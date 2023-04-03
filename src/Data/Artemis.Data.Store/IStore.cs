@@ -17,6 +17,24 @@ public interface IStore<TEntity> : IStore<TEntity, Guid> where TEntity : IModelB
 /// <typeparam name="TKey">键类型</typeparam>
 public interface IStore<TEntity, TKey> : IStoreBase<TEntity, TKey> where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
 {
+    #region Settings
+
+    /// <summary>
+    /// 配置是否自动保存
+    /// </summary>
+    bool AutoSaveChanges { get; set; }
+
+    /// <summary>
+    /// 配置是否托管元数据
+    /// </summary>
+    bool MetaDataHosting { get; set; }
+
+    /// <summary>
+    /// 配置是否需要软删除
+    /// </summary>
+    bool SoftDelete { get; set; }
+
+    #endregion
 
     #region CreateEntity & CreateEntities
 

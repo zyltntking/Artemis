@@ -15,15 +15,6 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     /// 创建新的管理器实例
     /// </summary>
     /// <param name="store">存储访问器依赖</param>
-    protected Manager(IStore<TEntity> store) : base(store)
-    {
-
-    }
-
-    /// <summary>
-    /// 创建新的管理器实例
-    /// </summary>
-    /// <param name="store">存储访问器依赖</param>
     /// <param name="optionsAccessor">配置依赖</param>
     /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
@@ -62,12 +53,16 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         StoreOptions = optionsAccessor?.Value ?? new StoreOptions();
         StoreErrorDescriber = errors ?? new StoreErrorDescriber();
         Logger = logger ?? new NullLogger<IManager<TEntity, TKey>>();
+
+        Store.AutoSaveChanges = StoreOptions.AutoSaveChanges;
+        Store.MetaDataHosting = StoreOptions.MetaDataHosting;
+        Store.SoftDelete = StoreOptions.SoftDelete;
     }
 
     /// <summary>
     /// 存储访问器
     /// </summary>
-    protected internal IStore<TEntity, TKey> Store { get; set; }
+    protected IStore<TEntity, TKey> Store { get; set; }
 
     /// <summary>
     /// 配置访问器
