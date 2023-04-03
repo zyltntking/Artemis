@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Artemis.Web.SnippetsApi.Pages
+namespace Artemis.Test.IdentityWebApp.Pages
 {
     public class IndexModel : PageModel
     {

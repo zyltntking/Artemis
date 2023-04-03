@@ -1,13 +1,13 @@
 {
   "profiles": {
-    "Artemis.Web.SnippetsApi": {
+    "Artemis.Test.IdentityWebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7201;http://localhost:5093"
+      "applicationUrl": "https://localhost:7183;http://localhost:5149"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -28,8 +28,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:29753",
-      "sslPort": 44351
+      "applicationUrl": "http://localhost:25406",
+      "sslPort": 44325
     }
   }
 }
