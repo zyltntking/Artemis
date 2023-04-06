@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Data.Store;
@@ -178,7 +179,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
 
     #endregion
 
-    #region Implementation of IStore<in TEntity,TKey>
+    #region Implementation of IStoreCommon<TEntity,in TKey>
 
     #region CreateEntity & CreateEntities
 
@@ -189,12 +190,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Create(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
-
+        OnActionExecuting(entity, nameof(entity));
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
@@ -213,12 +209,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Create(IEnumerable<TEntity> entities)
     {
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnActionExecuting(list, nameof(entities));
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
@@ -241,12 +233,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
@@ -266,13 +253,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
@@ -298,11 +280,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Update(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnActionExecuting(entity, nameof(entity));
         Context.Attach(entity);
         if (MetaDataHosting)
         {
@@ -329,12 +307,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual StoreResult Update(IEnumerable<TEntity> entities)
     {
 
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnActionExecuting(list, nameof(entities));
         Context.AttachRange(list);
         if (MetaDataHosting)
         {
@@ -365,12 +339,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         Context.Attach(entity);
         if (MetaDataHosting)
         {
@@ -397,13 +366,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         Context.AttachRange(list);
         if (MetaDataHosting)
         {
@@ -479,11 +443,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Delete(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnActionExecuting(entity, nameof(entity));
         if (SoftDelete)
         {
             Context.Attach(entity);
@@ -565,12 +525,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Delete(IEnumerable<TEntity> entities)
     {
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnActionExecuting(list, nameof(entities));
         if (SoftDelete)
         {
             Context.AttachRange(list);
@@ -652,12 +608,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         if (SoftDelete)
         {
             Context.Attach(entity);
@@ -742,13 +693,8 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entities == null)
-        {
-            throw new ArgumentNullException(nameof(entities));
-        }
         var list = entities.ToList();
+        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         if (SoftDelete)
         {
             Context.AttachRange(list);
@@ -822,6 +768,142 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public async Task<IEnumerable<TEntity>> FindEntitiesAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
     {
         return await NoTrackingQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken: cancellationToken);
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Implementation of IStoreMap<out TEntity,TKey>
+
+    #region CreateEntity & CreateEntities
+
+    /// <summary>
+    /// 通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <returns>映射后实体</returns>
+    public StoreResult CreateNew<TSource>(TSource source)
+    {
+        ThrowIfDisposed();
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+        var entity = source.Adapt<TEntity>();
+        if (entity == null)
+        {
+            throw new MapTargetNullException(nameof(entity));
+        }
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            entity.CreatedAt = now;
+            entity.UpdatedAt = now;
+        }
+        Context.Add(entity);
+        var changes = SaveChanges();
+        return StoreResult.Success(changes);
+    }
+
+    /// <summary>
+    /// 通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <returns>创建结果</returns>
+    public StoreResult CreateNew<TSource>(IEnumerable<TSource> sources)
+    {
+        ThrowIfDisposed();
+        if (sources == null)
+        {
+            throw new ArgumentNullException(nameof(sources));
+        }
+        var entities = sources.Adapt<IEnumerable<TEntity>>();
+        if (entities == null)
+        {
+            throw new MapTargetNullException(nameof(entities));
+        }
+        var list = entities.ToList();
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            foreach (var entity in list)
+            {
+                entity.CreatedAt = now;
+                entity.UpdatedAt = now;
+            }
+        }
+        Context.AddRange(list);
+        var changes = SaveChanges();
+        return StoreResult.Success(changes);
+    }
+
+    /// <summary>
+    /// 通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns>创建结果</returns>
+    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        ThrowIfDisposed();
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+        var entity = source.Adapt<TEntity>();
+        if (entity == null)
+        {
+            throw new MapTargetNullException(nameof(entity));
+        }
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            entity.CreatedAt = now;
+            entity.UpdatedAt = now;
+        }
+        Context.Add(entity);
+        var changes = await SaveChangesAsync(cancellationToken);
+        return StoreResult.Success(changes);
+    }
+
+    /// <summary>
+    /// 通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns>创建结果</returns>
+    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        ThrowIfDisposed();
+        if (sources == null)
+        {
+            throw new ArgumentNullException(nameof(sources));
+        }
+        var entities = sources.Adapt<IEnumerable<TEntity>>();
+        if (entities == null)
+        {
+            throw new MapTargetNullException(nameof(entities));
+        }
+        var list = entities.ToList();
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            foreach (var entity in list)
+            {
+                entity.CreatedAt = now;
+                entity.UpdatedAt = now;
+            }
+        }
+        Context.AddRange(list);
+        var changes = await SaveChangesAsync(cancellationToken);
+        return StoreResult.Success(changes);
     }
 
     #endregion

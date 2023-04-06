@@ -3,11 +3,20 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
+/// 可映射存储接口
+/// </summary>
+/// <typeparam name="TEntity">实体类型</typeparam>
+public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid> where TEntity : IModelBase<Guid>
+{
+
+}
+
+/// <summary>
 /// 基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IStoreBase<in TEntity, TKey> : IDisposable where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+public interface IStoreBase<in TEntity,TKey> : IDisposable where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     /// 获取指定实体Id

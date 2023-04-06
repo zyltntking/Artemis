@@ -38,11 +38,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns>Id</returns>
     public virtual TKey GetId(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnActionExecuting(entity, nameof(entity));
         return entity.Id;
     }
 
@@ -54,12 +50,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns>Id</returns>
     public virtual Task<TKey> GetIdAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(entity.Id);
     }
 
@@ -70,11 +61,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns>Id字符串</returns>
     public string GetIdString(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnActionExecuting(entity, nameof(entity));
         return ConvertIdToString(entity.Id)!;
     }
 
@@ -86,12 +73,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns></returns>
     public virtual Task<string> GetIdStringAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(ConvertIdToString(entity.Id)!);
     }
 
@@ -102,11 +84,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns>判断结果</returns>
     public virtual bool IsDeleted(TEntity entity)
     {
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnActionExecuting(entity, nameof(entity));
         return entity.DeletedAt == null;
     }
 
@@ -118,12 +96,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <returns>判断结果</returns>
     public virtual Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
+        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(entity.DeletedAt == null);
     }
 
@@ -171,4 +144,37 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     #endregion
+
+    #region Region
+
+    /// <summary>
+    /// 方法执行前
+    /// </summary>
+    /// <param name="value">实体</param>
+    /// <param name="name">参数名</param>
+    /// <exception cref="ArgumentNullException">空参数异常</exception>
+    protected void OnActionExecuting<TValue>(TValue value, string name)
+    {
+        ThrowIfDisposed();
+        if (value == null)
+        {
+            throw new ArgumentNullException(name);
+        }
+    }
+
+    /// <summary>
+    /// 异步方法执行前
+    /// </summary>
+    /// <param name="value">实体</param>
+    /// <param name="name">参数名</param>
+    /// <param name="cancellationToken">取消信号</param>
+    protected void OnAsyncActionExecuting<TValue>(TValue value, string name, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        OnActionExecuting(value, name);
+    }
+
+    #endregion
+
+
 }
