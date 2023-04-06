@@ -145,7 +145,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
 
     #endregion
 
-    #region Region
+    #region OnActionExecution
 
     /// <summary>
     /// 方法执行前

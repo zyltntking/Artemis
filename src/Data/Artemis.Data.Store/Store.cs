@@ -191,13 +191,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual StoreResult Create(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            entity.CreatedAt = now;
-            entity.UpdatedAt = now;
-        }
-        Context.Add(entity);
+        AddEntity(entity);
         var changes = SaveChanges();
         return StoreResult.Success(changes);
     }
@@ -211,16 +205,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            foreach (var entity in list)
-            {
-                entity.CreatedAt = now;
-                entity.UpdatedAt = now;
-            }
-        }
-        Context.AddRange(list);
+        AddEntities(list);
         var changes = SaveChanges();
         return StoreResult.Success(changes);
     }
@@ -234,13 +219,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual async Task<StoreResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            entity.CreatedAt = now;
-            entity.UpdatedAt = now;
-        }
-        Context.Add(entity);
+        AddEntity(entity);
         var changes = await SaveChangesAsync(cancellationToken);
         return StoreResult.Success(changes);
     }
@@ -255,16 +234,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            foreach (var entity in list)
-            {
-                entity.CreatedAt = now;
-                entity.UpdatedAt = now;
-            }
-        }
-        Context.AddRange(list);
+        AddEntities(list);
         var changes = await SaveChangesAsync(cancellationToken);
         return StoreResult.Success(changes);
     }
@@ -281,13 +251,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual StoreResult Update(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
-        Context.Attach(entity);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            entity.UpdatedAt = now;
-        }
-        Context.Update(entity);
+        UpdateEntity(entity);
         try
         {
             var changes = SaveChanges();
@@ -309,20 +273,10 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
 
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
-        Context.AttachRange(list);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            foreach (var entity in list)
-            {
-                entity.UpdatedAt = now;
-            }
-        }
-        Context.UpdateRange(list);
+        UpdateEntities(list);
         try
         {
             var changes = SaveChanges();
-
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
@@ -340,13 +294,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual async Task<StoreResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-        Context.Attach(entity);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            entity.UpdatedAt = now;
-        }
-        Context.Update(entity);
+        UpdateEntity(entity);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -368,16 +316,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-        Context.AttachRange(list);
-        if (MetaDataHosting)
-        {
-            var now = DateTime.Now;
-            foreach (var entity in list)
-            {
-                entity.UpdatedAt = now;
-            }
-        }
-        Context.UpdateRange(list);
+        UpdateEntities(list);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -400,31 +339,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <param name="id">被删除实体的主键</param>
     public virtual StoreResult Delete(TKey id)
     {
-        ThrowIfDisposed();
-        if (id == null)
-        {
-            throw new ArgumentNullException(nameof(id));
-        }
+        OnActionExecuting(id, nameof(id));
         var entity = FindEntity(id);
         if (entity == null)
         {
             return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         }
-        if (SoftDelete)
-        {
-            Context.Attach(entity);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                entity.UpdatedAt = now;
-                entity.DeletedAt = now;
-            }
-            Context.Update(entity);
-        }
-        else
-        {
-            Context.Remove(entity);
-        }
+        DeleteEntity(entity);
         try
         {
             var changes = SaveChanges();
@@ -444,21 +365,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual StoreResult Delete(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
-        if (SoftDelete)
-        {
-            Context.Attach(entity);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                entity.UpdatedAt = now;
-                entity.DeletedAt = now;
-            }
-            Context.Update(entity);
-        }
-        else
-        {
-            Context.Remove(entity);
-        }
+        DeleteEntity(entity);
         try
         {
             var changes = SaveChanges();
@@ -477,36 +384,15 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual StoreResult Delete(IEnumerable<TKey> ids)
     {
-        ThrowIfDisposed();
-        if (ids == null)
-        {
-            throw new ArgumentNullException(nameof(ids));
-        }
         var idList = ids as List<TKey> ?? ids.ToList();
+        OnActionExecuting(idList, nameof(ids));
         var entityList = FindEntities(idList).ToList();
         if (!entityList.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
-        if (SoftDelete)
-        {
-            Context.AttachRange(entityList);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                foreach (var entity in entityList)
-                {
-                    entity.UpdatedAt = now;
-                    entity.DeletedAt = now;
-                }
-            }
-            Context.UpdateRange(entityList);
-        }
-        else
-        {
-            Context.RemoveRange(entityList);
-        }
+        DeleteEntities(entityList);
         try
         {
             var changes = SaveChanges();
@@ -527,24 +413,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
-        if (SoftDelete)
-        {
-            Context.AttachRange(list);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                foreach (var entity in list)
-                {
-                    entity.UpdatedAt = now;
-                    entity.DeletedAt = now;
-                }
-            }
-            Context.UpdateRange(list);
-        }
-        else
-        {
-            Context.RemoveRange(list);
-        }
+        DeleteEntities(list);
         try
         {
             var changes = SaveChanges();
@@ -564,31 +433,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
-        if (id == null)
-        {
-            throw new ArgumentNullException(nameof(id));
-        }
+        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         var entity = await FindEntityAsync(id, cancellationToken);
         if (entity == null)
         {
             return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         }
-        if (SoftDelete)
-        {
-            Context.Attach(entity);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                entity.UpdatedAt = now;
-                entity.DeletedAt = now;
-            }
-            Context.Update(entity);
-        }
-        else
-        {
-            Context.Remove(entity);
-        }
+        DeleteEntity(entity);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -609,21 +460,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public virtual async Task<StoreResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-        if (SoftDelete)
-        {
-            Context.Attach(entity);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                entity.UpdatedAt = now;
-                entity.DeletedAt = now;
-            }
-            Context.Update(entity);
-        }
-        else
-        {
-            Context.Remove(entity);
-        }
+        DeleteEntity(entity);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -643,37 +480,15 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <returns></returns>
     public virtual async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-        ThrowIfDisposed();
-        if (ids == null)
-        {
-            throw new ArgumentNullException(nameof(ids));
-        }
         var idList = ids as List<TKey> ?? ids.ToList();
+        OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
         var entityList = (await FindEntitiesAsync(idList, cancellationToken)).ToList();
         if (!entityList.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
-        if (SoftDelete)
-        {
-            Context.AttachRange(entityList);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                foreach (var entity in entityList)
-                {
-                    entity.UpdatedAt = now;
-                    entity.DeletedAt = now;
-                }
-            }
-            Context.UpdateRange(entityList);
-        }
-        else
-        {
-            Context.RemoveRange(entityList);
-        }
+        DeleteEntities(entityList);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -695,24 +510,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-        if (SoftDelete)
-        {
-            Context.AttachRange(list);
-            if (MetaDataHosting)
-            {
-                var now = DateTime.Now;
-                foreach (var entity in list)
-                {
-                    entity.UpdatedAt = now;
-                    entity.DeletedAt = now;
-                }
-            }
-            Context.UpdateRange(list);
-        }
-        else
-        {
-            Context.RemoveRange(list);
-        }
+        DeleteEntities(list);
         try
         {
             var changes = await SaveChangesAsync(cancellationToken);
@@ -907,6 +705,125 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     #endregion
+
+    #endregion
+
+    #region ActionExecution
+
+    /// <summary>
+    /// 添加单个实体
+    /// </summary>
+    /// <param name="entity">实体</param>
+    private void AddEntity(TEntity entity)
+    {
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            entity.CreatedAt = now;
+            entity.UpdatedAt = now;
+        }
+        Context.Add(entity);
+    }
+
+    /// <summary>
+    /// 添加多个实体
+    /// </summary>
+    /// <param name="entities">实体</param>
+    private void AddEntities(ICollection<TEntity> entities)
+    {
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            foreach (var entity in entities)
+            {
+                entity.CreatedAt = now;
+                entity.UpdatedAt = now;
+            }
+        }
+        Context.AddRange(entities);
+    }
+
+    /// <summary>
+    /// 追踪一个实体更新
+    /// </summary>
+    /// <param name="entity">实体</param>
+    private void UpdateEntity(TEntity entity)
+    {
+        Context.Attach(entity);
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            entity.UpdatedAt = now;
+        }
+        Context.Update(entity);
+    }
+
+    /// <summary>
+    /// 追踪多个实体更新
+    /// </summary>
+    /// <param name="entities">实体</param>
+    private void UpdateEntities(ICollection<TEntity> entities)
+    {
+        Context.AttachRange(entities);
+        if (MetaDataHosting)
+        {
+            var now = DateTime.Now;
+            foreach (var entity in entities)
+            {
+                entity.UpdatedAt = now;
+            }
+        }
+        Context.UpdateRange(entities);
+    }
+
+    /// <summary>
+    /// 追踪一个实体删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    private void DeleteEntity(TEntity entity)
+    {
+        if (SoftDelete)
+        {
+            Context.Attach(entity);
+            if (MetaDataHosting)
+            {
+                var now = DateTime.Now;
+                entity.UpdatedAt = now;
+                entity.DeletedAt = now;
+            }
+            Context.Update(entity);
+        }
+        else
+        {
+            Context.Remove(entity);
+        }
+    }
+
+    /// <summary>
+    /// 追踪多个实体删除
+    /// </summary>
+    /// <param name="entities">实体</param>
+    private void DeleteEntities(ICollection<TEntity> entities)
+    {
+        if (SoftDelete)
+        {
+            Context.AttachRange(entities);
+            if (MetaDataHosting)
+            {
+                var now = DateTime.Now;
+                foreach (var entity in entities)
+                {
+                    entity.UpdatedAt = now;
+                    entity.DeletedAt = now;
+                }
+            }
+            Context.UpdateRange(entities);
+        }
+        else
+        {
+            Context.RemoveRange(entities);
+        }
+    }
 
     #endregion
 }
