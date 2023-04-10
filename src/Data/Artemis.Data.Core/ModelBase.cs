@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artemis.Data.Core;
 
@@ -13,6 +14,7 @@ public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase
     ///     存储标识
     /// </summary>
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public override Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion
@@ -45,6 +47,7 @@ public abstract class ModelBase : ModelBase<Guid>, IModelBase
     ///     存储标识
     /// </summary>
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public override Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion
@@ -93,6 +96,7 @@ public abstract class KeySlot : KeySlot<Guid>, IKeySlot
     ///     存储标识
     /// </summary>
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public override Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion

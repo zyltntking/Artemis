@@ -125,7 +125,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     /// <summary>
     /// Throws if this class has been disposed.
     /// </summary>
-    protected void ThrowIfDisposed()
+    private void ThrowIfDisposed()
     {
         if (_disposed)
         {
