@@ -3,14 +3,20 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
-/// 抽象基本存储实现
+///     抽象基本存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
+    where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 创建一个新的基本存储实例
+    ///     已释放标识
+    /// </summary>
+    private bool _disposed;
+
+    /// <summary>
+    ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="describer"></param>
     /// <exception cref="ArgumentNullException"></exception>
@@ -20,19 +26,54 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 已释放标识
-    /// </summary>
-    private bool _disposed;
-
-    /// <summary>
-    /// 设置当前发生错误的错误描述者
+    ///     设置当前发生错误的错误描述者
     /// </summary>
     public IStoreErrorDescriber ErrorDescriber { get; set; }
+
+    #region Implementation of IDisposable
+
+    /// <summary>
+    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+        _disposed = true;
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     转换字符串到id
+    /// </summary>
+    /// <param name="id">id字符串</param>
+    /// <returns>id</returns>
+    protected virtual TKey? ConvertIdFromString(string? id)
+    {
+        return id.IdFromString<TKey>();
+    }
+
+    /// <summary>
+    ///     转换Id为字符串
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>字符串</returns>
+    protected virtual string? ConvertIdToString(TKey id)
+    {
+        return id.IdToString();
+    }
+
+    /// <summary>
+    ///     Throws if this class has been disposed.
+    /// </summary>
+    private void ThrowIfDisposed()
+    {
+        if (_disposed) throw new ObjectDisposedException(GetType().Name);
+    }
 
     #region Implementation of IStoreBase<in TEntity,TKey>
 
     /// <summary>
-    /// 获取指定实体Id
+    ///     获取指定实体Id
     /// </summary>
     /// <param name="entity">实体</param>
     /// <returns>Id</returns>
@@ -43,7 +84,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 获取指定实体Id
+    ///     获取指定实体Id
     /// </summary>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">取消异步操作的信号</param>
@@ -55,7 +96,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 获取指定实体Id字符串
+    ///     获取指定实体Id字符串
     /// </summary>
     /// <param name="entity">实体</param>
     /// <returns>Id字符串</returns>
@@ -66,7 +107,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 获取指定实体Id字符串
+    ///     获取指定实体Id字符串
     /// </summary>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">取消异步操作信号</param>
@@ -78,7 +119,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 是否被删除
+    ///     是否被删除
     /// </summary>
     /// <param name="entity">实体</param>
     /// <returns>判断结果</returns>
@@ -89,7 +130,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     }
 
     /// <summary>
-    /// 是否被删除
+    ///     是否被删除
     /// </summary>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -102,53 +143,10 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
 
     #endregion
 
-    /// <summary>
-    /// 转换字符串到id
-    /// </summary>
-    /// <param name="id">id字符串</param>
-    /// <returns>id</returns>
-    protected virtual TKey? ConvertIdFromString(string? id)
-    {
-        return id.IdFromString<TKey>();
-    }
-
-    /// <summary>
-    /// 转换Id为字符串
-    /// </summary>
-    /// <param name="id">id</param>
-    /// <returns>字符串</returns>
-    protected virtual string? ConvertIdToString(TKey id)
-    {
-        return id.IdToString();
-    }
-
-    /// <summary>
-    /// Throws if this class has been disposed.
-    /// </summary>
-    private void ThrowIfDisposed()
-    {
-        if (_disposed)
-        {
-            throw new ObjectDisposedException(GetType().Name);
-        }
-    }
-
-    #region Implementation of IDisposable
-
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    public void Dispose()
-    {
-        _disposed = true;
-    }
-
-    #endregion
-
     #region OnActionExecution
 
     /// <summary>
-    /// 方法执行前
+    ///     方法执行前
     /// </summary>
     /// <param name="value">实体</param>
     /// <param name="name">参数名</param>
@@ -156,25 +154,21 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey> where
     protected void OnActionExecuting<TValue>(TValue value, string name)
     {
         ThrowIfDisposed();
-        if (value == null)
-        {
-            throw new ArgumentNullException(name);
-        }
+        if (value == null) throw new ArgumentNullException(name);
     }
 
     /// <summary>
-    /// 异步方法执行前
+    ///     异步方法执行前
     /// </summary>
     /// <param name="value">实体</param>
     /// <param name="name">参数名</param>
     /// <param name="cancellationToken">取消信号</param>
-    protected void OnAsyncActionExecuting<TValue>(TValue value, string name, CancellationToken cancellationToken = default)
+    protected void OnAsyncActionExecuting<TValue>(TValue value, string name,
+        CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         OnActionExecuting(value, name);
     }
 
     #endregion
-
-
 }

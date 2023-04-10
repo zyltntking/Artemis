@@ -7,14 +7,14 @@
 public class DataResult<T> : IDataResult<T>
 {
     /// <summary>
-    /// 空构造
+    ///     空构造
     /// </summary>
     public DataResult()
     {
     }
 
     /// <summary>
-    /// 异常构造
+    ///     异常构造
     /// </summary>
     /// <param name="code">消息码</param>
     /// <param name="message">消息</param>
@@ -28,7 +28,7 @@ public class DataResult<T> : IDataResult<T>
     }
 
     /// <summary>
-    /// 成功构造
+    ///     成功构造
     /// </summary>
     /// <param name="code">消息码</param>
     /// <param name="message">消息</param>
@@ -42,7 +42,7 @@ public class DataResult<T> : IDataResult<T>
     }
 
     /// <summary>
-    /// 是否成功
+    ///     是否成功
     /// </summary>
     public bool IsSuccess => Code == ResultStatus.Success;
 
@@ -120,7 +120,8 @@ public static class DataResult
     /// <param name="data">结果数据</param>
     /// <param name="exception"></param>
     /// <returns>数据结果</returns>
-    private static DataResult<T> GenerateResult<T>(int code, string message, T? data = default,  Exception? exception = null)
+    private static DataResult<T> GenerateResult<T>(int code, string message, T? data = default,
+        Exception? exception = null)
     {
         return new DataResult<T>
         {

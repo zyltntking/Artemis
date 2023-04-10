@@ -3,56 +3,57 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
-/// 存储操作结果
+///     存储操作结果
 /// </summary>
 public class StoreResult
 {
     private readonly List<StoreError> _errors = new();
 
     /// <summary>
-    /// 指示操作是否成功的标志
+    ///     指示操作是否成功的标志
     /// </summary>
     public bool Succeeded { get; protected init; }
 
     /// <summary>
-    /// 指示操作受影响行数
+    ///     指示操作受影响行数
     /// </summary>
     public int EffectRows { get; protected set; }
 
     /// <summary>
-    /// 包含存储过程中产生的所有错误的实例
+    ///     包含存储过程中产生的所有错误的实例
     /// </summary>
     public IEnumerable<StoreError> Errors => _errors;
 
     /// <summary>
-    /// 操作成功时返回结果
+    ///     操作成功时返回结果
     /// </summary>
     /// <param name="effectRows">收影响行数</param>
-    public static StoreResult Success(int effectRows) => new() { Succeeded = true, EffectRows = effectRows };
+    public static StoreResult Success(int effectRows)
+    {
+        return new StoreResult { Succeeded = true, EffectRows = effectRows };
+    }
 
     /// <summary>
-    /// 创建一个操作失败的实例
+    ///     创建一个操作失败的实例
     /// </summary>
     /// <param name="errors">错误列表</param>
     /// <returns></returns>
     public static StoreResult Failed(params StoreError[]? errors)
     {
         var result = new StoreResult { Succeeded = false };
-        if (errors != null)
-        {
-            result._errors.AddRange(errors);
-        }
+        if (errors != null) result._errors.AddRange(errors);
         return result;
     }
 
     /// <summary>
-    /// ToString
+    ///     ToString
     /// </summary>
     /// <returns></returns>
     public override string ToString()
     {
-        return Succeeded ?
-            "Succeeded" :
-            string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed", string.Join(",", Errors.Select(x => x.Code).ToList()));
+        return Succeeded
+            ? "Succeeded"
+            : string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed",
+                string.Join(",", Errors.Select(x => x.Code).ToList()));
     }
 }

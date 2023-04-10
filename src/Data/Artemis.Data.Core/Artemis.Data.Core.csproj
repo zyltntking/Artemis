@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<DocumentationFile>Artemis.Data.Store.xml</DocumentationFile>
+		<DocumentationFile>Artemis.Data.Core.xml</DocumentationFile>
 		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
 	</PropertyGroup>
 

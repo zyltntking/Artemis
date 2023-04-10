@@ -3,7 +3,7 @@
 namespace Artemis.Data.Core;
 
 /// <summary>
-/// 数据解析器
+///     数据解析器
 /// </summary>
 public static class DataParser
 {
@@ -29,45 +29,39 @@ public static class DataParser
     }
 
     /// <summary>
-    /// string转id
+    ///     string转id
     /// </summary>
     /// <param name="id">The id to convert.</param>
-    /// <returns>An instance of <typeparamref name="TKey"/> representing the provided <paramref name="id"/>.</returns>
+    /// <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
     public static TKey? IdFromString<TKey>(this string? id)
     {
-        if (id == null)
-        {
-            return default;
-        }
+        if (id == null) return default;
         return (TKey?)TypeDescriptor.GetConverter(typeof(TKey)).ConvertFromInvariantString(id);
     }
 
     /// <summary>
-    /// id转string
+    ///     id转string
     /// </summary>
     /// <param name="id">The id to convert.</param>
-    /// <returns>An <see cref="string"/> representation of the provided <paramref name="id"/>.</returns>
+    /// <returns>An <see cref="string" /> representation of the provided <paramref name="id" />.</returns>
     public static string? IdToString<TKey>(this TKey id) where TKey : IEquatable<TKey>
     {
         return Equals(id, default(TKey)) ? null : id.ToString();
     }
 
     /// <summary>
-    /// string装guid
+    ///     string装guid
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     public static Guid GuidFromString(this string? id)
     {
-        if (id == null)
-        {
-            return default;
-        }
+        if (id == null) return default;
         return Guid.Parse(id);
     }
 
     /// <summary>
-    /// Guid转String
+    ///     Guid转String
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>

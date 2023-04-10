@@ -5,9 +5,13 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<DocumentationFile>Artemis.Data.Core.xml</DocumentationFile>
+		<DocumentationFile>Artemis.Data.Store.xml</DocumentationFile>
 		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Store.cs~RF3e983553.TMP" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="Mapster" Version="7.3.0" />

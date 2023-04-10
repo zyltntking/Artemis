@@ -1,12 +1,12 @@
 ﻿namespace Artemis.Data.Store;
 
 /// <summary>
-/// 存储异常描述器
+///     存储异常描述器
 /// </summary>
 public class StoreErrorDescriber : IStoreErrorDescriber
 {
     /// <summary>
-    /// 生成默认异常
+    ///     生成默认异常
     /// </summary>
     /// <returns>默认异常</returns>
     public virtual StoreError DefaultError()
@@ -19,7 +19,7 @@ public class StoreErrorDescriber : IStoreErrorDescriber
     }
 
     /// <summary>
-    /// 提示发生并发失败
+    ///     提示发生并发失败
     /// </summary>
     /// <returns></returns>
     public virtual StoreError ConcurrencyFailure()
@@ -32,7 +32,7 @@ public class StoreErrorDescriber : IStoreErrorDescriber
     }
 
     /// <summary>
-    /// 提示未找到Id失败
+    ///     提示未找到Id失败
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>

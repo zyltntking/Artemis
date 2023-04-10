@@ -1,20 +1,18 @@
 ﻿using Artemis.Data.Core;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
-using System.Security.Principal;
 
 namespace Artemis.Data.Store;
 
 /// <summary>
-/// 抽象存储实现
+///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public class Store<TEntity> : Store<TEntity, DbContext> 
+public class Store<TEntity> : Store<TEntity, DbContext>
     where TEntity : ModelBase
 {
     /// <summary>
-    /// 创建一个新的基本存储实例
+    ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="describer">操作异常描述者</param>
@@ -25,16 +23,16 @@ public class Store<TEntity> : Store<TEntity, DbContext>
 }
 
 /// <summary>
-/// 抽象存储实现
+///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TContext">数据上下文类型</typeparam>
 public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>, IStore<TEntity>
-    where TEntity : ModelBase, IModelBase, IModelBase<Guid> 
+    where TEntity : ModelBase, IModelBase, IModelBase<Guid>
     where TContext : DbContext
 {
     /// <summary>
-    /// 创建一个新的基本存储实例
+    ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="describer">操作异常描述者</param>
@@ -46,7 +44,7 @@ public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>,
     #region Overrides of StoreBase<TEntity,Guid>
 
     /// <summary>
-    /// 转换字符串到id
+    ///     转换字符串到id
     /// </summary>
     /// <param name="id">id字符串</param>
     /// <returns>id</returns>
@@ -56,7 +54,7 @@ public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>,
     }
 
     /// <summary>
-    /// 转换Id为字符串
+    ///     转换Id为字符串
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>字符串</returns>
@@ -69,23 +67,24 @@ public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>,
 }
 
 /// <summary>
-/// 抽象存储实现
+///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TContext">数据上下文类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, IStore<TEntity, TKey> 
+public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>, IStore<TEntity, TKey>
     where TEntity : ModelBase<TKey>, IModelBase<TKey>
-    where TContext : DbContext 
+    where TContext : DbContext
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 创建一个新的基本存储实例
+    ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="describer">操作异常描述者</param>
     /// <exception cref="ArgumentNullException"></exception>
-    protected Store(TContext context, IStoreErrorDescriber? describer = null) : base(describer ?? new StoreErrorDescriber())
+    protected Store(TContext context, IStoreErrorDescriber? describer = null) : base(describer ??
+                                                                                     new StoreErrorDescriber())
     {
         Context = context ?? throw new ArgumentNullException(nameof(context));
     }
@@ -93,17 +92,17 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region Setting
 
     /// <summary>
-    /// 设置是否自动保存更改
+    ///     设置是否自动保存更改
     /// </summary>
     public bool AutoSaveChanges { get; set; } = true;
 
     /// <summary>
-    /// MetaDataHosting标记
+    ///     MetaDataHosting标记
     /// </summary>
     private bool _metaDataHosting = true;
 
     /// <summary>
-    /// 设置是否启用元数据托管
+    ///     设置是否启用元数据托管
     /// </summary>
     public bool MetaDataHosting
     {
@@ -112,12 +111,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// SoftDelete标记
+    ///     SoftDelete标记
     /// </summary>
     private bool _softDelete;
 
     /// <summary>
-    /// 设置是否启用软删除
+    ///     设置是否启用软删除
     /// </summary>
     public bool SoftDelete
     {
@@ -125,10 +124,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
         set
         {
             _softDelete = value;
-            if (_softDelete)
-            {
-                MetaDataHosting = _softDelete;
-            }
+            if (_softDelete) MetaDataHosting = _softDelete;
         }
     }
 
@@ -137,31 +133,33 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region DataAccess
 
     /// <summary>
-    /// 数据访问上下文
+    ///     数据访问上下文
     /// </summary>
-    public virtual TContext Context { get; private set; }
+    public virtual TContext Context { get; }
 
     /// <summary>
-    /// EntitySet访问器*Main Store Set*
+    ///     EntitySet访问器*Main Store Set*
     /// </summary>
     protected virtual DbSet<TEntity> EntitySet => Context.Set<TEntity>();
 
     /// <summary>
-    /// EntityQuery访问器
+    ///     EntityQuery访问器
     /// </summary>
-    protected virtual IQueryable<TEntity> EntityQuery => EntitySet.AsQueryable().Where(item => !SoftDelete || item.DeletedAt != null);
+    protected virtual IQueryable<TEntity> EntityQuery =>
+        EntitySet.AsQueryable().Where(item => !SoftDelete || item.DeletedAt != null);
 
     /// <summary>
-    /// Entity无追踪访问器
+    ///     Entity无追踪访问器
     /// </summary>
-    protected virtual IQueryable<TEntity> NoTrackingQuery => EntityQuery.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    protected virtual IQueryable<TEntity> NoTrackingQuery =>
+        EntityQuery.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
 
     #endregion
 
     #region SaveChanges
 
     /// <summary>
-    /// 保存当前存储
+    ///     保存当前存储
     /// </summary>
     /// <returns></returns>
     private int SaveChanges()
@@ -170,7 +168,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 保存当前存储
+    ///     保存当前存储
     /// </summary>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>异步取消结果</returns>
@@ -186,7 +184,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region CreateEntity & CreateEntities
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中创建一个新的实体
+    ///     在<paramref name="entity" />存储中创建一个新的实体
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <returns></returns>
@@ -199,7 +197,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中创建多个新的实体
+    ///     在<paramref name="entities" />存储中创建多个新的实体
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <returns></returns>
@@ -213,7 +211,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中创建一个新的实体
+    ///     在<paramref name="entity" />存储中创建一个新的实体
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
@@ -227,12 +225,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中创建多个新的实体
+    ///     在<paramref name="entities" />存储中创建多个新的实体
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    public virtual async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities,
+        CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -246,7 +245,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region UpdateEntity & UpdateEntities
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中更新已存在的实体
+    ///     在<paramref name="entity" />存储中更新已存在的实体
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <returns></returns>
@@ -258,13 +257,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中更新多个已存在的实体
+    ///     在<paramref name="entities" />存储中更新多个已存在的实体
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <returns></returns>
     public virtual StoreResult Update(IEnumerable<TEntity> entities)
     {
-
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
         UpdateEntities(list);
@@ -272,7 +270,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中更新已存在的实体
+    ///     在<paramref name="entity" />存储中更新已存在的实体
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
@@ -285,12 +283,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中更新多个已存在的实体
+    ///     在<paramref name="entities" />存储中更新多个已存在的实体
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    public virtual Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities,
+        CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -303,23 +302,20 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region DeleteEntity & DeleteEntities
 
     /// <summary>
-    /// 在存储中删除已存在的实体
+    ///     在存储中删除已存在的实体
     /// </summary>
     /// <param name="id">被删除实体的主键</param>
     public virtual StoreResult Delete(TKey id)
     {
         OnActionExecuting(id, nameof(id));
         var entity = FindEntity(id);
-        if (entity == null)
-        {
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
-        }
+        if (entity == null) return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         DeleteEntity(entity);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中删除已存在的实体
+    ///     在<paramref name="entity" />存储中删除已存在的实体
     /// </summary>
     /// <param name="entity">被删除实体</param>
     /// <returns></returns>
@@ -331,7 +327,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在存储中删除已存在的实体
+    ///     在存储中删除已存在的实体
     /// </summary>
     /// <param name="ids">被删除实体的主键</param>
     /// <returns></returns>
@@ -345,12 +341,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
+
         DeleteEntities(entityList);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中删除已存在的实体
+    ///     在<paramref name="entities" />存储中删除已存在的实体
     /// </summary>
     /// <param name="entities">被删除实体</param>
     /// <returns></returns>
@@ -363,7 +360,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在存储中删除已存在的实体
+    ///     在存储中删除已存在的实体
     /// </summary>
     /// <param name="id">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
@@ -372,16 +369,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         var entity = await FindEntityAsync(id, cancellationToken);
-        if (entity == null)
-        {
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
-        }
+        if (entity == null) return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         DeleteEntity(entity);
         return await AttacheChangeAsync(cancellationToken);
     }
 
     /// <summary>
-    /// 在<paramref name="entity"/>存储中删除已存在的实体
+    ///     在<paramref name="entity" />存储中删除已存在的实体
     /// </summary>
     /// <param name="entity">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
@@ -394,12 +388,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 在存储中删除已存在的实体
+    ///     在存储中删除已存在的实体
     /// </summary>
     /// <param name="ids">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
+    public virtual async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids,
+        CancellationToken cancellationToken = default)
     {
         var idList = ids as List<TKey> ?? ids.ToList();
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
@@ -409,17 +404,19 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
+
         DeleteEntities(entityList);
         return await AttacheChangeAsync(cancellationToken);
     }
 
     /// <summary>
-    /// 在<paramref name="entities"/>存储中删除已存在的实体
+    ///     在<paramref name="entities" />存储中删除已存在的实体
     /// </summary>
     /// <param name="entities">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    public virtual Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities,
+        CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -432,7 +429,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region FindEntity & FindEntities
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -443,7 +440,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
@@ -455,7 +452,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
@@ -467,12 +464,13 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<IEnumerable<TEntity>> FindEntitiesAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
+    public Task<IEnumerable<TEntity>> FindEntitiesAsync(IEnumerable<TKey> ids,
+        CancellationToken cancellationToken = default)
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
@@ -488,7 +486,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region CreateEntity & CreateEntities
 
     /// <summary>
-    /// 通过类型映射创建一个新实例
+    ///     通过类型映射创建一个新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
@@ -497,18 +495,17 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public StoreResult CreateNew<TSource>(TSource source, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        var entity = config == null ? source!.Adapt<TSource, TEntity>() : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
-        if (entity == null)
-        {
-            throw new MapTargetNullException(nameof(entity));
-        }
+        var entity = config == null
+            ? source!.Adapt<TSource, TEntity>()
+            : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var changes = SaveChanges();
         return StoreResult.Success(changes);
     }
 
     /// <summary>
-    /// 通过类型映射创建一个新实例
+    ///     通过类型映射创建一个新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>
@@ -517,11 +514,10 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public StoreResult CreateNew<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(sources, nameof(sources));
-        var entities = config == null ? sources.Adapt<IEnumerable<TEntity>>() : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = config == null
+            ? sources.Adapt<IEnumerable<TEntity>>()
+            : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
         var changes = SaveChanges();
@@ -529,42 +525,42 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 通过类型映射创建一个新实例
+    ///     通过类型映射创建一个新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null ? source!.Adapt<TSource, TEntity>() : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
-        if (entity == null)
-        {
-            throw new MapTargetNullException(nameof(entity));
-        }
+        var entity = config == null
+            ? source!.Adapt<TSource, TEntity>()
+            : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var changes = await SaveChangesAsync(cancellationToken);
         return StoreResult.Success(changes);
     }
 
     /// <summary>
-    /// 通过类型映射创建一个新实例
+    ///     通过类型映射创建一个新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
-        var entities = config == null ? sources.Adapt<IEnumerable<TEntity>>() : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = config == null
+            ? sources.Adapt<IEnumerable<TEntity>>()
+            : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
         var changes = await SaveChangesAsync(cancellationToken);
@@ -576,7 +572,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region OverEntity & OverEntities
 
     /// <summary>
-    /// 通过类型映射覆盖对应Id的实体
+    ///     通过类型映射覆盖对应Id的实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
@@ -585,17 +581,16 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public StoreResult Over<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         OnActionExecuting(source, nameof(source));
-        var entity = config == null ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>()) : source.Adapt<TSource, TEntity>(config);
-        if (entity == null)
-        {
-            throw new MapTargetNullException(nameof(entity));
-        }
+        var entity = config == null
+            ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>())
+            : source.Adapt<TSource, TEntity>(config);
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应实体
+    ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
@@ -605,37 +600,36 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     public StoreResult Over<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        destination = config == null ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>()) : source.Adapt<TSource, TEntity>(config);
-        if (destination == null)
-        {
-            throw new MapTargetNullException(nameof(destination));
-        }
+        destination = config == null
+            ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
+            : source.Adapt<TSource, TEntity>(config);
+        if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应Id的实体
+    ///     通过类型映射覆盖对应Id的实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Over<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    public StoreResult Over<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
+        where TSource : IKeySlot<TKey>
     {
         OnActionExecuting(sources, nameof(sources));
-        var entities = config == null ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>()) : sources.Adapt<IEnumerable<TEntity>>(config);
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = config == null
+            ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>())
+            : sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应实体
+    ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <typeparam name="TJKey">连接键类型</typeparam>
@@ -646,46 +640,47 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     /// <param name="sourceKeySelector">源连接键选择器</param>
     /// <returns></returns>
     public StoreResult Over<TSource, TJKey>(
-        IEnumerable<TSource> sources, 
-        IEnumerable<TEntity> destinations, 
-        Func<TSource, TJKey> sourceKeySelector, 
-        Func<TEntity, TJKey> destinationKeySelector, 
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
         TypeAdapterConfig? config = null)
     {
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector, (source, _) => config == null ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>()) : source.Adapt<TSource, TEntity>(config));
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+            (source, _) =>
+                config == null
+                    ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
+                    : source.Adapt<TSource, TEntity>(config));
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
         return AttacheChange();
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应Id的实体
+    ///     通过类型映射覆盖对应Id的实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource>(TSource source, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    public Task<StoreResult> OverAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>()) : source.Adapt<TSource, TEntity>(config);
-        if (entity == null)
-        {
-            throw new MapTargetNullException(nameof(entity));
-        }
+        var entity = config == null
+            ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>())
+            : source.Adapt<TSource, TEntity>(config);
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         return AttacheChangeAsync(cancellationToken);
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应实体
+    ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="source">源数据</param>
@@ -697,38 +692,37 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>()) : source.Adapt<TSource, TEntity>(config);
-        if (entity == null)
-        {
-            throw new MapTargetNullException(nameof(entity));
-        }
+        var entity = config == null
+            ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
+            : source.Adapt<TSource, TEntity>(config);
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         return AttacheChangeAsync(cancellationToken);
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应Id的实体
+    ///     通过类型映射覆盖对应Id的实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    public Task<StoreResult> OverAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
-        var entities = config == null ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>()) : sources.Adapt<IEnumerable<TEntity>>(config);
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = config == null
+            ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>())
+            : sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
         return AttacheChangeAsync(cancellationToken);
     }
 
     /// <summary>
-    /// 通过类型映射覆盖对应实体
+    ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <typeparam name="TJKey">连接键类型</typeparam>
@@ -749,11 +743,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     {
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector, (source, _) => config == null ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>()) : source.Adapt<TSource, TEntity>(config));
-        if (entities == null)
-        {
-            throw new MapTargetNullException(nameof(entities));
-        }
+        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+            (source, _) =>
+                config == null
+                    ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
+                    : source.Adapt<TSource, TEntity>(config));
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
         return AttacheChangeAsync(cancellationToken);
@@ -764,12 +759,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region MapConfig
 
     /// <summary>
-    /// Id忽略缓存
+    ///     Id忽略缓存
     /// </summary>
     private TypeAdapterConfig? _ignoreIdConfig;
 
     /// <summary>
-    /// Id忽略访问器
+    ///     Id忽略访问器
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
@@ -783,12 +778,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 元数据忽略缓存
+    ///     元数据忽略缓存
     /// </summary>
     private TypeAdapterConfig? _ignoreMetaConfig;
 
     /// <summary>
-    /// 元数据忽略访问器
+    ///     元数据忽略访问器
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
@@ -810,7 +805,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region ActionExecution
 
     /// <summary>
-    /// 添加单个实体
+    ///     添加单个实体
     /// </summary>
     /// <param name="entity">实体</param>
     private void AddEntity(TEntity entity)
@@ -821,11 +816,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
         }
+
         Context.Add(entity);
     }
 
     /// <summary>
-    /// 添加多个实体
+    ///     添加多个实体
     /// </summary>
     /// <param name="entities">实体</param>
     private void AddEntities(ICollection<TEntity> entities)
@@ -839,11 +835,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
                 entity.UpdatedAt = now;
             }
         }
+
         Context.AddRange(entities);
     }
 
     /// <summary>
-    /// 追踪一个实体更新
+    ///     追踪一个实体更新
     /// </summary>
     /// <param name="entity">实体</param>
     private void UpdateEntity(TEntity entity)
@@ -854,11 +851,12 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
             var now = DateTime.Now;
             entity.UpdatedAt = now;
         }
+
         Context.Update(entity);
     }
 
     /// <summary>
-    /// 追踪多个实体更新
+    ///     追踪多个实体更新
     /// </summary>
     /// <param name="entities">实体</param>
     private void UpdateEntities(ICollection<TEntity> entities)
@@ -867,16 +865,14 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
-            foreach (var entity in entities)
-            {
-                entity.UpdatedAt = now;
-            }
+            foreach (var entity in entities) entity.UpdatedAt = now;
         }
+
         Context.UpdateRange(entities);
     }
 
     /// <summary>
-    /// 追踪一个实体删除
+    ///     追踪一个实体删除
     /// </summary>
     /// <param name="entity">实体</param>
     private void DeleteEntity(TEntity entity)
@@ -890,6 +886,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
                 entity.UpdatedAt = now;
                 entity.DeletedAt = now;
             }
+
             Context.Update(entity);
         }
         else
@@ -899,7 +896,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 追踪多个实体删除
+    ///     追踪多个实体删除
     /// </summary>
     /// <param name="entities">实体</param>
     private void DeleteEntities(ICollection<TEntity> entities)
@@ -916,6 +913,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
                     entity.DeletedAt = now;
                 }
             }
+
             Context.UpdateRange(entities);
         }
         else
@@ -925,7 +923,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查询实体
+    ///     根据Id查询实体
     /// </summary>
     /// <param name="id">id</param>
     /// <returns></returns>
@@ -935,7 +933,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查询实体
+    ///     根据Id查询实体
     /// </summary>
     /// <param name="ids">id</param>
     /// <returns></returns>
@@ -945,7 +943,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
@@ -956,14 +954,15 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 根据Id查找实体
+    ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    private async Task<IEnumerable<TEntity>> FindByIdsAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
+    private async Task<IEnumerable<TEntity>> FindByIdsAsync(IEnumerable<TKey> ids,
+        CancellationToken cancellationToken = default)
     {
-        return await NoTrackingQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken: cancellationToken);
+        return await NoTrackingQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken);
     }
 
     #endregion
@@ -971,7 +970,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     #region OnActionExecution
 
     /// <summary>
-    /// 保存追踪
+    ///     保存追踪
     /// </summary>
     /// <returns></returns>
     private StoreResult AttacheChange()
@@ -988,7 +987,7 @@ public abstract class Store<TEntity, TContext, TKey>: StoreBase<TEntity, TKey>, 
     }
 
     /// <summary>
-    /// 保存异步追踪
+    ///     保存异步追踪
     /// </summary>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
