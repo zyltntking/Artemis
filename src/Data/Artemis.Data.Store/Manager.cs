@@ -63,17 +63,17 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     存储访问器
     /// </summary>
-    protected IStore<TEntity, TKey> Store { get; set; }
+    protected IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
     ///     配置访问器
     /// </summary>
-    private IStoreOptions StoreOptions { get; }
+    protected IStoreOptions StoreOptions { get; }
 
     /// <summary>
     ///     错误报告生成器
     /// </summary>
-    private IStoreErrorDescriber StoreErrorDescriber { get; set; }
+    protected IStoreErrorDescriber StoreErrorDescriber { get; }
 
     /// <summary>
     ///     日志依赖访问器
@@ -90,6 +90,9 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
 
     #region IDisposable
 
+    /// <summary>
+    /// 标记资源是否已被或是否需要释放
+    /// </summary>
     private bool _disposed;
 
     /// <summary>
@@ -108,13 +111,21 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     ///     true to release both managed and unmanaged resources; false to release only unmanaged
     ///     resources.
     /// </param>
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (disposing && !_disposed)
         {
-            Store.Dispose();
+            StoreDispose();
             _disposed = true;
         }
+    }
+
+    /// <summary>
+    /// 释放托管的Store
+    /// </summary>
+    protected virtual void StoreDispose()
+    {
+        Store.Dispose();
     }
 
     #endregion
