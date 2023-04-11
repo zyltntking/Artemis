@@ -6,8 +6,13 @@ namespace Artemis.Data.Store;
 ///     存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IStore<TEntity> : IStore<TEntity, Guid>, IStoreBase<TEntity>, IStoreCommon<TEntity>, IStoreMap<TEntity>
-    where TEntity : IModelBase<Guid>
+public interface IStore<TEntity> : 
+    IStore<TEntity, Guid>, 
+    IStoreBase<TEntity>, 
+    IStoreCommon<TEntity>,
+    IStoreAccess<TEntity>,
+    IStoreMap<TEntity>
+    where TEntity : class, IModelBase<Guid>
 {
 }
 
@@ -16,9 +21,12 @@ public interface IStore<TEntity> : IStore<TEntity, Guid>, IStoreBase<TEntity>, I
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IStore<TEntity, TKey> : IStoreBase<TEntity, TKey>, IStoreCommon<TEntity, TKey>,
+public interface IStore<TEntity, TKey> : 
+    IStoreBase<TEntity, TKey>, 
+    IStoreCommon<TEntity, TKey>,
+    IStoreAccess<TEntity, TKey>,
     IStoreMap<TEntity, TKey>
-    where TEntity : IModelBase<TKey>
+    where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
 }

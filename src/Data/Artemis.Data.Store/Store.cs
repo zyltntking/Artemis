@@ -17,7 +17,7 @@ public class Store<TEntity> : Store<TEntity, DbContext>
     /// <param name="context">数据访问上下文</param>
     /// <param name="describer">操作异常描述者</param>
     /// <exception cref="ArgumentNullException"></exception>
-    protected Store(DbContext context, IStoreErrorDescriber? describer = null) : base(context, describer)
+    public Store(DbContext context, IStoreErrorDescriber? describer = null) : base(context, describer)
     {
     }
 }
@@ -83,8 +83,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="context">数据访问上下文</param>
     /// <param name="describer">操作异常描述者</param>
     /// <exception cref="ArgumentNullException"></exception>
-    protected Store(TContext context, IStoreErrorDescriber? describer = null) : base(describer ??
-                                                                                     new StoreErrorDescriber())
+    protected Store(TContext context, IStoreErrorDescriber? describer = null) : base(describer ?? new StoreErrorDescriber())
     {
         Context = context ?? throw new ArgumentNullException(nameof(context));
     }
@@ -135,24 +134,22 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     数据访问上下文
     /// </summary>
-    public virtual TContext Context { get; }
+    protected virtual TContext Context { get; } = null!;
 
     /// <summary>
     ///     EntitySet访问器*Main Store Set*
     /// </summary>
-    protected virtual DbSet<TEntity> EntitySet => Context.Set<TEntity>();
+    public virtual DbSet<TEntity> EntitySet => Context.Set<TEntity>();
 
     /// <summary>
-    ///     EntityQuery访问器
+    ///     Entity有追踪访问器
     /// </summary>
-    protected virtual IQueryable<TEntity> EntityQuery =>
-        EntitySet.AsQueryable().Where(item => !SoftDelete || item.DeletedAt != null);
+    public virtual IQueryable<TEntity> TrackingQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null);
 
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    protected virtual IQueryable<TEntity> NoTrackingQuery =>
-        EntityQuery.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public virtual IQueryable<TEntity> EntityQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
 
     #endregion
 
@@ -495,9 +492,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult CreateNew<TSource>(TSource source, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        var entity = config == null
-            ? source!.Adapt<TSource, TEntity>()
-            : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
+        config ??= IgnoreIdConfig<TSource>();
+        var entity = source!.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var changes = SaveChanges();
@@ -514,9 +510,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult CreateNew<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(sources, nameof(sources));
-        var entities = config == null
-            ? sources.Adapt<IEnumerable<TEntity>>()
-            : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
+        config ??= IgnoreIdConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
@@ -532,13 +527,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
-        CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null
-            ? source!.Adapt<TSource, TEntity>()
-            : source!.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>());
+        config ??= IgnoreIdConfig<TSource>();
+        var entity = source!.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var changes = await SaveChangesAsync(cancellationToken);
@@ -553,13 +546,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
-        var entities = config == null
-            ? sources.Adapt<IEnumerable<TEntity>>()
-            : sources.Adapt<IEnumerable<TEntity>>(IgnoreIdConfig<TSource>());
+        config ??= IgnoreIdConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
@@ -1132,7 +1123,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private TEntity? FindById(TKey id)
     {
-        return NoTrackingQuery.FirstOrDefault(entity => entity.Id.Equals(id));
+        return EntityQuery.FirstOrDefault(entity => entity.Id.Equals(id));
     }
 
     /// <summary>
@@ -1142,7 +1133,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private IEnumerable<TEntity> FindByIds(IEnumerable<TKey> ids)
     {
-        return NoTrackingQuery.Where(entity => ids.Contains(entity.Id)).ToList();
+        return EntityQuery.Where(entity => ids.Contains(entity.Id)).ToList();
     }
 
     /// <summary>
@@ -1153,7 +1144,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private Task<TEntity?> FindByIdAsync(TKey id, CancellationToken cancellationToken = default)
     {
-        return NoTrackingQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id), cancellationToken);
+        return EntityQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id), cancellationToken);
     }
 
     /// <summary>
@@ -1165,7 +1156,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private async Task<IEnumerable<TEntity>> FindByIdsAsync(IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
-        return await NoTrackingQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken);
+        return await EntityQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken);
     }
 
     #endregion

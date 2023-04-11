@@ -9,7 +9,7 @@ namespace Artemis.Data.Store;
 ///     提供用于管理TEntity的存储器的API
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntity> where TEntity : IModelBase
+public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntity> where TEntity : class, IModelBase
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -34,7 +34,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposable
-    where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+    where TEntity : class, IModelBase<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     创建新的管理器实例
