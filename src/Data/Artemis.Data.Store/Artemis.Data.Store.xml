@@ -30,6 +30,32 @@
             <typeparam name="TEntity">实体类型</typeparam>
             <typeparam name="TKey">键类型</typeparam>
         </member>
+        <member name="T:Artemis.Data.Store.IStoreAccess`1">
+            <summary>
+                通用存储接口
+            </summary>
+            <typeparam name="TEntity">实体类型</typeparam>
+        </member>
+        <member name="T:Artemis.Data.Store.IStoreAccess`2">
+            <summary>
+            存储数据访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.IStoreAccess`2.EntitySet">
+            <summary>
+                EntitySet访问器*Main Store Set*
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.IStoreAccess`2.TrackingQuery">
+            <summary>
+                Entity有追踪访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.IStoreAccess`2.EntityQuery">
+            <summary>
+                Entity无追踪访问器
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Store.IStoreBase`1">
             <summary>
                 可映射存储接口
@@ -411,6 +437,92 @@
             <param name="sourceKeySelector">源键选择器</param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``1(``0,Mapster.TypeAdapterConfig)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``1(``0,`0,Mapster.TypeAdapterConfig)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="destination">目标数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{`0},System.Func{``0,``1},System.Func{`0,``1},Mapster.TypeAdapterConfig)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TJKey">连接键类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="destinations">目标数据</param>
+            <param name="destinationKeySelector">目标键选择器</param>
+            <param name="config">映射配置</param>
+            <param name="sourceKeySelector">源键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``1(``0,`0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="destination">目标数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{`0},System.Func{``0,``1},System.Func{`0,``1},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TJKey">连接键类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="destinations">目标数据</param>
+            <param name="destinationKeySelector">目标键选择器</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <param name="sourceKeySelector">源键选择器</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Data.Store.IStoreOptions">
             <summary>
                 存储配置接口
@@ -651,12 +763,12 @@
                 EntitySet访问器*Main Store Set*
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.Store`3.EntityQuery">
+        <member name="P:Artemis.Data.Store.Store`3.TrackingQuery">
             <summary>
-                EntityQuery访问器
+                Entity有追踪访问器
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.Store`3.NoTrackingQuery">
+        <member name="P:Artemis.Data.Store.Store`3.EntityQuery">
             <summary>
                 Entity无追踪访问器
             </summary>
@@ -945,6 +1057,116 @@
             <param name="config">映射配置</param>
             <param name="cancellationToken">取消信号</param>
             <param name="sourceKeySelector">源键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.Merge``1(``0,Mapster.TypeAdapterConfig)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.Merge``1(``0,`0,Mapster.TypeAdapterConfig)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="destination">目标数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.Merge``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="config">映射配置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.Merge``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{`0},System.Func{``0,``1},System.Func{`0,``1},Mapster.TypeAdapterConfig)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TJKey">连接键类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="destinations">目标数据</param>
+            <param name="destinationKeySelector">目标键选择器</param>
+            <param name="config">映射配置</param>
+            <param name="sourceKeySelector">源键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.MergeAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.MergeAsync``1(``0,`0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="source">源数据</param>
+            <param name="destination">目标数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.MergeAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+            通过类型映射合并对应Id的实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.MergeAsync``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{`0},System.Func{``0,``1},System.Func{`0,``1},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+            <summary>
+                通过类型映射合并对应实体
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TJKey">连接键类型</typeparam>
+            <param name="sources">源数据</param>
+            <param name="destinations">目标数据</param>
+            <param name="destinationKeySelector">目标键选择器</param>
+            <param name="config">映射配置</param>
+            <param name="cancellationToken">取消信号</param>
+            <param name="sourceKeySelector">源键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="F:Artemis.Data.Store.Store`3._ignoreIdAndNullConfig">
+            <summary>
+            id和空值忽略缓存
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.IgnoreIdAndNullConfig``1">
+            <summary>
+            空值或空字符值忽略缓存
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="F:Artemis.Data.Store.Store`3._ignoreNullConfig">
+            <summary>
+            空值或空字符值忽略缓存
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`3.IgnoreNullConfig``1">
+            <summary>
+            空值或空字符值忽略缓存
+            </summary>
+            <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
         <member name="F:Artemis.Data.Store.Store`3._ignoreIdConfig">
