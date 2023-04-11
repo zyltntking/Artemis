@@ -167,45 +167,105 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
 
     #endregion
 
-    //#region MergeEntity & MergeEntities
+    #region MergeEntity & MergeEntities
 
-    ///// <summary>
-    ///// 通过类型映射合并对应Id的实体
-    ///// </summary>
-    ///// <typeparam name="TSource">源类型</typeparam>
-    ///// <param name="source">源数据</param>
-    ///// <param name="config">映射配置</param>
-    ///// <returns></returns>
-    //StoreResult Merge<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
-    ///// <summary>
-    ///// 通过类型映射合并对应Id的实体
-    ///// </summary>
-    ///// <typeparam name="TSource">源类型</typeparam>
-    ///// <param name="sources">源数据</param>
-    ///// <param name="config">映射配置</param>
-    ///// <returns></returns>
-    //StoreResult Merge<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null);
 
-    ///// <summary>
-    ///// 通过类型映射合并对应Id的实体
-    ///// </summary>
-    ///// <typeparam name="TSource">源类型</typeparam>
-    ///// <param name="source">源数据</param>
-    ///// <param name="config">映射配置</param>
-    ///// <param name="cancellationToken">取消信号</param>
-    ///// <returns></returns>
-    //Task<StoreResult> MergeAsync<TSource>(TSource source, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
-    ///// <summary>
-    ///// 通过类型映射合并对应Id的实体
-    ///// </summary>
-    ///// <typeparam name="TSource">源类型</typeparam>
-    ///// <param name="sources">源数据</param>
-    ///// <param name="config">映射配置</param>
-    ///// <param name="cancellationToken">取消信号</param>
-    ///// <returns></returns>
-    //Task<StoreResult> MergeAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null);
 
-    //#endregion
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> MergeAsync<TSource>(TSource source, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> MergeAsync<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> MergeAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public Task<StoreResult> MergeAsync<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default);
+
+    #endregion
 }

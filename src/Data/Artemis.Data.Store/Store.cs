@@ -188,7 +188,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Create(TEntity entity)
+    public StoreResult Create(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
         AddEntity(entity);
@@ -201,7 +201,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Create(IEnumerable<TEntity> entities)
+    public StoreResult Create(IEnumerable<TEntity> entities)
     {
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
@@ -216,7 +216,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         AddEntity(entity);
@@ -230,7 +230,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities,
+    public async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
@@ -249,7 +249,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Update(TEntity entity)
+    public StoreResult Update(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
         UpdateEntity(entity);
@@ -261,7 +261,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Update(IEnumerable<TEntity> entities)
+    public StoreResult Update(IEnumerable<TEntity> entities)
     {
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
@@ -275,7 +275,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<StoreResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         UpdateEntity(entity);
@@ -288,7 +288,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities,
+    public Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
@@ -305,7 +305,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     在存储中删除已存在的实体
     /// </summary>
     /// <param name="id">被删除实体的主键</param>
-    public virtual StoreResult Delete(TKey id)
+    public StoreResult Delete(TKey id)
     {
         OnActionExecuting(id, nameof(id));
         var entity = FindEntity(id);
@@ -319,7 +319,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entity">被删除实体</param>
     /// <returns></returns>
-    public virtual StoreResult Delete(TEntity entity)
+    public StoreResult Delete(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
         DeleteEntity(entity);
@@ -331,7 +331,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="ids">被删除实体的主键</param>
     /// <returns></returns>
-    public virtual StoreResult Delete(IEnumerable<TKey> ids)
+    public StoreResult Delete(IEnumerable<TKey> ids)
     {
         var idList = ids as List<TKey> ?? ids.ToList();
         OnActionExecuting(idList, nameof(ids));
@@ -351,7 +351,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entities">被删除实体</param>
     /// <returns></returns>
-    public virtual StoreResult Delete(IEnumerable<TEntity> entities)
+    public StoreResult Delete(IEnumerable<TEntity> entities)
     {
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
@@ -365,7 +365,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         var entity = await FindEntityAsync(id, cancellationToken);
@@ -380,7 +380,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<StoreResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         DeleteEntity(entity);
@@ -393,7 +393,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids,
+    public async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         var idList = ids as List<TKey> ?? ids.ToList();
@@ -415,7 +415,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities,
+    public Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         var list = entities.ToList();
@@ -433,7 +433,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public virtual TEntity? FindEntity(TKey id)
+    public TEntity? FindEntity(TKey id)
     {
         OnActionExecuting(id, nameof(id));
         return FindById(id);
@@ -457,7 +457,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual Task<TEntity?> FindEntityAsync(TKey id, CancellationToken cancellationToken = default)
+    public Task<TEntity?> FindEntityAsync(TKey id, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         return FindByIdAsync(id, cancellationToken);
@@ -481,7 +481,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
     #endregion
 
-    #region Implementation of IStoreMap<out TEntity,TKey>
+    #region Implementation of IStoreMap<TEntity,TKey>
 
     #region CreateEntity & CreateEntities
 
@@ -581,9 +581,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Over<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         OnActionExecuting(source, nameof(source));
-        var entity = config == null
-            ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>())
-            : source.Adapt<TSource, TEntity>(config);
+        config ??= IgnoreMetaConfig<TSource>();
+        var entity = source.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         return AttacheChange();
@@ -600,9 +599,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Over<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        destination = config == null
-            ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
-            : source.Adapt<TSource, TEntity>(config);
+        config ??= IgnoreIdConfig<TSource>();
+        source.Adapt(destination, config);
         if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         return AttacheChange();
@@ -619,9 +617,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         where TSource : IKeySlot<TKey>
     {
         OnActionExecuting(sources, nameof(sources));
-        var entities = config == null
-            ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>())
-            : sources.Adapt<IEnumerable<TEntity>>(config);
+        config ??= IgnoreMetaConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
@@ -648,11 +645,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
+        config ??= IgnoreIdConfig<TSource>();
         var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
-            (source, _) =>
-                config == null
-                    ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
-                    : source.Adapt<TSource, TEntity>(config));
+            (source, _) =>  source.Adapt<TSource, TEntity>(config));
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
@@ -671,9 +666,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null
-            ? source.Adapt<TSource, TEntity>(IgnoreMetaConfig<TSource>())
-            : source.Adapt<TSource, TEntity>(config);
+        config ??= IgnoreMetaConfig<TSource>();
+        var entity = source.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         return AttacheChangeAsync(cancellationToken);
@@ -692,11 +686,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        var entity = config == null
-            ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
-            : source.Adapt<TSource, TEntity>(config);
-        if (entity == null) throw new MapTargetNullException(nameof(entity));
-        UpdateEntity(entity);
+        config ??= IgnoreIdConfig<TSource>();
+        source.Adapt(destination, config);
+        if (destination == null) throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
         return AttacheChangeAsync(cancellationToken);
     }
 
@@ -712,9 +705,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
-        var entities = config == null
-            ? sources.Adapt<IEnumerable<TEntity>>(IgnoreMetaConfig<TSource>())
-            : sources.Adapt<IEnumerable<TEntity>>(config);
+        config ??= IgnoreMetaConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
@@ -743,11 +735,182 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        config ??= IgnoreIdConfig<TSource>();
         var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
-            (source, _) =>
-                config == null
-                    ? source.Adapt<TSource, TEntity>(IgnoreIdConfig<TSource>())
-                    : source.Adapt<TSource, TEntity>(config));
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        return AttacheChangeAsync(cancellationToken);
+    }
+
+    #endregion
+
+    #region MergeEntity & MergeEntities
+
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    {
+        OnActionExecuting(source, nameof(source));
+        var entity = FindById(source.Id);
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
+        config ??= IgnoreNullConfig<TSource>();
+        source.Adapt(entity, config);
+        UpdateEntity(entity);
+        return AttacheChange();
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null)
+    {
+        OnActionExecuting(source, nameof(source));
+        config ??= IgnoreIdAndNullConfig<TSource>();
+        source.Adapt(destination, config);
+        if (destination == null) throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        return AttacheChange();
+    }
+
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    {
+        var sourceList = sources.ToList();
+        OnActionExecuting(sourceList, nameof(sources));
+        var destinations = FindByIds(sourceList.Select(source => source.Id));
+        if (destinations == null) throw new MapTargetNullException(nameof(destinations));
+        config ??= IgnoreNullConfig<TSource>();
+        var entities = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+            (source, destination) => source.Adapt(destination, config)).ToList();
+        UpdateEntities(entities);
+        return AttacheChange();
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource, TJKey>(IEnumerable<TSource> sources, IEnumerable<TEntity> destinations, Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector, TypeAdapterConfig? config = null)
+    {
+        var sourceList = sources.ToList();
+        OnActionExecuting(sourceList, nameof(sources));
+        config ??= IgnoreIdAndNullConfig<TSource>();
+        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities == null) throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        return AttacheChange();
+    }
+
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        var entity = await FindByIdAsync(source.Id, cancellationToken);
+        if (entity == null) throw new MapTargetNullException(nameof(entity));
+        config ??= IgnoreNullConfig<TSource>();
+        source.Adapt(entity, config);
+        UpdateEntity(entity);
+        return await AttacheChangeAsync(cancellationToken);
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public Task<StoreResult> MergeAsync<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        config ??= IgnoreIdAndNullConfig<TSource>();
+        source.Adapt(destination, config);
+        if (destination == null) throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        return AttacheChangeAsync(cancellationToken);
+    }
+
+    /// <summary>
+    /// 通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        var sourceList = sources.ToList();
+        OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        var destinations = await FindByIdsAsync(sourceList.Select(source => source.Id), cancellationToken);
+        if (destinations == null) throw new MapTargetNullException(nameof(destinations));
+        config ??= IgnoreNullConfig<TSource>();
+        var entities = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+            (source, destination) => source.Adapt(destination, config)).ToList();
+        UpdateEntities(entities);
+        return await AttacheChangeAsync(cancellationToken);
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public Task<StoreResult> MergeAsync<TSource, TJKey>(IEnumerable<TSource> sources, IEnumerable<TEntity> destinations, Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector, TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
+    {
+        var sourceList = sources.ToList();
+        OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        config ??= IgnoreIdAndNullConfig<TSource>();
+        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
@@ -757,6 +920,46 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     #endregion
 
     #region MapConfig
+
+    /// <summary>
+    /// id和空值忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreIdAndNullConfig;
+
+    /// <summary>
+    /// 空值或空字符值忽略缓存
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    public TypeAdapterConfig IgnoreIdAndNullConfig<TSource>()
+    {
+        if (_ignoreIdAndNullConfig != null) return _ignoreIdAndNullConfig;
+        _ignoreIdAndNullConfig = IgnoreNullConfig<TSource>().Clone();
+        _ignoreIdAndNullConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true);
+
+        return _ignoreIdAndNullConfig;
+    }
+
+    /// <summary>
+    /// 空值或空字符值忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreNullConfig;
+
+    /// <summary>
+    /// 空值或空字符值忽略缓存
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    public TypeAdapterConfig IgnoreNullConfig<TSource>()
+    {
+        if (_ignoreNullConfig != null) return _ignoreNullConfig;
+        _ignoreNullConfig = IgnoreMetaConfig<TSource>().Clone();
+        _ignoreNullConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true);
+
+        return _ignoreNullConfig;
+    }
 
     /// <summary>
     ///     Id忽略缓存

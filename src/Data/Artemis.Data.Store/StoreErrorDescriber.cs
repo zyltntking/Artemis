@@ -3,13 +3,13 @@
 /// <summary>
 ///     存储异常描述器
 /// </summary>
-public class StoreErrorDescriber : IStoreErrorDescriber
+public sealed class StoreErrorDescriber : IStoreErrorDescriber
 {
     /// <summary>
     ///     生成默认异常
     /// </summary>
     /// <returns>默认异常</returns>
-    public virtual StoreError DefaultError()
+    public StoreError DefaultError()
     {
         return new StoreError
         {
@@ -22,7 +22,7 @@ public class StoreErrorDescriber : IStoreErrorDescriber
     ///     提示发生并发失败
     /// </summary>
     /// <returns></returns>
-    public virtual StoreError ConcurrencyFailure()
+    public StoreError ConcurrencyFailure()
     {
         return new StoreError
         {
@@ -36,7 +36,7 @@ public class StoreErrorDescriber : IStoreErrorDescriber
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public virtual StoreError NotFoundId(string? id)
+    public StoreError NotFoundId(string? id)
     {
         return new StoreError
         {
