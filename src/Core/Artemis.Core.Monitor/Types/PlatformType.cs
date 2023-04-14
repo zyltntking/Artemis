@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core.Fundamental;
 
-namespace Artemis.Core.Probe.Types;
+namespace Artemis.Core.Monitor.Types;
 
 /// <summary>
 ///     平台类型

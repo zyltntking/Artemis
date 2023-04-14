@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.ConsoleSnippet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.Core", "test\Artemis.Test.Core\Artemis.Test.Core.csproj", "{CB4FD88C-23E4-4327-B029-D2430D8A5A81}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Core.Probe", "src\Core\Artemis.Core.Probe\Artemis.Core.Probe.csproj", "{A0AE41B0-95EB-4861-81A4-E021F59FCE4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Core.Monitor", "src\Core\Artemis.Core.Monitor\Artemis.Core.Monitor.csproj", "{A0AE41B0-95EB-4861-81A4-E021F59FCE4D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.WebApiSnippets", "test\Artemis.WebApiSnippets\Artemis.Test.WebApiSnippets.csproj", "{F8E568FA-096F-4004-AE23-B5F1D07C65A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Core.Probe.Store", "src\Core\Artemis.Core.Probe.Store\Artemis.Core.Probe.Store.csproj", "{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Core.Monitor.Store", "src\Core\Artemis.Core.Monitor.Store\Artemis.Core.Monitor.Store.csproj", "{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

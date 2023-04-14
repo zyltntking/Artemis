@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.Core.Monitor</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Core.Monitor.Models.Interface.IHostInfo">
+            <summary>
+                主机信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Models.Interface.IHostInfo.HostName">
+            <summary>
+                主机名
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Models.Interface.IHostInfo.HostType">
+            <summary>
+                主机类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Models.Interface.IHostInfo.OsName">
+            <summary>
+                系统名
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Models.Interface.IHostInfo.OsVersion">
+            <summary>
+                系统版本
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Types.HostType">
+            <summary>
+                主机类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Gateway">
+            <summary>
+                网关
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Cache">
+            <summary>
+                缓存
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Queue">
+            <summary>
+                队列
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Service">
+            <summary>
+                服务
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Log">
+            <summary>
+                日志
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.File">
+            <summary>
+                文件
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Interface">
+            <summary>
+                接口
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.HostType.Database">
+            <summary>
+                数据库
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Types.HostType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Types.MachineType">
+            <summary>
+                机器类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.MachineType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.MachineType.Physical">
+            <summary>
+                物理机
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.MachineType.Virtual">
+            <summary>
+                虚拟机
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Types.MachineType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Types.PlatformType">
+            <summary>
+                平台类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.PlatformType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.PlatformType.Linux">
+            <summary>
+                Linux
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.PlatformType.Windows">
+            <summary>
+                Windows
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.PlatformType.MacOS">
+            <summary>
+                MacOS
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Types.PlatformType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Types.StorageUnit">
+            <summary>
+                存储单位
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.StorageUnit.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.StorageUnit.B">
+            <summary>
+                B
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.StorageUnit.KB">
+            <summary>
+                KB
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.StorageUnit.MB">
+            <summary>
+                MB
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Types.StorageUnit.GB">
+            <summary>
+                GB
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Types.StorageUnit.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+    </members>
+</doc>

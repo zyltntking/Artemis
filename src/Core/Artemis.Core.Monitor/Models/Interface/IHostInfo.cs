@@ -1,6 +1,6 @@
-﻿using Artemis.Core.Probe.Types;
+﻿using Artemis.Core.Monitor.Types;
 
-namespace Artemis.Core.Probe.Models.Interface;
+namespace Artemis.Core.Monitor.Models.Interface;
 
 /// <summary>
 ///     主机信息接口
