@@ -1,4 +1,4 @@
-using Artemis.Data.Types;
+using Artemis.Core.Probe.Types;
 using Microsoft.OpenApi.Models;
 
 namespace Artemis.Test.WebApiSnippets

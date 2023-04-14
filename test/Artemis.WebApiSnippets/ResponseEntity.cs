@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
+using Artemis.Core.Probe.Types;
 using Artemis.Data.Core;
-using Artemis.Data.Types;
 
 namespace Artemis.Test.WebApiSnippets
 {

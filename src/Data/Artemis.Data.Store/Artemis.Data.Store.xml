@@ -4,6 +4,17 @@
         <name>Artemis.Data.Store</name>
     </assembly>
     <members>
+        <member name="T:Artemis.Data.Store.EnumerationValueConverter`1">
+            <summary>
+            枚举类型值转换器
+            </summary>
+            <typeparam name="T">枚举类</typeparam>
+        </member>
+        <member name="M:Artemis.Data.Store.EnumerationValueConverter`1.#ctor">
+            <summary>
+            构造
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Store.IManager`1">
             <summary>
                 提供用于管理TEntity的存储器的API
@@ -601,6 +612,11 @@
                 Throws if this class has been disposed.
             </summary>
         </member>
+        <member name="F:Artemis.Data.Store.Manager`2._disposed">
+            <summary>
+            标记资源是否已被或是否需要释放
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Store.Manager`2.Dispose">
             <summary>
                 Releases all resources used by the user manager.
@@ -614,6 +630,11 @@
                 true to release both managed and unmanaged resources; false to release only unmanaged
                 resources.
             </param>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.StoreDispose">
+            <summary>
+            释放托管的Store
+            </summary>
         </member>
         <member name="T:Artemis.Data.Store.MapTargetNullException">
             <summary>

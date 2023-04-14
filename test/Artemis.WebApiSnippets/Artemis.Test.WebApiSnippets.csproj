@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Data\Artemis.Data.Types\Artemis.Data.Types.csproj" />
+    <ProjectReference Include="..\..\src\Core\Artemis.Core.Probe\Artemis.Core.Probe.csproj" />
   </ItemGroup>
 
 </Project>

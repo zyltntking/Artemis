@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core;
 
-namespace Artemis.Data.Types;
+namespace Artemis.Core.Probe.Types;
 
 /// <summary>
 /// 主机类型
