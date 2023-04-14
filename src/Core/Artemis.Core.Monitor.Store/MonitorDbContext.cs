@@ -21,4 +21,9 @@ public class MonitorDbContext : DbContext
     /// </summary>
     public DbSet<MetadataGroup> MetadataGroups { get; set; }
 
+    /// <summary>
+    /// 元数据
+    /// </summary>
+    public DbSet<MetadataItem> MetadataItems { get; set; }
+
 }

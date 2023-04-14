@@ -6,27 +6,32 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Core.Monitor.Store.Entities;
 
 /// <summary>
-///     元数据组
+/// 元数据
 /// </summary>
-[EntityTypeConfiguration(typeof(MetadataGroupConfiguration))]
-public class MetadataGroup : PartitionBase, IMeta
+[EntityTypeConfiguration(typeof(MetadataItemConfiguration))]
+public class MetadataItem : PartitionBase, IMeta
 {
+    /// <summary>
+    /// 元数据组标识
+    /// </summary>
+    public virtual Guid MetadataGroupId { get; set; }
+
     #region Implementation of IMeta
 
     /// <summary>
     ///     数据键
     /// </summary>
-    public string Key { get; set; }
+    public virtual string Key { get; set; }
 
     /// <summary>
     ///     数据值
     /// </summary>
-    public string Value { get; set; }
+    public virtual string Value { get; set; }
 
     #endregion
 
     /// <summary>
-    /// 组内元数据
+    /// 所属元数据组
     /// </summary>
-    public virtual ICollection<MetadataItem> MetadataItems { get; set; }
+    public virtual MetadataGroup MetadataGroup { get; set; }
 }

@@ -15,6 +15,11 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     /// </summary>
     protected virtual DbType DbType => DbType.SqlServer;
 
+    /// <summary>
+    /// 数据类型集合访问器
+    /// </summary>
+    protected DataTypeSet DataTypeSet => DataTypeAdapter.GetDataTypeSet(DbType);
+
     #region Implementation of IEntityTypeConfiguration<T>
 
     /// <summary>
@@ -23,12 +28,25 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     /// <param name="builder">The builder to be used to configure the entity type.</param>
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
+        TableConfigure(builder);
+
         FieldCommentConfigure(builder);
 
         DataTypeConfigure(builder);
+
+        RelationConfigure(builder);
     }
 
     #endregion
+
+    /// <summary>
+    /// 表配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected virtual void TableConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+
+    }
 
     /// <summary>
     /// 数据库字段备注配置
@@ -46,17 +64,23 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     }
 
     /// <summary>
-    /// 数据库配置
+    /// 数据类型配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void DataTypeConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        var dataType = DataTypeAdapter.GetDataTypeSet(DbType);
+        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime);
 
-        builder.Property(entity => entity.CreatedAt).HasColumnType(dataType.DateTime);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime);
 
-        builder.Property(entity => entity.UpdatedAt).HasColumnType(dataType.DateTime);
+        builder.Property(entity => entity.DeletedAt).HasColumnType(DataTypeSet.DateTime);
+    }
 
-        builder.Property(entity => entity.DeletedAt).HasColumnType(dataType.DateTime);
+    /// <summary>
+    /// 数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected virtual void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
     }
 }
