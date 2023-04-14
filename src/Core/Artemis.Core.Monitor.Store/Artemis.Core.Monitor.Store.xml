@@ -4,16 +4,6 @@
         <name>Artemis.Core.Monitor.Store</name>
     </assembly>
     <members>
-        <member name="T:Artemis.Core.Monitor.Store.Constants">
-            <summary>
-            全局配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Core.Monitor.Store.Constants.DbType">
-            <summary>
-            数据库类型
-            </summary>
-        </member>
         <member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataGroupConfiguration">
             <summary>
             元数据组模型配置
@@ -45,20 +35,30 @@
                 数据值
             </summary>
         </member>
-        <member name="T:Artemis.Core.Monitor.Store.MetricDbContext">
+        <member name="T:Artemis.Core.Monitor.Store.MonitorDbContext">
             <summary>
                 监控数据上下文
             </summary>
         </member>
-        <member name="M:Artemis.Core.Monitor.Store.MetricDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Core.Monitor.Store.MetricDbContext})">
+        <member name="M:Artemis.Core.Monitor.Store.MonitorDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Core.Monitor.Store.MonitorDbContext})">
             <summary>
                 构造
             </summary>
             <param name="options"></param>
         </member>
-        <member name="P:Artemis.Core.Monitor.Store.MetricDbContext.MetadataGroups">
+        <member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MetadataGroups">
             <summary>
                元数据组
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.MonitorSetting">
+            <summary>
+            全局配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorSetting.DbType">
+            <summary>
+            数据库类型
             </summary>
         </member>
     </members>

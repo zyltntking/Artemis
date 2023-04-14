@@ -6,13 +6,13 @@ namespace Artemis.Core.Monitor.Store;
 /// <summary>
 ///     监控数据上下文
 /// </summary>
-public class MetricDbContext : DbContext
+public class MonitorDbContext : DbContext
 {
     /// <summary>
     ///     构造
     /// </summary>
     /// <param name="options"></param>
-    public MetricDbContext(DbContextOptions<MetricDbContext> options) : base(options)
+    public MonitorDbContext(DbContextOptions<MonitorDbContext> options) : base(options)
     {
     }
 

@@ -14,7 +14,7 @@ public class MetadataGroupConfiguration : ModelBaseTypeConfiguration<MetadataGro
     /// <summary>
     ///    数据库类型
     /// </summary>
-    protected override DbType DbType => Constants.DbType;
+    protected override DbType DbType => MonitorSetting.DbType;
 
     /// <summary>
     /// 数据库字段备注配置

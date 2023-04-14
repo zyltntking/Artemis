@@ -89,25 +89,25 @@ public class DataTypeSet
     /// <summary>
     /// DateTime数据类型
     /// </summary>
-    public string DateTime { get; set; }
+    public string DateTime { get; init; } = "DATETIME";
 
     /// <summary>
     /// Boolean数据类型
     /// </summary>
-    public string Boolean { get; set; }
+    public string Boolean { get; init; } = "BIT";
 
     /// <summary>
     /// Integer数据类型
     /// </summary>
-    public string Integer { get; set; }
+    public string Integer { get; init; } = "INTEGER";
 
     /// <summary>
     /// Long数据类型
     /// </summary>
-    public string Long { get; set; }
+    public string Long { get; init; } = "INTEGER";
 
     /// <summary>
     /// Double数据类型
     /// </summary>
-    public string Double { get; set; }
+    public string Double { get; init; } = "FLOAT";
 }
