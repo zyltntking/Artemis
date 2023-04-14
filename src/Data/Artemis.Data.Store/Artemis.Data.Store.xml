@@ -56,6 +56,11 @@
             Double数据类型
             </summary>
         </member>
+        <member name="P:Artemis.Data.Store.DataTypeSet.String">
+            <summary>
+            String数据类型
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Store.DbType">
             <summary>
                 数据库类型
@@ -759,11 +764,22 @@
                数据库类型
             </summary>
         </member>
+        <member name="P:Artemis.Data.Store.ModelBaseTypeConfiguration`1.DataTypeSet">
+            <summary>
+            数据类型集合访问器
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Store.ModelBaseTypeConfiguration`1.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
             <summary>
                 Configures the entity of type <typeparamref name="TEntity" />.
             </summary>
             <param name="builder">The builder to be used to configure the entity type.</param>
+        </member>
+        <member name="M:Artemis.Data.Store.ModelBaseTypeConfiguration`1.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            表配置
+            </summary>
+            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Data.Store.ModelBaseTypeConfiguration`1.FieldCommentConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
             <summary>
@@ -772,6 +788,30 @@
             <param name="builder"></param>
         </member>
         <member name="M:Artemis.Data.Store.ModelBaseTypeConfiguration`1.DataTypeConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            数据类型配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Data.Store.ModelBaseTypeConfiguration`1.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            数据库关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Data.Store.PartitionBaseTypeConfiguration`1">
+            <summary>
+            模型存储配置
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Artemis.Data.Store.PartitionBaseTypeConfiguration`1.FieldCommentConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            数据库字段备注配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Data.Store.PartitionBaseTypeConfiguration`1.DataTypeConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
             <summary>
             数据库配置
             </summary>

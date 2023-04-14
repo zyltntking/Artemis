@@ -5,7 +5,7 @@ namespace Artemis.Data.Core.Fundamental.Model;
 /// <summary>
 ///     元数据信息
 /// </summary>
-public class MetadataInfo : IMeta
+public class MetadataInfo : IMetadata
 {
     #region Implementation of IMeta
 

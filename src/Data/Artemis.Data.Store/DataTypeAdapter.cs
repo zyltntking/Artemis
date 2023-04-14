@@ -26,7 +26,8 @@ public static class DataTypeAdapter
                         Boolean = "NUMBER(1)",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "NUMBER(18, 4)"
+                        Double = "NUMBER(18, 4)",
+                        String = "VARCHAR2(4000)"
                     }
                 },
                 {
@@ -36,7 +37,8 @@ public static class DataTypeAdapter
                         Boolean = "BIT",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "FLOAT"
+                        Double = "FLOAT",
+                        String = "VARCHAR(4000)"
                     }
                 },
                 {
@@ -46,7 +48,8 @@ public static class DataTypeAdapter
                         Boolean = "BIT",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "FLOAT"
+                        Double = "FLOAT",
+                        String = "VARCHAR(4000)"
                     }
                 },
                 {
@@ -56,7 +59,8 @@ public static class DataTypeAdapter
                         Boolean = "BOOLEAN",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "DOUBLE PRECISION"
+                        Double = "DOUBLE PRECISION",
+                        String = "VARCHAR(4000)"
                     }
                 },
                 {
@@ -66,7 +70,8 @@ public static class DataTypeAdapter
                         Boolean = "BOOLEAN",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "FLOAT"
+                        Double = "FLOAT",
+                        String = "VARCHAR(4000)"
                     }
                 }
             };
@@ -110,4 +115,10 @@ public class DataTypeSet
     /// Double数据类型
     /// </summary>
     public string Double { get; init; } = "FLOAT";
+
+    /// <summary>
+    /// String数据类型
+    /// </summary>
+    public string String {get; init; } = "VARCHAR(4000)";
+
 }

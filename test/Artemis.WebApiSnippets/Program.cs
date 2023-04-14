@@ -1,4 +1,4 @@
-using Artemis.Core.Monitor.Types;
+using Artemis.Core.Monitor.Fundamental.Types;
 using Microsoft.OpenApi.Models;
 
 namespace Artemis.Test.WebApiSnippets;

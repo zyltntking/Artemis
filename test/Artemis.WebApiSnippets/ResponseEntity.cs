@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Artemis.Core.Monitor.Types;
+using Artemis.Core.Monitor.Fundamental.Types;
 using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.Test.WebApiSnippets;

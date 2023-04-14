@@ -1,11 +1,11 @@
-﻿using Artemis.Core.Monitor.Types;
+﻿using Artemis.Core.Monitor.Fundamental.Types;
 
-namespace Artemis.Core.Monitor.Models.Interface;
+namespace Artemis.Core.Monitor.Fundamental.Interface;
 
 /// <summary>
 ///     主机信息接口
 /// </summary>
-public interface IHostInfo
+public interface IHost
 {
     /// <summary>
     ///     主机名

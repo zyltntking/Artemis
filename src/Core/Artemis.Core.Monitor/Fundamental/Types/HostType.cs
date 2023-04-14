@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core.Fundamental;
 
-namespace Artemis.Core.Monitor.Types;
+namespace Artemis.Core.Monitor.Fundamental.Types;
 
 /// <summary>
 ///     主机类型

@@ -9,7 +9,7 @@ namespace Artemis.Core.Monitor.Store.Entities;
 /// 元数据
 /// </summary>
 [EntityTypeConfiguration(typeof(MetadataItemConfiguration))]
-public class MetadataItem : PartitionBase, IMeta
+public class MetadataItem : PartitionBase, IMetadata
 {
     /// <summary>
     /// 元数据组标识

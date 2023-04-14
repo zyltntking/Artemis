@@ -167,17 +167,17 @@
             <param name="value">The value to convert to JSON.</param>
             <param name="options">An object that specifies serialization options to use.</param>
         </member>
-        <member name="T:Artemis.Data.Core.Fundamental.Interface.IMeta">
+        <member name="T:Artemis.Data.Core.Fundamental.Interface.IMetadata">
             <summary>
                 元数据接口
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.Fundamental.Interface.IMeta.Key">
+        <member name="P:Artemis.Data.Core.Fundamental.Interface.IMetadata.Key">
             <summary>
                 数据键
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.Fundamental.Interface.IMeta.Value">
+        <member name="P:Artemis.Data.Core.Fundamental.Interface.IMetadata.Value">
             <summary>
                 数据值
             </summary>

@@ -3,7 +3,7 @@
 /// <summary>
 ///     元数据接口
 /// </summary>
-public interface IMeta
+public interface IMetadata
 {
     /// <summary>
     ///     数据键
@@ -19,7 +19,7 @@ public interface IMeta
 /// <summary>
 ///     数据字典
 /// </summary>
-public interface IDataDict : IMeta
+public interface IDataDict : IMetadata
 {
     /// <summary>
     ///     数据标签
