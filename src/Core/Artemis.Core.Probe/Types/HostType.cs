@@ -1,14 +1,14 @@
-﻿using Artemis.Data.Core;
+﻿using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.Core.Probe.Types;
 
 /// <summary>
-/// 主机类型
+///     主机类型
 /// </summary>
 public class HostType : Enumeration
 {
     /// <summary>
-    /// 未知类型
+    ///     未知类型
     /// </summary>
     public static HostType Unknown = new(-1, nameof(Unknown));
 
@@ -53,7 +53,7 @@ public class HostType : Enumeration
     public static HostType Database = new(7, nameof(Database));
 
     /// <summary>
-    /// 构造函数
+    ///     构造函数
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>

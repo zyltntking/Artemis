@@ -91,7 +91,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #region IDisposable
 
     /// <summary>
-    /// 标记资源是否已被或是否需要释放
+    ///     标记资源是否已被或是否需要释放
     /// </summary>
     private bool _disposed;
 
@@ -121,7 +121,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 释放托管的Store
+    ///     释放托管的Store
     /// </summary>
     protected virtual void StoreDispose()
     {

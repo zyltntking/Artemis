@@ -1,32 +1,31 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Artemis.Test.ConsoleSnippets
+namespace Artemis.Test.ConsoleSnippets;
+
+internal class Program
 {
-    internal class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var a = RuntimeInformation.OSDescription;
+        var a = RuntimeInformation.OSDescription;
 
-            var b = RuntimeInformation.OSArchitecture;
+        var b = RuntimeInformation.OSArchitecture;
 
-            var c = RuntimeInformation.FrameworkDescription;
+        var c = RuntimeInformation.FrameworkDescription;
 
-            var d = RuntimeInformation.ProcessArchitecture;
+        var d = RuntimeInformation.ProcessArchitecture;
 
-            var e = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        var e = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-            var f = Environment.OSVersion;
+        var f = Environment.OSVersion;
 
-            var g = Environment.CommandLine;
+        var g = Environment.CommandLine;
 
-            var h = Environment.MachineName;
+        var h = Environment.MachineName;
 
-            var i = Environment.Version;
+        var i = Environment.Version;
 
-            var bb = File.ReadAllLines("/etc/os-release");
+        var bb = File.ReadAllLines("/etc/os-release");
 
-            Console.WriteLine("Hello, World!");
-        }
+        Console.WriteLine("Hello, World!");
     }
 }

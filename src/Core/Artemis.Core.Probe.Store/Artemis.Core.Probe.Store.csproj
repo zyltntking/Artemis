@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Artemis.Core.Probe.Store.xml</DocumentationFile>
+		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
+	  <ProjectReference Include="..\Artemis.Core.Probe\Artemis.Core.Probe.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -163,7 +163,8 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <param name="value">实体</param>
     /// <param name="name">参数名</param>
     /// <param name="cancellationToken">取消信号</param>
-    protected void OnAsyncActionExecuting<TValue>(TValue value, string name, CancellationToken cancellationToken = default)
+    protected void OnAsyncActionExecuting<TValue>(TValue value, string name,
+        CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         OnActionExecuting(value, name);

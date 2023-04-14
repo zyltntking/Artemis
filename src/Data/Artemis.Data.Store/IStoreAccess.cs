@@ -12,7 +12,7 @@ public interface IStoreAccess<TEntity> : IStoreAccess<TEntity, Guid> where TEnti
 }
 
 /// <summary>
-/// 存储数据访问器
+///     存储数据访问器
 /// </summary>
 public interface IStoreAccess<TEntity, TKey> where TEntity : class, IModelBase<TKey> where TKey : IEquatable<TKey>
 {
@@ -24,7 +24,7 @@ public interface IStoreAccess<TEntity, TKey> where TEntity : class, IModelBase<T
     /// <summary>
     ///     Entity有追踪访问器
     /// </summary>
-    IQueryable<TEntity> TrackingQuery { get;}
+    IQueryable<TEntity> TrackingQuery { get; }
 
     /// <summary>
     ///     Entity无追踪访问器

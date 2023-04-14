@@ -1,14 +1,14 @@
-﻿using Artemis.Data.Core;
+﻿using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.Core.Probe.Types;
 
 /// <summary>
-/// 机器类型
+///     机器类型
 /// </summary>
 public class MachineType : Enumeration
 {
     /// <summary>
-    /// 未知类型
+    ///     未知类型
     /// </summary>
     public static MachineType Unknown = new(-1, nameof(Unknown));
 
@@ -23,7 +23,7 @@ public class MachineType : Enumeration
     public static MachineType Virtual = new(1, nameof(Virtual));
 
     /// <summary>
-    /// 构造函数
+    ///     构造函数
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>

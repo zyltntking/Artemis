@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Core.Probe", "src\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.WebApiSnippets", "test\Artemis.WebApiSnippets\Artemis.Test.WebApiSnippets.csproj", "{F8E568FA-096F-4004-AE23-B5F1D07C65A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Core.Probe.Store", "src\Core\Artemis.Core.Probe.Store\Artemis.Core.Probe.Store.csproj", "{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F8E568FA-096F-4004-AE23-B5F1D07C65A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8E568FA-096F-4004-AE23-B5F1D07C65A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8E568FA-096F-4004-AE23-B5F1D07C65A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{CB4FD88C-23E4-4327-B029-D2430D8A5A81} = {4EB4BA12-8103-4D29-9A03-7D635250035D}
 		{A0AE41B0-95EB-4861-81A4-E021F59FCE4D} = {DC0418E8-4616-4B0E-BEAC-1B9631BB9806}
 		{F8E568FA-096F-4004-AE23-B5F1D07C65A1} = {4EB4BA12-8103-4D29-9A03-7D635250035D}
+		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81} = {DC0418E8-4616-4B0E-BEAC-1B9631BB9806}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

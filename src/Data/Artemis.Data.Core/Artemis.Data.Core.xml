@@ -1,480 +1,484 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Data.Core</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Data.Core.DataParser">
-            <summary>
-                数据解析器
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.ToUnixTimeStamp(System.DateTime)">
-            <summary>
-                获取Unix时间戳
-            </summary>
-            <param name="time">时间</param>
-            <returns>时间戳</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.ToDateTime(System.Int64)">
-            <summary>
-                获取本地时间
-            </summary>
-            <param name="timestamp">时间戳</param>
-            <returns>Utc时间</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.IdFromString``1(System.String)">
-            <summary>
-                string转id
-            </summary>
-            <param name="id">The id to convert.</param>
-            <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.IdToString``1(``0)">
-            <summary>
-                id转string
-            </summary>
-            <param name="id">The id to convert.</param>
-            <returns>An <see cref="T:System.String" /> representation of the provided <paramref name="id" />.</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.GuidFromString(System.String)">
-            <summary>
-                string装guid
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataParser.GuidToString(System.Guid)">
-            <summary>
-                Guid转String
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Data.Core.Enumeration">
-            <summary>
-            枚举类
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Enumeration.Name">
-            <summary>
-            枚举名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Enumeration.Id">
-            <summary>
-            枚举ID
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.#ctor(System.Int32,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="id">枚举Id</param>
-            <param name="name">枚举名称</param>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.ToString">
-            <summary>
-            转为字符串
-            </summary>
-            <returns>字符串</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.Equals(System.Object)">
-            <summary>
-            等于
-            </summary>
-            <param name="obj">对象</param>
-            <returns>是否相等</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.GetHashCode">
-            <summary>
-            获取哈希码
-            </summary>
-            <returns>哈希码</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.FromValue``1(System.Int32)">
-            <summary>
-            从值获取枚举
-            </summary>
-            <typeparam name="T">枚举类型</typeparam>
-            <param name="id">值</param>
-            <returns>枚举成员</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.FromName``1(System.String)">
-            <summary>
-            从名称获取枚举
-            </summary>
-            <typeparam name="T">枚举类型</typeparam>
-            <param name="name">枚举成员名称</param>
-            <returns>枚举成员</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.AbsoluteDifference(Artemis.Data.Core.Enumeration,Artemis.Data.Core.Enumeration)">
-            <summary>
-            绝对值差
-            </summary>
-            <param name="lhs">左手资源</param>
-            <param name="rhs">右手资源</param>
-            <returns>差值</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.GetAll``1">
-            <summary>
-            获取枚举类的所有枚举成员
-            </summary>
-            <typeparam name="T">枚举类</typeparam>
-            <returns>枚举成员</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
-            <summary>
-            转换函数
-            </summary>
-            <typeparam name="T">枚举类</typeparam>
-            <typeparam name="TK">源类</typeparam>
-            <param name="value">源值</param>
-            <param name="description">描述</param>
-            <param name="predicate">匹配表达式</param>
-            <returns>枚举成员</returns>
-            <exception cref="T:System.InvalidOperationException">无效操作异常</exception>
-        </member>
-        <member name="M:Artemis.Data.Core.Enumeration.CompareTo(System.Object)">
-            <summary>
-            比较
-            </summary>
-            <param name="other">其他</param>
-            <returns>比较结果</returns>
-        </member>
-        <member name="T:Artemis.Data.Core.EnumerationJsonConverter`1">
-            <summary>
-            枚举类Json转换器
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
-            <param name="reader">The reader.</param>
-            <param name="typeToConvert">The type to convert.</param>
-            <param name="options">An object that specifies serialization options to use.</param>
-            <returns>The converted value.</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
-            <summary>Writes a specified value as JSON.</summary>
-            <param name="writer">The writer to write to.</param>
-            <param name="value">The value to convert to JSON.</param>
-            <param name="options">An object that specifies serialization options to use.</param>
-        </member>
-        <member name="T:Artemis.Data.Core.IPartitionBase">
-            <summary>
-                基本分区模型
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IPartitionBase`1">
-            <summary>
-                基本分区模型
-            </summary>
-            <typeparam name="TKey">基本记录标识</typeparam>
-        </member>
-        <member name="T:Artemis.Data.Core.IModelBase">
-            <summary>
-                基本模型接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IModelBase`1">
-            <summary>
-                基本模型接口
-            </summary>
-            <typeparam name="TKey">基本记录标识</typeparam>
-        </member>
-        <member name="T:Artemis.Data.Core.IPartitionSlot">
-            <summary>
-                分区组件接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IPartitionSlot.Partition">
-            <summary>
-                分区标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IKeySlot">
-            <summary>
-                标识组件接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IKeySlot`1">
-            <summary>
-                标识组件接口
-            </summary>
-            <typeparam name="TKey">基本记录标识</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.IKeySlot`1.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IMateSlot">
-            <summary>
-                元数据组件接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IMateSlot.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IMateSlot.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IMateSlot.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IDataResult">
-            <summary>
-                数据结果协议模板接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Code">
-            <summary>
-                消息码
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Message">
-            <summary>
-                消息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Timestamp">
-            <summary>
-                时间戳
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.IDataResult`1">
-            <summary>
-                数据结果协议模板接口
-            </summary>
-            <typeparam name="T">模板类型</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult`1.Data">
-            <summary>
-                数据
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult`1.Error">
-            <summary>
-                异常信息
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.PartitionBase">
-            <summary>
-                分区模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PartitionBase.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.PartitionBase`1">
-            <summary>
-                分区模型
-            </summary>
-            <typeparam name="TKey">记录标识</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.PartitionBase`1.Partition">
-            <summary>
-                分区标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.ModelBase">
-            <summary>
-                基本模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ModelBase.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.ModelBase`1">
-            <summary>
-                基本模型
-            </summary>
-            <typeparam name="TKey">记录标识</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.ModelBase`1.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.PartitionSlot">
-            <summary>
-                分区组件
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PartitionSlot.Partition">
-            <summary>
-                分区标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.KeySlot">
-            <summary>
-                标识组件
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.KeySlot.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.KeySlot`1">
-            <summary>
-                标识组件
-            </summary>
-            <typeparam name="TKey">记录标识</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.KeySlot`1.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.MateSlot">
-            <summary>
-                元数据组件
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.MateSlot.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.MateSlot.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.MateSlot.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.DataResult`1">
-            <summary>
-                数据结果协议模板接口
-            </summary>
-            <typeparam name="T">模板类型</typeparam>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult`1.#ctor">
-            <summary>
-                空构造
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult`1.#ctor(System.Int32,System.String,System.Exception)">
-            <summary>
-                异常构造
-            </summary>
-            <param name="code">消息码</param>
-            <param name="message">消息</param>
-            <param name="exception">异常</param>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult`1.#ctor(System.Int32,System.String,`0)">
-            <summary>
-                成功构造
-            </summary>
-            <param name="code">消息码</param>
-            <param name="message">消息</param>
-            <param name="data">数据</param>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.IsSuccess">
-            <summary>
-                是否成功
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Code">
-            <summary>
-                消息码
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Message">
-            <summary>
-                消息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Timestamp">
-            <summary>
-                时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Error">
-            <summary>
-                异常信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Data">
-            <summary>
-                数据
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.DataResult">
-            <summary>
-                数据结果生成函数集
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult.Success``1(``0,System.String)">
-            <summary>
-                生成成功结果
-            </summary>
-            <typeparam name="T">数据类型</typeparam>
-            <param name="data">数据</param>
-            <param name="message">消息</param>
-            <returns>成功结果</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult.Fail``1(System.String)">
-            <summary>
-                生成失败结果
-            </summary>
-            <typeparam name="T">数据类型</typeparam>
-            <param name="message">消息</param>
-            <returns>失败结果</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult.Exception``1(System.Exception,System.String)">
-            <summary>
-                生成异常结果
-            </summary>
-            <param name="exception">异常</param>
-            <param name="message">消息</param>
-            <returns>异常结果</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.DataResult.GenerateResult``1(System.Int32,System.String,``0,System.Exception)">
-            <summary>
-                生成数据结果
-            </summary>
-            <typeparam name="T">数据类型</typeparam>
-            <param name="code">结果状态编码</param>
-            <param name="message">结果消息</param>
-            <param name="data">结果数据</param>
-            <param name="exception"></param>
-            <returns>数据结果</returns>
-        </member>
-        <member name="T:Artemis.Data.Core.ResultStatus">
-            <summary>
-                结果状态
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.ResultStatus.Success">
-            <summary>
-                成功
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.ResultStatus.Fail">
-            <summary>
-                失败
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.ResultStatus.Exception">
-            <summary>
-                异常
-            </summary>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Data.Core</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Data.Core.DataParser">
+			<summary>
+				数据解析器
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.ToUnixTimeStamp(System.DateTime)">
+			<summary>
+				获取Unix时间戳
+			</summary>
+			<param name="time">时间</param>
+			<returns>时间戳</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.ToDateTime(System.Int64)">
+			<summary>
+				获取本地时间
+			</summary>
+			<param name="timestamp">时间戳</param>
+			<returns>Utc时间</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.IdFromString``1(System.String)">
+			<summary>
+				string转id
+			</summary>
+			<param name="id">The id to convert.</param>
+			<returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.IdToString``1(``0)">
+			<summary>
+				id转string
+			</summary>
+			<param name="id">The id to convert.</param>
+			<returns>An <see cref="T:System.String" /> representation of the provided <paramref name="id" />.</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.GuidFromString(System.String)">
+			<summary>
+				string装guid
+			</summary>
+			<param name="id"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.GuidToString(System.Guid)">
+			<summary>
+				Guid转String
+			</summary>
+			<param name="id"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Data.Core.Enumeration">
+			<summary>
+				枚举类
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Enumeration.Name">
+			<summary>
+				枚举名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Enumeration.Id">
+			<summary>
+				枚举ID
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.#ctor(System.Int32,System.String)">
+			<summary>
+				构造函数
+			</summary>
+			<param name="id">枚举Id</param>
+			<param name="name">枚举名称</param>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.ToString">
+			<summary>
+				转为字符串
+			</summary>
+			<returns>字符串</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.Equals(System.Object)">
+			<summary>
+				等于
+			</summary>
+			<param name="obj">对象</param>
+			<returns>是否相等</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.GetHashCode">
+			<summary>
+				获取哈希码
+			</summary>
+			<returns>哈希码</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.FromValue``1(System.Int32)">
+			<summary>
+				从值获取枚举
+			</summary>
+			<typeparam name="T">枚举类型</typeparam>
+			<param name="id">值</param>
+			<returns>枚举成员</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.FromName``1(System.String)">
+			<summary>
+				从名称获取枚举
+			</summary>
+			<typeparam name="T">枚举类型</typeparam>
+			<param name="name">枚举成员名称</param>
+			<returns>枚举成员</returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Core.Enumeration.AbsoluteDifference(Artemis.Data.Core.Enumeration,Artemis.Data.Core.Enumeration)">
+			<summary>
+				绝对值差
+			</summary>
+			<param name="lhs">左手资源</param>
+			<param name="rhs">右手资源</param>
+			<returns>差值</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.GetAll``1">
+			<summary>
+				获取枚举类的所有枚举成员
+			</summary>
+			<typeparam name="T">枚举类</typeparam>
+			<returns>枚举成员</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
+			<summary>
+				转换函数
+			</summary>
+			<typeparam name="T">枚举类</typeparam>
+			<typeparam name="TK">源类</typeparam>
+			<param name="value">源值</param>
+			<param name="description">描述</param>
+			<param name="predicate">匹配表达式</param>
+			<returns>枚举成员</returns>
+			<exception cref="T:System.InvalidOperationException">无效操作异常</exception>
+		</member>
+		<member name="M:Artemis.Data.Core.Enumeration.CompareTo(System.Object)">
+			<summary>
+				比较
+			</summary>
+			<param name="other">其他</param>
+			<returns>比较结果</returns>
+		</member>
+		<member name="T:Artemis.Data.Core.EnumerationJsonConverter`1">
+			<summary>
+				枚举类Json转换器
+			</summary>
+			<typeparam name="T"></typeparam>
+		</member>
+		<member
+			name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+			<summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+			<param name="reader">The reader.</param>
+			<param name="typeToConvert">The type to convert.</param>
+			<param name="options">An object that specifies serialization options to use.</param>
+			<returns>The converted value.</returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+			<summary>Writes a specified value as JSON.</summary>
+			<param name="writer">The writer to write to.</param>
+			<param name="value">The value to convert to JSON.</param>
+			<param name="options">An object that specifies serialization options to use.</param>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase">
+			<summary>
+				基本分区模型
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase`1">
+			<summary>
+				基本分区模型
+			</summary>
+			<typeparam name="TKey">基本记录标识</typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IModelBase">
+			<summary>
+				基本模型接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IModelBase`1">
+			<summary>
+				基本模型接口
+			</summary>
+			<typeparam name="TKey">基本记录标识</typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionSlot">
+			<summary>
+				分区组件接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IPartitionSlot.Partition">
+			<summary>
+				分区标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IKeySlot">
+			<summary>
+				标识组件接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IKeySlot`1">
+			<summary>
+				标识组件接口
+			</summary>
+			<typeparam name="TKey">基本记录标识</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.IKeySlot`1.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IMateSlot">
+			<summary>
+				元数据组件接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IMateSlot.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IMateSlot.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IMateSlot.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IDataResult">
+			<summary>
+				数据结果协议模板接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IDataResult.Code">
+			<summary>
+				消息码
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IDataResult.Message">
+			<summary>
+				消息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IDataResult.Timestamp">
+			<summary>
+				时间戳
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IDataResult`1">
+			<summary>
+				数据结果协议模板接口
+			</summary>
+			<typeparam name="T">模板类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.IDataResult`1.Data">
+			<summary>
+				数据
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.IDataResult`1.Error">
+			<summary>
+				异常信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase">
+			<summary>
+				分区模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PartitionBase.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase`1">
+			<summary>
+				分区模型
+			</summary>
+			<typeparam name="TKey">记录标识</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.PartitionBase`1.Partition">
+			<summary>
+				分区标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ModelBase">
+			<summary>
+				基本模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ModelBase`1">
+			<summary>
+				基本模型
+			</summary>
+			<typeparam name="TKey">记录标识</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase`1.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionSlot">
+			<summary>
+				分区组件
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PartitionSlot.Partition">
+			<summary>
+				分区标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.KeySlot">
+			<summary>
+				标识组件
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.KeySlot.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.KeySlot`1">
+			<summary>
+				标识组件
+			</summary>
+			<typeparam name="TKey">记录标识</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.KeySlot`1.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.MateSlot">
+			<summary>
+				元数据组件
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.DataResult`1">
+			<summary>
+				数据结果协议模板接口
+			</summary>
+			<typeparam name="T">模板类型</typeparam>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult`1.#ctor">
+			<summary>
+				空构造
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult`1.#ctor(System.Int32,System.String,System.Exception)">
+			<summary>
+				异常构造
+			</summary>
+			<param name="code">消息码</param>
+			<param name="message">消息</param>
+			<param name="exception">异常</param>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult`1.#ctor(System.Int32,System.String,`0)">
+			<summary>
+				成功构造
+			</summary>
+			<param name="code">消息码</param>
+			<param name="message">消息</param>
+			<param name="data">数据</param>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.IsSuccess">
+			<summary>
+				是否成功
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.Code">
+			<summary>
+				消息码
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.Message">
+			<summary>
+				消息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.Timestamp">
+			<summary>
+				时间戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.Error">
+			<summary>
+				异常信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.DataResult`1.Data">
+			<summary>
+				数据
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.DataResult">
+			<summary>
+				数据结果生成函数集
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.Success``1(``0,System.String)">
+			<summary>
+				生成成功结果
+			</summary>
+			<typeparam name="T">数据类型</typeparam>
+			<param name="data">数据</param>
+			<param name="message">消息</param>
+			<returns>成功结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.Fail``1(System.String)">
+			<summary>
+				生成失败结果
+			</summary>
+			<typeparam name="T">数据类型</typeparam>
+			<param name="message">消息</param>
+			<returns>失败结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.Exception``1(System.Exception,System.String)">
+			<summary>
+				生成异常结果
+			</summary>
+			<param name="exception">异常</param>
+			<param name="message">消息</param>
+			<returns>异常结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.GenerateResult``1(System.Int32,System.String,``0,System.Exception)">
+			<summary>
+				生成数据结果
+			</summary>
+			<typeparam name="T">数据类型</typeparam>
+			<param name="code">结果状态编码</param>
+			<param name="message">结果消息</param>
+			<param name="data">结果数据</param>
+			<param name="exception"></param>
+			<returns>数据结果</returns>
+		</member>
+		<member name="T:Artemis.Data.Core.ResultStatus">
+			<summary>
+				结果状态
+			</summary>
+		</member>
+		<member name="F:Artemis.Data.Core.ResultStatus.Success">
+			<summary>
+				成功
+			</summary>
+		</member>
+		<member name="F:Artemis.Data.Core.ResultStatus.Fail">
+			<summary>
+				失败
+			</summary>
+		</member>
+		<member name="F:Artemis.Data.Core.ResultStatus.Exception">
+			<summary>
+				异常
+			</summary>
+		</member>
+	</members>
 </doc>

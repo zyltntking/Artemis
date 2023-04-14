@@ -2,66 +2,49 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Artemis.Data.Core;
+namespace Artemis.Data.Core.Fundamental;
 
 /// <summary>
-/// 枚举类
+///     枚举类
 /// </summary>
 public abstract class Enumeration : IComparable
 {
     /// <summary>
-    /// 枚举名称
+    ///     构造函数
+    /// </summary>
+    /// <param name="id">枚举Id</param>
+    /// <param name="name">枚举名称</param>
+    protected Enumeration(int id, string name)
+    {
+        (Id, Name) = (id, name.ToUpper());
+    }
+
+    /// <summary>
+    ///     枚举名称
     /// </summary>
     private string Name { get; }
 
     /// <summary>
-    /// 枚举ID
+    ///     枚举ID
     /// </summary>
     private int Id { get; }
 
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="id">枚举Id</param>
-    /// <param name="name">枚举名称</param>
-    protected Enumeration(int id, string name) => (Id, Name) = (id, name.ToUpper());
-
-    #region Overrides of Object
+    #region Implementation of IComparable
 
     /// <summary>
-    /// 转为字符串
+    ///     比较
     /// </summary>
-    /// <returns>字符串</returns>
-    public override string ToString() => Name;
-
-    /// <summary>
-    /// 等于
-    /// </summary>
-    /// <param name="obj">对象</param>
-    /// <returns>是否相等</returns>
-    public override bool Equals(object? obj)
+    /// <param name="other">其他</param>
+    /// <returns>比较结果</returns>
+    public int CompareTo(object? other)
     {
-        if (obj is not Enumeration otherValue)
-        {
-            return false;
-        }
-
-        var typeMatches = GetType() == obj.GetType();
-        var valueMatches = Id.Equals(otherValue.Id);
-
-        return typeMatches && valueMatches;
+        return Id.CompareTo(((Enumeration)other!).Id);
     }
-
-    /// <summary>
-    /// 获取哈希码
-    /// </summary>
-    /// <returns>哈希码</returns>
-    public override int GetHashCode() => Id.GetHashCode();
 
     #endregion
 
     /// <summary>
-    /// 从值获取枚举
+    ///     从值获取枚举
     /// </summary>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="id">值</param>
@@ -73,7 +56,7 @@ public abstract class Enumeration : IComparable
     }
 
     /// <summary>
-    /// 从名称获取枚举
+    ///     从名称获取枚举
     /// </summary>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="name">枚举成员名称</param>
@@ -85,7 +68,7 @@ public abstract class Enumeration : IComparable
     }
 
     /// <summary>
-    /// 绝对值差
+    ///     绝对值差
     /// </summary>
     /// <param name="lhs">左手资源</param>
     /// <param name="rhs">右手资源</param>
@@ -97,19 +80,21 @@ public abstract class Enumeration : IComparable
     }
 
     /// <summary>
-    /// 获取枚举类的所有枚举成员
+    ///     获取枚举类的所有枚举成员
     /// </summary>
     /// <typeparam name="T">枚举类</typeparam>
     /// <returns>枚举成员</returns>
-    private static IEnumerable<T> GetAll<T>() where T : Enumeration =>
-        typeof(T).GetFields(BindingFlags.Public |
-                            BindingFlags.Static |
-                            BindingFlags.DeclaredOnly)
+    private static IEnumerable<T> GetAll<T>() where T : Enumeration
+    {
+        return typeof(T).GetFields(BindingFlags.Public |
+                                   BindingFlags.Static |
+                                   BindingFlags.DeclaredOnly)
             .Select(info => info.GetValue(null))
             .Cast<T>();
+    }
 
     /// <summary>
-    /// 转换函数
+    ///     转换函数
     /// </summary>
     /// <typeparam name="T">枚举类</typeparam>
     /// <typeparam name="TK">源类</typeparam>
@@ -122,23 +107,50 @@ public abstract class Enumeration : IComparable
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-        return matchingItem ?? throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
+        return matchingItem ??
+               throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
     }
 
-    #region Implementation of IComparable
+    #region Overrides of Object
 
     /// <summary>
-    /// 比较
+    ///     转为字符串
     /// </summary>
-    /// <param name="other">其他</param>
-    /// <returns>比较结果</returns>
-    public int CompareTo(object? other) => Id.CompareTo(((Enumeration)other!).Id);
+    /// <returns>字符串</returns>
+    public override string ToString()
+    {
+        return Name;
+    }
+
+    /// <summary>
+    ///     等于
+    /// </summary>
+    /// <param name="obj">对象</param>
+    /// <returns>是否相等</returns>
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Enumeration otherValue) return false;
+
+        var typeMatches = GetType() == obj.GetType();
+        var valueMatches = Id.Equals(otherValue.Id);
+
+        return typeMatches && valueMatches;
+    }
+
+    /// <summary>
+    ///     获取哈希码
+    /// </summary>
+    /// <returns>哈希码</returns>
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
 
     #endregion
 }
 
 /// <summary>
-/// 枚举类Json转换器
+///     枚举类Json转换器
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class EnumerationJsonConverter<T> : JsonConverter<T> where T : Enumeration

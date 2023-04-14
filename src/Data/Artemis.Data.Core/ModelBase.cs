@@ -31,7 +31,7 @@ public abstract class PartitionBase<TKey> : ModelBase<TKey>, IPartitionBase<TKey
     /// <summary>
     ///     分区标识
     /// </summary>
-    public int Partition { get; set; } = DateTime.Now.Month;
+    public virtual int Partition { get; set; } = DateTime.Now.Month;
 
     #endregion
 }
