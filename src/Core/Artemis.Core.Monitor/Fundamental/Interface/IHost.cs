@@ -18,12 +18,27 @@ public interface IHost
     HostType HostType { get; set; }
 
     /// <summary>
+    /// 实例类型
+    /// </summary>
+    InstanceType InstanceType { get; set; }
+
+    /// <summary>
     ///     系统名
     /// </summary>
     string OsName { get; set; }
 
     /// <summary>
+    ///    平台类型
+    /// </summary>
+    PlatformType PlatformType { get; set; }
+
+    /// <summary>
     ///     系统版本
     /// </summary>
     string OsVersion { get; set; }
+
+    /// <summary>
+    /// 进程架构
+    /// </summary>
+    string ProcessArchitecture { get; set; }
 }

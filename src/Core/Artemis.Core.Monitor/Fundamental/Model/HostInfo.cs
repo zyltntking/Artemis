@@ -21,14 +21,29 @@ public class HostInfo : IHost
     public HostType HostType { get; set; }
 
     /// <summary>
+    /// 实例类型
+    /// </summary>
+    public InstanceType InstanceType { get; set; }
+
+    /// <summary>
     ///     系统名
     /// </summary>
     public string OsName { get; set; }
 
     /// <summary>
+    ///    平台类型
+    /// </summary>
+    public PlatformType PlatformType { get; set; }
+
+    /// <summary>
     ///     系统版本
     /// </summary>
     public string OsVersion { get; set; }
+
+    /// <summary>
+    /// 进程架构
+    /// </summary>
+    public string ProcessArchitecture { get; set; }
 
     #endregion
 }

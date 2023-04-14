@@ -27,7 +27,7 @@ public static class DataTypeAdapter
                         Integer = "INTEGER",
                         Long = "INTEGER",
                         Double = "NUMBER(18, 4)",
-                        String = "VARCHAR2(4000)"
+                        StringTemplate = "NVARCHAR2({0})"
                     }
                 },
                 {
@@ -38,7 +38,7 @@ public static class DataTypeAdapter
                         Integer = "INTEGER",
                         Long = "INTEGER",
                         Double = "FLOAT",
-                        String = "VARCHAR(4000)"
+                        StringTemplate = "NVARCHAR({0})"
                     }
                 },
                 {
@@ -49,7 +49,7 @@ public static class DataTypeAdapter
                         Integer = "INTEGER",
                         Long = "INTEGER",
                         Double = "FLOAT",
-                        String = "VARCHAR(4000)"
+                        StringTemplate = "NVARCHAR({0})"
                     }
                 },
                 {
@@ -60,7 +60,7 @@ public static class DataTypeAdapter
                         Integer = "INTEGER",
                         Long = "INTEGER",
                         Double = "DOUBLE PRECISION",
-                        String = "VARCHAR(4000)"
+                        StringTemplate = "NVARCHAR({0})"
                     }
                 },
                 {
@@ -71,7 +71,7 @@ public static class DataTypeAdapter
                         Integer = "INTEGER",
                         Long = "INTEGER",
                         Double = "FLOAT",
-                        String = "VARCHAR(4000)"
+                        StringTemplate = "NVARCHAR({0})"
                     }
                 }
             };
@@ -119,6 +119,13 @@ public class DataTypeSet
     /// <summary>
     /// String数据类型
     /// </summary>
-    public string String {get; init; } = "VARCHAR(4000)";
+    public string StringTemplate {get; init; } = "VARCHAR({0})";
+
+    /// <summary>
+    /// 获取String数据类型
+    /// </summary>
+    /// <param name="length">字段长度</param>
+    /// <returns></returns>
+    public string String(int length) => string.Format(StringTemplate, length);
 
 }

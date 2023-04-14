@@ -26,4 +26,9 @@ public class MonitorDbContext : DbContext
     /// </summary>
     public DbSet<MetadataItem> MetadataItems { get; set; }
 
+    /// <summary>
+    /// 监控主机
+    /// </summary>
+    public DbSet<MonitorHost> MonitorHosts { get; set; }
+
 }

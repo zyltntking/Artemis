@@ -16,12 +16,12 @@ public class MetadataGroup : PartitionBase, IMetadata
     /// <summary>
     ///     数据键
     /// </summary>
-    public string Key { get; set; }
+    public virtual string Key { get; set; }
 
     /// <summary>
     ///     数据值
     /// </summary>
-    public string Value { get; set; }
+    public virtual string Value { get; set; }
 
     #endregion
 

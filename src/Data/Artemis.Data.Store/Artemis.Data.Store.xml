@@ -56,10 +56,17 @@
             Double数据类型
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.DataTypeSet.String">
+        <member name="P:Artemis.Data.Store.DataTypeSet.StringTemplate">
             <summary>
             String数据类型
             </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.DataTypeSet.String(System.Int32)">
+            <summary>
+            获取String数据类型
+            </summary>
+            <param name="length">字段长度</param>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Data.Store.DbType">
             <summary>

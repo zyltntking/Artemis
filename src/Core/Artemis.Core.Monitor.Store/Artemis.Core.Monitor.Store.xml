@@ -150,6 +150,11 @@
             元数据
             </summary>
         </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MonitorHosts">
+            <summary>
+            监控主机
+            </summary>
+        </member>
         <member name="T:Artemis.Core.Monitor.Store.MonitorSetting">
             <summary>
             全局配置

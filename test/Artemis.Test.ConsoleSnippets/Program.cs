@@ -24,6 +24,8 @@ internal class Program
 
         var i = Environment.Version;
 
+        var j = RuntimeInformation.RuntimeIdentifier;
+
         var bb = File.ReadAllLines("/etc/os-release");
 
         Console.WriteLine("Hello, World!");
