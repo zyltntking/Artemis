@@ -51,6 +51,116 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Data.Core.Enumeration">
+            <summary>
+            枚举类
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Enumeration.Name">
+            <summary>
+            枚举名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Enumeration.Id">
+            <summary>
+            枚举ID
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.#ctor(System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.ToString">
+            <summary>
+            转为字符串
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.Equals(System.Object)">
+            <summary>
+            等于
+            </summary>
+            <param name="obj">对象</param>
+            <returns>是否相等</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.GetHashCode">
+            <summary>
+            获取哈希码
+            </summary>
+            <returns>哈希码</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.FromValue``1(System.Int32)">
+            <summary>
+            从值获取枚举
+            </summary>
+            <typeparam name="T">枚举类型</typeparam>
+            <param name="id">值</param>
+            <returns>枚举成员</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.FromName``1(System.String)">
+            <summary>
+            从名称获取枚举
+            </summary>
+            <typeparam name="T">枚举类型</typeparam>
+            <param name="name">枚举成员名称</param>
+            <returns>枚举成员</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.AbsoluteDifference(Artemis.Data.Core.Enumeration,Artemis.Data.Core.Enumeration)">
+            <summary>
+            绝对值差
+            </summary>
+            <param name="lhs">左手资源</param>
+            <param name="rhs">右手资源</param>
+            <returns>差值</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.GetAll``1">
+            <summary>
+            获取枚举类的所有枚举成员
+            </summary>
+            <typeparam name="T">枚举类</typeparam>
+            <returns>枚举成员</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
+            <summary>
+            转换函数
+            </summary>
+            <typeparam name="T">枚举类</typeparam>
+            <typeparam name="TK">源类</typeparam>
+            <param name="value">源值</param>
+            <param name="description">描述</param>
+            <param name="predicate">匹配表达式</param>
+            <returns>枚举成员</returns>
+            <exception cref="T:System.InvalidOperationException">无效操作异常</exception>
+        </member>
+        <member name="M:Artemis.Data.Core.Enumeration.CompareTo(System.Object)">
+            <summary>
+            比较
+            </summary>
+            <param name="other">其他</param>
+            <returns>比较结果</returns>
+        </member>
+        <member name="T:Artemis.Data.Core.EnumerationJsonConverter`1">
+            <summary>
+            枚举类Json转换器
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.EnumerationJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+        </member>
         <member name="T:Artemis.Data.Core.IPartitionBase">
             <summary>
                 基本分区模型
