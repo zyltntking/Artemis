@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.App.Swashbuckle</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Swashbuckle.EnumerationSchemaFilter">
+            <summary>
+            枚举类过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.EnumerationSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            过滤器执行逻辑
+            </summary>
+            <param name="schema"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>

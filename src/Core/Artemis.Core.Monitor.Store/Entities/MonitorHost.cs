@@ -15,7 +15,7 @@ public class MonitorHost : PartitionBase, IHost
     /// <summary>
     /// 元数据组标识
     /// </summary>
-    public virtual Guid? MetadataGroupId { get; set; } = null; 
+    public virtual Guid? MetadataGroupId { get; set; } 
 
     #region Implementation of IHost
 

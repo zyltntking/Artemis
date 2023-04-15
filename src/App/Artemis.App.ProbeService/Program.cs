@@ -1,3 +1,5 @@
+using Artemis.App.Swashbuckle;
+
 namespace Artemis.App.ProbeService
 {
     public class Program

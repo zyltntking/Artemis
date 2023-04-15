@@ -8,10 +8,10 @@ public class StoreError
     /// <summary>
     ///     错误编码
     /// </summary>
-    public string Code { get; set; } = default!;
+    public string? Code { get; init; }
 
     /// <summary>
     ///     错误描述
     /// </summary>
-    public string Description { get; set; } = default!;
+    public string? Description { get; set; }
 }

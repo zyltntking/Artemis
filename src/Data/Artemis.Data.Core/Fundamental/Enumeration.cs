@@ -94,18 +94,43 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     /// <summary>
-    ///     获取枚举类的所有枚举成员
+    /// 获取字符串枚举成员
     /// </summary>
-    /// <typeparam name="T">枚举类</typeparam>
-    /// <returns>枚举成员</returns>
-    public static IEnumerable<string> GetAll(Type type)
+    /// <param name="type">枚举类</param>
+    /// <returns></returns>
+    public static IEnumerable<string> GetAllName(Type type)
     {
+        if (type.BaseType != typeof(Enumeration))
+        {
+            return new List<string>();
+        }
+
         return type.GetFields(BindingFlags.Public |
                               BindingFlags.Static |
                               BindingFlags.DeclaredOnly)
             .Select(info => info.GetValue(null))
             .Cast<Enumeration>()
             .Select(item => item.ToString());
+    }
+
+    /// <summary>
+    /// 获取id枚举成员
+    /// </summary>
+    /// <param name="type">枚举类</param>
+    /// <returns></returns>
+    public static IEnumerable<int> GetAllId(Type type)
+    {
+        if (type.BaseType != typeof(Enumeration))
+        {
+            return new List<int>();
+        }
+
+        return type.GetFields(BindingFlags.Public |
+                              BindingFlags.Static |
+                              BindingFlags.DeclaredOnly)
+            .Select(info => info.GetValue(null))
+            .Cast<Enumeration>()
+            .Select(item => item.ToInt());
     }
 
     /// <summary>
@@ -135,6 +160,15 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     public override string ToString()
     {
         return Name;
+    }
+
+    /// <summary>
+    /// 转换为int
+    /// </summary>
+    /// <returns></returns>
+    public int ToInt()
+    {
+        return Id;
     }
 
     /// <summary>

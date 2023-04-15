@@ -111,12 +111,19 @@
             <typeparam name="T">枚举类</typeparam>
             <returns>枚举成员</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.GetAll(System.Type)">
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.GetAllName(System.Type)">
             <summary>
-                获取枚举类的所有枚举成员
+            获取字符串枚举成员
             </summary>
-            <typeparam name="T">枚举类</typeparam>
-            <returns>枚举成员</returns>
+            <param name="type">枚举类</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.GetAllId(System.Type)">
+            <summary>
+            获取id枚举成员
+            </summary>
+            <param name="type">枚举类</param>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
             <summary>
@@ -135,6 +142,12 @@
                 转为字符串
             </summary>
             <returns>字符串</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.ToInt">
+            <summary>
+            转换为int
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.Equals(System.Object)">
             <summary>
@@ -179,6 +192,12 @@
             枚举接口
             </summary>
             <typeparam name="TEnum">枚举类</typeparam>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.IEnumeration`1.ToInt">
+            <summary>
+            转换为int
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Interface.IMetadata">
             <summary>

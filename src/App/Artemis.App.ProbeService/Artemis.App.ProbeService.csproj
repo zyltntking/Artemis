@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Artemis.Core.Monitor\Artemis.Core.Monitor.csproj" />
+    <ProjectReference Include="..\Artemis.App.Swashbuckle\Artemis.App.Swashbuckle.csproj" />
   </ItemGroup>
 
 </Project>
