@@ -1,10 +1,12 @@
 ﻿using Artemis.Data.Core.Fundamental;
+using System.ComponentModel;
 
 namespace Artemis.Core.Monitor.Fundamental.Types;
 
 /// <summary>
-///     机器类型
+///     实例类型
 /// </summary>
+[Description("实例类型")]
 public class InstanceType : Enumeration
 {
     /// <summary>
@@ -13,12 +15,12 @@ public class InstanceType : Enumeration
     public static InstanceType Unknown = new(-1, nameof(Unknown));
 
     /// <summary>
-    ///     物理机
+    ///     物理实例
     /// </summary>
     public static InstanceType Physical = new(0, nameof(Physical));
 
     /// <summary>
-    ///     虚拟机
+    ///     虚拟实例
     /// </summary>
     public static InstanceType Virtual = new(1, nameof(Virtual));
 

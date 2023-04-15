@@ -14,7 +14,11 @@ public class Program
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(c => { c.MapType<HostType>(() => new OpenApiSchema { Type = "string" }); });
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SchemaFilter<EnumerationSchemaFilter>();
+            //c.MapType<HostType>(() => new OpenApiSchema { Type = "string", Nullable = false});
+        });
 
         var app = builder.Build();
 

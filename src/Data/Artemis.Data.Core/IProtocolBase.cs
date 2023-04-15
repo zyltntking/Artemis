@@ -35,5 +35,5 @@ internal interface IDataResult<T> : IDataResult
     /// <summary>
     ///     异常信息
     /// </summary>
-    Exception? Error { get; set; }
+    string? Error { get; set; }
 }

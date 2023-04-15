@@ -1,10 +1,12 @@
-﻿using Artemis.Data.Core.Fundamental;
+﻿using System.ComponentModel;
+using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.Core.Monitor.Fundamental.Types;
 
 /// <summary>
 ///     主机类型
 /// </summary>
+[Description("主机类型")]
 public class HostType : Enumeration
 {
     /// <summary>

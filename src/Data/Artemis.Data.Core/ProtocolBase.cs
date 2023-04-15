@@ -23,7 +23,7 @@ public class DataResult<T> : IDataResult<T>
     {
         Code = code;
         Message = message;
-        Error = exception;
+        Error = exception.ToString();
         Data = default;
     }
 
@@ -64,7 +64,7 @@ public class DataResult<T> : IDataResult<T>
     /// <summary>
     ///     异常信息
     /// </summary>
-    public Exception? Error { get; set; }
+    public string? Error { get; set; }
 
     /// <summary>
     ///     数据
@@ -128,7 +128,7 @@ public static class DataResult
             Code = code,
             Data = data,
             Message = message,
-            Error = exception
+            Error = exception?.ToString()
         };
     }
 }

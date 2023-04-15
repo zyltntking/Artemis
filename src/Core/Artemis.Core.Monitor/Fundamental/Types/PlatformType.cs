@@ -1,10 +1,12 @@
 ﻿using Artemis.Data.Core.Fundamental;
+using System.ComponentModel;
 
 namespace Artemis.Core.Monitor.Fundamental.Types;
 
 /// <summary>
 ///     平台类型
 /// </summary>
+[Description("平台类型")]
 public class PlatformType : Enumeration
 {
     /// <summary>

@@ -111,6 +111,13 @@
             <typeparam name="T">枚举类</typeparam>
             <returns>枚举成员</returns>
         </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.GetAll(System.Type)">
+            <summary>
+                获取枚举类的所有枚举成员
+            </summary>
+            <typeparam name="T">枚举类</typeparam>
+            <returns>枚举成员</returns>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
             <summary>
                 转换函数
@@ -166,6 +173,12 @@
             <param name="writer">The writer to write to.</param>
             <param name="value">The value to convert to JSON.</param>
             <param name="options">An object that specifies serialization options to use.</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.IEnumeration`1">
+            <summary>
+            枚举接口
+            </summary>
+            <typeparam name="TEnum">枚举类</typeparam>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Interface.IMetadata">
             <summary>

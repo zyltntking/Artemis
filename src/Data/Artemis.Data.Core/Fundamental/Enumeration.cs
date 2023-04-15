@@ -7,7 +7,7 @@ namespace Artemis.Data.Core.Fundamental;
 /// <summary>
 ///     枚举类
 /// </summary>
-public abstract class Enumeration : IComparable, IEquatable<Enumeration>
+public abstract class Enumeration : IEnumeration<Enumeration>
 {
     /// <summary>
     ///     构造函数
@@ -91,6 +91,21 @@ public abstract class Enumeration : IComparable, IEquatable<Enumeration>
                                    BindingFlags.DeclaredOnly)
             .Select(info => info.GetValue(null))
             .Cast<T>();
+    }
+
+    /// <summary>
+    ///     获取枚举类的所有枚举成员
+    /// </summary>
+    /// <typeparam name="T">枚举类</typeparam>
+    /// <returns>枚举成员</returns>
+    public static IEnumerable<string> GetAll(Type type)
+    {
+        return type.GetFields(BindingFlags.Public |
+                              BindingFlags.Static |
+                              BindingFlags.DeclaredOnly)
+            .Select(info => info.GetValue(null))
+            .Cast<Enumeration>()
+            .Select(item => item.ToString());
     }
 
     /// <summary>
