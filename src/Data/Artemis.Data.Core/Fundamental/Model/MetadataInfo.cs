@@ -12,12 +12,12 @@ public class MetadataInfo : IMetadata
     /// <summary>
     ///     元数据键
     /// </summary>
-    public virtual string Key { get; set; }
+    public virtual string Key { get; set; } = null!;
 
     /// <summary>
     ///     元数据值
     /// </summary>
-    public virtual string Value { get; set; }
+    public virtual string? Value { get; set; }
 
     #endregion
 }
@@ -32,32 +32,32 @@ public class DataDictInfo : MetadataInfo, IDataDict
     /// <summary>
     ///     数据标签
     /// </summary>
-    public virtual string Label { get; set; }
+    public virtual string? Label { get; set; }
 
     /// <summary>
     ///     数据排序
     /// </summary>
-    public virtual int Order { get; set; }
+    public virtual int Order { get; set; } = 0;
 
     /// <summary>
     ///     数据类型
     /// </summary>
-    public virtual string Type { get; set; }
+    public virtual string? Type { get; set; }
 
     /// <summary>
     ///     数据是否锁定
     /// </summary>
-    public virtual bool Lock { get; set; }
+    public virtual bool Lock { get; set; } = false;
 
     /// <summary>
     ///     数据状态
     /// </summary>
-    public virtual bool Status { get; set; }
+    public virtual bool Status { get; set; } = false;
 
     /// <summary>
     ///     数据描述
     /// </summary>
-    public virtual string Description { get; set; }
+    public virtual string? Description { get; set; }
 
     #endregion
 }

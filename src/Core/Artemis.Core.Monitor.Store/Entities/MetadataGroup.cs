@@ -16,17 +16,17 @@ public class MetadataGroup : PartitionBase, IMetadata
     /// <summary>
     ///     数据键
     /// </summary>
-    public virtual string Key { get; set; }
+    public virtual string Key { get; set; } = null!;
 
     /// <summary>
     ///     数据值
     /// </summary>
-    public virtual string Value { get; set; }
+    public virtual string? Value { get; set; }
 
     #endregion
 
     /// <summary>
     /// 组内元数据
     /// </summary>
-    public virtual ICollection<MetadataItem> MetadataItems { get; set; }
+    public virtual ICollection<MetadataItem>? MetadataItems { get; set; }
 }

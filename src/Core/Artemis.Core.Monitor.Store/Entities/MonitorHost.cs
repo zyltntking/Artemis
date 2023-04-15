@@ -22,42 +22,42 @@ public class MonitorHost : PartitionBase, IHost
     /// <summary>
     ///     主机名
     /// </summary>
-    public virtual string HostName { get; set; }
+    public virtual string? HostName { get; set; }
 
     /// <summary>
     ///     主机类型
     /// </summary>
-    public virtual HostType HostType { get; set; }
+    public virtual HostType HostType { get; set; } = HostType.Unknown;
 
     /// <summary>
     /// 实例类型
     /// </summary>
-    public virtual InstanceType InstanceType { get; set; }
+    public virtual InstanceType InstanceType { get; set; } = InstanceType.Unknown;
 
     /// <summary>
     ///     系统名
     /// </summary>
-    public virtual string OsName { get; set; }
+    public virtual string? OsName { get; set; }
 
     /// <summary>
     ///    平台类型
     /// </summary>
-    public virtual PlatformType PlatformType { get; set; }
+    public virtual PlatformType PlatformType { get; set; } = PlatformType.Unknown;
 
     /// <summary>
     ///     系统版本
     /// </summary>
-    public virtual string OsVersion { get; set; }
+    public virtual string? OsVersion { get; set; }
 
     /// <summary>
     /// 进程架构
     /// </summary>
-    public virtual string ProcessArchitecture { get; set; }
+    public virtual string? ProcessArchitecture { get; set; }
 
     #endregion
 
     /// <summary>
     /// 具备的元数据组
     /// </summary>
-    public virtual MetadataGroup MetadataGroup { get; set; }
+    public virtual MetadataGroup? MetadataGroup { get; set; }
 }

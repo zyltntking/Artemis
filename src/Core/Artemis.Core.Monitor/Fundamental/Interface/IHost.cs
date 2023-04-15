@@ -10,7 +10,7 @@ public interface IHost
     /// <summary>
     ///     主机名
     /// </summary>
-    string HostName { get; set; }
+    string? HostName { get; set; }
 
     /// <summary>
     ///     主机类型
@@ -25,7 +25,7 @@ public interface IHost
     /// <summary>
     ///     系统名
     /// </summary>
-    string OsName { get; set; }
+    string? OsName { get; set; }
 
     /// <summary>
     ///    平台类型
@@ -35,10 +35,10 @@ public interface IHost
     /// <summary>
     ///     系统版本
     /// </summary>
-    string OsVersion { get; set; }
+    string? OsVersion { get; set; }
 
     /// <summary>
     /// 进程架构
     /// </summary>
-    string ProcessArchitecture { get; set; }
+    string? ProcessArchitecture { get; set; }
 }

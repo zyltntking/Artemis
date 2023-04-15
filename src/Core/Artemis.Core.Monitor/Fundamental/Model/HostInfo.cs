@@ -13,37 +13,37 @@ public class HostInfo : IHost
     /// <summary>
     ///     主机名
     /// </summary>
-    public string HostName { get; set; }
+    public string? HostName { get; set; }
 
     /// <summary>
     ///     主机类型
     /// </summary>
-    public HostType HostType { get; set; }
+    public HostType HostType { get; set; } = HostType.Unknown;
 
     /// <summary>
     /// 实例类型
     /// </summary>
-    public InstanceType InstanceType { get; set; }
+    public InstanceType InstanceType { get; set; } = InstanceType.Unknown;
 
     /// <summary>
     ///     系统名
     /// </summary>
-    public string OsName { get; set; }
+    public string? OsName { get; set; }
 
     /// <summary>
     ///    平台类型
     /// </summary>
-    public PlatformType PlatformType { get; set; }
+    public PlatformType PlatformType { get; set; } = PlatformType.Unknown; 
 
     /// <summary>
     ///     系统版本
     /// </summary>
-    public string OsVersion { get; set; }
+    public string? OsVersion { get; set; }
 
     /// <summary>
     /// 进程架构
     /// </summary>
-    public string ProcessArchitecture { get; set; }
+    public string? ProcessArchitecture { get; set; }
 
     #endregion
 }

@@ -46,7 +46,7 @@ public class MonitorHostConfiguration : MonitorConfiguration<MonitorHost>
         builder.HasOne(host => host.MetadataGroup)
             .WithOne()
             .HasForeignKey<MonitorHost>(entity => entity.MetadataGroupId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.SetNull);
     }
 
     #endregion

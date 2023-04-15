@@ -21,17 +21,17 @@ public class MetadataItem : PartitionBase, IMetadata
     /// <summary>
     ///     数据键
     /// </summary>
-    public virtual string Key { get; set; }
+    public virtual string Key { get; set; } = null!;
 
     /// <summary>
     ///     数据值
     /// </summary>
-    public virtual string Value { get; set; }
+    public virtual string? Value { get; set; }
 
     #endregion
 
     /// <summary>
     /// 所属元数据组
     /// </summary>
-    public virtual MetadataGroup MetadataGroup { get; set; }
+    public virtual MetadataGroup MetadataGroup { get; set; } = null!;
 }
