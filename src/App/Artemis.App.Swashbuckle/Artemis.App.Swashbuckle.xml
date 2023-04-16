@@ -4,17 +4,184 @@
         <name>Artemis.App.Swashbuckle</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.Swashbuckle.EnumerationSchemaFilter">
+        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddConsumesFilter">
+            <summary>
+            Adds document level property 'consumes' and sets its value to mime type application/json.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddConsumesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="swaggerDoc">OpenApiDocument.</param>
+            <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter">
+            <summary>
+            Adds document level property host and sets its value to ArmHostName.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="hostname"></param>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="swaggerDoc">OpenApiDocument.</param>
+            <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddProducesFilter">
+            <summary>
+            Adds document level property 'produce' and sets its value to supported mime type. Only supported type 'application/json'.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddProducesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="swaggerDoc">OpenApiDocument.</param>
+            <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddSchemesFilter">
+            <summary>
+            Adds document level property 'schemes' and sets its value to https.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddSchemesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="swaggerDoc">OpenApiDocument.</param>
+            <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.GeneratorConfig">
+            <summary>
+            生成配置
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.HostName">
+            <summary>
+            主机名
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.MappingTypeToSchema">
+            <summary>
+            映射类型到架构
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.UseXmlCommentFiles">
+            <summary>
+            使用xml注释文档
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.XmlCommentFiles">
+            <summary>
+            xml注释文档
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.UseAllOfToExtendReferenceSchemas">
+            <summary>
+            使用AllOf扩展引用架构
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.GenerateExternal">
+            <summary>
+            是否为第三方客户生成
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.IGeneratorConfig">
+            <summary>
+            生成配置接口
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.HostName">
+            <summary>
+            主机名
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.MappingTypeToSchema">
+            <summary>
+            映射类型到架构
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.UseXmlCommentFiles">
+            <summary>
+            使用xml注释文档
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.XmlCommentFiles">
+            <summary>
+            xml注释文档
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.UseAllOfToExtendReferenceSchemas">
+            <summary>
+            使用AllOf扩展引用架构
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.GenerateExternal">
+            <summary>
+            是否为第三方客户生成
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.OperationFilters.AddVersionParameterWithExactValueInQuery">
+            <summary>
+             添加版本参数
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.OperationFilters.AddVersionParameterWithExactValueInQuery.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+             应用
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.OperationFilters.ODataParametersSwaggerOperationFilter">
+            <summary>
+            Add the supported odata parameters for Odata queries endpoints.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.OperationFilters.ODataParametersSwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+             Apply
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.SchemaFilters.EnumerationSchemaFilter">
             <summary>
             枚举类过滤器
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.EnumerationSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+        <member name="M:Artemis.App.Swashbuckle.SchemaFilters.EnumerationSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
             <summary>
             过滤器执行逻辑
             </summary>
             <param name="schema"></param>
             <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.SwashbuckleExtensions">
+            <summary>
+            扩展方法
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.SwashbuckleExtensions.GenerateSwagger(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,Artemis.App.Swashbuckle.IGeneratorConfig)">
+            <summary>
+            生成Swagger
+            </summary>
+            <param name="options">生成配置</param>
+            <param name="config">配置</param>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.SwashbuckleExtensions.DefaultSchemaIdSelector(System.Type)">
+            <summary>
+             默认SchemaId选择器
+            </summary>
+            <param name="type">类型</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

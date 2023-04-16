@@ -10,11 +10,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
 	  <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
 	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Attributes\" />
   </ItemGroup>
 
 </Project>

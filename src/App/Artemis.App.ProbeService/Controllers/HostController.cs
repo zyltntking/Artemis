@@ -2,8 +2,6 @@
 using Artemis.Data.Core;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Artemis.App.ProbeService.Controllers
 {
     /// <summary>
@@ -11,6 +9,7 @@ namespace Artemis.App.ProbeService.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Produces("application/json")]
     public class HostController : ControllerBase
     {
         /// <summary>

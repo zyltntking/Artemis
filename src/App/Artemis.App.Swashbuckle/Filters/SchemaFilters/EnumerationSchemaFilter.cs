@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Artemis.App.Swashbuckle
+namespace Artemis.App.Swashbuckle.Filters.SchemaFilters
 {
     /// <summary>
     /// 枚举类过滤器

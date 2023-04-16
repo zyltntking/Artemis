@@ -2,8 +2,15 @@ using Artemis.App.Swashbuckle;
 
 namespace Artemis.App.ProbeService
 {
-    public class Program
+    /// <summary>
+    /// Program
+    /// </summary>
+    public static class Program
     {
+        /// <summary>
+        /// Main
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +22,8 @@ namespace Artemis.App.ProbeService
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {
-                options.SchemaFilter<EnumerationSchemaFilter>();
+                var config = new GeneratorConfig();
+                options.GenerateSwagger(config);
             });
 
             var app = builder.Build();
@@ -25,6 +33,8 @@ namespace Artemis.App.ProbeService
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseReDoc();
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();

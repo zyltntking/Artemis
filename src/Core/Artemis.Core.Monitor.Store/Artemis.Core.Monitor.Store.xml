@@ -45,7 +45,7 @@
         </member>
         <member name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorHostConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MonitorHost})">
             <summary>
-                Configures the entity of type <typeparamref name="TEntity" />.
+                Configures the entity of type MonitorHost.
             </summary>
             <param name="builder">The builder to be used to configure the entity type.</param>
         </member>
@@ -114,14 +114,29 @@
                 主机类型
             </summary>
         </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.InstanceType">
+            <summary>
+            实例类型
+            </summary>
+        </member>
         <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsName">
             <summary>
                 系统名
             </summary>
         </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.PlatformType">
+            <summary>
+               平台类型
+            </summary>
+        </member>
         <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsVersion">
             <summary>
                 系统版本
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.ProcessArchitecture">
+            <summary>
+            进程架构
             </summary>
         </member>
         <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.MetadataGroup">

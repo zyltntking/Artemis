@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.App.ProbeService</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.ProbeService.Controllers.HostController">
+            <summary>
+            主机控制器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.ProbeService.Controllers.HostController.HostInfo">
+            <summary>
+            主机信息
+            </summary>
+            <returns>主机信息</returns>
+        </member>
+        <member name="T:Artemis.App.ProbeService.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:Artemis.App.ProbeService.Program.Main(System.String[])">
+            <summary>
+            Main
+            </summary>
+            <param name="args"></param>
+        </member>
+    </members>
+</doc>
