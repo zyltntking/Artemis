@@ -16,7 +16,8 @@ namespace Artemis.App.ProbeService.Controllers
         /// 主机信息
         /// </summary>
         /// <returns>主机信息</returns>
-        [HttpGet]
+        [HttpPost]
+        //[Consumes("application/json")]
         public DataResult<HostInfo> HostInfo()
         {
             return DataResult.Success(new HostInfo());

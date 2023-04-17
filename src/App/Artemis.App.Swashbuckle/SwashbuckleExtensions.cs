@@ -1,4 +1,5 @@
-﻿using Artemis.App.Swashbuckle.Filters.DocumentFilters;
+﻿using Artemis.App.Swashbuckle.Filters;
+using Artemis.App.Swashbuckle.Filters.DocumentFilters;
 using Artemis.App.Swashbuckle.Filters.OperationFilters;
 using Artemis.App.Swashbuckle.Filters.SchemaFilters;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -73,14 +74,14 @@ public static class SwashbuckleExtensions
         options.OperationFilter<ODataParametersSwaggerOperationFilter>();
 
         options.SchemaFilter<SchemaPropertiesTypesFilter>();
-        //// Set the body name correctly
-        //options.RequestBodyFilter<SetBodyNameExtensionFilter>();
+        // Set the body name correctly
+        options.RequestBodyFilter<SetBodyNameExtensionFilter>();
 
-        //// This is used to remove duplicated api-version query parameter
-        //options.OperationFilter<RemoveDuplicateApiVersionParameterFilter>();
+        // This is used to remove duplicated api-version query parameter
+        options.OperationFilter<RemoveDuplicateApiVersionParameterFilter>();
 
-        //// This is used to add the x-ms-long-running-operation attribute and the options
-        //options.OperationFilter<LongRunningOperationFilter>();
+        // This is used to add the x-ms-long-running-operation attribute and the options
+        options.OperationFilter<LongRunningOperationFilter>();
     }
 
     /// <summary>

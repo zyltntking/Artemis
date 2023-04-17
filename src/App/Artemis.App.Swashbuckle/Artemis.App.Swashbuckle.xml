@@ -4,59 +4,143 @@
         <name>Artemis.App.Swashbuckle</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddConsumesFilter">
+        <member name="T:Artemis.App.Swashbuckle.Attributes.SwaggerTypeAttribute">
+            <summary>
+             Swagger类型特性
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Attributes.SwaggerTypeAttribute.#ctor(System.String)">
+            <summary>
+             构造函数
+            </summary>
+            <param name="typeName"></param>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.SwaggerTypeAttribute.TypeName">
+            <summary>
+             类型名称
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddConsumesFilter">
             <summary>
             Adds document level property 'consumes' and sets its value to mime type application/json.
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddConsumesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddConsumesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <summary>
             Applies filter.
             </summary>
             <param name="swaggerDoc">OpenApiDocument.</param>
             <param name="context">DocumentFilterContext.</param>
         </member>
-        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter">
+        <member name="T:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddHostFilter">
             <summary>
             Adds document level property host and sets its value to ArmHostName.
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter.#ctor(System.String)">
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddHostFilter.#ctor(System.String)">
             <summary>
             Constructor.
             </summary>
             <param name="hostname"></param>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddHostFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddHostFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <summary>
             Applies filter.
             </summary>
             <param name="swaggerDoc">OpenApiDocument.</param>
             <param name="context">DocumentFilterContext.</param>
         </member>
-        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddProducesFilter">
+        <member name="T:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddProducesFilter">
             <summary>
             Adds document level property 'produce' and sets its value to supported mime type. Only supported type 'application/json'.
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddProducesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddProducesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <summary>
             Applies filter.
             </summary>
             <param name="swaggerDoc">OpenApiDocument.</param>
             <param name="context">DocumentFilterContext.</param>
         </member>
-        <member name="T:Artemis.App.Swashbuckle.DocumentFilters.AddSchemesFilter">
+        <member name="T:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddSchemesFilter">
             <summary>
             Adds document level property 'schemes' and sets its value to https.
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.DocumentFilters.AddSchemesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.AddSchemesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
             <summary>
             Applies filter.
             </summary>
             <param name="swaggerDoc">OpenApiDocument.</param>
             <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.OperationFilters.AddVersionParameterWithExactValueInQuery">
+            <summary>
+             添加版本参数
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.OperationFilters.AddVersionParameterWithExactValueInQuery.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+             应用
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.OperationFilters.ODataParametersSwaggerOperationFilter">
+            <summary>
+            Add the supported odata parameters for Odata queries endpoints.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.OperationFilters.ODataParametersSwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+             Apply
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.OperationFilters.RemoveDuplicateApiVersionParameterFilter">
+             <summary>
+             By default MVC API versioning library adding "api-version" query parameter to each API.
+             And it is getting duplicated when there is an additional model binding with
+             same "api-version" parameter in any API while actually using this parameter.
+            
+             This operation filter removes the duplicated "api-version" query parameter.
+             </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.OperationFilters.RemoveDuplicateApiVersionParameterFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.SchemaFilters.EnumerationSchemaFilter">
+            <summary>
+            枚举类过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.SchemaFilters.EnumerationSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            过滤器执行逻辑
+            </summary>
+            <param name="schema"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.SchemaFilters.SchemaPropertiesTypesFilter">
+            <summary>
+             架构属性类型过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.SchemaFilters.SchemaPropertiesTypesFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+             应用
+            </summary>
+            <param name="schema"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.SetBodyNameExtensionFilter">
+            <summary>
+            Updates the body parameter's name.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.SetBodyNameExtensionFilter.Apply(Microsoft.OpenApi.Models.OpenApiRequestBody,Swashbuckle.AspNetCore.SwaggerGen.RequestBodyFilterContext)">
+            <inheritdoc/>
         </member>
         <member name="T:Artemis.App.Swashbuckle.GeneratorConfig">
             <summary>
@@ -127,42 +211,6 @@
             <summary>
             是否为第三方客户生成
             </summary>
-        </member>
-        <member name="T:Artemis.App.Swashbuckle.OperationFilters.AddVersionParameterWithExactValueInQuery">
-            <summary>
-             添加版本参数
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Swashbuckle.OperationFilters.AddVersionParameterWithExactValueInQuery.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-            <summary>
-             应用
-            </summary>
-            <param name="operation"></param>
-            <param name="context"></param>
-        </member>
-        <member name="T:Artemis.App.Swashbuckle.OperationFilters.ODataParametersSwaggerOperationFilter">
-            <summary>
-            Add the supported odata parameters for Odata queries endpoints.
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Swashbuckle.OperationFilters.ODataParametersSwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-            <summary>
-             Apply
-            </summary>
-            <param name="operation"></param>
-            <param name="context"></param>
-        </member>
-        <member name="T:Artemis.App.Swashbuckle.SchemaFilters.EnumerationSchemaFilter">
-            <summary>
-            枚举类过滤器
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Swashbuckle.SchemaFilters.EnumerationSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
-            <summary>
-            过滤器执行逻辑
-            </summary>
-            <param name="schema"></param>
-            <param name="context"></param>
         </member>
         <member name="T:Artemis.App.Swashbuckle.SwashbuckleExtensions">
             <summary>
