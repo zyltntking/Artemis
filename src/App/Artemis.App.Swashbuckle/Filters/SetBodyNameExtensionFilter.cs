@@ -16,7 +16,7 @@ public class SetBodyNameExtensionFilter : IRequestBodyFilter
 
         if (parameterInfo != null)
         {
-            requestBody?.Extensions.Add("x-bodyName", new OpenApiString(parameterInfo.Name));
+            requestBody.Extensions.Add("x-bodyName", new OpenApiString(parameterInfo.Name));
         }
     }
 }

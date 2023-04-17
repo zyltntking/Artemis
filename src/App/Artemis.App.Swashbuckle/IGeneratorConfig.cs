@@ -10,7 +10,7 @@ public interface IGeneratorConfig
     /// <summary>
     /// 主机名
     /// </summary>
-    string? HostName { get; set; }
+    string? HostName { get; init; }
 
     /// <summary>
     /// 映射类型到架构
@@ -20,7 +20,7 @@ public interface IGeneratorConfig
     /// <summary>
     /// 使用xml注释文档
     /// </summary>
-    bool UseXmlCommentFiles { get; set; }
+    bool UseXmlCommentFiles { get; init; }
 
     /// <summary>
     /// xml注释文档
@@ -30,10 +30,15 @@ public interface IGeneratorConfig
     /// <summary>
     /// 使用AllOf扩展引用架构
     /// </summary>
-    bool UseAllOfToExtendReferenceSchemas { get; set; }
+    bool UseAllOfToExtendReferenceSchemas { get; init; }
 
     /// <summary>
     /// 是否为第三方客户生成
     /// </summary>
-    bool GenerateExternal { get; set; }
+    bool GenerateExternal { get; init; }
+
+    /// <summary>
+    /// 隐藏参数路径
+    /// </summary>
+    bool HideParameters { get; init; }
 }

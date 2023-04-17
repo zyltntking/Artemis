@@ -9,7 +9,6 @@ namespace Artemis.App.ProbeService.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Produces("application/json")]
     public class HostController : ControllerBase
     {
         /// <summary>
@@ -17,7 +16,6 @@ namespace Artemis.App.ProbeService.Controllers
         /// </summary>
         /// <returns>主机信息</returns>
         [HttpPost]
-        //[Consumes("application/json")]
         public DataResult<HostInfo> HostInfo()
         {
             return DataResult.Success(new HostInfo());

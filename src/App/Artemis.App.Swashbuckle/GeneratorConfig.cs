@@ -13,7 +13,7 @@ public sealed class GeneratorConfig : IGeneratorConfig
     /// <summary>
     /// 主机名
     /// </summary>
-    public string? HostName { get; set; }
+    public string? HostName { get; init; }
 
     /// <summary>
     /// 映射类型到架构
@@ -27,7 +27,7 @@ public sealed class GeneratorConfig : IGeneratorConfig
     /// <summary>
     /// 使用xml注释文档
     /// </summary>
-    public bool UseXmlCommentFiles { get; set; } = true;
+    public bool UseXmlCommentFiles { get; init; } = true;
 
     /// <summary>
     /// xml注释文档
@@ -40,12 +40,30 @@ public sealed class GeneratorConfig : IGeneratorConfig
     /// <summary>
     /// 使用AllOf扩展引用架构
     /// </summary>
-    public bool UseAllOfToExtendReferenceSchemas { get; set; }
+    public bool UseAllOfToExtendReferenceSchemas { get; init; }
 
     /// <summary>
     /// 是否为第三方客户生成
     /// </summary>
-    public bool GenerateExternal { get; set; } = false;
+    public bool GenerateExternal { get; init; } = false;
+
+    /// <summary>
+    /// 隐藏参数路径
+    /// </summary>
+    private readonly bool _hideParameters;
+
+    /// <summary>
+    /// 隐藏参数路径
+    /// </summary>
+    public bool HideParameters
+    {
+        get => _hideParameters;
+        init
+        {
+            _hideParameters = value;
+            _hideParameters = GenerateExternal;
+        }
+    }
 
     #endregion
 }

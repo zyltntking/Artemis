@@ -20,6 +20,9 @@ public static class SwashbuckleExtensions
     /// <param name="config">配置</param>
     public static void GenerateSwagger(this SwaggerGenOptions options, IGeneratorConfig config)
     {
+
+        // todo SwaggerDocList
+
         options.SchemaFilter<EnumerationSchemaFilter>();
 
         foreach (var (type, schema) in config.MappingTypeToSchema)
@@ -62,14 +65,18 @@ public static class SwashbuckleExtensions
             options.UseAllOfToExtendReferenceSchemas(); // we prefer $ref over AllOf (and set up description ourselves)
         }
 
+        // todo DocInclusionPredicate
+
         if (config.GenerateExternal)
         {
+            options.UseInlineDefinitionsForEnums(); // we prefer commonize enums
             options.DocumentFilter<AddHostFilter>(config.HostName);
             options.DocumentFilter<AddSchemesFilter>();
         }
         options.DocumentFilter<AddProducesFilter>();
         options.DocumentFilter<AddConsumesFilter>();
 
+        // todo AddVersionParameterWithExactValueInQuery
         //options.OperationFilter<AddVersionParameterWithExactValueInQuery>();
         options.OperationFilter<ODataParametersSwaggerOperationFilter>();
 
@@ -77,11 +84,69 @@ public static class SwashbuckleExtensions
         // Set the body name correctly
         options.RequestBodyFilter<SetBodyNameExtensionFilter>();
 
+        // todo RemoveDuplicateApiVersionParameterFilter
         // This is used to remove duplicated api-version query parameter
-        options.OperationFilter<RemoveDuplicateApiVersionParameterFilter>();
+        //options.OperationFilter<RemoveDuplicateApiVersionParameterFilter>();
 
         // This is used to add the x-ms-long-running-operation attribute and the options
         options.OperationFilter<LongRunningOperationFilter>();
+
+        //todo PolymorphismDocumentFilter
+
+        // Schema level filters
+        // Works in conjunction with PolymorphismDocumentFilter and PolymorphismSchemaFilter for GeoJsonObject like requirement.
+        options.SchemaFilter<SubTypeOfFilter>();
+
+        // Adds 'x-ms-azure-resource' extension to a class marked by Microsoft.Azure.OpenApiExtensions.Attributes.AzureResourceAttribute.
+        options.SchemaFilter<AddAzureResourceExtensionFilter>();
+
+        // Manipulates Descriptions of schema mostly used on common generic types
+        options.SchemaFilter<CustomSchemaPropertiesFilter>();
+
+        // todo AllReusableParametersFilter
+
+        // Adds x-ms-mutability to the property marked by Microsoft.Azure.OpenApiExtensions.Attributes.MutabilityAttribute
+        options.SchemaFilter<AddMutabilityExtensionFilter>();
+
+        // Marked class will be flattened in client library by AutoRest to make it more user friendly.
+        options.SchemaFilter<AddClientFlattenExtensionFilter>();
+
+        // Adds "readOnly": true to the property marked by Microsoft.Azure.Global.Services.Common.Service.OpenApi.ValidationAttribute.ReadOnlyPropertyAttribute
+        options.SchemaFilter<AddReadOnlyPropertyFilter>();
+
+        ////Handle bug that Swashbuckle has: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1488 , https://github.com/Azure/autorest/issues/3417
+        //c.SchemaFilter<ReverseAllOfPropertiesFilter>();
+        // Operation level filters
+        // Set Description field using the XMLDoc summary if absent and clear summary. By
+        // default Swashbuckle uses remarks tag to populate operation description instead
+        // of using summary tag.
+        options.OperationFilter<MoveSummaryToDescriptionFilter>();
+
+        // Adds x-ms-pageable extension to operation marked with Page-able attribute.
+        options.OperationFilter<AddPageableExtensionFilter>();
+
+        // Adds x-ms-long-running-operation extension to operation marked with Microsoft.Azure.OpenApiExtensions.Attributes.LongRunningOperationAttribute.
+        options.OperationFilter<AddLongRunningOperationExtensionFilter>();
+
+        // todo DefaultResponseOperationFilter
+        //options.OperationFilter<DefaultResponseOperationFilter>(config);
+
+        // Clear all the supported mime type from response object. Supported mime type is
+        // added at document level, with hard coded value of application/json.
+        options.OperationFilter<SetProducesContentTypeFilter>();
+
+        // Clear all consumed types except application/json.
+        options.OperationFilter<SetConsumesContentTypeFilter>();
+
+        // Removes parameters that shouldn't be on swagger (if process specifies--externalswagger-gen in command line)
+        options.OperationFilter<HideParamInDocsFilter>(config.HideParameters);
+
+        // This is applied if swagger is generated using open api 3.0 spec, helps to fix bug in autorest tool.
+        // No impact for swagger generated using 2.0 spec.
+        options.OperationFilter<ArrayInQueryParametersFilter>();
+
+        // This is used to set default values, specifically to denote the api version as required parameter.
+        options.OperationFilter<SwaggerDefaultValuesFilter>();
     }
 
     /// <summary>

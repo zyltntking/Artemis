@@ -9,11 +9,10 @@
             主机控制器
             </summary>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.HostInfo(Artemis.Core.Monitor.Fundamental.Model.HostInfo)">
+        <member name="M:Artemis.App.ProbeService.Controllers.HostController.HostInfo">
             <summary>
             主机信息
             </summary>
-            <param name="request">请求</param>
             <returns>主机信息</returns>
         </member>
         <member name="T:Artemis.App.ProbeService.Program">
