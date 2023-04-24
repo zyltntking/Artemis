@@ -1,4 +1,5 @@
 ﻿using Artemis.Core.Monitor.Fundamental.Model;
+using Artemis.Core.Monitor.Fundamental.Types;
 using Artemis.Data.Core;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,13 @@ namespace Artemis.App.ProbeService.Controllers
         [HttpPost]
         public DataResult<HostInfo> HostInfo()
         {
-            return DataResult.Success(new HostInfo());
+            var hostInfo = new HostInfo
+            {
+                HostName = Environment.MachineName,
+                HostType = HostType.Service,
+            };
+
+            return DataResult.Success(hostInfo);
         }
     }
 }

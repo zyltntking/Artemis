@@ -4,11 +4,15 @@
 /// 枚举接口
 /// </summary>
 /// <typeparam name="TEnum">枚举类</typeparam>
-public interface IEnumeration<TEnum> : IComparable, IEquatable<TEnum>
+internal interface IEnumeration<TEnum> : IComparable, IEquatable<TEnum>
 {
     /// <summary>
-    /// 转换为int
+    ///     枚举名称
     /// </summary>
-    /// <returns></returns>
-    int ToInt();
+    string Name { get; }
+
+    /// <summary>
+    ///     枚举ID
+    /// </summary>
+    int Id { get; }
 }

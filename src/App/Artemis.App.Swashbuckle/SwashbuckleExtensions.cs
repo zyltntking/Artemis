@@ -2,6 +2,7 @@
 using Artemis.App.Swashbuckle.Filters.DocumentFilters;
 using Artemis.App.Swashbuckle.Filters.OperationFilters;
 using Artemis.App.Swashbuckle.Filters.SchemaFilters;
+using Artemis.App.Swashbuckle.Options;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -21,7 +22,19 @@ public static class SwashbuckleExtensions
     public static void GenerateSwagger(this SwaggerGenOptions options, IGeneratorConfig config)
     {
 
-        // todo SwaggerDocList
+        //var actualDocumentsToGenerate = config.SupportedApiVersions;
+
+        //var documentToGenerateList = actualDocumentsToGenerate.ToList();
+
+        //if (!documentToGenerateList.Any())
+        //{
+        //    documentToGenerateList = new List<string>
+        //    {
+        //        config.DefaultApiVersion
+        //    };
+        //}
+
+        //documentToGenerateList.ToList().ForEach(v => options.SwaggerDoc(v, OpenApiOptions.GetConfiguration(config, v).GetInfo()));
 
         options.SchemaFilter<EnumerationSchemaFilter>();
 
@@ -69,7 +82,7 @@ public static class SwashbuckleExtensions
 
         if (config.GenerateExternal)
         {
-            options.UseInlineDefinitionsForEnums(); // we prefer commonize enums
+            // options.UseInlineDefinitionsForEnums(); // we prefer commonize enums
             options.DocumentFilter<AddHostFilter>(config.HostName);
             options.DocumentFilter<AddSchemesFilter>();
         }
@@ -147,6 +160,20 @@ public static class SwashbuckleExtensions
 
         // This is used to set default values, specifically to denote the api version as required parameter.
         options.OperationFilter<SwaggerDefaultValuesFilter>();
+
+        // Adds x-ms-enum to a property enum type. Adds extension attributes to indicate
+        // AutoRest to model enum as string. This is as per OpenAPI specifications.
+        options.SchemaFilter<AddEnumExtensionFilter>(config.EnumsAsString);
+
+        if (config.GenerateExternal)
+        {
+            //options.SchemaFilter<CustomSchemaInheritanceFilter>(config);
+
+            // This is used to add x-ms-examples field to each operation. We use our own filter in order to allow for customizing the destination path.
+            options.DocumentFilter<ExampleFilter>(config);
+
+            //options.DocumentFilter<UpdateCommonRefsDocumentFilter>(config);
+        }
     }
 
     /// <summary>
@@ -167,5 +194,22 @@ public static class SwashbuckleExtensions
 
         return prefix + type.Name.Split('`').First();
     }
+}
 
+/// <summary>
+///  OpenApi配置
+/// </summary>
+internal static class OpenApiOptions
+{
+    /// <summary>
+    ///  获取配置
+    /// </summary>
+    /// <param name="config"></param>
+    /// <param name="version"></param>
+    /// <returns></returns>
+    public static Configuration GetConfiguration(IGeneratorConfig config, string? version = null)
+    {
+        var info = new OpenApiDocumentInfo(config.Title, config.Description, version ?? config.DefaultApiVersion, config.ClientName);
+        return new Configuration(info);
+    }
 }

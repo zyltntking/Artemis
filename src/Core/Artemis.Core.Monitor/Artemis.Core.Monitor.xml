@@ -84,6 +84,38 @@
             进程架构
             </summary>
         </member>
+        <member name="T:Artemis.Core.Monitor.Fundamental.Types.CommandType">
+            <summary>
+            指令类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Fundamental.Types.CommandType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Fundamental.Types.CommandType.BashScript">
+            <summary>
+            bash脚本
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Fundamental.Types.CommandType.CmdScript">
+            <summary>
+            Cmd脚本
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Fundamental.Types.CommandType.PowerShellScript">
+            <summary>
+            PowerShell脚本
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Fundamental.Types.CommandType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Core.Monitor.Fundamental.Types.HostType">
             <summary>
                 主机类型

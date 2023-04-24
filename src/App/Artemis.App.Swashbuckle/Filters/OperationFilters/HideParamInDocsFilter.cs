@@ -16,7 +16,7 @@ public class HideParamInDocsFilter : IOperationFilter
     /// <summary>
     /// Initializes a new instance of the <see cref="HideParamInDocsFilter"/> class.
     /// </summary>
-    public HideParamInDocsFilter(bool hideParameters)
+    public HideParamInDocsFilter(bool hideParameters = false)
     {
         _hideParameters = hideParameters;
     }

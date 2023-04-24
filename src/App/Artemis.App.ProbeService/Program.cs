@@ -1,4 +1,7 @@
 using Artemis.App.Swashbuckle;
+using Artemis.App.Swashbuckle.Options;
+using Artemis.Core.Monitor.Fundamental.Types;
+using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.App.ProbeService
 {
@@ -17,7 +20,14 @@ namespace Artemis.App.ProbeService
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(option =>
+            {
+                option.JsonSerializerOptions.AddConverter<CommandType>();
+                option.JsonSerializerOptions.AddConverter<HostType>();
+                option.JsonSerializerOptions.AddConverter<InstanceType>();
+                option.JsonSerializerOptions.AddConverter<PlatformType>();
+                option.JsonSerializerOptions.AddConverter<StorageUnit>();
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>

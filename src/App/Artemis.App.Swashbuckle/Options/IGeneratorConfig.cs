@@ -1,12 +1,31 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace Artemis.App.Swashbuckle;
+namespace Artemis.App.Swashbuckle.Options;
 
 /// <summary>
 /// 生成配置接口
 /// </summary>
 public interface IGeneratorConfig
 {
+    /// <summary>
+    ///  支持的API版本
+    /// </summary>
+    IEnumerable<string> SupportedApiVersions { get; init; }
+
+    /// <summary>
+    ///  默认API版本
+    /// </summary>
+    string DefaultApiVersion { get; init; }
+
+    /// <see cref="OpenApiDocumentInfo.Title"/>
+    public string Title { get; set; }
+
+    /// <see cref="OpenApiDocumentInfo.Description"/>
+    public string Description { get; set; }
+
+    /// <see cref="OpenApiDocumentInfo.ClientName"/>
+    public string ClientName { get; set; }
+
     /// <summary>
     /// 主机名
     /// </summary>
@@ -41,4 +60,9 @@ public interface IGeneratorConfig
     /// 隐藏参数路径
     /// </summary>
     bool HideParameters { get; init; }
+
+    /// <summary>
+    /// 以字符串形式使用枚举
+    /// </summary>
+    bool EnumsAsString { get; init; }
 }

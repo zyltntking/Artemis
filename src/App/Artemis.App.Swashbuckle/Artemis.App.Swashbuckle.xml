@@ -36,6 +36,83 @@
             </summary>
             <example>List of {GenericType} models</example>
         </member>
+        <member name="T:Artemis.App.Swashbuckle.Attributes.CommonObjectType">
+            <summary>
+             通用对象类型
+            </summary>
+        </member>
+        <member name="F:Artemis.App.Swashbuckle.Attributes.CommonObjectType.ResourceProviderCommonDefinition">
+            <summary>
+             This is the default value. It means that the schema is defined in the resource provider common definition file.
+            </summary>
+        </member>
+        <member name="F:Artemis.App.Swashbuckle.Attributes.CommonObjectType.GlobalCommonDefinition">
+            <summary>
+             This means that the schema is defined in the global common definition file.
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute">
+            <summary>
+              This attribute is used to define the inheritance of a schema from an external schema.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute.#ctor(System.String,System.String[],Artemis.App.Swashbuckle.Attributes.CommonObjectType)">
+            <summary>
+             This attribute is used to define the inheritance of a schema from an external schema.
+            </summary>
+            <param name="externalSchemaName"></param>
+            <param name="notInheritedPropertiesName"></param>
+            <param name="definitionLevel"></param>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute.ExternalSchemaName">
+            <summary>
+             外部架构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute.DefinitionLevel">
+            <summary>
+             通用对象类型
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute.NotInheritedPropertiesName">
+            <summary>
+             未继承的属性名称
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.CustomSwaggerSchemaInheritanceAttribute.SchemaDescriptionFormat">
+            <summary>
+             模式描述格式
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Attributes.ExampleAttribute">
+            <summary>
+            Describes the format for specifying examples for request and response of an operation in an OpenAPI definition.
+            In openApi documents, operations will have this field by default, with example file at #./examples/{operationId}.json.
+            </summary>
+            <see href="https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-examples">x-ms-examples.</see>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Attributes.ExampleAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the.
+            </summary>
+            <param name="folder"></param>
+            <param name="title">OperationId Eg: DerivedModels_Get.</param>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.ExampleAttribute.Title">
+            <summary>
+            Gets operationId Eg: DerivedModels_Get.
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.ExampleAttribute.FilePath">
+            <summary>
+            Gets file path of examples file Eg: #./examples/DerivedModels_Get.json.
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Attributes.HideInDocsAttribute">
+            <summary>
+            A marker attribute which can be applied to an API or controller to hide from docs.
+            </summary>
+        </member>
         <member name="T:Artemis.App.Swashbuckle.Attributes.LongRunningOperationFinalStateVia">
             <summary>
             长请求类型
@@ -174,6 +251,31 @@
             Is read only property.
             </summary>
         </member>
+        <member name="M:Artemis.App.Swashbuckle.Attributes.ResponseExampleAttribute.#ctor(System.Int32,System.Type,System.String)">
+            <summary>
+            Init new class that implements ExampleTypeProvider, to provide example for a controller's response
+            </summary>
+            <param name="httpCode"></param>
+            <param name="exampleTypeProvider">The type of ExampleTypeProvider to initiate</param>
+            <param name="exampleName">Optional. For support multiple examples by example name in single ExampleTypeProvider</param>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.ResponseExampleAttribute.HttpCode">
+            <summary>
+            Gets operationId Eg: DerivedModels_Get.
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Attributes.ResponseExampleAttribute.ExampleTypeProvider">
+            <summary>
+            Gets file path of examples file Eg: #./examples/DerivedModels_Get.json.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Attributes.RequestExampleAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Init new class that implements ExampleTypeProvider, to provide example for a controller's request
+            </summary>
+            <param name="exampleTypeProvider">The type of ExampleTypeProvider to initiate</param>
+            <param name="exampleName">Optional. For support multiple examples by example name in single ExampleTypeProvider</param>
+        </member>
         <member name="T:Artemis.App.Swashbuckle.Attributes.SubTypeOfAttribute">
             <summary>
             By convention, if a schema has an 'allOf' that references only one other schema, AutoRest
@@ -266,6 +368,39 @@
             </summary>
             <param name="swaggerDoc">OpenApiDocument.</param>
             <param name="context">DocumentFilterContext.</param>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.DocumentFilters.ExampleFilter">
+            <summary>
+            Adds x-ms-examples extention to every opertaion. Must run after SetOperationIdFilter.
+            By default, it will add ./examples/{RelativePath}/{opetationId}.json to all the operations.
+            Additional examples can be added using <see cref="T:Artemis.App.Swashbuckle.Attributes.ExampleAttribute"/>.
+            Eg: <code>
+            "x-ms-examples": {
+                "DerivedModels_ListBySubscription": {
+                    "$ref": "./examples/DerivedModels_ListBySubscription.json"
+                }
+            }</code>
+            </summary>
+            <see href="https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-examples">x-ms-examples.</see>
+        </member>
+        <member name="F:Artemis.App.Swashbuckle.Filters.DocumentFilters.ExampleFilter.ExamplesFolderPath">
+            <summary>
+             Relative path to the examples folder.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.ExampleFilter.#ctor(Artemis.App.Swashbuckle.Options.IGeneratorConfig)">
+            <summary>
+             Constructor.
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.DocumentFilters.ExampleFilter.ApplyWithVersion(Microsoft.OpenApi.Models.OpenApiOperation,Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription,Microsoft.OpenApi.Models.OpenApiInfo)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="operation">OpenApiOperation.</param>
+            <param name="apiDescription"></param>
+            <param name="info"></param>
         </member>
         <member name="T:Artemis.App.Swashbuckle.Filters.OperationFilters.AddLongRunningOperationExtensionFilter">
             <summary>
@@ -474,6 +609,25 @@
             <param name="schema">OpenApiSchema.</param>
             <param name="context">DocumentFilterContext.</param>
         </member>
+        <member name="T:Artemis.App.Swashbuckle.Filters.SchemaFilters.AddEnumExtensionFilter">
+            <summary>
+            Adds x-ms-enum to a property enum type. Adds extension attributes to indicate AutoRest to model enum as string
+            </summary>
+            <see href="https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-enum">x-ms-enum</see>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.SchemaFilters.AddEnumExtensionFilter.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Artemis.App.Swashbuckle.Filters.SchemaFilters.AddEnumExtensionFilter"/> class.
+            </summary>
+            <param name="modelAsString">Extend AddEnumExtensionFilter to support model as string false along with true.</param>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Filters.SchemaFilters.AddEnumExtensionFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            Applies filter.
+            </summary>
+            <param name="schema">OpenApiSchema.</param>
+            <param name="context">DocumentFilterContext.</param>
+        </member>
         <member name="T:Artemis.App.Swashbuckle.Filters.SchemaFilters.AddMutabilityExtensionFilter">
             <summary>
             Adds x-ms-mutability to the property marked by <see cref="T:Artemis.App.Swashbuckle.Attributes.MutabilityAttribute"/>
@@ -559,89 +713,203 @@
         <member name="M:Artemis.App.Swashbuckle.Filters.SetBodyNameExtensionFilter.Apply(Microsoft.OpenApi.Models.OpenApiRequestBody,Swashbuckle.AspNetCore.SwaggerGen.RequestBodyFilterContext)">
             <inheritdoc/>
         </member>
-        <member name="T:Artemis.App.Swashbuckle.GeneratorConfig">
+        <member name="T:Artemis.App.Swashbuckle.Options.Configuration">
+            <summary>
+            OpenApi document configuration.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Options.Configuration.#ctor(Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Artemis.App.Swashbuckle.Options.Configuration"/> class.
+            </summary>
+            <param name="info">Document info section details.</param>
+        </member>
+        <member name="F:Artemis.App.Swashbuckle.Options.Configuration._info">
+            <summary>
+            OpenAPI document info section properties.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Options.Configuration.GetVersion">
+            <summary>
+            Return api version.
+            </summary>
+            <returns>Api version.</returns>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Options.Configuration.GetInfo">
+            <summary>
+            Populate openAPI decoument 'info' section.
+            </summary>
+            <returns>OpenApiInfo.</returns>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Options.GeneratorConfig">
             <summary>
             生成配置
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.HostName">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.SupportedApiVersions">
+            <summary>
+             支持的API版本
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.DefaultApiVersion">
+            <summary>
+             默认API版本
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.Title">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Title"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.Description">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Description"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.ClientName">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.ClientName"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.HostName">
             <summary>
             主机名
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.MappingTypeToSchema">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.MappingTypeToSchema">
             <summary>
             映射类型到架构
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.UseXmlCommentFiles">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.UseXmlCommentFiles">
             <summary>
             使用xml注释文档
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.XmlCommentFiles">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.XmlCommentFiles">
             <summary>
             xml注释文档
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.UseAllOfToExtendReferenceSchemas">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.UseAllOfToExtendReferenceSchemas">
             <summary>
             使用AllOf扩展引用架构
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.GenerateExternal">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.GenerateExternal">
             <summary>
             是否为第三方客户生成
             </summary>
         </member>
-        <member name="F:Artemis.App.Swashbuckle.GeneratorConfig._hideParameters">
+        <member name="F:Artemis.App.Swashbuckle.Options.GeneratorConfig._hideParameters">
             <summary>
             隐藏参数路径
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.GeneratorConfig.HideParameters">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.HideParameters">
             <summary>
             隐藏参数路径
             </summary>
         </member>
-        <member name="T:Artemis.App.Swashbuckle.IGeneratorConfig">
+        <member name="P:Artemis.App.Swashbuckle.Options.GeneratorConfig.EnumsAsString">
+            <summary>
+            以字符串形式使用枚举
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Options.IGeneratorConfig">
             <summary>
             生成配置接口
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.HostName">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.SupportedApiVersions">
+            <summary>
+             支持的API版本
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.DefaultApiVersion">
+            <summary>
+             默认API版本
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.Title">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Title"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.Description">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Description"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.ClientName">
+            <see cref="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.ClientName"/>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.HostName">
             <summary>
             主机名
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.MappingTypeToSchema">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.MappingTypeToSchema">
             <summary>
             映射类型到架构
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.UseXmlCommentFiles">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.UseXmlCommentFiles">
             <summary>
             使用xml注释文档
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.XmlCommentFiles">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.XmlCommentFiles">
             <summary>
             xml注释文档
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.UseAllOfToExtendReferenceSchemas">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.UseAllOfToExtendReferenceSchemas">
             <summary>
             使用AllOf扩展引用架构
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.GenerateExternal">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.GenerateExternal">
             <summary>
             是否为第三方客户生成
             </summary>
         </member>
-        <member name="P:Artemis.App.Swashbuckle.IGeneratorConfig.HideParameters">
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.HideParameters">
             <summary>
             隐藏参数路径
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.IGeneratorConfig.EnumsAsString">
+            <summary>
+            以字符串形式使用枚举
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo">
+            <summary>
+            Corresponds to openAPI document info section.
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo"/> class.
+            </summary>
+            <param name="title">OpenAPI document title.</param>
+            <param name="description">OpenAPI document description.</param>
+            <param name="version">OpenAPI document version.</param>
+            <param name="clientName">OpenAPI document clientName.</param>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Title">
+            <summary>
+            Corresponds to openAPI document info.title
+            Autorest generated SDK client title.
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Description">
+            <summary>
+            Corresponds to openAPI document info.Description
+            Autorest generated SDK client description.
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.Version">
+            <summary>
+            Corresponds to openAPI document info.Version
+            Autorest generated SDK client supported api verison.
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Swashbuckle.Options.OpenApiDocumentInfo.ClientName">
+            <summary>
+            Corresponds to openAPI document info.x-ms-code-generation-settings.name
+            Autorest generated SDK client name.
             </summary>
         </member>
         <member name="T:Artemis.App.Swashbuckle.SwashbuckleExtensions">
@@ -649,7 +917,7 @@
             扩展方法
             </summary>
         </member>
-        <member name="M:Artemis.App.Swashbuckle.SwashbuckleExtensions.GenerateSwagger(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,Artemis.App.Swashbuckle.IGeneratorConfig)">
+        <member name="M:Artemis.App.Swashbuckle.SwashbuckleExtensions.GenerateSwagger(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,Artemis.App.Swashbuckle.Options.IGeneratorConfig)">
             <summary>
             生成Swagger
             </summary>
@@ -661,6 +929,19 @@
              默认SchemaId选择器
             </summary>
             <param name="type">类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.Swashbuckle.OpenApiOptions">
+            <summary>
+             OpenApi配置
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Swashbuckle.OpenApiOptions.GetConfiguration(Artemis.App.Swashbuckle.Options.IGeneratorConfig,System.String)">
+            <summary>
+             获取配置
+            </summary>
+            <param name="config"></param>
+            <param name="version"></param>
             <returns></returns>
         </member>
     </members>

@@ -22,12 +22,12 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <summary>
     ///     枚举名称
     /// </summary>
-    private string Name { get; }
+    public string Name { get; }
 
     /// <summary>
     ///     枚举ID
     /// </summary>
-    private int Id { get; }
+    public int Id { get; }
 
     #region Implementation of IComparable
 
@@ -130,7 +130,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
                               BindingFlags.DeclaredOnly)
             .Select(info => info.GetValue(null))
             .Cast<Enumeration>()
-            .Select(item => item.ToInt());
+            .Select(item => item.Id);
     }
 
     /// <summary>
@@ -160,15 +160,6 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     public override string ToString()
     {
         return Name;
-    }
-
-    /// <summary>
-    /// 转换为int
-    /// </summary>
-    /// <returns></returns>
-    public int ToInt()
-    {
-        return Id;
     }
 
     /// <summary>
@@ -244,4 +235,20 @@ public class EnumerationJsonConverter<T> : JsonConverter<T> where T : Enumeratio
     }
 
     #endregion
+}
+
+/// <summary>
+/// 枚举类扩展
+/// </summary>
+public static class EnumerationExtensions
+{
+    /// <summary>
+    /// 添加转换器
+    /// </summary>
+    /// <typeparam name="T">枚举类型</typeparam>
+    /// <param name="options">Json序列化配置</param>
+    public static void AddConverter<T>(this JsonSerializerOptions options) where T : Enumeration
+    {
+        options.Converters.Add(new EnumerationJsonConverter<T>());
+    }
 }
