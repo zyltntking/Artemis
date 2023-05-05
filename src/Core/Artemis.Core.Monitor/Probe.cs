@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Runtime.InteropServices;
+using Artemis.Core.Monitor.Fundamental.Components.Interface;
 using Artemis.Core.Monitor.Fundamental.Interface;
 using Artemis.Core.Monitor.Fundamental.Model;
 using Artemis.Core.Monitor.Fundamental.Types;
@@ -75,4 +76,9 @@ public class Probe : IProbe
             return hostInfo;
         }
     }
+
+    /// <summary>
+    /// 内存状态接口
+    /// </summary>
+    public IMemoryStatus MemoryStatus => HardwareInfo.MemoryStatus;
 }

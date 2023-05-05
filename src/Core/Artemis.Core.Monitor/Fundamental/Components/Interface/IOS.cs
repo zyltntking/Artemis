@@ -16,9 +16,4 @@ public interface IOS
     ///     操作系统版本
     /// </summary>
     string Version { get; set; }
-
-    /// <summary>
-    ///     元数据信息
-    /// </summary>
-    ICollection<MetadataInfo>? Metadata { get; set; }
 }

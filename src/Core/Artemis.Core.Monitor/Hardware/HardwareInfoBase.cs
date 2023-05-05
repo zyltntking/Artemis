@@ -6,6 +6,11 @@
 internal abstract class HardwareInfoBase
 {
     /// <summary>
+    ///  采集元数据
+    /// </summary>
+    public bool GatherMetadata { get; init; }
+
+    /// <summary>
     ///     从文件中读取所有行
     /// </summary>
     /// <param name="path">文件路径</param>

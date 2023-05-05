@@ -18,5 +18,23 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    ///   获取内存状态
+    /// </summary>
+    /// <returns></returns>
+    public IMemoryStatus GetMemoryStatus()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    ///  获取电池信息
+    /// </summary>
+    /// <returns></returns>
+    public ICollection<IBattery> GetBatteries()
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 }

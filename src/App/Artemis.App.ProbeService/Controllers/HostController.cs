@@ -1,4 +1,5 @@
 ﻿using Artemis.Core.Monitor;
+using Artemis.Core.Monitor.Fundamental.Components.Interface;
 using Artemis.Core.Monitor.Fundamental.Interface;
 using Artemis.Data.Core;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,9 @@ namespace Artemis.App.ProbeService.Controllers;
 [ApiController]
 public class HostController : ControllerBase
 {
-    private readonly HostConfig _hostConfig;
+    private HostConfig HostConfig { get; }
+
+    private IProbe Probe { get; }
 
     /// <summary>
     ///     构造函数
@@ -21,20 +24,31 @@ public class HostController : ControllerBase
     /// <param name="hostOptions">主机配置</param>
     public HostController(IOptions<HostConfig> hostOptions)
     {
-        _hostConfig = hostOptions.Value;
+        HostConfig = hostOptions.Value;
+        Probe = new Probe(HostConfig.HostType, HostConfig.InstanceType);
+
     }
 
     /// <summary>
     ///     主机信息
     /// </summary>
     /// <returns>主机信息</returns>
-    [HttpPost]
+    [HttpGet]
     public DataResult<IHostInfo> HostInfo()
     {
-        var probe = new Probe(_hostConfig.HostType, _hostConfig.InstanceType);
-
-        var info = probe.HostInfo;
+        var info = Probe.HostInfo;
 
         return DataResult.Success(info);
+    }
+
+    /// <summary>
+    ///   内存状态
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public DataResult<IMemoryStatus> MemoryStatus()
+    {
+        var status = Probe.MemoryStatus;
+        return DataResult.Success(status);
     }
 }

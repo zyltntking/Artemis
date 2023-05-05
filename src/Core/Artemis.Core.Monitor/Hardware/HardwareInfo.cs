@@ -1,6 +1,5 @@
 ﻿using Artemis.Core.Monitor.Fundamental.Components.Interface;
 using Artemis.Core.Monitor.Fundamental.Types;
-using Artemis.Core.Monitor.Hardware.Linux;
 
 namespace Artemis.Core.Monitor.Hardware;
 
@@ -15,17 +14,30 @@ internal class HardwareInfo : IHardwareInfo
     /// <param name="platform">平台类型</param>
     public HardwareInfo(PlatformType platform)
     {
-        if (platform.Equals(PlatformType.Linux)) HardwareInfoRetrieval = new HardwareInfoRetrieval();
+        if (platform.Equals(PlatformType.Linux))
+            HardwareInfoRetrieval = new Linux.HardwareInfoRetrieval
+            {
+                GatherMetadata = false
+            };
 
         if (platform.Equals(PlatformType.Windows))
             HardwareInfoRetrieval = new Windows.HardwareInfoRetrieval
             {
-                UseAsteriskInWmi = false
+                UseAsteriskInWmi = true,
+                GatherMetadata = false
             };
 
-        if (platform.Equals(PlatformType.MacOS)) HardwareInfoRetrieval = new Unknown.HardwareInfoRetrieval();
+        if (platform.Equals(PlatformType.MacOS)) 
+            HardwareInfoRetrieval = new Unknown.HardwareInfoRetrieval
+            {
+                GatherMetadata = false
+            };
 
-        if (platform.Equals(PlatformType.Unknown)) HardwareInfoRetrieval = new Unknown.HardwareInfoRetrieval();
+        if (platform.Equals(PlatformType.Unknown))
+            HardwareInfoRetrieval = new Unknown.HardwareInfoRetrieval
+            {
+                GatherMetadata = false
+            };
     }
 
     /// <summary>
@@ -39,6 +51,16 @@ internal class HardwareInfo : IHardwareInfo
     ///     操作系统信息
     /// </summary>
     public IOS OperatingSystem => HardwareInfoRetrieval.GetOperatingSystem();
+
+    /// <summary>
+    /// 当前内存状态
+    /// </summary>
+    public IMemoryStatus MemoryStatus => HardwareInfoRetrieval.GetMemoryStatus();
+
+    /// <summary>
+    ///  电池信息
+    /// </summary>
+    public ICollection<IBattery> Batteries { get; }
 
     #endregion
 }

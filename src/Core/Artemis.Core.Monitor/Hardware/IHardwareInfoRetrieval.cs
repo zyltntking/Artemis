@@ -12,4 +12,16 @@ internal interface IHardwareInfoRetrieval
     /// </summary>
     /// <returns></returns>
     IOS GetOperatingSystem();
+
+    /// <summary>
+    ///   获取内存状态
+    /// </summary>
+    /// <returns></returns>
+    IMemoryStatus GetMemoryStatus();
+
+    /// <summary>
+    ///  获取电池信息
+    /// </summary>
+    /// <returns></returns>
+    ICollection<IBattery> GetBatteries();
 }

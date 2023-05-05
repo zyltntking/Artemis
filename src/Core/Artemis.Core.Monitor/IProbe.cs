@@ -1,4 +1,5 @@
-﻿using Artemis.Core.Monitor.Fundamental.Interface;
+﻿using Artemis.Core.Monitor.Fundamental.Components.Interface;
+using Artemis.Core.Monitor.Fundamental.Interface;
 
 namespace Artemis.Core.Monitor;
 
@@ -11,4 +12,9 @@ public interface IProbe
     ///     主机信息接口
     /// </summary>
     IHostInfo HostInfo { get; }
+
+    /// <summary>
+    /// 内存状态接口
+    /// </summary>
+    IMemoryStatus MemoryStatus { get; }
 }
