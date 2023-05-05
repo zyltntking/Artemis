@@ -5,7 +5,7 @@ namespace Artemis.Core.Monitor.Fundamental.Interface;
 /// <summary>
 ///     主机信息接口
 /// </summary>
-public interface IHost
+public interface IHostInfo
 {
     /// <summary>
     ///     主机名
@@ -18,7 +18,7 @@ public interface IHost
     HostType HostType { get; set; }
 
     /// <summary>
-    /// 实例类型
+    ///     实例类型
     /// </summary>
     InstanceType InstanceType { get; set; }
 
@@ -28,7 +28,7 @@ public interface IHost
     string? OsName { get; set; }
 
     /// <summary>
-    ///    平台类型
+    ///     平台类型
     /// </summary>
     PlatformType PlatformType { get; set; }
 
@@ -38,7 +38,7 @@ public interface IHost
     string? OsVersion { get; set; }
 
     /// <summary>
-    /// 进程架构
+    ///     进程架构
     /// </summary>
-    string? ProcessArchitecture { get; set; }
+    string? OsArchitecture { get; set; }
 }

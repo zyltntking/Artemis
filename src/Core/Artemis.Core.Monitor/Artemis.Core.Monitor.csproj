@@ -13,4 +13,11 @@
     <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fundamental\Components\Interface\" />
+    <Folder Include="Hardware\Linux\" />
+    <Folder Include="Hardware\Windows\" />
+    <Folder Include="Hardware\Unknown\" />
+  </ItemGroup>
+
 </Project>

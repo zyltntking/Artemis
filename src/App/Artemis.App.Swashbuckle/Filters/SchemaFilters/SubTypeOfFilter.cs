@@ -6,16 +6,22 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.SchemaFilters;
 
 /// <summary>
-/// Inheritance in OpenApi spec is represented by including all the properties of base class in representation of derived class.
-/// Which leads to repetitions of same fields in all the derived classes representations. To avoid this problem. We have marked
-/// inherited classes with <see cref="SubTypeOfFilter"/>. Using which we will load the base class schemas and remove all base
-/// class properties from derived class.
+///     Inheritance in OpenApi spec is represented by including all the properties of base class in representation of
+///     derived class.
+///     Which leads to repetitions of same fields in all the derived classes representations. To avoid this problem. We
+///     have marked
+///     inherited classes with <see cref="SubTypeOfFilter" />. Using which we will load the base class schemas and remove
+///     all base
+///     class properties from derived class.
 /// </summary>
-/// <see href="https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#model-inheritance">model-inheritance.</see>
+/// <see
+///     href="https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#model-inheritance">
+///     model-inheritance.
+/// </see>
 public class SubTypeOfFilter : ISchemaFilter
 {
     /// <summary>
-    /// Applies filter.
+    ///     Applies filter.
     /// </summary>
     /// <param name="schema">OpenApiSchema.</param>
     /// <param name="context">DocumentFilterContext.</param>
@@ -43,13 +49,10 @@ public class SubTypeOfFilter : ISchemaFilter
                 // Check if parent schema is also marked with SubTypeAttribute
                 subTypeOfAttribute = subTypeOfAttribute.Parent.GetCustomAttribute<SubTypeOfAttribute>();
                 if (subTypeOfAttribute != null)
-                {
-                    schemaRef = context.SchemaGenerator.GenerateSchema(subTypeOfAttribute.Parent, context.SchemaRepository);
-                }
+                    schemaRef = context.SchemaGenerator.GenerateSchema(subTypeOfAttribute.Parent,
+                        context.SchemaRepository);
                 else
-                {
                     break;
-                }
             }
 
             // Once we have the parent schame, we can remove properties defined by the parent from the child

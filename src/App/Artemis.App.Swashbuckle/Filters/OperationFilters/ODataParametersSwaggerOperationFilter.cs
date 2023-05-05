@@ -4,18 +4,19 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// Add the supported odata parameters for Odata queries endpoints.
+///     Add the supported odata parameters for Odata queries endpoints.
 /// </summary>
 public class ODataParametersSwaggerOperationFilter : IOperationFilter
 {
     /// <summary>
-    ///  Apply
+    ///     Apply
     /// </summary>
     /// <param name="operation"></param>
     /// <param name="context"></param>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var odataParam = context.MethodInfo.GetParameters().FirstOrDefault(p => p.ParameterType.BaseType?.FullName == "Microsoft.AspNet.OData.Query.ODataQueryOptions");
+        var odataParam = context.MethodInfo.GetParameters().FirstOrDefault(p =>
+            p.ParameterType.BaseType?.FullName == "Microsoft.AspNet.OData.Query.ODataQueryOptions");
         if (odataParam != null)
         {
             var p = operation.Parameters.FirstOrDefault(p => p.Name.ToLower() == odataParam.Name?.ToLower());

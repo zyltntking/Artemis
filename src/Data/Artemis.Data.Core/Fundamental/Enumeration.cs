@@ -43,6 +43,26 @@ public abstract class Enumeration : IEnumeration<Enumeration>
 
     #endregion
 
+    #region Equality members
+
+    /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>
+    ///     <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise,
+    ///     <see langword="false" />.
+    /// </returns>
+    public bool Equals(Enumeration? other)
+    {
+        if (other == null) return false;
+
+        var typeMatches = GetType() == other.GetType();
+        var valueMatches = Id.Equals(other.Id);
+
+        return typeMatches && valueMatches;
+    }
+
+    #endregion
+
     /// <summary>
     ///     从值获取枚举
     /// </summary>
@@ -94,16 +114,13 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     /// <summary>
-    /// 获取字符串枚举成员
+    ///     获取字符串枚举成员
     /// </summary>
     /// <param name="type">枚举类</param>
     /// <returns></returns>
     public static IEnumerable<string> GetAllName(Type type)
     {
-        if (type.BaseType != typeof(Enumeration))
-        {
-            return new List<string>();
-        }
+        if (type.BaseType != typeof(Enumeration)) return new List<string>();
 
         return type.GetFields(BindingFlags.Public |
                               BindingFlags.Static |
@@ -114,16 +131,13 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     /// <summary>
-    /// 获取id枚举成员
+    ///     获取id枚举成员
     /// </summary>
     /// <param name="type">枚举类</param>
     /// <returns></returns>
     public static IEnumerable<int> GetAllId(Type type)
     {
-        if (type.BaseType != typeof(Enumeration))
-        {
-            return new List<int>();
-        }
+        if (type.BaseType != typeof(Enumeration)) return new List<int>();
 
         return type.GetFields(BindingFlags.Public |
                               BindingFlags.Static |
@@ -137,13 +151,13 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     ///     转换函数
     /// </summary>
     /// <typeparam name="T">枚举类</typeparam>
-    /// <typeparam name="TK">源类</typeparam>
+    /// <typeparam name="Tk">源类</typeparam>
     /// <param name="value">源值</param>
     /// <param name="description">描述</param>
     /// <param name="predicate">匹配表达式</param>
     /// <returns>枚举成员</returns>
     /// <exception cref="InvalidOperationException">无效操作异常</exception>
-    private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
+    private static T Parse<T, Tk>(Tk value, string description, Func<T, bool> predicate) where T : Enumeration
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
@@ -187,24 +201,6 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     #endregion
-
-    #region Equality members
-
-    /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-    /// <param name="other">An object to compare with this object.</param>
-    /// <returns>
-    /// <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <see langword="false" />.</returns>
-    public bool Equals(Enumeration? other)
-    {
-        if (other == null) return false;
-
-        var typeMatches = GetType() == other.GetType();
-        var valueMatches = Id.Equals(other.Id);
-
-        return typeMatches && valueMatches;
-    }
-
-    #endregion
 }
 
 /// <summary>
@@ -238,12 +234,12 @@ public class EnumerationJsonConverter<T> : JsonConverter<T> where T : Enumeratio
 }
 
 /// <summary>
-/// 枚举类扩展
+///     枚举类扩展
 /// </summary>
 public static class EnumerationExtensions
 {
     /// <summary>
-    /// 添加转换器
+    ///     添加转换器
     /// </summary>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="options">Json序列化配置</param>

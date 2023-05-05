@@ -4,12 +4,12 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-///  添加版本参数
+///     添加版本参数
 /// </summary>
 public class AddVersionParameterWithExactValueInQuery : IOperationFilter
 {
     /// <summary>
-    ///  应用
+    ///     应用
     /// </summary>
     /// <param name="operation"></param>
     /// <param name="context"></param>
@@ -17,7 +17,6 @@ public class AddVersionParameterWithExactValueInQuery : IOperationFilter
     {
         var existingApiVersion = operation.Parameters.FirstOrDefault(p => p.Name == "api-version");
         if (existingApiVersion == null)
-        {
             operation.Parameters.Add(new OpenApiParameter
             {
                 Name = "api-version",
@@ -29,6 +28,5 @@ public class AddVersionParameterWithExactValueInQuery : IOperationFilter
                     MinLength = 1
                 }
             });
-        }
     }
 }

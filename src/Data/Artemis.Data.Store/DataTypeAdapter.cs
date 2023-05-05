@@ -1,17 +1,17 @@
 ﻿namespace Artemis.Data.Store;
 
 /// <summary>
-/// 数据类型适配器
+///     数据类型适配器
 /// </summary>
 public static class DataTypeAdapter
 {
     /// <summary>
-    /// 数据类型缓存
+    ///     数据类型缓存
     /// </summary>
     private static Dictionary<DbType, DataTypeSet>? _dataTypeDictionary;
 
     /// <summary>
-    /// 数据类型访问器
+    ///     数据类型访问器
     /// </summary>
     private static Dictionary<DbType, DataTypeSet> DataTypeDictionary
     {
@@ -79,53 +79,58 @@ public static class DataTypeAdapter
     }
 
     /// <summary>
-    /// 获取数据类型集
+    ///     获取数据类型集
     /// </summary>
     /// <param name="dbType">数据库类型</param>
     /// <returns>数据类型集</returns>
-    public static DataTypeSet GetDataTypeSet(DbType dbType) => DataTypeDictionary[dbType];
+    public static DataTypeSet GetDataTypeSet(DbType dbType)
+    {
+        return DataTypeDictionary[dbType];
+    }
 }
 
 /// <summary>
-/// 数据类型集
+///     数据类型集
 /// </summary>
 public class DataTypeSet
 {
     /// <summary>
-    /// DateTime数据类型
+    ///     DateTime数据类型
     /// </summary>
     public string DateTime { get; init; } = "DATETIME";
 
     /// <summary>
-    /// Boolean数据类型
+    ///     Boolean数据类型
     /// </summary>
     public string Boolean { get; init; } = "BIT";
 
     /// <summary>
-    /// Integer数据类型
+    ///     Integer数据类型
     /// </summary>
     public string Integer { get; init; } = "INTEGER";
 
     /// <summary>
-    /// Long数据类型
+    ///     Long数据类型
     /// </summary>
     public string Long { get; init; } = "INTEGER";
 
     /// <summary>
-    /// Double数据类型
+    ///     Double数据类型
     /// </summary>
     public string Double { get; init; } = "FLOAT";
 
     /// <summary>
-    /// String数据类型
+    ///     String数据类型
     /// </summary>
-    public string StringTemplate {get; init; } = "VARCHAR({0})";
+    public string StringTemplate { get; init; } = "VARCHAR({0})";
 
     /// <summary>
-    /// 获取String数据类型
+    ///     获取String数据类型
     /// </summary>
     /// <param name="length">字段长度</param>
     /// <returns></returns>
-    public string String(int length) => string.Format(StringTemplate, length);
-
+    public string String(int length)
+    {
+        return string.Format(StringTemplate, length);
+    }
 }

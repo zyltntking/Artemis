@@ -7,25 +7,24 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// A conditional operation filter to hide an API paramater .
+///     A conditional operation filter to hide an API paramater .
 /// </summary>
 public class HideParamInDocsFilter : IOperationFilter
 {
     private readonly bool _hideParameters;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="HideParamInDocsFilter"/> class.
+    ///     Initializes a new instance of the <see cref="HideParamInDocsFilter" /> class.
     /// </summary>
     public HideParamInDocsFilter(bool hideParameters = false)
     {
         _hideParameters = hideParameters;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
         if (_hideParameters)
-        {
             foreach (var parameter in context.MethodInfo.GetParameters())
             {
                 var isParamHidden = parameter.GetCustomAttributes<SwaggerHideParameterAttribute>().Any();
@@ -39,6 +38,5 @@ public class HideParamInDocsFilter : IOperationFilter
                     operation.Parameters.Remove(p);
                 }
             }
-        }
     }
 }

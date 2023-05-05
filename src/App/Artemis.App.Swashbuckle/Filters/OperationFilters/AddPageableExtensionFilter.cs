@@ -6,13 +6,13 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// Adds x-ms-pageable extension to operation marked with Pageable attribute.
+///     Adds x-ms-pageable extension to operation marked with Pageable attribute.
 /// </summary>
 /// <see href="https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-pageable">x-ms-pageable</see>
 public class AddPageableExtensionFilter : IOperationFilter
 {
     /// <summary>
-    /// Applies filter.
+    ///     Applies filter.
     /// </summary>
     /// <param name="operation">OpenApiOperation.</param>
     /// <param name="context">DocumentFilterContext.</param>
@@ -25,23 +25,15 @@ public class AddPageableExtensionFilter : IOperationFilter
             var pa = pageableAttributes.First();
             var mxPageable = new OpenApiObject();
 
-            if (!string.IsNullOrWhiteSpace(pa.ItemName))
-            {
-                mxPageable.Add("itemName", new OpenApiString(pa.ItemName));
-            }
+            if (!string.IsNullOrWhiteSpace(pa.ItemName)) mxPageable.Add("itemName", new OpenApiString(pa.ItemName));
 
             var nextLinkName = "nextLink";
-            if (!string.IsNullOrWhiteSpace(pa.NextLinkName))
-            {
-                nextLinkName = pa.NextLinkName;
-            }
+            if (!string.IsNullOrWhiteSpace(pa.NextLinkName)) nextLinkName = pa.NextLinkName;
 
             mxPageable.Add("nextLinkName", new OpenApiString(nextLinkName));
 
             if (!string.IsNullOrWhiteSpace(pa.OperationName))
-            {
                 mxPageable.Add("operationName", new OpenApiString(pa.OperationName));
-            }
 
             operation.Extensions.Add("x-ms-pageable", mxPageable);
         }

@@ -6,12 +6,13 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.DocumentFilters;
 
 /// <summary>
-/// Adds document level property 'produce' and sets its value to supported mime type. Only supported type 'application/json'.
+///     Adds document level property 'produce' and sets its value to supported mime type. Only supported type
+///     'application/json'.
 /// </summary>
 public class AddProducesFilter : IDocumentFilter
 {
     /// <summary>
-    /// Applies filter.
+    ///     Applies filter.
     /// </summary>
     /// <param name="swaggerDoc">OpenApiDocument.</param>
     /// <param name="context">DocumentFilterContext.</param>

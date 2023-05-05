@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Core.Monitor.Store.Entities.Configurations;
 
 /// <summary>
-/// 监控主机模型配置
+///     监控主机模型配置
 /// </summary>
 public class MonitorHostConfiguration : MonitorConfiguration<MonitorHost>
 {

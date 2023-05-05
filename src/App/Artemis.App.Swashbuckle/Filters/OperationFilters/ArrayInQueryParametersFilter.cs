@@ -4,20 +4,23 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// The workaround for openapi3/autorest query parameters serialization
-/// For query of type array in parameters, client gen with autorest:  need to specify style propety = "form" so that it doesn't fail.
-/// For swagger 2.0, Items with reference in query parameter is not valid.
-/// This is used to directly add Enums schema to items in case of array type queries instead of references.
-/// This resolves that issue.
-/// See more: https://github.com/Azure/autorest/issues/3373, https://swagger.io/specification/.
-/// Usage guidelines: https://msazure.visualstudio.com/One/_wiki/wikis/AGE%20Agri%20Wiki/95022/ArrayInQueryParametersFilter-usage-guidelines.
+///     The workaround for openapi3/autorest query parameters serialization
+///     For query of type array in parameters, client gen with autorest:  need to specify style propety = "form" so that it
+///     doesn't fail.
+///     For swagger 2.0, Items with reference in query parameter is not valid.
+///     This is used to directly add Enums schema to items in case of array type queries instead of references.
+///     This resolves that issue.
+///     See more: https://github.com/Azure/autorest/issues/3373, https://swagger.io/specification/.
+///     Usage guidelines:
+///     https://msazure.visualstudio.com/One/_wiki/wikis/AGE%20Agri%20Wiki/95022/ArrayInQueryParametersFilter-usage-guidelines.
 /// </summary>
 public class ArrayInQueryParametersFilter : IOperationFilter
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public void Apply(OpenApiOperation? operation, OperationFilterContext context)
     {
-        foreach (var parameter in operation?.Parameters.Where(x => (x.In == ParameterLocation.Query && x.Schema.Type == "array")))
+        foreach (var parameter in operation?.Parameters.Where(x =>
+                     x.In == ParameterLocation.Query && x.Schema.Type == "array"))
         {
             if (!parameter.Style.HasValue)
             {
@@ -31,13 +34,11 @@ public class ArrayInQueryParametersFilter : IOperationFilter
             if (parameter.Schema?.Items?.Reference != null &&
                 context?.SchemaRepository?.Schemas.ContainsKey(parameter.Schema.Items.Reference.Id) == true &&
                 context?.SchemaRepository?.Schemas[parameter.Schema.Items.Reference.Id]?.Enum != null)
-            {
                 // Explicitly copying only relevant fields to Items.
                 if (parameter.Schema?.Items?.Reference?.Id != null)
                 {
                     var definition = context.SchemaRepository.Schemas[parameter.Schema?.Items?.Reference?.Id!];
                     if (parameter.Schema != null)
-                    {
                         if (parameter.Schema.Items != null)
                         {
                             parameter.Schema.Items.Enum = definition.Enum;
@@ -45,9 +46,7 @@ public class ArrayInQueryParametersFilter : IOperationFilter
                             parameter.Schema.Items.Extensions = definition.Extensions;
                             parameter.Schema.Items.Reference = null;
                         }
-                    }
                 }
-            }
         }
     }
 }

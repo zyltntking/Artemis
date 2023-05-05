@@ -17,13 +17,14 @@ public abstract class BodyExamplesProvider : IExamplesProvider
 
 public abstract class BaseExamplesProvider<TInnerValue> : IExamplesProvider
 {
-    public abstract ResponseObj<TInnerValue> GetTypedExamples();
-
     public object GetExample()
     {
         return GetTypedExamples();
     }
+
+    public abstract ResponseObj<TInnerValue> GetTypedExamples();
 }
+
 public class ResponseObj<TInnerValue>
 {
     public BodyType<TInnerValue> Body { get; set; }

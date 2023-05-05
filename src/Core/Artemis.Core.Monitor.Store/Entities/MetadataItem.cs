@@ -6,15 +6,20 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Core.Monitor.Store.Entities;
 
 /// <summary>
-/// 元数据
+///     元数据
 /// </summary>
 [EntityTypeConfiguration(typeof(MetadataItemConfiguration))]
 public class MetadataItem : PartitionBase, IMetadata
 {
     /// <summary>
-    /// 元数据组标识
+    ///     元数据组标识
     /// </summary>
     public virtual Guid MetadataGroupId { get; set; }
+
+    /// <summary>
+    ///     所属元数据组
+    /// </summary>
+    public virtual MetadataGroup MetadataGroup { get; set; } = null!;
 
     #region Implementation of IMeta
 
@@ -29,9 +34,4 @@ public class MetadataItem : PartitionBase, IMetadata
     public virtual string? Value { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 所属元数据组
-    /// </summary>
-    public virtual MetadataGroup MetadataGroup { get; set; } = null!;
 }

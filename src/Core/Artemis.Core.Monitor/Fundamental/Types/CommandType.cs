@@ -4,7 +4,7 @@ using Artemis.Data.Core.Fundamental;
 namespace Artemis.Core.Monitor.Fundamental.Types;
 
 /// <summary>
-/// 指令类型
+///     指令类型
 /// </summary>
 [Description("指令类型")]
 public class CommandType : Enumeration
@@ -15,17 +15,17 @@ public class CommandType : Enumeration
     public static CommandType Unknown = new(-1, nameof(Unknown));
 
     /// <summary>
-    /// bash脚本
+    ///     bash脚本
     /// </summary>
     public static CommandType BashScript = new(0, nameof(BashScript));
 
     /// <summary>
-    /// Cmd脚本
+    ///     Cmd脚本
     /// </summary>
     public static CommandType CmdScript = new(1, nameof(CmdScript));
 
     /// <summary>
-    /// PowerShell脚本
+    ///     PowerShell脚本
     /// </summary>
     public static CommandType PowerShellScript = new(2, nameof(PowerShellScript));
 

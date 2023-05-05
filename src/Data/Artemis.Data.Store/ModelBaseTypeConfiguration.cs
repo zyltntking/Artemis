@@ -8,15 +8,16 @@ namespace Artemis.Data.Store;
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : class, IModelBase
+public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+    where TEntity : class, IModelBase
 {
     /// <summary>
-    ///    数据库类型
+    ///     数据库类型
     /// </summary>
     protected virtual DbType DbType => DbType.SqlServer;
 
     /// <summary>
-    /// 数据类型集合访问器
+    ///     数据类型集合访问器
     /// </summary>
     protected DataTypeSet DataTypeSet => DataTypeAdapter.GetDataTypeSet(DbType);
 
@@ -40,16 +41,15 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     #endregion
 
     /// <summary>
-    /// 表配置
+    ///     表配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void TableConfigure(EntityTypeBuilder<TEntity> builder)
     {
-
     }
 
     /// <summary>
-    /// 数据库字段备注配置
+    ///     数据库字段备注配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void FieldCommentConfigure(EntityTypeBuilder<TEntity> builder)
@@ -64,7 +64,7 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     }
 
     /// <summary>
-    /// 数据类型配置
+    ///     数据类型配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void DataTypeConfigure(EntityTypeBuilder<TEntity> builder)
@@ -77,7 +77,7 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     }
 
     /// <summary>
-    /// 数据库关系配置
+    ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void RelationConfigure(EntityTypeBuilder<TEntity> builder)

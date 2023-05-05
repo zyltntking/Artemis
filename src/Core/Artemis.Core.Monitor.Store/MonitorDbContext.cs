@@ -17,18 +17,17 @@ public class MonitorDbContext : DbContext
     }
 
     /// <summary>
-    ///    元数据组
+    ///     元数据组
     /// </summary>
     public DbSet<MetadataGroup> MetadataGroups { get; set; }
 
     /// <summary>
-    /// 元数据
+    ///     元数据
     /// </summary>
     public DbSet<MetadataItem> MetadataItems { get; set; }
 
     /// <summary>
-    /// 监控主机
+    ///     监控主机
     /// </summary>
     public DbSet<MonitorHost> MonitorHosts { get; set; }
-
 }

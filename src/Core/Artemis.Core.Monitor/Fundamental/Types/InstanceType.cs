@@ -1,5 +1,5 @@
-﻿using Artemis.Data.Core.Fundamental;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using Artemis.Data.Core.Fundamental;
 
 namespace Artemis.Core.Monitor.Fundamental.Types;
 

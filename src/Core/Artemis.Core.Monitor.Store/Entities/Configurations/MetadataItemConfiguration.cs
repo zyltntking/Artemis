@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Core.Monitor.Store.Entities.Configurations;
 
 /// <summary>
-/// 元数据模型配置
+///     元数据模型配置
 /// </summary>
 public class MetadataItemConfiguration : MonitorConfiguration<MetadataItem>
 {

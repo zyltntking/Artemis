@@ -10,18 +10,17 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle;
 
 /// <summary>
-/// 扩展方法
+///     扩展方法
 /// </summary>
 public static class SwashbuckleExtensions
 {
     /// <summary>
-    /// 生成Swagger
+    ///     生成Swagger
     /// </summary>
     /// <param name="options">生成配置</param>
     /// <param name="config">配置</param>
     public static void GenerateSwagger(this SwaggerGenOptions options, IGeneratorConfig config)
     {
-
         //var actualDocumentsToGenerate = config.SupportedApiVersions;
 
         //var documentToGenerateList = actualDocumentsToGenerate.ToList();
@@ -38,12 +37,10 @@ public static class SwashbuckleExtensions
 
         options.SchemaFilter<EnumerationSchemaFilter>();
 
-        foreach (var (type, schema) in config.MappingTypeToSchema)
-        {
-            options.MapType(type, () => schema);
-        }
+        foreach (var (type, schema) in config.MappingTypeToSchema) options.MapType(type, () => schema);
 
-        options.CustomOperationIds(description => (description.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
+        options.CustomOperationIds(description =>
+            (description.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
 
         if (config.UseXmlCommentFiles)
         {
@@ -59,10 +56,7 @@ public static class SwashbuckleExtensions
 
             fileList = fileList.Distinct().ToList();
 
-            foreach (var file in fileList)
-            {
-                options.IncludeXmlComments(file, true);
-            }
+            foreach (var file in fileList) options.IncludeXmlComments(file, true);
         }
 
         options.CustomSchemaIds(DefaultSchemaIdSelector);
@@ -74,9 +68,7 @@ public static class SwashbuckleExtensions
         options.IgnoreObsoleteProperties();
 
         if (config.UseAllOfToExtendReferenceSchemas)
-        {
             options.UseAllOfToExtendReferenceSchemas(); // we prefer $ref over AllOf (and set up description ourselves)
-        }
 
         // todo DocInclusionPredicate
 
@@ -86,6 +78,7 @@ public static class SwashbuckleExtensions
             options.DocumentFilter<AddHostFilter>(config.HostName);
             options.DocumentFilter<AddSchemesFilter>();
         }
+
         options.DocumentFilter<AddProducesFilter>();
         options.DocumentFilter<AddConsumesFilter>();
 
@@ -166,27 +159,20 @@ public static class SwashbuckleExtensions
         options.SchemaFilter<AddEnumExtensionFilter>(config.EnumsAsString);
 
         if (config.GenerateExternal)
-        {
             //options.SchemaFilter<CustomSchemaInheritanceFilter>(config);
-
             // This is used to add x-ms-examples field to each operation. We use our own filter in order to allow for customizing the destination path.
             options.DocumentFilter<ExampleFilter>(config);
-
-            //options.DocumentFilter<UpdateCommonRefsDocumentFilter>(config);
-        }
+        //options.DocumentFilter<UpdateCommonRefsDocumentFilter>(config);
     }
 
     /// <summary>
-    ///  默认SchemaId选择器
+    ///     默认SchemaId选择器
     /// </summary>
     /// <param name="type">类型</param>
     /// <returns></returns>
     private static string DefaultSchemaIdSelector(Type type)
     {
-        if (!type.IsConstructedGenericType)
-        {
-            return type.Name;
-        }
+        if (!type.IsConstructedGenericType) return type.Name;
 
         var prefix = type.GetGenericArguments()
             .Select(DefaultSchemaIdSelector)
@@ -197,19 +183,20 @@ public static class SwashbuckleExtensions
 }
 
 /// <summary>
-///  OpenApi配置
+///     OpenApi配置
 /// </summary>
 internal static class OpenApiOptions
 {
     /// <summary>
-    ///  获取配置
+    ///     获取配置
     /// </summary>
     /// <param name="config"></param>
     /// <param name="version"></param>
     /// <returns></returns>
     public static Configuration GetConfiguration(IGeneratorConfig config, string? version = null)
     {
-        var info = new OpenApiDocumentInfo(config.Title, config.Description, version ?? config.DefaultApiVersion, config.ClientName);
+        var info = new OpenApiDocumentInfo(config.Title, config.Description, version ?? config.DefaultApiVersion,
+            config.ClientName);
         return new Configuration(info);
     }
 }

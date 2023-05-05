@@ -4,12 +4,17 @@ using Microsoft.OpenApi.Models;
 namespace Artemis.App.Swashbuckle.Options;
 
 /// <summary>
-/// OpenApi document configuration.
+///     OpenApi document configuration.
 /// </summary>
 internal class Configuration
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Configuration"/> class.
+    ///     OpenAPI document info section properties.
+    /// </summary>
+    private readonly OpenApiDocumentInfo _info;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="Configuration" /> class.
     /// </summary>
     /// <param name="info">Document info section details.</param>
     internal Configuration(OpenApiDocumentInfo info)
@@ -18,12 +23,7 @@ internal class Configuration
     }
 
     /// <summary>
-    /// OpenAPI document info section properties.
-    /// </summary>
-    private readonly OpenApiDocumentInfo _info;
-
-    /// <summary>
-    /// Return api version.
+    ///     Return api version.
     /// </summary>
     /// <returns>Api version.</returns>
     public string GetVersion()
@@ -32,7 +32,7 @@ internal class Configuration
     }
 
     /// <summary>
-    /// Populate openAPI decoument 'info' section.
+    ///     Populate openAPI decoument 'info' section.
     /// </summary>
     /// <returns>OpenApiInfo.</returns>
     public OpenApiInfo GetInfo()
@@ -43,12 +43,12 @@ internal class Configuration
             Version = _info.Version,
             Description = _info.Description,
             Extensions =
+            {
+                ["x-ms-code-generation-settings"] = new OpenApiObject
                 {
-                    ["x-ms-code-generation-settings"] = new OpenApiObject
-                    {
-                        ["name"] = new OpenApiString(_info.ClientName),
-                    },
-                },
+                    ["name"] = new OpenApiString(_info.ClientName)
+                }
+            }
         };
     }
 

@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net.Mime;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Net.Mime;
 
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// Clear all consumed types except application/json.
+///     Clear all consumed types except application/json.
 /// </summary>
 public class SetConsumesContentTypeFilter : IOperationFilter
 {
     /// <summary>
-    /// Applies filter.
+    ///     Applies filter.
     /// </summary>
     /// <param name="operation">OpenApiOperation.</param>
     /// <param name="context">DocumentFilterContext.</param>
@@ -20,12 +20,8 @@ public class SetConsumesContentTypeFilter : IOperationFilter
         if (operation.RequestBody is { Content: not null })
         {
             foreach (var content in operation.RequestBody.Content)
-            {
                 if (!content.Key.Equals(MediaTypeNames.Application.Json, StringComparison.InvariantCulture))
-                {
                     operation.RequestBody.Content.Remove(content.Key);
-                }
-            }
 
             // Add additional content types passed using ConsumesAttribute
             var consumesAttr = context.ApiDescription.CustomAttributes().OfType<ConsumesAttribute>().FirstOrDefault();
@@ -41,9 +37,7 @@ public class SetConsumesContentTypeFilter : IOperationFilter
                 operation.RequestBody.Content.Remove(MediaTypeNames.Application.Json);
 
                 foreach (var contentType in consumesAttr.ContentTypes)
-                {
                     operation.RequestBody.Content.Add(contentType, mediaType);
-                }
             }
         }
     }

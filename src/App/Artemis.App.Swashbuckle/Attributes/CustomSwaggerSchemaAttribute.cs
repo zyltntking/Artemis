@@ -1,7 +1,7 @@
 ﻿namespace Artemis.App.Swashbuckle.Attributes;
 
 /// <summary>
-///  自定义 Swagger 架构属性
+///     自定义 Swagger 架构属性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class CustomSwaggerSchemaAttribute : Attribute
@@ -13,7 +13,7 @@ public class CustomSwaggerSchemaAttribute : Attribute
     }
 
     /// <summary>
-    /// Can be string of format with the following Directives: {GenericType}
+    ///     Can be string of format with the following Directives: {GenericType}
     /// </summary>
     /// <example>List of {GenericType} models</example>
     public string DescriptionFormat { get; }

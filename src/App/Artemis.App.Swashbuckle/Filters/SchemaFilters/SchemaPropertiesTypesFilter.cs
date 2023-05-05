@@ -6,12 +6,12 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.SchemaFilters;
 
 /// <summary>
-///  架构属性类型过滤器
+///     架构属性类型过滤器
 /// </summary>
 public class SchemaPropertiesTypesFilter : ISchemaFilter
 {
     /// <summary>
-    ///  应用
+    ///     应用
     /// </summary>
     /// <param name="schema"></param>
     /// <param name="context"></param>
@@ -24,10 +24,7 @@ public class SchemaPropertiesTypesFilter : ISchemaFilter
             if (typeAtt != null)
             {
                 var schemaProp = schema.Properties.FirstOrDefault(kvp => kvp.Key.ToLower() == prop.Name.ToLower());
-                if (schemaProp.Value != null)
-                {
-                    schemaProp.Value.Type = typeAtt.TypeName;
-                }
+                if (schemaProp.Value != null) schemaProp.Value.Type = typeAtt.TypeName;
             }
         }
     }

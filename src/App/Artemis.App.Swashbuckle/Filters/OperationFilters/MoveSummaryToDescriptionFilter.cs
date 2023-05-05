@@ -4,13 +4,13 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Artemis.App.Swashbuckle.Filters.OperationFilters;
 
 /// <summary>
-/// Set Description field using the XMLDoc summary if absent and clear summary.
-/// By default Swachbuckle uses remarks tag to populate operation description instead of using summary tag.
+///     Set Description field using the XMLDoc summary if absent and clear summary.
+///     By default Swachbuckle uses remarks tag to populate operation description instead of using summary tag.
 /// </summary>
 public class MoveSummaryToDescriptionFilter : IOperationFilter
 {
     /// <summary>
-    /// Applies filter.
+    ///     Applies filter.
     /// </summary>
     /// <param name="operation">OpenApiOperation.</param>
     /// <param name="context">DocumentFilterContext.</param>

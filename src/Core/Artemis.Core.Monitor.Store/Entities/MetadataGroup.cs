@@ -11,6 +11,11 @@ namespace Artemis.Core.Monitor.Store.Entities;
 [EntityTypeConfiguration(typeof(MetadataGroupConfiguration))]
 public class MetadataGroup : PartitionBase, IMetadata
 {
+    /// <summary>
+    ///     组内元数据
+    /// </summary>
+    public virtual ICollection<MetadataItem>? MetadataItems { get; set; }
+
     #region Implementation of IMeta
 
     /// <summary>
@@ -24,9 +29,4 @@ public class MetadataGroup : PartitionBase, IMetadata
     public virtual string? Value { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 组内元数据
-    /// </summary>
-    public virtual ICollection<MetadataItem>? MetadataItems { get; set; }
 }

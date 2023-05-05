@@ -7,15 +7,20 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Core.Monitor.Store.Entities;
 
 /// <summary>
-/// 监控主机
+///     监控主机
 /// </summary>
 [EntityTypeConfiguration(typeof(MonitorHostConfiguration))]
-public class MonitorHost : PartitionBase, IHost
+public class MonitorHost : PartitionBase, IHostInfo
 {
     /// <summary>
-    /// 元数据组标识
+    ///     元数据组标识
     /// </summary>
-    public virtual Guid? MetadataGroupId { get; set; } 
+    public virtual Guid? MetadataGroupId { get; set; }
+
+    /// <summary>
+    ///     具备的元数据组
+    /// </summary>
+    public virtual MetadataGroup? MetadataGroup { get; set; }
 
     #region Implementation of IHost
 
@@ -30,7 +35,7 @@ public class MonitorHost : PartitionBase, IHost
     public virtual HostType HostType { get; set; } = HostType.Unknown;
 
     /// <summary>
-    /// 实例类型
+    ///     实例类型
     /// </summary>
     public virtual InstanceType InstanceType { get; set; } = InstanceType.Unknown;
 
@@ -40,7 +45,7 @@ public class MonitorHost : PartitionBase, IHost
     public virtual string? OsName { get; set; }
 
     /// <summary>
-    ///    平台类型
+    ///     平台类型
     /// </summary>
     public virtual PlatformType PlatformType { get; set; } = PlatformType.Unknown;
 
@@ -50,14 +55,9 @@ public class MonitorHost : PartitionBase, IHost
     public virtual string? OsVersion { get; set; }
 
     /// <summary>
-    /// 进程架构
+    ///     进程架构
     /// </summary>
-    public virtual string? ProcessArchitecture { get; set; }
+    public virtual string? OsArchitecture { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 具备的元数据组
-    /// </summary>
-    public virtual MetadataGroup? MetadataGroup { get; set; }
 }
