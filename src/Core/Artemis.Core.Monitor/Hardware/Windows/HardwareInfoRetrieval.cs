@@ -20,7 +20,14 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
     /// </summary>
     public bool UseAsteriskInWmi { get; init; }
 
+    /// <summary>
+    ///   WMI管理范围
+    /// </summary>
     private readonly string _managementScope = @"root\cimv2";
+
+    /// <summary>
+    ///  WMI枚举选项
+    /// </summary>
     private readonly EnumerationOptions _enumerationOptions = new() { ReturnImmediately = true, Rewindable = false, Timeout = ManagementOptions.InfiniteTimeout };
 
     #region Implementation of IHardwareInfoRetrieval
@@ -38,8 +45,6 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
 
         var os = new OS();
 
-        var metadata = new List<MetadataInfo>();
-
         foreach (var mo in mos.Get())
         {
             os.Name = GetPropertyString(mo["Caption"]);
@@ -47,18 +52,20 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
 
             if (GatherMetadata)
             {
+                var metadata = new List<MetadataInfo>();
+
                 foreach (var property in mo.Properties)
                 {
                     metadata.Add(new MetadataInfo
                     {
                         Key = property.Name,
-                        Value = property.Value is string str ? str : string.Empty
+                        Value = property.Value as string ?? string.Empty
                     });
                 }
+
+                os.Metadata = metadata;
             }
         }
-
-        os.Metadata = metadata;
 
         if (string.IsNullOrEmpty(os.Name))
         {
@@ -81,30 +88,30 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
 
         var memoryStatus = new MemoryStatus();
 
-        var metadata = new List<MetadataInfo>();
-
         foreach (var mo in mos.Get())
         {
-            memoryStatus.TotalPhysical = GetPropertyMemoryBytes(mo["TotalVisibleMemorySize"]);
-            memoryStatus.AvailablePhysical = GetPropertyMemoryBytes(mo["FreePhysicalMemory"]);
-            memoryStatus.TotalVirtual = GetPropertyMemoryBytes(mo["TotalVirtualMemorySize"]);
-            memoryStatus.AvailableVirtual = GetPropertyMemoryBytes(mo["FreeVirtualMemory"]);
+            memoryStatus.TotalPhysical = GetMemoryPropertyBytes(mo["TotalVisibleMemorySize"]);
+            memoryStatus.AvailablePhysical = GetMemoryPropertyBytes(mo["FreePhysicalMemory"]);
+            memoryStatus.TotalVirtual = GetMemoryPropertyBytes(mo["TotalVirtualMemorySize"]);
+            memoryStatus.AvailableVirtual = GetMemoryPropertyBytes(mo["FreeVirtualMemory"]);
             memoryStatus.StorageUnit = StorageUnit.B;
 
             if (GatherMetadata)
             {
+                var metadata = new List<MetadataInfo>();
+
                 foreach (var property in mo.Properties)
                 {
                     metadata.Add(new MetadataInfo
                     {
                         Key = property.Name,
-                        Value = property.Value is string str ? str : string.Empty
+                        Value = property.Value as string ?? string.Empty
                     });
                 }
+
+                memoryStatus.Metadata = metadata;
             }
         }
-
-        memoryStatus.Metadata = metadata;
 
         return memoryStatus;
     }
@@ -115,30 +122,99 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
     /// <returns></returns>
     public ICollection<IBattery> GetBatteries()
     {
-        throw new NotImplementedException();
+        var query = $"SELECT {(UseAsteriskInWmi? "*" : "Name, FullChargeCapacity, DesignCapacity, BatteryStatus, EstimatedChargeRemaining, EstimatedRunTime, ExpectedLife, MaxRechargeTime, TimeOnBattery, TimeToFullCharge")} FROM Win32_Battery";
+
+        var batteries = new List<IBattery>();
+
+        using var mos = new ManagementObjectSearcher(_managementScope, query, _enumerationOptions);
+
+        foreach (var mo in mos.Get())
+        {
+            var battery = new Battery
+            {
+                BatteryName = GetPropertyString(mo["Name"]),
+                FullChargeCapacity = GetPropertyValue<uint>(mo["FullChargeCapacity"]),
+                DesignCapacity = GetPropertyValue<uint>(mo["DesignCapacity"]),
+                BatteryStatus = GetPropertyValue<ushort>(mo["BatteryStatus"]),
+                EstimatedChargeRemaining = GetPropertyValue<ushort>(mo["EstimatedChargeRemaining"]),
+                EstimatedRunTime = GetPropertyValue<uint>(mo["EstimatedRunTime"]),
+                ExpectedLife = GetPropertyValue<uint>(mo["ExpectedLife"]),
+                MaxRechargeTime = GetPropertyValue<uint>(mo["MaxRechargeTime"]),
+                TimeOnBattery = GetPropertyValue<uint>(mo["TimeOnBattery"]),
+                TimeToFullCharge = GetPropertyValue<uint>(mo["TimeToFullCharge"])
+            };
+
+            if (GatherMetadata)
+            {
+                var metadata = new List<MetadataInfo>();
+
+                foreach (var property in mo.Properties)
+                {
+                    metadata.Add(new MetadataInfo
+                    {
+                        Key = property.Name,
+                        Value = property.Value as string ?? string.Empty
+                    });
+                }
+
+                battery.Metadata = metadata;
+            }
+
+            batteries.Add(battery);
+        }
+
+        return batteries;
+    }
+
+    /// <summary>
+    /// 获取BIOS信息
+    /// </summary>
+    /// <returns></returns>
+    public ICollection<IBIOS> GetBIOSList()
+    {
+        var query = $"SELECT {(UseAsteriskInWmi ? "*" : "Caption, Description, Manufacturer, Name, ReleaseDate, SerialNumber, SoftwareElementID, Version")} FROM Win32_BIOS";
+
+        var biosList = new List<IBIOS>();
+
+        using var mos = new ManagementObjectSearcher(_managementScope, query, _enumerationOptions);
+
+        foreach (var mo in mos.Get())
+        {
+            var bios = new BIOS
+            {
+                Caption = GetPropertyString(mo["Caption"]),
+                Description = GetPropertyString(mo["Description"]),
+                Manufacturer = GetPropertyString(mo["Manufacturer"]),
+                Name = GetPropertyString(mo["Name"]),
+                ReleaseDate = GetPropertyString(mo["ReleaseDate"]),
+                SerialNumber = GetPropertyString(mo["SerialNumber"]),
+                SoftwareElementId = GetPropertyString(mo["SoftwareElementID"]),
+                Version = GetPropertyString(mo["Version"])
+            };
+
+            if (GatherMetadata)
+            {
+                var metadata = new List<MetadataInfo>();
+
+                foreach (var property in mo.Properties)
+                {
+                    metadata.Add(new MetadataInfo
+                    {
+                        Key = property.Name,
+                        Value = property.Value as string ?? string.Empty
+                    });
+                }
+
+                bios.Metadata = metadata;
+            }
+
+            biosList.Add(bios);
+        }
+
+        return biosList;
     }
 
     #endregion
 
-    /// <summary>
-    ///   获取属性字符串
-    /// </summary>
-    /// <param name="property"></param>
-    /// <returns></returns>
-    private static string GetPropertyString(object property)
-    {
-        return property is string str ? str : string.Empty;
-    }
-
-    /// <summary>
-    ///  获取内存字节数
-    /// </summary>
-    /// <param name="property"></param>
-    /// <returns></returns>
-    private static ulong GetPropertyMemoryBytes(object property)
-    {
-        var mem = property is ulong size ? size : 0;
-
-        return mem * 1024;
-    }
+    
 }

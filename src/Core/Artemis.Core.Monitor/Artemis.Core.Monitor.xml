@@ -4,11 +4,147 @@
         <name>Artemis.Core.Monitor</name>
     </assembly>
     <members>
+        <member name="T:Artemis.Core.Monitor.Fundamental.Components.Battery">
+            <summary>
+            电池信息接口
+            </summary>
+            <remarks><![CDATA[WMI class: Win32_Battery]]></remarks>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.BatteryName">
+            <summary>
+            电池名
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.FullChargeCapacity">
+            <summary>
+            电池的完全充电容量（毫瓦时） 
+            将该值与 DesignCapacity 属性进行比较可确定何时需要更换电池。
+            电池的使用寿命通常在“满充电容量”属性低于“设计容量”属性的 80% 时结束。
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.DesignCapacity">
+            <summary>
+            电池的设计容量（毫瓦时）
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.BatteryStatus">
+            <summary>
+            电池的状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.EstimatedChargeRemaining">
+            <summary>
+            估计剩余电量的百分比
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.EstimatedRunTime">
+            <summary>
+            在当前负载条件下，如果市电关闭、丢失并保持关闭状态，或者笔记本电脑与电源断开连接，则以分钟为单位估计电池电量耗尽的时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.ExpectedLife">
+            <summary>
+            电池的预期使用寿命（分钟）
+            该属性表示电池的总预期寿命
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.MaxRechargeTime">
+            <summary>
+            电池充满电的最长时间（分钟）
+            该属性表示为完全耗尽的电池充电的时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.TimeOnBattery">
+            <summary>
+            自计算机系统的UPS上次切换到电池电源以来经过的时间（秒），或自系统或UPS上次重新启动以来的时间，以较小者为准
+            如果电池“在线”，则返回 0（零）
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.TimeToFullCharge">
+            <summary>
+            以当前充电速率和使用情况,为电池充满电的剩余时间（分钟）
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.BatteryStatusDescription">
+            <summary>
+             电池状态描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Battery.Metadata">
+            <summary>
+                元数据信息
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Fundamental.Components.Battery.ToString">
+            <summary>Returns a string that represents the current object.</summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Fundamental.Components.BIOS">
+            <summary>
+              BIOS信息
+            </summary>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-bios]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_BIOS]]></remarks>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Caption">
+            <summary>
+            对象说明
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Description">
+            <summary>
+            对象描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Manufacturer">
+            <summary>
+             制造商
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.ReleaseDate">
+            <summary>
+            Windows BIOS日期 (UTC) YYYYMMDDHHMMSS.MMMMMM(+-)OOO
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.SerialNumber">
+            <summary>
+            序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.SoftwareElementId">
+            <summary>
+            元素标识符
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.BIOS.Metadata">
+            <summary>
+                元数据信息
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Fundamental.Components.BIOS.ToString">
+            <summary>Returns a string that represents the current object.</summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
         <member name="T:Artemis.Core.Monitor.Fundamental.Components.Interface.IBattery">
             <summary>
             电池信息接口
             </summary>
             <remarks><![CDATA[WMI class: Win32_Battery]]></remarks>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBattery.BatteryName">
+            <summary>
+            电池名
+            </summary>
         </member>
         <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBattery.FullChargeCapacity">
             <summary>
@@ -60,10 +196,65 @@
             以当前充电速率和使用情况,为电池充满电的剩余时间（分钟）
             </summary>
         </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBattery.BatteryStatusDescription">
+            <summary>
+             电池状态描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS">
+            <summary>
+             BIOS信息接口
+            </summary>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-bios]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_BIOS]]></remarks>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.Caption">
+            <summary>
+            对象说明
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.Description">
+            <summary>
+            对象描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.Manufacturer">
+            <summary>
+             制造商
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.ReleaseDate">
+            <summary>
+            Windows BIOS日期 (UTC) YYYYMMDDHHMMSS.MMMMMM(+-)OOO
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.SerialNumber">
+            <summary>
+            序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.SoftwareElementId">
+            <summary>
+            元素标识符
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IBIOS.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
         <member name="T:Artemis.Core.Monitor.Fundamental.Components.Interface.IMemoryStatus">
             <summary>
               内存状态接口
             </summary>
+            <remarks><![CDATA[https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex]]></remarks>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-operatingsystem]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_OperatingSystem]]></remarks>
         </member>
         <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IMemoryStatus.TotalPhysical">
             <summary>
@@ -94,6 +285,8 @@
             <summary>
                 操作系统信息接口
             </summary>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-operatingsystem]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_OperatingSystem]]></remarks>
         </member>
         <member name="P:Artemis.Core.Monitor.Fundamental.Components.Interface.IOS.Name">
             <summary>
@@ -110,6 +303,8 @@
               内存状态
             </summary>
             <remarks><![CDATA[https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex]]></remarks>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-operatingsystem]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_OperatingSystem]]></remarks>
         </member>
         <member name="P:Artemis.Core.Monitor.Fundamental.Components.MemoryStatus.TotalPhysical">
             <summary>
@@ -149,6 +344,8 @@
             <summary>
                 操作系统信息
             </summary>
+            <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-operatingsystem]]></remarks>
+            <remarks><![CDATA[WMI class: Win32_OperatingSystem]]></remarks>
         </member>
         <member name="P:Artemis.Core.Monitor.Fundamental.Components.OS.Name">
             <summary>
@@ -460,6 +657,16 @@
             当前内存状态
             </summary>
         </member>
+        <member name="P:Artemis.Core.Monitor.Hardware.HardwareInfo.Batteries">
+            <summary>
+             电池信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Hardware.HardwareInfo.BIOSList">
+            <summary>
+             BIOS信息
+            </summary>
+        </member>
         <member name="T:Artemis.Core.Monitor.Hardware.HardwareInfoBase">
             <summary>
                 硬件信息基类
@@ -477,6 +684,57 @@
             <param name="path">文件路径</param>
             <returns></returns>
         </member>
+        <member name="F:Artemis.Core.Monitor.Hardware.HardwareInfoBase.KbToken">
+            <summary>
+            Kb标记
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.GetBytesFromMemoryLine(System.String,System.String)">
+            <summary>
+             获取字节数
+            </summary>
+            <param name="memoryLine"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.TryReadIntegerFromBatteryInfos(System.String[],System.String[])">
+            <summary>
+             尝试从信息中读取整数
+            </summary>
+            <param name="batteryInfo"></param>
+            <param name="possibleInfoToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.TryReadTextFromBatteryInfos(System.String[],System.String[])">
+            <summary>
+            尝试从信息中读取文本
+            </summary>
+            <param name="batteryInfo"></param>
+            <param name="possibleInfoToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.GetPropertyValue``1(System.Object)">
+            <summary>
+             获取属性值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.GetPropertyString(System.Object)">
+            <summary>
+              获取属性字符串
+            </summary>
+            <param name="property"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.GetMemoryPropertyBytes(System.Object)">
+            <summary>
+             获取内存字节数
+            </summary>
+            <param name="property"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Core.Monitor.Hardware.IHardwareInfo">
             <summary>
                 硬件信息接口
@@ -490,6 +748,16 @@
         <member name="P:Artemis.Core.Monitor.Hardware.IHardwareInfo.MemoryStatus">
             <summary>
             当前内存状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Hardware.IHardwareInfo.Batteries">
+            <summary>
+             电池信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Hardware.IHardwareInfo.BIOSList">
+            <summary>
+             BIOS信息
             </summary>
         </member>
         <member name="T:Artemis.Core.Monitor.Hardware.IHardwareInfoRetrieval">
@@ -506,6 +774,18 @@
         <member name="M:Artemis.Core.Monitor.Hardware.IHardwareInfoRetrieval.GetMemoryStatus">
             <summary>
               获取内存状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.IHardwareInfoRetrieval.GetBatteries">
+            <summary>
+             获取电池信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.IHardwareInfoRetrieval.GetBIOSList">
+            <summary>
+            获取BIOS信息
             </summary>
             <returns></returns>
         </member>
@@ -527,12 +807,35 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Core.Monitor.Hardware.Linux.HardwareInfoRetrieval.GetBytesFromLine(System.String,System.String)">
+        <member name="M:Artemis.Core.Monitor.Hardware.Linux.HardwareInfoRetrieval.GetBatteries">
             <summary>
-             获取字节数
+             获取电池信息
             </summary>
-            <param name="memoryLine"></param>
-            <param name="token"></param>
+            <returns></returns>
+            <remarks><![CDATA[https://stackoverflow.com/questions/26888636/how-to-calculate-the-time-remaining-until-the-end-of-the-battery-charge]]></remarks>
+            <remarks><![CDATA[https://stackoverflow.com/questions/4858657/how-can-i-obtain-battery-level-inside-a-linux-kernel-module]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/charge_now]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/charge_full]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/name = BAT0]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/status = Charging / Discharging]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/present = 1]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/technology = Li-ion]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/cycle_count = 0]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/voltage_min_design = 112530000]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/power_now = 21240000]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/energy_full_design = 50610000]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/energy_full = 50610000]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/energy_now  = 22460000]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/capacity = 44 //44 % full //50610000 / 22460000 = 0,4437858130804189]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/capacity_level = Normal]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/model_name = ]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/manufacturer = Sony Corp.]]></remarks>
+            <remarks><![CDATA[/sys/class/power_supply/BAT0/serial_number = ]]></remarks>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.Linux.HardwareInfoRetrieval.GetBIOSList">
+            <summary>
+            获取BIOS信息
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Artemis.Core.Monitor.Hardware.Unknown.HardwareInfoRetrieval">
@@ -552,6 +855,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.Unknown.HardwareInfoRetrieval.GetBatteries">
+            <summary>
+             获取电池信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.Unknown.HardwareInfoRetrieval.GetBIOSList">
+            <summary>
+            获取BIOS信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval">
             <summary>
                 硬件信息扫描(WINDOWS)
@@ -560,6 +875,16 @@
         <member name="P:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.UseAsteriskInWmi">
             <summary>
                 使用WMI中的星号查询标识
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval._managementScope">
+            <summary>
+              WMI管理范围
+            </summary>
+        </member>
+        <member name="F:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval._enumerationOptions">
+            <summary>
+             WMI枚举选项
             </summary>
         </member>
         <member name="M:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.GetOperatingSystem">
@@ -576,18 +901,16 @@
             <returns></returns>
             <remarks><![CDATA[https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex]]></remarks>
         </member>
-        <member name="M:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.GetPropertyString(System.Object)">
+        <member name="M:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.GetBatteries">
             <summary>
-              获取属性字符串
+             获取电池信息
             </summary>
-            <param name="property"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.GetPropertyMemoryBytes(System.Object)">
+        <member name="M:Artemis.Core.Monitor.Hardware.Windows.HardwareInfoRetrieval.GetBIOSList">
             <summary>
-             获取内存字节数
+            获取BIOS信息
             </summary>
-            <param name="property"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Core.Monitor.IProbe">
@@ -603,6 +926,16 @@
         <member name="P:Artemis.Core.Monitor.IProbe.MemoryStatus">
             <summary>
             内存状态接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.IProbe.Batteries">
+            <summary>
+            电池信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.IProbe.BIOSList">
+            <summary>
+            BIOS信息接口
             </summary>
         </member>
         <member name="T:Artemis.Core.Monitor.Probe">
@@ -645,6 +978,16 @@
         <member name="P:Artemis.Core.Monitor.Probe.MemoryStatus">
             <summary>
             内存状态接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Probe.Batteries">
+            <summary>
+            电池信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Probe.BIOSList">
+            <summary>
+            BIOS信息接口
             </summary>
         </member>
     </members>

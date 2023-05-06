@@ -17,4 +17,14 @@ public interface IProbe
     /// 内存状态接口
     /// </summary>
     IMemoryStatus MemoryStatus { get; }
+
+    /// <summary>
+    /// 电池信息接口
+    /// </summary>
+    ICollection<IBattery> Batteries { get; }
+
+    /// <summary>
+    /// BIOS信息接口
+    /// </summary>
+    ICollection<IBIOS> BIOSList { get; }
 }

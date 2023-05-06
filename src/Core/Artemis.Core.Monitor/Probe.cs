@@ -81,4 +81,14 @@ public class Probe : IProbe
     /// 内存状态接口
     /// </summary>
     public IMemoryStatus MemoryStatus => HardwareInfo.MemoryStatus;
+
+    /// <summary>
+    /// 电池信息接口
+    /// </summary>
+    public ICollection<IBattery> Batteries => HardwareInfo.Batteries;
+
+    /// <summary>
+    /// BIOS信息接口
+    /// </summary>
+    public ICollection<IBIOS> BIOSList => HardwareInfo.BIOSList;
 }

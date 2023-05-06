@@ -27,6 +27,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Artemis.App.ProbeService.Controllers.HostController.BatteryInfo">
+            <summary>
+            电池信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.ProbeService.Controllers.HostController.BIOSInfo">
+            <summary>
+            BIOS信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.App.ProbeService.HostConfig">
             <summary>
                 主机配置

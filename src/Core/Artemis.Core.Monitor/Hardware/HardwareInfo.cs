@@ -23,7 +23,7 @@ internal class HardwareInfo : IHardwareInfo
         if (platform.Equals(PlatformType.Windows))
             HardwareInfoRetrieval = new Windows.HardwareInfoRetrieval
             {
-                UseAsteriskInWmi = true,
+                UseAsteriskInWmi = false,
                 GatherMetadata = false
             };
 
@@ -60,7 +60,12 @@ internal class HardwareInfo : IHardwareInfo
     /// <summary>
     ///  电池信息
     /// </summary>
-    public ICollection<IBattery> Batteries { get; }
+    public ICollection<IBattery> Batteries => HardwareInfoRetrieval.GetBatteries();
+
+    /// <summary>
+    ///  BIOS信息
+    /// </summary>
+    public ICollection<IBIOS> BIOSList => HardwareInfoRetrieval.GetBIOSList();
 
     #endregion
 }

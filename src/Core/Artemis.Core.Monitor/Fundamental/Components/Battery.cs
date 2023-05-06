@@ -1,4 +1,5 @@
 ﻿using Artemis.Core.Monitor.Fundamental.Components.Interface;
+using Artemis.Data.Core.Fundamental.Model;
 
 namespace Artemis.Core.Monitor.Fundamental.Components;
 
@@ -9,6 +10,11 @@ namespace Artemis.Core.Monitor.Fundamental.Components;
 public class Battery : IBattery
 {
     #region Implementation of IBattery
+
+    /// <summary>
+    /// 电池名
+    /// </summary>
+    public string BatteryName { get; set; } = string.Empty;
 
     /// <summary>
     /// 电池的完全充电容量（毫瓦时） 
@@ -68,24 +74,29 @@ public class Battery : IBattery
     public string BatteryStatusDescription
     {
         get => !string.IsNullOrEmpty(_batteryStatusDescription) ? _batteryStatusDescription : BatteryStatus switch
-    {
-        1 => "电池正在放电",
-        2 => "系统可以使用交流电，因此没有电池放电（电池不一定在充电）",
-        3 => "充满电",
-        4 => "电量低",
-        5 => "危险",
-        6 => "正在充电",
-        7 => "正在充电（电量高）",
-        8 => "正在充电（电量低）",
-        9 => "正在充电（危险）",
-        10 => "未安装电池",
-        11 => "部分充电",
-        _ => string.Empty
-    };
+        {
+            1 => "电池正在放电",
+            2 => "系统可以使用交流电，因此没有电池放电（电池不一定在充电）",
+            3 => "充满电",
+            4 => "电量低",
+            5 => "危险",
+            6 => "正在充电",
+            7 => "正在充电（电量高）",
+            8 => "正在充电（电量低）",
+            9 => "正在充电（危险）",
+            10 => "未安装电池",
+            11 => "部分充电",
+            _ => string.Empty
+        };
         set => _batteryStatusDescription = value;
     }
 
     #endregion
+
+    /// <summary>
+    ///     元数据信息
+    /// </summary>
+    public ICollection<MetadataInfo>? Metadata { get; set; }
 
     #region Overrides of Object
 
@@ -94,6 +105,7 @@ public class Battery : IBattery
     public override string ToString()
     {
         return
+            $"{nameof(BatteryName)}: {BatteryName}" + Environment.NewLine +
             $"{nameof(FullChargeCapacity)}: {FullChargeCapacity}" + Environment.NewLine +
             $"{nameof(DesignCapacity)}: {DesignCapacity}" + Environment.NewLine +
             $"{nameof(BatteryStatusDescription)}: {BatteryStatusDescription}" + Environment.NewLine +

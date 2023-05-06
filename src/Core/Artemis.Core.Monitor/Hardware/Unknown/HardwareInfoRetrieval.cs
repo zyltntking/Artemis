@@ -36,5 +36,14 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// 获取BIOS信息
+    /// </summary>
+    /// <returns></returns>
+    public ICollection<IBIOS> GetBIOSList()
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 }

@@ -12,7 +12,7 @@ namespace Artemis.App.ProbeService.Controllers;
 /// </summary>
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class HostController : ControllerBase
+public class ProbeController : ControllerBase
 {
     private HostConfig HostConfig { get; }
 
@@ -22,7 +22,7 @@ public class HostController : ControllerBase
     ///     构造函数
     /// </summary>
     /// <param name="hostOptions">主机配置</param>
-    public HostController(IOptions<HostConfig> hostOptions)
+    public ProbeController(IOptions<HostConfig> hostOptions)
     {
         HostConfig = hostOptions.Value;
         Probe = new Probe(HostConfig.HostType, HostConfig.InstanceType);
@@ -50,5 +50,27 @@ public class HostController : ControllerBase
     {
         var status = Probe.MemoryStatus;
         return DataResult.Success(status);
+    }
+
+    /// <summary>
+    /// 电池信息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public DataResult<ICollection<IBattery>> BatteryInfo()
+    {
+        var batteries = Probe.Batteries;
+        return DataResult.Success(batteries);
+    }
+
+    /// <summary>
+    /// BIOS信息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public DataResult<ICollection<IBIOS>> BIOSInfo()
+    {
+        var biosList = Probe.BIOSList;
+        return DataResult.Success(biosList);
     }
 }

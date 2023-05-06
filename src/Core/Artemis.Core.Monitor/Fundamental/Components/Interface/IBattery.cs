@@ -7,6 +7,11 @@
 public interface IBattery
 {
     /// <summary>
+    /// 电池名
+    /// </summary>
+    string BatteryName { get; set; }
+
+    /// <summary>
     /// 电池的完全充电容量（毫瓦时） 
     /// 将该值与 DesignCapacity 属性进行比较可确定何时需要更换电池。
     /// 电池的使用寿命通常在“满充电容量”属性低于“设计容量”属性的 80% 时结束。

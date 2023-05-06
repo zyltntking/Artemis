@@ -24,4 +24,10 @@ internal interface IHardwareInfoRetrieval
     /// </summary>
     /// <returns></returns>
     ICollection<IBattery> GetBatteries();
+
+    /// <summary>
+    /// 获取BIOS信息
+    /// </summary>
+    /// <returns></returns>
+    ICollection<IBIOS> GetBIOSList();
 }

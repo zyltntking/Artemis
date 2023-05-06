@@ -21,4 +21,9 @@ internal interface IHardwareInfo
     ///  电池信息
     /// </summary>
     ICollection<IBattery> Batteries { get; }
+
+    /// <summary>
+    ///  BIOS信息
+    /// </summary>
+    ICollection<IBIOS> BIOSList { get; }
 }

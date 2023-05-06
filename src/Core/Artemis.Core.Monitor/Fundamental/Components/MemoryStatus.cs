@@ -8,6 +8,8 @@ namespace Artemis.Core.Monitor.Fundamental.Components;
 ///   内存状态
 /// </summary>
 /// <remarks><![CDATA[https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex]]></remarks>
+/// <remarks><![CDATA[https://learn.microsoft.com/zh-cn/windows/win32/cimwin32prov/win32-operatingsystem]]></remarks>
+/// <remarks><![CDATA[WMI class: Win32_OperatingSystem]]></remarks>
 public class MemoryStatus : IMemoryStatus
 {
     #region Implementation of IMemoryStatus
