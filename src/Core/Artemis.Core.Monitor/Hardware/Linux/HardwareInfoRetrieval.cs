@@ -243,7 +243,18 @@ internal class HardwareInfoRetrieval : HardwareInfoBase, IHardwareInfoRetrieval
     /// <returns></returns>
     public ICollection<IBIOS> GetBIOSList()
     {
-        throw new NotImplementedException();
+        var biosList = new List<IBIOS>();
+
+        var bios = new BIOS
+        {
+            ReleaseDate = TryReadTextFromFile("/sys/class/dmi/id/bios_date"),
+            Version = TryReadTextFromFile("/sys/class/dmi/id/bios_version"),
+            Manufacturer = TryReadTextFromFile("/sys/class/dmi/id/bios_vendor")
+        };
+
+        biosList.Add(bios);
+
+        return biosList;
     }
 
     #endregion

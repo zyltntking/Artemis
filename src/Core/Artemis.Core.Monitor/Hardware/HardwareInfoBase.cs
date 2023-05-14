@@ -13,6 +13,23 @@ internal abstract class HardwareInfoBase
     #region LINUX
 
     /// <summary>
+    /// 从文件中读取文本
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    internal static string TryReadTextFromFile(string path)
+    {
+        try
+        {
+            return File.ReadAllText(path).Trim();
+        }
+        catch
+        {
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
     ///     从文件中读取所有行
     /// </summary>
     /// <param name="path">文件路径</param>
