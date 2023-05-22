@@ -4,36 +4,36 @@
         <name>Artemis.App.ProbeService</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.ProbeService.Controllers.HostController">
+        <member name="T:Artemis.App.ProbeService.Controllers.ProbeController">
             <summary>
                 主机控制器
             </summary>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.App.ProbeService.HostConfig})">
+        <member name="M:Artemis.App.ProbeService.Controllers.ProbeController.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.App.ProbeService.HostConfig})">
             <summary>
                 构造函数
             </summary>
             <param name="hostOptions">主机配置</param>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.HostInfo">
+        <member name="M:Artemis.App.ProbeService.Controllers.ProbeController.HostInfo">
             <summary>
                 主机信息
             </summary>
             <returns>主机信息</returns>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.MemoryStatus">
+        <member name="M:Artemis.App.ProbeService.Controllers.ProbeController.MemoryStatus">
             <summary>
               内存状态
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.BatteryInfo">
+        <member name="M:Artemis.App.ProbeService.Controllers.ProbeController.BatteryInfo">
             <summary>
             电池信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Artemis.App.ProbeService.Controllers.HostController.BIOSInfo">
+        <member name="M:Artemis.App.ProbeService.Controllers.ProbeController.BIOSInfo">
             <summary>
             BIOS信息
             </summary>

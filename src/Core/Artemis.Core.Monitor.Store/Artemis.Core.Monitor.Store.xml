@@ -1,189 +1,184 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Core.Monitor.Store</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataGroupConfiguration">
-			<summary>
-				元数据组模型配置
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataGroupConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MetadataGroup})">
-			<summary>
-				Configures the entity of type MetadataGroup.
-			</summary>
-			<param name="builder">The builder to be used to configure the entity type.</param>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataItemConfiguration">
-			<summary>
-				元数据模型配置
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataItemConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MetadataItem})">
-			<summary>
-				Configures the entity of type MetadataItem.
-			</summary>
-			<param name="builder">The builder to be used to configure the entity type.</param>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorConfiguration`1">
-			<summary>
-				监控配置
-			</summary>
-			<typeparam name="TEntity">类型模板</typeparam>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorConfiguration`1.DbType">
-			<summary>
-				数据库类型
-			</summary>
-			<remarks>修改配置来源</remarks>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorHostConfiguration">
-			<summary>
-				监控主机模型配置
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorHostConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MonitorHost})">
-			<summary>
-				Configures the entity of type MonitorHost.
-			</summary>
-			<param name="builder">The builder to be used to configure the entity type.</param>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.MetadataGroup">
-			<summary>
-				元数据组
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.Key">
-			<summary>
-				数据键
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.Value">
-			<summary>
-				数据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.MetadataItems">
-			<summary>
-				组内元数据
-			</summary>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.MetadataItem">
-			<summary>
-				元数据
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.MetadataGroupId">
-			<summary>
-				元数据组标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.Key">
-			<summary>
-				数据键
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.Value">
-			<summary>
-				数据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.MetadataGroup">
-			<summary>
-				所属元数据组
-			</summary>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.Entities.MonitorHost">
-			<summary>
-				监控主机
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.MetadataGroupId">
-			<summary>
-				元数据组标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.HostName">
-			<summary>
-				主机名
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.HostType">
-			<summary>
-				主机类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.InstanceType">
-			<summary>
-				实例类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsName">
-			<summary>
-				系统名
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.PlatformType">
-			<summary>
-				平台类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsVersion">
-			<summary>
-				系统版本
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.ProcessArchitecture">
-			<summary>
-				进程架构
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.MetadataGroup">
-			<summary>
-				具备的元数据组
-			</summary>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.MonitorDbContext">
-			<summary>
-				监控数据上下文
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Core.Monitor.Store.MonitorDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Core.Monitor.Store.MonitorDbContext})">
-			<summary>
-				构造
-			</summary>
-			<param name="options"></param>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MetadataGroups">
-			<summary>
-				元数据组
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MetadataItems">
-			<summary>
-				元数据
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MonitorHosts">
-			<summary>
-				监控主机
-			</summary>
-		</member>
-		<member name="T:Artemis.Core.Monitor.Store.MonitorSetting">
-			<summary>
-				全局配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Core.Monitor.Store.MonitorSetting.DbType">
-			<summary>
-				数据库类型
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Core.Monitor.Store</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataGroupConfiguration">
+            <summary>
+                元数据组模型配置
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataGroupConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MetadataGroup})">
+            <summary>
+                Configures the entity of type MetadataGroup.
+            </summary>
+            <param name="builder">The builder to be used to configure the entity type.</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataItemConfiguration">
+            <summary>
+                元数据模型配置
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MetadataItemConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MetadataItem})">
+            <summary>
+                Configures the entity of type MetadataItem.
+            </summary>
+            <param name="builder">The builder to be used to configure the entity type.</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorConfiguration`1">
+            <summary>
+                监控配置
+            </summary>
+            <typeparam name="TEntity">类型模板</typeparam>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorConfiguration`1.DbType">
+            <summary>
+                数据库类型
+            </summary>
+            <remarks>修改配置来源</remarks>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorHostConfiguration">
+            <summary>
+                监控主机模型配置
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Store.Entities.Configurations.MonitorHostConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Core.Monitor.Store.Entities.MonitorHost})">
+            <summary>
+                Configures the entity of type MonitorHost.
+            </summary>
+            <param name="builder">The builder to be used to configure the entity type.</param>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.MetadataGroup">
+            <summary>
+                元数据组
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.MetadataItems">
+            <summary>
+                组内元数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.Key">
+            <summary>
+                数据键
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataGroup.Value">
+            <summary>
+                数据值
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.MetadataItem">
+            <summary>
+                元数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.MetadataGroupId">
+            <summary>
+                元数据组标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.MetadataGroup">
+            <summary>
+                所属元数据组
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.Key">
+            <summary>
+                数据键
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MetadataItem.Value">
+            <summary>
+                数据值
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.Entities.MonitorHost">
+            <summary>
+                监控主机
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.MetadataGroupId">
+            <summary>
+                元数据组标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.MetadataGroup">
+            <summary>
+                具备的元数据组
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.HostName">
+            <summary>
+                主机名
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.HostType">
+            <summary>
+                主机类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.InstanceType">
+            <summary>
+                实例类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsName">
+            <summary>
+                系统名
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.PlatformType">
+            <summary>
+                平台类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsVersion">
+            <summary>
+                系统版本
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.Entities.MonitorHost.OsArchitecture">
+            <summary>
+                进程架构
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.MonitorDbContext">
+            <summary>
+                监控数据上下文
+            </summary>
+        </member>
+        <member name="M:Artemis.Core.Monitor.Store.MonitorDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Core.Monitor.Store.MonitorDbContext})">
+            <summary>
+                构造
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MetadataGroups">
+            <summary>
+                元数据组
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MetadataItems">
+            <summary>
+                元数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorDbContext.MonitorHosts">
+            <summary>
+                监控主机
+            </summary>
+        </member>
+        <member name="T:Artemis.Core.Monitor.Store.MonitorSetting">
+            <summary>
+                全局配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Core.Monitor.Store.MonitorSetting.DbType">
+            <summary>
+                数据库类型
+            </summary>
+        </member>
+    </members>
 </doc>

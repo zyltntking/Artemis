@@ -363,9 +363,56 @@
                 数据描述
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.HashType">
+            <summary>
+               Hash类型
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.HashType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Unknown">
+            <summary>
+            未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Md5">
+            <summary>
+              Md5
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha1">
+            <summary>
+              Sha1
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha256">
+            <summary>
+             Sha256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha384">
+            <summary>
+             Sha384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha512">
+            <summary>
+             Sha512
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.HashProvider">
             <summary>
                 散列服务提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.HashProvider.DefaultKey">
+            <summary>
+            默认键
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.HashProvider.KeyBytes(System.String)">
@@ -379,7 +426,7 @@
             <summary>
                 委托，计算字符串散列
             </summary>
-            <param name="func">散列函数</param>
+            <param name="func">哈希函数</param>
             <param name="input">输入字符串</param>
             <returns></returns>
         </member>
@@ -462,7 +509,7 @@
             <returns></returns>
             <remarks>以自身作为密钥对自身进行散列</remarks>
         </member>
-        <member name="M:Artemis.Data.Core.HashProvider.HmacMd5Hash(System.String,System.Byte[])">
+        <member name="M:Artemis.Data.Core.HashProvider.HmacMd5Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACMd5哈希
             </summary>
@@ -479,7 +526,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.HashProvider.HmacSha1Hash(System.String,System.Byte[])">
+        <member name="M:Artemis.Data.Core.HashProvider.HmacSha1Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha1哈希
             </summary>
@@ -495,7 +542,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.HashProvider.HmacSha256Hash(System.String,System.Byte[])">
+        <member name="M:Artemis.Data.Core.HashProvider.HmacSha256Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha256哈希
             </summary>
@@ -511,7 +558,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.HashProvider.HmacSha384Hash(System.String,System.Byte[])">
+        <member name="M:Artemis.Data.Core.HashProvider.HmacSha384Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha384哈希
             </summary>
@@ -527,7 +574,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.HashProvider.HmacSha512Hash(System.String,System.Byte[])">
+        <member name="M:Artemis.Data.Core.HashProvider.HmacSha512Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha512哈希
             </summary>

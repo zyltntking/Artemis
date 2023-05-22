@@ -677,6 +677,13 @@
              采集元数据
             </summary>
         </member>
+        <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.TryReadTextFromFile(System.String)">
+            <summary>
+            从文件中读取文本
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Core.Monitor.Hardware.HardwareInfoBase.TryReadLinesFromFile(System.String)">
             <summary>
                 从文件中读取所有行
