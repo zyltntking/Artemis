@@ -503,7 +503,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    ///     通过类型映射创建一个新实例
+    ///     通过类型映射创建一组新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>

@@ -30,7 +30,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     StoreResult CreateNew<TSource>(TSource source, TypeAdapterConfig? config = null);
 
     /// <summary>
-    ///     通过类型映射创建一个新实例
+    ///     通过类型映射创建一组新实例
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
     /// <param name="sources">源数据</param>

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Artemis.Core.Monitor.Store\Artemis.Core.Monitor.Store.csproj" />
+    <ProjectReference Include="..\..\Core\Monitor\Artemis.Core.Monitor.Store\Artemis.Core.Monitor.Store.csproj" />
   </ItemGroup>
 
 </Project>

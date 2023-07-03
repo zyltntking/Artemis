@@ -19,15 +19,15 @@ public class MonitorDbContext : DbContext
     /// <summary>
     ///     元数据组
     /// </summary>
-    public DbSet<MetadataGroup> MetadataGroups { get; set; }
+    public DbSet<MetadataGroup> MetadataGroups { get; set; } = null!;
 
     /// <summary>
     ///     元数据
     /// </summary>
-    public DbSet<MetadataItem> MetadataItems { get; set; }
+    public DbSet<MetadataItem> MetadataItems { get; set; } = null!;
 
     /// <summary>
     ///     监控主机
     /// </summary>
-    public DbSet<MonitorHost> MonitorHosts { get; set; }
+    public DbSet<MonitorHost> MonitorHosts { get; set; } = null!;
 }
