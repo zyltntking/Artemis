@@ -1,7 +1,7 @@
 using Artemis.Data.Core;
 using Moq;
 
-namespace Artemis.Test.Data.Core
+namespace Artemis.Test.DataTests.Core
 {
     /// <summary>
     /// HashProvider≤‚ ‘¿‡
