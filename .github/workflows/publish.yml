@@ -27,8 +27,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     # Pack
-    - name: Pack
-      run: dotnet pack --no-build --no-restore --configuration Release --output nupkgs
+    # - name: Pack
+    #   run: dotnet pack --no-build --no-restore --configuration Release --output nupkgs
     # Publish
-    - name: Publish To NuGet
-      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ARTEMIS}} --source https://api.nuget.org/v3/index.json  --skip-duplicate
+    - name: Publish To GitHub Packages
+      run: dotnet nuget push nupkgs/*.nupkg --source https://nuget.pkg.github.com/zyltntking/index.json --skip-duplicate
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_GITHUB_ARTEMIS}}

@@ -20,6 +20,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RootNamespace>Artemis.Data</RootNamespace>
 		<AssemblyName>Artemis.Data</AssemblyName>
