@@ -15,13 +15,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 7.0.x
+    # - name: Restore dependencies
+    #   run: dotnet restore
+    # - name: Build
+    #   run: dotnet build --no-restore
+    
+    # Publish
     - name: publish
-      run: dotnet nuget push --api-key oy2fl66q4wbwtum7jgeqkmbqrxxrsmzudl2hpgwb5v5y4q
+      id: publish_nuget
+      uses: brandedoutcast/publish-nuget@v2
+      with:
+        # Filepath of the project to be packaged, relative to root of repository
+        PROJECT_FILE_PATH: Core/Core.csproj
+
+        # Configuration to build and package
+        BUILD_CONFIGURATION: Release
+
+        # Platform target to compile (default is empty/AnyCPU)
+        BUILD_PLATFORM: x64
+
+        # API key to authenticate with NuGet server
+        NUGET_KEY: ${{secrets.NUGET_ARTEMIS}}
+
+          # NuGet server uri hosting the packages, defaults to https://api.nuget.org
+          # NUGET_SOURCE: https://api.nuget.org
+
+          # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
+          # INCLUDE_SYMBOLS: false
