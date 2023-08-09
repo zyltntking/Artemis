@@ -2,11 +2,36 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix>beta1</VersionSuffix>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<Authors>zyltntking</Authors>
+		<Company>Artemis</Company>
+		<Product>Artemis.Net</Product>
+		<Description>Artemis.NET App Build Tools</Description>
+		<Copyright>Copyright © zyltntking 2013</Copyright>
+		<Summary>Artemis.NET App Build Tools</Summary>
+		<Title>Artemis.NET</Title>
+		<PackageId>Artemis.Data.Core</PackageId>
+		<PackageTags>data</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
+		<PackageLicenseExpression>BSD</PackageLicenseExpression>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RootNamespace>Artemis.Data.Core</RootNamespace>
+		<AssemblyName>Artemis.Data.Core</AssemblyName>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>Artemis.Data.Core.xml</DocumentationFile>
 		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
+		<Nullable>enable</Nullable>
+		<MinClientVersion>4.1.0</MinClientVersion>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 </Project>
