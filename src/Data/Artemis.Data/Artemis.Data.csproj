@@ -25,7 +25,7 @@
 	  <RootNamespace>Artemis.Data</RootNamespace>
 	  <AssemblyName>Artemis.Data</AssemblyName>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	  <DocumentationFile>Artemis.Data.Store.xml</DocumentationFile>
+	  <DocumentationFile>Artemis.Data.xml</DocumentationFile>
 	  <CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
 	  <Nullable>enable</Nullable>
 	  <MinClientVersion>4.1.0</MinClientVersion>
