@@ -1,1 +1,1 @@
-﻿# Artemis.Data。Core
+﻿# Artemis.Data.Core

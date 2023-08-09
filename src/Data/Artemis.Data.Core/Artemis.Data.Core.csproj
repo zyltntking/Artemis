@@ -17,9 +17,9 @@
 		<Title>Artemis.NET</Title>
 		<PackageId>Artemis.Data.Core</PackageId>
 		<PackageTags>data</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
-		<PackageLicenseExpression>BSD</PackageLicenseExpression>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RootNamespace>Artemis.Data.Core</RootNamespace>
 		<AssemblyName>Artemis.Data.Core</AssemblyName>
@@ -33,5 +33,9 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 </Project>

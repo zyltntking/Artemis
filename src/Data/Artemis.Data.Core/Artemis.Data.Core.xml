@@ -365,7 +365,37 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.HashType">
             <summary>
-               Hash类型
+                Hash类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Md5">
+            <summary>
+                Md5
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha1">
+            <summary>
+                Sha1
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha256">
+            <summary>
+                Sha256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha384">
+            <summary>
+                Sha384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha512">
+            <summary>
+                Sha512
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.HashType.#ctor(System.Int32,System.String)">
@@ -375,36 +405,6 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Unknown">
-            <summary>
-            未知类型
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Md5">
-            <summary>
-              Md5
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha1">
-            <summary>
-              Sha1
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha256">
-            <summary>
-             Sha256
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha384">
-            <summary>
-             Sha384
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha512">
-            <summary>
-             Sha512
-            </summary>
-        </member>
         <member name="T:Artemis.Data.Core.HashProvider">
             <summary>
                 散列服务提供程序
@@ -412,7 +412,7 @@
         </member>
         <member name="P:Artemis.Data.Core.HashProvider.DefaultKey">
             <summary>
-            默认键
+                默认键
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.HashProvider.KeyBytes(System.String)">

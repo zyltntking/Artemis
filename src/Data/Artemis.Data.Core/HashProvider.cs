@@ -9,7 +9,7 @@ namespace Artemis.Data.Core;
 public class HashProvider
 {
     /// <summary>
-    /// 默认键
+    ///     默认键
     /// </summary>
     public static string DefaultKey { get; set; } = "Artemis";
 
@@ -50,7 +50,10 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns>输出字符串</returns>
-    public string Md5Hash(string input) => Compute(Md5Hash, input);
+    public string Md5Hash(string input)
+    {
+        return Compute(Md5Hash, input);
+    }
 
     /// <summary>
     ///     Md5哈希
@@ -68,7 +71,10 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha1Hash(string input) => Compute(Sha1Hash, input);
+    public string Sha1Hash(string input)
+    {
+        return Compute(Sha1Hash, input);
+    }
 
     /// <summary>
     ///     Sha1哈希
@@ -86,7 +92,10 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha256Hash(string input) => Compute(Sha256Hash, input);
+    public string Sha256Hash(string input)
+    {
+        return Compute(Sha256Hash, input);
+    }
 
     /// <summary>
     ///     Sha256哈希
@@ -104,7 +113,10 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha384Hash(string input) => Compute(Sha384Hash, input);
+    public string Sha384Hash(string input)
+    {
+        return Compute(Sha384Hash, input);
+    }
 
     /// <summary>
     ///     Sha384哈希
@@ -122,7 +134,10 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha512Hash(string input) => Compute(Sha512Hash, input);
+    public string Sha512Hash(string input)
+    {
+        return Compute(Sha512Hash, input);
+    }
 
     /// <summary>
     ///     Sha512哈希
