@@ -27,8 +27,8 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     # Pack
-    # - name: Pack
-    #   run: dotnet pack --no-build --no-restore --configuration Release --output nupkgs
+    - name: Pack
+      run: dotnet pack --no-build --no-restore --configuration Release --output nupkgs
     # Publish
     - name: Publish To GitHub Packages
       run: dotnet nuget push nupkgs/*.nupkg --source https://nuget.pkg.github.com/zyltntking/index.json --skip-duplicate
