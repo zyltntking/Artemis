@@ -17,17 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Core.Monitor", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Core.Monitor.Store", "src\Core\Monitor\Artemis.Core.Monitor.Store\Artemis.Core.Monitor.Store.csproj", "{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{1D5C1798-D33F-4219-B376-0F0E10F98E45}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.Data", "test\Artemis.Test.Data\Artemis.Test.Data.csproj", "{A4419ECF-B47D-43C4-B0E6-3EF2CFFB338A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Data", "src\Data\Artemis.Data\Artemis.Data.csproj", "{0A99AFA5-8A30-4107-94FE-0EB5905BE835}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Identity", "src\App\Artemis.App.Identity\Artemis.App.Identity.csproj", "{E6EED4B9-5744-415B-BC79-4B09B6630FAB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monitor", "Monitor", "{926B9B9F-76B2-425A-AB06-0D24AA886364}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{C548F02B-2557-40EA-ADAE-CC965D2D47A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +53,6 @@ Global
 		{0A99AFA5-8A30-4107-94FE-0EB5905BE835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A99AFA5-8A30-4107-94FE-0EB5905BE835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A99AFA5-8A30-4107-94FE-0EB5905BE835}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6EED4B9-5744-415B-BC79-4B09B6630FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6EED4B9-5744-415B-BC79-4B09B6630FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6EED4B9-5744-415B-BC79-4B09B6630FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6EED4B9-5744-415B-BC79-4B09B6630FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,9 +64,7 @@ Global
 		{B86AA0D3-C2A4-4E4F-8DCA-56ED09804D81} = {926B9B9F-76B2-425A-AB06-0D24AA886364}
 		{A4419ECF-B47D-43C4-B0E6-3EF2CFFB338A} = {4EB4BA12-8103-4D29-9A03-7D635250035D}
 		{0A99AFA5-8A30-4107-94FE-0EB5905BE835} = {80E9AB60-64BE-4FCC-9BF3-D3F73DB7998A}
-		{E6EED4B9-5744-415B-BC79-4B09B6630FAB} = {1D5C1798-D33F-4219-B376-0F0E10F98E45}
 		{926B9B9F-76B2-425A-AB06-0D24AA886364} = {DC0418E8-4616-4B0E-BEAC-1B9631BB9806}
-		{C548F02B-2557-40EA-ADAE-CC965D2D47A7} = {DC0418E8-4616-4B0E-BEAC-1B9631BB9806}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

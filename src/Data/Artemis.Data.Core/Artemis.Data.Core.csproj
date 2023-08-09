@@ -9,8 +9,4 @@
 		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Folder Include="Fundamental\Types\" />
-	</ItemGroup>
-
 </Project>
