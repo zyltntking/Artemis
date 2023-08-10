@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.WebApi.Controllers;
 
+/// <summary>
+///     天气日报
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
@@ -13,11 +16,19 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
+    /// <summary>
+    ///     构造
+    /// </summary>
+    /// <param name="logger"></param>
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    ///     获取天气日报
+    /// </summary>
+    /// <returns></returns>
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {

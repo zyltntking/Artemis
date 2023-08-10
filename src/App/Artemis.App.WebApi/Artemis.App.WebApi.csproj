@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <DocumentationFile>Artemis.App.WebApi.xml</DocumentationFile>
+	  <CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3c953118-d3a9-48a5-9878-8cd16e094a75</UserSecretsId>
@@ -12,6 +15,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web\Artemis.Extensions.Web.csproj" />
   </ItemGroup>
 
 </Project>
