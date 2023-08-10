@@ -17,7 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Test.DataTests", "t
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.WebApi", "src\App\Artemis.App.WebApi\Artemis.App.WebApi.csproj", "{12B823E4-3FA3-495C-AD42-4DF80AC8EA77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.WebApi", "src\App\Artemis.App.WebApi\Artemis.App.WebApi.csproj", "{12B823E4-3FA3-495C-AD42-4DF80AC8EA77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{E5C1D629-668C-42F2-81A2-4395D4F83BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Extensions.Web", "src\Extensions\Artemis.Extensions.Web\Artemis.Extensions.Web.csproj", "{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Extensions.Web.Serilog", "src\Extensions\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj", "{4846A6C3-70AE-4619-86BE-D8CD16EB04F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +51,14 @@ Global
 		{12B823E4-3FA3-495C-AD42-4DF80AC8EA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B823E4-3FA3-495C-AD42-4DF80AC8EA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12B823E4-3FA3-495C-AD42-4DF80AC8EA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4846A6C3-70AE-4619-86BE-D8CD16EB04F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4846A6C3-70AE-4619-86BE-D8CD16EB04F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4846A6C3-70AE-4619-86BE-D8CD16EB04F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4846A6C3-70AE-4619-86BE-D8CD16EB04F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +69,8 @@ Global
 		{0A99AFA5-8A30-4107-94FE-0EB5905BE835} = {80E9AB60-64BE-4FCC-9BF3-D3F73DB7998A}
 		{B489E015-2F3C-4397-BB49-56B28C5745B9} = {4EB4BA12-8103-4D29-9A03-7D635250035D}
 		{12B823E4-3FA3-495C-AD42-4DF80AC8EA77} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
+		{97FB4B45-FF40-4C9C-9D00-EBCCA020BA35} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
+		{4846A6C3-70AE-4619-86BE-D8CD16EB04F1} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

@@ -2,7 +2,7 @@
 
 <doc>
 	<assembly>
-		<name>Artemis.Data</name>
+		<name>Artemis.Extensions.Web</name>
 	</assembly>
 	<members>
 	</members>
