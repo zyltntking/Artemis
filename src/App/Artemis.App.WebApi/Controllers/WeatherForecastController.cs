@@ -20,7 +20,8 @@ public class WeatherForecastController : ControllerBase
     ///     ππ‘Ï
     /// </summary>
     /// <param name="logger"></param>
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
     }

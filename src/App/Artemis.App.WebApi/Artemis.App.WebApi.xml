@@ -23,5 +23,16 @@
 			</summary>
 			<returns></returns>
 		</member>
+		<member name="T:Artemis.App.WebApi.Program">
+			<summary>
+				Program
+			</summary>
+		</member>
+		<member name="M:Artemis.App.WebApi.Program.Main(System.String[])">
+			<summary>
+				Main
+			</summary>
+			<param name="args"></param>
+		</member>
 	</members>
 </doc>

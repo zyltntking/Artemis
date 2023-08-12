@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+
+<doc>
+	<assembly>
+		<name>Artemis.Extensions.Web.OpenApi</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.ApiVersionRangeAttribute">
+			<summary>
+				Api版本范围属性
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Attributes.ApiVersionRangeAttribute.#ctor(System.String,System.String)">
+			<summary>
+				Api版本范围
+			</summary>
+			<param name="fromVersion">起始支持版本</param>
+			<param name="toVersion">终止支持版本</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.ApiVersionRangeAttribute.FromVersion">
+			<summary>
+				起始支持版本
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.ApiVersionRangeAttribute.ToVersion">
+			<summary>
+				终止支持版本
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.HideInDocsAttribute">
+			<summary>
+				标识需要在文档中隐藏的方法或类
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationFinalStateVia">
+			<summary>
+				慢接口最终操作状态
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationFinalStateVia.Location">
+			<summary>
+				最终响应在header中指向的uri中提供
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationFinalStateVia.OriginalUri">
+			<summary>
+				最终响应在Uri中提供
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationAttribute">
+			<summary>
+				用于运行时间较长的操作
+				设置 x-ms-long-running-operation 时，也要设置 x-ms-long-running-operation-options
+			</summary>
+			<see href="https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations">Asynchronous Operations.</see>
+			<see href="https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-long-running-operation">x-ms-long-running-operation.</see>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationAttribute.FinalStateVia">
+			<summary>
+				最终状态标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.OpenApiTypeAttribute">
+			<summary>
+				OpenApi文档类型
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.Attributes.OpenApiTypeAttribute.#ctor(System.String)">
+			<summary>
+				构造
+			</summary>
+			<param name="typeName"></param>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.OpenApiTypeAttribute.TypeName">
+			<summary>
+				类型名称
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute">
+			<summary>
+				模式名称策略属性
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute.#ctor(Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy,System.Type)">
+			<summary>
+				模式名称策略属性构造函数
+			</summary>
+			<param name="namingStrategy">命名规则</param>
+			<param name="customNameProvider">自定义名称提供程序</param>
+			<exception cref="T:System.ArgumentNullException">空参数异常</exception>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute.#ctor(System.String)">
+			<summary>
+				模式名称策略属性构造函数
+			</summary>
+			<param name="name">名称</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute.#ctor(Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy,System.String)">
+			<summary>
+				模式名称策略属性构造函数
+			</summary>
+			<param name="namingStrategy">命名策略</param>
+			<param name="name">名称</param>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute.NamingStrategy">
+			<summary>
+				命名策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.SchemaNameStrategyAttribute.CustomNameProvider">
+			<summary>
+				自定义名称提供程序
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy">
+			<summary>
+				命名策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy.ConcreteNamingConcatanation">
+			<summary>
+				具名串联
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy.Custom">
+			<summary>
+				自定义
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Attributes.NamingStrategy.ApplyToParentWrapper">
+			<summary>
+				应用到父包装器
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Attributes.ConstNameProvider">
+			<summary>
+				常量名称提供程序
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.Attributes.ConstNameProvider.#ctor(System.String)">
+			<summary>
+				常量名称提供程序构造函数
+			</summary>
+			<param name="name">名称</param>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Attributes.ConstNameProvider.Name">
+			<summary>
+				名称
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.Attributes.ConstNameProvider.GetName(System.Type)">
+			<summary>
+				获取名称
+			</summary>
+			<param name="type"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Configuration">
+			<summary>
+				OpenApi Document Configuration
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.OpenApi.Configuration._info">
+			<summary>
+				OpenAPI document info
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Configuration.#ctor(Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo)">
+			<summary>
+				初始化一个<see cref="T:Artemis.Extensions.Web.OpenApi.Configuration" />实例
+			</summary>
+			<param name="info">文档信息详情</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.Configuration.OpenApiInfo">
+			<summary>
+				获取OpenApi文档信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.DocumentConfig">
+			<summary>
+				OpenApi文档配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.Title">
+			<summary>
+				<see cref="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.Title" />
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.Description">
+			<summary>
+				<see cref="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.Description" />
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.ClientName">
+			<summary>
+				<see cref="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.ClientName" />
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.DefaultApiVersion">
+			<summary>
+				默认Api版本
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.SupportedApiVersions">
+			<summary>
+				受支持的Api版本
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.ApiVersions">
+			<summary>
+				Api版本
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.TypeSchemaMapping">
+			<summary>
+				类型架构映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.UseXmlCommentFiles">
+			<summary>
+				是否使用Xml注释文件
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.GenerateExternalSwagger">
+			<summary>
+				指示两种生成模式，一种用于向客户扩展API，另一种用于内部开发
+			</summary>
+			<value>true用于扩展，false用于本地开发</value>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.UseAllOfToExtendReferenceSchemas">
+			<summary>
+				在OpenApi规范中，当不使用$ref表征兄弟关系时，使用AllOf来表征兄弟关系
+				https://swagger.io/docs/specification/data-models/inheritance-and-polymorphism/#allOf
+				默认为false，即使用$ref表征兄弟关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.DocumentConfig.DefaultHostName">
+			<summary>
+				默认主机名
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.DocumentConfig.EnsureValidity">
+			<summary>
+				验证配置合法性，若非法则抛出异常
+			</summary>
+			<exception cref="T:System.ArgumentNullException">参数空异常</exception>
+			<exception cref="T:System.InvalidOperationException">非法操作异常</exception>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddConsumesFilter">
+			<summary>
+				添加文档级别的Consumes属性(consumes)
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddConsumesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="openApiDoc">OpenApiDocument.</param>
+			<param name="context">DocumentFilterContext.</param>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddHostFilter">
+			<summary>
+				添加文档级别的Host属性('host')
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddHostFilter.#ctor(Artemis.Extensions.Web.OpenApi.DocumentConfig)">
+			<summary>
+				构造
+			</summary>
+			<param name="config"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddHostFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="openApiDoc">OpenApiDocument.</param>
+			<param name="context">DocumentFilterContext.</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddProducesFilter">
+			<summary>
+				添加文档级别的Produce属性('produce')
+			</summary>
+			<remarks>默认设置'application/json'</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddProducesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="openApiDoc">OpenApiDocument.</param>
+			<param name="context">DocumentFilterContext.</param>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddSchemesFilter">
+			<summary>
+				添加文档级别的Schemes属性('schemes')
+			</summary>
+			<remarks>默认设置Http和Https</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.DocumentFilters.AddSchemesFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="openApiDoc">OpenApiDocument.</param>
+			<param name="context">DocumentFilterContext.</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.AddVersionParameterWithExactValueInQuery">
+			<summary>
+				在查询中添加具有确切值的版本参数
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.AddVersionParameterWithExactValueInQuery.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="operation">OpenApiOperation</param>
+			<param name="context">OperationFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.LongRunningOperationFilter">
+			<summary>
+				添加<see cref="T:Artemis.Extensions.Web.OpenApi.Attributes.LongRunningOperationAttribute" />
+				标识的x-ms-long-running-operation扩展
+
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.LongRunningOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="operation">OpenApiOperation</param>
+			<param name="context">OperationFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.ODataParametersSwaggerOperationFilter">
+			<summary>
+				为OData参数添加文档标识
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.ODataParametersSwaggerOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="operation">OpenApiOperation</param>
+			<param name="context">OperationFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.RemoveDuplicateApiVersionParameter">
+			<summary>
+				删除所有被重复添加的api-version参数
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.OperationFilters.RemoveDuplicateApiVersionParameter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="operation">OpenApiOperation</param>
+			<param name="context">OperationFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.SchemaFilters.SchemaPropertiesTypesFilter">
+			<summary>
+				模式属性类型筛选
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.SchemaFilters.SchemaPropertiesTypesFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="schema">OpenApiSchema</param>
+			<param name="context">SchemaFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Filters.SetBodyNameFilter">
+			<summary>
+				设置Body名称
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.Filters.SetBodyNameFilter.Apply(Microsoft.OpenApi.Models.OpenApiRequestBody,Swashbuckle.AspNetCore.SwaggerGen.RequestBodyFilterContext)">
+			<summary>
+				Applies filter.
+			</summary>
+			<param name="requestBody">OpenApiRequestBody</param>
+			<param name="context">RequestBodyFilterContext</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo">
+			<summary>
+				OpenApi文档信息配置段
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.#ctor(System.String,System.String,System.String,System.String)">
+			<summary>
+				初始化一个<see cref="T:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo" />类型的实例
+			</summary>
+			<param name="title">OpenApi文档标题</param>
+			<param name="description">OpenApi文档描述</param>
+			<param name="version">OpenApi文档版本</param>
+			<param name="clientName">OpenApi客户端名称</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.Title">
+			<summary>
+				OpenApi文档信息标题段
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.Description">
+			<summary>
+				OpenApi文档信息描述段
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.Version">
+			<summary>
+				OpenApi文档信息版本段
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.OpenApi.OpenApiDocumentInfo.ClientName">
+			<summary>
+				OpenApi文档信息客户端名称段
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.OpenApiExtensions">
+			<summary>
+				OpenApi扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.AddOpenApiDoc(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Artemis.Extensions.Web.OpenApi.DocumentConfig)">
+			<summary>
+				添加OpenApi文档
+			</summary>
+			<param name="builder">WebApp Builder</param>
+			<param name="config">配置</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.UseOpenApiDoc(Microsoft.AspNetCore.Builder.WebApplication,Artemis.Extensions.Web.OpenApi.DocumentConfig)">
+			<summary>
+				使用OpenApi文档
+			</summary>
+			<param name="app"></param>
+			<param name="config">配置</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.GetConfiguration(Artemis.Extensions.Web.OpenApi.DocumentConfig,System.String)">
+			<summary>
+				获取配置
+			</summary>
+			<param name="config">文档配置</param>
+			<param name="version">API版本号</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.SchemaIdSelector(System.Type)">
+			<summary>
+				模式ID选择器
+			</summary>
+			<param name="modelType"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.DocumentApiInclusion(Artemis.Extensions.Web.OpenApi.DocumentConfig,System.String,Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription)">
+			<summary>
+				文档API包含指示
+			</summary>
+			<param name="config">文档配置</param>
+			<param name="docName">文档名称</param>
+			<param name="apiDesc">Api描述</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.VisibilityInclusion(Artemis.Extensions.Web.OpenApi.DocumentConfig,Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription)">
+			<summary>
+				文档可见性包含
+			</summary>
+			<param name="config">文档配置</param>
+			<param name="apiDesc">Api描述</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.OpenApi.OpenApiExtensions.ApiVersionInclusion(Artemis.Extensions.Web.OpenApi.DocumentConfig,System.String,Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription)">
+			<summary>
+				API版本包含
+			</summary>
+			<param name="config">文档配置</param>
+			<param name="docName">文档名称</param>
+			<param name="apiDesc">Api描述</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Web.OpenApi.Standards.ICustomSchemaNameProvider">
+			<summary>
+				自定义模式名称提供程序接口
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Web.OpenApi.Standards.ICustomSchemaNameProvider.GetName(System.Type)">
+			<summary>
+				获取名称
+			</summary>
+			<param name="type">类型</param>
+			<returns>模式名称</returns>
+		</member>
+	</members>
+</doc>
