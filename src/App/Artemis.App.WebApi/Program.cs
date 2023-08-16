@@ -16,22 +16,7 @@ public static class Program
     /// <param name="args"></param>
     public static void Main(string[] args)
     {
-        var generateInternalSwagger = Environment.GetCommandLineArgs().Contains("--internal-swagger"); // 生成开发环境Swagger
-
-        var generateExternalSwagger = !generateInternalSwagger; // 生成生产环境Swagger
-
-        var documentConfig = new DocumentConfig
-        {
-            Title = "Artemis",
-            Description = "Artemis",
-            ClientName = "Artemis",
-            SupportedApiVersions = new[] { "2021-09-01-preview", "2022-01-01-preview", "2021-10-01" },
-            TypeSchemaMapping = new Dictionary<Type, OpenApiSchema>
-            {
-                { typeof(ODataQueryOptions<>), new OpenApiSchema() }
-            },
-            GenerateExternalSwagger = generateExternalSwagger
-        };
+        var documentConfig = new DocumentConfig();
 
         LogHost.CreateWebApp(args,
             builder =>

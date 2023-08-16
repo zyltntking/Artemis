@@ -1,38 +1,36 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.WebApi</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.WebApi.Controllers.WeatherForecastController">
-			<summary>
-				天气日报
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.WebApi.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.WebApi.Controllers.WeatherForecastController})">
-			<summary>
-				构造
-			</summary>
-			<param name="logger"></param>
-		</member>
-		<member name="M:Artemis.App.WebApi.Controllers.WeatherForecastController.Get">
-			<summary>
-				获取天气日报
-			</summary>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.App.WebApi.Program">
-			<summary>
-				Program
-			</summary>
-		</member>
-		<member name="M:Artemis.App.WebApi.Program.Main(System.String[])">
-			<summary>
-				Main
-			</summary>
-			<param name="args"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.WebApi.Controllers.WeatherForecastController">
+            <summary>
+                天气日报
+            </summary>
+        </member>
+        <member name="M:Artemis.App.WebApi.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.WebApi.Controllers.WeatherForecastController})">
+            <summary>
+                构造
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Artemis.App.WebApi.Controllers.WeatherForecastController.Get">
+            <summary>
+                获取天气日报
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.WebApi.Program">
+            <summary>
+                Program
+            </summary>
+        </member>
+        <member name="M:Artemis.App.WebApi.Program.Main(System.String[])">
+            <summary>
+                Main
+            </summary>
+            <param name="args"></param>
+        </member>
+    </members>
 </doc>
