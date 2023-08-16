@@ -1,7 +1,5 @@
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.OpenApi.Models;
 
 namespace Artemis.App.WebApi;
 
