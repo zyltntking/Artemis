@@ -31,9 +31,7 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     {
         TableConfigure(builder);
 
-        FieldCommentConfigure(builder);
-
-        DataTypeConfigure(builder);
+        FieldConfigure(builder);
 
         RelationConfigure(builder);
     }
@@ -49,31 +47,18 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     }
 
     /// <summary>
-    ///     数据库字段备注配置
+    ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected virtual void FieldCommentConfigure(EntityTypeBuilder<TEntity> builder)
+    protected virtual void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.Id).HasComment("标识");
 
-        builder.Property(entity => entity.CreatedAt).HasComment("创建时间,初始化后不再进行任何变更");
+        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("创建时间,初始化后不再进行任何变更");
 
-        builder.Property(entity => entity.UpdatedAt).HasComment("更新时间,初始为创建时间");
+        builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("更新时间,初始为创建时间");
 
-        builder.Property(entity => entity.DeletedAt).HasComment("删除时间,启用软删除时生效");
-    }
-
-    /// <summary>
-    ///     数据类型配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected virtual void DataTypeConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime);
-
-        builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime);
-
-        builder.Property(entity => entity.DeletedAt).HasColumnType(DataTypeSet.DateTime);
+        builder.Property(entity => entity.DeletedAt).HasColumnType(DataTypeSet.DateTime).HasComment("删除时间,启用软删除时生效");
     }
 
     /// <summary>

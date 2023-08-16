@@ -14,25 +14,14 @@ public class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguratio
     #region Overrides of ModelBaseTypeConfiguration<TEntity>
 
     /// <summary>
-    ///     数据库字段备注配置
+    ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void FieldCommentConfigure(EntityTypeBuilder<TEntity> builder)
+    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        base.FieldCommentConfigure(builder);
+        base.FieldConfigure(builder);
 
-        builder.Property(entity => entity.Partition).HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     数据库配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void DataTypeConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        base.DataTypeConfigure(builder);
-
-        builder.Property(entity => entity.Partition).HasColumnType(DataTypeSet.Integer);
+        builder.Property(entity => entity.Partition).HasColumnType(DataTypeSet.Integer).HasComment("分区标识");
     }
 
     #endregion
