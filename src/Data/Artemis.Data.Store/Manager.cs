@@ -63,12 +63,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     存储访问器
     /// </summary>
-    protected IStore<TEntity, TKey> Store { get; }
+    private IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
     ///     配置访问器
     /// </summary>
-    protected IStoreOptions StoreOptions { get; }
+    private IStoreOptions StoreOptions { get; }
 
     /// <summary>
     ///     错误报告生成器
