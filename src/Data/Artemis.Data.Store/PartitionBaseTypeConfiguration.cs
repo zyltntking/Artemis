@@ -24,5 +24,16 @@ public class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguratio
         builder.Property(entity => entity.Partition).HasColumnType(DataTypeSet.Integer).HasComment("分区标识");
     }
 
+    /// <summary>
+    ///     数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        base.RelationConfigure(builder);
+
+        builder.HasKey(entity => entity.Partition).HasName($"{nameof(TEntity)}Partition");
+    }
+
     #endregion
 }

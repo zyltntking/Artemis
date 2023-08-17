@@ -44,6 +44,7 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     /// <param name="builder"></param>
     protected virtual void TableConfigure(EntityTypeBuilder<TEntity> builder)
     {
+        builder.ToTable(nameof(TEntity), table => table.HasComment(nameof(TEntity)));
     }
 
     /// <summary>
