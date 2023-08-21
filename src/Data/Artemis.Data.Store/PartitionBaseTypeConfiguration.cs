@@ -32,7 +32,7 @@ public class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguratio
     {
         base.RelationConfigure(builder);
 
-        builder.HasIndex(entity => entity.Partition).HasName($"{nameof(TEntity)}_Partition_index");
+        builder.HasIndex(entity => entity.Partition);
     }
 
     #endregion
