@@ -243,7 +243,7 @@ public static class EnumerationExtensions
     /// </summary>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="options">Json序列化配置</param>
-    public static void AddConverter<T>(this JsonSerializerOptions options) where T : Enumeration
+    public static void AddEnumerationConverter<T>(this JsonSerializerOptions options) where T : Enumeration
     {
         options.Converters.Add(new EnumerationJsonConverter<T>());
     }
