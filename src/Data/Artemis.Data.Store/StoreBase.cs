@@ -65,7 +65,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <summary>
     ///     Throws if this class has been disposed.
     /// </summary>
-    private void ThrowIfDisposed()
+    protected void ThrowIfDisposed()
     {
         if (_disposed) throw new ObjectDisposedException(GetType().Name);
     }

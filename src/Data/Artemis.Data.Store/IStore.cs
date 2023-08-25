@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿
+using Artemis.Data.Core;
 
 namespace Artemis.Data.Store;
 

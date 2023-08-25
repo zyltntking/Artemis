@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using System.Linq.Expressions;
 
 namespace Artemis.Data.Store;
 
@@ -146,6 +147,54 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+
+    #endregion
+
+    #region BatchDeleteEntity & BatchDeleteEntities
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="id">被删除实体的主键</param>
+    StoreResult BatchDelete(TKey id);
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="ids">被删除实体的主键</param>
+    /// <returns></returns>
+    StoreResult BatchDelete(IEnumerable<TKey> ids);
+
+    /// <summary>
+    /// 在存储中删除符合条件的实体
+    /// </summary>
+    /// <param name="predicate">查询表达式</param>
+    /// <returns></returns>
+    StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate = null);
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="id">被删除实体的主键</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchDeleteAsync(TKey id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="ids">被删除实体的主键</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchDeleteAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 在存储中删除符合条件的实体
+    /// </summary>
+    /// <param name="predicate">查询表达式</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchDeleteAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
 
     #endregion
 

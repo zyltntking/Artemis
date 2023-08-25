@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.Linq.Expressions;
+using Artemis.Data.Core;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
@@ -421,6 +422,164 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         DeleteEntities(list);
         return AttacheChangeAsync(cancellationToken);
+    }
+
+    #endregion
+
+    #region BatchDeleteEntity & BatchDeleteEntities
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="id">被删除实体的主键</param>
+    public StoreResult BatchDelete(TKey id)
+    {
+        OnActionExecuting(id, nameof(id));
+
+        try
+        {
+            var changes = Context.Set<TEntity>()
+                .Where(item => item.Id.Equals(id))
+                .ExecuteDelete();
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
+    }
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="ids">被删除实体的主键</param>
+    /// <returns></returns>
+    public StoreResult BatchDelete(IEnumerable<TKey> ids)
+    {
+        var idList = ids as List<TKey> ?? ids.ToList();
+        OnActionExecuting(idList, nameof(ids));
+
+        try
+        {
+            var changes = Context.Set<TEntity>()
+                .Where(item => idList.Contains(item.Id))
+                .ExecuteDelete();
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
+    }
+
+    /// <summary>
+    /// 在存储中删除符合条件的实体
+    /// </summary>
+    /// <param name="predicate">查询表达式</param>
+    /// <returns></returns>
+    public StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate)
+    {
+        ThrowIfDisposed();
+
+        try
+        {
+            var query = Context.Set<TEntity>().AsNoTracking();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            var changes = query.ExecuteDelete();
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
+    }
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="id">被删除实体的主键</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> BatchDeleteAsync(TKey id, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
+
+        try
+        {
+            var changes = await Context.Set<TEntity>()
+                .Where(item => item.Id.Equals(id))
+                .ExecuteDeleteAsync(cancellationToken);
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
+    }
+
+    /// <summary>
+    ///     在存储中删除已存在的实体
+    /// </summary>
+    /// <param name="ids">被删除实体的主键</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> BatchDeleteAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default)
+    {
+        var idList = ids as List<TKey> ?? ids.ToList();
+        OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
+
+        try
+        {
+            var changes = await Context.Set<TEntity>()
+                .Where(item => idList.Contains(item.Id))
+                .ExecuteDeleteAsync(cancellationToken);
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
+    }
+
+    /// <summary>
+    /// 在存储中删除符合条件的实体
+    /// </summary>
+    /// <param name="predicate">查询表达式</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> BatchDeleteAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
+    {
+        ThrowIfDisposed();
+
+        cancellationToken.ThrowIfCancellationRequested();
+
+        try
+        {
+            var query = Context.Set<TEntity>().AsNoTracking();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            var changes = await query.ExecuteDeleteAsync(cancellationToken);
+
+            return StoreResult.Success(changes);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+        }
     }
 
     #endregion
