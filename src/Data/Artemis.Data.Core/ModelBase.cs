@@ -68,6 +68,16 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     public virtual TKey Id { get; set; } = default!;
 
     #endregion
+
+    #region Implementation of IModelBase<TKey>
+
+    /// <summary>
+    ///     生成键
+    /// </summary>
+    [NotMapped]
+    public string GenerateKey => Id.ToString()!;
+
+    #endregion
 }
 
 /// <summary>

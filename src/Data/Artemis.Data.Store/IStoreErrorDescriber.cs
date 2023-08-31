@@ -23,4 +23,10 @@ public interface IStoreErrorDescriber
     /// <param name="id"></param>
     /// <returns></returns>
     StoreError NotFoundId(string? id);
+
+    /// <summary>
+    ///     提示已允许具缓存策略
+    /// </summary>
+    /// <returns></returns>
+    StoreError EnableCache();
 }

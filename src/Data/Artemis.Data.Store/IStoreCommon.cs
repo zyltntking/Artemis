@@ -1,5 +1,6 @@
-﻿using Artemis.Data.Core;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Artemis.Data.Core;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Artemis.Data.Store;
 
@@ -19,6 +20,16 @@ public interface IStoreCommon<TEntity> : IStoreCommon<TEntity, Guid> where TEnti
 public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
 {
+    #region IStoreOptions
+
+    /// <summary>
+    ///     设置配置
+    /// </summary>
+    /// <param name="storeOptions"></param>
+    void SetOptions(IStoreOptions storeOptions);
+
+    #endregion
+
     #region CreateEntity & CreateEntities
 
     /// <summary>
@@ -84,6 +95,88 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+
+    #endregion
+
+    #region BatchUpdateEntity & BatchUpdateEntities
+
+    /// <summary>
+    ///     更新存储中的实体
+    /// </summary>
+    /// <param name="id">被更新实体的主键</param>
+    /// <param name="setter">更新行为</param>
+    /// <returns></returns>
+    StoreResult BatchUpdate(TKey id, Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter);
+
+    /// <summary>
+    ///     在存储中更新已存在的实体
+    /// </summary>
+    /// <param name="ids">被更新实体的主键</param>
+    /// <param name="setter">更新行为</param>
+    /// <returns></returns>
+    StoreResult BatchUpdate(IEnumerable<TKey> ids,
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter);
+
+    /// <summary>
+    ///     在存储中更新符合条件的实体
+    /// </summary>
+    /// <param name="setter">更新行为</param>
+    /// <param name="predicate">查询表达式</param>
+    /// <returns></returns>
+    StoreResult BatchUpdate(Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+        Expression<Func<TEntity, bool>>? predicate = null);
+
+    /// <summary>
+    ///     在存储中更新符合查询描述的实体
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="setter">更新行为</param>
+    /// <returns></returns>
+    StoreResult BatchUpdate(IQueryable<TEntity> query,
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter);
+
+    /// <summary>
+    ///     在存储中更新已存在的实体
+    /// </summary>
+    /// <param name="id">被更新实体的主键</param>
+    /// <param name="setter">更新行为</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchUpdateAsync(TKey id,
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     在存储中更新已存在的实体
+    /// </summary>
+    /// <param name="ids">被更新实体的主键</param>
+    /// <param name="setter">更新行为</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchUpdateAsync(IEnumerable<TKey> ids,
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     在存储中更新符合条件的实体
+    /// </summary>
+    /// <param name="setter">更新行为</param>
+    /// <param name="predicate">查询表达式</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> BatchUpdateAsync(Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+        Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     在存储中更新符合查询描述的实体
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="setter">更新行为</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<StoreResult> BatchUpdateAsync(IQueryable<TEntity> query,
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+        CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -166,11 +259,18 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     StoreResult BatchDelete(IEnumerable<TKey> ids);
 
     /// <summary>
-    /// 在存储中删除符合条件的实体
+    ///     在存储中删除符合条件的实体
     /// </summary>
     /// <param name="predicate">查询表达式</param>
     /// <returns></returns>
     StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate = null);
+
+    /// <summary>
+    ///     在存储中删除符合查询描述的实体
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    StoreResult BatchDelete(IQueryable<TEntity> query);
 
     /// <summary>
     ///     在存储中删除已存在的实体
@@ -189,12 +289,21 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     Task<StoreResult> BatchDeleteAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 在存储中删除符合条件的实体
+    ///     在存储中删除符合条件的实体
     /// </summary>
     /// <param name="predicate">查询表达式</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> BatchDeleteAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchDeleteAsync(Expression<Func<TEntity, bool>>? predicate = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     在存储中删除符合查询描述的实体
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<StoreResult> BatchDeleteAsync(IQueryable<TEntity> query, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -208,11 +317,25 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     TEntity? FindEntity(TKey id);
 
     /// <summary>
+    ///     根据缓存键查找实体
+    /// </summary>
+    /// <param name="key">缓存键</param>
+    /// <returns></returns>
+    TEntity? FindEntityViaKey(string key);
+
+    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
     IEnumerable<TEntity> FindEntities(IEnumerable<TKey> ids);
+
+    /// <summary>
+    ///     根据缓存键查找实体
+    /// </summary>
+    /// <param name="keys">缓存键</param>
+    /// <returns></returns>
+    IEnumerable<TEntity> FindEntitiesViaKeys(IEnumerable<string> keys);
 
     /// <summary>
     ///     根据Id查找实体

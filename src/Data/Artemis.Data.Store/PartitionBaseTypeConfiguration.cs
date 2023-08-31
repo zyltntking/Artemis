@@ -8,7 +8,7 @@ namespace Artemis.Data.Store;
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguration<TEntity>
+public abstract class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguration<TEntity>
     where TEntity : class, IPartitionBase
 {
     #region Overrides of ModelBaseTypeConfiguration<TEntity>

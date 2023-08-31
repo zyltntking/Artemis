@@ -17,7 +17,7 @@ public class StoreResult
     /// <summary>
     ///     指示操作受影响行数
     /// </summary>
-    public int EffectRows { get; protected set; }
+    public int EffectRows { get; protected init; }
 
     /// <summary>
     ///     包含存储过程中产生的所有错误的实例

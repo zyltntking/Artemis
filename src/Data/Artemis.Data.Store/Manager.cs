@@ -50,14 +50,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         IStoreErrorDescriber? errors = null,
         ILogger<IManager<TEntity, TKey>>? logger = null)
     {
-        Store = store ?? throw new ArgumentNullException(nameof(store));
+        Store = store;
         StoreOptions = optionsAccessor?.Value ?? new StoreOptions();
         StoreErrorDescriber = errors ?? new StoreErrorDescriber();
         Logger = logger ?? new NullLogger<IManager<TEntity, TKey>>();
 
-        Store.AutoSaveChanges = StoreOptions.AutoSaveChanges;
-        Store.MetaDataHosting = StoreOptions.MetaDataHosting;
-        Store.SoftDelete = StoreOptions.SoftDelete;
+        Store.SetOptions(StoreOptions);
     }
 
     /// <summary>

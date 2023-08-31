@@ -41,7 +41,20 @@ public sealed class StoreErrorDescriber : IStoreErrorDescriber
         return new StoreError
         {
             Code = nameof(NotFoundId),
-            Description = Resources.FomateNotFoundId(id)
+            Description = Resources.FormatNotFoundId(id)
+        };
+    }
+
+    /// <summary>
+    ///     提示已允许具缓存策略
+    /// </summary>
+    /// <returns></returns>
+    public StoreError EnableCache()
+    {
+        return new StoreError
+        {
+            Code = nameof(EnableCache),
+            Description = Resources.EnableCache
         };
     }
 }

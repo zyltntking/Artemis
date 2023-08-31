@@ -28,7 +28,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <summary>
     ///     设置当前发生错误的错误描述者
     /// </summary>
-    public IStoreErrorDescriber ErrorDescriber { get; set; }
+    protected IStoreErrorDescriber ErrorDescriber { get; set; }
 
     #region Implementation of IDisposable
 
@@ -77,7 +77,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// </summary>
     /// <param name="entity">实体</param>
     /// <returns>Id</returns>
-    public virtual TKey GetId(TEntity entity)
+    public TKey GetId(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
         return entity.Id;
@@ -89,7 +89,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">取消异步操作的信号</param>
     /// <returns>Id</returns>
-    public virtual Task<TKey> GetIdAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<TKey> GetIdAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(entity.Id);
@@ -112,7 +112,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">取消异步操作信号</param>
     /// <returns></returns>
-    public virtual Task<string> GetIdStringAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<string> GetIdStringAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(ConvertIdToString(entity.Id)!);
@@ -123,7 +123,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// </summary>
     /// <param name="entity">实体</param>
     /// <returns>判断结果</returns>
-    public virtual bool IsDeleted(TEntity entity)
+    public bool IsDeleted(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
         return entity.DeletedAt == null;
@@ -135,7 +135,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <param name="entity">实体</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>判断结果</returns>
-    public virtual Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         return Task.FromResult(entity.DeletedAt == null);

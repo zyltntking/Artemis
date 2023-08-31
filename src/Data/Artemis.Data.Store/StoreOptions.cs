@@ -22,5 +22,20 @@ public class StoreOptions : IStoreOptions
     /// </summary>
     public bool SoftDelete { get; set; } = false;
 
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    public bool CachedStore { get; set; } = false;
+
+    /// <summary>
+    ///     过期时间(秒)
+    /// </summary>
+    public int Expires { get; set; } = 0;
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    public bool DebugLogger { get; set; } = false;
+
     #endregion
 }

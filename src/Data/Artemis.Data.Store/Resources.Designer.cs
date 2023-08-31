@@ -63,7 +63,7 @@ namespace Artemis.Data.Store {
         /// <summary>
         ///   查找类似 乐观并发失败，对象已被修改。 的本地化字符串。
         /// </summary>
-        internal static string @ConcurrencyFailure {
+        internal static string ConcurrencyFailure {
             get {
                 return ResourceManager.GetString("ConcurrencyFailure", resourceCulture);
             }
@@ -72,9 +72,18 @@ namespace Artemis.Data.Store {
         /// <summary>
         ///   查找类似 发生未知异常。 的本地化字符串。
         /// </summary>
-        internal static string @DefaultError {
+        internal static string DefaultError {
             get {
                 return ResourceManager.GetString("DefaultError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前Store已启用具缓存策略。 的本地化字符串。
+        /// </summary>
+        internal static string EnableCache {
+            get {
+                return ResourceManager.GetString("EnableCache", resourceCulture);
             }
         }
         
@@ -92,7 +101,7 @@ namespace Artemis.Data.Store {
         /// <summary>
         ///   格式化 未查询到Id为 &apos;{0}&apos; 的对象。 的本地化字符串。
         /// </summary>
-        internal static string FomateNotFoundId(string id) => string.Format(Culture, ResourceManager.GetString("NotFoundId", resourceCulture), id);
+        internal static string FormatNotFoundId(string id) => string.Format(Culture, ResourceManager.GetString("NotFoundId", resourceCulture), id);
 
         #endregion
     }

@@ -28,6 +28,10 @@ public interface IModelBase : IKeySlot, IModelBase<Guid>
 /// <typeparam name="TKey">基本记录标识</typeparam>
 public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot where TKey : IEquatable<TKey>
 {
+    /// <summary>
+    ///     生成键
+    /// </summary>
+    string GenerateKey => Id.ToString()!;
 }
 
 /// <summary>

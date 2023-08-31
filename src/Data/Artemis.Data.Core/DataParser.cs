@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -69,12 +71,50 @@ public static class DataParser
     {
         return id.ToString();
     }
+
+    #region ModelBase
+
+    /// <summary>
+    ///     序列化
+    /// </summary>
+    /// <typeparam name="T">实体类型</typeparam>
+    /// <param name="model">实体模型</param>
+    /// <returns></returns>
+    public static string Serialize<T>(this T model) where T : class
+    {
+        var options = new JsonSerializerOptions
+        {
+            IgnoreReadOnlyProperties = true,
+            ReferenceHandler = ReferenceHandler.Preserve
+        };
+
+        return JsonSerializer.Serialize(model, options);
+    }
+
+    /// <summary>
+    ///     反序列化
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="json"></param>
+    /// <returns></returns>
+    public static T? Deserialize<T>(this string json) where T : class
+    {
+        var options = new JsonSerializerOptions
+        {
+            IgnoreReadOnlyProperties = true,
+            ReferenceHandler = ReferenceHandler.Preserve
+        };
+
+        return JsonSerializer.Deserialize<T>(json, options);
+    }
+
+    #endregion
 }
 
 /// <summary>
 ///     字节码转换器
 /// </summary>
-public static class ByteParser
+internal static class ByteParser
 {
     /// <summary>
     ///     扩展Bytes数组

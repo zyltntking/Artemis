@@ -55,7 +55,8 @@ public abstract class ModelBaseTypeConfiguration<TEntity> : IEntityTypeConfigura
     {
         builder.Property(entity => entity.Id).HasComment("标识");
 
-        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("创建时间,初始化后不再进行任何变更");
+        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime)
+            .HasComment("创建时间,初始化后不再进行任何变更");
 
         builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("更新时间,初始为创建时间");
 

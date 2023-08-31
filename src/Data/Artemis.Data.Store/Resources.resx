@@ -125,6 +125,10 @@
     <value>发生未知异常。</value>
     <comment>默认异常信息。</comment>
   </data>
+  <data name="EnableCache" xml:space="preserve">
+    <value>当前Store已启用具缓存策略。</value>
+    <comment>当前Store已启用具缓存策略。</comment>
+  </data>
   <data name="NotFoundId" xml:space="preserve">
     <value>未查询到Id为 '{0}' 的对象。</value>
     <comment>通过id查找失败时的信息。</comment>

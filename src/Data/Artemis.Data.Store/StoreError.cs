@@ -13,5 +13,5 @@ public class StoreError
     /// <summary>
     ///     错误描述
     /// </summary>
-    public string? Description { get; set; }
+    public string? Description { get; init; }
 }

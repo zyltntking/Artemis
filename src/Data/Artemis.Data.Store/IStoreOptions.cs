@@ -19,4 +19,19 @@ public interface IStoreOptions
     ///     是否启用软删除
     /// </summary>
     bool SoftDelete { get; set; }
+
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    bool CachedStore { get; set; }
+
+    /// <summary>
+    ///     过期时间(秒)
+    /// </summary>
+    int Expires { get; set; }
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    bool DebugLogger { get; set; }
 }
