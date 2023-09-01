@@ -1,9 +1,21 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Extensions.Web</name>
-	</assembly>
-	<members>
-	</members>
+    <assembly>
+        <name>Artemis.Extensions.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Web.WebApiHost">
+            <summary>
+                WebApi主机
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.WebApiHost.CreateHost(System.String[],System.Action{Microsoft.AspNetCore.Builder.WebApplicationBuilder},System.Action{Microsoft.AspNetCore.Builder.WebApplication})">
+            <summary>
+                创建主机
+            </summary>
+            <param name="args">应用控制参数</param>
+            <param name="buildAction">应用创建行为</param>
+            <param name="appAction">应用行为</param>
+        </member>
+    </members>
 </doc>
