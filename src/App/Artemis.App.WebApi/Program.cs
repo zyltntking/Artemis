@@ -1,3 +1,4 @@
+using Artemis.Extensions.Web;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 
@@ -14,29 +15,6 @@ public static class Program
     /// <param name="args"></param>
     public static void Main(string[] args)
     {
-        var documentConfig = new DocumentConfig();
-
-        LogHost.CreateWebApp(args,
-            builder =>
-            {
-                // Add services to the container.
-                builder.Services.AddControllers();
-
-                // OpenApi
-                builder.AddOpenApiDoc(documentConfig);
-            },
-            app =>
-            {
-                // Configure the HTTP request pipeline.
-                app.UseOpenApiDoc(documentConfig);
-
-                app.UseHttpsRedirection();
-
-                app.UseAuthorization();
-
-                app.MapControllers();
-
-                app.Run();
-            });
+        WebApiHost.CreateHost(args);
     }
 }

@@ -3,6 +3,7 @@ using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Extensions.Web;
 
@@ -17,14 +18,14 @@ public static class WebApiHost
     /// <param name="args">应用控制参数</param>
     /// <param name="buildAction">应用创建行为</param>
     /// <param name="appAction">应用行为</param>
-    public static void CreateHost(string[] args, Action<WebApplicationBuilder> buildAction,
-        Action<WebApplication> appAction)
+    public static void CreateHost(string[] args, Action<WebApplicationBuilder>? buildAction = null,
+        Action<WebApplication>? appAction = null)
     {
         var docConfig = new DocumentConfig();
 
         LogHost.CreateWebApp(args, builder =>
         {
-            buildAction(builder);
+            buildAction?.Invoke(builder);
 
             builder.Services
                 .AddControllers()
@@ -37,11 +38,35 @@ public static class WebApiHost
             builder.AddOpenApiDoc(docConfig);
         }, app =>
         {
+            appAction?.Invoke(app);
+
             app.UseOpenApiDoc(docConfig);
+
+            if (app.Environment.IsDevelopment())
+            {
+                // app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 
+            // app.UseStaticFiles();
+            // app.UseCookiePolicy();
+
+            // app.UseRouting();
+            // app.UseRateLimiter();
+            // app.UseRequestLocalization();
+            // app.UseCors();
+
+            //app.UseAuthentication();
             app.UseAuthorization();
+            // app.UseSession();
+            // app.UseResponseCompression();
+            // app.UseResponseCaching();
 
             app.MapControllers();
 
