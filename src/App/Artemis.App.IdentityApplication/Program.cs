@@ -14,22 +14,22 @@ namespace Artemis.App.IdentityApplication
             var connectionString = builder.Configuration
                 .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services.AddDbContext<ArtemisIdentityDbContext>(options =>
-            {
-                options.UseNpgsql(connectionString, npgsqlOption =>
-                {
-                    npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-                });
-            });
-
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
             builder.Services
+                .AddDbContext<ArtemisIdentityDbContext>(options =>
+                {
+                    options.UseNpgsql(connectionString, npgsqlOption =>
+                    {
+                        npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
+                    }).UseLazyLoadingProxies();
+                })
                 .AddDefaultIdentity<ArtemisIdentityUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
                 })
                 .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
             builder.Services.AddRazorPages();
 
             builder.Services.Configure<IdentityOptions>(options =>
