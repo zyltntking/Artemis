@@ -11,9 +11,17 @@ namespace Artemis.App.IdentityApplication
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration
+                .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             builder.Services.AddDbContext<ArtemisIdentityDbContext>(options =>
-                options.UseNpgsql(connectionString));
+            {
+                options.UseNpgsql(connectionString, npgsqlOption =>
+                {
+                    npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
+                });
+            });
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services

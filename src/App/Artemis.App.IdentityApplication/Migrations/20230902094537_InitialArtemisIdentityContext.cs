@@ -7,13 +7,17 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.IdentityApplication.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialArtemisIdentity : Migration
+    public partial class InitialArtemisIdentityContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "identity");
+
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityRole",
+                schema: "identity",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -28,6 +32,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityUser",
+                schema: "identity",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -53,6 +58,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityRoleClaim",
+                schema: "identity",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -67,6 +73,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityRoleClaim_ArtemisIdentityRole_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -74,6 +81,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityUserClaim",
+                schema: "identity",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -88,6 +96,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityUserClaim_ArtemisIdentityUser_UserId",
                         column: x => x.UserId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -95,6 +104,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityUserLogin",
+                schema: "identity",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
@@ -108,6 +118,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityUserLogin_ArtemisIdentityUser_UserId",
                         column: x => x.UserId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -115,6 +126,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityUserRole",
+                schema: "identity",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -126,12 +138,14 @@ namespace Artemis.App.IdentityApplication.Migrations
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityUserRole_ArtemisIdentityRole_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityUserRole_ArtemisIdentityUser_UserId",
                         column: x => x.UserId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -139,6 +153,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ArtemisIdentityUserToken",
+                schema: "identity",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -152,6 +167,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                     table.ForeignKey(
                         name: "FK_ArtemisIdentityUserToken_ArtemisIdentityUser_UserId",
                         column: x => x.UserId,
+                        principalSchema: "identity",
                         principalTable: "ArtemisIdentityUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -159,38 +175,45 @@ namespace Artemis.App.IdentityApplication.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
+                schema: "identity",
                 table: "ArtemisIdentityRole",
                 column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisIdentityRoleClaim_RoleId",
+                schema: "identity",
                 table: "ArtemisIdentityRoleClaim",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
+                schema: "identity",
                 table: "ArtemisIdentityUser",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
+                schema: "identity",
                 table: "ArtemisIdentityUser",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisIdentityUserClaim_UserId",
+                schema: "identity",
                 table: "ArtemisIdentityUserClaim",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisIdentityUserLogin_UserId",
+                schema: "identity",
                 table: "ArtemisIdentityUserLogin",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisIdentityUserRole_RoleId",
+                schema: "identity",
                 table: "ArtemisIdentityUserRole",
                 column: "RoleId");
         }
@@ -199,25 +222,32 @@ namespace Artemis.App.IdentityApplication.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityRoleClaim");
+                name: "ArtemisIdentityRoleClaim",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityUserClaim");
+                name: "ArtemisIdentityUserClaim",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityUserLogin");
+                name: "ArtemisIdentityUserLogin",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityUserRole");
+                name: "ArtemisIdentityUserRole",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityUserToken");
+                name: "ArtemisIdentityUserToken",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityRole");
+                name: "ArtemisIdentityRole",
+                schema: "identity");
 
             migrationBuilder.DropTable(
-                name: "ArtemisIdentityUser");
+                name: "ArtemisIdentityUser",
+                schema: "identity");
         }
     }
 }

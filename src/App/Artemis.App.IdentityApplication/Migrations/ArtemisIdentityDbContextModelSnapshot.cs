@@ -17,6 +17,7 @@ namespace Artemis.App.IdentityApplication.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("identity")
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -46,7 +47,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("ArtemisIdentityRole", (string)null);
+                    b.ToTable("ArtemisIdentityRole", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityRoleClaim", b =>
@@ -70,7 +71,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("ArtemisIdentityRoleClaim", (string)null);
+                    b.ToTable("ArtemisIdentityRoleClaim", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", b =>
@@ -135,7 +136,7 @@ namespace Artemis.App.IdentityApplication.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("ArtemisIdentityUser", (string)null);
+                    b.ToTable("ArtemisIdentityUser", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserClaim", b =>
@@ -159,7 +160,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArtemisIdentityUserClaim", (string)null);
+                    b.ToTable("ArtemisIdentityUserClaim", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserLogin", b =>
@@ -182,7 +183,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArtemisIdentityUserLogin", (string)null);
+                    b.ToTable("ArtemisIdentityUserLogin", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserRole", b =>
@@ -197,7 +198,7 @@ namespace Artemis.App.IdentityApplication.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("ArtemisIdentityUserRole", (string)null);
+                    b.ToTable("ArtemisIdentityUserRole", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserToken", b =>
@@ -218,58 +219,88 @@ namespace Artemis.App.IdentityApplication.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("ArtemisIdentityUserToken", (string)null);
+                    b.ToTable("ArtemisIdentityUserToken", "identity");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityRoleClaim", b =>
                 {
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityRole", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityRole", "Role")
+                        .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserClaim", b =>
                 {
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", "User")
+                        .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserLogin", b =>
                 {
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", "User")
+                        .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserRole", b =>
                 {
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityRole", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityRole", "Role")
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", "User")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUserToken", b =>
                 {
-                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", null)
-                        .WithMany()
+                    b.HasOne("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", "User")
+                        .WithMany("Tokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityRole", b =>
+                {
+                    b.Navigation("RoleClaims");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Artemis.App.IdentityApplication.Data.ArtemisIdentityUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Tokens");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }
