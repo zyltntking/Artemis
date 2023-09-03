@@ -34,6 +34,8 @@ public static class LogHost
             var app = builder.Build();
 
             appAction(app);
+
+            app.Run();
         }
         catch (Exception exception)
         {

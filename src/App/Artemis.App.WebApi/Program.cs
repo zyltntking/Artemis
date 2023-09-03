@@ -67,8 +67,6 @@ public static class Program
             // app.UseResponseCaching();
 
             app.MapControllers();
-
-            app.Run();
         });
     }
 }

@@ -77,7 +77,12 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
 
             Logger.LogInformation("开始校验凭据。");
 
-            Cache.SetString("test", Guid.NewGuid().ToString());
+            var token = Guid.NewGuid().ToString();
+
+            Cache.SetString($"Identity:Token:{token}", token, new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(4000)
+            });
 
 
             return Task.CompletedTask;

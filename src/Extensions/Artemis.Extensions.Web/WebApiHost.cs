@@ -71,8 +71,6 @@ public static class WebApiHost
             // app.UseResponseCaching();
 
             app.MapControllers();
-
-            app.Run();
         });
     }
 }

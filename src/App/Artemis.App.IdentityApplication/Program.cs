@@ -1,4 +1,6 @@
 using Artemis.App.IdentityApplication.Data;
+using Artemis.Extensions.Web.OpenApi;
+using Artemis.Extensions.Web.Serilog;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,87 +10,94 @@ namespace Artemis.App.IdentityApplication
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var docConfig = new DocumentConfig();
 
-            // Add services to the container.
-            var connectionString = builder.Configuration
-                .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            LogHost.CreateWebApp(args, builder =>
+            {
+                // Add services to the container.
+                var connectionString = builder.Configuration
+                    .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services
-                .AddDbContext<ArtemisIdentityDbContext>(options =>
-                {
-                    options.UseNpgsql(connectionString, npgsqlOption =>
+                builder.Services
+                    .AddDbContext<ArtemisIdentityDbContext>(options =>
                     {
-                        npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-                    }).UseLazyLoadingProxies();
-                })
-                .AddDefaultIdentity<ArtemisIdentityUser>(options =>
+                        options.UseNpgsql(connectionString, npgsqlOption =>
+                        {
+                            npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
+                        }).UseLazyLoadingProxies();
+                    })
+                    .AddDefaultIdentity<ArtemisIdentityUser>(options =>
+                    {
+                        options.SignIn.RequireConfirmedAccount = true;
+                    })
+                    .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
+
+                builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+                builder.Services.AddRazorPages();
+
+                builder.Services.Configure<IdentityOptions>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = true;
-                })
-                .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
+                    // Password settings.
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredUniqueChars = 1;
 
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+                    // Lockout settings.
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
 
-            builder.Services.AddRazorPages();
+                    // User settings.
+                    options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    options.User.RequireUniqueEmail = false;
+                });
 
-            builder.Services.Configure<IdentityOptions>(options =>
+                builder.Services.ConfigureApplicationCookie(options =>
+                {
+                    // Cookie settings
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                    options.LoginPath = "/Identity/Account/Login";
+                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                    options.SlidingExpiration = true;
+                });
+                // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+                builder.AddOpenApiDoc(docConfig);
+            }, app =>
             {
-                // Password settings.
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
+                app.UseOpenApiDoc(docConfig);
 
-                // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
+                // Configure the HTTP request pipeline.
+                if (app.Environment.IsDevelopment())
+                {
+                    app.UseMigrationsEndPoint();
+                }
+                else
+                {
+                    app.UseExceptionHandler("/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    app.UseHsts();
+                }
 
-                // User settings.
-                options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
+                app.UseHttpsRedirection();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.MapRazorPages();
+
+                app.MapControllers();
             });
-
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
-            });
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseMigrationsEndPoint();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.MapRazorPages();
-
-            app.Run();
         }
     }
 }
