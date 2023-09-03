@@ -4,6 +4,70 @@
         <name>Artemis.Extensions.Web</name>
     </assembly>
     <members>
+        <member name="T:Artemis.Extensions.Web.Exceptions.ClaimNullException">
+            <summary>
+            空凭据异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimNullException.#ctor">
+            <summary>
+            构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimNullException.#ctor(System.String)">
+            <summary>
+            构造
+            </summary>
+            <param name="actionName">操作名</param>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute">
+            <summary>
+            ArtemisClaim过滤器属性
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.#ctor(System.String)">
+            <summary>
+            Instantiates a new <see cref="T:Microsoft.AspNetCore.Mvc.TypeFilterAttribute" /> instance.
+            </summary>
+            <param name="claim">是否生效</param>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter">
+            <summary>
+            ArtemisClaimFilter内部实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter},Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+            <summary>
+            ArtemisClaimFilter构造
+            </summary>
+            <param name="logger">日志</param>
+            <param name="cache">缓存</param>
+            <param name="claim">是否生效</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Cache">
+            <summary>
+            缓存
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Claim">
+            <summary>
+            是否生效
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Called early in the filter pipeline to confirm request is authorized.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext" />.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> that on completion indicates the filter has executed.
+            </returns>
+        </member>
         <member name="T:Artemis.Extensions.Web.WebApiHost">
             <summary>
                 WebApi主机

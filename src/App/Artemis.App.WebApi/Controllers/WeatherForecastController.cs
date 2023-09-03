@@ -1,3 +1,5 @@
+using Artemis.Extensions.Web.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.WebApi.Controllers;
@@ -6,7 +8,8 @@ namespace Artemis.App.WebApi.Controllers;
 ///     天气日报
 /// </summary>
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]/[action]")]
+[ArtemisClaim]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries =
@@ -30,8 +33,8 @@ public class WeatherForecastController : ControllerBase
     ///     获取天气日报
     /// </summary>
     /// <returns></returns>
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet]
+    public IEnumerable<WeatherForecast> GetWeatherForecast()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

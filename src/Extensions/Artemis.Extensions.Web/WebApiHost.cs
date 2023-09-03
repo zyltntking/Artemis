@@ -44,6 +44,8 @@ public static class WebApiHost
 
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
+                // app.UseDatabaseErrorPage();
                 // app.UseMigrationsEndPoint();
             }
             else
