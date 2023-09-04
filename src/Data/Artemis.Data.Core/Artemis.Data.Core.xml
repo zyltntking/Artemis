@@ -51,12 +51,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.DataParser.Serialize``1(``0)">
+        <member name="M:Artemis.Data.Core.DataParser.Serialize``1(``0,System.Boolean)">
             <summary>
                 序列化
             </summary>
             <typeparam name="T">实体类型</typeparam>
             <param name="model">实体模型</param>
+            <param name="writeIndented">是否启用格式化</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.Deserialize``1(System.String)">
@@ -206,7 +207,7 @@
                 转换函数
             </summary>
             <typeparam name="T">枚举类</typeparam>
-            <typeparam name="Tk">源类</typeparam>
+            <typeparam name="TK">源类</typeparam>
             <param name="value">源值</param>
             <param name="description">描述</param>
             <param name="predicate">匹配表达式</param>

@@ -4,69 +4,200 @@
         <name>Artemis.Extensions.Web</name>
     </assembly>
     <members>
-        <member name="T:Artemis.Extensions.Web.Exceptions.ClaimNullException">
+        <member name="T:Artemis.Extensions.Web.Builder.RoutesTableApplicationBuilderExtensions">
             <summary>
-            空凭据异常
+                路由表应用创建扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimNullException.#ctor">
+        <member name="M:Artemis.Extensions.Web.Builder.RoutesTableApplicationBuilderExtensions.MapRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
             <summary>
-            构造
+                映射路由表
+            </summary>
+            <param name="app">Web应用</param>
+            <param name="pattern">访问路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Controller.GenericApiController">
+            <summary>
+                泛型Api控制器
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimNullException.#ctor(System.String)">
+        <member name="T:Artemis.Extensions.Web.Exceptions.ArtemisException">
             <summary>
-            构造
+            Artemis系统日志
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Exceptions.ArtemisException.#ctor(System.String,System.Int32)">
+            <summary>
+            错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Exceptions.ArtemisException.ErrorMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Exceptions.ArtemisException.ErrorCode">
+            <summary>
+            错误编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Exceptions.ClaimInvalidException">
+            <summary>
+                凭据无效异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimInvalidException.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimInvalidException.#ctor(System.String)">
+            <summary>
+                构造
             </summary>
             <param name="actionName">操作名</param>
         </member>
-        <member name="T:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute">
+        <member name="T:Artemis.Extensions.Web.Exceptions.ExceptionCode">
             <summary>
-            ArtemisClaim过滤器属性
+            异常编码
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.#ctor(System.String)">
+        <member name="F:Artemis.Extensions.Web.Exceptions.ExceptionCode.ArtemisException">
             <summary>
-            Instantiates a new <see cref="T:Microsoft.AspNetCore.Mvc.TypeFilterAttribute" /> instance.
+            Artemis 异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Exceptions.ExceptionCode.ClaimInvalidException">
+            <summary>
+            凭据无效异常
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Feature.DistributedCacheExtensions">
+            <summary>
+                分布式缓存扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Feature.DistributedCacheExtensions.FetchClaims(Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+                获取凭据列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute">
+            <summary>
+                ArtemisClaim过滤器属性
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.#ctor(System.String)">
+            <summary>
+                Instantiates a new <see cref="T:Microsoft.AspNetCore.Mvc.TypeFilterAttribute" /> instance.
             </summary>
             <param name="claim">是否生效</param>
         </member>
-        <member name="T:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter">
+        <member name="T:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter">
             <summary>
-            ArtemisClaimFilter内部实现
+                ArtemisClaimFilter内部实现
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter},Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter},Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
             <summary>
-            ArtemisClaimFilter构造
+                ArtemisClaimFilter构造
             </summary>
             <param name="logger">日志</param>
             <param name="cache">缓存</param>
             <param name="claim">是否生效</param>
         </member>
-        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Logger">
+        <member name="P:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.Logger">
             <summary>
-            日志
+                日志
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Cache">
+        <member name="P:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.Cache">
             <summary>
-            缓存
+                缓存
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.Claim">
+        <member name="P:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.SignatureClaim">
             <summary>
-            是否生效
+                是否生效
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Filters.ArtemisClaimAttribute.ArtemisClaimFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
             <summary>
-            Called early in the filter pipeline to confirm request is authorized.
+                Called early in the filter pipeline to confirm request is authorized.
             </summary>
             <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext" />.</param>
             <returns>
-            A <see cref="T:System.Threading.Tasks.Task" /> that on completion indicates the filter has executed.
+                A <see cref="T:System.Threading.Tasks.Task" /> that on completion indicates the filter has executed.
             </returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.ActionNameClaim(System.String)">
+            <summary>
+                操作名凭据
+            </summary>
+            <param name="actionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.VerifyClaim(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String,System.String)">
+            <summary>
+                校验凭据
+            </summary>
+            <param name="claims">凭据表</param>
+            <param name="claimType">凭据类型</param>
+            <param name="claimValue">凭据值</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Fundamental.IdentityClaimType">
+            <summary>
+                认证凭据类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Fundamental.IdentityClaimType.RoutePath">
+            <summary>
+                路由路径凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Fundamental.IdentityClaimType.ActionName">
+            <summary>
+                操作名凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Fundamental.IdentityClaimType.Signature">
+            <summary>
+                签名凭据
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Fundamental.IdentityClaimType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware">
+            <summary>
+            异常结果中间件
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware})">
+            <summary>
+            中间件构造
+            </summary>
+            <param name="logger">日志依赖</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware.Logger">
+            <summary>
+                日志
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>Request handling method.</summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> for the current request.</param>
+            <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
         </member>
         <member name="T:Artemis.Extensions.Web.WebApiHost">
             <summary>

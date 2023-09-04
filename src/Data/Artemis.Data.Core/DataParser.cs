@@ -79,13 +79,15 @@ public static class DataParser
     /// </summary>
     /// <typeparam name="T">实体类型</typeparam>
     /// <param name="model">实体模型</param>
+    /// <param name="writeIndented">是否启用格式化</param>
     /// <returns></returns>
-    public static string Serialize<T>(this T model) where T : class
+    public static string Serialize<T>(this T model, bool writeIndented = false) where T : class
     {
         var options = new JsonSerializerOptions
         {
             IgnoreReadOnlyProperties = true,
-            ReferenceHandler = ReferenceHandler.Preserve
+            ReferenceHandler = ReferenceHandler.Preserve,
+            WriteIndented = writeIndented
         };
 
         return JsonSerializer.Serialize(model, options);

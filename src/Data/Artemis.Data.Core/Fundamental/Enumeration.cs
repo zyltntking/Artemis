@@ -151,13 +151,13 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     ///     转换函数
     /// </summary>
     /// <typeparam name="T">枚举类</typeparam>
-    /// <typeparam name="Tk">源类</typeparam>
+    /// <typeparam name="TK">源类</typeparam>
     /// <param name="value">源值</param>
     /// <param name="description">描述</param>
     /// <param name="predicate">匹配表达式</param>
     /// <returns>枚举成员</returns>
     /// <exception cref="InvalidOperationException">无效操作异常</exception>
-    private static T Parse<T, Tk>(Tk value, string description, Func<T, bool> predicate) where T : Enumeration
+    private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 

@@ -1,4 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using Artemis.App.IdentityApplication.Data;
+using Artemis.Extensions.Web.Builder;
+using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Microsoft.AspNetCore.Identity;
@@ -69,6 +74,8 @@ namespace Artemis.App.IdentityApplication
                 });
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+                builder.Services.AddTransient<ExceptionResultMiddleware>();
+
                 builder.AddOpenApiDoc(docConfig);
             }, app =>
             {
@@ -94,9 +101,13 @@ namespace Artemis.App.IdentityApplication
                 app.UseAuthentication();
                 app.UseAuthorization();
 
+                app.UseMiddleware<ExceptionResultMiddleware>();
+
                 app.MapRazorPages();
 
                 app.MapControllers();
+
+                app.MapRouteTable();
             });
         }
     }

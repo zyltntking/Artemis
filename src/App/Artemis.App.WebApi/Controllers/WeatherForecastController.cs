@@ -1,5 +1,4 @@
-using Artemis.Extensions.Web.Filters;
-using Microsoft.AspNetCore.Authorization;
+using Artemis.Extensions.Web.Filter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.WebApi.Controllers;
