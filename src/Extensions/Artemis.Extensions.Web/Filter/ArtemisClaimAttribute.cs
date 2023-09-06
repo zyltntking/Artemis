@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using System.Text.RegularExpressions;
 using Artemis.Extensions.Web.Exceptions;
 using Artemis.Extensions.Web.Feature;
 using Artemis.Extensions.Web.Fundamental;
@@ -14,7 +13,7 @@ namespace Artemis.Extensions.Web.Filter;
 /// <summary>
 ///     ArtemisClaim过滤器属性
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class ArtemisClaimAttribute : TypeFilterAttribute
 {
     /// <summary>
@@ -60,6 +59,16 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         /// </summary>
         private string SignatureClaim { get; }
 
+        /// <summary>
+        /// 凭据类型索引
+        /// </summary>
+        private const string ClaimTypeKey = "ClaimType";
+
+        /// <summary>
+        /// 域标识
+        /// </summary>
+        private const string DomainKey = SharedKeys.DomainKey;
+
         #region Implementation of IAsyncAuthorizationFilter
 
         /// <summary>
@@ -71,9 +80,15 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         /// </returns>
         public Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            if (context.HttpContext.Items.ContainsKey(ClaimTypeKey))
+            {
+                //不改变上个筛选器的校验结果
+                return Task.CompletedTask;
+            }
+
             var routePathClaim = context.HttpContext.Request.Path.Value ?? string.Empty;
 
-            var actionNameClaim = ActionNameClaim(context.ActionDescriptor.DisplayName);
+            var actionName = ActionNameClaim(context.ActionDescriptor as ControllerActionDescriptor);
 
             Logger.LogInformation("从缓存中获取凭据...");
 
@@ -81,18 +96,20 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
 
             Logger.LogInformation("开始校验凭据...");
 
-            bool signatureValid = false, routePathValid = false, actionNameValid = false;
-
             if (!string.IsNullOrEmpty(SignatureClaim))
             {
                 Logger.LogInformation("校验签名凭据...");
 
                 var claimType = IdentityClaimType.Signature.ToString();
 
-                signatureValid = VerifyClaim(claimList, claimType, SignatureClaim);
-            }
+                var signatureValid = VerifyClaim(claimList, claimType, SignatureClaim);
 
-            if (signatureValid) return Task.CompletedTask;
+                if (signatureValid)
+                {
+                    context.HttpContext.Items.Add(ClaimTypeKey, claimType);
+                    return Task.CompletedTask;
+                }
+            }
 
             if (!string.IsNullOrEmpty(routePathClaim))
             {
@@ -100,29 +117,41 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
 
                 var claimType = IdentityClaimType.RoutePath.ToString();
 
-                routePathValid = VerifyClaim(claimList, claimType, routePathClaim);
+                var routePathValid = VerifyClaim(claimList, claimType, routePathClaim);
+
+                if (routePathValid)
+                {
+                    context.HttpContext.Items.Add(ClaimTypeKey, claimType);
+                    return Task.CompletedTask;
+                }
             }
 
-            if (routePathValid) return Task.CompletedTask;
+            var domain = context.HttpContext.Items[DomainKey] as string;
 
-            if (!string.IsNullOrEmpty(actionNameClaim))
+            var actionNameClaim = $"{domain}.{actionName}";
+
+            if (!string.IsNullOrEmpty(actionName))
             {
                 Logger.LogInformation("校验操作名凭据...");
 
                 var claimType = IdentityClaimType.ActionName.ToString();
 
-                actionNameValid = VerifyClaim(claimList, claimType, actionNameClaim);
+                var actionNameValid = VerifyClaim(claimList, claimType, actionNameClaim);
+
+                if (actionNameValid)
+                {
+                    context.HttpContext.Items.Add(ClaimTypeKey, claimType);
+                    return Task.CompletedTask;
+                }
             }
 
-            if (actionNameValid) return Task.CompletedTask;
+            // 提示凭据异常所在操作
+            Logger.LogInformation($"domain:{domain} action:{actionName},凭据校验未通过...");
 
-            var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
+            if (string.IsNullOrWhiteSpace(actionName)) 
+                throw new ClaimInvalidException();
 
-            var actionName = descriptor?.ActionName;
-
-            if (string.IsNullOrWhiteSpace(actionName)) throw new ClaimInvalidException();
-
-            throw new ClaimInvalidException(actionName);
+            throw new ClaimInvalidException("actionNameClaim");
         }
 
         #endregion
@@ -130,13 +159,20 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         /// <summary>
         ///     操作名凭据
         /// </summary>
-        /// <param name="actionName"></param>
+        /// <param name="descriptor"></param>
         /// <returns></returns>
-        private static string ActionNameClaim(string? actionName)
+        private static string ActionNameClaim(ControllerActionDescriptor? descriptor)
         {
-            var regex = new Regex(@"\((.*?)\)");
+            if (descriptor == null)
+            {
+                return string.Empty;
+            }
 
-            return regex.Replace(actionName ?? string.Empty, string.Empty).Trim();
+            var controller = descriptor.ControllerName;
+
+            var action = descriptor.ActionName;
+
+            return $"{controller}.{action}";
         }
 
         /// <summary>

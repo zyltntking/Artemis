@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using Artemis.App.IdentityApplication.Data;
 using Artemis.Extensions.Web.Builder;
 using Artemis.Extensions.Web.Middleware;
@@ -41,6 +38,11 @@ namespace Artemis.App.IdentityApplication
 
                 builder.Services.AddRazorPages();
 
+                builder.Services.Configure<DomainOptions>(options =>
+                {
+                    options.DomainName = "Identity";
+                });
+
                 builder.Services.Configure<IdentityOptions>(options =>
                 {
                     // Password settings.
@@ -72,9 +74,10 @@ namespace Artemis.App.IdentityApplication
                     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                     options.SlidingExpiration = true;
                 });
+                
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
-                builder.Services.AddTransient<ExceptionResultMiddleware>();
+                builder.Services.AddScoped<ServiceDomainMiddleware>();
+                builder.Services.AddScoped<ExceptionResultMiddleware>();
 
                 builder.AddOpenApiDoc(docConfig);
             }, app =>
@@ -101,13 +104,14 @@ namespace Artemis.App.IdentityApplication
                 app.UseAuthentication();
                 app.UseAuthorization();
 
+                app.UseMiddleware<ServiceDomainMiddleware>();
                 app.UseMiddleware<ExceptionResultMiddleware>();
 
                 app.MapRazorPages();
 
                 app.MapControllers();
 
-                app.MapRouteTable();
+                app.MapApiRouteTable();
             });
         }
     }

@@ -4,18 +4,63 @@
         <name>Artemis.Extensions.Web</name>
     </assembly>
     <members>
-        <member name="T:Artemis.Extensions.Web.Builder.RoutesTableApplicationBuilderExtensions">
+        <member name="T:Artemis.Extensions.Web.Builder.ActionType">
+            <summary>
+            操作类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Builder.ActionType.API">
+            <summary>
+            API操作
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Builder.ActionType.PAGE">
+            <summary>
+            PAGE
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Builder.ApiRoutesTableBuilderExtensions">
             <summary>
                 路由表应用创建扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Builder.RoutesTableApplicationBuilderExtensions.MapRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+        <member name="M:Artemis.Extensions.Web.Builder.ApiRoutesTableBuilderExtensions.MapApiRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
             <summary>
                 映射路由表
             </summary>
             <param name="app">Web应用</param>
             <param name="pattern">访问路径</param>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Builder.RouteItem">
+            <summary>
+            路由项目
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Builder.RouteItem.Action">
+            <summary>
+            操作类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Builder.RouteItem.Methods">
+            <summary>
+            路由方法
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Builder.RouteItem.Path">
+            <summary>
+            路由路径
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Builder.RouteItem.DomainAction">
+            <summary>
+            域操作名
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Controller.ClaimedGenericApiController">
+            <summary>
+                泛型凭据认证Api控制器
+            </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.Controller.GenericApiController">
             <summary>
@@ -125,6 +170,16 @@
                 是否生效
             </summary>
         </member>
+        <member name="F:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.ClaimTypeKey">
+            <summary>
+            凭据类型索引
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.DomainKey">
+            <summary>
+            域标识
+            </summary>
+        </member>
         <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
             <summary>
                 Called early in the filter pipeline to confirm request is authorized.
@@ -134,11 +189,11 @@
                 A <see cref="T:System.Threading.Tasks.Task" /> that on completion indicates the filter has executed.
             </returns>
         </member>
-        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.ActionNameClaim(System.String)">
+        <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.ActionNameClaim(Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)">
             <summary>
                 操作名凭据
             </summary>
-            <param name="actionName"></param>
+            <param name="descriptor"></param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Extensions.Web.Filter.ArtemisClaimAttribute.ArtemisClaimFilter.VerifyClaim(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String,System.String)">
@@ -177,6 +232,16 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Extensions.Web.Middleware.DomainOptions">
+            <summary>
+            域配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Middleware.DomainOptions.DomainName">
+            <summary>
+            域名
+            </summary>
+        </member>
         <member name="T:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware">
             <summary>
             异常结果中间件
@@ -198,6 +263,49 @@
             <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> for the current request.</param>
             <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware">
+            <summary>
+            服务域中间件
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Middleware.DomainOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware})">
+            <summary>
+            中间件构造
+            </summary>
+            <param name="options">域</param>
+            <param name="logger">日志依赖</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.Options">
+            <summary>
+            域名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.Logger">
+            <summary>
+                日志
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.DomainKey">
+            <summary>
+            服务域标识
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>Request handling method.</summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> for the current request.</param>
+            <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.SharedKeys">
+            <summary>
+            共享键
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.SharedKeys.DomainKey">
+            <summary>
+            域标识
+            </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.WebApiHost">
             <summary>
