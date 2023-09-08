@@ -1,5 +1,6 @@
 ﻿using Artemis.Extensions.Web.Filter;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Artemis.Extensions.Web.Controller;
 
@@ -11,7 +12,13 @@ namespace Artemis.Extensions.Web.Controller;
 [ArtemisClaim]
 public abstract class ClaimedGenericApiController : GenericApiController
 {
-
+    /// <summary>
+    /// 泛型API控制器
+    /// </summary>
+    /// <param name="logger"></param>
+    protected ClaimedGenericApiController(ILogger logger) : base(logger)
+    {
+    }
 }
 
 /// <summary>
@@ -21,4 +28,17 @@ public abstract class ClaimedGenericApiController : GenericApiController
 [ApiController]
 public abstract class GenericApiController : ControllerBase
 {
+    /// <summary>
+    /// 泛型API控制器
+    /// </summary>
+    /// <param name="logger"></param>
+    protected GenericApiController(ILogger logger)
+    {
+        Logger = logger;
+    }
+
+    /// <summary>
+    /// 日志访问器
+    /// </summary>
+    protected ILogger Logger { get; }
 }

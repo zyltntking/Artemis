@@ -1,10 +1,10 @@
-using Artemis.App.IdentityApplication.Data;
+using System.Text.Json.Serialization;
+using Artemis.App.Logic.IdentityLogic;
 using Artemis.Extensions.Web.Builder;
 using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.App.IdentityApplication
 {
@@ -20,23 +20,25 @@ namespace Artemis.App.IdentityApplication
                 var connectionString = builder.Configuration
                     .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-                builder.Services
-                    .AddDbContext<ArtemisIdentityDbContext>(options =>
-                    {
-                        options.UseNpgsql(connectionString, npgsqlOption =>
-                        {
-                            npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-                        }).UseLazyLoadingProxies();
-                    })
-                    .AddDefaultIdentity<ArtemisIdentityUser>(options =>
-                    {
-                        options.SignIn.RequireConfirmedAccount = true;
-                    })
-                    .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
-
-                builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+                builder.Services.AddIdentityService(new IdentityLogicOptions
+                {
+                    Connection = connectionString,
+                    AssemblyName = "Artemis.App.IdentityApplication"
+                });
 
                 builder.Services.AddRazorPages();
+
+                builder.Services
+                    .AddControllers()
+                    .AddMvcOptions(options =>
+                    {
+                        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                            name => $"×Ö¶Î:{name}ÊÇ±ØÒª×Ö¶Î.");
+                    })
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                    });
 
                 builder.Services.Configure<DomainOptions>(options =>
                 {

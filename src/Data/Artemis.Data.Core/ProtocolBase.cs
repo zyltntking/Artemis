@@ -1,4 +1,6 @@
-﻿namespace Artemis.Data.Core;
+﻿using System.Collections.ObjectModel;
+
+namespace Artemis.Data.Core;
 
 /// <summary>
 ///     数据结果协议模板接口
@@ -42,6 +44,26 @@ public class DataResult<T> : IDataResult<T>
     }
 
     /// <summary>
+    /// 设置异常
+    /// </summary>
+    /// <param name="exception">异常</param>
+    public void SetException(Exception exception)
+    {
+        InnerException = exception;
+    }
+
+    /// <summary>
+    /// 获取异常
+    /// </summary>
+    /// <returns></returns>
+    public Exception? GetException() => InnerException;
+
+    /// <summary>
+    /// 内部异常
+    /// </summary>
+    private Exception? InnerException { get; set; }
+
+    /// <summary>
     ///     是否成功
     /// </summary>
     public bool IsSuccess => Code == ResultStatus.Success;
@@ -67,6 +89,11 @@ public class DataResult<T> : IDataResult<T>
     public string? Error { get; set; }
 
     /// <summary>
+    /// 描述器
+    /// </summary>
+    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
+
+    /// <summary>
     ///     数据
     /// </summary>
     public T? Data { get; set; }
@@ -90,6 +117,16 @@ public static class DataResult
     }
 
     /// <summary>
+    ///     生成成功结果
+    /// </summary>
+    /// <param name="message">消息</param>
+    /// <returns>成功结果</returns>
+    public static DataResult<object> Success(string message = "成功")
+    {
+        return GenerateResult(ResultStatus.Success, message, new object());
+    }
+
+    /// <summary>
     ///     生成失败结果
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
@@ -101,14 +138,37 @@ public static class DataResult
     }
 
     /// <summary>
+    ///     生成失败结果
+    /// </summary>
+    /// <param name="message">消息</param>
+    /// <returns>失败结果</returns>
+    public static DataResult<object> Fail(string message = "失败")
+    {
+        return GenerateResult<object>(ResultStatus.Fail, message);
+    }
+
+    /// <summary>
     ///     生成异常结果
     /// </summary>
     /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
     /// <param name="message">消息</param>
     /// <returns>异常结果</returns>
-    public static DataResult<T> Exception<T>(Exception exception, string message = "异常")
+    public static DataResult<T> Exception<T>(Exception exception, int code = ResultStatus.Exception, string message = "异常")
     {
-        return GenerateResult<T>(ResultStatus.Exception, message, default, exception);
+        return GenerateResult<T>(code, message, default, exception);
+    }
+
+    /// <summary>
+    /// 生成异常结果
+    /// </summary>
+    /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <returns></returns>
+    public static DataResult<object> Exception(Exception exception, int code = ResultStatus.Exception, string message = "异常")
+    {
+        return GenerateResult<object>(code, message, default, exception);
     }
 
     /// <summary>
@@ -123,13 +183,25 @@ public static class DataResult
     private static DataResult<T> GenerateResult<T>(int code, string message, T? data = default,
         Exception? exception = null)
     {
-        return new DataResult<T>
+        var result = new DataResult<T>
         {
             Code = code,
             Data = data,
             Message = message,
-            Error = exception?.ToString()
+            Error = exception?.ToString(),
         };
+
+        if (exception != null)
+        {
+            result.SetException(exception);
+
+            result.Descriptor = new Dictionary<string, Collection<string>>
+            {
+                {"Exception", new Collection<string> { exception.ToString() }}
+            };
+        }
+
+        return result;
     }
 }
 

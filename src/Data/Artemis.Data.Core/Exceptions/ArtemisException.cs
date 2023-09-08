@@ -1,4 +1,4 @@
-﻿namespace Artemis.Extensions.Web.Exceptions;
+﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
 /// Artemis系统日志

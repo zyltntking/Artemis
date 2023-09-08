@@ -24,4 +24,9 @@ internal class RouteItem
     /// 域操作名
     /// </summary>
     public string DomainAction { get; set; } = null!;
+
+    /// <summary>
+    /// 接口描述
+    /// </summary>
+    public string? Description { get; set; }
 }

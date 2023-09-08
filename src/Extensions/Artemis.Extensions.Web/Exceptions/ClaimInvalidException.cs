@@ -1,9 +1,11 @@
-﻿namespace Artemis.Extensions.Web.Exceptions;
+﻿using Artemis.Data.Core.Exceptions;
+
+namespace Artemis.Extensions.Web.Exceptions;
 
 /// <summary>
 ///     凭据无效异常
 /// </summary>
-internal class ClaimInvalidException : ArtemisException
+public class ClaimInvalidException : ArtemisException
 {
     /// <summary>
     ///     构造

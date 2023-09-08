@@ -57,36 +57,36 @@
             域操作名
             </summary>
         </member>
+        <member name="P:Artemis.Extensions.Web.Builder.RouteItem.Description">
+            <summary>
+            接口描述
+            </summary>
+        </member>
         <member name="T:Artemis.Extensions.Web.Controller.ClaimedGenericApiController">
             <summary>
                 泛型凭据认证Api控制器
             </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Controller.ClaimedGenericApiController.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            泛型API控制器
+            </summary>
+            <param name="logger"></param>
         </member>
         <member name="T:Artemis.Extensions.Web.Controller.GenericApiController">
             <summary>
                 泛型Api控制器
             </summary>
         </member>
-        <member name="T:Artemis.Extensions.Web.Exceptions.ArtemisException">
+        <member name="M:Artemis.Extensions.Web.Controller.GenericApiController.#ctor(Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Artemis系统日志
+            泛型API控制器
             </summary>
+            <param name="logger"></param>
         </member>
-        <member name="M:Artemis.Extensions.Web.Exceptions.ArtemisException.#ctor(System.String,System.Int32)">
+        <member name="P:Artemis.Extensions.Web.Controller.GenericApiController.Logger">
             <summary>
-            错误构造
-            </summary>
-            <param name="errorMessage">错误消息</param>
-            <param name="errorCode">错误编码</param>
-        </member>
-        <member name="P:Artemis.Extensions.Web.Exceptions.ArtemisException.ErrorMessage">
-            <summary>
-            错误信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Web.Exceptions.ArtemisException.ErrorCode">
-            <summary>
-            错误编码
+            日志访问器
             </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.Exceptions.ClaimInvalidException">
@@ -104,21 +104,6 @@
                 构造
             </summary>
             <param name="actionName">操作名</param>
-        </member>
-        <member name="T:Artemis.Extensions.Web.Exceptions.ExceptionCode">
-            <summary>
-            异常编码
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Web.Exceptions.ExceptionCode.ArtemisException">
-            <summary>
-            Artemis 异常
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Web.Exceptions.ExceptionCode.ClaimInvalidException">
-            <summary>
-            凭据无效异常
-            </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.Feature.DistributedCacheExtensions">
             <summary>
@@ -296,6 +281,19 @@
             <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> for the current request.</param>
             <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.ResultExtensions">
+            <summary>
+            结果扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.ResultExtensions.Fail``1(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            从ModelState格式化失败结果
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+            <param name="modelState">模型状态</param>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Extensions.Web.SharedKeys">
             <summary>

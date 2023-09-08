@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +18,7 @@ public static class ApiRoutesTableBuilderExtensions
     /// <param name="app">Web应用</param>
     /// <param name="pattern">访问路径</param>
     /// <returns></returns>
-    public static WebApplication MapApiRouteTable(this WebApplication app, string pattern = "route-table")
+    public static WebApplication MapApiRouteTable(this WebApplication app, string pattern = "api-route-table")
     {
         if (app.Environment.IsDevelopment())
             app.MapGet(pattern, (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
@@ -63,12 +63,18 @@ public static class ApiRoutesTableBuilderExtensions
 
                             var displayAction = $"{domain}.{controller}.{action}";
 
+                            var descriptionMetadata = routeEndpoint
+                                .Metadata
+                                .OfType<DescriptionAttribute>()
+                                .FirstOrDefault();
+
                             var routeItem = new RouteItem
                             {
                                 Action = ActionType.API,
                                 Methods = displayMethods,
                                 Path = displayPath,
-                                DomainAction = displayAction
+                                DomainAction = displayAction,
+                                Description = descriptionMetadata?.Description
                             };
 
                             routeItemList.Add(routeItem);

@@ -120,6 +120,74 @@
             <code><![CDATA[((long)bytes[offset + 6] &lt;&lt; 8) |]]></code>
             <code><![CDATA[bytes[offset + 7];]]></code>
         </member>
+        <member name="T:Artemis.Data.Core.Exceptions.ArtemisException">
+            <summary>
+            Artemis系统日志
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.ArtemisException.#ctor(System.String,System.Int32)">
+            <summary>
+            错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Exceptions.ArtemisException.ErrorMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Exceptions.ArtemisException.ErrorCode">
+            <summary>
+            错误编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.CreateInstanceException">
+            <summary>
+            创建实例异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.CreateInstanceException.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.CreateInstanceException.#ctor(System.String)">
+            <summary>
+                构造
+            </summary>
+            <param name="instanceName">实例名</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.ExceptionCode">
+            <summary>
+            异常编码
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.ArtemisException">
+            <summary>
+            Artemis异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.CreateInstanceException">
+            <summary>
+            创建实例异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.ClaimInvalidException">
+            <summary>
+            凭据无效异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.NotSupportEmailException">
+            <summary>
+             认证不支持邮箱异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.NotSupportPhoneNumberException">
+            <summary>
+            认证不支持手机号码异常
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Enumeration">
             <summary>
                 枚举类
@@ -1342,6 +1410,23 @@
             <param name="message">消息</param>
             <param name="data">数据</param>
         </member>
+        <member name="M:Artemis.Data.Core.DataResult`1.SetException(System.Exception)">
+            <summary>
+            设置异常
+            </summary>
+            <param name="exception">异常</param>
+        </member>
+        <member name="M:Artemis.Data.Core.DataResult`1.GetException">
+            <summary>
+            获取异常
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.InnerException">
+            <summary>
+            内部异常
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Core.DataResult`1.IsSuccess">
             <summary>
                 是否成功
@@ -1367,6 +1452,11 @@
                 异常信息
             </summary>
         </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Descriptor">
+            <summary>
+            描述器
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Core.DataResult`1.Data">
             <summary>
                 数据
@@ -1386,6 +1476,13 @@
             <param name="message">消息</param>
             <returns>成功结果</returns>
         </member>
+        <member name="M:Artemis.Data.Core.DataResult.Success(System.String)">
+            <summary>
+                生成成功结果
+            </summary>
+            <param name="message">消息</param>
+            <returns>成功结果</returns>
+        </member>
         <member name="M:Artemis.Data.Core.DataResult.Fail``1(System.String)">
             <summary>
                 生成失败结果
@@ -1394,13 +1491,30 @@
             <param name="message">消息</param>
             <returns>失败结果</returns>
         </member>
-        <member name="M:Artemis.Data.Core.DataResult.Exception``1(System.Exception,System.String)">
+        <member name="M:Artemis.Data.Core.DataResult.Fail(System.String)">
+            <summary>
+                生成失败结果
+            </summary>
+            <param name="message">消息</param>
+            <returns>失败结果</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.DataResult.Exception``1(System.Exception,System.Int32,System.String)">
             <summary>
                 生成异常结果
             </summary>
             <param name="exception">异常</param>
+            <param name="code">结果编码</param>
             <param name="message">消息</param>
             <returns>异常结果</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.DataResult.Exception(System.Exception,System.Int32,System.String)">
+            <summary>
+            生成异常结果
+            </summary>
+            <param name="exception">异常</param>
+            <param name="code">结果编码</param>
+            <param name="message">结果消息</param>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.DataResult.GenerateResult``1(System.Int32,System.String,``0,System.Exception)">
             <summary>
@@ -2146,6 +2260,19 @@
             <summary>
                 状态项目
             </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Utility">
+            <summary>
+            辅助类
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Utility.CreateInstance``1">
+            <summary>
+            创建实例
+            </summary>
+            <typeparam name="T">实例类型</typeparam>
+            <returns></returns>
+            <exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
         </member>
     </members>
 </doc>

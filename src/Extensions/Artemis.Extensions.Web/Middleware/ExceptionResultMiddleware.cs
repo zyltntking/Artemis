@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Artemis.Extensions.Web.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -43,7 +44,7 @@ public class ExceptionResultMiddleware : IMiddleware
             Logger.LogInformation("格式化异常信息...");
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/json";
-            var result = DataResult.Exception<object>(exception);
+            var result = DataResult.Exception(exception);
             if (exception is ArtemisException artemisException)
             {
                 result.Code = artemisException.ErrorCode;

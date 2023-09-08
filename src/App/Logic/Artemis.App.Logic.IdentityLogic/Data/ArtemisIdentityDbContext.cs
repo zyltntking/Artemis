@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Artemis.App.IdentityApplication.Data
+namespace Artemis.App.Logic.IdentityLogic.Data
 {
+    /// <summary>
+    /// Artemis认证数据上下文
+    /// </summary>
     public class ArtemisIdentityDbContext : IdentityDbContext<
         ArtemisIdentityUser, 
         ArtemisIdentityRole, 
@@ -13,6 +16,10 @@ namespace Artemis.App.IdentityApplication.Data
         ArtemisIdentityRoleClaim, 
         ArtemisIdentityUserToken>
     {
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="options">创建配置</param>
         public ArtemisIdentityDbContext(DbContextOptions<ArtemisIdentityDbContext> options)
             : base(options)
         {
