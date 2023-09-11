@@ -826,5 +826,17 @@
             释放时间
             </summary>
         </member>
+        <member name="T:Artemis.App.IdentityApplication.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.IdentityApplication.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.IdentityApplication.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.IdentityApplication.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

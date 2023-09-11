@@ -6,7 +6,7 @@ namespace Artemis.Data.Core;
 ///     数据结果协议模板接口
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
-public class DataResult<T> : IDataResult<T>
+public sealed class DataResult<T> : ResultBase<T>
 {
     /// <summary>
     ///     空构造
@@ -66,37 +66,70 @@ public class DataResult<T> : IDataResult<T>
     /// <summary>
     ///     是否成功
     /// </summary>
-    public bool IsSuccess => Code == ResultStatus.Success;
+    public override bool Succeeded
+    {
+        get => Code == ResultStatus.Success;
+        set
+        {
+            //ignore
+        }
+    }
+
+}
+
+/// <summary>
+/// 结果协议类
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public abstract class ResultBase<T> : IResultBase<T>
+{
+    #region Implementation of IResultBase
 
     /// <summary>
     ///     消息码
     /// </summary>
-    public int Code { get; set; }
+    public virtual int Code { get; set; }
+
+    /// <summary>
+    /// 操作是否成功
+    /// </summary>
+    public virtual bool Succeeded { get; set; }
 
     /// <summary>
     ///     消息
     /// </summary>
-    public string Message { get; set; } = string.Empty;
-
-    /// <summary>
-    ///     时间戳
-    /// </summary>
-    public long Timestamp { get; set; } = DateTime.Now.ToUnixTimeStamp();
+    public virtual string Message { get; set; } = string.Empty;
 
     /// <summary>
     ///     异常信息
     /// </summary>
-    public string? Error { get; set; }
+    public virtual string? Error { get; set; }
+
+    /// <summary>
+    /// 本地时间戳
+    /// </summary>
+    public virtual DateTime DateTime { get; set; }
+
+    /// <summary>
+    ///     时间戳
+    /// </summary>
+    public virtual long Timestamp { get; set; }
+
+    #endregion
 
     /// <summary>
     /// 描述器
     /// </summary>
-    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
+    public virtual Dictionary<string, Collection<string>>? Descriptor { get; set; }
+
+    #region Implementation of IResultBase<T>
 
     /// <summary>
     ///     数据
     /// </summary>
-    public T? Data { get; set; }
+    public virtual T? Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>

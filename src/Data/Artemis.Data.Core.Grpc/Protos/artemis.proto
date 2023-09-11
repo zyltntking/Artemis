@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";  
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Artemis.Data.Core.Grpc.Protos";
+
+message Result{
+	int32 code = 1;
+	bool succeed = 2;
+	string message = 3;
+	string error = 4;
+	google.protobuf.Timestamp datetime = 5;
+	google.protobuf.Duration timestamp = 6;
+}
+
+message PageInfo{
+	uint32 page = 1;
+	uint32 size = 2;
+	uint32 count = 3;
+	google.protobuf.Int32Value total = 4;
+}

@@ -62,6 +62,14 @@ namespace Artemis.App.IdentityApplication.Controllers
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
+
+                var response = new SignInResponse
+                {
+                    Expire = DateTime.Now.AddDays(30),
+                    Token = resultAttach.Attach.Id.ToString()
+                };
+
+                return DataResult.Success(response);
             }
 
             return ModelState.Fail<SignInResponse>();

@@ -1249,40 +1249,102 @@
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Data.Core.IDataResult">
+        <member name="T:Artemis.Data.Core.IPageBase">
+            <summary>
+            分页协议接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageBase.Page">
+            <summary>
+            当前页码(从0开始)
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageBase.Size">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.IPageRequest`1">
+            <summary>
+            分页请求协议接口
+            </summary>
+            <typeparam name="T">过滤条件</typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageRequest`1.FilterCondition">
+            <summary>
+            过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.IPageReplay">
+            <summary>
+            分页响应协议接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageReplay.Count">
+            <summary>
+            过滤后数据条数
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageReplay.Total">
+            <summary>
+            数据总量
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.IPageReplay`1">
+            <summary>
+            分页响应协议接口
+            </summary>
+            <typeparam name="T">响应数据</typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.IPageReplay`1.Data">
+            <summary>
+            数据包
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.IResultBase">
             <summary>
                 数据结果协议模板接口
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Code">
+        <member name="P:Artemis.Data.Core.IResultBase.Code">
             <summary>
                 消息码
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Message">
+        <member name="P:Artemis.Data.Core.IResultBase.Succeeded">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IResultBase.Message">
             <summary>
                 消息
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.IDataResult.Timestamp">
+        <member name="P:Artemis.Data.Core.IResultBase.Error">
+            <summary>
+                异常信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IResultBase.DateTime">
+            <summary>
+            本地时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IResultBase.Timestamp">
             <summary>
                 时间戳
             </summary>
         </member>
-        <member name="T:Artemis.Data.Core.IDataResult`1">
+        <member name="T:Artemis.Data.Core.IResultBase`1">
             <summary>
                 数据结果协议模板接口
             </summary>
             <typeparam name="T">模板类型</typeparam>
         </member>
-        <member name="P:Artemis.Data.Core.IDataResult`1.Data">
+        <member name="P:Artemis.Data.Core.IResultBase`1.Data">
             <summary>
                 数据
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.IDataResult`1.Error">
-            <summary>
-                异常信息
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.PartitionBase">
@@ -1383,6 +1445,63 @@
                 删除时间
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.PageRequest`1">
+            <summary>
+            分页请求
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.PageRequest`1.Page">
+            <summary>
+            当前页码(从1开始)
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageRequest`1.Size">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageRequest`1.Skip">
+            <summary>
+            跳过数
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageRequest`1.FilterCondition">
+            <summary>
+            过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.PageReply`1">
+            <summary>
+            分页数据响应
+            </summary>
+            <typeparam name="T">数据包</typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.PageReply`1.Page">
+            <summary>
+            当前页码(从0开始)
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageReply`1.Size">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageReply`1.Count">
+            <summary>
+            过滤后数据条数
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageReply`1.Total">
+            <summary>
+            数据总量
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageReply`1.Data">
+            <summary>
+            数据包
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.DataResult`1">
             <summary>
                 数据结果协议模板接口
@@ -1427,37 +1546,53 @@
             内部异常
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.IsSuccess">
+        <member name="P:Artemis.Data.Core.DataResult`1.Succeeded">
             <summary>
                 是否成功
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Code">
+        <member name="T:Artemis.Data.Core.ResultBase`1">
+            <summary>
+            结果协议类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.ResultBase`1.Code">
             <summary>
                 消息码
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Message">
+        <member name="P:Artemis.Data.Core.ResultBase`1.Succeeded">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ResultBase`1.Message">
             <summary>
                 消息
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Timestamp">
-            <summary>
-                时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Error">
+        <member name="P:Artemis.Data.Core.ResultBase`1.Error">
             <summary>
                 异常信息
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Descriptor">
+        <member name="P:Artemis.Data.Core.ResultBase`1.DateTime">
+            <summary>
+            本地时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ResultBase`1.Timestamp">
+            <summary>
+                时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ResultBase`1.Descriptor">
             <summary>
             描述器
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Data">
+        <member name="P:Artemis.Data.Core.ResultBase`1.Data">
             <summary>
                 数据
             </summary>
