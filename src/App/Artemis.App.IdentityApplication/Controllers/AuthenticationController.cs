@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Artemis.App.IdentityApplication.Protocols;
 using Artemis.Data.Core;
 using Artemis.Extensions.Web;
 using Artemis.Extensions.Web.Controller;
@@ -33,47 +32,47 @@ namespace Artemis.App.IdentityApplication.Controllers
         private IIdentityService<ArtemisIdentityUser> IdentityService { get; }
 
 
-        /// <summary>
-        /// 注册
-        /// </summary>
-        /// <param name="request">注册请求</param>
-        /// <returns></returns>
-        [HttpPost, HttpHead]
-        [Description("注册")]
-        public async Task<DataResult<SignInResponse>> SignUp([FromBody] [Required] SignUpRequest request)
-        {
-            if (ModelState.IsValid)
-            {
-                //var user = Utility.CreateInstance<ArtemisIdentityUser>();
+        ///// <summary>
+        ///// 注册
+        ///// </summary>
+        ///// <param name="request">注册请求</param>
+        ///// <returns></returns>
+        //[HttpPost, HttpHead]
+        //[Description("注册")]
+        //public async Task<DataResult<SignInResponse>> SignUp([FromBody] [Required] SignUpRequest request)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //var user = Utility.CreateInstance<ArtemisIdentityUser>();
 
-                //await UserStore.SetUserNameAsync(user, request.Username, CancellationToken.None);
+        //        //await UserStore.SetUserNameAsync(user, request.Username, CancellationToken.None);
 
-                //var result = await UserManger.CreateAsync(user, request.Password);
+        //        //var result = await UserManger.CreateAsync(user, request.Password);
 
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, false);
+        //        //if (result.Succeeded)
+        //        //{
+        //        //    await SignInManager.SignInAsync(user, false);
 
 
-                //}
+        //        //}
 
-                var resultAttach = await IdentityService.SignUp(request.Username, request.Password);
+        //        var resultAttach = await IdentityService.SignUp(request.Username, request.Password);
 
-                foreach (var error in resultAttach.Result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
+        //        foreach (var error in resultAttach.Result.Errors)
+        //        {
+        //            ModelState.AddModelError(error.Code, error.Description);
+        //        }
 
-                var response = new SignInResponse
-                {
-                    Expire = DateTime.Now.AddDays(30),
-                    Token = resultAttach.Attach.Id.ToString()
-                };
+        //        var response = new SignInResponse
+        //        {
+        //            Expire = DateTime.Now.AddDays(30),
+        //            Token = resultAttach.Attach.Id.ToString()
+        //        };
 
-                return DataResult.Success(response);
-            }
+        //        return DataResult.Success(response);
+        //    }
 
-            return ModelState.Fail<SignInResponse>();
-        }
+        //    return ModelState.Fail<SignInResponse>();
+        //}
     }
 }

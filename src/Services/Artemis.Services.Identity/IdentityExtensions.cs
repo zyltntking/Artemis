@@ -1,5 +1,4 @@
 ﻿using Artemis.Services.Identity.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,45 +13,35 @@ public static class IdentityExtensions
     ///     添加认证服务
     /// </summary>
     /// <param name="serviceCollection"></param>
-    /// <param name="logicOptions"></param>
+    /// <param name="serviceOptions"></param>
+    /// <param name="isDevelopment"></param>
     /// <returns></returns>
     public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection,
-        IdentityLogicOptions logicOptions)
+        IdentityServiceOptions serviceOptions, bool isDevelopment)
     {
         serviceCollection.AddDbContext<ArtemisIdentityDbContext>(options =>
             {
-                options.UseNpgsql(logicOptions.Connection, npgsqlOption =>
+                options.UseNpgsql(serviceOptions.Connection, npgsqlOption =>
                 {
                     npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
 
-                    npgsqlOption.MigrationsAssembly(logicOptions.AssemblyName);
+                    npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
                 }).UseLazyLoadingProxies();
-            }).AddDefaultIdentity<ArtemisIdentityUser>()
+            })
+            .AddDefaultIdentity<ArtemisIdentityUser>()
             .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
 
         serviceCollection.AddScoped<IIdentityService, IdentityService>();
 
-        serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
-
-        serviceCollection.Configure<IdentityOptions>(options =>
+        if (isDevelopment)
         {
-            // Password settings.
-            // options.Password.RequireDigit = true;
-            // options.Password.RequireLowercase = true;
-            // options.Password.RequireNonAlphanumeric = true;
-            // options.Password.RequireUppercase = true;
-            // options.Password.RequiredLength = 6;
-            // options.Password.RequiredUniqueChars = 1;
+            serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
+        }
 
-            // Lockout settings.
-            // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            // options.Lockout.MaxFailedAccessAttempts = 5;
-            // options.Lockout.AllowedForNewUsers = true;
-
-            // User settings.
-            // options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            // options.User.RequireUniqueEmail = false;
-        });
+        if (serviceOptions.IdentityOptionsAction != null)
+        {
+            serviceCollection.Configure(serviceOptions.IdentityOptionsAction);
+        }
 
         serviceCollection.ConfigureApplicationCookie(options =>
         {

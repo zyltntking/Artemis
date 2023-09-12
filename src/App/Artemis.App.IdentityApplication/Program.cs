@@ -1,11 +1,9 @@
 using System.Text.Json.Serialization;
-using Artemis.App.IdentityApplication.Services;
 using Artemis.Services.Identity;
 using Artemis.Extensions.Web.Builder;
 using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
-using ProtoBuf.Grpc.Server;
 
 namespace Artemis.App.IdentityApplication
 {
@@ -21,16 +19,16 @@ namespace Artemis.App.IdentityApplication
                 var connectionString = builder.Configuration
                     .GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-                builder.Services.AddIdentityService(new IdentityLogicOptions
+                builder.Services.AddIdentityService(new IdentityServiceOptions
                 {
                     Connection = connectionString,
                     AssemblyName = "Artemis.App.IdentityApplication"
-                });
+                }, builder.Environment.IsDevelopment());
 
-                builder.Services.AddGrpc();
-                builder.Services.AddCodeFirstGrpc();
-                builder.Services.AddGrpcReflection();
-                builder.Services.AddCodeFirstGrpcReflection();
+                //builder.Services.AddGrpc();
+                //builder.Services.AddCodeFirstGrpc();
+                //builder.Services.AddGrpcReflection();
+                //builder.Services.AddCodeFirstGrpcReflection();
 
                 builder.Services.AddRazorPages();
 
@@ -89,13 +87,13 @@ namespace Artemis.App.IdentityApplication
 
                 app.MapApiRouteTable();
 
-                app.MapGrpcService<GreeterService>();
-                app.MapGrpcService<SampleService>();
+                //app.MapGrpcService<GreeterService>();
+                //app.MapGrpcService<SampleService>();
 
                 if (app.Environment.IsDevelopment())
                 {
                     //app.MapGrpcReflectionService();
-                    app.MapCodeFirstGrpcReflectionService();
+                    //app.MapCodeFirstGrpcReflectionService();
                 }
             });
         }

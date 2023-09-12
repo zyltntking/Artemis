@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix>beta1</VersionSuffix>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Authors>zyltntking</Authors>
+		<Company>Artemis</Company>
+		<Product>Artemis.Net</Product>
+		<Description>Artemis.NET App Build Tools</Description>
+		<Copyright>Copyright © zyltntking 2013</Copyright>
+		<Summary>Artemis.NET App Build Tools</Summary>
+		<Title>Artemis.NET</Title>
+		<PackageId>Artemis.Shared</PackageId>
+		<PackageTags>data</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RootNamespace>Artemis.Shared</RootNamespace>
+		<AssemblyName>Artemis.Shared</AssemblyName>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Artemis.Shared.xml</DocumentationFile>
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
+		<Nullable>enable</Nullable>
+		<MinClientVersion>4.1.0</MinClientVersion>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj" />
+	</ItemGroup>
+
+</Project>

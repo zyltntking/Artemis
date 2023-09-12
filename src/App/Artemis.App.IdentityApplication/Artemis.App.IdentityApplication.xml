@@ -777,7 +777,7 @@
             认证接口组
             </summary>
         </member>
-        <member name="M:Artemis.App.IdentityApplication.Controllers.AuthenticationController.#ctor(Artemis.App.Logic.IdentityLogic.IIdentityService{Artemis.App.Logic.IdentityLogic.Data.ArtemisIdentityUser},Microsoft.Extensions.Logging.ILogger{Artemis.App.IdentityApplication.Controllers.AuthenticationController})">
+        <member name="M:Artemis.App.IdentityApplication.Controllers.AuthenticationController.#ctor(Artemis.Services.Identity.IIdentityService{Artemis.Services.Identity.Data.ArtemisIdentityUser},Microsoft.Extensions.Logging.ILogger{Artemis.App.IdentityApplication.Controllers.AuthenticationController})">
             <summary>
             认证控制器
             </summary>
@@ -788,13 +788,6 @@
             <summary>
             用户管理器
             </summary>
-        </member>
-        <member name="M:Artemis.App.IdentityApplication.Controllers.AuthenticationController.SignUp(Artemis.App.IdentityApplication.Protocols.SignUpRequest)">
-            <summary>
-            注册
-            </summary>
-            <param name="request">注册请求</param>
-            <returns></returns>
         </member>
         <member name="T:Artemis.App.IdentityApplication.Migrations.InitialCreate">
             <inheritdoc />
@@ -807,87 +800,6 @@
         </member>
         <member name="M:Artemis.App.IdentityApplication.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.SignUpRequest">
-            <summary>
-            注册请求
-            </summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.SignUpRequest.Username">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.SignUpRequest.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.SignInResponse">
-            <summary>
-            登录响应
-            </summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.SignInResponse.Token">
-            <summary>
-            令牌
-            </summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.SignInResponse.Expire">
-            <summary>
-            释放时间
-            </summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.GreetReflection">
-            <summary>Holder for reflection information generated from Protocols/greet.proto</summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.GreetReflection.Descriptor">
-            <summary>File descriptor for Protocols/greet.proto</summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.HelloRequest">
-            <summary>
-            The request message containing the user's name.
-            </summary>
-        </member>
-        <member name="F:Artemis.App.IdentityApplication.Protocols.HelloRequest.NameFieldNumber">
-            <summary>Field number for the "name" field.</summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.HelloReply">
-            <summary>
-            The response message containing the greetings.
-            </summary>
-        </member>
-        <member name="F:Artemis.App.IdentityApplication.Protocols.HelloReply.MessageFieldNumber">
-            <summary>Field number for the "message" field.</summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.Greeter">
-            <summary>
-            The greeting service definition.
-            </summary>
-        </member>
-        <member name="P:Artemis.App.IdentityApplication.Protocols.Greeter.Descriptor">
-            <summary>Service descriptor</summary>
-        </member>
-        <member name="T:Artemis.App.IdentityApplication.Protocols.Greeter.GreeterBase">
-            <summary>Base class for server-side implementations of Greeter</summary>
-        </member>
-        <member name="M:Artemis.App.IdentityApplication.Protocols.Greeter.GreeterBase.SayHello(Artemis.App.IdentityApplication.Protocols.HelloRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            Sends a greeting
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.IdentityApplication.Protocols.Greeter.BindService(Artemis.App.IdentityApplication.Protocols.Greeter.GreeterBase)">
-            <summary>Creates service definition that can be registered with a server</summary>
-            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-        </member>
-        <member name="M:Artemis.App.IdentityApplication.Protocols.Greeter.BindService(Grpc.Core.ServiceBinderBase,Artemis.App.IdentityApplication.Protocols.Greeter.GreeterBase)">
-            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
-            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
-            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
-            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
     </members>
 </doc>

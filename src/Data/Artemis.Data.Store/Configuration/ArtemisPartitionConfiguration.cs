@@ -2,16 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Artemis.Data.Store;
+namespace Artemis.Data.Store.Configuration;
 
 /// <summary>
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeConfiguration<TEntity>
+public abstract class ArtemisPartitionConfiguration<TEntity> : ArtemisModelConfiguration<TEntity>
     where TEntity : class, IPartitionBase
 {
-    #region Overrides of ModelBaseTypeConfiguration<TEntity>
+    #region Overrides of ArtemisModelConfiguration<TEntity>
 
     /// <summary>
     ///     数据库字段配置
@@ -30,8 +30,6 @@ public abstract class PartitionBaseTypeConfiguration<TEntity> : ModelBaseTypeCon
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        base.RelationConfigure(builder);
-
         builder.HasIndex(entity => entity.Partition);
     }
 

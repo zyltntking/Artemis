@@ -1,0 +1,1 @@
+﻿# Artemis.Shared.Identity
