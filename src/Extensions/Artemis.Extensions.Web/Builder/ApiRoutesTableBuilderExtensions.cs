@@ -31,10 +31,8 @@ public static class ApiRoutesTableBuilderExtensions
                 var routeItemList = new List<RouteItem>();
 
                 foreach (var endpoint in endpoints)
-                {
                     if (endpoint is RouteEndpoint routeEndpoint)
                     {
-
                         var apiControllerMetadata = routeEndpoint
                             .Metadata
                             .OfType<ApiControllerAttribute>()
@@ -80,7 +78,6 @@ public static class ApiRoutesTableBuilderExtensions
                             routeItemList.Add(routeItem);
                         }
                     }
-                }
 
                 return routeItemList;
             });

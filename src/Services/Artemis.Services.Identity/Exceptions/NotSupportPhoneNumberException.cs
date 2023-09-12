@@ -3,11 +3,10 @@
 namespace Artemis.Services.Identity.Exceptions;
 
 /// <summary>
-/// 认证不支持手机号码异常
+///     认证不支持手机号码异常
 /// </summary>
 public class NotSupportPhoneNumberException : ArtemisException
 {
-
     /// <summary>
     ///     构造
     /// </summary>
@@ -16,11 +15,12 @@ public class NotSupportPhoneNumberException : ArtemisException
     }
 
     /// <summary>
-    /// 错误构造
+    ///     错误构造
     /// </summary>
     /// <param name="errorMessage">错误消息</param>
     /// <param name="errorCode">错误编码</param>
-    public NotSupportPhoneNumberException(string errorMessage, int errorCode = ExceptionCode.NotSupportPhoneNumberException) : base(errorMessage, errorCode)
+    public NotSupportPhoneNumberException(string errorMessage,
+        int errorCode = ExceptionCode.NotSupportPhoneNumberException) : base(errorMessage, errorCode)
     {
     }
 }

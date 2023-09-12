@@ -45,13 +45,41 @@ public sealed class DataResult<T> : IResultBase<T>
         Error = null;
     }
 
+    /// <summary>
+    ///     内部异常
+    /// </summary>
+    private Exception? InnerException { get; set; }
+
+    /// <summary>
+    ///     描述器
+    /// </summary>
+    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
+
+    /// <summary>
+    ///     设置异常
+    /// </summary>
+    /// <param name="exception">异常</param>
+    public void SetException(Exception exception)
+    {
+        InnerException = exception;
+    }
+
+    /// <summary>
+    ///     获取异常
+    /// </summary>
+    /// <returns></returns>
+    public Exception? GetException()
+    {
+        return InnerException;
+    }
+
     #region Implementation of IResultBase
 
     /// <summary>
     ///     消息码
     /// </summary>
     [DataMember(Order = 1)]
-    public  int Code { get; set; }
+    public int Code { get; set; }
 
     /// <summary>
     ///     是否成功
@@ -72,7 +100,7 @@ public sealed class DataResult<T> : IResultBase<T>
     public string? Error { get; set; }
 
     /// <summary>
-    /// 本地时间戳
+    ///     本地时间戳
     /// </summary>
     [DataMember(Order = 5)]
     public DateTime DateTime { get; set; }
@@ -90,31 +118,6 @@ public sealed class DataResult<T> : IResultBase<T>
     public T? Data { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 设置异常
-    /// </summary>
-    /// <param name="exception">异常</param>
-    public void SetException(Exception exception)
-    {
-        InnerException = exception;
-    }
-
-    /// <summary>
-    /// 获取异常
-    /// </summary>
-    /// <returns></returns>
-    public Exception? GetException() => InnerException;
-
-    /// <summary>
-    /// 内部异常
-    /// </summary>
-    private Exception? InnerException { get; set; }
-
-    /// <summary>
-    /// 描述器
-    /// </summary>
-    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
 }
 
 /// <summary>
@@ -172,19 +175,21 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">消息</param>
     /// <returns>异常结果</returns>
-    public static DataResult<T> Exception<T>(Exception exception, int code = ResultStatus.Exception, string message = "异常")
+    public static DataResult<T> Exception<T>(Exception exception, int code = ResultStatus.Exception,
+        string message = "异常")
     {
         return GenerateResult<T>(code, message, default, exception);
     }
 
     /// <summary>
-    /// 生成异常结果
+    ///     生成异常结果
     /// </summary>
     /// <param name="exception">异常</param>
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static DataResult<object> Exception(Exception exception, int code = ResultStatus.Exception, string message = "异常")
+    public static DataResult<object> Exception(Exception exception, int code = ResultStatus.Exception,
+        string message = "异常")
     {
         return GenerateResult<object>(code, message, default, exception);
     }
@@ -206,7 +211,7 @@ public static class DataResult
             Code = code,
             Data = data,
             Message = message,
-            Error = exception?.ToString(),
+            Error = exception?.ToString()
         };
 
         if (exception != null)
@@ -215,7 +220,7 @@ public static class DataResult
 
             result.Descriptor = new Dictionary<string, Collection<string>>
             {
-                {"Exception", new Collection<string> { exception.ToString() }}
+                { "Exception", new Collection<string> { exception.ToString() } }
             };
         }
 

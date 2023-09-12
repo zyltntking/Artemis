@@ -3,7 +3,7 @@
 namespace Artemis.Services.Identity.Exceptions;
 
 /// <summary>
-/// 认证系统不支持邮箱异常
+///     认证系统不支持邮箱异常
 /// </summary>
 public class NotSupportEmailException : ArtemisException
 {
@@ -15,11 +15,12 @@ public class NotSupportEmailException : ArtemisException
     }
 
     /// <summary>
-    /// 错误构造
+    ///     错误构造
     /// </summary>
     /// <param name="errorMessage">错误消息</param>
     /// <param name="errorCode">错误编码</param>
-    public NotSupportEmailException(string errorMessage, int errorCode = ExceptionCode.NotSupportEmailException) : base(errorMessage, errorCode)
+    public NotSupportEmailException(string errorMessage, int errorCode = ExceptionCode.NotSupportEmailException) : base(
+        errorMessage, errorCode)
     {
     }
 }

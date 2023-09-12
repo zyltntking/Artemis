@@ -13,7 +13,7 @@ namespace Artemis.Extensions.Web.Controller;
 public abstract class ClaimedGenericApiController : GenericApiController
 {
     /// <summary>
-    /// 泛型API控制器
+    ///     泛型API控制器
     /// </summary>
     /// <param name="logger"></param>
     protected ClaimedGenericApiController(ILogger logger) : base(logger)
@@ -29,7 +29,7 @@ public abstract class ClaimedGenericApiController : GenericApiController
 public abstract class GenericApiController : ControllerBase
 {
     /// <summary>
-    /// 泛型API控制器
+    ///     泛型API控制器
     /// </summary>
     /// <param name="logger"></param>
     protected GenericApiController(ILogger logger)
@@ -38,7 +38,7 @@ public abstract class GenericApiController : ControllerBase
     }
 
     /// <summary>
-    /// 日志访问器
+    ///     日志访问器
     /// </summary>
     protected ILogger Logger { get; }
 }

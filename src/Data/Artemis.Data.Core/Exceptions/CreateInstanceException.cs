@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
-/// 创建实例异常
+///     创建实例异常
 /// </summary>
 public class CreateInstanceException : ArtemisException
 {
@@ -16,7 +16,8 @@ public class CreateInstanceException : ArtemisException
     ///     构造
     /// </summary>
     /// <param name="instanceName">实例名</param>
-    public CreateInstanceException(string instanceName) : base($"创建实例:{instanceName}异常", ExceptionCode.CreateInstanceException)
+    public CreateInstanceException(string instanceName) : base($"创建实例:{instanceName}异常",
+        ExceptionCode.CreateInstanceException)
     {
     }
 }

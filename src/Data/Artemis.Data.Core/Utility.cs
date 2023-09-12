@@ -3,12 +3,12 @@
 namespace Artemis.Data.Core;
 
 /// <summary>
-/// 辅助类
+///     辅助类
 /// </summary>
 public static class Utility
 {
     /// <summary>
-    /// 创建实例
+    ///     创建实例
     /// </summary>
     /// <typeparam name="T">实例类型</typeparam>
     /// <returns></returns>

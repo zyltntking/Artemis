@@ -18,7 +18,8 @@ public class ClaimInvalidException : ArtemisException
     ///     构造
     /// </summary>
     /// <param name="actionName">操作名</param>
-    public ClaimInvalidException(string actionName) : base($"操作{actionName}没有有效的凭据", ExceptionCode.ClaimInvalidException)
+    public ClaimInvalidException(string actionName) : base($"操作{actionName}没有有效的凭据",
+        ExceptionCode.ClaimInvalidException)
     {
     }
 }

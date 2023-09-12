@@ -1,19 +1,18 @@
 ﻿using System.Net;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
-using Artemis.Extensions.Web.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Extensions.Web.Middleware;
 
 /// <summary>
-/// 异常结果中间件
+///     异常结果中间件
 /// </summary>
 public class ExceptionResultMiddleware : IMiddleware
 {
     /// <summary>
-    /// 中间件构造
+    ///     中间件构造
     /// </summary>
     /// <param name="logger">日志依赖</param>
     public ExceptionResultMiddleware(ILogger<ExceptionResultMiddleware> logger)
@@ -34,7 +33,6 @@ public class ExceptionResultMiddleware : IMiddleware
     /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-
         try
         {
             await next(context);
@@ -50,6 +48,7 @@ public class ExceptionResultMiddleware : IMiddleware
                 result.Code = artemisException.ErrorCode;
                 result.Error = artemisException.ErrorMessage;
             }
+
             await context.Response.WriteAsJsonAsync(result);
         }
     }

@@ -5,12 +5,17 @@ using Microsoft.Extensions.Options;
 namespace Artemis.Extensions.Web.Middleware;
 
 /// <summary>
-/// 服务域中间件
+///     服务域中间件
 /// </summary>
 public class ServiceDomainMiddleware : IMiddleware
 {
     /// <summary>
-    /// 中间件构造
+    ///     服务域标识
+    /// </summary>
+    private const string DomainKey = SharedKeys.DomainKey;
+
+    /// <summary>
+    ///     中间件构造
     /// </summary>
     /// <param name="options">域</param>
     /// <param name="logger">日志依赖</param>
@@ -21,7 +26,7 @@ public class ServiceDomainMiddleware : IMiddleware
     }
 
     /// <summary>
-    /// 域名称
+    ///     域名称
     /// </summary>
     private DomainOptions Options { get; }
 
@@ -29,11 +34,6 @@ public class ServiceDomainMiddleware : IMiddleware
     ///     日志
     /// </summary>
     private ILogger<ServiceDomainMiddleware> Logger { get; }
-
-    /// <summary>
-    /// 服务域标识
-    /// </summary>
-    private const string DomainKey = SharedKeys.DomainKey;
 
     #region Implementation of IMiddleware
 

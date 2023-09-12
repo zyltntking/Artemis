@@ -2,22 +2,22 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Services.Identity;
 
 /// <summary>
-/// 认证扩展
+///     认证扩展
 /// </summary>
 public static class IdentityExtensions
 {
     /// <summary>
-    /// 添加认证服务
+    ///     添加认证服务
     /// </summary>
     /// <param name="serviceCollection"></param>
     /// <param name="logicOptions"></param>
     /// <returns></returns>
-    public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection, IdentityLogicOptions logicOptions)
+    public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection,
+        IdentityLogicOptions logicOptions)
     {
         serviceCollection.AddDbContext<ArtemisIdentityDbContext>(options =>
             {
@@ -34,30 +34,24 @@ public static class IdentityExtensions
 
         serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 
-        serviceCollection.Configure<HostOptions>(hostOptions =>
-        {
-            hostOptions.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore;
-        });
-
         serviceCollection.Configure<IdentityOptions>(options =>
         {
             // Password settings.
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireNonAlphanumeric = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequiredLength = 6;
-            options.Password.RequiredUniqueChars = 1;
+            // options.Password.RequireDigit = true;
+            // options.Password.RequireLowercase = true;
+            // options.Password.RequireNonAlphanumeric = true;
+            // options.Password.RequireUppercase = true;
+            // options.Password.RequiredLength = 6;
+            // options.Password.RequiredUniqueChars = 1;
 
             // Lockout settings.
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.AllowedForNewUsers = true;
+            // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            // options.Lockout.MaxFailedAccessAttempts = 5;
+            // options.Lockout.AllowedForNewUsers = true;
 
             // User settings.
-            options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            options.User.RequireUniqueEmail = false;
+            // options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            // options.User.RequireUniqueEmail = false;
         });
 
         serviceCollection.ConfigureApplicationCookie(options =>

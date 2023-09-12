@@ -11,7 +11,7 @@ public interface IResultBase
     int Code { get; set; }
 
     /// <summary>
-    /// 操作是否成功
+    ///     操作是否成功
     /// </summary>
     bool Succeeded { get; }
 
@@ -26,7 +26,7 @@ public interface IResultBase
     string? Error { get; set; }
 
     /// <summary>
-    /// 本地时间戳
+    ///     本地时间戳
     /// </summary>
     DateTime DateTime { get; set; }
 

@@ -32,6 +32,16 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
     private class ArtemisClaimFilter : IAsyncAuthorizationFilter
     {
         /// <summary>
+        ///     凭据类型索引
+        /// </summary>
+        private const string ClaimTypeKey = "ClaimType";
+
+        /// <summary>
+        ///     域标识
+        /// </summary>
+        private const string DomainKey = SharedKeys.DomainKey;
+
+        /// <summary>
         ///     ArtemisClaimFilter构造
         /// </summary>
         /// <param name="logger">日志</param>
@@ -59,16 +69,6 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         /// </summary>
         private string SignatureClaim { get; }
 
-        /// <summary>
-        /// 凭据类型索引
-        /// </summary>
-        private const string ClaimTypeKey = "ClaimType";
-
-        /// <summary>
-        /// 域标识
-        /// </summary>
-        private const string DomainKey = SharedKeys.DomainKey;
-
         #region Implementation of IAsyncAuthorizationFilter
 
         /// <summary>
@@ -81,10 +81,8 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         public Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             if (context.HttpContext.Items.ContainsKey(ClaimTypeKey))
-            {
                 //不改变上个筛选器的校验结果
                 return Task.CompletedTask;
-            }
 
             var routePathClaim = context.HttpContext.Request.Path.Value ?? string.Empty;
 
@@ -148,7 +146,7 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
             // 提示凭据异常所在操作
             Logger.LogInformation($"domain:{domain} action:{actionName},凭据校验未通过...");
 
-            if (string.IsNullOrWhiteSpace(actionName)) 
+            if (string.IsNullOrWhiteSpace(actionName))
                 throw new ClaimInvalidException();
 
             throw new ClaimInvalidException("actionNameClaim");
@@ -163,10 +161,7 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         /// <returns></returns>
         private static string ActionNameClaim(ControllerActionDescriptor? descriptor)
         {
-            if (descriptor == null)
-            {
-                return string.Empty;
-            }
+            if (descriptor == null) return string.Empty;
 
             var controller = descriptor.ControllerName;
 
