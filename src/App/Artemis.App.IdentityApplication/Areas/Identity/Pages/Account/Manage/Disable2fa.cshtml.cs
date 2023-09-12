@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
-using Artemis.App.Logic.IdentityLogic.Data;
+using Artemis.Services.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

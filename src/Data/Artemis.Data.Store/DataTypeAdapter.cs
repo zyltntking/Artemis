@@ -3,7 +3,7 @@
 /// <summary>
 ///     数据类型适配器
 /// </summary>
-public static class DataTypeAdapter
+internal static class DataTypeAdapter
 {
     /// <summary>
     ///     数据类型缓存

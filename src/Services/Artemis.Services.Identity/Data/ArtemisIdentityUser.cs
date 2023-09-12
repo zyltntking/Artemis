@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Artemis.App.Logic.IdentityLogic.Data;
+namespace Artemis.Services.Identity.Data;
 
 public class ArtemisIdentityUser : IdentityUser<Guid>
 {

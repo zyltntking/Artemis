@@ -1,10 +1,10 @@
-﻿using Artemis.App.Logic.IdentityLogic.Data;
-using Artemis.App.Logic.IdentityLogic.Exceptions;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
+using Artemis.Services.Identity.Data;
+using Artemis.Services.Identity.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Artemis.App.Logic.IdentityLogic;
+namespace Artemis.Services.Identity;
 
 /// <summary>
 /// 认证服务实现

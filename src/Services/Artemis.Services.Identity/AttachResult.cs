@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Artemis.App.Logic.IdentityLogic;
+namespace Artemis.Services.Identity;
 
 /// <summary>
 /// Identity结果附加数据

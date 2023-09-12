@@ -14,17 +14,17 @@
 	  <Copyright>Copyright © zyltntking 2013</Copyright>
 	  <Summary>Artemis.NET App Build Tools</Summary>
 	  <Title>Artemis.NET</Title>
-	  <PackageId>Artemis.App.Logic.IdentityLogic</PackageId>
+	  <PackageId>Artemis.Services.Identity</PackageId>
 	  <PackageTags>data</PackageTags>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
-	  <RootNamespace>Artemis.App.Logic.IdentityLogic</RootNamespace>
-	  <AssemblyName>Artemis.App.Logic.IdentityLogic</AssemblyName>
+	  <RootNamespace>Artemis.Services.Identity</RootNamespace>
+	  <AssemblyName>Artemis.Services.Identity</AssemblyName>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	  <DocumentationFile>Artemis.App.Logic.IdentityLogic.xml</DocumentationFile>
+	  <DocumentationFile>Artemis.Services.Identity.xml</DocumentationFile>
 	  <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 	  <CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
 	  <Nullable>enable</Nullable>
@@ -39,16 +39,16 @@
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.10" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.10" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+	</ItemGroup>
 
 </Project>

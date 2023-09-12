@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Artemis.App.Logic.IdentityLogic;
-using Artemis.App.Logic.IdentityLogic.Data;
+using Artemis.App.IdentityApplication.Protocols;
 using Artemis.Data.Core;
 using Artemis.Extensions.Web;
 using Artemis.Extensions.Web.Controller;
+using Artemis.Services.Identity;
+using Artemis.Services.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.IdentityApplication.Controllers
@@ -74,40 +75,5 @@ namespace Artemis.App.IdentityApplication.Controllers
 
             return ModelState.Fail<SignInResponse>();
         }
-    }
-
-    /// <summary>
-    /// 注册请求
-    /// </summary>
-    public class SignUpRequest
-    {
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        [Required]
-        public string Username { get; set; } = null!;
-
-        /// <summary>
-        /// 密码
-        /// </summary>
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; } = null!;
-    }
-
-    /// <summary>
-    /// 登录响应
-    /// </summary>
-    public class SignInResponse
-    {
-        /// <summary>
-        /// 令牌
-        /// </summary>
-        public string Token { get; set; } = null!;
-
-        /// <summary>
-        /// 释放时间
-        /// </summary>
-        public DateTime Expire { get; set; } = DateTime.Now;
     }
 }

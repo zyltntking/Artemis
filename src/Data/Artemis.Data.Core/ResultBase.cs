@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -6,7 +7,8 @@ namespace Artemis.Data.Core;
 ///     数据结果协议模板接口
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
-public sealed class DataResult<T> : ResultBase<T>
+[DataContract]
+public sealed class DataResult<T> : IResultBase<T>
 {
     /// <summary>
     ///     空构造
@@ -43,6 +45,52 @@ public sealed class DataResult<T> : ResultBase<T>
         Error = null;
     }
 
+    #region Implementation of IResultBase
+
+    /// <summary>
+    ///     消息码
+    /// </summary>
+    [DataMember(Order = 1)]
+    public  int Code { get; set; }
+
+    /// <summary>
+    ///     是否成功
+    /// </summary>
+    [DataMember(Order = 2)]
+    public bool Succeeded => Code == ResultStatus.Success;
+
+    /// <summary>
+    ///     消息
+    /// </summary>
+    [DataMember(Order = 3, IsRequired = true)]
+    public string Message { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     异常信息
+    /// </summary>
+    [DataMember(Order = 4)]
+    public string? Error { get; set; }
+
+    /// <summary>
+    /// 本地时间戳
+    /// </summary>
+    [DataMember(Order = 5)]
+    public DateTime DateTime { get; set; }
+
+    /// <summary>
+    ///     时间戳
+    /// </summary>
+    [DataMember(Order = 6)]
+    public long Timestamp { get; set; }
+
+    /// <summary>
+    ///     数据
+    /// </summary>
+    [DataMember(Order = 7)]
+    public T? Data { get; set; }
+
+    #endregion
+
     /// <summary>
     /// 设置异常
     /// </summary>
@@ -64,72 +112,9 @@ public sealed class DataResult<T> : ResultBase<T>
     private Exception? InnerException { get; set; }
 
     /// <summary>
-    ///     是否成功
-    /// </summary>
-    public override bool Succeeded
-    {
-        get => Code == ResultStatus.Success;
-        set
-        {
-            //ignore
-        }
-    }
-
-}
-
-/// <summary>
-/// 结果协议类
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class ResultBase<T> : IResultBase<T>
-{
-    #region Implementation of IResultBase
-
-    /// <summary>
-    ///     消息码
-    /// </summary>
-    public virtual int Code { get; set; }
-
-    /// <summary>
-    /// 操作是否成功
-    /// </summary>
-    public virtual bool Succeeded { get; set; }
-
-    /// <summary>
-    ///     消息
-    /// </summary>
-    public virtual string Message { get; set; } = string.Empty;
-
-    /// <summary>
-    ///     异常信息
-    /// </summary>
-    public virtual string? Error { get; set; }
-
-    /// <summary>
-    /// 本地时间戳
-    /// </summary>
-    public virtual DateTime DateTime { get; set; }
-
-    /// <summary>
-    ///     时间戳
-    /// </summary>
-    public virtual long Timestamp { get; set; }
-
-    #endregion
-
-    /// <summary>
     /// 描述器
     /// </summary>
-    public virtual Dictionary<string, Collection<string>>? Descriptor { get; set; }
-
-    #region Implementation of IResultBase<T>
-
-    /// <summary>
-    ///     数据
-    /// </summary>
-    public virtual T? Data { get; set; }
-
-    #endregion
+    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
 }
 
 /// <summary>

@@ -1,22 +1,27 @@
-﻿namespace Artemis.Data.Core;
+﻿using System.Runtime.Serialization;
+
+namespace Artemis.Data.Core;
 
 /// <summary>
 /// 分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class PageRequest<T> : IPageRequest<T>
+[DataContract]
+public sealed class PageRequest<T> : IPageRequest<T>
 {
     #region Implementation of IPageBase
 
     /// <summary>
     /// 当前页码(从1开始)
     /// </summary>
-    public virtual uint Page { get; set; }
+    [DataMember(Order = 1)]
+    public uint Page { get; set; }
 
     /// <summary>
     /// 页面大小
     /// </summary>
-    public virtual uint Size { get; set; }
+    [DataMember(Order = 2)]
+    public uint Size { get; set; }
 
     #endregion
 
@@ -30,7 +35,8 @@ public class PageRequest<T> : IPageRequest<T>
     /// <summary>
     /// 过滤条件
     /// </summary>
-    public virtual T? FilterCondition { get; set; }
+    [DataMember(Order = 3)]
+    public T? FilterCondition { get; set; }
 
     #endregion
 }
@@ -39,19 +45,22 @@ public class PageRequest<T> : IPageRequest<T>
 /// 分页数据响应
 /// </summary>
 /// <typeparam name="T">数据包</typeparam>
-public class PageReply<T> : IPageReplay<T>
+[DataContract]
+public sealed class PageReply<T> : IPageReplay<T>
 {
     #region Implementation of IPageBase
 
     /// <summary>
     /// 当前页码(从0开始)
     /// </summary>
-    public virtual uint Page { get; set; }
+    [DataMember(Order = 1)]
+    public uint Page { get; set; }
 
     /// <summary>
     /// 页面大小
     /// </summary>
-    public virtual uint Size { get; set; }
+    [DataMember(Order = 2)]
+    public uint Size { get; set; }
 
     #endregion
 
@@ -60,12 +69,14 @@ public class PageReply<T> : IPageReplay<T>
     /// <summary>
     /// 过滤后数据条数
     /// </summary>
-    public virtual ulong? Count { get; set; }
+    [DataMember(Order = 3)]
+    public ulong? Count { get; set; }
 
     /// <summary>
     /// 数据总量
     /// </summary>
-    public virtual ulong? Total { get; set; }
+    [DataMember(Order = 4)]
+    public ulong? Total { get; set; }
 
     #endregion
 
@@ -74,7 +85,8 @@ public class PageReply<T> : IPageReplay<T>
     /// <summary>
     /// 数据包
     /// </summary>
-    public virtual T? Data { get; set; }
+    [DataMember(Order = 5)]
+    public T? Data { get; set; }
 
     #endregion
 }

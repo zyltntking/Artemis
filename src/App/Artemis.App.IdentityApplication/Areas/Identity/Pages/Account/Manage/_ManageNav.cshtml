@@ -1,4 +1,4 @@
-﻿@using Artemis.App.Logic.IdentityLogic.Data
+﻿@using Artemis.Services.Identity.Data
 @inject SignInManager<ArtemisIdentityUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

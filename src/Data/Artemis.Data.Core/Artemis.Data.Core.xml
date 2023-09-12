@@ -1529,6 +1529,41 @@
             <param name="message">消息</param>
             <param name="data">数据</param>
         </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Code">
+            <summary>
+                消息码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Succeeded">
+            <summary>
+                是否成功
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Message">
+            <summary>
+                消息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Error">
+            <summary>
+                异常信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.DateTime">
+            <summary>
+            本地时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Timestamp">
+            <summary>
+                时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Data">
+            <summary>
+                数据
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Core.DataResult`1.SetException(System.Exception)">
             <summary>
             设置异常
@@ -1546,55 +1581,9 @@
             内部异常
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Succeeded">
-            <summary>
-                是否成功
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.ResultBase`1">
-            <summary>
-            结果协议类
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Code">
-            <summary>
-                消息码
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Succeeded">
-            <summary>
-            操作是否成功
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Message">
-            <summary>
-                消息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Error">
-            <summary>
-                异常信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.DateTime">
-            <summary>
-            本地时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Timestamp">
-            <summary>
-                时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Descriptor">
+        <member name="P:Artemis.Data.Core.DataResult`1.Descriptor">
             <summary>
             描述器
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ResultBase`1.Data">
-            <summary>
-                数据
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.DataResult">

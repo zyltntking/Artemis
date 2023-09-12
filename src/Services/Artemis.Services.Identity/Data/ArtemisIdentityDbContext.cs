@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Artemis.App.Logic.IdentityLogic.Data
+namespace Artemis.Services.Identity.Data
 {
     /// <summary>
     /// Artemis认证数据上下文

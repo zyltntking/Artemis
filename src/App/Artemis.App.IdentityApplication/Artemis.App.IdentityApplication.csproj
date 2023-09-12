@@ -15,26 +15,25 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Protobuf Include="*.proto" GrpcServices="Server" />
+		<Protobuf Include="Protocols\*.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.57.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.58.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
 		<PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1" />
+		<PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Data\Artemis.Data.Core.Grpc\Artemis.Data.Core.Grpc.csproj" />
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web\Artemis.Extensions.Web.csproj" />
-		<ProjectReference Include="..\Logic\Artemis.App.Logic.IdentityLogic\Artemis.App.Logic.IdentityLogic.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Services\" />
-	  <Folder Include="Protocols\" />
+		<ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
 	</ItemGroup>
 
 </Project>

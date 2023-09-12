@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Artemis.App.Logic.IdentityLogic;
+namespace Artemis.Services.Identity;
 
 /// <summary>
 /// 认证逻辑配置

@@ -1,10 +1,10 @@
-﻿using Artemis.App.Logic.IdentityLogic.Data;
+﻿using Artemis.Services.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Artemis.App.Logic.IdentityLogic;
+namespace Artemis.Services.Identity;
 
 /// <summary>
 /// 认证扩展

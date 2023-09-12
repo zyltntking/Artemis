@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Artemis.App.Logic.IdentityLogic.Data;
+using Artemis.Services.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;

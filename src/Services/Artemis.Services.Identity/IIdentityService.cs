@@ -1,7 +1,7 @@
-﻿using Artemis.App.Logic.IdentityLogic.Data;
+﻿using Artemis.Services.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 
-namespace Artemis.App.Logic.IdentityLogic;
+namespace Artemis.Services.Identity;
 
 /// <summary>
 /// 认证服务接口
