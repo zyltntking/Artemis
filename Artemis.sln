@@ -35,9 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Services.Identity",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F43C7BD7-4A13-41FE-AD33-1DD91C0FDBF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Shared.Identity", "src\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj", "{49482649-3D6F-4358-A6A9-BA4ECAEA7D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Shared.Identity", "src\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj", "{49482649-3D6F-4358-A6A9-BA4ECAEA7D2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Shared", "src\Shared\Artemis.Shared\Artemis.Shared.csproj", "{4D2F6682-E44A-45C6-B3BF-AA580DDA1500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Shared", "src\Shared\Artemis.Shared\Artemis.Shared.csproj", "{4D2F6682-E44A-45C6-B3BF-AA580DDA1500}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Shared.ProtoGenerator", "src\Shared\Artemis.Shared.ProtoGenerator\Artemis.Shared.ProtoGenerator.csproj", "{22ADF6EE-FB8C-4357-B921-A959375C6C0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.Identity", "src\App\Artemis.App.Identity\Artemis.App.Identity.csproj", "{197C4279-6D47-472B-92F3-C5DD3B4BA1C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,14 @@ Global
 		{4D2F6682-E44A-45C6-B3BF-AA580DDA1500}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D2F6682-E44A-45C6-B3BF-AA580DDA1500}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D2F6682-E44A-45C6-B3BF-AA580DDA1500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22ADF6EE-FB8C-4357-B921-A959375C6C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22ADF6EE-FB8C-4357-B921-A959375C6C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22ADF6EE-FB8C-4357-B921-A959375C6C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22ADF6EE-FB8C-4357-B921-A959375C6C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197C4279-6D47-472B-92F3-C5DD3B4BA1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197C4279-6D47-472B-92F3-C5DD3B4BA1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197C4279-6D47-472B-92F3-C5DD3B4BA1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197C4279-6D47-472B-92F3-C5DD3B4BA1C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +122,8 @@ Global
 		{3DECFF4C-3241-46B1-8EF7-22FE4ACCB94D} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{49482649-3D6F-4358-A6A9-BA4ECAEA7D2F} = {F43C7BD7-4A13-41FE-AD33-1DD91C0FDBF4}
 		{4D2F6682-E44A-45C6-B3BF-AA580DDA1500} = {F43C7BD7-4A13-41FE-AD33-1DD91C0FDBF4}
+		{22ADF6EE-FB8C-4357-B921-A959375C6C0D} = {F43C7BD7-4A13-41FE-AD33-1DD91C0FDBF4}
+		{197C4279-6D47-472B-92F3-C5DD3B4BA1C7} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

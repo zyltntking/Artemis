@@ -2385,12 +2385,12 @@
                 状态项目
             </summary>
         </member>
-        <member name="T:Artemis.Data.Core.Utility">
+        <member name="T:Artemis.Data.Core.Instance">
             <summary>
                 辅助类
             </summary>
         </member>
-        <member name="M:Artemis.Data.Core.Utility.CreateInstance``1">
+        <member name="M:Artemis.Data.Core.Instance.CreateInstance``1">
             <summary>
                 创建实例
             </summary>

@@ -120,7 +120,7 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     public async Task<AttachResult<TUser>> SignUp(string username, string password, string? email = null,
         string? phone = null, CancellationToken cancellationToken = default)
     {
-        var user = Utility.CreateInstance<TUser>();
+        var user = Instance.CreateInstance<TUser>();
 
         await UserStore.SetUserNameAsync(user, username, cancellationToken);
 

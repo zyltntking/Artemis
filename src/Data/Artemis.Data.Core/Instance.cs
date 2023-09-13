@@ -5,7 +5,7 @@ namespace Artemis.Data.Core;
 /// <summary>
 ///     辅助类
 /// </summary>
-public static class Utility
+public static class Instance
 {
     /// <summary>
     ///     创建实例

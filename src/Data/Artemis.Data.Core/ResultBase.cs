@@ -85,7 +85,14 @@ public sealed class DataResult<T> : IResultBase<T>
     ///     是否成功
     /// </summary>
     [DataMember(Order = 2)]
-    public bool Succeeded => Code == ResultStatus.Success;
+    public bool Succeeded
+    {
+        get => Code == ResultStatus.Success;
+        set
+        {
+            //ignore
+        }
+    }
 
     /// <summary>
     ///     消息

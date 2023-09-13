@@ -13,7 +13,7 @@ public interface IResultBase
     /// <summary>
     ///     操作是否成功
     /// </summary>
-    bool Succeeded { get; }
+    bool Succeeded { set; get; }
 
     /// <summary>
     ///     消息

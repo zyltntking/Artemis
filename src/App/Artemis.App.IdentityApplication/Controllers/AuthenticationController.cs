@@ -43,7 +43,7 @@ namespace Artemis.App.IdentityApplication.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        //var user = Utility.CreateInstance<ArtemisIdentityUser>();
+        //        //var user = Instance.CreateInstance<ArtemisIdentityUser>();
 
         //        //await UserStore.SetUserNameAsync(user, request.Username, CancellationToken.None);
 

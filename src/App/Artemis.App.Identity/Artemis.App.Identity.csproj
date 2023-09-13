@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>852d04c5-e8be-44d8-aa2f-0e084dd8010b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web\Artemis.Extensions.Web.csproj" />
+    <ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
+    <ProjectReference Include="..\..\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj" />
+  </ItemGroup>
+
+</Project>
