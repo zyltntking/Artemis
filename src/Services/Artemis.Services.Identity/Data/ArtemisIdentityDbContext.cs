@@ -35,7 +35,7 @@ public class ArtemisIdentityDbContext : IdentityDbContext<
     /// </param>
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(builder);
+        //base.OnModelCreating(builder);
 
         builder.HasDefaultSchema("identity");
     }

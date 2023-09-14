@@ -12,13 +12,6 @@ namespace Artemis.Services.Identity.Data;
 [EntityTypeConfiguration(typeof(RoleConfiguration))]
 public class ArtemisIdentityRole : IdentityRole<Guid>, IMateSlot
 {
-    /// <summary>
-    /// 角色编码
-    /// </summary>
-    [Required]
-    [MaxLength(16)]
-    public virtual string Code { get; set; } = null!;
-
     #region Implementation of IMateSlot
 
     /// <summary>

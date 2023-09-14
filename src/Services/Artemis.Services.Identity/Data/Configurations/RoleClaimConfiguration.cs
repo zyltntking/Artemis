@@ -23,17 +23,15 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     {
         base.FieldConfigure(builder);
 
-        builder.Property(entity => entity.Id)
-            .HasComment("标识");
+        builder.Property(roleClaim => roleClaim.Id).HasComment("标识");
 
-        builder.Property(entity => entity.RoleId)
-            .HasComment("角色标识");
+        builder.Property(roleClaim => roleClaim.RoleId).HasComment("角色标识");
 
-        builder.Property(entity => entity.ClaimType)
-            .HasComment("凭据类型");
+        builder.Property(roleClaim => roleClaim.ClaimType)
+            .HasMaxLength(128).HasComment("凭据类型");
 
-        builder.Property(entity => entity.ClaimValue)
-            .HasComment("凭据类型");
+        builder.Property(roleClaim => roleClaim.ClaimValue)
+            .HasMaxLength(128).HasComment("凭据类型");
     }
 
     /// <summary>
@@ -42,8 +40,11 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityRoleClaim> builder)
     {
+        // Role Claim Key
+        builder.HasKey(roleClaim => roleClaim.Id).HasName("PK_RoleClaims");
+
         // Role Claim Index
-        builder.HasIndex(entity => entity.ClaimType);
+        builder.HasIndex(roleClaim => roleClaim.ClaimType).HasDatabaseName("IX_RoleClaim_ClaimType");
     }
 
     #endregion

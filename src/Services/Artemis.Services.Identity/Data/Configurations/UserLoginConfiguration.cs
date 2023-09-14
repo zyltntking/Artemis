@@ -23,17 +23,17 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     {
         base.FieldConfigure(builder);
 
-        builder.Property(entity => entity.UserId)
+        builder.Property(userLogin => userLogin.UserId)
             .HasComment("用户标识");
 
-        builder.Property(entity => entity.LoginProvider)
-            .HasComment("认证提供程序");
+        builder.Property(userLogin => userLogin.LoginProvider)
+            .HasMaxLength(256).HasComment("认证提供程序");
 
-        builder.Property(entity => entity.ProviderKey)
-            .HasComment("认证提供程序所需的Key");
+        builder.Property(userLogin => userLogin.ProviderKey)
+            .HasMaxLength(256).HasComment("认证提供程序所需的Key");
 
-        builder.Property(entity => entity.ProviderDisplayName)
-            .HasComment("认证提供程序显示的用户名");
+        builder.Property(userLogin => userLogin.ProviderDisplayName)
+            .HasMaxLength(128).HasComment("认证提供程序显示的用户名");
     }
 
     /// <summary>
@@ -42,7 +42,8 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityUserLogin> builder)
     {
-        builder.HasIndex(entity => entity.LoginProvider);
+        // User Login Key
+        builder.HasKey(userLogin => new {userLogin.LoginProvider, userLogin.ProviderKey}).HasName("PK_UserLogins");
     }
 
     #endregion

@@ -25,50 +25,41 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
     {
         base.FieldConfigure(builder);
 
-        builder.Property(entity => entity.Id)
-            .HasComment("标识");
+        builder.Property(user => user.Id).HasComment("标识");
 
-        builder.Property(entity => entity.UserName)
-            .HasComment("角色名");
+        builder.Property(user => user.UserName)
+            .HasMaxLength(256).HasComment("角色名");
 
-        builder.Property(entity => entity.NormalizedUserName)
-            .HasComment("规范化角色名");
+        builder.Property(user => user.NormalizedUserName)
+            .HasMaxLength(256).HasComment("规范化角色名");
 
-        builder.Property(entity => entity.Email)
-            .HasComment("邮箱地址");
+        builder.Property(user => user.Email)
+            .HasMaxLength(256).HasComment("邮箱地址");
 
-        builder.Property(entity => entity.NormalizedEmail)
-            .HasComment("规范化邮箱地址");
+        builder.Property(user => user.NormalizedEmail)
+            .HasMaxLength(256).HasComment("规范化邮箱地址");
 
-        builder.Property(entity => entity.EmailConfirmed)
-            .HasComment("是否确认邮箱地址");
+        builder.Property(user => user.EmailConfirmed).HasComment("是否确认邮箱地址");
 
-        builder.Property(entity => entity.PasswordHash)
-            .HasComment("密码哈希");
+        builder.Property(user => user.PasswordHash).HasComment("密码哈希");
 
-        builder.Property(item => item.SecurityStamp)
-            .HasComment("加密戳");
+        builder.Property(user => user.SecurityStamp).HasComment("加密戳");
 
-        builder.Property(item => item.ConcurrencyStamp)
-            .HasComment("并发戳");
+        builder.Property(user => user.ConcurrencyStamp)
+            .IsConcurrencyToken().HasComment("并发戳");
 
-        builder.Property(entity => entity.PhoneNumber)
-            .HasComment("电话号码");
+        builder.Property(user => user.PhoneNumber)
+            .HasMaxLength(256).HasComment("电话号码");
 
-        builder.Property(entity => entity.PhoneNumberConfirmed)
-            .HasComment("是否确认电话号码");
+        builder.Property(user => user.PhoneNumberConfirmed).HasComment("是否确认电话号码");
 
-        builder.Property(entity => entity.TwoFactorEnabled)
-            .HasComment("是否允许双步认证");
+        builder.Property(user => user.TwoFactorEnabled).HasComment("是否允许双步认证");
 
-        builder.Property(entity => entity.LockoutEnd)
-            .HasComment("用户锁定到期时间标记");
+        builder.Property(user => user.LockoutEnd).HasComment("用户锁定到期时间标记");
 
-        builder.Property(entity => entity.LockoutEnabled)
-            .HasComment("是否允许锁定用户");
+        builder.Property(user => user.LockoutEnabled).HasComment("是否允许锁定用户");
 
-        builder.Property(entity => entity.AccessFailedCount)
-            .HasComment("尝试错误数量");
+        builder.Property(user => user.AccessFailedCount).HasComment("尝试错误数量");
 
     }
 
@@ -80,10 +71,19 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityUser> builder)
     {
+        // User Key
+        builder.HasKey(user => user.Id).HasName("PK_Users");
+
+        // User Index
+        builder.HasIndex(user => user.NormalizedUserName).HasDatabaseName("IX_User_UserName").IsUnique();
+        builder.HasIndex(user => user.NormalizedEmail).HasDatabaseName("IX_User_Email");
+        builder.HasIndex(user => user.PhoneNumber).HasDatabaseName("IX_User_PhoneNumber");
+
         // Each User can have many UserClaims
         builder.HasMany(user => user.Claims)
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
+            .HasConstraintName("FK_UserClaims_Users_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -91,6 +91,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
         builder.HasMany(user => user.Logins)
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
+            .HasConstraintName("FK_UserLogins_Users_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -98,6 +99,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
         builder.HasMany(user => user.Tokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
+            .HasConstraintName("FK_UserTokens_Users_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -105,6 +107,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
         builder.HasMany(user => user.UserRoles)
             .WithOne(userRole => userRole.User)
             .HasForeignKey(userRole => userRole.UserId)
+            .HasConstraintName("FK_UserRoles_Users_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
