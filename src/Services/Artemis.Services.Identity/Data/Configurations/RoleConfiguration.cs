@@ -6,9 +6,9 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     角色数据集配置
 /// </summary>
-public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRole>
+public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
 {
-    #region Overrides of ArtemisConfiguration<ArtemisIdentityRole>
+    #region Overrides of ArtemisConfiguration<ArtemisRole>
 
     /// <summary>
     ///     数据集描述
@@ -19,9 +19,9 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRol
     ///     表配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisIdentityRole> builder)
+    protected override void TableConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
-        builder.ToTable(nameof(ArtemisIdentityRole), table => table.HasComment(DataSetDescription));
+        builder.ToTable(nameof(ArtemisRole), table => table.HasComment(DataSetDescription));
     }
 
 
@@ -29,7 +29,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRol
     ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void FieldConfigure(EntityTypeBuilder<ArtemisIdentityRole> builder)
+    protected override void FieldConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
         base.FieldConfigure(builder);
 
@@ -49,7 +49,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRol
     ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityRole> builder)
+    protected override void RelationConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
         // Role Key
         builder.HasKey(role => role.Id).HasName("PK_Roles");

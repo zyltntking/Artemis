@@ -4,17 +4,18 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Artemis.Extensions.Web.Middleware;
 
 /// <summary>
-/// Artemis中间件扩展
+///     Artemis中间件扩展
 /// </summary>
 public static class ArtemisMiddlewareExtension
 {
     /// <summary>
-    /// 添加Artemis中间件组
+    ///     添加Artemis中间件组
     /// </summary>
     /// <param name="services"></param>
     /// <param name="optionAction"></param>
     /// <returns></returns>
-    public static IServiceCollection AddArtemisMiddleWares(this IServiceCollection services, Action<ArtemisMiddlewareOptions> optionAction)
+    public static IServiceCollection AddArtemisMiddleWares(this IServiceCollection services,
+        Action<ArtemisMiddlewareOptions> optionAction)
     {
         services.Configure(optionAction);
 
@@ -25,7 +26,7 @@ public static class ArtemisMiddlewareExtension
     }
 
     /// <summary>
-    /// 使用Artemis中间件组
+    ///     使用Artemis中间件组
     /// </summary>
     /// <param name="builder"></param>
     /// <returns></returns>

@@ -40,10 +40,7 @@ public static class LogHost
         }
         catch (Exception exception)
         {
-            if (exception is not HostAbortedException)
-            {
-                Log.Fatal(exception, "Application terminated unexpectedly");
-            }
+            if (exception is not HostAbortedException) Log.Fatal(exception, "Application terminated unexpectedly");
         }
         finally
         {

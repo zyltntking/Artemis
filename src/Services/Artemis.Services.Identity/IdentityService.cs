@@ -9,7 +9,7 @@ namespace Artemis.Services.Identity;
 /// <summary>
 ///     认证服务实现
 /// </summary>
-public class IdentityService : IdentityService<ArtemisIdentityUser>, IIdentityService
+public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
 {
     /// <summary>
     ///     认证服务构造
@@ -18,9 +18,9 @@ public class IdentityService : IdentityService<ArtemisIdentityUser>, IIdentitySe
     /// <param name="userStore">用户存储</param>
     /// <param name="logger">日志</param>
     public IdentityService(
-        UserManager<ArtemisIdentityUser> userManager,
-        IUserStore<ArtemisIdentityUser> userStore,
-        ILogger<IdentityService<ArtemisIdentityUser>> logger) : base(userManager, userStore, logger)
+        UserManager<ArtemisUser> userManager,
+        IUserStore<ArtemisUser> userStore,
+        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, logger)
     {
     }
 }

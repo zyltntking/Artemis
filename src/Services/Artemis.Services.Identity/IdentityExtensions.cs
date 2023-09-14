@@ -19,7 +19,7 @@ public static class IdentityExtensions
     public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection,
         IdentityServiceOptions serviceOptions, bool isDevelopment)
     {
-        serviceCollection.AddDbContext<ArtemisIdentityDbContext>(options =>
+        serviceCollection.AddDbContext<ArtemisIdentityContext>(options =>
             {
                 options.UseNpgsql(serviceOptions.Connection, npgsqlOption =>
                 {
@@ -28,8 +28,8 @@ public static class IdentityExtensions
                     npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
                 }).UseLazyLoadingProxies();
             })
-            .AddDefaultIdentity<ArtemisIdentityUser>()
-            .AddEntityFrameworkStores<ArtemisIdentityDbContext>();
+            .AddDefaultIdentity<ArtemisUser>()
+            .AddEntityFrameworkStores<ArtemisIdentityContext>();
 
         serviceCollection.AddScoped<IIdentityService, IdentityService>();
 

@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Data.Store.Configuration;
 
 /// <summary>
-/// ArtemisMateSlot
+///     ArtemisMateSlot
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfiguration<TEntity> where TEntity : class, IMateSlot
+public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfiguration<TEntity>
+    where TEntity : class, IMateSlot
 {
     #region Overrides of ArtemisConfiguration<TEntity>
 
@@ -18,7 +19,8 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("创建时间,初始化后不再进行任何变更");
+        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime)
+            .HasComment("创建时间,初始化后不再进行任何变更");
 
         builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("更新时间,初始为创建时间");
 
@@ -29,10 +31,11 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
 }
 
 /// <summary>
-/// ArtemisKeySlot类型配置
+///     ArtemisKeySlot类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguration<TEntity> where TEntity : class, IKeySlot
+public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguration<TEntity>
+    where TEntity : class, IKeySlot
 {
     #region Overrides of ArtemisConfiguration<TEntity>
 
@@ -48,9 +51,8 @@ public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguratio
     #endregion
 }
 
-
 /// <summary>
-/// Artemis抽象类型配置
+///     Artemis抽象类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : class
@@ -66,7 +68,7 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     protected DataTypeSet DataTypeSet => DataTypeAdapter.GetDataTypeSet(DbType);
 
     /// <summary>
-    ///   数据集描述
+    ///     数据集描述
     /// </summary>
     protected virtual string DataSetDescription => nameof(TEntity);
 
@@ -102,7 +104,6 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     /// <param name="builder"></param>
     protected virtual void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        
     }
 
     /// <summary>

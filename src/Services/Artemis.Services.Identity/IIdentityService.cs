@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity;
 /// <summary>
 ///     认证服务接口
 /// </summary>
-public interface IIdentityService : IIdentityService<ArtemisIdentityUser>
+public interface IIdentityService : IIdentityService<ArtemisUser>
 {
 }
 

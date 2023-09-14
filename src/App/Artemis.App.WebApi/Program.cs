@@ -1,6 +1,6 @@
+using System.Text.Json.Serialization;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
-using System.Text.Json.Serialization;
 
 namespace Artemis.App.WebApi;
 

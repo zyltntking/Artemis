@@ -8,7 +8,8 @@ namespace Artemis.Data.Store.Configuration;
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisModelConfiguration<TEntity> :ArtemisMateSlotConfiguration<TEntity> where TEntity : class, IModelBase
+public abstract class ArtemisModelConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+    where TEntity : class, IModelBase
 {
     #region Overrides of ArtemisMateSlotConfiguration<TEntity>
 
@@ -23,5 +24,4 @@ public abstract class ArtemisModelConfiguration<TEntity> :ArtemisMateSlotConfigu
     }
 
     #endregion
-
 }

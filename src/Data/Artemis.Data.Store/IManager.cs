@@ -8,7 +8,6 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntity">实体类型</typeparam>
 public interface IManager<TEntity> : IManager<TEntity, Guid> where TEntity : IModelBase
 {
-    
 }
 
 /// <summary>

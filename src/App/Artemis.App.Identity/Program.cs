@@ -5,100 +5,97 @@ using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 
-namespace Artemis.App.Identity
+namespace Artemis.App.Identity;
+
+/// <summary>
+///     Program
+/// </summary>
+public static class Program
 {
     /// <summary>
-    /// Program
+    ///     Main
     /// </summary>
-    public static class Program
+    /// <param name="args"></param>
+    public static void Main(string[] args)
     {
-        /// <summary>
-        /// Main
-        /// </summary>
-        /// <param name="args"></param>
-        public static void Main(string[] args)
+        var docConfig = new DocumentConfig();
+
+        LogHost.CreateWebApp(args, builder =>
         {
-            var docConfig = new DocumentConfig();
+            // Add services to the container.
+            var connectionString = builder.Configuration
+                                       .GetConnectionString("Identity") ??
+                                   throw new InvalidOperationException("Connection string 'Identity' not found.");
 
-            LogHost.CreateWebApp(args, builder =>
+            builder.Services.AddIdentityService(new IdentityServiceOptions
             {
-                // Add services to the container.
-                var connectionString = builder.Configuration
-                    .GetConnectionString("Identity") ?? throw new InvalidOperationException("Connection string 'Identity' not found.");
+                Connection = connectionString,
+                AssemblyName = "Artemis.App.Identity"
+            }, builder.Environment.IsDevelopment());
 
-                builder.Services.AddIdentityService(new IdentityServiceOptions
+            //builder.Services.AddGrpc();
+            //builder.Services.AddCodeFirstGrpc();
+            //builder.Services.AddGrpcReflection();
+            //builder.Services.AddCodeFirstGrpcReflection();
+
+            builder.Services.AddRazorPages();
+
+            builder.Services
+                .AddControllers()
+                .AddMvcOptions(options =>
                 {
-                    Connection = connectionString,
-                    AssemblyName = "Artemis.App.Identity"
-                }, builder.Environment.IsDevelopment());
-
-                //builder.Services.AddGrpc();
-                //builder.Services.AddCodeFirstGrpc();
-                //builder.Services.AddGrpcReflection();
-                //builder.Services.AddCodeFirstGrpcReflection();
-
-                builder.Services.AddRazorPages();
-
-                builder.Services
-                    .AddControllers()
-                    .AddMvcOptions(options =>
-                    {
-                        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                            name => $"字段:{name}是必要字段.");
-                    })
-                    .AddJsonOptions(options =>
-                    {
-                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                    });
-
-                builder.Services.AddArtemisMiddleWares(options =>
+                    options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                        name => $"字段:{name}是必要字段.");
+                })
+                .AddJsonOptions(options =>
                 {
-                    options.ServiceDomain.DomainName = "Identity";
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 });
 
-                // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-                builder.AddOpenApiDoc(docConfig);
-            }, app =>
+            builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.AddOpenApiDoc(docConfig);
+        }, app =>
+        {
+            app.UseOpenApiDoc(docConfig);
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
             {
-                app.UseOpenApiDoc(docConfig);
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
-                // Configure the HTTP request pipeline.
-                if (app.Environment.IsDevelopment())
-                {
-                    app.UseMigrationsEndPoint();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/Error");
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                    app.UseHsts();
-                }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-                app.UseHttpsRedirection();
-                app.UseStaticFiles();
+            app.UseRouting();
 
-                app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-                app.UseAuthentication();
-                app.UseAuthorization();
+            app.UseArtemisMiddleWares();
 
-                app.UseArtemisMiddleWares();
+            app.MapRazorPages();
 
-                app.MapRazorPages();
+            app.MapControllers();
 
-                app.MapControllers();
+            //app.MapGrpcService<GreeterService>();
+            //app.MapGrpcService<SampleService>();
 
-                //app.MapGrpcService<GreeterService>();
-                //app.MapGrpcService<SampleService>();
+            app.MapApiRouteTable();
 
-                app.MapApiRouteTable();
-
-                if (app.Environment.IsDevelopment())
-                {
-                    //app.MapGrpcReflectionService();
-                    //app.MapCodeFirstGrpcReflectionService();
-                }
-            });
-        }
+            if (app.Environment.IsDevelopment())
+            {
+                //app.MapGrpcReflectionService();
+                //app.MapCodeFirstGrpcReflectionService();
+            }
+        });
     }
 }
