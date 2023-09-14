@@ -1,12 +1,12 @@
 ﻿using Artemis.Data.Core;
 using Microsoft.AspNetCore.Identity;
 
-namespace Artemis.Shared.Identity;
+namespace Artemis.Shared.Identity.Models;
 
 /// <summary>
-///     用户
+///     用户登录信息
 /// </summary>
-public class User : IdentityUser<Guid>, IMateSlot
+public class UserLogin : IdentityUserLogin<Guid>, IMateSlot
 {
     #region Implementation of IMateSlot
 

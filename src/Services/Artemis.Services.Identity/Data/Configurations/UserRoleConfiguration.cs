@@ -46,7 +46,8 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
         // User Role Key
-        builder.HasKey(userRole => new { userRole.UserId, userRole.RoleId }).HasName("PK_UserRoles");
+        builder.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
+            .HasName($"PK_{nameof(ArtemisUserRole)}");
     }
 
     #endregion

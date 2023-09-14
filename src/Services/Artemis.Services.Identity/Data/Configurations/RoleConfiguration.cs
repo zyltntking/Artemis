@@ -33,16 +33,20 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
     {
         base.FieldConfigure(builder);
 
-        builder.Property(role => role.Id).HasComment("标识");
+        builder.Property(role => role.Id)
+            .HasComment("标识");
 
         builder.Property(role => role.Name)
-            .HasMaxLength(128).HasComment("角色名");
+            .HasMaxLength(128)
+            .HasComment("角色名");
 
         builder.Property(role => role.NormalizedName)
-            .HasMaxLength(128).HasComment("规范化角色名");
+            .HasMaxLength(128)
+            .HasComment("规范化角色名");
 
         builder.Property(role => role.ConcurrencyStamp)
-            .IsConcurrencyToken().HasComment("并发戳");
+            .IsConcurrencyToken()
+            .HasComment("并发戳");
     }
 
     /// <summary>
@@ -52,16 +56,19 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
         // Role Key
-        builder.HasKey(role => role.Id).HasName("PK_Roles");
+        builder.HasKey(role => role.Id)
+            .HasName($"PK_{nameof(ArtemisRole)}");
 
         // Role Index
-        builder.HasIndex(role => role.NormalizedName).HasDatabaseName("IX_Role_Name").IsUnique();
+        builder.HasIndex(role => role.NormalizedName)
+            .HasDatabaseName($"IX_{nameof(ArtemisRole)}_Name")
+            .IsUnique();
 
         // Each Role can have many entries in the UserRole join table
         builder.HasMany(role => role.UserRoles)
             .WithOne(userRole => userRole.Role)
             .HasForeignKey(userRole => userRole.RoleId)
-            .HasConstraintName("FK_UserRoles_Roles_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -69,7 +76,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
         builder.HasMany(role => role.RoleClaims)
             .WithOne(roleClaim => roleClaim.Role)
             .HasForeignKey(roleClaim => roleClaim.RoleId)
-            .HasConstraintName("FK_UserClaims_Roles_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{nameof(ArtemisRole)}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

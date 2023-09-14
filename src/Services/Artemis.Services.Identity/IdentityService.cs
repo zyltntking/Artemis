@@ -16,11 +16,13 @@ public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
+    /// <param name="signInManager">签入管理器</param>
     /// <param name="logger">日志</param>
     public IdentityService(
         UserManager<ArtemisUser> userManager,
         IUserStore<ArtemisUser> userStore,
-        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, logger)
+        SignInManager<ArtemisUser> signInManager,
+        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, signInManager,logger)
     {
     }
 }
@@ -29,7 +31,7 @@ public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
 ///     认证服务实现
 /// </summary>
 /// <typeparam name="TUser">用户类型</typeparam>
-public class IdentityService<TUser> : IdentityService<TUser, Guid>, IIdentityService<TUser>
+public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IIdentityService<TUser>
     where TUser : IdentityUser<Guid>
 {
     /// <summary>
@@ -37,11 +39,13 @@ public class IdentityService<TUser> : IdentityService<TUser, Guid>, IIdentitySer
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
+    /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
-    public IdentityService(
+    protected IdentityService(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
-        ILogger<IdentityService<TUser>> logger) : base(userManager, userStore, logger)
+        SignInManager<TUser> signInManager,
+        ILogger<IdentityService<TUser>> logger) : base(userManager, userStore, signInManager, logger)
     {
     }
 }
@@ -56,14 +60,17 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
+    /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
     protected IdentityService(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
+        SignInManager<TUser> signInManager,
         ILogger<IdentityService<TUser, TKey>> logger)
     {
         UserManger = userManager;
         UserStore = userStore;
+        SignInManager = signInManager;
         Logger = logger;
     }
 
@@ -71,6 +78,11 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     ///     用户管理器
     /// </summary>
     private UserManager<TUser> UserManger { get; }
+
+    /// <summary>
+    /// 签到管理器
+    /// </summary>
+    private SignInManager<TUser> SignInManager { get; }
 
     /// <summary>
     ///     用户存储器
@@ -84,7 +96,8 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     {
         get
         {
-            if (!UserManger.SupportsUserEmail) throw new NotSupportEmailException();
+            if (!UserManger.SupportsUserEmail) 
+                throw new NotSupportEmailException();
             return (IUserEmailStore<TUser>)UserStore;
         }
     }
@@ -96,7 +109,8 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     {
         get
         {
-            if (!UserManger.SupportsUserPhoneNumber) throw new NotSupportPhoneNumberException();
+            if (!UserManger.SupportsUserPhoneNumber) 
+                throw new NotSupportPhoneNumberException();
             return (IUserPhoneNumberStore<TUser>)UserStore;
         }
     }
@@ -124,9 +138,11 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
 
         await UserStore.SetUserNameAsync(user, username, cancellationToken);
 
-        if (email != null) await EmailStore.SetEmailAsync(user, email, cancellationToken);
+        if (email != null) 
+            await EmailStore.SetEmailAsync(user, email, cancellationToken);
 
-        if (phone != null) await PhoneNumberStore.SetPhoneNumberAsync(user, phone, cancellationToken);
+        if (phone != null) 
+            await PhoneNumberStore.SetPhoneNumberAsync(user, phone, cancellationToken);
 
         var result = await UserManger.CreateAsync(user, password);
 

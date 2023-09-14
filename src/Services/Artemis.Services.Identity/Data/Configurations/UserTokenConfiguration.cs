@@ -36,10 +36,12 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
             .HasComment("用户标识");
 
         builder.Property(userToken => userToken.LoginProvider)
-            .HasMaxLength(256).HasComment("认证提供程序");
+            .HasMaxLength(256)
+            .HasComment("认证提供程序");
 
         builder.Property(userToken => userToken.Name)
-            .HasMaxLength(256).HasComment("认证令牌名");
+            .HasMaxLength(256)
+            .HasComment("认证令牌名");
 
         builder.Property(userToken => userToken.Value)
             .HasComment("认证令牌");
@@ -53,7 +55,7 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     {
         // User Token Key
         builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
-            .HasName("PK_UserTokens");
+            .HasName($"PK_{nameof(ArtemisUserToken)}");
     }
 
     #endregion

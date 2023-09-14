@@ -39,10 +39,12 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
             .HasComment("用户标识");
 
         builder.Property(userClaim => userClaim.ClaimType)
-            .HasMaxLength(128).HasComment("凭据类型");
+            .HasMaxLength(128)
+            .HasComment("凭据类型");
 
         builder.Property(userClaim => userClaim.ClaimValue)
-            .HasMaxLength(128).HasComment("凭据类型");
+            .HasMaxLength(128)
+            .HasComment("凭据类型");
     }
 
     /// <summary>
@@ -52,10 +54,12 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
     {
         // User Claim Key
-        builder.HasKey(userClaim => userClaim.Id).HasName("PK_UserClaims");
+        builder.HasKey(userClaim => userClaim.Id)
+            .HasName($"PK_{nameof(ArtemisUserClaim)}");
 
         // User Claim Index
-        builder.HasIndex(userClaim => userClaim.ClaimType).HasDatabaseName("IX_UserClaim_ClaimType");
+        builder.HasIndex(userClaim => userClaim.ClaimType)
+            .HasDatabaseName($"IX_{nameof(ArtemisUserClaim)}_ClaimType");
     }
 
     #endregion

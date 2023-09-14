@@ -1,5 +1,6 @@
 ﻿using Artemis.Services.Identity.Data.Configurations;
 using Artemis.Shared.Identity;
+using Artemis.Shared.Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Services.Identity.Data;

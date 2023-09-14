@@ -36,13 +36,16 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
             .HasComment("用户标识");
 
         builder.Property(userLogin => userLogin.LoginProvider)
-            .HasMaxLength(256).HasComment("认证提供程序");
+            .HasMaxLength(256)
+            .HasComment("认证提供程序");
 
         builder.Property(userLogin => userLogin.ProviderKey)
-            .HasMaxLength(256).HasComment("认证提供程序所需的Key");
+            .HasMaxLength(256)
+            .HasComment("认证提供程序所需的Key");
 
         builder.Property(userLogin => userLogin.ProviderDisplayName)
-            .HasMaxLength(128).HasComment("认证提供程序显示的用户名");
+            .HasMaxLength(128)
+            .HasComment("认证提供程序显示的用户名");
     }
 
     /// <summary>
@@ -52,7 +55,8 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
         // User Login Key
-        builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey }).HasName("PK_UserLogins");
+        builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
+            .HasName($"PK_{nameof(ArtemisUserLogin)}");
     }
 
     #endregion
