@@ -4,18 +4,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// 用户数据集配置
+///     用户数据集配置
 /// </summary>
 public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUser>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityUser>
 
     /// <summary>
-    ///   数据集描述
+    ///     数据集描述
     /// </summary>
     protected override string DataSetDescription => "认证用户数据集";
 
-    #region Overrides of ArtemisMateSlotConfiguration<ArtemisIdentityUser>
+    /// <summary>
+    ///     表配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void TableConfigure(EntityTypeBuilder<ArtemisIdentityUser> builder)
+    {
+        builder.ToTable(nameof(ArtemisIdentityUser), table => table.HasComment(DataSetDescription));
+    }
 
     /// <summary>
     ///     数据库字段配置
@@ -60,10 +67,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUse
         builder.Property(user => user.LockoutEnabled).HasComment("是否允许锁定用户");
 
         builder.Property(user => user.AccessFailedCount).HasComment("尝试错误数量");
-
     }
-
-    #endregion
 
     /// <summary>
     ///     数据库关系配置

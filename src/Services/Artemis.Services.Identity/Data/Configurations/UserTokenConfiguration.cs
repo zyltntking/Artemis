@@ -4,16 +4,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// 用户令牌数据集配置
+///     用户令牌数据集配置
 /// </summary>
 public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUserToken>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityUserToken>
 
     /// <summary>
-    ///   数据集描述
+    ///     数据集描述
     /// </summary>
     protected override string DataSetDescription => "认证用户令牌数据集";
+
+    /// <summary>
+    ///     表配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void TableConfigure(EntityTypeBuilder<ArtemisIdentityUserToken> builder)
+    {
+        builder.ToTable(nameof(ArtemisIdentityUserToken), table => table.HasComment(DataSetDescription));
+    }
 
     /// <summary>
     ///     数据库字段配置
@@ -43,7 +52,8 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityUserToken> builder)
     {
         // User Token Key
-        builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name }).HasName("PK_UserTokens");
+        builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
+            .HasName("PK_UserTokens");
     }
 
     #endregion

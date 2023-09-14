@@ -6,11 +6,31 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Services.Identity.Data;
 
 /// <summary>
-/// ArtemisIdentityUser
+///     ArtemisIdentityUser
 /// </summary>
 [EntityTypeConfiguration(typeof(UserConfiguration))]
 public class ArtemisIdentityUser : IdentityUser<Guid>, IMateSlot
 {
+    /// <summary>
+    ///     用户凭据映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityUserClaim>? Claims { get; set; }
+
+    /// <summary>
+    ///     用户登录映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityUserLogin>? Logins { get; set; }
+
+    /// <summary>
+    ///     用户令牌映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityUserToken>? Tokens { get; set; }
+
+    /// <summary>
+    ///     用户角色映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityUserRole>? UserRoles { get; set; }
+
     #region Implementation of IMateSlot
 
     /// <summary>
@@ -29,24 +49,4 @@ public class ArtemisIdentityUser : IdentityUser<Guid>, IMateSlot
     public virtual DateTime? DeletedAt { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 用户凭据映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityUserClaim>? Claims { get; set; }
-
-    /// <summary>
-    /// 用户登录映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityUserLogin>? Logins { get; set; }
-
-    /// <summary>
-    /// 用户令牌映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityUserToken>? Tokens { get; set; }
-
-    /// <summary>
-    /// 用户角色映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityUserRole>? UserRoles { get; set; }
 }

@@ -6,11 +6,16 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Services.Identity.Data;
 
 /// <summary>
-/// ArtemisIdentityRoleClaim
+///     ArtemisIdentityRoleClaim
 /// </summary>
 [EntityTypeConfiguration(typeof(RoleClaimConfiguration))]
 public class ArtemisIdentityRoleClaim : IdentityRoleClaim<Guid>, IMateSlot
 {
+    /// <summary>
+    ///     凭据所属角色
+    /// </summary>
+    public virtual ArtemisIdentityRole Role { get; set; } = null!;
+
     #region Implementation of IMateSlot
 
     /// <summary>
@@ -29,9 +34,4 @@ public class ArtemisIdentityRoleClaim : IdentityRoleClaim<Guid>, IMateSlot
     public virtual DateTime? DeletedAt { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 凭据所属角色
-    /// </summary>
-    public virtual ArtemisIdentityRole Role { get; set; } = null!;
 }

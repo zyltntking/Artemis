@@ -33,15 +33,10 @@ public static class IdentityExtensions
 
         serviceCollection.AddScoped<IIdentityService, IdentityService>();
 
-        if (isDevelopment)
-        {
-            serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
-        }
+        if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 
         if (serviceOptions.IdentityOptionsAction != null)
-        {
             serviceCollection.Configure(serviceOptions.IdentityOptionsAction);
-        }
 
         serviceCollection.ConfigureApplicationCookie(options =>
         {

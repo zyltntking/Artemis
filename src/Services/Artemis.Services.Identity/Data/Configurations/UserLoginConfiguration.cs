@@ -4,16 +4,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// 用户登录数据集
+///     用户登录数据集
 /// </summary>
 public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUserLogin>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityUserLogin>
 
     /// <summary>
-    ///   数据集描述
+    ///     数据集描述
     /// </summary>
     protected override string DataSetDescription => "认证用户登录数据集";
+
+    /// <summary>
+    ///     表配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void TableConfigure(EntityTypeBuilder<ArtemisIdentityUserLogin> builder)
+    {
+        builder.ToTable(nameof(ArtemisIdentityUserLogin), table => table.HasComment(DataSetDescription));
+    }
 
     /// <summary>
     ///     数据库字段配置
@@ -43,7 +52,7 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisIdenti
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisIdentityUserLogin> builder)
     {
         // User Login Key
-        builder.HasKey(userLogin => new {userLogin.LoginProvider, userLogin.ProviderKey}).HasName("PK_UserLogins");
+        builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey }).HasName("PK_UserLogins");
     }
 
     #endregion

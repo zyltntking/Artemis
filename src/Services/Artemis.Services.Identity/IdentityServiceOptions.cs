@@ -21,7 +21,7 @@ public sealed class IdentityServiceOptions
     public string AssemblyName { get; init; } = null!;
 
     /// <summary>
-    /// 认证配置选项操作
+    ///     认证配置选项操作
     /// </summary>
     public Action<IdentityOptions>? IdentityOptionsAction { get; set; }
 }

@@ -4,16 +4,26 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// 角色数据集配置
+///     角色数据集配置
 /// </summary>
 public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRole>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityRole>
 
     /// <summary>
-    ///   数据集描述
+    ///     数据集描述
     /// </summary>
     protected override string DataSetDescription => "认证角色数据集";
+
+    /// <summary>
+    ///     表配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void TableConfigure(EntityTypeBuilder<ArtemisIdentityRole> builder)
+    {
+        builder.ToTable(nameof(ArtemisIdentityRole), table => table.HasComment(DataSetDescription));
+    }
+
 
     /// <summary>
     ///     数据库字段配置

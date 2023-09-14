@@ -5,10 +5,11 @@ using Artemis.Data.Store.Configuration;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// Artemis认证模型配置
+///     Artemis认证模型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisIdentityConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity> where TEntity : class, IMateSlot
+public abstract class ArtemisIdentityConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+    where TEntity : class, IMateSlot
 {
     #region Overrides of ArtemisConfiguration<TEntity>
 

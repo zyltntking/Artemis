@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
 using Artemis.Services.Identity.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +6,21 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Services.Identity.Data;
 
 /// <summary>
-/// ArtemisIdentityRole
+///     ArtemisIdentityRole
 /// </summary>
 [EntityTypeConfiguration(typeof(RoleConfiguration))]
 public class ArtemisIdentityRole : IdentityRole<Guid>, IMateSlot
 {
+    /// <summary>
+    ///     用户角色表映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityUserRole>? UserRoles { get; set; }
+
+    /// <summary>
+    ///     角色凭据映射
+    /// </summary>
+    public virtual ICollection<ArtemisIdentityRoleClaim>? RoleClaims { get; set; }
+
     #region Implementation of IMateSlot
 
     /// <summary>
@@ -30,14 +39,4 @@ public class ArtemisIdentityRole : IdentityRole<Guid>, IMateSlot
     public virtual DateTime? DeletedAt { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 用户角色表映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityUserRole>? UserRoles { get; set; }
-
-    /// <summary>
-    /// 角色凭据映射
-    /// </summary>
-    public virtual ICollection<ArtemisIdentityRoleClaim>? RoleClaims { get; set; }
 }

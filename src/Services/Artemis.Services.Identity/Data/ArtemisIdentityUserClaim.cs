@@ -6,11 +6,16 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Services.Identity.Data;
 
 /// <summary>
-/// ArtemisIdentityUserClaim
+///     ArtemisIdentityUserClaim
 /// </summary>
 [EntityTypeConfiguration(typeof(UserClaimConfiguration))]
 public class ArtemisIdentityUserClaim : IdentityUserClaim<Guid>, IMateSlot
 {
+    /// <summary>
+    ///     所属用户
+    /// </summary>
+    public virtual ArtemisIdentityUser User { get; set; } = null!;
+
     #region Implementation of IMateSlot
 
     /// <summary>
@@ -29,9 +34,4 @@ public class ArtemisIdentityUserClaim : IdentityUserClaim<Guid>, IMateSlot
     public virtual DateTime? DeletedAt { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// 所属用户
-    /// </summary>
-    public virtual ArtemisIdentityUser User { get; set; } = null!;
 }
