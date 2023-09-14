@@ -7,66 +7,68 @@ using Microsoft.Extensions.Logging;
 namespace Artemis.Services.Identity;
 
 /// <summary>
-///     认证服务实现
+///     账户服务实现
 /// </summary>
-public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
+public class AccountService : AccountService<ArtemisUser>, IAccountService
 {
     /// <summary>
-    ///     认证服务构造
+    ///     账户服务构造
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager">签入管理器</param>
     /// <param name="logger">日志</param>
-    public IdentityService(
+    public AccountService(
         UserManager<ArtemisUser> userManager,
         IUserStore<ArtemisUser> userStore,
         SignInManager<ArtemisUser> signInManager,
-        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, signInManager,logger)
+        ILogger<AccountService<ArtemisUser>> logger) : base(userManager, userStore, signInManager,logger)
     {
     }
 }
 
 /// <summary>
-///     认证服务实现
+///     账户服务实现
 /// </summary>
 /// <typeparam name="TUser">用户类型</typeparam>
-public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IIdentityService<TUser>
+public abstract class AccountService<TUser> : AccountService<TUser, Guid>, IAccountService<TUser>
     where TUser : IdentityUser<Guid>
 {
     /// <summary>
-    ///     认证服务构造
+    ///     账户服务构造
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
-    protected IdentityService(
+    protected AccountService(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
         SignInManager<TUser> signInManager,
-        ILogger<IdentityService<TUser>> logger) : base(userManager, userStore, signInManager, logger)
+        ILogger logger) : base(userManager, userStore, signInManager, logger)
     {
     }
 }
 
 /// <summary>
-///     认证服务实现
+///     账户服务实现
 /// </summary>
-public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TKey> where TKey : IEquatable<TKey>
+public abstract class AccountService<TUser, TKey> : IAccountService<TUser, TKey> 
+    where TUser : IdentityUser<TKey> 
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
-    ///     认证服务构造
+    ///     账户服务构造
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
-    protected IdentityService(
+    protected AccountService(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
         SignInManager<TUser> signInManager,
-        ILogger<IdentityService<TUser, TKey>> logger)
+        ILogger logger)
     {
         UserManger = userManager;
         UserStore = userStore;
@@ -120,10 +122,10 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     /// </summary>
     private ILogger Logger { get; }
 
-    #region Implementation of IIdentityService<TUser>
+    #region Implementation of IAccountService<TUser>
 
     /// <summary>
-    ///     签入
+    ///     注册
     /// </summary>
     /// <param name="username">用户名</param>
     /// <param name="password">密码</param>
@@ -134,6 +136,8 @@ public abstract class IdentityService<TUser, TKey> where TUser : IdentityUser<TK
     public async Task<AttachResult<TUser>> SignUp(string username, string password, string? email = null,
         string? phone = null, CancellationToken cancellationToken = default)
     {
+        Logger.LogInformation($"用户注册：{username}，邮箱：{email}，手机号码：{phone}");
+
         var user = Instance.CreateInstance<TUser>();
 
         await UserStore.SetUserNameAsync(user, username, cancellationToken);

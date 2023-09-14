@@ -6,8 +6,17 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户登录信息
 /// </summary>
-public class UserLogin : IdentityUserLogin<Guid>, IMateSlot
+public class UserLogin : IdentityUserLogin<Guid>, IModelBase<int>
 {
+    #region Implementation of IKeySlot<int>
+
+    /// <summary>
+    ///     存储标识
+    /// </summary>
+    public int Id { get; set; }
+
+    #endregion
+
     #region Implementation of IMateSlot
 
     /// <summary>

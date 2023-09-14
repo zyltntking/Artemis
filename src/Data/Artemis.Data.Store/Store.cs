@@ -12,8 +12,8 @@ namespace Artemis.Data.Store;
 ///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public sealed class Store<TEntity> : Store<TEntity, DbContext>
-    where TEntity : ModelBase
+public class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
+    where TEntity : class, IModelBase, IModelBase<Guid>
 {
     /// <summary>
     ///     创建一个新的基本存储实例
@@ -25,32 +25,6 @@ public sealed class Store<TEntity> : Store<TEntity, DbContext>
     /// <exception cref="ArgumentNullException"></exception>
     public Store(
         DbContext context,
-        IDistributedCache? cache = null,
-        ILogger? logger = null,
-        IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
-    {
-    }
-}
-
-/// <summary>
-///     抽象存储实现
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TContext">数据上下文类型</typeparam>
-public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>, IStore<TEntity>
-    where TEntity : ModelBase, IModelBase, IModelBase<Guid>
-    where TContext : DbContext
-{
-    /// <summary>
-    ///     创建一个新的基本存储实例
-    /// </summary>
-    /// <param name="context">数据访问上下文</param>
-    /// <param name="logger">日志依赖</param>
-    /// <param name="describer">操作异常描述者</param>
-    /// <param name="cache">缓存依赖</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    protected Store(
-        TContext context,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
@@ -86,10 +60,36 @@ public abstract class Store<TEntity, TContext> : Store<TEntity, TContext, Guid>,
 ///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
+/// <typeparam name="TKey">数据上下文类型</typeparam>
+public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
+    where TEntity : class, IModelBase<TKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     创建一个新的基本存储实例
+    /// </summary>
+    /// <param name="context">数据访问上下文</param>
+    /// <param name="logger">日志依赖</param>
+    /// <param name="describer">操作异常描述者</param>
+    /// <param name="cache">缓存依赖</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    protected Store(
+        DbContext context,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
+        IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
+    {
+    }
+}
+
+/// <summary>
+///     抽象存储实现
+/// </summary>
+/// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TContext">数据上下文类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>, IStore<TEntity, TKey>
-    where TEntity : ModelBase<TKey>, IModelBase<TKey>
+    where TEntity : class, IModelBase<TKey>
     where TContext : DbContext
     where TKey : IEquatable<TKey>
 {

@@ -6,7 +6,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户凭据
 /// </summary>
-public class UserClaim : IdentityUserClaim<Guid>, IMateSlot
+public class UserClaim : IdentityUserClaim<Guid>, IModelBase<int>
 {
     #region Implementation of IMateSlot
 

@@ -32,6 +32,9 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     {
         base.FieldConfigure(builder);
 
+        builder.Property(user => user.Id)
+            .HasComment("标识");
+
         builder.Property(userLogin => userLogin.UserId)
             .HasComment("用户标识");
 
@@ -55,8 +58,16 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
         // User Login Key
-        builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
+        builder.HasKey(userLogin => userLogin.Id)
             .HasName($"PK_{nameof(ArtemisUserLogin)}");
+
+        // User Login Index
+        builder.HasIndex(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
+            .HasDatabaseName($"IX_{nameof(ArtemisUserLogin)}_LoginProvider_ProviderKey")
+            .IsUnique();
+
+        //builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
+        //    .HasName($"PK_{nameof(ArtemisUserLogin)}");
     }
 
     #endregion

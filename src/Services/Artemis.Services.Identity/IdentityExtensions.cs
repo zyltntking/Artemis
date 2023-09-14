@@ -1,4 +1,6 @@
-﻿using Artemis.Services.Identity.Data;
+﻿using Artemis.Data.Store;
+using Artemis.Services.Identity.Data;
+using Artemis.Services.Identity.Stores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,7 +33,17 @@ public static class IdentityExtensions
             .AddDefaultIdentity<ArtemisUser>()
             .AddEntityFrameworkStores<ArtemisIdentityContext>();
 
-        serviceCollection.AddScoped<IIdentityService, IdentityService>();
+        serviceCollection.AddScoped<IArtemisUserStore, ArtemisUserStore>();
+        serviceCollection.AddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
+        serviceCollection.AddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
+        serviceCollection.AddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
+        serviceCollection.AddScoped<IArtemisRoleStore, ArtemisRoleStore>();
+        serviceCollection.AddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
+        serviceCollection.AddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
+
+        serviceCollection.AddScoped<IArtemisManager, ArtemisManager>();
+
+        serviceCollection.AddScoped<IAccountService, AccountService>();
 
         if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 

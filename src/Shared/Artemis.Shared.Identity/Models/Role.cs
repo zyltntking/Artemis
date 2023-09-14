@@ -6,7 +6,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     角色
 /// </summary>
-public class Role : IdentityRole<Guid>, IMateSlot
+public class Role : IdentityRole<Guid>, IModelBase
 {
     #region Implementation of IMateSlot
 

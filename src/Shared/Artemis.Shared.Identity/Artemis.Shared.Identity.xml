@@ -46,142 +46,157 @@
                 Token过期时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.Role">
+        <member name="T:Artemis.Shared.Identity.Models.Role">
             <summary>
                 角色
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Role.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.Role.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Role.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.Role.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Role.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.Role.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.RoleClaim">
+        <member name="T:Artemis.Shared.Identity.Models.RoleClaim">
             <summary>
                 角色凭据
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.RoleClaim.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.RoleClaim.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.RoleClaim.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.User">
+        <member name="T:Artemis.Shared.Identity.Models.User">
             <summary>
                 用户
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.User.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.User.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.User.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.User.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.User.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.User.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.UserClaim">
+        <member name="T:Artemis.Shared.Identity.Models.UserClaim">
             <summary>
                 用户凭据
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserClaim.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserClaim.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserClaim.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserClaim.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserClaim.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserClaim.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.UserLogin">
+        <member name="T:Artemis.Shared.Identity.Models.UserLogin">
             <summary>
                 用户登录信息
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserLogin.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserLogin.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserLogin.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserLogin.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserLogin.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserLogin.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserLogin.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.UserRole">
+        <member name="T:Artemis.Shared.Identity.Models.UserRole">
             <summary>
                 用户角色映射
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserRole.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserRole.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserRole.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserRole.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserRole.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserRole.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserRole.DeletedAt">
             <summary>
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.UserToken">
+        <member name="T:Artemis.Shared.Identity.Models.UserToken">
             <summary>
                 用户令牌
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserToken.CreatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserToken.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserToken.CreatedAt">
             <summary>
                 创建时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserToken.UpdatedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserToken.UpdatedAt">
             <summary>
                 更新时间
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.UserToken.DeletedAt">
+        <member name="P:Artemis.Shared.Identity.Models.UserToken.DeletedAt">
             <summary>
                 删除时间
             </summary>

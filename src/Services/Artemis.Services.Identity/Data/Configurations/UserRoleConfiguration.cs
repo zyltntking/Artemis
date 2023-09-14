@@ -32,6 +32,9 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
     {
         base.FieldConfigure(builder);
 
+        builder.Property(user => user.Id)
+            .HasComment("标识");
+
         builder.Property(userRole => userRole.UserId)
             .HasComment("用户标识");
 
@@ -46,8 +49,16 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
         // User Role Key
-        builder.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
+        builder.HasKey(userRole => userRole.Id)
             .HasName($"PK_{nameof(ArtemisUserRole)}");
+
+        // User Role Index
+        builder.HasIndex(userRole => new { userRole.UserId, userRole.RoleId })
+            .HasDatabaseName($"IX_{nameof(ArtemisUserRole)}_UserId_RoleId")
+            .IsUnique();
+
+        //builder.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
+        //    .HasName($"PK_{nameof(ArtemisUserRole)}");
     }
 
     #endregion

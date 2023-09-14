@@ -4,6 +4,146 @@
         <name>Artemis.Services.Identity</name>
     </assembly>
     <members>
+        <member name="T:Artemis.Services.Identity.AccountService">
+            <summary>
+                账户服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.AccountService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.AccountService{Artemis.Services.Identity.Data.ArtemisUser}})">
+            <summary>
+                账户服务构造
+            </summary>
+            <param name="userManager">用户管理器</param>
+            <param name="userStore">用户存储</param>
+            <param name="signInManager">签入管理器</param>
+            <param name="logger">日志</param>
+        </member>
+        <member name="T:Artemis.Services.Identity.AccountService`1">
+            <summary>
+                账户服务实现
+            </summary>
+            <typeparam name="TUser">用户类型</typeparam>
+        </member>
+        <member name="M:Artemis.Services.Identity.AccountService`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                账户服务构造
+            </summary>
+            <param name="userManager">用户管理器</param>
+            <param name="userStore">用户存储</param>
+            <param name="signInManager"></param>
+            <param name="logger">日志</param>
+        </member>
+        <member name="T:Artemis.Services.Identity.AccountService`2">
+            <summary>
+                账户服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.AccountService`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                账户服务构造
+            </summary>
+            <param name="userManager">用户管理器</param>
+            <param name="userStore">用户存储</param>
+            <param name="signInManager"></param>
+            <param name="logger">日志</param>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.UserManger">
+            <summary>
+                用户管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.SignInManager">
+            <summary>
+            签到管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.UserStore">
+            <summary>
+                用户存储器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.EmailStore">
+            <summary>
+                Email存储器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.PhoneNumberStore">
+            <summary>
+                PhoneNumber存储器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.AccountService`2.Logger">
+            <summary>
+                日志记录器
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.AccountService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+                注册
+            </summary>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="email">邮箱</param>
+            <param name="phone">手机号码</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Services.Identity.ArtemisManager">
+            <summary>
+            Artemis用户管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.ArtemisManager.#ctor(Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUser},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserClaim,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserLogin,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserToken,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisRole},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisRoleClaim,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserRole,System.Int32},Microsoft.Extensions.Options.IOptions{Artemis.Data.Store.IStoreOptions},Artemis.Data.Store.IStoreErrorDescriber,Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
+            <summary>
+                创建新的管理器实例
+            </summary>
+            <param name="userStore">用户存储访问器</param>
+            <param name="userClaimStore">用户凭据存储访问器</param>
+            <param name="userTokenStore"></param>
+            <param name="roleStore">角色存储访问器</param>
+            <param name="roleClaimStore">角色凭据存储访问器</param>
+            <param name="userRoleStore"></param>
+            <param name="optionsAccessor">配置依赖</param>
+            <param name="errors">错误依赖</param>
+            <param name="logger">日志依赖</param>
+            <param name="userLoginStore"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.UserStore">
+            <summary>
+             用户存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.UserClaimStore">
+            <summary>
+             用户凭据存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.UserLoginStore">
+            <summary>
+             用户登录存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.UserTokenStore">
+            <summary>
+            用户令牌存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.RoleStore">
+            <summary>
+            角色存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.RoleClaimStore">
+            <summary>
+            角色凭据存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.ArtemisManager.UserRoleStore">
+            <summary>
+            用户角色映射存储访问器
+            </summary>
+        </member>
         <member name="T:Artemis.Services.Identity.AttachResult`1">
             <summary>
                 Identity结果附加数据
@@ -404,6 +544,33 @@
             <param name="errorMessage">错误消息</param>
             <param name="errorCode">错误编码</param>
         </member>
+        <member name="T:Artemis.Services.Identity.IAccountService">
+            <summary>
+                账户服务接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.IAccountService`1">
+            <summary>
+                账户服务接口
+            </summary>
+            <typeparam name="TUser">用户类型</typeparam>
+        </member>
+        <member name="T:Artemis.Services.Identity.IAccountService`2">
+            <summary>
+                账户服务接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.IAccountService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+                注册
+            </summary>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="email">邮箱</param>
+            <param name="phone">手机号码</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Services.Identity.IdentityExtensions">
             <summary>
                 认证扩展
@@ -416,90 +583,6 @@
             <param name="serviceCollection"></param>
             <param name="serviceOptions"></param>
             <param name="isDevelopment"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.IdentityService">
-            <summary>
-                认证服务实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.IdentityService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.IdentityService{Artemis.Services.Identity.Data.ArtemisUser}})">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager">签入管理器</param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="T:Artemis.Services.Identity.IdentityService`1">
-            <summary>
-                认证服务实现
-            </summary>
-            <typeparam name="TUser">用户类型</typeparam>
-        </member>
-        <member name="M:Artemis.Services.Identity.IdentityService`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.IdentityService{`0}})">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager"></param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="T:Artemis.Services.Identity.IdentityService`2">
-            <summary>
-                认证服务实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.IdentityService`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.IdentityService{`0,`1}})">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager"></param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.UserManger">
-            <summary>
-                用户管理器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.SignInManager">
-            <summary>
-            签到管理器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.UserStore">
-            <summary>
-                用户存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.EmailStore">
-            <summary>
-                Email存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.PhoneNumberStore">
-            <summary>
-                PhoneNumber存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityService`2.Logger">
-            <summary>
-                日志记录器
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.IdentityService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                签入
-            </summary>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="email">邮箱</param>
-            <param name="phone">手机号码</param>
-            <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Services.Identity.IdentityServiceOptions">
@@ -524,30 +607,8 @@
         </member>
         <member name="T:Artemis.Services.Identity.IIdentityService">
             <summary>
-                认证服务接口
+            认证域服务接口
             </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.IIdentityService`1">
-            <summary>
-                认证服务接口
-            </summary>
-            <typeparam name="TUser">用户类型</typeparam>
-        </member>
-        <member name="T:Artemis.Services.Identity.IIdentityService`2">
-            <summary>
-                认证服务接口
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.IIdentityService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                签入
-            </summary>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="email">邮箱</param>
-            <param name="phone">手机号码</param>
-            <param name="cancellationToken">取消信号</param>
-            <returns></returns>
         </member>
     </members>
 </doc>
