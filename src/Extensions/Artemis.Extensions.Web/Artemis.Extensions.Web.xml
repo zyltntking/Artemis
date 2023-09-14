@@ -217,14 +217,34 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
-        <member name="T:Artemis.Extensions.Web.Middleware.DomainOptions">
+        <member name="T:Artemis.Extensions.Web.Middleware.ArtemisMiddlewareExtension">
             <summary>
-                域配置
+            Artemis中间件扩展
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.Web.Middleware.DomainOptions.DomainName">
+        <member name="M:Artemis.Extensions.Web.Middleware.ArtemisMiddlewareExtension.AddArtemisMiddleWares(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Artemis.Extensions.Web.Middleware.ArtemisMiddlewareOptions})">
             <summary>
-                域名
+            添加Artemis中间件组
+            </summary>
+            <param name="services"></param>
+            <param name="optionAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Middleware.ArtemisMiddlewareExtension.UseArtemisMiddleWares(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用Artemis中间件组
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Middleware.ArtemisMiddlewareOptions">
+            <summary>
+            Artemis中间件配置
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Middleware.ArtemisMiddlewareOptions.ServiceDomain">
+            <summary>
+            域配置
             </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.Middleware.ExceptionResultMiddleware">
@@ -259,7 +279,7 @@
                 服务域标识
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Middleware.DomainOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware})">
+        <member name="M:Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Middleware.ArtemisMiddlewareOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Middleware.ServiceDomainMiddleware})">
             <summary>
                 中间件构造
             </summary>
@@ -281,6 +301,16 @@
             <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> for the current request.</param>
             <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Middleware.ServiceDomainOptions">
+            <summary>
+                域配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Middleware.ServiceDomainOptions.DomainName">
+            <summary>
+                域名
+            </summary>
         </member>
         <member name="T:Artemis.Extensions.Web.ResultExtensions">
             <summary>

@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 /// 角色凭据数据集配置
 /// </summary>
-public sealed class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRoleClaim>
+public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityRoleClaim>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityRoleClaim>
 

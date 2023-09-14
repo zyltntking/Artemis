@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 /// 用户令牌数据集配置
 /// </summary>
-public sealed class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUserToken>
+public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisIdentityUserToken>
 {
     #region Overrides of ArtemisConfiguration<ArtemisIdentityUserToken>
 

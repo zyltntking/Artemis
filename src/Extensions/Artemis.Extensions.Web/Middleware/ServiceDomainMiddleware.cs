@@ -19,7 +19,7 @@ public class ServiceDomainMiddleware : IMiddleware
     /// </summary>
     /// <param name="options">域</param>
     /// <param name="logger">日志依赖</param>
-    public ServiceDomainMiddleware(IOptions<DomainOptions> options, ILogger<ServiceDomainMiddleware> logger)
+    public ServiceDomainMiddleware(IOptions<ArtemisMiddlewareOptions> options, ILogger<ServiceDomainMiddleware> logger)
     {
         Options = options.Value;
         Logger = logger;
@@ -28,7 +28,7 @@ public class ServiceDomainMiddleware : IMiddleware
     /// <summary>
     ///     域名称
     /// </summary>
-    private DomainOptions Options { get; }
+    private ArtemisMiddlewareOptions Options { get; }
 
     /// <summary>
     ///     日志
@@ -43,7 +43,7 @@ public class ServiceDomainMiddleware : IMiddleware
     /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the execution of this middleware.</returns>
     public Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        context.Items.Add(DomainKey, Options.DomainName);
+        context.Items.Add(DomainKey, Options.ServiceDomain.DomainName);
 
         return next(context);
     }

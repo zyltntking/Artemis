@@ -44,7 +44,7 @@ namespace Artemis.App.IdentityApplication
                         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     });
 
-                builder.Services.Configure<DomainOptions>(options =>
+                builder.Services.Configure<ServiceDomainOptions>(options =>
                 {
                     options.DomainName = "Identity";
                 });

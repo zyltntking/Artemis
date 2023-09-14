@@ -1249,6 +1249,19 @@
                 删除时间
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Instance">
+            <summary>
+                辅助类
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Instance.CreateInstance``1">
+            <summary>
+                创建实例
+            </summary>
+            <typeparam name="T">实例类型</typeparam>
+            <returns></returns>
+            <exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
+        </member>
         <member name="T:Artemis.Data.Core.IPageBase">
             <summary>
                 分页协议接口
@@ -2384,19 +2397,6 @@
             <summary>
                 状态项目
             </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Instance">
-            <summary>
-                辅助类
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.Instance.CreateInstance``1">
-            <summary>
-                创建实例
-            </summary>
-            <typeparam name="T">实例类型</typeparam>
-            <returns></returns>
-            <exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
         </member>
     </members>
 </doc>

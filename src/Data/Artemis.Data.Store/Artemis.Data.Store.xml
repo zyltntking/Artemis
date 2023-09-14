@@ -222,13 +222,13 @@
         </member>
         <member name="T:Artemis.Data.Store.IManager`1">
             <summary>
-                提供用于管理TEntity的存储器的API
+                提供用于管理TEntity的存储器的API接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
         </member>
         <member name="T:Artemis.Data.Store.IManager`2">
             <summary>
-                提供用于管理TEntity的存储器的API
+                提供用于管理TEntity的存储器的API接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
             <typeparam name="TKey">键类型</typeparam>
