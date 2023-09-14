@@ -6,34 +6,34 @@ using Artemis.Data.Core;
 namespace Artemis.Shared.Identity;
 
 /// <summary>
-/// 账户服务接口
+///     账户服务接口
 /// </summary>
 [ServiceContract]
 public interface IAccount
 {
     /// <summary>
-    /// 登录
+    ///     登录
     /// </summary>
     /// <param name="request">登录请求</param>
-    /// <returns>登录响应<see cref="SignInReply"/></returns>
+    /// <returns>登录响应<see cref="SignInReply" /></returns>
     [OperationContract]
     Task<DataResult<SignInReply>> SignIn(SignInRequest request);
 }
 
 /// <summary>
-/// 登录请求
+///     登录请求
 /// </summary>
 [DataContract]
 public class SignInRequest
 {
     /// <summary>
-    /// 用户名
+    ///     用户名
     /// </summary>
     [DataMember(Order = 1)]
     public string UserName { get; set; } = null!;
 
     /// <summary>
-    /// 密码
+    ///     密码
     /// </summary>
     [DataMember(Order = 2)]
     [DataType(DataType.Password)]
@@ -41,19 +41,19 @@ public class SignInRequest
 }
 
 /// <summary>
-/// 登录响应
+///     登录响应
 /// </summary>
 [DataContract]
 public class SignInReply
 {
     /// <summary>
-    /// 登录Token
+    ///     登录Token
     /// </summary>
     [DataMember(Order = 1)]
     public string Token { get; set; } = null!;
 
     /// <summary>
-    /// Token过期时间
+    ///     Token过期时间
     /// </summary>
     [DataMember(Order = 2)]
     public DateTime Expire { get; set; }

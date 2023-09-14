@@ -1,6 +1,5 @@
-﻿using Artemis.Data.Core;
-using Artemis.Services.Identity.Data.Configurations;
-using Microsoft.AspNetCore.Identity;
+﻿using Artemis.Services.Identity.Data.Configurations;
+using Artemis.Shared.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Services.Identity.Data;
@@ -9,7 +8,7 @@ namespace Artemis.Services.Identity.Data;
 ///     ArtemisIdentityUser
 /// </summary>
 [EntityTypeConfiguration(typeof(UserConfiguration))]
-public class ArtemisIdentityUser : IdentityUser<Guid>, IMateSlot
+public class ArtemisIdentityUser : User
 {
     /// <summary>
     ///     用户凭据映射

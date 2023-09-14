@@ -3,29 +3,29 @@ using ProtoBuf;
 using ProtoBuf.Grpc.Reflection;
 
 [assembly: CompatibilityLevel(CompatibilityLevel.Level200)]
-namespace Artemis.Shared.ProtoGenerator
+
+namespace Artemis.Shared.ProtoGenerator;
+
+/// <summary>
+///     Program
+/// </summary>
+internal static class Program
 {
     /// <summary>
-    /// Program
+    ///     Main
     /// </summary>
-    internal static class Program
+    /// <param name="args"></param>
+    private static async Task Main(string[] args)
     {
-        /// <summary>
-        /// Main
-        /// </summary>
-        /// <param name="args"></param>
-        static async Task Main(string[] args)
-        {
-            var generator = new SchemaGenerator();
+        var generator = new SchemaGenerator();
 
 
-            var schema = generator.GetSchema<IAccount>();
+        var schema = generator.GetSchema<IAccount>();
 
-            await using var writer = new StreamWriter("account.proto");
-                
-            await writer.WriteAsync(schema);
+        await using var writer = new StreamWriter("account.proto");
 
-            Console.WriteLine("Hello, World!");
-        }
+        await writer.WriteAsync(schema);
+
+        Console.WriteLine("Hello, World!");
     }
 }

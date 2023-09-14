@@ -1,50 +1,51 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Shared.Identity</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Shared.Identity.IAccount">
-            <summary>
-            账户服务接口
-            </summary>
-        </member>
-        <member name="M:Artemis.Shared.Identity.IAccount.SignIn(Artemis.Shared.Identity.SignInRequest)">
-            <summary>
-            登录
-            </summary>
-            <param name="request">登录请求</param>
-            <returns>登录响应<see cref="T:Artemis.Shared.Identity.SignInReply"/></returns>
-        </member>
-        <member name="T:Artemis.Shared.Identity.SignInRequest">
-            <summary>
-            登录请求
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.SignInRequest.UserName">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.SignInRequest.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.SignInReply">
-            <summary>
-            登录响应
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.SignInReply.Token">
-            <summary>
-            登录Token
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.SignInReply.Expire">
-            <summary>
-            Token过期时间
-            </summary>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Shared.Identity</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Shared.Identity.IAccount">
+			<summary>
+				账户服务接口
+			</summary>
+		</member>
+		<member name="M:Artemis.Shared.Identity.IAccount.SignIn(Artemis.Shared.Identity.SignInRequest)">
+			<summary>
+				登录
+			</summary>
+			<param name="request">登录请求</param>
+			<returns>登录响应<see cref="T:Artemis.Shared.Identity.SignInReply" /></returns>
+		</member>
+		<member name="T:Artemis.Shared.Identity.SignInRequest">
+			<summary>
+				登录请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.SignInRequest.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.SignInRequest.Password">
+			<summary>
+				密码
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.SignInReply">
+			<summary>
+				登录响应
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.SignInReply.Token">
+			<summary>
+				登录Token
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.SignInReply.Expire">
+			<summary>
+				Token过期时间
+			</summary>
+		</member>
+	</members>
 </doc>
