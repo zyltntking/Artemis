@@ -133,7 +133,7 @@ public abstract class AccountService<TUser, TKey> : IAccountService<TUser, TKey>
     /// <param name="phone">手机号码</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<AttachResult<TUser>> SignUp(string username, string password, string? email = null,
+    public async Task<AttachIdentityResult<TUser>> SignUp(string username, string password, string? email = null,
         string? phone = null, CancellationToken cancellationToken = default)
     {
         Logger.LogInformation($"用户注册：{username}，邮箱：{email}，手机号码：{phone}");

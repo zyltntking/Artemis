@@ -33,6 +33,8 @@ public static class Program
                 AssemblyName = "Artemis.App.Identity"
             }, builder.Environment.IsDevelopment());
 
+            builder.Services.AddScoped<IArtemisManager, ArtemisManager>();
+
             //builder.Services.AddGrpc();
             //builder.Services.AddCodeFirstGrpc();
             //builder.Services.AddGrpcReflection();

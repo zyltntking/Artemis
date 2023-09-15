@@ -1,21 +1,18 @@
 ﻿using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 
 namespace Artemis.Services.Identity.Stores;
 
 /// <summary>
-/// IArtemisUserTokenStore接口
+///     IArtemisUserTokenStore接口
 /// </summary>
 public interface IArtemisUserTokenStore : IStore<ArtemisUserToken, int>
 {
-    
 }
 
 /// <summary>
-/// ArtemisUserTokenStore
+///     ArtemisUserTokenStore
 /// </summary>
 public class ArtemisUserTokenStore : Store<ArtemisUserToken, int>, IArtemisUserTokenStore
 {
@@ -27,7 +24,9 @@ public class ArtemisUserTokenStore : Store<ArtemisUserToken, int>, IArtemisUserT
     /// <param name="describer">操作异常描述者</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public ArtemisUserTokenStore(DbContext context, IDistributedCache? cache = null, ILogger? logger = null, IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
+    public ArtemisUserTokenStore(
+        ArtemisIdentityContext context,
+        IDistributedCache? cache = null) : base(context, cache)
     {
     }
 }

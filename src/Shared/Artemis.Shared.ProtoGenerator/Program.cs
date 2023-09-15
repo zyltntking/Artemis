@@ -1,14 +1,14 @@
 ﻿using Artemis.Shared.Identity;
 using ProtoBuf;
 using ProtoBuf.Grpc.Reflection;
-
-[assembly: CompatibilityLevel(CompatibilityLevel.Level200)]
+using ProtoBuf.Meta;
 
 namespace Artemis.Shared.ProtoGenerator;
 
 /// <summary>
 ///     Program
 /// </summary>
+[CompatibilityLevel(CompatibilityLevel.Level300)]
 internal static class Program
 {
     /// <summary>
@@ -17,8 +17,10 @@ internal static class Program
     /// <param name="args"></param>
     private static async Task Main(string[] args)
     {
-        var generator = new SchemaGenerator();
-
+        var generator = new SchemaGenerator
+        {
+            ProtoSyntax = ProtoSyntax.Proto3
+        };
 
         var schema = generator.GetSchema<IAccount>();
 

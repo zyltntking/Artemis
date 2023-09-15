@@ -32,6 +32,6 @@ public interface IAccountService<TUser, TKey> where TUser : IdentityUser<TKey> w
     /// <param name="phone">手机号码</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    Task<AttachResult<TUser>> SignUp(string username, string password, string? email = null, string? phone = null,
+    Task<AttachIdentityResult<TUser>> SignUp(string username, string password, string? email = null, string? phone = null,
         CancellationToken cancellationToken = default);
 }

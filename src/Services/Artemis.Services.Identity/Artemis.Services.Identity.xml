@@ -93,7 +93,7 @@
             Artemis用户管理器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.ArtemisManager.#ctor(Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUser},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserClaim,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserLogin,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserToken,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisRole},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisRoleClaim,System.Int32},Artemis.Data.Store.IStore{Artemis.Services.Identity.Data.ArtemisUserRole,System.Int32},Microsoft.Extensions.Options.IOptions{Artemis.Data.Store.IStoreOptions},Artemis.Data.Store.IStoreErrorDescriber,Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
+        <member name="M:Artemis.Services.Identity.ArtemisManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Artemis.Services.Identity.Stores.IArtemisUserRoleStore,Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -144,20 +144,43 @@
             用户角色映射存储访问器
             </summary>
         </member>
-        <member name="T:Artemis.Services.Identity.AttachResult`1">
+        <member name="M:Artemis.Services.Identity.ArtemisManager.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.ArtemisManager.Test">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.AttachStoreResult`1">
+            <summary>
+            Store结果附加数据
+            </summary>
+            <typeparam name="TAttach"></typeparam>
+        </member>
+        <member name="T:Artemis.Services.Identity.AttachIdentityResult`1">
             <summary>
                 Identity结果附加数据
             </summary>
-            <typeparam name="T">附加数据类型</typeparam>
+            <typeparam name="TAttach">附加数据类型</typeparam>
         </member>
-        <member name="P:Artemis.Services.Identity.AttachResult`1.Result">
+        <member name="T:Artemis.Services.Identity.AttachResult`2">
             <summary>
-                Identity结果
+            结果附加
+            </summary>
+            <typeparam name="TResult">结果</typeparam>
+            <typeparam name="TAttach">附加</typeparam>
+        </member>
+        <member name="P:Artemis.Services.Identity.AttachResult`2.Result">
+            <summary>
+            结果
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AttachResult`1.Attach">
+        <member name="P:Artemis.Services.Identity.AttachResult`2.Attach">
             <summary>
-                附加数据
+            附加
             </summary>
         </member>
         <member name="T:Artemis.Services.Identity.AttachResultException">
@@ -165,11 +188,20 @@
                 结果附加扩展
             </summary>
         </member>
+        <member name="M:Artemis.Services.Identity.AttachResultException.Attach``1(Artemis.Data.Store.StoreResult,``0)">
+            <summary>
+            附加
+            </summary>
+            <typeparam name="TAttach"></typeparam>
+            <param name="result"></param>
+            <param name="attach"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Services.Identity.AttachResultException.Attach``1(Microsoft.AspNetCore.Identity.IdentityResult,``0)">
             <summary>
                 附加
             </summary>
-            <typeparam name="T">附加数据类型</typeparam>
+            <typeparam name="TAttach">附加数据类型</typeparam>
             <param name="result">结果</param>
             <param name="attach">附加数据</param>
             <returns></returns>
@@ -571,6 +603,16 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Services.Identity.IArtemisManager">
+            <summary>
+            Artemis用户管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.IArtemisManager.Test">
+            <summary>
+            测试
+            </summary>
+        </member>
         <member name="T:Artemis.Services.Identity.IdentityExtensions">
             <summary>
                 认证扩展
@@ -609,6 +651,146 @@
             <summary>
             认证域服务接口
             </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisRoleClaimStore">
+            <summary>
+                ArtemisRoleClaimStore接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore">
+            <summary>
+                ArtemisRoleClaimStore
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisRoleStore">
+            <summary>
+                ArtemisUserStore接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisRoleStore">
+            <summary>
+                ArtemisUserStore
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserClaimStore">
+            <summary>
+                ArtemisUserClaim接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserClaimStore">
+            <summary>
+                ArtemisUserClaim
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserLoginStore">
+            <summary>
+                ArtemisUserLogin接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserLoginStore">
+            <summary>
+                ArtemisUserLogin
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserLoginStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserRoleStore">
+            <summary>
+                ArtemisUserRoleStore接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserRoleStore">
+            <summary>
+                ArtemisUserRoleStore
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserStore">
+            <summary>
+                ArtemisUserStore接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserStore">
+            <summary>
+                ArtemisUserStore
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserTokenStore">
+            <summary>
+                IArtemisUserTokenStore接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserTokenStore">
+            <summary>
+                ArtemisUserTokenStore
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserTokenStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+            <summary>
+                创建一个新的基本存储实例
+            </summary>
+            <param name="context">数据访问上下文</param>
+            <param name="logger">日志依赖</param>
+            <param name="describer">操作异常描述者</param>
+            <param name="cache">缓存依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
     </members>
 </doc>

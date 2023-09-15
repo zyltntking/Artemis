@@ -1084,14 +1084,28 @@
             <param name="cache">缓存依赖</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="M:Artemis.Data.Store.Store`1.ConvertIdFromString(System.String)">
+            <summary>
+                转换字符串到id
+            </summary>
+            <param name="id">id字符串</param>
+            <returns>id</returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Store`1.ConvertIdToString(System.Guid)">
+            <summary>
+                转换Id为字符串
+            </summary>
+            <param name="id">id</param>
+            <returns>字符串</returns>
+        </member>
         <member name="T:Artemis.Data.Store.Store`2">
             <summary>
                 抽象存储实现
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
-            <typeparam name="TContext">数据上下文类型</typeparam>
+            <typeparam name="TKey">数据上下文类型</typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.Store`2.#ctor(`1,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
+        <member name="M:Artemis.Data.Store.Store`2.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.IStoreErrorDescriber)">
             <summary>
                 创建一个新的基本存储实例
             </summary>
@@ -1100,20 +1114,6 @@
             <param name="describer">操作异常描述者</param>
             <param name="cache">缓存依赖</param>
             <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Data.Store.Store`2.ConvertIdFromString(System.String)">
-            <summary>
-                转换字符串到id
-            </summary>
-            <param name="id">id字符串</param>
-            <returns>id</returns>
-        </member>
-        <member name="M:Artemis.Data.Store.Store`2.ConvertIdToString(System.Guid)">
-            <summary>
-                转换Id为字符串
-            </summary>
-            <param name="id">id</param>
-            <returns>字符串</returns>
         </member>
         <member name="T:Artemis.Data.Store.Store`3">
             <summary>

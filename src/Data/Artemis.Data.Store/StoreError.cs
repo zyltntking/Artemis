@@ -3,7 +3,7 @@
 /// <summary>
 ///     存储子系统错误封装
 /// </summary>
-public class StoreError
+public record StoreError
 {
     /// <summary>
     ///     错误编码

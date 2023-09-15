@@ -1,20 +1,18 @@
 ﻿using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 
 namespace Artemis.Services.Identity.Stores;
 
 /// <summary>
-/// ArtemisUserStore接口
+///     ArtemisUserStore接口
 /// </summary>
 public interface IArtemisRoleStore : IStore<ArtemisRole>
 {
 }
 
 /// <summary>
-/// ArtemisUserStore
+///     ArtemisUserStore
 /// </summary>
 public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
 {
@@ -26,7 +24,9 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
     /// <param name="describer">操作异常描述者</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public ArtemisRoleStore(DbContext context, IDistributedCache? cache = null, ILogger? logger = null, IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
+    public ArtemisRoleStore(
+        ArtemisIdentityContext context,
+        IDistributedCache? cache = null) : base(context, cache)
     {
     }
 }

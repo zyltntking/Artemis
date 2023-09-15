@@ -9,7 +9,7 @@ namespace Artemis.Data.Store.Configuration;
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public abstract class ArtemisModelConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
-    where TEntity : class, IModelBase
+    where TEntity : class, IModelBase, IKeySlot, IMateSlot
 {
     #region Overrides of ArtemisMateSlotConfiguration<TEntity>
 

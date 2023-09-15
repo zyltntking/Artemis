@@ -24,7 +24,7 @@ public interface IAccount
 ///     登录请求
 /// </summary>
 [DataContract]
-public class SignInRequest
+public record SignInRequest
 {
     /// <summary>
     ///     用户名
@@ -44,7 +44,7 @@ public class SignInRequest
 ///     登录响应
 /// </summary>
 [DataContract]
-public class SignInReply
+public record SignInReply
 {
     /// <summary>
     ///     登录Token

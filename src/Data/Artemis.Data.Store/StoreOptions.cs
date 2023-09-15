@@ -3,7 +3,7 @@
 /// <summary>
 ///     存储配置
 /// </summary>
-public class StoreOptions : IStoreOptions
+public record StoreOptions : IStoreOptions
 {
     #region Implementation of IStoreConfig
 

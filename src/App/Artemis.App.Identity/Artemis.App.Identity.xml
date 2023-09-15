@@ -4,6 +4,24 @@
         <name>Artemis.App.Identity</name>
     </assembly>
     <members>
+        <member name="T:Artemis.App.Identity.Controllers.TestController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Controllers.TestController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Controllers.TestController},Artemis.Services.Identity.IArtemisManager)">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="logger"></param>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Artemis.App.Identity.Controllers.TestController.TestGet">
+            <summary>
+            Get测试
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.App.Identity.Migrations.InitialCreate">
             <inheritdoc />
         </member>

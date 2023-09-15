@@ -1,8 +1,8 @@
 ﻿using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
+using Artemis.Shared.Identity.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity;
 
@@ -33,9 +33,7 @@ public class ArtemisManager : Manager<ArtemisUser>, IArtemisManager
         IArtemisRoleStore roleStore,
         IArtemisRoleClaimStore roleClaimStore,
         IArtemisUserRoleStore userRoleStore,
-        IOptions<IStoreOptions>? optionsAccessor = null, 
-        IStoreErrorDescriber? errors = null, 
-        ILogger<IManager<ArtemisUser>>? logger = null) : base(userStore, optionsAccessor, errors, logger)
+        ILogger<IManager<ArtemisUser>> logger) : base(userStore, null, null, logger)
     {
         UserStore = userStore;
         UserClaimStore = userClaimStore;
@@ -46,40 +44,44 @@ public class ArtemisManager : Manager<ArtemisUser>, IArtemisManager
         UserRoleStore = userRoleStore;
     }
 
+    #region StoreAccess
+
     /// <summary>
     ///  用户存储访问器
     /// </summary>
-    private IStore<ArtemisUser> UserStore { get; }
+    private IArtemisUserStore UserStore { get; }
 
     /// <summary>
     ///  用户凭据存储访问器
     /// </summary>
-    private IStore<ArtemisUserClaim, int> UserClaimStore { get; }
+    private IArtemisUserClaimStore UserClaimStore { get; }
 
     /// <summary>
     ///  用户登录存储访问器
     /// </summary>
-    private IStore<ArtemisUserLogin, int> UserLoginStore { get; }
+    private IArtemisUserLoginStore UserLoginStore { get; }
 
     /// <summary>
     /// 用户令牌存储访问器
     /// </summary>
-    private IStore<ArtemisUserToken, int> UserTokenStore { get; }
+    private IArtemisUserTokenStore UserTokenStore { get; }
 
     /// <summary>
     /// 角色存储访问器
     /// </summary>
-    private IStore<ArtemisRole> RoleStore { get; }
+    private IArtemisRoleStore RoleStore { get; }
 
     /// <summary>
     /// 角色凭据存储访问器
     /// </summary>
-    private IStore<ArtemisRoleClaim, int> RoleClaimStore { get; }
+    private IArtemisRoleClaimStore RoleClaimStore { get; }
 
     /// <summary>
     /// 用户角色映射存储访问器
     /// </summary>
-    private IStore<ArtemisUserRole, int> UserRoleStore { get; }
+    private IArtemisUserRoleStore UserRoleStore { get; }
+
+    #endregion
 
     #region Overrides of Manager<ArtemisUser,Guid>
 
@@ -96,6 +98,26 @@ public class ArtemisManager : Manager<ArtemisUser>, IArtemisManager
         RoleClaimStore.Dispose();
         UserRoleStore.Dispose();
         base.StoreDispose();
+    }
+
+    #endregion
+
+    #region Implementation of IArtemisManager
+
+    /// <summary>
+    /// 测试
+    /// </summary>
+    public async Task<AttachIdentityResult<Role>> Test()
+    {
+        var role = new ArtemisRole
+        {
+            Name = "Test",
+            NormalizedName = "TEST"
+        };
+
+        var result = await RoleStore.CreateAsync(role);
+
+        throw new NotImplementedException();
     }
 
     #endregion

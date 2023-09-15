@@ -5,7 +5,7 @@ namespace Artemis.Data.Store;
 /// <summary>
 ///     存储操作结果
 /// </summary>
-public class StoreResult
+public record StoreResult
 {
     private readonly List<StoreError> _errors = new();
 
