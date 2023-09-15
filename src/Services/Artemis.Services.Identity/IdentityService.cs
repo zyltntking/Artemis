@@ -22,7 +22,7 @@ public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
         UserManager<ArtemisUser> userManager,
         IUserStore<ArtemisUser> userStore,
         SignInManager<ArtemisUser> signInManager,
-        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, signInManager,logger)
+        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, signInManager, logger)
     {
     }
 }
@@ -53,8 +53,8 @@ public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IId
 /// <summary>
 ///     认证服务实现
 /// </summary>
-public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKey> 
-    where TUser : IdentityUser<TKey> 
+public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKey>
+    where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
@@ -82,7 +82,7 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     private UserManager<TUser> UserManger { get; }
 
     /// <summary>
-    /// 签到管理器
+    ///     签到管理器
     /// </summary>
     private SignInManager<TUser> SignInManager { get; }
 
@@ -98,7 +98,7 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     {
         get
         {
-            if (!UserManger.SupportsUserEmail) 
+            if (!UserManger.SupportsUserEmail)
                 throw new NotSupportEmailException();
             return (IUserEmailStore<TUser>)UserStore;
         }
@@ -111,7 +111,7 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     {
         get
         {
-            if (!UserManger.SupportsUserPhoneNumber) 
+            if (!UserManger.SupportsUserPhoneNumber)
                 throw new NotSupportPhoneNumberException();
             return (IUserPhoneNumberStore<TUser>)UserStore;
         }
@@ -133,7 +133,8 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     /// <param name="phone">手机号码</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<AttachIdentityResult<TUser>> SignUp(string username, string password, string? email = null,
+    public async Task<(IdentityResult result, TUser user)> SignUp(string username, string password,
+        string? email = null,
         string? phone = null, CancellationToken cancellationToken = default)
     {
         Logger.LogInformation($"用户注册：{username}，邮箱：{email}，手机号码：{phone}");
@@ -142,15 +143,15 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
 
         await UserStore.SetUserNameAsync(user, username, cancellationToken);
 
-        if (email != null) 
+        if (email != null)
             await EmailStore.SetEmailAsync(user, email, cancellationToken);
 
-        if (phone != null) 
+        if (phone != null)
             await PhoneNumberStore.SetPhoneNumberAsync(user, phone, cancellationToken);
 
         var result = await UserManger.CreateAsync(user, password);
 
-        return result.Attach(user);
+        return (result, user);
     }
 
     #endregion

@@ -37,11 +37,11 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
 
         builder.Property(user => user.UserName)
             .HasMaxLength(256)
-            .HasComment("角色名");
+            .HasComment("用户名");
 
         builder.Property(user => user.NormalizedUserName)
             .HasMaxLength(256)
-            .HasComment("规范化角色名");
+            .HasComment("规范化用户名");
 
         builder.Property(user => user.Email)
             .HasMaxLength(256)

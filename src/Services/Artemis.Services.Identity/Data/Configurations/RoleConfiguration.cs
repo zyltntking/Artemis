@@ -38,10 +38,12 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
 
         builder.Property(role => role.Name)
             .HasMaxLength(128)
+            .IsRequired()
             .HasComment("角色名");
 
         builder.Property(role => role.NormalizedName)
             .HasMaxLength(128)
+            .IsRequired()
             .HasComment("规范化角色名");
 
         builder.Property(role => role.ConcurrencyStamp)

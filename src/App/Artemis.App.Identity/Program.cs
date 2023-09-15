@@ -92,10 +92,8 @@ public static class Program
             app.MapApiRouteTable();
 
             if (app.Environment.IsDevelopment())
-            {
                 //app.MapGrpcReflectionService();
                 app.MapCodeFirstGrpcReflectionService();
-            }
         });
     }
 }

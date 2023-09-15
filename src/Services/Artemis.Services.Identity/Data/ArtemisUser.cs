@@ -1,5 +1,4 @@
 ﻿using Artemis.Services.Identity.Data.Configurations;
-using Artemis.Shared.Identity;
 using Artemis.Shared.Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,23 +29,4 @@ public class ArtemisUser : User
     ///     用户角色映射
     /// </summary>
     public virtual ICollection<ArtemisUserRole>? UserRoles { get; set; }
-
-    #region Implementation of IMateSlot
-
-    /// <summary>
-    ///     创建时间
-    /// </summary>
-    public virtual DateTime CreatedAt { get; set; } = DateTime.Now;
-
-    /// <summary>
-    ///     更新时间
-    /// </summary>
-    public virtual DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-    /// <summary>
-    ///     删除时间
-    /// </summary>
-    public virtual DateTime? DeletedAt { get; set; }
-
-    #endregion
 }

@@ -1,6 +1,6 @@
-﻿using Artemis.Data.Store;
-using Artemis.Services.Identity.Data;
+﻿using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,8 +30,9 @@ public static class IdentityExtensions
                     npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
                 }).UseLazyLoadingProxies();
             })
-            .AddDefaultIdentity<ArtemisUser>()
-            .AddEntityFrameworkStores<ArtemisIdentityContext>();
+            .AddIdentity<ArtemisUser, ArtemisRole>()
+            .AddEntityFrameworkStores<ArtemisIdentityContext>()
+            .AddDefaultTokenProviders();
 
         serviceCollection.AddScoped<IArtemisUserStore, ArtemisUserStore>();
         serviceCollection.AddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
@@ -41,7 +42,7 @@ public static class IdentityExtensions
         serviceCollection.AddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
         serviceCollection.AddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
 
-        serviceCollection.AddScoped<IArtemisManager, ArtemisManager>();
+        serviceCollection.AddScoped<IIdentityManager, IdentityManager>();
 
         serviceCollection.AddScoped<IIdentityService, IdentityService>();
 
