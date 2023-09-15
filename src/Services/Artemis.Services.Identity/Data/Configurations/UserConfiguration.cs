@@ -58,9 +58,11 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
             .HasComment("密码哈希");
 
         builder.Property(user => user.SecurityStamp)
+            .HasMaxLength(128)
             .HasComment("加密戳");
 
         builder.Property(user => user.ConcurrencyStamp)
+            .HasMaxLength(128)
             .IsConcurrencyToken()
             .HasComment("并发戳");
 

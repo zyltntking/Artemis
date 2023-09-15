@@ -1,72 +1,66 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.Identity</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.Identity.Controllers.TestController">
-			<summary>
-				测试控制器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Controllers.TestController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Controllers.TestController},Artemis.Services.Identity.IIdentityManager)">
-			<summary>
-				泛型API控制器
-			</summary>
-			<param name="logger"></param>
-			<param name="manager"></param>
-		</member>
-		<member name="M:Artemis.App.Identity.Controllers.TestController.TestGet">
-			<summary>
-				Get测试
-			</summary>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.App.Identity.Controllers.UserController">
-			<summary>
-				用户控制器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Controllers.UserController.#ctor(Artemis.Services.Identity.IIdentityManager,Microsoft.Extensions.Logging.ILogger)">
-			<summary>
-				泛型API控制器
-			</summary>
-			<param name="manager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.App.Identity.Controllers.UserController.Manager">
-			<summary>
-				管理器
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Migrations.InitialCreate">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.Identity.Program">
-			<summary>
-				Program
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Program.Main(System.String[])">
-			<summary>
-				Main
-			</summary>
-			<param name="args"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Identity.Controllers.TestController">
+            <summary>
+                测试控制器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Controllers.TestController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Controllers.TestController},Artemis.Services.Identity.IIdentityManager)">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="logger"></param>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Artemis.App.Identity.Controllers.TestController.TestGet">
+            <summary>
+                Get测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Controllers.UserController">
+            <summary>
+                用户控制器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Controllers.UserController.#ctor(Artemis.Services.Identity.IIdentityManager,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="manager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.App.Identity.Controllers.UserController.Manager">
+            <summary>
+                管理器
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Identity.Program">
+            <summary>
+                Program
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Program.Main(System.String[])">
+            <summary>
+                Main
+            </summary>
+            <param name="args"></param>
+        </member>
+    </members>
 </doc>

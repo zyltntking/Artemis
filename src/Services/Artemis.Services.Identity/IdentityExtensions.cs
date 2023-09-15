@@ -21,14 +21,17 @@ public static class IdentityExtensions
     public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection,
         IdentityServiceOptions serviceOptions, bool isDevelopment)
     {
-        serviceCollection.AddDbContext<ArtemisIdentityContext>(options =>
+        serviceCollection.AddDbContextPool<ArtemisIdentityContext>(options =>
             {
-                options.UseNpgsql(serviceOptions.Connection, npgsqlOption =>
-                {
-                    npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-
-                    npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
-                }).UseLazyLoadingProxies();
+                options.EnableServiceProviderCaching()
+                    //.EnableSensitiveDataLogging()
+                    .UseNpgsql(serviceOptions.Connection, npgsqlOption =>
+                    {
+                        npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
+                        
+                        npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
+                    })
+                    .UseLazyLoadingProxies();
             })
             .AddIdentity<ArtemisUser, ArtemisRole>()
             .AddEntityFrameworkStores<ArtemisIdentityContext>()

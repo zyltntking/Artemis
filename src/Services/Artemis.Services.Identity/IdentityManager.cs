@@ -159,7 +159,9 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     public async Task<Role?> GetRoleAsync(string roleName)
     {
         Logger.LogDebug($"查询角色：{roleName}");
+
         var role = await RoleManager.FindByNameAsync(roleName);
+
         return role?.Adapt<ArtemisRole>();
     }
 
@@ -167,7 +169,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     ///     获取角色列表
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Role>> GetAllRolesAsync()
+    public async Task<IEnumerable<Role>> GetRolesAsync()
     {
         var roles = await RoleManager.Roles.AsNoTracking().ToListAsync();
 
@@ -177,14 +179,15 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <summary>
     ///     根据角色名搜索角色列表
     /// </summary>
-    /// <param name="roleNameSearchText">搜索值</param>
+    /// <param name="roleNameSearch">搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <returns></returns>
-    public async Task<PageResult<Role>> GetRolesAsync(string? roleNameSearchText = null, int page = 1, int size = 20)
+    public async Task<PageResult<Role>> GetRolesAsync(string roleNameSearch, int page = 1, int size = 20)
     {
-        Logger.LogDebug($"查询角色：{roleNameSearchText}，页码：{page}，页面大小：{size}");
-        var normalizedSearch = RoleManager.NormalizeKey(roleNameSearchText);
+        Logger.LogDebug($"查询角色：{roleNameSearch}，页码：{page}，页面大小：{size}");
+
+        var normalizedSearch = RoleManager.NormalizeKey(roleNameSearch);
 
         var total = await RoleManager.Roles.LongCountAsync();
 
@@ -292,6 +295,29 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         Logger.LogDebug($"批量删除角色：{enumerable}");
 
         return RoleStore.DeleteAsync(enumerable, cancellationToken);
+    }
+
+    /// <summary>
+    /// 获取角色用户
+    /// </summary>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="usernameSearch">用户名搜索值</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面大小</param>
+    /// <returns></returns>
+    public async Task<PageResult<User>> GetRoleUsersAsync(Guid roleId, string usernameSearch, int page = 1, int size = 20)
+    {
+        Logger.LogDebug($"获取角色用户：{roleId}，搜索值：{usernameSearch}，页码：{page}，页面大小：{size}");
+
+        var normalizedSearch = UserManager.NormalizeName(usernameSearch);
+
+        var mapQuery = UserRoleStore.EntityQuery.Where(entity => entity.RoleId == roleId);
+
+        var total = await mapQuery.LongCountAsync();
+
+
+
+        throw new NotImplementedException();
     }
 
     #endregion

@@ -27,16 +27,16 @@ public interface IIdentityManager : IManager<ArtemisUser>
     ///     获取角色列表
     /// </summary>
     /// <returns></returns>
-    Task<IEnumerable<Role>> GetAllRolesAsync();
+    Task<IEnumerable<Role>> GetRolesAsync();
 
     /// <summary>
     ///     根据角色名搜索角色
     /// </summary>
-    /// <param name="roleNameSearchText">搜索值</param>
+    /// <param name="roleNameSearch">搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <returns></returns>
-    Task<PageResult<Role>> GetRolesAsync(string? roleNameSearchText = null, int page = 1, int size = 20);
+    Task<PageResult<Role>> GetRolesAsync(string roleNameSearch, int page = 1, int size = 20);
 
     /// <summary>
     ///     创建角色
@@ -70,4 +70,14 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<StoreResult> DeleteRolesAsync(IEnumerable<Guid> roleIds, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 获取角色用户
+    /// </summary>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="usernameSearch">用户名搜索值</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面大小</param>
+    /// <returns></returns>
+    Task<PageResult<User>> GetRoleUsersAsync(Guid roleId, string usernameSearch, int page = 1, int size = 20);
 }

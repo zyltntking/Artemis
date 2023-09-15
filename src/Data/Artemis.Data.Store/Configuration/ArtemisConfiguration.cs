@@ -5,6 +5,62 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Data.Store.Configuration;
 
 /// <summary>
+///     模型存储配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class ArtemisPartitionConfiguration<TEntity> : ArtemisModelConfiguration<TEntity>
+    where TEntity : class, IPartitionBase
+{
+    #region Overrides of ArtemisModelConfiguration<TEntity>
+
+    /// <summary>
+    ///     数据库字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        base.FieldConfigure(builder);
+
+        builder.Property(entity => entity.Partition)
+            .HasColumnType(DataTypeSet.Integer)
+            .HasComment("分区标识");
+    }
+
+    /// <summary>
+    ///     数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        builder.HasIndex(entity => entity.Partition);
+    }
+
+    #endregion
+}
+
+/// <summary>
+///     模型存储配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class ArtemisModelConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+    where TEntity : class, IModelBase, IKeySlot, IMateSlot
+{
+    #region Overrides of ArtemisMateSlotConfiguration<TEntity>
+
+    /// <summary>
+    ///     数据库字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        builder.Property(entity => entity.Id).HasComment("标识");
+        base.FieldConfigure(builder);
+    }
+
+    #endregion
+}
+
+/// <summary>
 ///     ArtemisMateSlot
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
@@ -19,12 +75,25 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.CreatedAt).HasColumnType(DataTypeSet.DateTime)
+        builder.Property(entity => entity.CreatedAt)
+            .ValueGeneratedOnAdd()
+            .HasValueGenerator<DateTimeGenerator>()
+            .HasColumnType(DataTypeSet.DateTime)
             .HasComment("创建时间,初始化后不再进行任何变更");
 
-        builder.Property(entity => entity.UpdatedAt).HasColumnType(DataTypeSet.DateTime).HasComment("更新时间,初始为创建时间");
+        builder.Property(entity => entity.UpdatedAt)
+            .ValueGeneratedOnAddOrUpdate()
+            .HasValueGenerator<DateTimeGenerator>()
+            .IsConcurrencyToken()
+            .HasColumnType(DataTypeSet.DateTime)
+            .HasComment("更新时间,初始为创建时间");
 
-        builder.Property(entity => entity.DeletedAt).HasColumnType(DataTypeSet.DateTime).HasComment("删除时间,启用软删除时生效");
+        builder.Property(entity => entity.DeletedAt)
+            .HasColumnType(DataTypeSet.DateTime)
+            .HasComment("删除时间,启用软删除时生效");
+
+        // SoftDeleteQueryFilter
+        builder.HasQueryFilter(entity => entity.DeletedAt == null);
     }
 
     #endregion

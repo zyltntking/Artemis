@@ -44,7 +44,7 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
 
         builder.Property(userLogin => userLogin.ProviderKey)
             .HasMaxLength(256)
-            .HasComment("认证提供程序所需的Key");
+            .HasComment("认证提供程序提供的第三方标识");
 
         builder.Property(userLogin => userLogin.ProviderDisplayName)
             .HasMaxLength(128)

@@ -47,6 +47,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
             .HasComment("规范化角色名");
 
         builder.Property(role => role.ConcurrencyStamp)
+            .HasMaxLength(128)
             .IsConcurrencyToken()
             .HasComment("并发戳");
     }

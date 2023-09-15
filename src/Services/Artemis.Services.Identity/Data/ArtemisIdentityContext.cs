@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data;
 /// <summary>
 ///     Artemis认证数据上下文
 /// </summary>
-public class ArtemisIdentityContext : IdentityDbContext<
+public sealed class ArtemisIdentityContext : IdentityDbContext<
     ArtemisUser,
     ArtemisRole,
     Guid,
