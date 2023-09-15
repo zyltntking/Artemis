@@ -28,10 +28,8 @@ public class TestController : ApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<string> TestGet()
+    public Task<string> TestGet()
     {
-        await Manager.Test();
-
-        return "success";
+         return Manager.Test();
     }
 }

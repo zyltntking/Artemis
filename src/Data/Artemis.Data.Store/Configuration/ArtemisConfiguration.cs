@@ -1,5 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Data.Store.Configuration;
@@ -76,24 +77,16 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.CreatedAt)
-            .ValueGeneratedOnAdd()
-            .HasValueGenerator<DateTimeGenerator>()
             .HasColumnType(DataTypeSet.DateTime)
             .HasComment("创建时间,初始化后不再进行任何变更");
 
         builder.Property(entity => entity.UpdatedAt)
-            .ValueGeneratedOnAddOrUpdate()
-            .HasValueGenerator<DateTimeGenerator>()
-            .IsConcurrencyToken()
             .HasColumnType(DataTypeSet.DateTime)
             .HasComment("更新时间,初始为创建时间");
 
         builder.Property(entity => entity.DeletedAt)
             .HasColumnType(DataTypeSet.DateTime)
             .HasComment("删除时间,启用软删除时生效");
-
-        // SoftDeleteQueryFilter
-        builder.HasQueryFilter(entity => entity.DeletedAt == null);
     }
 
     #endregion

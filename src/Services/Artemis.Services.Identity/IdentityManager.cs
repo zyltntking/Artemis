@@ -146,9 +146,29 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <summary>
     ///     测试
     /// </summary>
-    public Task<string> Test()
+    public async Task<string> Test()
     {
-        throw new NotImplementedException();
+        var role = new ArtemisRole
+        {
+            Name = "Test",
+            NormalizedName = "Test"
+        };
+
+        await IdentityRoleStore.CreateAsync(role, CancellationToken.None);
+
+        var role2 = new ArtemisRole
+        {
+            Name = "Test2",
+            NormalizedName = "Test2"
+        };
+
+        await IdentityRoleStore.CreateAsync(role2, CancellationToken.None);
+
+        role.Name = "change";
+
+        await IdentityRoleStore.UpdateAsync(role, CancellationToken.None);
+
+        return "success";
     }
 
     /// <summary>
