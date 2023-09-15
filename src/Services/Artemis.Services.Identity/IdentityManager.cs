@@ -318,14 +318,15 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     }
 
     /// <summary>
-    /// 获取角色用户
+    ///     获取角色用户
     /// </summary>
     /// <param name="roleId">角色标识</param>
     /// <param name="usernameSearch">用户名搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <returns></returns>
-    public async Task<PageResult<User>> GetRoleUsersAsync(Guid roleId, string usernameSearch, int page = 1, int size = 20)
+    public async Task<PageResult<User>> GetRoleUsersAsync(Guid roleId, string usernameSearch, int page = 1,
+        int size = 20)
     {
         Logger.LogDebug($"获取角色用户：{roleId}，搜索值：{usernameSearch}，页码：{page}，页面大小：{size}");
 
@@ -334,7 +335,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         var mapQuery = UserRoleStore.EntityQuery.Where(entity => entity.RoleId == roleId);
 
         var total = await mapQuery.LongCountAsync();
-
 
 
         throw new NotImplementedException();

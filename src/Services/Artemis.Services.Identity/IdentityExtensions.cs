@@ -28,7 +28,7 @@ public static class IdentityExtensions
                     .UseNpgsql(serviceOptions.Connection, npgsqlOption =>
                     {
                         npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-                        
+
                         npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
                     })
                     .UseLazyLoadingProxies();

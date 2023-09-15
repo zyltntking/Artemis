@@ -11,6 +11,11 @@ namespace Artemis.Services.Identity.Data;
 public class ArtemisRole : Role
 {
     /// <summary>
+    ///     具备该角色的用户
+    /// </summary>
+    public virtual ICollection<ArtemisUser>? Users { get; set; }
+
+    /// <summary>
     ///     用户角色表映射
     /// </summary>
     public virtual ICollection<ArtemisUserRole>? UserRoles { get; set; }

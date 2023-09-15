@@ -35,9 +35,36 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
     /// </param>
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //base.OnModelCreating(builder);
-
         builder.HasDefaultSchema("identity");
+
+        // User Role Map
+        builder.Entity<ArtemisRole>()
+            .HasMany(role => role.Users) //left side
+            .WithMany(user => user.Roles) //right side
+            .UsingEntity<ArtemisUserRole>(
+                userRoleLeft => userRoleLeft
+                    .HasOne(userRole => userRole.User)
+                    .WithMany(user => user.UserRoles)
+                    .HasForeignKey(userRole => userRole.UserId)
+                    .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{nameof(ArtemisUser)}_Id")
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(user => user.Id),
+                userRoleRight => userRoleRight
+                    .HasOne(userRole => userRole.Role)
+                    .WithMany(role => role.UserRoles)
+                    .HasForeignKey(userRole => userRole.RoleId)
+                    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(role => role.Id),
+                userRoleJoin =>
+                {
+                    userRoleJoin.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
+                        .HasName($"PK_{nameof(ArtemisUserRole)}");
+
+                    userRoleJoin.HasAlternateKey(userRole => userRole.Id).HasName($"AK_{nameof(ArtemisUserRole)}");
+                });
     }
 
     #endregion

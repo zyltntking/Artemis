@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,9 +21,9 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "角色名"),
-                    NormalizedName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "规范化角色名"),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true, comment: "并发戳"),
+                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "角色名"),
+                    NormalizedName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "规范化角色名"),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "并发戳"),
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效")
@@ -40,14 +40,14 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "角色名"),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "规范化角色名"),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "用户名"),
+                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "规范化用户名"),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "邮箱地址"),
                     NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "规范化邮箱地址"),
                     EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false, comment: "是否确认邮箱地址"),
                     PasswordHash = table.Column<string>(type: "text", nullable: true, comment: "密码哈希"),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true, comment: "加密戳"),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true, comment: "并发戳"),
+                    SecurityStamp = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "加密戳"),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "并发戳"),
                     PhoneNumber = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "电话号码"),
                     PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false, comment: "是否确认电话号码"),
                     TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false, comment: "是否允许双步认证"),
@@ -123,8 +123,10 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     LoginProvider = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证提供程序"),
-                    ProviderKey = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证提供程序所需的Key"),
+                    ProviderKey = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证提供程序提供的第三方标识"),
                     ProviderDisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "认证提供程序显示的用户名"),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
@@ -133,7 +135,7 @@ namespace Artemis.App.Identity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtemisUserLogin", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_ArtemisUserLogin", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ArtemisUserLogin_ArtemisUser_Id",
                         column: x => x.UserId,
@@ -151,6 +153,8 @@ namespace Artemis.App.Identity.Migrations
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
+                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效")
@@ -158,18 +162,19 @@ namespace Artemis.App.Identity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArtemisUserRole", x => new { x.UserId, x.RoleId });
+                    table.UniqueConstraint("AK_ArtemisUserRole", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArtemisUserClaim_ArtemisUser_Id",
+                        column: x => x.UserId,
+                        principalSchema: "identity",
+                        principalTable: "ArtemisUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ArtemisUserRole_ArtemisRole_Id",
                         column: x => x.RoleId,
                         principalSchema: "identity",
                         principalTable: "ArtemisRole",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArtemisUserRole_ArtemisUser_Id",
-                        column: x => x.UserId,
-                        principalSchema: "identity",
-                        principalTable: "ArtemisUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 },
@@ -180,6 +185,8 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     LoginProvider = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证提供程序"),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证令牌名"),
@@ -190,7 +197,7 @@ namespace Artemis.App.Identity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtemisUserToken", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_ArtemisUserToken", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ArtemisUserToken_ArtemisUser_Id",
                         column: x => x.UserId,
@@ -252,6 +259,13 @@ namespace Artemis.App.Identity.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserLogin_LoginProvider_ProviderKey",
+                schema: "identity",
+                table: "ArtemisUserLogin",
+                columns: new[] { "LoginProvider", "ProviderKey" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserLogin_UserId",
                 schema: "identity",
                 table: "ArtemisUserLogin",
@@ -262,6 +276,13 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 table: "ArtemisUserRole",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserToken_UserId_LoginProvider_Name",
+                schema: "identity",
+                table: "ArtemisUserToken",
+                columns: new[] { "UserId", "LoginProvider", "Name" },
+                unique: true);
         }
 
         /// <inheritdoc />

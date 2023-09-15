@@ -68,12 +68,12 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
             .IsUnique();
 
         // Each Role can have many entries in the UserRole join table
-        builder.HasMany(role => role.UserRoles)
-            .WithOne(userRole => userRole.Role)
-            .HasForeignKey(userRole => userRole.RoleId)
-            .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
+        // builder.HasMany(role => role.UserRoles)
+        //    .WithOne(userRole => userRole.Role)
+        //    .HasForeignKey(userRole => userRole.RoleId)
+        //    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")
+        //    .IsRequired()
+        //    .OnDelete(DeleteBehavior.Cascade);
 
         // Each Role can have many associated RoleClaims
         builder.HasMany(role => role.RoleClaims)

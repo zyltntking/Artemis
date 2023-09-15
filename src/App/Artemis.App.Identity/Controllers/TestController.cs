@@ -30,6 +30,6 @@ public class TestController : ApiController
     [HttpGet]
     public Task<string> TestGet()
     {
-         return Manager.Test();
+        return Manager.Test();
     }
 }

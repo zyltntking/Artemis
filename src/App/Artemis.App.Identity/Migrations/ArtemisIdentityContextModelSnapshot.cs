@@ -35,7 +35,8 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("并发戳");
 
                     b.Property<DateTime>("CreatedAt")
@@ -47,11 +48,13 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("删除时间,启用软删除时生效");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("角色名");
 
                     b.Property<string>("NormalizedName")
+                        .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("规范化角色名");
@@ -135,7 +138,8 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("并发戳");
 
                     b.Property<DateTime>("CreatedAt")
@@ -171,7 +175,7 @@ namespace Artemis.App.Identity.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasComment("规范化角色名");
+                        .HasComment("规范化用户名");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text")
@@ -187,7 +191,8 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("是否确认电话号码");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("加密戳");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -201,7 +206,7 @@ namespace Artemis.App.Identity.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasComment("角色名");
+                        .HasComment("用户名");
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisUser");
@@ -273,15 +278,12 @@ namespace Artemis.App.Identity.Migrations
 
             modelBuilder.Entity("Artemis.Services.Identity.Data.ArtemisUserLogin", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasComment("认证提供程序");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasComment("标识");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasComment("认证提供程序所需的Key");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -291,10 +293,22 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("TIMESTAMP")
                         .HasComment("删除时间,启用软删除时生效");
 
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasComment("认证提供程序");
+
                     b.Property<string>("ProviderDisplayName")
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("认证提供程序显示的用户名");
+
+                    b.Property<string>("ProviderKey")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasComment("认证提供程序提供的第三方标识");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -304,10 +318,14 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("uuid")
                         .HasComment("用户标识");
 
-                    b.HasKey("LoginProvider", "ProviderKey")
+                    b.HasKey("Id")
                         .HasName("PK_ArtemisUserLogin");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("LoginProvider", "ProviderKey")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisUserLogin_LoginProvider_ProviderKey");
 
                     b.ToTable("ArtemisUserLogin", "identity", t =>
                         {
@@ -333,12 +351,22 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("TIMESTAMP")
                         .HasComment("删除时间,启用软删除时生效");
 
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasComment("标识");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TIMESTAMP")
                         .HasComment("更新时间,初始为创建时间");
 
                     b.HasKey("UserId", "RoleId")
                         .HasName("PK_ArtemisUserRole");
+
+                    b.HasAlternateKey("Id")
+                        .HasName("AK_ArtemisUserRole");
 
                     b.HasIndex("RoleId");
 
@@ -350,19 +378,12 @@ namespace Artemis.App.Identity.Migrations
 
             modelBuilder.Entity("Artemis.Services.Identity.Data.ArtemisUserToken", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasComment("用户标识");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasComment("标识");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasComment("认证提供程序");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasComment("认证令牌名");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -372,16 +393,36 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("TIMESTAMP")
                         .HasComment("删除时间,启用软删除时生效");
 
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasComment("认证提供程序");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasComment("认证令牌名");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TIMESTAMP")
                         .HasComment("更新时间,初始为创建时间");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasComment("用户标识");
 
                     b.Property<string>("Value")
                         .HasColumnType("text")
                         .HasComment("认证令牌");
 
-                    b.HasKey("UserId", "LoginProvider", "Name")
+                    b.HasKey("Id")
                         .HasName("PK_ArtemisUserToken");
+
+                    b.HasIndex("UserId", "LoginProvider", "Name")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisUserToken_UserId_LoginProvider_Name");
 
                     b.ToTable("ArtemisUserToken", "identity", t =>
                         {
@@ -439,7 +480,7 @@ namespace Artemis.App.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_ArtemisUserRole_ArtemisUser_Id");
+                        .HasConstraintName("FK_ArtemisUserClaim_ArtemisUser_Id");
 
                     b.Navigation("Role");
 

@@ -72,7 +72,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     Task<StoreResult> DeleteRolesAsync(IEnumerable<Guid> roleIds, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取角色用户
+    ///     获取角色用户
     /// </summary>
     /// <param name="roleId">角色标识</param>
     /// <param name="usernameSearch">用户名搜索值</param>
