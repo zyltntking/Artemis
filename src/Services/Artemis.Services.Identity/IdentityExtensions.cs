@@ -43,7 +43,7 @@ public static class IdentityExtensions
 
         serviceCollection.AddScoped<IArtemisManager, ArtemisManager>();
 
-        serviceCollection.AddScoped<IAccountService, AccountService>();
+        serviceCollection.AddScoped<IIdentityService, IdentityService>();
 
         if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 

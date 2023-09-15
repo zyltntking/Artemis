@@ -10,13 +10,13 @@ namespace Artemis.Extensions.Web.Controller;
 [Route("api/[controller]/[action]")]
 [ApiController]
 [ArtemisClaim]
-public abstract class ClaimedGenericApiController : GenericApiController
+public abstract class ClaimedApiController : ApiController
 {
     /// <summary>
     ///     泛型API控制器
     /// </summary>
     /// <param name="logger"></param>
-    protected ClaimedGenericApiController(ILogger logger) : base(logger)
+    protected ClaimedApiController(ILogger logger) : base(logger)
     {
     }
 }
@@ -26,13 +26,13 @@ public abstract class ClaimedGenericApiController : GenericApiController
 /// </summary>
 [Route("api/[controller]/[action]")]
 [ApiController]
-public abstract class GenericApiController : ControllerBase
+public abstract class ApiController : ControllerBase
 {
     /// <summary>
     ///     泛型API控制器
     /// </summary>
     /// <param name="logger"></param>
-    protected GenericApiController(ILogger logger)
+    protected ApiController(ILogger logger)
     {
         Logger = logger;
     }

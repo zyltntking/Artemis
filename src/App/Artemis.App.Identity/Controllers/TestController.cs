@@ -7,7 +7,7 @@ namespace Artemis.App.Identity.Controllers
     /// <summary>
     /// 测试控制器
     /// </summary>
-    public class TestController : GenericApiController
+    public class TestController : ApiController
     {
         /// <summary>
         ///     泛型API控制器

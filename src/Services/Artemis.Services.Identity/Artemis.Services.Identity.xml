@@ -4,12 +4,12 @@
         <name>Artemis.Services.Identity</name>
     </assembly>
     <members>
-        <member name="T:Artemis.Services.Identity.AccountService">
+        <member name="T:Artemis.Services.Identity.IdentityService">
             <summary>
                 账户服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.AccountService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.AccountService{Artemis.Services.Identity.Data.ArtemisUser}})">
+        <member name="M:Artemis.Services.Identity.IdentityService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.IdentityService{Artemis.Services.Identity.Data.ArtemisUser}})">
             <summary>
                 账户服务构造
             </summary>
@@ -18,13 +18,13 @@
             <param name="signInManager">签入管理器</param>
             <param name="logger">日志</param>
         </member>
-        <member name="T:Artemis.Services.Identity.AccountService`1">
+        <member name="T:Artemis.Services.Identity.IdentityService`1">
             <summary>
                 账户服务实现
             </summary>
             <typeparam name="TUser">用户类型</typeparam>
         </member>
-        <member name="M:Artemis.Services.Identity.AccountService`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Services.Identity.IdentityService`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 账户服务构造
             </summary>
@@ -33,12 +33,12 @@
             <param name="signInManager"></param>
             <param name="logger">日志</param>
         </member>
-        <member name="T:Artemis.Services.Identity.AccountService`2">
+        <member name="T:Artemis.Services.Identity.IdentityService`2">
             <summary>
                 账户服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.AccountService`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Services.Identity.IdentityService`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 账户服务构造
             </summary>
@@ -47,37 +47,37 @@
             <param name="signInManager"></param>
             <param name="logger">日志</param>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.UserManger">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.UserManger">
             <summary>
                 用户管理器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.SignInManager">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.SignInManager">
             <summary>
             签到管理器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.UserStore">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.UserStore">
             <summary>
                 用户存储器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.EmailStore">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.EmailStore">
             <summary>
                 Email存储器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.PhoneNumberStore">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.PhoneNumberStore">
             <summary>
                 PhoneNumber存储器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.AccountService`2.Logger">
+        <member name="P:Artemis.Services.Identity.IdentityService`2.Logger">
             <summary>
                 日志记录器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.AccountService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.IdentityService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 注册
             </summary>
@@ -576,23 +576,23 @@
             <param name="errorMessage">错误消息</param>
             <param name="errorCode">错误编码</param>
         </member>
-        <member name="T:Artemis.Services.Identity.IAccountService">
+        <member name="T:Artemis.Services.Identity.IIdentityService">
             <summary>
                 账户服务接口
             </summary>
         </member>
-        <member name="T:Artemis.Services.Identity.IAccountService`1">
+        <member name="T:Artemis.Services.Identity.IIdentityService`1">
             <summary>
                 账户服务接口
             </summary>
             <typeparam name="TUser">用户类型</typeparam>
         </member>
-        <member name="T:Artemis.Services.Identity.IAccountService`2">
+        <member name="T:Artemis.Services.Identity.IIdentityService`2">
             <summary>
                 账户服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.IAccountService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.IIdentityService`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 注册
             </summary>

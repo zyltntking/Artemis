@@ -4,6 +4,7 @@ using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
+using ProtoBuf.Grpc.Server;
 
 namespace Artemis.App.Identity;
 
@@ -33,12 +34,10 @@ public static class Program
                 AssemblyName = "Artemis.App.Identity"
             }, builder.Environment.IsDevelopment());
 
-            builder.Services.AddScoped<IArtemisManager, ArtemisManager>();
-
             //builder.Services.AddGrpc();
-            //builder.Services.AddCodeFirstGrpc();
             //builder.Services.AddGrpcReflection();
-            //builder.Services.AddCodeFirstGrpcReflection();
+            builder.Services.AddCodeFirstGrpc();
+            builder.Services.AddCodeFirstGrpcReflection();
 
             builder.Services.AddRazorPages();
 
@@ -88,7 +87,6 @@ public static class Program
 
             app.MapControllers();
 
-            //app.MapGrpcService<GreeterService>();
             //app.MapGrpcService<SampleService>();
 
             app.MapApiRouteTable();
@@ -96,7 +94,7 @@ public static class Program
             if (app.Environment.IsDevelopment())
             {
                 //app.MapGrpcReflectionService();
-                //app.MapCodeFirstGrpcReflectionService();
+                app.MapCodeFirstGrpcReflectionService();
             }
         });
     }

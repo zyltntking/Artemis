@@ -30,6 +30,7 @@ public record SignInRequest
     ///     用户名
     /// </summary>
     [DataMember(Order = 1)]
+    [MaxLength(128)]
     public string UserName { get; set; } = null!;
 
     /// <summary>
