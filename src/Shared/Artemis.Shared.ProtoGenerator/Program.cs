@@ -1,5 +1,4 @@
 ﻿using Artemis.Shared.Identity;
-using ProtoBuf;
 using ProtoBuf.Grpc.Reflection;
 using ProtoBuf.Meta;
 
@@ -8,7 +7,6 @@ namespace Artemis.Shared.ProtoGenerator;
 /// <summary>
 ///     Program
 /// </summary>
-[CompatibilityLevel(CompatibilityLevel.Level300)]
 internal static class Program
 {
     /// <summary>

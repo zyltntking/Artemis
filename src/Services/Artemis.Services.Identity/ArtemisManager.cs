@@ -20,8 +20,6 @@ public class ArtemisManager : Manager<ArtemisUser>, IArtemisManager
     /// <param name="roleStore">角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
     /// <param name="userRoleStore"></param>
-    /// <param name="optionsAccessor">配置依赖</param>
-    /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <param name="userLoginStore"></param>
     /// <exception cref="ArgumentNullException"></exception>

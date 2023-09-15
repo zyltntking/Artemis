@@ -20,8 +20,6 @@ public class ArtemisUserRoleStore : Store<ArtemisUserRole, int>, IArtemisUserRol
     ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="context">数据访问上下文</param>
-    /// <param name="logger">日志依赖</param>
-    /// <param name="describer">操作异常描述者</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public ArtemisUserRoleStore(

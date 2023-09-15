@@ -8,7 +8,7 @@ namespace Artemis.Data.Core;
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
 [DataContract]
-public sealed class DataResult<T> : IResultBase<T>
+public class DataResult<T> : IResultBase<T>
 {
     /// <summary>
     ///     空构造
