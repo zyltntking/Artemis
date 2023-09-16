@@ -48,7 +48,6 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
 
         builder.Property(role => role.ConcurrencyStamp)
             .HasMaxLength(64)
-            .IsRequired()
             .IsConcurrencyToken()
             .HasComment("并发锁");
 

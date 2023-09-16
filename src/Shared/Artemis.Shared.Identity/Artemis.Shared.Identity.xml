@@ -81,6 +81,11 @@
                 角色凭据
             </summary>
         </member>
+        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Id">
+            <summary>
+                标识
+            </summary>
+        </member>
         <member name="P:Artemis.Shared.Identity.Models.RoleClaim.RoleId">
             <summary>
                 角色标识
@@ -99,11 +104,6 @@
         <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Description">
             <summary>
                 凭据描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Id">
-            <summary>
-                标识
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Models.User">
@@ -191,6 +191,11 @@
                 用户凭据
             </summary>
         </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserClaim.Id">
+            <summary>
+                标识
+            </summary>
+        </member>
         <member name="P:Artemis.Shared.Identity.Models.UserClaim.UserId">
             <summary>
                 用户标识
@@ -211,14 +216,14 @@
                 凭据描述
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
         <member name="T:Artemis.Shared.Identity.Models.UserLogin">
             <summary>
                 用户登录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserLogin.Id">
+            <summary>
+                存储标识
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Models.UserLogin.UserId">
@@ -239,11 +244,6 @@
         <member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderDisplayName">
             <summary>
                 提供程序显示名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserLogin.Id">
-            <summary>
-                存储标识
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Models.UserRole">
@@ -271,6 +271,11 @@
                 用户令牌
             </summary>
         </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserToken.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
         <member name="P:Artemis.Shared.Identity.Models.UserToken.UserId">
             <summary>
                 用户标识
@@ -289,11 +294,6 @@
         <member name="P:Artemis.Shared.Identity.Models.UserToken.Value">
             <summary>
                 令牌值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserToken.Id">
-            <summary>
-                存储标识
             </summary>
         </member>
     </members>
