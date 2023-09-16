@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     [DbContext(typeof(ArtemisIdentityContext))]
-    [Migration("20230915170331_InitalCreate")]
+    [Migration("20230916035648_InitalCreate")]
     partial class InitalCreate
     {
         /// <inheritdoc />

@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Core.Fundamental;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Artemis.Data.Store;
+namespace Artemis.Data.Store.ValueConverter;
 
 /// <summary>
 ///     枚举类型值转换器
@@ -14,8 +14,8 @@ public class EnumerationValueConverter<T> : ValueConverter<T, string> where T : 
     /// </summary>
     public EnumerationValueConverter()
         : base(
-            v => v.ToString(),
-            value => Enumeration.FromName<T>(value))
+            toValue => toValue.ToString(),
+            fromValue => Enumeration.FromName<T>(fromValue))
     {
     }
 }

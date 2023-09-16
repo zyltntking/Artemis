@@ -6,7 +6,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户角色映射
 /// </summary>
-public class UserRole : IdentityUserRole<Guid>, IModelBase<int>
+public class UserRole : IdentityUserRole<Guid>, IKeySlot<int>
 {
     #region Implementation of IKeySlot<int>
 
@@ -14,25 +14,6 @@ public class UserRole : IdentityUserRole<Guid>, IModelBase<int>
     ///     存储标识
     /// </summary>
     public int Id { get; set; }
-
-    #endregion
-
-    #region Implementation of IMateSlot
-
-    /// <summary>
-    ///     创建时间
-    /// </summary>
-    public virtual DateTime CreatedAt { get; set; } = DateTime.Now;
-
-    /// <summary>
-    ///     更新时间
-    /// </summary>
-    public virtual DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-    /// <summary>
-    ///     删除时间
-    /// </summary>
-    public virtual DateTime? DeletedAt { get; set; }
 
     #endregion
 }

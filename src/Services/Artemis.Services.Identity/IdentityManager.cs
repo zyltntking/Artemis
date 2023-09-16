@@ -318,9 +318,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var normalizedSearch = UserManager.NormalizeName(usernameSearch);
 
-        var mapQuery = UserRoleStore.EntityQuery.Where(entity => entity.RoleId == roleId);
-
-        var total = await mapQuery.LongCountAsync();
+        var total = await UserRoleStore.EntityQuery.Where(entity => entity.RoleId == roleId).LongCountAsync();
 
 
         throw new NotImplementedException();
