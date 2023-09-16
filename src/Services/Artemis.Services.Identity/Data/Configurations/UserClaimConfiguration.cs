@@ -16,13 +16,9 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
     protected override string DataSetDescription => "认证用户数据集";
 
     /// <summary>
-    ///     表配置
+    /// 表名
     /// </summary>
-    /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
-    {
-        builder.ToTable(nameof(ArtemisUserClaim), table => table.HasComment(DataSetDescription));
-    }
+    protected override string TableName => nameof(ArtemisUserClaim);
 
     /// <summary>
     ///     数据库字段配置
@@ -59,6 +55,8 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
     {
+        base.RelationConfigure(builder);
+
         // User Claim Key
         builder.HasKey(userClaim => userClaim.Id)
             .HasName($"PK_{nameof(ArtemisUserClaim)}");

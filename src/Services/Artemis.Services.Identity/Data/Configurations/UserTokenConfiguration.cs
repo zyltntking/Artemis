@@ -16,13 +16,9 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     protected override string DataSetDescription => "认证用户令牌数据集";
 
     /// <summary>
-    ///     表配置
+    /// 表名
     /// </summary>
-    /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
-    {
-        builder.ToTable(nameof(ArtemisUserToken), table => table.HasComment(DataSetDescription));
-    }
+    protected override string TableName => nameof(ArtemisUserToken);
 
     /// <summary>
     ///     数据库字段配置

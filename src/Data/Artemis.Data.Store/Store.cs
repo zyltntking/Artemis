@@ -1189,6 +1189,35 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
     #endregion
 
+    #region Exists
+
+    /// <summary>
+    /// 判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <returns></returns>
+    public bool Exists(TKey id)
+    {
+        OnActionExecuting(id, nameof(id));
+        return Context.Set<TEntity>()
+            .Any(entity => entity.Id.Equals(id));
+    }
+
+    /// <summary>
+    /// 判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<bool> ExistsAsync(TKey id, CancellationToken cancellationToken = default)
+    {
+        OnActionExecuting(id, nameof(id));
+        return Context.Set<TEntity>()
+            .AnyAsync(entity => entity.Id.Equals(id), cancellationToken: cancellationToken);
+    }
+
+    #endregion
+
     #endregion
 
     #region Implementation of IStoreMap<TEntity,TKey>

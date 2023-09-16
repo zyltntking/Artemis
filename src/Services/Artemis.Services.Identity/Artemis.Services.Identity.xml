@@ -539,7 +539,7 @@
                 Artemis用户管理器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Artemis.Services.Identity.Stores.IArtemisUserRoleStore,Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.RoleManager{Artemis.Services.Identity.Data.ArtemisRole},Microsoft.AspNetCore.Identity.IRoleStore{Artemis.Services.Identity.Data.ArtemisRole},Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
+        <member name="M:Artemis.Services.Identity.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Artemis.Services.Identity.Stores.IArtemisUserRoleStore,Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.RoleManager{Artemis.Services.Identity.Data.ArtemisRole},Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -551,7 +551,6 @@
             <param name="userRoleStore">用户管理器</param>
             <param name="identityUserStore">用户存储</param>
             <param name="roleManager">角色管理器</param>
-            <param name="identityRoleStore">角色存储</param>
             <param name="logger">日志依赖</param>
             <param name="userLoginStore"></param>
             <param name="userManager"></param>
@@ -612,11 +611,6 @@
                 角色管理器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.IdentityManager.IdentityRoleStore">
-            <summary>
-                角色存储
-            </summary>
-        </member>
         <member name="M:Artemis.Services.Identity.IdentityManager.Test">
             <summary>
                 测试
@@ -635,7 +629,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.GetRolesAsync(System.String,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32)">
             <summary>
                 根据角色名搜索角色列表
             </summary>
@@ -682,6 +676,15 @@
             </summary>
             <param name="roleId">角色标识</param>
             <param name="usernameSearch">用户名搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">页面大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.IdentityManager.GetRoleClaimsAsync(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            获取角色声明
+            </summary>
+            <param name="roleId">角色标识</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
             <returns></returns>
@@ -813,7 +816,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRolesAsync(System.String,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IIdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32)">
             <summary>
                 根据角色名搜索角色
             </summary>
@@ -860,6 +863,15 @@
             </summary>
             <param name="roleId">角色标识</param>
             <param name="usernameSearch">用户名搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">页面大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRoleClaimsAsync(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            获取角色声明
+            </summary>
+            <param name="roleId">角色标识</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
             <returns></returns>

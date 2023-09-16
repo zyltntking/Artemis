@@ -16,13 +16,9 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisRoleCl
     protected override string DataSetDescription => "认证角色凭据数据集";
 
     /// <summary>
-    ///     表配置
+    /// 表名
     /// </summary>
-    /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisRoleClaim> builder)
-    {
-        builder.ToTable(nameof(ArtemisRoleClaim), table => table.HasComment(DataSetDescription));
-    }
+    protected override string TableName => nameof(ArtemisRoleClaim);
 
     /// <summary>
     ///     数据库字段配置
@@ -59,6 +55,8 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisRoleCl
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRoleClaim> builder)
     {
+        base.RelationConfigure(builder);
+
         // Role Claim Key
         builder.HasKey(roleClaim => roleClaim.Id)
             .HasName($"PK_{nameof(ArtemisRoleClaim)}");

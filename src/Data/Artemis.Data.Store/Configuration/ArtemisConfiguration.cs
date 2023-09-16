@@ -88,6 +88,20 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
             .HasComment("删除时间,启用软删除时生效");
     }
 
+    /// <summary>
+    /// 数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        builder.HasIndex(entity => entity.CreatedAt)
+            .HasDatabaseName($"IX_{TableName}_CreatedAt");
+        builder.HasIndex(entity => entity.UpdatedAt)
+            .HasDatabaseName($"IX_{TableName}_UpdatedAt");
+        builder.HasIndex(entity => entity.DeletedAt)
+            .HasDatabaseName($"IX_{TableName}_DeletedAt");
+    }
+
     #endregion
 }
 
@@ -133,6 +147,16 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     /// </summary>
     protected virtual string DataSetDescription => nameof(TEntity);
 
+    /// <summary>
+    /// 表名
+    /// </summary>
+    protected virtual string TableName => nameof(TEntity);
+
+    /// <summary>
+    /// 架构名
+    /// </summary>
+    protected virtual string? SchemaName => null;
+
     #region Implementation of IEntityTypeConfiguration<TEntity>
 
     /// <summary>
@@ -154,9 +178,9 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     ///     表配置
     /// </summary>
     /// <param name="builder"></param>
-    protected virtual void TableConfigure(EntityTypeBuilder<TEntity> builder)
+    private void TableConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.ToTable(nameof(TEntity), table => table.HasComment(DataSetDescription));
+        builder.ToTable(TableName, SchemaName,table => table.HasComment(DataSetDescription));
     }
 
     /// <summary>

@@ -16,13 +16,9 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
     protected override string DataSetDescription => "认证用户角色映射数据集";
 
     /// <summary>
-    ///     表配置
+    /// 表名
     /// </summary>
-    /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
-    {
-        builder.ToTable(nameof(ArtemisUserRole), table => table.HasComment(DataSetDescription));
-    }
+    protected override string TableName => nameof(ArtemisUserRole);
 
     /// <summary>
     ///     数据库字段配置
@@ -41,6 +37,15 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
 
         builder.Property(userRole => userRole.RoleId)
             .HasComment("角色标识");
+    }
+
+    /// <summary>
+    /// 数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
+    {
+        
     }
 
     #endregion

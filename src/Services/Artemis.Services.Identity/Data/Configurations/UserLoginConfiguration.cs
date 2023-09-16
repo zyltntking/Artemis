@@ -16,13 +16,10 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     protected override string DataSetDescription => "认证用户登录数据集";
 
     /// <summary>
-    ///     表配置
+    /// 表名
     /// </summary>
-    /// <param name="builder"></param>
-    protected override void TableConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
-    {
-        builder.ToTable(nameof(ArtemisUserLogin), table => table.HasComment(DataSetDescription));
-    }
+    protected override string TableName => nameof(ArtemisUserLogin);
+
 
     /// <summary>
     ///     数据库字段配置

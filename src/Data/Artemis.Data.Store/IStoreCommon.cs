@@ -354,4 +354,23 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     Task<IEnumerable<TEntity>> FindEntitiesAsync(IEnumerable<TKey> ids, CancellationToken cancellationToken = default);
 
     #endregion
+
+    #region Exists
+
+    /// <summary>
+    /// 判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <returns></returns>
+    bool Exists(TKey id);
+
+    /// <summary>
+    /// 判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<bool> ExistsAsync(TKey id, CancellationToken cancellationToken = default);
+
+    #endregion
 }
