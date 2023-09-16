@@ -57,7 +57,7 @@
 				标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Role.Descripcion">
+		<member name="P:Artemis.Shared.Identity.Models.Role.Description">
 			<summary>
 				角色描述
 			</summary>

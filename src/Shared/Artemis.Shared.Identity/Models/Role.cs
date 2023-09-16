@@ -44,5 +44,5 @@ public class Role : IdentityRole<Guid>
     /// </summary>
     [DataMember(Order = 5)]
     [MaxLength(256)]
-    public virtual string? Descripcion { get; set; }
+    public virtual string? Description { get; set; }
 }

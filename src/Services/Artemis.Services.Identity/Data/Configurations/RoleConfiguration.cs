@@ -44,7 +44,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
             .IsConcurrencyToken()
             .HasComment("并发锁");
 
-        builder.Property(role => role.Descripcion)
+        builder.Property(role => role.Description)
             .HasComment("角色描述");
 
         base.FieldConfigure(builder);
