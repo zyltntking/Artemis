@@ -21,7 +21,7 @@ public class Role : IdentityRole<Guid>
     /// </summary>
     [DataMember(Order = 2)]
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     public override string Name { get; set; } = null!;
 
     /// <summary>
@@ -29,20 +29,20 @@ public class Role : IdentityRole<Guid>
     /// </summary>
     [DataMember(Order = 3)]
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     public override string NormalizedName { get; set; } = null!;
 
     /// <summary>
     ///     并发锁
     /// </summary>
     [DataMember(Order = 4)]
-    [MaxLength(128)]
+    [MaxLength(64)]
     public override string? ConcurrencyStamp { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
     [DataMember(Order = 5)]
-    [MaxLength(256)]
+    [MaxLength(128)]
     public virtual string? Description { get; set; }
 }

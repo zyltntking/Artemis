@@ -30,6 +30,8 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
+        base.FieldConfigure(builder);
+
         builder.Property(user => user.Id)
             .ValueGeneratedOnAdd()
             .HasComment("标识");
@@ -39,8 +41,6 @@ public class UserRoleConfiguration : ArtemisIdentityConfiguration<ArtemisUserRol
 
         builder.Property(userRole => userRole.RoleId)
             .HasComment("角色标识");
-
-        base.FieldConfigure(builder);
     }
 
     #endregion

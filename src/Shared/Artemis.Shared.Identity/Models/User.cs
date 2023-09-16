@@ -20,7 +20,7 @@ public class User : IdentityUser<Guid>
     ///     用户名
     /// </summary>
     [DataMember(Order = 2)]
-    [MaxLength(256)]
+    [MaxLength(32)]
     [Required]
     public override string UserName { get; set; } = null!;
 
@@ -28,7 +28,7 @@ public class User : IdentityUser<Guid>
     ///     标准化用户名
     /// </summary>
     [DataMember(Order = 3)]
-    [MaxLength(256)]
+    [MaxLength(32)]
     [Required]
     public override string NormalizedUserName { get; set; } = null!;
 
@@ -36,14 +36,14 @@ public class User : IdentityUser<Guid>
     ///     电子邮件
     /// </summary>
     [DataMember(Order = 4)]
-    [MaxLength(256)]
+    [MaxLength(128)]
     public override string? Email { get; set; }
 
     /// <summary>
     ///     标准化电子邮件
     /// </summary>
     [DataMember(Order = 5)]
-    [MaxLength(256)]
+    [MaxLength(128)]
     public override string? NormalizedEmail { get; set; }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class User : IdentityUser<Guid>
     ///     电话号码
     /// </summary>
     [DataMember(Order = 7)]
-    [MaxLength(32)]
+    [MaxLength(16)]
     public override string? PhoneNumber { get; set; }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class User : IdentityUser<Guid>
     ///     密码哈希
     /// </summary>
     [DataMember(Order = 9)]
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Required]
     public override string PasswordHash { get; set; } = null!;
 
@@ -77,14 +77,14 @@ public class User : IdentityUser<Guid>
     ///     密码锁
     /// </summary>
     [DataMember(Order = 10)]
-    [MaxLength(256)]
+    [MaxLength(64)]
     public override string? SecurityStamp { get; set; }
 
     /// <summary>
     ///     并发锁
     /// </summary>
     [DataMember(Order = 11)]
-    [MaxLength(256)]
+    [MaxLength(64)]
     public override string? ConcurrencyStamp { get; set; }
 
     /// <summary>

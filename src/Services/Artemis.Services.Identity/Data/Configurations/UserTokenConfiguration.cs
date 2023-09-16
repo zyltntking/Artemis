@@ -30,6 +30,8 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
+        base.FieldConfigure(builder);
+
         builder.Property(user => user.Id)
             .ValueGeneratedOnAdd()
             .HasComment("标识");
@@ -38,17 +40,18 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
             .HasComment("用户标识");
 
         builder.Property(userToken => userToken.LoginProvider)
-            .HasMaxLength(256)
+            .HasMaxLength(32)
+            .IsRequired()
             .HasComment("认证提供程序");
 
         builder.Property(userToken => userToken.Name)
-            .HasMaxLength(256)
+            .HasMaxLength(32)
+            .IsRequired()
             .HasComment("认证令牌名");
 
         builder.Property(userToken => userToken.Value)
             .HasComment("认证令牌");
 
-        base.FieldConfigure(builder);
     }
 
     /// <summary>

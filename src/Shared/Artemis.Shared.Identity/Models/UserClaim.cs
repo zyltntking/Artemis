@@ -12,6 +12,12 @@ namespace Artemis.Shared.Identity.Models;
 public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>
 {
     /// <summary>
+    ///     标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override int Id { get; set; }
+
+    /// <summary>
     ///     用户标识
     /// </summary>
     [DataMember(Order = 2)]
@@ -39,10 +45,4 @@ public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>
     [DataMember(Order = 5)]
     [MaxLength(256)]
     public virtual string? Description { get; set; }
-
-    /// <summary>
-    ///     标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public override int Id { get; set; }
 }
