@@ -30,9 +30,8 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(user => user.Id)
+            .ValueGeneratedOnAdd()
             .HasComment("标识");
 
         builder.Property(userToken => userToken.UserId)
@@ -48,6 +47,8 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
 
         builder.Property(userToken => userToken.Value)
             .HasComment("认证令牌");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
@@ -57,16 +58,12 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
         // User Token Key
-        builder.HasKey(userToken => userToken.Id)
+        builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
             .HasName($"PK_{nameof(ArtemisUserToken)}");
 
-        // User Token Index
-        builder.HasIndex(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
-            .HasDatabaseName($"IX_{nameof(ArtemisUserToken)}_UserId_LoginProvider_Name")
-            .IsUnique();
-
-        //builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
-        //    .HasName($"PK_{nameof(ArtemisUserToken)}");
+        // User Token Alternate Key
+        builder.HasAlternateKey(userToken => userToken.Id)
+            .HasName($"AK_{nameof(ArtemisUserToken)}");
     }
 
     #endregion

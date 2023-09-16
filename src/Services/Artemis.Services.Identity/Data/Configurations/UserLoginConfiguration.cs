@@ -30,25 +30,23 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(user => user.Id)
+            .ValueGeneratedOnAdd()
             .HasComment("标识");
 
         builder.Property(userLogin => userLogin.UserId)
             .HasComment("用户标识");
 
         builder.Property(userLogin => userLogin.LoginProvider)
-            .HasMaxLength(256)
             .HasComment("认证提供程序");
 
         builder.Property(userLogin => userLogin.ProviderKey)
-            .HasMaxLength(256)
             .HasComment("认证提供程序提供的第三方标识");
 
         builder.Property(userLogin => userLogin.ProviderDisplayName)
-            .HasMaxLength(128)
             .HasComment("认证提供程序显示的用户名");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
@@ -58,16 +56,12 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
         // User Login Key
-        builder.HasKey(userLogin => userLogin.Id)
+        builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
             .HasName($"PK_{nameof(ArtemisUserLogin)}");
 
-        // User Login Index
-        builder.HasIndex(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
-            .HasDatabaseName($"IX_{nameof(ArtemisUserLogin)}_LoginProvider_ProviderKey")
-            .IsUnique();
-
-        //builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
-        //    .HasName($"PK_{nameof(ArtemisUserLogin)}");
+        // User Login Alternate Key
+        builder.HasAlternateKey(userLogin => userLogin.Id)
+            .HasName($"AK_{nameof(ArtemisUserLogin)}");
     }
 
     #endregion

@@ -30,8 +30,6 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisRoleCl
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisRoleClaim> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(roleClaim => roleClaim.Id)
             .HasComment("标识");
 
@@ -39,12 +37,12 @@ public class RoleClaimConfiguration : ArtemisIdentityConfiguration<ArtemisRoleCl
             .HasComment("角色标识");
 
         builder.Property(roleClaim => roleClaim.ClaimType)
-            .HasMaxLength(128)
             .HasComment("凭据类型");
 
         builder.Property(roleClaim => roleClaim.ClaimValue)
-            .HasMaxLength(128)
             .HasComment("凭据类型");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>

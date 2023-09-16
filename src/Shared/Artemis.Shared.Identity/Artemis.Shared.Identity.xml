@@ -52,19 +52,14 @@
 				角色
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Role.CreatedAt">
+		<member name="P:Artemis.Shared.Identity.Models.Role.Id">
 			<summary>
-				创建时间
+				标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Role.UpdatedAt">
+		<member name="P:Artemis.Shared.Identity.Models.Role.Descripcion">
 			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Role.DeletedAt">
-			<summary>
-				删除时间
+				角色描述
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Models.RoleClaim">
@@ -72,59 +67,14 @@
 				角色凭据
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.DeletedAt">
-			<summary>
-				删除时间
-			</summary>
-		</member>
 		<member name="T:Artemis.Shared.Identity.Models.User">
 			<summary>
 				用户
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.User.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.User.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.User.DeletedAt">
-			<summary>
-				删除时间
-			</summary>
-		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserClaim">
 			<summary>
 				用户凭据
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserClaim.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserClaim.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserClaim.DeletedAt">
-			<summary>
-				删除时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserLogin">
@@ -137,21 +87,6 @@
 				存储标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserLogin.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserLogin.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserLogin.DeletedAt">
-			<summary>
-				删除时间
-			</summary>
-		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserRole">
 			<summary>
 				用户角色映射
@@ -162,21 +97,6 @@
 				存储标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserRole.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserRole.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserRole.DeletedAt">
-			<summary>
-				删除时间
-			</summary>
-		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserToken">
 			<summary>
 				用户令牌
@@ -185,21 +105,6 @@
 		<member name="P:Artemis.Shared.Identity.Models.UserToken.Id">
 			<summary>
 				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserToken.CreatedAt">
-			<summary>
-				创建时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserToken.UpdatedAt">
-			<summary>
-				更新时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserToken.DeletedAt">
-			<summary>
-				删除时间
 			</summary>
 		</member>
 	</members>

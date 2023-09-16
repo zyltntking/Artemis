@@ -30,25 +30,19 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUser> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(user => user.Id)
             .HasComment("标识");
 
         builder.Property(user => user.UserName)
-            .HasMaxLength(256)
             .HasComment("用户名");
 
         builder.Property(user => user.NormalizedUserName)
-            .HasMaxLength(256)
             .HasComment("规范化用户名");
 
         builder.Property(user => user.Email)
-            .HasMaxLength(256)
             .HasComment("邮箱地址");
 
         builder.Property(user => user.NormalizedEmail)
-            .HasMaxLength(256)
             .HasComment("规范化邮箱地址");
 
         builder.Property(user => user.EmailConfirmed)
@@ -58,16 +52,13 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
             .HasComment("密码哈希");
 
         builder.Property(user => user.SecurityStamp)
-            .HasMaxLength(128)
-            .HasComment("加密戳");
+            .HasComment("密码锁");
 
         builder.Property(user => user.ConcurrencyStamp)
-            .HasMaxLength(128)
             .IsConcurrencyToken()
-            .HasComment("并发戳");
+            .HasComment("并发锁");
 
         builder.Property(user => user.PhoneNumber)
-            .HasMaxLength(256)
             .HasComment("电话号码");
 
         builder.Property(user => user.PhoneNumberConfirmed)
@@ -84,6 +75,8 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
 
         builder.Property(user => user.AccessFailedCount)
             .HasComment("尝试错误数量");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>

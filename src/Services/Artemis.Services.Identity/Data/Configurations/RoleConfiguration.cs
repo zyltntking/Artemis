@@ -31,25 +31,23 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(role => role.Id)
             .HasComment("标识");
 
         builder.Property(role => role.Name)
-            .HasMaxLength(128)
-            .IsRequired()
             .HasComment("角色名");
 
         builder.Property(role => role.NormalizedName)
-            .HasMaxLength(128)
-            .IsRequired()
             .HasComment("规范化角色名");
 
         builder.Property(role => role.ConcurrencyStamp)
-            .HasMaxLength(128)
             .IsConcurrencyToken()
-            .HasComment("并发戳");
+            .HasComment("并发锁");
+
+        builder.Property(role => role.Descripcion)
+            .HasComment("角色描述");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>

@@ -99,6 +99,21 @@
 				角色凭据映射
 			</summary>
 		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisRoleClaim">
 			<summary>
 				ArtemisRoleClaim
@@ -107,6 +122,21 @@
 		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.Role">
 			<summary>
 				凭据所属角色
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.DeletedAt">
+			<summary>
+				删除时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisUser">
@@ -139,6 +169,21 @@
 				用户令牌映射
 			</summary>
 		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisUserClaim">
 			<summary>
 				ArtemisUserClaim
@@ -149,6 +194,21 @@
 				所属用户
 			</summary>
 		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisUserLogin">
 			<summary>
 				ArtemisUserLogin
@@ -157,6 +217,21 @@
 		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.User">
 			<summary>
 				登录信息所属用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.DeletedAt">
+			<summary>
+				删除时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisUserRole">
@@ -174,6 +249,21 @@
 				角色映射
 			</summary>
 		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
 		<member name="T:Artemis.Services.Identity.Data.ArtemisUserToken">
 			<summary>
 				ArtemisUserToken
@@ -182,6 +272,21 @@
 		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.User">
 			<summary>
 				凭据所属用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.DeletedAt">
+			<summary>
+				删除时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Services.Identity.Data.Configurations.ArtemisIdentityConfiguration`1">

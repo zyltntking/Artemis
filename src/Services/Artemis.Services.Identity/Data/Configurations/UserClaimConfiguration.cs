@@ -30,8 +30,6 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(userClaim => userClaim.Id)
             .HasComment("标识");
 
@@ -39,12 +37,12 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
             .HasComment("用户标识");
 
         builder.Property(userClaim => userClaim.ClaimType)
-            .HasMaxLength(128)
             .HasComment("凭据类型");
 
         builder.Property(userClaim => userClaim.ClaimValue)
-            .HasMaxLength(128)
             .HasComment("凭据类型");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
