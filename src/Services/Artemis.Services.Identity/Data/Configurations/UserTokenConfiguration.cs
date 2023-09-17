@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户令牌数据集配置
 /// </summary>
-public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserToken>
+public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
 {
     #region Overrides of ArtemisConfiguration<ArtemisUserToken>
 
@@ -58,11 +58,11 @@ public class UserTokenConfiguration : ArtemisIdentityConfiguration<ArtemisUserTo
     {
         // User Token Key
         builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
-            .HasName($"PK_{nameof(ArtemisUserToken)}");
+            .HasName($"PK_{TableName}");
 
         // User Token Alternate Key
         builder.HasAlternateKey(userToken => userToken.Id)
-            .HasName($"AK_{nameof(ArtemisUserToken)}");
+            .HasName($"AK_{TableName}");
     }
 
     #endregion

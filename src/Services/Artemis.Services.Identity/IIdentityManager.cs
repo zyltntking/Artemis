@@ -20,14 +20,14 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// </summary>
     /// <param name="roleName"></param>
     /// <returns></returns>
-    Task<Role?> GetRoleAsync(string roleName);
+    Task<Role> GetRoleAsync(string roleName);
 
     /// <summary>
     /// 根据角色id获取角色
     /// </summary>
     /// <param name="roleId"></param>
     /// <returns></returns>
-    Task<Role?> GetRoleAsync(Guid roleId);
+    Task<Role> GetRoleAsync(Guid roleId);
 
     /// <summary>
     ///     获取角色列表
@@ -89,6 +89,14 @@ public interface IIdentityManager : IManager<ArtemisUser>
     Task<PageResult<User>> FetchRoleUsersAsync(Guid roleId, string? userNameSearch = null, int page = 1, int size = 20, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// 获取角色凭据列表
+    /// </summary>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<IEnumerable<RoleClaim>> GetRoleClaimAsync(Guid roleId, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// 查询角色的声明
     /// </summary>
     /// <param name="roleId">角色id</param>
@@ -98,4 +106,12 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(Guid roleId, string? claimTypeSearch = null, int page = 1, int size = 20, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 创建角色凭据
+    /// </summary>
+    /// <param name="roleClaims">凭据列表</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<(StoreResult result, IEnumerable<ArtemisRoleClaim> roleClaims)> CreateRoleClaimsAsync(IEnumerable<ArtemisRoleClaim> roleClaims, CancellationToken cancellationToken = default);
 }

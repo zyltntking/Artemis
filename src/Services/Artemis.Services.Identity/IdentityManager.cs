@@ -145,7 +145,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     /// <param name="roleName">角色名</param>
     /// <returns></returns>
-    public async Task<Role?> GetRoleAsync(string roleName)
+    public async Task<Role> GetRoleAsync(string roleName)
     {
         Logger.LogDebug($"查询角色：{roleName}");
 
@@ -163,7 +163,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     /// <param name="roleId"></param>
     /// <returns></returns>
-    public async Task<Role?> GetRoleAsync(Guid roleId)
+    public async Task<Role> GetRoleAsync(Guid roleId)
     {
         Logger.LogDebug($"查询角色：{roleId}");
 
@@ -382,6 +382,34 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     }
 
     /// <summary>
+    /// 获取角色凭据列表
+    /// </summary>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="EntityNotFoundException"></exception>
+    public async Task<IEnumerable<RoleClaim>> GetRoleClaimAsync(Guid roleId, CancellationToken cancellationToken = default)
+    {
+        Logger.LogDebug("获取角色凭据列表");
+
+        var roleExists = await RoleManager.Roles
+            .AnyAsync(role => role.Id == roleId, cancellationToken);
+
+        if (roleExists)
+        {
+            var artemisRoleClaims = await RoleManager.Roles
+                .Where(role => role.Id == roleId)
+                .SelectMany(role => role.RoleClaims)
+                .OrderBy(roleClaim => roleClaim.ClaimType)
+                .ToListAsync(cancellationToken);
+
+            return artemisRoleClaims;
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisRole), roleId.ToString());
+    }
+
+    /// <summary>
     /// 查询角色的声明
     /// </summary>
     /// <param name="roleId">角色id</param>
@@ -390,9 +418,11 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
+    /// <exception cref="EntityNotFoundException"></exception>
     public async Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(Guid roleId, string? claimTypeSearch = null, int page = 1, int size = 20, CancellationToken cancellationToken = default)
     {
         Logger.LogDebug($"查询角色凭据，角色：{roleId}，页码：{page}，页面大小：{size}");
+
         var roleExists = await RoleManager.Roles
             .AnyAsync(role => role.Id == roleId, cancellationToken);
 
@@ -435,6 +465,19 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         }
 
         throw new EntityNotFoundException(nameof(ArtemisRole), roleId.ToString());
+    }
+
+    /// <summary>
+    /// 创建角色凭据
+    /// </summary>
+    /// <param name="roleClaims">凭据列表</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<(StoreResult result, IEnumerable<ArtemisRoleClaim> roleClaims)> CreateRoleClaimsAsync(IEnumerable<ArtemisRoleClaim> roleClaims, CancellationToken cancellationToken = default)
+    {
+        Logger.LogDebug($"创建角色凭据：{roleClaims}");
+
+        throw new NotImplementedException();
     }
 
     #endregion

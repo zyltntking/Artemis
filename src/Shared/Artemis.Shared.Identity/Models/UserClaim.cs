@@ -40,9 +40,17 @@ public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>
     public override string ClaimValue { get; set; } = null!;
 
     /// <summary>
-    ///     凭据描述
+    /// 校验戳
     /// </summary>
     [DataMember(Order = 5)]
-    [MaxLength(256)]
+    [MaxLength(64)]
+    [Required]
+    public virtual string CheckStamp { get; set; } = null!;
+
+    /// <summary>
+    ///     凭据描述
+    /// </summary>
+    [DataMember(Order = 6)]
+    [MaxLength(128)]
     public virtual string? Description { get; set; }
 }

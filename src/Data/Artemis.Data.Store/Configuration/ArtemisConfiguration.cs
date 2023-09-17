@@ -89,10 +89,10 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     }
 
     /// <summary>
-    /// 数据库关系配置
+    /// 元索引配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    protected virtual void MetaIndexConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasIndex(entity => entity.CreatedAt)
             .HasDatabaseName($"IX_{TableName}_CreatedAt");
@@ -100,6 +100,14 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
             .HasDatabaseName($"IX_{TableName}_UpdatedAt");
         builder.HasIndex(entity => entity.DeletedAt)
             .HasDatabaseName($"IX_{TableName}_DeletedAt");
+    }
+
+    /// <summary>
+    /// 数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
     }
 
     #endregion

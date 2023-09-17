@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     角色数据集配置
 /// </summary>
-public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
+public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
 {
     #region Overrides of ArtemisConfiguration<ArtemisRole>
 
@@ -57,15 +57,13 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
-        base.RelationConfigure(builder);
-
         // Role Key
         builder.HasKey(role => role.Id)
-            .HasName($"PK_{nameof(ArtemisRole)}");
+            .HasName($"PK_{TableName}");
 
         // Role Index
         builder.HasIndex(role => role.NormalizedName)
-            .HasDatabaseName($"IX_{nameof(ArtemisRole)}_Name")
+            .HasDatabaseName($"IX_{TableName}_Name")
             .IsUnique();
 
         // Each Role can have many entries in the UserRole join table
@@ -80,7 +78,7 @@ public class RoleConfiguration : ArtemisIdentityConfiguration<ArtemisRole>
         builder.HasMany(role => role.RoleClaims)
             .WithOne(roleClaim => roleClaim.Role)
             .HasForeignKey(roleClaim => roleClaim.RoleId)
-            .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{nameof(ArtemisRole)}_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

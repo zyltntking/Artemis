@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户凭据数据集配置
 /// </summary>
-public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserClaim>
+public class UserClaimConfiguration : IdentityConfiguration<ArtemisUserClaim>
 {
     #region Overrides of ArtemisConfiguration<ArtemisUserClaim>
 
@@ -44,6 +44,11 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
             .IsRequired()
             .HasComment("凭据类型");
 
+        builder.Property(roleClaims => roleClaims.CheckStamp)
+            .HasMaxLength(64)
+            .IsRequired()
+            .HasComment("校验戳");
+
         builder.Property(role => role.Description)
             .HasMaxLength(128)
             .HasComment("凭据描述");
@@ -55,15 +60,17 @@ public class UserClaimConfiguration : ArtemisIdentityConfiguration<ArtemisUserCl
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
     {
-        base.RelationConfigure(builder);
-
         // User Claim Key
         builder.HasKey(userClaim => userClaim.Id)
-            .HasName($"PK_{nameof(ArtemisUserClaim)}");
+            .HasName($"PK_{TableName}");
 
         // User Claim Index
         builder.HasIndex(userClaim => userClaim.ClaimType)
-            .HasDatabaseName($"IX_{nameof(ArtemisUserClaim)}_ClaimType");
+            .HasDatabaseName($"IX_{TableName}_ClaimType");
+
+        builder.HasIndex(userClaim => new { userClaim.CheckStamp, userClaim.UserId })
+            .HasDatabaseName($"IX_{TableName}_CheckStamp_UserId")
+            .IsUnique();
     }
 
     #endregion

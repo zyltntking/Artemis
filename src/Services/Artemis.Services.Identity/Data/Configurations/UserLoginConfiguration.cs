@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户登录数据集
 /// </summary>
-public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLogin>
+public class UserLoginConfiguration : IdentityConfiguration<ArtemisUserLogin>
 {
     #region Overrides of ArtemisConfiguration<ArtemisUserLogin>
 
@@ -59,11 +59,11 @@ public class UserLoginConfiguration : ArtemisIdentityConfiguration<ArtemisUserLo
     {
         // User Login Key
         builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
-            .HasName($"PK_{nameof(ArtemisUserLogin)}");
+            .HasName($"PK_{TableName}");
 
         // User Login Alternate Key
         builder.HasAlternateKey(userLogin => userLogin.Id)
-            .HasName($"AK_{nameof(ArtemisUserLogin)}");
+            .HasName($"AK_{TableName}");
     }
 
     #endregion

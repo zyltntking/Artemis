@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户数据集配置
 /// </summary>
-public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
+public class UserConfiguration : IdentityConfiguration<ArtemisUser>
 {
     #region Overrides of ArtemisConfiguration<ArtemisUser>
 
@@ -92,28 +92,26 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUser> builder)
     {
-        base.RelationConfigure(builder);
-
         // User Key
         builder.HasKey(user => user.Id)
-            .HasName($"PK_{nameof(ArtemisUser)}");
+            .HasName($"PK_{TableName}");
 
         // User Index
         builder.HasIndex(user => user.NormalizedUserName)
-            .HasDatabaseName($"IX_{nameof(ArtemisUser)}_UserName")
+            .HasDatabaseName($"IX_{TableName}_UserName")
             .IsUnique();
 
         builder.HasIndex(user => user.NormalizedEmail)
-            .HasDatabaseName($"IX_{nameof(ArtemisUser)}_Email");
+            .HasDatabaseName($"IX_{TableName}_Email");
 
         builder.HasIndex(user => user.PhoneNumber)
-            .HasDatabaseName($"IX_{nameof(ArtemisUser)}_PhoneNumber");
+            .HasDatabaseName($"IX_{TableName}_PhoneNumber");
 
         // Each User can have many UserClaims
         builder.HasMany(user => user.Claims)
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
-            .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{nameof(ArtemisUser)}_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -121,7 +119,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
         builder.HasMany(user => user.Logins)
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
-            .HasConstraintName($"FK_{nameof(ArtemisUserLogin)}_{nameof(ArtemisUser)}_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserLogin)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -129,7 +127,7 @@ public class UserConfiguration : ArtemisIdentityConfiguration<ArtemisUser>
         builder.HasMany(user => user.Tokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
-            .HasConstraintName($"FK_{nameof(ArtemisUserToken)}_{nameof(ArtemisUser)}_Id")
+            .HasConstraintName($"FK_{nameof(ArtemisUserToken)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 

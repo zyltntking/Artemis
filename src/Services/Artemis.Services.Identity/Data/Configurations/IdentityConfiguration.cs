@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 ///     Artemis认证模型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisIdentityConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+public abstract class IdentityConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
     where TEntity : class, IMateSlot
 {
     #region Overrides of ArtemisConfiguration<TEntity>

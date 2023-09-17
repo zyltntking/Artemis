@@ -285,13 +285,13 @@
                 删除时间
             </summary>
         </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.ArtemisIdentityConfiguration`1">
+        <member name="T:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1">
             <summary>
                 Artemis认证模型配置
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.ArtemisIdentityConfiguration`1.DbType">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1.DbType">
             <summary>
                 数据库类型
             </summary>

@@ -21,9 +21,14 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
     /// </summary>
     /// <param name="options">创建配置</param>
     public ArtemisIdentityContext(DbContextOptions<ArtemisIdentityContext> options)
-        : base(options)
+    : base(options)
     {
     }
+
+    /// <summary>
+    /// ArtemisClaimsSet
+    /// </summary>
+    public DbSet<ArtemisClaim> ArtemisClaims { get; set; } = default!;
 
     #region OnModelCreating
 
@@ -46,7 +51,7 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
                     .HasOne(userRole => userRole.User)
                     .WithMany(user => user.UserRoles)
                     .HasForeignKey(userRole => userRole.UserId)
-                    .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{nameof(ArtemisUser)}_Id")
+                    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisUser)}_Id")
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(user => user.Id),
