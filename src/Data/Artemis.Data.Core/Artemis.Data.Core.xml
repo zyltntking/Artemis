@@ -142,6 +142,22 @@
                 错误编码
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Exceptions.ClaimInvalidException">
+            <summary>
+                凭据无效异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.ClaimInvalidException.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.ClaimInvalidException.#ctor(System.String)">
+            <summary>
+                构造
+            </summary>
+            <param name="actionName">操作名</param>
+        </member>
         <member name="T:Artemis.Data.Core.Exceptions.CreateInstanceException">
             <summary>
                 创建实例异常

@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core.Exceptions;
 
-namespace Artemis.Services.Identity.Exceptions;
+namespace Artemis.Shared.Identity.Exceptions;
 
 /// <summary>
 ///     认证系统不支持邮箱异常

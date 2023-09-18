@@ -18,6 +18,38 @@ public interface IStoreMap<TEntity> : IStoreMap<TEntity, Guid> where TEntity : I
 /// <typeparam name="TKey">键类型</typeparam>
 public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
 {
+    #region MapConfig
+
+    /// <summary>
+    /// 在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    TypeAdapterConfig IgnoreIdAndNullConfig<TSource>();
+
+    /// <summary>
+    /// 在忽略目标实体元数据属性的基础上忽略源实体的空值属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    TypeAdapterConfig IgnoreNullConfig<TSource>();
+
+    /// <summary>
+    /// 在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    TypeAdapterConfig IgnoreIdConfig<TSource>();
+
+    /// <summary>
+    /// 忽略目标实体的元数据属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    TypeAdapterConfig IgnoreMetaConfig<TSource>();
+
+    #endregion
+
     #region CreateNewEntity & CreateNewEntities
 
     /// <summary>

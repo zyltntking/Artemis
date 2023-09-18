@@ -1,6 +1,4 @@
-﻿using Artemis.Data.Core.Exceptions;
-
-namespace Artemis.Extensions.Web.Exceptions;
+﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
 ///     凭据无效异常

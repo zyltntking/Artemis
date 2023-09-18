@@ -3,6 +3,7 @@ using Artemis.Services.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Services.Identity;
@@ -42,17 +43,17 @@ public static class IdentityExtensions
             .AddDefaultUI()
             .AddDefaultTokenProviders();
 
-        serviceCollection.AddScoped<IArtemisUserStore, ArtemisUserStore>();
-        serviceCollection.AddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
-        serviceCollection.AddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
-        serviceCollection.AddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
-        serviceCollection.AddScoped<IArtemisRoleStore, ArtemisRoleStore>();
-        serviceCollection.AddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
-        serviceCollection.AddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
+        serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
+        serviceCollection.TryAddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
+        serviceCollection.TryAddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
+        serviceCollection.TryAddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
+        serviceCollection.TryAddScoped<IArtemisRoleStore, ArtemisRoleStore>();
+        serviceCollection.TryAddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
+        serviceCollection.TryAddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
 
-        serviceCollection.AddScoped<IIdentityManager, IdentityManager>();
+        serviceCollection.TryAddScoped<IIdentityManager, IdentityManager>();
 
-        serviceCollection.AddScoped<IIdentityService, IdentityService>();
+        serviceCollection.TryAddScoped<IIdentityService, IdentityService>();
 
         if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 

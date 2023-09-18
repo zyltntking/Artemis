@@ -39,16 +39,16 @@
                 管理器
             </summary>
         </member>
-        <member name="T:Artemis.App.Identity.Migrations.InitalCreate">
+        <member name="T:Artemis.App.Identity.Migrations.InitialCreate">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.InitalCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.InitalCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.InitalCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:Artemis.App.Identity.Program">

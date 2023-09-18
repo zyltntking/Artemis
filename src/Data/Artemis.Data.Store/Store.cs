@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -155,8 +156,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    public IQueryable<TEntity> EntityQuery =>
-        EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public IQueryable<TEntity> EntityQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
 
     #endregion
 
@@ -186,12 +186,41 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
+
             if (CacheOption == null)
                 Cache?.SetString(entity.GenerateKey, entity.Serialize());
             else
                 Cache?.SetString(entity.GenerateKey, entity.Serialize(), CacheOption);
             SetDebugLog("Entity Cached");
         }
+
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    /// 缓存实体
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private async Task CacheEntityAsync(
+        TEntity entity, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            if (CacheOption == null)
+            {
+                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), cancellationToken)!;
+            }
+            else
+            {
+                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), CacheOption, cancellationToken)!;
+            }
+            SetDebugLog("Entity Cached");
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     /// <summary>
@@ -211,6 +240,32 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             SetDebugLog($"Cached {count} Entities");
         }
+
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    ///     缓存实体
+    /// </summary>
+    /// <param name="entities"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task CacheEntitiesAsync(
+        IEnumerable<TEntity> entities, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            var count = 0;
+            foreach (var entity in entities)
+            {
+                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), cancellationToken)!;
+                count++;
+            }
+
+            SetDebugLog($"Cached {count} Entities");
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     /// <summary>
@@ -228,7 +283,28 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             return json?.Deserialize<TEntity>();
         }
 
-        throw new NotImplementedException(nameof(Cache));
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    ///     获取实体
+    /// </summary>
+    /// <param name="key">缓存键</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    private async Task<TEntity?> GetEntityAsync(
+        string key, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            var json = await Cache?.GetStringAsync(key, cancellationToken)!;
+
+            return json?.Deserialize<TEntity>();
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     /// <summary>
@@ -255,7 +331,37 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             return list;
         }
 
-        throw new NotImplementedException(nameof(Cache));
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    ///     获取实体
+    /// </summary>
+    /// <param name="keys">实体键列表</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    private async Task<IEnumerable<TEntity>> GetEntitiesAsync(
+        IEnumerable<string> keys, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            var list = new List<TEntity>();
+
+            foreach (var key in keys)
+            {
+                var json = await Cache?.GetStringAsync(key, cancellationToken)!;
+
+                var entity = json?.Deserialize<TEntity>();
+
+                if (entity != null) list.Add(entity);
+            }
+
+            return list;
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     /// <summary>
@@ -264,8 +370,31 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity"></param>
     private void RemoveCachedEntity(TEntity entity)
     {
-        if (CachedStore) Cache?.Remove(entity.GenerateKey);
-        SetDebugLog("Entity Remove");
+        if (CachedStore)
+        {
+            Cache?.Remove(entity.GenerateKey);
+            SetDebugLog("Entity Remove");
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task RemoveCachedEntityAsync(
+        TEntity entity, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            await Cache?.RemoveAsync(entity.GenerateKey, cancellationToken)!;
+            SetDebugLog("Entity Remove");
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     /// <summary>
@@ -285,6 +414,32 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             SetDebugLog($"Removed {count} Entities From Cache");
         }
+
+        throw new InstanceNotImplementException(nameof(Cache));
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
+    /// <param name="entities"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task RemoveCachedEntitiesAsync(
+        IEnumerable<TEntity> entities, 
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            var count = 0;
+            foreach (var entity in entities)
+            {
+                await Cache?.RemoveAsync(entity.GenerateKey, cancellationToken)!;
+                count++;
+            }
+
+            SetDebugLog($"Removed {count} Entities From Cache");
+        }
+
+        throw new InstanceNotImplementException(nameof(Cache));
     }
 
     #endregion
@@ -360,7 +515,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     是否启用具缓存策略
     /// </summary>
-    public bool CachedStore { get; set; }
+    private bool _cachedStore;
+
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    public bool CachedStore
+    {
+        get => _cachedStore;
+        set => _cachedStore = value && Cache != null;
+    }
 
     /// <summary>
     ///     过期时间(秒)
@@ -386,9 +550,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
+    /// 是否启用Debug日志
+    /// </summary>
+    private bool _debugLogger;
+
+    /// <summary>
     ///     是否启用Debug日志
     /// </summary>
-    public bool DebugLogger { get; set; }
+    public bool DebugLogger
+    {
+        get => _debugLogger;
+        set => _debugLogger = value && Logger != null;
+    }
 
     #endregion
 
@@ -447,13 +620,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task<StoreResult> CreateAsync(
+        TEntity entity, 
+        CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateAsync));
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         AddEntity(entity);
         var changes = await SaveChangesAsync(cancellationToken);
-        CacheEntity(entity);
+        await CacheEntityAsync(entity, cancellationToken);
         return StoreResult.Success(changes);
     }
 
@@ -463,7 +638,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(IEnumerable<TEntity> entities,
+    public virtual async Task<StoreResult> CreateAsync(
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateAsync));
@@ -471,7 +647,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         AddEntities(list);
         var changes = await SaveChangesAsync(cancellationToken);
-        CacheEntities(list);
+        await CacheEntitiesAsync(list, cancellationToken);
         return StoreResult.Success(changes);
     }
 
@@ -489,8 +665,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         SetDebugLog(nameof(Update));
         OnActionExecuting(entity, nameof(entity));
         UpdateEntity(entity);
+        var result = AttacheChange();
         CacheEntity(entity);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -504,8 +681,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
         UpdateEntities(list);
+        var result = AttacheChange();
         CacheEntities(list);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -514,13 +692,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> UpdateAsync
+        (TEntity entity, 
+            CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         UpdateEntity(entity);
-        CacheEntity(entity);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntityAsync(entity, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -529,15 +710,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> UpdateAsync(IEnumerable<TEntity> entities,
+    public async Task<StoreResult> UpdateAsync(
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         UpdateEntities(list);
-        CacheEntities(list);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     #endregion
@@ -550,7 +733,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被更新实体的主键</param>
     /// <param name="setter">更新行为</param>
     /// <returns></returns>
-    public StoreResult BatchUpdate(TKey id,
+    public StoreResult BatchUpdate(
+        TKey id,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -576,7 +760,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids">被更新实体的主键</param>
     /// <param name="setter">更新行为</param>
     /// <returns></returns>
-    public StoreResult BatchUpdate(IEnumerable<TKey> ids,
+    public StoreResult BatchUpdate(
+        IEnumerable<TKey> ids,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -603,7 +788,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新行为</param>
     /// <param name="predicate">查询表达式</param>
     /// <returns></returns>
-    public StoreResult BatchUpdate(Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
+    public StoreResult BatchUpdate(
+        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         Expression<Func<TEntity, bool>>? predicate = null)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -631,7 +817,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query"></param>
     /// <param name="setter">更新行为</param>
     /// <returns></returns>
-    public StoreResult BatchUpdate(IQueryable<TEntity> query,
+    public StoreResult BatchUpdate(
+        IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -655,7 +842,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新行为</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(TKey id,
+    public async Task<StoreResult> BatchUpdateAsync(
+        TKey id,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
@@ -683,7 +871,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新行为</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(IEnumerable<TKey> ids,
+    public async Task<StoreResult> BatchUpdateAsync(
+        IEnumerable<TKey> ids,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
@@ -744,7 +933,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新行为</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(IQueryable<TEntity> query,
+    public async Task<StoreResult> BatchUpdateAsync(
+        IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
@@ -776,10 +966,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         SetDebugLog(nameof(Delete));
         OnActionExecuting(id, nameof(id));
         var entity = FindEntity(id);
-        if (entity == null) return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
+        if (entity == null) 
+            return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         DeleteEntity(entity);
+        var result = AttacheChange();
         RemoveCachedEntity(entity);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -792,8 +984,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         SetDebugLog(nameof(Delete));
         OnActionExecuting(entity, nameof(entity));
         DeleteEntity(entity);
+        var result = AttacheChange();
         RemoveCachedEntity(entity);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -806,16 +999,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         SetDebugLog(nameof(Delete));
         var idList = ids as List<TKey> ?? ids.ToList();
         OnActionExecuting(idList, nameof(ids));
-        var entityList = FindEntities(idList).ToList();
-        if (!entityList.Any())
+        var list = FindEntities(idList).ToList();
+        if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
-
-        DeleteEntities(entityList);
-        RemoveCachedEntities(entityList);
-        return AttacheChange();
+        DeleteEntities(list);
+        var result = AttacheChange();
+        RemoveCachedEntities(list);
+        return result;
     }
 
     /// <summary>
@@ -829,8 +1022,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         OnActionExecuting(list, nameof(entities));
         DeleteEntities(list);
+        var result = AttacheChange();
         RemoveCachedEntities(list);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -839,15 +1033,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteAsync(
+        TKey id, 
+        CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         var entity = await FindEntityAsync(id, cancellationToken);
         if (entity == null) return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         DeleteEntity(entity);
-        RemoveCachedEntity(entity);
-        return await AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await RemoveCachedEntityAsync(entity, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -856,13 +1053,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteAsync(
+        TEntity entity, 
+        CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
         DeleteEntity(entity);
-        RemoveCachedEntity(entity);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await RemoveCachedEntityAsync(entity, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -871,22 +1071,24 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(IEnumerable<TKey> ids,
+    public async Task<StoreResult> DeleteAsync(
+        IEnumerable<TKey> ids, 
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
         var idList = ids as List<TKey> ?? ids.ToList();
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
-        var entityList = (await FindEntitiesAsync(idList, cancellationToken)).ToList();
-        if (!entityList.Any())
+        var list = (await FindEntitiesAsync(idList, cancellationToken)).ToList();
+        if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
 
-        DeleteEntities(entityList);
-        RemoveCachedEntities(entityList);
-        return await AttacheChangeAsync(cancellationToken);
+        DeleteEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await RemoveCachedEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -895,15 +1097,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities">被删除实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> DeleteAsync(IEnumerable<TEntity> entities,
+    public async Task<StoreResult> DeleteAsync(
+        IEnumerable<TEntity> entities, 
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
         var list = entities.ToList();
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
         DeleteEntities(list);
-        RemoveCachedEntities(list);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await RemoveCachedEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     #endregion
@@ -1011,7 +1215,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> BatchDeleteAsync(
+        TKey id, 
+        CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
@@ -1036,7 +1242,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids">被删除实体的主键</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(IEnumerable<TKey> ids,
+    public async Task<StoreResult> BatchDeleteAsync(
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -1063,7 +1270,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="predicate">查询表达式</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(Expression<Func<TEntity, bool>>? predicate,
+    public async Task<StoreResult> BatchDeleteAsync(
+        Expression<Func<TEntity, bool>>? predicate,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -1093,7 +1301,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(IQueryable<TEntity> query,
+    public async Task<StoreResult> BatchDeleteAsync(
+        IQueryable<TEntity> query,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -1127,6 +1336,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
+    /// 根据id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id">id</param>
+    /// <returns></returns>
+    public TMapEntity? FindMapEntity<TMapEntity>(TKey id)
+    {
+        OnActionExecuting(id, nameof(id));
+        return FindById<TMapEntity>(id);
+    }
+
+    /// <summary>
     ///     根据缓存键查找实体
     /// </summary>
     /// <param name="key">缓存键</param>
@@ -1135,6 +1356,21 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         OnActionExecuting(key, nameof(key));
         return GetEntity(key);
+    }
+
+    /// <summary>
+    /// 根据缓存键查找实体查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="key">id</param>
+    /// <returns></returns>
+    public TMapEntity? FindMapEntityViaKey<TMapEntity>(string key)
+    {
+        OnActionExecuting(key, nameof(key));
+
+        var entity = GetEntity(key);
+
+        return entity != null ? entity.Adapt<TMapEntity>() : default;
     }
 
     /// <summary>
@@ -1150,6 +1386,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
+    /// 根据id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="ids">ids</param>
+    /// <returns></returns>
+    public IEnumerable<TMapEntity> FindMapEntities<TMapEntity>(IEnumerable<TKey> ids)
+    {
+        var idArray = ids as TKey[] ?? ids.ToArray();
+        OnActionExecuting(idArray, nameof(ids));
+        return FindByIds<TMapEntity>(idArray);
+    }
+
+    /// <summary>
     ///     根据缓存键查找实体
     /// </summary>
     /// <param name="keys">缓存键</param>
@@ -1162,15 +1411,78 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
+    /// 根据缓存键查找实体查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="keys">keys</param>
+    /// <returns></returns>
+    public IEnumerable<TMapEntity> FindMapEntitiesViaKeys<TMapEntity>(IEnumerable<string> keys)
+    {
+        var keyList = keys.ToList();
+        OnActionExecuting(keyList, nameof(keys));
+        var entities = GetEntities(keyList);
+        return entities.Select(entity => entity.Adapt<TMapEntity>());
+    }
+
+    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<TEntity?> FindEntityAsync(TKey id, CancellationToken cancellationToken = default)
+    public Task<TEntity?> FindEntityAsync(
+        TKey id, 
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         return FindByIdAsync(id, cancellationToken);
+    }
+
+    /// <summary>
+    ///     根据Id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
+        TKey id, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
+        return FindByIdAsync<TMapEntity>(id, cancellationToken);
+    }
+
+    /// <summary>
+    ///     根据缓存键查找实体
+    /// </summary>
+    /// <param name="key">缓存键</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<TEntity?> FindEntityViaKeyAsync(
+        string key, 
+        CancellationToken cancellationToken = default)
+    {
+        OnActionExecuting(key, nameof(key));
+        return GetEntityAsync(key, cancellationToken);
+    }
+
+    /// <summary>
+    /// 根据缓存键查找实体查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="key">id</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<TMapEntity?> FindMapEntityViaKeyAsync<TMapEntity>(
+        string key, CancellationToken 
+            cancellationToken = default)
+    {
+        OnActionExecuting(key, nameof(key));
+
+        var entity = await GetEntityAsync(key, cancellationToken);
+
+        return entity != null ? entity.Adapt<TMapEntity>() : default;
     }
 
     /// <summary>
@@ -1179,12 +1491,61 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<IEnumerable<TEntity>> FindEntitiesAsync(IEnumerable<TKey> ids,
+    public Task<List<TEntity>> FindEntitiesAsync(
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
         return FindByIdsAsync(idArray, cancellationToken);
+    }
+
+    /// <summary>
+    ///     根据Id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="ids"></param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
+        IEnumerable<TKey> ids, 
+        CancellationToken cancellationToken = default)
+    {
+        var idArray = ids as TKey[] ?? ids.ToArray();
+        OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
+        return FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
+    }
+
+    /// <summary>
+    ///     根据缓存键查找实体
+    /// </summary>
+    /// <param name="keys">缓存键</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<IEnumerable<TEntity>> FindEntitiesViaKeysAsync(
+        IEnumerable<string> keys, 
+        CancellationToken cancellationToken = default)
+    {
+        var keyList = keys.ToList();
+        OnActionExecuting(keyList, nameof(keys));
+        return GetEntitiesAsync(keyList, cancellationToken);
+    }
+
+    /// <summary>
+    /// 根据缓存键查找实体查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="keys">keys</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<TMapEntity>> FindMapEntitiesViaKeysAsync<TMapEntity>(
+        IEnumerable<string> keys, 
+        CancellationToken cancellationToken = default)
+    {
+        var keyList = keys.ToList();
+        OnActionExecuting(keyList, nameof(keys));
+        var entities = await GetEntitiesAsync(keyList, cancellationToken);
+        return entities.Select(entity => entity.Adapt<TMapEntity>());
     }
 
     #endregion
@@ -1198,6 +1559,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public bool Exists(TKey id)
     {
+        SetDebugLog(nameof(Exists));
         OnActionExecuting(id, nameof(id));
         return Context.Set<TEntity>()
             .Any(entity => entity.Id.Equals(id));
@@ -1209,8 +1571,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">实体键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task<bool> ExistsAsync(TKey id, CancellationToken cancellationToken = default)
+    public Task<bool> ExistsAsync(
+        TKey id, 
+        CancellationToken cancellationToken = default)
     {
+        SetDebugLog(nameof(ExistsAsync));
         OnActionExecuting(id, nameof(id));
         return Context.Set<TEntity>()
             .AnyAsync(entity => entity.Id.Equals(id), cancellationToken: cancellationToken);
@@ -1231,7 +1596,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="source">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns>映射后实体</returns>
-    public StoreResult CreateNew<TSource>(TSource source, TypeAdapterConfig? config = null)
+    public StoreResult CreateNew<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(CreateNew));
         OnActionExecuting(source, nameof(source));
@@ -1251,7 +1618,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns>创建结果</returns>
-    public StoreResult CreateNew<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
+    public StoreResult CreateNew<TSource>(
+        IEnumerable<TSource> sources, 
+        TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(CreateNew));
         OnActionExecuting(sources, nameof(sources));
@@ -1273,7 +1642,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> CreateNewAsync<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateNewAsync));
@@ -1283,7 +1654,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var changes = await SaveChangesAsync(cancellationToken);
-        CacheEntity(entity);
+        await CacheEntityAsync(entity, cancellationToken);
         return StoreResult.Success(changes);
     }
 
@@ -1295,8 +1666,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<StoreResult> CreateNewAsync<TSource>(IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateNewAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null, 
+        CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateNewAsync));
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
@@ -1306,7 +1679,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         AddEntities(list);
         var changes = await SaveChangesAsync(cancellationToken);
-        CacheEntities(list);
+        await CacheEntitiesAsync(list, cancellationToken);
         return StoreResult.Success(changes);
     }
 
@@ -1321,7 +1694,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="source">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Over<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    public StoreResult Over<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Over));
         OnActionExecuting(source, nameof(source));
@@ -1329,8 +1704,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var entity = source.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
+        var result = AttacheChange();
         CacheEntity(entity);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1341,7 +1717,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="destination">目标数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Over<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null)
+    public StoreResult Over<TSource>(
+        TSource source, 
+        TEntity destination, 
+        TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Over));
         OnActionExecuting(source, nameof(source));
@@ -1349,8 +1728,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(destination, config);
         if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
+        var result = AttacheChange();
         CacheEntity(destination);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1360,7 +1740,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Over<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
+    public StoreResult Over<TSource>(
+        IEnumerable<TSource> sources, 
+        TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Over));
@@ -1370,8 +1752,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
+        var result = AttacheChange();
         CacheEntities(list);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1401,8 +1784,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
+        var result = AttacheChange();
         CacheEntities(list);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1413,7 +1797,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> OverAsync<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(OverAsync));
@@ -1422,8 +1808,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var entity = source.Adapt<TSource, TEntity>(config);
         if (entity == null) throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
-        CacheEntity(entity);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntityAsync(entity, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1435,7 +1822,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> OverAsync<TSource>(
+        TSource source, TEntity destination, 
+        TypeAdapterConfig? config = null, 
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(OverAsync));
@@ -1444,8 +1833,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(destination, config);
         if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
-        CacheEntity(destination);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntityAsync(destination, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1456,7 +1846,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> OverAsync<TSource>(
+        IEnumerable<TSource> sources, 
+        TypeAdapterConfig? config = null, 
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(OverAsync));
@@ -1466,8 +1858,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
-        CacheEntities(list);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1482,7 +1875,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <param name="sourceKeySelector">源键选择器</param>
     /// <returns></returns>
-    public Task<StoreResult> OverAsync<TSource, TJKey>(
+    public async Task<StoreResult> OverAsync<TSource, TJKey>(
         IEnumerable<TSource> sources,
         IEnumerable<TEntity> destinations,
         Func<TSource, TJKey> sourceKeySelector,
@@ -1499,8 +1892,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
-        CacheEntities(list);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     #endregion
@@ -1514,7 +1908,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="source">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Merge<TSource>(TSource source, TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    public StoreResult Merge<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Merge));
         OnActionExecuting(source, nameof(source));
@@ -1523,8 +1919,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         config ??= IgnoreNullConfig<TSource>();
         source.Adapt(entity, config);
         UpdateEntity(entity);
+        var result = AttacheChange();
         CacheEntity(entity);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1535,7 +1932,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="destination">目标数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Merge<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null)
+    public StoreResult Merge<TSource>(
+        TSource source, 
+        TEntity destination, 
+        TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Merge));
         OnActionExecuting(source, nameof(source));
@@ -1543,8 +1943,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(destination, config);
         if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
+        var result = AttacheChange();
         CacheEntity(destination);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1554,7 +1955,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="sources">源数据</param>
     /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public StoreResult Merge<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null)
+    public StoreResult Merge<TSource>(
+        IEnumerable<TSource> sources, 
+        TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Merge));
@@ -1563,11 +1966,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var destinations = FindByIds(sourceList.Select(source => source.Id));
         if (destinations == null) throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
-        var entities = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+        var list = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
-        UpdateEntities(entities);
-        CacheEntities(entities);
-        return AttacheChange();
+        UpdateEntities(list);
+        var result = AttacheChange();
+        CacheEntities(list);
+        return result;
     }
 
     /// <summary>
@@ -1581,9 +1985,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="sourceKeySelector">源键选择器</param>
     /// <returns></returns>
-    public StoreResult Merge<TSource, TJKey>(IEnumerable<TSource> sources, IEnumerable<TEntity> destinations,
-        Func<TSource, TJKey> sourceKeySelector,
-        Func<TEntity, TJKey> destinationKeySelector, TypeAdapterConfig? config = null)
+    public StoreResult Merge<TSource, TJKey>(
+        IEnumerable<TSource> sources, 
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector, 
+        Func<TEntity, TJKey> destinationKeySelector, 
+        TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Merge));
         var sourceList = sources.ToList();
@@ -1594,8 +2001,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
+        var result = AttacheChange();
         CacheEntities(list);
-        return AttacheChange();
+        return result;
     }
 
     /// <summary>
@@ -1606,7 +2014,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> MergeAsync<TSource>(TSource source, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> MergeAsync<TSource>(
+        TSource source, 
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(MergeAsync));
@@ -1616,8 +2026,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         config ??= IgnoreNullConfig<TSource>();
         source.Adapt(entity, config);
         UpdateEntity(entity);
-        CacheEntity(entity);
-        return await AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntityAsync(entity, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1629,7 +2040,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> MergeAsync<TSource>(TSource source, TEntity destination, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> MergeAsync<TSource>(
+        TSource source, 
+        TEntity destination, 
+        TypeAdapterConfig? config = null, 
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(MergeAsync));
@@ -1638,8 +2052,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(destination, config);
         if (destination == null) throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
-        CacheEntity(destination);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntityAsync(destination, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1650,7 +2065,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> MergeAsync<TSource>(IEnumerable<TSource> sources, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> MergeAsync<TSource>(
+        IEnumerable<TSource> sources, 
+        TypeAdapterConfig? config = null, 
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(MergeAsync));
@@ -1659,11 +2076,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var destinations = await FindByIdsAsync(sourceList.Select(source => source.Id), cancellationToken);
         if (destinations == null) throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
-        var entities = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+        var list = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
-        UpdateEntities(entities);
-        CacheEntities(entities);
-        return await AttacheChangeAsync(cancellationToken);
+        UpdateEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     /// <summary>
@@ -1678,9 +2096,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <param name="sourceKeySelector">源键选择器</param>
     /// <returns></returns>
-    public Task<StoreResult> MergeAsync<TSource, TJKey>(IEnumerable<TSource> sources, IEnumerable<TEntity> destinations,
-        Func<TSource, TJKey> sourceKeySelector,
-        Func<TEntity, TJKey> destinationKeySelector, TypeAdapterConfig? config = null,
+    public async Task<StoreResult> MergeAsync<TSource, TJKey>(
+        IEnumerable<TSource> sources, 
+        IEnumerable<TEntity> destinations, 
+        Func<TSource, TJKey> sourceKeySelector, 
+        Func<TEntity, TJKey> destinationKeySelector, 
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(MergeAsync));
@@ -1692,8 +2113,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entities == null) throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         UpdateEntities(list);
-        CacheEntities(list);
-        return AttacheChangeAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
+        await CacheEntitiesAsync(list, cancellationToken);
+        return result;
     }
 
     #endregion
@@ -1706,10 +2128,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreIdAndNullConfig;
 
     /// <summary>
-    ///     空值或空字符值忽略缓存
+    /// 在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <returns></returns>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
     public TypeAdapterConfig IgnoreIdAndNullConfig<TSource>()
     {
         if (_ignoreIdAndNullConfig != null) return _ignoreIdAndNullConfig;
@@ -1726,10 +2148,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreNullConfig;
 
     /// <summary>
-    ///     空值或空字符值忽略缓存
+    /// 在忽略目标实体元数据属性的基础上忽略源实体的空值属性
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <returns></returns>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
     public TypeAdapterConfig IgnoreNullConfig<TSource>()
     {
         if (_ignoreNullConfig != null) return _ignoreNullConfig;
@@ -1746,10 +2168,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreIdConfig;
 
     /// <summary>
-    ///     Id忽略访问器
+    /// 在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <returns></returns>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
     public TypeAdapterConfig IgnoreIdConfig<TSource>()
     {
         if (_ignoreIdConfig != null) return _ignoreIdConfig;
@@ -1765,10 +2187,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreMetaConfig;
 
     /// <summary>
-    ///     元数据忽略访问器
+    /// 忽略目标实体的元数据属性
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <returns></returns>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
     public TypeAdapterConfig IgnoreMetaConfig<TSource>()
     {
         if (_ignoreMetaConfig != null) return _ignoreMetaConfig;
@@ -1859,7 +2281,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query">查询</param>
     /// <param name="setter">更新委托</param>
     /// <returns></returns>
-    private int BatchUpdateEntity(IQueryable<TEntity> query,
+    private int BatchUpdateEntity(
+        IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
         if (MetaDataHosting)
@@ -1875,7 +2298,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新委托</param>
     /// <param name="cancellationToken">异步操作取消信号</param>
     /// <returns></returns>
-    private Task<int> BatchUpdateEntityAsync(IQueryable<TEntity> query,
+    private Task<int> BatchUpdateEntityAsync(
+        IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
@@ -1950,7 +2374,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private Task<int> BatchDeleteEntityAsync(IQueryable<TEntity> query, CancellationToken cancellationToken = default)
+    private Task<int> BatchDeleteEntityAsync(
+        IQueryable<TEntity> query, 
+        CancellationToken cancellationToken = default)
     {
         if (SoftDelete)
             return query.ExecuteUpdateAsync(setter => setter
@@ -1971,13 +2397,39 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
+    /// 根据Id查询实体并映射到指定类型
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id">id</param>
+    /// <returns></returns>
+    private TMapEntity? FindById<TMapEntity>(TKey id)
+    {
+        return EntityQuery.Where(entity => entity.Id.Equals(id))
+            .ProjectToType<TMapEntity>()
+            .FirstOrDefault();
+    }
+
+    /// <summary>
     ///     根据Id查询实体
     /// </summary>
-    /// <param name="ids">id</param>
+    /// <param name="ids">id表</param>
     /// <returns></returns>
     private IEnumerable<TEntity> FindByIds(IEnumerable<TKey> ids)
     {
         return EntityQuery.Where(entity => ids.Contains(entity.Id)).ToList();
+    }
+
+    /// <summary>
+    ///  根据Id查询实体并映射到指定类型
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="ids">id表</param>
+    /// <returns></returns>
+    private IEnumerable<TMapEntity> FindByIds<TMapEntity>(IEnumerable<TKey> ids)
+    {
+        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+            .ProjectToType<TMapEntity>()
+            .ToList();
     }
 
     /// <summary>
@@ -1986,9 +2438,27 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    private Task<TEntity?> FindByIdAsync(TKey id, CancellationToken cancellationToken = default)
+    private Task<TEntity?> FindByIdAsync(
+        TKey id, 
+        CancellationToken cancellationToken = default)
     {
         return EntityQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id), cancellationToken);
+    }
+
+    /// <summary>
+    ///  根据Id查询实体并映射到指定类型
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    private Task<TMapEntity?> FindByIdAsync<TMapEntity>(
+        TKey id, 
+        CancellationToken cancellationToken = default)
+    {
+        return EntityQuery.Where(entity => entity.Id.Equals(id))
+            .ProjectToType<TMapEntity>()
+            .FirstOrDefaultAsync(cancellationToken);
     }
 
     /// <summary>
@@ -1997,10 +2467,28 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    private async Task<IEnumerable<TEntity>> FindByIdsAsync(IEnumerable<TKey> ids,
+    private Task<List<TEntity>> FindByIdsAsync(
+        IEnumerable<TKey> ids, 
         CancellationToken cancellationToken = default)
     {
-        return await EntityQuery.Where(entity => ids.Contains(entity.Id)).ToListAsync(cancellationToken);
+        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+            .ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
+    ///  根据Id查询实体并映射到指定类型
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="ids"></param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    private Task<List<TMapEntity>> FindByIdsAsync<TMapEntity>(
+        IEnumerable<TKey> ids, 
+        CancellationToken cancellationToken = default)
+    {
+        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+            .ProjectToType<TMapEntity>()
+            .ToListAsync(cancellationToken);
     }
 
     #endregion

@@ -23,6 +23,64 @@ namespace Artemis.App.Identity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Artemis.Services.Identity.Data.ArtemisClaim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasComment("标识");
+
+                    b.Property<string>("CheckStamp")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("校验戳");
+
+                    b.Property<string>("ClaimType")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasComment("凭据类型");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("凭据类型");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("创建时间,初始化后不再进行任何变更");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("删除时间,启用软删除时生效");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("凭据描述");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("更新时间,初始为创建时间");
+
+                    b.HasKey("Id")
+                        .HasName("PK_ArtemisClaim");
+
+                    b.HasIndex("CheckStamp")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisClaim_CheckStamp");
+
+                    b.HasIndex("ClaimType")
+                        .HasDatabaseName("IX_ArtemisClaim_ClaimType");
+
+                    b.ToTable("ArtemisClaim", "identity", t =>
+                        {
+                            t.HasComment("认证凭据数据集");
+                        });
+                });
+
             modelBuilder.Entity("Artemis.Services.Identity.Data.ArtemisRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -87,6 +145,12 @@ namespace Artemis.App.Identity.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CheckStamp")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("校验戳");
+
                     b.Property<string>("ClaimType")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -127,6 +191,10 @@ namespace Artemis.App.Identity.Migrations
                         .HasDatabaseName("IX_ArtemisRoleClaim_ClaimType");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("CheckStamp", "RoleId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisRoleClaim_CheckStamp_RoleId");
 
                     b.ToTable("ArtemisRoleClaim", "identity", t =>
                         {
@@ -249,6 +317,12 @@ namespace Artemis.App.Identity.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CheckStamp")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("校验戳");
+
                     b.Property<string>("ClaimType")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -289,6 +363,10 @@ namespace Artemis.App.Identity.Migrations
                         .HasDatabaseName("IX_ArtemisUserClaim_ClaimType");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("CheckStamp", "UserId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisUserClaim_CheckStamp_UserId");
 
                     b.ToTable("ArtemisUserClaim", "identity", t =>
                         {
@@ -494,7 +572,7 @@ namespace Artemis.App.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_ArtemisUserClaim_ArtemisUser_Id");
+                        .HasConstraintName("FK_ArtemisUserRole_ArtemisUser_Id");
 
                     b.Navigation("Role");
 

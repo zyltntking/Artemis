@@ -7,13 +7,33 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "identity");
+
+            migrationBuilder.CreateTable(
+                name: "ArtemisClaim",
+                schema: "identity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
+                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
+                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
+                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
+                    ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
+                    Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtemisClaim", x => x.Id);
+                },
+                comment: "认证凭据数据集");
 
             migrationBuilder.CreateTable(
                 name: "ArtemisRole",
@@ -78,6 +98,7 @@ namespace Artemis.App.Identity.Migrations
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
                 constraints: table =>
@@ -106,6 +127,7 @@ namespace Artemis.App.Identity.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
                 constraints: table =>
@@ -168,17 +190,17 @@ namespace Artemis.App.Identity.Migrations
                     table.PrimaryKey("PK_ArtemisUserRole", x => new { x.UserId, x.RoleId });
                     table.UniqueConstraint("AK_ArtemisUserRole", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ArtemisUserClaim_ArtemisUser_Id",
-                        column: x => x.UserId,
-                        principalSchema: "identity",
-                        principalTable: "ArtemisUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_ArtemisUserRole_ArtemisRole_Id",
                         column: x => x.RoleId,
                         principalSchema: "identity",
                         principalTable: "ArtemisRole",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtemisUserRole_ArtemisUser_Id",
+                        column: x => x.UserId,
+                        principalSchema: "identity",
+                        principalTable: "ArtemisUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 },
@@ -214,10 +236,30 @@ namespace Artemis.App.Identity.Migrations
                 comment: "认证用户令牌数据集");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisClaim_CheckStamp",
+                schema: "identity",
+                table: "ArtemisClaim",
+                column: "CheckStamp",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisClaim_ClaimType",
+                schema: "identity",
+                table: "ArtemisClaim",
+                column: "ClaimType");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRole_Name",
                 schema: "identity",
                 table: "ArtemisRole",
                 column: "NormalizedName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRoleClaim_CheckStamp_RoleId",
+                schema: "identity",
+                table: "ArtemisRoleClaim",
+                columns: new[] { "CheckStamp", "RoleId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -252,6 +294,13 @@ namespace Artemis.App.Identity.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserClaim_CheckStamp_UserId",
+                schema: "identity",
+                table: "ArtemisUserClaim",
+                columns: new[] { "CheckStamp", "UserId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserClaim_ClaimType",
                 schema: "identity",
                 table: "ArtemisUserClaim",
@@ -279,6 +328,10 @@ namespace Artemis.App.Identity.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ArtemisClaim",
+                schema: "identity");
+
             migrationBuilder.DropTable(
                 name: "ArtemisRoleClaim",
                 schema: "identity");

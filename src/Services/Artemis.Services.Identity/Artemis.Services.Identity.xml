@@ -56,6 +56,26 @@
             <param name="attach">附加数据</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Services.Identity.Data.ArtemisClaim">
+            <summary>
+            ArtemisClaim
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.CreatedAt">
+            <summary>
+                创建时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.UpdatedAt">
+            <summary>
+                更新时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.DeletedAt">
+            <summary>
+                删除时间
+            </summary>
+        </member>
         <member name="T:Artemis.Services.Identity.Data.ArtemisIdentityContext">
             <summary>
                 Artemis认证数据上下文
@@ -66,6 +86,11 @@
                 构造
             </summary>
             <param name="options">创建配置</param>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisIdentityContext.ArtemisClaims">
+            <summary>
+            ArtemisClaimsSet
+            </summary>
         </member>
         <member name="M:Artemis.Services.Identity.Data.ArtemisIdentityContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
@@ -285,6 +310,33 @@
                 删除时间
             </summary>
         </member>
+        <member name="T:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration">
+            <summary>
+            凭据数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.TableName">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
+            <summary>
+                数据库字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
+            <summary>
+            数据库关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1">
             <summary>
                 Artemis认证模型配置
@@ -306,11 +358,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
             <summary>
@@ -334,11 +385,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
             <summary>
@@ -362,11 +412,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
             <summary>
@@ -390,11 +439,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.UserConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
             <summary>
@@ -418,11 +466,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
             <summary>
@@ -446,15 +493,20 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
             <summary>
                 数据库字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
+            <summary>
+            数据库关系配置
             </summary>
             <param name="builder"></param>
         </member>
@@ -468,11 +520,10 @@
                 数据集描述
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.TableConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
+        <member name="P:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.TableName">
             <summary>
-                表配置
+            表名
             </summary>
-            <param name="builder"></param>
         </member>
         <member name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
             <summary>
@@ -485,40 +536,6 @@
                 数据库关系配置
             </summary>
             <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Exceptions.NotSupportEmailException">
-            <summary>
-                认证系统不支持邮箱异常
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Exceptions.NotSupportEmailException.#ctor">
-            <summary>
-                构造
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Exceptions.NotSupportEmailException.#ctor(System.String,System.Int32)">
-            <summary>
-                错误构造
-            </summary>
-            <param name="errorMessage">错误消息</param>
-            <param name="errorCode">错误编码</param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Exceptions.NotSupportPhoneNumberException">
-            <summary>
-                认证不支持手机号码异常
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Exceptions.NotSupportPhoneNumberException.#ctor">
-            <summary>
-                构造
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Exceptions.NotSupportPhoneNumberException.#ctor(System.String,System.Int32)">
-            <summary>
-                错误构造
-            </summary>
-            <param name="errorMessage">错误消息</param>
-            <param name="errorCode">错误编码</param>
         </member>
         <member name="T:Artemis.Services.Identity.IdentityExtensions">
             <summary>
@@ -539,7 +556,7 @@
                 Artemis用户管理器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Artemis.Services.Identity.Stores.IArtemisUserRoleStore,Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.RoleManager{Artemis.Services.Identity.Data.ArtemisRole},Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
+        <member name="M:Artemis.Services.Identity.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.RoleManager{Artemis.Services.Identity.Data.ArtemisRole},Microsoft.Extensions.Logging.ILogger{Artemis.Data.Store.IManager{Artemis.Services.Identity.Data.ArtemisUser}})">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -548,7 +565,6 @@
             <param name="userTokenStore"></param>
             <param name="roleStore">角色存储访问器</param>
             <param name="roleClaimStore">角色凭据存储访问器</param>
-            <param name="userRoleStore">用户管理器</param>
             <param name="identityUserStore">用户存储</param>
             <param name="roleManager">角色管理器</param>
             <param name="logger">日志依赖</param>
@@ -591,11 +607,6 @@
                 角色凭据存储访问器
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.IdentityManager.UserRoleStore">
-            <summary>
-                用户角色映射存储访问器
-            </summary>
-        </member>
         <member name="P:Artemis.Services.Identity.IdentityManager.UserManager">
             <summary>
                 用户管理器
@@ -620,29 +631,40 @@
             <summary>
                 根据角色名获取角色
             </summary>
-            <param name="roleName">角色名</param>
-            <returns></returns>
+            <param name="name">角色名</param>
+            <returns>角色实例</returns>
+            <remarks>当查询不到角色实例时返回空</remarks>
+        </member>
+        <member name="M:Artemis.Services.Identity.IdentityManager.GetRoleAsync(System.Guid)">
+            <summary>
+            根据角色id获取角色
+            </summary>
+            <param name="id">角色id</param>
+            <returns>角色实例</returns>
+            <remarks>当查询不到角色实例时返回空</remarks>
         </member>
         <member name="M:Artemis.Services.Identity.IdentityManager.GetRolesAsync">
             <summary>
                 获取角色列表
             </summary>
-            <returns></returns>
+            <returns>角色列表</returns>
+            <remarks>当查询不到角色实例时返回空列表</remarks>
         </member>
         <member name="M:Artemis.Services.Identity.IdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32)">
             <summary>
                 根据角色名搜索角色列表
             </summary>
-            <param name="roleNameSearch">搜索值</param>
+            <param name="nameSearch">角色名搜索值</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.CreateRoleAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.IdentityManager.CreateRoleAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
-            <param name="roleName">角色名</param>
+            <param name="name">角色名</param>
+            <param name="description">角色描述</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -658,7 +680,7 @@
             <summary>
                 删除角色
             </summary>
-            <param name="roleId">角色id</param>
+            <param name="id">角色id</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -666,27 +688,48 @@
             <summary>
                 批量删除角色
             </summary>
-            <param name="roleIds"></param>
+            <param name="ids"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.GetRoleUsersAsync(System.Guid,System.String,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-                获取角色用户
+            根据用户名搜索具有该角色标签的用户
             </summary>
-            <param name="roleId">角色标识</param>
-            <param name="usernameSearch">用户名搜索值</param>
+            <param name="id">角色id</param>
+            <param name="nameSearch">用户名</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
+            <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityManager.GetRoleClaimsAsync(System.Guid,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IdentityManager.GetRoleClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
-            获取角色声明
+            获取角色凭据列表
             </summary>
-            <param name="roleId">角色标识</param>
+            <param name="id">角色id</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:Artemis.Data.Core.Exceptions.EntityNotFoundException"></exception>
+        </member>
+        <member name="M:Artemis.Services.Identity.IdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            查询角色的声明
+            </summary>
+            <param name="id">角色id</param>
+            <param name="claimTypeSearch">凭据类型</param>
             <param name="page">页码</param>
-            <param name="size">页面大小</param>
+            <param name="size">页面尺寸</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+            <exception cref="T:Artemis.Data.Core.Exceptions.EntityNotFoundException"></exception>
+        </member>
+        <member name="M:Artemis.Services.Identity.IdentityManager.CreateRoleClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Services.Identity.Data.ArtemisRoleClaim},System.Threading.CancellationToken)">
+            <summary>
+            创建角色凭据
+            </summary>
+            <param name="roleClaims">凭据列表</param>
+            <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Services.Identity.IdentityService">
@@ -807,29 +850,41 @@
             <summary>
                 根据角色名获取角色
             </summary>
-            <param name="roleName"></param>
-            <returns></returns>
+            <param name="name">角色名</param>
+            <returns>角色实例</returns>
+            <remarks>当查询不到角色实例时返回空</remarks>
+        </member>
+        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRoleAsync(System.Guid)">
+            <summary>
+            根据角色id获取角色
+            </summary>
+            <param name="id">角色id</param>
+            <returns>角色实例</returns>
+            <remarks>当查询不到角色实例时返回空</remarks>
         </member>
         <member name="M:Artemis.Services.Identity.IIdentityManager.GetRolesAsync">
             <summary>
                 获取角色列表
             </summary>
-            <returns></returns>
+            <returns>角色列表</returns>
+            <remarks>当查询不到角色实例时返回空列表</remarks>
         </member>
         <member name="M:Artemis.Services.Identity.IIdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32)">
             <summary>
                 根据角色名搜索角色
             </summary>
-            <param name="roleNameSearch">搜索值</param>
+            <param name="nameSearch">角色名搜索值</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
-            <returns></returns>
+            <returns>分页搜索结果</returns>
+            <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
         </member>
-        <member name="M:Artemis.Services.Identity.IIdentityManager.CreateRoleAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.IIdentityManager.CreateRoleAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
-            <param name="roleName">角色</param>
+            <param name="name">角色</param>
+            <param name="description">角色描述</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -845,7 +900,7 @@
             <summary>
                 删除角色
             </summary>
-            <param name="roleId">角色id</param>
+            <param name="id">角色id</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -853,27 +908,46 @@
             <summary>
                 批量删除角色
             </summary>
-            <param name="roleIds"></param>
-            <param name="cancellationToken"></param>
+            <param name="ids">角色id列表</param>
+            <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRoleUsersAsync(System.Guid,System.String,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IIdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-                获取角色用户
+            根据用户名搜索具有该角色标签的用户
             </summary>
-            <param name="roleId">角色标识</param>
-            <param name="usernameSearch">用户名搜索值</param>
+            <param name="id">角色id</param>
+            <param name="nameSearch">用户名</param>
             <param name="page">页码</param>
             <param name="size">页面大小</param>
+            <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRoleClaimsAsync(System.Guid,System.Int32,System.Int32)">
+        <member name="M:Artemis.Services.Identity.IIdentityManager.GetRoleClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
-            获取角色声明
+            获取角色凭据列表
             </summary>
-            <param name="roleId">角色标识</param>
+            <param name="id">角色id</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.IIdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            查询角色的声明
+            </summary>
+            <param name="id">角色id</param>
+            <param name="claimTypeSearch">凭据类型</param>
             <param name="page">页码</param>
-            <param name="size">页面大小</param>
+            <param name="size">页面尺寸</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.IIdentityManager.CreateRoleClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Services.Identity.Data.ArtemisRoleClaim},System.Threading.CancellationToken)">
+            <summary>
+            创建角色凭据
+            </summary>
+            <param name="roleClaims">凭据列表</param>
+            <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Services.Identity.IIdentityService">

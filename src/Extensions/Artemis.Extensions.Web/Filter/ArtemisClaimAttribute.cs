@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Artemis.Extensions.Web.Exceptions;
+using Artemis.Data.Core.Exceptions;
 using Artemis.Extensions.Web.Feature;
 using Artemis.Extensions.Web.Fundamental;
 using Microsoft.AspNetCore.Mvc;

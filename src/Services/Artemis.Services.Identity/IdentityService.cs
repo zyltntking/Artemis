@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Services.Identity.Data;
-using Artemis.Services.Identity.Exceptions;
+using Artemis.Shared.Identity.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 

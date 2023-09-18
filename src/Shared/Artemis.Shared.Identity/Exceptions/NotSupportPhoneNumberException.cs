@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core.Exceptions;
 
-namespace Artemis.Services.Identity.Exceptions;
+namespace Artemis.Shared.Identity.Exceptions;
 
 /// <summary>
 ///     认证不支持手机号码异常

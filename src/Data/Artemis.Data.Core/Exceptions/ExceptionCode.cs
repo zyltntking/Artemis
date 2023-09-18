@@ -23,6 +23,11 @@ public static class ExceptionCode
     [Description("实体查询失败异常")] public const int EntityNotFoundException = 90002;
 
     /// <summary>
+    /// 实例未设置异常
+    /// </summary>
+    [Description("实例未设置异常")] public const int InstanceNotImplementException = 90003;
+
+    /// <summary>
     ///     凭据无效异常
     /// </summary>
     [Description("凭据无效异常")] public const int ClaimInvalidException = 91001;

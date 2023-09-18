@@ -46,6 +46,70 @@
                 Token过期时间
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Exceptions.NotSupportEmailException">
+            <summary>
+                认证系统不支持邮箱异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Exceptions.NotSupportEmailException.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Exceptions.NotSupportEmailException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Exceptions.NotSupportPhoneNumberException">
+            <summary>
+                认证不支持手机号码异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Exceptions.NotSupportPhoneNumberException.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Exceptions.NotSupportPhoneNumberException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Models.Claim">
+            <summary>
+            凭据字典
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.Claim.Id">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.Claim.ClaimType">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.Claim.ClaimValue">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.Claim.CheckStamp">
+            <summary>
+            校验戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.Claim.Description">
+            <summary>
+                凭据描述
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Models.Role">
             <summary>
                 角色
@@ -99,6 +163,11 @@
         <member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimValue">
             <summary>
                 凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.CheckStamp">
+            <summary>
+            校验戳
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Description">
@@ -209,6 +278,11 @@
         <member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimValue">
             <summary>
                 凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.UserClaim.CheckStamp">
+            <summary>
+            校验戳
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Models.UserClaim.Description">

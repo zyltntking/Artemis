@@ -89,22 +89,6 @@
                 日志访问器
             </summary>
         </member>
-        <member name="T:Artemis.Extensions.Web.Exceptions.ClaimInvalidException">
-            <summary>
-                凭据无效异常
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimInvalidException.#ctor">
-            <summary>
-                构造
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Web.Exceptions.ClaimInvalidException.#ctor(System.String)">
-            <summary>
-                构造
-            </summary>
-            <param name="actionName">操作名</param>
-        </member>
         <member name="T:Artemis.Extensions.Web.Feature.DistributedCacheExtensions">
             <summary>
                 分布式缓存扩展
