@@ -1,7 +1,7 @@
 ﻿using Artemis.Extensions.Web.Controller;
 using Artemis.Services.Identity;
 
-namespace Artemis.App.Identity.Controllers;
+namespace Artemis.App.Identity.Services;
 
 /// <summary>
 ///     用户控制器

@@ -4,41 +4,6 @@
         <name>Artemis.App.Identity</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.Identity.Controllers.TestController">
-            <summary>
-                测试控制器
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Identity.Controllers.TestController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Controllers.TestController},Artemis.Services.Identity.IIdentityManager)">
-            <summary>
-                泛型API控制器
-            </summary>
-            <param name="logger"></param>
-            <param name="manager"></param>
-        </member>
-        <member name="M:Artemis.App.Identity.Controllers.TestController.TestGet">
-            <summary>
-                Get测试
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.App.Identity.Controllers.UserController">
-            <summary>
-                用户控制器
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Identity.Controllers.UserController.#ctor(Artemis.Services.Identity.IIdentityManager,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                泛型API控制器
-            </summary>
-            <param name="manager"></param>
-            <param name="logger"></param>
-        </member>
-        <member name="P:Artemis.App.Identity.Controllers.UserController.Manager">
-            <summary>
-                管理器
-            </summary>
-        </member>
         <member name="T:Artemis.App.Identity.Interceptors.TokenInterceptor">
             <summary>
             Token侦听器
@@ -93,16 +58,44 @@
         </member>
         <member name="T:Artemis.App.Identity.Services.RoleService">
             <summary>
-            角色服务
+            角色控制器
             </summary>
         </member>
-        <member name="M:Artemis.App.Identity.Services.RoleService.GetRole(Artemis.Shared.Identity.GetRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.App.Identity.Services.RoleService.#ctor(Artemis.Services.Identity.IIdentityManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.RoleService})">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="manager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.RoleService.IdentityManager">
+            <summary>
+            认证管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.RoleService.GetRole(Artemis.Shared.Identity.GetRoleRequest)">
             <summary>
             获取角色
             </summary>
             <param name="request">角色名</param>
-            <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Services.UserController">
+            <summary>
+                用户控制器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserController.#ctor(Artemis.Services.Identity.IIdentityManager,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="manager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.UserController.Manager">
+            <summary>
+                管理器
+            </summary>
         </member>
     </members>
 </doc>

@@ -85,7 +85,7 @@
             角色服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Shared.Identity.IRoleService.GetRole(Artemis.Shared.Identity.GetRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.IRoleService.GetRole(Artemis.Shared.Identity.GetRoleRequest)">
             <summary>
             获取角色
             </summary>
@@ -98,9 +98,9 @@
             获取角色请求
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.GetRoleRequest.Name">
+        <member name="P:Artemis.Shared.Identity.GetRoleRequest.RoleId">
             <summary>
-            角色名
+            角色标识
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Models.Claim">

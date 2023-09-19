@@ -20,7 +20,7 @@ public interface IRoleService
     /// <param name="context"></param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<Role>> GetRole(GetRoleRequest request, ServerCallContext? context = default);
+    Task<DataResult<Role>> GetRole(GetRoleRequest request);
 }
 
 /// <summary>
@@ -30,9 +30,9 @@ public interface IRoleService
 public record GetRoleRequest
 {
     /// <summary>
-    /// 角色名
+    /// 角色标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public string Name { get; set; } = null!;
+    public Guid RoleId { get; set; }
 }

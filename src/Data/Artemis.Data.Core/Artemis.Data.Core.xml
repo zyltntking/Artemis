@@ -200,6 +200,18 @@
             <param name="flag"></param>
             <param name="errorCode">错误编码</param>
         </member>
+        <member name="T:Artemis.Data.Core.Exceptions.EnumerationNotMatchException">
+            <summary>
+            枚举类不匹配异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.EnumerationNotMatchException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
         <member name="T:Artemis.Data.Core.Exceptions.ExceptionCode">
             <summary>
                 异常编码
@@ -228,6 +240,31 @@
         <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.InstanceNotImplementException">
             <summary>
                 实例未设置异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.MapTargetNullException">
+            <summary>
+                映射目标空异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.EnumerationNotMatchException">
+            <summary>
+                枚举类不匹配异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.StoreDisposedException">
+            <summary>
+                存储已被释放异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.StoreParameterNullException">
+            <summary>
+                存储参数空异常
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.ManagerDisposedException">
+            <summary>
+                管理器已被释放异常
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Exceptions.ExceptionCode.ClaimInvalidException">
@@ -260,6 +297,65 @@
                 错误构造
             </summary>
             <param name="instanceName">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.ManagerDisposedException">
+            <summary>
+            管理器已被释放异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.ManagerDisposedException.#ctor(System.Type)">
+            <summary>
+            错误构造
+            </summary>
+            <param name="storeType"></param>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.ManagerDisposedException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.MapTargetNullException">
+            <summary>
+                Represents errors that occur during an interop call from .NET to MapTargetNull.
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.MapTargetNullException.#ctor(System.String)">
+            <summary>
+                Constructs an instance of <see cref="T:Artemis.Data.Core.Exceptions.MapTargetNullException" />.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.StoreDisposedException">
+            <summary>
+            存储已被释放异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.StoreDisposedException.#ctor(System.Type)">
+            <summary>
+            错误构造
+            </summary>
+            <param name="storeType"></param>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.StoreDisposedException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="errorMessage">错误消息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Exceptions.StoreParameterNullException">
+            <summary>
+            存储参数空异常
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Exceptions.StoreParameterNullException.#ctor(System.String,System.Int32)">
+            <summary>
+                错误构造
+            </summary>
+            <param name="parameterName">参数名</param>
             <param name="errorCode">错误编码</param>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Enumeration">

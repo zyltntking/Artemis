@@ -218,7 +218,9 @@ public static class DataResult
             Code = code,
             Data = data,
             Message = message,
-            Error = exception?.ToString()
+            Error = exception?.ToString(),
+            DateTime = DateTime.Now,
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
         };
 
         if (exception != null)

@@ -1160,6 +1160,12 @@
                 日志依赖访问器
             </summary>
         </member>
+        <member name="M:Artemis.Data.Store.Manager`2.SetDebugLog(System.String)">
+            <summary>
+                设置Debug日志
+            </summary>
+            <param name="message">日志消息</param>
+        </member>
         <member name="M:Artemis.Data.Store.Manager`2.ThrowIfDisposed">
             <summary>
                 Throws if this class has been disposed.
@@ -1188,24 +1194,6 @@
             <summary>
                 释放托管的Store
             </summary>
-        </member>
-        <member name="T:Artemis.Data.Store.MapTargetNullException">
-            <summary>
-                Represents errors that occur during an interop call from .NET to MapTargetNull.
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Store.MapTargetNullException.#ctor(System.String)">
-            <summary>
-                Constructs an instance of <see cref="T:Artemis.Data.Store.MapTargetNullException" />.
-            </summary>
-            <param name="message">The exception message.</param>
-        </member>
-        <member name="M:Artemis.Data.Store.MapTargetNullException.#ctor(System.String,System.Exception)">
-            <summary>
-                Constructs an instance of <see cref="T:Artemis.Data.Store.MapTargetNullException" />.
-            </summary>
-            <param name="message">The exception message.</param>
-            <param name="innerException">The inner exception.</param>
         </member>
         <member name="T:Artemis.Data.Store.Resources">
             <summary>
@@ -2334,7 +2322,7 @@
                 创建一个新的基本存储实例
             </summary>
             <param name="describer"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
         </member>
         <member name="P:Artemis.Data.Store.StoreBase`2.ErrorDescriber">
             <summary>
@@ -2364,6 +2352,7 @@
             <summary>
                 Throws if this class has been disposed.
             </summary>
+            <exception cref="T:Artemis.Data.Core.Exceptions.StoreDisposedException"></exception>
         </member>
         <member name="M:Artemis.Data.Store.StoreBase`2.GetId(`0)">
             <summary>
@@ -2416,7 +2405,7 @@
             </summary>
             <param name="value">实体</param>
             <param name="name">参数名</param>
-            <exception cref="T:System.ArgumentNullException">空参数异常</exception>
+            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException">空参数异常</exception>
         </member>
         <member name="M:Artemis.Data.Store.StoreBase`2.OnAsyncActionExecuting``1(``0,System.String,System.Threading.CancellationToken)">
             <summary>
