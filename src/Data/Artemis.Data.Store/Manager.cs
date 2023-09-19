@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -76,14 +77,28 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     日志依赖访问器
     /// </summary>
-    protected ILogger Logger { get; }
+    private ILogger Logger { get; }
+
+    #region DebugLogger
+
+    /// <summary>
+    ///     设置Debug日志
+    /// </summary>
+    /// <param name="message">日志消息</param>
+    protected void SetDebugLog(string message)
+    {
+        if (StoreOptions.DebugLogger)
+            Logger.LogDebug(message);
+    }
+
+    #endregion
 
     /// <summary>
     ///     Throws if this class has been disposed.
     /// </summary>
     protected void ThrowIfDisposed()
     {
-        if (_disposed) throw new ObjectDisposedException(GetType().Name);
+        if (_disposed) throw new ManagerDisposedException(GetType().Name);
     }
 
     #region IDisposable

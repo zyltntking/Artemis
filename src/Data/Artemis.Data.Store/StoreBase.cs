@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 
 namespace Artemis.Data.Store;
 
@@ -19,10 +20,10 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="describer"></param>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="StoreParameterNullException"></exception>
     protected StoreBase(IStoreErrorDescriber describer)
     {
-        ErrorDescriber = describer ?? throw new ArgumentNullException(nameof(describer));
+        ErrorDescriber = describer ?? throw new StoreParameterNullException(nameof(describer));
     }
 
     /// <summary>
@@ -66,9 +67,10 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <summary>
     ///     Throws if this class has been disposed.
     /// </summary>
+    /// <exception cref="StoreDisposedException"></exception>
     protected void ThrowIfDisposed()
     {
-        if (_disposed) throw new ObjectDisposedException(GetType().Name);
+        if (_disposed) throw new StoreDisposedException(GetType());
     }
 
     #region Implementation of IStoreBase<in TEntity,TKey>
@@ -151,11 +153,11 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// </summary>
     /// <param name="value">实体</param>
     /// <param name="name">参数名</param>
-    /// <exception cref="ArgumentNullException">空参数异常</exception>
+    /// <exception cref="StoreParameterNullException">空参数异常</exception>
     protected void OnActionExecuting<TValue>(TValue value, string name)
     {
         ThrowIfDisposed();
-        if (value == null) throw new ArgumentNullException(name);
+        if (value == null) throw new StoreParameterNullException(name);
     }
 
     /// <summary>

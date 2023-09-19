@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Artemis.Data.Core.Exceptions;
 
 namespace Artemis.Data.Core.Fundamental;
 
@@ -162,7 +163,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
         return matchingItem ??
-               throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
+               throw new EnumerationNotMatchException($"'{value}' is not a valid {description} in {typeof(T)}");
     }
 
     #region Overrides of Object
