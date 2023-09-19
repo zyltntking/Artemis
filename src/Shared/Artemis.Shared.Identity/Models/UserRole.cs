@@ -16,7 +16,6 @@ public class UserRole : IdentityUserRole<Guid>, IKeySlot<int>
     [DataMember(Order = 2)]
     public override Guid UserId { get; set; }
 
-
     /// <summary>
     ///     角色标识
     /// </summary>

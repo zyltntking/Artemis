@@ -89,7 +89,7 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     }
 
     /// <summary>
-    /// 元索引配置
+    ///     元索引配置
     /// </summary>
     /// <param name="builder"></param>
     protected virtual void MetaIndexConfigure(EntityTypeBuilder<TEntity> builder)
@@ -103,7 +103,7 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     }
 
     /// <summary>
-    /// 数据库关系配置
+    ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
@@ -156,12 +156,12 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     protected virtual string DataSetDescription => nameof(TEntity);
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected virtual string TableName => nameof(TEntity);
 
     /// <summary>
-    /// 架构名
+    ///     架构名
     /// </summary>
     protected virtual string? SchemaName => null;
 
@@ -188,7 +188,7 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     /// <param name="builder"></param>
     private void TableConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.ToTable(TableName, SchemaName,table => table.HasComment(DataSetDescription));
+        builder.ToTable(TableName, SchemaName, table => table.HasComment(DataSetDescription));
     }
 
     /// <summary>

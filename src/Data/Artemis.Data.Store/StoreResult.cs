@@ -1,27 +1,32 @@
 ﻿using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace Artemis.Data.Store;
 
 /// <summary>
 ///     存储操作结果
 /// </summary>
-public record StoreResult
+[DataContract]
+public record StoreResult : IStoreResult
 {
     private readonly List<StoreError> _errors = new();
 
     /// <summary>
     ///     指示操作是否成功的标志
     /// </summary>
-    public bool Succeeded { get; protected init; }
+    [DataMember(Order = 1)]
+    public bool Succeeded { get; init; }
 
     /// <summary>
     ///     指示操作受影响行数
     /// </summary>
-    public int EffectRows { get; protected init; }
+    [DataMember(Order = 2)]
+    public int EffectRows { get; init; }
 
     /// <summary>
     ///     包含存储过程中产生的所有错误的实例
     /// </summary>
+    [DataMember(Order = 3)]
     public IEnumerable<StoreError> Errors => _errors;
 
     /// <summary>
@@ -56,4 +61,25 @@ public record StoreResult
             : string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed",
                 string.Join(",", Errors.Select(x => x.Code).ToList()));
     }
+}
+
+/// <summary>
+///     存储操作结果接口
+/// </summary>
+public interface IStoreResult
+{
+    /// <summary>
+    ///     指示操作是否成功的标志
+    /// </summary>
+    bool Succeeded { get; protected init; }
+
+    /// <summary>
+    ///     指示操作受影响行数
+    /// </summary>
+    int EffectRows { get; protected init; }
+
+    /// <summary>
+    ///     包含存储过程中产生的所有错误的实例
+    /// </summary>
+    IEnumerable<StoreError> Errors { get; }
 }

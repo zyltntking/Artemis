@@ -131,7 +131,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     数据访问上下文
     /// </summary>
-    private TContext Context { get; }
+    protected TContext Context { get; }
 
     /// <summary>
     ///     缓存依赖
@@ -156,11 +156,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    public IQueryable<TEntity> EntityQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public IQueryable<TEntity> EntityQuery =>
+        EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
 
     #endregion
 
     #region Cache
+
+    /// <summary>
+    ///     缓存前缀
+    /// </summary>
+    protected virtual string Prefix => "Artemis";
 
     /// <summary>
     ///     缓存选项
@@ -186,11 +192,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-
             if (CacheOption == null)
-                Cache?.SetString(entity.GenerateKey, entity.Serialize());
+                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
             else
-                Cache?.SetString(entity.GenerateKey, entity.Serialize(), CacheOption);
+                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption);
             SetDebugLog("Entity Cached");
         }
 
@@ -198,25 +203,22 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 缓存实体
+    ///     缓存实体
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     private async Task CacheEntityAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
         {
             if (CacheOption == null)
-            {
-                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), cancellationToken)!;
-            }
+                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
             else
-            {
-                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), CacheOption, cancellationToken)!;
-            }
+                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption,
+                    cancellationToken)!;
             SetDebugLog("Entity Cached");
         }
 
@@ -234,7 +236,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             var count = 0;
             foreach (var entity in entities)
             {
-                Cache?.SetString(entity.GenerateKey, entity.Serialize());
+                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
                 count++;
             }
 
@@ -250,7 +252,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities"></param>
     /// <param name="cancellationToken"></param>
     private async Task CacheEntitiesAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -258,7 +260,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             var count = 0;
             foreach (var entity in entities)
             {
-                await Cache?.SetStringAsync(entity.GenerateKey, entity.Serialize(), cancellationToken)!;
+                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
                 count++;
             }
 
@@ -294,7 +296,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     private async Task<TEntity?> GetEntityAsync(
-        string key, 
+        string key,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -342,7 +344,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     private async Task<IEnumerable<TEntity>> GetEntitiesAsync(
-        IEnumerable<string> keys, 
+        IEnumerable<string> keys,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -372,7 +374,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            Cache?.Remove(entity.GenerateKey);
+            Cache?.Remove(entity.GenerateKey(Prefix));
             SetDebugLog("Entity Remove");
         }
 
@@ -385,12 +387,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
     private async Task RemoveCachedEntityAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
         {
-            await Cache?.RemoveAsync(entity.GenerateKey, cancellationToken)!;
+            await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
             SetDebugLog("Entity Remove");
         }
 
@@ -408,7 +410,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             var count = 0;
             foreach (var entity in entities)
             {
-                Cache?.Remove(entity.GenerateKey);
+                Cache?.Remove(entity.GenerateKey(Prefix));
                 count++;
             }
 
@@ -424,7 +426,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entities"></param>
     /// <param name="cancellationToken"></param>
     private async Task RemoveCachedEntitiesAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -432,7 +434,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             var count = 0;
             foreach (var entity in entities)
             {
-                await Cache?.RemoveAsync(entity.GenerateKey, cancellationToken)!;
+                await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
                 count++;
             }
 
@@ -550,7 +552,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 是否启用Debug日志
+    ///     是否启用Debug日志
     /// </summary>
     private bool _debugLogger;
 
@@ -621,7 +623,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public virtual async Task<StoreResult> CreateAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateAsync));
@@ -693,8 +695,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> UpdateAsync
-        (TEntity entity, 
-            CancellationToken cancellationToken = default)
+    (TEntity entity,
+        CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
@@ -966,7 +968,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         SetDebugLog(nameof(Delete));
         OnActionExecuting(id, nameof(id));
         var entity = FindEntity(id);
-        if (entity == null) 
+        if (entity == null)
             return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
         DeleteEntity(entity);
         var result = AttacheChange();
@@ -1005,6 +1007,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
             return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
         }
+
         DeleteEntities(list);
         var result = AttacheChange();
         RemoveCachedEntities(list);
@@ -1034,7 +1037,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
@@ -1054,7 +1057,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
@@ -1072,7 +1075,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteAsync(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
@@ -1098,7 +1101,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
@@ -1216,7 +1219,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> BatchDeleteAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
@@ -1336,7 +1339,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据id查找映射实体
+    ///     根据id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="id">id</param>
@@ -1359,7 +1362,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="key">id</param>
@@ -1386,7 +1389,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据id查找映射实体
+    ///     根据id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="ids">ids</param>
@@ -1411,7 +1414,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="keys">keys</param>
@@ -1431,7 +1434,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public Task<TEntity?> FindEntityAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
@@ -1446,7 +1449,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
@@ -1460,7 +1463,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public Task<TEntity?> FindEntityViaKeyAsync(
-        string key, 
+        string key,
         CancellationToken cancellationToken = default)
     {
         OnActionExecuting(key, nameof(key));
@@ -1468,14 +1471,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="key">id</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task<TMapEntity?> FindMapEntityViaKeyAsync<TMapEntity>(
-        string key, CancellationToken 
+        string key, CancellationToken
             cancellationToken = default)
     {
         OnActionExecuting(key, nameof(key));
@@ -1508,7 +1511,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
@@ -1523,7 +1526,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public Task<IEnumerable<TEntity>> FindEntitiesViaKeysAsync(
-        IEnumerable<string> keys, 
+        IEnumerable<string> keys,
         CancellationToken cancellationToken = default)
     {
         var keyList = keys.ToList();
@@ -1532,14 +1535,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="keys">keys</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task<IEnumerable<TMapEntity>> FindMapEntitiesViaKeysAsync<TMapEntity>(
-        IEnumerable<string> keys, 
+        IEnumerable<string> keys,
         CancellationToken cancellationToken = default)
     {
         var keyList = keys.ToList();
@@ -1553,7 +1556,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     #region Exists
 
     /// <summary>
-    /// 判断实体是否存在
+    ///     判断实体是否存在
     /// </summary>
     /// <param name="id">实体键</param>
     /// <returns></returns>
@@ -1566,19 +1569,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 判断实体是否存在
+    ///     判断实体是否存在
     /// </summary>
     /// <param name="id">实体键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public Task<bool> ExistsAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(ExistsAsync));
         OnActionExecuting(id, nameof(id));
         return Context.Set<TEntity>()
-            .AnyAsync(entity => entity.Id.Equals(id), cancellationToken: cancellationToken);
+            .AnyAsync(entity => entity.Id.Equals(id), cancellationToken);
     }
 
     #endregion
@@ -1597,7 +1600,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns>映射后实体</returns>
     public StoreResult CreateNew<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(CreateNew));
@@ -1619,7 +1622,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns>创建结果</returns>
     public StoreResult CreateNew<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(CreateNew));
@@ -1643,7 +1646,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
     public async Task<StoreResult> CreateNewAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
@@ -1668,7 +1671,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns>创建结果</returns>
     public async Task<StoreResult> CreateNewAsync<TSource>(
         IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null, 
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateNewAsync));
@@ -1695,7 +1698,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Over<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Over));
@@ -1718,8 +1721,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Over<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Over));
@@ -1741,7 +1744,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Over<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
@@ -1798,7 +1801,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> OverAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
@@ -1823,8 +1826,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> OverAsync<TSource>(
-        TSource source, TEntity destination, 
-        TypeAdapterConfig? config = null, 
+        TSource source, TEntity destination,
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(OverAsync));
@@ -1847,8 +1850,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> OverAsync<TSource>(
-        IEnumerable<TSource> sources, 
-        TypeAdapterConfig? config = null, 
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(OverAsync));
@@ -1909,7 +1912,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Merge<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(Merge));
@@ -1933,8 +1936,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Merge<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Merge));
@@ -1956,7 +1959,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     public StoreResult Merge<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
@@ -1986,10 +1989,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="sourceKeySelector">源键选择器</param>
     /// <returns></returns>
     public StoreResult Merge<TSource, TJKey>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         IEnumerable<TEntity> destinations,
-        Func<TSource, TJKey> sourceKeySelector, 
-        Func<TEntity, TJKey> destinationKeySelector, 
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
         TypeAdapterConfig? config = null)
     {
         SetDebugLog(nameof(Merge));
@@ -2015,7 +2018,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> MergeAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
@@ -2041,9 +2044,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> MergeAsync<TSource>(
-        TSource source, 
-        TEntity destination, 
-        TypeAdapterConfig? config = null, 
+        TSource source,
+        TEntity destination,
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(MergeAsync));
@@ -2066,8 +2069,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> MergeAsync<TSource>(
-        IEnumerable<TSource> sources, 
-        TypeAdapterConfig? config = null, 
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
         SetDebugLog(nameof(MergeAsync));
@@ -2097,10 +2100,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="sourceKeySelector">源键选择器</param>
     /// <returns></returns>
     public async Task<StoreResult> MergeAsync<TSource, TJKey>(
-        IEnumerable<TSource> sources, 
-        IEnumerable<TEntity> destinations, 
-        Func<TSource, TJKey> sourceKeySelector, 
-        Func<TEntity, TJKey> destinationKeySelector, 
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
@@ -2128,7 +2131,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreIdAndNullConfig;
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
+    ///     在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
@@ -2148,7 +2151,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreNullConfig;
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略源实体的空值属性
+    ///     在忽略目标实体元数据属性的基础上忽略源实体的空值属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
@@ -2168,7 +2171,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreIdConfig;
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
+    ///     在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
@@ -2187,7 +2190,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private TypeAdapterConfig? _ignoreMetaConfig;
 
     /// <summary>
-    /// 忽略目标实体的元数据属性
+    ///     忽略目标实体的元数据属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
@@ -2375,7 +2378,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     private Task<int> BatchDeleteEntityAsync(
-        IQueryable<TEntity> query, 
+        IQueryable<TEntity> query,
         CancellationToken cancellationToken = default)
     {
         if (SoftDelete)
@@ -2397,7 +2400,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    /// 根据Id查询实体并映射到指定类型
+    ///     根据Id查询实体并映射到指定类型
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="id">id</param>
@@ -2420,7 +2423,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    ///  根据Id查询实体并映射到指定类型
+    ///     根据Id查询实体并映射到指定类型
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="ids">id表</param>
@@ -2439,21 +2442,21 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     private Task<TEntity?> FindByIdAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         return EntityQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id), cancellationToken);
     }
 
     /// <summary>
-    ///  根据Id查询实体并映射到指定类型
+    ///     根据Id查询实体并映射到指定类型
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     private Task<TMapEntity?> FindByIdAsync<TMapEntity>(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default)
     {
         return EntityQuery.Where(entity => entity.Id.Equals(id))
@@ -2468,7 +2471,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     private Task<List<TEntity>> FindByIdsAsync(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         return EntityQuery.Where(entity => ids.Contains(entity.Id))
@@ -2476,14 +2479,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     }
 
     /// <summary>
-    ///  根据Id查询实体并映射到指定类型
+    ///     根据Id查询实体并映射到指定类型
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     private Task<List<TMapEntity>> FindByIdsAsync<TMapEntity>(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         return EntityQuery.Where(entity => ids.Contains(entity.Id))

@@ -23,9 +23,14 @@ public static class ExceptionCode
     [Description("实体查询失败异常")] public const int EntityNotFoundException = 90002;
 
     /// <summary>
-    /// 实例未设置异常
+    ///     实体已存在异常
     /// </summary>
-    [Description("实例未设置异常")] public const int InstanceNotImplementException = 90003;
+    [Description("实体已存在异常")] public const int EntityHasBeenSetException = 90003;
+
+    /// <summary>
+    ///     实例未设置异常
+    /// </summary>
+    [Description("实例未设置异常")] public const int InstanceNotImplementException = 90004;
 
     /// <summary>
     ///     凭据无效异常

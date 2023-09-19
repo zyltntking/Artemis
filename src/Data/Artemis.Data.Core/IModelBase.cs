@@ -31,7 +31,11 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot where TKey : IEqua
     /// <summary>
     ///     生成键
     /// </summary>
-    string GenerateKey => Id.ToString()!;
+    /// <param name="prefix">前缀</param>
+    string GenerateKey(string? prefix)
+    {
+        return prefix == null ? Id.ToString()! : $"{prefix}:{Id}";
+    }
 }
 
 /// <summary>

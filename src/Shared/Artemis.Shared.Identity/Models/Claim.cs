@@ -5,17 +5,11 @@ using Artemis.Data.Core;
 namespace Artemis.Shared.Identity.Models;
 
 /// <summary>
-/// 凭据字典
+///     凭据字典
 /// </summary>
 [DataContract]
 public class Claim : IKeySlot<Guid>
 {
-    /// <summary>
-    ///     角色标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public Guid Id { get; set; }
-
     /// <summary>
     ///     凭据类型
     /// </summary>
@@ -33,7 +27,7 @@ public class Claim : IKeySlot<Guid>
     public string ClaimValue { get; set; } = null!;
 
     /// <summary>
-    /// 校验戳
+    ///     校验戳
     /// </summary>
     [DataMember(Order = 4)]
     [MaxLength(64)]
@@ -46,4 +40,10 @@ public class Claim : IKeySlot<Guid>
     [DataMember(Order = 5)]
     [MaxLength(128)]
     public string? Description { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public Guid Id { get; set; }
 }

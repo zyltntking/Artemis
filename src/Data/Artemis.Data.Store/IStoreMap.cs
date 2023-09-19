@@ -21,28 +21,28 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     #region MapConfig
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
+    ///     在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
     TypeAdapterConfig IgnoreIdAndNullConfig<TSource>();
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略源实体的空值属性
+    ///     在忽略目标实体元数据属性的基础上忽略源实体的空值属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
     TypeAdapterConfig IgnoreNullConfig<TSource>();
 
     /// <summary>
-    /// 在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
+    ///     在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
     TypeAdapterConfig IgnoreIdConfig<TSource>();
 
     /// <summary>
-    /// 忽略目标实体的元数据属性
+    ///     忽略目标实体的元数据属性
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>

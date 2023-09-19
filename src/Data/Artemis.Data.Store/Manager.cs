@@ -61,7 +61,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     存储访问器
     /// </summary>
-    private IStore<TEntity, TKey> Store { get; }
+    protected IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
     ///     配置访问器

@@ -3,7 +3,7 @@
 /// <summary>
 ///     存储异常描述器
 /// </summary>
-public sealed class StoreErrorDescriber : IStoreErrorDescriber
+public sealed record StoreErrorDescriber : IStoreErrorDescriber
 {
     /// <summary>
     ///     生成默认异常
@@ -41,7 +41,7 @@ public sealed class StoreErrorDescriber : IStoreErrorDescriber
         return new StoreError
         {
             Code = nameof(NotFoundId),
-            Description = Resources.FormatNotFoundId(id)
+            Description = Formatter.FormatNotFoundId(id)
         };
     }
 
@@ -55,6 +55,36 @@ public sealed class StoreErrorDescriber : IStoreErrorDescriber
         {
             Code = nameof(EnableCache),
             Description = Resources.EnableCache
+        };
+    }
+
+    /// <summary>
+    ///     实体未找到
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    public StoreError EntityNotFound(string? entity, string? flag)
+    {
+        return new StoreError
+        {
+            Code = nameof(EntityNotFound),
+            Description = Formatter.FormatEntityNotFound(entity, flag)
+        };
+    }
+
+    /// <summary>
+    ///     实体已存在
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    public StoreError EntityHasBeenSet(string? entity, string? flag)
+    {
+        return new StoreError
+        {
+            Code = nameof(EntityHasBeenSet),
+            Description = Formatter.FormatEntityHasBeenSet(entity, flag)
         };
     }
 }

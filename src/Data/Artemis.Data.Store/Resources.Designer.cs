@@ -88,6 +88,24 @@ namespace Artemis.Data.Store {
         }
         
         /// <summary>
+        ///   查找类似 对象&apos;{0}&apos;已被设置,Flag:&apos;{1}&apos;。 的本地化字符串。
+        /// </summary>
+        internal static string EntityHasBeenSet {
+            get {
+                return ResourceManager.GetString("EntityHasBeenSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到匹配的&apos;{0}&apos;对象,Flag:&apos;{1}&apos;。 的本地化字符串。
+        /// </summary>
+        internal static string EntityNotFound {
+            get {
+                return ResourceManager.GetString("EntityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未查询到Id为 &apos;{0}&apos; 的对象。 的本地化字符串。
         /// </summary>
         internal static string NotFoundId {
@@ -95,14 +113,5 @@ namespace Artemis.Data.Store {
                 return ResourceManager.GetString("NotFoundId", resourceCulture);
             }
         }
-
-        #region Format
-
-        /// <summary>
-        ///   格式化 未查询到Id为 &apos;{0}&apos; 的对象。 的本地化字符串。
-        /// </summary>
-        internal static string FormatNotFoundId(string id) => string.Format(Culture, ResourceManager.GetString("NotFoundId", resourceCulture), id);
-
-        #endregion
     }
 }

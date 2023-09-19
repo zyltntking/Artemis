@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Services.Identity.Data;
 
 /// <summary>
-/// ArtemisClaim
+///     ArtemisClaim
 /// </summary>
 [EntityTypeConfiguration(typeof(ClaimConfiguration))]
 public class ArtemisClaim : Claim, IModelBase

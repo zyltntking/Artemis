@@ -16,7 +16,7 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
     protected override string DataSetDescription => "认证用户数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisUser);
 

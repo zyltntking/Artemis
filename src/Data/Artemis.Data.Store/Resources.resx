@@ -129,6 +129,14 @@
     <value>当前Store已启用具缓存策略。</value>
     <comment>当前Store已启用具缓存策略。</comment>
   </data>
+  <data name="EntityHasBeenSet" xml:space="preserve">
+    <value>对象'{0}'已被设置,Flag:'{1}'。</value>
+    <comment>当前对象已在数据库中被设置。</comment>
+  </data>
+  <data name="EntityNotFound" xml:space="preserve">
+    <value>未找到匹配的'{0}'对象,Flag:'{1}'。</value>
+    <comment>未找到匹配的对象。</comment>
+  </data>
   <data name="NotFoundId" xml:space="preserve">
     <value>未查询到Id为 '{0}' 的对象。</value>
     <comment>通过id查找失败时的信息。</comment>

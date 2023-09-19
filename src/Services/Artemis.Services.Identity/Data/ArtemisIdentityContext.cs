@@ -21,12 +21,12 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
     /// </summary>
     /// <param name="options">创建配置</param>
     public ArtemisIdentityContext(DbContextOptions<ArtemisIdentityContext> options)
-    : base(options)
+        : base(options)
     {
     }
 
     /// <summary>
-    /// ArtemisClaimsSet
+    ///     ArtemisClaimsSet
     /// </summary>
     public DbSet<ArtemisClaim> ArtemisClaims { get; set; } = default!;
 

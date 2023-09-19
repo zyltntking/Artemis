@@ -29,4 +29,20 @@ public interface IStoreErrorDescriber
     /// </summary>
     /// <returns></returns>
     StoreError EnableCache();
+
+    /// <summary>
+    ///     实体未找到
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    StoreError EntityNotFound(string? entity, string? flag);
+
+    /// <summary>
+    ///     实体已存在
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    StoreError EntityHasBeenSet(string? entity, string? flag);
 }

@@ -16,7 +16,7 @@ public class RoleClaimConfiguration : IdentityConfiguration<ArtemisRoleClaim>
     protected override string DataSetDescription => "认证角色凭据数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisRoleClaim);
 
@@ -68,7 +68,7 @@ public class RoleClaimConfiguration : IdentityConfiguration<ArtemisRoleClaim>
         builder.HasIndex(roleClaim => roleClaim.ClaimType)
             .HasDatabaseName($"IX_{TableName}_ClaimType");
 
-        builder.HasIndex(roleClaim => new {roleClaim.CheckStamp, roleClaim.RoleId})
+        builder.HasIndex(roleClaim => new { roleClaim.CheckStamp, roleClaim.RoleId })
             .HasDatabaseName($"IX_{TableName}_CheckStamp_RoleId")
             .IsUnique();
     }

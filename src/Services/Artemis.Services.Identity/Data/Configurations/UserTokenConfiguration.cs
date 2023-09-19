@@ -16,7 +16,7 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
     protected override string DataSetDescription => "认证用户令牌数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisUserToken);
 
@@ -47,7 +47,6 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
 
         builder.Property(userToken => userToken.Value)
             .HasComment("认证令牌");
-
     }
 
     /// <summary>

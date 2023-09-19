@@ -16,7 +16,7 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
     protected override string DataSetDescription => "认证角色数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisRole);
 

@@ -12,12 +12,6 @@ namespace Artemis.Shared.Identity.Models;
 public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>
 {
     /// <summary>
-    ///     标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public override int Id { get; set; }
-
-    /// <summary>
     ///     角色标识
     /// </summary>
     [DataMember(Order = 2)]
@@ -40,7 +34,7 @@ public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>
     public override string ClaimValue { get; set; } = null!;
 
     /// <summary>
-    /// 校验戳
+    ///     校验戳
     /// </summary>
     [DataMember(Order = 5)]
     [MaxLength(64)]
@@ -53,4 +47,10 @@ public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>
     [DataMember(Order = 6)]
     [MaxLength(128)]
     public virtual string? Description { get; set; }
+
+    /// <summary>
+    ///     标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override int Id { get; set; }
 }

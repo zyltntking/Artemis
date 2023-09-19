@@ -317,7 +317,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     TEntity? FindEntity(TKey id);
 
     /// <summary>
-    /// 根据id查找映射实体
+    ///     根据id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="id">id</param>
@@ -332,7 +332,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     TEntity? FindEntityViaKey(string key);
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="key">id</param>
@@ -347,7 +347,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     IEnumerable<TEntity> FindEntities(IEnumerable<TKey> ids);
 
     /// <summary>
-    /// 根据id查找映射实体
+    ///     根据id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="ids">ids</param>
@@ -362,7 +362,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     IEnumerable<TEntity> FindEntitiesViaKeys(IEnumerable<string> keys);
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="keys">keys</param>
@@ -395,7 +395,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     Task<TEntity?> FindEntityViaKeyAsync(string key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="key">id</param>
@@ -418,7 +418,8 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(IEnumerable<TKey> ids, CancellationToken cancellationToken = default);
+    Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(IEnumerable<TKey> ids,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     根据缓存键查找实体
@@ -430,7 +431,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 根据缓存键查找实体查找映射实体
+    ///     根据缓存键查找实体查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="keys">keys</param>
@@ -444,14 +445,14 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     #region Exists
 
     /// <summary>
-    /// 判断实体是否存在
+    ///     判断实体是否存在
     /// </summary>
     /// <param name="id">实体键</param>
     /// <returns></returns>
     bool Exists(TKey id);
 
     /// <summary>
-    /// 判断实体是否存在
+    ///     判断实体是否存在
     /// </summary>
     /// <param name="id">实体键</param>
     /// <param name="cancellationToken">操作取消信号</param>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Artemis.Services.Identity.Data.Configurations;
 
 /// <summary>
-/// 凭据数据集配置
+///     凭据数据集配置
 /// </summary>
 public class ClaimConfiguration : IdentityConfiguration<ArtemisClaim>
 {
@@ -16,7 +16,7 @@ public class ClaimConfiguration : IdentityConfiguration<ArtemisClaim>
     protected override string DataSetDescription => "认证凭据数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisClaim);
 
@@ -52,7 +52,7 @@ public class ClaimConfiguration : IdentityConfiguration<ArtemisClaim>
     }
 
     /// <summary>
-    /// 数据库关系配置
+    ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisClaim> builder)

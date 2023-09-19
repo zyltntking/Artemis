@@ -16,7 +16,7 @@ public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
     protected override string DataSetDescription => "认证用户角色映射数据集";
 
     /// <summary>
-    /// 表名
+    ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisUserRole);
 
@@ -40,12 +40,11 @@ public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
     }
 
     /// <summary>
-    /// 数据库关系配置
+    ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
-        
     }
 
     #endregion
