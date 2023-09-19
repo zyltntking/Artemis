@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity;
 /// <summary>
 ///     结果附加扩展
 /// </summary>
-public static class AttachResultException
+internal static class AttachResultException
 {
     /// <summary>
     ///     附加

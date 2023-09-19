@@ -53,7 +53,7 @@ public static class IdentityExtensions
 
         serviceCollection.TryAddScoped<IIdentityManager, IdentityManager>();
 
-        serviceCollection.TryAddScoped<IIdentityService, IdentityService>();
+        serviceCollection.TryAddScoped<IAccountManager, AccountManager>();
 
         if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -9,7 +9,7 @@ namespace Artemis.Shared.Identity;
 ///     账户服务接口
 /// </summary>
 [ServiceContract]
-public interface IAccount
+public interface IAccountService
 {
     /// <summary>
     ///     登录

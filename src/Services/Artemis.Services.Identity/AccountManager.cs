@@ -9,7 +9,7 @@ namespace Artemis.Services.Identity;
 /// <summary>
 ///     认证服务实现
 /// </summary>
-public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
+public class AccountManager : AccountManager<ArtemisUser>, IAccountManager
 {
     /// <summary>
     ///     认证服务构造
@@ -18,11 +18,11 @@ public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager">签入管理器</param>
     /// <param name="logger">日志</param>
-    public IdentityService(
+    public AccountManager(
         UserManager<ArtemisUser> userManager,
         IUserStore<ArtemisUser> userStore,
         SignInManager<ArtemisUser> signInManager,
-        ILogger<IdentityService<ArtemisUser>> logger) : base(userManager, userStore, signInManager, logger)
+        ILogger<AccountManager<ArtemisUser>> logger) : base(userManager, userStore, signInManager, logger)
     {
     }
 }
@@ -31,7 +31,7 @@ public class IdentityService : IdentityService<ArtemisUser>, IIdentityService
 ///     认证服务实现
 /// </summary>
 /// <typeparam name="TUser">用户类型</typeparam>
-public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IIdentityService<TUser>
+public abstract class AccountManager<TUser> : AccountManager<TUser, Guid>, IAccountManager<TUser>
     where TUser : IdentityUser<Guid>
 {
     /// <summary>
@@ -41,7 +41,7 @@ public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IId
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
-    protected IdentityService(
+    protected AccountManager(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
         SignInManager<TUser> signInManager,
@@ -53,7 +53,7 @@ public abstract class IdentityService<TUser> : IdentityService<TUser, Guid>, IId
 /// <summary>
 ///     认证服务实现
 /// </summary>
-public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKey>
+public abstract class AccountManager<TUser, TKey> : IAccountManager<TUser, TKey>
     where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -64,7 +64,7 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     /// <param name="userStore">用户存储</param>
     /// <param name="signInManager"></param>
     /// <param name="logger">日志</param>
-    protected IdentityService(
+    protected AccountManager(
         UserManager<TUser> userManager,
         IUserStore<TUser> userStore,
         SignInManager<TUser> signInManager,
@@ -122,7 +122,7 @@ public abstract class IdentityService<TUser, TKey> : IIdentityService<TUser, TKe
     /// </summary>
     private ILogger Logger { get; }
 
-    #region Implementation of IIdentityService<TUser>
+    #region Implementation of IAccountManager<TUser>
 
     /// <summary>
     ///     注册

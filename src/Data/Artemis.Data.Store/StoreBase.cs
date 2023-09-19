@@ -38,6 +38,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     public void Dispose()
     {
         _disposed = true;
+        GC.SuppressFinalize(this);
     }
 
     #endregion

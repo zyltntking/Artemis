@@ -144,7 +144,7 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
             }
 
             // 提示凭据异常所在操作
-            Logger.LogInformation($"domain:{domain} action:{actionName},凭据校验未通过...");
+            Logger.LogInformation("domain:{domain} action:{actionName},凭据校验未通过...", domain, actionName);
 
             if (string.IsNullOrWhiteSpace(actionName))
                 throw new ClaimInvalidException();

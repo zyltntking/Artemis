@@ -6,7 +6,7 @@ namespace Artemis.Services.Identity;
 /// <summary>
 ///     认证服务接口
 /// </summary>
-public interface IIdentityService : IIdentityService<ArtemisUser>
+public interface IAccountManager : IAccountManager<ArtemisUser>
 {
 }
 
@@ -14,14 +14,14 @@ public interface IIdentityService : IIdentityService<ArtemisUser>
 ///     认证服务接口
 /// </summary>
 /// <typeparam name="TUser">用户类型</typeparam>
-public interface IIdentityService<TUser> : IIdentityService<TUser, Guid> where TUser : IdentityUser<Guid>
+public interface IAccountManager<TUser> : IAccountManager<TUser, Guid> where TUser : IdentityUser<Guid>
 {
 }
 
 /// <summary>
 ///     认证服务接口
 /// </summary>
-public interface IIdentityService<TUser, TKey> where TUser : IdentityUser<TKey> where TKey : IEquatable<TKey>
+public interface IAccountManager<TUser, TKey> where TUser : IdentityUser<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     注册

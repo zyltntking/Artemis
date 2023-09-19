@@ -4,6 +4,7 @@ using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Models;
+using Artemis.Shared.Identity.Records;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -269,7 +270,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    public async Task<(StoreResult result, Role role)> CreateRoleAsync(
+    public async Task<AttachResult<StoreResult, Role>> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default)
@@ -284,7 +285,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var result = await RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
 
-        return (result, role);
+        return result.Attach(role);
     }
 
     /// <summary>
@@ -552,7 +553,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<(StoreResult result, IEnumerable<RoleClaim> roleClaims)> CreateRoleClaimsAsync(
+    public async Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> CreateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default)
     {
@@ -567,16 +568,17 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             .Select(claim => new { claim.RoleId, claim.CheckStamp })
             .AsEnumerable()
             .Join(source,
-                claimsInDb => claimsInDb,
-                claimsToAdd => new { claimsToAdd.RoleId, claimsToAdd.CheckStamp },
-                (_, claimsToAdd) => claimsToAdd)
+                claimInDb => new ClaimKey(claimInDb.RoleId, claimInDb.CheckStamp),
+                claimToAdd => new ClaimKey(claimToAdd.RoleId, claimToAdd.CheckStamp),
+                (_, claimsToAdd) => claimsToAdd,
+                new ClaimKeyEqualityComparer())
             .ToList();
 
         var sourceToAdd = source.Except(sourceInDb).ToList();
 
         var result = await RoleClaimStore.CreateNewAsync(sourceToAdd, cancellationToken: cancellationToken);
 
-        return (result, sourceToAdd);
+        return result.Attach(sourceToAdd.AsEnumerable());
     }
 
     /// <summary>
@@ -603,7 +605,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<(StoreResult result, IEnumerable<RoleClaim> roleClaims)> UpdateRoleClaimsAsync(
+    public async Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> UpdateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default)
     {
@@ -641,7 +643,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var result = await RoleClaimStore.OverAsync(sourceToUpdate, cancellationToken: cancellationToken);
 
-        return (result, sourceToUpdate);
+        return result.Attach(sourceToUpdate.AsEnumerable());
     }
 
     /// <summary>
@@ -696,25 +698,25 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <summary>
     ///     删除角色凭据
     /// </summary>
-    /// <param name="claimKey">角色键</param>
+    /// <param name="claimKeys">角色键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> DeleteRoleClaimsAsync(IEnumerable<(Guid roleId, string checkStamp)> claimKey,
+    public Task<StoreResult> DeleteRoleClaimsAsync(IEnumerable<ClaimKey> claimKeys,
         CancellationToken cancellationToken)
     {
-        var list = claimKey.ToList();
+        var list = claimKeys.ToList();
 
         Logger.LogDebug("批量删除角色凭据：{claimKey}",
-            string.Join(",", list.Select(item => $"{item.roleId:N}:{item.checkStamp}")));
+            string.Join(",", list.Select(item => $"{item.OuterId:N}:{item.CheckStamp}")));
 
         var idList = new List<Guid>();
 
         var checkList = new List<string>();
 
-        foreach (var (roleId, checkStamp) in list)
+        foreach (var claimKey in list)
         {
-            idList.Add(roleId);
-            checkList.Add(checkStamp);
+            idList.Add(claimKey.OuterId);
+            checkList.Add(claimKey.CheckStamp);
         }
 
         var sourceToDelete = RoleClaimStore.EntityQuery
@@ -723,9 +725,10 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             .Select(claim => new { claim.Id, claim.RoleId, claim.CheckStamp })
             .AsEnumerable()
             .Join(list,
-                claimInDb => new { claimInDb.RoleId, claimInDb.CheckStamp },
-                claimToDelete => new { RoleId = claimToDelete.roleId, CheckStamp = claimToDelete.checkStamp },
-                (claimInDb, _) => claimInDb.Id)
+                claimInDb => new ClaimKey(claimInDb.RoleId, claimInDb.CheckStamp),
+                claimToDelete => new ClaimKey(claimToDelete.OuterId, claimToDelete.CheckStamp),
+                (claimInDb, _) => claimInDb.Id,
+                new ClaimKeyEqualityComparer())
             .ToList();
 
         return RoleClaimStore.DeleteAsync(sourceToDelete, cancellationToken);

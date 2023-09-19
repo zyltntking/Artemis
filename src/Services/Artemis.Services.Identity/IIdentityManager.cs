@@ -2,6 +2,7 @@
 using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Shared.Identity.Models;
+using Artemis.Shared.Identity.Records;
 
 namespace Artemis.Services.Identity;
 
@@ -67,7 +68,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    Task<(StoreResult result, Role role)> CreateRoleAsync(
+    Task<AttachResult<StoreResult, Role>> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default);
@@ -170,7 +171,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<(StoreResult result, IEnumerable<RoleClaim> roleClaims)> CreateRoleClaimsAsync(
+    Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> CreateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default);
 
@@ -190,7 +191,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<(StoreResult result, IEnumerable<RoleClaim> roleClaims)> UpdateRoleClaimsAsync(
+    Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> UpdateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default);
 
@@ -229,10 +230,10 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <summary>
     ///     删除角色凭据
     /// </summary>
-    /// <param name="claimKey">角色键</param>
+    /// <param name="claimKeys">角色键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteRoleClaimsAsync(
-        IEnumerable<(Guid roleId, string checkStamp)> claimKey,
+        IEnumerable<ClaimKey> claimKeys,
         CancellationToken cancellationToken);
 }

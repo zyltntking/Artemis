@@ -20,7 +20,7 @@ internal static class Program
             ProtoSyntax = ProtoSyntax.Proto3
         };
 
-        var schema = generator.GetSchema<IAccount>();
+        var schema = generator.GetSchema<IRoleService>();
 
         await using var writer = new StreamWriter("account.proto");
 

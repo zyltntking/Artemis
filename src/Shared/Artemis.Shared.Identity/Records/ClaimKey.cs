@@ -9,6 +9,24 @@ namespace Artemis.Shared.Identity.Records;
 public record ClaimKey : IComparable<ClaimKey>
 {
     /// <summary>
+    /// 凭据键构造
+    /// </summary>
+    public ClaimKey()
+    {
+    }
+
+    /// <summary>
+    /// 凭据键构造
+    /// </summary>
+    /// <param name="outerId">相关标识</param>
+    /// <param name="checkStamp">凭据戳</param>
+    public ClaimKey(Guid outerId, string checkStamp)
+    {
+        OuterId = outerId;
+        CheckStamp = checkStamp;
+    }
+
+    /// <summary>
     /// 凭据相关标识
     /// </summary>
     [DataMember(Order = 1)]
@@ -28,12 +46,41 @@ public record ClaimKey : IComparable<ClaimKey>
     /// <list type="table"><listheader><term> Value</term><description> Meaning</description></listheader><item><term> Less than zero</term><description> This instance precedes <paramref name="other" /> in the sort order.</description></item><item><term> Zero</term><description> This instance occurs in the same position in the sort order as <paramref name="other" />.</description></item><item><term> Greater than zero</term><description> This instance follows <paramref name="other" /> in the sort order.</description></item></list></returns>
     public int CompareTo(ClaimKey? other)
     {
-        if (ReferenceEquals(this, other)) return 0;
-        if (ReferenceEquals(null, other)) return 1;
+        if (ReferenceEquals(this, other)) 
+            return 0;
+        if (other is null) 
+            return 1;
         var outerIdComparison = OuterId.CompareTo(other.OuterId);
-        if (outerIdComparison != 0) return outerIdComparison;
-        return string.Compare(CheckStamp, other.CheckStamp, StringComparison.Ordinal);
+        return outerIdComparison != 0 ? outerIdComparison : string.Compare(CheckStamp, other.CheckStamp, StringComparison.Ordinal);
     }
 
     #endregion
+}
+
+/// <summary>
+/// 凭据键比较器
+/// </summary>
+public class ClaimKeyEqualityComparer : IEqualityComparer<ClaimKey>
+{
+    /// <summary>
+    /// 判断相等
+    /// </summary>
+    /// <param name="lhs">左侧资源</param>
+    /// <param name="rhs">右侧资源</param>
+    /// <returns></returns>
+    public bool Equals(ClaimKey? lhs, ClaimKey? rhs)
+    {
+        if (ReferenceEquals(lhs, rhs)) return true;
+        if (lhs is null) return false;
+        if (rhs is null) return false;
+        if (lhs.GetType() != rhs.GetType()) return false;
+        return lhs.OuterId.Equals(rhs.OuterId) && lhs.CheckStamp == rhs.CheckStamp;
+    }
+
+    /// <summary>
+    /// 获取哈希码
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public int GetHashCode(ClaimKey obj) => HashCode.Combine(obj.OuterId, obj.CheckStamp);
 }

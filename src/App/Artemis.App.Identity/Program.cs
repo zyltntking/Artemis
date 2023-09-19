@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Artemis.App.Identity.Interceptors;
+using Artemis.App.Identity.Services;
 using Artemis.Extensions.Web.Builder;
 using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
@@ -36,7 +38,10 @@ public static class Program
 
             //builder.Services.AddGrpc();
             //builder.Services.AddGrpcReflection();
-            builder.Services.AddCodeFirstGrpc();
+            builder.Services.AddCodeFirstGrpc(options =>
+            {
+                options.Interceptors.Add<TokenInterceptor>();
+            });
             builder.Services.AddCodeFirstGrpcReflection();
 
             builder.Services.AddRazorPages();
@@ -87,13 +92,15 @@ public static class Program
 
             app.MapControllers();
 
-            //app.MapGrpcService<SampleService>();
+            app.MapGrpcService<RoleService>();
 
             app.MapApiRouteTable();
 
             if (app.Environment.IsDevelopment())
+            {
                 //app.MapGrpcReflectionService();
                 app.MapCodeFirstGrpcReflectionService();
+            }
         });
     }
 }
