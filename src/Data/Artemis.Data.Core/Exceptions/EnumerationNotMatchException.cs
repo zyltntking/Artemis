@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
-/// 枚举类不匹配异常
+///     枚举类不匹配异常
 /// </summary>
 public class EnumerationNotMatchException : ArtemisException
 {
@@ -10,7 +10,8 @@ public class EnumerationNotMatchException : ArtemisException
     /// </summary>
     /// <param name="errorMessage">错误消息</param>
     /// <param name="errorCode">错误编码</param>
-    public EnumerationNotMatchException(string errorMessage, int errorCode = ExceptionCode.EnumerationNotMatchException) : base(errorMessage, errorCode)
+    public EnumerationNotMatchException(string errorMessage, int errorCode = ExceptionCode.EnumerationNotMatchException)
+        : base(errorMessage, errorCode)
     {
     }
 }

@@ -12,6 +12,12 @@ namespace Artemis.Shared.Identity.Models;
 public class User : IdentityUser<Guid>, IKeySlot<Guid>
 {
     /// <summary>
+    ///     标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override Guid Id { get; set; }
+
+    /// <summary>
     ///     用户名
     /// </summary>
     [DataMember(Order = 2)]
@@ -105,10 +111,4 @@ public class User : IdentityUser<Guid>, IKeySlot<Guid>
     /// </summary>
     [DataMember(Order = 15)]
     public override DateTimeOffset? LockoutEnd { get; set; }
-
-    /// <summary>
-    ///     标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public override Guid Id { get; set; }
 }

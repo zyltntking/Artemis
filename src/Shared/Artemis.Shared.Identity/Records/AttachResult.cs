@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Records;
 
 /// <summary>
-/// 结果数据附加集合记录
+///     结果数据附加集合记录
 /// </summary>
 /// <typeparam name="TResult">结果</typeparam>
 /// <typeparam name="TAttach">附加</typeparam>
@@ -27,12 +27,12 @@ public record AttachResult<TResult, TAttach> : IAttachResult<TResult, TAttach>
 }
 
 /// <summary>
-/// 结果数据附加集合
+///     结果数据附加集合
 /// </summary>
 /// <typeparam name="TResult">结果</typeparam>
 /// <typeparam name="TAttach">附加数据</typeparam>
-public interface IAttachResult<TResult, TAttach> 
-    where TResult : class 
+public interface IAttachResult<TResult, TAttach>
+    where TResult : class
     where TAttach : class
 {
     /// <summary>
@@ -59,8 +59,8 @@ public static class AttachResultException
     /// <param name="attach">附加数据</param>
     /// <returns></returns>
     public static AttachResult<IdentityResult, TAttach> Attach<TAttach>(
-        this IdentityResult result, 
-        TAttach attach) 
+        this IdentityResult result,
+        TAttach attach)
         where TAttach : class
     {
         return new AttachResult<IdentityResult, TAttach>

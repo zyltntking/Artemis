@@ -59,16 +59,6 @@ public abstract class ModelBase : ModelBase<Guid>, IModelBase
 /// <typeparam name="TKey">记录标识</typeparam>
 public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : IEquatable<TKey>
 {
-    #region Implementation of IModelBase<TKey>
-
-    /// <summary>
-    ///     生成键
-    /// </summary>
-    [NotMapped]
-    public string GenerateKey => Id.ToString()!;
-
-    #endregion
-
     #region Implementation of IKeySlot<TKey>
 
     /// <summary>
@@ -76,6 +66,16 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     /// </summary>
     [Key]
     public virtual TKey Id { get; set; } = default!;
+
+    #endregion
+
+    #region Implementation of IModelBase<TKey>
+
+    /// <summary>
+    ///     生成键
+    /// </summary>
+    [NotMapped]
+    public string GenerateKey => Id.ToString()!;
 
     #endregion
 }

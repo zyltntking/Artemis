@@ -36,18 +36,15 @@ public static class Program
                 AssemblyName = "Artemis.App.Identity"
             }, builder.Environment.IsDevelopment());
 
-            //builder.Services.AddGrpc();
-            //builder.Services.AddGrpcReflection();
-            builder.Services.AddCodeFirstGrpc(options =>
-            {
-                options.Interceptors.Add<TokenInterceptor>();
-            });
-            builder.Services.AddCodeFirstGrpcReflection();
+            builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
             builder.Services.AddRazorPages();
 
             builder.Services
-                .AddControllers()
+                .AddControllers(option =>
+                {
+                    option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+                })
                 .AddMvcOptions(options =>
                 {
                     options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
@@ -57,6 +54,16 @@ public static class Program
                 {
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 });
+
+            //builder.Services.AddGrpc();
+            //builder.Services.AddGrpcReflection();
+            builder.Services.AddCodeFirstGrpc(options =>
+            {
+                options.EnableDetailedErrors = true;
+                options.Interceptors.Add<TokenInterceptor>();
+            });
+
+            builder.Services.AddCodeFirstGrpcReflection();
 
             builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
 
@@ -88,6 +95,8 @@ public static class Program
 
             app.UseArtemisMiddleWares();
 
+            app.UseResponseCompression();
+
             app.MapRazorPages();
 
             app.MapControllers();
@@ -97,10 +106,8 @@ public static class Program
             app.MapApiRouteTable();
 
             if (app.Environment.IsDevelopment())
-            {
                 //app.MapGrpcReflectionService();
                 app.MapCodeFirstGrpcReflectionService();
-            }
         });
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Artemis.Services.Identity;
+namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
 ///     Artemis用户管理器
@@ -324,7 +324,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         role.NormalizedName = RoleManager.NormalizeKey(role.Name);
 
-        var exists = await RoleStore.ExistsAsync(role.Id, cancellationToken);
+        var exists = role.Id != default && await RoleStore.ExistsAsync(role.Id, cancellationToken);
 
         if (exists) return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
 
@@ -386,7 +386,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"查询角色用户，角色：{id}，用户名：{nameSearch}，页码：{page}，页面大小：{size}");
 
-        var roleExists = await RoleManager.Roles
+        var roleExists = id != default && await RoleManager.Roles
             .AnyAsync(role => role.Id == id, cancellationToken);
 
         if (roleExists)
@@ -445,7 +445,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog("获取角色凭据列表");
 
-        var roleExists = await RoleManager.Roles
+        var roleExists = id != default && await RoleManager.Roles
             .AnyAsync(role => role.Id == id, cancellationToken);
 
         if (roleExists)
@@ -481,7 +481,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"查询角色凭据，角色：{id}，页码：{page}，页面大小：{size}");
 
-        var roleExists = await RoleManager.Roles
+        var roleExists = id != default && await RoleManager.Roles
             .AnyAsync(role => role.Id == id, cancellationToken);
 
         if (roleExists)

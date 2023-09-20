@@ -16,7 +16,7 @@ internal static class AttachResultException
     /// <param name="attach">附加数据</param>
     /// <returns></returns>
     public static AttachResult<StoreResult, TAttach> Attach<TAttach>(
-        this StoreResult result, 
+        this StoreResult result,
         TAttach attach)
         where TAttach : class
     {

@@ -20,11 +20,6 @@ public class ExceptionResultMiddleware : IMiddleware
         Logger = logger;
     }
 
-    /// <summary>
-    ///     日志
-    /// </summary>
-    private ILogger<ExceptionResultMiddleware> Logger { get; }
-
     #region Implementation of IMiddleware
 
     /// <summary>Request handling method.</summary>
@@ -54,4 +49,9 @@ public class ExceptionResultMiddleware : IMiddleware
     }
 
     #endregion
+
+    /// <summary>
+    ///     日志
+    /// </summary>
+    private ILogger<ExceptionResultMiddleware> Logger { get; }
 }

@@ -121,7 +121,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="message">日志消息</param>
     private void SetDebugLog(string message)
     {
-        if (DebugLogger) 
+        if (DebugLogger)
             Logger?.LogDebug(message);
     }
 

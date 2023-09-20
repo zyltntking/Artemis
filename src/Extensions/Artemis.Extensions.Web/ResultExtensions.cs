@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Artemis.Extensions.Web;
@@ -19,12 +18,9 @@ public static class ResultExtensions
     {
         var result = DataResult.Fail<T>();
 
-        var descriptor = new Dictionary<string, Collection<string>>();
-
         foreach (var (key, entry) in modelState)
-            descriptor.Add(key, new Collection<string>(entry.Errors.Select(item => item.ErrorMessage).ToArray()));
-
-        result.Descriptor = descriptor;
+        foreach (var entryError in entry.Errors)
+            result.AddDescriptor(key, entryError.ErrorMessage);
 
         return result;
     }

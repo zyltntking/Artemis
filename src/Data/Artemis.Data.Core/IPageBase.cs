@@ -25,7 +25,7 @@ public interface IPageRequest<T> : IPageBase
     /// <summary>
     ///     过滤条件
     /// </summary>
-    T? FilterCondition { get; set; }
+    T Filter { get; set; }
 }
 
 /// <summary>

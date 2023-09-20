@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -9,34 +11,41 @@ namespace Artemis.Data.Core;
 [DataContract]
 public sealed class PageRequest<T> : IPageRequest<T>
 {
-    /// <summary>
-    ///     跳过数
-    /// </summary>
-    public int Skip => Page * Size;
-
     #region Implementation of IPageRequest<T>
 
     /// <summary>
     ///     过滤条件
     /// </summary>
+    [Required]
     [DataMember(Order = 3)]
-    public T? FilterCondition { get; set; }
+    public T Filter { get; set; } = default!;
 
     #endregion
+
+    /// <summary>
+    ///     跳过数
+    /// </summary>
+    public int Skip => (Page - 1) * Size;
 
     #region Implementation of IPageBase
 
     /// <summary>
     ///     当前页码(从1开始)
     /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DefaultValue(1)]
     [DataMember(Order = 1)]
-    public int Page { get; set; }
+    public int Page { get; set; } = 1;
 
     /// <summary>
     ///     页面大小
     /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DefaultValue(20)]
     [DataMember(Order = 2)]
-    public int Size { get; set; }
+    public int Size { get; set; } = 20;
 
     #endregion
 }

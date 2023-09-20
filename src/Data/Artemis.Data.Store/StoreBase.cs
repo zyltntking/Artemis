@@ -26,11 +26,6 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
         ErrorDescriber = describer ?? throw new StoreParameterNullException(nameof(describer));
     }
 
-    /// <summary>
-    ///     设置当前发生错误的错误描述者
-    /// </summary>
-    protected IStoreErrorDescriber ErrorDescriber { get; set; }
-
     #region Implementation of IDisposable
 
     /// <summary>
@@ -43,6 +38,11 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     }
 
     #endregion
+
+    /// <summary>
+    ///     设置当前发生错误的错误描述者
+    /// </summary>
+    protected IStoreErrorDescriber ErrorDescriber { get; set; }
 
     /// <summary>
     ///     转换字符串到id

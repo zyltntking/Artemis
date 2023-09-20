@@ -1,5 +1,5 @@
 ﻿using Artemis.Extensions.Web.Controller;
-using Artemis.Services.Identity;
+using Artemis.Services.Identity.Managers;
 
 namespace Artemis.App.Identity.Services;
 

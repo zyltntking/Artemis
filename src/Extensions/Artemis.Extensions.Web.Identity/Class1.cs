@@ -1,7 +1,5 @@
-﻿namespace Artemis.Extensions.Web.Identity
-{
-    public class Class1
-    {
+﻿namespace Artemis.Extensions.Web.Identity;
 
-    }
+public class Class1
+{
 }

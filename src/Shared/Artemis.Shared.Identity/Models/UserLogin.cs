@@ -12,6 +12,12 @@ namespace Artemis.Shared.Identity.Models;
 public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>
 {
     /// <summary>
+    ///     存储标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public virtual int Id { get; set; }
+
+    /// <summary>
     ///     用户标识
     /// </summary>
     [DataMember(Order = 2)]
@@ -39,10 +45,4 @@ public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>
     [DataMember(Order = 5)]
     [MaxLength(32)]
     public override string? ProviderDisplayName { get; set; }
-
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public virtual int Id { get; set; }
 }

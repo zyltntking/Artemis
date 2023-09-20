@@ -20,10 +20,24 @@ public static class OpenApiExtensions
 
         config.EnsureValidity();
 
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            var xmlCommentFiles = Directory.GetFiles(
+                    AppContext.BaseDirectory,
+                    "Artemis.*.xml",
+                    SearchOption.TopDirectoryOnly)
+                .Where(path =>
+                    Path.GetFileName(path).Contains("Artemis.Data") ||
+                    Path.GetFileName(path).Contains("Artemis.Shared") ||
+                    Path.GetFileName(path).Contains("Artemis.App"))
+                .ToList();
+
+            foreach (var xmlCommentFile in xmlCommentFiles) options.IncludeXmlComments(xmlCommentFile, true);
+        });
 
         return builder.Services;
     }
+
 
     /// <summary>
     ///     使用OpenApi文档

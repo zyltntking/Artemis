@@ -4,7 +4,7 @@ using Artemis.Shared.Identity.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Artemis.Services.Identity;
+namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
 ///     认证服务实现
@@ -76,6 +76,40 @@ public abstract class AccountManager<TUser, TKey> : IAccountManager<TUser, TKey>
         Logger = logger;
     }
 
+    #region Implementation of IAccountManager<TUser>
+
+    /// <summary>
+    ///     注册
+    /// </summary>
+    /// <param name="username">用户名</param>
+    /// <param name="password">密码</param>
+    /// <param name="email">邮箱</param>
+    /// <param name="phone">手机号码</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<(IdentityResult result, TUser user)> SignUp(string username, string password,
+        string? email = null,
+        string? phone = null, CancellationToken cancellationToken = default)
+    {
+        Logger.LogInformation($"用户注册：{username}，邮箱：{email}，手机号码：{phone}");
+
+        var user = Instance.CreateInstance<TUser>();
+
+        await UserStore.SetUserNameAsync(user, username, cancellationToken);
+
+        if (email != null)
+            await EmailStore.SetEmailAsync(user, email, cancellationToken);
+
+        if (phone != null)
+            await PhoneNumberStore.SetPhoneNumberAsync(user, phone, cancellationToken);
+
+        var result = await UserManger.CreateAsync(user, password);
+
+        return (result, user);
+    }
+
+    #endregion
+
     /// <summary>
     ///     用户管理器
     /// </summary>
@@ -121,38 +155,4 @@ public abstract class AccountManager<TUser, TKey> : IAccountManager<TUser, TKey>
     ///     日志记录器
     /// </summary>
     private ILogger Logger { get; }
-
-    #region Implementation of IAccountManager<TUser>
-
-    /// <summary>
-    ///     注册
-    /// </summary>
-    /// <param name="username">用户名</param>
-    /// <param name="password">密码</param>
-    /// <param name="email">邮箱</param>
-    /// <param name="phone">手机号码</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<(IdentityResult result, TUser user)> SignUp(string username, string password,
-        string? email = null,
-        string? phone = null, CancellationToken cancellationToken = default)
-    {
-        Logger.LogInformation($"用户注册：{username}，邮箱：{email}，手机号码：{phone}");
-
-        var user = Instance.CreateInstance<TUser>();
-
-        await UserStore.SetUserNameAsync(user, username, cancellationToken);
-
-        if (email != null)
-            await EmailStore.SetEmailAsync(user, email, cancellationToken);
-
-        if (phone != null)
-            await PhoneNumberStore.SetPhoneNumberAsync(user, phone, cancellationToken);
-
-        var result = await UserManger.CreateAsync(user, password);
-
-        return (result, user);
-    }
-
-    #endregion
 }

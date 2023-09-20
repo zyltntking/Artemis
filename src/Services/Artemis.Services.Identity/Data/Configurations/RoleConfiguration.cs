@@ -67,7 +67,7 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
             .IsUnique();
 
         // Each Role can have many entries in the UserRole join table
-        // builder.HasMany(role => role.UserRoles)
+        // builder.HasMany(emptyRecord => emptyRecord.UserRoles)
         //    .WithOne(userRole => userRole.Role)
         //    .HasForeignKey(userRole => userRole.RoleId)
         //    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")

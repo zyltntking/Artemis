@@ -1,4 +1,5 @@
 ﻿using Artemis.Services.Identity.Data;
+using Artemis.Services.Identity.Managers;
 using Artemis.Services.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

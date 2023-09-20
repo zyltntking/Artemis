@@ -11,6 +11,12 @@ namespace Artemis.Shared.Identity.Models;
 public class UserRole : IdentityUserRole<Guid>, IKeySlot<int>
 {
     /// <summary>
+    ///     存储标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public virtual int Id { get; set; }
+
+    /// <summary>
     ///     用户标识
     /// </summary>
     [DataMember(Order = 2)]
@@ -21,10 +27,4 @@ public class UserRole : IdentityUserRole<Guid>, IKeySlot<int>
     /// </summary>
     [DataMember(Order = 3)]
     public override Guid RoleId { get; set; }
-
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public virtual int Id { get; set; }
 }

@@ -54,21 +54,6 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
             SignatureClaim = claim ?? string.Empty;
         }
 
-        /// <summary>
-        ///     日志
-        /// </summary>
-        private ILogger<ArtemisClaimFilter> Logger { get; }
-
-        /// <summary>
-        ///     缓存
-        /// </summary>
-        private IDistributedCache Cache { get; }
-
-        /// <summary>
-        ///     是否生效
-        /// </summary>
-        private string SignatureClaim { get; }
-
         #region Implementation of IAsyncAuthorizationFilter
 
         /// <summary>
@@ -153,6 +138,21 @@ public class ArtemisClaimAttribute : TypeFilterAttribute
         }
 
         #endregion
+
+        /// <summary>
+        ///     日志
+        /// </summary>
+        private ILogger<ArtemisClaimFilter> Logger { get; }
+
+        /// <summary>
+        ///     缓存
+        /// </summary>
+        private IDistributedCache Cache { get; }
+
+        /// <summary>
+        ///     是否生效
+        /// </summary>
+        private string SignatureClaim { get; }
 
         /// <summary>
         ///     操作名凭据

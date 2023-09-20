@@ -53,7 +53,28 @@ public class DataResult<T> : IResultBase<T>
     /// <summary>
     ///     描述器
     /// </summary>
-    public Dictionary<string, Collection<string>>? Descriptor { get; set; }
+    private Dictionary<string, Collection<string>> Descriptor { get; } = new();
+
+    /// <summary>
+    ///     添加描述器
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    public void AddDescriptor(string key, string value)
+    {
+        if (Descriptor.ContainsKey(key))
+            Descriptor[key].Add(value);
+        else
+            Descriptor.Add(key, new Collection<string> { value });
+    }
+
+    /// <summary>
+    ///     获取描述器
+    /// </summary>
+    public Dictionary<string, Collection<string>> GetDescriptor()
+    {
+        return Descriptor;
+    }
 
     /// <summary>
     ///     设置异常
@@ -219,7 +240,7 @@ public static class DataResult
             Data = data,
             Message = message,
             Error = exception?.ToString(),
-            DateTime = DateTime.Now,
+            DateTime = DateTime.Now.ToLocalTime(),
             Timestamp = DateTime.Now.ToUnixTimeStamp()
         };
 
@@ -227,10 +248,7 @@ public static class DataResult
         {
             result.SetException(exception);
 
-            result.Descriptor = new Dictionary<string, Collection<string>>
-            {
-                { "Exception", new Collection<string> { exception.ToString() } }
-            };
+            result.AddDescriptor("Exception", exception.ToString());
         }
 
         return result;

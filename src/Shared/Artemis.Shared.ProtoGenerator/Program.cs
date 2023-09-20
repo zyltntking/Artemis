@@ -1,4 +1,4 @@
-﻿using Artemis.Shared.Identity;
+﻿using Artemis.Shared.Identity.Services;
 using ProtoBuf.Grpc.Reflection;
 using ProtoBuf.Meta;
 

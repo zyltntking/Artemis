@@ -12,6 +12,12 @@ namespace Artemis.Shared.Identity.Models;
 public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
 {
     /// <summary>
+    ///     存储标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public virtual int Id { get; set; }
+
+    /// <summary>
     ///     用户标识
     /// </summary>
     [DataMember(Order = 2)]
@@ -38,10 +44,4 @@ public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
     /// </summary>
     [DataMember(Order = 5)]
     public override string? Value { get; set; }
-
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [DataMember(Order = 1)]
-    public virtual int Id { get; set; }
 }

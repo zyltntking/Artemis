@@ -25,16 +25,6 @@ public class ServiceDomainMiddleware : IMiddleware
         Logger = logger;
     }
 
-    /// <summary>
-    ///     域名称
-    /// </summary>
-    private ArtemisMiddlewareOptions Options { get; }
-
-    /// <summary>
-    ///     日志
-    /// </summary>
-    private ILogger<ServiceDomainMiddleware> Logger { get; }
-
     #region Implementation of IMiddleware
 
     /// <summary>Request handling method.</summary>
@@ -49,4 +39,14 @@ public class ServiceDomainMiddleware : IMiddleware
     }
 
     #endregion
+
+    /// <summary>
+    ///     域名称
+    /// </summary>
+    private ArtemisMiddlewareOptions Options { get; }
+
+    /// <summary>
+    ///     日志
+    /// </summary>
+    private ILogger<ServiceDomainMiddleware> Logger { get; }
 }

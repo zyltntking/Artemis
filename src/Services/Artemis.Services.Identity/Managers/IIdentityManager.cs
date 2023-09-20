@@ -4,7 +4,7 @@ using Artemis.Services.Identity.Data;
 using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
 
-namespace Artemis.Services.Identity;
+namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
 ///     Artemis用户管理器接口

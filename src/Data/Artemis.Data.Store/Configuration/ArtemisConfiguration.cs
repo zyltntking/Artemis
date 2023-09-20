@@ -140,6 +140,23 @@ public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguratio
 /// <typeparam name="TEntity"></typeparam>
 public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : class
 {
+    #region Implementation of IEntityTypeConfiguration<TEntity>
+
+    /// <summary>
+    ///     Configures the entity of type <typeparamref name="TEntity" />.
+    /// </summary>
+    /// <param name="builder">The builder to be used to configure the entity type.</param>
+    public void Configure(EntityTypeBuilder<TEntity> builder)
+    {
+        TableConfigure(builder);
+
+        FieldConfigure(builder);
+
+        RelationConfigure(builder);
+    }
+
+    #endregion
+
     /// <summary>
     ///     数据库类型
     /// </summary>
@@ -164,23 +181,6 @@ public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<T
     ///     架构名
     /// </summary>
     protected virtual string? SchemaName => null;
-
-    #region Implementation of IEntityTypeConfiguration<TEntity>
-
-    /// <summary>
-    ///     Configures the entity of type <typeparamref name="TEntity" />.
-    /// </summary>
-    /// <param name="builder">The builder to be used to configure the entity type.</param>
-    public void Configure(EntityTypeBuilder<TEntity> builder)
-    {
-        TableConfigure(builder);
-
-        FieldConfigure(builder);
-
-        RelationConfigure(builder);
-    }
-
-    #endregion
 
     /// <summary>
     ///     表配置
