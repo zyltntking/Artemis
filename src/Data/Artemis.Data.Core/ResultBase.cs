@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
@@ -8,7 +9,7 @@ namespace Artemis.Data.Core;
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
 [DataContract]
-public class DataResult<T> : IResultBase<T>
+public record DataResult<T> : IResultBase<T>
 {
     /// <summary>
     ///     空构造
@@ -62,8 +63,8 @@ public class DataResult<T> : IResultBase<T>
     /// <param name="value"></param>
     public void AddDescriptor(string key, string value)
     {
-        if (Descriptor.ContainsKey(key))
-            Descriptor[key].Add(value);
+        if (Descriptor.TryGetValue(key, out var collection))
+            collection.Add(value);
         else
             Descriptor.Add(key, new Collection<string> { value });
     }
@@ -71,10 +72,7 @@ public class DataResult<T> : IResultBase<T>
     /// <summary>
     ///     获取描述器
     /// </summary>
-    public Dictionary<string, Collection<string>> GetDescriptor()
-    {
-        return Descriptor;
-    }
+    public Dictionary<string, Collection<string>> GetDescriptor() => Descriptor;
 
     /// <summary>
     ///     设置异常
@@ -99,8 +97,9 @@ public class DataResult<T> : IResultBase<T>
     /// <summary>
     ///     消息码
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public int Code { get; set; }
+    public required int Code { get; set; }
 
     /// <summary>
     ///     是否成功
@@ -118,26 +117,30 @@ public class DataResult<T> : IResultBase<T>
     /// <summary>
     ///     消息
     /// </summary>
-    [DataMember(Order = 3, IsRequired = true)]
-    public string Message { get; set; } = string.Empty;
+    [Required]
+    [DataMember(Order = 3)]
+    public required string Message { get; set; } = string.Empty;
 
     /// <summary>
     ///     异常信息
     /// </summary>
+    [Required]
     [DataMember(Order = 4)]
-    public string? Error { get; set; }
+    public required string? Error { get; set; }
 
     /// <summary>
     ///     本地时间戳
     /// </summary>
+    [Required]
     [DataMember(Order = 5)]
-    public DateTime DateTime { get; set; }
+    public required DateTime DateTime { get; set; }
 
     /// <summary>
     ///     时间戳
     /// </summary>
+    [Required]
     [DataMember(Order = 6)]
-    public long Timestamp { get; set; }
+    public required long Timestamp { get; set; }
 
     /// <summary>
     ///     数据

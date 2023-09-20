@@ -4,6 +4,7 @@ using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
+using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -17,9 +18,9 @@ public interface IRoleService
     ///     获取角色
     /// </summary>
     /// <param name="request">获取角色请求</param>
-    /// <returns></returns>
+    /// <returns>角色信息<see cref="RoleInfo"/></returns>
     [OperationContract]
-    Task<DataResult<Role>> GetRoleAsync(GetRoleRequest request);
+    Task<DataResult<RoleInfo>> GetRoleAsync(GetRoleRequest request);
 
     /// <summary>
     ///     查询角色
@@ -27,23 +28,15 @@ public interface IRoleService
     /// <param name="request">查询角色请求</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<PageResult<Role>>> FetchRolesAsync(PageRequest<FetchRolesFilter> request);
+    Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync(PageRequest<FetchRolesFilter> request);
 
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="request">创建角色请求</param>
+    /// <param name="roleRequest">创建角色请求</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateRoleAsync(CreateRoleRequest request);
-
-    /// <summary>
-    ///     更新角色
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
-    [OperationContract]
-    Task<DataResult<EmptyRecord>> UpdateRoleAsync(UpdateRoleRequest request);
+    Task<DataResult<EmptyRecord>> CreateRoleAsync(CreateRoleRequest roleRequest);
 
     /// <summary>
     ///     创建或更新角色
@@ -89,7 +82,7 @@ public record GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public Guid RoleId { get; set; }
+    public required string RoleName { get; set; } = null!;
 }
 
 /// <summary>
@@ -109,28 +102,37 @@ public record FetchRolesFilter
 ///     创建角色请求
 /// </summary>
 [DataContract]
-public record CreateRoleRequest
+public record CreateRoleRequest : RoleBase
 {
     /// <summary>
     ///     角色名
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public string Name { get; set; } = null!;
+    public override required string Name { get; set; } = null!;
 
     /// <summary>
     ///     角色描述
     /// </summary>
     [DataMember(Order = 2)]
-    public string? Description { get; set; }
+    public override required string? Description { get; set; }
 }
 
 /// <summary>
 ///     更新角色请求
 /// </summary>
 [DataContract]
-public class UpdateRoleRequest : Role
+public record UpdateRoleRequest
 {
+    /// <summary>
+    /// 角色名
+    /// </summary>
+    public required string RoleName { get; set; } = null!;
+
+    /// <summary>
+    /// 角色信息
+    /// </summary>
+    public RoleBase RoleInfo { get; set; } = null!;
 }
 
 /// <summary>

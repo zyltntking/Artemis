@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;
@@ -9,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     角色
 /// </summary>
 [DataContract]
-public class Role : IdentityRole<Guid>, IKeySlot<Guid>
+public class Role : IdentityRole<Guid>, IKeySlot<Guid>, IRole
 {
     /// <summary>
     ///     标识

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Records;
@@ -16,12 +17,14 @@ public record AttachResult<TResult, TAttach> : IAttachResult<TResult, TAttach>
     /// <summary>
     ///     结果
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
     public TResult Result { get; init; } = null!;
 
     /// <summary>
     ///     附加数据
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
     public TAttach Attach { get; init; } = null!;
 }

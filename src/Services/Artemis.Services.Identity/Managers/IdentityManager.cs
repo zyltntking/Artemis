@@ -5,6 +5,7 @@ using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
+using Artemis.Shared.Identity.Transfer;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="userTokenStore"></param>
     /// <param name="roleStore">角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
-    /// <param name="identityUserStore">用户存储</param>
     /// <param name="roleManager">角色管理器</param>
     /// <param name="logger">日志依赖</param>
     /// <param name="userLoginStore"></param>
@@ -39,7 +39,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         IArtemisRoleStore roleStore,
         IArtemisRoleClaimStore roleClaimStore,
         UserManager<ArtemisUser> userManager,
-        IUserStore<ArtemisUser> identityUserStore,
         RoleManager<ArtemisRole> roleManager,
         ILogger<IManager<ArtemisUser>> logger) : base(userStore, null, null, logger)
     {
@@ -49,7 +48,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleStore = roleStore;
         RoleClaimStore = roleClaimStore;
         UserManager = userManager;
-        IdentityUserStore = identityUserStore;
         RoleManager = roleManager;
     }
 
@@ -60,14 +58,13 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     protected override void StoreDispose()
     {
-        base.StoreDispose();
+        UserStore.Dispose();
         UserClaimStore.Dispose();
         UserLoginStore.Dispose();
         UserTokenStore.Dispose();
         RoleStore.Dispose();
         RoleClaimStore.Dispose();
         UserManager.Dispose();
-        IdentityUserStore.Dispose();
         RoleManager.Dispose();
     }
 
@@ -111,11 +108,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     private UserManager<ArtemisUser> UserManager { get; }
 
     /// <summary>
-    ///     用户存储
-    /// </summary>
-    private IUserStore<ArtemisUser> IdentityUserStore { get; }
-
-    /// <summary>
     ///     角色管理器
     /// </summary>
     private RoleManager<ArtemisRole> RoleManager { get; }
@@ -136,13 +128,15 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="cancellationToken"></param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
-    public async Task<Role?> GetRoleAsync(
+    public Task<RoleInfo?> GetRoleAsync(
         string name,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog($"查询角色：{name}");
 
-        return await RoleManager.FindByNameAsync(name);
+        var normalizedName = RoleManager.NormalizeKey(name);
+
+        return RoleStore.FindMapRoleByNameAsync<RoleInfo>(normalizedName, cancellationToken);
     }
 
     /// <summary>
@@ -152,16 +146,13 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="cancellationToken"></param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
-    public async Task<Role?> GetRoleAsync(
+    public Task<RoleInfo?> GetRoleAsync(
         Guid id,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog($"查询角色：{id}");
 
-        return await RoleManager.Roles
-            .AsNoTracking()
-            .ProjectToType<Role>()
-            .FirstOrDefaultAsync(role => role.Id == id, cancellationToken);
+        return RoleStore.FindMapEntityAsync<RoleInfo>(id, cancellationToken);
     }
 
     /// <summary>
@@ -169,15 +160,11 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     /// <returns>角色列表</returns>
     /// <remarks>当查询不到角色实例时返回空列表</remarks>
-    public async Task<IEnumerable<Role>> GetRolesAsync(CancellationToken cancellationToken = default)
+    public Task<IEnumerable<RoleInfo>> GetRolesAsync(CancellationToken cancellationToken = default)
     {
         SetDebugLog("获取角色列表");
 
-        return await RoleManager.Roles
-            .AsNoTracking()
-            .OrderBy(role => role.NormalizedName)
-            .ProjectToType<Role>()
-            .ToListAsync(cancellationToken);
+        return RoleStore.GetMapRolesAsync<RoleInfo>(cancellationToken);
     }
 
     /// <summary>
@@ -189,7 +176,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="cancellationToken"></param>
     /// <returns>分页搜索结果</returns>
     /// <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
-    public async Task<PageResult<Role>> FetchRolesAsync(
+    public async Task<PageResult<RoleInfo>> FetchRolesAsync(
         string? nameSearch = null,
         int page = 1,
         int size = 20,
@@ -199,7 +186,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         nameSearch ??= string.Empty;
 
-        var query = RoleManager.Roles.AsNoTracking();
+        var query = RoleStore.EntityQuery;
 
         var total = await query.LongCountAsync(cancellationToken);
 
@@ -219,12 +206,11 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         }
 
         var artemisRoles = await query
-            .OrderBy(role => role.NormalizedName)
             .Skip((page - 1) * size).Take(size)
-            .ProjectToType<Role>()
+            .ProjectToType<RoleInfo>()
             .ToListAsync(cancellationToken);
 
-        return new PageResult<Role>
+        return new PageResult<RoleInfo>
         {
             Page = page,
             Size = size,
@@ -241,12 +227,12 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    public async Task<StoreResult> CreateRoleAsync(
+    public Task<StoreResult> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog($"查询角色：{name}");
+        SetDebugLog($"创建角色：{name}");
 
         var role = Instance.CreateInstance<Role>();
 
@@ -254,50 +240,134 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         role.NormalizedName = RoleManager.NormalizeKey(name);
         role.Description = description;
 
-        return await RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
+        return RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
     }
 
     /// <summary>
     ///     更新角色
     /// </summary>
-    /// <param name="role">角色</param>
+    /// <param name="name">角色名</param>
+    /// <param name="info">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> UpdateRoleAsync(
-        Role role,
+        string name,
+        RoleBase info,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog($"查询角色：{role.Id}");
+        SetDebugLog($"更新角色：{name}");
 
-        var roleExists = await RoleStore.ExistsAsync(role.Id, cancellationToken);
+        var normalizedName = RoleManager.NormalizeKey(name);
 
-        if (roleExists)
+        var role = await RoleStore.FindMapRoleByNameAsync<Role>(normalizedName, cancellationToken);
+
+        if (role is not null)
         {
-            role.NormalizedName = RoleManager.NormalizeKey(role.Name);
+            role.Name = info.Name;
+            role.NormalizedName = normalizedName;
+            role.Description = info.Description;
 
             return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
         }
 
-        return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), role.Id.ToString()));
+        return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), name));
+    }
+
+    /// <summary>
+    ///     更新角色
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateRoleAsync(
+        Guid id,
+        RoleBase info,
+        CancellationToken cancellationToken = default)
+    {
+        SetDebugLog($"查询角色：{id:D}");
+
+        var role = await RoleStore.FindMapEntityAsync<Role>(id, cancellationToken);
+
+        if (role is not null)
+        {
+            role.Name = info.Name;
+            role.NormalizedName = RoleManager.NormalizeKey(info.Name);
+            role.Description = info.Description;
+
+            return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
+        }
+
+        return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
     }
 
     /// <summary>
     ///     创建或更新角色
     /// </summary>
-    /// <param name="role"></param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="name">角色名</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateOrUpdateRoleAsync(Role role, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateOrUpdateRoleAsync(
+        string name, 
+        RoleBase info, 
+        CancellationToken cancellationToken = default)
     {
-        SetDebugLog($"查询角色：{role.Name}");
+        SetDebugLog($"创建或更新角色：{name}");
 
-        role.NormalizedName = RoleManager.NormalizeKey(role.Name);
+        if (name != string.Empty)
+        {
+            var normalizedName = RoleManager.NormalizeKey(name);
 
-        var exists = role.Id != default && await RoleStore.ExistsAsync(role.Id, cancellationToken);
+            var role = await RoleStore.FindMapRoleByNameAsync<Role>(normalizedName, cancellationToken);
 
-        if (exists) return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
+            if (role is not null)
+            {
+                role.Name = info.Name;
+                role.NormalizedName = normalizedName;
+                role.Description = info.Description;
 
-        return await RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
+                return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
+            }
+        }
+
+        return await CreateRoleAsync(info.Name, info.Description, cancellationToken);
+    }
+
+    /// <summary>
+    ///     创建或更新角色
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> CreateOrUpdateRoleAsync(
+        Guid id, 
+        RoleBase info, 
+        CancellationToken cancellationToken = default)
+    {
+        SetDebugLog($"创建或更新角色：{id:D}");
+
+        if (id != default)
+        {
+            var exists = await RoleStore.ExistsAsync(id, cancellationToken);
+
+            if (exists)
+            {
+                var role = await RoleStore.FindMapEntityAsync<Role>(id, cancellationToken);
+
+                if (role is not null)
+                {
+                    role.Name = info.Name;
+                    role.NormalizedName = RoleManager.NormalizeKey(info.Name);
+                    role.Description = info.Description;
+
+                    return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
+                }
+            }
+        }
+
+        return await CreateRoleAsync(info.Name, info.Description, cancellationToken);
     }
 
     /// <summary>

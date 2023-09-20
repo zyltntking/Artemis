@@ -588,6 +588,16 @@
                 数据字典信息
             </summary>
         </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.DataDictInfo.Key">
+            <summary>
+                元数据键
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.DataDictInfo.Value">
+            <summary>
+                元数据值
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Core.Fundamental.Model.DataDictInfo.Label">
             <summary>
                 数据标签
@@ -1422,7 +1432,7 @@
         </member>
         <member name="T:Artemis.Data.Core.Instance">
             <summary>
-                辅助类
+               实例辅助类
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Instance.CreateInstance``1">

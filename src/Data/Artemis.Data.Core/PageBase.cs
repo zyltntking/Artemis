@@ -9,7 +9,7 @@ namespace Artemis.Data.Core;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [DataContract]
-public sealed class PageRequest<T> : IPageRequest<T>
+public sealed record PageRequest<T> : IPageRequest<T>
 {
     #region Implementation of IPageRequest<T>
 
@@ -18,7 +18,7 @@ public sealed class PageRequest<T> : IPageRequest<T>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public T Filter { get; set; } = default!;
+    public required T Filter { get; set; } = default!;
 
     #endregion
 
@@ -36,7 +36,7 @@ public sealed class PageRequest<T> : IPageRequest<T>
     [Required]
     [DefaultValue(1)]
     [DataMember(Order = 1)]
-    public int Page { get; set; } = 1;
+    public required int Page { get; set; } = 1;
 
     /// <summary>
     ///     页面大小
@@ -45,7 +45,7 @@ public sealed class PageRequest<T> : IPageRequest<T>
     [Required]
     [DefaultValue(20)]
     [DataMember(Order = 2)]
-    public int Size { get; set; } = 20;
+    public required int Size { get; set; } = 20;
 
     #endregion
 }
@@ -72,14 +72,16 @@ public sealed class PageResult<T> : IPageResult<T>
     /// <summary>
     ///     当前页码(从0开始)
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public int Page { get; set; }
+    public required int Page { get; set; }
 
     /// <summary>
     ///     页面大小
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public int Size { get; set; }
+    public required int Size { get; set; }
 
     #endregion
 
@@ -88,14 +90,16 @@ public sealed class PageResult<T> : IPageResult<T>
     /// <summary>
     ///     过滤后数据条数
     /// </summary>
+    [Required]
     [DataMember(Order = 3)]
-    public long Count { get; set; }
+    public required long Count { get; set; }
 
     /// <summary>
     ///     数据总量
     /// </summary>
+    [Required]
     [DataMember(Order = 4)]
-    public long Total { get; set; }
+    public required long Total { get; set; }
 
     #endregion
 }

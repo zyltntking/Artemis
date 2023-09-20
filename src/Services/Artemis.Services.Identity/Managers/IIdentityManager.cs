@@ -3,6 +3,7 @@ using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
+using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -15,10 +16,10 @@ public interface IIdentityManager : IManager<ArtemisUser>
     ///     根据角色名获取角色
     /// </summary>
     /// <param name="name">角色名</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
-    Task<Role?> GetRoleAsync(
+    Task<RoleInfo?> GetRoleAsync(
         string name,
         CancellationToken cancellationToken = default);
 
@@ -29,7 +30,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="cancellationToken"></param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
-    Task<Role?> GetRoleAsync(
+    Task<RoleInfo?> GetRoleAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
@@ -39,7 +40,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="cancellationToken"></param>
     /// <returns>角色列表</returns>
     /// <remarks>当查询不到角色实例时返回空列表</remarks>
-    Task<IEnumerable<Role>> GetRolesAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<RoleInfo>> GetRolesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     根据角色名搜索角色
@@ -50,7 +51,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="cancellationToken"></param>
     /// <returns>分页搜索结果</returns>
     /// <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
-    Task<PageResult<Role>> FetchRolesAsync(
+    Task<PageResult<RoleInfo>> FetchRolesAsync(
         string? nameSearch,
         int page = 1,
         int size = 20,
@@ -71,21 +72,49 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <summary>
     ///     更新角色
     /// </summary>
-    /// <param name="role">角色</param>
+    /// <param name="name">角色名</param>
+    /// <param name="info">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateRoleAsync(
-        Role role,
+        string name,
+        RoleBase info,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新角色
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateRoleAsync(
+        Guid id,
+        RoleBase info,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     创建或更新角色
     /// </summary>
-    /// <param name="role"></param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="name">角色名</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateOrUpdateRoleAsync(
-        Role role,
+        string name,
+        RoleBase info,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     创建或更新角色
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="info">角色信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> CreateOrUpdateRoleAsync(
+        Guid id,
+        RoleBase info,
         CancellationToken cancellationToken = default);
 
     /// <summary>

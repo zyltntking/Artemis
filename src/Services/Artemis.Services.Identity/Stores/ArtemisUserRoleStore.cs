@@ -1,5 +1,8 @@
 ﻿using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
+using Artemis.Shared.Identity.Transfer;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Artemis.Services.Identity.Stores;
@@ -27,4 +30,5 @@ public class ArtemisUserRoleStore : Store<ArtemisUserRole, int>, IArtemisUserRol
         IDistributedCache? cache = null) : base(context, cache)
     {
     }
+
 }

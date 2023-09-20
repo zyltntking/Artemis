@@ -4,6 +4,7 @@ using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Services;
+using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.Identity.Services;
@@ -40,9 +41,14 @@ public class RoleService : ApiController, IRoleService
     /// <returns>Role Result</returns>
     /// <remark>GET api/Roles/{roleName}</remark>
     [HttpGet("{roleName}")]
-    public Task<DataResult<Role>> Get(string roleName)
+    public Task<DataResult<RoleInfo>> Get(string roleName)
     {
-        throw new NotImplementedException();
+        var request = new GetRoleRequest
+        {
+            RoleName = roleName
+        };
+
+        return GetRoleAsync(request);
     }
 
     /// <summary>
@@ -50,38 +56,57 @@ public class RoleService : ApiController, IRoleService
     /// </summary>
     /// <param name="nameSearch">角色名称</param>
     /// <param name="page">页码</param>
-    /// <param name="pageSize">条目数</param>
+    /// <param name="size">条目数</param>
     /// <returns>Roles PagedResult</returns>
     /// <remark>GET api/Roles</remark>
     [HttpGet]
-    public Task<DataResult<PageResult<Role>>> Fetch(string? nameSearch, int page = 1, int pageSize = 20)
+    public Task<DataResult<PageResult<RoleInfo>>> Fetch(
+        string? nameSearch, 
+        int page = 1, 
+        int size = 20)
     {
-        throw new NotImplementedException();
+        var request = new PageRequest<FetchRolesFilter>
+        {
+            Page = page,
+            Size = size,
+            Filter = new FetchRolesFilter
+            {
+                RoleNameSearch = nameSearch
+            }
+        };
+
+        return FetchRolesAsync(request);
     }
 
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="request">创建角色请求</param>
+    /// <param name="roleRequest">创建角色请求</param>
     /// <returns>Create Status</returns>
     /// <remark>POST api/Roles</remark>
     [HttpPost]
-    public Task<DataResult<EmptyRecord>> Post([FromBody] CreateRoleRequest request)
+    public Task<DataResult<EmptyRecord>> Post([FromBody] CreateRoleRequest roleRequest)
     {
-        throw new NotImplementedException();
+        return CreateRoleAsync(roleRequest);
     }
 
     /// <summary>
     ///     更新角色
     /// </summary>
     /// <param name="roleName">角色名</param>
-    /// <param name="request">更新角色信息</param>
+    /// <param name="roleInfo">更新角色信息</param>
     /// <returns>Update Status</returns>
     /// <remark>PUT api/Roles/{roleName}</remark>
     [HttpPut("{roleName}")]
-    public Task<DataResult<EmptyRecord>> Put(string roleName, [FromBody] UpdateRoleRequest request)
+    public Task<DataResult<EmptyRecord>> Put(string roleName, [FromBody] RoleBase roleInfo)
     {
-        throw new NotImplementedException();
+        var request = new UpdateRoleRequest
+        {
+            RoleName = roleName,
+            RoleInfo = roleInfo
+        };
+
+        return CreateOrUpdateRoleAsync(request);
     }
 
     /// <summary>
@@ -106,13 +131,11 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request">角色名</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<Role>> GetRoleAsync([FromBody] GetRoleRequest request)
+    public async Task<DataResult<RoleInfo>> GetRoleAsync([FromBody] GetRoleRequest request)
     {
-        var result = await IdentityManager.GetRoleAsync(request.RoleId);
+        var result = await IdentityManager.GetRoleAsync(request.RoleName);
 
-        if (result is not null) return DataResult.Success(result);
-
-        return DataResult.Fail<Role>("未查询到匹配的角色");
+        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
 
     /// <summary>
@@ -121,7 +144,7 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request">查询角色请求</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<PageResult<Role>>> FetchRolesAsync([FromBody] PageRequest<FetchRolesFilter> request)
+    public async Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync([FromBody] PageRequest<FetchRolesFilter> request)
     {
         var filter = request.Filter;
 
@@ -135,33 +158,17 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="request">创建角色请求</param>
-    /// <returns></returns>
+    /// <param name="roleRequest">创建角色请求</param>
+    /// <returns>创建结果</returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateRoleAsync([FromBody] CreateRoleRequest request)
+    public async Task<DataResult<EmptyRecord>> CreateRoleAsync([FromBody] CreateRoleRequest roleRequest)
     {
-        var result = await IdentityManager.CreateRoleAsync(request.Name, request.Description);
+        var result = await IdentityManager.CreateRoleAsync(roleRequest.Name, roleRequest.Description);
 
-        if (result.Succeeded) return DataResult.Success(new EmptyRecord());
+        if (result.Succeeded) 
+            return DataResult.Success(new EmptyRecord());
 
-        return DataResult.Fail<EmptyRecord>(
-            $"创建失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
-    }
-
-    /// <summary>
-    ///     更新角色
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
-    [NonAction]
-    public async Task<DataResult<EmptyRecord>> UpdateRoleAsync([FromBody] UpdateRoleRequest request)
-    {
-        var result = await IdentityManager.UpdateRoleAsync(request);
-
-        if (result.Succeeded) return DataResult.Success(new EmptyRecord());
-
-        return DataResult.Fail<EmptyRecord>(
-            $"更新失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
+        return DataResult.Fail<EmptyRecord>($"创建失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
     }
 
     /// <summary>
@@ -172,12 +179,12 @@ public class RoleService : ApiController, IRoleService
     [NonAction]
     public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync([FromBody] UpdateRoleRequest request)
     {
-        var result = await IdentityManager.CreateOrUpdateRoleAsync(request);
+        var result = await IdentityManager.CreateOrUpdateRoleAsync(request.RoleName, request.RoleInfo);
 
-        if (result.Succeeded) return DataResult.Success(new EmptyRecord());
+        if (result.Succeeded) 
+            return DataResult.Success(new EmptyRecord());
 
-        return DataResult.Fail<EmptyRecord>(
-            $"创建或更新失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
+        return DataResult.Fail<EmptyRecord>($"创建或更新失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
     }
 
     /// <summary>

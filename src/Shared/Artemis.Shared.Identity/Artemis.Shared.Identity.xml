@@ -508,7 +508,7 @@
                 获取角色
             </summary>
             <param name="request">获取角色请求</param>
-            <returns></returns>
+            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo"/></returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRolesAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRolesFilter})">
             <summary>
@@ -521,14 +521,7 @@
             <summary>
                 创建角色
             </summary>
-            <param name="request">创建角色请求</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
-            <summary>
-                更新角色
-            </summary>
-            <param name="request"></param>
+            <param name="roleRequest">创建角色请求</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateOrUpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
@@ -564,7 +557,7 @@
                 获取角色请求
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Services.GetRoleRequest.RoleId">
+        <member name="P:Artemis.Shared.Identity.Services.GetRoleRequest.RoleName">
             <summary>
                 角色标识
             </summary>
@@ -597,6 +590,16 @@
         <member name="T:Artemis.Shared.Identity.Services.UpdateRoleRequest">
             <summary>
                 更新角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UpdateRoleRequest.RoleName">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UpdateRoleRequest.RoleInfo">
+            <summary>
+            角色信息
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.DeleteRoleRequest">
@@ -637,6 +640,56 @@
         <member name="P:Artemis.Shared.Identity.Services.FetchRoleUsersFilter.RequiredParameter">
             <summary>
                 必要字段
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.Interface.IRole">
+            <summary>
+            基础角色接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.Interface.IRole.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.Interface.IRole.Description">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.RoleBase">
+            <summary>
+            基本角色信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.RoleBase.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.RoleBase.Description">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.RoleInfo">
+            <summary>
+            角色信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.RoleInfo.Id">
+            <summary>
+            角色标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.RoleInfo.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.RoleInfo.Description">
+            <summary>
+            角色描述
             </summary>
         </member>
     </members>
