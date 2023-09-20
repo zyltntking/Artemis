@@ -36,12 +36,13 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     获取角色
     /// </summary>
-    /// <param name="roleId">角色标识</param>
-    /// <returns></returns>
-    [HttpGet("{roleId}")]
-    public Task<DataResult<Role>> Get(Guid roleId)
+    /// <param name="roleName">角色标识</param>
+    /// <returns>Role Result</returns>
+    /// <remark>GET api/Roles/{roleName}</remark>
+    [HttpGet("{roleName}")]
+    public Task<DataResult<Role>> Get(string roleName)
     {
-        return GetRoleAsync(new GetRoleRequest { RoleId = roleId });
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -50,41 +51,49 @@ public class RoleService : ApiController, IRoleService
     /// <param name="nameSearch">角色名称</param>
     /// <param name="page">页码</param>
     /// <param name="pageSize">条目数</param>
-    /// <returns></returns>
+    /// <returns>Roles PagedResult</returns>
+    /// <remark>GET api/Roles</remark>
     [HttpGet]
-    public Task<DataResult<PageResult<Role>>> Get(string? nameSearch, int page = 1, int pageSize = 20)
+    public Task<DataResult<PageResult<Role>>> Fetch(string? nameSearch, int page = 1, int pageSize = 20)
     {
-        return FetchRolesAsync(new PageRequest<FetchRolesFilter>
-        {
-            Filter = new FetchRolesFilter
-            {
-                RoleNameSearch = nameSearch
-            },
-            Page = page,
-            Size = pageSize
-        });
+        throw new NotImplementedException();
     }
 
     /// <summary>
     ///     创建角色
     /// </summary>
     /// <param name="request">创建角色请求</param>
-    /// <returns></returns>
+    /// <returns>Create Status</returns>
+    /// <remark>POST api/Roles</remark>
     [HttpPost]
     public Task<DataResult<EmptyRecord>> Post([FromBody] CreateRoleRequest request)
     {
-        return CreateRoleAsync(request);
+        throw new NotImplementedException();
     }
 
     /// <summary>
     ///     更新角色
     /// </summary>
-    /// <param name="request">更新角色请求</param>
-    /// <returns></returns>
-    [HttpPut]
-    public Task<DataResult<EmptyRecord>> Put([FromBody] UpdateRoleRequest request)
+    /// <param name="roleName">角色名</param>
+    /// <param name="request">更新角色信息</param>
+    /// <returns>Update Status</returns>
+    /// <remark>PUT api/Roles/{roleName}</remark>
+    [HttpPut("{roleName}")]
+    public Task<DataResult<EmptyRecord>> Put(string roleName, [FromBody] UpdateRoleRequest request)
     {
-        return UpdateRoleAsync(request);
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// 删除角色
+    /// </summary>
+    /// <param name="roleName"></param>
+    /// <returns>Delete Status</returns>
+    /// <remarks>DELETE api/Roles/{roleName}</remarks>
+    [HttpDelete("{roleName}")]
+    public Task<DataResult<EmptyRecord>> Delete(string roleName)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -99,12 +108,9 @@ public class RoleService : ApiController, IRoleService
     [NonAction]
     public async Task<DataResult<Role>> GetRoleAsync([FromBody] GetRoleRequest request)
     {
-        if (ModelState.IsValid)
-        {
-            var result = await IdentityManager.GetRoleAsync(request.RoleId);
+        var result = await IdentityManager.GetRoleAsync(request.RoleId);
 
-            if (result is not null) return DataResult.Success(result);
-        }
+        if (result is not null) return DataResult.Success(result);
 
         return DataResult.Fail<Role>("未查询到匹配的角色");
     }
@@ -136,10 +142,10 @@ public class RoleService : ApiController, IRoleService
     {
         var result = await IdentityManager.CreateRoleAsync(request.Name, request.Description);
 
-        if (result.Result.Succeeded) return DataResult.Success(new EmptyRecord());
+        if (result.Succeeded) return DataResult.Success(new EmptyRecord());
 
         return DataResult.Fail<EmptyRecord>(
-            $"创建失败。{string.Join(",", result.Result.Errors.Select(error => error.Description))}");
+            $"创建失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
     }
 
     /// <summary>

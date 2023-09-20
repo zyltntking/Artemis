@@ -130,35 +130,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     #region Implementation of IIdentityManager
 
     /// <summary>
-    ///     测试
-    /// </summary>
-    public async Task<string> Test()
-    {
-        var provider = new HashProvider();
-
-        var cc = await UpdateRoleClaimsAsync(new List<RoleClaim>
-        {
-            new()
-            {
-                Id = 1,
-                RoleId = Guid.NewGuid(),
-                CheckStamp = provider.Md5Hash("test"),
-                ClaimType = "test",
-                ClaimValue = "test",
-                Description = "test"
-            }
-        });
-
-        var res = await RoleManager
-            .Roles
-            .Include(item => item.Users)
-            .Select(item => item.Users)
-            .FirstOrDefaultAsync();
-
-        return res == null ? "success" : res.Count.ToString();
-    }
-
-    /// <summary>
     ///     根据角色名获取角色
     /// </summary>
     /// <param name="name">角色名</param>
@@ -270,7 +241,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    public async Task<AttachResult<StoreResult, Role>> CreateRoleAsync(
+    public async Task<StoreResult> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default)
@@ -283,9 +254,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         role.NormalizedName = RoleManager.NormalizeKey(name);
         role.Description = description;
 
-        var result = await RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
-
-        return result.Attach(role);
+        return await RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
     }
 
     /// <summary>
@@ -553,7 +522,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> CreateRoleClaimsAsync(
+    public async Task<StoreResult> CreateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default)
     {
@@ -576,9 +545,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var sourceToAdd = source.Except(sourceInDb).ToList();
 
-        var result = await RoleClaimStore.CreateNewAsync(sourceToAdd, cancellationToken: cancellationToken);
-
-        return result.Attach(sourceToAdd.AsEnumerable());
+        return await RoleClaimStore.CreateNewAsync(sourceToAdd, cancellationToken: cancellationToken);
     }
 
     /// <summary>
@@ -605,7 +572,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> UpdateRoleClaimsAsync(
+    public async Task<StoreResult> UpdateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default)
     {
@@ -641,9 +608,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             if (!exists) sourceToUpdate.Add(checkItem);
         }
 
-        var result = await RoleClaimStore.OverAsync(sourceToUpdate, cancellationToken: cancellationToken);
-
-        return result.Attach(sourceToUpdate.AsEnumerable());
+        return await RoleClaimStore.OverAsync(sourceToUpdate, cancellationToken: cancellationToken);
     }
 
     /// <summary>

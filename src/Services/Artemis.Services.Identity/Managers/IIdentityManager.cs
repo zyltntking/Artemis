@@ -12,11 +12,6 @@ namespace Artemis.Services.Identity.Managers;
 public interface IIdentityManager : IManager<ArtemisUser>
 {
     /// <summary>
-    ///     测试
-    /// </summary>
-    Task<string> Test();
-
-    /// <summary>
     ///     根据角色名获取角色
     /// </summary>
     /// <param name="name">角色名</param>
@@ -68,7 +63,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    Task<AttachResult<StoreResult, Role>> CreateRoleAsync(
+    Task<StoreResult> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default);
@@ -171,7 +166,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> CreateRoleClaimsAsync(
+    Task<StoreResult> CreateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default);
 
@@ -191,7 +186,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="roleClaims">凭据列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<AttachResult<StoreResult, IEnumerable<RoleClaim>>> UpdateRoleClaimsAsync(
+    Task<StoreResult> UpdateRoleClaimsAsync(
         IEnumerable<RoleClaim> roleClaims,
         CancellationToken cancellationToken = default);
 
