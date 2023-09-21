@@ -42,6 +42,13 @@ public interface IArtemisRoleStore : IStore<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     名称匹配查询
+    /// </summary>
+    /// <param name="roleName">角色名</param>
+    /// <returns></returns>
+    IQueryable<ArtemisRole> NameMatchQuery(string roleName);
+
+    /// <summary>
     ///     是否存在
     /// </summary>
     /// <param name="name">角色名</param>
@@ -111,6 +118,16 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
             .OrderByDescending(role => role.CreatedAt)
             .ProjectToType<TMap>()
             .ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
+    ///     名称匹配查询
+    /// </summary>
+    /// <param name="roleName">角色名</param>
+    /// <returns></returns>
+    public IQueryable<ArtemisRole> NameMatchQuery(string roleName)
+    {
+        return EntityQuery.Where(role => role.NormalizedName == roleName);
     }
 
     /// <summary>

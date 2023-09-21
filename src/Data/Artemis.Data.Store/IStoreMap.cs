@@ -82,7 +82,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="keys">keys</param>
     /// <returns></returns>
-    IEnumerable<TMapEntity> FindMapEntitiesViaKeys<TMapEntity>(IEnumerable<string> keys);
+    IEnumerable<TMapEntity>? FindMapEntitiesViaKeys<TMapEntity>(IEnumerable<string> keys);
 
     /// <summary>
     ///     根据Id查找映射实体
@@ -124,7 +124,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="keys">keys</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IEnumerable<TMapEntity>> FindMapEntitiesViaKeysAsync<TMapEntity>(
+    Task<IEnumerable<TMapEntity>?> FindMapEntitiesViaKeysAsync<TMapEntity>(
         IEnumerable<string> keys,
         CancellationToken cancellationToken = default);
 

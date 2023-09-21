@@ -132,7 +132,6 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .HasConstraintName($"FK_{nameof(ArtemisUserToken)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
-
     }
 
     #endregion

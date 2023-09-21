@@ -8,7 +8,7 @@ namespace Artemis.Shared.Identity.Transfer;
 ///     基本角色信息
 /// </summary>
 [DataContract]
-public abstract record RoleBase : IRole
+public record RoleBase : IRole
 {
     #region Implementation of IRole
 

@@ -129,7 +129,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     public bool IsDeleted(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
-        return entity.DeletedAt == null;
+        return entity.DeletedAt is null;
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     public Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-        return Task.FromResult(entity.DeletedAt == null);
+        return Task.FromResult(entity.DeletedAt is null);
     }
 
     #endregion
@@ -157,7 +157,8 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     protected void OnActionExecuting<TValue>(TValue value, string name)
     {
         ThrowIfDisposed();
-        if (value == null) throw new StoreParameterNullException(name);
+        if (value is null)
+            throw new StoreParameterNullException(name);
     }
 
     /// <summary>

@@ -438,8 +438,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             emailSearch ??= string.Empty;
             phoneSearch ??= string.Empty;
 
-            var query = RoleStore.EntityQuery
-                .Where(artemisRole => artemisRole.NormalizedName == normalizedName)
+            var query = RoleStore
+                .NameMatchQuery(normalizedName)
                 .SelectMany(artemisRole => artemisRole.Users);
 
             var total = await query.LongCountAsync(cancellationToken);
@@ -585,8 +585,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         if (exists)
         {
-            var claims = await RoleStore.EntityQuery
-                .Where(role => role.NormalizedName == normalizedName)
+            var claims = await RoleStore
+                .NameMatchQuery(normalizedName)
                 .SelectMany(role => role.RoleClaims)
                 .OrderBy(claim => claim.CreatedAt)
                 .ProjectToType<RoleClaimInfo>()
@@ -629,7 +629,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     }
 
     /// <summary>
-    ///     查询角色的声明
+    ///     查询角色的凭据
     /// </summary>
     /// <param name="name">角色名称</param>
     /// <param name="claimTypeSearch">凭据类型</param>
@@ -637,7 +637,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
+    public async Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         string name,
         string? claimTypeSearch = null,
         int page = 1,
@@ -646,12 +646,47 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"查询角色凭据，角色：{name}，页码：{page}，页面大小：{size}");
 
+        var exists = name != string.Empty && await RoleStore.ExistsAsync(name, cancellationToken);
 
-        throw new NotImplementedException();
+        if (exists)
+        {
+            claimTypeSearch ??= string.Empty;
+
+            var query = RoleStore
+                .NameMatchQuery(name)
+                .SelectMany(role => role.RoleClaims);
+
+            var total = await query.LongCountAsync(cancellationToken);
+
+            query = query.WhereIf(
+                claimTypeSearch != string.Empty,
+                claim => EF.Functions.Like(
+                    claim.ClaimType,
+                    $"%{claimTypeSearch}%"));
+
+            var count = await query.LongCountAsync(cancellationToken);
+
+            var artemisRoles = await query
+                .OrderBy(role => role.CreatedAt)
+                .ProjectToType<RoleClaimInfo>()
+                .Page(page, size)
+                .ToListAsync(cancellationToken);
+
+            return new PageResult<RoleClaimInfo>
+            {
+                Page = page,
+                Size = size,
+                Count = count,
+                Total = total,
+                Data = artemisRoles
+            };
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisRole), name);
     }
 
     /// <summary>
-    ///     查询角色的声明
+    ///     查询角色的凭据
     /// </summary>
     /// <param name="id">角色id</param>
     /// <param name="claimTypeSearch">凭据类型</param>
@@ -660,7 +695,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     /// <exception cref="EntityNotFoundException"></exception>
-    public async Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
+    public async Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         Guid id,
         string? claimTypeSearch = null,
         int page = 1,
@@ -675,31 +710,27 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         {
             claimTypeSearch ??= string.Empty;
 
-            var query = RoleManager.Roles.AsNoTracking()
-                .Where(artemisRole => artemisRole.Id == id)
-                .SelectMany(artemisRole => artemisRole.RoleClaims);
+            var query = RoleStore
+                .KeyMatchQuery(id)
+                .SelectMany(role => role.RoleClaims);
 
             var total = await query.LongCountAsync(cancellationToken);
 
-            long count;
+            query = query.WhereIf(
+                claimTypeSearch != string.Empty,
+                claim => EF.Functions.Like(
+                    claim.ClaimType,
+                    $"%{claimTypeSearch}%"));
 
-            if (claimTypeSearch == string.Empty)
-            {
-                query = query.Where(artemisClaim => artemisClaim.ClaimType.Contains(claimTypeSearch));
-
-                count = await query.LongCountAsync(cancellationToken);
-            }
-            else
-            {
-                count = total;
-            }
+            var count = await query.LongCountAsync(cancellationToken);
 
             var artemisRoles = await query
-                .OrderBy(role => role.ClaimType)
-                .Skip((page - 1) * size).Take(size)
+                .OrderBy(role => role.CreatedAt)
+                .ProjectToType<RoleClaimInfo>()
+                .Page(page, size)
                 .ToListAsync(cancellationToken);
 
-            return new PageResult<RoleClaim>
+            return new PageResult<RoleClaimInfo>
             {
                 Page = page,
                 Size = size,
@@ -711,6 +742,59 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
     }
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<RoleClaimInfo?> GetRoleClaimAsync(
+        string name,
+        int claimId,
+        CancellationToken cancellationToken = default)
+    {
+        SetDebugLog($"获取角色凭据，角色：{name}，凭据标识：{claimId}");
+
+        var normalizedName = RoleManager.NormalizeKey(name);
+
+        var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
+
+        if (exists)
+        {
+            var claim = await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
+
+            return claim;
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisRole), name);
+    }
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<RoleClaimInfo?> GetRoleClaimAsync(Guid id, int claimId,
+        CancellationToken cancellationToken = default)
+    {
+        SetDebugLog($"获取角色凭据，角色：{id:D}，凭据标识：{claimId}");
+
+        var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
+        {
+            var claim = await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
+
+            return claim;
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
+    }
+
 
     /// <summary>
     ///     创建角色凭据

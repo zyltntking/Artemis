@@ -46,7 +46,8 @@ public record StoreResult : IStoreResult
     public static StoreResult Failed(params StoreError[]? errors)
     {
         var result = new StoreResult { Succeeded = false };
-        if (errors != null) result._errors.AddRange(errors);
+        if (errors is not null)
+            result._errors.AddRange(errors);
         return result;
     }
 

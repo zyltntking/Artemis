@@ -198,7 +198,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     查询角色的声明
+    ///     查询角色的凭据
     /// </summary>
     /// <param name="name">角色名称</param>
     /// <param name="claimTypeSearch">凭据类型</param>
@@ -206,7 +206,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
+    Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         string name,
         string? claimTypeSearch = null,
         int page = 1,
@@ -214,7 +214,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     查询角色的声明
+    ///     查询角色的凭据
     /// </summary>
     /// <param name="id">角色id</param>
     /// <param name="claimTypeSearch">凭据类型</param>
@@ -222,12 +222,37 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
+    Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         Guid id,
         string? claimTypeSearch = null,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<RoleClaimInfo?> GetRoleClaimAsync(
+        string name,
+        int claimId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<RoleClaimInfo?> GetRoleClaimAsync(
+        Guid id,
+        int claimId,
+        CancellationToken cancellationToken = default);
+
 
     /// <summary>
     ///     创建角色凭据

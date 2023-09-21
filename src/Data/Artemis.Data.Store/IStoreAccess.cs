@@ -14,7 +14,7 @@ public interface IStoreAccess<TEntity> : IStoreAccess<TEntity, Guid> where TEnti
 /// <summary>
 ///     存储数据访问器
 /// </summary>
-public interface IStoreAccess<TEntity, TKey> where TEntity : class, IModelBase<TKey> where TKey : IEquatable<TKey>
+public interface IStoreAccess<TEntity, in TKey> where TEntity : class, IModelBase<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     EntitySet访问器*Main Store Set*

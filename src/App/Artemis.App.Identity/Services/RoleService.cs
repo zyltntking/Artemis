@@ -34,23 +34,6 @@ public class RoleService : ApiController, IRoleService
     #region ControllerActions
 
     /// <summary>
-    ///     获取角色
-    /// </summary>
-    /// <param name="roleName">角色标识</param>
-    /// <returns>Role Result</returns>
-    /// <remark>GET api/Roles/{roleName}</remark>
-    [HttpGet("{roleName}")]
-    public Task<DataResult<RoleInfo>> Get(string roleName)
-    {
-        var request = new GetRoleRequest
-        {
-            RoleName = roleName
-        };
-
-        return GetRoleAsync(request);
-    }
-
-    /// <summary>
     ///     查询角色
     /// </summary>
     /// <param name="nameSearch">角色名称匹配</param>
@@ -75,6 +58,23 @@ public class RoleService : ApiController, IRoleService
         };
 
         return FetchRolesAsync(request);
+    }
+
+    /// <summary>
+    ///     获取角色
+    /// </summary>
+    /// <param name="roleName">角色标识</param>
+    /// <returns>Role Result</returns>
+    /// <remark>GET api/Roles/{roleName}</remark>
+    [HttpGet("{roleName}")]
+    public Task<DataResult<RoleInfo>> Get(string roleName)
+    {
+        var request = new GetRoleRequest
+        {
+            RoleName = roleName
+        };
+
+        return GetRoleAsync(request);
     }
 
     /// <summary>
@@ -177,35 +177,54 @@ public class RoleService : ApiController, IRoleService
     ///     角色凭据列表
     /// </summary>
     /// <param name="roleName">角色名</param>
+    /// <param name="claimTypeSearch">凭据类型搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <remarks>GET api/Roles/{roleName}/Claims</remarks>
     [HttpGet("{roleName}/Claims")]
     public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaims(
         string roleName,
+        string? claimTypeSearch,
         int page = 1,
         int size = 20)
     {
-        throw new NotImplementedException();
+        var request = new PageRequest<FetchRoleClaimsFilter>
+        {
+            Page = page,
+            Size = size,
+            Filter = new FetchRoleClaimsFilter
+            {
+                RoleName = roleName,
+                ClaimTypeSearch = claimTypeSearch
+            }
+        };
+
+        return FetchRoleClaimsAsync(request);
+    }
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="roleName">角色名</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <returns></returns>
+    /// <remarks>GET api/Roles/{roleName}/Claims/{claimId}</remarks>
+    [HttpGet("{roleName}/Claims/{claimId}")]
+    public Task<DataResult<RoleClaimInfo>> GetRoleClaim(string roleName, int claimId)
+    {
+        var request = new GetRoleClaimRequest
+        {
+            RoleName = roleName,
+            ClaimId = claimId
+        };
+
+        return GetRoleClaimAsync(request);
     }
 
     #endregion
 
     #region Implementation of IRoleService
-
-    /// <summary>
-    ///     获取角色
-    /// </summary>
-    /// <param name="request">角色名</param>
-    /// <returns></returns>
-    [NonAction]
-    public async Task<DataResult<RoleInfo>> GetRoleAsync([FromBody] GetRoleRequest request)
-    {
-        var result = await IdentityManager.GetRoleAsync(request.RoleName);
-
-        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
-    }
 
     /// <summary>
     ///     查询角色
@@ -223,6 +242,19 @@ public class RoleService : ApiController, IRoleService
         var result = await IdentityManager.FetchRolesAsync(nameSearch, request.Page, request.Size);
 
         return DataResult.Success(result);
+    }
+
+    /// <summary>
+    ///     获取角色
+    /// </summary>
+    /// <param name="request">角色名</param>
+    /// <returns></returns>
+    [NonAction]
+    public async Task<DataResult<RoleInfo>> GetRoleAsync([FromBody] GetRoleRequest request)
+    {
+        var result = await IdentityManager.GetRoleAsync(request.RoleName);
+
+        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
 
     /// <summary>
@@ -307,19 +339,37 @@ public class RoleService : ApiController, IRoleService
     }
 
     /// <summary>
-    ///     查询用户凭据
+    ///     查询角色凭据
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
     [NonAction]
-    public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(PageRequest<FetchRoleClaimsFilter> request)
+    public async Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(
+        PageRequest<FetchRoleClaimsFilter> request)
     {
         var filter = request.Filter;
 
         var roleName = filter.RoleName;
 
+        var claimTypeSearch = filter.ClaimTypeSearch;
 
-        throw new NotImplementedException();
+        var result = await IdentityManager.FetchRoleClaimsAsync(roleName, claimTypeSearch, request.Page, request.Size);
+
+        return DataResult.Success(result);
+    }
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [NonAction]
+    public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request)
+    {
+        var result = await IdentityManager
+            .GetRoleClaimAsync(request.RoleName, request.ClaimId);
+
+        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
     }
 
     #endregion

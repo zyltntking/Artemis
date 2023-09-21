@@ -63,12 +63,20 @@ public interface IRoleService
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
 
     /// <summary>
-    ///     查询用户凭据
+    ///     查询角色凭据
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(PageRequest<FetchRoleClaimsFilter> request);
+
+    /// <summary>
+    ///     获取角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request);
 }
 
 /// <summary>
@@ -96,7 +104,7 @@ public record FetchRolesFilter
     /// </summary>
     [NullWrappedValue]
     [DataMember(Order = 1)]
-    public virtual string? RoleNameSearch { get; set; }
+    public string? RoleNameSearch { get; set; }
 }
 
 /// <summary>
@@ -208,4 +216,32 @@ public record FetchRoleClaimsFilter : GetRoleRequest
     [Required]
     [DataMember(Order = 1)]
     public override required string RoleName { get; set; }
+
+    /// <summary>
+    ///     凭据类型搜索值
+    /// </summary>
+    [NullWrappedValue]
+    [DataMember(Order = 2)]
+    public string? ClaimTypeSearch { get; set; }
+}
+
+/// <summary>
+///     获取角色凭据请求
+/// </summary>
+[DataContract]
+public record GetRoleClaimRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required string RoleName { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required int ClaimId { get; set; }
 }

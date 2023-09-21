@@ -368,7 +368,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// </summary>
     /// <param name="keys">缓存键</param>
     /// <returns></returns>
-    IEnumerable<TEntity> FindEntitiesViaKeys(IEnumerable<string> keys);
+    IEnumerable<TEntity>? FindEntitiesViaKeys(IEnumerable<string> keys);
 
     /// <summary>
     ///     根据Id查找实体
@@ -406,7 +406,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="keys">缓存键</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IEnumerable<TEntity>> FindEntitiesViaKeysAsync(
+    Task<IEnumerable<TEntity>?> FindEntitiesViaKeysAsync(
         IEnumerable<string> keys,
         CancellationToken cancellationToken = default);
 
