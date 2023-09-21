@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
-using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Transfer;
 
@@ -18,7 +17,7 @@ public interface IRoleService
     ///     获取角色
     /// </summary>
     /// <param name="request">获取角色请求</param>
-    /// <returns>角色信息<see cref="RoleInfo"/></returns>
+    /// <returns>角色信息<see cref="RoleInfo" /></returns>
     [OperationContract]
     Task<DataResult<RoleInfo>> GetRoleAsync(GetRoleRequest request);
 
@@ -55,20 +54,12 @@ public interface IRoleService
     Task<DataResult<EmptyRecord>> DeleteRoleAsync(DeleteRoleRequest request);
 
     /// <summary>
-    ///     删除角色
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
-    [OperationContract]
-    Task<DataResult<EmptyRecord>> DeleteRolesAsync(DeleteRolesRequest request);
-
-    /// <summary>
     ///     查询角色用户
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<PageResult<User>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
+    Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
 }
 
 /// <summary>
@@ -125,14 +116,18 @@ public record CreateRoleRequest : RoleBase
 public record UpdateRoleRequest
 {
     /// <summary>
-    /// 角色名
+    ///     角色名
     /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
     public required string RoleName { get; set; } = null!;
 
     /// <summary>
-    /// 角色信息
+    ///     角色信息
     /// </summary>
-    public RoleBase RoleInfo { get; set; } = null!;
+    [Required]
+    [DataMember(Order = 2)]
+    public required RoleBase RoleInfo { get; set; } = null!;
 }
 
 /// <summary>
@@ -146,20 +141,7 @@ public record DeleteRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public Guid RoleId { get; set; }
-}
-
-/// <summary>
-///     删除角色请求
-/// </summary>
-public record DeleteRolesRequest
-{
-    /// <summary>
-    ///     角色标识列表
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public IEnumerable<Guid> RoleIds { get; set; } = null!;
+    public required string RoleName { get; set; } = null!;
 }
 
 /// <summary>
@@ -173,7 +155,7 @@ public record FetchRoleUsersFilter
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public Guid RoleId { get; set; }
+    public required string RoleName { get; set; }
 
 
     /// <summary>
@@ -181,11 +163,4 @@ public record FetchRoleUsersFilter
     /// </summary>
     [DataMember(Order = 2)]
     public string? UserNameSearch { get; set; }
-
-    /// <summary>
-    ///     必要字段
-    /// </summary>
-    [Required]
-    [DataMember(Order = 3)]
-    public string RequiredParameter { get; set; } = null!;
 }

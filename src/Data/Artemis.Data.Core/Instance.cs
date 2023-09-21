@@ -3,7 +3,7 @@
 namespace Artemis.Data.Core;
 
 /// <summary>
-///    实例辅助类
+///     实例辅助类
 /// </summary>
 public static class Instance
 {

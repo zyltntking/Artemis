@@ -10,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     角色
 /// </summary>
 [DataContract]
-public class Role : IdentityRole<Guid>, IKeySlot<Guid>, IRole
+public class Role : IdentityRole<Guid>, IKeySlot, IRole
 {
     /// <summary>
     ///     标识
@@ -27,6 +27,13 @@ public class Role : IdentityRole<Guid>, IKeySlot<Guid>, IRole
     public override string Name { get; set; } = null!;
 
     /// <summary>
+    ///     角色描述
+    /// </summary>
+    [DataMember(Order = 5)]
+    [MaxLength(128)]
+    public virtual string? Description { get; set; }
+
+    /// <summary>
     ///     规范化角色名
     /// </summary>
     [DataMember(Order = 3)]
@@ -40,11 +47,4 @@ public class Role : IdentityRole<Guid>, IKeySlot<Guid>, IRole
     [DataMember(Order = 4)]
     [MaxLength(64)]
     public override string? ConcurrencyStamp { get; set; }
-
-    /// <summary>
-    ///     角色描述
-    /// </summary>
-    [DataMember(Order = 5)]
-    [MaxLength(128)]
-    public virtual string? Description { get; set; }
 }

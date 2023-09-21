@@ -22,8 +22,8 @@ public static class OpenApiExtensions
 
         builder.Services.AddSwaggerGen(options =>
         {
-
-            options.OrderActionsBy((apiDesc) => $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}");
+            options.OrderActionsBy(apiDesc =>
+                $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}");
 
             var xmlCommentFiles = Directory.GetFiles(
                     AppContext.BaseDirectory,

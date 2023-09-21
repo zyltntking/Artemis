@@ -92,7 +92,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -103,7 +103,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<TMapEntity?> FindMapEntityViaKeyAsync<TMapEntity>(
-        string key, 
+        string key,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -140,7 +140,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns>创建结果</returns>
     StoreResult CreateNew<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null);
 
     /// <summary>
@@ -151,7 +151,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns>创建结果</returns>
     StoreResult CreateNew<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null);
 
     /// <summary>
@@ -163,7 +163,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateNewAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
 
@@ -176,7 +176,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateNewAsync<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
 
@@ -192,7 +192,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Over<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
@@ -204,8 +204,8 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Over<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null);
 
     /// <summary>
@@ -216,7 +216,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Over<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
@@ -246,7 +246,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> OverAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 
@@ -260,8 +260,8 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> OverAsync<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
 
@@ -274,7 +274,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> OverAsync<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 
@@ -310,7 +310,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Merge<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
@@ -322,8 +322,8 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Merge<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null);
 
     /// <summary>
@@ -334,7 +334,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="config">映射配置</param>
     /// <returns></returns>
     StoreResult Merge<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
@@ -364,7 +364,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> MergeAsync<TSource>(
-        TSource source, 
+        TSource source,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 
@@ -378,8 +378,8 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> MergeAsync<TSource>(
-        TSource source, 
-        TEntity destination, 
+        TSource source,
+        TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
 
@@ -392,7 +392,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> MergeAsync<TSource>(
-        IEnumerable<TSource> sources, 
+        IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 

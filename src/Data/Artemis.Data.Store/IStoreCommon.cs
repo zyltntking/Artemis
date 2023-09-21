@@ -53,7 +53,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -63,7 +63,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -91,7 +91,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -101,7 +101,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -115,7 +115,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="setter">更新行为</param>
     /// <returns></returns>
     StoreResult BatchUpdate(
-        TKey id, 
+        TKey id,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter);
 
     /// <summary>
@@ -181,7 +181,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <returns></returns>
     Task<StoreResult> BatchUpdateAsync(
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        Expression<Func<TEntity, bool>>? predicate = null, 
+        Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -234,7 +234,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -244,7 +244,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteAsync(
-        TEntity entity, 
+        TEntity entity,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -254,7 +254,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteAsync(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -264,7 +264,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> DeleteAsync(
-        IEnumerable<TEntity> entities, 
+        IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -305,7 +305,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> BatchDeleteAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -315,7 +315,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<StoreResult> BatchDeleteAsync(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -335,7 +335,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<StoreResult> BatchDeleteAsync(
-        IQueryable<TEntity> query, 
+        IQueryable<TEntity> query,
         CancellationToken cancellationToken = default);
 
     #endregion
@@ -377,7 +377,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<TEntity?> FindEntityAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -387,7 +387,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<TEntity?> FindEntityViaKeyAsync(
-        string key, 
+        string key,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -397,7 +397,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     Task<List<TEntity>> FindEntitiesAsync(
-        IEnumerable<TKey> ids, 
+        IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -428,7 +428,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<bool> ExistsAsync(
-        TKey id, 
+        TKey id,
         CancellationToken cancellationToken = default);
 
     #endregion

@@ -73,48 +73,58 @@ public interface IIdentityManager : IManager<ArtemisUser>
     ///     更新角色
     /// </summary>
     /// <param name="name">角色名</param>
-    /// <param name="info">角色信息</param>
+    /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateRoleAsync(
         string name,
-        RoleBase info,
+        RoleBase pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     更新角色
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="info">角色信息</param>
+    /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> UpdateRoleAsync(
         Guid id,
-        RoleBase info,
+        RoleBase pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     创建或更新角色
     /// </summary>
     /// <param name="name">角色名</param>
-    /// <param name="info">角色信息</param>
+    /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateOrUpdateRoleAsync(
         string name,
-        RoleBase info,
+        RoleBase pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     创建或更新角色
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="info">角色信息</param>
+    /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateOrUpdateRoleAsync(
         Guid id,
-        RoleBase info,
+        RoleBase pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     删除角色
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> DeleteRoleAsync(
+        string name,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -128,25 +138,31 @@ public interface IIdentityManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     批量删除角色
+    ///     根据用户名搜索具有该角色标签的用户
     /// </summary>
-    /// <param name="ids">角色id列表</param>
+    /// <param name="name">角色名</param>
+    /// <param name="nameSearch">用户名匹配值</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面大小</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> DeleteRolesAsync(
-        IEnumerable<Guid> ids,
+    Task<PageResult<UserInfo>> FetchRoleUsersAsync(
+        string name,
+        string? nameSearch = null,
+        int page = 1,
+        int size = 20,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     根据用户名搜索具有该角色标签的用户
     /// </summary>
-    /// <param name="id">角色id</param>
-    /// <param name="nameSearch">用户名</param>
+    /// <param name="id">角色标识</param>
+    /// <param name="nameSearch">用户名匹配值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<PageResult<User>> FetchRoleUsersAsync(
+    Task<PageResult<UserInfo>> FetchRoleUsersAsync(
         Guid id,
         string? nameSearch = null,
         int page = 1,

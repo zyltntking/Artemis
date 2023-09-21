@@ -6,7 +6,6 @@ using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
-using Newtonsoft.Json;
 using ProtoBuf.Grpc.Server;
 
 namespace Artemis.App.Identity;
@@ -37,10 +36,7 @@ public static class Program
                 AssemblyName = "Artemis.App.Identity"
             }, builder.Environment.IsDevelopment());
 
-            builder.Services.AddResponseCompression(options =>
-            {
-                options.EnableForHttps = true;
-            });
+            builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
             builder.Services.AddRazorPages();
 

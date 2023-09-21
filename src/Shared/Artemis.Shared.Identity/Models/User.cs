@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;
@@ -9,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     用户
 /// </summary>
 [DataContract]
-public class User : IdentityUser<Guid>, IKeySlot<Guid>
+public class User : IdentityUser<Guid>, IKeySlot, IUser
 {
     /// <summary>
     ///     标识
@@ -20,32 +21,18 @@ public class User : IdentityUser<Guid>, IKeySlot<Guid>
     /// <summary>
     ///     用户名
     /// </summary>
+    [Required]
+    [MaxLength(32)]
     [DataMember(Order = 2)]
-    [MaxLength(32)]
-    [Required]
     public override string UserName { get; set; } = null!;
-
-    /// <summary>
-    ///     标准化用户名
-    /// </summary>
-    [DataMember(Order = 3)]
-    [MaxLength(32)]
-    [Required]
-    public override string NormalizedUserName { get; set; } = null!;
 
     /// <summary>
     ///     电子邮件
     /// </summary>
+    [EmailAddress]
+    [MaxLength(128)]
     [DataMember(Order = 4)]
-    [MaxLength(128)]
     public override string? Email { get; set; }
-
-    /// <summary>
-    ///     标准化电子邮件
-    /// </summary>
-    [DataMember(Order = 5)]
-    [MaxLength(128)]
-    public override string? NormalizedEmail { get; set; }
 
     /// <summary>
     ///     电子邮件确认戳
@@ -56,8 +43,9 @@ public class User : IdentityUser<Guid>, IKeySlot<Guid>
     /// <summary>
     ///     电话号码
     /// </summary>
-    [DataMember(Order = 7)]
+    [Phone]
     [MaxLength(16)]
+    [DataMember(Order = 7)]
     public override string? PhoneNumber { get; set; }
 
     /// <summary>
@@ -67,11 +55,26 @@ public class User : IdentityUser<Guid>, IKeySlot<Guid>
     public override bool PhoneNumberConfirmed { get; set; }
 
     /// <summary>
+    ///     标准化用户名
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [DataMember(Order = 3)]
+    public override string NormalizedUserName { get; set; } = null!;
+
+    /// <summary>
+    ///     标准化电子邮件
+    /// </summary>
+    [MaxLength(128)]
+    [DataMember(Order = 5)]
+    public override string? NormalizedEmail { get; set; }
+
+    /// <summary>
     ///     密码哈希
     /// </summary>
-    [DataMember(Order = 9)]
+    [EmailAddress]
     [MaxLength(128)]
-    [Required]
+    [DataMember(Order = 9)]
     public override string PasswordHash { get; set; } = null!;
 
     /// <summary>

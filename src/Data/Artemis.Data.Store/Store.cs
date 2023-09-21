@@ -906,7 +906,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public async Task<StoreResult> BatchUpdateAsync(
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        Expression<Func<TEntity, bool>>? predicate = null, 
+        Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());

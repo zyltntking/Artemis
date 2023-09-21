@@ -12,23 +12,44 @@ namespace Artemis.Services.Identity.Stores;
 public interface IArtemisRoleStore : IStore<ArtemisRole>
 {
     /// <summary>
-    /// 根据角色名获取角色
+    ///     根据角色名获取角色
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<ArtemisRole?> FindRoleAsync(
+        string name,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     根据角色名获取角色
     /// </summary>
     /// <typeparam name="TMap">映射目标类型</typeparam>
     /// <param name="name">角色名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<TMap?> FindMapRoleByNameAsync<TMap>(
+    Task<TMap?> FindRoleAsync<TMap>(
         string name,
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取角色列表
+    ///     获取角色列表
     /// </summary>
     /// <typeparam name="TMap">映射目标类型</typeparam>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<IEnumerable<TMap>> GetMapRolesAsync<TMap>(CancellationToken cancellationToken = default);
+    Task<IEnumerable<TMap>> GetRolesAsync<TMap>(
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     是否存在
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<bool> ExistsAsync(
+        string name,
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -51,13 +72,26 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
     #region Implementation of IArtemisRoleStore
 
     /// <summary>
-    /// 根据角色名获取角色
+    ///     根据角色名获取角色
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<ArtemisRole?> FindRoleAsync(string name, CancellationToken cancellationToken = default)
+    {
+        return EntityQuery
+            .Where(role => role.NormalizedName == name)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    /// <summary>
+    ///     根据角色名获取角色
     /// </summary>
     /// <typeparam name="TMap">映射目标类型</typeparam>
     /// <param name="name">角色名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task<TMap?> FindMapRoleByNameAsync<TMap>(string name, CancellationToken cancellationToken = default)
+    public Task<TMap?> FindRoleAsync<TMap>(string name, CancellationToken cancellationToken = default)
     {
         return EntityQuery
             .Where(role => role.NormalizedName == name)
@@ -66,18 +100,29 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
     }
 
     /// <summary>
-    /// 获取角色列表
+    ///     获取角色列表
     /// </summary>
     /// <typeparam name="TMap">映射目标类型</typeparam>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<IEnumerable<TMap>> GetMapRolesAsync<TMap>(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TMap>> GetRolesAsync<TMap>(CancellationToken cancellationToken = default)
     {
         return await EntityQuery
+            .OrderByDescending(role => role.CreatedAt)
             .ProjectToType<TMap>()
             .ToListAsync(cancellationToken);
     }
 
-    #endregion
+    /// <summary>
+    ///     是否存在
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<bool> ExistsAsync(string name, CancellationToken cancellationToken = default)
+    {
+        return EntityQuery.AnyAsync(role => role.NormalizedName == name, cancellationToken);
+    }
 
+    #endregion
 }

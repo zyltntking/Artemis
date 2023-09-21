@@ -72,7 +72,10 @@ public record DataResult<T> : IResultBase<T>
     /// <summary>
     ///     获取描述器
     /// </summary>
-    public Dictionary<string, Collection<string>> GetDescriptor() => Descriptor;
+    public Dictionary<string, Collection<string>> GetDescriptor()
+    {
+        return Descriptor;
+    }
 
     /// <summary>
     ///     设置异常
