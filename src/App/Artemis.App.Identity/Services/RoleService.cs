@@ -141,7 +141,9 @@ public class RoleService : ApiController, IRoleService
     ///     角色用户列表
     /// </summary>
     /// <param name="roleName">角色名</param>
-    /// <param name="nameSearch">用户名称匹配</param>
+    /// <param name="userNameSearch">用户名匹配值</param>
+    /// <param name="emailSearch">邮箱匹配值</param>
+    /// <param name="phoneSearch">电话匹配值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <returns>GET status</returns>
@@ -149,7 +151,9 @@ public class RoleService : ApiController, IRoleService
     [HttpGet("{roleName}/Users")]
     public Task<DataResult<PageResult<UserInfo>>> FetchRoleUsers(
         string roleName,
-        string? nameSearch,
+        string? userNameSearch = null,
+        string? emailSearch = null,
+        string? phoneSearch = null,
         int page = 1,
         int size = 20)
     {
@@ -160,11 +164,30 @@ public class RoleService : ApiController, IRoleService
             Filter = new FetchRoleUsersFilter
             {
                 RoleName = roleName,
-                UserNameSearch = nameSearch
+                UserNameSearch = userNameSearch,
+                EmailSearch = emailSearch,
+                PhoneNumberSearch = phoneSearch
             }
         };
 
         return FetchRoleUsersAsync(request);
+    }
+
+    /// <summary>
+    /// 角色凭据列表
+    /// </summary>
+    /// <param name="roleName">角色名</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    [HttpGet("{roleName}/Claims")]
+    public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaims(
+        string roleName, 
+        int page = 1,
+        int size = 20)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -266,11 +289,37 @@ public class RoleService : ApiController, IRoleService
 
         var roleName = filter.RoleName;
 
-        var nameSearch = filter.UserNameSearch ?? string.Empty;
+        var userNameSearch = filter.UserNameSearch ?? string.Empty;
 
-        var result = await IdentityManager.FetchRoleUsersAsync(roleName, nameSearch, request.Page, request.Size);
+        var emailSearch = filter.EmailSearch ?? string.Empty;
+
+        var phoneSearch = filter.PhoneNumberSearch ?? string.Empty;
+
+        var result = await IdentityManager.FetchRoleUsersAsync(
+            roleName, 
+            userNameSearch, 
+            emailSearch, 
+            phoneSearch, 
+            request.Page, 
+            request.Size);
 
         return DataResult.Success(result);
+    }
+
+    /// <summary>
+    /// 查询用户凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [NonAction]
+    public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(PageRequest<FetchRoleClaimsFilter> request)
+    {
+        var filter = request.Filter;
+
+        var roleName = filter.RoleName;
+
+
+        throw new NotImplementedException();
     }
 
     #endregion

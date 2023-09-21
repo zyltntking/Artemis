@@ -60,6 +60,14 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
+
+    /// <summary>
+    /// 查询用户凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(PageRequest<FetchRoleClaimsFilter> request);
 }
 
 /// <summary>
@@ -73,7 +81,7 @@ public record GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public required string RoleName { get; set; } = null!;
+    public required string RoleName { get; set; }
 }
 
 /// <summary>
@@ -93,35 +101,14 @@ public record FetchRolesFilter
 ///     创建角色请求
 /// </summary>
 [DataContract]
-public record CreateRoleRequest : RoleBase
-{
-    /// <summary>
-    ///     角色名
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public override required string Name { get; set; } = null!;
-
-    /// <summary>
-    ///     角色描述
-    /// </summary>
-    [DataMember(Order = 2)]
-    public override required string? Description { get; set; }
-}
+public record CreateRoleRequest : RoleBase;
 
 /// <summary>
 ///     更新角色请求
 /// </summary>
 [DataContract]
-public record UpdateRoleRequest
+public record UpdateRoleRequest : GetRoleRequest
 {
-    /// <summary>
-    ///     角色名
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public required string RoleName { get; set; } = null!;
-
     /// <summary>
     ///     角色信息
     /// </summary>
@@ -134,33 +121,35 @@ public record UpdateRoleRequest
 ///     删除角色请求
 /// </summary>
 [DataContract]
-public record DeleteRoleRequest
-{
-    /// <summary>
-    ///     角色标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public required string RoleName { get; set; } = null!;
-}
+public record DeleteRoleRequest : GetRoleRequest;
 
 /// <summary>
 ///     查询用户过滤器
 /// </summary>
 [DataContract]
-public record FetchRoleUsersFilter
+public record FetchRoleUsersFilter : GetRoleRequest
 {
-    /// <summary>
-    ///     角色标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public required string RoleName { get; set; }
-
-
     /// <summary>
     ///     用户名搜索值
     /// </summary>
     [DataMember(Order = 2)]
     public string? UserNameSearch { get; set; }
+
+    /// <summary>
+    /// 邮箱搜索值
+    /// </summary>
+    [DataMember(Order = 3)]
+    public string? EmailSearch { get; set; }
+
+    /// <summary>
+    /// 电话号码搜索值
+    /// </summary>
+    [DataMember(Order = 4)]
+    public string? PhoneNumberSearch { get; set; }
 }
+
+/// <summary>
+/// 查询角色凭据过滤器
+/// </summary>
+[DataContract]
+public record FetchRoleClaimsFilter : GetRoleRequest;

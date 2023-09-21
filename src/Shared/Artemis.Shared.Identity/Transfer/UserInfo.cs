@@ -21,6 +21,7 @@ public record UserInfo : UserBase, IKeySlot
     ///     用户名
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [DataMember(Order = 2)]
     public override required string UserName { get; set; }
 
@@ -28,6 +29,7 @@ public record UserInfo : UserBase, IKeySlot
     ///     电子邮件
     /// </summary>
     [EmailAddress]
+    [MaxLength(128)]
     [DataMember(Order = 3)]
     public override string? Email { get; set; }
 
@@ -42,6 +44,7 @@ public record UserInfo : UserBase, IKeySlot
     ///     电话号码
     /// </summary>
     [Phone]
+    [MaxLength(16)]
     [DataMember(Order = 5)]
     public override string? PhoneNumber { get; set; }
 

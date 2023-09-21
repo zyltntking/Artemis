@@ -132,7 +132,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     数据访问上下文
     /// </summary>
-    protected TContext Context { get; }
+    private TContext Context { get; }
 
     /// <summary>
     ///     缓存依赖
@@ -157,8 +157,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    public IQueryable<TEntity> EntityQuery =>
-        EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public IQueryable<TEntity> EntityQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+
+    /// <summary>
+    /// 键适配查询
+    /// </summary>
+    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(item => item.Id.Equals(key));
+
+    /// <summary>
+    /// 键适配查询
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns></returns>
+    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys) => EntityQuery.Where(item => keys.Contains(item.Id));
 
     #endregion
 
@@ -2398,7 +2409,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private TEntity? FindById(TKey id)
     {
-        return EntityQuery.FirstOrDefault(entity => entity.Id.Equals(id));
+        return KeyMatchQuery(id).FirstOrDefault();
     }
 
     /// <summary>
@@ -2409,7 +2420,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private TMapEntity? FindById<TMapEntity>(TKey id)
     {
-        return EntityQuery.Where(entity => entity.Id.Equals(id))
+        return KeyMatchQuery(id)
             .ProjectToType<TMapEntity>()
             .FirstOrDefault();
     }
@@ -2421,7 +2432,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private IEnumerable<TEntity> FindByIds(IEnumerable<TKey> ids)
     {
-        return EntityQuery.Where(entity => ids.Contains(entity.Id)).ToList();
+        return KeyMatchQuery(ids).ToList();
     }
 
     /// <summary>
@@ -2432,7 +2443,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private IEnumerable<TMapEntity> FindByIds<TMapEntity>(IEnumerable<TKey> ids)
     {
-        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+        return KeyMatchQuery(ids)
             .ProjectToType<TMapEntity>()
             .ToList();
     }
@@ -2447,7 +2458,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         CancellationToken cancellationToken = default)
     {
-        return EntityQuery.FirstOrDefaultAsync(entity => entity.Id.Equals(id), cancellationToken);
+        return KeyMatchQuery(id).FirstOrDefaultAsync(cancellationToken);
     }
 
     /// <summary>
@@ -2461,7 +2472,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         CancellationToken cancellationToken = default)
     {
-        return EntityQuery.Where(entity => entity.Id.Equals(id))
+        return KeyMatchQuery(id)
             .ProjectToType<TMapEntity>()
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -2476,7 +2487,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
-        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+        return KeyMatchQuery(ids)
             .ToListAsync(cancellationToken);
     }
 
@@ -2491,7 +2502,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
-        return EntityQuery.Where(entity => ids.Contains(entity.Id))
+        return KeyMatchQuery(ids)
             .ProjectToType<TMapEntity>()
             .ToListAsync(cancellationToken);
     }

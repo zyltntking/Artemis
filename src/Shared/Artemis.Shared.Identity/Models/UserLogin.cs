@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;
@@ -9,40 +10,42 @@ namespace Artemis.Shared.Identity.Models;
 ///     用户登录信息
 /// </summary>
 [DataContract]
-public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>
+public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>, IUserLogin
 {
     /// <summary>
     ///     存储标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public virtual int Id { get; set; }
+    public virtual required int Id { get; set; }
 
     /// <summary>
     ///     用户标识
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public override Guid UserId { get; set; }
+    public override required Guid UserId { get; set; }
 
     /// <summary>
     ///     登录提供程序
     /// </summary>
-    [DataMember(Order = 3)]
-    [MaxLength(32)]
     [Required]
-    public override string LoginProvider { get; set; } = null!;
+    [MaxLength(32)]
+    [DataMember(Order = 3)]
+    public override required string LoginProvider { get; set; }
 
     /// <summary>
     ///     提供程序密钥
     /// </summary>
-    [DataMember(Order = 4)]
-    [MaxLength(64)]
     [Required]
-    public override string ProviderKey { get; set; } = null!;
+    [MaxLength(64)]
+    [DataMember(Order = 4)]
+    public override required string ProviderKey { get; set; }
 
     /// <summary>
     ///     提供程序显示名称
     /// </summary>
-    [DataMember(Order = 5)]
     [MaxLength(32)]
+    [DataMember(Order = 5)]
     public override string? ProviderDisplayName { get; set; }
 }

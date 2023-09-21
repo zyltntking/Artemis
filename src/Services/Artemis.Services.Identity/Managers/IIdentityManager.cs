@@ -24,7 +24,7 @@ public interface IIdentityManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     根据角色id获取角色
+    ///     根据角色标识获取角色
     /// </summary>
     /// <param name="id">角色id</param>
     /// <param name="cancellationToken"></param>
@@ -141,14 +141,18 @@ public interface IIdentityManager : IManager<ArtemisUser>
     ///     根据用户名搜索具有该角色标签的用户
     /// </summary>
     /// <param name="name">角色名</param>
-    /// <param name="nameSearch">用户名匹配值</param>
+    /// <param name="userNameSearch">用户名匹配值</param>
+    /// <param name="emailSearch">邮箱匹配值</param>
+    /// <param name="phoneSearch">电话匹配值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<PageResult<UserInfo>> FetchRoleUsersAsync(
         string name,
-        string? nameSearch = null,
+        string? userNameSearch = null,
+        string? emailSearch = null,
+        string? phoneSearch = null,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);
@@ -157,16 +161,30 @@ public interface IIdentityManager : IManager<ArtemisUser>
     ///     根据用户名搜索具有该角色标签的用户
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="nameSearch">用户名匹配值</param>
+    /// <param name="userNameSearch">用户名匹配值</param>
+    /// <param name="emailSearch">邮箱匹配值</param>
+    /// <param name="phoneSearch">电话匹配值</param>
     /// <param name="page">页码</param>
     /// <param name="size">页面大小</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<PageResult<UserInfo>> FetchRoleUsersAsync(
         Guid id,
-        string? nameSearch = null,
+        string? userNameSearch = null,
+        string? emailSearch = null,
+        string? phoneSearch = null,
         int page = 1,
         int size = 20,
+        CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    ///  获取角色凭据列表
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<IEnumerable<RoleClaimInfo>> GetRoleClaimsAsync(
+        string name,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -175,8 +193,24 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <param name="id">角色id</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<IEnumerable<RoleClaim>> GetRoleClaimAsync(
+    Task<IEnumerable<RoleClaimInfo>> GetRoleClaimsAsync(
         Guid id,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     查询角色的声明
+    /// </summary>
+    /// <param name="name">角色名称</param>
+    /// <param name="claimTypeSearch">凭据类型</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面尺寸</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
+        string name,
+        string? claimTypeSearch = null,
+        int page = 1,
+        int size = 20,
         CancellationToken cancellationToken = default);
 
     /// <summary>

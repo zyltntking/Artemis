@@ -15,36 +15,37 @@ public class Role : IdentityRole<Guid>, IKeySlot, IRole
     /// <summary>
     ///     标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public override Guid Id { get; set; }
+    public override required Guid Id { get; set; }
 
     /// <summary>
     ///     角色名
     /// </summary>
-    [DataMember(Order = 2)]
     [Required]
     [MaxLength(32)]
-    public override string Name { get; set; } = null!;
+    [DataMember(Order = 2)]
+    public override required string Name { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
-    [DataMember(Order = 5)]
     [MaxLength(128)]
+    [DataMember(Order = 5)]
     public virtual string? Description { get; set; }
 
     /// <summary>
     ///     规范化角色名
     /// </summary>
-    [DataMember(Order = 3)]
     [Required]
     [MaxLength(32)]
-    public override string NormalizedName { get; set; } = null!;
+    [DataMember(Order = 3)]
+    public override required string NormalizedName { get; set; }
 
     /// <summary>
     ///     并发锁
     /// </summary>
-    [DataMember(Order = 4)]
     [MaxLength(64)]
+    [DataMember(Order = 4)]
     public override string? ConcurrencyStamp { get; set; }
 }

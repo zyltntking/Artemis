@@ -1,21 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Artemis.Shared.Identity.Transfer.Interface;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Artemis.Data.Core;
 
-namespace Artemis.Shared.Identity.Models;
+namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
-///     凭据字典
+/// 基本角色凭据信息
 /// </summary>
 [DataContract]
-public class Claim : IKeySlot<Guid>
+public record RoleClaimBase : IRoleClaim
 {
+    #region Implementation of IRoleClaim
+
     /// <summary>
     ///     角色标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public required Guid Id { get; set; }
+    public virtual required Guid RoleId { get; set; }
 
     /// <summary>
     ///     凭据类型
@@ -23,7 +25,7 @@ public class Claim : IKeySlot<Guid>
     [Required]
     [MaxLength(32)]
     [DataMember(Order = 2)]
-    public required string ClaimType { get; set; }
+    public virtual string ClaimType { get; set; } = null!;
 
     /// <summary>
     ///     凭据值
@@ -31,7 +33,7 @@ public class Claim : IKeySlot<Guid>
     [Required]
     [MaxLength(128)]
     [DataMember(Order = 3)]
-    public required string ClaimValue { get; set; }
+    public virtual string ClaimValue { get; set; } = null!;
 
     /// <summary>
     ///     校验戳
@@ -39,12 +41,14 @@ public class Claim : IKeySlot<Guid>
     [Required]
     [MaxLength(64)]
     [DataMember(Order = 4)]
-    public required string CheckStamp { get; set; }
+    public virtual string CheckStamp { get; set; } = null!;
 
     /// <summary>
     ///     凭据描述
     /// </summary>
     [MaxLength(128)]
     [DataMember(Order = 5)]
-    public string? Description { get; set; }
+    public virtual string? Description { get; set; }
+
+    #endregion
 }

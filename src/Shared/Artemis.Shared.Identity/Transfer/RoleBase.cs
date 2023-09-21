@@ -16,12 +16,14 @@ public abstract record RoleBase : IRole
     ///     角色名
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [DataMember(Order = 1)]
-    public virtual required string Name { get; set; } = null!;
+    public virtual required string Name { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
+    [MaxLength(128)]
     [DataMember(Order = 2)]
     public virtual string? Description { get; set; }
 

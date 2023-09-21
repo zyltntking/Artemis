@@ -14,30 +14,32 @@ public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
     /// <summary>
     ///     存储标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public virtual int Id { get; set; }
+    public virtual required int Id { get; set; }
 
     /// <summary>
     ///     用户标识
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public override Guid UserId { get; set; }
+    public override required Guid UserId { get; set; }
 
     /// <summary>
     ///     登录提供程序
     /// </summary>
-    [DataMember(Order = 3)]
-    [MaxLength(32)]
     [Required]
-    public override string LoginProvider { get; set; } = null!;
+    [MaxLength(32)]
+    [DataMember(Order = 3)]
+    public override required string LoginProvider { get; set; }
 
     /// <summary>
     ///     令牌名称
     /// </summary>
-    [DataMember(Order = 4)]
-    [MaxLength(32)]
     [Required]
-    public override string Name { get; set; } = null!;
+    [MaxLength(32)]
+    [DataMember(Order = 4)]
+    public override required string Name { get; set; }
 
     /// <summary>
     ///     令牌值

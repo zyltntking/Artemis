@@ -21,12 +21,14 @@ public record RoleInfo : RoleBase, IKeySlot
     ///     角色名
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [DataMember(Order = 2)]
     public override required string Name { get; set; } = null!;
 
     /// <summary>
     ///     角色描述
     /// </summary>
+    [MaxLength(128)]
     [DataMember(Order = 3)]
     public override string? Description { get; set; }
 }

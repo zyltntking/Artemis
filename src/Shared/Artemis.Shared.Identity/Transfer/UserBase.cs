@@ -16,6 +16,7 @@ public record UserBase : IUser
     ///     用户名
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [DataMember(Order = 1)]
     public virtual required string UserName { get; set; }
 
@@ -23,6 +24,7 @@ public record UserBase : IUser
     ///     电子邮件
     /// </summary>
     [EmailAddress]
+    [MaxLength(128)]
     [DataMember(Order = 2)]
     public virtual string? Email { get; set; }
 
@@ -37,6 +39,7 @@ public record UserBase : IUser
     ///     电话号码
     /// </summary>
     [Phone]
+    [MaxLength(16)]
     [DataMember(Order = 4)]
     public virtual string? PhoneNumber { get; set; }
 

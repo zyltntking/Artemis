@@ -15,8 +15,9 @@ public class User : IdentityUser<Guid>, IKeySlot, IUser
     /// <summary>
     ///     标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public override Guid Id { get; set; }
+    public override required Guid Id { get; set; }
 
     /// <summary>
     ///     用户名
@@ -24,35 +25,39 @@ public class User : IdentityUser<Guid>, IKeySlot, IUser
     [Required]
     [MaxLength(32)]
     [DataMember(Order = 2)]
-    public override string UserName { get; set; } = null!;
+    public override required string UserName { get; set; }
 
     /// <summary>
     ///     电子邮件
     /// </summary>
+    [Required]
     [EmailAddress]
     [MaxLength(128)]
     [DataMember(Order = 4)]
-    public override string? Email { get; set; }
+    public override required string Email { get; set; }
 
     /// <summary>
     ///     电子邮件确认戳
     /// </summary>
+    [Required]
     [DataMember(Order = 6)]
-    public override bool EmailConfirmed { get; set; }
+    public override required bool EmailConfirmed { get; set; }
 
     /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
+    [Required]
     [MaxLength(16)]
     [DataMember(Order = 7)]
-    public override string? PhoneNumber { get; set; }
+    public override required string PhoneNumber { get; set; }
 
     /// <summary>
     ///     电话号码确认戳
     /// </summary>
+    [Required]
     [DataMember(Order = 8)]
-    public override bool PhoneNumberConfirmed { get; set; }
+    public override required bool PhoneNumberConfirmed { get; set; }
 
     /// <summary>
     ///     标准化用户名
@@ -60,14 +65,15 @@ public class User : IdentityUser<Guid>, IKeySlot, IUser
     [Required]
     [MaxLength(32)]
     [DataMember(Order = 3)]
-    public override string NormalizedUserName { get; set; } = null!;
+    public override required string NormalizedUserName { get; set; }
 
     /// <summary>
     ///     标准化电子邮件
     /// </summary>
+    [Required]
     [MaxLength(128)]
     [DataMember(Order = 5)]
-    public override string? NormalizedEmail { get; set; }
+    public override required string NormalizedEmail { get; set; }
 
     /// <summary>
     ///     密码哈希
@@ -75,39 +81,42 @@ public class User : IdentityUser<Guid>, IKeySlot, IUser
     [EmailAddress]
     [MaxLength(128)]
     [DataMember(Order = 9)]
-    public override string PasswordHash { get; set; } = null!;
+    public override required string PasswordHash { get; set; }
 
     /// <summary>
     ///     密码锁
     /// </summary>
-    [DataMember(Order = 10)]
     [MaxLength(64)]
+    [DataMember(Order = 10)]
     public override string? SecurityStamp { get; set; }
 
     /// <summary>
     ///     并发锁
     /// </summary>
-    [DataMember(Order = 11)]
     [MaxLength(64)]
+    [DataMember(Order = 11)]
     public override string? ConcurrencyStamp { get; set; }
 
     /// <summary>
     ///     是否启用双因子认证
     /// </summary>
+    [Required]
     [DataMember(Order = 12)]
-    public override bool TwoFactorEnabled { get; set; }
+    public override required bool TwoFactorEnabled { get; set; }
 
     /// <summary>
     ///     是否启用锁定
     /// </summary>
+    [Required]
     [DataMember(Order = 13)]
-    public override bool LockoutEnabled { get; set; }
+    public override required bool LockoutEnabled { get; set; }
 
     /// <summary>
     ///     失败尝试次数
     /// </summary>
+    [Required]
     [DataMember(Order = 14)]
-    public override int AccessFailedCount { get; set; }
+    public override required int AccessFailedCount { get; set; }
 
     /// <summary>
     ///     用户锁定到期时间标记

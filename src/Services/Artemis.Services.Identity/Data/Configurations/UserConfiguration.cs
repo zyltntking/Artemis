@@ -92,6 +92,8 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUser> builder)
     {
+        MetaIndexConfigure(builder);
+
         // User Key
         builder.HasKey(user => user.Id)
             .HasName($"PK_{TableName}");

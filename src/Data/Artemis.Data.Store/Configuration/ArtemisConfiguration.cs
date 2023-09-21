@@ -92,7 +92,7 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
     ///     元索引配置
     /// </summary>
     /// <param name="builder"></param>
-    protected virtual void MetaIndexConfigure(EntityTypeBuilder<TEntity> builder)
+    protected void MetaIndexConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasIndex(entity => entity.CreatedAt)
             .HasDatabaseName($"IX_{TableName}_CreatedAt");

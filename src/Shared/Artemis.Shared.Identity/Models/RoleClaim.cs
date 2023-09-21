@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;
@@ -9,48 +10,50 @@ namespace Artemis.Shared.Identity.Models;
 ///     角色凭据
 /// </summary>
 [DataContract]
-public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>
+public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>, IRoleClaim
 {
     /// <summary>
     ///     标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public override int Id { get; set; }
+    public override required int Id { get; set; }
 
     /// <summary>
     ///     角色标识
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public override Guid RoleId { get; set; }
+    public override required Guid RoleId { get; set; }
 
     /// <summary>
     ///     凭据类型
     /// </summary>
-    [DataMember(Order = 3)]
-    [MaxLength(32)]
     [Required]
-    public override string ClaimType { get; set; } = null!;
+    [MaxLength(32)]
+    [DataMember(Order = 3)]
+    public override required string ClaimType { get; set; }
 
     /// <summary>
     ///     凭据值
     /// </summary>
-    [DataMember(Order = 4)]
-    [MaxLength(128)]
     [Required]
-    public override string ClaimValue { get; set; } = null!;
+    [MaxLength(128)]
+    [DataMember(Order = 4)]
+    public override required string ClaimValue { get; set; }
 
     /// <summary>
     ///     校验戳
     /// </summary>
-    [DataMember(Order = 5)]
-    [MaxLength(64)]
     [Required]
-    public virtual string CheckStamp { get; set; } = null!;
+    [MaxLength(64)]
+    [DataMember(Order = 5)]
+    public virtual required string CheckStamp { get; set; }
 
     /// <summary>
     ///     凭据描述
     /// </summary>
-    [DataMember(Order = 6)]
     [MaxLength(128)]
+    [DataMember(Order = 6)]
     public virtual string? Description { get; set; }
 }
