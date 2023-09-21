@@ -60,6 +60,8 @@ public class RoleClaimConfiguration : IdentityConfiguration<ArtemisRoleClaim>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRoleClaim> builder)
     {
+        MetaIndexConfigure(builder);
+
         // Role Claim Key
         builder.HasKey(roleClaim => roleClaim.Id)
             .HasName($"PK_{TableName}");

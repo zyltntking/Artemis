@@ -133,13 +133,6 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Each User can have many entries in the UserRole join table
-        // builder.HasMany(user => user.UserRoles)
-        //    .WithOne(userRole => userRole.User)
-        //    .HasForeignKey(userRole => userRole.UserId)
-        //    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisUser)}_Id")
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

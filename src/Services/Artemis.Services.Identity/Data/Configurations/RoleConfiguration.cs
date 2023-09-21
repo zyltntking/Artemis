@@ -57,6 +57,8 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
+        MetaIndexConfigure(builder);
+
         // Role Key
         builder.HasKey(role => role.Id)
             .HasName($"PK_{TableName}");
@@ -65,14 +67,6 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
         builder.HasIndex(role => role.NormalizedName)
             .HasDatabaseName($"IX_{TableName}_Name")
             .IsUnique();
-
-        // Each Role can have many entries in the UserRole join table
-        // builder.HasMany(emptyRecord => emptyRecord.UserRoles)
-        //    .WithOne(userRole => userRole.Role)
-        //    .HasForeignKey(userRole => userRole.RoleId)
-        //    .HasConstraintName($"FK_{nameof(ArtemisUserRole)}_{nameof(ArtemisRole)}_Id")
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
 
         // Each Role can have many associated RoleClaims
         builder.HasMany(role => role.RoleClaims)

@@ -45,6 +45,7 @@ public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
+        MetaIndexConfigure(builder);
     }
 
     #endregion

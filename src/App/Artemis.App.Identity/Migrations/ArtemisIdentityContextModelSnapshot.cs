@@ -75,6 +75,15 @@ namespace Artemis.App.Identity.Migrations
                     b.HasIndex("ClaimType")
                         .HasDatabaseName("IX_ArtemisClaim_ClaimType");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_DeletedAt");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_UpdatedAt");
+
                     b.ToTable("ArtemisClaim", "identity", t =>
                         {
                             t.HasComment("认证凭据数据集");
@@ -126,9 +135,18 @@ namespace Artemis.App.Identity.Migrations
                     b.HasKey("Id")
                         .HasName("PK_ArtemisRole");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisRole_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisRole_DeletedAt");
+
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("IX_ArtemisRole_Name");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisRole_UpdatedAt");
 
                     b.ToTable("ArtemisRole", "identity", t =>
                         {
@@ -190,7 +208,16 @@ namespace Artemis.App.Identity.Migrations
                     b.HasIndex("ClaimType")
                         .HasDatabaseName("IX_ArtemisRoleClaim_ClaimType");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisRoleClaim_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisRoleClaim_DeletedAt");
+
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisRoleClaim_UpdatedAt");
 
                     b.HasIndex("CheckStamp", "RoleId")
                         .IsUnique()
@@ -292,6 +319,12 @@ namespace Artemis.App.Identity.Migrations
                     b.HasKey("Id")
                         .HasName("PK_ArtemisUser");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUser_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUser_DeletedAt");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("IX_ArtemisUser_Email");
 
@@ -301,6 +334,9 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("PhoneNumber")
                         .HasDatabaseName("IX_ArtemisUser_PhoneNumber");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUser_UpdatedAt");
 
                     b.ToTable("ArtemisUser", "identity", t =>
                         {
@@ -362,6 +398,15 @@ namespace Artemis.App.Identity.Migrations
                     b.HasIndex("ClaimType")
                         .HasDatabaseName("IX_ArtemisUserClaim_ClaimType");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUserClaim_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUserClaim_DeletedAt");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUserClaim_UpdatedAt");
+
                     b.HasIndex("UserId");
 
                     b.HasIndex("CheckStamp", "UserId")
@@ -420,6 +465,15 @@ namespace Artemis.App.Identity.Migrations
                     b.HasAlternateKey("Id")
                         .HasName("AK_ArtemisUserLogin");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUserLogin_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUserLogin_DeletedAt");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUserLogin_UpdatedAt");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("ArtemisUserLogin", "identity", t =>
@@ -463,7 +517,16 @@ namespace Artemis.App.Identity.Migrations
                     b.HasAlternateKey("Id")
                         .HasName("AK_ArtemisUserRole");
 
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUserRole_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUserRole_DeletedAt");
+
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUserRole_UpdatedAt");
 
                     b.ToTable("ArtemisUserRole", "identity", t =>
                         {
@@ -515,6 +578,15 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasAlternateKey("Id")
                         .HasName("AK_ArtemisUserToken");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUserToken_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUserToken_DeletedAt");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUserToken_UpdatedAt");
 
                     b.ToTable("ArtemisUserToken", "identity", t =>
                         {

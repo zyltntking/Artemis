@@ -55,6 +55,8 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
+        MetaIndexConfigure(builder);
+
         // User Token Key
         builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
             .HasName($"PK_{TableName}");

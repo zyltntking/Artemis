@@ -60,6 +60,8 @@ public class UserClaimConfiguration : IdentityConfiguration<ArtemisUserClaim>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserClaim> builder)
     {
+        MetaIndexConfigure(builder);
+
         // User Claim Key
         builder.HasKey(userClaim => userClaim.Id)
             .HasName($"PK_{TableName}");

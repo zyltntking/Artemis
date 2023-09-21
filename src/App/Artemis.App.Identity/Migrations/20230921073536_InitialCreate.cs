@@ -249,11 +249,47 @@ namespace Artemis.App.Identity.Migrations
                 column: "ClaimType");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisClaim_CreatedAt",
+                schema: "identity",
+                table: "ArtemisClaim",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisClaim_DeletedAt",
+                schema: "identity",
+                table: "ArtemisClaim",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisClaim_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisClaim",
+                column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRole_CreatedAt",
+                schema: "identity",
+                table: "ArtemisRole",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRole_DeletedAt",
+                schema: "identity",
+                table: "ArtemisRole",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRole_Name",
                 schema: "identity",
                 table: "ArtemisRole",
                 column: "NormalizedName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRole_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisRole",
+                column: "UpdatedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRoleClaim_CheckStamp_RoleId",
@@ -269,10 +305,40 @@ namespace Artemis.App.Identity.Migrations
                 column: "ClaimType");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRoleClaim_CreatedAt",
+                schema: "identity",
+                table: "ArtemisRoleClaim",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRoleClaim_DeletedAt",
+                schema: "identity",
+                table: "ArtemisRoleClaim",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRoleClaim_RoleId",
                 schema: "identity",
                 table: "ArtemisRoleClaim",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisRoleClaim_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisRoleClaim",
+                column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUser_CreatedAt",
+                schema: "identity",
+                table: "ArtemisUser",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUser_DeletedAt",
+                schema: "identity",
+                table: "ArtemisUser",
+                column: "DeletedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_Email",
@@ -285,6 +351,12 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 table: "ArtemisUser",
                 column: "PhoneNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUser_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisUser",
+                column: "UpdatedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_UserName",
@@ -307,10 +379,46 @@ namespace Artemis.App.Identity.Migrations
                 column: "ClaimType");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserClaim_CreatedAt",
+                schema: "identity",
+                table: "ArtemisUserClaim",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserClaim_DeletedAt",
+                schema: "identity",
+                table: "ArtemisUserClaim",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserClaim_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisUserClaim",
+                column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserClaim_UserId",
                 schema: "identity",
                 table: "ArtemisUserClaim",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserLogin_CreatedAt",
+                schema: "identity",
+                table: "ArtemisUserLogin",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserLogin_DeletedAt",
+                schema: "identity",
+                table: "ArtemisUserLogin",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserLogin_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisUserLogin",
+                column: "UpdatedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserLogin_UserId",
@@ -319,10 +427,46 @@ namespace Artemis.App.Identity.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserRole_CreatedAt",
+                schema: "identity",
+                table: "ArtemisUserRole",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserRole_DeletedAt",
+                schema: "identity",
+                table: "ArtemisUserRole",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserRole_RoleId",
                 schema: "identity",
                 table: "ArtemisUserRole",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserRole_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisUserRole",
+                column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserToken_CreatedAt",
+                schema: "identity",
+                table: "ArtemisUserToken",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserToken_DeletedAt",
+                schema: "identity",
+                table: "ArtemisUserToken",
+                column: "DeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisUserToken_UpdatedAt",
+                schema: "identity",
+                table: "ArtemisUserToken",
+                column: "UpdatedAt");
         }
 
         /// <inheritdoc />
