@@ -157,19 +157,26 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    public IQueryable<TEntity> EntityQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public IQueryable<TEntity> EntityQuery =>
+        EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
 
     /// <summary>
-    /// 键适配查询
+    ///     键适配查询
     /// </summary>
-    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(item => item.Id.Equals(key));
+    public IQueryable<TEntity> KeyMatchQuery(TKey key)
+    {
+        return EntityQuery.Where(item => item.Id.Equals(key));
+    }
 
     /// <summary>
-    /// 键适配查询
+    ///     键适配查询
     /// </summary>
     /// <param name="keys"></param>
     /// <returns></returns>
-    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys) => EntityQuery.Where(item => keys.Contains(item.Id));
+    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys)
+    {
+        return EntityQuery.Where(item => keys.Contains(item.Id));
+    }
 
     #endregion
 

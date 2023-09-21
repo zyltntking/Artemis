@@ -4,6 +4,7 @@ using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Transfer;
+using ProtoBuf;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -62,7 +63,7 @@ public interface IRoleService
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
 
     /// <summary>
-    /// 查询用户凭据
+    ///     查询用户凭据
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
@@ -81,7 +82,7 @@ public record GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public required string RoleName { get; set; }
+    public virtual required string RoleName { get; set; }
 }
 
 /// <summary>
@@ -93,15 +94,37 @@ public record FetchRolesFilter
     /// <summary>
     ///     角色名搜索值
     /// </summary>
+    [NullWrappedValue]
     [DataMember(Order = 1)]
-    public string? RoleNameSearch { get; set; }
+    public virtual string? RoleNameSearch { get; set; }
 }
 
 /// <summary>
 ///     创建角色请求
 /// </summary>
 [DataContract]
-public record CreateRoleRequest : RoleBase;
+public record CreateRoleRequest : RoleBase
+{
+    #region Implementation of RoleBase
+
+    /// <summary>
+    ///     角色名
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [DataMember(Order = 1)]
+    public override required string Name { get; set; }
+
+    /// <summary>
+    ///     角色描述
+    /// </summary>
+    [MaxLength(128)]
+    [NullWrappedValue]
+    [DataMember(Order = 2)]
+    public override string? Description { get; set; }
+
+    #endregion
+}
 
 /// <summary>
 ///     更新角色请求
@@ -109,6 +132,13 @@ public record CreateRoleRequest : RoleBase;
 [DataContract]
 public record UpdateRoleRequest : GetRoleRequest
 {
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required string RoleName { get; set; }
+
     /// <summary>
     ///     角色信息
     /// </summary>
@@ -121,7 +151,15 @@ public record UpdateRoleRequest : GetRoleRequest
 ///     删除角色请求
 /// </summary>
 [DataContract]
-public record DeleteRoleRequest : GetRoleRequest;
+public record DeleteRoleRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required string RoleName { get; set; }
+}
 
 /// <summary>
 ///     查询用户过滤器
@@ -130,26 +168,44 @@ public record DeleteRoleRequest : GetRoleRequest;
 public record FetchRoleUsersFilter : GetRoleRequest
 {
     /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required string RoleName { get; set; }
+
+    /// <summary>
     ///     用户名搜索值
     /// </summary>
+    [NullWrappedValue]
     [DataMember(Order = 2)]
     public string? UserNameSearch { get; set; }
 
     /// <summary>
-    /// 邮箱搜索值
+    ///     邮箱搜索值
     /// </summary>
+    [NullWrappedValue]
     [DataMember(Order = 3)]
     public string? EmailSearch { get; set; }
 
     /// <summary>
-    /// 电话号码搜索值
+    ///     电话号码搜索值
     /// </summary>
+    [NullWrappedValue]
     [DataMember(Order = 4)]
     public string? PhoneNumberSearch { get; set; }
 }
 
 /// <summary>
-/// 查询角色凭据过滤器
+///     查询角色凭据过滤器
 /// </summary>
 [DataContract]
-public record FetchRoleClaimsFilter : GetRoleRequest;
+public record FetchRoleClaimsFilter : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required string RoleName { get; set; }
+}

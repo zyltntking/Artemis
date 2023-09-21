@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Shared.Identity.Transfer.Interface;
 
 /// <summary>
-/// 基本角色凭据接口
+///     基本角色凭据接口
 /// </summary>
 public interface IRoleClaim
 {

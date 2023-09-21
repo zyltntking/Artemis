@@ -174,7 +174,7 @@ public class RoleService : ApiController, IRoleService
     }
 
     /// <summary>
-    /// 角色凭据列表
+    ///     角色凭据列表
     /// </summary>
     /// <param name="roleName">角色名</param>
     /// <param name="page">页码</param>
@@ -183,7 +183,7 @@ public class RoleService : ApiController, IRoleService
     /// <exception cref="NotImplementedException"></exception>
     [HttpGet("{roleName}/Claims")]
     public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaims(
-        string roleName, 
+        string roleName,
         int page = 1,
         int size = 20)
     {
@@ -296,18 +296,18 @@ public class RoleService : ApiController, IRoleService
         var phoneSearch = filter.PhoneNumberSearch ?? string.Empty;
 
         var result = await IdentityManager.FetchRoleUsersAsync(
-            roleName, 
-            userNameSearch, 
-            emailSearch, 
-            phoneSearch, 
-            request.Page, 
+            roleName,
+            userNameSearch,
+            emailSearch,
+            phoneSearch,
+            request.Page,
             request.Size);
 
         return DataResult.Success(result);
     }
 
     /// <summary>
-    /// 查询用户凭据
+    ///     查询用户凭据
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>

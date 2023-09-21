@@ -176,9 +176,9 @@ public interface IIdentityManager : IManager<ArtemisUser>
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);
-    
+
     /// <summary>
-    ///  获取角色凭据列表
+    ///     获取角色凭据列表
     /// </summary>
     /// <param name="name">角色名</param>
     /// <param name="cancellationToken">操作取消信号</param>

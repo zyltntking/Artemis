@@ -32,12 +32,12 @@ public interface IStoreAccess<TEntity, TKey> where TEntity : class, IModelBase<T
     IQueryable<TEntity> EntityQuery { get; }
 
     /// <summary>
-    /// 键适配查询
+    ///     键适配查询
     /// </summary>
     IQueryable<TEntity> KeyMatchQuery(TKey key);
 
     /// <summary>
-    /// 键适配查询
+    ///     键适配查询
     /// </summary>
     /// <param name="keys"></param>
     /// <returns></returns>

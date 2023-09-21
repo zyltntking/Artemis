@@ -17,15 +17,15 @@ public static class QueryableExtensions
     /// <param name="size">数据条目</param>
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
-        this IQueryable<TEntity> query, 
-        int page, 
+        this IQueryable<TEntity> query,
+        int page,
         int size)
     {
         return query.Skip((page - 1) * size).Take(size);
     }
 
     /// <summary>
-    /// 分页扩展
+    ///     分页扩展
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <param name="query">查询</param>
@@ -34,9 +34,9 @@ public static class QueryableExtensions
     /// <param name="count">数据规模</param>
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
-        this IQueryable<TEntity> query, 
-        int page, 
-        int size, 
+        this IQueryable<TEntity> query,
+        int page,
+        int size,
         out long count)
     {
         count = query.LongCount();
@@ -44,21 +44,21 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// 分页扩展
+    ///     分页扩展
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <param name="query">查询</param>
     /// <param name="request">分页请求</param>
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
-        this IQueryable<TEntity> query, 
+        this IQueryable<TEntity> query,
         IPageBase request)
     {
         return query.Page(request.Page, request.Size);
     }
 
     /// <summary>
-    /// 分页扩展
+    ///     分页扩展
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <param name="query">查询</param>
@@ -66,15 +66,15 @@ public static class QueryableExtensions
     /// <param name="count">数据规模</param>
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
-        this IQueryable<TEntity> query, 
-        IPageBase request, 
+        this IQueryable<TEntity> query,
+        IPageBase request,
         out long count)
     {
         return query.Page(request.Page, request.Size, out count);
     }
 
     /// <summary>
-    /// 若条件为真则添加查询条件
+    ///     若条件为真则添加查询条件
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <param name="query">查询</param>
@@ -82,7 +82,7 @@ public static class QueryableExtensions
     /// <param name="predicate">查询条件</param>
     /// <returns></returns>
     public static IQueryable<TEntity> WhereIf<TEntity>(
-        this IQueryable<TEntity> query, 
+        this IQueryable<TEntity> query,
         bool condition,
         Expression<Func<TEntity, bool>> predicate)
     {

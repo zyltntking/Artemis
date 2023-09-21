@@ -1,11 +1,11 @@
-﻿using Artemis.Data.Core;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
-/// 角色凭据信息
+///     角色凭据信息
 /// </summary>
 [DataContract]
 public record RoleClaimInfo : RoleClaimBase, IKeySlot<int>

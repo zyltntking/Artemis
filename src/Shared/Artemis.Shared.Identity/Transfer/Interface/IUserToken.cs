@@ -1,11 +1,10 @@
 ﻿namespace Artemis.Shared.Identity.Transfer.Interface;
 
 /// <summary>
-/// 基本用户令牌信息接口
+///     基本用户令牌信息接口
 /// </summary>
 public interface IUserToken
 {
-
     /// <summary>
     ///     用户标识
     /// </summary>

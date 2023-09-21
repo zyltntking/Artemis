@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Artemis.Shared.Identity.Records;
 
@@ -8,24 +9,6 @@ namespace Artemis.Shared.Identity.Records;
 [DataContract]
 public record ClaimKey : IComparable<ClaimKey>
 {
-    /// <summary>
-    ///     凭据键构造
-    /// </summary>
-    public ClaimKey()
-    {
-    }
-
-    /// <summary>
-    ///     凭据键构造
-    /// </summary>
-    /// <param name="outerId">相关标识</param>
-    /// <param name="checkStamp">凭据戳</param>
-    public ClaimKey(Guid outerId, string checkStamp)
-    {
-        OuterId = outerId;
-        CheckStamp = checkStamp;
-    }
-
     #region Relational members
 
     /// <summary>
@@ -71,14 +54,16 @@ public record ClaimKey : IComparable<ClaimKey>
     /// <summary>
     ///     凭据相关标识
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    public Guid OuterId { get; init; }
+    public required Guid OuterId { get; init; }
 
     /// <summary>
     ///     凭据戳
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public string CheckStamp { get; init; } = null!;
+    public required string CheckStamp { get; init; }
 }
 
 /// <summary>

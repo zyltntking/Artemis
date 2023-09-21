@@ -11,7 +11,6 @@ using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Xml.Linq;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -198,7 +197,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         query = query.WhereIf(
             nameSearch != string.Empty,
             role => EF.Functions.Like(
-                role.NormalizedName, 
+                role.NormalizedName,
                 $"%{normalizedSearch}%"));
 
         var count = await query.LongCountAsync(cancellationToken);
@@ -426,7 +425,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog($"查询角色用户，角色：{name}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
+        SetDebugLog(
+            $"查询角色用户，角色：{name}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
 
         var normalizedName = RoleManager.NormalizeKey(name);
 
@@ -449,21 +449,21 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             query = query.WhereIf(
                 userNameSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.NormalizedUserName, 
+                    user.NormalizedUserName,
                     $"%{normalizedNameSearch}%"));
 
             var normalizedEmailSearch = UserManager.NormalizeEmail(emailSearch);
 
             query = query.WhereIf(
-                emailSearch != string.Empty, 
+                emailSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.NormalizedEmail, 
+                    user.NormalizedEmail,
                     $"%{normalizedEmailSearch}%"));
 
             query = query.WhereIf(
                 phoneSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.PhoneNumber, 
+                    user.PhoneNumber,
                     $"%{phoneSearch}%"));
 
             var count = await query.LongCountAsync(cancellationToken);
@@ -507,7 +507,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog($"查询角色用户，角色：{id:D}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
+        SetDebugLog(
+            $"查询角色用户，角色：{id:D}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
 
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
@@ -528,7 +529,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             query = query.WhereIf(
                 userNameSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.NormalizedUserName, 
+                    user.NormalizedUserName,
                     $"%{normalizedNameSearch}%"));
 
             var normalizedEmailSearch = UserManager.NormalizeEmail(emailSearch);
@@ -536,13 +537,13 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             query = query.WhereIf(
                 emailSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.NormalizedEmail, 
+                    user.NormalizedEmail,
                     $"%{normalizedEmailSearch}%"));
 
             query = query.WhereIf(
                 phoneSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.PhoneNumber, 
+                    user.PhoneNumber,
                     $"%{phoneSearch}%"));
 
             var count = await query.LongCountAsync(cancellationToken);
@@ -567,13 +568,13 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     }
 
     /// <summary>
-    ///  获取角色凭据列表
+    ///     获取角色凭据列表
     /// </summary>
     /// <param name="name">角色名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<IEnumerable<RoleClaimInfo>> GetRoleClaimsAsync(
-        string name, 
+        string name,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog($"获取角色凭据列表, 角色名: {name}");
@@ -585,7 +586,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         if (exists)
         {
             var claims = await RoleStore.EntityQuery
-                .Where(role => role.NormalizedName == normalizedName )                
+                .Where(role => role.NormalizedName == normalizedName)
                 .SelectMany(role => role.RoleClaims)
                 .OrderBy(claim => claim.CreatedAt)
                 .ProjectToType<RoleClaimInfo>()
@@ -637,9 +638,9 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public Task<PageResult<RoleClaim>> FetchRoleClaimsAsync(
-        string name, 
-        string? claimTypeSearch = null, 
-        int page = 1, 
+        string name,
+        string? claimTypeSearch = null,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -754,8 +755,16 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             .Select(claim => new { claim.RoleId, claim.CheckStamp })
             .AsEnumerable()
             .Join(source,
-                claimInDb => new ClaimKey(claimInDb.RoleId, claimInDb.CheckStamp),
-                claimToAdd => new ClaimKey(claimToAdd.RoleId, claimToAdd.CheckStamp),
+                claimInDb => new ClaimKey
+                {
+                    OuterId = claimInDb.RoleId,
+                    CheckStamp = claimInDb.CheckStamp
+                },
+                claimToAdd => new ClaimKey
+                {
+                    OuterId = claimToAdd.RoleId,
+                    CheckStamp = claimToAdd.CheckStamp
+                },
                 (_, claimsToAdd) => claimsToAdd,
                 new ClaimKeyEqualityComparer())
             .ToList();
@@ -906,8 +915,16 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             .Select(claim => new { claim.Id, claim.RoleId, claim.CheckStamp })
             .AsEnumerable()
             .Join(list,
-                claimInDb => new ClaimKey(claimInDb.RoleId, claimInDb.CheckStamp),
-                claimToDelete => new ClaimKey(claimToDelete.OuterId, claimToDelete.CheckStamp),
+                claimInDb => new ClaimKey
+                {
+                    OuterId = claimInDb.RoleId,
+                    CheckStamp = claimInDb.CheckStamp
+                },
+                claimToDelete => new ClaimKey
+                {
+                    OuterId = claimToDelete.OuterId,
+                    CheckStamp = claimToDelete.CheckStamp
+                },
                 (claimInDb, _) => claimInDb.Id,
                 new ClaimKeyEqualityComparer())
             .ToList();

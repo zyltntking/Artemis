@@ -1,11 +1,11 @@
-﻿using Artemis.Shared.Identity.Transfer.Interface;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Shared.Identity.Transfer.Interface;
 
 namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
-/// 基本角色凭据信息
+///     基本角色凭据信息
 /// </summary>
 [DataContract]
 public record RoleClaimBase : IRoleClaim
