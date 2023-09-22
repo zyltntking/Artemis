@@ -370,122 +370,6 @@
                 令牌值
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.Records.AttachResult`2">
-            <summary>
-                结果数据附加集合记录
-            </summary>
-            <typeparam name="TResult">结果</typeparam>
-            <typeparam name="TAttach">附加</typeparam>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.AttachResult`2.Result">
-            <summary>
-                结果
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.AttachResult`2.Attach">
-            <summary>
-                附加数据
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Records.IAttachResult`2">
-            <summary>
-                结果数据附加集合
-            </summary>
-            <typeparam name="TResult">结果</typeparam>
-            <typeparam name="TAttach">附加数据</typeparam>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.IAttachResult`2.Result">
-            <summary>
-                结果
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.IAttachResult`2.Attach">
-            <summary>
-                附加数据
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Records.AttachResultException">
-            <summary>
-                结果附加扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Shared.Identity.Records.AttachResultException.Attach``1(Microsoft.AspNetCore.Identity.IdentityResult,``0)">
-            <summary>
-                附加
-            </summary>
-            <typeparam name="TAttach">附加数据类型</typeparam>
-            <param name="result">结果</param>
-            <param name="attach">附加数据</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Records.ClaimKey">
-            <summary>
-                凭据键
-            </summary>
-        </member>
-        <member name="M:Artemis.Shared.Identity.Records.ClaimKey.CompareTo(Artemis.Shared.Identity.Records.ClaimKey)">
-            <summary>
-                Compares the current instance with another object of the same type and returns an integer that indicates
-                whether the current instance precedes, follows, or occurs in the same position in the sort order as the other
-                object.
-            </summary>
-            <param name="other">An object to compare with this instance.</param>
-            <returns>
-                A value that indicates the relative order of the objects being compared. The return value has these meanings:
-                <list type="table">
-                    <listheader>
-                        <term> Value</term><description> Meaning</description>
-                    </listheader>
-                    <item>
-                        <term> Less than zero</term>
-                        <description> This instance precedes <paramref name="other" /> in the sort order.</description>
-                    </item>
-                    <item>
-                        <term> Zero</term>
-                        <description> This instance occurs in the same position in the sort order as <paramref name="other" />.</description>
-                    </item>
-                    <item>
-                        <term> Greater than zero</term>
-                        <description> This instance follows <paramref name="other" /> in the sort order.</description>
-                    </item>
-                </list>
-            </returns>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.ClaimKey.OuterId">
-            <summary>
-                凭据相关标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Records.ClaimKey.CheckStamp">
-            <summary>
-                凭据戳
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Records.ClaimKeyEqualityComparer">
-            <summary>
-                凭据键比较器
-            </summary>
-        </member>
-        <member name="M:Artemis.Shared.Identity.Records.ClaimKeyEqualityComparer.Equals(Artemis.Shared.Identity.Records.ClaimKey,Artemis.Shared.Identity.Records.ClaimKey)">
-            <summary>
-                判断相等
-            </summary>
-            <param name="lhs">左侧资源</param>
-            <param name="rhs">右侧资源</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Shared.Identity.Records.ClaimKeyEqualityComparer.GetHashCode(Artemis.Shared.Identity.Records.ClaimKey)">
-            <summary>
-                获取哈希码
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Records.EmptyRecord">
-            <summary>
-                空记录
-            </summary>
-        </member>
         <member name="T:Artemis.Shared.Identity.Services.IRoleService">
             <summary>
                 角色服务接口
@@ -661,6 +545,83 @@
             <summary>
                 凭据标识
             </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.AttachResultException">
+            <summary>
+                结果附加扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Transfer.AttachResultException.Attach``1(Microsoft.AspNetCore.Identity.IdentityResult,``0)">
+            <summary>
+                附加
+            </summary>
+            <typeparam name="TAttach">附加数据类型</typeparam>
+            <param name="result">结果</param>
+            <param name="attach">附加数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.ClaimKey">
+            <summary>
+                凭据键
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Transfer.ClaimKey.CompareTo(Artemis.Shared.Identity.Transfer.ClaimKey)">
+            <summary>
+                Compares the current instance with another object of the same type and returns an integer that indicates
+                whether the current instance precedes, follows, or occurs in the same position in the sort order as the other
+                object.
+            </summary>
+            <param name="other">An object to compare with this instance.</param>
+            <returns>
+                A value that indicates the relative order of the objects being compared. The return value has these meanings:
+                <list type="table">
+                    <listheader>
+                        <term> Value</term><description> Meaning</description>
+                    </listheader>
+                    <item>
+                        <term> Less than zero</term>
+                        <description> This instance precedes <paramref name="other" /> in the sort order.</description>
+                    </item>
+                    <item>
+                        <term> Zero</term>
+                        <description> This instance occurs in the same position in the sort order as <paramref name="other" />.</description>
+                    </item>
+                    <item>
+                        <term> Greater than zero</term>
+                        <description> This instance follows <paramref name="other" /> in the sort order.</description>
+                    </item>
+                </list>
+            </returns>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.ClaimKey.OuterId">
+            <summary>
+                凭据相关标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Transfer.ClaimKey.CheckStamp">
+            <summary>
+                凭据戳
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Transfer.ClaimKeyEqualityComparer">
+            <summary>
+                凭据键比较器
+            </summary>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Transfer.ClaimKeyEqualityComparer.Equals(Artemis.Shared.Identity.Transfer.ClaimKey,Artemis.Shared.Identity.Transfer.ClaimKey)">
+            <summary>
+                判断相等
+            </summary>
+            <param name="lhs">左侧资源</param>
+            <param name="rhs">右侧资源</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Transfer.ClaimKeyEqualityComparer.GetHashCode(Artemis.Shared.Identity.Transfer.ClaimKey)">
+            <summary>
+                获取哈希码
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Shared.Identity.Transfer.Interface.IRole">
             <summary>

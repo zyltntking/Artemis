@@ -13,7 +13,7 @@ namespace Artemis.Data.Store;
 ///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
+public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     where TEntity : class, IModelBase, IModelBase<Guid>
 {
     /// <summary>
@@ -21,14 +21,12 @@ public class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="logger">日志依赖</param>
-    /// <param name="describer">操作异常描述者</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public Store(
+    protected Store(
         DbContext context,
         IDistributedCache? cache = null,
-        ILogger? logger = null,
-        IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
+        ILogger? logger = null) : base(context, cache, logger)
     {
     }
 
@@ -71,14 +69,12 @@ public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="logger">日志依赖</param>
-    /// <param name="describer">操作异常描述者</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Store(
         DbContext context,
         IDistributedCache? cache = null,
-        ILogger? logger = null,
-        IStoreErrorDescriber? describer = null) : base(context, cache, logger, describer)
+        ILogger? logger = null) : base(context, cache, logger)
     {
     }
 }
@@ -106,7 +102,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TContext context,
         IDistributedCache? cache = null,
         ILogger? logger = null,
-        IStoreErrorDescriber? describer = null) : base(describer ?? new StoreErrorDescriber())
+        StoreErrorDescriber? describer = null) : base(describer)
     {
         Context = context;
         Cache = cache;
@@ -157,16 +153,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity无追踪访问器
     /// </summary>
-    public IQueryable<TEntity> EntityQuery =>
-        EntitySet.Where(item => !SoftDelete || item.DeletedAt != null).AsNoTracking();
+    public IQueryable<TEntity> EntityQuery => TrackingQuery.AsNoTracking();
 
     /// <summary>
     ///     键适配查询
     /// </summary>
-    public IQueryable<TEntity> KeyMatchQuery(TKey key)
-    {
-        return EntityQuery.Where(item => item.Id.Equals(key));
-    }
+    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(item => item.Id.Equals(key));
 
     /// <summary>
     ///     键适配查询
@@ -185,7 +177,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     缓存前缀
     /// </summary>
-    protected string Prefix => "Store";
+    protected virtual string Prefix => "Store";
 
     /// <summary>
     ///     缓存选项
@@ -770,8 +762,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateAsync
-    (TEntity entity,
+    public async Task<StoreResult> UpdateAsync(
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
@@ -826,20 +818,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         OnActionExecuting(id, nameof(id));
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => item.Id.Equals(id));
-
-            var changes = BatchUpdateEntity(query, setter);
+            var changes = BatchUpdateEntity(KeyMatchQuery(id), setter);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -853,21 +842,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TKey> ids,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         var idList = ids as List<TKey> ?? ids.ToList();
         OnActionExecuting(idList, nameof(ids));
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => idList.Contains(item.Id));
-
-            var changes = BatchUpdateEntity(query, setter);
+            var changes = BatchUpdateEntity(KeyMatchQuery(idList), setter);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -881,14 +867,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         Expression<Func<TEntity, bool>>? predicate = null)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         ThrowIfDisposed();
         try
         {
-            var query = Context.Set<TEntity>().AsNoTracking();
-
-            if (predicate is not null)
-                query = query.Where(predicate);
+            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
 
             var changes = BatchUpdateEntity(query, setter);
 
@@ -896,7 +879,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -910,7 +893,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         ThrowIfDisposed();
         try
         {
@@ -920,7 +903,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -936,20 +919,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => item.Id.Equals(id));
-
-            var changes = await BatchUpdateEntityAsync(query, setter, cancellationToken);
+            var changes = await BatchUpdateEntityAsync(KeyMatchQuery(id), setter, cancellationToken);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -965,21 +945,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         var idList = ids as List<TKey> ?? ids.ToList();
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => idList.Contains(item.Id));
-
-            var changes = await BatchUpdateEntityAsync(query, setter, cancellationToken);
+            var changes = await BatchUpdateEntityAsync(KeyMatchQuery(idList), setter, cancellationToken);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -995,15 +972,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         ThrowIfDisposed();
         cancellationToken.ThrowIfCancellationRequested();
         try
         {
-            var query = Context.Set<TEntity>().AsNoTracking();
-
-            if (predicate is not null)
-                query = query.Where(predicate);
+            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
 
             var changes = await BatchUpdateEntityAsync(query, setter, cancellationToken);
 
@@ -1011,7 +985,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1027,7 +1001,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         ThrowIfDisposed();
         cancellationToken.ThrowIfCancellationRequested();
         try
@@ -1038,7 +1012,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1059,7 +1033,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var entity = FindEntity(id);
 
         if (entity is null)
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
+            return StoreResult.Failed(Describer.NotFoundId(ConvertIdToString(id)));
 
         DeleteEntity(entity);
 
@@ -1108,7 +1082,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
+            return StoreResult.Failed(Describer.NotFoundId(idsString));
         }
 
         DeleteEntities(list);
@@ -1159,7 +1133,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var entity = await FindEntityAsync(id, cancellationToken);
 
         if (entity is null)
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
+            return StoreResult.Failed(Describer.NotFoundId(ConvertIdToString(id)));
 
         DeleteEntity(entity);
 
@@ -1214,7 +1188,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
-            return StoreResult.Failed(ErrorDescriber.NotFoundId(idsString));
+            return StoreResult.Failed(Describer.NotFoundId(idsString));
         }
 
         DeleteEntities(list);
@@ -1262,21 +1236,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult BatchDelete(TKey id)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         OnActionExecuting(id, nameof(id));
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => item.Id.Equals(id));
-
-            var changes = BatchDeleteEntity(query);
+            var changes = BatchDeleteEntity(KeyMatchQuery(id));
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1288,23 +1259,20 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult BatchDelete(IEnumerable<TKey> ids)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         var idList = ids as List<TKey> ?? ids.ToList();
 
         OnActionExecuting(idList, nameof(ids));
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => idList.Contains(item.Id));
-
-            var changes = BatchDeleteEntity(query);
+            var changes = BatchDeleteEntity(KeyMatchQuery(idList));
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1316,15 +1284,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         ThrowIfDisposed();
         try
         {
-            var query = Context.Set<TEntity>().AsNoTracking();
-
-            if (predicate is not null)
-                query = query.Where(predicate);
+            var query = predicate is not null ? 
+                EntityQuery.Where(predicate) : 
+                EntityQuery;
 
             var changes = BatchDeleteEntity(query);
 
@@ -1332,7 +1299,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1344,7 +1311,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult BatchDelete(IQueryable<TEntity> query)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         ThrowIfDisposed();
         try
@@ -1355,7 +1322,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1370,21 +1337,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => item.Id.Equals(id));
-
-            var changes = await BatchDeleteEntityAsync(query, cancellationToken);
+            var changes = await BatchDeleteEntityAsync(KeyMatchQuery(id), cancellationToken);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1399,23 +1363,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
-            return
-                StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         var idList = ids as List<TKey> ?? ids.ToList();
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
         try
         {
-            var query = Context.Set<TEntity>()
-                .Where(item => idList.Contains(item.Id));
-
-            var changes = await BatchDeleteEntityAsync(query, cancellationToken);
+            var changes = await BatchDeleteEntityAsync(KeyMatchQuery(idList), cancellationToken);
 
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1430,16 +1390,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
-            return StoreResult.Failed(ErrorDescriber.EnableCache());
+            return StoreResult.Failed(Describer.EnableCache());
 
         ThrowIfDisposed();
         cancellationToken.ThrowIfCancellationRequested();
         try
         {
-            var query = Context.Set<TEntity>().AsNoTracking();
-
-            if (predicate is not null)
-                query = query.Where(predicate);
+            var query = predicate is not null ?
+                EntityQuery.Where(predicate) :
+                EntityQuery;
 
             var changes = await BatchDeleteEntityAsync(query, cancellationToken);
 
@@ -1447,7 +1406,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1461,7 +1420,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IQueryable<TEntity> query,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
         ThrowIfDisposed();
         cancellationToken.ThrowIfCancellationRequested();
         try
@@ -1472,7 +1431,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -1717,8 +1676,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         SetDebugLog(nameof(Exists));
         OnActionExecuting(id, nameof(id));
-        return Context.Set<TEntity>()
-            .Any(entity => entity.Id.Equals(id));
+        return KeyMatchQuery(id).Any();
     }
 
     /// <summary>
@@ -1733,8 +1691,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         SetDebugLog(nameof(ExistsAsync));
         OnActionExecuting(id, nameof(id));
-        return Context.Set<TEntity>()
-            .AnyAsync(entity => entity.Id.Equals(id), cancellationToken);
+        return KeyMatchQuery(id).AnyAsync(cancellationToken);
     }
 
     #endregion
@@ -1942,7 +1899,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdConfig<TSource>();
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+        var entities = sourceList.Join(
+            destinations, 
+            sourceKeySelector, 
+            destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -1988,7 +1948,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> OverAsync<TSource>(
-        TSource source, TEntity destination,
+        TSource source, 
+        TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
@@ -2054,7 +2015,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+        var entities = sourceList.Join(
+            destinations, 
+            sourceKeySelector, 
+            destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -2137,7 +2101,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (destinations is null)
             throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
-        var list = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+        var list = sourceList.Join(
+            destinations, source => source.Id, 
+            destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
         var result = AttacheChange();
@@ -2167,7 +2133,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdAndNullConfig<TSource>();
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+        var entities = sourceList.Join(
+            destinations, 
+            sourceKeySelector, 
+            destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -2251,7 +2220,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (destinations is null)
             throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
-        var list = sourceList.Join(destinations, source => source.Id, destination => destination.Id,
+        var list = sourceList.Join(
+            destinations, source => source.Id, 
+            destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
@@ -2283,7 +2254,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdAndNullConfig<TSource>();
-        var entities = sourceList.Join(destinations, sourceKeySelector, destinationKeySelector,
+        var entities = sourceList.Join(
+            destinations, 
+            sourceKeySelector, 
+            destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -2442,7 +2416,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         Context.Update(entity);
 
-        if (MetaDataHosting) Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+        if (MetaDataHosting) 
+            Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
     }
 
     /// <summary>
@@ -2703,7 +2678,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 
@@ -2721,7 +2696,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
         catch (DbUpdateConcurrencyException)
         {
-            return StoreResult.Failed(ErrorDescriber.ConcurrencyFailure());
+            return StoreResult.Failed(Describer.ConcurrencyFailure());
         }
     }
 

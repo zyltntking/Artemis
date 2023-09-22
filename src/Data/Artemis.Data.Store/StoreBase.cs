@@ -21,9 +21,9 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// </summary>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    protected StoreBase(IStoreErrorDescriber describer)
+    protected StoreBase(StoreErrorDescriber? describer = null)
     {
-        ErrorDescriber = describer ?? throw new StoreParameterNullException(nameof(describer));
+        Describer = describer ?? new StoreErrorDescriber();
     }
 
     #region Implementation of IDisposable
@@ -42,7 +42,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <summary>
     ///     设置当前发生错误的错误描述者
     /// </summary>
-    protected IStoreErrorDescriber ErrorDescriber { get; set; }
+    protected StoreErrorDescriber Describer { get; set; }
 
     /// <summary>
     ///     Throws if this class has been disposed.

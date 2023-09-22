@@ -2,7 +2,6 @@
 using Artemis.Data.Core.Exceptions;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
 namespace Artemis.Data.Store;
@@ -91,15 +90,13 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     /// <param name="store">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
     /// <param name="optionsAccessor">配置依赖</param>
-    /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Manager(
         IStore<TEntity> store,
         IDistributedCache? cache = null,
         IOptions<StoreOptions>? optionsAccessor = null,
-        IStoreErrorDescriber? errors = null,
-        ILogger<IManager<TEntity>>? logger = null) : base(store, cache, optionsAccessor, errors, logger)
+        ILogger? logger = null) : base(store, cache, optionsAccessor, null, logger)
     {
     }
 }
@@ -125,12 +122,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         IStore<TEntity, TKey> store,
         IDistributedCache? cache = null,
         IOptions<StoreOptions>? optionsAccessor = null,
-        IStoreErrorDescriber? errors = null,
+        StoreErrorDescriber? errors = null,
         ILogger? logger = null)
     {
         Store = store;
         StoreOptions = optionsAccessor?.Value ?? new StoreOptions();
-        StoreErrorDescriber = errors ?? new StoreErrorDescriber();
+        Describer = errors ?? new StoreErrorDescriber();
         Logger = logger;
         Cache = cache;
 
@@ -162,7 +159,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     错误报告生成器
     /// </summary>
-    protected IStoreErrorDescriber StoreErrorDescriber { get; }
+    protected StoreErrorDescriber Describer { get; }
 
     /// <summary>
     ///     日志依赖访问器

@@ -1,4 +1,73 @@
-﻿namespace Artemis.Data.Store;
+﻿using System.Runtime.Serialization;
+
+namespace Artemis.Data.Store;
+
+#region Interface
+
+/// <summary>
+///     存储异常描述接口
+/// </summary>
+file interface IStoreErrorDescriber
+{
+    /// <summary>
+    ///     生成默认异常
+    /// </summary>
+    /// <returns></returns>
+    StoreError DefaultError();
+
+    /// <summary>
+    ///     提示并发失败异常
+    /// </summary>
+    /// <returns></returns>
+    StoreError ConcurrencyFailure();
+
+    /// <summary>
+    ///     提示未找到Id失败
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    StoreError NotFoundId(string? id);
+
+    /// <summary>
+    ///     提示已允许具缓存策略
+    /// </summary>
+    /// <returns></returns>
+    StoreError EnableCache();
+
+    /// <summary>
+    ///     实体未找到
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    StoreError EntityNotFound(string? entity, string? flag);
+
+    /// <summary>
+    ///     实体已存在
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="flag"></param>
+    /// <returns></returns>
+    StoreError EntityHasBeenSet(string? entity, string? flag);
+}
+
+/// <summary>
+///     存储子系统错误接口
+/// </summary>
+file interface IStoreError
+{
+    /// <summary>
+    ///     错误编码
+    /// </summary>
+    string? Code { get; init; }
+
+    /// <summary>
+    ///     错误描述
+    /// </summary>
+    string? Description { get; init; }
+}
+
+#endregion
 
 /// <summary>
 ///     存储异常描述器
@@ -87,4 +156,23 @@ public sealed record StoreErrorDescriber : IStoreErrorDescriber
             Description = Formatter.FormatEntityHasBeenSet(entity, flag)
         };
     }
+}
+
+/// <summary>
+///     存储子系统错误封装
+/// </summary>
+[DataContract]
+public record StoreError : IStoreError
+{
+    /// <summary>
+    ///     错误编码
+    /// </summary>
+    [DataMember(Order = 1)]
+    public string? Code { get; init; }
+
+    /// <summary>
+    ///     错误描述
+    /// </summary>
+    [DataMember(Order = 2)]
+    public string? Description { get; init; }
 }

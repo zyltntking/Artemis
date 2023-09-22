@@ -8,13 +8,6 @@ public interface IConcurrencyPartitionBase : IPartitionBase, IConcurrencyPartiti
 }
 
 /// <summary>
-///     基本分区模型
-/// </summary>
-public interface IPartitionBase : IModelBase, IPartitionBase<Guid>
-{
-}
-
-/// <summary>
 ///     基本并发分区模型接口
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
@@ -26,8 +19,16 @@ public interface IConcurrencyPartitionBase<TKey> : IPartitionBase<TKey>, IConcur
 /// <summary>
 ///     基本分区模型
 /// </summary>
+public interface IPartitionBase : IModelBase, IPartitionBase<Guid>
+{
+}
+
+/// <summary>
+///     基本分区模型
+/// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot where TKey : IEquatable<TKey>
+public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot 
+    where TKey : IEquatable<TKey>
 {
 }
 
@@ -39,6 +40,15 @@ public interface IConcurrencyModelBase : IModelBase, IConcurrencyModelBase<Guid>
 }
 
 /// <summary>
+///     基本并发模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp 
+    where TKey : IEquatable<TKey>
+{
+}
+
+/// <summary>
 ///     基本模型接口
 /// </summary>
 public interface IModelBase : IKeySlot, IModelBase<Guid>
@@ -46,49 +56,34 @@ public interface IModelBase : IKeySlot, IModelBase<Guid>
 }
 
 /// <summary>
-///     基本并发模型接口
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp where TKey : IEquatable<TKey>
-{
-}
-
-/// <summary>
 ///     基本模型接口
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot where TKey : IEquatable<TKey>
+public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot 
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     生成键
     /// </summary>
     /// <param name="prefix">前缀</param>
-    string GenerateKey(string? prefix)
+    /// <param name="space">空间</param>
+    /// <param name="key"></param>
+    string GenerateKey(string? prefix = null, string? space = null, string? key = null)
     {
-        return prefix == null ? Id.ToString()! : $"{prefix}:{Id}";
+        var list = new List<string>();
+
+        if (prefix is not null) 
+            list.Add(prefix);       //1
+        
+        list.Add(GetType().Name);   //2
+
+        if (space is not null) 
+            list.Add(space);        //3
+
+        list.Add(key ?? Id.ToString()!);
+
+        return string.Join(":", list);
     }
-}
-
-/// <summary>
-///     并发锁组件接口
-/// </summary>
-public interface IConcurrencyStamp
-{
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    string ConcurrencyStamp { get; set; }
-}
-
-/// <summary>
-///     分区组件接口
-/// </summary>
-public interface IPartitionSlot
-{
-    /// <summary>
-    ///     分区标识
-    /// </summary>
-    int Partition { get; set; }
 }
 
 /// <summary>
@@ -129,4 +124,26 @@ public interface IMateSlot
     ///     删除时间
     /// </summary>
     DateTime? DeletedAt { get; set; }
+}
+
+/// <summary>
+///     并发锁组件接口
+/// </summary>
+public interface IConcurrencyStamp
+{
+    /// <summary>
+    ///     并发锁
+    /// </summary>
+    string ConcurrencyStamp { get; set; }
+}
+
+/// <summary>
+///     分区组件接口
+/// </summary>
+public interface IPartitionSlot
+{
+    /// <summary>
+    ///     分区标识
+    /// </summary>
+    int Partition { get; set; }
 }

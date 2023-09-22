@@ -4,7 +4,6 @@ using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
-using Artemis.Shared.Identity.Models;
 using Artemis.Shared.Identity.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +39,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         IArtemisRoleClaimStore roleClaimStore,
         ILogger<IdentityManager> logger,
         IOptions<StoreOptions>? optionsAccessor = null,
-        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, null, logger)
+        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, logger)
     {
         UserClaimStore = userClaimStore;
         UserLoginStore = userLoginStore;
@@ -97,11 +96,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     ///     角色凭据存储访问器
     /// </summary>
     private IArtemisRoleClaimStore RoleClaimStore { get; }
-
-    /// <summary>
-    ///     存储错误描述器
-    /// </summary>
-    private IStoreErrorDescriber Describer { get; } = new StoreErrorDescriber();
 
     #endregion
 
@@ -194,6 +188,14 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     public void Test()
     {
+        var role = new ArtemisRole
+        {
+            Name = "test",
+            NormalizedName = "test",
+            Description = "test",
+            Id = default
+        };
+
         SetKey("keyName", Guid.NewGuid());
     }
 
