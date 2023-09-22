@@ -34,6 +34,18 @@ public class RoleService : ApiController, IRoleService
     #region ControllerActions
 
     /// <summary>
+    /// 测试
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("Test")]
+    public IActionResult Test()
+    {
+        IdentityManager.Test();
+
+        return Ok("Test");
+    }
+
+    /// <summary>
     ///     查询角色
     /// </summary>
     /// <param name="nameSearch">角色名称匹配</param>
@@ -211,7 +223,9 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     /// <remarks>GET api/Roles/{roleName}/Claims/{claimId}</remarks>
     [HttpGet("{roleName}/Claims/{claimId}")]
-    public Task<DataResult<RoleClaimInfo>> GetRoleClaim(string roleName, int claimId)
+    public Task<DataResult<RoleClaimInfo>> GetRoleClaim(
+        string roleName, 
+        int claimId)
     {
         var request = new GetRoleClaimRequest
         {
@@ -307,7 +321,6 @@ public class RoleService : ApiController, IRoleService
         return DataResult.Fail<EmptyRecord>(
             $"删除失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
     }
-
 
     /// <summary>
     ///     查询角色用户

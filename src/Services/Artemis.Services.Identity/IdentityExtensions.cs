@@ -21,8 +21,10 @@ public static class IdentityExtensions
     /// <param name="serviceOptions"></param>
     /// <param name="isDevelopment"></param>
     /// <returns></returns>
-    public static IServiceCollection AddIdentityService(this IServiceCollection serviceCollection,
-        IdentityServiceOptions serviceOptions, bool isDevelopment)
+    public static IServiceCollection AddIdentityService(
+        this IServiceCollection serviceCollection,
+        IdentityServiceOptions serviceOptions,
+        bool isDevelopment)
     {
         serviceCollection.AddDbContextPool<ArtemisIdentityContext>(options =>
             {
@@ -30,7 +32,7 @@ public static class IdentityExtensions
                     .EnableDetailedErrors(isDevelopment)
                     .EnableSensitiveDataLogging(isDevelopment)
                     .LogTo(Console.WriteLine, LogLevel.Information)
-                    .UseNpgsql(serviceOptions.Connection, npgsqlOption =>
+                    .UseNpgsql(serviceOptions.ContextConnection, npgsqlOption =>
                     {
                         npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
 
@@ -44,6 +46,20 @@ public static class IdentityExtensions
             .AddDefaultUI()
             .AddDefaultTokenProviders();
 
+        if (serviceOptions.RedisCacheConnection is not null && serviceOptions.RedisCacheConnection != string.Empty)
+        {
+            serviceCollection.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = serviceOptions.RedisCacheConnection;
+                options.InstanceName = "ArtemisIdentity:";
+            });
+
+            serviceCollection.Configure<Artemis.Data.Store.StoreOptions>(option =>
+            {
+                option.CachedManager = true;
+            });
+        }
+
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
         serviceCollection.TryAddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
@@ -56,9 +72,10 @@ public static class IdentityExtensions
 
         serviceCollection.TryAddScoped<IAccountManager, AccountManager>();
 
-        if (isDevelopment) serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
+        if (isDevelopment) 
+            serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 
-        if (serviceOptions.IdentityOptionsAction != null)
+        if (serviceOptions.IdentityOptionsAction is not null)
             serviceCollection.Configure(serviceOptions.IdentityOptionsAction);
 
         serviceCollection.ConfigureApplicationCookie(options =>

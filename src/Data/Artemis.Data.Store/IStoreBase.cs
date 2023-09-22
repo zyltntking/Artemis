@@ -20,6 +20,27 @@ public interface IStoreBase<in TEntity, TKey> : IDisposable
     where TKey : IEquatable<TKey>
 {
     /// <summary>
+    ///  规范化键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns></returns>
+    string NormalizeKey(string key);
+
+    /// <summary>
+    ///     转换字符串到id
+    /// </summary>
+    /// <param name="id">id字符串</param>
+    /// <returns>id</returns>
+    TKey? ConvertIdFromString(string id);
+
+    /// <summary>
+    ///     转换Id为字符串
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>字符串</returns>
+    string? ConvertIdToString(TKey id);
+
+    /// <summary>
     ///     获取指定实体Id
     /// </summary>
     /// <param name="entity">实体</param>

@@ -39,7 +39,7 @@ public class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="id">id字符串</param>
     /// <returns>id</returns>
-    protected override Guid ConvertIdFromString(string? id)
+    public override Guid ConvertIdFromString(string id)
     {
         return id.GuidFromString();
     }
@@ -49,7 +49,7 @@ public class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>字符串</returns>
-    protected override string ConvertIdToString(Guid id)
+    public override string ConvertIdToString(Guid id)
     {
         return id.GuidToString();
     }
@@ -185,7 +185,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     缓存前缀
     /// </summary>
-    protected virtual string Prefix => "Artemis";
+    protected virtual string Prefix => GenerateKey("Artemis","Store");
 
     /// <summary>
     ///     缓存选项
@@ -614,7 +614,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     设置配置
     /// </summary>
     /// <param name="storeOptions"></param>
-    public void SetOptions(IStoreOptions storeOptions)
+    public void SetOptions(StoreOptions storeOptions)
     {
         AutoSaveChanges = storeOptions.AutoSaveChanges;
         MetaDataHosting = storeOptions.MetaDataHosting;
@@ -2441,6 +2441,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         Context.Update(entity);
+
+        if (MetaDataHosting)
+        {
+            Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+        }
     }
 
     /// <summary>
@@ -2457,6 +2462,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         Context.UpdateRange(entities);
+
+        if (MetaDataHosting)
+        {
+            foreach (var entity in entities)
+                Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+        }
     }
 
     /// <summary>
@@ -2506,6 +2517,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             entity.UpdatedAt = now;
             entity.DeletedAt = now;
             Context.Update(entity);
+
+            Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
         }
         else
         {
@@ -2528,8 +2541,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 entity.UpdatedAt = now;
                 entity.DeletedAt = now;
             }
-
             Context.UpdateRange(entities);
+
+            foreach (var entity in entities)
+                Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
         }
         else
         {

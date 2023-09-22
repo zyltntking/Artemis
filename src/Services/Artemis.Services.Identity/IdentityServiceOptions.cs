@@ -12,7 +12,12 @@ public sealed class IdentityServiceOptions
     ///     连接
     /// </summary>
     [Required]
-    public string Connection { get; init; } = null!;
+    public string ContextConnection { get; init; } = null!;
+
+    /// <summary>
+    /// 缓存连接
+    /// </summary>
+    public string? RedisCacheConnection { get; init; }
 
     /// <summary>
     ///     AssemblyName

@@ -45,26 +45,6 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     protected IStoreErrorDescriber ErrorDescriber { get; set; }
 
     /// <summary>
-    ///     转换字符串到id
-    /// </summary>
-    /// <param name="id">id字符串</param>
-    /// <returns>id</returns>
-    protected virtual TKey? ConvertIdFromString(string? id)
-    {
-        return id.IdFromString<TKey>();
-    }
-
-    /// <summary>
-    ///     转换Id为字符串
-    /// </summary>
-    /// <param name="id">id</param>
-    /// <returns>字符串</returns>
-    protected virtual string? ConvertIdToString(TKey id)
-    {
-        return id.IdToString();
-    }
-
-    /// <summary>
     ///     Throws if this class has been disposed.
     /// </summary>
     /// <exception cref="StoreDisposedException"></exception>
@@ -74,6 +54,46 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     }
 
     #region Implementation of IStoreBase<in TEntity,TKey>
+
+    /// <summary>
+    /// 生成Key
+    /// </summary>
+    /// <param name="args">生成参数</param>
+    /// <returns></returns>
+    protected string GenerateKey(params string[] args)
+    {
+        return string.Join(":", args);
+    }
+
+    /// <summary>
+    ///  规范化键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns></returns>
+    public string NormalizeKey(string key)
+    {
+        return key.Normalize().ToUpperInvariant();
+    }
+
+    /// <summary>
+    ///     转换字符串到id
+    /// </summary>
+    /// <param name="id">id字符串</param>
+    /// <returns>id</returns>
+    public virtual TKey? ConvertIdFromString(string id)
+    {
+        return id.IdFromString<TKey>();
+    }
+
+    /// <summary>
+    ///     转换Id为字符串
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>字符串</returns>
+    public virtual string? ConvertIdToString(TKey id)
+    {
+        return id.IdToString();
+    }
 
     /// <summary>
     ///     获取指定实体Id

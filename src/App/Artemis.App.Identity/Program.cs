@@ -27,12 +27,13 @@ public static class Program
         {
             // Add services to the container.
             var connectionString = builder.Configuration
-                                       .GetConnectionString("Identity") ??
-                                   throw new InvalidOperationException("Connection string 'Identity' not found.");
+                                       .GetConnectionString("IdentityContext") ??
+                                   throw new InvalidOperationException("ContextConnection string 'Identity' not found.");
 
             builder.Services.AddIdentityService(new IdentityServiceOptions
             {
-                Connection = connectionString,
+                ContextConnection = connectionString,
+                RedisCacheConnection = builder.Configuration.GetConnectionString("RedisCache"),
                 AssemblyName = "Artemis.App.Identity"
             }, builder.Environment.IsDevelopment());
 

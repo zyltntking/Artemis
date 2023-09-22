@@ -80,20 +80,6 @@ public interface IRoleService
 }
 
 /// <summary>
-///     获取角色请求
-/// </summary>
-[DataContract]
-public record GetRoleRequest
-{
-    /// <summary>
-    ///     角色标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public virtual required string RoleName { get; set; }
-}
-
-/// <summary>
 ///     查询角色过滤器
 /// </summary>
 [DataContract]
@@ -105,6 +91,20 @@ public record FetchRolesFilter
     [NullWrappedValue]
     [DataMember(Order = 1)]
     public string? RoleNameSearch { get; set; }
+}
+
+/// <summary>
+///     获取角色请求
+/// </summary>
+[DataContract]
+public record GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public virtual required string RoleName { get; set; }
 }
 
 /// <summary>

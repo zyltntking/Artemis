@@ -23,9 +23,14 @@ public record StoreOptions : IStoreOptions
     public bool SoftDelete { get; set; } = false;
 
     /// <summary>
-    ///     是否启用具缓存策略
+    ///     是否启用具缓存存储策略
     /// </summary>
     public bool CachedStore { get; set; } = false;
+
+    /// <summary>
+    /// 是否启用据缓存管理器策略
+    /// </summary>
+    public bool CachedManager { get; set; } = false;
 
     /// <summary>
     ///     过期时间(秒)

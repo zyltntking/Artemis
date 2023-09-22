@@ -35,7 +35,7 @@ public static class DataParser
     /// </summary>
     /// <param name="id">The id to convert.</param>
     /// <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
-    public static TKey? IdFromString<TKey>(this string? id)
+    public static TKey? IdFromString<TKey>(this string? id) where TKey : IEquatable<TKey>
     {
         if (id == null) return default;
         return (TKey?)TypeDescriptor.GetConverter(typeof(TKey)).ConvertFromInvariantString(id);

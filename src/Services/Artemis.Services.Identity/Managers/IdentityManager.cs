@@ -10,7 +10,9 @@ using Artemis.Shared.Identity.Transfer;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -27,11 +29,11 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="userTokenStore"></param>
     /// <param name="roleStore">角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
-    /// <param name="roleManager">角色管理器</param>
+    /// <param name="optionsAccessor"></param>
+    /// <param name="cache">缓存以来</param>
     /// <param name="logger">日志依赖</param>
-    /// <param name="userLoginStore"></param>
-    /// <param name="userManager"></param>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <param name="userLoginStore">用户登录存储访问器</param>
+    /// <param name="userManager">用户管理器</param>
     public IdentityManager(
         IArtemisUserStore userStore,
         IArtemisUserClaimStore userClaimStore,
@@ -40,8 +42,9 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         IArtemisRoleStore roleStore,
         IArtemisRoleClaimStore roleClaimStore,
         UserManager<ArtemisUser> userManager,
-        RoleManager<ArtemisRole> roleManager,
-        ILogger<IManager<ArtemisUser>> logger) : base(userStore, null, null, logger)
+        ILogger<IdentityManager> logger,
+        IOptions<Artemis.Data.Store.StoreOptions>? optionsAccessor = null,
+        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, null, logger)
     {
         UserClaimStore = userClaimStore;
         UserLoginStore = userLoginStore;
@@ -49,7 +52,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleStore = roleStore;
         RoleClaimStore = roleClaimStore;
         UserManager = userManager;
-        RoleManager = roleManager;
     }
 
     #region Overrides of Manager<ArtemisUser,Guid>
@@ -66,7 +68,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleStore.Dispose();
         RoleClaimStore.Dispose();
         UserManager.Dispose();
-        RoleManager.Dispose();
     }
 
     #endregion
@@ -109,11 +110,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     private UserManager<ArtemisUser> UserManager { get; }
 
     /// <summary>
-    ///     角色管理器
-    /// </summary>
-    private RoleManager<ArtemisRole> RoleManager { get; }
-
-    /// <summary>
     ///     存储错误描述器
     /// </summary>
     private IStoreErrorDescriber Describer { get; } = new StoreErrorDescriber();
@@ -121,6 +117,14 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     #endregion
 
     #region Implementation of IIdentityManager
+
+    /// <summary>
+    /// 测试
+    /// </summary>
+    public void Test()
+    {
+        CacheKey("keyName", Guid.NewGuid());
+    }
 
     /// <summary>
     ///     根据角色名获取角色
@@ -135,7 +139,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"查询角色：{name}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         return RoleStore.FindRoleAsync<RoleInfo>(normalizedName, cancellationToken);
     }
@@ -192,7 +196,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var total = await query.LongCountAsync(cancellationToken);
 
-        var normalizedSearch = RoleManager.NormalizeKey(nameSearch);
+        var normalizedSearch = NormalizeKey(nameSearch);
 
         query = query.WhereIf(
             nameSearch != string.Empty,
@@ -225,20 +229,38 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="description">角色描述</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    public Task<StoreResult> CreateRoleAsync(
+    public async Task<StoreResult> CreateRoleAsync(
         string name,
         string? description = null,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog($"创建角色：{name}");
 
-        var role = Instance.CreateInstance<Role>();
+        var exists = await RoleStore.ExistsAsync(name, cancellationToken);
+
+        if (exists)
+        {
+            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), name));
+        }
+
+        var role = Instance.CreateInstance<ArtemisRole>();
+
+        var normalizedName = NormalizeKey(name);
 
         role.Name = name;
-        role.NormalizedName = RoleManager.NormalizeKey(name);
+        role.NormalizedName = NormalizeKey(name);
         role.Description = description;
 
-        return RoleStore.CreateNewAsync(role, cancellationToken: cancellationToken);
+        var result = await RoleStore.CreateAsync(role, cancellationToken: cancellationToken);
+
+        if (CacheAvailable)
+        {
+            var key = RoleStore.GenerateRoleNameKey(normalizedName);
+
+            await CacheKeyAsync(key, role.Id, cancellationToken)!;
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -255,7 +277,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"更新角色：{name}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         var role = await RoleStore.FindRoleAsync<Role>(normalizedName, cancellationToken);
 
@@ -290,7 +312,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         if (role is not null)
         {
             role.Name = pack.Name;
-            role.NormalizedName = RoleManager.NormalizeKey(pack.Name);
+            role.NormalizedName = NormalizeKey(pack.Name);
             role.Description = pack.Description;
 
             return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
@@ -315,7 +337,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         if (name != string.Empty)
         {
-            var normalizedName = RoleManager.NormalizeKey(name);
+            var normalizedName = NormalizeKey(name);
 
             var role = await RoleStore.FindRoleAsync<Role>(normalizedName, cancellationToken);
 
@@ -353,7 +375,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             if (role is not null)
             {
                 role.Name = pack.Name;
-                role.NormalizedName = RoleManager.NormalizeKey(pack.Name);
+                role.NormalizedName = NormalizeKey(pack.Name);
                 role.Description = pack.Description;
 
                 return await RoleStore.OverAsync(role, cancellationToken: cancellationToken);
@@ -375,7 +397,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"删除角色：{name}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         var role = await RoleStore.FindRoleAsync(normalizedName, cancellationToken);
 
@@ -428,7 +450,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         SetDebugLog(
             $"查询角色用户，角色：{name}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
 
@@ -579,7 +601,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"获取角色凭据列表, 角色名: {name}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
 
@@ -757,7 +779,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         SetDebugLog($"获取角色凭据，角色：{name}，凭据标识：{claimId}");
 
-        var normalizedName = RoleManager.NormalizeKey(name);
+        var normalizedName = NormalizeKey(name);
 
         var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
 
@@ -778,7 +800,9 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<RoleClaimInfo?> GetRoleClaimAsync(Guid id, int claimId,
+    public async Task<RoleClaimInfo?> GetRoleClaimAsync(
+        Guid id, 
+        int claimId,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog($"获取角色凭据，角色：{id:D}，凭据标识：{claimId}");
@@ -795,28 +819,36 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
     }
 
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="pack">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<StoreResult> CreateRoleClaimAsync(
+        string name, 
+        RoleClaimBase pack, 
+        CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 
     /// <summary>
     ///     创建角色凭据
     /// </summary>
-    /// <param name="roleClaim">凭据</param>
+    /// <param name="id">角色标识</param>
+    /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateRoleClaimAsync(
-        RoleClaim roleClaim,
+    public Task<StoreResult> CreateRoleClaimAsync(
+        Guid id, 
+        RoleClaimBase pack, 
         CancellationToken cancellationToken)
     {
-        SetDebugLog($"创建角色凭据：roleId: {roleClaim.RoleId}, stamp: {roleClaim.CheckStamp}");
-
-        var exists = await RoleClaimStore.EntityQuery
-            .AnyAsync(claim => claim.RoleId == roleClaim.RoleId &&
-                               claim.CheckStamp == roleClaim.CheckStamp,
-                cancellationToken);
-
-        if (!exists) return await RoleClaimStore.CreateNewAsync(roleClaim, cancellationToken: cancellationToken);
-
-        return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), roleClaim.CheckStamp));
+        throw new NotImplementedException();
     }
+
 
     /// <summary>
     ///     创建角色凭据

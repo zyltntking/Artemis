@@ -1,5 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -16,15 +17,17 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     ///     创建新的管理器实例
     /// </summary>
     /// <param name="store">存储访问器依赖</param>
+    /// <param name="cache">缓存管理器</param>
     /// <param name="optionsAccessor">配置依赖</param>
     /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Manager(
         IStore<TEntity> store,
-        IOptions<IStoreOptions>? optionsAccessor = null,
+        IDistributedCache? cache = null,
+        IOptions<StoreOptions>? optionsAccessor = null,
         IStoreErrorDescriber? errors = null,
-        ILogger<IManager<TEntity>>? logger = null) : base(store, optionsAccessor, errors, logger)
+        ILogger<IManager<TEntity>>? logger = null) : base(store, cache, optionsAccessor, errors, logger)
     {
     }
 }
@@ -44,10 +47,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="optionsAccessor">配置依赖</param>
     /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
+    /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Manager(
         IStore<TEntity, TKey> store,
-        IOptions<IStoreOptions>? optionsAccessor = null,
+        IDistributedCache? cache = null,
+        IOptions<StoreOptions>? optionsAccessor = null,
         IStoreErrorDescriber? errors = null,
         ILogger<IManager<TEntity, TKey>>? logger = null)
     {
@@ -55,6 +60,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         StoreOptions = optionsAccessor?.Value ?? new StoreOptions();
         StoreErrorDescriber = errors ?? new StoreErrorDescriber();
         Logger = logger ?? new NullLogger<IManager<TEntity, TKey>>();
+        Cache = cache;
 
         Store.SetOptions(StoreOptions);
     }
@@ -65,9 +71,19 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     protected IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
+    /// 缓存访问器
+    /// </summary>
+    private IDistributedCache? Cache { get; }
+
+    /// <summary>
+    /// 缓存是否可用
+    /// </summary>
+    protected bool CacheAvailable => StoreOptions.CachedManager;
+
+    /// <summary>
     ///     配置访问器
     /// </summary>
-    private IStoreOptions StoreOptions { get; }
+    private StoreOptions StoreOptions { get; }
 
     /// <summary>
     ///     错误报告生成器
@@ -89,6 +105,42 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     {
         if (StoreOptions.DebugLogger)
             Logger.LogDebug(message);
+    }
+
+    #endregion
+
+    #region Implementation of IManager<TEntity,in TKey>
+
+    /// <summary>
+    /// 规范化键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns>规范化后的键</returns>
+    public string NormalizeKey(string key)
+    {
+        return Store.NormalizeKey(key);
+    }
+
+    /// <summary>
+    /// 缓存键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <param name="value">值</param>
+    public void CacheKey(string key, TKey value)
+    {
+        Cache?.SetString(key, Store.ConvertIdToString(value)!);
+    }
+
+    /// <summary>
+    /// 缓存键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <param name="value">值</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task? CacheKeyAsync(string key, TKey value, CancellationToken cancellationToken = default)
+    {
+        return Cache?.SetStringAsync(key, Store.ConvertIdToString(value)!, cancellationToken);
     }
 
     #endregion

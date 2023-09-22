@@ -13,6 +13,11 @@ namespace Artemis.Services.Identity.Managers;
 public interface IIdentityManager : IManager<ArtemisUser>
 {
     /// <summary>
+    /// 测试
+    /// </summary>
+    public void Test();
+
+    /// <summary>
     ///     根据角色名获取角色
     /// </summary>
     /// <param name="name">角色名</param>
@@ -253,15 +258,28 @@ public interface IIdentityManager : IManager<ArtemisUser>
         int claimId,
         CancellationToken cancellationToken = default);
 
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="name">角色名</param>
+    /// <param name="pack">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> CreateRoleClaimAsync(
+        string name,
+        RoleClaimBase pack,
+        CancellationToken cancellationToken);
 
     /// <summary>
     ///     创建角色凭据
     /// </summary>
-    /// <param name="roleClaim">凭据</param>
+    /// <param name="id">角色标识</param>
+    /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<StoreResult> CreateRoleClaimAsync(
-        RoleClaim roleClaim,
+        Guid id,
+        RoleClaimBase pack,
         CancellationToken cancellationToken);
 
     /// <summary>

@@ -26,7 +26,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     ///     设置配置
     /// </summary>
     /// <param name="storeOptions"></param>
-    void SetOptions(IStoreOptions storeOptions);
+    void SetOptions(StoreOptions storeOptions);
 
     #endregion
 
