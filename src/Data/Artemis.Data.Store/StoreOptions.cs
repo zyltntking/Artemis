@@ -28,7 +28,7 @@ public record StoreOptions : IStoreOptions
     public bool CachedStore { get; set; } = false;
 
     /// <summary>
-    /// 是否启用据缓存管理器策略
+    ///     是否启用据缓存管理器策略
     /// </summary>
     public bool CachedManager { get; set; } = false;
 

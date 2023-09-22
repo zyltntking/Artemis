@@ -115,6 +115,11 @@
                 角色
             </summary>
         </member>
+        <member name="P:Artemis.Shared.Identity.Models.Role.ConcurrencyStamp">
+            <summary>
+                并发锁
+            </summary>
+        </member>
         <member name="P:Artemis.Shared.Identity.Models.Role.Id">
             <summary>
                 标识
@@ -133,11 +138,6 @@
         <member name="P:Artemis.Shared.Identity.Models.Role.NormalizedName">
             <summary>
                 规范化角色名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.ConcurrencyStamp">
-            <summary>
-                并发锁
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Models.RoleClaim">
@@ -178,6 +178,11 @@
         <member name="T:Artemis.Shared.Identity.Models.User">
             <summary>
                 用户
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Models.User.ConcurrencyStamp">
+            <summary>
+                并发锁
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Models.User.Id">
@@ -228,11 +233,6 @@
         <member name="P:Artemis.Shared.Identity.Models.User.SecurityStamp">
             <summary>
                 密码锁
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.ConcurrencyStamp">
-            <summary>
-                并发锁
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Models.User.TwoFactorEnabled">

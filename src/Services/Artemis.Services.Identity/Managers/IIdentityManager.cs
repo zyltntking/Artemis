@@ -13,7 +13,7 @@ namespace Artemis.Services.Identity.Managers;
 public interface IIdentityManager : IManager<ArtemisUser>
 {
     /// <summary>
-    /// 测试
+    ///     测试
     /// </summary>
     public void Test();
 

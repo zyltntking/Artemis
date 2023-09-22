@@ -56,7 +56,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     #region Implementation of IStoreBase<in TEntity,TKey>
 
     /// <summary>
-    /// 生成Key
+    ///     生成Key
     /// </summary>
     /// <param name="args">生成参数</param>
     /// <returns></returns>
@@ -66,7 +66,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     }
 
     /// <summary>
-    ///  规范化键
+    ///     规范化键
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>

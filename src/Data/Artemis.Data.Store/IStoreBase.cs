@@ -20,7 +20,7 @@ public interface IStoreBase<in TEntity, TKey> : IDisposable
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    ///  规范化键
+    ///     规范化键
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>

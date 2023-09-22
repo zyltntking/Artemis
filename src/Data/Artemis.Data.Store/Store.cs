@@ -185,7 +185,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     缓存前缀
     /// </summary>
-    protected virtual string Prefix => GenerateKey("Artemis","Store");
+    protected string Prefix => "Store";
 
     /// <summary>
     ///     缓存选项
@@ -2431,7 +2431,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         Context.Attach(entity);
 
-        if (entity is IConcurrencyStamp concurrency) 
+        if (entity is IConcurrencyStamp concurrency)
             concurrency.ConcurrencyStamp = Guid.NewGuid().ToString();
 
         if (MetaDataHosting)
@@ -2442,10 +2442,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         Context.Update(entity);
 
-        if (MetaDataHosting)
-        {
-            Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
-        }
+        if (MetaDataHosting) Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
     }
 
     /// <summary>
@@ -2464,10 +2461,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Context.UpdateRange(entities);
 
         if (MetaDataHosting)
-        {
             foreach (var entity in entities)
                 Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
-        }
     }
 
     /// <summary>
@@ -2541,6 +2536,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 entity.UpdatedAt = now;
                 entity.DeletedAt = now;
             }
+
             Context.UpdateRange(entities);
 
             foreach (var entity in entities)

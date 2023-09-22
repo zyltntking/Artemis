@@ -28,7 +28,8 @@ public static class Program
             // Add services to the container.
             var connectionString = builder.Configuration
                                        .GetConnectionString("IdentityContext") ??
-                                   throw new InvalidOperationException("ContextConnection string 'Identity' not found.");
+                                   throw new InvalidOperationException(
+                                       "ContextConnection string 'Identity' not found.");
 
             builder.Services.AddIdentityService(new IdentityServiceOptions
             {

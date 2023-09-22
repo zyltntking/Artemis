@@ -13,6 +13,13 @@ namespace Artemis.Shared.Identity.Models;
 public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
 {
     /// <summary>
+    ///     并发锁
+    /// </summary>
+    [MaxLength(64)]
+    [DataMember(Order = 11)]
+    public override string? ConcurrencyStamp { get; set; }
+
+    /// <summary>
     ///     标识
     /// </summary>
     [Required]
@@ -89,13 +96,6 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
     [MaxLength(64)]
     [DataMember(Order = 10)]
     public override string? SecurityStamp { get; set; }
-
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    [MaxLength(64)]
-    [DataMember(Order = 11)]
-    public override string? ConcurrencyStamp { get; set; }
 
     /// <summary>
     ///     是否启用双因子认证

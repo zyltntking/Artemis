@@ -34,7 +34,7 @@ public class RoleService : ApiController, IRoleService
     #region ControllerActions
 
     /// <summary>
-    /// 测试
+    ///     测试
     /// </summary>
     /// <returns></returns>
     [HttpGet("Test")]
@@ -224,7 +224,7 @@ public class RoleService : ApiController, IRoleService
     /// <remarks>GET api/Roles/{roleName}/Claims/{claimId}</remarks>
     [HttpGet("{roleName}/Claims/{claimId}")]
     public Task<DataResult<RoleClaimInfo>> GetRoleClaim(
-        string roleName, 
+        string roleName,
         int claimId)
     {
         var request = new GetRoleClaimRequest

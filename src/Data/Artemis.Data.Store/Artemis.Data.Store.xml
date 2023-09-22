@@ -327,24 +327,53 @@
         </member>
         <member name="M:Artemis.Data.Store.IManager`2.NormalizeKey(System.String)">
             <summary>
-            规范化键
+                规范化键
             </summary>
             <param name="key">键</param>
             <returns>规范化后的键</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IManager`2.CacheKey(System.String,`1)">
+        <member name="M:Artemis.Data.Store.IManager`2.SetKey(System.String,`1)">
             <summary>
-            缓存键
+                缓存键
             </summary>
             <param name="key">键</param>
             <param name="value">值</param>
         </member>
-        <member name="M:Artemis.Data.Store.IManager`2.CacheKeyAsync(System.String,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IManager`2.SetKeyAsync(System.String,`1,System.Threading.CancellationToken)">
             <summary>
-            缓存键
+                缓存键
             </summary>
             <param name="key">键</param>
             <param name="value">值</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IManager`2.GetKey(System.String)">
+            <summary>
+            获取键
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IManager`2.GetKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            获取键
+            </summary>
+            <param name="key">键</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IManager`2.RemoveKey(System.String)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Artemis.Data.Store.IManager`2.RemoveKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -414,7 +443,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreBase`2.NormalizeKey(System.String)">
             <summary>
-             规范化键
+                规范化键
             </summary>
             <param name="key">键</param>
             <returns></returns>
@@ -1260,12 +1289,12 @@
         </member>
         <member name="P:Artemis.Data.Store.Manager`2.Cache">
             <summary>
-            缓存访问器
+                缓存访问器
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Manager`2.CacheAvailable">
             <summary>
-            缓存是否可用
+                缓存是否可用
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Manager`2.StoreOptions">
@@ -1289,33 +1318,74 @@
             </summary>
             <param name="message">日志消息</param>
         </member>
+        <member name="M:Artemis.Data.Store.Manager`2.ThrowIfDisposed">
+            <summary>
+                Throws if this class has been disposed.
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.Manager`2.KeyPrefix">
+            <summary>
+            键前缀
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.GenerateKey(System.String[])">
+            <summary>
+                生成Key
+            </summary>
+            <param name="args">生成参数</param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Data.Store.Manager`2.NormalizeKey(System.String)">
             <summary>
-            规范化键
+                规范化键
             </summary>
             <param name="key">键</param>
             <returns>规范化后的键</returns>
         </member>
-        <member name="M:Artemis.Data.Store.Manager`2.CacheKey(System.String,`1)">
+        <member name="M:Artemis.Data.Store.Manager`2.SetKey(System.String,`1)">
             <summary>
-            缓存键
+                缓存键
             </summary>
             <param name="key">键</param>
             <param name="value">值</param>
         </member>
-        <member name="M:Artemis.Data.Store.Manager`2.CacheKeyAsync(System.String,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Manager`2.SetKeyAsync(System.String,`1,System.Threading.CancellationToken)">
             <summary>
-            缓存键
+                缓存键
             </summary>
             <param name="key">键</param>
             <param name="value">值</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.Manager`2.ThrowIfDisposed">
+        <member name="M:Artemis.Data.Store.Manager`2.GetKey(System.String)">
             <summary>
-                Throws if this class has been disposed.
+            获取键
             </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.GetKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            获取键
+            </summary>
+            <param name="key">键</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.RemoveKey(System.String)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.RemoveKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
         </member>
         <member name="F:Artemis.Data.Store.Manager`2._disposed">
             <summary>
@@ -2500,14 +2570,14 @@
         </member>
         <member name="M:Artemis.Data.Store.StoreBase`2.GenerateKey(System.String[])">
             <summary>
-            生成Key
+                生成Key
             </summary>
             <param name="args">生成参数</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.StoreBase`2.NormalizeKey(System.String)">
             <summary>
-             规范化键
+                规范化键
             </summary>
             <param name="key">键</param>
             <returns></returns>
@@ -2675,7 +2745,7 @@
         </member>
         <member name="P:Artemis.Data.Store.StoreOptions.CachedManager">
             <summary>
-            是否启用据缓存管理器策略
+                是否启用据缓存管理器策略
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.StoreOptions.Expires">

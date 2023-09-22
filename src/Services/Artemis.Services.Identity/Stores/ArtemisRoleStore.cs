@@ -12,13 +12,6 @@ namespace Artemis.Services.Identity.Stores;
 public interface IArtemisRoleStore : IStore<ArtemisRole>
 {
     /// <summary>
-    /// 生成角色名键
-    /// </summary>
-    /// <param name="roleName"></param>
-    /// <returns></returns>
-    string GenerateRoleNameKey(string roleName);
-
-    /// <summary>
     ///     根据角色名获取角色
     /// </summary>
     /// <param name="name"></param>
@@ -84,16 +77,6 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
     }
 
     #region Implementation of IArtemisRoleStore
-
-    /// <summary>
-    /// 生成角色名键
-    /// </summary>
-    /// <param name="roleName"></param>
-    /// <returns></returns>
-    public string GenerateRoleNameKey(string roleName)
-    {
-        return GenerateKey("Store","Role","Name",roleName);
-    }
 
     /// <summary>
     ///     根据角色名获取角色

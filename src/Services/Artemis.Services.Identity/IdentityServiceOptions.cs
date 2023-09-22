@@ -15,7 +15,7 @@ public sealed class IdentityServiceOptions
     public string ContextConnection { get; init; } = null!;
 
     /// <summary>
-    /// 缓存连接
+    ///     缓存连接
     /// </summary>
     public string? RedisCacheConnection { get; init; }
 

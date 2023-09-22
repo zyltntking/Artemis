@@ -525,7 +525,7 @@
         </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.RedisCacheConnection">
             <summary>
-            缓存连接
+                缓存连接
             </summary>
         </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.AssemblyName">
@@ -714,9 +714,41 @@
                 存储错误描述器
             </summary>
         </member>
+        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.CacheRoleIdAsync(System.String,System.Guid,System.Threading.CancellationToken)">
+            <summary>
+               缓存角色名键
+            </summary>
+            <param name="roleName">角色名称</param>
+            <param name="roleId">角色标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleIdAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            查询角色id
+            </summary>
+            <param name="roleName">角色名</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.DeleteRolIdAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            删除角色名键
+            </summary>
+            <param name="roleName">角色名</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GenerateRoleNameKey(System.String)">
+            <summary>
+            生成角色名键
+            </summary>
+            <param name="roleName">角色名称</param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Services.Identity.Managers.IdentityManager.Test">
             <summary>
-            测试
+                测试
             </summary>
         </member>
         <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleAsync(System.String,System.Threading.CancellationToken)">
@@ -982,7 +1014,7 @@
         </member>
         <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.Test">
             <summary>
-            测试
+                测试
             </summary>
         </member>
         <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleAsync(System.String,System.Threading.CancellationToken)">
@@ -1263,13 +1295,6 @@
                 ArtemisUserStore接口
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.GenerateRoleNameKey(System.String)">
-            <summary>
-            生成角色名键
-            </summary>
-            <param name="roleName"></param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.FindRoleAsync(System.String,System.Threading.CancellationToken)">
             <summary>
                 根据角色名获取角色
@@ -1322,13 +1347,6 @@
             <param name="context">数据访问上下文</param>
             <param name="cache">缓存依赖</param>
             <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.GenerateRoleNameKey(System.String)">
-            <summary>
-            生成角色名键
-            </summary>
-            <param name="roleName"></param>
-            <returns></returns>
         </member>
         <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.FindRoleAsync(System.String,System.Threading.CancellationToken)">
             <summary>

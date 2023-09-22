@@ -13,6 +13,13 @@ namespace Artemis.Shared.Identity.Models;
 public class Role : IdentityRole<Guid>, IKeySlot, IConcurrencyStamp, IRole
 {
     /// <summary>
+    ///     并发锁
+    /// </summary>
+    [MaxLength(64)]
+    [DataMember(Order = 4)]
+    public override string? ConcurrencyStamp { get; set; }
+
+    /// <summary>
     ///     标识
     /// </summary>
     [Required]
@@ -41,11 +48,4 @@ public class Role : IdentityRole<Guid>, IKeySlot, IConcurrencyStamp, IRole
     [MaxLength(32)]
     [DataMember(Order = 3)]
     public override required string NormalizedName { get; set; }
-
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    [MaxLength(64)]
-    [DataMember(Order = 4)]
-    public override string? ConcurrencyStamp { get; set; }
 }

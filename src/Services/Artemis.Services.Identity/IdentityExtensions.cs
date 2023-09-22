@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using StoreOptions = Artemis.Data.Store.StoreOptions;
 
 namespace Artemis.Services.Identity;
 
@@ -54,10 +55,7 @@ public static class IdentityExtensions
                 options.InstanceName = "ArtemisIdentity:";
             });
 
-            serviceCollection.Configure<Artemis.Data.Store.StoreOptions>(option =>
-            {
-                option.CachedManager = true;
-            });
+            serviceCollection.Configure<StoreOptions>(option => { option.CachedManager = true; });
         }
 
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
@@ -72,7 +70,7 @@ public static class IdentityExtensions
 
         serviceCollection.TryAddScoped<IAccountManager, AccountManager>();
 
-        if (isDevelopment) 
+        if (isDevelopment)
             serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 
         if (serviceOptions.IdentityOptionsAction is not null)
