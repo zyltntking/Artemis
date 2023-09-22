@@ -92,7 +92,7 @@ internal static class DataTypeAdapter
 /// <summary>
 ///     数据类型集
 /// </summary>
-public class DataTypeSet
+public record DataTypeSet
 {
     /// <summary>
     ///     DateTime数据类型

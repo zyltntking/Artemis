@@ -1,8 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
-using Artemis.Shared.Identity.Models;
-using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Services.Identity.Managers;
@@ -257,100 +255,4 @@ public interface IIdentityManager : IManager<ArtemisUser>
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     创建角色凭据
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="pack">凭据信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> CreateRoleClaimAsync(
-        string name,
-        RoleClaimBase pack,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     创建角色凭据
-    /// </summary>
-    /// <param name="id">角色标识</param>
-    /// <param name="pack">凭据信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> CreateRoleClaimAsync(
-        Guid id,
-        RoleClaimBase pack,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     创建角色凭据
-    /// </summary>
-    /// <param name="roleClaims">凭据列表</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> CreateRoleClaimsAsync(
-        IEnumerable<RoleClaim> roleClaims,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     更新角色凭据
-    /// </summary>
-    /// <param name="roleClaim"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<StoreResult> UpdateRoleClaimAsync(
-        RoleClaim roleClaim,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     更新角色凭据
-    /// </summary>
-    /// <param name="roleClaims">凭据列表</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> UpdateRoleClaimsAsync(
-        IEnumerable<RoleClaim> roleClaims,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     删除角色凭据
-    /// </summary>
-    /// <param name="claimId">角色凭据标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> DeleteRoleClaimAsync(
-        int claimId,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     删除角色凭据
-    /// </summary>
-    /// <param name="roleId">角色标识</param>
-    /// <param name="checkStamp">校验戳</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> DeleteRoleClaimAsync(
-        Guid roleId,
-        string checkStamp,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     删除角色凭据
-    /// </summary>
-    /// <param name="claimIds">凭据标识列表</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> DeleteRoleClaimsAsync(
-        IEnumerable<int> claimIds,
-        CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     删除角色凭据
-    /// </summary>
-    /// <param name="claimKeys">角色键</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> DeleteRoleClaimsAsync(
-        IEnumerable<ClaimKey> claimKeys,
-        CancellationToken cancellationToken);
 }

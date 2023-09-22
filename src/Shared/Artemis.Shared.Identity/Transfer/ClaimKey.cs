@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace Artemis.Shared.Identity.Records;
+namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
 ///     凭据键

@@ -5,10 +5,31 @@ using Artemis.Data.Core.Exceptions;
 
 namespace Artemis.Data.Core.Fundamental;
 
+#region Interface
+
+/// <summary>
+///     枚举接口
+/// </summary>
+/// <typeparam name="TEnum">枚举类</typeparam>
+file interface IEnumeration<TEnum> : IComparable, IEquatable<TEnum>
+{
+    /// <summary>
+    ///     枚举名称
+    /// </summary>
+    string Name { get; }
+
+    /// <summary>
+    ///     枚举ID
+    /// </summary>
+    int Id { get; }
+}
+
+#endregion
+
 /// <summary>
 ///     枚举类
 /// </summary>
-public abstract class Enumeration : IEnumeration<Enumeration>
+public class Enumeration : IEnumeration<Enumeration>
 {
     /// <summary>
     ///     构造函数
@@ -54,7 +75,8 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// </returns>
     public bool Equals(Enumeration? other)
     {
-        if (other == null) return false;
+        if (other == null) 
+            return false;
 
         var typeMatches = GetType() == other.GetType();
         var valueMatches = Id.Equals(other.Id);
@@ -138,7 +160,8 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <returns></returns>
     public static IEnumerable<int> GetAllId(Type type)
     {
-        if (type.BaseType != typeof(Enumeration)) return new List<int>();
+        if (type.BaseType != typeof(Enumeration)) 
+            return new List<int>();
 
         return type.GetFields(BindingFlags.Public |
                               BindingFlags.Static |

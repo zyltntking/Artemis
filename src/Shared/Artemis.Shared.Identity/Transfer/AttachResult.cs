@@ -1,12 +1,12 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Store;
+using Microsoft.AspNetCore.Identity;
 
-namespace Artemis.Services.Identity;
+namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
 ///     结果附加扩展
 /// </summary>
-internal static class AttachResultException
+public static class AttachResultException
 {
     /// <summary>
     ///     附加
@@ -15,12 +15,12 @@ internal static class AttachResultException
     /// <param name="result">结果</param>
     /// <param name="attach">附加数据</param>
     /// <returns></returns>
-    public static AttachResult<StoreResult, TAttach> Attach<TAttach>(
-        this StoreResult result,
+    public static AttachResult<IdentityResult, TAttach> Attach<TAttach>(
+        this IdentityResult result,
         TAttach attach)
         where TAttach : class
     {
-        return new AttachResult<StoreResult, TAttach>
+        return new AttachResult<IdentityResult, TAttach>
         {
             Result = result,
             Attach = attach

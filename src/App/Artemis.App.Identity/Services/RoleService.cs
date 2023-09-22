@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Extensions.Web.Controller;
 using Artemis.Services.Identity.Managers;
-using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Services;
 using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Mvc;

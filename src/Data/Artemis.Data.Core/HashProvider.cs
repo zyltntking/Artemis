@@ -11,7 +11,7 @@ public class HashProvider
     /// <summary>
     ///     默认键
     /// </summary>
-    public static string DefaultKey { get; set; } = "Artemis";
+    private static string DefaultKey { get; set; } = "Artemis";
 
     /// <summary>
     ///     密钥字节码

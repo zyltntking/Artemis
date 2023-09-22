@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
-using Artemis.Shared.Identity.Records;
 using Artemis.Shared.Identity.Transfer;
 using ProtoBuf;
 

@@ -138,7 +138,8 @@ public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguratio
 ///     Artemis抽象类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : class
+public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> 
+    where TEntity : class
 {
     #region Implementation of IEntityTypeConfiguration<TEntity>
 

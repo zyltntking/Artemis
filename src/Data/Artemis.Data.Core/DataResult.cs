@@ -4,6 +4,58 @@ using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
+#region interface
+
+/// <summary>
+///     数据结果协议模板接口
+/// </summary>
+file interface IResultBase
+{
+    /// <summary>
+    ///     消息码
+    /// </summary>
+    int Code { get; set; }
+
+    /// <summary>
+    ///     操作是否成功
+    /// </summary>
+    bool Succeeded { set; get; }
+
+    /// <summary>
+    ///     消息
+    /// </summary>
+    string Message { get; set; }
+
+    /// <summary>
+    ///     异常信息
+    /// </summary>
+    string? Error { get; set; }
+
+    /// <summary>
+    ///     本地时间戳
+    /// </summary>
+    DateTime DateTime { get; set; }
+
+    /// <summary>
+    ///     时间戳
+    /// </summary>
+    long Timestamp { get; set; }
+}
+
+/// <summary>
+///     数据结果协议模板接口
+/// </summary>
+/// <typeparam name="T">模板类型</typeparam>
+file interface IResultBase<T> : IResultBase
+{
+    /// <summary>
+    ///     数据
+    /// </summary>
+    T? Data { get; set; }
+}
+
+#endregion
+
 /// <summary>
 ///     数据结果协议模板接口
 /// </summary>
@@ -72,28 +124,19 @@ public record DataResult<T> : IResultBase<T>
     /// <summary>
     ///     获取描述器
     /// </summary>
-    public Dictionary<string, Collection<string>> GetDescriptor()
-    {
-        return Descriptor;
-    }
+    public Dictionary<string, Collection<string>> GetDescriptor() => Descriptor;
 
     /// <summary>
     ///     设置异常
     /// </summary>
     /// <param name="exception">异常</param>
-    public void SetException(Exception exception)
-    {
-        InnerException = exception;
-    }
+    public void SetException(Exception exception) => InnerException = exception;
 
     /// <summary>
     ///     获取异常
     /// </summary>
     /// <returns></returns>
-    public Exception? GetException()
-    {
-        return InnerException;
-    }
+    public Exception? GetException() => InnerException;
 
     #region Implementation of IResultBase
 
@@ -127,9 +170,8 @@ public record DataResult<T> : IResultBase<T>
     /// <summary>
     ///     异常信息
     /// </summary>
-    [Required]
     [DataMember(Order = 4)]
-    public required string? Error { get; set; }
+    public string? Error { get; set; }
 
     /// <summary>
     ///     本地时间戳
@@ -176,9 +218,9 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>成功结果</returns>
-    public static DataResult<object> Success(string message = "成功")
+    public static DataResult<EmptyRecord> Success(string message = "成功")
     {
-        return GenerateResult(ResultStatus.Success, message, new object());
+        return GenerateResult(ResultStatus.Success, message, new EmptyRecord());
     }
 
     /// <summary>
@@ -197,9 +239,9 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>失败结果</returns>
-    public static DataResult<object> Fail(string message = "失败")
+    public static DataResult<EmptyRecord> Fail(string message = "失败")
     {
-        return GenerateResult<object>(ResultStatus.Fail, message);
+        return GenerateResult<EmptyRecord>(ResultStatus.Fail, message);
     }
 
     /// <summary>
@@ -222,10 +264,10 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static DataResult<object> Exception(Exception exception, int code = ResultStatus.Exception,
+    public static DataResult<EmptyRecord> Exception(Exception exception, int code = ResultStatus.Exception,
         string message = "异常")
     {
-        return GenerateResult<object>(code, message, default, exception);
+        return GenerateResult<EmptyRecord>(code, message, default, exception);
     }
 
     /// <summary>
@@ -264,20 +306,26 @@ public static class DataResult
 /// <summary>
 ///     结果状态
 /// </summary>
-public static class ResultStatus
+internal static class ResultStatus
 {
     /// <summary>
     ///     成功
     /// </summary>
-    public const int Success = 0;
+    internal const int Success = 0;
 
     /// <summary>
     ///     失败
     /// </summary>
-    public const int Fail = 1;
+    internal const int Fail = 1;
 
     /// <summary>
     ///     异常
     /// </summary>
     public const int Exception = 9;
 }
+
+/// <summary>
+///     空记录
+/// </summary>
+[DataContract]
+public record EmptyRecord;
