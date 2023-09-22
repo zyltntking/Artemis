@@ -3,7 +3,23 @@
 /// <summary>
 ///     基本分区模型
 /// </summary>
+public interface IConcurrencyPartitionBase : IPartitionBase, IConcurrencyPartitionBase<Guid>, IConcurrencyModelBase
+{
+}
+
+/// <summary>
+///     基本分区模型
+/// </summary>
 public interface IPartitionBase : IModelBase, IPartitionBase<Guid>
+{
+}
+
+/// <summary>
+///     基本并发分区模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public interface IConcurrencyPartitionBase<TKey> : IPartitionBase<TKey>, IConcurrencyModelBase<TKey>
+    where TKey : IEquatable<TKey>
 {
 }
 
@@ -16,9 +32,24 @@ public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot where T
 }
 
 /// <summary>
+///     基本并发模型接口
+/// </summary>
+public interface IConcurrencyModelBase : IModelBase, IConcurrencyModelBase<Guid>
+{
+}
+
+/// <summary>
 ///     基本模型接口
 /// </summary>
 public interface IModelBase : IKeySlot, IModelBase<Guid>
+{
+}
+
+/// <summary>
+///     基本并发模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp where TKey : IEquatable<TKey>
 {
 }
 
@@ -36,6 +67,17 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot where TKey : IEqua
     {
         return prefix == null ? Id.ToString()! : $"{prefix}:{Id}";
     }
+}
+
+/// <summary>
+///     并发锁组件接口
+/// </summary>
+public interface IConcurrencyStamp
+{
+    /// <summary>
+    ///     并发锁
+    /// </summary>
+    string ConcurrencyStamp { get; set; }
 }
 
 /// <summary>

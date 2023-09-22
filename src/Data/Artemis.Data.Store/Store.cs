@@ -211,12 +211,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             if (CacheOption is null)
                 Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
             else
                 Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption);
+
             SetDebugLog("Entity Cached");
         }
     }
@@ -233,13 +235,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             if (CacheOption is null)
                 await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
             else
                 await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption,
                     cancellationToken)!;
+
             SetDebugLog("Entity Cached");
         }
     }
@@ -255,6 +259,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
 
             var count = 0;
+
             foreach (var entity in entities)
             {
                 Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
@@ -279,6 +284,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
 
             var count = 0;
+
             foreach (var entity in entities)
             {
                 await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
@@ -299,7 +305,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var json = Cache?.GetString(key);
 
@@ -322,7 +329,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var json = await Cache?.GetStringAsync(key, cancellationToken)!;
 
@@ -342,7 +350,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var list = new List<TEntity>();
 
@@ -375,7 +384,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var list = new List<TEntity>();
 
@@ -403,7 +413,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             Cache?.Remove(entity.GenerateKey(Prefix));
             SetDebugLog("Entity Remove");
@@ -421,7 +432,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
             SetDebugLog("Entity Remove");
@@ -436,7 +448,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var count = 0;
             foreach (var entity in entities)
@@ -460,7 +473,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         if (CachedStore)
         {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
 
             var count = 0;
             foreach (var entity in entities)
@@ -622,11 +636,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public virtual StoreResult Create(TEntity entity)
     {
         SetDebugLog(nameof(Create));
+
         OnActionExecuting(entity, nameof(entity));
+
         AddEntity(entity);
-        var changes = SaveChanges();
+
+        var result = AttacheChange();
+
         CacheEntity(entity);
-        return StoreResult.Success(changes);
+
+        return result;
     }
 
     /// <summary>
@@ -637,12 +656,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public virtual StoreResult Create(IEnumerable<TEntity> entities)
     {
         SetDebugLog(nameof(Create));
+
         var list = entities.ToList();
+
         OnActionExecuting(list, nameof(entities));
+
         AddEntities(list);
-        var changes = SaveChanges();
+
+        var result = AttacheChange();
+
         CacheEntities(list);
-        return StoreResult.Success(changes);
+
+        return result;
     }
 
     /// <summary>
@@ -656,11 +681,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateAsync));
+
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
+
         AddEntity(entity);
-        var changes = await SaveChangesAsync(cancellationToken);
+
+        var result = await AttacheChangeAsync(cancellationToken);
+
         await CacheEntityAsync(entity, cancellationToken);
-        return StoreResult.Success(changes);
+
+        return result;
     }
 
     /// <summary>
@@ -674,12 +704,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(CreateAsync));
+
         var list = entities.ToList();
+
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
+
         AddEntities(list);
-        var changes = await SaveChangesAsync(cancellationToken);
+
+        var result = await AttacheChangeAsync(cancellationToken);
+
         await CacheEntitiesAsync(list, cancellationToken);
-        return StoreResult.Success(changes);
+
+        return result;
     }
 
     #endregion
@@ -694,10 +730,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Update(TEntity entity)
     {
         SetDebugLog(nameof(Update));
+
         OnActionExecuting(entity, nameof(entity));
+
         UpdateEntity(entity);
+
         var result = AttacheChange();
+
         CacheEntity(entity);
+
         return result;
     }
 
@@ -709,11 +750,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Update(IEnumerable<TEntity> entities)
     {
         SetDebugLog(nameof(Update));
+
         var list = entities.ToList();
+
         OnActionExecuting(list, nameof(entities));
+
         UpdateEntities(list);
+
         var result = AttacheChange();
+
         CacheEntities(list);
+
         return result;
     }
 
@@ -728,10 +775,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
+
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
+
         UpdateEntity(entity);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await CacheEntityAsync(entity, cancellationToken);
+
         return result;
     }
 
@@ -746,11 +798,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(UpdateAsync));
+
         var list = entities.ToList();
+
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
+
         UpdateEntities(list);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await CacheEntitiesAsync(list, cancellationToken);
+
         return result;
     }
 
@@ -995,13 +1053,20 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Delete(TKey id)
     {
         SetDebugLog(nameof(Delete));
+
         OnActionExecuting(id, nameof(id));
+
         var entity = FindEntity(id);
+
         if (entity is null)
             return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
+
         DeleteEntity(entity);
+
         var result = AttacheChange();
+
         RemoveCachedEntity(entity);
+
         return result;
     }
 
@@ -1013,10 +1078,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Delete(TEntity entity)
     {
         SetDebugLog(nameof(Delete));
+
         OnActionExecuting(entity, nameof(entity));
+
         DeleteEntity(entity);
+
         var result = AttacheChange();
+
         RemoveCachedEntity(entity);
+
         return result;
     }
 
@@ -1028,9 +1098,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Delete(IEnumerable<TKey> ids)
     {
         SetDebugLog(nameof(Delete));
+
         var idList = ids as List<TKey> ?? ids.ToList();
+
         OnActionExecuting(idList, nameof(ids));
+
         var list = FindEntities(idList).ToList();
+
         if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
@@ -1038,8 +1112,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         DeleteEntities(list);
+
         var result = AttacheChange();
+
         RemoveCachedEntities(list);
+
         return result;
     }
 
@@ -1051,11 +1128,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public StoreResult Delete(IEnumerable<TEntity> entities)
     {
         SetDebugLog(nameof(Delete));
+
         var list = entities.ToList();
+
         OnActionExecuting(list, nameof(entities));
+
         DeleteEntities(list);
+
         var result = AttacheChange();
+
         RemoveCachedEntities(list);
+
         return result;
     }
 
@@ -1070,13 +1153,20 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
+
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
+
         var entity = await FindEntityAsync(id, cancellationToken);
+
         if (entity is null)
             return StoreResult.Failed(ErrorDescriber.NotFoundId(ConvertIdToString(id)));
+
         DeleteEntity(entity);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await RemoveCachedEntityAsync(entity, cancellationToken);
+
         return result;
     }
 
@@ -1091,10 +1181,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
+
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
+
         DeleteEntity(entity);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await RemoveCachedEntityAsync(entity, cancellationToken);
+
         return result;
     }
 
@@ -1109,9 +1204,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
+
         var idList = ids as List<TKey> ?? ids.ToList();
+
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
+
         var list = (await FindEntitiesAsync(idList, cancellationToken)).ToList();
+
         if (!list.Any())
         {
             var idsString = string.Join(",", idList.Select(ConvertIdToString));
@@ -1119,8 +1218,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         DeleteEntities(list);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await RemoveCachedEntitiesAsync(list, cancellationToken);
+
         return result;
     }
 
@@ -1135,11 +1237,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         CancellationToken cancellationToken = default)
     {
         SetDebugLog(nameof(DeleteAsync));
+
         var list = entities.ToList();
+
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
+
         DeleteEntities(list);
+
         var result = await AttacheChangeAsync(cancellationToken);
+
         await RemoveCachedEntitiesAsync(list, cancellationToken);
+
         return result;
     }
 
@@ -1153,7 +1261,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被删除实体的主键</param>
     public StoreResult BatchDelete(TKey id)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         OnActionExecuting(id, nameof(id));
         try
         {
@@ -1177,8 +1287,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult BatchDelete(IEnumerable<TKey> ids)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         var idList = ids as List<TKey> ?? ids.ToList();
+
         OnActionExecuting(idList, nameof(ids));
         try
         {
@@ -1202,7 +1315,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         ThrowIfDisposed();
         try
         {
@@ -1228,7 +1343,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult BatchDelete(IQueryable<TEntity> query)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         ThrowIfDisposed();
         try
         {
@@ -1252,7 +1369,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
         try
         {
@@ -1279,7 +1398,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return
+                StoreResult.Failed(ErrorDescriber.EnableCache());
+
         var idList = ids as List<TKey> ?? ids.ToList();
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
         try
@@ -1307,7 +1429,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Expression<Func<TEntity, bool>>? predicate,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore) return StoreResult.Failed(ErrorDescriber.EnableCache());
+        if (CachedStore)
+            return StoreResult.Failed(ErrorDescriber.EnableCache());
+
         ThrowIfDisposed();
         cancellationToken.ThrowIfCancellationRequested();
         try
@@ -1639,9 +1763,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
-        var changes = SaveChanges();
+        var result = AttacheChange();
         CacheEntity(entity);
-        return StoreResult.Success(changes);
+        return result;
     }
 
     /// <summary>
@@ -1663,9 +1787,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
-        var changes = SaveChanges();
+        var result = AttacheChange();
         CacheEntities(list);
-        return StoreResult.Success(changes);
+        return result;
     }
 
     /// <summary>
@@ -1688,9 +1812,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
-        var changes = await SaveChangesAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
         await CacheEntityAsync(entity, cancellationToken);
-        return StoreResult.Success(changes);
+        return result;
     }
 
     /// <summary>
@@ -1714,9 +1838,9 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entities));
         var list = entities.ToList();
         AddEntities(list);
-        var changes = await SaveChangesAsync(cancellationToken);
+        var result = await AttacheChangeAsync(cancellationToken);
         await CacheEntitiesAsync(list, cancellationToken);
-        return StoreResult.Success(changes);
+        return result;
     }
 
     #endregion
@@ -2306,6 +2430,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     private void UpdateEntity(TEntity entity)
     {
         Context.Attach(entity);
+
+        if (entity is IConcurrencyStamp concurrency) 
+            concurrency.ConcurrencyStamp = Guid.NewGuid().ToString();
+
         if (MetaDataHosting)
         {
             var now = DateTime.Now;

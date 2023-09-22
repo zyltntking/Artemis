@@ -10,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     用户
 /// </summary>
 [DataContract]
-public class User : IdentityUser<Guid>, IKeySlot, IUser
+public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
 {
     /// <summary>
     ///     标识

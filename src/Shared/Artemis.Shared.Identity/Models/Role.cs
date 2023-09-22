@@ -10,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     角色
 /// </summary>
 [DataContract]
-public class Role : IdentityRole<Guid>, IKeySlot, IRole
+public class Role : IdentityRole<Guid>, IKeySlot, IConcurrencyStamp, IRole
 {
     /// <summary>
     ///     标识

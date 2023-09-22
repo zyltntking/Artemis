@@ -9,7 +9,7 @@ namespace Artemis.Services.Identity.Data;
 ///     ArtemisUser
 /// </summary>
 [EntityTypeConfiguration(typeof(UserConfiguration))]
-public class ArtemisUser : User, IModelBase
+public class ArtemisUser : User, IConcurrencyModelBase
 {
     /// <summary>
     ///     用户具备的角色
