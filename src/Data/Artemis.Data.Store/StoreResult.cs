@@ -84,6 +84,17 @@ public record StoreResult : IStoreResult
     }
 
     /// <summary>
+    /// 描述错误代码
+    /// </summary>
+    /// <returns></returns>
+    private string DescribeCode => string.Join(",", Errors.Select(error => error.Code).ToList());
+
+    /// <summary>
+    /// 描述错误
+    /// </summary>
+    public string DescribeError => string.Join(",", Errors.Select(error => error.Description).ToList());
+
+    /// <summary>
     ///     ToString
     /// </summary>
     /// <returns></returns>
@@ -91,7 +102,6 @@ public record StoreResult : IStoreResult
     {
         return Succeeded
             ? "Succeeded"
-            : string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed",
-                string.Join(",", Errors.Select(x => x.Code).ToList()));
+            : string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed", DescribeCode);
     }
 }

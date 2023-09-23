@@ -49,8 +49,4 @@
 	  <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Records\" />
-	</ItemGroup>
-
 </Project>

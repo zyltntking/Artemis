@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
+using Artemis.Data.Store.Extensions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -148,7 +149,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     Entity有追踪访问器
     /// </summary>
-    public IQueryable<TEntity> TrackingQuery => EntitySet.Where(item => !SoftDelete || item.DeletedAt != null);
+    public IQueryable<TEntity> TrackingQuery => EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
 
     /// <summary>
     ///     Entity无追踪访问器
@@ -158,17 +159,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     键适配查询
     /// </summary>
-    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(item => item.Id.Equals(key));
+    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(entity => entity.Id.Equals(key));
 
     /// <summary>
     ///     键适配查询
     /// </summary>
     /// <param name="keys"></param>
     /// <returns></returns>
-    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys)
-    {
-        return EntityQuery.Where(item => keys.Contains(item.Id));
-    }
+    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys) => EntityQuery.Where(item => keys.Contains(item.Id));
 
     #endregion
 

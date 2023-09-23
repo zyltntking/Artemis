@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using Artemis.Shared.Identity.Transfer.Interface;
 
-namespace Artemis.Shared.Identity.Transfer;
+namespace Artemis.Shared.Identity.Transfer.Base;
 
 /// <summary>
 ///     基本用户信息

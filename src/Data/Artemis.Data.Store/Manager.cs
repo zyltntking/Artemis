@@ -200,7 +200,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// </summary>
     /// <param name="args">生成参数</param>
     /// <returns></returns>
-    protected string GenerateKey(params string[] args)
+    protected virtual string GenerateCacheKey(params string[] args)
     {
         return string.Join(":", args);
     }

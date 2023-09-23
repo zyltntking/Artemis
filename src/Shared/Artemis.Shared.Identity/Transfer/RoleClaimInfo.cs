@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer.Base;
 
 namespace Artemis.Shared.Identity.Transfer;
 

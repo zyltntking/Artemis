@@ -5,6 +5,7 @@ using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Transfer;
+using Artemis.Shared.Identity.Transfer.Base;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -99,87 +100,87 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
     #endregion
 
-    /// <summary>
-    ///    缓存角色名键
-    /// </summary>
-    /// <param name="roleName">角色名称</param>
-    /// <param name="roleId">角色标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    private Task CacheRoleIdAsync(string roleName, Guid roleId, CancellationToken cancellationToken = default)
-    {
-        if (CacheAvailable)
-        {
-            var key = GenerateRoleNameKey(roleName);
+    ///// <summary>
+    /////    缓存角色名键
+    ///// </summary>
+    ///// <param name="roleName">角色名称</param>
+    ///// <param name="roleId">角色标识</param>
+    ///// <param name="cancellationToken">操作取消信号</param>
+    ///// <returns></returns>
+    //private Task CacheRoleIdAsync(string roleName, Guid roleId, CancellationToken cancellationToken = default)
+    //{
+    //    if (CacheAvailable)
+    //    {
+    //        var key = GenerateRoleNameKey(roleName);
 
-            return SetKeyAsync(key, roleId, cancellationToken)!;
-        }
+    //        return SetKeyAsync(key, roleId, cancellationToken)!;
+    //    }
 
-        return Task.CompletedTask;
-    }
+    //    return Task.CompletedTask;
+    //}
 
-    /// <summary>
-    /// 查询角色id
-    /// </summary>
-    /// <param name="roleName">角色名</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    private async Task<Guid> FetchRoleIdAsync(string roleName, CancellationToken cancellationToken = default)
-    {
-        var key = GenerateRoleNameKey(roleName);
+    ///// <summary>
+    ///// 查询角色id
+    ///// </summary>
+    ///// <param name="roleName">角色名</param>
+    ///// <param name="cancellationToken">操作取消信号</param>
+    ///// <returns></returns>
+    //private async Task<Guid> FetchRoleIdAsync(string roleName, CancellationToken cancellationToken = default)
+    //{
+    //    var key = GenerateRoleNameKey(roleName);
 
-        Guid id = default;
+    //    Guid id = default;
 
-        if (CacheAvailable)
-        {
-            id = await GetKeyAsync(key, cancellationToken);
-        }
+    //    if (CacheAvailable)
+    //    {
+    //        id = await GetKeyAsync(key, cancellationToken);
+    //    }
 
-        if (id == default)
-        {
-            var normalizedName = NormalizeKey(roleName);
+    //    if (id == default)
+    //    {
+    //        var normalizedName = NormalizeKey(roleName);
 
-            id = RoleStore.EntityQuery
-                .Where(role => role.NormalizedName == normalizedName)
-                .Select(role => role.Id)
-                .FirstOrDefault();
+    //        id = RoleStore.EntityQuery
+    //            .Where(role => role.NormalizedName == normalizedName)
+    //            .Select(role => role.Id)
+    //            .FirstOrDefault();
 
-            if (CacheAvailable)
-            {
-                await SetKeyAsync(key, id, cancellationToken)!;
-            }
-        }
+    //        if (CacheAvailable)
+    //        {
+    //            await SetKeyAsync(key, id, cancellationToken)!;
+    //        }
+    //    }
 
-        return id;
-    }
+    //    return id;
+    //}
 
-    /// <summary>
-    /// 删除角色名键
-    /// </summary>
-    /// <param name="roleName">角色名</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    private async Task DeleteRolIdAsync(string roleName, CancellationToken cancellationToken = default)
-    {
-        if (CacheAvailable)
-        {
-            var key = GenerateRoleNameKey(roleName);
+    ///// <summary>
+    ///// 删除角色名键
+    ///// </summary>
+    ///// <param name="roleName">角色名</param>
+    ///// <param name="cancellationToken">操作取消信号</param>
+    ///// <returns></returns>
+    //private async Task DeleteRolIdAsync(string roleName, CancellationToken cancellationToken = default)
+    //{
+    //    if (CacheAvailable)
+    //    {
+    //        var key = GenerateRoleNameKey(roleName);
 
-            await RemoveKeyAsync(key, cancellationToken)!;
-        }
-    }
+    //        await RemoveKeyAsync(key, cancellationToken)!;
+    //    }
+    //}
 
-    /// <summary>
-    /// 生成角色名键
-    /// </summary>
-    /// <param name="roleName">角色名称</param>
-    /// <returns></returns>
-    private string GenerateRoleNameKey(string roleName)
-    {
-        var normalizedName = NormalizeKey(roleName);
-
-        return GenerateKey(KeyPrefix, "Role", "Name", normalizedName);
-    }
+    ///// <summary>
+    ///// 生成键
+    ///// </summary>
+    ///// <param name="model">模型名</param>
+    ///// <param name="space">名空间</param>
+    ///// <param name="key">键</param>
+    ///// <returns>生成键</returns>
+    //private string GenerateKey(string model, string space, string key)
+    //{
+    //    return GenerateCacheKey(KeyPrefix, model, space, NormalizeKey(key));
+    //}
 
     #region Implementation of IIdentityManager
 
@@ -197,52 +198,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         };
 
         SetKey("keyName", Guid.NewGuid());
-    }
-
-    /// <summary>
-    ///     根据角色名获取角色
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>角色实例</returns>
-    /// <remarks>当查询不到角色实例时返回空</remarks>
-    public async Task<RoleInfo?> GetRoleAsync(
-        string name,
-        CancellationToken cancellationToken = default)
-    {
-        var id = await FetchRoleIdAsync(name, cancellationToken);
-
-        if (id == default)
-        {
-            return default;
-        }
-
-        return await GetRoleAsync(id, cancellationToken);
-    }
-
-    /// <summary>
-    ///     根据角色标识获取角色
-    /// </summary>
-    /// <param name="id">角色id</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>角色实例</returns>
-    /// <remarks>当查询不到角色实例时返回空</remarks>
-    public Task<RoleInfo?> GetRoleAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
-    {
-        return RoleStore.FindMapEntityAsync<RoleInfo>(id, cancellationToken);
-    }
-
-    /// <summary>
-    ///     获取角色列表
-    /// </summary>
-    /// <returns>角色列表</returns>
-    /// <remarks>当查询不到角色实例时返回空列表</remarks>
-    public Task<IEnumerable<RoleInfo>> GetRolesAsync(
-        CancellationToken cancellationToken = default)
-    {
-        return RoleStore.GetRolesAsync<RoleInfo>(cancellationToken);
     }
 
     /// <summary>
@@ -276,7 +231,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
         var count = await query.LongCountAsync(cancellationToken);
 
-        var artemisRoles = await query
+        var roles = await query
             .OrderByDescending(role => role.CreatedAt)
             .Page(page, size)
             .ProjectToType<RoleInfo>()
@@ -288,8 +243,22 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
             Size = size,
             Count = count,
             Total = total,
-            Data = artemisRoles
+            Data = roles
         };
+    }
+
+    /// <summary>
+    ///     根据角色标识获取角色
+    /// </summary>
+    /// <param name="id">角色id</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>角色实例</returns>
+    /// <remarks>当查询不到角色实例时返回空</remarks>
+    public Task<RoleInfo?> GetRoleAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        return RoleStore.FindMapEntityAsync<RoleInfo>(id, cancellationToken);
     }
 
     /// <summary>
@@ -304,40 +273,18 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         string? description = null,
         CancellationToken cancellationToken = default)
     {
+
         var exists = await RoleStore.ExistsAsync(name, cancellationToken);
 
-        if (exists) return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), name));
+        if (exists)
+            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), name));
 
         var role = Instance.CreateInstance<ArtemisRole>();
-
-        var normalizedName = NormalizeKey(name);
-
         role.Name = name;
-        role.NormalizedName = normalizedName;
+        role.NormalizedName = NormalizeKey(name);
         role.Description = description;
 
-        var result = await RoleStore.CreateAsync(role, cancellationToken);
-
-        await CacheRoleIdAsync(name, role.Id, cancellationToken);
-
-        return result;
-    }
-
-    /// <summary>
-    ///     更新角色
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="pack">角色信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> UpdateRoleAsync(
-        string name,
-        RoleBase pack,
-        CancellationToken cancellationToken = default)
-    {
-        var id = await FetchRoleIdAsync(name, cancellationToken);
-
-        return await UpdateRoleAsync(id, pack, cancellationToken);
+        return await RoleStore.CreateAsync(role, cancellationToken);
     }
 
     /// <summary>
@@ -354,50 +301,16 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     {
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
-        var cacheUpdate = role?.Name != pack.Name;
-
-        if (cacheUpdate)
-        {
-            await DeleteRolIdAsync(role?.Name!, cancellationToken);
-        }
-
         if (role is not null)
         {
             role.Name = pack.Name;
             role.NormalizedName = NormalizeKey(pack.Name);
             role.Description = pack.Description;
 
-            var result = await RoleStore.UpdateAsync(role, cancellationToken: cancellationToken);
-
-            if (result.Succeeded)
-            {
-                if (cacheUpdate)
-                {
-                    await CacheRoleIdAsync(role.Name, role.Id, cancellationToken);
-                }
-            }
-
-            return result;
+            return await RoleStore.UpdateAsync(role, cancellationToken: cancellationToken);
         }
 
         return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
-    }
-
-    /// <summary>
-    ///     创建或更新角色
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="pack">角色信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> CreateOrUpdateRoleAsync(
-        string name,
-        RoleBase pack,
-        CancellationToken cancellationToken = default)
-    {
-        var id = await FetchRoleIdAsync(name, cancellationToken);
-
-        return await CreateOrUpdateRoleAsync(id, pack, cancellationToken);
     }
 
     /// <summary>
@@ -412,27 +325,14 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleBase pack,
         CancellationToken cancellationToken = default)
     {
-        if (id != default)
+        var exists = await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
         {
             return await UpdateRoleAsync(id, pack, cancellationToken);
         }
 
         return await CreateRoleAsync(pack.Name, pack.Description, cancellationToken);
-    }
-
-    /// <summary>
-    ///     删除角色
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> DeleteRoleAsync(
-        string name,
-        CancellationToken cancellationToken = default)
-    {
-        var id = await FetchRoleIdAsync(name, cancellationToken);
-
-        return await DeleteRoleAsync(id, cancellationToken);
     }
 
     /// <summary>
@@ -445,94 +345,12 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         Guid id,
         CancellationToken cancellationToken = default)
     {
-        var role = await RoleStore.FindEntityAsync(id, cancellationToken);
+        var role =  await RoleStore.FindEntityAsync(id, cancellationToken);
 
         if (role != null)
             return await RoleStore.DeleteAsync(role, cancellationToken);
 
         return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
-    }
-
-    /// <summary>
-    ///     根据用户名搜索具有该角色标签的用户
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="userNameSearch">用户名匹配值</param>
-    /// <param name="emailSearch">邮箱匹配值</param>
-    /// <param name="phoneSearch">电话匹配值</param>
-    /// <param name="page">页码</param>
-    /// <param name="size">页面大小</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<PageResult<UserInfo>> FetchRoleUsersAsync(
-        string name,
-        string? userNameSearch = null,
-        string? emailSearch = null,
-        string? phoneSearch = null,
-        int page = 1,
-        int size = 20,
-        CancellationToken cancellationToken = default)
-    {
-        SetDebugLog(
-            $"查询角色用户，角色：{name}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
-
-        var normalizedName = NormalizeKey(name);
-
-        var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
-
-        if (exists)
-        {
-            userNameSearch ??= string.Empty;
-            emailSearch ??= string.Empty;
-            phoneSearch ??= string.Empty;
-
-            var query = RoleStore
-                .NameMatchQuery(normalizedName)
-                .SelectMany(artemisRole => artemisRole.Users);
-
-            var total = await query.LongCountAsync(cancellationToken);
-
-            var normalizedNameSearch = NormalizeKey(userNameSearch);
-
-            query = query.WhereIf(
-                userNameSearch != string.Empty,
-                user => EF.Functions.Like(
-                    user.NormalizedUserName,
-                    $"%{normalizedNameSearch}%"));
-
-            var normalizedEmailSearch = NormalizeKey(emailSearch);
-
-            query = query.WhereIf(
-                emailSearch != string.Empty,
-                user => EF.Functions.Like(
-                    user.NormalizedEmail,
-                    $"%{normalizedEmailSearch}%"));
-
-            query = query.WhereIf(
-                phoneSearch != string.Empty,
-                user => EF.Functions.Like(
-                    user.PhoneNumber,
-                    $"%{phoneSearch}%"));
-
-            var count = await query.LongCountAsync(cancellationToken);
-
-            var users = await query
-                .OrderBy(user => user.CreatedAt)
-                .Page(page, size)
-                .ProjectToType<UserInfo>()
-                .ToListAsync(cancellationToken);
-
-            return new PageResult<UserInfo>
-            {
-                Page = page,
-                Size = size,
-                Count = count,
-                Total = total,
-                Data = users
-            };
-        }
-
-        throw new EntityNotFoundException(nameof(ArtemisRole), name);
     }
 
     /// <summary>
@@ -555,9 +373,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(
-            $"查询角色用户，角色：{id:D}，用户名称搜索值：{userNameSearch}，用户邮箱搜索值：{emailSearch}，用户手机号码搜索值：{phoneSearch}，页码：{page}，页面大小：{size}");
-
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (exists)
@@ -616,124 +431,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     }
 
     /// <summary>
-    ///     获取角色凭据列表
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<IEnumerable<RoleClaimInfo>> GetRoleClaimsAsync(
-        string name,
-        CancellationToken cancellationToken = default)
-    {
-        SetDebugLog($"获取角色凭据列表, 角色名: {name}");
-
-        var normalizedName = NormalizeKey(name);
-
-        var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
-
-        if (exists)
-        {
-            var claims = await RoleStore
-                .NameMatchQuery(normalizedName)
-                .SelectMany(role => role.RoleClaims)
-                .OrderBy(claim => claim.CreatedAt)
-                .ProjectToType<RoleClaimInfo>()
-                .ToListAsync(cancellationToken);
-
-            return claims;
-        }
-
-        throw new EntityNotFoundException(nameof(ArtemisRole), name);
-    }
-
-    /// <summary>
-    ///     获取角色凭据列表
-    /// </summary>
-    /// <param name="id">角色id</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    /// <exception cref="EntityNotFoundException"></exception>
-    public async Task<IEnumerable<RoleClaimInfo>> GetRoleClaimsAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
-    {
-        SetDebugLog($"获取角色凭据列表, 角色标识: {id:D}");
-
-        var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
-
-        if (exists)
-        {
-            var claims = await RoleStore
-                .KeyMatchQuery(id)
-                .SelectMany(role => role.RoleClaims)
-                .OrderBy(claim => claim.CreatedAt)
-                .ProjectToType<RoleClaimInfo>()
-                .ToListAsync(cancellationToken);
-
-            return claims;
-        }
-
-        throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
-    }
-
-    /// <summary>
-    ///     查询角色的凭据
-    /// </summary>
-    /// <param name="name">角色名称</param>
-    /// <param name="claimTypeSearch">凭据类型</param>
-    /// <param name="page">页码</param>
-    /// <param name="size">页面尺寸</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
-        string name,
-        string? claimTypeSearch = null,
-        int page = 1,
-        int size = 20,
-        CancellationToken cancellationToken = default)
-    {
-        SetDebugLog($"查询角色凭据，角色：{name}，页码：{page}，页面大小：{size}");
-
-        var exists = name != string.Empty && await RoleStore.ExistsAsync(name, cancellationToken);
-
-        if (exists)
-        {
-            claimTypeSearch ??= string.Empty;
-
-            var query = RoleStore
-                .NameMatchQuery(name)
-                .SelectMany(role => role.RoleClaims);
-
-            var total = await query.LongCountAsync(cancellationToken);
-
-            query = query.WhereIf(
-                claimTypeSearch != string.Empty,
-                claim => EF.Functions.Like(
-                    claim.ClaimType,
-                    $"%{claimTypeSearch}%"));
-
-            var count = await query.LongCountAsync(cancellationToken);
-
-            var artemisRoles = await query
-                .OrderBy(role => role.CreatedAt)
-                .ProjectToType<RoleClaimInfo>()
-                .Page(page, size)
-                .ToListAsync(cancellationToken);
-
-            return new PageResult<RoleClaimInfo>
-            {
-                Page = page,
-                Size = size,
-                Count = count,
-                Total = total,
-                Data = artemisRoles
-            };
-        }
-
-        throw new EntityNotFoundException(nameof(ArtemisRole), name);
-    }
-
-    /// <summary>
     ///     查询角色的凭据
     /// </summary>
     /// <param name="id">角色id</param>
@@ -789,34 +486,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         }
 
         throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
-    }
-
-    /// <summary>
-    ///     获取角色凭据
-    /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="claimId">凭据标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<RoleClaimInfo?> GetRoleClaimAsync(
-        string name,
-        int claimId,
-        CancellationToken cancellationToken = default)
-    {
-        SetDebugLog($"获取角色凭据，角色：{name}，凭据标识：{claimId}");
-
-        var normalizedName = NormalizeKey(name);
-
-        var exists = name != string.Empty && await RoleStore.ExistsAsync(normalizedName, cancellationToken);
-
-        if (exists)
-        {
-            var claim = await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
-
-            return claim;
-        }
-
-        throw new EntityNotFoundException(nameof(ArtemisRole), name);
     }
 
     /// <summary>

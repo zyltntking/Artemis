@@ -758,7 +758,7 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRolesAsync(System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRolesAsync(System.Threading.CancellationToken)">
             <summary>
                 获取角色列表
             </summary>
@@ -949,7 +949,7 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRolesAsync(System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRolesAsync(System.Threading.CancellationToken)">
             <summary>
                 获取角色列表
             </summary>
@@ -1151,7 +1151,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.GetRolesAsync``1(System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.FetchRolesAsync``1(System.Threading.CancellationToken)">
             <summary>
                 获取角色列表
             </summary>
@@ -1204,7 +1204,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.GetRolesAsync``1(System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.FetchRolesAsync``1(System.Threading.CancellationToken)">
             <summary>
                 获取角色列表
             </summary>

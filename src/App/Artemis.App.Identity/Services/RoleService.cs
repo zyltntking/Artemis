@@ -74,15 +74,15 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     获取角色
     /// </summary>
-    /// <param name="roleName">角色标识</param>
+    /// <param name="roleId">角色标识</param>
     /// <returns>Role Result</returns>
-    /// <remark>GET api/Roles/{roleName}</remark>
-    [HttpGet("{roleName}")]
-    public Task<DataResult<RoleInfo>> Get(string roleName)
+    /// <remark>GET api/Roles/{roleId}</remark>
+    [HttpGet("{roleId}")]
+    public Task<DataResult<RoleInfo>> Get(Guid roleId)
     {
         var request = new GetRoleRequest
         {
-            RoleName = roleName
+            RoleId = roleId
         };
 
         return GetRoleAsync(request);
@@ -104,17 +104,17 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     更新角色
     /// </summary>
-    /// <param name="roleName">角色名</param>
-    /// <param name="roleInfo">更新角色信息</param>
+    /// <param name="roleId">角色名</param>
+    /// <param name="rolePack">更新角色信息</param>
     /// <returns>Update Status</returns>
-    /// <remark>PUT api/Roles/{roleName}</remark>
-    [HttpPut("{roleName}")]
-    public Task<DataResult<EmptyRecord>> Put(string roleName, [FromBody] RoleBase roleInfo)
+    /// <remark>PUT api/Roles/{roleId}</remark>
+    [HttpPut("{roleId}")]
+    public Task<DataResult<EmptyRecord>> Put(Guid roleId, [FromBody] RolePack rolePack)
     {
         var request = new UpdateRoleRequest
         {
-            RoleName = roleName,
-            RoleInfo = roleInfo
+            RoleId = roleId,
+            RolePack = rolePack
         };
 
         return CreateOrUpdateRoleAsync(request);
@@ -123,15 +123,15 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     删除角色
     /// </summary>
-    /// <param name="roleName"></param>
+    /// <param name="roleId">角色标识</param>
     /// <returns>Delete Status</returns>
-    /// <remarks>DELETE api/Roles/{roleName}</remarks>
-    [HttpDelete("{roleName}")]
-    public Task<DataResult<EmptyRecord>> Delete(string roleName)
+    /// <remarks>DELETE api/Roles/{roleId}</remarks>
+    [HttpDelete("{roleId}")]
+    public Task<DataResult<EmptyRecord>> Delete(Guid roleId)
     {
         var request = new DeleteRoleRequest
         {
-            RoleName = roleName
+            RoleId = roleId
         };
 
         return DeleteRoleAsync(request);
@@ -151,17 +151,17 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     角色用户列表
     /// </summary>
-    /// <param name="roleName">角色名</param>
+    /// <param name="roleId">角色名</param>
     /// <param name="userNameSearch">用户名匹配值</param>
     /// <param name="emailSearch">邮箱匹配值</param>
     /// <param name="phoneSearch">电话匹配值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <returns>GET status</returns>
-    /// <remarks>GET api/Roles/{roleName}/Users</remarks>
-    [HttpGet("{roleName}/Users")]
+    /// <remarks>GET api/Roles/{roleId}/Users</remarks>
+    [HttpGet("{roleId}/Users")]
     public Task<DataResult<PageResult<UserInfo>>> FetchRoleUsers(
-        string roleName,
+        Guid roleId,
         string? userNameSearch = null,
         string? emailSearch = null,
         string? phoneSearch = null,
@@ -174,7 +174,7 @@ public class RoleService : ApiController, IRoleService
             Size = size,
             Filter = new FetchRoleUsersFilter
             {
-                RoleName = roleName,
+                RoleId = roleId,
                 UserNameSearch = userNameSearch,
                 EmailSearch = emailSearch,
                 PhoneNumberSearch = phoneSearch
@@ -187,15 +187,15 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     角色凭据列表
     /// </summary>
-    /// <param name="roleName">角色名</param>
+    /// <param name="roleId">角色名</param>
     /// <param name="claimTypeSearch">凭据类型搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <returns></returns>
     /// <remarks>GET api/Roles/{roleName}/Claims</remarks>
-    [HttpGet("{roleName}/Claims")]
+    [HttpGet("{roleId}/Claims")]
     public Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaims(
-        string roleName,
+        Guid roleId,
         string? claimTypeSearch,
         int page = 1,
         int size = 20)
@@ -206,7 +206,7 @@ public class RoleService : ApiController, IRoleService
             Size = size,
             Filter = new FetchRoleClaimsFilter
             {
-                RoleName = roleName,
+                RoleId = roleId,
                 ClaimTypeSearch = claimTypeSearch
             }
         };
@@ -217,18 +217,18 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     获取角色凭据
     /// </summary>
-    /// <param name="roleName">角色名</param>
+    /// <param name="roleId">角色名</param>
     /// <param name="claimId">凭据标识</param>
     /// <returns></returns>
-    /// <remarks>GET api/Roles/{roleName}/Claims/{claimId}</remarks>
-    [HttpGet("{roleName}/Claims/{claimId}")]
+    /// <remarks>GET api/Roles/{roleId}/Claims/{claimId}</remarks>
+    [HttpGet("{roleId}/Claims/{claimId}")]
     public Task<DataResult<RoleClaimInfo>> GetRoleClaim(
-        string roleName,
+        Guid roleId,
         int claimId)
     {
         var request = new GetRoleClaimRequest
         {
-            RoleName = roleName,
+            RoleId = roleId,
             ClaimId = claimId
         };
 
@@ -246,13 +246,11 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync(
-        [FromBody] PageRequest<FetchRolesFilter> request)
+        PageRequest<FetchRolesFilter> request)
     {
         var filter = request.Filter;
 
-        var nameSearch = filter.RoleNameSearch ?? string.Empty;
-
-        var result = await IdentityManager.FetchRolesAsync(nameSearch, request.Page, request.Size);
+        var result = await IdentityManager.FetchRolesAsync(filter.RoleNameSearch, request.Page, request.Size);
 
         return DataResult.Success(result);
     }
@@ -263,11 +261,14 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request">角色名</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<RoleInfo>> GetRoleAsync([FromBody] GetRoleRequest request)
+    public async Task<DataResult<RoleInfo>> GetRoleAsync(
+        GetRoleRequest request)
     {
-        var result = await IdentityManager.GetRoleAsync(request.RoleName);
+        var result = await IdentityManager.GetRoleAsync(request.RoleId);
 
-        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
+        return result is not null ? 
+            DataResult.Success(result) : 
+            DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
 
     /// <summary>
@@ -276,15 +277,14 @@ public class RoleService : ApiController, IRoleService
     /// <param name="roleRequest">创建角色请求</param>
     /// <returns>创建结果</returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateRoleAsync([FromBody] CreateRoleRequest roleRequest)
+    public async Task<DataResult<EmptyRecord>> CreateRoleAsync(
+        CreateRoleRequest roleRequest)
     {
         var result = await IdentityManager.CreateRoleAsync(roleRequest.Name, roleRequest.Description);
 
-        if (result.Succeeded)
-            return DataResult.Success(new EmptyRecord());
-
-        return DataResult.Fail<EmptyRecord>(
-            $"创建失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
+        return result.Succeeded ? 
+            DataResult.Success(new EmptyRecord()) : 
+            DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -293,15 +293,14 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request"></param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync([FromBody] UpdateRoleRequest request)
+    public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(
+        UpdateRoleRequest request)
     {
-        var result = await IdentityManager.CreateOrUpdateRoleAsync(request.RoleName, request.RoleInfo);
+        var result = await IdentityManager.CreateOrUpdateRoleAsync(request.RoleId, request.RolePack);
 
-        if (result.Succeeded)
-            return DataResult.Success(new EmptyRecord());
-
-        return DataResult.Fail<EmptyRecord>(
-            $"创建或更新失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
+        return result.Succeeded ? 
+            DataResult.Success(new EmptyRecord()) : 
+            DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -310,15 +309,14 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request"></param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> DeleteRoleAsync(DeleteRoleRequest request)
+    public async Task<DataResult<EmptyRecord>> DeleteRoleAsync(
+        DeleteRoleRequest request)
     {
-        var result = await IdentityManager.DeleteRoleAsync(request.RoleName);
+        var result = await IdentityManager.DeleteRoleAsync(request.RoleId);
 
-        if (result.Succeeded)
-            return DataResult.Success(new EmptyRecord());
-
-        return DataResult.Fail<EmptyRecord>(
-            $"删除失败。{string.Join(",", result.Errors.Select(error => error.Description))}");
+        return result.Succeeded
+            ? DataResult.Success(new EmptyRecord())
+            : DataResult.Fail<EmptyRecord>($"删除失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -327,23 +325,16 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request"></param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request)
+    public async Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
+        PageRequest<FetchRoleUsersFilter> request)
     {
         var filter = request.Filter;
 
-        var roleName = filter.RoleName;
-
-        var userNameSearch = filter.UserNameSearch ?? string.Empty;
-
-        var emailSearch = filter.EmailSearch ?? string.Empty;
-
-        var phoneSearch = filter.PhoneNumberSearch ?? string.Empty;
-
         var result = await IdentityManager.FetchRoleUsersAsync(
-            roleName,
-            userNameSearch,
-            emailSearch,
-            phoneSearch,
+            filter.RoleId,
+            filter.UserNameSearch,
+            filter.EmailSearch,
+            filter.PhoneNumberSearch,
             request.Page,
             request.Size);
 
@@ -361,11 +352,11 @@ public class RoleService : ApiController, IRoleService
     {
         var filter = request.Filter;
 
-        var roleName = filter.RoleName;
-
-        var claimTypeSearch = filter.ClaimTypeSearch;
-
-        var result = await IdentityManager.FetchRoleClaimsAsync(roleName, claimTypeSearch, request.Page, request.Size);
+        var result = await IdentityManager.FetchRoleClaimsAsync(
+            filter.RoleId, 
+            filter.ClaimTypeSearch, 
+            request.Page, 
+            request.Size);
 
         return DataResult.Success(result);
     }
@@ -378,10 +369,11 @@ public class RoleService : ApiController, IRoleService
     [NonAction]
     public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request)
     {
-        var result = await IdentityManager
-            .GetRoleClaimAsync(request.RoleName, request.ClaimId);
+        var result = await IdentityManager.GetRoleClaimAsync(request.RoleId, request.ClaimId);
 
-        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
+        return result is not null ? 
+            DataResult.Success(result) : 
+            DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
     }
 
     #endregion
