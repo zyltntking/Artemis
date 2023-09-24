@@ -1,4 +1,5 @@
-﻿using Artemis.Services.Identity.Data;
+﻿using Artemis.Data.Store;
+using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Managers;
 using Artemis.Services.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
@@ -6,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using StoreOptions = Artemis.Data.Store.StoreOptions;
 
 namespace Artemis.Services.Identity;
 
@@ -55,7 +55,7 @@ public static class IdentityExtensions
                 options.InstanceName = "ArtemisIdentity:";
             });
 
-            serviceCollection.Configure<StoreOptions>(option => { option.CachedManager = true; });
+            serviceCollection.Configure<ArtemisStoreOptions>(option => { option.CachedManager = true; });
         }
 
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
@@ -66,7 +66,8 @@ public static class IdentityExtensions
         serviceCollection.TryAddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
 
-        serviceCollection.TryAddScoped<IIdentityManager, IdentityManager>();
+        serviceCollection.TryAddScoped<IUserManager, UserManager>();
+        serviceCollection.TryAddScoped<IRoleManager, RoleManager>();
 
         serviceCollection.TryAddScoped<IAccountManager, AccountManager>();
 

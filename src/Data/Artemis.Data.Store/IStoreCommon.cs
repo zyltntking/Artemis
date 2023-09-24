@@ -26,8 +26,8 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <summary>
     ///     设置配置
     /// </summary>
-    /// <param name="storeOptions"></param>
-    void SetOptions(StoreOptions storeOptions);
+    /// <param name="artemisStoreOptions"></param>
+    void SetOptions(ArtemisStoreOptions artemisStoreOptions);
 
     #endregion
 

@@ -95,7 +95,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     protected Manager(
         IStore<TEntity> store,
         IDistributedCache? cache = null,
-        IOptions<StoreOptions>? optionsAccessor = null,
+        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         ILogger? logger = null) : base(store, cache, optionsAccessor, null, logger)
     {
     }
@@ -121,17 +121,17 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     protected Manager(
         IStore<TEntity, TKey> store,
         IDistributedCache? cache = null,
-        IOptions<StoreOptions>? optionsAccessor = null,
+        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         StoreErrorDescriber? errors = null,
         ILogger? logger = null)
     {
         Store = store;
-        StoreOptions = optionsAccessor?.Value ?? new StoreOptions();
+        ArtemisStoreOptions = optionsAccessor?.Value ?? new ArtemisStoreOptions();
         Describer = errors ?? new StoreErrorDescriber();
         Logger = logger;
         Cache = cache;
 
-        Store.SetOptions(StoreOptions);
+        Store.SetOptions(ArtemisStoreOptions);
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="message">日志消息</param>
     protected void SetDebugLog(string message)
     {
-        if (StoreOptions.DebugLogger)
+        if (ArtemisStoreOptions.DebugLogger)
             Logger?.LogDebug(message);
     }
 
@@ -186,12 +186,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     缓存是否可用
     /// </summary>
-    protected bool CacheAvailable => StoreOptions.CachedManager;
+    protected bool CacheAvailable => ArtemisStoreOptions.CachedManager;
 
     /// <summary>
     ///     配置访问器
     /// </summary>
-    private StoreOptions StoreOptions { get; }
+    private ArtemisStoreOptions ArtemisStoreOptions { get; }
 
     /// <summary>
     ///     错误报告生成器

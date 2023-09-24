@@ -4,7 +4,6 @@ using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
 using Artemis.Shared.Identity.Transfer.Base;
-using ProtoBuf;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -112,7 +111,6 @@ public record FetchRolesFilter
     /// <summary>
     ///     角色名搜索值
     /// </summary>
-    [NullWrappedValue]
     [DataMember(Order = 1)]
     public string? RoleNameSearch { get; set; }
 }
@@ -151,7 +149,6 @@ public record CreateRoleRequest : RoleBase
     ///     角色描述
     /// </summary>
     [MaxLength(128)]
-    [NullWrappedValue]
     [DataMember(Order = 2)]
     public override string? Description { get; set; }
 
@@ -209,21 +206,18 @@ public record FetchRoleUsersFilter : GetRoleRequest
     /// <summary>
     ///     用户名搜索值
     /// </summary>
-    [NullWrappedValue]
     [DataMember(Order = 2)]
     public string? UserNameSearch { get; set; }
 
     /// <summary>
     ///     邮箱搜索值
     /// </summary>
-    [NullWrappedValue]
     [DataMember(Order = 3)]
     public string? EmailSearch { get; set; }
 
     /// <summary>
     ///     电话号码搜索值
     /// </summary>
-    [NullWrappedValue]
     [DataMember(Order = 4)]
     public string? PhoneNumberSearch { get; set; }
 }
@@ -244,7 +238,6 @@ public record FetchRoleClaimsFilter : GetRoleRequest
     /// <summary>
     ///     凭据类型搜索值
     /// </summary>
-    [NullWrappedValue]
     [DataMember(Order = 2)]
     public string? ClaimTypeSearch { get; set; }
 }

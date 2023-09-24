@@ -10,6 +10,11 @@ namespace Artemis.Shared.Identity.Transfer.Base;
 [DataContract]
 public record UserBase : IUser
 {
+    /// <summary>
+    /// 生成加密戳
+    /// </summary>
+    public string GenerateSecurityStamp => Guid.NewGuid().ToString("N").ToUpper();
+
     #region Implementation of IUser
 
     /// <summary>

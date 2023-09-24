@@ -609,15 +609,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     设置配置
     /// </summary>
-    /// <param name="storeOptions"></param>
-    public void SetOptions(StoreOptions storeOptions)
+    /// <param name="artemisStoreOptions"></param>
+    public void SetOptions(ArtemisStoreOptions artemisStoreOptions)
     {
-        AutoSaveChanges = storeOptions.AutoSaveChanges;
-        MetaDataHosting = storeOptions.MetaDataHosting;
-        SoftDelete = storeOptions.SoftDelete;
-        CachedStore = storeOptions.CachedStore;
-        Expires = storeOptions.Expires;
-        DebugLogger = storeOptions.DebugLogger;
+        AutoSaveChanges = artemisStoreOptions.AutoSaveChanges;
+        MetaDataHosting = artemisStoreOptions.MetaDataHosting;
+        SoftDelete = artemisStoreOptions.SoftDelete;
+        CachedStore = artemisStoreOptions.CachedStore;
+        Expires = artemisStoreOptions.Expires;
+        DebugLogger = artemisStoreOptions.DebugLogger;
     }
 
     #endregion

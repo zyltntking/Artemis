@@ -46,7 +46,7 @@ public static class Program
                 .AddControllers(option =>
                 {
                     option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-                    option.InputFormatters.Insert(0, MyJPIF.GetJsonPatchInputFormatter());
+                    //option.InputFormatters.Insert(0, MyJPIF.GetJsonPatchInputFormatter());
                 })
                 .AddMvcOptions(options =>
                 {
@@ -72,6 +72,7 @@ public static class Program
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddOpenApiDoc(docConfig);
+
         }, app =>
         {
             app.UseOpenApiDoc(docConfig);
@@ -105,6 +106,7 @@ public static class Program
             app.MapControllers();
 
             app.MapGrpcService<RoleService>();
+            app.MapGrpcService<UserService>();
 
             app.MapApiRouteTable();
 

@@ -7,15 +7,10 @@ using Artemis.Shared.Identity.Transfer.Base;
 namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
-///     Artemis用户管理器接口
+///     角色管理器接口
 /// </summary>
-public interface IIdentityManager : IManager<ArtemisUser>
+public interface IRoleManager : IManager<ArtemisUser>
 {
-    /// <summary>
-    ///     测试
-    /// </summary>
-    public void Test();
-
     /// <summary>
     ///     根据角色名搜索角色
     /// </summary>

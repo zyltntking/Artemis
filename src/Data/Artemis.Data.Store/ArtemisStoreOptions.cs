@@ -43,7 +43,7 @@ public interface IStoreOptions
 /// <summary>
 ///     存储配置
 /// </summary>
-public record StoreOptions : IStoreOptions
+public record ArtemisStoreOptions : IStoreOptions
 {
     #region Implementation of IStoreConfig
 

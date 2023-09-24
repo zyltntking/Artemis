@@ -21,16 +21,16 @@ public class RoleService : ApiController, IRoleService
     /// <param name="manager"></param>
     /// <param name="logger"></param>
     public RoleService(
-        IIdentityManager manager,
+        IRoleManager manager,
         ILogger<RoleService> logger) : base(logger)
     {
-        IdentityManager = manager;
+        RoleManager = manager;
     }
 
     /// <summary>
     ///     认证管理器
     /// </summary>
-    private IIdentityManager IdentityManager { get; }
+    private IRoleManager RoleManager { get; }
 
     #region ControllerActions
 
@@ -316,7 +316,7 @@ public class RoleService : ApiController, IRoleService
     {
         var filter = request.Filter;
 
-        var result = await IdentityManager.FetchRolesAsync(filter.RoleNameSearch, request.Page, request.Size);
+        var result = await RoleManager.FetchRolesAsync(filter.RoleNameSearch, request.Page, request.Size);
 
         return DataResult.Success(result);
     }
@@ -330,7 +330,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<RoleInfo>> GetRoleAsync(
         GetRoleRequest request)
     {
-        var result = await IdentityManager.GetRoleAsync(request.RoleId);
+        var result = await RoleManager.GetRoleAsync(request.RoleId);
 
         return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
@@ -344,7 +344,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> CreateRoleAsync(
         CreateRoleRequest roleRequest)
     {
-        var result = await IdentityManager.CreateRoleAsync(roleRequest);
+        var result = await RoleManager.CreateRoleAsync(roleRequest);
 
         return result.Succeeded
             ? DataResult.Success(new EmptyRecord())
@@ -360,7 +360,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(
         UpdateRoleRequest request)
     {
-        var result = await IdentityManager.CreateOrUpdateRoleAsync(request.RoleId, request.RolePack);
+        var result = await RoleManager.CreateOrUpdateRoleAsync(request.RoleId, request.RolePack);
 
         return result.Succeeded
             ? DataResult.Success(new EmptyRecord())
@@ -376,7 +376,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> DeleteRoleAsync(
         DeleteRoleRequest request)
     {
-        var result = await IdentityManager.DeleteRoleAsync(request.RoleId);
+        var result = await RoleManager.DeleteRoleAsync(request.RoleId);
 
         return result.Succeeded
             ? DataResult.Success(new EmptyRecord())
@@ -394,7 +394,7 @@ public class RoleService : ApiController, IRoleService
     {
         var filter = request.Filter;
 
-        var result = await IdentityManager.FetchRoleUsersAsync(
+        var result = await RoleManager.FetchRoleUsersAsync(
             filter.RoleId,
             filter.UserNameSearch,
             filter.EmailSearch,
@@ -416,7 +416,7 @@ public class RoleService : ApiController, IRoleService
     {
         var filter = request.Filter;
 
-        var result = await IdentityManager.FetchRoleClaimsAsync(
+        var result = await RoleManager.FetchRoleClaimsAsync(
             filter.RoleId,
             filter.ClaimTypeSearch,
             request.Page,
@@ -434,7 +434,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
         GetRoleClaimRequest request)
     {
-        var result = await IdentityManager.GetRoleClaimAsync(request.RoleId, request.ClaimId);
+        var result = await RoleManager.GetRoleClaimAsync(request.RoleId, request.ClaimId);
 
         return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
     }
@@ -448,7 +448,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(
         CreateRoleClaimRequest request)
     {
-        var result = await IdentityManager.CreateRoleClaimAsync(request.RoleId, request.ClaimPack);
+        var result = await RoleManager.CreateRoleClaimAsync(request.RoleId, request.ClaimPack);
 
         return result.Succeeded
             ? DataResult.Success(new EmptyRecord())
@@ -464,7 +464,7 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(UpdateRoleClaimRequest request)
     {
         var result =
-            await IdentityManager.CreateOrUpdateRoleClaimAsync(request.RoleId, request.ClaimId, request.ClaimPack);
+            await RoleManager.CreateOrUpdateRoleClaimAsync(request.RoleId, request.ClaimId, request.ClaimPack);
 
         return result.Succeeded
             ? DataResult.Success(new EmptyRecord())

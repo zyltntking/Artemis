@@ -15,37 +15,25 @@ using Microsoft.Extensions.Options;
 namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
-///     Artemis用户管理器
+///     角色管理器
 /// </summary>
-public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
+public class RoleManager : Manager<ArtemisRole>, IRoleManager
 {
     /// <summary>
     ///     创建新的管理器实例
     /// </summary>
-    /// <param name="userStore">用户存储访问器</param>
-    /// <param name="userClaimStore">用户凭据存储访问器</param>
-    /// <param name="userTokenStore"></param>
     /// <param name="roleStore">角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
     /// <param name="optionsAccessor"></param>
     /// <param name="cache">缓存以来</param>
     /// <param name="logger">日志依赖</param>
-    /// <param name="userLoginStore">用户登录存储访问器</param>
-    public IdentityManager(
-        IArtemisUserStore userStore,
-        IArtemisUserClaimStore userClaimStore,
-        IArtemisUserLoginStore userLoginStore,
-        IArtemisUserTokenStore userTokenStore,
+    public RoleManager(
         IArtemisRoleStore roleStore,
         IArtemisRoleClaimStore roleClaimStore,
-        ILogger<IdentityManager> logger,
-        IOptions<StoreOptions>? optionsAccessor = null,
-        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, logger)
+        ILogger? logger = null,
+        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
+        IDistributedCache? cache = null) : base(roleStore, cache, optionsAccessor, logger)
     {
-        UserClaimStore = userClaimStore;
-        UserLoginStore = userLoginStore;
-        UserTokenStore = userTokenStore;
-        RoleStore = roleStore;
         RoleClaimStore = roleClaimStore;
     }
 
@@ -56,10 +44,6 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     /// </summary>
     protected override void StoreDispose()
     {
-        UserStore.Dispose();
-        UserClaimStore.Dispose();
-        UserLoginStore.Dispose();
-        UserTokenStore.Dispose();
         RoleStore.Dispose();
         RoleClaimStore.Dispose();
     }
@@ -69,29 +53,9 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
     #region StoreAccess
 
     /// <summary>
-    ///     用户存储访问器
-    /// </summary>
-    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
-
-    /// <summary>
-    ///     用户凭据存储访问器
-    /// </summary>
-    private IArtemisUserClaimStore UserClaimStore { get; }
-
-    /// <summary>
-    ///     用户登录存储访问器
-    /// </summary>
-    private IArtemisUserLoginStore UserLoginStore { get; }
-
-    /// <summary>
-    ///     用户令牌存储访问器
-    /// </summary>
-    private IArtemisUserTokenStore UserTokenStore { get; }
-
-    /// <summary>
     ///     角色存储访问器
     /// </summary>
-    private IArtemisRoleStore RoleStore { get; }
+    private IArtemisRoleStore RoleStore => (IArtemisRoleStore)Store;
 
     /// <summary>
     ///     角色凭据存储访问器
@@ -100,23 +64,7 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
 
     #endregion
 
-    #region Implementation of IIdentityManager
-
-    /// <summary>
-    ///     测试
-    /// </summary>
-    public void Test()
-    {
-        var role = new ArtemisRole
-        {
-            Name = "test",
-            NormalizedName = "test",
-            Description = "test",
-            Id = default
-        };
-
-        SetKey("keyName", Guid.NewGuid());
-    }
+    #region Implementation of IRoleManager
 
     /// <summary>
     ///     根据角色名搜索角色
@@ -133,19 +81,21 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         nameSearch ??= string.Empty;
 
         var query = RoleStore.EntityQuery;
 
         var total = await query.LongCountAsync(cancellationToken);
 
-        var normalizedSearch = NormalizeKey(nameSearch);
+        var normalizedName = NormalizeKey(nameSearch);
 
         query = query.WhereIf(
             nameSearch != string.Empty,
             role => EF.Functions.Like(
                 role.NormalizedName,
-                $"%{normalizedSearch}%"));
+                $"%{normalizedName}%"));
 
         var count = await query.LongCountAsync(cancellationToken);
 
@@ -176,6 +126,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         Guid id,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         return RoleStore.FindMapEntityAsync<RoleInfo>(id, cancellationToken);
     }
 
@@ -189,6 +141,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var normalizedName = NormalizeKey(pack.Name);
 
         var exists = await RoleStore.EntityQuery
@@ -218,6 +172,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
         if (role is not null)
@@ -244,6 +200,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var exists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (exists) return await UpdateRoleAsync(id, pack, cancellationToken);
@@ -261,6 +219,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         Guid id,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
         if (role != null)
@@ -289,6 +249,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (exists)
@@ -363,6 +325,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (exists)
@@ -414,6 +378,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         int claimId,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (exists)
@@ -438,6 +404,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleClaimBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
@@ -473,6 +441,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleClaimBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
@@ -511,6 +481,8 @@ public class IdentityManager : Manager<ArtemisUser>, IIdentityManager
         RoleClaimBase pack,
         CancellationToken cancellationToken = default)
     {
+        ThrowIfDisposed();
+
         var exists = await RoleClaimStore.EntityQuery
             .Where(claim => claim.RoleId == id)
             .Where(claim => claim.Id == claimId)

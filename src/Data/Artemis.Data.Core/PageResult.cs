@@ -65,6 +65,36 @@ file interface IPageResult<T> : IPageResult
 #endregion
 
 /// <summary>
+/// 基本分页处理
+/// </summary>
+public abstract record PageBase : IPageBase
+{
+    #region Implementation of IPageBase
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DefaultValue(1)]
+    [Range(1, int.MaxValue)]
+    [DataMember(Order = 1)]
+    public required int Page { get; set; } = 1;
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DefaultValue(20)]
+    [Range(0, 500)]
+    [DataMember(Order = 2)]
+    public required int Size { get; set; } = 20;
+
+    #endregion
+}
+
+/// <summary>
 ///     分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
@@ -95,6 +125,7 @@ public sealed record PageRequest<T> : IPageRequest<T>
     /// <example>1</example>
     [Required]
     [DefaultValue(1)]
+    [Range(1, int.MaxValue)]
     [DataMember(Order = 1)]
     public required int Page { get; set; } = 1;
 
@@ -104,6 +135,7 @@ public sealed record PageRequest<T> : IPageRequest<T>
     /// <example>20</example>
     [Required]
     [DefaultValue(20)]
+    [Range(0, 500)]
     [DataMember(Order = 2)]
     public required int Size { get; set; } = 20;
 
