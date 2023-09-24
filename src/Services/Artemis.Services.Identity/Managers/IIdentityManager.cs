@@ -45,13 +45,11 @@ public interface IIdentityManager : IManager<ArtemisUser>
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="name">角色名</param>
-    /// <param name="description">角色描述</param>
+    /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
     Task<StoreResult> CreateRoleAsync(
-        string name,
-        string? description = null,
+        RoleBase pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -134,5 +132,45 @@ public interface IIdentityManager : IManager<ArtemisUser>
     Task<RoleClaimInfo?> GetRoleClaimAsync(
         Guid id,
         int claimId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="pack">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> CreateRoleClaimAsync(
+        Guid id,
+        RoleClaimBase pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="pack">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateRoleClaimAsync(
+        Guid id,
+        int claimId,
+        RoleClaimBase pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     创建或更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="pack">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> CreateOrUpdateRoleClaimAsync(
+        Guid id,
+        int claimId,
+        RoleClaimBase pack,
         CancellationToken cancellationToken = default);
 }

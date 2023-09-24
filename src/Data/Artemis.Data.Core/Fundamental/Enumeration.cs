@@ -75,7 +75,7 @@ public class Enumeration : IEnumeration<Enumeration>
     /// </returns>
     public bool Equals(Enumeration? other)
     {
-        if (other == null) 
+        if (other == null)
             return false;
 
         var typeMatches = GetType() == other.GetType();
@@ -160,7 +160,7 @@ public class Enumeration : IEnumeration<Enumeration>
     /// <returns></returns>
     public static IEnumerable<int> GetAllId(Type type)
     {
-        if (type.BaseType != typeof(Enumeration)) 
+        if (type.BaseType != typeof(Enumeration))
             return new List<int>();
 
         return type.GetFields(BindingFlags.Public |

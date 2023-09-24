@@ -1,1321 +1,1138 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Services.Identity</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Services.Identity.AttachResultException">
-            <summary>
-                结果附加扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.AttachResultException.Attach``1(Artemis.Data.Store.StoreResult,``0)">
-            <summary>
-                附加
-            </summary>
-            <typeparam name="TAttach">附加数据类型</typeparam>
-            <param name="result">结果</param>
-            <param name="attach">附加数据</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisClaim">
-            <summary>
-                ArtemisClaim
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisIdentityContext">
-            <summary>
-                Artemis认证数据上下文
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.ArtemisIdentityContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Services.Identity.Data.ArtemisIdentityContext})">
-            <summary>
-                构造
-            </summary>
-            <param name="options">创建配置</param>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisIdentityContext.ArtemisClaims">
-            <summary>
-                ArtemisClaimsSet
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.ArtemisIdentityContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-                Configures the schema needed for the identity framework.
-            </summary>
-            <param name="builder">
-                The builder being used to construct the model for this context.
-            </param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisRole">
-            <summary>
-                ArtemisRole
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.Users">
-            <summary>
-                具备该角色的用户
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.UserRoles">
-            <summary>
-                用户角色表映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.RoleClaims">
-            <summary>
-                角色凭据映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisRoleClaim">
-            <summary>
-                ArtemisRoleClaim
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.Role">
-            <summary>
-                凭据所属角色
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisUser">
-            <summary>
-                ArtemisUser
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.Roles">
-            <summary>
-                用户具备的角色
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.UserRoles">
-            <summary>
-                用户角色映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.Claims">
-            <summary>
-                用户凭据映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.Logins">
-            <summary>
-                用户登录映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.Tokens">
-            <summary>
-                用户令牌映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisUserClaim">
-            <summary>
-                ArtemisUserClaim
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.User">
-            <summary>
-                所属用户
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisUserLogin">
-            <summary>
-                ArtemisUserLogin
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.User">
-            <summary>
-                登录信息所属用户
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisUserRole">
-            <summary>
-                ArtemisUserRole
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.User">
-            <summary>
-                用户映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.Role">
-            <summary>
-                角色映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.ArtemisUserToken">
-            <summary>
-                ArtemisUserToken
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.User">
-            <summary>
-                凭据所属用户
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.CreatedAt">
-            <summary>
-                创建时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.UpdatedAt">
-            <summary>
-                更新时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.DeletedAt">
-            <summary>
-                删除时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration">
-            <summary>
-                凭据数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1">
-            <summary>
-                Artemis认证模型配置
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1.DbType">
-            <summary>
-                数据库类型
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration">
-            <summary>
-                角色凭据数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.RoleConfiguration">
-            <summary>
-                角色数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration">
-            <summary>
-                用户凭据数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.UserConfiguration">
-            <summary>
-                用户数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration">
-            <summary>
-                用户登录数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration">
-            <summary>
-                用户角色映射数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration">
-            <summary>
-                用户令牌数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
-            <summary>
-                数据库关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Services.Identity.IdentityExtensions">
-            <summary>
-                认证扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.IdentityExtensions.AddIdentityService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Artemis.Services.Identity.IdentityServiceOptions,System.Boolean)">
-            <summary>
-                添加认证服务
-            </summary>
-            <param name="serviceCollection"></param>
-            <param name="serviceOptions"></param>
-            <param name="isDevelopment"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.IdentityServiceOptions">
-            <summary>
-                认证逻辑配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.ContextConnection">
-            <summary>
-                连接
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.RedisCacheConnection">
-            <summary>
-                缓存连接
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.AssemblyName">
-            <summary>
-                AssemblyName
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.IdentityOptionsAction">
-            <summary>
-                认证配置选项操作
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.AccountManager">
-            <summary>
-                认证服务实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.Managers.AccountManager{Artemis.Services.Identity.Data.ArtemisUser}})">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager">签入管理器</param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.AccountManager`1">
-            <summary>
-                认证服务实现
-            </summary>
-            <typeparam name="TUser">用户类型</typeparam>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager"></param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.AccountManager`2">
-            <summary>
-                认证服务实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                认证服务构造
-            </summary>
-            <param name="userManager">用户管理器</param>
-            <param name="userStore">用户存储</param>
-            <param name="signInManager"></param>
-            <param name="logger">日志</param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                注册
-            </summary>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="email">邮箱</param>
-            <param name="phone">手机号码</param>
-            <param name="cancellationToken">取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.UserManger">
-            <summary>
-                用户管理器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.SignInManager">
-            <summary>
-                签到管理器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.UserStore">
-            <summary>
-                用户存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.EmailStore">
-            <summary>
-                Email存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.PhoneNumberStore">
-            <summary>
-                PhoneNumber存储器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.AccountManager`2.Logger">
-            <summary>
-                日志记录器
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.IAccountManager">
-            <summary>
-                认证服务接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.IAccountManager`1">
-            <summary>
-                认证服务接口
-            </summary>
-            <typeparam name="TUser">用户类型</typeparam>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.IAccountManager`2">
-            <summary>
-                认证服务接口
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IAccountManager`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                注册
-            </summary>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="email">邮箱</param>
-            <param name="phone">手机号码</param>
-            <param name="cancellationToken">取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.IdentityManager">
-            <summary>
-                Artemis用户管理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.Managers.IdentityManager},Microsoft.Extensions.Options.IOptions{Artemis.Data.Store.StoreOptions},Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="userStore">用户存储访问器</param>
-            <param name="userClaimStore">用户凭据存储访问器</param>
-            <param name="userTokenStore"></param>
-            <param name="roleStore">角色存储访问器</param>
-            <param name="roleClaimStore">角色凭据存储访问器</param>
-            <param name="optionsAccessor"></param>
-            <param name="cache">缓存以来</param>
-            <param name="logger">日志依赖</param>
-            <param name="userLoginStore">用户登录存储访问器</param>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.StoreDispose">
-            <summary>
-                释放托管的Store
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserStore">
-            <summary>
-                用户存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserClaimStore">
-            <summary>
-                用户凭据存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserLoginStore">
-            <summary>
-                用户登录存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserTokenStore">
-            <summary>
-                用户令牌存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.RoleStore">
-            <summary>
-                角色存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Services.Identity.Managers.IdentityManager.RoleClaimStore">
-            <summary>
-                角色凭据存储访问器
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.CacheRoleIdAsync(System.String,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-               缓存角色名键
-            </summary>
-            <param name="roleName">角色名称</param>
-            <param name="roleId">角色标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleIdAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            查询角色id
-            </summary>
-            <param name="roleName">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.DeleteRolIdAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            删除角色名键
-            </summary>
-            <param name="roleName">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GenerateRoleNameKey(System.String)">
-            <summary>
-            生成角色名键
-            </summary>
-            <param name="roleName">角色名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.Test">
-            <summary>
-                测试
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken"></param>
-            <returns>角色实例</returns>
-            <remarks>当查询不到角色实例时返回空</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                根据角色标识获取角色
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken"></param>
-            <returns>角色实例</returns>
-            <remarks>当查询不到角色实例时返回空</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRolesAsync(System.Threading.CancellationToken)">
-            <summary>
-                获取角色列表
-            </summary>
-            <returns>角色列表</returns>
-            <remarks>当查询不到角色实例时返回空列表</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名搜索角色
-            </summary>
-            <param name="nameSearch">角色名搜索值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken"></param>
-            <returns>分页搜索结果</returns>
-            <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateRoleAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                创建角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="description">角色描述</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns>存储结果和创建成功的角色实例</returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.UpdateRoleAsync(System.String,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                更新角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                更新角色
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateOrUpdateRoleAsync(System.String,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                创建或更新角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                创建或更新角色
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.DeleteRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                删除角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除角色
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleUsersAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据用户名搜索具有该角色标签的用户
-            </summary>
-            <param name="name">角色名</param>
-            <param name="userNameSearch">用户名匹配值</param>
-            <param name="emailSearch">邮箱匹配值</param>
-            <param name="phoneSearch">电话匹配值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据用户名搜索具有该角色标签的用户
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="userNameSearch">用户名匹配值</param>
-            <param name="emailSearch">邮箱匹配值</param>
-            <param name="phoneSearch">电话匹配值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleClaimsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据列表
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleClaimsAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据列表
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-            <exception cref="T:Artemis.Data.Core.Exceptions.EntityNotFoundException"></exception>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                查询角色的凭据
-            </summary>
-            <param name="name">角色名称</param>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="page">页码</param>
-            <param name="size">页面尺寸</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                查询角色的凭据
-            </summary>
-            <param name="id">角色id</param>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="page">页码</param>
-            <param name="size">页面尺寸</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-            <exception cref="T:Artemis.Data.Core.Exceptions.EntityNotFoundException"></exception>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleClaimAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据
-            </summary>
-            <param name="name">角色名</param>
-            <param name="claimId">凭据标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="claimId">凭据标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Managers.IIdentityManager">
-            <summary>
-                Artemis用户管理器接口
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.Test">
-            <summary>
-                测试
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns>角色实例</returns>
-            <remarks>当查询不到角色实例时返回空</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                根据角色标识获取角色
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken"></param>
-            <returns>角色实例</returns>
-            <remarks>当查询不到角色实例时返回空</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRolesAsync(System.Threading.CancellationToken)">
-            <summary>
-                获取角色列表
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns>角色列表</returns>
-            <remarks>当查询不到角色实例时返回空列表</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名搜索角色
-            </summary>
-            <param name="nameSearch">角色名搜索值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken"></param>
-            <returns>分页搜索结果</returns>
-            <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateRoleAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-                创建角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="description">角色描述</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns>存储结果和创建成功的角色实例</returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.UpdateRoleAsync(System.String,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                更新角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                更新角色
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateOrUpdateRoleAsync(System.String,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                创建或更新角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.RoleBase,System.Threading.CancellationToken)">
-            <summary>
-                创建或更新角色
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="pack">角色信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.DeleteRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                删除角色
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除角色
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleUsersAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据用户名搜索具有该角色标签的用户
-            </summary>
-            <param name="name">角色名</param>
-            <param name="userNameSearch">用户名匹配值</param>
-            <param name="emailSearch">邮箱匹配值</param>
-            <param name="phoneSearch">电话匹配值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据用户名搜索具有该角色标签的用户
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="userNameSearch">用户名匹配值</param>
-            <param name="emailSearch">邮箱匹配值</param>
-            <param name="phoneSearch">电话匹配值</param>
-            <param name="page">页码</param>
-            <param name="size">页面大小</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleClaimsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据列表
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleClaimsAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据列表
-            </summary>
-            <param name="id">角色id</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                查询角色的凭据
-            </summary>
-            <param name="name">角色名称</param>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="page">页码</param>
-            <param name="size">页面尺寸</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                查询角色的凭据
-            </summary>
-            <param name="id">角色id</param>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="page">页码</param>
-            <param name="size">页面尺寸</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleClaimAsync(System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据
-            </summary>
-            <param name="name">角色名</param>
-            <param name="claimId">凭据标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                获取角色凭据
-            </summary>
-            <param name="id">角色标识</param>
-            <param name="claimId">凭据标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisRoleClaimStore">
-            <summary>
-                ArtemisRoleClaimStore接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore">
-            <summary>
-                ArtemisRoleClaimStore
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisRoleStore">
-            <summary>
-                ArtemisUserStore接口
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.FindRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <param name="name"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.FindRoleAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <typeparam name="TMap">映射目标类型</typeparam>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.FetchRolesAsync``1(System.Threading.CancellationToken)">
-            <summary>
-                获取角色列表
-            </summary>
-            <typeparam name="TMap">映射目标类型</typeparam>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.NameMatchQuery(System.String)">
-            <summary>
-                名称匹配查询
-            </summary>
-            <param name="roleName">角色名</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.IArtemisRoleStore.ExistsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                是否存在
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisRoleStore">
-            <summary>
-                ArtemisUserStore
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.FindRoleAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <param name="name"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.FindRoleAsync``1(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据角色名获取角色
-            </summary>
-            <typeparam name="TMap">映射目标类型</typeparam>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.FetchRolesAsync``1(System.Threading.CancellationToken)">
-            <summary>
-                获取角色列表
-            </summary>
-            <typeparam name="TMap">映射目标类型</typeparam>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.NameMatchQuery(System.String)">
-            <summary>
-                名称匹配查询
-            </summary>
-            <param name="roleName">角色名</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.ExistsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                是否存在
-            </summary>
-            <param name="name">角色名</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserClaimStore">
-            <summary>
-                ArtemisUserClaim接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserClaimStore">
-            <summary>
-                ArtemisUserClaim
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserLoginStore">
-            <summary>
-                ArtemisUserLogin接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserLoginStore">
-            <summary>
-                ArtemisUserLogin
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserLoginStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserRoleStore">
-            <summary>
-                ArtemisUserRoleStore接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserRoleStore">
-            <summary>
-                ArtemisUserRoleStore
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserStore">
-            <summary>
-                ArtemisUserStore接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserStore">
-            <summary>
-                ArtemisUserStore
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.IArtemisUserTokenStore">
-            <summary>
-                IArtemisUserTokenStore接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Services.Identity.Stores.ArtemisUserTokenStore">
-            <summary>
-                ArtemisUserTokenStore
-            </summary>
-        </member>
-        <member name="M:Artemis.Services.Identity.Stores.ArtemisUserTokenStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
-            <summary>
-                创建一个新的基本存储实例
-            </summary>
-            <param name="context">数据访问上下文</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Services.Identity</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Services.Identity.AttachResultException">
+			<summary>
+				结果附加扩展
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.AttachResultException.Attach``1(Artemis.Data.Store.StoreResult,``0)">
+			<summary>
+				附加
+			</summary>
+			<typeparam name="TAttach">附加数据类型</typeparam>
+			<param name="result">结果</param>
+			<param name="attach">附加数据</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisClaim">
+			<summary>
+				ArtemisClaim
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisClaim.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisClaim.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisClaim.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisIdentityContext">
+			<summary>
+				Artemis认证数据上下文
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.ArtemisIdentityContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Services.Identity.Data.ArtemisIdentityContext})">
+			<summary>
+				构造
+			</summary>
+			<param name="options">创建配置</param>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisIdentityContext.ArtemisClaims">
+			<summary>
+				ArtemisClaimsSet
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.ArtemisIdentityContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<summary>
+				Configures the schema needed for the identity framework.
+			</summary>
+			<param name="builder">
+				The builder being used to construct the model for this context.
+			</param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisRole">
+			<summary>
+				ArtemisRole
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.Users">
+			<summary>
+				具备该角色的用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.UserRoles">
+			<summary>
+				用户角色表映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.RoleClaims">
+			<summary>
+				角色凭据映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRole.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisRoleClaim">
+			<summary>
+				ArtemisRoleClaim
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.Role">
+			<summary>
+				凭据所属角色
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisRoleClaim.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisUser">
+			<summary>
+				ArtemisUser
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.Roles">
+			<summary>
+				用户具备的角色
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.UserRoles">
+			<summary>
+				用户角色映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.Claims">
+			<summary>
+				用户凭据映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.Logins">
+			<summary>
+				用户登录映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.Tokens">
+			<summary>
+				用户令牌映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUser.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisUserClaim">
+			<summary>
+				ArtemisUserClaim
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.User">
+			<summary>
+				所属用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserClaim.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisUserLogin">
+			<summary>
+				ArtemisUserLogin
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.User">
+			<summary>
+				登录信息所属用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserLogin.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisUserRole">
+			<summary>
+				ArtemisUserRole
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.User">
+			<summary>
+				用户映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.Role">
+			<summary>
+				角色映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserRole.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.ArtemisUserToken">
+			<summary>
+				ArtemisUserToken
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.User">
+			<summary>
+				凭据所属用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.ArtemisUserToken.DeletedAt">
+			<summary>
+				删除时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration">
+			<summary>
+				凭据数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.ClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisClaim})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1">
+			<summary>
+				Artemis认证模型配置
+			</summary>
+			<typeparam name="TEntity"></typeparam>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.IdentityConfiguration`1.DbType">
+			<summary>
+				数据库类型
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration">
+			<summary>
+				角色凭据数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.RoleClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRoleClaim})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.RoleConfiguration">
+			<summary>
+				角色数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.RoleConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisRole})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration">
+			<summary>
+				用户凭据数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserClaimConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserClaim})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.UserConfiguration">
+			<summary>
+				用户数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUser})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration">
+			<summary>
+				用户登录数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserLoginConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserLogin})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration">
+			<summary>
+				用户角色映射数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserRoleConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserRole})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration">
+			<summary>
+				用户令牌数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
+			<summary>
+				数据库字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Data.Configurations.UserTokenConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Services.Identity.Data.ArtemisUserToken})">
+			<summary>
+				数据库关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Services.Identity.IdentityExtensions">
+			<summary>
+				认证扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.IdentityExtensions.AddIdentityService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Artemis.Services.Identity.IdentityServiceOptions,System.Boolean)">
+			<summary>
+				添加认证服务
+			</summary>
+			<param name="serviceCollection"></param>
+			<param name="serviceOptions"></param>
+			<param name="isDevelopment"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.IdentityServiceOptions">
+			<summary>
+				认证逻辑配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.IdentityServiceOptions.ContextConnection">
+			<summary>
+				连接
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.IdentityServiceOptions.RedisCacheConnection">
+			<summary>
+				缓存连接
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.IdentityServiceOptions.AssemblyName">
+			<summary>
+				AssemblyName
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.IdentityServiceOptions.IdentityOptionsAction">
+			<summary>
+				认证配置选项操作
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.AccountManager">
+			<summary>
+				认证服务实现
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.AccountManager.#ctor(Microsoft.AspNetCore.Identity.UserManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.IUserStore{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.AspNetCore.Identity.SignInManager{Artemis.Services.Identity.Data.ArtemisUser},Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.Managers.AccountManager{Artemis.Services.Identity.Data.ArtemisUser}})">
+			<summary>
+				认证服务构造
+			</summary>
+			<param name="userManager">用户管理器</param>
+			<param name="userStore">用户存储</param>
+			<param name="signInManager">签入管理器</param>
+			<param name="logger">日志</param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.AccountManager`1">
+			<summary>
+				认证服务实现
+			</summary>
+			<typeparam name="TUser">用户类型</typeparam>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.AccountManager`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				认证服务构造
+			</summary>
+			<param name="userManager">用户管理器</param>
+			<param name="userStore">用户存储</param>
+			<param name="signInManager"></param>
+			<param name="logger">日志</param>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.AccountManager`2">
+			<summary>
+				认证服务实现
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.AccountManager`2.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.AspNetCore.Identity.SignInManager{`0},Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				认证服务构造
+			</summary>
+			<param name="userManager">用户管理器</param>
+			<param name="userStore">用户存储</param>
+			<param name="signInManager"></param>
+			<param name="logger">日志</param>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.AccountManager`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+			<summary>
+				注册
+			</summary>
+			<param name="username">用户名</param>
+			<param name="password">密码</param>
+			<param name="email">邮箱</param>
+			<param name="phone">手机号码</param>
+			<param name="cancellationToken">取消信号</param>
+			<returns></returns>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.UserManger">
+			<summary>
+				用户管理器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.SignInManager">
+			<summary>
+				签到管理器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.UserStore">
+			<summary>
+				用户存储器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.EmailStore">
+			<summary>
+				Email存储器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.PhoneNumberStore">
+			<summary>
+				PhoneNumber存储器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager`2.Logger">
+			<summary>
+				日志记录器
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IAccountManager">
+			<summary>
+				认证服务接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IAccountManager`1">
+			<summary>
+				认证服务接口
+			</summary>
+			<typeparam name="TUser">用户类型</typeparam>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IAccountManager`2">
+			<summary>
+				认证服务接口
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IAccountManager`2.SignUp(System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+			<summary>
+				注册
+			</summary>
+			<param name="username">用户名</param>
+			<param name="password">密码</param>
+			<param name="email">邮箱</param>
+			<param name="phone">手机号码</param>
+			<param name="cancellationToken">取消信号</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IdentityManager">
+			<summary>
+				Artemis用户管理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Artemis.Services.Identity.Stores.IArtemisUserClaimStore,Artemis.Services.Identity.Stores.IArtemisUserLoginStore,Artemis.Services.Identity.Stores.IArtemisUserTokenStore,Artemis.Services.Identity.Stores.IArtemisRoleStore,Artemis.Services.Identity.Stores.IArtemisRoleClaimStore,Microsoft.Extensions.Logging.ILogger{Artemis.Services.Identity.Managers.IdentityManager},Microsoft.Extensions.Options.IOptions{Artemis.Data.Store.StoreOptions},Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="userStore">用户存储访问器</param>
+			<param name="userClaimStore">用户凭据存储访问器</param>
+			<param name="userTokenStore"></param>
+			<param name="roleStore">角色存储访问器</param>
+			<param name="roleClaimStore">角色凭据存储访问器</param>
+			<param name="optionsAccessor"></param>
+			<param name="cache">缓存以来</param>
+			<param name="logger">日志依赖</param>
+			<param name="userLoginStore">用户登录存储访问器</param>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.IdentityManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserStore">
+			<summary>
+				用户存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserClaimStore">
+			<summary>
+				用户凭据存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserLoginStore">
+			<summary>
+				用户登录存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.UserTokenStore">
+			<summary>
+				用户令牌存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.RoleStore">
+			<summary>
+				角色存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.IdentityManager.RoleClaimStore">
+			<summary>
+				角色凭据存储访问器
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.IdentityManager.Test">
+			<summary>
+				测试
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据角色名搜索角色
+			</summary>
+			<param name="nameSearch">角色名搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken"></param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				根据角色标识获取角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken"></param>
+			<returns>角色实例</returns>
+			<remarks>当查询不到角色实例时返回空</remarks>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>存储结果和创建成功的角色实例</returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户名搜索具有该角色标签的用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userNameSearch">用户名匹配值</param>
+			<param name="emailSearch">邮箱匹配值</param>
+			<param name="phoneSearch">电话匹配值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				查询角色的凭据
+			</summary>
+			<param name="id">角色id</param>
+			<param name="claimTypeSearch">凭据类型</param>
+			<param name="page">页码</param>
+			<param name="size">页面尺寸</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+			<exception cref="T:Artemis.Data.Core.Exceptions.EntityNotFoundException"></exception>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				获取角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				创建角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IdentityManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IIdentityManager">
+			<summary>
+				Artemis用户管理器接口
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.IIdentityManager.Test">
+			<summary>
+				测试
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据角色名搜索角色
+			</summary>
+			<param name="nameSearch">角色名搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken"></param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				根据角色标识获取角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken"></param>
+			<returns>角色实例</returns>
+			<remarks>当查询不到角色实例时返回空</remarks>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>存储结果和创建成功的角色实例</returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户名搜索具有该角色标签的用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userNameSearch">用户名匹配值</param>
+			<param name="emailSearch">邮箱匹配值</param>
+			<param name="phoneSearch">电话匹配值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				查询角色的凭据
+			</summary>
+			<param name="id">角色id</param>
+			<param name="claimTypeSearch">凭据类型</param>
+			<param name="page">页码</param>
+			<param name="size">页面尺寸</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				获取角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				创建角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.IIdentityManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="pack">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisRoleClaimStore">
+			<summary>
+				ArtemisRoleClaimStore接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore">
+			<summary>
+				ArtemisRoleClaimStore
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisRoleClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisRoleStore">
+			<summary>
+				ArtemisUserStore接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisRoleStore">
+			<summary>
+				ArtemisUserStore
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisUserClaimStore">
+			<summary>
+				ArtemisUserClaim接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisUserClaimStore">
+			<summary>
+				ArtemisUserClaim
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisUserClaimStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisUserLoginStore">
+			<summary>
+				ArtemisUserLogin接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisUserLoginStore">
+			<summary>
+				ArtemisUserLogin
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisUserLoginStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisUserRoleStore">
+			<summary>
+				ArtemisUserRoleStore接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisUserRoleStore">
+			<summary>
+				ArtemisUserRoleStore
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisUserRoleStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisUserStore">
+			<summary>
+				ArtemisUserStore接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisUserStore">
+			<summary>
+				ArtemisUserStore
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisUserStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.IArtemisUserTokenStore">
+			<summary>
+				IArtemisUserTokenStore接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Services.Identity.Stores.ArtemisUserTokenStore">
+			<summary>
+				ArtemisUserTokenStore
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Stores.ArtemisUserTokenStore.#ctor(Artemis.Services.Identity.Data.ArtemisIdentityContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			<summary>
+				创建一个新的基本存储实例
+			</summary>
+			<param name="context">数据访问上下文</param>
+			<param name="cache">缓存依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+	</members>
 </doc>

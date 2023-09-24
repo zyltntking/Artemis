@@ -47,14 +47,14 @@ public interface IManager<TEntity, TKey> where TEntity : IModelBase<TKey> where 
     public Task? SetKeyAsync(string key, TKey value, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取键
+    ///     获取键
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>
     public TKey? GetKey(string key);
 
     /// <summary>
-    /// 获取键
+    ///     获取键
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -62,13 +62,13 @@ public interface IManager<TEntity, TKey> where TEntity : IModelBase<TKey> where 
     public Task<TKey?> GetKeyAsync(string key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 移除键
+    ///     移除键
     /// </summary>
     /// <param name="key">键</param>
     public void RemoveKey(string key);
 
     /// <summary>
-    /// 移除键
+    ///     移除键
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -134,6 +134,43 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         Store.SetOptions(StoreOptions);
     }
 
+    /// <summary>
+    ///     键前缀
+    /// </summary>
+    protected string KeyPrefix => "Manager";
+
+    #region DebugLogger
+
+    /// <summary>
+    ///     设置Debug日志
+    /// </summary>
+    /// <param name="message">日志消息</param>
+    protected void SetDebugLog(string message)
+    {
+        if (StoreOptions.DebugLogger)
+            Logger?.LogDebug(message);
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     Throws if this class has been disposed.
+    /// </summary>
+    protected void ThrowIfDisposed()
+    {
+        if (_disposed) throw new ManagerDisposedException(GetType().Name);
+    }
+
+    /// <summary>
+    ///     生成Key
+    /// </summary>
+    /// <param name="args">生成参数</param>
+    /// <returns></returns>
+    protected virtual string GenerateCacheKey(params string[] args)
+    {
+        return string.Join(":", args);
+    }
+
     #region Properties
 
     /// <summary>
@@ -168,43 +205,6 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
 
     #endregion
 
-    #region DebugLogger
-
-    /// <summary>
-    ///     设置Debug日志
-    /// </summary>
-    /// <param name="message">日志消息</param>
-    protected void SetDebugLog(string message)
-    {
-        if (StoreOptions.DebugLogger)
-            Logger?.LogDebug(message);
-    }
-
-    #endregion
-
-    /// <summary>
-    ///     Throws if this class has been disposed.
-    /// </summary>
-    protected void ThrowIfDisposed()
-    {
-        if (_disposed) throw new ManagerDisposedException(GetType().Name);
-    }
-
-    /// <summary>
-    /// 键前缀
-    /// </summary>
-    protected string KeyPrefix => "Manager";
-
-    /// <summary>
-    ///     生成Key
-    /// </summary>
-    /// <param name="args">生成参数</param>
-    /// <returns></returns>
-    protected virtual string GenerateCacheKey(params string[] args)
-    {
-        return string.Join(":", args);
-    }
-
     #region Implementation of IManager<TEntity,in TKey>
 
     /// <summary>
@@ -212,7 +212,10 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// </summary>
     /// <param name="key">键</param>
     /// <returns>规范化后的键</returns>
-    public string NormalizeKey(string key) => Store.NormalizeKey(key);
+    public string NormalizeKey(string key)
+    {
+        return Store.NormalizeKey(key);
+    }
 
     #region CacheAccess
 
@@ -221,7 +224,10 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="value">值</param>
-    public void SetKey(string key, TKey value) => Cache?.SetString(key, Store.ConvertIdToString(value)!);
+    public void SetKey(string key, TKey value)
+    {
+        Cache?.SetString(key, Store.ConvertIdToString(value)!);
+    }
 
     /// <summary>
     ///     缓存键
@@ -230,10 +236,13 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="value">值</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task? SetKeyAsync(string key, TKey value, CancellationToken cancellationToken = default) => Cache?.SetStringAsync(key, Store.ConvertIdToString(value)!, cancellationToken);
+    public Task? SetKeyAsync(string key, TKey value, CancellationToken cancellationToken = default)
+    {
+        return Cache?.SetStringAsync(key, Store.ConvertIdToString(value)!, cancellationToken);
+    }
 
     /// <summary>
-    /// 获取键
+    ///     获取键
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>
@@ -244,7 +253,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 获取键
+    ///     获取键
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -256,18 +265,24 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 移除键
+    ///     移除键
     /// </summary>
     /// <param name="key">键</param>
-    public void RemoveKey(string key) => Cache?.Remove(key);
+    public void RemoveKey(string key)
+    {
+        Cache?.Remove(key);
+    }
 
     /// <summary>
-    /// 移除键
+    ///     移除键
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task? RemoveKeyAsync(string key, CancellationToken cancellationToken = default) => Cache?.RemoveAsync(key, cancellationToken);
+    public Task? RemoveKeyAsync(string key, CancellationToken cancellationToken = default)
+    {
+        return Cache?.RemoveAsync(key, cancellationToken);
+    }
 
     #endregion
 

@@ -1,8 +1,10 @@
-﻿using Artemis.Data.Core;
+﻿using System.ComponentModel.DataAnnotations;
+using Artemis.Data.Core;
 using Artemis.Extensions.Web.Controller;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
 using Artemis.Shared.Identity.Transfer;
+using Artemis.Shared.Identity.Transfer.Base;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.Identity.Services;
@@ -31,18 +33,6 @@ public class RoleService : ApiController, IRoleService
     private IIdentityManager IdentityManager { get; }
 
     #region ControllerActions
-
-    /// <summary>
-    ///     测试
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("Test")]
-    public IActionResult Test()
-    {
-        IdentityManager.Test();
-
-        return Ok("Test");
-    }
 
     /// <summary>
     ///     查询角色
@@ -91,14 +81,14 @@ public class RoleService : ApiController, IRoleService
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="roleRequest">创建角色请求</param>
+    /// <param name="request">创建角色请求</param>
     /// <returns>Create Status</returns>
     /// <remark>POST api/Roles</remark>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public Task<DataResult<EmptyRecord>> Post([FromBody] CreateRoleRequest roleRequest)
+    public Task<DataResult<EmptyRecord>> Post([FromBody] [Required] CreateRoleRequest request)
     {
-        return CreateRoleAsync(roleRequest);
+        return CreateRoleAsync(request);
     }
 
     /// <summary>
@@ -109,7 +99,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns>Update Status</returns>
     /// <remark>PUT api/Roles/{roleId}</remark>
     [HttpPut("{roleId}")]
-    public Task<DataResult<EmptyRecord>> Put(Guid roleId, [FromBody] RolePack rolePack)
+    public Task<DataResult<EmptyRecord>> Put(Guid roleId, [FromBody] [Required] RoleBase rolePack)
     {
         var request = new UpdateRoleRequest
         {
@@ -149,7 +139,7 @@ public class RoleService : ApiController, IRoleService
     }
 
     /// <summary>
-    ///     角色用户列表
+    ///     查询角色用户列表
     /// </summary>
     /// <param name="roleId">角色名</param>
     /// <param name="userNameSearch">用户名匹配值</param>
@@ -185,7 +175,7 @@ public class RoleService : ApiController, IRoleService
     }
 
     /// <summary>
-    ///     角色凭据列表
+    ///     查询角色凭据列表
     /// </summary>
     /// <param name="roleId">角色名</param>
     /// <param name="claimTypeSearch">凭据类型搜索值</param>
@@ -235,6 +225,82 @@ public class RoleService : ApiController, IRoleService
         return GetRoleClaimAsync(request);
     }
 
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="claimPack"></param>
+    /// <returns>POST api/Roles/{roleId}/Claims</returns>
+    [HttpPost("{roleId}/Claims")]
+    public Task<DataResult<EmptyRecord>> PostRoleClaim(
+        Guid roleId,
+        [FromBody] [Required] RoleClaimBase claimPack)
+    {
+        var request = new CreateRoleClaimRequest
+        {
+            RoleId = roleId,
+            ClaimPack = claimPack
+        };
+
+        return CreateRoleClaimAsync(request);
+    }
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="claimPack">凭据信息</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    [HttpPut("{roleId}/Claims/{claimId}")]
+    public Task<DataResult<EmptyRecord>> PutRoleClaim(
+        Guid roleId,
+        int claimId,
+        [FromBody] [Required] RoleClaimBase claimPack)
+    {
+        var request = new UpdateRoleClaimRequest
+        {
+            RoleId = roleId,
+            ClaimId = claimId,
+            ClaimPack = claimPack
+        };
+
+        return CreateOrUpdateRoleClaimAsync(request);
+    }
+
+    /// <summary>
+    ///     删除角色凭据
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <param name="claimId"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    [HttpDelete("{roleId}/Claims/{claimId}")]
+    public Task<DataResult<EmptyRecord>> DeleteRoleClaim(
+        Guid roleId,
+        int claimId)
+    {
+        var request = new DeleteRoleClaimRequest
+        {
+            RoleId = roleId,
+            ClaimId = claimId
+        };
+
+        return DeleteRoleClaimAsync(request);
+    }
+
+    /// <summary>
+    ///     角色凭据批量处理
+    /// </summary>
+    /// <param name="roleId">角色标识</param>
+    /// <returns></returns>
+    [HttpPatch("{roleId}/Claims")]
+    public Task<DataResult<EmptyRecord>> PatchRoleClaim(Guid roleId)
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
 
     #region Implementation of IRoleService
@@ -266,9 +332,7 @@ public class RoleService : ApiController, IRoleService
     {
         var result = await IdentityManager.GetRoleAsync(request.RoleId);
 
-        return result is not null ? 
-            DataResult.Success(result) : 
-            DataResult.Fail<RoleInfo>("未查询到匹配的角色");
+        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
 
     /// <summary>
@@ -280,11 +344,11 @@ public class RoleService : ApiController, IRoleService
     public async Task<DataResult<EmptyRecord>> CreateRoleAsync(
         CreateRoleRequest roleRequest)
     {
-        var result = await IdentityManager.CreateRoleAsync(roleRequest.Name, roleRequest.Description);
+        var result = await IdentityManager.CreateRoleAsync(roleRequest);
 
-        return result.Succeeded ? 
-            DataResult.Success(new EmptyRecord()) : 
-            DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
+        return result.Succeeded
+            ? DataResult.Success(new EmptyRecord())
+            : DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -298,9 +362,9 @@ public class RoleService : ApiController, IRoleService
     {
         var result = await IdentityManager.CreateOrUpdateRoleAsync(request.RoleId, request.RolePack);
 
-        return result.Succeeded ? 
-            DataResult.Success(new EmptyRecord()) : 
-            DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
+        return result.Succeeded
+            ? DataResult.Success(new EmptyRecord())
+            : DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -353,9 +417,9 @@ public class RoleService : ApiController, IRoleService
         var filter = request.Filter;
 
         var result = await IdentityManager.FetchRoleClaimsAsync(
-            filter.RoleId, 
-            filter.ClaimTypeSearch, 
-            request.Page, 
+            filter.RoleId,
+            filter.ClaimTypeSearch,
+            request.Page,
             request.Size);
 
         return DataResult.Success(result);
@@ -367,13 +431,55 @@ public class RoleService : ApiController, IRoleService
     /// <param name="request"></param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request)
+    public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
+        GetRoleClaimRequest request)
     {
         var result = await IdentityManager.GetRoleClaimAsync(request.RoleId, request.ClaimId);
 
-        return result is not null ? 
-            DataResult.Success(result) : 
-            DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
+        return result is not null ? DataResult.Success(result) : DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
+    }
+
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [NonAction]
+    public async Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(
+        CreateRoleClaimRequest request)
+    {
+        var result = await IdentityManager.CreateRoleClaimAsync(request.RoleId, request.ClaimPack);
+
+        return result.Succeeded
+            ? DataResult.Success(new EmptyRecord())
+            : DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
+    }
+
+    /// <summary>
+    ///     创建或更新角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [NonAction]
+    public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(UpdateRoleClaimRequest request)
+    {
+        var result =
+            await IdentityManager.CreateOrUpdateRoleClaimAsync(request.RoleId, request.ClaimId, request.ClaimPack);
+
+        return result.Succeeded
+            ? DataResult.Success(new EmptyRecord())
+            : DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
+    }
+
+    /// <summary>
+    ///     删除角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [NonAction]
+    public Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(DeleteRoleClaimRequest request)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion

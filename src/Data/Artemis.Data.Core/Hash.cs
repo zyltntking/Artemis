@@ -6,12 +6,12 @@ namespace Artemis.Data.Core;
 /// <summary>
 ///     散列服务提供程序
 /// </summary>
-public class HashProvider
+public static class Hash
 {
     /// <summary>
     ///     默认键
     /// </summary>
-    private static string DefaultKey { get; set; } = "Artemis";
+    private static string DefaultKey { get; } = "Artemis";
 
     /// <summary>
     ///     密钥字节码
@@ -50,7 +50,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns>输出字符串</returns>
-    public string Md5Hash(string input)
+    public static string Md5Hash(string input)
     {
         return Compute(Md5Hash, input);
     }
@@ -60,7 +60,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
-    public byte[] Md5Hash(byte[] input)
+    public static byte[] Md5Hash(byte[] input)
     {
         using var hash = MD5.Create();
         return hash.ComputeHash(input);
@@ -71,7 +71,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha1Hash(string input)
+    public static string Sha1Hash(string input)
     {
         return Compute(Sha1Hash, input);
     }
@@ -81,7 +81,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
-    private byte[] Sha1Hash(byte[] input)
+    private static byte[] Sha1Hash(byte[] input)
     {
         using var hash = SHA1.Create();
         return hash.ComputeHash(input);
@@ -92,7 +92,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha256Hash(string input)
+    public static string Sha256Hash(string input)
     {
         return Compute(Sha256Hash, input);
     }
@@ -102,7 +102,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
-    private byte[] Sha256Hash(byte[] input)
+    private static byte[] Sha256Hash(byte[] input)
     {
         using var hash = SHA256.Create();
         return hash.ComputeHash(input);
@@ -113,7 +113,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha384Hash(string input)
+    public static string Sha384Hash(string input)
     {
         return Compute(Sha384Hash, input);
     }
@@ -123,7 +123,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
-    private byte[] Sha384Hash(byte[] input)
+    private static byte[] Sha384Hash(byte[] input)
     {
         using var hash = SHA384.Create();
         return hash.ComputeHash(input);
@@ -134,7 +134,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字符串</param>
     /// <returns></returns>
-    public string Sha512Hash(string input)
+    public static string Sha512Hash(string input)
     {
         return Compute(Sha512Hash, input);
     }
@@ -144,7 +144,7 @@ public class HashProvider
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
-    private byte[] Sha512Hash(byte[] input)
+    private static byte[] Sha512Hash(byte[] input)
     {
         using var hash = SHA512.Create();
         return hash.ComputeHash(input);
@@ -157,7 +157,7 @@ public class HashProvider
     /// <param name="key"></param>
     /// <returns></returns>
     /// <remarks>以自身作为密钥对自身进行散列</remarks>
-    public string HmacMd5Hash(string input, string? key = null)
+    public static string HmacMd5Hash(string input, string? key = null)
     {
         using var hash = new HMACMD5(KeyBytes(key));
         var result = Compute(hash.ComputeHash, input);
@@ -172,7 +172,7 @@ public class HashProvider
     /// <param name="key"></param>
     /// <returns></returns>
     /// <remarks>以自身作为密钥对自身进行散列</remarks>
-    public byte[] HmacMd5Hash(byte[] input, byte[] key)
+    public static byte[] HmacMd5Hash(byte[] input, byte[] key)
     {
         using var hash = new HMACMD5(key);
         return hash.ComputeHash(input);
@@ -184,7 +184,7 @@ public class HashProvider
     /// <param name="input">输入字符串</param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string HmacSha1Hash(string input, string? key = null)
+    public static string HmacSha1Hash(string input, string? key = null)
     {
         using var hash = new HMACSHA1(KeyBytes(key));
         var result = Compute(hash.ComputeHash, input);
@@ -198,7 +198,7 @@ public class HashProvider
     /// <param name="input">输入字符串</param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public byte[] HmacSha1Hash(byte[] input, byte[] key)
+    public static byte[] HmacSha1Hash(byte[] input, byte[] key)
     {
         using var hash = new HMACSHA1(key);
         return hash.ComputeHash(input);
@@ -210,7 +210,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string HmacSha256Hash(string input, string? key = null)
+    public static string HmacSha256Hash(string input, string? key = null)
     {
         using var hash = new HMACSHA256(KeyBytes(key));
         var result = Compute(hash.ComputeHash, input);
@@ -224,7 +224,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public byte[] HmacSha256Hash(byte[] input, byte[] key)
+    public static byte[] HmacSha256Hash(byte[] input, byte[] key)
     {
         using var hash = new HMACSHA256(key);
         return hash.ComputeHash(input);
@@ -236,7 +236,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string HmacSha384Hash(string input, string? key = null)
+    public static string HmacSha384Hash(string input, string? key = null)
     {
         using var hash = new HMACSHA384(KeyBytes(key));
         var result = Compute(hash.ComputeHash, input);
@@ -250,7 +250,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public byte[] HmacSha384Hash(byte[] input, byte[] key)
+    public static byte[] HmacSha384Hash(byte[] input, byte[] key)
     {
         using var hash = new HMACSHA384(key);
         return hash.ComputeHash(input);
@@ -262,7 +262,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string HmacSha512Hash(string input, string? key = null)
+    public static string HmacSha512Hash(string input, string? key = null)
     {
         using var hash = new HMACSHA512(KeyBytes(key));
         var result = Compute(hash.ComputeHash, input);
@@ -276,7 +276,7 @@ public class HashProvider
     /// <param name="input"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public byte[] HmacSha512Hash(byte[] input, byte[] key)
+    public static byte[] HmacSha512Hash(byte[] input, byte[] key)
     {
         using var hash = new HMACSHA512(key);
         return hash.ComputeHash(input);

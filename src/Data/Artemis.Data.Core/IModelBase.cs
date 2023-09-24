@@ -27,7 +27,7 @@ public interface IPartitionBase : IModelBase, IPartitionBase<Guid>
 ///     基本分区模型
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot 
+public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot
     where TKey : IEquatable<TKey>
 {
 }
@@ -43,7 +43,7 @@ public interface IConcurrencyModelBase : IModelBase, IConcurrencyModelBase<Guid>
 ///     基本并发模型接口
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp 
+public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp
     where TKey : IEquatable<TKey>
 {
 }
@@ -59,7 +59,7 @@ public interface IModelBase : IKeySlot, IModelBase<Guid>
 ///     基本模型接口
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot 
+public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot
     where TKey : IEquatable<TKey>
 {
     /// <summary>
@@ -72,13 +72,13 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot
     {
         var list = new List<string>();
 
-        if (prefix is not null) 
-            list.Add(prefix);       //1
-        
-        list.Add(GetType().Name);   //2
+        if (prefix is not null)
+            list.Add(prefix); //1
 
-        if (space is not null) 
-            list.Add(space);        //3
+        list.Add(GetType().Name); //2
+
+        if (space is not null)
+            list.Add(space); //3
 
         list.Add(key ?? Id.ToString()!);
 

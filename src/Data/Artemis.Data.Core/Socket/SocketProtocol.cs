@@ -163,8 +163,7 @@ public class SocketProtocol
     /// <returns></returns>
     private static byte GetCheckSum(IEnumerable<byte> content)
     {
-        var hash = new HashProvider();
-        var md5 = hash.Md5Hash(content.ToArray());
+        var md5 = Hash.Md5Hash(content.ToArray());
         var length = md5.Length;
         var checkSum = 0;
         for (var i = 0; i < length; i++) checkSum += md5[i];
@@ -179,8 +178,7 @@ public class SocketProtocol
     /// <returns></returns>
     private static byte GetCheckXor(IEnumerable<byte> headAndContent)
     {
-        var hash = new HashProvider();
-        var md5 = hash.Md5Hash(headAndContent.ToArray());
+        var md5 = Hash.Md5Hash(headAndContent.ToArray());
         var length = md5.Length;
         var checkXor = 0;
         for (var i = 0; i < length; i++) checkXor ^= md5[i];

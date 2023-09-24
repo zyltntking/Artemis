@@ -77,6 +77,30 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request);
+
+    /// <summary>
+    ///     创建角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(CreateRoleClaimRequest request);
+
+    /// <summary>
+    ///     创建或更新角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(UpdateRoleClaimRequest request);
+
+    /// <summary>
+    ///     删除角色凭据
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(DeleteRoleClaimRequest request);
 }
 
 /// <summary>
@@ -105,33 +129,6 @@ public record GetRoleRequest
     [Required]
     [DataMember(Order = 1)]
     public virtual required Guid RoleId { get; set; }
-}
-
-/// <summary>
-/// 角色包
-/// </summary>
-[DataContract]
-public record RolePack : RoleBase
-{
-    #region Implementation of RoleBase
-
-    /// <summary>
-    ///     角色名
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    [DataMember(Order = 1)]
-    public override required string Name { get; set; }
-
-    /// <summary>
-    ///     角色描述
-    /// </summary>
-    [MaxLength(128)]
-    [NullWrappedValue]
-    [DataMember(Order = 2)]
-    public override string? Description { get; set; }
-
-    #endregion
 }
 
 /// <summary>
@@ -179,7 +176,7 @@ public record UpdateRoleRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RolePack RolePack { get; set; }
+    public required RoleBase RolePack { get; set; }
 }
 
 /// <summary>
@@ -257,6 +254,76 @@ public record FetchRoleClaimsFilter : GetRoleRequest
 /// </summary>
 [DataContract]
 public record GetRoleClaimRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required int ClaimId { get; set; }
+}
+
+/// <summary>
+///     创建角色凭据请求
+/// </summary>
+[DataContract]
+public record CreateRoleClaimRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     凭据信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required RoleClaimBase ClaimPack { get; set; }
+}
+
+/// <summary>
+///     更新角色凭据请求
+/// </summary>
+[DataContract]
+public record UpdateRoleClaimRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required int ClaimId { get; set; }
+
+    /// <summary>
+    ///     凭据信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required RoleClaimBase ClaimPack { get; set; }
+}
+
+/// <summary>
+///     删除角色凭据请求
+/// </summary>
+[DataContract]
+public record DeleteRoleClaimRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer.Interface;
 
 namespace Artemis.Shared.Identity.Transfer.Base;
@@ -10,6 +11,17 @@ namespace Artemis.Shared.Identity.Transfer.Base;
 [DataContract]
 public record RoleClaimBase : IRoleClaim
 {
+    /// <summary>
+    ///     生成校验戳
+    /// </summary>
+    /// <returns></returns>
+    public string GenerateCheckStamp => Hash.Md5Hash($"{ClaimType}:{ClaimValue}");
+
+    /// <summary>
+    ///     生成标识
+    /// </summary>
+    public string GenerateFlag => $"{ClaimType}:{ClaimValue}";
+
     #region Implementation of IRoleClaim
 
     /// <summary>

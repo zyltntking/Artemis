@@ -6,7 +6,7 @@ namespace Artemis.Data.Store;
 ///     可映射存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid> 
+public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid>
     where TEntity : IModelBase<Guid>
 {
 }

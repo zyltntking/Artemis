@@ -18,7 +18,7 @@ public interface IStoreCommon<TEntity> : IStoreCommon<TEntity, Guid> where TEnti
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
-    where TEntity : IModelBase<TKey> 
+    where TEntity : IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
     #region IStoreOptions

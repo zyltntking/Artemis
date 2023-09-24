@@ -159,14 +159,20 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     键适配查询
     /// </summary>
-    public IQueryable<TEntity> KeyMatchQuery(TKey key) => EntityQuery.Where(entity => entity.Id.Equals(key));
+    public IQueryable<TEntity> KeyMatchQuery(TKey key)
+    {
+        return EntityQuery.Where(entity => entity.Id.Equals(key));
+    }
 
     /// <summary>
     ///     键适配查询
     /// </summary>
     /// <param name="keys"></param>
     /// <returns></returns>
-    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys) => EntityQuery.Where(item => keys.Contains(item.Id));
+    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys)
+    {
+        return EntityQuery.Where(item => keys.Contains(item.Id));
+    }
 
     #endregion
 
@@ -1287,9 +1293,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         ThrowIfDisposed();
         try
         {
-            var query = predicate is not null ? 
-                EntityQuery.Where(predicate) : 
-                EntityQuery;
+            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
 
             var changes = BatchDeleteEntity(query);
 
@@ -1394,9 +1398,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         cancellationToken.ThrowIfCancellationRequested();
         try
         {
-            var query = predicate is not null ?
-                EntityQuery.Where(predicate) :
-                EntityQuery;
+            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
 
             var changes = await BatchDeleteEntityAsync(query, cancellationToken);
 
@@ -1898,8 +1900,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdConfig<TSource>();
         var entities = sourceList.Join(
-            destinations, 
-            sourceKeySelector, 
+            destinations,
+            sourceKeySelector,
             destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
@@ -1946,7 +1948,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> OverAsync<TSource>(
-        TSource source, 
+        TSource source,
         TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
@@ -2014,8 +2016,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
         var entities = sourceList.Join(
-            destinations, 
-            sourceKeySelector, 
+            destinations,
+            sourceKeySelector,
             destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
@@ -2100,7 +2102,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
         var list = sourceList.Join(
-            destinations, source => source.Id, 
+            destinations, source => source.Id,
             destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
@@ -2132,8 +2134,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdAndNullConfig<TSource>();
         var entities = sourceList.Join(
-            destinations, 
-            sourceKeySelector, 
+            destinations,
+            sourceKeySelector,
             destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
@@ -2219,7 +2221,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destinations));
         config ??= IgnoreNullConfig<TSource>();
         var list = sourceList.Join(
-            destinations, source => source.Id, 
+            destinations, source => source.Id,
             destination => destination.Id,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
@@ -2253,8 +2255,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdAndNullConfig<TSource>();
         var entities = sourceList.Join(
-            destinations, 
-            sourceKeySelector, 
+            destinations,
+            sourceKeySelector,
             destinationKeySelector,
             (source, _) => source.Adapt<TSource, TEntity>(config));
         if (entities is null)
@@ -2287,7 +2289,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         _ignoreIdAndNullConfig = IgnoreNullConfig<TSource>().Clone();
         _ignoreIdAndNullConfig.NewConfig<TSource, TEntity>()
             .IgnoreNullValues(true);
-
         return _ignoreIdAndNullConfig;
     }
 
@@ -2308,7 +2309,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         _ignoreNullConfig = IgnoreMetaConfig<TSource>().Clone();
         _ignoreNullConfig.NewConfig<TSource, TEntity>()
             .IgnoreNullValues(true);
-
         return _ignoreNullConfig;
     }
 
@@ -2414,7 +2414,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         Context.Update(entity);
 
-        if (MetaDataHosting) 
+        if (MetaDataHosting)
             Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
     }
 

@@ -58,6 +58,17 @@ public record StoreResult : IStoreResult
     public IEnumerable<StoreError> Errors => _errors;
 
     /// <summary>
+    ///     描述错误代码
+    /// </summary>
+    /// <returns></returns>
+    private string DescribeCode => string.Join(",", Errors.Select(error => error.Code).ToList());
+
+    /// <summary>
+    ///     描述错误
+    /// </summary>
+    public string DescribeError => string.Join(",", Errors.Select(error => error.Description).ToList());
+
+    /// <summary>
     ///     操作成功时返回结果
     /// </summary>
     /// <param name="effectRows">收影响行数</param>
@@ -82,17 +93,6 @@ public record StoreResult : IStoreResult
             result._errors.AddRange(errors);
         return result;
     }
-
-    /// <summary>
-    /// 描述错误代码
-    /// </summary>
-    /// <returns></returns>
-    private string DescribeCode => string.Join(",", Errors.Select(error => error.Code).ToList());
-
-    /// <summary>
-    /// 描述错误
-    /// </summary>
-    public string DescribeError => string.Join(",", Errors.Select(error => error.Description).ToList());
 
     /// <summary>
     ///     ToString

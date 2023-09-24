@@ -7,9 +7,10 @@ namespace Artemis.Extensions.Web.Controller;
 /// <summary>
 ///     泛型凭据认证Api控制器
 /// </summary>
-[Route("api/[controller]/[action]")]
-[ApiController]
 [ArtemisClaim]
+[ApiController]
+[Produces("application/json")]
+[Route("api/[controller]/[action]")]
 public abstract class ClaimedApiController : ApiController
 {
     /// <summary>
@@ -24,8 +25,9 @@ public abstract class ClaimedApiController : ApiController
 /// <summary>
 ///     泛型Api控制器
 /// </summary>
-[Route("api/[controller]/[action]")]
 [ApiController]
+[Produces("application/json")]
+[Route("api/[controller]/[action]")]
 public abstract class ApiController : ControllerBase
 {
     /// <summary>

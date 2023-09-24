@@ -124,19 +124,28 @@ public record DataResult<T> : IResultBase<T>
     /// <summary>
     ///     获取描述器
     /// </summary>
-    public Dictionary<string, Collection<string>> GetDescriptor() => Descriptor;
+    public Dictionary<string, Collection<string>> GetDescriptor()
+    {
+        return Descriptor;
+    }
 
     /// <summary>
     ///     设置异常
     /// </summary>
     /// <param name="exception">异常</param>
-    public void SetException(Exception exception) => InnerException = exception;
+    public void SetException(Exception exception)
+    {
+        InnerException = exception;
+    }
 
     /// <summary>
     ///     获取异常
     /// </summary>
     /// <returns></returns>
-    public Exception? GetException() => InnerException;
+    public Exception? GetException()
+    {
+        return InnerException;
+    }
 
     #region Implementation of IResultBase
 
