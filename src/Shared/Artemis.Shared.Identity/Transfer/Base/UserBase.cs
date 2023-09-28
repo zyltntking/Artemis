@@ -32,28 +32,14 @@ public record UserBase : IUser
     [MaxLength(128)]
     [DataMember(Order = 2)]
     public virtual string? Email { get; set; }
-
-    /// <summary>
-    ///     电子邮件确认戳
-    /// </summary>
-    [Required]
-    [DataMember(Order = 3)]
-    public virtual bool EmailConfirmed { get; set; }
-
+    
     /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
     [MaxLength(16)]
-    [DataMember(Order = 4)]
+    [DataMember(Order = 3)]
     public virtual string? PhoneNumber { get; set; }
-
-    /// <summary>
-    ///     电话号码确认戳
-    /// </summary>
-    [Required]
-    [DataMember(Order = 5)]
-    public virtual bool PhoneNumberConfirmed { get; set; }
 
     #endregion
 }

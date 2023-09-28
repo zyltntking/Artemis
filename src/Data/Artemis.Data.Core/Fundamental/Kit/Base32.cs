@@ -4,7 +4,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Artemis.Data.Core;
+namespace Artemis.Data.Core.Fundamental.Kit;
 
 // See http://tools.ietf.org/html/rfc3548#section-5
 

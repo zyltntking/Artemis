@@ -784,6 +784,191 @@
             <typeparam name="T">枚举类型</typeparam>
             <param name="options">Json序列化配置</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher">
+            <summary>
+            标准哈希类(密码实现)
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.Default">
+            <summary>
+            默认实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.Create">
+            <summary>
+            创建实例
+            </summary>
+            <returns>ArtemisHasher</returns>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.IterationCount">
+            <summary>
+            迭代计数器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.Rng">
+            <summary>
+            随机数生成器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.#ctor(System.Int32)">
+            <summary>
+            密码哈希器
+            </summary>
+            <param name="iterationCount">迭代计数</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ComputeHash(System.String)">
+            <summary>
+            生成哈希
+            </summary>
+            <param name="input">原文</param>
+            <returns>哈希值</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ComputeHashBytes(System.String)">
+            <summary>
+            计算哈希字节码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ComputeHashBytes(System.String,System.Security.Cryptography.RandomNumberGenerator)">
+            <summary>
+            计算哈希字节码
+            </summary>
+            <param name="input">原文</param>
+            <param name="rng">随机数生成器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ComputeHashBytes(System.String,System.Security.Cryptography.RandomNumberGenerator,Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf,System.Int32,System.Int32,System.Int32)">
+            <summary>
+             生成哈希字节码
+            </summary>
+            <param name="input">输入原文</param>
+            <param name="rng">随机数生成器</param>
+            <param name="prf">PRF</param>
+            <param name="iterationCount">迭代计数器</param>
+            <param name="saltSize">盐长度</param>
+            <param name="numBytesRequested">请求长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.VerifyHash(System.String,System.String)">
+            <summary>
+            检验哈希码
+            </summary>
+            <param name="hashedText">哈希后的值</param>
+            <param name="providedText">原文</param>
+            <returns>bool success, bool needRehash</returns>
+            <remarks>时间一致</remarks>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.VerifyHash(System.Byte[],System.String,System.Int32@,Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf@)">
+            <summary>
+            校验密码哈希
+            </summary>
+            <param name="hashedPassword">密码哈希</param>
+            <param name="password">密码</param>
+            <param name="iterationCount">迭代计数器</param>
+            <param name="prf">PRF</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf">
+            <summary>
+            指定应用于密钥派生算法的 PRF。
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf.HmacSha1">
+            <summary>
+            HMAC (RFC 2104) SHA1 (FIPS 180-4).
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf.HmacSha256">
+            <summary>
+            HMAC (RFC 2104) SHA256 (FIPS 180-4).
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf.HmacSha512">
+            <summary>
+            HMAC (RFC 2104) SHA512 (FIPS 180-4).
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.Pbkdf2(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf,System.Int32,System.Int32)">
+            <summary>使用 PBKDF2 算法执行密钥派生</summary>
+            <param name="input">原文</param>
+            <param name="salt">盐</param>
+            <param name="prf">伪随机函数(pseudo-random function)</param>
+            <param name="iterationCount">哈希过程中prf的迭代次数</param>
+            <param name="numBytesRequested">密钥长度(字节长度)</param>
+            <returns>派生密钥</returns>
+            <remarks>PBKDF2 算法在 RFC 2898 中指定。</remarks>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.DeriveKey(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ArtemisKeyDerivationPrf,System.Int32,System.Int32)">
+            <summary>
+            派生密钥
+            </summary>
+            <param name="input"></param>
+            <param name="salt"></param>
+            <param name="prf"></param>
+            <param name="iterationCount"></param>
+            <param name="numBytesRequested"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ReadBytesOrder(System.Collections.Generic.IReadOnlyList{System.Byte},System.Int32)">
+            <summary>
+            读取字节序
+            </summary>
+            <param name="buffer">接收器</param>
+            <param name="offset">偏移量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.WriteBytesOrder(System.Collections.Generic.IList{System.Byte},System.Int32,System.UInt32)">
+            <summary>
+            写入字节序
+            </summary>
+            <param name="buffer">接收器</param>
+            <param name="offset">偏移量</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.ArtemisHasher.ThrowIfNull(System.Object,System.String)">
+            <summary>
+            若参数为空则抛出异常
+            </summary>
+            <param name="argument"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Kit.Base32">
+            <summary>
+            Base32 encoding/decoding
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Base32.ThrowIfNull(System.Object,System.String)">
+            <summary>
+            若参数为空则抛出异常
+            </summary>
+            <param name="argument"></param>
+            <param name="paramName"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Base32.GenerateBase32">
+            <summary>
+            生成base32串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Base32.ToBase32(System.Byte[])">
+            <summary>
+            转为Base32
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Base32.FromBase32(System.String)">
+            <summary>
+            解析Base32
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+            <exception cref="T:System.FormatException"></exception>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Model.IMetadata">
             <summary>
                 元数据接口
@@ -1470,6 +1655,22 @@
             <param name="input">输入字符串</param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Data.Core.Hash.ArtemisHash(System.String)">
+            <summary>
+            Artemis哈希
+            </summary>
+            <param name="input">输入原文</param>
+            <returns></returns>
+            <remarks>用于计算密码</remarks>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.ArtemisHashVerify(System.String,System.String)">
+            <summary>
+            哈希校验
+            </summary>
+            <param name="hashedText">密文</param>
+            <param name="providedText">原文</param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Data.Core.Hash.Md5Hash(System.String)">
             <summary>
                 Md5哈希
@@ -1892,6 +2093,23 @@
             <summary>
                 数据包
             </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.PageBase">
+            <summary>
+            基本分页处理
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.PageBase.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Data.Core.PageBase.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
         </member>
         <member name="T:Artemis.Data.Core.PageRequest`1">
             <summary>

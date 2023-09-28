@@ -16,17 +16,7 @@ public interface IUser
     string? Email { get; set; }
 
     /// <summary>
-    ///     电子邮件确认戳
-    /// </summary>
-    bool EmailConfirmed { get; set; }
-
-    /// <summary>
     ///     电话号码
     /// </summary>
     string? PhoneNumber { get; set; }
-
-    /// <summary>
-    ///     电话号码确认戳
-    /// </summary>
-    bool PhoneNumberConfirmed { get; set; }
 }

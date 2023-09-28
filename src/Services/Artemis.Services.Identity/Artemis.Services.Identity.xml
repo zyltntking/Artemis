@@ -770,12 +770,21 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.DeleteRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            删除角色凭据
+            </summary>
+            <param name="id">角色标识</param>
+            <param name="claimId">凭据标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Services.Identity.Managers.IUserManager">
             <summary>
                用户管理器接口
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IUserManager.Fetch(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IUserManager.FetchUserAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             搜索用户
             </summary>
@@ -784,6 +793,23 @@
             <param name="phoneNumberSearch">电话号码搜索值</param>
             <param name="page">页码</param>
             <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.IUserManager.GetUserAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            根据用户标识获取用户
+            </summary>
+            <param name="id">标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.IUserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserBase,System.String,System.Threading.CancellationToken)">
+            <summary>
+            创建用户
+            </summary>
+            <param name="pack">用户信息</param>
+            <param name="password">用户密码</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -934,6 +960,15 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.DeleteRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            删除角色凭据
+            </summary>
+            <param name="id">角色标识</param>
+            <param name="claimId">凭据标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Services.Identity.Managers.UserManager">
             <summary>
             用户管理器
@@ -959,7 +994,7 @@
                 角色存储访问器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.UserManager.Fetch(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.UserManager.FetchUserAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             搜索用户
             </summary>
@@ -968,6 +1003,23 @@
             <param name="phoneNumberSearch">电话号码搜索值</param>
             <param name="page">页码</param>
             <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.UserManager.GetUserAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            根据用户标识获取用户
+            </summary>
+            <param name="id">标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Managers.UserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserBase,System.String,System.Threading.CancellationToken)">
+            <summary>
+            创建用户
+            </summary>
+            <param name="pack">用户信息</param>
+            <param name="password">密码</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>

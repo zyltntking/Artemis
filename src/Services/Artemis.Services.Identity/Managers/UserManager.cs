@@ -1,9 +1,11 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Transfer;
+using Artemis.Shared.Identity.Transfer.Base;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -66,7 +68,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<PageResult<UserInfo>> Fetch(
+    public async Task<PageResult<UserInfo>> FetchUserAsync(
         string? nameSearch, 
         string? emailSearch, 
         string? phoneNumberSearch, 
@@ -124,6 +126,58 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             Total = total,
             Data = users
         };
+    }
+
+    /// <summary>
+    /// 根据用户标识获取用户
+    /// </summary>
+    /// <param name="id">标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<UserInfo?> GetUserAsync(
+        Guid id, 
+        CancellationToken cancellationToken = default)
+    {
+        ThrowIfDisposed();
+
+        return UserStore.FindMapEntityAsync<UserInfo>(id, cancellationToken);
+    }
+
+    /// <summary>
+    /// 创建用户
+    /// </summary>
+    /// <param name="pack">用户信息</param>
+    /// <param name="password">密码</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> CreateUserAsync(
+        UserBase pack, 
+        string password,
+        CancellationToken cancellationToken)
+    {
+        ThrowIfDisposed();
+
+        var normalizedUserName = NormalizeKey(pack.UserName);
+
+        var exists = await UserStore.EntityQuery
+            .AnyAsync(user => user.NormalizedUserName == normalizedUserName, cancellationToken);
+
+        if (exists)
+            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisUser), pack.UserName));
+
+        var user = Instance.CreateInstance<ArtemisUser>();
+
+        pack.Adapt(user);
+
+        user.NormalizedUserName = normalizedUserName;
+
+        user.NormalizedEmail = NormalizeKey(user.Email);
+
+        user.PasswordHash = Hash.ArtemisHash(password);
+
+        user.SecurityStamp = Base32.GenerateBase32();
+
+        return await UserStore.CreateAsync(user, cancellationToken);
     }
 
     #endregion

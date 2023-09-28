@@ -168,4 +168,16 @@ public interface IRoleManager : IManager<ArtemisUser>
         int claimId,
         RoleClaimBase pack,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 删除角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> DeleteRoleClaimAsync(
+        Guid id,
+        int claimId,
+        CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using Artemis.Data.Core.Fundamental.Kit;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Artemis.Data.Core;
@@ -43,6 +44,34 @@ public static class Hash
             builder.Append(b.ToString("x2"));
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    /// Artemis哈希
+    /// </summary>
+    /// <param name="input">输入原文</param>
+    /// <returns></returns>
+    /// <remarks>用于计算密码</remarks>
+    public static string ArtemisHash(string input)
+    {
+        var hash = ArtemisHasher.Create();
+
+        return hash.ComputeHash(input);
+    }
+
+    /// <summary>
+    /// 哈希校验
+    /// </summary>
+    /// <param name="hashedText">密文</param>
+    /// <param name="providedText">原文</param>
+    /// <returns></returns>
+    public static bool ArtemisHashVerify(string hashedText, string providedText)
+    {
+        var hasher = ArtemisHasher.Create();
+
+        var (success, _) = hasher.VerifyHash(hashedText, providedText);
+
+        return success;
     }
 
     /// <summary>

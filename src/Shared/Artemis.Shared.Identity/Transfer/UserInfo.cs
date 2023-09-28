@@ -39,7 +39,7 @@ public record UserInfo : UserBase, IKeySlot
     /// </summary>
     [Required]
     [DataMember(Order = 4)]
-    public override bool EmailConfirmed { get; set; }
+    public virtual required bool EmailConfirmed { get; set; }
 
     /// <summary>
     ///     电话号码
@@ -54,5 +54,5 @@ public record UserInfo : UserBase, IKeySlot
     /// </summary>
     [Required]
     [DataMember(Order = 6)]
-    public override bool PhoneNumberConfirmed { get; set; }
+    public virtual required bool PhoneNumberConfirmed { get; set; }
 }

@@ -4,6 +4,7 @@ using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
 using Artemis.Shared.Identity.Transfer.Base;
+using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -16,90 +17,123 @@ public interface IRoleService
     /// <summary>
     ///     搜索角色
     /// </summary>
-    /// <param name="request">查询角色请求</param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync(PageRequest<FetchRolesFilter> request);
+    Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync(
+        PageRequest<FetchRolesFilter> request,
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     获取角色
     /// </summary>
-    /// <param name="request">获取角色请求</param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns>角色信息<see cref="RoleInfo" /></returns>
     [OperationContract]
-    Task<DataResult<RoleInfo>> GetRoleAsync(GetRoleRequest request);
+    Task<DataResult<RoleInfo>> GetRoleAsync(
+        GetRoleRequest request,
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     创建角色
     /// </summary>
-    /// <param name="roleRequest">创建角色请求</param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateRoleAsync(CreateRoleRequest roleRequest);
+    Task<DataResult<EmptyRecord>> CreateRoleAsync(
+        CreateRoleRequest request,
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     创建或更新角色
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(UpdateRoleRequest request);
+    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(
+        UpdateRoleRequest request,
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     删除角色
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> DeleteRoleAsync(DeleteRoleRequest request);
+    Task<DataResult<EmptyRecord>> DeleteRoleAsync(
+        DeleteRoleRequest request,
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     查询角色用户
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(PageRequest<FetchRoleUsersFilter> request);
+    Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
+        PageRequest<FetchRoleUsersFilter> request, 
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     查询角色凭据
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(PageRequest<FetchRoleClaimsFilter> request);
+    Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(
+        PageRequest<FetchRoleClaimsFilter> request, 
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     获取角色凭据
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(GetRoleClaimRequest request);
+    Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
+        GetRoleClaimRequest request, 
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     创建角色凭据
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(CreateRoleClaimRequest request);
+    Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(
+        CreateRoleClaimRequest request, 
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     创建或更新角色凭据
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(UpdateRoleClaimRequest request);
+    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(
+        UpdateRoleClaimRequest request, 
+        ServerCallContext? context = default);
 
     /// <summary>
     ///     删除角色凭据
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(DeleteRoleClaimRequest request);
+    Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(
+        DeleteRoleClaimRequest request, 
+        ServerCallContext? context = default);
 }
 
 /// <summary>
