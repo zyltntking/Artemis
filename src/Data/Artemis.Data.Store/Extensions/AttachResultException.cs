@@ -1,12 +1,11 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Store;
 
-namespace Artemis.Services.Identity;
+namespace Artemis.Data.Store.Extensions;
 
 /// <summary>
 ///     结果附加扩展
 /// </summary>
-internal static class AttachResultException
+public static class AttachResultException
 {
     /// <summary>
     ///     附加

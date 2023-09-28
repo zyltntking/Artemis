@@ -87,7 +87,7 @@ public class RoleService : ApiController, IRoleService
     /// <remark>POST api/Roles</remark>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public Task<DataResult<EmptyRecord>> PostRole([FromBody] [Required] CreateRoleRequest request)
+    public Task<DataResult<RoleInfo>> PostRole([FromBody] [Required] CreateRoleRequest request)
     {
         return CreateRoleAsync(request);
     }
@@ -100,7 +100,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns>Update Status</returns>
     /// <remark>PUT api/Roles/{roleId}</remark>
     [HttpPut("{roleId}")]
-    public Task<DataResult<EmptyRecord>> PutRole(Guid roleId, [FromBody] [Required] RoleBase rolePack)
+    public Task<DataResult<RoleInfo>> PutRole(Guid roleId, [FromBody] [Required] RoleBase rolePack)
     {
         var request = new UpdateRoleRequest
         {
@@ -234,7 +234,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns>POST api/Roles/{roleId}/Claims</returns>
     [HttpPost("{roleId}/Claims")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public Task<DataResult<EmptyRecord>> PostRoleClaim(
+    public Task<DataResult<RoleClaimInfo>> PostRoleClaim(
         Guid roleId,
         [FromBody] [Required] RoleClaimBase claimPack)
     {
@@ -256,7 +256,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     [HttpPut("{roleId}/Claims/{claimId}")]
-    public Task<DataResult<EmptyRecord>> PutRoleClaim(
+    public Task<DataResult<RoleClaimInfo>> PutRoleClaim(
         Guid roleId,
         int claimId,
         [FromBody] [Required] RoleClaimBase claimPack)
@@ -356,17 +356,17 @@ public class RoleService : ApiController, IRoleService
     /// <param name="context">上下文</param>
     /// <returns>创建结果</returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateRoleAsync(
+    public async Task<DataResult<RoleInfo>> CreateRoleAsync(
         CreateRoleRequest request,
         ServerCallContext? context = default)
     {
-        var result = await RoleManager.CreateRoleAsync(
+        var (result, role) = await RoleManager.CreateRoleAsync(
             request, 
             context?.CancellationToken ?? default);
 
         return result.Succeeded
-            ? DataResult.Success(new EmptyRecord())
-            : DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
+            ? DataResult.Success(role)!
+            : DataResult.Fail<RoleInfo>($"创建失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -376,18 +376,18 @@ public class RoleService : ApiController, IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(
+    public async Task<DataResult<RoleInfo>> CreateOrUpdateRoleAsync(
         UpdateRoleRequest request, 
         ServerCallContext? context = default)
     {
-        var result = await RoleManager.CreateOrUpdateRoleAsync(
+        var (result, role) = await RoleManager.CreateOrUpdateRoleAsync(
             request.RoleId, 
             request.RolePack, 
             context?.CancellationToken ?? default);
 
         return result.Succeeded
-            ? DataResult.Success(new EmptyRecord())
-            : DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
+            ? DataResult.Success(role)!
+            : DataResult.Fail<RoleInfo>($"创建或更新失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -486,18 +486,18 @@ public class RoleService : ApiController, IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(
+    public async Task<DataResult<RoleClaimInfo>> CreateRoleClaimAsync(
         CreateRoleClaimRequest request, 
         ServerCallContext? context = default)
     {
-        var result = await RoleManager.CreateRoleClaimAsync(
+        var (result, roleClaim) = await RoleManager.CreateRoleClaimAsync(
             request.RoleId, 
             request.ClaimPack,
             context?.CancellationToken ?? default);
 
         return result.Succeeded
-            ? DataResult.Success(new EmptyRecord())
-            : DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
+            ? DataResult.Success(roleClaim)!
+            : DataResult.Fail<RoleClaimInfo>($"创建失败。{result.DescribeError}");
     }
 
     /// <summary>
@@ -507,19 +507,19 @@ public class RoleService : ApiController, IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
-    public async Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(
+    public async Task<DataResult<RoleClaimInfo>> CreateOrUpdateRoleClaimAsync(
         UpdateRoleClaimRequest request, 
         ServerCallContext? context = default)
     {
-        var result = await RoleManager.CreateOrUpdateRoleClaimAsync(
+        var (result, roleClaim) = await RoleManager.CreateOrUpdateRoleClaimAsync(
             request.RoleId, 
             request.ClaimId, 
             request.ClaimPack,
             context?.CancellationToken ?? default);
 
         return result.Succeeded
-            ? DataResult.Success(new EmptyRecord())
-            : DataResult.Fail<EmptyRecord>($"创建或更新失败。{result.DescribeError}");
+            ? DataResult.Success(roleClaim)!
+            : DataResult.Fail<RoleClaimInfo>($"创建或更新失败。{result.DescribeError}");
     }
 
     /// <summary>

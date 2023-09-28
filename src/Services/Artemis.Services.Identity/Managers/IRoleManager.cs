@@ -43,7 +43,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    Task<StoreResult> CreateRoleAsync(
+    Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
         RoleBase pack,
         CancellationToken cancellationToken = default);
 
@@ -54,7 +54,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> UpdateRoleAsync(
+    Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
         Guid id,
         RoleBase pack,
         CancellationToken cancellationToken = default);
@@ -66,7 +66,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> CreateOrUpdateRoleAsync(
+    Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
         RoleBase pack,
         CancellationToken cancellationToken = default);
@@ -136,7 +136,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> CreateRoleClaimAsync(
+    Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateRoleClaimAsync(
         Guid id,
         RoleClaimBase pack,
         CancellationToken cancellationToken = default);
@@ -149,7 +149,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> UpdateRoleClaimAsync(
+    Task<(StoreResult result, RoleClaimInfo? roleClaim)> UpdateRoleClaimAsync(
         Guid id,
         int claimId,
         RoleClaimBase pack,
@@ -163,7 +163,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> CreateOrUpdateRoleClaimAsync(
+    Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateOrUpdateRoleClaimAsync(
         Guid id,
         int claimId,
         RoleClaimBase pack,

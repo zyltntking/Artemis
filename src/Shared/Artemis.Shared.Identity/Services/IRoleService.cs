@@ -43,7 +43,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateRoleAsync(
+    Task<DataResult<RoleInfo>> CreateRoleAsync(
         CreateRoleRequest request,
         ServerCallContext? context = default);
 
@@ -54,7 +54,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleAsync(
+    Task<DataResult<RoleInfo>> CreateOrUpdateRoleAsync(
         UpdateRoleRequest request,
         ServerCallContext? context = default);
 
@@ -109,7 +109,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateRoleClaimAsync(
+    Task<DataResult<RoleClaimInfo>> CreateRoleClaimAsync(
         CreateRoleClaimRequest request, 
         ServerCallContext? context = default);
 
@@ -120,7 +120,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateOrUpdateRoleClaimAsync(
+    Task<DataResult<RoleClaimInfo>> CreateOrUpdateRoleClaimAsync(
         UpdateRoleClaimRequest request, 
         ServerCallContext? context = default);
 

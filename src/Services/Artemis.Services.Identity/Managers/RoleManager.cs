@@ -137,7 +137,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
-    public async Task<StoreResult> CreateRoleAsync(
+    public async Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
         RoleBase pack,
         CancellationToken cancellationToken = default)
     {
@@ -149,7 +149,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(role => role.NormalizedName == normalizedName, cancellationToken);
 
         if (exists)
-            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), pack.Name));
+            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), pack.Name)), default);
 
         var role = Instance.CreateInstance<ArtemisRole>();
 
@@ -157,7 +157,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         role.NormalizedName = normalizedName;
 
-        return await RoleStore.CreateAsync(role, cancellationToken);
+        return (await RoleStore.CreateAsync(role, cancellationToken), role.Adapt<RoleInfo>());
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateRoleAsync(
+    public async Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
         Guid id,
         RoleBase pack,
         CancellationToken cancellationToken = default)
@@ -182,10 +182,10 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
             role.NormalizedName = NormalizeKey(pack.Name);
 
-            return await RoleStore.UpdateAsync(role, cancellationToken);
+            return (await RoleStore.UpdateAsync(role, cancellationToken), role.Adapt<RoleInfo>());
         }
 
-        return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
+        return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
     }
 
     /// <summary>
@@ -195,7 +195,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateOrUpdateRoleAsync(
+    public async Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
         RoleBase pack,
         CancellationToken cancellationToken = default)
@@ -398,7 +398,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateRoleClaimAsync(
+    public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateRoleClaimAsync(
         Guid id,
         RoleClaimBase pack,
         CancellationToken cancellationToken = default)
@@ -408,7 +408,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
-            return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
+            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
 
         var claimExists = await RoleClaimStore.EntityQuery
             .Where(claim => claim.RoleId == id)
@@ -416,14 +416,14 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(cancellationToken);
 
         if (claimExists)
-            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag));
+            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag)), default);
 
-        var claim = Instance.CreateInstance<ArtemisRoleClaim>();
+        var roleClaim = Instance.CreateInstance<ArtemisRoleClaim>();
 
-        pack.Adapt(claim);
-        claim.RoleId = id;
+        pack.Adapt(roleClaim);
+        roleClaim.RoleId = id;
 
-        return await RoleClaimStore.CreateAsync(claim, cancellationToken);
+        return (await RoleClaimStore.CreateAsync(roleClaim, cancellationToken), roleClaim.Adapt<RoleClaimInfo>());
     }
 
     /// <summary>
@@ -434,7 +434,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateRoleClaimAsync(
+    public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> UpdateRoleClaimAsync(
         Guid id,
         int claimId,
         RoleClaimBase pack,
@@ -445,7 +445,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
-            return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
+            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
 
         var hasBeenSet = await RoleClaimStore.EntityQuery
             .Where(claim => claim.Id != claimId)
@@ -453,16 +453,16 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(cancellationToken);
 
         if (hasBeenSet)
-            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag));
+            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag)), default);
 
         var roleClaim = await RoleClaimStore.FindEntityAsync(claimId, cancellationToken);
 
         if (roleClaim is null)
-            return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRoleClaim), claimId.ToString()));
+            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRoleClaim), claimId.ToString())), default);
 
         pack.Adapt(roleClaim);
 
-        return await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken);
+        return (await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken), roleClaim.Adapt<RoleClaimInfo>());
     }
 
     /// <summary>
@@ -473,7 +473,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="pack">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateOrUpdateRoleClaimAsync(
+    public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateOrUpdateRoleClaimAsync(
         Guid id,
         int claimId,
         RoleClaimBase pack,

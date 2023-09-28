@@ -306,6 +306,20 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Store.Extensions.AttachResultException">
+            <summary>
+                结果附加扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.Extensions.AttachResultException.Attach``1(Artemis.Data.Store.StoreResult,``0)">
+            <summary>
+                附加
+            </summary>
+            <typeparam name="TAttach">附加数据类型</typeparam>
+            <param name="result">结果</param>
+            <param name="attach">附加数据</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Data.Store.Extensions.QueryableExtensions">
             <summary>
                 Queryable扩展

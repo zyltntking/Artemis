@@ -386,6 +386,27 @@
                 空记录
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.KeyRecord">
+            <summary>
+            含键记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.KeyRecord.Id">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.KeyRecord`1">
+            <summary>
+            含键记录
+            </summary>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.KeyRecord`1.Id">
+            <summary>
+            标识
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Exceptions.ArtemisException">
             <summary>
                 Artemis系统日志

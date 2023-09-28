@@ -338,3 +338,36 @@ internal static class ResultStatus
 /// </summary>
 [DataContract]
 public record EmptyRecord;
+
+/// <summary>
+/// 含键记录
+/// </summary>
+[DataContract]
+public record KeyRecord : KeyRecord<Guid>
+{
+    #region Overrides of KeyRecord<Guid>
+
+    /// <summary>
+    /// 标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid Id { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+/// 含键记录
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+[DataContract]
+public record KeyRecord<TKey> where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    /// 标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public virtual required TKey Id { get; set; }
+}
