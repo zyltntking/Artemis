@@ -156,6 +156,20 @@ public sealed record StoreErrorDescriber : IStoreErrorDescriber
             Description = Formatter.FormatEntityHasBeenSet(entity, flag)
         };
     }
+
+    /// <summary>
+    /// 属性为空
+    /// </summary>
+    /// <param name="propertyName">属性名</param>
+    /// <returns></returns>
+    public StoreError PropertyIsNull(string? propertyName)
+    {
+        return new StoreError
+        {
+            Code = nameof(PropertyIsNull),
+            Description = Formatter.FormatPropertyIsNull(propertyName)
+        };
+    } 
 }
 
 /// <summary>

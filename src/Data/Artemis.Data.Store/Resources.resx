@@ -141,4 +141,8 @@
     <value>未查询到Id为 '{0}' 的对象。</value>
     <comment>通过id查找失败时的信息。</comment>
   </data>
+  <data name="PropertyIsNull" xml:space="preserve">
+    <value>必要参数'{0}'的值为空。</value>
+    <comment>必要参数为空。</comment>
+  </data>
 </root>

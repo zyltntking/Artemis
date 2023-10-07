@@ -1,9 +1,9 @@
-﻿namespace Artemis.Shared.Identity.Transfer.Interface;
+﻿namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
-///     基本用户登录信息接口
+///     基本用户令牌信息接口
 /// </summary>
-public interface IUserLogin
+public interface IUserToken
 {
     /// <summary>
     ///     用户标识
@@ -16,12 +16,12 @@ public interface IUserLogin
     string LoginProvider { get; set; }
 
     /// <summary>
-    ///     提供程序密钥
+    ///     令牌名称
     /// </summary>
-    string ProviderKey { get; set; }
+    string Name { get; set; }
 
     /// <summary>
-    ///     提供程序显示名称
+    ///     令牌值
     /// </summary>
-    string? ProviderDisplayName { get; set; }
+    string? Value { get; set; }
 }

@@ -549,7 +549,7 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
@@ -557,7 +557,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>存储结果和创建成功的角色实例</returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -566,7 +566,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色
             </summary>
@@ -616,7 +616,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色凭据
             </summary>
@@ -625,7 +625,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -635,7 +635,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IRoleManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色凭据
             </summary>
@@ -679,7 +679,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IUserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserBase,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IUserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserPackage,System.String,System.Threading.CancellationToken)">
             <summary>
             创建用户
             </summary>
@@ -738,7 +738,7 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateRoleAsync(Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
@@ -746,7 +746,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>存储结果和创建成功的角色实例</returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.UpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -755,7 +755,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色
             </summary>
@@ -806,7 +806,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateRoleClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色凭据
             </summary>
@@ -815,7 +815,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -825,7 +825,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.RoleManager.CreateOrUpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色凭据
             </summary>
@@ -889,7 +889,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.UserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserBase,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.UserManager.CreateUserAsync(Artemis.Shared.Identity.Transfer.Base.UserPackage,System.String,System.Threading.CancellationToken)">
             <summary>
             创建用户
             </summary>

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
 
-namespace Artemis.Shared.Identity;
+namespace Artemis.Shared.Identity.Services;
 
 /// <summary>
 ///     账户服务接口

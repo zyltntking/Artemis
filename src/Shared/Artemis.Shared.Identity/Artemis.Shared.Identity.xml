@@ -712,83 +712,83 @@
                 电话号码
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.Base.RoleBase">
+        <member name="T:Artemis.Shared.Identity.Transfer.Base.RolePackage">
             <summary>
                 基本角色信息
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleBase.Name">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RolePackage.Name">
             <summary>
                 角色名
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleBase.Description">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RolePackage.Description">
             <summary>
                 角色描述
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase">
+        <member name="T:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage">
             <summary>
                 基本角色凭据信息
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.GenerateCheckStamp">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.GenerateCheckStamp">
             <summary>
                 生成校验戳
             </summary>
             <returns></returns>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.GenerateFlag">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.GenerateFlag">
             <summary>
                 生成标识
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.RoleId">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.RoleId">
             <summary>
                 角色标识
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.ClaimType">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.ClaimType">
             <summary>
                 凭据类型
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.ClaimValue">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.ClaimValue">
             <summary>
                 凭据值
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.CheckStamp">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.CheckStamp">
             <summary>
                 校验戳
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimBase.Description">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage.Description">
             <summary>
                 凭据描述
             </summary>
         </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.Base.UserBase">
+        <member name="T:Artemis.Shared.Identity.Transfer.Base.UserPackage">
             <summary>
                 基本用户信息
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserBase.GenerateSecurityStamp">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserPackage.GenerateSecurityStamp">
             <summary>
             生成加密戳
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserBase.UserName">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserPackage.UserName">
             <summary>
                 用户名
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserBase.Email">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserPackage.Email">
             <summary>
                 电子邮件
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserBase.PhoneNumber">
+        <member name="P:Artemis.Shared.Identity.Transfer.Base.UserPackage.PhoneNumber">
             <summary>
                 电话号码
             </summary>

@@ -1,14 +1,14 @@
-﻿namespace Artemis.Shared.Identity.Transfer.Interface;
+﻿namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
-///     基本角色凭据接口
+///     基本用户凭据接口
 /// </summary>
-public interface IRoleClaim
+public interface IUserClaim
 {
     /// <summary>
     ///     角色标识
     /// </summary>
-    Guid RoleId { get; set; }
+    Guid UserId { get; set; }
 
     /// <summary>
     ///     凭据类型

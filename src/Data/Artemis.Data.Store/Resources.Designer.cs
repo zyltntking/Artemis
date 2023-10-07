@@ -113,5 +113,14 @@ namespace Artemis.Data.Store {
                 return ResourceManager.GetString("NotFoundId", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 必要参数&apos;{0}&apos;的值为空。 的本地化字符串。
+        /// </summary>
+        internal static string PropertyIsNull {
+            get {
+                return ResourceManager.GetString("PropertyIsNull", resourceCulture);
+            }
+        }
     }
 }

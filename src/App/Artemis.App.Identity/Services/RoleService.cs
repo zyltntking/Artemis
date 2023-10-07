@@ -4,7 +4,6 @@ using Artemis.Extensions.Web.Controller;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
 
@@ -100,7 +99,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns>Update Status</returns>
     /// <remark>PUT api/Roles/{roleId}</remark>
     [HttpPut("{roleId}")]
-    public Task<DataResult<RoleInfo>> PutRole(Guid roleId, [FromBody] [Required] RoleBase rolePack)
+    public Task<DataResult<RoleInfo>> PutRole(Guid roleId, [FromBody] [Required] RolePackage rolePack)
     {
         var request = new UpdateRoleRequest
         {
@@ -236,7 +235,7 @@ public class RoleService : ApiController, IRoleService
     [ProducesResponseType(StatusCodes.Status201Created)]
     public Task<DataResult<RoleClaimInfo>> PostRoleClaim(
         Guid roleId,
-        [FromBody] [Required] RoleClaimBase claimPack)
+        [FromBody] [Required] RoleClaimPackage claimPack)
     {
         var request = new CreateRoleClaimRequest
         {
@@ -259,7 +258,7 @@ public class RoleService : ApiController, IRoleService
     public Task<DataResult<RoleClaimInfo>> PutRoleClaim(
         Guid roleId,
         int claimId,
-        [FromBody] [Required] RoleClaimBase claimPack)
+        [FromBody] [Required] RoleClaimPackage claimPack)
     {
         var request = new UpdateRoleClaimRequest
         {

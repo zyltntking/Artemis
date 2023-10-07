@@ -5,7 +5,6 @@ using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -81,7 +80,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         nameSearch ??= string.Empty;
 
@@ -126,7 +125,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         Guid id,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         return RoleStore.FindMapEntityAsync<RoleInfo>(id, cancellationToken);
     }
@@ -138,10 +137,10 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
     public async Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var normalizedName = NormalizeKey(pack.Name);
 
@@ -149,7 +148,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(role => role.NormalizedName == normalizedName, cancellationToken);
 
         if (exists)
-            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRole), pack.Name)), default);
+            return (StoreResult.EntityFoundFailed(nameof(ArtemisRole), pack.Name), default);
 
         var role = Instance.CreateInstance<ArtemisRole>();
 
@@ -157,7 +156,9 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         role.NormalizedName = normalizedName;
 
-        return (await RoleStore.CreateAsync(role, cancellationToken), role.Adapt<RoleInfo>());
+        var result = await RoleStore.CreateAsync(role, cancellationToken);
+
+        return (result, role.Adapt<RoleInfo>());
     }
 
     /// <summary>
@@ -169,10 +170,10 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <returns></returns>
     public async Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
         Guid id,
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
@@ -182,10 +183,12 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
             role.NormalizedName = NormalizeKey(pack.Name);
 
-            return (await RoleStore.UpdateAsync(role, cancellationToken), role.Adapt<RoleInfo>());
+            var result = await RoleStore.UpdateAsync(role, cancellationToken);
+
+            return (result, role.Adapt<RoleInfo>());
         }
 
-        return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
+        return (StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString()), default);
     }
 
     /// <summary>
@@ -197,10 +200,10 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <returns></returns>
     public async Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var exists = await RoleStore.ExistsAsync(id, cancellationToken);
 
@@ -220,14 +223,14 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         Guid id,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
         if (role != null)
             return await RoleStore.DeleteAsync(role, cancellationToken);
 
-        return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -250,7 +253,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
@@ -326,7 +329,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
@@ -379,7 +382,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         int claimId,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
@@ -400,15 +403,15 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <returns></returns>
     public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateRoleClaimAsync(
         Guid id,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
-            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
+            return (StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString()), default);
 
         var claimExists = await RoleClaimStore.EntityQuery
             .Where(claim => claim.RoleId == id)
@@ -416,14 +419,16 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(cancellationToken);
 
         if (claimExists)
-            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag)), default);
+            return (StoreResult.EntityFoundFailed(nameof(ArtemisRoleClaim), pack.GenerateFlag), default);
 
         var roleClaim = Instance.CreateInstance<ArtemisRoleClaim>();
 
         pack.Adapt(roleClaim);
         roleClaim.RoleId = id;
 
-        return (await RoleClaimStore.CreateAsync(roleClaim, cancellationToken), roleClaim.Adapt<RoleClaimInfo>());
+        var result = await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
+
+        return (result, roleClaim.Adapt<RoleClaimInfo>());
     }
 
     /// <summary>
@@ -437,15 +442,15 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> UpdateRoleClaimAsync(
         Guid id,
         int claimId,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
-            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString())), default);
+            return (StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString()), default);
 
         var hasBeenSet = await RoleClaimStore.EntityQuery
             .Where(claim => claim.Id != claimId)
@@ -453,16 +458,18 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .AnyAsync(cancellationToken);
 
         if (hasBeenSet)
-            return (StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisRoleClaim), pack.GenerateFlag)), default);
+            return (StoreResult.EntityFoundFailed(nameof(ArtemisRoleClaim), pack.GenerateFlag), default);
 
         var roleClaim = await RoleClaimStore.FindEntityAsync(claimId, cancellationToken);
 
         if (roleClaim is null)
-            return (StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRoleClaim), claimId.ToString())), default);
+            return (StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim), claimId.ToString()), default);
 
         pack.Adapt(roleClaim);
 
-        return (await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken), roleClaim.Adapt<RoleClaimInfo>());
+        var result = await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken);
+
+        return (result, roleClaim.Adapt<RoleClaimInfo>());
     }
 
     /// <summary>
@@ -476,10 +483,10 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     public async Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateOrUpdateRoleClaimAsync(
         Guid id,
         int claimId,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var exists = await RoleClaimStore.EntityQuery
             .Where(claim => claim.RoleId == id)
@@ -504,19 +511,19 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         int claimId, 
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
         if (!roleExists)
-            return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRole), id.ToString()));
+            return StoreResult.EntityFoundFailed(nameof(ArtemisRole), id.ToString());
 
         var roleClaim = await RoleClaimStore.KeyMatchQuery(claimId)
             .Where(claim => claim.RoleId == id)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (roleClaim == null)
-            return StoreResult.Failed(Describer.EntityNotFound(nameof(ArtemisRoleClaim), claimId.ToString()));
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim), claimId.ToString());
 
         return await RoleClaimStore.DeleteAsync(roleClaim, cancellationToken);
     }

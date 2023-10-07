@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
@@ -167,9 +166,9 @@ public record GetRoleRequest
 ///     创建角色请求
 /// </summary>
 [DataContract]
-public record CreateRoleRequest : RoleBase
+public record CreateRoleRequest : RolePackage
 {
-    #region Implementation of RoleBase
+    #region Implementation of RolePackage
 
     /// <summary>
     ///     角色名
@@ -207,7 +206,7 @@ public record UpdateRoleRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RoleBase RolePack { get; set; }
+    public required RolePackage RolePack { get; set; }
 }
 
 /// <summary>
@@ -315,7 +314,7 @@ public record CreateRoleClaimRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RoleClaimBase ClaimPack { get; set; }
+    public required RoleClaimPackage ClaimPack { get; set; }
 }
 
 /// <summary>
@@ -343,7 +342,7 @@ public record UpdateRoleClaimRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RoleClaimBase ClaimPack { get; set; }
+    public required RoleClaimPackage ClaimPack { get; set; }
 }
 
 /// <summary>

@@ -99,7 +99,7 @@
             <returns>Create Status</returns>
             <remark>POST api/Roles</remark>
         </member>
-        <member name="M:Artemis.App.Identity.Services.RoleService.PutRole(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleBase)">
+        <member name="M:Artemis.App.Identity.Services.RoleService.PutRole(System.Guid,Artemis.Shared.Identity.Transfer.Base.RolePackage)">
             <summary>
                 更新角色
             </summary>
@@ -156,7 +156,7 @@
             <returns></returns>
             <remarks>GET api/Roles/{roleId}/Claims/{claimId}</remarks>
         </member>
-        <member name="M:Artemis.App.Identity.Services.RoleService.PostRoleClaim(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase)">
+        <member name="M:Artemis.App.Identity.Services.RoleService.PostRoleClaim(System.Guid,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage)">
             <summary>
                 创建角色凭据
             </summary>
@@ -164,7 +164,7 @@
             <param name="claimPack"></param>
             <returns>POST api/Roles/{roleId}/Claims</returns>
         </member>
-        <member name="M:Artemis.App.Identity.Services.RoleService.PutRoleClaim(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimBase)">
+        <member name="M:Artemis.App.Identity.Services.RoleService.PutRoleClaim(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.Base.RoleClaimPackage)">
             <summary>
                 更新角色凭据
             </summary>

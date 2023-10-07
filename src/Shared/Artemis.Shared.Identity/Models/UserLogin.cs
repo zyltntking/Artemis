@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
-using Artemis.Shared.Identity.Transfer.Interface;
+using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;

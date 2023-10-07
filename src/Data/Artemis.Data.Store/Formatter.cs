@@ -34,4 +34,14 @@ public static class Formatter
     {
         return string.Format(Resources.EntityHasBeenSet, entity, flag);
     }
+
+    /// <summary>
+    /// 格式化属性{0}为空。 的本地化字符串
+    /// </summary>
+    /// <param name="propertyName">属性名</param>
+    /// <returns></returns>
+    internal static string FormatPropertyIsNull(string? propertyName)
+    {
+        return string.Format(Resources.PropertyIsNull, propertyName);
+    }
 }

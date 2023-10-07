@@ -1,4 +1,4 @@
-﻿namespace Artemis.Shared.Identity.Transfer.Interface;
+﻿namespace Artemis.Shared.Identity.Transfer;
 
 /// <summary>
 ///     基本用户角色信息接口

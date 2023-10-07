@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
@@ -43,7 +42,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> CreateUserAsync(
+    Task<DataResult<UserInfo>> CreateUserAsync(
         CreateUserRequest request,
         ServerCallContext? context = default);
 }
@@ -91,9 +90,9 @@ public record GetUserRequest
 ///     创建用户请求
 /// </summary>
 [DataContract]
-public record CreateUserRequest : UserBase
+public record CreateUserRequest : UserPackage
 {
-    #region Implementation of RoleBase
+    #region Implementation of RolePackage
 
     /// <summary>
     ///     用户名
@@ -109,7 +108,7 @@ public record CreateUserRequest : UserBase
     [Required]
     [StringLength(32, MinimumLength = 6)]
     [DataMember(Order = 2)]
-    public required string Password { get; set; }
+    public virtual required string Password { get; set; }
 
     /// <summary>
     ///     电子邮件

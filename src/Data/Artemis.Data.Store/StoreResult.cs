@@ -38,6 +38,11 @@ public record StoreResult : IStoreResult
     private readonly List<StoreError> _errors = new();
 
     /// <summary>
+    /// 描述器
+    /// </summary>
+    private static StoreErrorDescriber Describer => new();
+
+    /// <summary>
     ///     指示操作是否成功的标志
     /// </summary>
     [Required]
@@ -92,6 +97,38 @@ public record StoreResult : IStoreResult
         if (errors is not null)
             result._errors.AddRange(errors);
         return result;
+    }
+
+    /// <summary>
+    /// 实体已存在失败
+    /// </summary>
+    /// <param name="name">实体名</param>
+    /// <param name="flag">判断标识</param>
+    /// <returns></returns>
+    public static StoreResult EntityFoundFailed(string name, string flag)
+    {
+        return Failed(Describer.EntityHasBeenSet(name, flag));
+    }
+
+    /// <summary>
+    /// 实体不存在失败
+    /// </summary>
+    /// <param name="name">实体名</param>
+    /// <param name="flag">判断标识</param>
+    /// <returns></returns>
+    public static StoreResult EntityNotFoundFailed(string name, string flag)
+    {
+        return Failed(Describer.EntityNotFound(name, flag));
+    }
+
+    /// <summary>
+    /// 属性为空失败
+    /// </summary>
+    /// <param name="propertyName">属性名</param>
+    /// <returns></returns>
+    public static StoreResult PropertyIsNullFailed(string? propertyName)
+    {
+        return Failed(Describer.PropertyIsNull(propertyName));
     }
 
     /// <summary>

@@ -90,7 +90,7 @@ namespace Artemis.App.Identity.Services
         /// <remark>POST api/Users</remark>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public Task<DataResult<EmptyRecord>> PostRole([FromBody][Required] CreateUserRequest request)
+        public Task<DataResult<UserInfo>> PostRole([FromBody][Required] CreateUserRequest request)
         {
             return CreateUserAsync(request);
         }
@@ -149,18 +149,18 @@ namespace Artemis.App.Identity.Services
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [NonAction]
-        public async Task<DataResult<EmptyRecord>> CreateUserAsync(
+        public async Task<DataResult<UserInfo>> CreateUserAsync(
             CreateUserRequest request,
             ServerCallContext? context = default)
         {
-            var result = await UserManager.CreateUserAsync(
+            var (result, user) = await UserManager.CreateUserAsync(
                 request,
                 request.Password,
                 context?.CancellationToken ?? default);
 
             return result.Succeeded
-                ? DataResult.Success(new EmptyRecord())
-                : DataResult.Fail<EmptyRecord>($"创建失败。{result.DescribeError}");
+                ? DataResult.Success(user)!
+                : DataResult.Fail<UserInfo>($"创建失败。{result.DescribeError}");
         }
 
         #endregion

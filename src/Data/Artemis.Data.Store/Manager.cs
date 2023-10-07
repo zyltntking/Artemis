@@ -155,9 +155,20 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #endregion
 
     /// <summary>
+    /// 异步函数执行前
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    protected void OnAsyncActionExecuting(CancellationToken cancellationToken = default)
+    {
+        ThrowIfDisposed();
+
+        cancellationToken.ThrowIfCancellationRequested();
+    }
+
+    /// <summary>
     ///     Throws if this class has been disposed.
     /// </summary>
-    protected void ThrowIfDisposed()
+    private void ThrowIfDisposed()
     {
         if (_disposed) throw new ManagerDisposedException(GetType().Name);
     }

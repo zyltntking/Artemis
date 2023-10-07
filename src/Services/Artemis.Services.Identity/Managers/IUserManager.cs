@@ -2,7 +2,6 @@
 using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -46,8 +45,46 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> CreateUserAsync(
-        UserBase pack, 
+    Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
+        UserPackage pack, 
         string password,
         CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 更新用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="pack">用户信息</param>
+    /// <param name="password">密码</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
+        Guid id, 
+        UserPackage pack,
+        string? password = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 创建或更新用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="pack">用户信息</param>
+    /// <param name="password">密码</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<(StoreResult result, UserInfo? user)> CreateOrUpdateUserAsync(
+        Guid id,
+        UserPackage pack,
+        string? password = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 删除用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> DeleteUserAsync(
+        Guid id,
+        CancellationToken cancellationToken = default);
 }

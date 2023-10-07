@@ -5,7 +5,6 @@ using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -76,7 +75,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         int size = 20,
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         nameSearch ??= string.Empty;
 
@@ -138,7 +137,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         Guid id, 
         CancellationToken cancellationToken = default)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         return UserStore.FindMapEntityAsync<UserInfo>(id, cancellationToken);
     }
@@ -150,12 +149,12 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateUserAsync(
-        UserBase pack, 
+    public async Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
+        UserPackage pack, 
         string password,
         CancellationToken cancellationToken)
     {
-        ThrowIfDisposed();
+        OnAsyncActionExecuting(cancellationToken);
 
         var normalizedUserName = NormalizeKey(pack.UserName);
 
@@ -163,7 +162,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             .AnyAsync(user => user.NormalizedUserName == normalizedUserName, cancellationToken);
 
         if (exists)
-            return StoreResult.Failed(Describer.EntityHasBeenSet(nameof(ArtemisUser), pack.UserName));
+            return (StoreResult.EntityFoundFailed(nameof(ArtemisUser), pack.UserName), default);
 
         var user = Instance.CreateInstance<ArtemisUser>();
 
@@ -171,13 +170,107 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         user.NormalizedUserName = normalizedUserName;
 
-        user.NormalizedEmail = NormalizeKey(user.Email);
+        if (pack.Email is not null)
+        {
+            user.NormalizedEmail = NormalizeKey(pack.Email);
+        }
 
         user.PasswordHash = Hash.ArtemisHash(password);
 
         user.SecurityStamp = Base32.GenerateBase32();
 
-        return await UserStore.CreateAsync(user, cancellationToken);
+        var result = await UserStore.CreateAsync(user, cancellationToken);
+
+        return (result, user.Adapt<UserInfo>());
+    }
+
+    /// <summary>
+    /// 更新用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="pack">用户信息</param>
+    /// <param name="password">密码</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
+        Guid id, 
+        UserPackage pack,
+        string? password = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var user = await UserStore.FindEntityAsync(id, cancellationToken);
+
+        if (user is not null)
+        {
+            pack.Adapt(user);
+
+            user.NormalizedUserName = NormalizeKey(pack.UserName);
+
+            if (pack.Email is not null)
+            {
+                user.NormalizedEmail = NormalizeKey(pack.Email);
+            }
+
+            if (password is not null)
+            {
+                user.PasswordHash = Hash.ArtemisHash(password);
+            }
+
+            user.SecurityStamp = Base32.GenerateBase32();
+
+            var result = await UserStore.UpdateAsync(user, cancellationToken);
+
+            return (result, user.Adapt<UserInfo>());
+        }
+
+        return (StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString()), default);
+    }
+
+    /// <summary>
+    /// 创建或更新用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="pack">用户信息</param>
+    /// <param name="password">用户密码</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<(StoreResult result, UserInfo? user)> CreateOrUpdateUserAsync(
+        Guid id, 
+        UserPackage pack, 
+        string? password = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var exists = await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
+            return await UpdateUserAsync(id, pack, password, cancellationToken);
+
+        if (password is null)
+            return (StoreResult.PropertyIsNullFailed(nameof(password)), default);
+
+        return await CreateUserAsync(pack, password, cancellationToken);
+    }
+
+    /// <summary>
+    /// 删除用户
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> DeleteUserAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var user = await UserStore.FindEntityAsync(id, cancellationToken);
+
+        if (user != null)
+            return await UserStore.DeleteAsync(user, cancellationToken);
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
     }
 
     #endregion

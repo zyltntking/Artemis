@@ -2,7 +2,6 @@
 using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Shared.Identity.Transfer;
-using Artemis.Shared.Identity.Transfer.Base;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -44,7 +43,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的角色实例</returns>
     Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -56,7 +55,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <returns></returns>
     Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
         Guid id,
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -68,7 +67,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <returns></returns>
     Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
-        RoleBase pack,
+        RolePackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -138,7 +137,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     /// <returns></returns>
     Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateRoleClaimAsync(
         Guid id,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -152,7 +151,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     Task<(StoreResult result, RoleClaimInfo? roleClaim)> UpdateRoleClaimAsync(
         Guid id,
         int claimId,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -166,7 +165,7 @@ public interface IRoleManager : IManager<ArtemisUser>
     Task<(StoreResult result, RoleClaimInfo? roleClaim)> CreateOrUpdateRoleClaimAsync(
         Guid id,
         int claimId,
-        RoleClaimBase pack,
+        RoleClaimPackage pack,
         CancellationToken cancellationToken = default);
 
     /// <summary>
