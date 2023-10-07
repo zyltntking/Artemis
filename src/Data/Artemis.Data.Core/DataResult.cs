@@ -340,7 +340,7 @@ internal static class ResultStatus
 public record EmptyRecord;
 
 /// <summary>
-/// 含键记录
+///     含键记录
 /// </summary>
 [DataContract]
 public record KeyRecord : KeyRecord<Guid>
@@ -348,7 +348,7 @@ public record KeyRecord : KeyRecord<Guid>
     #region Overrides of KeyRecord<Guid>
 
     /// <summary>
-    /// 标识
+    ///     标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
@@ -358,14 +358,14 @@ public record KeyRecord : KeyRecord<Guid>
 }
 
 /// <summary>
-/// 含键记录
+///     含键记录
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
 [DataContract]
 public record KeyRecord<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 标识
+    ///     标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]

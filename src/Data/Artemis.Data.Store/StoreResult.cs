@@ -38,11 +38,6 @@ public record StoreResult : IStoreResult
     private readonly List<StoreError> _errors = new();
 
     /// <summary>
-    /// 描述器
-    /// </summary>
-    private static StoreErrorDescriber Describer => new();
-
-    /// <summary>
     ///     指示操作是否成功的标志
     /// </summary>
     [Required]
@@ -61,6 +56,11 @@ public record StoreResult : IStoreResult
     /// </summary>
     [DataMember(Order = 3)]
     public IEnumerable<StoreError> Errors => _errors;
+
+    /// <summary>
+    ///     描述器
+    /// </summary>
+    private static StoreErrorDescriber Describer => new();
 
     /// <summary>
     ///     描述错误代码
@@ -100,7 +100,7 @@ public record StoreResult : IStoreResult
     }
 
     /// <summary>
-    /// 实体已存在失败
+    ///     实体已存在失败
     /// </summary>
     /// <param name="name">实体名</param>
     /// <param name="flag">判断标识</param>
@@ -111,7 +111,7 @@ public record StoreResult : IStoreResult
     }
 
     /// <summary>
-    /// 实体不存在失败
+    ///     实体不存在失败
     /// </summary>
     /// <param name="name">实体名</param>
     /// <param name="flag">判断标识</param>
@@ -122,7 +122,7 @@ public record StoreResult : IStoreResult
     }
 
     /// <summary>
-    /// 属性为空失败
+    ///     属性为空失败
     /// </summary>
     /// <param name="propertyName">属性名</param>
     /// <returns></returns>

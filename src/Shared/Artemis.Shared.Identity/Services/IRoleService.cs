@@ -76,7 +76,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
-        PageRequest<FetchRoleUsersFilter> request, 
+        PageRequest<FetchRoleUsersFilter> request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -87,7 +87,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(
-        PageRequest<FetchRoleClaimsFilter> request, 
+        PageRequest<FetchRoleClaimsFilter> request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -98,7 +98,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
-        GetRoleClaimRequest request, 
+        GetRoleClaimRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -109,7 +109,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<RoleClaimInfo>> CreateRoleClaimAsync(
-        CreateRoleClaimRequest request, 
+        CreateRoleClaimRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -120,7 +120,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<RoleClaimInfo>> CreateOrUpdateRoleClaimAsync(
-        UpdateRoleClaimRequest request, 
+        UpdateRoleClaimRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -131,7 +131,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(
-        DeleteRoleClaimRequest request, 
+        DeleteRoleClaimRequest request,
         ServerCallContext? context = default);
 }
 

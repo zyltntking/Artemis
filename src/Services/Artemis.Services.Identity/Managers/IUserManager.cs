@@ -6,12 +6,12 @@ using Artemis.Shared.Identity.Transfer;
 namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
-///    用户管理器接口
+///     用户管理器接口
 /// </summary>
 public interface IUserManager : IManager<ArtemisUser>
 {
     /// <summary>
-    /// 搜索用户
+    ///     搜索用户
     /// </summary>
     /// <param name="nameSearch">用户名搜索值</param>
     /// <param name="emailSearch">邮箱搜索值</param>
@@ -29,7 +29,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 根据用户标识获取用户
+    ///     根据用户标识获取用户
     /// </summary>
     /// <param name="id">标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -39,19 +39,19 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 创建用户
+    ///     创建用户
     /// </summary>
     /// <param name="pack">用户信息</param>
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage pack, 
+        UserPackage pack,
         string password,
         CancellationToken cancellationToken);
 
     /// <summary>
-    /// 更新用户
+    ///     更新用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="pack">用户信息</param>
@@ -59,13 +59,13 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
-        Guid id, 
+        Guid id,
         UserPackage pack,
         string? password = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 创建或更新用户
+    ///     创建或更新用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="pack">用户信息</param>
@@ -79,7 +79,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除用户
+    ///     删除用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>

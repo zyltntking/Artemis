@@ -65,7 +65,7 @@ file interface IPageResult<T> : IPageResult
 #endregion
 
 /// <summary>
-/// 基本分页处理
+///     基本分页处理
 /// </summary>
 public abstract record PageBase : IPageBase
 {

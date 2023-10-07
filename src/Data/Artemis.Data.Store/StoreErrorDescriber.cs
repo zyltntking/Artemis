@@ -158,7 +158,7 @@ public sealed record StoreErrorDescriber : IStoreErrorDescriber
     }
 
     /// <summary>
-    /// 属性为空
+    ///     属性为空
     /// </summary>
     /// <param name="propertyName">属性名</param>
     /// <returns></returns>
@@ -169,7 +169,7 @@ public sealed record StoreErrorDescriber : IStoreErrorDescriber
             Code = nameof(PropertyIsNull),
             Description = Formatter.FormatPropertyIsNull(propertyName)
         };
-    } 
+    }
 }
 
 /// <summary>

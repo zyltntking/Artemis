@@ -169,7 +169,7 @@ public interface IRoleManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除角色凭据
+    ///     删除角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="claimId">凭据标识</param>

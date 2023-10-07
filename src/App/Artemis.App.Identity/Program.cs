@@ -72,7 +72,6 @@ public static class Program
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddOpenApiDoc(docConfig);
-
         }, app =>
         {
             app.UseOpenApiDoc(docConfig);

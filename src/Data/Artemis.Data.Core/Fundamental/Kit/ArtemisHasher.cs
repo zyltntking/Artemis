@@ -3,22 +3,25 @@
 namespace Artemis.Data.Core.Fundamental.Kit;
 
 /// <summary>
-/// 标准哈希类(密码实现)
+///     标准哈希类(密码实现)
 /// </summary>
 internal class ArtemisHasher
 {
     /// <summary>
-    /// 默认实现
+    ///     默认实现
     /// </summary>
     private static readonly Lazy<ArtemisHasher> Default = new(() => new ArtemisHasher());
 
     /// <summary>
-    /// 创建实例
+    ///     密码哈希器
     /// </summary>
-    /// <returns>ArtemisHasher</returns>
-    public static ArtemisHasher Create()
+    /// <param name="iterationCount">迭代计数</param>
+    private ArtemisHasher(int iterationCount = 100000)
     {
-        return Default.Value;
+        IterationCount = iterationCount;
+        if (IterationCount < 1) IterationCount = 100_000;
+
+        Rng = RandomNumberGenerator.Create();
     }
 
     /* =======================
@@ -30,32 +33,26 @@ internal class ArtemisHasher
      */
 
     /// <summary>
-    /// 迭代计数器
+    ///     迭代计数器
     /// </summary>
     private int IterationCount { get; }
 
     /// <summary>
-    /// 随机数生成器
+    ///     随机数生成器
     /// </summary>
     private RandomNumberGenerator Rng { get; }
 
     /// <summary>
-    /// 密码哈希器
+    ///     创建实例
     /// </summary>
-    /// <param name="iterationCount">迭代计数</param>
-    private ArtemisHasher(int iterationCount = 100000)
+    /// <returns>ArtemisHasher</returns>
+    public static ArtemisHasher Create()
     {
-        IterationCount = iterationCount;
-        if (IterationCount < 1)
-        {
-            IterationCount = 100_000;
-        }
-
-        Rng = RandomNumberGenerator.Create();
+        return Default.Value;
     }
 
     /// <summary>
-    /// 生成哈希
+    ///     生成哈希
     /// </summary>
     /// <param name="input">原文</param>
     /// <returns>哈希值</returns>
@@ -67,7 +64,7 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 计算哈希字节码
+    ///     计算哈希字节码
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -77,7 +74,7 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 计算哈希字节码
+    ///     计算哈希字节码
     /// </summary>
     /// <param name="input">原文</param>
     /// <param name="rng">随机数生成器</param>
@@ -85,14 +82,14 @@ internal class ArtemisHasher
     private byte[] ComputeHashBytes(string input, RandomNumberGenerator rng)
     {
         return ComputeHashBytes(input, rng,
-            prf: ArtemisKeyDerivationPrf.HmacSha512,
-            iterationCount: IterationCount,
-            saltSize: 128 / 8,
-            numBytesRequested: 256 / 8);
+            ArtemisKeyDerivationPrf.HmacSha512,
+            IterationCount,
+            128 / 8,
+            256 / 8);
     }
 
     /// <summary>
-    ///  生成哈希字节码
+    ///     生成哈希字节码
     /// </summary>
     /// <param name="input">输入原文</param>
     /// <param name="rng">随机数生成器</param>
@@ -102,11 +99,11 @@ internal class ArtemisHasher
     /// <param name="numBytesRequested">请求长度</param>
     /// <returns></returns>
     private static byte[] ComputeHashBytes(
-        string input, 
-        RandomNumberGenerator rng, 
-        ArtemisKeyDerivationPrf prf, 
-        int iterationCount, 
-        int saltSize, 
+        string input,
+        RandomNumberGenerator rng,
+        ArtemisKeyDerivationPrf prf,
+        int iterationCount,
+        int saltSize,
         int numBytesRequested)
     {
         // 生成摘要
@@ -126,14 +123,14 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 检验哈希码
+    ///     检验哈希码
     /// </summary>
     /// <param name="hashedText">哈希后的值</param>
     /// <param name="providedText">原文</param>
     /// <returns>bool success, bool needRehash</returns>
     /// <remarks>时间一致</remarks>
     public (bool success, bool needRehash) VerifyHash(
-        string hashedText, 
+        string hashedText,
         string providedText)
     {
         ThrowIfNull(hashedText);
@@ -142,24 +139,18 @@ internal class ArtemisHasher
         var decodeHashedText = Convert.FromBase64String(hashedText);
 
         // 读取散列格式标记
-        if (decodeHashedText.Length == 0)
-        {
-            return (false, false);
-        }
+        if (decodeHashedText.Length == 0) return (false, false);
         switch (decodeHashedText[0])
         {
             case 0x01:
                 if (VerifyHash(decodeHashedText, providedText, out var embeddedIterationCount, out var prf))
                 {
                     // 比较迭代计数器
-                    if (embeddedIterationCount < IterationCount)
-                    {
-                        return (true, true);
-                    }
+                    if (embeddedIterationCount < IterationCount) return (true, true);
 
                     // SHA512. 比较PRF标记
-                    return prf is ArtemisKeyDerivationPrf.HmacSha1 or ArtemisKeyDerivationPrf.HmacSha256 
-                        ? (true, true) 
+                    return prf is ArtemisKeyDerivationPrf.HmacSha1 or ArtemisKeyDerivationPrf.HmacSha256
+                        ? (true, true)
                         : (true, false);
                 }
 
@@ -172,7 +163,7 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 校验密码哈希
+    ///     校验密码哈希
     /// </summary>
     /// <param name="hashedPassword">密码哈希</param>
     /// <param name="password">密码</param>
@@ -180,9 +171,9 @@ internal class ArtemisHasher
     /// <param name="prf">PRF</param>
     /// <returns></returns>
     private static bool VerifyHash(
-        byte[] hashedPassword, 
-        string password, 
-        out int iterationCount, 
+        byte[] hashedPassword,
+        string password,
+        out int iterationCount,
         out ArtemisKeyDerivationPrf prf)
     {
         iterationCount = default;
@@ -196,19 +187,13 @@ internal class ArtemisHasher
             var saltLength = (int)ReadBytesOrder(hashedPassword, 9);
 
             // 读取盐: 不超过128比特
-            if (saltLength < 128 / 8)
-            {
-                return false;
-            }
+            if (saltLength < 128 / 8) return false;
             var salt = new byte[saltLength];
             Buffer.BlockCopy(hashedPassword, 13, salt, 0, salt.Length);
 
             // 读取子钥 (剩余载荷): 不超过128比特
             var subKeyLength = hashedPassword.Length - 13 - salt.Length;
-            if (subKeyLength < 128 / 8)
-            {
-                return false;
-            }
+            if (subKeyLength < 128 / 8) return false;
             var expectedSubKey = new byte[subKeyLength];
             Buffer.BlockCopy(hashedPassword, 13 + salt.Length, expectedSubKey, 0, expectedSubKey.Length);
 
@@ -216,7 +201,6 @@ internal class ArtemisHasher
             var actualSubKey = Pbkdf2(password, salt, prf, iterationCount, subKeyLength);
 
             return CryptographicOperations.FixedTimeEquals(actualSubKey, expectedSubKey);
-
         }
         catch
         {
@@ -225,25 +209,38 @@ internal class ArtemisHasher
         }
     }
 
+    /// <summary>
+    ///     若参数为空则抛出异常
+    /// </summary>
+    /// <param name="argument"></param>
+    /// <param name="paramName"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    private static void ThrowIfNull(object? argument, string? paramName = null)
+    {
+        if (argument is null) throw new ArgumentNullException(paramName);
+    }
+
     #region ArtemisKeyDerivationPrf
 
     /// <summary>
-    /// 指定应用于密钥派生算法的 PRF。
+    ///     指定应用于密钥派生算法的 PRF。
     /// </summary>
     private enum ArtemisKeyDerivationPrf
     {
         /// <summary>
-        /// HMAC (RFC 2104) SHA1 (FIPS 180-4).
+        ///     HMAC (RFC 2104) SHA1 (FIPS 180-4).
         /// </summary>
         HmacSha1,
+
         /// <summary>
-        /// HMAC (RFC 2104) SHA256 (FIPS 180-4).
+        ///     HMAC (RFC 2104) SHA256 (FIPS 180-4).
         /// </summary>
         HmacSha256,
+
         /// <summary>
-        /// HMAC (RFC 2104) SHA512 (FIPS 180-4).
+        ///     HMAC (RFC 2104) SHA512 (FIPS 180-4).
         /// </summary>
-        HmacSha512,
+        HmacSha512
     }
 
     #endregion
@@ -279,7 +276,7 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 派生密钥
+    ///     派生密钥
     /// </summary>
     /// <param name="input"></param>
     /// <param name="salt"></param>
@@ -310,21 +307,21 @@ internal class ArtemisHasher
     #region ReqdAndWrite
 
     /// <summary>
-    /// 读取字节序
+    ///     读取字节序
     /// </summary>
     /// <param name="buffer">接收器</param>
     /// <param name="offset">偏移量</param>
     /// <returns></returns>
     private static uint ReadBytesOrder(IReadOnlyList<byte> buffer, int offset)
     {
-        return ((uint)(buffer[offset + 0]) << 24)
-               | ((uint)(buffer[offset + 1]) << 16)
-               | ((uint)(buffer[offset + 2]) << 8)
+        return ((uint)buffer[offset + 0] << 24)
+               | ((uint)buffer[offset + 1] << 16)
+               | ((uint)buffer[offset + 2] << 8)
                | buffer[offset + 3];
     }
 
     /// <summary>
-    /// 写入字节序
+    ///     写入字节序
     /// </summary>
     /// <param name="buffer">接收器</param>
     /// <param name="offset">偏移量</param>
@@ -338,18 +335,4 @@ internal class ArtemisHasher
     }
 
     #endregion
-
-    /// <summary>
-    /// 若参数为空则抛出异常
-    /// </summary>
-    /// <param name="argument"></param>
-    /// <param name="paramName"></param>
-    /// <exception cref="ArgumentNullException"></exception>
-    private static void ThrowIfNull(object? argument, string? paramName = null)
-    {
-        if (argument is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-    }
 }

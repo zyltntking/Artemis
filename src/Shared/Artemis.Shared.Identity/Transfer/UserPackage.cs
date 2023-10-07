@@ -1,6 +1,6 @@
-﻿using Artemis.Data.Core;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
@@ -36,7 +36,7 @@ public interface IUser
 public record UserPackage : IUser
 {
     /// <summary>
-    /// 生成加密戳
+    ///     生成加密戳
     /// </summary>
     public string GenerateSecurityStamp => Guid.NewGuid().ToString("N").ToUpper();
 
@@ -57,7 +57,7 @@ public record UserPackage : IUser
     [MaxLength(128)]
     [DataMember(Order = 2)]
     public virtual string? Email { get; set; }
-    
+
     /// <summary>
     ///     电话号码
     /// </summary>

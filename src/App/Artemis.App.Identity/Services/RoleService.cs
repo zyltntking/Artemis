@@ -320,8 +320,8 @@ public class RoleService : ApiController, IRoleService
         var filter = request.Filter;
 
         var result = await RoleManager.FetchRolesAsync(
-            filter.RoleNameSearch, 
-            request.Page, 
+            filter.RoleNameSearch,
+            request.Page,
             request.Size,
             context?.CancellationToken ?? default);
 
@@ -336,15 +336,15 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<RoleInfo>> GetRoleAsync(
-        GetRoleRequest request, 
+        GetRoleRequest request,
         ServerCallContext? context = default)
     {
         var result = await RoleManager.GetRoleAsync(
-            request.RoleId, 
+            request.RoleId,
             context?.CancellationToken ?? default);
 
-        return result is not null 
-            ? DataResult.Success(result) 
+        return result is not null
+            ? DataResult.Success(result)
             : DataResult.Fail<RoleInfo>("未查询到匹配的角色");
     }
 
@@ -360,7 +360,7 @@ public class RoleService : ApiController, IRoleService
         ServerCallContext? context = default)
     {
         var (result, role) = await RoleManager.CreateRoleAsync(
-            request, 
+            request,
             context?.CancellationToken ?? default);
 
         return result.Succeeded
@@ -376,12 +376,12 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<RoleInfo>> CreateOrUpdateRoleAsync(
-        UpdateRoleRequest request, 
+        UpdateRoleRequest request,
         ServerCallContext? context = default)
     {
         var (result, role) = await RoleManager.CreateOrUpdateRoleAsync(
-            request.RoleId, 
-            request.RolePack, 
+            request.RoleId,
+            request.RolePack,
             context?.CancellationToken ?? default);
 
         return result.Succeeded
@@ -397,7 +397,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<EmptyRecord>> DeleteRoleAsync(
-        DeleteRoleRequest request, 
+        DeleteRoleRequest request,
         ServerCallContext? context = default)
     {
         var result = await RoleManager.DeleteRoleAsync(
@@ -417,7 +417,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
-        PageRequest<FetchRoleUsersFilter> request, 
+        PageRequest<FetchRoleUsersFilter> request,
         ServerCallContext? context = default)
     {
         var filter = request.Filter;
@@ -442,7 +442,7 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(
-        PageRequest<FetchRoleClaimsFilter> request, 
+        PageRequest<FetchRoleClaimsFilter> request,
         ServerCallContext? context = default)
     {
         var filter = request.Filter;
@@ -465,16 +465,16 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
-        GetRoleClaimRequest request, 
+        GetRoleClaimRequest request,
         ServerCallContext? context = default)
     {
         var result = await RoleManager.GetRoleClaimAsync(
-            request.RoleId, 
-            request.ClaimId, 
+            request.RoleId,
+            request.ClaimId,
             context?.CancellationToken ?? default);
 
-        return result is not null 
-            ? DataResult.Success(result) 
+        return result is not null
+            ? DataResult.Success(result)
             : DataResult.Fail<RoleClaimInfo>("未查询到对应的凭据");
     }
 
@@ -486,11 +486,11 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<RoleClaimInfo>> CreateRoleClaimAsync(
-        CreateRoleClaimRequest request, 
+        CreateRoleClaimRequest request,
         ServerCallContext? context = default)
     {
         var (result, roleClaim) = await RoleManager.CreateRoleClaimAsync(
-            request.RoleId, 
+            request.RoleId,
             request.ClaimPack,
             context?.CancellationToken ?? default);
 
@@ -507,12 +507,12 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<RoleClaimInfo>> CreateOrUpdateRoleClaimAsync(
-        UpdateRoleClaimRequest request, 
+        UpdateRoleClaimRequest request,
         ServerCallContext? context = default)
     {
         var (result, roleClaim) = await RoleManager.CreateOrUpdateRoleClaimAsync(
-            request.RoleId, 
-            request.ClaimId, 
+            request.RoleId,
+            request.ClaimId,
             request.ClaimPack,
             context?.CancellationToken ?? default);
 
@@ -529,11 +529,11 @@ public class RoleService : ApiController, IRoleService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(
-        DeleteRoleClaimRequest request, 
+        DeleteRoleClaimRequest request,
         ServerCallContext? context = default)
     {
         var result = await RoleManager.DeleteRoleClaimAsync(
-            request.RoleId, 
+            request.RoleId,
             request.ClaimId,
             context?.CancellationToken ?? default);
 

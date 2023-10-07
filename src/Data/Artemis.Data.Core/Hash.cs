@@ -1,6 +1,6 @@
-﻿using Artemis.Data.Core.Fundamental.Kit;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
+using Artemis.Data.Core.Fundamental.Kit;
 
 namespace Artemis.Data.Core;
 
@@ -47,7 +47,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// Artemis哈希
+    ///     Artemis哈希
     /// </summary>
     /// <param name="input">输入原文</param>
     /// <returns></returns>
@@ -60,7 +60,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// 哈希校验
+    ///     哈希校验
     /// </summary>
     /// <param name="hashedText">密文</param>
     /// <param name="providedText">原文</param>

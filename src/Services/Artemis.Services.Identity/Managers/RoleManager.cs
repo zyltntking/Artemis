@@ -207,7 +207,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var exists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (exists) 
+        if (exists)
             return await UpdateRoleAsync(id, pack, cancellationToken);
 
         return await CreateRoleAsync(pack, cancellationToken);
@@ -386,10 +386,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (roleExists)
-        {
-            return await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
-        }
+        if (roleExists) return await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
 
         throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString());
     }
@@ -493,22 +490,23 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .Where(claim => claim.Id == claimId)
             .AnyAsync(cancellationToken);
 
-        if (exists) return 
-            await UpdateRoleClaimAsync(id, claimId, pack, cancellationToken);
+        if (exists)
+            return
+                await UpdateRoleClaimAsync(id, claimId, pack, cancellationToken);
 
         return await CreateRoleClaimAsync(id, pack, cancellationToken);
     }
 
     /// <summary>
-    /// 删除角色凭据
+    ///     删除角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteRoleClaimAsync(
-        Guid id, 
-        int claimId, 
+        Guid id,
+        int claimId,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

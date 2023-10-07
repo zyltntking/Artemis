@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Options;
-
-namespace Artemis.App.Identity;
+﻿namespace Artemis.App.Identity;
 
 //public static class MyJPIF
 //{

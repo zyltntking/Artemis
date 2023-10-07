@@ -44,13 +44,6 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
     public override required string Email { get; set; }
 
     /// <summary>
-    ///     电子邮件确认戳
-    /// </summary>
-    [Required]
-    [DataMember(Order = 6)]
-    public override required bool EmailConfirmed { get; set; }
-
-    /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
@@ -58,6 +51,13 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
     [MaxLength(16)]
     [DataMember(Order = 7)]
     public override required string PhoneNumber { get; set; }
+
+    /// <summary>
+    ///     电子邮件确认戳
+    /// </summary>
+    [Required]
+    [DataMember(Order = 6)]
+    public override required bool EmailConfirmed { get; set; }
 
     /// <summary>
     ///     电话号码确认戳

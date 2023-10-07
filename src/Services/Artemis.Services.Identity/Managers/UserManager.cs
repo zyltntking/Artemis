@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
-/// 用户管理器
+///     用户管理器
 /// </summary>
 public class UserManager : Manager<ArtemisUser>, IUserManager
 {
@@ -27,12 +27,21 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public UserManager(
-        IArtemisUserStore store, 
+        IArtemisUserStore store,
         ILogger? logger = null,
         IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         IDistributedCache? cache = null) : base(store, cache, optionsAccessor, logger)
     {
     }
+
+    #region StoreAccess
+
+    /// <summary>
+    ///     角色存储访问器
+    /// </summary>
+    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
+
+    #endregion
 
     #region Overrides of Manager<ArtemisUser,Guid>
 
@@ -46,19 +55,10 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
     #endregion
 
-    #region StoreAccess
-
-    /// <summary>
-    ///     角色存储访问器
-    /// </summary>
-    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
-
-    #endregion
-
     #region Implementation of IUserManager
 
     /// <summary>
-    /// 搜索用户
+    ///     搜索用户
     /// </summary>
     /// <param name="nameSearch">用户名搜索值</param>
     /// <param name="emailSearch">邮箱搜索值</param>
@@ -68,10 +68,10 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<PageResult<UserInfo>> FetchUserAsync(
-        string? nameSearch, 
-        string? emailSearch, 
-        string? phoneNumberSearch, 
-        int page = 1, 
+        string? nameSearch,
+        string? emailSearch,
+        string? phoneNumberSearch,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -128,13 +128,13 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 根据用户标识获取用户
+    ///     根据用户标识获取用户
     /// </summary>
     /// <param name="id">标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public Task<UserInfo?> GetUserAsync(
-        Guid id, 
+        Guid id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -143,14 +143,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 创建用户
+    ///     创建用户
     /// </summary>
     /// <param name="pack">用户信息</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage pack, 
+        UserPackage pack,
         string password,
         CancellationToken cancellationToken)
     {
@@ -170,10 +170,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         user.NormalizedUserName = normalizedUserName;
 
-        if (pack.Email is not null)
-        {
-            user.NormalizedEmail = NormalizeKey(pack.Email);
-        }
+        if (pack.Email is not null) user.NormalizedEmail = NormalizeKey(pack.Email);
 
         user.PasswordHash = Hash.ArtemisHash(password);
 
@@ -185,7 +182,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 更新用户
+    ///     更新用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="pack">用户信息</param>
@@ -193,7 +190,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
-        Guid id, 
+        Guid id,
         UserPackage pack,
         string? password = null,
         CancellationToken cancellationToken = default)
@@ -208,15 +205,9 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
             user.NormalizedUserName = NormalizeKey(pack.UserName);
 
-            if (pack.Email is not null)
-            {
-                user.NormalizedEmail = NormalizeKey(pack.Email);
-            }
+            if (pack.Email is not null) user.NormalizedEmail = NormalizeKey(pack.Email);
 
-            if (password is not null)
-            {
-                user.PasswordHash = Hash.ArtemisHash(password);
-            }
+            if (password is not null) user.PasswordHash = Hash.ArtemisHash(password);
 
             user.SecurityStamp = Base32.GenerateBase32();
 
@@ -229,7 +220,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 创建或更新用户
+    ///     创建或更新用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="pack">用户信息</param>
@@ -237,8 +228,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<(StoreResult result, UserInfo? user)> CreateOrUpdateUserAsync(
-        Guid id, 
-        UserPackage pack, 
+        Guid id,
+        UserPackage pack,
         string? password = null,
         CancellationToken cancellationToken = default)
     {
@@ -256,7 +247,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 删除用户
+    ///     删除用户
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
