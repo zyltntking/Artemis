@@ -9,7 +9,7 @@ namespace Artemis.Shared.Identity.Transfer;
 /// <summary>
 ///     基本角色接口
 /// </summary>
-public interface IRole
+internal interface IRole
 {
     /// <summary>
     ///     角色名

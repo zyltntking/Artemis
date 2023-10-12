@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -45,17 +46,17 @@ public record SignInRequest
 ///     登录响应
 /// </summary>
 [DataContract]
-public record SignInReply
+public record SignInReply : TokenPackage
 {
     /// <summary>
     ///     登录Token
     /// </summary>
     [DataMember(Order = 1)]
-    public string Token { get; set; } = null!;
+    public override string Token { get; } = null!;
 
     /// <summary>
     ///     Token过期时间
     /// </summary>
     [DataMember(Order = 2)]
-    public DateTime Expire { get; set; }
+    public override required DateTime Expire { get; set; }
 }

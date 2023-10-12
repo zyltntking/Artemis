@@ -9,7 +9,7 @@ namespace Artemis.Shared.Identity.Transfer;
 /// <summary>
 ///     基本用户接口
 /// </summary>
-public interface IUser
+internal interface IUser
 {
     /// <summary>
     ///     用户名
