@@ -190,6 +190,7 @@ public class UserService : ApiController, IUserService
     /// <param name="request">删除用户请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
+    [NonAction]
     public async Task<DataResult<EmptyRecord>> DeleteUserAsync(DeleteUserRequest request,
         ServerCallContext? context = default)
     {

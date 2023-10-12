@@ -87,4 +87,44 @@ public interface IUserManager : IManager<ArtemisUser>
     Task<StoreResult> DeleteUserAsync(
         Guid id,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 根据角色名搜索该用户具有的角色
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="roleNameSearch">角色名搜索值</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面大小</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<PageResult<RoleInfo>> FetchUserRolesAsync(
+        Guid id,
+        string? roleNameSearch = null,
+        int page = 1,
+        int size = 20,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 添加用户角色
+    /// </summary>
+    /// <param name="id">用户id</param>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> AddUserRoleAsync(
+        Guid id,
+        Guid roleId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 删除用户角色
+    /// </summary>
+    /// <param name="id">用户id</param>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> RemoveUserRoleAsync(
+        Guid id,
+        Guid roleId,
+        CancellationToken cancellationToken = default);
 }

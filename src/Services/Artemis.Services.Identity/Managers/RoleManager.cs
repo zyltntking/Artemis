@@ -22,17 +22,23 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     ///     创建新的管理器实例
     /// </summary>
     /// <param name="roleStore">角色存储访问器</param>
+    /// <param name="userStore">用户存储管理器</param>
+    /// <param name="userRoleStore">用户角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
     /// <param name="optionsAccessor"></param>
     /// <param name="cache">缓存以来</param>
     /// <param name="logger">日志依赖</param>
     public RoleManager(
         IArtemisRoleStore roleStore,
+        IArtemisUserStore userStore,
+        IArtemisUserRoleStore userRoleStore,
         IArtemisRoleClaimStore roleClaimStore,
         ILogger? logger = null,
         IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         IDistributedCache? cache = null) : base(roleStore, cache, optionsAccessor, logger)
     {
+        UserStore = userStore;
+        UserRoleStore = userRoleStore;
         RoleClaimStore = roleClaimStore;
     }
 
@@ -44,6 +50,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     protected override void StoreDispose()
     {
         RoleStore.Dispose();
+        UserStore.Dispose();
+        UserRoleStore.Dispose();
         RoleClaimStore.Dispose();
     }
 
@@ -57,9 +65,19 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     private IArtemisRoleStore RoleStore => (IArtemisRoleStore)Store;
 
     /// <summary>
+    /// 用户存储访问器
+    /// </summary>
+    private IArtemisUserStore UserStore { get; }
+
+    /// <summary>
     ///     角色凭据存储访问器
     /// </summary>
     private IArtemisRoleClaimStore RoleClaimStore { get; }
+
+    /// <summary>
+    /// 用户角色存储访问器
+    /// </summary>
+    private IArtemisUserRoleStore UserRoleStore { get; }
 
     #endregion
 
@@ -310,6 +328,75 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         }
 
         throw new EntityNotFoundException(nameof(ArtemisRole), id.ToString("D"));
+    }
+
+    /// <summary>
+    /// 添加角色用户
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="userId">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddRoleUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (!roleExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+
+        var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
+
+        if (!userExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), userId.ToString());
+
+        var userRoleExists = await UserRoleStore.EntityQuery
+            .Where(userRole => userRole.RoleId == id)
+            .Where(userRole => userRole.UserId == userId)
+            .AnyAsync(cancellationToken);
+
+        if (userRoleExists)
+            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"userId:{userId},roleId:{id}");
+
+        var userRole = Instance.CreateInstance<ArtemisUserRole>();
+
+        userRole.UserId = userId;
+        userRole.RoleId = id;
+
+        return await UserRoleStore.CreateAsync(userRole, cancellationToken);
+    }
+
+    /// <summary>
+    /// 删除角色用户
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="userId">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> RemoveRoleUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (!roleExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+
+        var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
+
+        if (!userExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), userId.ToString());
+
+        var userRole = await UserRoleStore.EntityQuery
+            .Where(userRole => userRole.RoleId == id)
+            .Where(userRole => userRole.UserId == userId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (userRole == null)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), $"userId:{userId},roleId:{id}");
+
+        return await UserRoleStore.DeleteAsync(userRole, cancellationToken);
     }
 
     /// <summary>

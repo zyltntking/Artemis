@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     Hash类型
 /// </summary>
 [Description("Hash类型")]
-public class HashType : Enumeration
+public sealed class HashType : Enumeration
 {
     /// <summary>
     ///     未知类型

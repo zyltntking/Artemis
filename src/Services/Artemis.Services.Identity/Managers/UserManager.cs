@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Kit;
+using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Data;
@@ -24,22 +24,38 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="store">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
     /// <param name="optionsAccessor">配置依赖</param>
+    /// <param name="roleStore">角色存储访问器依赖</param>
+    /// <param name="userRoleStore">用户角色存储访问器依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public UserManager(
         IArtemisUserStore store,
+        IArtemisRoleStore roleStore,
+        IArtemisUserRoleStore userRoleStore,
         ILogger? logger = null,
         IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         IDistributedCache? cache = null) : base(store, cache, optionsAccessor, logger)
     {
+        RoleStore = roleStore;
+        UserRoleStore = userRoleStore;
     }
 
     #region StoreAccess
 
     /// <summary>
-    ///     角色存储访问器
+    ///     用户存储访问器
     /// </summary>
     private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
+
+    /// <summary>
+    /// 角色存储访问器
+    /// </summary>
+    private IArtemisRoleStore RoleStore { get; }
+
+    /// <summary>
+    /// 用户角色存储访问器
+    /// </summary>
+    private IArtemisUserRoleStore UserRoleStore { get; }
 
     #endregion
 
@@ -51,6 +67,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     protected override void StoreDispose()
     {
         UserStore.Dispose();
+        RoleStore.Dispose();
+        UserRoleStore.Dispose();
     }
 
     #endregion
@@ -174,7 +192,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         user.PasswordHash = Hash.ArtemisHash(password);
 
-        user.SecurityStamp = Base32.GenerateBase32();
+        user.SecurityStamp = pack.GenerateSecurityStamp;
 
         var result = await UserStore.CreateAsync(user, cancellationToken);
 
@@ -209,7 +227,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
             if (password is not null) user.PasswordHash = Hash.ArtemisHash(password);
 
-            user.SecurityStamp = Base32.GenerateBase32();
+            user.SecurityStamp = pack.GenerateSecurityStamp;
 
             var result = await UserStore.UpdateAsync(user, cancellationToken);
 
@@ -252,7 +270,9 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="id">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteUserAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteUserAsync(
+        Guid id, 
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -262,6 +282,139 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             return await UserStore.DeleteAsync(user, cancellationToken);
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
+    }
+
+    /// <summary>
+    /// 根据角色名搜索该用户具有的角色
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="roleNameSearch">角色名搜索值</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">页面大小</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<PageResult<RoleInfo>> FetchUserRolesAsync(
+        Guid id, 
+        string? roleNameSearch = null, 
+        int page = 1, 
+        int size = 20,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var exists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
+        {
+            roleNameSearch ??= string.Empty;
+
+            var query = UserStore
+                .KeyMatchQuery(id)
+                .SelectMany(artemisUser => artemisUser.Roles);
+
+            var total = await query.LongCountAsync(cancellationToken);
+
+            var normalizedNameSearch = NormalizeKey(roleNameSearch);
+
+            query = query.WhereIf(
+                roleNameSearch != string.Empty,
+                role => EF.Functions.Like(
+                    role.NormalizedName,
+                    $"%{normalizedNameSearch}%"));
+
+            var count = await query.LongCountAsync(cancellationToken);
+
+            var roles = await query
+                .OrderBy(role => role.CreatedAt)
+                .Page(page, size)
+                .ProjectToType<RoleInfo>()
+                .ToListAsync(cancellationToken);
+
+            return new PageResult<RoleInfo>
+            {
+                Page = page,
+                Size = size,
+                Count = count,
+                Total = total,
+                Data = roles
+            };
+
+        }
+
+
+        throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString("D"));
+    }
+
+    /// <summary>
+    /// 添加用户角色
+    /// </summary>
+    /// <param name="id">用户id</param>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddUserRoleAsync(
+        Guid id, 
+        Guid roleId, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (!userExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
+
+        var roleExists = await RoleStore.ExistsAsync(roleId, cancellationToken);
+
+        if (!roleExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), roleId.ToString());
+
+        var userRoleExists = await UserRoleStore.EntityQuery
+            .Where(userRole => userRole.UserId == id)
+            .Where(userRole => userRole.RoleId == roleId)
+            .AnyAsync(cancellationToken);
+
+        if (userRoleExists)
+            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"userId:{id},roleId:{roleId}");
+
+        var userRole = Instance.CreateInstance<ArtemisUserRole>();
+
+        userRole.UserId = id;
+        userRole.RoleId = roleId;
+
+        return await UserRoleStore.CreateAsync(userRole, cancellationToken);
+    }
+
+    /// <summary>
+    /// 删除用户角色
+    /// </summary>
+    /// <param name="id">用户id</param>
+    /// <param name="roleId">角色id</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> RemoveUserRoleAsync(Guid id, Guid roleId, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (!userExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
+
+        var roleExists = await RoleStore.ExistsAsync(roleId, cancellationToken);
+
+        if (!roleExists)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+
+        var userRole = await UserRoleStore.EntityQuery
+            .Where(userRole => userRole.UserId == id)
+            .Where(userRole => userRole.RoleId == roleId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (userRole == null)
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), $"userId:{id},roleId:{roleId}");
+
+        return await UserRoleStore.DeleteAsync(userRole, cancellationToken);
     }
 
     #endregion

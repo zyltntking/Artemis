@@ -22,7 +22,7 @@ internal static class Program
 
         var schema = generator.GetSchema<IRoleService>();
 
-        await using var writer = new StreamWriter("account.proto");
+        await using var writer = new StreamWriter("role.proto");
 
         await writer.WriteAsync(schema);
 

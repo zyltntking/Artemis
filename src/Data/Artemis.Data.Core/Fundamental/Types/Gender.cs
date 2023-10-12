@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     性别类型
 /// </summary>
 [Description("性别类型")]
-public class Gender : Enumeration
+public sealed class Gender : Enumeration
 {
     /// <summary>
     ///     未知

@@ -72,7 +72,7 @@ public interface IUserService
 ///     查询用户过滤器
 /// </summary>
 [DataContract]
-public record FetchUsersFilter
+public sealed record FetchUsersFilter
 {
     /// <summary>
     ///     用户名搜索值
@@ -111,7 +111,7 @@ public record GetUserRequest
 ///     创建用户请求
 /// </summary>
 [DataContract]
-public record CreateUserRequest : UserPackage
+public sealed record CreateUserRequest : UserPackage
 {
     #region Implementation of RolePackage
 
@@ -129,7 +129,7 @@ public record CreateUserRequest : UserPackage
     [Required]
     [StringLength(32, MinimumLength = 6)]
     [DataMember(Order = 2)]
-    public virtual required string Password { get; set; }
+    public required string Password { get; set; }
 
     /// <summary>
     ///     电子邮件
@@ -154,7 +154,7 @@ public record CreateUserRequest : UserPackage
 ///     更新用户请求
 /// </summary>
 [DataContract]
-public record UpdateUserRequest : GetUserRequest
+public sealed record UpdateUserRequest : GetUserRequest
 {
     /// <summary>
     ///     角色标识
@@ -168,7 +168,7 @@ public record UpdateUserRequest : GetUserRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required UserPackage UserPack { get; set; }
+    public required UserPackage UserPack { get; set; }
 
     /// <summary>
     ///     用户密码
@@ -180,7 +180,7 @@ public record UpdateUserRequest : GetUserRequest
 /// <summary>
 ///     删除用户请求
 /// </summary>
-public record DeleteUserRequest : GetUserRequest
+public sealed record DeleteUserRequest : GetUserRequest
 {
     /// <summary>
     ///     角色标识

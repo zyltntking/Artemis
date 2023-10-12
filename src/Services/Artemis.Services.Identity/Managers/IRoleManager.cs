@@ -81,7 +81,7 @@ public interface IRoleManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     根据用户名搜索具有该角色标签的用户
+    ///     根据用户信息搜索具有该角色标签的用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userNameSearch">用户名匹配值</param>
@@ -98,6 +98,30 @@ public interface IRoleManager : IManager<ArtemisUser>
         string? phoneSearch = null,
         int page = 1,
         int size = 20,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 添加角色用户
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="userId">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> AddRoleUserAsync(
+        Guid id,
+        Guid userId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 删除角色用户
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="userId">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> RemoveRoleUserAsync(
+        Guid id,
+        Guid userId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
