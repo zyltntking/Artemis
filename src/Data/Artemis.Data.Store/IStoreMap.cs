@@ -86,7 +86,7 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
+    Task<IEnumerable<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default);
 

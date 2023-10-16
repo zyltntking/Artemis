@@ -89,11 +89,6 @@
 			<typeparam name="TResourceInfo">资源信息类型</typeparam>
 			<typeparam name="TResourcePack">资源包类型</typeparam>
 		</member>
-		<member name="P:Artemis.Extensions.Web.Controller.ResourceController`4.Manager">
-			<summary>
-				存储管理器依赖访问器
-			</summary>
-		</member>
 		<member
 			name="M:Artemis.Extensions.Web.Controller.ResourceController`4.#ctor(Artemis.Data.Store.IManager{`0,`1},Microsoft.Extensions.Logging.ILogger)">
 			<summary>
@@ -101,6 +96,11 @@
 			</summary>
 			<param name="manager">管理器依赖</param>
 			<param name="logger">日志依赖</param>
+		</member>
+		<member name="P:Artemis.Extensions.Web.Controller.ResourceController`4.Manager">
+			<summary>
+				存储管理器依赖访问器
+			</summary>
 		</member>
 		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.GetResources(System.Int32,System.Int32)">
 			<summary>

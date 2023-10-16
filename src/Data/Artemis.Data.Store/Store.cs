@@ -728,7 +728,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        CacheEntity(entity);
+        if (result.Succeeded) CacheEntity(entity);
 
         return result;
     }
@@ -750,7 +750,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        CacheEntities(list);
+        if (result.Succeeded) CacheEntities(list);
 
         return result;
     }
@@ -773,7 +773,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded) await CacheEntityAsync(entity, cancellationToken);
 
         return result;
     }
@@ -798,7 +798,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded) await CacheEntitiesAsync(list, cancellationToken);
 
         return result;
     }
@@ -822,7 +822,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        CacheEntity(entity);
+        if (result.Succeeded) CacheEntity(entity);
 
         return result;
     }
@@ -844,7 +844,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        CacheEntities(list);
+        if (result.Succeeded) CacheEntities(list);
 
         return result;
     }
@@ -867,7 +867,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded) await CacheEntityAsync(entity, cancellationToken);
 
         return result;
     }
@@ -892,7 +892,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded) await CacheEntitiesAsync(list, cancellationToken);
 
         return result;
     }
@@ -1132,7 +1132,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        RemoveCachedEntity(entity);
+        if (result.Succeeded) RemoveCachedEntity(entity);
 
         return result;
     }
@@ -1152,7 +1152,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        RemoveCachedEntity(entity);
+        if (result.Succeeded) RemoveCachedEntity(entity);
 
         return result;
     }
@@ -1182,7 +1182,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        RemoveCachedEntities(list);
+        if (result.Succeeded) RemoveCachedEntities(list);
 
         return result;
     }
@@ -1204,7 +1204,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        RemoveCachedEntities(list);
+        if (result.Succeeded) RemoveCachedEntities(list);
 
         return result;
     }
@@ -1232,7 +1232,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await RemoveCachedEntityAsync(entity, cancellationToken);
+        if (result.Succeeded) await RemoveCachedEntityAsync(entity, cancellationToken);
 
         return result;
     }
@@ -1255,7 +1255,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await RemoveCachedEntityAsync(entity, cancellationToken);
+        if (result.Succeeded) await RemoveCachedEntityAsync(entity, cancellationToken);
 
         return result;
     }
@@ -1288,7 +1288,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await RemoveCachedEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded) await RemoveCachedEntitiesAsync(list, cancellationToken);
 
         return result;
     }
@@ -1313,7 +1313,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        await RemoveCachedEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded) await RemoveCachedEntitiesAsync(list, cancellationToken);
 
         return result;
     }
@@ -1549,7 +1549,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (cached is not null) return cached;
 
-        return FindById(id);
+        var entity = FindById(id);
+
+        if (entity is not null) CacheEntity(entity);
+
+        return entity;
     }
 
     /// <summary>
@@ -1564,9 +1568,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var cached = GetEntity(id);
 
-        if (cached is not null) return cached.Adapt<TMapEntity>();
+        if (cached is not null)
+            return cached.Adapt<TMapEntity>();
 
         return FindById<TMapEntity>(id);
+
+        //var entity = FindById(id);
+
+        //if (entity is not null)
+        //{
+        //    CacheEntity(entity);
+        //}
+
+        //return entity.Adapt<TMapEntity>();
     }
 
     /// <summary>
@@ -1588,7 +1602,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (list.Any()) return list;
         }
 
-        return FindByIds(idArray);
+        var entities = FindByIds(idArray).ToList();
+
+        if (entities.Any()) CacheEntities(entities);
+
+        return entities;
     }
 
     /// <summary>
@@ -1612,6 +1630,15 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         return FindByIds<TMapEntity>(idArray);
+
+        //var entities = FindByIds(idArray).ToList();
+
+        //if (entities.Any())
+        //{
+        //    CacheEntities(entities);
+        //}
+
+        //return entities.Adapt<IEnumerable<TMapEntity>>();
     }
 
     /// <summary>
@@ -1630,7 +1657,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (cached is not null) return cached;
 
-        return await FindByIdAsync(id, cancellationToken);
+        var entity = await FindByIdAsync(id, cancellationToken);
+
+        if (entity is not null) await CacheEntityAsync(entity, cancellationToken);
+
+        return entity;
     }
 
     /// <summary>
@@ -1648,9 +1679,19 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var cached = await GetEntityAsync(id, cancellationToken);
 
-        if (cached is not null) return cached.Adapt<TMapEntity>();
+        if (cached is not null)
+            return cached.Adapt<TMapEntity>();
 
         return await FindByIdAsync<TMapEntity>(id, cancellationToken);
+
+        //var entity = await FindByIdAsync(id, cancellationToken);
+
+        //if (entity is not null)
+        //{
+        //    await CacheEntityAsync(entity, cancellationToken);
+        //}
+
+        //return entity.Adapt<TMapEntity>();
     }
 
     /// <summary>
@@ -1659,7 +1700,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<List<TEntity>> FindEntitiesAsync(
+    public async Task<IEnumerable<TEntity>> FindEntitiesAsync(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
@@ -1675,7 +1716,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (list.Any()) return list;
         }
 
-        return await FindByIdsAsync(idArray, cancellationToken);
+        var entities = await FindByIdsAsync(idArray, cancellationToken);
+
+        if (entities.Any()) await CacheEntitiesAsync(entities, cancellationToken);
+
+        return entities;
     }
 
     /// <summary>
@@ -1685,7 +1730,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public async Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
+    public async Task<IEnumerable<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
@@ -1701,8 +1746,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (list.Any()) return list.Adapt<List<TMapEntity>>();
         }
 
-
         return await FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
+
+        //var entities = await FindByIdsAsync(ids, cancellationToken);
+
+        //if (entities.Any())
+        //{
+        //    await CacheEntitiesAsync(entities, cancellationToken);
+        //}
+
+        //return entities.Adapt<IEnumerable<TMapEntity>>();
     }
 
     #endregion

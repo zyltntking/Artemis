@@ -560,6 +560,14 @@
 			<param name="logger">日志依赖</param>
 			<exception cref="T:System.ArgumentNullException"></exception>
 		</member>
+		<member name="M:Artemis.Services.Identity.Managers.AccountManager.SignInAsync(System.String,System.String)">
+			<summary>
+				签到
+			</summary>
+			<param name="username">用户名</param>
+			<param name="password">密码</param>
+			<returns></returns>
+		</member>
 		<member name="P:Artemis.Services.Identity.Managers.AccountManager.UserStore">
 			<summary>
 				用户存储访问器
@@ -569,14 +577,6 @@
 			<summary>
 				释放托管的Store
 			</summary>
-		</member>
-		<member name="M:Artemis.Services.Identity.Managers.AccountManager.SignInAsync(System.String,System.String)">
-			<summary>
-				签到
-			</summary>
-			<param name="username">用户名</param>
-			<param name="password">密码</param>
-			<returns></returns>
 		</member>
 		<member name="T:Artemis.Services.Identity.Managers.IAccountManager">
 			<summary>

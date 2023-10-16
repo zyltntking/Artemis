@@ -373,7 +373,7 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    Task<List<TEntity>> FindEntitiesAsync(
+    Task<IEnumerable<TEntity>> FindEntitiesAsync(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default);
 
