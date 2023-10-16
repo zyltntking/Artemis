@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Artemis.Data.Core;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Data.Store.Extensions;
 
@@ -89,6 +91,54 @@ public static class QueryableExtensions
         out long count)
     {
         return query.Page(request.Page, request.Size, out count);
+    }
+
+    /// <summary>
+    /// 映射式分页
+    /// </summary>
+    /// <typeparam name="TEntity">实体类型</typeparam>
+    /// <typeparam name="TKey">实体键类型</typeparam>
+    /// <typeparam name="TEntityInfo">映射类型</typeparam>
+    /// <param name="query">查询</param>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public static Task<List<TEntityInfo>> MapPageAsync<TEntity, TKey, TEntityInfo>(
+        this IQueryable<TEntity> query,
+        int page,
+        int size,
+        CancellationToken cancellationToken = default) 
+        where TEntity: class, IModelBase<TKey>
+        where TKey : IEquatable<TKey> 
+    {
+        return query.OrderByDescending(item => item.CreatedAt)
+            .Page(page, size)
+            .ProjectToType<TEntityInfo>()
+            .ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
+    /// 映射式分页
+    /// </summary>
+    /// <typeparam name="TEntity">实体类型</typeparam>
+    /// <typeparam name="TKey">实体键类型</typeparam>
+    /// <typeparam name="TEntityInfo">映射类型</typeparam>
+    /// <param name="query">查询</param>
+    /// <param name="request">页码</param>
+    /// <param name="cancellationToken">条目数</param>
+    /// <returns></returns>
+    public static Task<List<TEntityInfo>> MapPageAsync<TEntity, TKey, TEntityInfo>(
+        this IQueryable<TEntity> query,
+        IPageBase request,
+        CancellationToken cancellationToken = default)
+        where TEntity : class, IModelBase<TKey>
+        where TKey : IEquatable<TKey>
+    {
+        return query.OrderByDescending(item => item.CreatedAt)
+            .Page(request.Page, request.Size)
+            .ProjectToType<TEntityInfo>()
+            .ToListAsync(cancellationToken);
     }
 
     #endregion

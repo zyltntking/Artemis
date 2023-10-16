@@ -65,7 +65,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     private IArtemisRoleStore RoleStore => (IArtemisRoleStore)Store;
 
     /// <summary>
-    /// 用户存储访问器
+    ///     用户存储访问器
     /// </summary>
     private IArtemisUserStore UserStore { get; }
 
@@ -75,7 +75,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     private IArtemisRoleClaimStore RoleClaimStore { get; }
 
     /// <summary>
-    /// 用户角色存储访问器
+    ///     用户角色存储访问器
     /// </summary>
     private IArtemisUserRoleStore UserRoleStore { get; }
 
@@ -331,7 +331,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 添加角色用户
+    ///     添加角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userId">用户标识</param>
@@ -368,13 +368,14 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 删除角色用户
+    ///     删除角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userId">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> RemoveRoleUserAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> RemoveRoleUserAsync(Guid id, Guid userId,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 

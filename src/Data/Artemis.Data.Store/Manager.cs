@@ -1,5 +1,7 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
+using Artemis.Data.Store.Extensions;
+using Mapster;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -12,7 +14,8 @@ namespace Artemis.Data.Store;
 ///     提供用于管理TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IManager<TEntity> : IManager<TEntity, Guid> where TEntity : IModelBase
+public interface IManager<TEntity> : IManager<TEntity, Guid> 
+    where TEntity : class, IModelBase
 {
 }
 
@@ -21,8 +24,15 @@ public interface IManager<TEntity> : IManager<TEntity, Guid> where TEntity : IMo
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IManager<TEntity, TKey> where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+public interface IManager<TEntity, TKey> 
+    where TEntity : class, IModelBase<TKey> 
+    where TKey : IEquatable<TKey>
 {
+    /// <summary>
+    /// 实体存储
+    /// </summary>
+    public IStore<TEntity, TKey> EntityStore { get; }
+
     /// <summary>
     ///     规范化键
     /// </summary>
@@ -30,50 +40,20 @@ public interface IManager<TEntity, TKey> where TEntity : IModelBase<TKey> where 
     /// <returns>规范化后的键</returns>
     public string NormalizeKey(string key);
 
-    /// <summary>
-    ///     缓存键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="value">值</param>
-    public void SetKey(string key, TKey value);
+    #region BaseResourceManager
 
     /// <summary>
-    ///     缓存键
+    /// 获取实体信息列表
     /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="value">值</param>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task? SetKeyAsync(string key, TKey value, CancellationToken cancellationToken = default);
+    /// <returns>实体信息列表</returns>
+    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 20, int size = 1,
+        CancellationToken cancellationToken = default);
 
-    /// <summary>
-    ///     获取键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
-    public TKey? GetKey(string key);
-
-    /// <summary>
-    ///     获取键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task<TKey?> GetKeyAsync(string key, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     移除键
-    /// </summary>
-    /// <param name="key">键</param>
-    public void RemoveKey(string key);
-
-    /// <summary>
-    ///     移除键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task? RemoveKeyAsync(string key, CancellationToken cancellationToken = default);
+    #endregion
 }
 
 #endregion
@@ -138,7 +118,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     键前缀
     /// </summary>
-    protected string KeyPrefix => "Manager";
+    protected virtual string KeyPrefix => "Manager";
 
     #region DebugLogger
 
@@ -180,7 +160,9 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <returns></returns>
     protected virtual string GenerateCacheKey(params string[] args)
     {
-        return string.Join(":", args);
+        var parameters = args.Prepend(KeyPrefix);
+
+        return string.Join(":", parameters);
     }
 
     #region Properties
@@ -193,7 +175,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <summary>
     ///     缓存访问器
     /// </summary>
-    private IDistributedCache? Cache { get; }
+    protected IDistributedCache? Cache { get; }
 
     /// <summary>
     ///     缓存是否可用
@@ -220,6 +202,11 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #region Implementation of IManager<TEntity,in TKey>
 
     /// <summary>
+    /// 实体存储
+    /// </summary>
+    public IStore<TEntity, TKey> EntityStore => Store;
+
+    /// <summary>
     ///     规范化键
     /// </summary>
     /// <param name="key">键</param>
@@ -229,71 +216,108 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         return Store.NormalizeKey(key);
     }
 
-    #region CacheAccess
+    #region BaseResourceManager
 
     /// <summary>
-    ///     缓存键
+    /// 获取实体信息列表
     /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="value">值</param>
-    public void SetKey(string key, TKey value)
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>实体信息列表</returns>
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 1, int size = 20, CancellationToken cancellationToken = default)
     {
-        Cache?.SetString(key, Store.ConvertIdToString(value)!);
+        OnAsyncActionExecuting(cancellationToken);
+
+        return Store.EntityQuery
+            .MapPageAsync<TEntity, TKey, TEntityInfo>(
+                page, 
+                size, 
+                cancellationToken);
     }
 
     /// <summary>
-    ///     缓存键
+    /// 获取实体信息
     /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="value">值</param>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="id">实体标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task? SetKeyAsync(string key, TKey value, CancellationToken cancellationToken = default)
+    public Task<TEntityInfo?> GetEntityAsync<TEntityInfo>(TKey id, CancellationToken cancellationToken)
     {
-        return Cache?.SetStringAsync(key, Store.ConvertIdToString(value)!, cancellationToken);
+        OnAsyncActionExecuting(cancellationToken);
+
+        return Store.FindMapEntityAsync<TEntityInfo>(id, cancellationToken);
     }
 
     /// <summary>
-    ///     获取键
+    /// 创建实体
     /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
-    public TKey? GetKey(string key)
-    {
-        var keyString = Cache?.GetString(key);
-        return keyString is null ? default : Store.ConvertIdFromString(keyString)!;
-    }
-
-    /// <summary>
-    ///     获取键
-    /// </summary>
-    /// <param name="key">键</param>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="pack">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<TKey?> GetKeyAsync(string key, CancellationToken cancellationToken = default)
+    /// <returns>创建结果</returns>
+    public async Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
+        TEntityPack pack, 
+        CancellationToken cancellationToken = default)
     {
-        var keyString = await Cache?.GetStringAsync(key, cancellationToken)!;
-        return keyString is null ? default : Store.ConvertIdFromString(keyString)!;
+        OnAsyncActionExecuting(cancellationToken);
+
+        var entity = Instance.CreateInstance<TEntity>();
+
+        pack.Adapt(entity);
+
+        var result = await Store.CreateAsync(entity, cancellationToken);
+
+        return (result, entity.Adapt<TEntityInfo>());
     }
 
     /// <summary>
-    ///     移除键
+    /// 更新实体
     /// </summary>
-    /// <param name="key">键</param>
-    public void RemoveKey(string key)
-    {
-        Cache?.Remove(key);
-    }
-
-    /// <summary>
-    ///     移除键
-    /// </summary>
-    /// <param name="key">键</param>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="id">实体键</param>
+    /// <param name="pack">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task? RemoveKeyAsync(string key, CancellationToken cancellationToken = default)
+    /// <returns>更新结果</returns>
+    public async Task<(StoreResult result, TEntityInfo? info)> UpdateEntityAsync<TEntityInfo, TEntityPack>(
+        TKey id,
+        TEntityPack pack,
+        CancellationToken cancellationToken = default)
     {
-        return Cache?.RemoveAsync(key, cancellationToken);
+        OnAsyncActionExecuting(cancellationToken);
+
+        var entity = await Store.FindEntityAsync(id, cancellationToken);
+
+        if (entity is null)
+            return (StoreResult.EntityFoundFailed(typeof(TEntity).Name, id.ToString()!), default);
+
+        pack.Adapt(entity);
+
+        var result = await Store.UpdateAsync(entity, cancellationToken);
+
+        return (result, entity.Adapt<TEntityInfo>());
+    }
+
+    /// <summary>
+    /// 删除实体
+    /// </summary>
+    /// <param name="id">标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>删除结果</returns>
+    public async Task<StoreResult> DeleteEntityAsync(TKey id, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var entity = await Store.FindEntityAsync(id, cancellationToken);
+
+        if (entity is null)
+            return StoreResult.EntityFoundFailed(typeof(TEntity).Name, id.ToString()!);
+
+        return await Store.DeleteAsync(entity, cancellationToken);
     }
 
     #endregion

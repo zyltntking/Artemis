@@ -40,25 +40,6 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         UserRoleStore = userRoleStore;
     }
 
-    #region StoreAccess
-
-    /// <summary>
-    ///     用户存储访问器
-    /// </summary>
-    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
-
-    /// <summary>
-    /// 角色存储访问器
-    /// </summary>
-    private IArtemisRoleStore RoleStore { get; }
-
-    /// <summary>
-    /// 用户角色存储访问器
-    /// </summary>
-    private IArtemisUserRoleStore UserRoleStore { get; }
-
-    #endregion
-
     #region Overrides of Manager<ArtemisUser,Guid>
 
     /// <summary>
@@ -70,6 +51,25 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         RoleStore.Dispose();
         UserRoleStore.Dispose();
     }
+
+    #endregion
+
+    #region StoreAccess
+
+    /// <summary>
+    ///     用户存储访问器
+    /// </summary>
+    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
+
+    /// <summary>
+    ///     角色存储访问器
+    /// </summary>
+    private IArtemisRoleStore RoleStore { get; }
+
+    /// <summary>
+    ///     用户角色存储访问器
+    /// </summary>
+    private IArtemisUserRoleStore UserRoleStore { get; }
 
     #endregion
 
@@ -271,7 +271,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> DeleteUserAsync(
-        Guid id, 
+        Guid id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -285,7 +285,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 根据角色名搜索该用户具有的角色
+    ///     根据角色名搜索该用户具有的角色
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="roleNameSearch">角色名搜索值</param>
@@ -294,9 +294,9 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<PageResult<RoleInfo>> FetchUserRolesAsync(
-        Guid id, 
-        string? roleNameSearch = null, 
-        int page = 1, 
+        Guid id,
+        string? roleNameSearch = null,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -338,7 +338,6 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
                 Total = total,
                 Data = roles
             };
-
         }
 
 
@@ -346,15 +345,15 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 添加用户角色
+    ///     添加用户角色
     /// </summary>
     /// <param name="id">用户id</param>
     /// <param name="roleId">角色id</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<StoreResult> AddUserRoleAsync(
-        Guid id, 
-        Guid roleId, 
+        Guid id,
+        Guid roleId,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -386,13 +385,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 删除用户角色
+    ///     删除用户角色
     /// </summary>
     /// <param name="id">用户id</param>
     /// <param name="roleId">角色id</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> RemoveUserRoleAsync(Guid id, Guid roleId, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> RemoveUserRoleAsync(Guid id, Guid roleId,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 

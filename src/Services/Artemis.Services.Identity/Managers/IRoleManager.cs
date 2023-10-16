@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     角色管理器接口
 /// </summary>
-public interface IRoleManager : IManager<ArtemisUser>
+public interface IRoleManager : IManager<ArtemisRole>
 {
     /// <summary>
     ///     根据角色名搜索角色
@@ -101,7 +101,7 @@ public interface IRoleManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加角色用户
+    ///     添加角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userId">用户标识</param>
@@ -113,7 +113,7 @@ public interface IRoleManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除角色用户
+    ///     删除角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userId">用户标识</param>

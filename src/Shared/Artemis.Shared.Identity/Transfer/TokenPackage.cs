@@ -6,17 +6,17 @@ namespace Artemis.Shared.Identity.Transfer;
 #region Interface
 
 /// <summary>
-/// Token对象接口
+///     Token对象接口
 /// </summary>
 file interface IToken
 {
     /// <summary>
-    /// Token
+    ///     Token
     /// </summary>
     public string Token { get; }
 
     /// <summary>
-    /// 过期时间
+    ///     过期时间
     /// </summary>
     public DateTime Expire { get; set; }
 }
@@ -24,7 +24,7 @@ file interface IToken
 #endregion
 
 /// <summary>
-/// Token对象
+///     Token对象
 /// </summary>
 [DataContract]
 public record TokenPackage : IToken
@@ -32,14 +32,14 @@ public record TokenPackage : IToken
     #region Implementation of IToken
 
     /// <summary>
-    /// Token
+    ///     Token
     /// </summary>
     [MaxLength(32)]
     [DataMember(Order = 1)]
     public virtual string Token { get; } = null!;
 
     /// <summary>
-    /// 过期时间
+    ///     过期时间
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
@@ -49,38 +49,37 @@ public record TokenPackage : IToken
 }
 
 /// <summary>
-/// Token信息
+///     Token信息
 /// </summary>
-[DataContract]
 public sealed record TokenInfo
 {
     /// <summary>
-    /// 用户标识
+    ///     用户标识
     /// </summary>
     public required Guid UserId { get; set; }
 
     /// <summary>
-    /// 用户凭据
+    ///     用户凭据
     /// </summary>
     public required List<ClaimItem> UserClaims { get; set; }
 
     /// <summary>
-    /// 用户名
+    ///     用户名
     /// </summary>
     public required string UserName { get; set; }
 
     /// <summary>
-    /// 角色标识
+    ///     角色标识
     /// </summary>
     public required IEnumerable<Guid> RoleIds { get; set; }
 
     /// <summary>
-    /// 角色名
+    ///     角色名
     /// </summary>
     public required IEnumerable<string> RoleNames { get; set; }
 
     /// <summary>
-    /// 角色凭据
+    ///     角色凭据
     /// </summary>
     public required List<ClaimItem> RoleClaims { get; set; }
 }

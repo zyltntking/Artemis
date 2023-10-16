@@ -25,7 +25,7 @@ internal interface IUserRole
 #endregion
 
 /// <summary>
-/// 基本用户角色信息
+///     基本用户角色信息
 /// </summary>
 [DataContract]
 public record UserRolePackage : IUserRole
@@ -50,7 +50,7 @@ public record UserRolePackage : IUserRole
 }
 
 /// <summary>
-/// 用户角色信息
+///     用户角色信息
 /// </summary>
 public record UserRoleInfo : UserRolePackage, IKeySlot<int>
 {
@@ -74,5 +74,4 @@ public record UserRoleInfo : UserRolePackage, IKeySlot<int>
     [Required]
     [DataMember(Order = 2)]
     public override required Guid RoleId { get; set; }
-
 }

@@ -184,22 +184,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     protected virtual string Prefix => "Store";
 
     /// <summary>
-    ///     缓存选项
-    /// </summary>
-    private DistributedCacheEntryOptions? CacheOption
-    {
-        get
-        {
-            if (Expires <= 0) return null;
-
-            return new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(Expires)
-            };
-        }
-    }
-
-    /// <summary>
     ///     缓存实体
     /// </summary>
     /// <param name="entity"></param>
@@ -210,10 +194,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            if (CacheOption is null)
-                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
-            else
-                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption);
+            Cache?.Set(entity.GenerateKey(Prefix), entity, Expires);
 
             SetDebugLog("Entity Cached");
         }
@@ -225,7 +206,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private async Task CacheEntityAsync(
+    private Task CacheEntityAsync(
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
@@ -234,14 +215,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            if (CacheOption is null)
-                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
-            else
-                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), CacheOption,
-                    cancellationToken)!;
+            Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires, cancellationToken);
 
             SetDebugLog("Entity Cached");
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -258,7 +237,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var entity in entities)
             {
-                Cache?.SetString(entity.GenerateKey(Prefix), entity.Serialize());
+                Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires);
                 count++;
             }
 
@@ -271,7 +250,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="entities"></param>
     /// <param name="cancellationToken"></param>
-    private async Task CacheEntitiesAsync(
+    private Task CacheEntitiesAsync(
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
@@ -283,12 +262,14 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var entity in entities)
             {
-                await Cache?.SetStringAsync(entity.GenerateKey(Prefix), entity.Serialize(), cancellationToken)!;
+                Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires, cancellationToken);
                 count++;
             }
 
             SetDebugLog($"Cached {count} Entities");
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -304,9 +285,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            var json = Cache?.GetString(key);
-
-            return json?.Deserialize<TEntity>();
+            return Cache?.Get<TEntity>(key);
         }
 
         return default;
@@ -328,9 +307,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            var json = await Cache?.GetStringAsync(key, cancellationToken)!;
-
-            return json?.Deserialize<TEntity>();
+            return await Cache?.GetAsync<TEntity>(key, cancellationToken)!;
         }
 
         return default;
@@ -353,9 +330,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var key in keys)
             {
-                var json = Cache?.GetString(key);
-
-                var entity = json?.Deserialize<TEntity>();
+                var entity = Cache?.Get<TEntity>(key);
 
                 if (entity is not null)
                     list.Add(entity);
@@ -387,9 +362,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var key in keys)
             {
-                var json = await Cache?.GetStringAsync(key, cancellationToken)!;
-
-                var entity = json?.Deserialize<TEntity>();
+                var entity = await Cache?.GetAsync<TEntity>(key, cancellationToken)!;
 
                 if (entity is not null)
                     list.Add(entity);

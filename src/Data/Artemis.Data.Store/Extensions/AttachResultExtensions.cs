@@ -5,7 +5,7 @@ namespace Artemis.Data.Store.Extensions;
 /// <summary>
 ///     结果附加扩展
 /// </summary>
-public static class AttachResultException
+public static class AttachResultExtensions
 {
     /// <summary>
     ///     附加

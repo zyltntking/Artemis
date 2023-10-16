@@ -1,6 +1,7 @@
 ﻿using Artemis.Data.Store;
 using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Stores;
+using Artemis.Shared.Identity.Transfer;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -8,9 +9,9 @@ using Microsoft.Extensions.Options;
 namespace Artemis.Services.Identity.Managers;
 
 /// <summary>
-/// 账号管理器
+///     账号管理器
 /// </summary>
-public class AccountManager : Manager<ArtemisUser> , IAccountManager
+public class AccountManager : Manager<ArtemisUser>, IAccountManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -21,9 +22,9 @@ public class AccountManager : Manager<ArtemisUser> , IAccountManager
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public AccountManager(
-        IArtemisUserStore store, 
-        IDistributedCache? cache = null, 
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null, 
+        IArtemisUserStore store,
+        IDistributedCache? cache = null,
+        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
         ILogger? logger = null) : base(store, cache, optionsAccessor, logger)
     {
     }
@@ -45,6 +46,21 @@ public class AccountManager : Manager<ArtemisUser> , IAccountManager
     protected override void StoreDispose()
     {
         UserStore.Dispose();
+    }
+
+    #endregion
+
+    #region Implementation of IAccountManager
+
+    /// <summary>
+    /// 签到
+    /// </summary>
+    /// <param name="username">用户名</param>
+    /// <param name="password">密码</param>
+    /// <returns></returns>
+    public Task<TokenInfo> SignInAsync(string username, string password)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion

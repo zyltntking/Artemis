@@ -41,6 +41,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+		<ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
 		<ProjectReference Include="..\Artemis.Extensions.Web.OpenApi\Artemis.Extensions.Web.OpenApi.csproj" />
 		<ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
 	</ItemGroup>

@@ -89,7 +89,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 根据角色名搜索该用户具有的角色
+    ///     根据角色名搜索该用户具有的角色
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="roleNameSearch">角色名搜索值</param>
@@ -105,7 +105,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加用户角色
+    ///     添加用户角色
     /// </summary>
     /// <param name="id">用户id</param>
     /// <param name="roleId">角色id</param>
@@ -117,7 +117,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除用户角色
+    ///     删除用户角色
     /// </summary>
     /// <param name="id">用户id</param>
     /// <param name="roleId">角色id</param>
