@@ -61,28 +61,12 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     TMapEntity? FindMapEntity<TMapEntity>(TKey id);
 
     /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="key">id</param>
-    /// <returns></returns>
-    TMapEntity? FindMapEntityViaKey<TMapEntity>(string key);
-
-    /// <summary>
     ///     根据id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
     /// <param name="ids">ids</param>
     /// <returns></returns>
     IEnumerable<TMapEntity> FindMapEntities<TMapEntity>(IEnumerable<TKey> ids);
-
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="keys">keys</param>
-    /// <returns></returns>
-    IEnumerable<TMapEntity>? FindMapEntitiesViaKeys<TMapEntity>(IEnumerable<string> keys);
 
     /// <summary>
     ///     根据Id查找映射实体
@@ -96,17 +80,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="key">id</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<TMapEntity?> FindMapEntityViaKeyAsync<TMapEntity>(
-        string key,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///     根据Id查找映射实体
     /// </summary>
     /// <typeparam name="TMapEntity">映射类型</typeparam>
@@ -115,17 +88,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     /// <returns></returns>
     Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
         IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="keys">keys</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<IEnumerable<TMapEntity>?> FindMapEntitiesViaKeysAsync<TMapEntity>(
-        IEnumerable<string> keys,
         CancellationToken cancellationToken = default);
 
     #endregion

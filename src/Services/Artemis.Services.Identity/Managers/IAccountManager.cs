@@ -10,7 +10,7 @@ namespace Artemis.Services.Identity.Managers;
 public interface IAccountManager : IManager<ArtemisUser>
 {
     /// <summary>
-    /// 签到
+    ///     签到
     /// </summary>
     /// <param name="username">用户名</param>
     /// <param name="password">密码</param>

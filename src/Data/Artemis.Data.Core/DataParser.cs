@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -87,7 +88,8 @@ public static class DataParser
         {
             IgnoreReadOnlyProperties = true,
             ReferenceHandler = ReferenceHandler.Preserve,
-            WriteIndented = writeIndented
+            WriteIndented = writeIndented,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
         return JsonSerializer.Serialize(model, options);

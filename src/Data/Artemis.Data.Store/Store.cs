@@ -278,14 +278,20 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="key">缓存键</param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    private TEntity? GetEntity(string key)
+    private TEntity? GetEntity(TKey key)
     {
         if (CachedStore)
         {
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            return Cache?.Get<TEntity>(key);
+            var entity = Instance.CreateInstance<TEntity>();
+
+            entity.Id = key;
+
+            entity = Cache?.Get<TEntity>(entity.GenerateKey(Prefix));
+
+            return entity;
         }
 
         return default;
@@ -299,7 +305,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     private async Task<TEntity?> GetEntityAsync(
-        string key,
+        TKey key,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -307,7 +313,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             if (Cache is null)
                 throw new InstanceNotImplementException(nameof(Cache));
 
-            return await Cache?.GetAsync<TEntity>(key, cancellationToken)!;
+            var entity = Instance.CreateInstance<TEntity>();
+
+            entity.Id = key;
+
+            entity = await Cache?.GetAsync<TEntity>(entity.GenerateKey(Prefix), cancellationToken)!;
+
+            return entity;
         }
 
         return default;
@@ -319,7 +331,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="keys">实体键列表</param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    private IEnumerable<TEntity>? GetEntities(IEnumerable<string> keys)
+    private IEnumerable<TEntity>? GetEntities(IEnumerable<TKey> keys)
     {
         if (CachedStore)
         {
@@ -330,7 +342,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var key in keys)
             {
-                var entity = Cache?.Get<TEntity>(key);
+                var entity = Instance.CreateInstance<TEntity>();
+
+                entity.Id = key;
+
+                entity = Cache?.Get<TEntity>(entity.GenerateKey(Prefix));
 
                 if (entity is not null)
                     list.Add(entity);
@@ -348,9 +364,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="keys">实体键列表</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     private async Task<IEnumerable<TEntity>?> GetEntitiesAsync(
-        IEnumerable<string> keys,
+        IEnumerable<TKey> keys,
         CancellationToken cancellationToken = default)
     {
         if (CachedStore)
@@ -362,7 +377,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             foreach (var key in keys)
             {
-                var entity = await Cache?.GetAsync<TEntity>(key, cancellationToken)!;
+                var entity = Instance.CreateInstance<TEntity>();
+
+                entity.Id = key;
+
+                entity = await Cache?.GetAsync<TEntity>(entity.GenerateKey(Prefix), cancellationToken)!;
 
                 if (entity is not null)
                     list.Add(entity);
@@ -377,6 +396,27 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     移除被缓存的实体
     /// </summary>
+    /// <param name="key"></param>
+    /// <exception cref="InstanceNotImplementException"></exception>
+    private void RemoveCachedEntity(TKey key)
+    {
+        if (CachedStore)
+        {
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
+
+            var entity = Instance.CreateInstance<TEntity>();
+
+            entity.Id = key;
+
+            Cache?.Remove(entity.GenerateKey(Prefix));
+            SetDebugLog("Entity Remove");
+        }
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
     /// <param name="entity"></param>
     private void RemoveCachedEntity(TEntity entity)
     {
@@ -386,6 +426,27 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 throw new InstanceNotImplementException(nameof(Cache));
 
             Cache?.Remove(entity.GenerateKey(Prefix));
+            SetDebugLog("Entity Remove");
+        }
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task RemoveCachedEntityAsync(TKey key, CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
+
+            var entity = Instance.CreateInstance<TEntity>();
+
+            entity.Id = key;
+
+            await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
             SetDebugLog("Entity Remove");
         }
     }
@@ -412,6 +473,32 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     移除被缓存的实体
     /// </summary>
+    /// <param name="keys"></param>
+    private void RemoveCachedEntities(IEnumerable<TKey> keys)
+    {
+        if (CachedStore)
+        {
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
+
+            var count = 0;
+            foreach (var key in keys)
+            {
+                var entity = Instance.CreateInstance<TEntity>();
+
+                entity.Id = key;
+
+                Cache?.Remove(entity.GenerateKey(Prefix));
+                count++;
+            }
+
+            SetDebugLog($"Removed {count} Entities From Cache");
+        }
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
     /// <param name="entities"></param>
     private void RemoveCachedEntities(IEnumerable<TEntity> entities)
     {
@@ -424,6 +511,35 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             foreach (var entity in entities)
             {
                 Cache?.Remove(entity.GenerateKey(Prefix));
+                count++;
+            }
+
+            SetDebugLog($"Removed {count} Entities From Cache");
+        }
+    }
+
+    /// <summary>
+    ///     移除被缓存的实体
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task RemoveCachedEntitiesAsync(
+        IEnumerable<TKey> keys,
+        CancellationToken cancellationToken = default)
+    {
+        if (CachedStore)
+        {
+            if (Cache is null)
+                throw new InstanceNotImplementException(nameof(Cache));
+
+            var count = 0;
+            foreach (var key in keys)
+            {
+                var entity = Instance.CreateInstance<TEntity>();
+
+                entity.Id = key;
+
+                await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
                 count++;
             }
 
@@ -1220,6 +1336,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         {
             var changes = BatchDeleteEntity(KeyMatchQuery(id));
 
+            if (changes > 0) RemoveCachedEntity(id);
+
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
@@ -1244,6 +1362,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         try
         {
             var changes = BatchDeleteEntity(KeyMatchQuery(idList));
+
+            if (changes > 0) RemoveCachedEntities(idList);
 
             return StoreResult.Success(changes);
         }
@@ -1319,6 +1439,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         {
             var changes = await BatchDeleteEntityAsync(KeyMatchQuery(id), cancellationToken);
 
+            if (changes > 0) await RemoveCachedEntityAsync(id, cancellationToken);
+
             return StoreResult.Success(changes);
         }
         catch (DbUpdateConcurrencyException)
@@ -1345,6 +1467,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         try
         {
             var changes = await BatchDeleteEntityAsync(KeyMatchQuery(idList), cancellationToken);
+
+            if (changes > 0) await RemoveCachedEntitiesAsync(idList, cancellationToken);
 
             return StoreResult.Success(changes);
         }
@@ -1420,6 +1544,11 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public TEntity? FindEntity(TKey id)
     {
         OnActionExecuting(id, nameof(id));
+
+        var cached = GetEntity(id);
+
+        if (cached is not null) return cached;
+
         return FindById(id);
     }
 
@@ -1432,33 +1561,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     public TMapEntity? FindMapEntity<TMapEntity>(TKey id)
     {
         OnActionExecuting(id, nameof(id));
+
+        var cached = GetEntity(id);
+
+        if (cached is not null) return cached.Adapt<TMapEntity>();
+
         return FindById<TMapEntity>(id);
-    }
-
-    /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <returns></returns>
-    public TEntity? FindEntityViaKey(string key)
-    {
-        OnActionExecuting(key, nameof(key));
-        return GetEntity(key);
-    }
-
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="key">id</param>
-    /// <returns></returns>
-    public TMapEntity? FindMapEntityViaKey<TMapEntity>(string key)
-    {
-        OnActionExecuting(key, nameof(key));
-
-        var entity = GetEntity(key);
-
-        return entity is not null ? entity.Adapt<TMapEntity>() : default;
     }
 
     /// <summary>
@@ -1470,6 +1578,16 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnActionExecuting(idArray, nameof(ids));
+
+        var cached = GetEntities(idArray);
+
+        if (cached is not null)
+        {
+            var list = cached.ToList();
+
+            if (list.Any()) return list;
+        }
+
         return FindByIds(idArray);
     }
 
@@ -1483,47 +1601,36 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnActionExecuting(idArray, nameof(ids));
+
+        var cached = GetEntities(idArray);
+
+        if (cached is not null)
+        {
+            var list = cached.ToList();
+
+            if (list.Any()) return list.Adapt<IEnumerable<TMapEntity>>();
+        }
+
         return FindByIds<TMapEntity>(idArray);
     }
 
     /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="keys">缓存键</param>
-    /// <returns></returns>
-    public IEnumerable<TEntity>? FindEntitiesViaKeys(IEnumerable<string> keys)
-    {
-        var keyList = keys.ToList();
-        OnActionExecuting(keyList, nameof(keys));
-        return GetEntities(keyList);
-    }
-
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="keys">keys</param>
-    /// <returns></returns>
-    public IEnumerable<TMapEntity>? FindMapEntitiesViaKeys<TMapEntity>(IEnumerable<string> keys)
-    {
-        var keyList = keys.ToList();
-        OnActionExecuting(keyList, nameof(keys));
-        var entities = GetEntities(keyList);
-        return entities?.Select(entity => entity.Adapt<TMapEntity>());
-    }
-
-    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<TEntity?> FindEntityAsync(
+    public async Task<TEntity?> FindEntityAsync(
         TKey id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-        return FindByIdAsync(id, cancellationToken);
+
+        var cached = await GetEntityAsync(id, cancellationToken);
+
+        if (cached is not null) return cached;
+
+        return await FindByIdAsync(id, cancellationToken);
     }
 
     /// <summary>
@@ -1533,44 +1640,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
+    public async Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
         TKey id,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-        return FindByIdAsync<TMapEntity>(id, cancellationToken);
-    }
 
-    /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public Task<TEntity?> FindEntityViaKeyAsync(
-        string key,
-        CancellationToken cancellationToken = default)
-    {
-        OnActionExecuting(key, nameof(key));
-        return GetEntityAsync(key, cancellationToken);
-    }
+        var cached = await GetEntityAsync(id, cancellationToken);
 
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="key">id</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task<TMapEntity?> FindMapEntityViaKeyAsync<TMapEntity>(
-        string key, CancellationToken
-            cancellationToken = default)
-    {
-        OnActionExecuting(key, nameof(key));
+        if (cached is not null) return cached.Adapt<TMapEntity>();
 
-        var entity = await GetEntityAsync(key, cancellationToken);
-
-        return entity is not null ? entity.Adapt<TMapEntity>() : default;
+        return await FindByIdAsync<TMapEntity>(id, cancellationToken);
     }
 
     /// <summary>
@@ -1579,13 +1659,23 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<List<TEntity>> FindEntitiesAsync(
+    public async Task<List<TEntity>> FindEntitiesAsync(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
-        return FindByIdsAsync(idArray, cancellationToken);
+
+        var cached = await GetEntitiesAsync(idArray, cancellationToken);
+
+        if (cached is not null)
+        {
+            var list = cached.ToList();
+
+            if (list.Any()) return list;
+        }
+
+        return await FindByIdsAsync(idArray, cancellationToken);
     }
 
     /// <summary>
@@ -1595,45 +1685,24 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="ids"></param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
+    public async Task<List<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
         var idArray = ids as TKey[] ?? ids.ToArray();
         OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
-        return FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
-    }
 
-    /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="keys">缓存键</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public Task<IEnumerable<TEntity>?> FindEntitiesViaKeysAsync(
-        IEnumerable<string> keys,
-        CancellationToken cancellationToken = default)
-    {
-        var keyList = keys.ToList();
-        OnActionExecuting(keyList, nameof(keys));
-        return GetEntitiesAsync(keyList, cancellationToken);
-    }
+        var cached = await GetEntitiesAsync(idArray, cancellationToken);
 
-    /// <summary>
-    ///     根据缓存键查找实体查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="keys">keys</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task<IEnumerable<TMapEntity>?> FindMapEntitiesViaKeysAsync<TMapEntity>(
-        IEnumerable<string> keys,
-        CancellationToken cancellationToken = default)
-    {
-        var keyList = keys.ToList();
-        OnActionExecuting(keyList, nameof(keys));
-        var entities = await GetEntitiesAsync(keyList, cancellationToken);
-        return entities?.Select(entity => entity.Adapt<TMapEntity>());
+        if (cached is not null)
+        {
+            var list = cached.ToList();
+
+            if (list.Any()) return list.Adapt<List<TMapEntity>>();
+        }
+
+
+        return await FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
     }
 
     #endregion

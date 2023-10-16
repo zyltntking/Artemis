@@ -351,25 +351,11 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     TEntity? FindEntity(TKey id);
 
     /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <returns></returns>
-    TEntity? FindEntityViaKey(string key);
-
-    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
     IEnumerable<TEntity> FindEntities(IEnumerable<TKey> ids);
-
-    /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="keys">缓存键</param>
-    /// <returns></returns>
-    IEnumerable<TEntity>? FindEntitiesViaKeys(IEnumerable<string> keys);
 
     /// <summary>
     ///     根据Id查找实体
@@ -382,16 +368,6 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<TEntity?> FindEntityViaKeyAsync(
-        string key,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
@@ -399,16 +375,6 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     /// <returns></returns>
     Task<List<TEntity>> FindEntitiesAsync(
         IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     根据缓存键查找实体
-    /// </summary>
-    /// <param name="keys">缓存键</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<IEnumerable<TEntity>?> FindEntitiesViaKeysAsync(
-        IEnumerable<string> keys,
         CancellationToken cancellationToken = default);
 
     #endregion

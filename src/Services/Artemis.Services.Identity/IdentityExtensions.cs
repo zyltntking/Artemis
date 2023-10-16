@@ -55,7 +55,11 @@ public static class IdentityExtensions
                 options.InstanceName = "ArtemisIdentity:";
             });
 
-            serviceCollection.Configure<ArtemisStoreOptions>(option => { option.CachedManager = true; });
+            serviceCollection.Configure<ArtemisStoreOptions>(option =>
+            {
+                option.CachedManager = true;
+                option.CachedStore = true;
+            });
         }
 
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();

@@ -14,7 +14,7 @@ namespace Artemis.Data.Store;
 ///     提供用于管理TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IManager<TEntity> : IManager<TEntity, Guid> 
+public interface IManager<TEntity> : IManager<TEntity, Guid>
     where TEntity : class, IModelBase
 {
 }
@@ -24,12 +24,12 @@ public interface IManager<TEntity> : IManager<TEntity, Guid>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IManager<TEntity, TKey> 
-    where TEntity : class, IModelBase<TKey> 
+public interface IManager<TEntity, TKey>
+    where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 实体存储
+    ///     实体存储
     /// </summary>
     public IStore<TEntity, TKey> EntityStore { get; }
 
@@ -43,7 +43,7 @@ public interface IManager<TEntity, TKey>
     #region BaseResourceManager
 
     /// <summary>
-    /// 获取实体信息列表
+    ///     获取实体信息列表
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <param name="page">页码</param>
@@ -202,7 +202,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #region Implementation of IManager<TEntity,in TKey>
 
     /// <summary>
-    /// 实体存储
+    ///     实体存储
     /// </summary>
     public IStore<TEntity, TKey> EntityStore => Store;
 
@@ -219,26 +219,27 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #region BaseResourceManager
 
     /// <summary>
-    /// 获取实体信息列表
+    ///     获取实体信息列表
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 1, int size = 20, CancellationToken cancellationToken = default)
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 1, int size = 20,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         return Store.EntityQuery
             .MapPageAsync<TEntity, TKey, TEntityInfo>(
-                page, 
-                size, 
+                page,
+                size,
                 cancellationToken);
     }
 
     /// <summary>
-    /// 获取实体信息
+    ///     获取实体信息
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <param name="id">实体标识</param>
@@ -252,7 +253,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 创建实体
+    ///     创建实体
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
@@ -260,7 +261,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     public async Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
-        TEntityPack pack, 
+        TEntityPack pack,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -275,7 +276,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 更新实体
+    ///     更新实体
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
@@ -303,7 +304,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     }
 
     /// <summary>
-    /// 删除实体
+    ///     删除实体
     /// </summary>
     /// <param name="id">标识</param>
     /// <param name="cancellationToken">操作取消信号</param>

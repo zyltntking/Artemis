@@ -64,6 +64,86 @@
 				接口描述
 			</summary>
 		</member>
+		<member name="T:Artemis.Extensions.Web.Controller.ResourceController`3">
+			<summary>
+				抽象资源控制器
+			</summary>
+			<typeparam name="TResourceEntity">资源实体类型</typeparam>
+			<typeparam name="TResourceInfo">资源信息类型</typeparam>
+			<typeparam name="TResourcePack">资源包类型</typeparam>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Controller.ResourceController`3.#ctor(Artemis.Data.Store.IManager{`0},Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				泛型资源控制器
+			</summary>
+			<param name="manager">管理器依赖</param>
+			<param name="logger">日志依赖</param>
+		</member>
+		<member name="T:Artemis.Extensions.Web.Controller.ResourceController`4">
+			<summary>
+				抽象资源控制器
+			</summary>
+			<typeparam name="TResourceEntity">资源实体类型</typeparam>
+			<typeparam name="TKey">资源键类型</typeparam>
+			<typeparam name="TResourceInfo">资源信息类型</typeparam>
+			<typeparam name="TResourcePack">资源包类型</typeparam>
+		</member>
+		<member name="P:Artemis.Extensions.Web.Controller.ResourceController`4.Manager">
+			<summary>
+				存储管理器依赖访问器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Controller.ResourceController`4.#ctor(Artemis.Data.Store.IManager{`0,`1},Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				泛型资源控制器
+			</summary>
+			<param name="manager">管理器依赖</param>
+			<param name="logger">日志依赖</param>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.GetResources(System.Int32,System.Int32)">
+			<summary>
+				获取资源列表
+			</summary>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<returns>Resources PagedResult</returns>
+			<remark>GET api/Resources</remark>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.GetResource(`1)">
+			<summary>
+				获取资源信息
+			</summary>
+			<param name="resourceId">资源标识</param>
+			<returns>Resource Info Result</returns>
+			<remark>GET api/Resources/{resourceId}</remark>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.PostResource(`3)">
+			<summary>
+				创建资源
+			</summary>
+			<param name="pack">资源信息包</param>
+			<returns>Resource Info Result</returns>
+			<remark>POST api/Resources</remark>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.PutResource(`1,`3)">
+			<summary>
+				更新资源
+			</summary>
+			<param name="resourceId">资源标识</param>
+			<param name="pack">资源信息包</param>
+			<returns>Resource Info Result</returns>
+			<remark>PUT api/Resources/{resourceId}</remark>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Controller.ResourceController`4.DeleteResource(`1)">
+			<summary>
+				删除资源
+			</summary>
+			<param name="resourceId">资源标识</param>
+			<returns>Delete Status</returns>
+			<remarks>DELETE api/Resources/{resourceId}</remarks>
+		</member>
 		<member name="T:Artemis.Extensions.Web.Controller.ClaimedApiController">
 			<summary>
 				泛型凭据认证Api控制器

@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.ComponentModel.DataAnnotations;
+using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Web.Filter;
@@ -7,18 +8,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 
 namespace Artemis.Extensions.Web.Controller;
 
 /// <summary>
-/// 抽象资源控制器
+///     抽象资源控制器
 /// </summary>
 /// <typeparam name="TResourceEntity">资源实体类型</typeparam>
 /// <typeparam name="TResourceInfo">资源信息类型</typeparam>
 /// <typeparam name="TResourcePack">资源包类型</typeparam>
 [Route("api/[controller]")]
-public abstract class ResourceController<TResourceEntity, TResourceInfo, TResourcePack> : ResourceController<TResourceEntity, Guid, TResourceInfo, TResourcePack> where TResourceEntity : class, IModelBase
+public abstract class
+    ResourceController<TResourceEntity, TResourceInfo, TResourcePack> : ResourceController<TResourceEntity, Guid,
+        TResourceInfo, TResourcePack> where TResourceEntity : class, IModelBase
 {
     /// <summary>
     ///     泛型资源控制器
@@ -31,22 +33,17 @@ public abstract class ResourceController<TResourceEntity, TResourceInfo, TResour
 }
 
 /// <summary>
-/// 抽象资源控制器
+///     抽象资源控制器
 /// </summary>
 /// <typeparam name="TResourceEntity">资源实体类型</typeparam>
 /// <typeparam name="TKey">资源键类型</typeparam>
 /// <typeparam name="TResourceInfo">资源信息类型</typeparam>
 /// <typeparam name="TResourcePack">资源包类型</typeparam>
 [Route("api/[controller]")]
-public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, TResourcePack> : ClaimedApiController 
-    where TResourceEntity : class, IModelBase<TKey> 
+public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, TResourcePack> : ClaimedApiController
+    where TResourceEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
-    /// <summary>
-    /// 存储管理器依赖访问器
-    /// </summary>
-    private IManager<TResourceEntity, TKey> Manager { get; }
-
     /// <summary>
     ///     泛型资源控制器
     /// </summary>
@@ -60,7 +57,12 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     }
 
     /// <summary>
-    /// 获取资源列表
+    ///     存储管理器依赖访问器
+    /// </summary>
+    private IManager<TResourceEntity, TKey> Manager { get; }
+
+    /// <summary>
+    ///     获取资源列表
     /// </summary>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
@@ -94,7 +96,7 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     }
 
     /// <summary>
-    /// 获取资源信息
+    ///     获取资源信息
     /// </summary>
     /// <param name="resourceId">资源标识</param>
     /// <returns>Resource Info Result</returns>
@@ -113,14 +115,14 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     }
 
     /// <summary>
-    /// 创建资源
+    ///     创建资源
     /// </summary>
     /// <param name="pack">资源信息包</param>
     /// <returns>Resource Info Result</returns>
     /// <remark>POST api/Resources</remark>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<DataResult<TResourceInfo>> PostResource([FromBody][Required] TResourcePack pack)
+    public async Task<DataResult<TResourceInfo>> PostResource([FromBody] [Required] TResourcePack pack)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
@@ -136,30 +138,24 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     }
 
     /// <summary>
-    /// 更新资源
+    ///     更新资源
     /// </summary>
     /// <param name="resourceId">资源标识</param>
     /// <param name="pack">资源信息包</param>
     /// <returns>Resource Info Result</returns>
     /// <remark>PUT api/Resources/{resourceId}</remark>
     [HttpPut]
-    public async Task<DataResult<TResourceInfo>> PutResource(TKey resourceId, [FromBody][Required] TResourcePack pack)
+    public async Task<DataResult<TResourceInfo>> PutResource(TKey resourceId, [FromBody] [Required] TResourcePack pack)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
         var exists = await Manager.EntityStore.ExistsAsync(resourceId, cancellationToken);
 
-        if (!exists)
-        {
-            return DataResult.Fail<TResourceInfo>("资源不存在");
-        }
+        if (!exists) return DataResult.Fail<TResourceInfo>("资源不存在");
 
         var resource = await Manager.EntityStore.FindEntityAsync(resourceId, cancellationToken);
 
-        if (resource is null)
-        {
-            return DataResult.Fail<TResourceInfo>("资源不存在");
-        }
+        if (resource is null) return DataResult.Fail<TResourceInfo>("资源不存在");
 
         pack.Adapt(resource);
 
@@ -171,7 +167,7 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     }
 
     /// <summary>
-    /// 删除资源
+    ///     删除资源
     /// </summary>
     /// <param name="resourceId">资源标识</param>
     /// <returns>Delete Status</returns>

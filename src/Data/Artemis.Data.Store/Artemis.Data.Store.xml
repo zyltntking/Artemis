@@ -332,6 +332,56 @@
 			<param name="attach">附加数据</param>
 			<returns></returns>
 		</member>
+		<member name="T:Artemis.Data.Store.Extensions.DistributedCacheExtensions">
+			<summary>
+				分布式缓存扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.DistributedCacheExtensions.Set``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32)">
+			<summary>
+				设置缓存
+			</summary>
+			<typeparam name="T">存储类型</typeparam>
+			<param name="cache">缓存依赖</param>
+			<param name="key">缓存键</param>
+			<param name="entity">实体</param>
+			<param name="expire">过期时间</param>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.DistributedCacheExtensions.SetAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				设置缓存
+			</summary>
+			<typeparam name="T">存储类型</typeparam>
+			<param name="cache">缓存依赖</param>
+			<param name="key">缓存键</param>
+			<param name="entity">缓存实体</param>
+			<param name="expire">过期时间</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.DistributedCacheExtensions.Get``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+			<summary>
+				获取缓存
+			</summary>
+			<typeparam name="T">存储类型</typeparam>
+			<param name="cache">缓存依赖</param>
+			<param name="key">缓存键</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.DistributedCacheExtensions.GetAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Threading.CancellationToken)">
+			<summary>
+				获取缓存
+			</summary>
+			<typeparam name="T">存储类型</typeparam>
+			<param name="cache">缓存依赖</param>
+			<param name="key">缓存键</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
 		<member name="T:Artemis.Data.Store.Extensions.QueryableExtensions">
 			<summary>
 				Queryable扩展
@@ -390,6 +440,33 @@
 			<param name="query">查询</param>
 			<param name="request">分页请求</param>
 			<param name="count">数据规模</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.QueryableExtensions.MapPageAsync``3(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				映射式分页
+			</summary>
+			<typeparam name="TEntity">实体类型</typeparam>
+			<typeparam name="TKey">实体键类型</typeparam>
+			<typeparam name="TEntityInfo">映射类型</typeparam>
+			<param name="query">查询</param>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.Extensions.QueryableExtensions.MapPageAsync``3(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageBase,System.Threading.CancellationToken)">
+			<summary>
+				映射式分页
+			</summary>
+			<typeparam name="TEntity">实体类型</typeparam>
+			<typeparam name="TKey">实体键类型</typeparam>
+			<typeparam name="TEntityInfo">映射类型</typeparam>
+			<param name="query">查询</param>
+			<param name="request">页码</param>
+			<param name="cancellationToken">条目数</param>
 			<returns></returns>
 		</member>
 		<member
@@ -1306,6 +1383,11 @@
 			<typeparam name="TEntity">实体类型</typeparam>
 			<typeparam name="TKey">键类型</typeparam>
 		</member>
+		<member name="P:Artemis.Data.Store.IManager`2.EntityStore">
+			<summary>
+				实体存储
+			</summary>
+		</member>
 		<member name="M:Artemis.Data.Store.IManager`2.NormalizeKey(System.String)">
 			<summary>
 				规范化键
@@ -1313,50 +1395,16 @@
 			<param name="key">键</param>
 			<returns>规范化后的键</returns>
 		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.SetKey(System.String,`1)">
+		<member
+			name="M:Artemis.Data.Store.IManager`2.GetEntitiesAsync``1(System.Int32,System.Int32,System.Threading.CancellationToken)">
 			<summary>
-				缓存键
+				获取实体信息列表
 			</summary>
-			<param name="key">键</param>
-			<param name="value">值</param>
-		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.SetKeyAsync(System.String,`1,System.Threading.CancellationToken)">
-			<summary>
-				缓存键
-			</summary>
-			<param name="key">键</param>
-			<param name="value">值</param>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
 			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.GetKey(System.String)">
-			<summary>
-				获取键
-			</summary>
-			<param name="key">键</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.GetKeyAsync(System.String,System.Threading.CancellationToken)">
-			<summary>
-				获取键
-			</summary>
-			<param name="key">键</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.RemoveKey(System.String)">
-			<summary>
-				移除键
-			</summary>
-			<param name="key">键</param>
-		</member>
-		<member name="M:Artemis.Data.Store.IManager`2.RemoveKeyAsync(System.String,System.Threading.CancellationToken)">
-			<summary>
-				移除键
-			</summary>
-			<param name="key">键</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
+			<returns>实体信息列表</returns>
 		</member>
 		<member name="T:Artemis.Data.Store.Manager`1">
 			<summary>
@@ -1453,6 +1501,11 @@
 				日志依赖访问器
 			</summary>
 		</member>
+		<member name="P:Artemis.Data.Store.Manager`2.EntityStore">
+			<summary>
+				实体存储
+			</summary>
+		</member>
 		<member name="M:Artemis.Data.Store.Manager`2.NormalizeKey(System.String)">
 			<summary>
 				规范化键
@@ -1460,50 +1513,54 @@
 			<param name="key">键</param>
 			<returns>规范化后的键</returns>
 		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.SetKey(System.String,`1)">
+		<member
+			name="M:Artemis.Data.Store.Manager`2.GetEntitiesAsync``1(System.Int32,System.Int32,System.Threading.CancellationToken)">
 			<summary>
-				缓存键
+				获取实体信息列表
 			</summary>
-			<param name="key">键</param>
-			<param name="value">值</param>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>实体信息列表</returns>
 		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.SetKeyAsync(System.String,`1,System.Threading.CancellationToken)">
+		<member name="M:Artemis.Data.Store.Manager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
 			<summary>
-				缓存键
+				获取实体信息
 			</summary>
-			<param name="key">键</param>
-			<param name="value">值</param>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<param name="id">实体标识</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns></returns>
 		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.GetKey(System.String)">
+		<member name="M:Artemis.Data.Store.Manager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
 			<summary>
-				获取键
+				创建实体
 			</summary>
-			<param name="key">键</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.GetKeyAsync(System.String,System.Threading.CancellationToken)">
-			<summary>
-				获取键
-			</summary>
-			<param name="key">键</param>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="pack">实体包</param>
 			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
+			<returns>创建结果</returns>
 		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.RemoveKey(System.String)">
+		<member name="M:Artemis.Data.Store.Manager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
 			<summary>
-				移除键
+				更新实体
 			</summary>
-			<param name="key">键</param>
-		</member>
-		<member name="M:Artemis.Data.Store.Manager`2.RemoveKeyAsync(System.String,System.Threading.CancellationToken)">
-			<summary>
-				移除键
-			</summary>
-			<param name="key">键</param>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="id">实体键</param>
+			<param name="pack">实体包</param>
 			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
+			<returns>更新结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Store.Manager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+			<summary>
+				删除实体
+			</summary>
+			<param name="id">标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
 		</member>
 		<member name="F:Artemis.Data.Store.Manager`2._disposed">
 			<summary>
@@ -1697,11 +1754,6 @@
 		<member name="P:Artemis.Data.Store.Store`3.Prefix">
 			<summary>
 				缓存前缀
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Store.Store`3.CacheOption">
-			<summary>
-				缓存选项
 			</summary>
 		</member>
 		<member name="M:Artemis.Data.Store.Store`3.CacheEntity(`0)">

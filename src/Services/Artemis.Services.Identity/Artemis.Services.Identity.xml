@@ -544,6 +544,53 @@
 				认证配置选项操作
 			</summary>
 		</member>
+		<member name="T:Artemis.Services.Identity.Managers.AccountManager">
+			<summary>
+				账号管理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.Managers.AccountManager.#ctor(Artemis.Services.Identity.Stores.IArtemisUserStore,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Data.Store.ArtemisStoreOptions},Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="store">存储访问器依赖</param>
+			<param name="cache">缓存管理器</param>
+			<param name="optionsAccessor">配置依赖</param>
+			<param name="logger">日志依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="P:Artemis.Services.Identity.Managers.AccountManager.UserStore">
+			<summary>
+				用户存储访问器
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.AccountManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.AccountManager.SignInAsync(System.String,System.String)">
+			<summary>
+				签到
+			</summary>
+			<param name="username">用户名</param>
+			<param name="password">密码</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Services.Identity.Managers.IAccountManager">
+			<summary>
+				账号管理器接口
+			</summary>
+		</member>
+		<member name="M:Artemis.Services.Identity.Managers.IAccountManager.SignInAsync(System.String,System.String)">
+			<summary>
+				签到
+			</summary>
+			<param name="username">用户名</param>
+			<param name="password">密码</param>
+			<returns></returns>
+		</member>
 		<member name="T:Artemis.Services.Identity.Managers.IRoleManager">
 			<summary>
 				角色管理器接口
@@ -1027,6 +1074,11 @@
 			<param name="logger">日志依赖</param>
 			<exception cref="T:System.ArgumentNullException"></exception>
 		</member>
+		<member name="M:Artemis.Services.Identity.Managers.UserManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
 		<member name="P:Artemis.Services.Identity.Managers.UserManager.UserStore">
 			<summary>
 				用户存储访问器
@@ -1040,11 +1092,6 @@
 		<member name="P:Artemis.Services.Identity.Managers.UserManager.UserRoleStore">
 			<summary>
 				用户角色存储访问器
-			</summary>
-		</member>
-		<member name="M:Artemis.Services.Identity.Managers.UserManager.StoreDispose">
-			<summary>
-				释放托管的Store
 			</summary>
 		</member>
 		<member

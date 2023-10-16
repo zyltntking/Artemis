@@ -89,8 +89,8 @@ public static class DistributedCacheExtensions
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public static Task<T?> GetAsync<T>(
-        this IDistributedCache cache, 
-        string key, 
+        this IDistributedCache cache,
+        string key,
         CancellationToken cancellationToken = default) where T : class
     {
         cancellationToken.ThrowIfCancellationRequested();

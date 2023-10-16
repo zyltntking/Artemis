@@ -1053,6 +1053,71 @@
 				角色描述
 			</summary>
 		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IToken">
+			<summary>
+				Token对象接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IToken.Token">
+			<summary>
+				Token
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IToken.Expire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.TokenPackage">
+			<summary>
+				Token对象
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenPackage.Token">
+			<summary>
+				Token
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenPackage.Expire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.TokenInfo">
+			<summary>
+				Token信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserClaims">
+			<summary>
+				用户凭据
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleIds">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleNames">
+			<summary>
+				角色名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleClaims">
+			<summary>
+				角色凭据
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Transfer.IUser">
 			<summary>
 				基本用户接口

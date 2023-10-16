@@ -2989,5 +2989,113 @@
 				状态项目
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Core.INode">
+			<summary>
+				节点结构接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.INode`1">
+			<summary>
+				节点结构接口
+			</summary>
+			<typeparam name="TKey">键类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.INode`1.ParentId">
+			<summary>
+				父节点键
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ITree`1">
+			<summary>
+				基本树结构接口
+			</summary>
+			<typeparam name="TEntity">实体类型</typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.ITree`2">
+			<summary>
+				基本树结构接口
+			</summary>
+			<typeparam name="TKey">键类型</typeparam>
+			<typeparam name="TEntity">实体类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ITree`2.Node">
+			<summary>
+				当前节点
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ITree`2.Children">
+			<summary>
+				子节点集合
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.Node">
+			<summary>
+				树结构数据
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Node.Id">
+			<summary>
+				节点键
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Node.ParentId">
+			<summary>
+				父节点键
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.Node`1">
+			<summary>
+				树结构数据
+			</summary>
+			<typeparam name="TKey">标识类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.Node`1.Id">
+			<summary>
+				节点键
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Node`1.ParentId">
+			<summary>
+				父节点键
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.Tree`1">
+			<summary>
+				基本树结构
+			</summary>
+			<typeparam name="TEntity"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.Tree`1.Node">
+			<summary>
+				当前节点
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Tree`1.Children">
+			<summary>
+				子节点集合
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.Tree`2">
+			<summary>
+				基本树结构
+			</summary>
+			<typeparam name="TKey">键</typeparam>
+			<typeparam name="TEntity">实体类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.Tree`2.Node">
+			<summary>
+				当前节点
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Tree`2.Children">
+			<summary>
+				子节点集合
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.TreeExtensions">
+			<summary>
+				树扩展
+			</summary>
+		</member>
 	</members>
 </doc>

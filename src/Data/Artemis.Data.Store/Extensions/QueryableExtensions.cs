@@ -94,7 +94,7 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// 映射式分页
+    ///     映射式分页
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">实体键类型</typeparam>
@@ -108,9 +108,9 @@ public static class QueryableExtensions
         this IQueryable<TEntity> query,
         int page,
         int size,
-        CancellationToken cancellationToken = default) 
-        where TEntity: class, IModelBase<TKey>
-        where TKey : IEquatable<TKey> 
+        CancellationToken cancellationToken = default)
+        where TEntity : class, IModelBase<TKey>
+        where TKey : IEquatable<TKey>
     {
         return query.OrderByDescending(item => item.CreatedAt)
             .Page(page, size)
@@ -119,7 +119,7 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// 映射式分页
+    ///     映射式分页
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">实体键类型</typeparam>
