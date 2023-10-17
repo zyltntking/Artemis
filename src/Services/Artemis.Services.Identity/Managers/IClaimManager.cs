@@ -80,6 +80,18 @@ public interface IClaimManager : IManager<ArtemisClaim>
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     创建或更新凭据
+    /// </summary>
+    /// <param name="id">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>创建或更新结果</returns>
+    Task<(StoreResult result, ClaimInfo? role)> UpdateOrCreateClaimAsync(
+        Guid id,
+        ClaimPackage package,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     ///     删除凭据
     /// </summary>
     /// <param name="id">凭据标识</param>

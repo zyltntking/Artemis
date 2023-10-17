@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core.Exceptions;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Mapster;
 
 namespace Artemis.Data.Store.Extensions;
@@ -14,17 +15,7 @@ public static class Instance
     /// <typeparam name="TEntity">实例类型</typeparam>
     /// <returns>实例</returns>
     /// <exception cref="CreateInstanceException">创建实例异常</exception>
-    public static TEntity CreateInstance<TEntity>()
-    {
-        try
-        {
-            return Activator.CreateInstance<TEntity>();
-        }
-        catch
-        {
-            throw new CreateInstanceException(nameof(TEntity));
-        }
-    }
+    public static TEntity CreateInstance<TEntity>() => Generator.CreateInstance<TEntity>();
 
     /// <summary>
     ///     创建实例
@@ -36,17 +27,10 @@ public static class Instance
     /// <exception cref="CreateInstanceException">创建实例异常</exception>
     public static TEntity CreateInstance<TEntity, TMapEntity>(TMapEntity mapEntity)
     {
-        try
-        {
-            var entity = Activator.CreateInstance<TEntity>();
+        var entity = Generator.CreateInstance<TEntity>();
 
-            mapEntity.Adapt(entity);
+        mapEntity.Adapt(entity);
 
-            return entity;
-        }
-        catch
-        {
-            throw new CreateInstanceException(nameof(TEntity));
-        }
+        return entity;
     }
 }

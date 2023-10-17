@@ -35,7 +35,7 @@ public interface IClaim
     ///     生成校验戳
     /// </summary>
     /// <returns></returns>
-    string GenerateCheckStamp => Hash.Md5Hash($"{ClaimType}:{ClaimValue}");
+    string GenerateCheckStamp => Hash.Md5Hash(GenerateFlag);
 
     /// <summary>
     ///     生成标识
@@ -85,7 +85,7 @@ public abstract record ClaimPackage : IClaim
     ///     生成校验戳
     /// </summary>
     /// <returns></returns>
-    public string GenerateCheckStamp => Hash.Md5Hash($"{ClaimType}:{ClaimValue}");
+    public string GenerateCheckStamp => Hash.Md5Hash(GenerateFlag);
 
     /// <summary>
     ///     生成标识

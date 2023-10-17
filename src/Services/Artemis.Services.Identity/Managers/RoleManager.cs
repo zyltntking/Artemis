@@ -198,18 +198,27 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .Select(role => role.NormalizedName)
             .ToList();
 
-        var roles = rolePackages
-            .Where(package => !storedRoleNames.Contains(NormalizeKey(package.Name)))
-            .Select(package =>
-            {
-                var role = Instance.CreateInstance<ArtemisRole, RolePackage>(package);
+        var notSetRoleNames = packageRoleNames.Except(storedRoleNames).ToList();
 
-                role.NormalizedName = NormalizeKey(package.Name);
+        if (notSetRoleNames.Any())
+        {
+            var roles = rolePackages
+                .Where(package => notSetRoleNames.Contains(NormalizeKey(package.Name)))
+                .Select(package =>
+                {
+                    var role = Instance.CreateInstance<ArtemisRole, RolePackage>(package);
 
-                return role;
-            }).ToList();
+                    role.NormalizedName = NormalizeKey(package.Name);
 
-        return RoleStore.CreateAsync(roles, cancellationToken);
+                    return role;
+                }).ToList();
+
+            return RoleStore.CreateAsync(roles, cancellationToken);
+        }
+
+        var flag = string.Join(',', packageRoleNames);
+
+        return Task.FromResult(StoreResult.EntityFoundFailed(nameof(ArtemisRole), flag));
     }
 
     /// <summary>
@@ -262,18 +271,27 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roles = await RoleStore.FindEntitiesAsync(ids, cancellationToken);
 
-        roles = roles.Select(role =>
+        var roleList = roles.ToList();
+
+        if (roleList.Any())
         {
-            var package = dictionary[role.Id];
+            roles = roleList.Select(role =>
+            {
+                var package = dictionary[role.Id];
 
-            package.Adapt(role);
+                package.Adapt(role);
 
-            role.NormalizedName = NormalizeKey(package.Name);
+                role.NormalizedName = NormalizeKey(package.Name);
 
-            return role;
-        }).ToList();
+                return role;
+            }).ToList();
 
-        return await RoleStore.UpdateAsync(roles, cancellationToken);
+            return await RoleStore.UpdateAsync(roles, cancellationToken);
+        }
+
+        var flag = string.Join(',', ids.Select(item => item.ToString()));
+
+        return StoreResult.EntityFoundFailed(nameof(ArtemisRole), flag);
     }
 
     /// <summary>
@@ -312,7 +330,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var role = await RoleStore.FindEntityAsync(id, cancellationToken);
 
-        if (role != null)
+        if (role is not null)
             return await RoleStore.DeleteAsync(role, cancellationToken);
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
@@ -336,7 +354,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleList = roles.ToList();
 
-        if (roleList.Any())
+        if (roleList.Any()) 
             return await RoleStore.DeleteAsync(roleList, cancellationToken);
 
         var flag = string.Join(',', idList.Select(id => id.ToString()));
@@ -440,28 +458,32 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
 
-        var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
+            if (userExists)
+            {
+                var userRoleExists = await UserRoleStore.EntityQuery
+                    .Where(userRole => userRole.RoleId == id)
+                    .Where(userRole => userRole.UserId == userId)
+                    .AnyAsync(cancellationToken);
 
-        if (!userExists)
+                if (userRoleExists)
+                    return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"userId:{userId},roleId:{id}");
+
+                var userRole = Instance.CreateInstance<ArtemisUserRole>();
+
+                userRole.UserId = userId;
+                userRole.RoleId = id;
+
+                return await UserRoleStore.CreateAsync(userRole, cancellationToken);
+            }
+
             return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), userId.ToString());
+        }
 
-        var userRoleExists = await UserRoleStore.EntityQuery
-            .Where(userRole => userRole.RoleId == id)
-            .Where(userRole => userRole.UserId == userId)
-            .AnyAsync(cancellationToken);
-
-        if (userRoleExists)
-            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"userId:{userId},roleId:{id}");
-
-        var userRole = Instance.CreateInstance<ArtemisUserRole>();
-
-        userRole.UserId = userId;
-        userRole.RoleId = id;
-
-        return await UserRoleStore.CreateAsync(userRole, cancellationToken);
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -480,42 +502,52 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
-
-        var storeUserIds = await UserStore
-            .EntityQuery
-            .Where(user => userIds.Contains(user.Id))
-            .Select(user => user.Id)
-            .ToListAsync(cancellationToken);
-
-        if (!storeUserIds.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser),
-                string.Join(',', userIds.Select(item => item.ToString())));
-
-        var beenSetUserIds = await UserRoleStore.EntityQuery
-            .Where(userRole => userRole.RoleId == id)
-            .Where(userRole => storeUserIds.Contains(userRole.UserId))
-            .Select(userRole => userRole.UserId)
-            .ToListAsync(cancellationToken);
-
-        var notSetUserIds = storeUserIds.Except(beenSetUserIds).ToList();
-
-        if (!notSetUserIds.Any())
-            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole),
-                $"userId:{string.Join(',', userIds.Select(item => item.ToString()))},roleId:{id}");
-
-        var userRoles = notSetUserIds.Select(userId =>
+        if (roleExists)
         {
-            var userRole = Instance.CreateInstance<ArtemisUserRole>();
+            var storeUserIds = await UserStore
+                .EntityQuery
+                .Where(user => userIds.Contains(user.Id))
+                .Select(user => user.Id)
+                .ToListAsync(cancellationToken);
 
-            userRole.UserId = userId;
-            userRole.RoleId = id;
+            string flag;
 
-            return userRole;
-        });
+            if (storeUserIds.Any())
+            {
+                var beenSetUserIds = await UserRoleStore.EntityQuery
+                    .Where(userRole => userRole.RoleId == id)
+                    .Where(userRole => storeUserIds.Contains(userRole.UserId))
+                    .Select(userRole => userRole.UserId)
+                    .ToListAsync(cancellationToken);
 
-        return await UserRoleStore.CreateAsync(userRoles, cancellationToken);
+                var notSetUserIds = storeUserIds.Except(beenSetUserIds).ToList();
+
+                if (notSetUserIds.Any())
+                {
+                    var userRoles = notSetUserIds.Select(userId =>
+                    {
+                        var userRole = Instance.CreateInstance<ArtemisUserRole>();
+
+                        userRole.UserId = userId;
+                        userRole.RoleId = id;
+
+                        return userRole;
+                    });
+
+                    return await UserRoleStore.CreateAsync(userRoles, cancellationToken);
+                }
+
+                flag = string.Join(',', notSetUserIds.Select(userId => userId.ToString()));
+
+                return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), flag);
+            }
+
+            flag = string.Join(',', userIds.Select(item => item.ToString()));
+
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -534,23 +566,28 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
 
-        var userExists = await UserStore.ExistsAsync(userId, cancellationToken);
+            if (userExists)
+            {
+                var userRole = await UserRoleStore.EntityQuery
+                    .Where(userRole => userRole.RoleId == id)
+                    .Where(userRole => userRole.UserId == userId)
+                    .FirstOrDefaultAsync(cancellationToken);
 
-        if (!userExists)
+                if (userRole is not null) return await UserRoleStore.DeleteAsync(userRole, cancellationToken);
+
+                var flag = $"userId:{userId},roleId:{id}";
+
+                return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), flag);
+            }
+
             return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), userId.ToString());
+        }
 
-        var userRole = await UserRoleStore.EntityQuery
-            .Where(userRole => userRole.RoleId == id)
-            .Where(userRole => userRole.UserId == userId)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (userRole == null)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), $"userId:{userId},roleId:{id}");
-
-        return await UserRoleStore.DeleteAsync(userRole, cancellationToken);
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -569,19 +606,21 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var userRoles = await UserRoleStore.EntityQuery
+                .Where(userRole => userRole.RoleId == id)
+                .Where(userRole => userIds.Contains(userRole.UserId))
+                .ToListAsync(cancellationToken);
 
-        var userRoles = await UserRoleStore.EntityQuery
-            .Where(userRole => userRole.RoleId == id)
-            .Where(userRole => userIds.Contains(userRole.UserId))
-            .ToListAsync(cancellationToken);
+            if (userRoles.Any()) return await UserRoleStore.DeleteAsync(userRoles, cancellationToken);
 
-        if (!userRoles.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole),
-                string.Join(',', userIds.Select(item => item.ToString())));
+            var flag = string.Join(',', userIds.Select(item => item.ToString()));
 
-        return await UserRoleStore.DeleteAsync(userRoles, cancellationToken);
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -679,22 +718,28 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var claimExists = await RoleClaimStore.EntityQuery
+                .Where(claim => claim.RoleId == id)
+                .Where(claim => claim.CheckStamp == package.CheckStamp)
+                .AnyAsync(cancellationToken);
 
-        var claimExists = await RoleClaimStore.EntityQuery
-            .Where(claim => claim.RoleId == id)
-            .Where(claim => claim.CheckStamp == package.GenerateCheckStamp)
-            .AnyAsync(cancellationToken);
+            if (claimExists)
+            {
+                var flag = $"roleId:{id},claim：{package.GenerateFlag}";
 
-        if (claimExists)
-            return StoreResult.EntityFoundFailed(nameof(ArtemisRoleClaim), $"roleId:{id},claim：{package.GenerateFlag}");
+                return StoreResult.EntityFoundFailed(nameof(ArtemisRoleClaim), flag);
+            }
 
-        var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
+            var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
 
-        roleClaim.RoleId = id;
+            roleClaim.RoleId = id;
 
-        return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
+            return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -713,37 +758,43 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var packageList = packages.ToList();
 
-        var packageList = packages.ToList();
-        var checkStamps = packageList.Select(package => package.CheckStamp).ToList();
+            var checkStamps = packageList.Select(package => package.CheckStamp).ToList();
 
-        var beenSetClaimsCheckStamp = await RoleClaimStore.EntityQuery
-            .Where(claim => claim.RoleId == id)
-            .Where(claim => checkStamps.Contains(claim.CheckStamp))
-            .Select(claim => claim.CheckStamp)
-            .ToListAsync(cancellationToken);
+            var storedClaimsCheckStamp = await RoleClaimStore.EntityQuery
+                .Where(claim => claim.RoleId == id)
+                .Where(claim => checkStamps.Contains(claim.CheckStamp))
+                .Select(claim => claim.CheckStamp)
+                .ToListAsync(cancellationToken);
 
-        var notSetClaimsCheckStamp = checkStamps.Except(beenSetClaimsCheckStamp).ToList();
+            var notSetClaimsCheckStamp = checkStamps.Except(storedClaimsCheckStamp).ToList();
 
-        if (!notSetClaimsCheckStamp.Any())
-            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole),
-                $"roleId:{id},claims:{string.Join(',', packageList.Select(item => item.GenerateFlag))}");
-
-        var roleClaims = packageList
-            .Where(package => notSetClaimsCheckStamp.Contains(package.CheckStamp))
-            .Select(package =>
+            if (notSetClaimsCheckStamp.Any())
             {
-                var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
+                var roleClaims = packageList
+                    .Where(package => notSetClaimsCheckStamp.Contains(package.CheckStamp))
+                    .Select(package =>
+                    {
+                        var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
 
-                roleClaim.RoleId = id;
+                        roleClaim.RoleId = id;
 
-                return roleClaim;
-            })
-            .ToList();
+                        return roleClaim;
+                    })
+                    .ToList();
 
-        return await RoleClaimStore.CreateAsync(roleClaims, cancellationToken);
+                return await RoleClaimStore.CreateAsync(roleClaims, cancellationToken);
+            }
+
+            var flag = $"roleId:{id},claims:{string.Join(',', packageList.Select(item => item.GenerateFlag))}";
+
+            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -762,17 +813,18 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var roleClaim = await RoleClaimStore.KeyMatchQuery(claimId)
+                .Where(claim => claim.RoleId == id)
+                .FirstOrDefaultAsync(cancellationToken);
 
-        var roleClaim = await RoleClaimStore.KeyMatchQuery(claimId)
-            .Where(claim => claim.RoleId == id)
-            .FirstOrDefaultAsync(cancellationToken);
+            if (roleClaim is not null) return await RoleClaimStore.DeleteAsync(roleClaim, cancellationToken);
 
-        if (roleClaim == null)
             return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim), claimId.ToString());
+        }
 
-        return await RoleClaimStore.DeleteAsync(roleClaim, cancellationToken);
+        return StoreResult.EntityFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -791,20 +843,22 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
 
-        if (!roleExists)
-            return StoreResult.EntityFoundFailed(nameof(ArtemisRole), id.ToString());
+        if (roleExists)
+        {
+            var claimIdList = claimIds.ToList();
 
-        var claimIdList = claimIds.ToList();
+            var roleClaims = await RoleClaimStore.KeyMatchQuery(claimIdList)
+                .Where(claim => claim.RoleId == id)
+                .ToListAsync(cancellationToken);
 
-        var roleClaims = await RoleClaimStore.KeyMatchQuery(claimIdList)
-            .Where(claim => claim.RoleId == id)
-            .ToListAsync(cancellationToken);
+            if (roleClaims.Any()) return await RoleClaimStore.DeleteAsync(roleClaims, cancellationToken);
 
-        if (!roleClaims.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim),
-                string.Join(',', claimIdList.Select(item => item.ToString())));
+            var flag = string.Join(',', claimIdList.Select(item => item.ToString()));
 
-        return await RoleClaimStore.DeleteAsync(roleClaims, cancellationToken);
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim), flag);
+        }
+
+        return StoreResult.EntityFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     #endregion

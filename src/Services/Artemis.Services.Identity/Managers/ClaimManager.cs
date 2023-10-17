@@ -149,7 +149,9 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
 
         var claim = Instance.CreateInstance<ArtemisClaim, ClaimPackage>(package);
 
-        throw new NotImplementedException();
+        var result = await ClaimStore.CreateAsync(claim, cancellationToken);
+
+        return (result, claim.Adapt<ClaimInfo>());
     }
 
     /// <summary>
@@ -158,10 +160,36 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    public Task<StoreResult> CreateClaimsAsync(IEnumerable<ClaimPackage> packages,
+    public Task<StoreResult> CreateClaimsAsync(
+        IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var claimPackages = packages.ToList();
+
+        var checkStamps = claimPackages.Select(claim => claim.CheckStamp).ToList();
+
+        var storedCheckStamps = ClaimStore.EntityQuery
+            .Where(claim => checkStamps.Contains(claim.CheckStamp))
+            .Select(claim => claim.CheckStamp)
+            .ToList();
+
+        var notSetCheckStamps = checkStamps.Except(storedCheckStamps).ToList();
+
+        if (notSetCheckStamps.Any())
+        {
+            var claims = claimPackages
+                .Where(claim => notSetCheckStamps.Contains(claim.CheckStamp))
+                .Select(Instance.CreateInstance<ArtemisClaim, ClaimPackage>)
+                .ToList();
+
+            return ClaimStore.CreateAsync(claims, cancellationToken);
+        }
+
+        var flag = string.Join(',', claimPackages.Select(item => item.GenerateFlag));
+
+        return Task.FromResult(StoreResult.EntityFoundFailed(nameof(ArtemisClaim), flag));
     }
 
     /// <summary>
@@ -171,10 +199,25 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
-    public Task<(StoreResult result, ClaimInfo? claim)> UpdateClaimAsync(Guid id, ClaimPackage package,
+    public async Task<(StoreResult result, ClaimInfo? claim)> UpdateClaimAsync(
+        Guid id,
+        ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var claim = await ClaimStore.FindEntityAsync(id, cancellationToken);
+
+        if (claim is not null)
+        {
+            package.Adapt(claim);
+
+            var result = await ClaimStore.UpdateAsync(claim, cancellationToken);
+
+            return (result, claim.Adapt<ClaimInfo>());
+        }
+
+        return (StoreResult.EntityNotFoundFailed(nameof(ArtemisClaim), id.ToString()), default);
     }
 
     /// <summary>
@@ -183,10 +226,58 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public Task<StoreResult> UpdateClaimsAsync(IEnumerable<KeyValuePair<Guid, ClaimPackage>> packages,
+    public async Task<StoreResult> UpdateClaimsAsync(
+        IEnumerable<KeyValuePair<Guid, ClaimPackage>> packages,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var keyValuePairs = packages.ToList();
+
+        var dictionary = keyValuePairs.ToDictionary(pair => pair.Key, pair => pair.Value);
+        var ids = dictionary.Keys;
+
+        var claims = await ClaimStore.FindEntitiesAsync(ids, cancellationToken);
+
+        var claimList = claims.ToList();
+
+        if (claimList.Any())
+        {
+            claims = claimList.Select(claim =>
+            {
+                var package = dictionary[claim.Id];
+
+                package.Adapt(claim);
+
+                return claim;
+            }).ToList();
+
+            return await ClaimStore.UpdateAsync(claims, cancellationToken);
+        }
+
+        var flag = string.Join(',', ids.Select(item => item.ToString()));
+
+        return StoreResult.EntityFoundFailed(nameof(ArtemisClaim), flag);
+    }
+
+    /// <summary>
+    ///     创建或更新凭据
+    /// </summary>
+    /// <param name="id">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>创建或更新结果</returns>
+    public async Task<(StoreResult result, ClaimInfo? role)> UpdateOrCreateClaimAsync(Guid id, ClaimPackage package,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var exists = id != default && await ClaimStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
+            return await UpdateClaimAsync(id, package, cancellationToken);
+
+        return await CreateClaimAsync(package, cancellationToken);
     }
 
     /// <summary>
@@ -195,9 +286,18 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="id">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public Task<StoreResult> DeleteClaimAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteClaimAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var claim = await ClaimStore.FindEntityAsync(id, cancellationToken);
+
+        if (claim is not null)
+            return await ClaimStore.DeleteAsync(claim, cancellationToken);
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
     }
 
     /// <summary>
@@ -206,9 +306,24 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="ids">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public Task<StoreResult> DeleteClaimsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteClaimsAsync(
+        IEnumerable<Guid> ids,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var idList = ids.ToList();
+
+        var claims = await ClaimStore.FindEntitiesAsync(idList, cancellationToken);
+
+        var claimList = claims.ToList();
+
+        if (claimList.Any())
+            return await ClaimStore.DeleteAsync(claimList, cancellationToken);
+
+        var flag = string.Join(',', idList.Select(id => id.ToString()));
+
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisClaim), flag);
     }
 
     #endregion
