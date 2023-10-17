@@ -112,6 +112,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     ///     凭据类型
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [DataMember(Order = 1)]
     public override required string ClaimType { get; set; }
 
@@ -119,6 +120,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     ///     凭据值
     /// </summary>
     [Required]
+    [MaxLength(128)]
     [DataMember(Order = 2)]
     public override required string ClaimValue { get; set; }
 
@@ -126,6 +128,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     ///     校验戳
     /// </summary>
     [Required]
+    [MaxLength(64)]
     [DataMember(Order = 3)]
     public override required string CheckStamp { get; set; }
 
@@ -133,6 +136,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     ///     描述
     /// </summary>
     [Required]
+    [MaxLength(128)]
     [DataMember(Order = 4)]
     public override string? Description { get; set; }
 }

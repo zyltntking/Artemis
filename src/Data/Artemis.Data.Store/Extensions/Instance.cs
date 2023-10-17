@@ -15,7 +15,10 @@ public static class Instance
     /// <typeparam name="TEntity">实例类型</typeparam>
     /// <returns>实例</returns>
     /// <exception cref="CreateInstanceException">创建实例异常</exception>
-    public static TEntity CreateInstance<TEntity>() => Generator.CreateInstance<TEntity>();
+    public static TEntity CreateInstance<TEntity>()
+    {
+        return Generator.CreateInstance<TEntity>();
+    }
 
     /// <summary>
     ///     创建实例

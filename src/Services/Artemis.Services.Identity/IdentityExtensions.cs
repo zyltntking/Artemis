@@ -72,7 +72,7 @@ public static class IdentityExtensions
         serviceCollection.TryAddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
 
         serviceCollection.TryAddScoped<IClaimManager, ClaimManager>();
-        serviceCollection.TryAddScoped<IUserManager, UserManager>();
+        //serviceCollection.TryAddScoped<IUserManager, UserManager>();
         serviceCollection.TryAddScoped<IRoleManager, RoleManager>();
 
         if (isDevelopment)

@@ -7,30 +7,30 @@ namespace Artemis.Shared.Identity.Transfer;
 #region Interface
 
 /// <summary>
-///     基本角色凭据接口
+///     基本用户凭据接口
 /// </summary>
-internal interface IRoleClaim : IClaim
+internal interface IUserClaim : IClaim
 {
 }
 
 /// <summary>
-///     角色凭据文档接口
+///     用户凭据文档接口
 /// </summary>
-file interface IRoleClaimDocument : IRoleClaim
+file interface IUserClaimDocument : IUserClaim
 {
     /// <summary>
-    ///     角色标识
+    ///     用户标识
     /// </summary>
-    Guid RoleId { get; set; }
+    Guid UserId { get; set; }
 }
 
 #endregion
 
 /// <summary>
-///     基本角色凭据信息
+///     基本用户凭据信息
 /// </summary>
 [DataContract]
-public record RoleClaimPackage : ClaimPackage, IRoleClaim
+public record UserClaimPackage : ClaimPackage, IUserClaim
 {
     #region Implementation of IRoleClaim
 
@@ -69,10 +69,10 @@ public record RoleClaimPackage : ClaimPackage, IRoleClaim
 }
 
 /// <summary>
-///     角色凭据信息
+///     用户凭据信息
 /// </summary>
 [DataContract]
-public record RoleClaimInfo : RoleClaimPackage, IRoleClaimDocument, IKeySlot<int>
+public record UserClaimInfo : UserClaimPackage, IUserClaimDocument, IKeySlot<int>
 {
     /// <summary>
     ///     标识
@@ -82,11 +82,11 @@ public record RoleClaimInfo : RoleClaimPackage, IRoleClaimDocument, IKeySlot<int
     public virtual required int Id { get; set; }
 
     /// <summary>
-    ///     角色标识
+    ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required Guid RoleId { get; set; }
+    public virtual required Guid UserId { get; set; }
 
     /// <summary>
     ///     凭据类型

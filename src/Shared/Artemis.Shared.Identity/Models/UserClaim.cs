@@ -20,13 +20,6 @@ public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>, IUserClaim
     public override required int Id { get; set; }
 
     /// <summary>
-    ///     用户标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required Guid UserId { get; set; }
-
-    /// <summary>
     ///     凭据类型
     /// </summary>
     [Required]
@@ -56,4 +49,11 @@ public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>, IUserClaim
     [MaxLength(128)]
     [DataMember(Order = 6)]
     public virtual string? Description { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid UserId { get; set; }
 }

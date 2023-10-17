@@ -20,13 +20,6 @@ public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>, IUserLogin
     public virtual required int Id { get; set; }
 
     /// <summary>
-    ///     用户标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required Guid UserId { get; set; }
-
-    /// <summary>
     ///     登录提供程序
     /// </summary>
     [Required]
@@ -48,4 +41,11 @@ public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>, IUserLogin
     [MaxLength(32)]
     [DataMember(Order = 5)]
     public override string? ProviderDisplayName { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid UserId { get; set; }
 }

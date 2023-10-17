@@ -15,8 +15,8 @@ public interface IRoleManager : IManager<ArtemisRole>
     /// </summary>
     /// <param name="nameSearch">角色名搜索值</param>
     /// <param name="page">页码</param>
-    /// <param name="size">页面大小</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     /// <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
     Task<PageResult<RoleInfo>> FetchRolesAsync(
@@ -29,7 +29,7 @@ public interface IRoleManager : IManager<ArtemisRole>
     ///     根据角色标识获取角色
     /// </summary>
     /// <param name="id">角色id</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
     Task<RoleInfo?> GetRoleAsync(
@@ -217,7 +217,7 @@ public interface IRoleManager : IManager<ArtemisRole>
     /// <returns>添加结果</returns>
     Task<StoreResult> AddRoleClaimAsync(
         Guid id,
-        ClaimPackage package,
+        RoleClaimPackage package,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -229,7 +229,7 @@ public interface IRoleManager : IManager<ArtemisRole>
     /// <returns>添加结果</returns>
     Task<StoreResult> AddRoleClaimsAsync(
         Guid id,
-        IEnumerable<ClaimPackage> packages,
+        IEnumerable<RoleClaimPackage> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>

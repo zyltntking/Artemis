@@ -88,8 +88,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// </summary>
     /// <param name="nameSearch">角色名搜索值</param>
     /// <param name="page">页码</param>
-    /// <param name="size">页面大小</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     /// <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
     public async Task<PageResult<RoleInfo>> FetchRolesAsync(
@@ -136,7 +136,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     ///     根据角色标识获取角色
     /// </summary>
     /// <param name="id">角色id</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>角色实例</returns>
     /// <remarks>当查询不到角色实例时返回空</remarks>
     public Task<RoleInfo?> GetRoleAsync(
@@ -354,7 +354,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
 
         var roleList = roles.ToList();
 
-        if (roleList.Any()) 
+        if (roleList.Any())
             return await RoleStore.DeleteAsync(roleList, cancellationToken);
 
         var flag = string.Join(',', idList.Select(id => id.ToString()));
@@ -711,7 +711,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <returns>添加结果</returns>
     public async Task<StoreResult> AddRoleClaimAsync(
         Guid id,
-        ClaimPackage package,
+        RoleClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -751,7 +751,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <returns>添加结果</returns>
     public async Task<StoreResult> AddRoleClaimsAsync(
         Guid id,
-        IEnumerable<ClaimPackage> packages,
+        IEnumerable<RoleClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

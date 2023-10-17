@@ -20,13 +20,6 @@ public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>, IRoleClaim
     public override required int Id { get; set; }
 
     /// <summary>
-    ///     角色标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required Guid RoleId { get; set; }
-
-    /// <summary>
     ///     凭据类型
     /// </summary>
     [Required]
@@ -56,4 +49,11 @@ public class RoleClaim : IdentityRoleClaim<Guid>, IKeySlot<int>, IRoleClaim
     [MaxLength(128)]
     [DataMember(Order = 6)]
     public virtual string? Description { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid RoleId { get; set; }
 }

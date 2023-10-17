@@ -43,7 +43,7 @@ public class Claim : IKeySlot<Guid>, IClaim
     public string? Description { get; set; }
 
     /// <summary>
-    ///     角色标识
+    ///     凭据标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]

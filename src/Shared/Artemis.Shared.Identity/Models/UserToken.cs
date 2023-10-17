@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artemis.Shared.Identity.Models;
@@ -9,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     用户令牌
 /// </summary>
 [DataContract]
-public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
+public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>, IUserToken
 {
     /// <summary>
     ///     存储标识
@@ -17,13 +18,6 @@ public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
     [Required]
     [DataMember(Order = 1)]
     public virtual required int Id { get; set; }
-
-    /// <summary>
-    ///     用户标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required Guid UserId { get; set; }
 
     /// <summary>
     ///     登录提供程序
@@ -46,4 +40,11 @@ public class UserToken : IdentityUserToken<Guid>, IKeySlot<int>
     /// </summary>
     [DataMember(Order = 5)]
     public override string? Value { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid UserId { get; set; }
 }
