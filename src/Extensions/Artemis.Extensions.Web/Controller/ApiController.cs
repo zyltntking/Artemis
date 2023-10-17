@@ -117,18 +117,16 @@ public abstract class ResourceController<TResourceEntity, TKey, TResourceInfo, T
     /// <summary>
     ///     创建资源
     /// </summary>
-    /// <param name="pack">资源信息包</param>
+    /// <param name="package">资源信息包</param>
     /// <returns>Resource Info Result</returns>
     /// <remark>POST api/Resources</remark>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<DataResult<TResourceInfo>> PostResource([FromBody] [Required] TResourcePack pack)
+    public async Task<DataResult<TResourceInfo>> PostResource([FromBody] [Required] TResourcePack package)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
-        var resource = Instance.CreateInstance<TResourceEntity>();
-
-        resource = pack.Adapt(resource);
+        var resource = Instance.CreateInstance<TResourceEntity, TResourcePack>(package);
 
         var result = await Manager.EntityStore.CreateAsync(resource, cancellationToken);
 

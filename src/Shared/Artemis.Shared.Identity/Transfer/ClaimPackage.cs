@@ -1,6 +1,6 @@
-﻿using Artemis.Data.Core;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
@@ -20,12 +20,12 @@ public interface IClaim
     string ClaimValue { get; set; }
 
     /// <summary>
-    /// 校验戳
+    ///     校验戳
     /// </summary>
     string CheckStamp { get; set; }
 
     /// <summary>
-    /// 描述
+    ///     描述
     /// </summary>
     string? Description { get; set; }
 
@@ -66,14 +66,14 @@ public abstract record ClaimPackage : IClaim
     public virtual required string ClaimValue { get; set; }
 
     /// <summary>
-    /// 校验戳
+    ///     校验戳
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
     public virtual required string CheckStamp { get; set; }
 
     /// <summary>
-    /// 描述
+    ///     描述
     /// </summary>
     [Required]
     [DataMember(Order = 4)]
@@ -123,17 +123,16 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     public override required string ClaimValue { get; set; }
 
     /// <summary>
-    /// 校验戳
+    ///     校验戳
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
     public override required string CheckStamp { get; set; }
 
     /// <summary>
-    /// 描述
+    ///     描述
     /// </summary>
     [Required]
     [DataMember(Order = 4)]
     public override string? Description { get; set; }
 }
-

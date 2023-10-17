@@ -47,13 +47,13 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 创建角色
+    ///     创建角色
     /// </summary>
     /// <param name="packages">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateRolesAsync(
-        IEnumerable<RolePackage> packages, 
+        IEnumerable<RolePackage> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -69,13 +69,13 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 更新角色
+    ///     更新角色
     /// </summary>
     /// <param name="packages">更新角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
     Task<StoreResult> UpdateRolesAsync(
-        IEnumerable<KeyValuePair<Guid, RolePackage>> packages, 
+        IEnumerable<KeyValuePair<Guid, RolePackage>> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -101,13 +101,13 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除角色
+    ///     删除角色
     /// </summary>
     /// <param name="ids">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     Task<StoreResult> DeleteRolesAsync(
-        IEnumerable<Guid> ids, 
+        IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -144,7 +144,7 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加角色用户
+    ///     添加角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userIds">用户标识列表</param>
@@ -168,7 +168,7 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除角色用户
+    ///     删除角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userIds">用户标识列表</param>
@@ -221,14 +221,14 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加角色凭据
+    ///     添加角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="packages">凭据</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
     Task<StoreResult> AddRoleClaimsAsync(
-        Guid id, 
+        Guid id,
         IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default);
 
@@ -245,7 +245,7 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除角色凭据
+    ///     删除角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="claimIds">凭据标识</param>

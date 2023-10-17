@@ -1469,7 +1469,7 @@
 			</summary>
 			<typeparam name="TEntityInfo">实体信息类型</typeparam>
 			<typeparam name="TEntityPack">实体包类型</typeparam>
-			<param name="pack">实体包</param>
+			<param name="package">实体包</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>创建结果</returns>
 		</member>
@@ -1480,7 +1480,7 @@
 			<typeparam name="TEntityInfo">实体信息类型</typeparam>
 			<typeparam name="TEntityPack">实体包类型</typeparam>
 			<param name="id">实体键</param>
-			<param name="pack">实体包</param>
+			<param name="package">实体包</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>更新结果</returns>
 		</member>

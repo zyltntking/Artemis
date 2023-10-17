@@ -12,13 +12,6 @@ namespace Artemis.Shared.Identity.Models;
 public class Claim : IKeySlot<Guid>, IClaim
 {
     /// <summary>
-    ///     角色标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public required Guid Id { get; set; }
-
-    /// <summary>
     ///     凭据类型
     /// </summary>
     [Required]
@@ -48,4 +41,11 @@ public class Claim : IKeySlot<Guid>, IClaim
     [MaxLength(128)]
     [DataMember(Order = 5)]
     public string? Description { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required Guid Id { get; set; }
 }

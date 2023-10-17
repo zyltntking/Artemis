@@ -168,9 +168,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         if (exists)
             return (StoreResult.EntityFoundFailed(nameof(ArtemisRole), package.Name), default);
 
-        var role = Instance.CreateInstance<ArtemisRole>();
-
-        package.Adapt(role);
+        var role = Instance.CreateInstance<ArtemisRole, RolePackage>(package);
 
         role.NormalizedName = normalizedName;
 
@@ -180,13 +178,13 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 创建角色
+    ///     创建角色
     /// </summary>
     /// <param name="packages">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     public Task<StoreResult> CreateRolesAsync(
-        IEnumerable<RolePackage> packages, 
+        IEnumerable<RolePackage> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -204,9 +202,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .Where(package => !storedRoleNames.Contains(NormalizeKey(package.Name)))
             .Select(package =>
             {
-                var role = Instance.CreateInstance<ArtemisRole>();
-
-                package.Adapt(role);
+                var role = Instance.CreateInstance<ArtemisRole, RolePackage>(package);
 
                 role.NormalizedName = NormalizeKey(package.Name);
 
@@ -247,13 +243,13 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 更新角色
+    ///     更新角色
     /// </summary>
     /// <param name="packages">更新角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
     public async Task<StoreResult> UpdateRolesAsync(
-        IEnumerable<KeyValuePair<Guid, RolePackage>> packages, 
+        IEnumerable<KeyValuePair<Guid, RolePackage>> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -323,13 +319,13 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 删除角色
+    ///     删除角色
     /// </summary>
     /// <param name="ids">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> DeleteRolesAsync(
-        IEnumerable<Guid> ids, 
+        IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -436,8 +432,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
     public async Task<StoreResult> AddRoleUserAsync(
-        Guid id, 
-        Guid userId, 
+        Guid id,
+        Guid userId,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -469,15 +465,15 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 添加角色用户
+    ///     添加角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
     public async Task<StoreResult> AddRoleUsersAsync(
-        Guid id, 
-        IEnumerable<Guid> userIds, 
+        Guid id,
+        IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -494,7 +490,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .ToListAsync(cancellationToken);
 
         if (!storeUserIds.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), string.Join(',', userIds.Select(item => item.ToString())));
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser),
+                string.Join(',', userIds.Select(item => item.ToString())));
 
         var beenSetUserIds = await UserRoleStore.EntityQuery
             .Where(userRole => userRole.RoleId == id)
@@ -505,7 +502,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         var notSetUserIds = storeUserIds.Except(beenSetUserIds).ToList();
 
         if (!notSetUserIds.Any())
-            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"userId:{string.Join(',', userIds.Select(item => item.ToString()))},roleId:{id}");
+            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole),
+                $"userId:{string.Join(',', userIds.Select(item => item.ToString()))},roleId:{id}");
 
         var userRoles = notSetUserIds.Select(userId =>
         {
@@ -528,7 +526,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveRoleUserAsync(
-        Guid id, 
+        Guid id,
         Guid userId,
         CancellationToken cancellationToken = default)
     {
@@ -556,15 +554,15 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 删除角色用户
+    ///     删除角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveRoleUsersAsync(
-        Guid id, 
-        IEnumerable<Guid> userIds, 
+        Guid id,
+        IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -580,7 +578,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .ToListAsync(cancellationToken);
 
         if (!userRoles.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole), string.Join(',', userIds.Select(item => item.ToString())));
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserRole),
+                string.Join(',', userIds.Select(item => item.ToString())));
 
         return await UserRoleStore.DeleteAsync(userRoles, cancellationToken);
     }
@@ -691,24 +690,23 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         if (claimExists)
             return StoreResult.EntityFoundFailed(nameof(ArtemisRoleClaim), $"roleId:{id},claim：{package.GenerateFlag}");
 
-        var roleClaim = Instance.CreateInstance<ArtemisRoleClaim>();
+        var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
 
-        package.Adapt(roleClaim);
         roleClaim.RoleId = id;
 
         return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
     }
 
     /// <summary>
-    /// 添加角色凭据
+    ///     添加角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="packages">凭据</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
     public async Task<StoreResult> AddRoleClaimsAsync(
-        Guid id, 
-        IEnumerable<ClaimPackage> packages, 
+        Guid id,
+        IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -730,20 +728,20 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         var notSetClaimsCheckStamp = checkStamps.Except(beenSetClaimsCheckStamp).ToList();
 
         if (!notSetClaimsCheckStamp.Any())
-            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole), $"roleId:{id},claims:{string.Join(',', packageList.Select(item => item.GenerateFlag))}");
+            return StoreResult.EntityFoundFailed(nameof(ArtemisUserRole),
+                $"roleId:{id},claims:{string.Join(',', packageList.Select(item => item.GenerateFlag))}");
 
         var roleClaims = packageList
             .Where(package => notSetClaimsCheckStamp.Contains(package.CheckStamp))
             .Select(package =>
             {
-                var roleClaim = Instance.CreateInstance<ArtemisRoleClaim>();
+                var roleClaim = Instance.CreateInstance<ArtemisRoleClaim, ClaimPackage>(package);
 
-                package.Adapt(roleClaim);
                 roleClaim.RoleId = id;
 
                 return roleClaim;
             })
-        .ToList();
+            .ToList();
 
         return await RoleClaimStore.CreateAsync(roleClaims, cancellationToken);
     }
@@ -778,15 +776,15 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     }
 
     /// <summary>
-    /// 删除角色凭据
+    ///     删除角色凭据
     /// </summary>
     /// <param name="id">角色标识</param>
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveRoleClaimsAsync(
-        Guid id, 
-        IEnumerable<int> claimIds, 
+        Guid id,
+        IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -803,7 +801,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             .ToListAsync(cancellationToken);
 
         if (!roleClaims.Any())
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim), string.Join(',', claimIdList.Select(item => item.ToString())));
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisRoleClaim),
+                string.Join(',', claimIdList.Select(item => item.ToString())));
 
         return await RoleClaimStore.DeleteAsync(roleClaims, cancellationToken);
     }

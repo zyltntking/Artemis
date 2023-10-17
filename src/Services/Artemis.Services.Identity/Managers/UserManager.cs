@@ -163,36 +163,35 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <summary>
     ///     创建用户
     /// </summary>
-    /// <param name="pack">用户信息</param>
+    /// <param name="package">用户信息</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage pack,
+        UserPackage package,
         string password,
         CancellationToken cancellationToken)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var normalizedUserName = NormalizeKey(pack.UserName);
+        var normalizedUserName = NormalizeKey(package.UserName);
 
         var exists = await UserStore.EntityQuery
             .AnyAsync(user => user.NormalizedUserName == normalizedUserName, cancellationToken);
 
         if (exists)
-            return (StoreResult.EntityFoundFailed(nameof(ArtemisUser), pack.UserName), default);
+            return (StoreResult.EntityFoundFailed(nameof(ArtemisUser), package.UserName), default);
 
-        var user = Instance.CreateInstance<ArtemisUser>();
-
-        pack.Adapt(user);
+        var user = Instance.CreateInstance<ArtemisUser, UserPackage>(package);
 
         user.NormalizedUserName = normalizedUserName;
 
-        if (pack.Email is not null) user.NormalizedEmail = NormalizeKey(pack.Email);
+        if (package.Email is not null)
+            user.NormalizedEmail = NormalizeKey(package.Email);
 
         user.PasswordHash = Hash.ArtemisHash(password);
 
-        user.SecurityStamp = pack.GenerateSecurityStamp;
+        user.SecurityStamp = package.GenerateSecurityStamp;
 
         var result = await UserStore.CreateAsync(user, cancellationToken);
 

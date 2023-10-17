@@ -6,13 +6,13 @@ namespace Artemis.Data.Core;
 #region Interface
 
 /// <summary>
-/// 修补项目接口
+///     修补项目接口
 /// </summary>
 /// <typeparam name="TPatch"></typeparam>
 public interface IPatchItem<TPatch>
 {
     /// <summary>
-    /// 修补内容
+    ///     修补内容
     /// </summary>
     ICollection<TPatch> Items { get; set; }
 }

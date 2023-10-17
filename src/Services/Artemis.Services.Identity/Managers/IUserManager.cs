@@ -41,12 +41,12 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <summary>
     ///     创建用户
     /// </summary>
-    /// <param name="pack">用户信息</param>
+    /// <param name="package">用户信息</param>
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage pack,
+        UserPackage package,
         string password,
         CancellationToken cancellationToken);
 

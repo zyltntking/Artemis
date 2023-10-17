@@ -123,7 +123,7 @@
 			<summary>
 				创建资源
 			</summary>
-			<param name="pack">资源信息包</param>
+			<param name="package">资源信息包</param>
 			<returns>Resource Info Result</returns>
 			<remark>POST api/Resources</remark>
 		</member>
@@ -132,7 +132,7 @@
 				更新资源
 			</summary>
 			<param name="resourceId">资源标识</param>
-			<param name="pack">资源信息包</param>
+			<param name="package">资源信息包</param>
 			<returns>Resource Info Result</returns>
 			<remark>PUT api/Resources/{resourceId}</remark>
 		</member>

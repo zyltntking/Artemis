@@ -67,11 +67,11 @@ public interface IManager<TEntity, TKey>
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="pack">实体包</param>
+    /// <param name="package">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
-        TEntityPack pack,
+        TEntityPack package,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -94,12 +94,12 @@ public interface IManager<TEntity, TKey>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
     /// <param name="id">实体键</param>
-    /// <param name="pack">实体包</param>
+    /// <param name="package">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新或创建结果</returns>
     Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
         TKey id,
-        TEntityPack pack,
+        TEntityPack package,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -314,18 +314,16 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// </summary>
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="pack">实体包</param>
+    /// <param name="package">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     public async Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
-        TEntityPack pack,
+        TEntityPack package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var entity = Instance.CreateInstance<TEntity>();
-
-        pack.Adapt(entity);
+        var entity = Instance.CreateInstance<TEntity, TEntityPack>(package);
 
         var result = await Store.CreateAsync(entity, cancellationToken);
 
@@ -366,11 +364,12 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
     /// <typeparam name="TEntityPack">实体包类型</typeparam>
     /// <param name="id">实体键</param>
-    /// <param name="pack">实体包</param>
+    /// <param name="package">实体包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新或创建结果</returns>
     public async Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
-        TKey id, TEntityPack pack,
+        TKey id,
+        TEntityPack package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -379,18 +378,16 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
 
         if (entity is null)
         {
-            entity = Instance.CreateInstance<TEntity>();
+            entity = Instance.CreateInstance<TEntity, TEntityPack>(package);
 
             entity.Id = id;
-
-            pack.Adapt(entity);
 
             var createResult = await Store.CreateAsync(entity, cancellationToken);
 
             return (createResult, entity.Adapt<TEntityInfo>());
         }
 
-        pack.Adapt(entity);
+        package.Adapt(entity);
 
         var updateResult = await Store.UpdateAsync(entity, cancellationToken);
 
