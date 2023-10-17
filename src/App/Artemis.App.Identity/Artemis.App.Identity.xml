@@ -230,7 +230,7 @@
 			<returns>创建结果</returns>
 		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.RoleService.CreateOrUpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.App.Identity.Services.RoleService.UpdateOrCreateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
 			<summary>
 				创建或更新角色
 			</summary>

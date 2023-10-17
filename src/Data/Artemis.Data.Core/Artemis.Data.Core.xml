@@ -2258,7 +2258,7 @@
 				数据总量
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.PatchBase">
+		<member name="T:Artemis.Data.Core.PatchPackage">
 			<summary>
 				基础修补协议
 			</summary>

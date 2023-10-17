@@ -62,13 +62,14 @@ public static class IdentityExtensions
             });
         }
 
+        serviceCollection.TryAddScoped<IArtemisClaimStore, ArtemisClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
-        serviceCollection.TryAddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
-        serviceCollection.TryAddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
-        serviceCollection.TryAddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
         serviceCollection.TryAddScoped<IArtemisRoleStore, ArtemisRoleStore>();
         serviceCollection.TryAddScoped<IArtemisRoleClaimStore, ArtemisRoleClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserRoleStore, ArtemisUserRoleStore>();
+        serviceCollection.TryAddScoped<IArtemisUserClaimStore, ArtemisUserClaimStore>();
+        serviceCollection.TryAddScoped<IArtemisUserLoginStore, ArtemisUserLoginStore>();
+        serviceCollection.TryAddScoped<IArtemisUserTokenStore, ArtemisUserTokenStore>();
 
         serviceCollection.TryAddScoped<IUserManager, UserManager>();
         serviceCollection.TryAddScoped<IRoleManager, RoleManager>();

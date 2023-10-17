@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
+using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Shared.Identity.Models;
 
@@ -8,7 +9,7 @@ namespace Artemis.Shared.Identity.Models;
 ///     凭据字典
 /// </summary>
 [DataContract]
-public class Claim : IKeySlot<Guid>
+public class Claim : IKeySlot<Guid>, IClaim
 {
     /// <summary>
     ///     角色标识

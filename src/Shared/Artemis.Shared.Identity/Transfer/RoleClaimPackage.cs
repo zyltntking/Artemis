@@ -9,32 +9,12 @@ namespace Artemis.Shared.Identity.Transfer;
 /// <summary>
 ///     基本角色凭据接口
 /// </summary>
-internal interface IRoleClaim : IClaimItem
+internal interface IRoleClaim : IClaim
 {
     /// <summary>
     ///     角色标识
     /// </summary>
     Guid RoleId { get; set; }
-
-    /// <summary>
-    ///     凭据类型
-    /// </summary>
-    new string ClaimType { get; set; }
-
-    /// <summary>
-    ///     凭据值
-    /// </summary>
-    new string ClaimValue { get; set; }
-
-    /// <summary>
-    ///     校验戳
-    /// </summary>
-    string CheckStamp { get; set; }
-
-    /// <summary>
-    ///     凭据描述
-    /// </summary>
-    string? Description { get; set; }
 }
 
 #endregion
@@ -43,7 +23,7 @@ internal interface IRoleClaim : IClaimItem
 ///     基本角色凭据信息
 /// </summary>
 [DataContract]
-public record RoleClaimPackage : ClaimItem, IRoleClaim
+public record RoleClaimPackage : ClaimPackage, IRoleClaim
 {
     #region Implementation of IRoleClaim
 
@@ -76,14 +56,14 @@ public record RoleClaimPackage : ClaimItem, IRoleClaim
     [Required]
     [MaxLength(64)]
     [DataMember(Order = 4)]
-    public virtual required string CheckStamp { get; set; }
+    public override required string CheckStamp { get; set; }
 
     /// <summary>
     ///     凭据描述
     /// </summary>
     [MaxLength(128)]
     [DataMember(Order = 5)]
-    public virtual string? Description { get; set; }
+    public override string? Description { get; set; }
 
     #endregion
 }

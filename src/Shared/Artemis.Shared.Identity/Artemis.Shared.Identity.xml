@@ -39,32 +39,32 @@
 			<param name="errorMessage">错误消息</param>
 			<param name="errorCode">错误编码</param>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Models.Claim">
+		<member name="T:Artemis.Shared.Identity.Models.ClaimPackage">
 			<summary>
 				凭据字典
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Claim.Id">
+		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.Id">
 			<summary>
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimType">
+		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.ClaimType">
 			<summary>
 				凭据类型
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimValue">
+		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.ClaimValue">
 			<summary>
 				凭据值
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Claim.CheckStamp">
+		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.CheckStamp">
 			<summary>
 				校验戳
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.Claim.Description">
+		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.Description">
 			<summary>
 				凭据描述
 			</summary>
@@ -776,54 +776,54 @@
 				角色标识
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.IClaimItem">
+		<member name="T:Artemis.Shared.Identity.Transfer.IClaim">
 			<summary>
 				凭据项目接口
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IClaimItem.ClaimType">
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimType">
 			<summary>
 				凭据类型
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IClaimItem.ClaimValue">
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimValue">
 			<summary>
 				凭据值
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IClaimItem.GenerateCheckStamp">
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateCheckStamp">
 			<summary>
 				生成校验戳
 			</summary>
 			<returns></returns>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IClaimItem.GenerateFlag">
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateFlag">
 			<summary>
 				生成标识
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.ClaimItem">
+		<member name="T:Artemis.Shared.Identity.Transfer.ClaimPackage">
 			<summary>
 				凭据项目实现
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimItem.GenerateCheckStamp">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateCheckStamp">
 			<summary>
 				生成校验戳
 			</summary>
 			<returns></returns>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimItem.GenerateFlag">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateFlag">
 			<summary>
 				生成标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimItem.ClaimType">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimType">
 			<summary>
 				凭据类型
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimItem.ClaimValue">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
 			<summary>
 				凭据值
 			</summary>

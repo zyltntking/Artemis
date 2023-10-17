@@ -62,11 +62,11 @@ public class UserClaimConfiguration : IdentityConfiguration<ArtemisUserClaim>
     {
         MetaIndexConfigure(builder);
 
-        // User Claim Key
+        // User ClaimPackage Key
         builder.HasKey(userClaim => userClaim.Id)
             .HasName($"PK_{TableName}");
 
-        // User Claim Index
+        // User ClaimPackage Index
         builder.HasIndex(userClaim => userClaim.ClaimType)
             .HasDatabaseName($"IX_{TableName}_ClaimType");
 

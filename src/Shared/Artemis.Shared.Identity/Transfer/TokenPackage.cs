@@ -61,7 +61,7 @@ public sealed record TokenInfo
     /// <summary>
     ///     用户凭据
     /// </summary>
-    public required List<ClaimItem> UserClaims { get; set; }
+    public required List<ClaimPackage> UserClaims { get; set; }
 
     /// <summary>
     ///     用户名
@@ -81,5 +81,5 @@ public sealed record TokenInfo
     /// <summary>
     ///     角色凭据
     /// </summary>
-    public required List<ClaimItem> RoleClaims { get; set; }
+    public required List<ClaimPackage> RoleClaims { get; set; }
 }

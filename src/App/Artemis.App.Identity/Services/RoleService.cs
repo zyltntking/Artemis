@@ -379,7 +379,7 @@ public class RoleService : ApiController, IRoleService
         UpdateRoleRequest request,
         ServerCallContext? context = default)
     {
-        var (result, role) = await RoleManager.CreateOrUpdateRoleAsync(
+        var (result, role) = await RoleManager.UpdateOrCreateRoleAsync(
             request.RoleId,
             request.RolePack,
             context?.CancellationToken ?? default);

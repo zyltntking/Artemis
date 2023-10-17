@@ -53,6 +53,63 @@ public interface IManager<TEntity, TKey>
     Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 20, int size = 1,
         CancellationToken cancellationToken = default);
 
+    /// <summary>
+    ///     获取实体信息
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="id">实体标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<TEntityInfo?> GetEntityAsync<TEntityInfo>(TKey id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     创建实体
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="pack">实体包</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>创建结果</returns>
+    Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
+        TEntityPack pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新实体
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="id">实体键</param>
+    /// <param name="pack">实体包</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>更新结果</returns>
+    Task<(StoreResult result, TEntityInfo? info)> UpdateEntityAsync<TEntityInfo, TEntityPack>(
+        TKey id,
+        TEntityPack pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新或创建实体
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="id">实体键</param>
+    /// <param name="pack">实体包</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>更新或创建结果</returns>
+    Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
+        TKey id,
+        TEntityPack pack,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     删除实体
+    /// </summary>
+    /// <param name="id">标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>删除结果</returns>
+    Task<StoreResult> DeleteEntityAsync(TKey id, CancellationToken cancellationToken = default);
+
     #endregion
 }
 
@@ -301,6 +358,43 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         var result = await Store.UpdateAsync(entity, cancellationToken);
 
         return (result, entity.Adapt<TEntityInfo>());
+    }
+
+    /// <summary>
+    ///     更新或创建实体
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <typeparam name="TEntityPack">实体包类型</typeparam>
+    /// <param name="id">实体键</param>
+    /// <param name="pack">实体包</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>更新或创建结果</returns>
+    public async Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
+        TKey id, TEntityPack pack,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var entity = await Store.FindEntityAsync(id, cancellationToken);
+
+        if (entity is null)
+        {
+            entity = Instance.CreateInstance<TEntity>();
+
+            entity.Id = id;
+
+            pack.Adapt(entity);
+
+            var createResult = await Store.CreateAsync(entity, cancellationToken);
+
+            return (createResult, entity.Adapt<TEntityInfo>());
+        }
+
+        pack.Adapt(entity);
+
+        var updateResult = await Store.UpdateAsync(entity, cancellationToken);
+
+        return (updateResult, entity.Adapt<TEntityInfo>());
     }
 
     /// <summary>

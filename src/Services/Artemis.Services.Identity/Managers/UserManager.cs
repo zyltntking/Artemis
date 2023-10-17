@@ -21,7 +21,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <summary>
     ///     创建新的管理器实例
     /// </summary>
-    /// <param name="store">存储访问器依赖</param>
+    /// <param name="userStore">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
     /// <param name="optionsAccessor">配置依赖</param>
     /// <param name="roleStore">角色存储访问器依赖</param>
@@ -29,12 +29,12 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public UserManager(
-        IArtemisUserStore store,
+        IArtemisUserStore userStore,
         IArtemisRoleStore roleStore,
         IArtemisUserRoleStore userRoleStore,
         ILogger? logger = null,
         IOptions<ArtemisStoreOptions>? optionsAccessor = null,
-        IDistributedCache? cache = null) : base(store, cache, optionsAccessor, logger)
+        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, logger)
     {
         RoleStore = roleStore;
         UserRoleStore = userRoleStore;

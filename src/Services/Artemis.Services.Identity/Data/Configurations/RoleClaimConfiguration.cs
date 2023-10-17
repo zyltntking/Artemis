@@ -62,11 +62,11 @@ public class RoleClaimConfiguration : IdentityConfiguration<ArtemisRoleClaim>
     {
         MetaIndexConfigure(builder);
 
-        // Role Claim Key
+        // Role ClaimPackage Key
         builder.HasKey(roleClaim => roleClaim.Id)
             .HasName($"PK_{TableName}");
 
-        // Role Claim Index
+        // Role ClaimPackage Index
         builder.HasIndex(roleClaim => roleClaim.ClaimType)
             .HasDatabaseName($"IX_{TableName}_ClaimType");
 

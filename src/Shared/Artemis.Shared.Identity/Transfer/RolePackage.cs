@@ -69,7 +69,7 @@ public record RoleInfo : RolePackage, IKeySlot
     [Required]
     [MaxLength(32)]
     [DataMember(Order = 2)]
-    public override required string Name { get; set; } = null!;
+    public override required string Name { get; set; }
 
     /// <summary>
     ///     角色描述
