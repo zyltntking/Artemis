@@ -39,34 +39,34 @@
 			<param name="errorMessage">错误消息</param>
 			<param name="errorCode">错误编码</param>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Models.ClaimPackage">
+		<member name="T:Artemis.Shared.Identity.Models.Claim">
 			<summary>
 				凭据字典
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.Id">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.ClaimType">
+		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimType">
 			<summary>
 				凭据类型
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.ClaimValue">
+		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimValue">
 			<summary>
 				凭据值
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.CheckStamp">
+		<member name="P:Artemis.Shared.Identity.Models.Claim.CheckStamp">
 			<summary>
 				校验戳
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.ClaimPackage.Description">
+		<member name="P:Artemis.Shared.Identity.Models.Claim.Description">
 			<summary>
 				凭据描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.Id">
+			<summary>
+				凭据标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Models.Role">
@@ -109,11 +109,6 @@
 				标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.RoleId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
 		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimType">
 			<summary>
 				凭据类型
@@ -132,6 +127,11 @@
 		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.Description">
 			<summary>
 				凭据描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.RoleId">
+			<summary>
+				角色标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Models.User">
@@ -224,11 +224,6 @@
 				标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserClaim.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
 		<member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimType">
 			<summary>
 				凭据类型
@@ -249,6 +244,11 @@
 				凭据描述
 			</summary>
 		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserLogin">
 			<summary>
 				用户登录信息
@@ -257,11 +257,6 @@
 		<member name="P:Artemis.Shared.Identity.Models.UserLogin.Id">
 			<summary>
 				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserLogin.UserId">
-			<summary>
-				用户标识
 			</summary>
 		</member>
 		<member name="P:Artemis.Shared.Identity.Models.UserLogin.LoginProvider">
@@ -277,6 +272,11 @@
 		<member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderDisplayName">
 			<summary>
 				提供程序显示名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserLogin.UserId">
+			<summary>
+				用户标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserRole">
@@ -309,11 +309,6 @@
 				存储标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Models.UserToken.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
 		<member name="P:Artemis.Shared.Identity.Models.UserToken.LoginProvider">
 			<summary>
 				登录提供程序
@@ -327,6 +322,11 @@
 		<member name="P:Artemis.Shared.Identity.Models.UserToken.Value">
 			<summary>
 				令牌值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserToken.UserId">
+			<summary>
+				用户标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Services.IAccountService">
@@ -405,9 +405,27 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Shared.Identity.Services.IRoleService.CreateOrUpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRolesAsync(Artemis.Shared.Identity.Services.CreateRolesRequest,Grpc.Core.ServerCallContext)">
 			<summary>
-				创建或更新角色
+				创建角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRolesAsync(Artemis.Shared.Identity.Services.UpdateRolesRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				更新角色
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
@@ -423,9 +441,63 @@
 			<returns></returns>
 		</member>
 		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRolesAsync(Artemis.Shared.Identity.Services.DeleteRolesRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRoleUsersAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRoleUsersFilter},Grpc.Core.ServerCallContext)">
 			<summary>
 				查询角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleUserAsync(Artemis.Shared.Identity.Services.GetRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				获取角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUserAsync(Artemis.Shared.Identity.Services.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUsersAsync(Artemis.Shared.Identity.Services.AddRoleUsersRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUserAsync(Artemis.Shared.Identity.Services.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUsersAsync(Artemis.Shared.Identity.Services.RemoveRoleUsersRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色用户
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
@@ -450,7 +522,7 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRoleClaimAsync(Artemis.Shared.Identity.Services.CreateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimAsync(Artemis.Shared.Identity.Services.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
 			<summary>
 				创建角色凭据
 			</summary>
@@ -459,16 +531,25 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Shared.Identity.Services.IRoleService.CreateOrUpdateRoleClaimAsync(Artemis.Shared.Identity.Services.UpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimsAsync(Artemis.Shared.Identity.Services.AddRoleClaimsRequest,Grpc.Core.ServerCallContext)">
 			<summary>
-				创建或更新角色凭据
+				创建角色凭据
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRoleClaimAsync(Artemis.Shared.Identity.Services.DeleteRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色凭据
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimsAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest,Grpc.Core.ServerCallContext)">
 			<summary>
 				删除角色凭据
 			</summary>
@@ -511,6 +592,16 @@
 				角色描述
 			</summary>
 		</member>
+		<member name="T:Artemis.Shared.Identity.Services.CreateRolesRequest">
+			<summary>
+				创建角色请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.CreateRolesRequest.RolePackages">
+			<summary>
+				角色信息
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Services.UpdateRoleRequest">
 			<summary>
 				更新角色请求
@@ -521,7 +612,17 @@
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.UpdateRoleRequest.RolePack">
+		<member name="P:Artemis.Shared.Identity.Services.UpdateRoleRequest.RolePackage">
+			<summary>
+				角色信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.UpdateRolesRequest">
+			<summary>
+				更新角色请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.UpdateRolesRequest.RolePackages">
 			<summary>
 				角色信息
 			</summary>
@@ -532,6 +633,16 @@
 			</summary>
 		</member>
 		<member name="P:Artemis.Shared.Identity.Services.DeleteRoleRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.DeleteRolesRequest">
+			<summary>
+				删除角色请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.DeleteRolesRequest.RoleIds">
 			<summary>
 				角色标识
 			</summary>
@@ -561,6 +672,81 @@
 				电话号码搜索值
 			</summary>
 		</member>
+		<member name="T:Artemis.Shared.Identity.Services.GetRoleUserRequest">
+			<summary>
+				获取角色用户请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.GetRoleUserRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.GetRoleUserRequest.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.AddRoleUserRequest">
+			<summary>
+				添加角色用户请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleUserRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleUserRequest.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.AddRoleUsersRequest">
+			<summary>
+				添加角色用户请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleUsersRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleUsersRequest.UserIds">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.RemoveRoleUserRequest">
+			<summary>
+				删除角色用户请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleUserRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleUserRequest.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.RemoveRoleUsersRequest">
+			<summary>
+				删除角色用户请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleUsersRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleUsersRequest.UserIds">
+			<summary>
+				用户标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Services.FetchRoleClaimsFilter">
 			<summary>
 				查询角色凭据过滤器
@@ -586,57 +772,67 @@
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.GetRoleClaimRequest.ClaimId">
+		<member name="P:Artemis.Shared.Identity.Services.GetRoleClaimRequest.RoleClaimId">
 			<summary>
 				凭据标识
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Services.CreateRoleClaimRequest">
+		<member name="T:Artemis.Shared.Identity.Services.AddRoleClaimRequest">
 			<summary>
-				创建角色凭据请求
+				添加角色凭据请求
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.CreateRoleClaimRequest.RoleId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Services.CreateRoleClaimRequest.ClaimPack">
-			<summary>
-				凭据信息
-			</summary>
-		</member>
-		<member name="T:Artemis.Shared.Identity.Services.UpdateRoleClaimRequest">
-			<summary>
-				更新角色凭据请求
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Services.UpdateRoleClaimRequest.RoleId">
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleClaimRequest.RoleId">
 			<summary>
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.UpdateRoleClaimRequest.ClaimId">
-			<summary>
-				凭据标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Services.UpdateRoleClaimRequest.ClaimPack">
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleClaimRequest.ClaimPackage">
 			<summary>
 				凭据信息
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Services.DeleteRoleClaimRequest">
+		<member name="T:Artemis.Shared.Identity.Services.AddRoleClaimsRequest">
+			<summary>
+				添加角色凭据请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleClaimsRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.AddRoleClaimsRequest.ClaimPackage">
+			<summary>
+				凭据信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.RemoveRoleClaimRequest">
 			<summary>
 				删除角色凭据请求
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.DeleteRoleClaimRequest.RoleId">
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleClaimRequest.RoleId">
 			<summary>
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Services.DeleteRoleClaimRequest.ClaimId">
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleClaimRequest.RoleClaimId">
+			<summary>
+				凭据标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest">
+			<summary>
+				删除角色凭据请求
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest.RoleClaimId">
 			<summary>
 				凭据标识
 			</summary>
@@ -791,6 +987,16 @@
 				凭据值
 			</summary>
 		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
 		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateCheckStamp">
 			<summary>
 				生成校验戳
@@ -807,6 +1013,26 @@
 				凭据项目实现
 			</summary>
 		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
 		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateCheckStamp">
 			<summary>
 				生成校验戳
@@ -818,94 +1044,34 @@
 				生成标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimType">
+		<member name="T:Artemis.Shared.Identity.Transfer.ClaimInfo">
+			<summary>
+				凭据项目实现
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.Id">
+			<summary>
+				凭据标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.ClaimType">
 			<summary>
 				凭据类型
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.ClaimValue">
 			<summary>
 				凭据值
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.IUserClaim">
-			<summary>
-				基本用户凭据接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaim.UserId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaim.ClaimType">
-			<summary>
-				凭据类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaim.ClaimValue">
-			<summary>
-				凭据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaim.CheckStamp">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.CheckStamp">
 			<summary>
 				校验戳
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaim.Description">
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.Description">
 			<summary>
-				凭据描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.IUserLogin">
-			<summary>
-				基本用户登录信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderKey">
-			<summary>
-				提供程序密钥
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderDisplayName">
-			<summary>
-				提供程序显示名称
-			</summary>
-		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.IUserToken">
-			<summary>
-				基本用户令牌信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Name">
-			<summary>
-				令牌名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Value">
-			<summary>
-				令牌值
+				描述
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Transfer.IRoleClaim">
@@ -913,39 +1079,19 @@
 				基本角色凭据接口
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaim.RoleId">
+		<member name="T:Artemis.Shared.Identity.Transfer.IRoleClaimDocument">
+			<summary>
+				角色凭据文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaimDocument.RoleId">
 			<summary>
 				角色标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaim.ClaimType">
-			<summary>
-				凭据类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaim.ClaimValue">
-			<summary>
-				凭据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaim.CheckStamp">
-			<summary>
-				校验戳
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaim.Description">
-			<summary>
-				凭据描述
 			</summary>
 		</member>
 		<member name="T:Artemis.Shared.Identity.Transfer.RoleClaimPackage">
 			<summary>
 				基本角色凭据信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.RoleClaimPackage.RoleId">
-			<summary>
-				角色标识
 			</summary>
 		</member>
 		<member name="P:Artemis.Shared.Identity.Transfer.RoleClaimPackage.ClaimType">
@@ -1118,6 +1264,171 @@
 				角色凭据
 			</summary>
 		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserClaim">
+			<summary>
+				基本用户凭据接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserClaimDocument">
+			<summary>
+				用户凭据文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaimDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserClaimPackage">
+			<summary>
+				基本用户凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimPackage.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimPackage.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimPackage.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimPackage.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserClaimInfo">
+			<summary>
+				用户凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserLogin">
+			<summary>
+				基本用户登录信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserLoginDocument">
+			<summary>
+				用户登录信息文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLoginDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserLoginPackage">
+			<summary>
+				基本用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserLoginInfo">
+			<summary>
+				用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Transfer.IUser">
 			<summary>
 				基本用户接口
@@ -1246,6 +1557,96 @@
 		<member name="P:Artemis.Shared.Identity.Transfer.UserRoleInfo.RoleId">
 			<summary>
 				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserToken">
+			<summary>
+				基本用户令牌信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Value">
+			<summary>
+				令牌值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserTokenDocument">
+			<summary>
+				用户令牌信息文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserTokenDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserTokenPackage">
+			<summary>
+				基本用户令牌信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Value">
+			<summary>
+				令牌值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserTokenInfo">
+			<summary>
+				用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.Value">
+			<summary>
+				令牌值
 			</summary>
 		</member>
 	</members>

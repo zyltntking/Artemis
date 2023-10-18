@@ -66,146 +66,21 @@
 				角色服务
 			</summary>
 		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.#ctor(Artemis.Services.Identity.Managers.IRoleManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.RoleService})">
+		<member name="M:Artemis.App.Identity.Services.RoleService.#ctor(Artemis.Services.Identity.Managers.IRoleManager)">
 			<summary>
-				泛型API控制器
+				角色服务
 			</summary>
-			<param name="manager"></param>
-			<param name="logger"></param>
+			<param name="roleManager">角色管理器依赖</param>
 		</member>
 		<member name="P:Artemis.App.Identity.Services.RoleService.RoleManager">
 			<summary>
 				认证管理器
 			</summary>
 		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.FetchRoles(System.String,System.Int32,System.Int32)">
-			<summary>
-				查询角色
-			</summary>
-			<param name="nameSearch">角色名称匹配</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<returns>Roles PagedResult</returns>
-			<remark>GET api/Roles</remark>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.GetRole(System.Guid)">
-			<summary>
-				获取角色
-			</summary>
-			<param name="roleId">角色标识</param>
-			<returns>Role Result</returns>
-			<remark>GET api/Roles/{roleId}</remark>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.PostRole(Artemis.Shared.Identity.Services.CreateRoleRequest)">
-			<summary>
-				创建角色
-			</summary>
-			<param name="request">创建角色请求</param>
-			<returns>Create Status</returns>
-			<remark>POST api/Roles</remark>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.PutRole(System.Guid,Artemis.Shared.Identity.Transfer.RolePackage)">
-			<summary>
-				更新角色
-			</summary>
-			<param name="roleId">角色名</param>
-			<param name="rolePack">更新角色信息</param>
-			<returns>Update Status</returns>
-			<remark>PUT api/Roles/{roleId}</remark>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.DeleteRole(System.Guid)">
-			<summary>
-				删除角色
-			</summary>
-			<param name="roleId">角色标识</param>
-			<returns>Delete Status</returns>
-			<remarks>DELETE api/Roles/{roleId}</remarks>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.PatchRoles">
-			<summary>
-				角色批量处理
-			</summary>
-			<returns>PATCH status</returns>
-			<remarks>PATCH api/Roles</remarks>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.FetchRoleUsers(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32)">
-			<summary>
-				查询角色用户列表
-			</summary>
-			<param name="roleId">角色名</param>
-			<param name="userNameSearch">用户名匹配值</param>
-			<param name="emailSearch">邮箱匹配值</param>
-			<param name="phoneSearch">电话匹配值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<returns>GET status</returns>
-			<remarks>GET api/Roles/{roleId}/Users</remarks>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.FetchRoleClaims(System.Guid,System.String,System.Int32,System.Int32)">
-			<summary>
-				查询角色凭据列表
-			</summary>
-			<param name="roleId">角色名</param>
-			<param name="claimTypeSearch">凭据类型搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<returns></returns>
-			<remarks>GET api/Roles/{roleName}/Claims</remarks>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.GetRoleClaim(System.Guid,System.Int32)">
-			<summary>
-				获取角色凭据
-			</summary>
-			<param name="roleId">角色名</param>
-			<param name="claimId">凭据标识</param>
-			<returns></returns>
-			<remarks>GET api/Roles/{roleId}/Claims/{claimId}</remarks>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.PostRoleClaim(System.Guid,Artemis.Shared.Identity.Transfer.RoleClaimPackage)">
-			<summary>
-				创建角色凭据
-			</summary>
-			<param name="roleId">角色标识</param>
-			<param name="claimPack"></param>
-			<returns>POST api/Roles/{roleId}/Claims</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.RoleService.PutRoleClaim(System.Guid,System.Int32,Artemis.Shared.Identity.Transfer.RoleClaimPackage)">
-			<summary>
-				更新角色凭据
-			</summary>
-			<param name="roleId">角色标识</param>
-			<param name="claimId">凭据标识</param>
-			<param name="claimPack">凭据信息</param>
-			<returns></returns>
-			<exception cref="T:System.NotImplementedException"></exception>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.DeleteRoleClaim(System.Guid,System.Int32)">
-			<summary>
-				删除角色凭据
-			</summary>
-			<param name="roleId"></param>
-			<param name="claimId"></param>
-			<returns></returns>
-			<exception cref="T:System.NotImplementedException"></exception>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.RoleService.PatchRoleClaim(System.Guid)">
-			<summary>
-				角色凭据批量处理
-			</summary>
-			<param name="roleId">角色标识</param>
-			<returns></returns>
-		</member>
 		<member
 			name="M:Artemis.App.Identity.Services.RoleService.FetchRolesAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRolesFilter},Grpc.Core.ServerCallContext)">
 			<summary>
-				查询角色
+				搜索角色
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
@@ -218,7 +93,7 @@
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
-			<returns></returns>
+			<returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo" /></returns>
 		</member>
 		<member
 			name="M:Artemis.App.Identity.Services.RoleService.CreateRoleAsync(Artemis.Shared.Identity.Services.CreateRoleRequest,Grpc.Core.ServerCallContext)">
@@ -227,12 +102,30 @@
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
-			<returns>创建结果</returns>
+			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.RoleService.UpdateOrCreateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.App.Identity.Services.RoleService.CreateRolesAsync(Artemis.Shared.Identity.Services.CreateRolesRequest,Grpc.Core.ServerCallContext)">
 			<summary>
-				创建或更新角色
+				创建角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.UpdateRolesAsync(Artemis.Shared.Identity.Services.UpdateRolesRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				更新角色
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
@@ -248,9 +141,63 @@
 			<returns></returns>
 		</member>
 		<member
+			name="M:Artemis.App.Identity.Services.RoleService.DeleteRolesAsync(Artemis.Shared.Identity.Services.DeleteRolesRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.App.Identity.Services.RoleService.FetchRoleUsersAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRoleUsersFilter},Grpc.Core.ServerCallContext)">
 			<summary>
 				查询角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.GetRoleUserAsync(Artemis.Shared.Identity.Services.GetRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				获取角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.AddRoleUserAsync(Artemis.Shared.Identity.Services.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.AddRoleUsersAsync(Artemis.Shared.Identity.Services.AddRoleUsersRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.RemoveRoleUserAsync(Artemis.Shared.Identity.Services.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="request">请求</param>
+			<param name="context">上下文</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.RoleService.RemoveRoleUsersAsync(Artemis.Shared.Identity.Services.RemoveRoleUsersRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				删除角色用户
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
@@ -275,7 +222,7 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.RoleService.CreateRoleClaimAsync(Artemis.Shared.Identity.Services.CreateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.App.Identity.Services.RoleService.AddRoleClaimAsync(Artemis.Shared.Identity.Services.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
 			<summary>
 				创建角色凭据
 			</summary>
@@ -284,16 +231,16 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.RoleService.CreateOrUpdateRoleClaimAsync(Artemis.Shared.Identity.Services.UpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.App.Identity.Services.RoleService.AddRoleClaimsAsync(Artemis.Shared.Identity.Services.AddRoleClaimsRequest,Grpc.Core.ServerCallContext)">
 			<summary>
-				创建或更新角色凭据
+				创建角色凭据
 			</summary>
 			<param name="request">请求</param>
 			<param name="context">上下文</param>
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.RoleService.DeleteRoleClaimAsync(Artemis.Shared.Identity.Services.DeleteRoleClaimRequest,Grpc.Core.ServerCallContext)">
+			name="M:Artemis.App.Identity.Services.RoleService.RemoveRoleClaimAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimRequest,Grpc.Core.ServerCallContext)">
 			<summary>
 				删除角色凭据
 			</summary>
@@ -301,97 +248,12 @@
 			<param name="context">上下文</param>
 			<returns></returns>
 		</member>
-		<member name="T:Artemis.App.Identity.Services.UserService">
-			<summary>
-				用户服务
-			</summary>
-		</member>
 		<member
-			name="M:Artemis.App.Identity.Services.UserService.#ctor(Artemis.Services.Identity.Managers.IUserManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.UserService})">
+			name="M:Artemis.App.Identity.Services.RoleService.RemoveRoleClaimsAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest,Grpc.Core.ServerCallContext)">
 			<summary>
-				泛型API控制器
-			</summary>
-			<param name="manager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.UserService.UserManager">
-			<summary>
-				认证管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.Fetch(System.String,System.String,System.String,System.Int32,System.Int32)">
-			<summary>
-				查询用户
-			</summary>
-			<param name="nameSearch">用户名搜索值</param>
-			<param name="emailSearch">用户邮箱搜索值</param>
-			<param name="phoneNumberSearch">用户电话号码搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<returns>Roles PagedResult</returns>
-			<remark>GET api/Roles</remark>
-		</member>
-		<member name="M:Artemis.App.Identity.Services.UserService.GetRole(System.Guid)">
-			<summary>
-				获取用户
-			</summary>
-			<param name="userId">用户标识</param>
-			<returns>User Result</returns>
-			<remark>GET api/Users/{roleId}</remark>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.PostRole(Artemis.Shared.Identity.Services.CreateUserRequest)">
-			<summary>
-				创建用户
-			</summary>
-			<param name="request">创建用户请求</param>
-			<returns>Create Status</returns>
-			<remark>POST api/Users</remark>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.FetchUsersAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUsersFilter},Grpc.Core.ServerCallContext)">
-			<summary>
-				搜索用户
+				删除角色凭据
 			</summary>
 			<param name="request">请求</param>
-			<param name="context">上下文</param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.GetUserAsync(Artemis.Shared.Identity.Services.GetUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				获取用户
-			</summary>
-			<param name="request">请求</param>
-			<param name="context">上下文</param>
-			<returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.UserInfo" /></returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.CreateUserAsync(Artemis.Shared.Identity.Services.CreateUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建用户
-			</summary>
-			<param name="request">请求</param>
-			<param name="context">上下文</param>
-			<returns></returns>
-			<exception cref="T:System.NotImplementedException"></exception>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.CreateOrUpdateUserAsync(Artemis.Shared.Identity.Services.UpdateUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建或更新用户
-			</summary>
-			<param name="request">请求</param>
-			<param name="context">上下文</param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.DeleteUserAsync(Artemis.Shared.Identity.Services.DeleteUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除用户
-			</summary>
-			<param name="request">删除用户请求</param>
 			<param name="context">上下文</param>
 			<returns></returns>
 		</member>

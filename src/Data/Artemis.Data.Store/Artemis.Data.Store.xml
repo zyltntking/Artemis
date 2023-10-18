@@ -382,6 +382,29 @@
 			<param name="cancellationToken">操作取消信号</param>
 			<returns></returns>
 		</member>
+		<member name="T:Artemis.Data.Store.Extensions.Instance">
+			<summary>
+				实例辅助类
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Store.Extensions.Instance.CreateInstance``1">
+			<summary>
+				创建实例
+			</summary>
+			<typeparam name="TEntity">实例类型</typeparam>
+			<returns>实例</returns>
+			<exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
+		</member>
+		<member name="M:Artemis.Data.Store.Extensions.Instance.CreateInstance``2(``1)">
+			<summary>
+				创建实例
+			</summary>
+			<typeparam name="TEntity">实例类型</typeparam>
+			<typeparam name="TMapEntity">映射实例类型</typeparam>
+			<param name="mapEntity"></param>
+			<returns>实例</returns>
+			<exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
+		</member>
 		<member name="T:Artemis.Data.Store.Extensions.QueryableExtensions">
 			<summary>
 				Queryable扩展
@@ -1336,6 +1359,56 @@
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>实体信息列表</returns>
 		</member>
+		<member name="M:Artemis.Data.Store.IManager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
+			<summary>
+				获取实体信息
+			</summary>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<param name="id">实体标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Store.IManager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
+			<summary>
+				创建实体
+			</summary>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="package">实体包</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>创建结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Store.IManager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+			<summary>
+				更新实体
+			</summary>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="id">实体键</param>
+			<param name="pack">实体包</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Data.Store.IManager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+			<summary>
+				更新或创建实体
+			</summary>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="id">实体键</param>
+			<param name="package">实体包</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新或创建结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Store.IManager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+			<summary>
+				删除实体
+			</summary>
+			<param name="id">标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
 		<member name="T:Artemis.Data.Store.Manager`1">
 			<summary>
 				提供用于管理TEntity的存储器的API
@@ -1480,9 +1553,20 @@
 			<typeparam name="TEntityInfo">实体信息类型</typeparam>
 			<typeparam name="TEntityPack">实体包类型</typeparam>
 			<param name="id">实体键</param>
-			<param name="package">实体包</param>
+			<param name="pack">实体包</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>更新结果</returns>
+		</member>
+		<member name="M:Artemis.Data.Store.Manager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+			<summary>
+				更新或创建实体
+			</summary>
+			<typeparam name="TEntityInfo">实体信息类型</typeparam>
+			<typeparam name="TEntityPack">实体包类型</typeparam>
+			<param name="id">实体键</param>
+			<param name="package">实体包</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新或创建结果</returns>
 		</member>
 		<member name="M:Artemis.Data.Store.Manager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
 			<summary>

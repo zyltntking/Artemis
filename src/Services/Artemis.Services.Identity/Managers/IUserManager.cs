@@ -65,12 +65,12 @@ public interface IUserManager : IManager<ArtemisUser>
     ///     更新用户
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="pack">用户信息</param>
+    /// <param name="package">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新后的实体</returns>
     Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
         Guid id,
-        UserPackage pack,
+        UserPackage package,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -287,18 +287,6 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     添加用户登录信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="packages">登录信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserLoginsAsync(
-        Guid id,
-        IEnumerable<UserLoginPackage> packages,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///     替换用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
@@ -310,18 +298,6 @@ public interface IUserManager : IManager<ArtemisUser>
         Guid id,
         int loginId,
         UserLoginPackage package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     替换用户登录信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="packages">登录信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>替换结果</returns>
-    Task<StoreResult> ReplaceUserLoginsAsync(
-        Guid id,
-        IEnumerable<KeyValuePair<int, UserLoginPackage>> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -392,18 +368,6 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     添加用户令牌信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="packages">令牌信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserTokensAsync(
-        Guid id,
-        IEnumerable<UserTokenPackage> packages,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///     替换用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
@@ -415,18 +379,6 @@ public interface IUserManager : IManager<ArtemisUser>
         Guid id,
         int tokenId,
         UserTokenPackage package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     替换用户令牌信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="packages">令牌信息</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>替换结果</returns>
-    Task<StoreResult> ReplaceUserLoginsAsync(
-        Guid id,
-        IEnumerable<KeyValuePair<int, UserTokenPackage>> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>

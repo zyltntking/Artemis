@@ -29,21 +29,6 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     {
     }
 
-    #region Implementation of IAccountManager
-
-    /// <summary>
-    ///     签到
-    /// </summary>
-    /// <param name="username">用户名</param>
-    /// <param name="password">密码</param>
-    /// <returns></returns>
-    public Task<TokenInfo> SignInAsync(string username, string password)
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
-
     #region StoreAccess
 
     /// <summary>
@@ -61,6 +46,41 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     protected override void StoreDispose()
     {
         UserStore.Dispose();
+    }
+
+    #endregion
+
+    #region Implementation of IAccountManager
+
+    /// <summary>
+    ///     签到
+    /// </summary>
+    /// <param name="username">用户名</param>
+    /// <param name="password">密码</param>
+    /// <returns></returns>
+    public Task<TokenInfo> SignInAsync(string username, string password)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    ///     报名/注册
+    /// </summary>
+    /// <param name="username">用户名</param>
+    /// <param name="password">密码</param>
+    /// <returns>登录后的Token信息</returns>
+    public Task<TokenInfo> SignUpAsync(string username, string password)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    ///     签退/登出
+    /// </summary>
+    /// <returns></returns>
+    public Task SignOutAsync()
+    {
+        throw new NotImplementedException();
     }
 
     #endregion

@@ -25,6 +25,15 @@ public interface IUserToken
     ///     令牌值
     /// </summary>
     string? Value { get; set; }
+
+    #region DefaultImlement
+
+    /// <summary>
+    ///     生成标识
+    /// </summary>
+    string GenerateFlag => $"{LoginProvider}:{Name}";
+
+    #endregion
 }
 
 /// <summary>
@@ -46,6 +55,15 @@ file interface IUserTokenDocument : IUserToken
 [DataContract]
 public record UserTokenPackage : IUserToken
 {
+    #region DefaultImlement
+
+    /// <summary>
+    ///     生成标识
+    /// </summary>
+    public string GenerateFlag => $"{LoginProvider}:{Name}";
+
+    #endregion
+
     #region Implementation of IUserToken
 
     /// <summary>

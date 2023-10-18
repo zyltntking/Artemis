@@ -160,7 +160,7 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    public Task<StoreResult> CreateClaimsAsync(
+    public async Task<StoreResult> CreateClaimsAsync(
         IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
@@ -170,10 +170,10 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
 
         var checkStamps = claimPackages.Select(claim => claim.CheckStamp).ToList();
 
-        var storedCheckStamps = ClaimStore.EntityQuery
+        var storedCheckStamps = await ClaimStore.EntityQuery
             .Where(claim => checkStamps.Contains(claim.CheckStamp))
             .Select(claim => claim.CheckStamp)
-            .ToList();
+            .ToListAsync(cancellationToken);
 
         var notSetCheckStamps = checkStamps.Except(storedCheckStamps).ToList();
 
@@ -184,12 +184,12 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
                 .Select(Instance.CreateInstance<ArtemisClaim, ClaimPackage>)
                 .ToList();
 
-            return ClaimStore.CreateAsync(claims, cancellationToken);
+            return await ClaimStore.CreateAsync(claims, cancellationToken);
         }
 
         var flag = string.Join(',', claimPackages.Select(item => item.GenerateFlag));
 
-        return Task.FromResult(StoreResult.EntityFoundFailed(nameof(ArtemisClaim), flag));
+        return StoreResult.EntityFoundFailed(nameof(ArtemisClaim), flag);
     }
 
     /// <summary>
@@ -297,7 +297,7 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
         if (claim is not null)
             return await ClaimStore.DeleteAsync(claim, cancellationToken);
 
-        return StoreResult.EntityNotFoundFailed(nameof(ArtemisRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(ArtemisClaim), id.ToString());
     }
 
     /// <summary>

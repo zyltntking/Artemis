@@ -1718,6 +1718,19 @@
 			<param name="id">枚举Id</param>
 			<param name="name">枚举名称</param>
 		</member>
+		<member name="T:Artemis.Data.Core.Generator">
+			<summary>
+				实例辅助类
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.Generator.CreateInstance``1">
+			<summary>
+				创建实例
+			</summary>
+			<typeparam name="TEntity">实例类型</typeparam>
+			<returns>实例</returns>
+			<exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
+		</member>
 		<member name="T:Artemis.Data.Core.Hash">
 			<summary>
 				散列服务提供程序
@@ -2019,19 +2032,6 @@
 				分区标识
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.Instance">
-			<summary>
-				实例辅助类
-			</summary>
-		</member>
-		<member name="M:Artemis.Data.Core.Instance.CreateInstance``1">
-			<summary>
-				创建实例
-			</summary>
-			<typeparam name="T">实例类型</typeparam>
-			<returns></returns>
-			<exception cref="T:Artemis.Data.Core.Exceptions.CreateInstanceException">创建实例异常</exception>
-		</member>
 		<member name="T:Artemis.Data.Core.PartitionBase">
 			<summary>
 				分区模型
@@ -2258,9 +2258,46 @@
 				数据总量
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.PatchPackage">
+		<member name="T:Artemis.Data.Core.IPatchItem`1">
+			<summary>
+				修补项目接口
+			</summary>
+			<typeparam name="TPatch"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.IPatchItem`1.Items">
+			<summary>
+				修补内容
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PatchPackage`2">
 			<summary>
 				基础修补协议
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PatchPackage`2.AddPatches">
+			<summary>
+				批量添加
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PatchPackage`2.UpdatePatches">
+			<summary>
+				批量删除
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PatchPackage`2.RemovePatches">
+			<summary>
+				批量删除
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PatchItem`1">
+			<summary>
+				修补项目
+			</summary>
+			<typeparam name="TPatch">修补数据类型</typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.PatchItem`1.Items">
+			<summary>
+				修补内容
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Core.Socket.AsciiControl">

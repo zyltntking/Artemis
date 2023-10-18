@@ -25,6 +25,15 @@ public interface IUserLogin
     ///     提供程序显示名称
     /// </summary>
     string? ProviderDisplayName { get; set; }
+
+    #region DefaultImlement
+
+    /// <summary>
+    ///     生成标识
+    /// </summary>
+    string GenerateFlag => $"{LoginProvider}:{ProviderKey}:{ProviderDisplayName}";
+
+    #endregion
 }
 
 /// <summary>
@@ -46,6 +55,15 @@ file interface IUserLoginDocument : IUserLogin
 [DataContract]
 public record UserLoginPackage : IUserLogin
 {
+    #region DefaultImlement
+
+    /// <summary>
+    ///     生成标识
+    /// </summary>
+    public string GenerateFlag => $"{LoginProvider}:{ProviderKey}:{ProviderDisplayName}";
+
+    #endregion
+
     #region Implementation of IUserLogin
 
     /// <summary>

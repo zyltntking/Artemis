@@ -47,14 +47,36 @@ public interface IRoleService
         ServerCallContext? context = default);
 
     /// <summary>
-    ///     创建或更新角色
+    ///     创建角色
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<RoleInfo>> CreateOrUpdateRoleAsync(
+    Task<DataResult<EmptyRecord>> CreateRolesAsync(
+        CreateRolesRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     更新角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<RoleInfo>> UpdateRoleAsync(
         UpdateRoleRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     更新角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> UpdateRolesAsync(
+        UpdateRolesRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -69,6 +91,17 @@ public interface IRoleService
         ServerCallContext? context = default);
 
     /// <summary>
+    ///     删除角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> DeleteRolesAsync(
+        DeleteRolesRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
     ///     查询角色用户
     /// </summary>
     /// <param name="request">请求</param>
@@ -77,6 +110,61 @@ public interface IRoleService
     [OperationContract]
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
         PageRequest<FetchRoleUsersFilter> request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     获取角色用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<UserInfo>> GetRoleUserAsync(
+        GetRoleUserRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加角色用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddRoleUserAsync(
+        AddRoleUserRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加角色用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddRoleUsersAsync(
+        AddRoleUsersRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除角色用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveRoleUserAsync(
+        RemoveRoleUserRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除角色用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveRoleUsersAsync(
+        RemoveRoleUsersRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -102,25 +190,25 @@ public interface IRoleService
         ServerCallContext? context = default);
 
     /// <summary>
-    ///     创建角色凭据
+    ///     添加角色凭据
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<RoleClaimInfo>> CreateRoleClaimAsync(
-        CreateRoleClaimRequest request,
+    Task<DataResult<EmptyRecord>> AddRoleClaimAsync(
+        AddRoleClaimRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
-    ///     创建或更新角色凭据
+    ///     添加角色凭据
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<RoleClaimInfo>> CreateOrUpdateRoleClaimAsync(
-        UpdateRoleClaimRequest request,
+    Task<DataResult<EmptyRecord>> AddRoleClaimsAsync(
+        AddRoleClaimsRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -130,8 +218,19 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<EmptyRecord>> DeleteRoleClaimAsync(
-        DeleteRoleClaimRequest request,
+    Task<DataResult<EmptyRecord>> RemoveRoleClaimAsync(
+        RemoveRoleClaimRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除角色凭据
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveRoleClaimsAsync(
+        RemoveRoleClaimsRequest request,
         ServerCallContext? context = default);
 }
 
@@ -189,6 +288,20 @@ public sealed record CreateRoleRequest : RolePackage
 }
 
 /// <summary>
+///     创建角色请求
+/// </summary>
+[DataContract]
+public sealed record CreateRolesRequest
+{
+    /// <summary>
+    ///     角色信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required List<RolePackage> RolePackages { get; set; }
+}
+
+/// <summary>
 ///     更新角色请求
 /// </summary>
 [DataContract]
@@ -206,7 +319,21 @@ public sealed record UpdateRoleRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RolePackage RolePack { get; set; }
+    public required RolePackage RolePackage { get; set; }
+}
+
+/// <summary>
+///     更新角色请求
+/// </summary>
+[DataContract]
+public sealed record UpdateRolesRequest
+{
+    /// <summary>
+    ///     角色信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required Dictionary<Guid, RolePackage> RolePackages { get; set; }
 }
 
 /// <summary>
@@ -221,6 +348,20 @@ public sealed record DeleteRoleRequest : GetRoleRequest
     [Required]
     [DataMember(Order = 1)]
     public override required Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     删除角色请求
+/// </summary>
+[DataContract]
+public sealed record DeleteRolesRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required List<Guid> RoleIds { get; set; }
 }
 
 /// <summary>
@@ -253,6 +394,111 @@ public sealed record FetchRoleUsersFilter : GetRoleRequest
     /// </summary>
     [DataMember(Order = 4)]
     public string? PhoneNumberSearch { get; set; }
+}
+
+/// <summary>
+///     获取角色用户请求
+/// </summary>
+[DataContract]
+public record GetRoleUserRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public virtual required Guid UserId { get; set; }
+}
+
+/// <summary>
+///     添加角色用户请求
+/// </summary>
+[DataContract]
+public sealed record AddRoleUserRequest : GetRoleUserRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid UserId { get; set; }
+}
+
+/// <summary>
+///     添加角色用户请求
+/// </summary>
+[DataContract]
+public sealed record AddRoleUsersRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<Guid> UserIds { get; set; }
+}
+
+/// <summary>
+///     删除角色用户请求
+/// </summary>
+[DataContract]
+public sealed record RemoveRoleUserRequest : GetRoleUserRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required Guid UserId { get; set; }
+}
+
+/// <summary>
+///     删除角色用户请求
+/// </summary>
+[DataContract]
+public sealed record RemoveRoleUsersRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<Guid> UserIds { get; set; }
 }
 
 /// <summary>
@@ -293,14 +539,14 @@ public record GetRoleClaimRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required int ClaimId { get; set; }
+    public virtual required int RoleClaimId { get; set; }
 }
 
 /// <summary>
-///     创建角色凭据请求
+///     添加角色凭据请求
 /// </summary>
 [DataContract]
-public sealed record CreateRoleClaimRequest : GetRoleRequest
+public sealed record AddRoleClaimRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -314,14 +560,14 @@ public sealed record CreateRoleClaimRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RoleClaimPackage ClaimPack { get; set; }
+    public required RoleClaimPackage ClaimPackage { get; set; }
 }
 
 /// <summary>
-///     更新角色凭据请求
+///     添加角色凭据请求
 /// </summary>
 [DataContract]
-public sealed record UpdateRoleClaimRequest : GetRoleClaimRequest
+public sealed record AddRoleClaimsRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -331,25 +577,18 @@ public sealed record UpdateRoleClaimRequest : GetRoleClaimRequest
     public override required Guid RoleId { get; set; }
 
     /// <summary>
-    ///     凭据标识
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required int ClaimId { get; set; }
-
-    /// <summary>
     ///     凭据信息
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required RoleClaimPackage ClaimPack { get; set; }
+    public required List<RoleClaimPackage> ClaimPackages { get; set; }
 }
 
 /// <summary>
 ///     删除角色凭据请求
 /// </summary>
 [DataContract]
-public sealed record DeleteRoleClaimRequest : GetRoleClaimRequest
+public sealed record RemoveRoleClaimRequest : GetRoleClaimRequest
 {
     /// <summary>
     ///     角色标识
@@ -363,5 +602,26 @@ public sealed record DeleteRoleClaimRequest : GetRoleClaimRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required int ClaimId { get; set; }
+    public override required int RoleClaimId { get; set; }
+}
+
+/// <summary>
+///     删除角色凭据请求
+/// </summary>
+[DataContract]
+public sealed record RemoveRoleClaimsRequest : GetRoleRequest
+{
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid RoleId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<int> RoleClaimIds { get; set; }
 }

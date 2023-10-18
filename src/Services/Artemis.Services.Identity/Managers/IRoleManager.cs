@@ -132,6 +132,18 @@ public interface IRoleManager : IManager<ArtemisRole>
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     获取角色用户
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="userId">用户标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>用户信息</returns>
+    Task<UserInfo?> GetRoleUserAsync(
+        Guid id,
+        Guid userId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     ///     添加角色用户
     /// </summary>
     /// <param name="id">角色标识</param>
