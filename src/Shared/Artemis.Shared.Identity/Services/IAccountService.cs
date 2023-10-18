@@ -52,7 +52,7 @@ public record SignInReply : TokenPackage
     ///     登录Token
     /// </summary>
     [DataMember(Order = 1)]
-    public override string Token { get; } = null!;
+    public override string? Token { get; set; }
 
     /// <summary>
     ///     Token过期时间

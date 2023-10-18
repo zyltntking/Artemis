@@ -80,6 +80,17 @@ public interface IRoleService
         ServerCallContext? context = default);
 
     /// <summary>
+    /// 更新或创建角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<RoleInfo>> UpdateOrCreateRoleAsync(
+        UpdateRoleRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
     ///     删除角色
     /// </summary>
     /// <param name="request">请求</param>

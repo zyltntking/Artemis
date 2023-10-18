@@ -146,6 +146,26 @@ public class RoleService : IRoleService
     }
 
     /// <summary>
+    /// 更新或创建角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    public async Task<DataResult<RoleInfo>> UpdateOrCreateRoleAsync(
+        UpdateRoleRequest request, 
+        ServerCallContext? context = default)
+    {
+        var (result, role) = await RoleManager.UpdateOrCreateRoleAsync(
+            request.RoleId,
+            request.RolePackage,
+            context?.CancellationToken ?? default);
+
+        return result.Succeeded
+            ? DataResult.Success(role)!
+            : DataResult.Fail<RoleInfo>($"创建过更新失败。{result.DescribeError}");
+    }
+
+    /// <summary>
     ///     删除角色
     /// </summary>
     /// <param name="request">请求</param>

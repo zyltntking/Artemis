@@ -13,7 +13,7 @@ file interface IToken
     /// <summary>
     ///     Token
     /// </summary>
-    public string Token { get; }
+    public string? Token { get; set; }
 
     /// <summary>
     ///     过期时间
@@ -36,7 +36,7 @@ public record TokenPackage : IToken
     /// </summary>
     [MaxLength(32)]
     [DataMember(Order = 1)]
-    public virtual string Token { get; } = null!;
+    public virtual string? Token { get; set; }
 
     /// <summary>
     ///     过期时间
