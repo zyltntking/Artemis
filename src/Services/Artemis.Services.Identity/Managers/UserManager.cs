@@ -232,14 +232,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     public async Task<StoreResult> CreateUsersAsync(
-        IEnumerable<(UserPackage package, string password)> packages,
+        IEnumerable<KeyValuePair<UserPackage, string>> packages,
         CancellationToken cancellationToken)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var userPackages = packages.ToList();
 
-        var packageUserNames = userPackages.Select(item => NormalizeKey(item.package.UserName)).ToList();
+        var packageUserNames = userPackages.Select(item => NormalizeKey(item.Key.UserName)).ToList();
 
         var storedUserNames = await UserStore.EntityQuery
             .Where(user => packageUserNames.Contains(user.NormalizedUserName))
@@ -252,7 +252,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         {
             var users = userPackages
                 .Where(item =>
-                    notSetUserNames.Contains(NormalizeKey(item.package.UserName))
+                    notSetUserNames.Contains(NormalizeKey(item.Key.UserName))
                 )
                 .Select(item =>
                 {
@@ -319,7 +319,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="packages">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public async Task<StoreResult> UpdateUserAsync(
+    public async Task<StoreResult> UpdateUsersAsync(
         IEnumerable<KeyValuePair<Guid, UserPackage>> packages,
         CancellationToken cancellationToken = default)
     {
@@ -464,6 +464,31 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         }
 
         throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString("D"));
+    }
+
+    /// <summary>
+    /// 获取用户角色
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>查询角色结果</returns>
+    public async Task<RoleInfo?> GetUserRoleAsync(Guid id, Guid roleId, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (userExists)
+        {
+            return await UserStore.KeyMatchQuery(id)
+                .SelectMany(user => user.Roles)
+                .Where(role => role.Id == roleId)
+                .ProjectToType<RoleInfo>()
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString());
     }
 
     /// <summary>
@@ -733,7 +758,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<StoreResult> AddRoleClaimAsync(
+    public async Task<StoreResult> AddUserClaimAsync(
         Guid id,
         UserClaimPackage package,
         CancellationToken cancellationToken = default)
@@ -773,7 +798,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<StoreResult> AddRoleClaimsAsync(
+    public async Task<StoreResult> AddUserClaimsAsync(
         Guid id,
         IEnumerable<UserClaimPackage> packages,
         CancellationToken cancellationToken = default)
@@ -828,7 +853,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<StoreResult> RemoveRoleClaimAsync(
+    public async Task<StoreResult> RemoveUserClaimAsync(
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default)
@@ -858,7 +883,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<StoreResult> RemoveRoleClaimsAsync(
+    public async Task<StoreResult> RemoveUserClaimsAsync(
         Guid id,
         IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default)
@@ -950,7 +975,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <param name="loginId">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
-    public async Task<UserClaimInfo?> GetUserLoginAsync(
+    public async Task<UserLoginInfo?> GetUserLoginAsync(
         Guid id,
         int loginId,
         CancellationToken cancellationToken = default)
@@ -959,7 +984,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
 
-        if (userExists) return await UserLoginStore.FindMapEntityAsync<UserClaimInfo>(loginId, cancellationToken);
+        if (userExists) return await UserLoginStore.FindMapEntityAsync<UserLoginInfo>(loginId, cancellationToken);
 
         throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString());
     }

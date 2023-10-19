@@ -21,7 +21,7 @@ public class RoleService : IRoleService
     }
 
     /// <summary>
-    ///     认证管理器
+    ///     角色管理器
     /// </summary>
     private IRoleManager RoleManager { get; }
 

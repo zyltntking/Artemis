@@ -58,7 +58,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateUsersAsync(
-        IEnumerable<(UserPackage package, string password)> packages,
+        IEnumerable<KeyValuePair<UserPackage, string>> packages,
         CancellationToken cancellationToken);
 
     /// <summary>
@@ -79,7 +79,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="packages">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<StoreResult> UpdateUserAsync(
+    Task<StoreResult> UpdateUsersAsync(
         IEnumerable<KeyValuePair<Guid, UserPackage>> packages,
         CancellationToken cancellationToken = default);
 
@@ -118,6 +118,18 @@ public interface IUserManager : IManager<ArtemisUser>
         string? roleNameSearch = null,
         int page = 1,
         int size = 20,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 获取用户角色
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="roleId">角色标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>查询角色结果</returns>
+    Task<RoleInfo?> GetUserRoleAsync(
+        Guid id,
+        Guid roleId,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -204,7 +216,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddRoleClaimAsync(
+    Task<StoreResult> AddUserClaimAsync(
         Guid id,
         UserClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -216,7 +228,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddRoleClaimsAsync(
+    Task<StoreResult> AddUserClaimsAsync(
         Guid id,
         IEnumerable<UserClaimPackage> packages,
         CancellationToken cancellationToken = default);
@@ -228,7 +240,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveRoleClaimAsync(
+    Task<StoreResult> RemoveUserClaimAsync(
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default);
@@ -240,7 +252,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveRoleClaimsAsync(
+    Task<StoreResult> RemoveUserClaimsAsync(
         Guid id,
         IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default);
@@ -269,7 +281,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <param name="loginId">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
-    Task<UserClaimInfo?> GetUserLoginAsync(
+    Task<UserLoginInfo?> GetUserLoginAsync(
         Guid id,
         int loginId,
         CancellationToken cancellationToken = default);

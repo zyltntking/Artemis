@@ -852,7 +852,7 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.CreateOrUpdateUserAsync(Artemis.Shared.Identity.Services.UpdateUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.UpdateOrCreateUserAsync(Artemis.Shared.Identity.Services.UpdateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 创建或更新用户
             </summary>
@@ -933,7 +933,7 @@
                 角色标识
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Services.UpdateUserRequest.UserPack">
+        <member name="P:Artemis.Shared.Identity.Services.UpdateUserRequest.UserPackage">
             <summary>
                 用户信息
             </summary>

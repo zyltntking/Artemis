@@ -47,14 +47,36 @@ public interface IUserService
         ServerCallContext? context = default);
 
     /// <summary>
-    ///     创建或更新用户
+    ///     创建用户
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
-    Task<DataResult<UserInfo>> CreateOrUpdateUserAsync(
+    Task<DataResult<EmptyRecord>> CreateUsersAsync(
+        CreateUsersRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     更新用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<UserInfo>> UpdateUserAsync(
         UpdateUserRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     更新用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> UpdateUsersAsync(
+        UpdateUsersRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -63,8 +85,284 @@ public interface IUserService
     /// <param name="request">删除用户请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
+    [OperationContract]
     Task<DataResult<EmptyRecord>> DeleteUserAsync(
         DeleteUserRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> DeleteUsersAsync(
+        DeleteUsersRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     查询用户角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<PageResult<RoleInfo>>> FetchUserRolesAsync(
+        PageRequest<FetchUserRolesFilter> request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     获取用户角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<RoleInfo>> GetUserRoleAsync(
+        GetUserRoleRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserRoleAsync(
+        AddUserRoleRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户角色
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserRolesAsync(
+        AddUserRolesRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserRoleAsync(
+        RemoveUserRoleRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserRolesAsync(
+        RemoveUserRolesRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     查询用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<PageResult<UserClaimInfo>>> FetchUserClaimsAsync(
+        PageRequest<FetchUserClaimsFilter> request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     获取用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<UserClaimInfo>> GetUserClaimAsync(
+        GetUserClaimRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserClaimAsync(
+        AddUserClaimRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserClaimsAsync(
+        AddUserClaimsRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserClaimAsync(
+        RemoveUserClaimRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户凭据信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUsersClaimAsync(
+        RemoveUserClaimsRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     查询用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<PageResult<UserLoginInfo>>> FetchUserLoginsAsync(
+        PageRequest<FetchUserLoginsFilter> request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     获取用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<UserLoginInfo>> GetUserLoginAsync(
+        GetUserLoginRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserLoginAsync(
+        AddUserLoginRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     替换用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> ReplaceUserLoginAsync(
+        ReplaceUserLoginRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserLoginAsync(
+        RemoveUserLoginRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户登录信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserLoginsAsync(
+        RemoveUserLoginsRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     查询用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<PageResult<UserTokenInfo>>> FetchUserTokensAsync(
+        PageRequest<FetchUserTokensFilter> request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     获取用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<UserTokenInfo>> GetUserTokenAsync(
+        GetUserTokenRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     添加用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> AddUserTokenAsync(
+        AddUserTokenRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     替换用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> ReplaceUserTokenAsync(
+        ReplaceUserTokenRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserTokenAsync(
+        RemoveUserTokenRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    ///     删除用户令牌信息
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    Task<DataResult<EmptyRecord>> RemoveUserTokensAsync(
+        RemoveUserTokensRequest request,
         ServerCallContext? context = default);
 }
 
@@ -151,6 +449,21 @@ public sealed record CreateUserRequest : UserPackage
 }
 
 /// <summary>
+///     创建用户请求
+/// </summary>
+[DataContract]
+public sealed record CreateUsersRequest
+{
+    /// <summary>
+    ///     用户信息
+    /// </summary>
+    /// <remarks>key: userPackage, value: password</remarks>
+    [Required]
+    [DataMember(Order = 1)]
+    public required Dictionary<UserPackage, string> UserPackages { get; set; }
+}
+
+/// <summary>
 ///     更新用户请求
 /// </summary>
 [DataContract]
@@ -168,13 +481,21 @@ public sealed record UpdateUserRequest : GetUserRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required UserPackage UserPack { get; set; }
+    public required UserPackage UserPackage { get; set; }
+}
 
+/// <summary>
+///     更新用户请求
+/// </summary>
+[DataContract]
+public sealed record UpdateUsersRequest
+{
     /// <summary>
-    ///     用户密码
+    ///     用户信息
     /// </summary>
-    [DataMember(Order = 3)]
-    public string? Password { get; set; }
+    [Required]
+    [DataMember(Order = 1)]
+    public required Dictionary<Guid, UserPackage> UserPackages { get; set; }
 }
 
 /// <summary>
@@ -188,4 +509,514 @@ public sealed record DeleteUserRequest : GetUserRequest
     [Required]
     [DataMember(Order = 1)]
     public override required Guid UserId { get; set; }
+}
+
+/// <summary>
+///     删除用户请求
+/// </summary>
+[DataContract]
+public sealed record DeleteUsersRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required List<Guid> UserIds { get; set; }
+}
+
+/// <summary>
+///     查询角色过滤器
+/// </summary>
+[DataContract]
+public sealed record FetchUserRolesFilter : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户名搜索值
+    /// </summary>
+    [DataMember(Order = 2)]
+    public string? RoleNameSearch { get; set; }
+}
+
+/// <summary>
+///     获取用户角色请求
+/// </summary>
+[DataContract]
+public sealed record GetUserRoleRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     添加用户角色请求
+/// </summary>
+[DataContract]
+public sealed record AddUserRoleRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     添加角色用户请求
+/// </summary>
+[DataContract]
+public sealed record AddUserRolesRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<Guid> RoleIds { get; set; }
+}
+
+/// <summary>
+///     删除用户角色请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserRoleRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     删除角色用户请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserRolesRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     角色标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<Guid> RoleIds { get; set; }
+}
+
+/// <summary>
+///     查询用户凭据过滤器
+/// </summary>
+[DataContract]
+public sealed record FetchUserClaimsFilter : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据类型搜索值
+    /// </summary>
+    [DataMember(Order = 2)]
+    public string? ClaimTypeSearch { get; set; }
+}
+
+/// <summary>
+///     获取用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record GetUserClaimRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required int UserClaimId { get; set; }
+}
+
+/// <summary>
+///     添加用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record AddUserClaimRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required UserClaimPackage ClaimPackage { get; set; }
+}
+
+/// <summary>
+///     添加用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record AddUserClaimsRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<UserClaimPackage> ClaimPackages { get; set; }
+}
+
+/// <summary>
+///     删除用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserClaimRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required int UserClaimId { get; set; }
+}
+
+/// <summary>
+///     删除用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserClaimsRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     凭据标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required List<int> UserClaimIds { get; set; }
+}
+
+/// <summary>
+///     查询用户登录信息过滤器
+/// </summary>
+[DataContract]
+public sealed record FetchUserLoginsFilter : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     登录类型搜索值
+    /// </summary>
+    [DataMember(Order = 2)]
+    public string? LoginProviderSearch { get; init; }
+}
+
+/// <summary>
+///     获取用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record GetUserLoginRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserLoginId { get; set; }
+}
+
+/// <summary>
+///     添加用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record AddUserLoginRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required UserLoginPackage UserLoginPackage { get; set; }
+}
+
+/// <summary>
+///     替换用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record ReplaceUserLoginRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserLoginId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 3)]
+    public required UserLoginPackage UserLoginPackage { get; set; }
+}
+
+/// <summary>
+///     删除用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserLoginRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserLoginId { get; set; }
+}
+
+/// <summary>
+///     删除用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserLoginsRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required List<int> UserLoginIds { get; set; }
+}
+
+/// <summary>
+///     查询用户令牌信息过滤器
+/// </summary>
+[DataContract]
+public sealed record FetchUserTokensFilter : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     登录类型搜索值
+    /// </summary>
+    [DataMember(Order = 2)]
+    public string? LoginProviderSearch { get; init; }
+
+    /// <summary>
+    ///     令牌名搜索值
+    /// </summary>
+    [DataMember(Order = 3)]
+    public string? NameSearch { get; init; }
+}
+
+/// <summary>
+///     获取用户令牌信息请求
+/// </summary>
+[DataContract]
+public sealed record GetUserTokenRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户令牌信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserTokenId { get; set; }
+}
+
+/// <summary>
+///     添加用户令牌信息请求
+/// </summary>
+[DataContract]
+public sealed record AddUserTokenRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户令牌信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required UserTokenPackage UserTokenPackage { get; set; }
+}
+
+/// <summary>
+///     替换用户令牌信息请求
+/// </summary>
+[DataContract]
+public sealed record ReplaceUserTokenRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserTokenId { get; set; }
+
+    /// <summary>
+    ///     用户登录信息标识
+    /// </summary>
+    [DataMember(Order = 3)]
+    public required UserTokenPackage UserTokenPackage { get; set; }
+}
+
+/// <summary>
+///     删除用户登录信息请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserTokenRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户令牌信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required int UserTokenId { get; set; }
+}
+
+/// <summary>
+///     删除用户令牌信息请求
+/// </summary>
+[DataContract]
+public sealed record RemoveUserTokensRequest : GetUserRequest
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    [DataMember(Order = 1)]
+    public override required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     用户令牌信息标识
+    /// </summary>
+    [DataMember(Order = 2)]
+    public required List<int> UserTokenIds { get; set; }
 }

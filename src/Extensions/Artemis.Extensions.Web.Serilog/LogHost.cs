@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -27,6 +29,14 @@ public static class LogHost
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
+
+            //builder.WebHost.ConfigureKestrel(serverOptions =>
+            //{
+            //    serverOptions.ConfigureEndpointDefaults(options =>
+            //    {
+            //        options.Protocols = HttpProtocols.Http1AndHttp2;
+            //    });
+            //});
 
             buildAction(builder);
 

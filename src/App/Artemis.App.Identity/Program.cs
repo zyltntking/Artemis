@@ -105,7 +105,7 @@ public static class Program
             app.MapControllers();
 
             app.MapGrpcService<RoleService>();
-            //app.MapGrpcService<UserService>();
+            app.MapGrpcService<UserService>();
             app.MapGrpcService<AccountService>();
 
             app.MapApiRouteTable();

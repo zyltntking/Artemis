@@ -411,7 +411,7 @@ public sealed record FetchRoleUsersFilter : GetRoleRequest
 ///     获取角色用户请求
 /// </summary>
 [DataContract]
-public record GetRoleUserRequest : GetRoleRequest
+public sealed record GetRoleUserRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -425,14 +425,14 @@ public record GetRoleUserRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required Guid UserId { get; set; }
+    public required Guid UserId { get; set; }
 }
 
 /// <summary>
 ///     添加角色用户请求
 /// </summary>
 [DataContract]
-public sealed record AddRoleUserRequest : GetRoleUserRequest
+public sealed record AddRoleUserRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -446,7 +446,7 @@ public sealed record AddRoleUserRequest : GetRoleUserRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required Guid UserId { get; set; }
+    public required Guid UserId { get; set; }
 }
 
 /// <summary>
@@ -474,7 +474,7 @@ public sealed record AddRoleUsersRequest : GetRoleRequest
 ///     删除角色用户请求
 /// </summary>
 [DataContract]
-public sealed record RemoveRoleUserRequest : GetRoleUserRequest
+public sealed record RemoveRoleUserRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -488,7 +488,7 @@ public sealed record RemoveRoleUserRequest : GetRoleUserRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required Guid UserId { get; set; }
+    public required Guid UserId { get; set; }
 }
 
 /// <summary>
@@ -536,7 +536,7 @@ public sealed record FetchRoleClaimsFilter : GetRoleRequest
 ///     获取角色凭据请求
 /// </summary>
 [DataContract]
-public record GetRoleClaimRequest : GetRoleRequest
+public sealed record GetRoleClaimRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -550,7 +550,7 @@ public record GetRoleClaimRequest : GetRoleRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required int RoleClaimId { get; set; }
+    public required int RoleClaimId { get; set; }
 }
 
 /// <summary>
@@ -599,7 +599,7 @@ public sealed record AddRoleClaimsRequest : GetRoleRequest
 ///     删除角色凭据请求
 /// </summary>
 [DataContract]
-public sealed record RemoveRoleClaimRequest : GetRoleClaimRequest
+public sealed record RemoveRoleClaimRequest : GetRoleRequest
 {
     /// <summary>
     ///     角色标识
@@ -613,7 +613,7 @@ public sealed record RemoveRoleClaimRequest : GetRoleClaimRequest
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required int RoleClaimId { get; set; }
+    public required int RoleClaimId { get; set; }
 }
 
 /// <summary>
