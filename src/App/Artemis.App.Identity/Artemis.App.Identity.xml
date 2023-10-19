@@ -61,7 +61,26 @@
             账户服务
             </summary>
         </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
+            <summary>
+                泛型API控制器
+            </summary>
+            <param name="logger"></param>
+        </member>
         <member name="M:Artemis.App.Identity.Services.AccountService.SignIn(Artemis.Shared.Identity.Services.SignInRequest)">
+            <summary>
+            登录
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.Test">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest)">
             <summary>
                 登录
             </summary>
