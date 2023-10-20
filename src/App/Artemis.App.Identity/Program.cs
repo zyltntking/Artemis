@@ -40,7 +40,7 @@ public static class Program
 
             builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
-            builder.Services.AddRazorPages();
+            //builder.Services.AddRazorPages();
 
             builder.Services
                 .AddControllers(option =>
@@ -73,6 +73,17 @@ public static class Program
             });
             builder.Services.AddCodeFirstGrpcReflection();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllGrpc", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+                });
+            });
+
             builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -93,8 +104,8 @@ public static class Program
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -105,11 +116,19 @@ public static class Program
 
             app.UseResponseCompression();
 
-            app.MapRazorPages();
+            app.UseGrpcWeb();
+
+            //app.MapRazorPages();
             app.MapControllers();
-            app.MapGrpcService<RoleService>();
-            app.MapGrpcService<UserService>();
-            app.MapGrpcService<AccountService>();
+            app.MapGrpcService<RoleService>()
+                .EnableGrpcWeb()
+                .RequireCors("AllowAllGrpc");
+            app.MapGrpcService<UserService>()
+                .EnableGrpcWeb()
+                .RequireCors("AllowAllGrpc"); ;
+            app.MapGrpcService<AccountService>()
+                .EnableGrpcWeb()
+                .RequireCors("AllowAllGrpc");
 
             //app.MapGrpcHealthChecksService();
 

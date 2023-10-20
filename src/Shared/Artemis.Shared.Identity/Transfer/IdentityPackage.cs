@@ -111,5 +111,5 @@ public sealed record TokenDocument
     /// <summary>
     ///     角色凭据
     /// </summary>
-    public required List<ClaimPackage> RoleClaims { get; set; }
+    public required IEnumerable<ClaimPackage> RoleClaims { get; set; }
 }

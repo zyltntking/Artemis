@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
+using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -15,20 +17,72 @@ public interface IAccountService
     /// <summary>
     ///     登录
     /// </summary>
-    /// <param name="request">登录请求</param>
-    /// <returns>登录响应<see cref="SignInReply" /></returns>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
     [OperationContract]
-    Task<DataResult<SignInReply>> SignIn(SignInRequest request);
+    [Description("登录")]
+    Task<DataResult<TokenResult>> SignInAsync(
+        SignInRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    /// 注册
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    [Description("注册")]
+    Task<DataResult<TokenResult>> SignUpAsync(
+        SignUpRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    /// 修改密码
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    [Description("修改密码")]
+    Task<DataResult<EmptyRecord>> ChangePasswordAsync(
+        ChangePasswordRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    /// 重置密码
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    [Description("重置密码")]
+    Task<DataResult<EmptyRecord>> ResetPasswordAsync(
+        ResetPasswordRequest request,
+        ServerCallContext? context = default);
+
+    /// <summary>
+    /// 重置密码
+    /// </summary>
+    /// <param name="request">请求</param>
+    /// <param name="context">上下文</param>
+    /// <returns></returns>
+    [OperationContract]
+    [Description("重置密码")]
+    Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
+         ResetPasswordsRequest request,
+         ServerCallContext? context = default);
 }
 
 /// <summary>
 ///     登录请求
 /// </summary>
 [DataContract]
-public record SignInRequest : SignInPackage
+public sealed record SignInRequest : SignInPackage
 {
     /// <summary>
-    ///     用户名
+    ///     用户签名
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
@@ -44,10 +98,53 @@ public record SignInRequest : SignInPackage
 }
 
 /// <summary>
+/// 注册请求
+/// </summary>
+[DataContract]
+public sealed record SignUpRequest : UserPackage
+{
+    #region Implementation of RolePackage
+
+    /// <summary>
+    ///     用户名
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [DataMember(Order = 1)]
+    public override required string UserName { get; set; }
+
+    /// <summary>
+    ///     密码
+    /// </summary>
+    [Required]
+    [StringLength(32, MinimumLength = 6)]
+    [DataMember(Order = 2)]
+    public required string Password { get; set; }
+
+    /// <summary>
+    ///     电子邮件
+    /// </summary>
+    [EmailAddress]
+    [MaxLength(128)]
+    [DataMember(Order = 3)]
+    public override string? Email { get; set; }
+
+    /// <summary>
+    ///     电话号码
+    /// </summary>
+    [Phone]
+    [MaxLength(16)]
+    [DataMember(Order = 4)]
+    public override string? PhoneNumber { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     登录响应
 /// </summary>
 [DataContract]
-public record SignInReply : TokenPackage
+public sealed record TokenResult : TokenPackage
 {
     /// <summary>
     ///     登录Token
@@ -60,4 +157,74 @@ public record SignInReply : TokenPackage
     /// </summary>
     [DataMember(Order = 2)]
     public override required DateTime Expire { get; set; }
+}
+
+/// <summary>
+/// 修改密码请求
+/// </summary>
+[DataContract]
+public sealed record ChangePasswordRequest
+{
+    /// <summary>
+    /// 用户签名
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required string UserSign { get; set; }
+
+    /// <summary>
+    /// 原始密码
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required string OldPassword { get; set; }
+
+    /// <summary>
+    /// 新密码
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public required string NewPassword { get; set; }
+}
+
+/// <summary>
+/// 重置密码请求
+/// </summary>
+[DataContract]
+public sealed record ResetPasswordRequest
+{
+    /// <summary>
+    /// 用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required Guid UserId { get; set; }
+
+    /// <summary>
+    /// 密码
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required string Password { get; set; }
+}
+
+/// <summary>
+/// 重置密码请求
+/// </summary>
+[DataContract]
+public sealed record ResetPasswordsRequest
+{
+    /// <summary>
+    /// 用户标识
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public required List<Guid> UserIds { get; set; }
+
+    /// <summary>
+    /// 密码
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public required string Password { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
@@ -20,6 +21,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("搜索角色")]
     Task<DataResult<PageResult<RoleInfo>>> FetchRolesAsync(
         PageRequest<FetchRolesFilter> request,
         ServerCallContext? context = default);
@@ -31,6 +33,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns>角色信息<see cref="RoleInfo" /></returns>
     [OperationContract]
+    [Description("获取角色")]
     Task<DataResult<RoleInfo>> GetRoleAsync(
         GetRoleRequest request,
         ServerCallContext? context = default);
@@ -42,6 +45,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("创建角色")]
     Task<DataResult<RoleInfo>> CreateRoleAsync(
         CreateRoleRequest request,
         ServerCallContext? context = default);
@@ -53,6 +57,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("创建角色")]
     Task<DataResult<EmptyRecord>> CreateRolesAsync(
         CreateRolesRequest request,
         ServerCallContext? context = default);
@@ -64,6 +69,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("更新角色")]
     Task<DataResult<RoleInfo>> UpdateRoleAsync(
         UpdateRoleRequest request,
         ServerCallContext? context = default);
@@ -75,6 +81,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("更新角色")]
     Task<DataResult<EmptyRecord>> UpdateRolesAsync(
         UpdateRolesRequest request,
         ServerCallContext? context = default);
@@ -86,6 +93,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("更新或创建角色")]
     Task<DataResult<RoleInfo>> UpdateOrCreateRoleAsync(
         UpdateRoleRequest request,
         ServerCallContext? context = default);
@@ -97,6 +105,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色")]
     Task<DataResult<EmptyRecord>> DeleteRoleAsync(
         DeleteRoleRequest request,
         ServerCallContext? context = default);
@@ -108,6 +117,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色")]
     Task<DataResult<EmptyRecord>> DeleteRolesAsync(
         DeleteRolesRequest request,
         ServerCallContext? context = default);
@@ -119,6 +129,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询角色用户")]
     Task<DataResult<PageResult<UserInfo>>> FetchRoleUsersAsync(
         PageRequest<FetchRoleUsersFilter> request,
         ServerCallContext? context = default);
@@ -130,6 +141,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取角色用户")]
     Task<DataResult<UserInfo>> GetRoleUserAsync(
         GetRoleUserRequest request,
         ServerCallContext? context = default);
@@ -141,6 +153,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加角色用户")]
     Task<DataResult<EmptyRecord>> AddRoleUserAsync(
         AddRoleUserRequest request,
         ServerCallContext? context = default);
@@ -152,6 +165,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加角色用户")]
     Task<DataResult<EmptyRecord>> AddRoleUsersAsync(
         AddRoleUsersRequest request,
         ServerCallContext? context = default);
@@ -163,6 +177,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色用户")]
     Task<DataResult<EmptyRecord>> RemoveRoleUserAsync(
         RemoveRoleUserRequest request,
         ServerCallContext? context = default);
@@ -174,6 +189,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色用户")]
     Task<DataResult<EmptyRecord>> RemoveRoleUsersAsync(
         RemoveRoleUsersRequest request,
         ServerCallContext? context = default);
@@ -185,6 +201,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询角色凭据")]
     Task<DataResult<PageResult<RoleClaimInfo>>> FetchRoleClaimsAsync(
         PageRequest<FetchRoleClaimsFilter> request,
         ServerCallContext? context = default);
@@ -196,6 +213,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取角色凭据")]
     Task<DataResult<RoleClaimInfo>> GetRoleClaimAsync(
         GetRoleClaimRequest request,
         ServerCallContext? context = default);
@@ -207,6 +225,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加角色凭据")]
     Task<DataResult<EmptyRecord>> AddRoleClaimAsync(
         AddRoleClaimRequest request,
         ServerCallContext? context = default);
@@ -218,6 +237,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加角色凭据")]
     Task<DataResult<EmptyRecord>> AddRoleClaimsAsync(
         AddRoleClaimsRequest request,
         ServerCallContext? context = default);
@@ -229,6 +249,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色凭据")]
     Task<DataResult<EmptyRecord>> RemoveRoleClaimAsync(
         RemoveRoleClaimRequest request,
         ServerCallContext? context = default);
@@ -240,6 +261,7 @@ public interface IRoleService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除角色凭据")]
     Task<DataResult<EmptyRecord>> RemoveRoleClaimsAsync(
         RemoveRoleClaimsRequest request,
         ServerCallContext? context = default);

@@ -18,7 +18,7 @@ namespace Artemis.App.Identity.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("identity")
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -46,7 +46,7 @@ namespace Artemis.App.Identity.Migrations
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasComment("凭据类型");
+                        .HasComment("凭据值");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -179,7 +179,7 @@ namespace Artemis.App.Identity.Migrations
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasComment("凭据类型");
+                        .HasComment("凭据值");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -276,6 +276,11 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(128)")
                         .HasComment("规范化邮箱地址");
 
+                    b.Property<string>("NormalizedPhoneNumber")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasComment("规范化电话号码");
+
                     b.Property<string>("NormalizedUserName")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -326,6 +331,7 @@ namespace Artemis.App.Identity.Migrations
                         .HasDatabaseName("IX_ArtemisUser_DeletedAt");
 
                     b.HasIndex("NormalizedEmail")
+                        .IsUnique()
                         .HasDatabaseName("IX_ArtemisUser_Email");
 
                     b.HasIndex("NormalizedUserName")
@@ -333,6 +339,7 @@ namespace Artemis.App.Identity.Migrations
                         .HasDatabaseName("IX_ArtemisUser_UserName");
 
                     b.HasIndex("PhoneNumber")
+                        .IsUnique()
                         .HasDatabaseName("IX_ArtemisUser_PhoneNumber");
 
                     b.HasIndex("UpdatedAt")

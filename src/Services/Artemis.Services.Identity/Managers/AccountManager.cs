@@ -305,7 +305,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<SignResult> ReSetPasswordAsync(
+    public async Task<SignResult> ResetPasswordAsync(
         Guid userId,
         string password,
         CancellationToken cancellationToken = default)
@@ -351,8 +351,8 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<SignResult> ReSetPasswordAsync(
-        List<Guid> userIds,
+    public async Task<SignResult> ResetPasswordsAsync(
+        IEnumerable<Guid> userIds,
         string password,
         CancellationToken cancellationToken = default)
     {

@@ -44,7 +44,7 @@ public static class IdentityExtensions
             })
             .AddIdentity<ArtemisUser, ArtemisRole>()
             .AddEntityFrameworkStores<ArtemisIdentityContext>()
-            .AddDefaultUI()
+            //.AddDefaultUI()
             .AddDefaultTokenProviders();
 
         if (serviceOptions.RedisCacheConnection is not null && serviceOptions.RedisCacheConnection != string.Empty)
@@ -74,23 +74,13 @@ public static class IdentityExtensions
         serviceCollection.TryAddScoped<IClaimManager, ClaimManager>();
         serviceCollection.TryAddScoped<IUserManager, UserManager>();
         serviceCollection.TryAddScoped<IRoleManager, RoleManager>();
+        serviceCollection.TryAddScoped<IAccountManager, AccountManager>();
 
         if (isDevelopment)
             serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
 
         if (serviceOptions.IdentityOptionsAction is not null)
             serviceCollection.Configure(serviceOptions.IdentityOptionsAction);
-
-        serviceCollection.ConfigureApplicationCookie(options =>
-        {
-            // Cookie settings
-            options.Cookie.HttpOnly = true;
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-            options.LoginPath = "/Identity/Account/Login";
-            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            options.SlidingExpiration = true;
-        });
 
         return serviceCollection;
     }

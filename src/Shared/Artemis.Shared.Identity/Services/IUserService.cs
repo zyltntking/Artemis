@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Core;
@@ -20,6 +21,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("搜索用户")]
     Task<DataResult<PageResult<UserInfo>>> FetchUsersAsync(
         PageRequest<FetchUsersFilter> request,
         ServerCallContext? context = default);
@@ -31,6 +33,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns>角色信息<see cref="UserInfo" /></returns>
     [OperationContract]
+    [Description("获取用户")]
     Task<DataResult<UserInfo>> GetUserAsync(
         GetUserRequest request,
         ServerCallContext? context = default);
@@ -42,6 +45,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("创建用户")]
     Task<DataResult<UserInfo>> CreateUserAsync(
         CreateUserRequest request,
         ServerCallContext? context = default);
@@ -53,6 +57,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("创建用户")]
     Task<DataResult<EmptyRecord>> CreateUsersAsync(
         CreateUsersRequest request,
         ServerCallContext? context = default);
@@ -64,6 +69,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("更新用户")]
     Task<DataResult<UserInfo>> UpdateUserAsync(
         UpdateUserRequest request,
         ServerCallContext? context = default);
@@ -75,6 +81,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("更新用户")]
     Task<DataResult<EmptyRecord>> UpdateUsersAsync(
         UpdateUsersRequest request,
         ServerCallContext? context = default);
@@ -86,6 +93,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户")]
     Task<DataResult<EmptyRecord>> DeleteUserAsync(
         DeleteUserRequest request,
         ServerCallContext? context = default);
@@ -97,6 +105,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户")]
     Task<DataResult<EmptyRecord>> DeleteUsersAsync(
         DeleteUsersRequest request,
         ServerCallContext? context = default);
@@ -108,6 +117,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询用户角色")]
     Task<DataResult<PageResult<RoleInfo>>> FetchUserRolesAsync(
         PageRequest<FetchUserRolesFilter> request,
         ServerCallContext? context = default);
@@ -119,6 +129,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取用户角色")]
     Task<DataResult<RoleInfo>> GetUserRoleAsync(
         GetUserRoleRequest request,
         ServerCallContext? context = default);
@@ -130,6 +141,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户角色")]
     Task<DataResult<EmptyRecord>> AddUserRoleAsync(
         AddUserRoleRequest request,
         ServerCallContext? context = default);
@@ -141,6 +153,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户角色")]
     Task<DataResult<EmptyRecord>> AddUserRolesAsync(
         AddUserRolesRequest request,
         ServerCallContext? context = default);
@@ -152,6 +165,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户角色")]
     Task<DataResult<EmptyRecord>> RemoveUserRoleAsync(
         RemoveUserRoleRequest request,
         ServerCallContext? context = default);
@@ -163,6 +177,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户角色")]
     Task<DataResult<EmptyRecord>> RemoveUserRolesAsync(
         RemoveUserRolesRequest request,
         ServerCallContext? context = default);
@@ -174,6 +189,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询用户凭据信息")]
     Task<DataResult<PageResult<UserClaimInfo>>> FetchUserClaimsAsync(
         PageRequest<FetchUserClaimsFilter> request,
         ServerCallContext? context = default);
@@ -185,6 +201,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取用户凭据信息")]
     Task<DataResult<UserClaimInfo>> GetUserClaimAsync(
         GetUserClaimRequest request,
         ServerCallContext? context = default);
@@ -196,6 +213,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户凭据信息")]
     Task<DataResult<EmptyRecord>> AddUserClaimAsync(
         AddUserClaimRequest request,
         ServerCallContext? context = default);
@@ -207,6 +225,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户凭据信息")]
     Task<DataResult<EmptyRecord>> AddUserClaimsAsync(
         AddUserClaimsRequest request,
         ServerCallContext? context = default);
@@ -218,6 +237,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户凭据信息")]
     Task<DataResult<EmptyRecord>> RemoveUserClaimAsync(
         RemoveUserClaimRequest request,
         ServerCallContext? context = default);
@@ -229,6 +249,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户凭据信息")]
     Task<DataResult<EmptyRecord>> RemoveUsersClaimAsync(
         RemoveUserClaimsRequest request,
         ServerCallContext? context = default);
@@ -240,6 +261,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询用户登录信息")]
     Task<DataResult<PageResult<UserLoginInfo>>> FetchUserLoginsAsync(
         PageRequest<FetchUserLoginsFilter> request,
         ServerCallContext? context = default);
@@ -251,6 +273,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取用户登录信息")]
     Task<DataResult<UserLoginInfo>> GetUserLoginAsync(
         GetUserLoginRequest request,
         ServerCallContext? context = default);
@@ -262,6 +285,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户登录信息")]
     Task<DataResult<EmptyRecord>> AddUserLoginAsync(
         AddUserLoginRequest request,
         ServerCallContext? context = default);
@@ -273,6 +297,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("替换用户登录信息")]
     Task<DataResult<EmptyRecord>> ReplaceUserLoginAsync(
         ReplaceUserLoginRequest request,
         ServerCallContext? context = default);
@@ -284,6 +309,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户登录信息")]
     Task<DataResult<EmptyRecord>> RemoveUserLoginAsync(
         RemoveUserLoginRequest request,
         ServerCallContext? context = default);
@@ -295,6 +321,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户登录信息")]
     Task<DataResult<EmptyRecord>> RemoveUserLoginsAsync(
         RemoveUserLoginsRequest request,
         ServerCallContext? context = default);
@@ -306,6 +333,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("查询用户令牌信息")]
     Task<DataResult<PageResult<UserTokenInfo>>> FetchUserTokensAsync(
         PageRequest<FetchUserTokensFilter> request,
         ServerCallContext? context = default);
@@ -317,6 +345,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("获取用户令牌信息")]
     Task<DataResult<UserTokenInfo>> GetUserTokenAsync(
         GetUserTokenRequest request,
         ServerCallContext? context = default);
@@ -328,6 +357,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("添加用户令牌信息")]
     Task<DataResult<EmptyRecord>> AddUserTokenAsync(
         AddUserTokenRequest request,
         ServerCallContext? context = default);
@@ -339,6 +369,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("替换用户令牌信息")]
     Task<DataResult<EmptyRecord>> ReplaceUserTokenAsync(
         ReplaceUserTokenRequest request,
         ServerCallContext? context = default);
@@ -350,6 +381,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户令牌信息")]
     Task<DataResult<EmptyRecord>> RemoveUserTokenAsync(
         RemoveUserTokenRequest request,
         ServerCallContext? context = default);
@@ -361,6 +393,7 @@ public interface IUserService
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
+    [Description("删除用户令牌信息")]
     Task<DataResult<EmptyRecord>> RemoveUserTokensAsync(
         RemoveUserTokensRequest request,
         ServerCallContext? context = default);
@@ -409,7 +442,7 @@ public record GetUserRequest
 ///     创建用户请求
 /// </summary>
 [DataContract]
-public sealed record CreateUserRequest : UserPackage
+public record CreateUserRequest : UserPackage
 {
     #region Implementation of RolePackage
 
@@ -501,6 +534,7 @@ public sealed record UpdateUsersRequest
 /// <summary>
 ///     删除用户请求
 /// </summary>
+[DataContract]
 public sealed record DeleteUserRequest : GetUserRequest
 {
     /// <summary>

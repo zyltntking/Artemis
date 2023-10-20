@@ -1,6 +1,10 @@
 ﻿using Artemis.Shared.Identity.Services;
+using ProtoBuf;
+using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Reflection;
 using ProtoBuf.Meta;
+
+[module: CompatibilityLevel(CompatibilityLevel.Level300)]
 
 namespace Artemis.Shared.ProtoGenerator;
 
@@ -15,9 +19,12 @@ internal static class Program
     /// <param name="args"></param>
     private static async Task Main(string[] args)
     {
+        var binderConfiguration = BinderConfiguration.Create();
+
         var generator = new SchemaGenerator
         {
-            ProtoSyntax = ProtoSyntax.Proto3
+            ProtoSyntax = ProtoSyntax.Proto3,
+           
         };
 
         var schema = generator.GetSchema<IRoleService>();

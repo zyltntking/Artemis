@@ -52,7 +52,7 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<SignResult> ReSetPasswordAsync(
+    Task<SignResult> ResetPasswordAsync(
         Guid userId,
         string password,
         CancellationToken cancellationToken = default);
@@ -64,8 +64,8 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<SignResult> ReSetPasswordAsync(
-        List<Guid> userIds,
+    Task<SignResult> ResetPasswordsAsync(
+        IEnumerable<Guid> userIds,
         string password,
         CancellationToken cancellationToken = default);
 }

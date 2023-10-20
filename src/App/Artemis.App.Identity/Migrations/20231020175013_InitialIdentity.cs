@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +25,7 @@ namespace Artemis.App.Identity.Migrations
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
-                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
@@ -77,7 +77,8 @@ namespace Artemis.App.Identity.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false, comment: "是否允许双步认证"),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true, comment: "用户锁定到期时间标记"),
                     LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false, comment: "是否允许锁定用户"),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false, comment: "尝试错误数量")
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false, comment: "尝试错误数量"),
+                    NormalizedPhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true, comment: "规范化电话号码")
                 },
                 constraints: table =>
                 {
@@ -97,7 +98,7 @@ namespace Artemis.App.Identity.Migrations
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
-                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
@@ -344,13 +345,15 @@ namespace Artemis.App.Identity.Migrations
                 name: "IX_ArtemisUser_Email",
                 schema: "identity",
                 table: "ArtemisUser",
-                column: "NormalizedEmail");
+                column: "NormalizedEmail",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_PhoneNumber",
                 schema: "identity",
                 table: "ArtemisUser",
-                column: "PhoneNumber");
+                column: "PhoneNumber",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_UpdatedAt",
