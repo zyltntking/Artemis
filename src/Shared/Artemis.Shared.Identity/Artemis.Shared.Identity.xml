@@ -852,9 +852,25 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.UpdateOrCreateUserAsync(Artemis.Shared.Identity.Services.UpdateUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.CreateUsersAsync(Artemis.Shared.Identity.Services.CreateUsersRequest,Grpc.Core.ServerCallContext)">
             <summary>
-                创建或更新用户
+                创建用户
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.UpdateUserAsync(Artemis.Shared.Identity.Services.UpdateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新用户
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.UpdateUsersAsync(Artemis.Shared.Identity.Services.UpdateUsersRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新用户
             </summary>
             <param name="request">请求</param>
             <param name="context">上下文</param>
@@ -865,6 +881,206 @@
                 删除用户
             </summary>
             <param name="request">删除用户请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.DeleteUsersAsync(Artemis.Shared.Identity.Services.DeleteUsersRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserRolesAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserRolesFilter},Grpc.Core.ServerCallContext)">
+            <summary>
+                查询用户角色
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.GetUserRoleAsync(Artemis.Shared.Identity.Services.GetUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户角色
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserRoleAsync(Artemis.Shared.Identity.Services.AddUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户角色
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserRolesAsync(Artemis.Shared.Identity.Services.AddUserRolesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户角色
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserRoleAsync(Artemis.Shared.Identity.Services.RemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserRolesAsync(Artemis.Shared.Identity.Services.RemoveUserRolesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserClaimsAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserClaimsFilter},Grpc.Core.ServerCallContext)">
+            <summary>
+                查询用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.GetUserClaimAsync(Artemis.Shared.Identity.Services.GetUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserClaimAsync(Artemis.Shared.Identity.Services.AddUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserClaimsAsync(Artemis.Shared.Identity.Services.AddUserClaimsRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserClaimAsync(Artemis.Shared.Identity.Services.RemoveUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUsersClaimAsync(Artemis.Shared.Identity.Services.RemoveUserClaimsRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户凭据信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserLoginsAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserLoginsFilter},Grpc.Core.ServerCallContext)">
+            <summary>
+                查询用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.GetUserLoginAsync(Artemis.Shared.Identity.Services.GetUserLoginRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserLoginAsync(Artemis.Shared.Identity.Services.AddUserLoginRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.ReplaceUserLoginAsync(Artemis.Shared.Identity.Services.ReplaceUserLoginRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                替换用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserLoginAsync(Artemis.Shared.Identity.Services.RemoveUserLoginRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserLoginsAsync(Artemis.Shared.Identity.Services.RemoveUserLoginsRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户登录信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserTokensAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserTokensFilter},Grpc.Core.ServerCallContext)">
+            <summary>
+                查询用户令牌信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.GetUserTokenAsync(Artemis.Shared.Identity.Services.GetUserTokenRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户令牌信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.AddUserTokenAsync(Artemis.Shared.Identity.Services.AddUserTokenRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加用户令牌信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.ReplaceUserTokenAsync(Artemis.Shared.Identity.Services.ReplaceUserTokenRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                替换用户令牌信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserTokenAsync(Artemis.Shared.Identity.Services.RemoveUserTokenRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户令牌信息
+            </summary>
+            <param name="request">请求</param>
+            <param name="context">上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.RemoveUserTokensAsync(Artemis.Shared.Identity.Services.RemoveUserTokensRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户令牌信息
+            </summary>
+            <param name="request">请求</param>
             <param name="context">上下文</param>
             <returns></returns>
         </member>
@@ -923,6 +1139,17 @@
                 电话号码
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.CreateUsersRequest">
+            <summary>
+                创建用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.CreateUsersRequest.UserPackages">
+            <summary>
+                用户信息
+            </summary>
+            <remarks>key: userPackage, value: password</remarks>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.UpdateUserRequest">
             <summary>
                 更新用户请求
@@ -938,9 +1165,14 @@
                 用户信息
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Services.UpdateUserRequest.Password">
+        <member name="T:Artemis.Shared.Identity.Services.UpdateUsersRequest">
             <summary>
-                用户密码
+                更新用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UpdateUsersRequest.UserPackages">
+            <summary>
+                用户信息
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.DeleteUserRequest">
@@ -951,6 +1183,391 @@
         <member name="P:Artemis.Shared.Identity.Services.DeleteUserRequest.UserId">
             <summary>
                 角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.DeleteUsersRequest">
+            <summary>
+                删除用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.DeleteUsersRequest.UserIds">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserRolesFilter">
+            <summary>
+                查询角色过滤器
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserRolesFilter.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserRolesFilter.RoleNameSearch">
+            <summary>
+                用户名搜索值
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.GetUserRoleRequest">
+            <summary>
+                获取用户角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserRoleRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserRoleRequest.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserRoleRequest">
+            <summary>
+                添加用户角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserRoleRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserRoleRequest.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserRolesRequest">
+            <summary>
+                添加角色用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserRolesRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserRolesRequest.RoleIds">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserRoleRequest">
+            <summary>
+                删除用户角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserRoleRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserRoleRequest.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserRolesRequest">
+            <summary>
+                删除角色用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserRolesRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserRolesRequest.RoleIds">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserClaimsFilter">
+            <summary>
+                查询用户凭据过滤器
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserClaimsFilter.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserClaimsFilter.ClaimTypeSearch">
+            <summary>
+                凭据类型搜索值
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.GetUserClaimRequest">
+            <summary>
+                获取用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserClaimRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserClaimRequest.UserClaimId">
+            <summary>
+                凭据标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserClaimRequest">
+            <summary>
+                添加用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserClaimRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserClaimRequest.ClaimPackage">
+            <summary>
+                凭据信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserClaimsRequest">
+            <summary>
+                添加用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserClaimsRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserClaimsRequest.ClaimPackages">
+            <summary>
+                凭据信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserClaimRequest">
+            <summary>
+                删除用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserClaimRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserClaimRequest.UserClaimId">
+            <summary>
+                凭据标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserClaimsRequest">
+            <summary>
+                删除用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserClaimsRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserClaimsRequest.UserClaimIds">
+            <summary>
+                凭据标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserLoginsFilter">
+            <summary>
+                查询用户登录信息过滤器
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserLoginsFilter.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserLoginsFilter.LoginProviderSearch">
+            <summary>
+                登录类型搜索值
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.GetUserLoginRequest">
+            <summary>
+                获取用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserLoginRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserLoginRequest.UserLoginId">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserLoginRequest">
+            <summary>
+                添加用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserLoginRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserLoginRequest.UserLoginPackage">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.ReplaceUserLoginRequest">
+            <summary>
+                替换用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserLoginRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserLoginRequest.UserLoginId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserLoginRequest.UserLoginPackage">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserLoginRequest">
+            <summary>
+                删除用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserLoginRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserLoginRequest.UserLoginId">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserLoginsRequest">
+            <summary>
+                删除用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserLoginsRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserLoginsRequest.UserLoginIds">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserTokensFilter">
+            <summary>
+                查询用户令牌信息过滤器
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensFilter.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensFilter.LoginProviderSearch">
+            <summary>
+                登录类型搜索值
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensFilter.NameSearch">
+            <summary>
+                令牌名搜索值
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.GetUserTokenRequest">
+            <summary>
+                获取用户令牌信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserTokenRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.GetUserTokenRequest.UserTokenId">
+            <summary>
+                用户令牌信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.AddUserTokenRequest">
+            <summary>
+                添加用户令牌信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserTokenRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.AddUserTokenRequest.UserTokenPackage">
+            <summary>
+                用户令牌信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.ReplaceUserTokenRequest">
+            <summary>
+                替换用户令牌信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserTokenRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserTokenRequest.UserTokenId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.ReplaceUserTokenRequest.UserTokenPackage">
+            <summary>
+                用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserTokenRequest">
+            <summary>
+                删除用户登录信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserTokenRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserTokenRequest.UserTokenId">
+            <summary>
+                用户令牌信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RemoveUserTokensRequest">
+            <summary>
+                删除用户令牌信息请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserTokensRequest.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RemoveUserTokensRequest.UserTokenIds">
+            <summary>
+                用户令牌信息标识
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Transfer.IClaim">

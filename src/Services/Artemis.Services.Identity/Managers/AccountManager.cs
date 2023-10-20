@@ -55,10 +55,10 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     签到/登录
     /// </summary>
-    /// <param name="username">用户名</param>
+    /// <param name="userSign">用户名</param>
     /// <param name="password">密码</param>
     /// <returns></returns>
-    public Task<TokenInfo> SignInAsync(string username, string password)
+    public Task<TokenInfo> SignInAsync(string userSign, string password)
     {
         throw new NotImplementedException();
     }

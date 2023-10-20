@@ -14,4 +14,9 @@ internal static class ActionType
     ///     PAGE
     /// </summary>
     public const string PAGE = nameof(PAGE);
+
+    /// <summary>
+    /// GRPC
+    /// </summary>
+    public const string GRPC = nameof(GRPC);
 }

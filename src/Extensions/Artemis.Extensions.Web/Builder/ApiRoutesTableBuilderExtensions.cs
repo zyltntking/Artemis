@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
+using Grpc.AspNetCore.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Extensions.Web.Builder;
@@ -31,14 +34,64 @@ public static class ApiRoutesTableBuilderExtensions
                 var routeItemList = new List<RouteItem>();
 
                 foreach (var endpoint in endpoints)
+                {
                     if (endpoint is RouteEndpoint routeEndpoint)
                     {
-                        var apiControllerMetadata = routeEndpoint
+                        var pageModel = routeEndpoint
+                            .Metadata
+                            .OfType<PageModelAttribute>()
+                            .Any();
+
+                        var apiAction = routeEndpoint
                             .Metadata
                             .OfType<ApiControllerAttribute>()
-                            .FirstOrDefault();
+                            .Any();
 
-                        if (apiControllerMetadata != null)
+                        var grpcAction = routeEndpoint
+                            .Metadata
+                            .OfType<GrpcMethodMetadata>()
+                            .Any();
+
+                        if (pageModel)
+                        {
+                            var displayPath = routeEndpoint.RoutePattern.RawText ?? string.Empty;
+
+                            displayPath = $"{domain}:{displayPath}";
+
+                            var actionParts = routeEndpoint.RoutePattern
+                                .PathSegments
+                                .SelectMany(item => item.Parts)
+                                .Select(item =>
+                                {
+                                    return item switch
+                                    {
+                                        RoutePatternLiteralPart literalPart => literalPart.Content,
+                                        RoutePatternParameterPart parameterPart => parameterPart.Name,
+                                        RoutePatternSeparatorPart separatorPart => separatorPart.Content,
+                                        _ => string.Empty
+                                    };
+                                });
+
+                            var displayAction = $"{domain}:{string.Join(".", actionParts)}";
+
+                            var descriptionMetadata = routeEndpoint
+                                .Metadata
+                                .OfType<DescriptionAttribute>()
+                                .FirstOrDefault();
+
+                            var routeItem = new RouteItem
+                            {
+                                Action = ActionType.PAGE,
+                                Methods = ActionType.PAGE,
+                                Path = displayPath,
+                                DomainAction = displayAction,
+                                Description = descriptionMetadata?.Description
+                            };
+
+                            routeItemList.Add(routeItem);
+                        }
+
+                        if (apiAction)
                         {
                             var httpMethodsMetadata = routeEndpoint
                                 .Metadata
@@ -51,15 +104,14 @@ public static class ApiRoutesTableBuilderExtensions
 
                             var displayPath = routeEndpoint.RoutePattern.RawText ?? string.Empty;
 
-                            displayPath = $"{domain}/{displayPath}";
+                            displayPath = $"{domain}:{displayPath}";
 
-                            var routePatternDefaults = routeEndpoint.RoutePattern.Defaults;
+                            var actionParts = routeEndpoint
+                                .RoutePattern
+                                .Defaults
+                                .Select(item => item.Value as string);
 
-                            string? controller, action;
-                            controller = routePatternDefaults[nameof(controller)] as string;
-                            action = routePatternDefaults[nameof(action)] as string;
-
-                            var displayAction = $"{domain}.{controller}.{action}";
+                            var displayAction = $"{domain}:{string.Join(".", actionParts)}";
 
                             var descriptionMetadata = routeEndpoint
                                 .Metadata
@@ -77,8 +129,47 @@ public static class ApiRoutesTableBuilderExtensions
 
                             routeItemList.Add(routeItem);
                         }
-                    }
 
+                        if (grpcAction)
+                        {
+                            var displayPath = routeEndpoint.RoutePattern.RawText ?? string.Empty;
+
+                            displayPath = $"{domain}:{displayPath}";
+
+                            var actionParts = routeEndpoint.RoutePattern
+                                .PathSegments
+                                .SelectMany(item => item.Parts)
+                                .Select(item =>
+                                {
+                                    return item switch
+                                    {
+                                        RoutePatternLiteralPart literalPart => literalPart.Content,
+                                        RoutePatternParameterPart parameterPart => parameterPart.Name,
+                                        RoutePatternSeparatorPart separatorPart => separatorPart.Content,
+                                        _ => string.Empty
+                                    };
+                                });
+
+                            var displayAction = $"{domain}:{string.Join(".", actionParts)}";
+
+                            var descriptionMetadata = routeEndpoint
+                                .Metadata
+                                .OfType<DescriptionAttribute>()
+                                .FirstOrDefault();
+
+                            var routeItem = new RouteItem
+                            {
+                                Action = ActionType.GRPC,
+                                Methods = ActionType.GRPC,
+                                Path = displayPath,
+                                DomainAction = displayAction,
+                                Description = descriptionMetadata?.Description
+                            };
+
+                            routeItemList.Add(routeItem);
+                        }
+                    }
+                }
                 return routeItemList;
             });
 

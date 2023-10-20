@@ -104,10 +104,12 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .IsUnique();
 
         builder.HasIndex(user => user.NormalizedEmail)
-            .HasDatabaseName($"IX_{TableName}_Email");
+            .HasDatabaseName($"IX_{TableName}_Email")
+            .IsUnique();
 
         builder.HasIndex(user => user.PhoneNumber)
-            .HasDatabaseName($"IX_{TableName}_PhoneNumber");
+            .HasDatabaseName($"IX_{TableName}_PhoneNumber")
+            .IsUnique();
 
         // Each User can have many UserClaims
         builder.HasMany(user => user.Claims)

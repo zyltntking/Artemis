@@ -19,6 +19,11 @@
                 PAGE
             </summary>
         </member>
+        <member name="F:Artemis.Extensions.Web.Builder.ActionType.GRPC">
+            <summary>
+            GRPC
+            </summary>
+        </member>
         <member name="T:Artemis.Extensions.Web.Builder.ApiRoutesTableBuilderExtensions">
             <summary>
                 路由表应用创建扩展

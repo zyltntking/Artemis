@@ -12,10 +12,10 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <summary>
     ///     签到/登录
     /// </summary>
-    /// <param name="username">用户名</param>
+    /// <param name="userSign">用户名/密码/邮箱</param>
     /// <param name="password">密码</param>
     /// <returns>登录后的Token信息</returns>
-    Task<TokenInfo> SignInAsync(string username, string password);
+    Task<TokenInfo> SignInAsync(string userSign, string password);
 
     /// <summary>
     ///     报名/注册

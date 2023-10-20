@@ -58,17 +58,25 @@ public static class Program
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 });
 
-            //builder.Services.AddGrpc();
+            //builder.Services.AddGrpc(options =>
+            //    {
+            //        options.EnableDetailedErrors = true;
+            //        options.Interceptors.Add<TokenInterceptor>();
+            //    })
+            //    .AddJsonTranscoding();
             //builder.Services.AddGrpcReflection();
+
             builder.Services.AddCodeFirstGrpc(options =>
             {
                 options.EnableDetailedErrors = true;
                 options.Interceptors.Add<TokenInterceptor>();
             });
-
             builder.Services.AddCodeFirstGrpcReflection();
 
-            builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
+            builder.Services.AddArtemisMiddleWares(options =>
+            {
+                options.ServiceDomain.DomainName = "Identity";
+            });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddOpenApiDoc(docConfig);
@@ -88,7 +96,7 @@ public static class Program
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -101,18 +109,19 @@ public static class Program
             app.UseResponseCompression();
 
             app.MapRazorPages();
-
             app.MapControllers();
-
             app.MapGrpcService<RoleService>();
             app.MapGrpcService<UserService>();
             app.MapGrpcService<AccountService>();
 
-            app.MapApiRouteTable();
+            //app.MapGrpcHealthChecksService();
 
             if (app.Environment.IsDevelopment())
+            {
+                app.MapApiRouteTable();
                 //app.MapGrpcReflectionService();
                 app.MapCodeFirstGrpcReflectionService();
+            }
         });
     }
 }

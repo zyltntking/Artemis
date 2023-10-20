@@ -30,14 +30,6 @@ public static class LogHost
 
             var builder = WebApplication.CreateBuilder(args);
 
-            //builder.WebHost.ConfigureKestrel(serverOptions =>
-            //{
-            //    serverOptions.ConfigureEndpointDefaults(options =>
-            //    {
-            //        options.Protocols = HttpProtocols.Http1AndHttp2;
-            //    });
-            //});
-
             buildAction(builder);
 
             builder.Host.UseSerilog();
