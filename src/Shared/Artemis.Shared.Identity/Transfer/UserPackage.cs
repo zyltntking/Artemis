@@ -27,6 +27,27 @@ internal interface IUser
     string? PhoneNumber { get; set; }
 }
 
+/// <summary>
+/// 认证必要信息
+/// </summary>
+public interface IIdentityUserDocument
+{
+    /// <summary>
+    /// 标识
+    /// </summary>
+    Guid Id { get; set; }
+
+    /// <summary>
+    /// 用户名
+    /// </summary>
+    string UserName { get; set; }
+    
+    /// <summary>
+    /// 密码哈希
+    /// </summary>
+    string PasswordHash { get; set; }
+}
+
 #endregion
 
 /// <summary>
@@ -119,4 +140,29 @@ public sealed record UserInfo : UserPackage, IKeySlot
     [Required]
     [DataMember(Order = 6)]
     public required bool PhoneNumberConfirmed { get; set; }
+}
+
+/// <summary>
+/// 认证用户文档
+/// </summary>
+public sealed record IdentityUserDocument : IIdentityUserDocument
+{
+    #region Implementation of IIdentityUserDocument
+
+    /// <summary>
+    /// 标识
+    /// </summary>
+    public required Guid Id { get; set; }
+
+    /// <summary>
+    /// 用户名
+    /// </summary>
+    public required string UserName { get; set; }
+
+    /// <summary>
+    /// 密码哈希
+    /// </summary>
+    public required string PasswordHash { get; set; }
+
+    #endregion
 }

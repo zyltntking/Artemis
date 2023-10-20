@@ -1882,37 +1882,37 @@
 				过期时间
 			</summary>
 		</member>
-		<member name="T:Artemis.Shared.Identity.Transfer.TokenInfo">
+		<member name="T:Artemis.Shared.Identity.Transfer.TokenDocument">
 			<summary>
 				Token信息
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserId">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserId">
 			<summary>
 				用户标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserClaims">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserClaims">
 			<summary>
 				用户凭据
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.UserName">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserName">
 			<summary>
 				用户名
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleIds">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.RoleIds">
 			<summary>
 				角色标识
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleNames">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.RoleNames">
 			<summary>
 				角色名
 			</summary>
 		</member>
-		<member name="P:Artemis.Shared.Identity.Transfer.TokenInfo.RoleClaims">
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.RoleClaims">
 			<summary>
 				角色凭据
 			</summary>

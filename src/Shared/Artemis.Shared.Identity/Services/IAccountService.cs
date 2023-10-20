@@ -25,21 +25,22 @@ public interface IAccountService
 ///     登录请求
 /// </summary>
 [DataContract]
-public record SignInRequest
+public record SignInRequest : SignInPackage
 {
     /// <summary>
     ///     用户名
     /// </summary>
+    [Required]
     [DataMember(Order = 1)]
-    [MaxLength(128)]
-    public string UserName { get; set; } = null!;
+    public override required string UserSign { get; set; }
 
     /// <summary>
     ///     密码
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
     [DataType(DataType.Password)]
-    public string Password { get; set; } = null!;
+    public override required string Password { get; set; }
 }
 
 /// <summary>

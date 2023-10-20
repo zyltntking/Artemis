@@ -146,13 +146,13 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         query = query.WhereIf(
             normalizedEmail != string.Empty,
             user => EF.Functions.Like(
-                user.NormalizedEmail,
+                user.NormalizedEmail!,
                 $"%{normalizedEmail}%"));
 
         query = query.WhereIf(
             phoneNumberSearch != string.Empty,
             user => EF.Functions.Like(
-                user.PhoneNumber,
+                user.PhoneNumber!,
                 $"%{phoneNumberSearch}%"));
 
         var count = await query.LongCountAsync(cancellationToken);

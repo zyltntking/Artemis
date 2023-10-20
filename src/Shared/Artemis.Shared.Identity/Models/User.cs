@@ -8,7 +8,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户
 /// </summary>
-public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
+public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIdentityUserDocument
 {
     /// <summary>
     ///     并发锁
@@ -53,7 +53,6 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
     /// <summary>
     ///     标准化电子邮件
     /// </summary>
-    [EmailAddress]
     [MaxLength(128)]
     public override string? NormalizedEmail { get; set; }
 
@@ -66,7 +65,6 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser
     /// <summary>
     ///     标准化电话号码
     /// </summary>
-    [Phone]
     [MaxLength(16)]
     public virtual string? NormalizedPhoneNumber { get; set; }
 
