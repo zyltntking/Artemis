@@ -16,31 +16,33 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录后的Token信息</returns>
     Task<(SignResult result, TokenDocument? token)> SignInAsync(
-        SignInPackage package, 
+        SignInPackage package,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     报名/注册
     /// </summary>
-    /// <param name="package">注册信息</param>
+    /// <param name="package">用户信息</param>
+    /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录后的Token信息</returns>
     Task<(SignResult result, TokenDocument? token)> SignUpAsync(
-        SignUpPackage package, 
+        UserPackage package,
+        string password,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     修改密码
     /// </summary>
-    /// <param name="username">用户名</param>
+    /// <param name="userSign">用户名</param>
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> ChangePasswordAsync(
-        string username, 
-        string oldPassword, 
-        string newPassword, 
+    Task<SignResult> ChangePasswordAsync(
+        string userSign,
+        string oldPassword,
+        string newPassword,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -50,9 +52,9 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> ReSetPasswordAsync(
-        Guid userId, 
-        string password, 
+    Task<SignResult> ReSetPasswordAsync(
+        Guid userId,
+        string password,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -62,8 +64,8 @@ public interface IAccountManager : IManager<ArtemisUser>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> ReSetPasswordAsync(
-        List<Guid> userIds, 
-        string password, 
+    Task<SignResult> ReSetPasswordAsync(
+        List<Guid> userIds,
+        string password,
         CancellationToken cancellationToken = default);
 }

@@ -17,6 +17,12 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     public override string? ConcurrencyStamp { get; set; }
 
     /// <summary>
+    ///     密码哈希
+    /// </summary>
+    [MaxLength(128)]
+    public override required string PasswordHash { get; set; }
+
+    /// <summary>
     ///     标识
     /// </summary>
     [Required]
@@ -73,12 +79,6 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     /// </summary>
     [Required]
     public override required bool PhoneNumberConfirmed { get; set; }
-
-    /// <summary>
-    ///     密码哈希
-    /// </summary>
-    [MaxLength(128)]
-    public override required string PasswordHash { get; set; }
 
     /// <summary>
     ///     密码锁

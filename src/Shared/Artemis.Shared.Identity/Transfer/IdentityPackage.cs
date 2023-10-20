@@ -49,78 +49,38 @@ public record TokenPackage : IToken
 }
 
 /// <summary>
-/// 认证基本信息
+///     认证基本信息
 /// </summary>
 public record SignInPackage
 {
     /// <summary>
-    /// 用户签名
+    ///     用户签名
     /// </summary>
     /// <remarks>用户名|电话号码|邮箱地址</remarks>
     [Required]
     public virtual required string UserSign { get; set; }
 
     /// <summary>
-    /// 密码
+    ///     密码
     /// </summary>
     [Required]
     public virtual required string Password { get; set; }
-
-
 }
 
 /// <summary>
-/// 签入结果
+///     签入结果
 /// </summary>
 public sealed record SignResult
 {
     /// <summary>
-    /// 是否认证成功
+    ///     是否认证成功
     /// </summary>
     public bool Succeeded { get; set; }
 
     /// <summary>
-    /// 认证消息
+    ///     认证消息
     /// </summary>
     public required string Message { get; set; }
-}
-
-/// <summary>
-/// 报名基本信息
-/// </summary>
-public sealed record SignUpPackage : UserPackage
-{
-    #region Implementation of RolePackage
-
-    /// <summary>
-    ///     用户名
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    public override required string UserName { get; set; }
-
-    /// <summary>
-    ///     密码
-    /// </summary>
-    [Required]
-    [StringLength(32, MinimumLength = 6)]
-    public required string Password { get; set; }
-
-    /// <summary>
-    ///     电子邮件
-    /// </summary>
-    [EmailAddress]
-    [MaxLength(128)]
-    public override string? Email { get; set; }
-
-    /// <summary>
-    ///     电话号码
-    /// </summary>
-    [Phone]
-    [MaxLength(16)]
-    public override string? PhoneNumber { get; set; }
-
-    #endregion
 }
 
 /// <summary>

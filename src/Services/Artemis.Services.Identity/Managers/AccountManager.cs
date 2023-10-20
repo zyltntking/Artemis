@@ -39,25 +39,6 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
         RoleClaimStore = roleClaimStore;
     }
 
-    #region StoreAccess
-
-    /// <summary>
-    ///     用户存储访问器
-    /// </summary>
-    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
-
-    /// <summary>
-    /// 用户凭据存储依赖
-    /// </summary>
-    private IArtemisUserClaimStore UserClaimStore { get; }
-
-    /// <summary>
-    /// 角色凭据存储依赖
-    /// </summary>
-    private IArtemisRoleClaimStore RoleClaimStore { get; }
-
-    #endregion
-
     #region Overrides of Manager<ArtemisUser,Guid>
 
     /// <summary>
@@ -67,6 +48,25 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     {
         UserStore.Dispose();
     }
+
+    #endregion
+
+    #region StoreAccess
+
+    /// <summary>
+    ///     用户存储访问器
+    /// </summary>
+    private IArtemisUserStore UserStore => (IArtemisUserStore)Store;
+
+    /// <summary>
+    ///     用户凭据存储依赖
+    /// </summary>
+    private IArtemisUserClaimStore UserClaimStore { get; }
+
+    /// <summary>
+    ///     角色凭据存储依赖
+    /// </summary>
+    private IArtemisRoleClaimStore RoleClaimStore { get; }
 
     #endregion
 
@@ -92,7 +92,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
                 item.NormalizedUserName == normalizeSign ||
                 item.NormalizedEmail == normalizeSign ||
                 item.NormalizedPhoneNumber == normalizeSign)
-            .ProjectToType<IdentityUserDocument>()
+            .ProjectToType<UserDocument>()
             .FirstOrDefaultAsync(cancellationToken);
 
         var result = new SignResult
@@ -152,11 +152,13 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     报名/注册
     /// </summary>
-    /// <param name="package">注册信息</param>
+    /// <param name="package">用户信息</param>
+    /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录后的Token信息</returns>
     public async Task<(SignResult result, TokenDocument? token)> SignUpAsync(
-        SignUpPackage package, 
+        UserPackage package,
+        string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -185,7 +187,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
 
         user.NormalizedEmail = package.Email is not null ? NormalizeKey(package.Email) : string.Empty;
 
-        user.PasswordHash = Hash.ArtemisHash(package.Password);
+        user.PasswordHash = Hash.ArtemisHash(password);
 
         user.SecurityStamp = package.GenerateSecurityStamp;
 
@@ -232,18 +234,68 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     修改密码
     /// </summary>
-    /// <param name="username">用户名</param>
+    /// <param name="userSign">用户名</param>
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public Task<StoreResult> ChangePasswordAsync(
-        string username, 
-        string oldPassword, 
+    public async Task<SignResult> ChangePasswordAsync(
+        string userSign,
+        string oldPassword,
         string newPassword,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        OnAsyncActionExecuting(cancellationToken);
+
+        var result = new SignResult
+        {
+            Succeeded = false,
+            Message = "修改失败"
+        };
+
+        if (oldPassword == newPassword)
+        {
+            result.Message = "新密码不能与旧密码相同";
+
+            return result;
+        }
+
+        var normalizeSign = UserStore.NormalizeKey(userSign);
+
+        var user = await UserStore.EntityQuery
+            .Where(item =>
+                item.NormalizedUserName == normalizeSign ||
+                item.NormalizedEmail == normalizeSign ||
+                item.NormalizedPhoneNumber == normalizeSign)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (user is null)
+        {
+            result.Message = "未找到匹配签名的用户，请检查输入";
+
+            return result;
+        }
+
+        var passwordValid = Hash.ArtemisHashVerify(user.PasswordHash, oldPassword);
+
+        if (!passwordValid)
+        {
+            result.Message = "原密码错误";
+
+            return result;
+        }
+
+        user.PasswordHash = Hash.ArtemisHash(newPassword);
+
+        var storeResult = await UserStore.UpdateAsync(user, cancellationToken);
+
+        if (storeResult.Succeeded)
+        {
+            result.Succeeded = true;
+            result.Message = "修改成功";
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -253,9 +305,9 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> ReSetPasswordAsync(
-        Guid userId, 
-        string password, 
+    public async Task<SignResult> ReSetPasswordAsync(
+        Guid userId,
+        string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -264,14 +316,32 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
             .KeyMatchQuery(userId)
             .FirstOrDefaultAsync(cancellationToken);
 
+        var result = new SignResult
+        {
+            Succeeded = false,
+            Message = "重置失败"
+        };
+
         if (user is null)
         {
-            return StoreResult.Failed();
+            result.Message = "未找到匹配用户";
+
+            return result;
         }
 
         user.PasswordHash = Hash.ArtemisHash(password);
 
-        return await UserStore.UpdateAsync(user, cancellationToken);
+        var storeResult = await UserStore.UpdateAsync(user, cancellationToken);
+
+        result.Message = storeResult.DescribeError;
+
+        if (storeResult.Succeeded)
+        {
+            result.Succeeded = true;
+            result.Message = "重置成功";
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -281,9 +351,9 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<StoreResult> ReSetPasswordAsync(
-        List<Guid> userIds, 
-        string password, 
+    public async Task<SignResult> ReSetPasswordAsync(
+        List<Guid> userIds,
+        string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -291,17 +361,31 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
         var users = await UserStore.KeyMatchQuery(userIds)
             .ToListAsync(cancellationToken);
 
+        var result = new SignResult
+        {
+            Succeeded = false,
+            Message = "重置失败"
+        };
+
         if (!users.Any())
         {
-            return StoreResult.Failed();
+            result.Message = "未找到匹配用户";
+
+            return result;
         }
 
-        foreach (var user in users)
+        foreach (var user in users) user.PasswordHash = Hash.ArtemisHash(password);
+
+        var storeResult = await UserStore.UpdateAsync(users, cancellationToken);
+
+        if (storeResult.Succeeded)
         {
-            user.PasswordHash = Hash.ArtemisHash(password);
+            result.Succeeded = true;
+
+            result.Message = "重置成功";
         }
 
-        return await UserStore.UpdateAsync(users, cancellationToken);
+        return result;
     }
 
     #endregion

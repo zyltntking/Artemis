@@ -582,7 +582,7 @@
 			<summary>
 				报名/注册
 			</summary>
-			<param name="username">用户名</param>
+			<param name="userSign">用户名</param>
 			<param name="password">密码</param>
 			<returns>登录后的Token信息</returns>
 		</member>
@@ -597,7 +597,7 @@
 			<summary>
 				修改密码
 			</summary>
-			<param name="username">用户名</param>
+			<param name="userSign">用户名</param>
 			<param name="oldPassword">原密码</param>
 			<param name="newPassword">新密码</param>
 			<returns></returns>
@@ -749,7 +749,7 @@
 			<summary>
 				报名/注册
 			</summary>
-			<param name="username">用户名</param>
+			<param name="userSign">用户名</param>
 			<param name="password">密码</param>
 			<returns>登录后的Token信息</returns>
 		</member>
@@ -764,7 +764,7 @@
 			<summary>
 				修改密码
 			</summary>
-			<param name="username">用户名</param>
+			<param name="userSign">用户名</param>
 			<param name="oldPassword">原密码</param>
 			<param name="newPassword">新密码</param>
 			<returns></returns>
