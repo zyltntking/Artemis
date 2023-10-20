@@ -72,21 +72,21 @@ public record UserClaimPackage : ClaimPackage, IUserClaim
 ///     用户凭据信息
 /// </summary>
 [DataContract]
-public record UserClaimInfo : UserClaimPackage, IUserClaimDocument, IKeySlot<int>
+public sealed record UserClaimInfo : UserClaimPackage, IUserClaimDocument, IKeySlot<int>
 {
     /// <summary>
     ///     标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required int Id { get; set; }
+    public required int Id { get; set; }
 
     /// <summary>
     ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required Guid UserId { get; set; }
+    public required Guid UserId { get; set; }
 
     /// <summary>
     ///     凭据类型

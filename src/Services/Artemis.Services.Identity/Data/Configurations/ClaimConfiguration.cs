@@ -39,7 +39,7 @@ public class ClaimConfiguration : IdentityConfiguration<ArtemisClaim>
         builder.Property(roleClaim => roleClaim.ClaimValue)
             .HasMaxLength(128)
             .IsRequired()
-            .HasComment("凭据类型");
+            .HasComment("凭据值");
 
         builder.Property(roleClaims => roleClaims.CheckStamp)
             .HasMaxLength(64)

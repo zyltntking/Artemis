@@ -53,14 +53,14 @@ public record UserRolePackage : IUserRole
 ///     用户角色信息
 /// </summary>
 [DataContract]
-public record UserRoleInfo : UserRolePackage, IKeySlot<int>
+public sealed record UserRoleInfo : UserRolePackage, IKeySlot<int>
 {
     /// <summary>
     ///     存储标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required int Id { get; set; }
+    public required int Id { get; set; }
 
     /// <summary>
     ///     用户标识

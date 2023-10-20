@@ -32,7 +32,7 @@ public interface IAccountManager : IManager<ArtemisUser>
     Task SignOutAsync();
 
     /// <summary>
-    /// 修改密码
+    ///     修改密码
     /// </summary>
     /// <param name="username">用户名</param>
     /// <param name="oldPassword">原密码</param>
@@ -41,7 +41,7 @@ public interface IAccountManager : IManager<ArtemisUser>
     Task<StoreResult> ChangePasswordAsync(string username, string oldPassword, string newPassword);
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="userId">用户标识</param>
     /// <param name="password">新密码</param>
@@ -49,7 +49,7 @@ public interface IAccountManager : IManager<ArtemisUser>
     Task<StoreResult> ReSetPasswordAsync(Guid userId, string password);
 
     /// <summary>
-    /// 批量修改密码
+    ///     批量修改密码
     /// </summary>
     /// <param name="userIds">用户标识列表</param>
     /// <param name="password">新密码</param>

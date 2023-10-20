@@ -58,8 +58,12 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     /// <param name="userSign">用户名</param>
     /// <param name="password">密码</param>
     /// <returns></returns>
-    public Task<TokenInfo> SignInAsync(string userSign, string password)
+    public async Task<TokenInfo> SignInAsync(string userSign, string password)
     {
+        var normalizeSign = UserStore.NormalizeKey(userSign);
+        var user = UserStore.EntityQuery
+            .Where(item => item.NormalizedUserName == normalizeSign || item.NormalizedEmail == normalizeSign);
+
         throw new NotImplementedException();
     }
 
@@ -84,7 +88,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     }
 
     /// <summary>
-    /// 修改密码
+    ///     修改密码
     /// </summary>
     /// <param name="username">用户名</param>
     /// <param name="oldPassword">原密码</param>
@@ -96,7 +100,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     }
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="userId">用户标识</param>
     /// <param name="password">新密码</param>
@@ -107,7 +111,7 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
     }
 
     /// <summary>
-    /// 批量重置密码
+    ///     批量重置密码
     /// </summary>
     /// <param name="userIds">用户标识列表</param>
     /// <param name="password">新密码</param>

@@ -146,13 +146,13 @@ public class RoleService : IRoleService
     }
 
     /// <summary>
-    /// 更新或创建角色
+    ///     更新或创建角色
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     public async Task<DataResult<RoleInfo>> UpdateOrCreateRoleAsync(
-        UpdateRoleRequest request, 
+        UpdateRoleRequest request,
         ServerCallContext? context = default)
     {
         var (result, role) = await RoleManager.UpdateOrCreateRoleAsync(

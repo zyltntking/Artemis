@@ -34,7 +34,6 @@ public static class ApiRoutesTableBuilderExtensions
                 var routeItemList = new List<RouteItem>();
 
                 foreach (var endpoint in endpoints)
-                {
                     if (endpoint is RouteEndpoint routeEndpoint)
                     {
                         var pageModel = routeEndpoint
@@ -169,7 +168,7 @@ public static class ApiRoutesTableBuilderExtensions
                             routeItemList.Add(routeItem);
                         }
                     }
-                }
+
                 return routeItemList;
             });
 

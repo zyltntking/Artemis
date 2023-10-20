@@ -9,7 +9,7 @@ namespace Artemis.Shared.Identity.Transfer;
 /// <summary>
 ///     基本用户令牌信息接口
 /// </summary>
-public interface IUserToken
+internal interface IUserToken
 {
     /// <summary>
     ///     登录提供程序
@@ -95,14 +95,14 @@ public record UserTokenPackage : IUserToken
 ///     用户登录信息
 /// </summary>
 [DataContract]
-public record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeySlot<int>
+public sealed record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeySlot<int>
 {
     /// <summary>
     ///     存储标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required int Id { get; set; }
+    public required int Id { get; set; }
 
 
     /// <summary>
@@ -110,7 +110,7 @@ public record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeySlot<int
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required Guid UserId { get; set; }
+    public required Guid UserId { get; set; }
 
     /// <summary>
     ///     登录提供程序

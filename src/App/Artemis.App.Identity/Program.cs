@@ -73,10 +73,7 @@ public static class Program
             });
             builder.Services.AddCodeFirstGrpcReflection();
 
-            builder.Services.AddArtemisMiddleWares(options =>
-            {
-                options.ServiceDomain.DomainName = "Identity";
-            });
+            builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddOpenApiDoc(docConfig);

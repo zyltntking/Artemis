@@ -467,7 +467,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    /// 获取用户角色
+    ///     获取用户角色
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="roleId">角色标识</param>
@@ -480,13 +480,11 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
 
         if (userExists)
-        {
             return await UserStore.KeyMatchQuery(id)
                 .SelectMany(user => user.Roles)
                 .Where(role => role.Id == roleId)
                 .ProjectToType<RoleInfo>()
                 .FirstOrDefaultAsync(cancellationToken);
-        }
 
         throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString());
     }

@@ -121,7 +121,7 @@ public interface IUserManager : IManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取用户角色
+    ///     获取用户角色
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="roleId">角色标识</param>

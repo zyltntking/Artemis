@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Extensions.Web.Identity</name>
-    </assembly>
-    <members>
-    </members>
+	<assembly>
+		<name>Artemis.Extensions.Web.Identity</name>
+	</assembly>
+	<members>
+	</members>
 </doc>

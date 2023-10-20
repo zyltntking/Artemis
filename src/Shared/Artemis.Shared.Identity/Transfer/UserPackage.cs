@@ -73,14 +73,14 @@ public record UserPackage : IUser
 ///     用户信息
 /// </summary>
 [DataContract]
-public record UserInfo : UserPackage, IKeySlot
+public sealed record UserInfo : UserPackage, IKeySlot
 {
     /// <summary>
     ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///     用户名
@@ -103,7 +103,7 @@ public record UserInfo : UserPackage, IKeySlot
     /// </summary>
     [Required]
     [DataMember(Order = 4)]
-    public virtual required bool EmailConfirmed { get; set; }
+    public required bool EmailConfirmed { get; set; }
 
     /// <summary>
     ///     电话号码
@@ -118,5 +118,5 @@ public record UserInfo : UserPackage, IKeySlot
     /// </summary>
     [Required]
     [DataMember(Order = 6)]
-    public virtual required bool PhoneNumberConfirmed { get; set; }
+    public required bool PhoneNumberConfirmed { get; set; }
 }

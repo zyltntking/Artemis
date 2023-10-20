@@ -4,10 +4,12 @@ using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
+#region Interface
+
 /// <summary>
 ///     凭据项目接口
 /// </summary>
-public interface IClaim
+internal interface IClaim : ICheckStamp
 {
     /// <summary>
     ///     凭据类型
@@ -18,11 +20,6 @@ public interface IClaim
     ///     凭据值
     /// </summary>
     string ClaimValue { get; set; }
-
-    /// <summary>
-    ///     校验戳
-    /// </summary>
-    string CheckStamp { get; set; }
 
     /// <summary>
     ///     描述
@@ -45,11 +42,13 @@ public interface IClaim
     #endregion
 }
 
+#endregion
+
 /// <summary>
 ///     凭据项目实现
 /// </summary>
 [DataContract]
-public abstract record ClaimPackage : IClaim
+public record ClaimPackage : IClaim
 {
     /// <summary>
     ///     凭据类型
@@ -99,21 +98,21 @@ public abstract record ClaimPackage : IClaim
 ///     凭据项目实现
 /// </summary>
 [DataContract]
-public abstract record ClaimInfo : ClaimPackage, IKeySlot
+public sealed record ClaimInfo : ClaimPackage, IKeySlot
 {
     /// <summary>
     ///     凭据标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///     凭据类型
     /// </summary>
     [Required]
     [MaxLength(32)]
-    [DataMember(Order = 1)]
+    [DataMember(Order = 2)]
     public override required string ClaimType { get; set; }
 
     /// <summary>
@@ -121,7 +120,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     /// </summary>
     [Required]
     [MaxLength(128)]
-    [DataMember(Order = 2)]
+    [DataMember(Order = 3)]
     public override required string ClaimValue { get; set; }
 
     /// <summary>
@@ -129,7 +128,7 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     /// </summary>
     [Required]
     [MaxLength(64)]
-    [DataMember(Order = 3)]
+    [DataMember(Order = 4)]
     public override required string CheckStamp { get; set; }
 
     /// <summary>
@@ -137,6 +136,6 @@ public abstract record ClaimInfo : ClaimPackage, IKeySlot
     /// </summary>
     [Required]
     [MaxLength(128)]
-    [DataMember(Order = 4)]
+    [DataMember(Order = 5)]
     public override string? Description { get; set; }
 }

@@ -72,21 +72,21 @@ public record RoleClaimPackage : ClaimPackage, IRoleClaim
 ///     角色凭据信息
 /// </summary>
 [DataContract]
-public record RoleClaimInfo : RoleClaimPackage, IRoleClaimDocument, IKeySlot<int>
+public sealed record RoleClaimInfo : RoleClaimPackage, IRoleClaimDocument, IKeySlot<int>
 {
     /// <summary>
     ///     标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required int Id { get; set; }
+    public required int Id { get; set; }
 
     /// <summary>
     ///     角色标识
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required Guid RoleId { get; set; }
+    public required Guid RoleId { get; set; }
 
     /// <summary>
     ///     凭据类型

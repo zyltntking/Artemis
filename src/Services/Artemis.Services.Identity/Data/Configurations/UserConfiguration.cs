@@ -70,6 +70,10 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .HasMaxLength(16)
             .HasComment("电话号码");
 
+        builder.Property(user => user.NormalizedPhoneNumber)
+            .HasMaxLength(16)
+            .HasComment("规范化电话号码");
+
         builder.Property(user => user.PhoneNumberConfirmed)
             .HasComment("是否确认电话号码");
 

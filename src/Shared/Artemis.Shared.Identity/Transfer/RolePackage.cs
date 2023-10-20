@@ -54,14 +54,14 @@ public record RolePackage : IRole
 ///     角色信息
 /// </summary>
 [DataContract]
-public record RoleInfo : RolePackage, IKeySlot
+public sealed record RoleInfo : RolePackage, IKeySlot
 {
     /// <summary>
     ///     角色标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public virtual required Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///     角色名

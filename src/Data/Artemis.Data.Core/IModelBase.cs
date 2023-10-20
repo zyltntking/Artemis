@@ -134,7 +134,18 @@ public interface IConcurrencyStamp
     /// <summary>
     ///     并发锁
     /// </summary>
-    string ConcurrencyStamp { get; set; }
+    string? ConcurrencyStamp { get; set; }
+}
+
+/// <summary>
+///     检验戳组件接口
+/// </summary>
+public interface ICheckStamp
+{
+    /// <summary>
+    ///     校验戳
+    /// </summary>
+    string CheckStamp { get; set; }
 }
 
 /// <summary>
