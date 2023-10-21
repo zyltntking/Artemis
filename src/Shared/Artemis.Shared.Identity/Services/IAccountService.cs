@@ -27,7 +27,7 @@ public interface IAccountService
         ServerCallContext? context = default);
 
     /// <summary>
-    /// 注册
+    ///     注册
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
@@ -39,7 +39,7 @@ public interface IAccountService
         ServerCallContext? context = default);
 
     /// <summary>
-    /// 修改密码
+    ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
@@ -51,7 +51,7 @@ public interface IAccountService
         ServerCallContext? context = default);
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
@@ -63,7 +63,7 @@ public interface IAccountService
         ServerCallContext? context = default);
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
@@ -71,8 +71,8 @@ public interface IAccountService
     [OperationContract]
     [Description("重置密码")]
     Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
-         ResetPasswordsRequest request,
-         ServerCallContext? context = default);
+        ResetPasswordsRequest request,
+        ServerCallContext? context = default);
 }
 
 /// <summary>
@@ -98,7 +98,7 @@ public sealed record SignInRequest : SignInPackage
 }
 
 /// <summary>
-/// 注册请求
+///     注册请求
 /// </summary>
 [DataContract]
 public sealed record SignUpRequest : UserPackage
@@ -160,27 +160,27 @@ public sealed record TokenResult : TokenPackage
 }
 
 /// <summary>
-/// 修改密码请求
+///     修改密码请求
 /// </summary>
 [DataContract]
 public sealed record ChangePasswordRequest
 {
     /// <summary>
-    /// 用户签名
+    ///     用户签名
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
     public required string UserSign { get; set; }
 
     /// <summary>
-    /// 原始密码
+    ///     原始密码
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
     public required string OldPassword { get; set; }
 
     /// <summary>
-    /// 新密码
+    ///     新密码
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
@@ -188,20 +188,20 @@ public sealed record ChangePasswordRequest
 }
 
 /// <summary>
-/// 重置密码请求
+///     重置密码请求
 /// </summary>
 [DataContract]
 public sealed record ResetPasswordRequest
 {
     /// <summary>
-    /// 用户标识
+    ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
     public required Guid UserId { get; set; }
 
     /// <summary>
-    /// 密码
+    ///     密码
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
@@ -209,20 +209,20 @@ public sealed record ResetPasswordRequest
 }
 
 /// <summary>
-/// 重置密码请求
+///     重置密码请求
 /// </summary>
 [DataContract]
 public sealed record ResetPasswordsRequest
 {
     /// <summary>
-    /// 用户标识
+    ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
     public required List<Guid> UserIds { get; set; }
 
     /// <summary>
-    /// 密码
+    ///     密码
     /// </summary>
     [Required]
     [DataMember(Order = 2)]

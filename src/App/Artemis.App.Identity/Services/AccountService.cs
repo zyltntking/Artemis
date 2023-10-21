@@ -14,7 +14,7 @@ namespace Artemis.App.Identity.Services;
 public class AccountService : ApiController, IAccountService
 {
     /// <summary>
-    /// 账户服务
+    ///     账户服务
     /// </summary>
     /// <param name="logger">日志依赖</param>
     /// <param name="accountManager">账户管理器依赖</param>
@@ -31,7 +31,7 @@ public class AccountService : ApiController, IAccountService
     private IAccountManager AccountManager { get; }
 
     /// <summary>
-    /// 登录
+    ///     登录
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
@@ -51,12 +51,12 @@ public class AccountService : ApiController, IAccountService
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<TokenResult>> SignInAsync(
-        SignInRequest request, 
+        SignInRequest request,
         ServerCallContext? context = default)
     {
         var (result, token) = await AccountManager
             .SignInAsync(
-                request, 
+                request,
                 context?.CancellationToken ?? default);
 
         if (result.Succeeded)
@@ -80,20 +80,20 @@ public class AccountService : ApiController, IAccountService
     }
 
     /// <summary>
-    /// 注册
+    ///     注册
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<TokenResult>> SignUpAsync(
-        SignUpRequest request, 
+        SignUpRequest request,
         ServerCallContext? context = default)
     {
         var (result, token) = await AccountManager
             .SignUpAsync(
-                request, 
-                request.Password, 
+                request,
+                request.Password,
                 context?.CancellationToken ?? default);
 
         if (result.Succeeded)
@@ -117,70 +117,64 @@ public class AccountService : ApiController, IAccountService
     }
 
     /// <summary>
-    /// 修改密码
+    ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<EmptyRecord>> ChangePasswordAsync(
-        ChangePasswordRequest request, 
+        ChangePasswordRequest request,
         ServerCallContext? context = default)
     {
         var result = await AccountManager
             .ChangePasswordAsync(
-                request.UserSign, 
+                request.UserSign,
                 request.OldPassword,
                 request.NewPassword,
                 context?.CancellationToken ?? default);
 
-        return result.Succeeded ? 
-            DataResult.Success(new EmptyRecord()) : 
-            DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
     }
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<EmptyRecord>> ResetPasswordAsync(
-        ResetPasswordRequest request, 
+        ResetPasswordRequest request,
         ServerCallContext? context = default)
     {
         var result = await AccountManager
             .ResetPasswordAsync(
-                request.UserId, 
+                request.UserId,
                 request.Password,
                 context?.CancellationToken ?? default);
 
-        return result.Succeeded ? 
-            DataResult.Success(new EmptyRecord()) : 
-            DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
     }
 
     /// <summary>
-    /// 重置密码
+    ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
     [NonAction]
     public async Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
-        ResetPasswordsRequest request, 
+        ResetPasswordsRequest request,
         ServerCallContext? context = default)
     {
         var result = await AccountManager
             .ResetPasswordsAsync(
-                request.UserIds, 
+                request.UserIds,
                 request.Password,
                 context?.CancellationToken ?? default);
 
-        return result.Succeeded ?
-            DataResult.Success(new EmptyRecord()) :
-            DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
     }
 
     #endregion

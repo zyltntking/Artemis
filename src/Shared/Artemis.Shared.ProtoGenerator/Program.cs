@@ -1,6 +1,5 @@
 ﻿using Artemis.Shared.Identity.Services;
 using ProtoBuf;
-using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Reflection;
 using ProtoBuf.Meta;
 
@@ -21,7 +20,7 @@ internal static class Program
     {
         var generator = new SchemaGenerator
         {
-            ProtoSyntax = ProtoSyntax.Proto3,
+            ProtoSyntax = ProtoSyntax.Proto3
         };
 
         var schema = generator.GetSchema<IRoleService>();
