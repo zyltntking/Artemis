@@ -27,7 +27,7 @@ public static class Program
         {
             // Add services to the container.
             var connectionString = builder.Configuration
-                                       .GetConnectionString("IdentityContext") ??
+                                       .GetConnectionString("IdentityContext") ?? 
                                    throw new InvalidOperationException(
                                        "ContextConnection string 'Identity' not found.");
 
@@ -46,7 +46,6 @@ public static class Program
                 .AddControllers(option =>
                 {
                     option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-                    //option.InputFormatters.Insert(0, MyJPIF.GetJsonPatchInputFormatter());
                 })
                 .AddMvcOptions(options =>
                 {
@@ -101,7 +100,7 @@ public static class Program
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             //app.UseHttpsRedirection();
@@ -118,6 +117,8 @@ public static class Program
 
             app.UseGrpcWeb();
 
+            app.UseCors();
+
             //app.MapRazorPages();
             app.MapControllers();
             app.MapGrpcService<RoleService>()
@@ -125,7 +126,7 @@ public static class Program
                 .RequireCors("AllowAllGrpc");
             app.MapGrpcService<UserService>()
                 .EnableGrpcWeb()
-                .RequireCors("AllowAllGrpc"); ;
+                .RequireCors("AllowAllGrpc");
             app.MapGrpcService<AccountService>()
                 .EnableGrpcWeb()
                 .RequireCors("AllowAllGrpc");

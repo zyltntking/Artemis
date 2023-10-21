@@ -412,13 +412,13 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             query = query.WhereIf(
                 emailSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.NormalizedEmail,
+                    user.NormalizedEmail!,
                     $"%{normalizedEmailSearch}%"));
 
             query = query.WhereIf(
                 phoneSearch != string.Empty,
                 user => EF.Functions.Like(
-                    user.PhoneNumber,
+                    user.PhoneNumber!,
                     $"%{phoneSearch}%"));
 
             var count = await query.LongCountAsync(cancellationToken);

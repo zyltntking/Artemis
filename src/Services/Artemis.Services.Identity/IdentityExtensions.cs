@@ -40,11 +40,10 @@ public static class IdentityExtensions
                         npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
 
                         npgsqlOption.EnableRetryOnFailure(3);
-                    }) /*.UseLazyLoadingProxies()*/;
+                    });
             })
             .AddIdentity<ArtemisUser, ArtemisRole>()
             .AddEntityFrameworkStores<ArtemisIdentityContext>()
-            //.AddDefaultUI()
             .AddDefaultTokenProviders();
 
         if (serviceOptions.RedisCacheConnection is not null && serviceOptions.RedisCacheConnection != string.Empty)

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Artemis.Shared\Artemis.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="protos\" />
+  </ItemGroup>
+
 </Project>

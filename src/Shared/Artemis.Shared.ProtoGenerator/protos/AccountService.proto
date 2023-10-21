@@ -1,0 +1,58 @@
+syntax = "proto3";
+package Artemis.Shared.Identity.Services;
+import "google/protobuf/timestamp.proto";
+
+message ChangePasswordRequest {
+   string UserSign = 1;
+   string OldPassword = 2;
+   string NewPassword = 3;
+}
+message DataResult_EmptyRecord {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   EmptyRecord Data = 7;
+}
+message DataResult_TokenResult {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   TokenResult Data = 7;
+}
+message EmptyRecord {
+}
+message ResetPasswordRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string Password = 2;
+}
+message ResetPasswordsRequest {
+   repeated string UserIds = 1;
+   string Password = 2;
+}
+message SignInRequest {
+   string UserSign = 1;
+   string Password = 2;
+}
+message SignUpRequest {
+   string UserName = 1;
+   string Password = 2;
+   string Email = 3;
+   string PhoneNumber = 4;
+}
+message TokenResult {
+   string Token = 1;
+   .google.protobuf.Timestamp Expire = 2;
+}
+service AccountService {
+   rpc ChangePassword (ChangePasswordRequest) returns (DataResult_EmptyRecord);
+   rpc ResetPassword (ResetPasswordRequest) returns (DataResult_EmptyRecord);
+   rpc ResetPasswords (ResetPasswordsRequest) returns (DataResult_EmptyRecord);
+   rpc SignIn (SignInRequest) returns (DataResult_TokenResult);
+   rpc SignUp (SignUpRequest) returns (DataResult_TokenResult);
+}

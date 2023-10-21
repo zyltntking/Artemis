@@ -1,0 +1,388 @@
+syntax = "proto3";
+package Artemis.Shared.Identity.Services;
+import "google/protobuf/timestamp.proto";
+
+message AddUserClaimRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   UserClaimPackage ClaimPackage = 2;
+}
+message AddUserClaimsRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated UserClaimPackage ClaimPackages = 2;
+}
+message AddUserLoginRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   UserLoginPackage UserLoginPackage = 2;
+}
+message AddUserRoleRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string RoleId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+}
+message AddUserRolesRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated string RoleIds = 2;
+}
+message AddUserTokenRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   UserTokenPackage UserTokenPackage = 2;
+}
+message CreateUserRequest {
+   string UserName = 1;
+   string Password = 2;
+   string Email = 3;
+   string PhoneNumber = 4;
+}
+message CreateUsersRequest {
+   repeated KeyValuePair_UserPackage_String UserPackages = 1;
+}
+message DataResult_EmptyRecord {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   EmptyRecord Data = 7;
+}
+message DataResult_PageResult_RoleInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   PageResult_RoleInfo Data = 7;
+}
+message DataResult_PageResult_UserClaimInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   PageResult_UserClaimInfo Data = 7;
+}
+message DataResult_PageResult_UserInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   PageResult_UserInfo Data = 7;
+}
+message DataResult_PageResult_UserLoginInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   PageResult_UserLoginInfo Data = 7;
+}
+message DataResult_PageResult_UserTokenInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   PageResult_UserTokenInfo Data = 7;
+}
+message DataResult_RoleInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   RoleInfo Data = 7;
+}
+message DataResult_UserClaimInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   UserClaimInfo Data = 7;
+}
+message DataResult_UserInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   UserInfo Data = 7;
+}
+message DataResult_UserLoginInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   UserLoginInfo Data = 7;
+}
+message DataResult_UserTokenInfo {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
+   UserTokenInfo Data = 7;
+}
+message DeleteUserRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+}
+message DeleteUsersRequest {
+   repeated string UserIds = 1;
+}
+message EmptyRecord {
+}
+message FetchUserClaimsFilter {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string ClaimTypeSearch = 2;
+}
+message FetchUserLoginsFilter {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string LoginProviderSearch = 2;
+}
+message FetchUserRolesFilter {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string RoleNameSearch = 2;
+}
+message FetchUserTokensFilter {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string LoginProviderSearch = 2;
+   string NameSearch = 3;
+}
+message FetchUsersFilter {
+   string NameSearch = 1;
+   string EmailSearch = 2;
+   string PhoneNumberSearch = 3;
+}
+message GetUserClaimRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserClaimId = 2;
+}
+message GetUserLoginRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserLoginId = 2;
+}
+message GetUserRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+}
+message GetUserRoleRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string RoleId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+}
+message GetUserTokenRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserTokenId = 2;
+}
+message KeyValuePair_UserPackage_String {
+   UserPackage Key = 1;
+   string Value = 2;
+}
+message PageRequest_FetchUserClaimsFilter {
+   int32 Page = 1; // default value could not be applied: 1
+   int32 Size = 2; // default value could not be applied: 20
+   FetchUserClaimsFilter Filter = 3;
+}
+message PageRequest_FetchUserLoginsFilter {
+   int32 Page = 1; // default value could not be applied: 1
+   int32 Size = 2; // default value could not be applied: 20
+   FetchUserLoginsFilter Filter = 3;
+}
+message PageRequest_FetchUserRolesFilter {
+   int32 Page = 1; // default value could not be applied: 1
+   int32 Size = 2; // default value could not be applied: 20
+   FetchUserRolesFilter Filter = 3;
+}
+message PageRequest_FetchUserTokensFilter {
+   int32 Page = 1; // default value could not be applied: 1
+   int32 Size = 2; // default value could not be applied: 20
+   FetchUserTokensFilter Filter = 3;
+}
+message PageRequest_FetchUsersFilter {
+   int32 Page = 1; // default value could not be applied: 1
+   int32 Size = 2; // default value could not be applied: 20
+   FetchUsersFilter Filter = 3;
+}
+message PageResult_RoleInfo {
+   int32 Page = 1;
+   int32 Size = 2;
+   int64 Count = 3;
+   int64 Total = 4;
+   repeated RoleInfo Data = 5;
+}
+message PageResult_UserClaimInfo {
+   int32 Page = 1;
+   int32 Size = 2;
+   int64 Count = 3;
+   int64 Total = 4;
+   repeated UserClaimInfo Data = 5;
+}
+message PageResult_UserInfo {
+   int32 Page = 1;
+   int32 Size = 2;
+   int64 Count = 3;
+   int64 Total = 4;
+   repeated UserInfo Data = 5;
+}
+message PageResult_UserLoginInfo {
+   int32 Page = 1;
+   int32 Size = 2;
+   int64 Count = 3;
+   int64 Total = 4;
+   repeated UserLoginInfo Data = 5;
+}
+message PageResult_UserTokenInfo {
+   int32 Page = 1;
+   int32 Size = 2;
+   int64 Count = 3;
+   int64 Total = 4;
+   repeated UserTokenInfo Data = 5;
+}
+message RemoveUserClaimRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserClaimId = 2;
+}
+message RemoveUserClaimsRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated int32 UserClaimIds = 2 [packed = false];
+}
+message RemoveUserLoginRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserLoginId = 2;
+}
+message RemoveUserLoginsRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated int32 UserLoginIds = 2 [packed = false];
+}
+message RemoveUserRoleRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string RoleId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+}
+message RemoveUserRolesRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated string RoleIds = 2;
+}
+message RemoveUserTokenRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserTokenId = 2;
+}
+message RemoveUserTokensRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   repeated int32 UserTokenIds = 2 [packed = false];
+}
+message ReplaceUserLoginRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserLoginId = 2;
+   UserLoginPackage UserLoginPackage = 3;
+}
+message ReplaceUserTokenRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   int32 UserTokenId = 2;
+   UserTokenPackage UserTokenPackage = 3;
+}
+message RoleInfo {
+   string Id = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string Name = 2;
+   string Description = 3;
+}
+message UpdateUserRequest {
+   string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   UserPackage UserPackage = 2;
+}
+message UpdateUsersRequest {
+   map<string,UserPackage> UserPackages = 1;
+}
+message UserClaimInfo {
+   int32 Id = 1;
+   string UserId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string ClaimType = 3;
+   string ClaimValue = 4;
+   string CheckStamp = 5;
+   string Description = 6;
+}
+message UserClaimPackage {
+   string ClaimType = 1;
+   string ClaimValue = 2;
+   string CheckStamp = 3;
+   string Description = 4;
+}
+message UserInfo {
+   string Id = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string UserName = 2;
+   string Email = 3;
+   bool EmailConfirmed = 4;
+   string PhoneNumber = 5;
+   bool PhoneNumberConfirmed = 6;
+}
+message UserLoginInfo {
+   int32 Id = 1;
+   string UserId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string LoginProvider = 3;
+   string ProviderKey = 4;
+   string ProviderDisplayName = 5;
+}
+message UserLoginPackage {
+   string LoginProvider = 1;
+   string ProviderKey = 2;
+   string ProviderDisplayName = 3;
+}
+message UserPackage {
+   string UserName = 1;
+   string Email = 2;
+   string PhoneNumber = 3;
+}
+message UserTokenInfo {
+   int32 Id = 1;
+   string UserId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
+   string LoginProvider = 3;
+   string Name = 4;
+   string Value = 5;
+}
+message UserTokenPackage {
+   string LoginProvider = 1;
+   string Name = 2;
+   string Value = 3;
+}
+service UserService {
+   rpc AddUserClaim (AddUserClaimRequest) returns (DataResult_EmptyRecord);
+   rpc AddUserClaims (AddUserClaimsRequest) returns (DataResult_EmptyRecord);
+   rpc AddUserLogin (AddUserLoginRequest) returns (DataResult_EmptyRecord);
+   rpc AddUserRole (AddUserRoleRequest) returns (DataResult_EmptyRecord);
+   rpc AddUserRoles (AddUserRolesRequest) returns (DataResult_EmptyRecord);
+   rpc AddUserToken (AddUserTokenRequest) returns (DataResult_EmptyRecord);
+   rpc CreateUser (CreateUserRequest) returns (DataResult_UserInfo);
+   rpc CreateUsers (CreateUsersRequest) returns (DataResult_EmptyRecord);
+   rpc DeleteUser (DeleteUserRequest) returns (DataResult_EmptyRecord);
+   rpc DeleteUsers (DeleteUsersRequest) returns (DataResult_EmptyRecord);
+   rpc FetchUserClaims (PageRequest_FetchUserClaimsFilter) returns (DataResult_PageResult_UserClaimInfo);
+   rpc FetchUserLogins (PageRequest_FetchUserLoginsFilter) returns (DataResult_PageResult_UserLoginInfo);
+   rpc FetchUserRoles (PageRequest_FetchUserRolesFilter) returns (DataResult_PageResult_RoleInfo);
+   rpc FetchUsers (PageRequest_FetchUsersFilter) returns (DataResult_PageResult_UserInfo);
+   rpc FetchUserTokens (PageRequest_FetchUserTokensFilter) returns (DataResult_PageResult_UserTokenInfo);
+   rpc GetUser (GetUserRequest) returns (DataResult_UserInfo);
+   rpc GetUserClaim (GetUserClaimRequest) returns (DataResult_UserClaimInfo);
+   rpc GetUserLogin (GetUserLoginRequest) returns (DataResult_UserLoginInfo);
+   rpc GetUserRole (GetUserRoleRequest) returns (DataResult_RoleInfo);
+   rpc GetUserToken (GetUserTokenRequest) returns (DataResult_UserTokenInfo);
+   rpc RemoveUserClaim (RemoveUserClaimRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserLogin (RemoveUserLoginRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserLogins (RemoveUserLoginsRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserRole (RemoveUserRoleRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserRoles (RemoveUserRolesRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUsersClaim (RemoveUserClaimsRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserToken (RemoveUserTokenRequest) returns (DataResult_EmptyRecord);
+   rpc RemoveUserTokens (RemoveUserTokensRequest) returns (DataResult_EmptyRecord);
+   rpc ReplaceUserLogin (ReplaceUserLoginRequest) returns (DataResult_EmptyRecord);
+   rpc ReplaceUserToken (ReplaceUserTokenRequest) returns (DataResult_EmptyRecord);
+   rpc UpdateUser (UpdateUserRequest) returns (DataResult_UserInfo);
+   rpc UpdateUsers (UpdateUsersRequest) returns (DataResult_EmptyRecord);
+}

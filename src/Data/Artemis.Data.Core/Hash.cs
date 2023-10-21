@@ -91,8 +91,7 @@ public static class Hash
     /// <returns>输出字节码</returns>
     public static byte[] Md5Hash(byte[] input)
     {
-        using var hash = MD5.Create();
-        return hash.ComputeHash(input);
+        return MD5.HashData(input);
     }
 
     /// <summary>
@@ -112,8 +111,7 @@ public static class Hash
     /// <returns>输出字节码</returns>
     private static byte[] Sha1Hash(byte[] input)
     {
-        using var hash = SHA1.Create();
-        return hash.ComputeHash(input);
+        return SHA1.HashData(input);
     }
 
     /// <summary>
@@ -133,8 +131,7 @@ public static class Hash
     /// <returns>输出字节码</returns>
     private static byte[] Sha256Hash(byte[] input)
     {
-        using var hash = SHA256.Create();
-        return hash.ComputeHash(input);
+        return SHA256.HashData(input);
     }
 
     /// <summary>
@@ -154,8 +151,7 @@ public static class Hash
     /// <returns>输出字节码</returns>
     private static byte[] Sha384Hash(byte[] input)
     {
-        using var hash = SHA384.Create();
-        return hash.ComputeHash(input);
+        return SHA384.HashData(input);
     }
 
     /// <summary>
@@ -175,8 +171,7 @@ public static class Hash
     /// <returns>输出字节码</returns>
     private static byte[] Sha512Hash(byte[] input)
     {
-        using var hash = SHA512.Create();
-        return hash.ComputeHash(input);
+        return SHA512.HashData(input);
     }
 
     /// <summary>

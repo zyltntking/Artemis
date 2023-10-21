@@ -19,19 +19,29 @@ internal static class Program
     /// <param name="args"></param>
     private static async Task Main(string[] args)
     {
-        var binderConfiguration = BinderConfiguration.Create();
-
         var generator = new SchemaGenerator
         {
             ProtoSyntax = ProtoSyntax.Proto3,
-           
         };
 
         var schema = generator.GetSchema<IRoleService>();
 
-        await using var writer = new StreamWriter("role.proto");
+        await using var roleWriter = new StreamWriter("../../../protos/RoleService.proto");
 
-        await writer.WriteAsync(schema);
+        await roleWriter.WriteAsync(schema);
+
+        schema = generator.GetSchema<IUserService>();
+
+        await using var userWriter = new StreamWriter("../../../protos/UserService.proto");
+
+        await userWriter.WriteAsync(schema);
+
+        schema = generator.GetSchema<IAccountService>();
+
+        await using var accountWriter = new StreamWriter("../../../protos/AccountService.proto");
+
+        await accountWriter.WriteAsync(schema);
+
 
         Console.WriteLine("Hello, World!");
     }
