@@ -47,7 +47,7 @@ message SignUpRequest {
 }
 message TokenResult {
    string Token = 1;
-   .google.protobuf.Timestamp Expire = 2;
+   int64 Expire = 2;
 }
 service AccountService {
    rpc ChangePassword (ChangePasswordRequest) returns (DataResult_EmptyRecord);

@@ -18,7 +18,7 @@ file interface IToken
     /// <summary>
     ///     过期时间
     /// </summary>
-    public DateTime Expire { get; set; }
+    public long Expire { get; set; }
 }
 
 #endregion
@@ -43,7 +43,7 @@ public record TokenPackage : IToken
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public virtual required DateTime Expire { get; set; }
+    public virtual required long Expire { get; set; }
 
     #endregion
 }

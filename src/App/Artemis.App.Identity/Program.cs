@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Artemis.App.Identity.Interceptors;
 using Artemis.App.Identity.Services;
 using Artemis.Extensions.Web.Builder;
@@ -42,20 +41,20 @@ public static class Program
 
             //builder.Services.AddRazorPages();
 
-            builder.Services
-                .AddControllers(option =>
-                {
-                    option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-                })
-                .AddMvcOptions(options =>
-                {
-                    options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                        name => $"字段:{name}是必要字段.");
-                })
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                });
+            //builder.Services
+            //    .AddControllers(option =>
+            //    {
+            //        option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            //    })
+            //    .AddMvcOptions(options =>
+            //    {
+            //        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+            //            name => $"字段:{name}是必要字段.");
+            //    })
+            //    .AddJsonOptions(options =>
+            //    {
+            //        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            //    });
 
             //builder.Services.AddGrpc(options =>
             //    {
@@ -72,18 +71,10 @@ public static class Program
             });
             builder.Services.AddCodeFirstGrpcReflection();
 
-            builder.Services.AddCors(options =>
+            builder.Services.AddArtemisMiddleWares(options =>
             {
-                options.AddPolicy("AllowAllGrpc", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
-                });
+                options.ServiceDomain.DomainName = "Identity";
             });
-
-            builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddOpenApiDoc(docConfig);
@@ -93,41 +84,29 @@ public static class Program
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
+            {
                 app.UseMigrationsEndPoint();
+            }
             else
+            {
                 app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //app.UseHsts();
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
+            }
             //app.UseHttpsRedirection();
             //app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
+            //app.UseAuthentication();
+            //app.UseAuthorization();
             app.UseArtemisMiddleWares();
-
             app.UseResponseCompression();
-
-            app.UseGrpcWeb();
-
-            app.UseCors();
-
+            //app.UseCors();
             //app.MapRazorPages();
-            app.MapControllers();
-            app.MapGrpcService<RoleService>()
-                .EnableGrpcWeb()
-                .RequireCors("AllowAllGrpc");
-            app.MapGrpcService<UserService>()
-                .EnableGrpcWeb()
-                .RequireCors("AllowAllGrpc");
-            app.MapGrpcService<AccountService>()
-                .EnableGrpcWeb()
-                .RequireCors("AllowAllGrpc");
-
+            //app.MapControllers();
+            app.MapGrpcService<RoleService>();
+            app.MapGrpcService<UserService>();
+            app.MapGrpcService<AccountService>();
             //app.MapGrpcHealthChecksService();
-
             if (app.Environment.IsDevelopment())
             {
                 app.MapApiRouteTable();

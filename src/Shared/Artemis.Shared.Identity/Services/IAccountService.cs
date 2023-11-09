@@ -156,7 +156,7 @@ public sealed record TokenResult : TokenPackage
     ///     Token过期时间
     /// </summary>
     [DataMember(Order = 2)]
-    public override required DateTime Expire { get; set; }
+    public override required long Expire { get; set; }
 }
 
 /// <summary>

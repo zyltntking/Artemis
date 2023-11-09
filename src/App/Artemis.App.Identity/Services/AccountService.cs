@@ -1,26 +1,20 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Extensions.Web.Controller;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
 using Grpc.Core;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Artemis.App.Identity.Services;
 
 /// <summary>
 ///     账户服务
 /// </summary>
-[Route("api/Account")]
-public class AccountService : ApiController, IAccountService
+public class AccountService : IAccountService
 {
     /// <summary>
     ///     账户服务
     /// </summary>
-    /// <param name="logger">日志依赖</param>
     /// <param name="accountManager">账户管理器依赖</param>
-    public AccountService(
-        ILogger<AccountService> logger,
-        IAccountManager accountManager) : base(logger)
+    public AccountService(IAccountManager accountManager)
     {
         AccountManager = accountManager;
     }
@@ -30,17 +24,6 @@ public class AccountService : ApiController, IAccountService
     /// </summary>
     private IAccountManager AccountManager { get; }
 
-    /// <summary>
-    ///     登录
-    /// </summary>
-    /// <param name="request">请求</param>
-    /// <returns></returns>
-    [HttpPost(nameof(SignIn))]
-    public Task<DataResult<TokenResult>> SignIn(SignInRequest request)
-    {
-        return SignInAsync(request);
-    }
-
     #region Implementation of IAccountService
 
     /// <summary>
@@ -49,7 +32,6 @@ public class AccountService : ApiController, IAccountService
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
-    [NonAction]
     public async Task<DataResult<TokenResult>> SignInAsync(
         SignInRequest request,
         ServerCallContext? context = default)
@@ -70,7 +52,7 @@ public class AccountService : ApiController, IAccountService
             var tokenResult = new TokenResult
             {
                 Token = replyToken,
-                Expire = DateTime.Now.AddDays(30)
+                Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
             };
 
             return DataResult.Success(tokenResult);
@@ -85,7 +67,6 @@ public class AccountService : ApiController, IAccountService
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
-    [NonAction]
     public async Task<DataResult<TokenResult>> SignUpAsync(
         SignUpRequest request,
         ServerCallContext? context = default)
@@ -107,7 +88,7 @@ public class AccountService : ApiController, IAccountService
             var tokenResult = new TokenResult
             {
                 Token = replyToken,
-                Expire = DateTime.Now.AddDays(30)
+                Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
             };
 
             return DataResult.Success(tokenResult);
@@ -122,7 +103,6 @@ public class AccountService : ApiController, IAccountService
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
-    [NonAction]
     public async Task<DataResult<EmptyRecord>> ChangePasswordAsync(
         ChangePasswordRequest request,
         ServerCallContext? context = default)
@@ -143,7 +123,6 @@ public class AccountService : ApiController, IAccountService
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
-    [NonAction]
     public async Task<DataResult<EmptyRecord>> ResetPasswordAsync(
         ResetPasswordRequest request,
         ServerCallContext? context = default)
@@ -163,7 +142,6 @@ public class AccountService : ApiController, IAccountService
     /// <param name="request">请求</param>
     /// <param name="context">上下文</param>
     /// <returns></returns>
-    [NonAction]
     public async Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
         ResetPasswordsRequest request,
         ServerCallContext? context = default)
