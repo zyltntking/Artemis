@@ -16,7 +16,7 @@ public static class Base32
     private const string Base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
     /// <summary>
-    ///     Èô²ÎÊıÎª¿ÕÔòÅ×³öÒì³£
+    ///     è‹¥å‚æ•°ä¸ºç©ºåˆ™æŠ›å‡ºå¼‚å¸¸
     /// </summary>
     /// <param name="argument"></param>
     /// <param name="paramName"></param>
@@ -27,7 +27,7 @@ public static class Base32
     }
 
     /// <summary>
-    ///     Éú³Ébase32´®
+    ///     ç”Ÿæˆbase32ä¸²
     /// </summary>
     /// <returns></returns>
     public static string GenerateBase32()
@@ -64,7 +64,7 @@ public static class Base32
     }
 
     /// <summary>
-    ///     ×ªÎªBase32
+    ///     è½¬ä¸ºBase32
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -92,7 +92,7 @@ public static class Base32
     }
 
     /// <summary>
-    ///     ½âÎöBase32
+    ///     è§£æBase32
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

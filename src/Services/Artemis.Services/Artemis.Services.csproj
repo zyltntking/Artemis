@@ -14,17 +14,17 @@
         <Copyright>Copyright © zyltntking 2013</Copyright>
         <Summary>Artemis.NET App Build Tools</Summary>
         <Title>Artemis.NET</Title>
-        <PackageId>Artemis.Extensions.Web</PackageId>
-        <PackageTags>data</PackageTags>
+        <PackageId>Artemis.Services</PackageId>
+        <PackageTags>services</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
         <RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <RootNamespace>Artemis.Extensions.Web</RootNamespace>
-        <AssemblyName>Artemis.Extensions.Web</AssemblyName>
+        <RootNamespace>Artemis.Services</RootNamespace>
+        <AssemblyName>Artemis.Services</AssemblyName>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile>Artemis.Extensions.Web.xml</DocumentationFile>
+        <DocumentationFile>Artemis.Services.xml</DocumentationFile>
         <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
         <CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
         <Nullable>enable</Nullable>
@@ -39,17 +39,9 @@
         <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj"/>
-        <ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj"/>
-        <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj"/>
-        <ProjectReference Include="..\Artemis.Extensions.Web.OpenApi\Artemis.Extensions.Web.OpenApi.csproj"/>
-        <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj"/>
-    </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore.Server" Version="2.59.0"/>
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.13"/>
+        <ProjectReference Include="..\Artemis.Services.Identity\Artemis.Services.Identity.csproj"/>
     </ItemGroup>
 
 </Project>

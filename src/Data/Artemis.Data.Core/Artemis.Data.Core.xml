@@ -62,14 +62,20 @@
                 string转id
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
+            <returns>An instance of
+                <typeparamref name="TKey"/>
+                representing the provided<paramref name="id"/>.
+            </returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.IdToString``1(``0)">
             <summary>
                 id转string
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>An <see cref="T:System.String" /> representation of the provided <paramref name="id" />.</returns>
+            <returns>An
+                <see cref="T:System.String"/>
+                representation of the provided<paramref name="id"/>.
+            </returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.GuidFromString(System.String)">
             <summary>
@@ -611,7 +617,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Exceptions.MapTargetNullException.#ctor(System.String)">
             <summary>
-                Constructs an instance of <see cref="T:Artemis.Data.Core.Exceptions.MapTargetNullException" />.
+                Constructs an instance of<see cref="T:Artemis.Data.Core.Exceptions.MapTargetNullException"/>.
             </summary>
             <param name="message">The exception message.</param>
         </member>
@@ -694,8 +700,11 @@
             <summary>Indicates whether the current object is equal to another object of the same type.</summary>
             <param name="other">An object to compare with this object.</param>
             <returns>
-                <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise,
-                <see langword="false" />.
+                <see langword="true"/>
+                if the current object is equal to the
+                <paramref name="other"/>
+                parameter; otherwise,
+                <see langword="false"/>.
             </returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.FromValue``1(System.Int32)">
@@ -781,7 +790,8 @@
             <typeparam name="T"></typeparam>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type<typeparamref name="T"/>.
+            </summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -2366,14 +2376,14 @@
                 换行键
             </summary>
             <remarks>Line Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Nl" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Nl"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Nl">
             <summary>
                 换行键
             </summary>
             <remarks>New Line</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Lf" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Lf"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Vt">
             <summary>
@@ -2386,14 +2396,14 @@
                 换页键
             </summary>
             <remarks>Form Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Np" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Np"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Np">
             <summary>
                 换页键
             </summary>
             <remarks>New Page</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Ff" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Ff"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Cr">
             <summary>
@@ -2424,14 +2434,14 @@
                 设备控制1
             </summary>
             <remarks>Device Control 1</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Xon" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Xon"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Xon">
             <summary>
                 传输开始
             </summary>
             <remarks>Transmission O</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc1" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc1"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc2">
             <summary>
@@ -2444,14 +2454,14 @@
                 设备控制3
             </summary>
             <remarks>Device Control 3</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOff" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOff"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.XOff">
             <summary>
                 传输中断
             </summary>
             <remarks>Transmission Off</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc3" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc3"/>
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc4">
             <summary>

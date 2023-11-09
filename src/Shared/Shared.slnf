@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "..\\..\\Artemis.sln",
+    "projects": [
+      "src\\Data\\Artemis.Data.Core\\Artemis.Data.Core.csproj",
+      "src\\Shared\\Artemis.Shared.Identity\\Artemis.Shared.Identity.csproj",
+      "src\\Shared\\Artemis.Shared\\Artemis.Shared.csproj"
+    ]
+  }
+}
