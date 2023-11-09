@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -60,7 +59,6 @@ file interface IResultBase<T> : IResultBase
 ///     数据结果协议模板接口
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
-[DataContract]
 public record DataResult<T> : IResultBase<T>
 {
     /// <summary>
@@ -153,13 +151,11 @@ public record DataResult<T> : IResultBase<T>
     ///     消息码
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required int Code { get; set; }
 
     /// <summary>
     ///     是否成功
     /// </summary>
-    [DataMember(Order = 2)]
     public bool Succeeded
     {
         get => Code == ResultStatus.Success;
@@ -173,33 +169,28 @@ public record DataResult<T> : IResultBase<T>
     ///     消息
     /// </summary>
     [Required]
-    [DataMember(Order = 3)]
     public required string Message { get; set; } = string.Empty;
 
     /// <summary>
     ///     异常信息
     /// </summary>
-    [DataMember(Order = 4)]
     public string? Error { get; set; }
 
     /// <summary>
     ///     本地时间戳
     /// </summary>
     [Required]
-    [DataMember(Order = 5)]
     public required DateTime DateTime { get; set; }
 
     /// <summary>
     ///     时间戳
     /// </summary>
     [Required]
-    [DataMember(Order = 6)]
     public required long Timestamp { get; set; }
 
     /// <summary>
     ///     数据
     /// </summary>
-    [DataMember(Order = 7)]
     public T? Data { get; set; }
 
     #endregion
@@ -336,13 +327,11 @@ internal static class ResultStatus
 /// <summary>
 ///     空记录
 /// </summary>
-[DataContract]
 public record EmptyRecord;
 
 /// <summary>
 ///     含键记录
 /// </summary>
-[DataContract]
 public record KeyRecord : KeyRecord<Guid>
 {
     #region Overrides of KeyRecord<Guid>
@@ -351,7 +340,6 @@ public record KeyRecord : KeyRecord<Guid>
     ///     标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public override required Guid Id { get; set; }
 
     #endregion
@@ -361,13 +349,11 @@ public record KeyRecord : KeyRecord<Guid>
 ///     含键记录
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-[DataContract]
 public record KeyRecord<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public virtual required TKey Id { get; set; }
 }

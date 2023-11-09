@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
-///     缓存未设置异常
+///     实例未设置异常
 /// </summary>
 public class InstanceNotImplementException : ArtemisException
 {

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -32,7 +31,6 @@ file interface IAttachResult<TResult, TAttach>
 /// </summary>
 /// <typeparam name="TResult">结果</typeparam>
 /// <typeparam name="TAttach">附加</typeparam>
-[DataContract]
 public record AttachResult<TResult, TAttach> : IAttachResult<TResult, TAttach>
     where TResult : class
     where TAttach : class
@@ -41,13 +39,11 @@ public record AttachResult<TResult, TAttach> : IAttachResult<TResult, TAttach>
     ///     结果
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required TResult Result { get; init; }
 
     /// <summary>
     ///     附加数据
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
     public required TAttach Attach { get; init; }
 }

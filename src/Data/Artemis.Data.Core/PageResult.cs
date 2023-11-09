@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace Artemis.Data.Core;
 
@@ -78,7 +77,6 @@ public abstract record PageBase : IPageBase
     [Required]
     [DefaultValue(1)]
     [Range(1, int.MaxValue)]
-    [DataMember(Order = 1)]
     public required int Page { get; set; } = 1;
 
     /// <summary>
@@ -88,7 +86,6 @@ public abstract record PageBase : IPageBase
     [Required]
     [DefaultValue(20)]
     [Range(0, 500)]
-    [DataMember(Order = 2)]
     public required int Size { get; set; } = 20;
 
     #endregion
@@ -98,7 +95,6 @@ public abstract record PageBase : IPageBase
 ///     分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
-[DataContract]
 public sealed record PageRequest<T> : IPageRequest<T>
 {
     #region Implementation of IPageRequest<T>
@@ -107,7 +103,6 @@ public sealed record PageRequest<T> : IPageRequest<T>
     ///     过滤条件
     /// </summary>
     [Required]
-    [DataMember(Order = 3)]
     public required T Filter { get; set; } = default!;
 
     #endregion
@@ -126,7 +121,6 @@ public sealed record PageRequest<T> : IPageRequest<T>
     [Required]
     [DefaultValue(1)]
     [Range(1, int.MaxValue)]
-    [DataMember(Order = 1)]
     public required int Page { get; set; } = 1;
 
     /// <summary>
@@ -136,7 +130,6 @@ public sealed record PageRequest<T> : IPageRequest<T>
     [Required]
     [DefaultValue(20)]
     [Range(0, 500)]
-    [DataMember(Order = 2)]
     public required int Size { get; set; } = 20;
 
     #endregion
@@ -146,7 +139,6 @@ public sealed record PageRequest<T> : IPageRequest<T>
 ///     分页数据响应
 /// </summary>
 /// <typeparam name="T">数据包</typeparam>
-[DataContract]
 public sealed class PageResult<T> : IPageResult<T>
 {
     #region Implementation of IPageResult<T>
@@ -154,7 +146,6 @@ public sealed class PageResult<T> : IPageResult<T>
     /// <summary>
     ///     数据包
     /// </summary>
-    [DataMember(Order = 5)]
     public IEnumerable<T>? Data { get; set; }
 
     #endregion
@@ -165,14 +156,12 @@ public sealed class PageResult<T> : IPageResult<T>
     ///     当前页码(从0开始)
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required int Page { get; set; }
 
     /// <summary>
     ///     页面大小
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
     public required int Size { get; set; }
 
     #endregion
@@ -183,14 +172,12 @@ public sealed class PageResult<T> : IPageResult<T>
     ///     过滤后数据条数
     /// </summary>
     [Required]
-    [DataMember(Order = 3)]
     public required long Count { get; set; }
 
     /// <summary>
     ///     数据总量
     /// </summary>
     [Required]
-    [DataMember(Order = 4)]
     public required long Total { get; set; }
 
     #endregion

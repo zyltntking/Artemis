@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
-///     实体查询失败异常
+///     实体未设置失败异常
 /// </summary>
 public class EntityNotFoundException : ArtemisException
 {

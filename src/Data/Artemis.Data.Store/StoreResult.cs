@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Runtime.Serialization;
 
 namespace Artemis.Data.Store;
 
@@ -32,7 +31,6 @@ file interface IStoreResult
 /// <summary>
 ///     存储操作结果
 /// </summary>
-[DataContract]
 public record StoreResult : IStoreResult
 {
     private readonly List<StoreError> _errors = new();
@@ -41,20 +39,17 @@ public record StoreResult : IStoreResult
     ///     指示操作是否成功的标志
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required bool Succeeded { get; init; }
 
     /// <summary>
     ///     指示操作受影响行数
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
     public required int EffectRows { get; init; }
 
     /// <summary>
     ///     包含存储过程中产生的所有错误的实例
     /// </summary>
-    [DataMember(Order = 3)]
     public IEnumerable<StoreError> Errors => _errors;
 
     /// <summary>
