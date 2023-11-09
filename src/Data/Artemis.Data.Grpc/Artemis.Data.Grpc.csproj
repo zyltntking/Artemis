@@ -10,4 +10,8 @@
     <PackageReference Include="protobuf-net.Core" Version="3.2.26" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+  </ItemGroup>
+
 </Project>

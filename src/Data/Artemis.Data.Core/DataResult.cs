@@ -56,10 +56,61 @@ file interface IResultBase<T> : IResultBase
 #endregion
 
 /// <summary>
+/// 抽象数据结果
+/// </summary>
+public abstract record AbstractResult : IResultBase
+{
+    #region Implementation of IResultBase
+
+    /// <summary>
+    ///     消息码
+    /// </summary>
+    [Required]
+    public virtual required int Code { get; set; }
+
+    /// <summary>
+    ///     是否成功
+    /// </summary>
+    public virtual bool Succeeded
+    {
+        get => Code == ResultStatus.Success;
+        set
+        {
+            //ignore
+        }
+    }
+
+    /// <summary>
+    ///     消息
+    /// </summary>
+    [Required]
+    public virtual required string Message { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     异常信息
+    /// </summary>
+    public virtual string? Error { get; set; }
+
+    /// <summary>
+    ///     本地时间戳
+    /// </summary>
+    [Required]
+    public virtual required DateTime DateTime { get; set; }
+
+    /// <summary>
+    ///     时间戳
+    /// </summary>
+    [Required]
+    public virtual required long Timestamp { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     数据结果协议模板接口
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
-public record DataResult<T> : IResultBase<T>
+public sealed record DataResult<T> : AbstractResult, IResultBase<T>
 {
     /// <summary>
     ///     空构造
@@ -145,48 +196,7 @@ public record DataResult<T> : IResultBase<T>
         return InnerException;
     }
 
-    #region Implementation of IResultBase
-
-    /// <summary>
-    ///     消息码
-    /// </summary>
-    [Required]
-    public required int Code { get; set; }
-
-    /// <summary>
-    ///     是否成功
-    /// </summary>
-    public bool Succeeded
-    {
-        get => Code == ResultStatus.Success;
-        set
-        {
-            //ignore
-        }
-    }
-
-    /// <summary>
-    ///     消息
-    /// </summary>
-    [Required]
-    public required string Message { get; set; } = string.Empty;
-
-    /// <summary>
-    ///     异常信息
-    /// </summary>
-    public string? Error { get; set; }
-
-    /// <summary>
-    ///     本地时间戳
-    /// </summary>
-    [Required]
-    public required DateTime DateTime { get; set; }
-
-    /// <summary>
-    ///     时间戳
-    /// </summary>
-    [Required]
-    public required long Timestamp { get; set; }
+    #region Implementation of IResultBase<T>
 
     /// <summary>
     ///     数据
@@ -306,17 +316,17 @@ public static class DataResult
 /// <summary>
 ///     结果状态
 /// </summary>
-internal static class ResultStatus
+public static class ResultStatus
 {
     /// <summary>
     ///     成功
     /// </summary>
-    internal const int Success = 0;
+    public const int Success = 0;
 
     /// <summary>
     ///     失败
     /// </summary>
-    internal const int Fail = 1;
+    public const int Fail = 1;
 
     /// <summary>
     ///     异常
