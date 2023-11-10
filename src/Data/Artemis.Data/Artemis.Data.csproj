@@ -41,7 +41,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
         <ProjectReference Include="..\Artemis.Data.Grpc\Artemis.Data.Grpc.csproj" />
-        <ProjectReference Include="..\Artemis.Data.Store\Artemis.Data.Store.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 
 namespace Artemis.Data.Grpc;
 
@@ -15,13 +16,39 @@ public abstract record GrpcResponse<T>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public required GrpcPageResult Result { get; set; }
+    public virtual required GrpcPageResult Result { get; set; }
 
     /// <summary>
     /// 结果数据
     /// </summary>
+    [Required]
     [DataMember(Order = 2)]
-    public T? Data { get; set; }
+    public virtual required T Data { get; set; } = default!;
+}
+
+/// <summary>
+/// GRPC空响应对象
+/// </summary>
+[DataContract]
+public sealed record GrpcEmptyResponse : GrpcResponse<EmptyRecord>
+{
+    #region Overrides of GrpcResponse<EmptyRecord>
+
+    /// <summary>
+    /// 结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    /// 结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required EmptyRecord Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -36,18 +63,18 @@ public abstract record GrpcPageResponse<T>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public required GrpcPageResult Result { get; set; }
+    public virtual required GrpcPageResult Result { get; set; }
 
     /// <summary>
     /// 分页信息
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public required GrpcPageResult Page { get; set; }
+    public virtual required GrpcPageResult Page { get; set; }
 
     /// <summary>
     /// 数据集
     /// </summary>
     [DataMember(Order = 3)]
-    public IEnumerable<T>? Date { get; set; }
+    public virtual required IEnumerable<T> Date { get; set; }
 }

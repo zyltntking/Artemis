@@ -95,7 +95,7 @@ public abstract record PageBase : IPageBase
 ///     分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public sealed record PageRequest<T> : PageBase,IPageRequest<T>
+public record PageRequest<T> : PageBase,IPageRequest<T>
 {
     #region Implementation of IPageRequest<T>
 
@@ -103,7 +103,7 @@ public sealed record PageRequest<T> : PageBase,IPageRequest<T>
     ///     过滤条件
     /// </summary>
     [Required]
-    public required T Filter { get; set; } = default!;
+    public virtual required T Filter { get; set; } = default!;
 
     #endregion
 

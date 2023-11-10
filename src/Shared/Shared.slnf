@@ -3,6 +3,7 @@
     "path": "..\\..\\Artemis.sln",
     "projects": [
       "src\\Data\\Artemis.Data.Core\\Artemis.Data.Core.csproj",
+      "src\\Data\\Artemis.Data.Grpc\\Artemis.Data.Grpc.csproj",
       "src\\Shared\\Artemis.Shared.Identity\\Artemis.Shared.Identity.csproj",
       "src\\Shared\\Artemis.Shared\\Artemis.Shared.csproj"
     ]

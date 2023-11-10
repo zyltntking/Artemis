@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using Artemis.Data.Core;
+using Artemis.Data.Grpc;
 using Artemis.Shared.Identity.Transfer;
-using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -18,61 +17,46 @@ public interface IAccountService
     ///     登录
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("登录")]
-    Task<DataResult<TokenResult>> SignInAsync(
-        SignInRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcTokenResponse> SignInAsync(SignInRequest request);
 
     /// <summary>
     ///     注册
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("注册")]
-    Task<DataResult<TokenResult>> SignUpAsync(
-        SignUpRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcTokenResponse> SignUpAsync(SignUpRequest request);
 
     /// <summary>
     ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("修改密码")]
-    Task<DataResult<EmptyRecord>> ChangePasswordAsync(
-        ChangePasswordRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request);
 
     /// <summary>
     ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("重置密码")]
-    Task<DataResult<EmptyRecord>> ResetPasswordAsync(
-        ResetPasswordRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> ResetPasswordAsync(ResetPasswordRequest request);
 
     /// <summary>
     ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("重置密码")]
-    Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
-        ResetPasswordsRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> ResetPasswordsAsync(ResetPasswordsRequest request);
 }
 
 /// <summary>
@@ -141,7 +125,7 @@ public sealed record SignUpRequest : UserPackage
 }
 
 /// <summary>
-///     登录响应
+///     Token结果
 /// </summary>
 [DataContract]
 public sealed record TokenResult : TokenPackage
@@ -157,6 +141,31 @@ public sealed record TokenResult : TokenPackage
     /// </summary>
     [DataMember(Order = 2)]
     public override required long Expire { get; set; }
+}
+
+/// <summary>
+/// Token响应
+/// </summary>
+[DataContract]
+public sealed record GrpcTokenResponse : GrpcResponse<TokenResult>
+{
+    #region Overrides of GrpcResponse<TokenResult>
+
+    /// <summary>
+    /// 结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    /// 结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required TokenResult Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>

@@ -66,13 +66,13 @@ public sealed record UserRoleInfo : UserRolePackage, IKeySlot<int>
     ///     用户标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
+    [DataMember(Order = 2)]
     public override required Guid UserId { get; set; }
 
     /// <summary>
     ///     角色标识
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
+    [DataMember(Order = 3)]
     public override required Guid RoleId { get; set; }
 }
