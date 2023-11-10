@@ -56,7 +56,7 @@ file interface IResultBase<T> : IResultBase
 #endregion
 
 /// <summary>
-/// 抽象数据结果
+///     抽象数据结果
 /// </summary>
 public abstract record AbstractResult : IResultBase
 {
@@ -147,6 +147,15 @@ public sealed record DataResult<T> : AbstractResult, IResultBase<T>
         Error = null;
     }
 
+    #region Implementation of IResultBase<T>
+
+    /// <summary>
+    ///     数据
+    /// </summary>
+    public T? Data { get; set; }
+
+    #endregion
+
     /// <summary>
     ///     内部异常
     /// </summary>
@@ -195,15 +204,6 @@ public sealed record DataResult<T> : AbstractResult, IResultBase<T>
     {
         return InnerException;
     }
-
-    #region Implementation of IResultBase<T>
-
-    /// <summary>
-    ///     数据
-    /// </summary>
-    public T? Data { get; set; }
-
-    #endregion
 }
 
 /// <summary>

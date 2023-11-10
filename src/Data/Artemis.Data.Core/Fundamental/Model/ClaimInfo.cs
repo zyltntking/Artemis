@@ -16,13 +16,12 @@ file interface IClaim : ICheckStamp
     ///     凭据值
     /// </summary>
     string Value { get; set; }
-
 }
 
 #endregion
 
 /// <summary>
-/// 凭据信息
+///     凭据信息
 /// </summary>
 public record ClaimInfo : IClaim
 {

@@ -144,7 +144,7 @@ public sealed record TokenResult : TokenPackage
 }
 
 /// <summary>
-/// Token响应
+///     Token响应
 /// </summary>
 [DataContract]
 public sealed record GrpcTokenResponse : GrpcResponse<TokenResult>
@@ -152,14 +152,14 @@ public sealed record GrpcTokenResponse : GrpcResponse<TokenResult>
     #region Overrides of GrpcResponse<TokenResult>
 
     /// <summary>
-    /// 结果信息
+    ///     结果信息
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
     public override required GrpcPageResult Result { get; set; }
 
     /// <summary>
-    /// 结果数据
+    ///     结果数据
     /// </summary>
     [Required]
     [DataMember(Order = 2)]

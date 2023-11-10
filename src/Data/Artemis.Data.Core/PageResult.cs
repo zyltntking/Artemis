@@ -95,7 +95,7 @@ public abstract record PageBase : IPageBase
 ///     分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public record PageRequest<T> : PageBase,IPageRequest<T>
+public record PageRequest<T> : PageBase, IPageRequest<T>
 {
     #region Implementation of IPageRequest<T>
 
@@ -111,11 +111,10 @@ public record PageRequest<T> : PageBase,IPageRequest<T>
     ///     跳过数
     /// </summary>
     public int Skip => (Page - 1) * Size;
-
 }
 
 /// <summary>
-/// 分页数据结果
+///     分页数据结果
 /// </summary>
 public abstract record AbstractPageResult : PageBase, IPageResult
 {

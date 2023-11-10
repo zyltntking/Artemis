@@ -1,11 +1,11 @@
-﻿using Artemis.Data.Core;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Artemis.Data.Core;
 
 namespace Artemis.Data.Grpc;
 
 /// <summary>
-/// GRPC结果对象
+///     GRPC结果对象
 /// </summary>
 [DataContract]
 public record GrpcResult : AbstractResult

@@ -29,5 +29,4 @@ public abstract record GrpcPageRequest<T> : PageRequest<T>
     [Required]
     [DataMember(Order = 3)]
     public override required T Filter { get; set; }
-
 }

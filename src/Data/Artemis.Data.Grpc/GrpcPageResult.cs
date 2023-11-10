@@ -5,7 +5,7 @@ using Artemis.Data.Core;
 namespace Artemis.Data.Grpc;
 
 /// <summary>
-/// GRPC分页信息对象
+///     GRPC分页信息对象
 /// </summary>
 [DataContract]
 public record GrpcPageResult : AbstractPageResult

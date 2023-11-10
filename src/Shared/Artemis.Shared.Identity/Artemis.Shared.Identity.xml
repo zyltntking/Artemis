@@ -502,7 +502,9 @@
             </summary>
             <param name="request">请求</param>
             <param name="context">上下文</param>
-            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo" /></returns>
+            <returns>角色信息
+                <see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo"/>
+            </returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRoleAsync(Artemis.Shared.Identity.Services.CreateRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
@@ -955,7 +957,9 @@
             </summary>
             <param name="request">请求</param>
             <param name="context">上下文</param>
-            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.UserInfo" /></returns>
+            <returns>角色信息
+                <see cref="T:Artemis.Shared.Identity.Transfer.UserInfo"/>
+            </returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IUserService.CreateUserAsync(Artemis.Shared.Identity.Services.CreateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
