@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Logic;
 /// <summary>
 ///     账户服务
 /// </summary>
-public class AccountService : IAccountService
+internal class AccountService : IAccountService
 {
     /// <summary>
     ///     账户服务
