@@ -62,20 +62,14 @@
                 string转id
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>An instance of
-                <typeparamref name="TKey"/>
-                representing the provided<paramref name="id"/>.
-            </returns>
+            <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.IdToString``1(``0)">
             <summary>
                 id转string
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>An
-                <see cref="T:System.String"/>
-                representation of the provided<paramref name="id"/>.
-            </returns>
+            <returns>An <see cref="T:System.String" /> representation of the provided <paramref name="id" />.</returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.GuidFromString(System.String)">
             <summary>
@@ -206,6 +200,41 @@
                 数据
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.AbstractResult">
+            <summary>
+                抽象数据结果
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.Code">
+            <summary>
+                消息码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.Succeeded">
+            <summary>
+                是否成功
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.Message">
+            <summary>
+                消息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.Error">
+            <summary>
+                异常信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.DateTime">
+            <summary>
+                本地时间戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractResult.Timestamp">
+            <summary>
+                时间戳
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.DataResult`1">
             <summary>
                 数据结果协议模板接口
@@ -232,6 +261,11 @@
             <param name="code">消息码</param>
             <param name="message">消息</param>
             <param name="data">数据</param>
+        </member>
+        <member name="P:Artemis.Data.Core.DataResult`1.Data">
+            <summary>
+                数据
+            </summary>
         </member>
         <member name="P:Artemis.Data.Core.DataResult`1.InnerException">
             <summary>
@@ -266,41 +300,6 @@
                 获取异常
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Code">
-            <summary>
-                消息码
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Succeeded">
-            <summary>
-                是否成功
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Message">
-            <summary>
-                消息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Error">
-            <summary>
-                异常信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.DateTime">
-            <summary>
-                本地时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Timestamp">
-            <summary>
-                时间戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.DataResult`1.Data">
-            <summary>
-                数据
-            </summary>
         </member>
         <member name="T:Artemis.Data.Core.DataResult">
             <summary>
@@ -469,7 +468,7 @@
         </member>
         <member name="T:Artemis.Data.Core.Exceptions.EntityHasBeenSetException">
             <summary>
-                实体查询失败异常
+                实体已设置失败异常
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Exceptions.EntityHasBeenSetException.#ctor(System.String,System.String,System.Int32)">
@@ -482,7 +481,7 @@
         </member>
         <member name="T:Artemis.Data.Core.Exceptions.EntityNotFoundException">
             <summary>
-                实体查询失败异常
+                实体未设置失败异常
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Exceptions.EntityNotFoundException.#ctor(System.String,System.String,System.Int32)">
@@ -577,7 +576,7 @@
         </member>
         <member name="T:Artemis.Data.Core.Exceptions.InstanceNotImplementException">
             <summary>
-                缓存未设置异常
+                实例未设置异常
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Exceptions.InstanceNotImplementException.#ctor">
@@ -617,7 +616,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Exceptions.MapTargetNullException.#ctor(System.String)">
             <summary>
-                Constructs an instance of<see cref="T:Artemis.Data.Core.Exceptions.MapTargetNullException"/>.
+                Constructs an instance of <see cref="T:Artemis.Data.Core.Exceptions.MapTargetNullException" />.
             </summary>
             <param name="message">The exception message.</param>
         </member>
@@ -700,11 +699,8 @@
             <summary>Indicates whether the current object is equal to another object of the same type.</summary>
             <param name="other">An object to compare with this object.</param>
             <returns>
-                <see langword="true"/>
-                if the current object is equal to the
-                <paramref name="other"/>
-                parameter; otherwise,
-                <see langword="false"/>.
+                <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise,
+                <see langword="false" />.
             </returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.FromValue``1(System.Int32)">
@@ -790,8 +786,7 @@
             <typeparam name="T"></typeparam>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type<typeparamref name="T"/>.
-            </summary>
+            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -1015,6 +1010,41 @@
                 生成新的Id
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Model.IClaim">
+            <summary>
+                凭据项目接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.IClaim.Type">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.IClaim.Value">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Model.ClaimInfo">
+            <summary>
+                凭据信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.ClaimInfo.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.ClaimInfo.Type">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Model.ClaimInfo.Value">
+            <summary>
+                凭据值
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Model.IMetadata">
             <summary>
@@ -2221,17 +2251,20 @@
                 跳过数
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.PageRequest`1.Page">
+        <member name="T:Artemis.Data.Core.AbstractPageResult">
             <summary>
-                当前页码(从1开始)
+                分页数据结果
             </summary>
-            <example>1</example>
         </member>
-        <member name="P:Artemis.Data.Core.PageRequest`1.Size">
+        <member name="P:Artemis.Data.Core.AbstractPageResult.Count">
             <summary>
-                页面大小
+                过滤后数据条数
             </summary>
-            <example>20</example>
+        </member>
+        <member name="P:Artemis.Data.Core.AbstractPageResult.Total">
+            <summary>
+                数据总量
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.PageResult`1">
             <summary>
@@ -2242,26 +2275,6 @@
         <member name="P:Artemis.Data.Core.PageResult`1.Data">
             <summary>
                 数据包
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PageResult`1.Page">
-            <summary>
-                当前页码(从0开始)
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PageResult`1.Size">
-            <summary>
-                页面大小
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PageResult`1.Count">
-            <summary>
-                过滤后数据条数
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PageResult`1.Total">
-            <summary>
-                数据总量
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.IPatchItem`1">
@@ -2376,14 +2389,14 @@
                 换行键
             </summary>
             <remarks>Line Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Nl"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Nl" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Nl">
             <summary>
                 换行键
             </summary>
             <remarks>New Line</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Lf"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Lf" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Vt">
             <summary>
@@ -2396,14 +2409,14 @@
                 换页键
             </summary>
             <remarks>Form Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Np"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Np" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Np">
             <summary>
                 换页键
             </summary>
             <remarks>New Page</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Ff"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Ff" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Cr">
             <summary>
@@ -2434,14 +2447,14 @@
                 设备控制1
             </summary>
             <remarks>Device Control 1</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Xon"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Xon" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Xon">
             <summary>
                 传输开始
             </summary>
             <remarks>Transmission O</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc1"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc1" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc2">
             <summary>
@@ -2454,14 +2467,14 @@
                 设备控制3
             </summary>
             <remarks>Device Control 3</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOff"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOff" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.XOff">
             <summary>
                 传输中断
             </summary>
             <remarks>Transmission Off</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc3"/>
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc3" />
         </member>
         <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc4">
             <summary>

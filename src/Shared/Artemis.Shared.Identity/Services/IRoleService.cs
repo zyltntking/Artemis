@@ -18,253 +18,190 @@ public interface IRoleService
     ///     搜索角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("搜索角色")]
-    Task<RolesResponse> FetchRolesAsync(
-        FetchRolesRequest request,
-        ServerCallContext? context = default);
+    Task<RolesResponse> FetchRolesAsync(FetchRolesRequest request);
 
     /// <summary>
     ///     获取角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns>角色信息<see cref="RoleInfo" /></returns>
     [OperationContract]
     [Description("获取角色")]
-    Task<RoleResponse> GetRoleAsync(
-        GetRoleRequest request,
-        ServerCallContext? context = default);
+    Task<RoleResponse> GetRoleAsync(GetRoleRequest request);
 
     /// <summary>
     ///     创建角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("创建角色")]
-    Task<RoleResponse> CreateRoleAsync(
-        CreateRoleRequest request,
-        ServerCallContext? context = default);
+    Task<RoleResponse> CreateRoleAsync(CreateRoleRequest request);
 
     /// <summary>
     ///     创建角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("创建角色")]
-    Task<GrpcEmptyResponse> CreateRolesAsync(
-        CreateRolesRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> CreateRolesAsync(CreateRolesRequest request);
 
     /// <summary>
     ///     更新角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("更新角色")]
-    Task<RoleResponse> UpdateRoleAsync(
-        UpdateRoleRequest request,
-        ServerCallContext? context = default);
+    Task<RoleResponse> UpdateRoleAsync(UpdateRoleRequest request);
 
     /// <summary>
     ///     更新角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("更新角色")]
-    Task<GrpcEmptyResponse> UpdateRolesAsync(
-        UpdateRolesRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> UpdateRolesAsync(UpdateRolesRequest request);
 
     /// <summary>
     ///     更新或创建角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("更新或创建角色")]
-    Task<RoleResponse> UpdateOrCreateRoleAsync(
-        UpdateRoleRequest request,
-        ServerCallContext? context = default);
+    Task<RoleResponse> UpdateOrCreateRoleAsync(UpdateRoleRequest request);
 
     /// <summary>
     ///     删除角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色")]
-    Task<GrpcEmptyResponse> DeleteRoleAsync(
-        DeleteRoleRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> DeleteRoleAsync(DeleteRoleRequest request);
 
     /// <summary>
     ///     删除角色
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色")]
-    Task<GrpcEmptyResponse> DeleteRolesAsync(
-        DeleteRolesRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> DeleteRolesAsync(DeleteRolesRequest request);
 
     /// <summary>
     ///     查询角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("查询角色用户")]
-    Task<RoleUsersResponse> FetchRoleUsersAsync(
-        FetchRoleUsersRequest request,
-        ServerCallContext? context = default);
+    Task<RoleUsersResponse> FetchRoleUsersAsync(FetchRoleUsersRequest request);
 
     /// <summary>
     ///     获取角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("获取角色用户")]
-    Task<RoleUserResponse> GetRoleUserAsync(
-        GetRoleUserRequest request,
-        ServerCallContext? context = default);
+    Task<RoleUserResponse> GetRoleUserAsync(GetRoleUserRequest request);
 
     /// <summary>
     ///     添加角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("添加角色用户")]
-    Task<GrpcEmptyResponse> AddRoleUserAsync(
-        AddRoleUserRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> AddRoleUserAsync(AddRoleUserRequest request);
 
     /// <summary>
     ///     添加角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("添加角色用户")]
-    Task<GrpcEmptyResponse> AddRoleUsersAsync(
-        AddRoleUsersRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> AddRoleUsersAsync(AddRoleUsersRequest request);
 
     /// <summary>
     ///     删除角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色用户")]
-    Task<GrpcEmptyResponse> RemoveRoleUserAsync(
-        RemoveRoleUserRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> RemoveRoleUserAsync(RemoveRoleUserRequest request);
 
     /// <summary>
     ///     删除角色用户
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色用户")]
-    Task<GrpcEmptyResponse> RemoveRoleUsersAsync(
-        RemoveRoleUsersRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> RemoveRoleUsersAsync(RemoveRoleUsersRequest request);
 
     /// <summary>
     ///     查询角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("查询角色凭据")]
-    Task<RoleClaimsResponse> FetchRoleClaimsAsync(
-        FetchRoleClaimsRequest request,
-        ServerCallContext? context = default);
+    Task<RoleClaimsResponse> FetchRoleClaimsAsync(FetchRoleClaimsRequest request);
 
     /// <summary>
     ///     获取角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("获取角色凭据")]
-    Task<RoleClaimResponse> GetRoleClaimAsync(
-        GetRoleClaimRequest request,
-        ServerCallContext? context = default);
+    Task<RoleClaimResponse> GetRoleClaimAsync(GetRoleClaimRequest request);
 
     /// <summary>
     ///     添加角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("添加角色凭据")]
-    Task<GrpcEmptyResponse> AddRoleClaimAsync(
-        AddRoleClaimRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> AddRoleClaimAsync(AddRoleClaimRequest request);
 
     /// <summary>
     ///     添加角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("添加角色凭据")]
-    Task<GrpcEmptyResponse> AddRoleClaimsAsync(
-        AddRoleClaimsRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> AddRoleClaimsAsync(AddRoleClaimsRequest request);
 
     /// <summary>
     ///     删除角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色凭据")]
-    Task<GrpcEmptyResponse> RemoveRoleClaimAsync(
-        RemoveRoleClaimRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> RemoveRoleClaimAsync(RemoveRoleClaimRequest request);
 
     /// <summary>
     ///     删除角色凭据
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("删除角色凭据")]
-    Task<GrpcEmptyResponse> RemoveRoleClaimsAsync(
-        RemoveRoleClaimsRequest request,
-        ServerCallContext? context = default);
+    Task<GrpcEmptyResponse> RemoveRoleClaimsAsync(RemoveRoleClaimsRequest request);
 }
 
 /// <summary>
@@ -327,7 +264,7 @@ public sealed record RolesResponse : GrpcPageResponse<RoleInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     分页信息
@@ -341,7 +278,7 @@ public sealed record RolesResponse : GrpcPageResponse<RoleInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<RoleInfo> Date { get; set; }
+    public override required IEnumerable<RoleInfo>? Date { get; set; }
 
     #endregion
 }
@@ -373,14 +310,14 @@ public sealed record RoleResponse : GrpcResponse<RoleInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     结果数据
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required RoleInfo Data { get; set; }
+    public override required RoleInfo? Data { get; set; }
 
     #endregion
 }
@@ -567,7 +504,7 @@ public sealed record RoleUsersResponse : GrpcPageResponse<UserInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     分页信息
@@ -581,7 +518,7 @@ public sealed record RoleUsersResponse : GrpcPageResponse<UserInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserInfo> Date { get; set; }
+    public override required IEnumerable<UserInfo>? Date { get; set; }
 
     #endregion
 }
@@ -620,14 +557,14 @@ public sealed record RoleUserResponse : GrpcResponse<UserInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     结果数据
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required UserInfo Data { get; set; }
+    public override required UserInfo? Data { get; set; }
 
     #endregion
 }
@@ -783,7 +720,7 @@ public sealed record RoleClaimsResponse : GrpcPageResponse<RoleClaimInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     分页信息
@@ -797,7 +734,7 @@ public sealed record RoleClaimsResponse : GrpcPageResponse<RoleClaimInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<RoleClaimInfo> Date { get; set; }
+    public override required IEnumerable<RoleClaimInfo>? Date { get; set; }
 
     #endregion
 }
@@ -836,14 +773,14 @@ public sealed record RoleClaimResponse : GrpcResponse<RoleClaimInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     结果数据
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required RoleClaimInfo Data { get; set; }
+    public override required RoleClaimInfo? Data { get; set; }
 
     #endregion
 }

@@ -338,44 +338,39 @@
                 账户服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest)">
             <summary>
                 登录
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest)">
             <summary>
                 注册
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest)">
             <summary>
                 修改密码
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ResetPasswordAsync(Artemis.Shared.Identity.Services.ResetPasswordRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ResetPasswordAsync(Artemis.Shared.Identity.Services.ResetPasswordRequest)">
             <summary>
                 重置密码
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ResetPasswordsAsync(Artemis.Shared.Identity.Services.ResetPasswordsRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.ResetPasswordsAsync(Artemis.Shared.Identity.Services.ResetPasswordsRequest)">
             <summary>
                 重置密码
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.SignInRequest">
@@ -420,7 +415,7 @@
         </member>
         <member name="T:Artemis.Shared.Identity.Services.TokenResult">
             <summary>
-                登录响应
+                Token结果
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Services.TokenResult.Token">
@@ -431,6 +426,21 @@
         <member name="P:Artemis.Shared.Identity.Services.TokenResult.Expire">
             <summary>
                 Token过期时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.TokenResponse">
+            <summary>
+                Token响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.TokenResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.TokenResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.ChangePasswordRequest">
@@ -488,174 +498,151 @@
                 角色服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRolesAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRolesFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRolesAsync(Artemis.Shared.Identity.Services.FetchRolesRequest)">
             <summary>
                 搜索角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleAsync(Artemis.Shared.Identity.Services.GetRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleAsync(Artemis.Shared.Identity.Services.GetRoleRequest)">
             <summary>
                 获取角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
-            <returns>角色信息
-                <see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo"/>
-            </returns>
+            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo" /></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRoleAsync(Artemis.Shared.Identity.Services.CreateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRoleAsync(Artemis.Shared.Identity.Services.CreateRoleRequest)">
             <summary>
                 创建角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRolesAsync(Artemis.Shared.Identity.Services.CreateRolesRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.CreateRolesAsync(Artemis.Shared.Identity.Services.CreateRolesRequest)">
             <summary>
                 创建角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
             <summary>
                 更新角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRolesAsync(Artemis.Shared.Identity.Services.UpdateRolesRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateRolesAsync(Artemis.Shared.Identity.Services.UpdateRolesRequest)">
             <summary>
                 更新角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateOrCreateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.UpdateOrCreateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
             <summary>
                 更新或创建角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRoleAsync(Artemis.Shared.Identity.Services.DeleteRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRoleAsync(Artemis.Shared.Identity.Services.DeleteRoleRequest)">
             <summary>
                 删除角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRolesAsync(Artemis.Shared.Identity.Services.DeleteRolesRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.DeleteRolesAsync(Artemis.Shared.Identity.Services.DeleteRolesRequest)">
             <summary>
                 删除角色
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRoleUsersAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRoleUsersFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRoleUsersAsync(Artemis.Shared.Identity.Services.FetchRoleUsersRequest)">
             <summary>
                 查询角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleUserAsync(Artemis.Shared.Identity.Services.GetRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleUserAsync(Artemis.Shared.Identity.Services.GetRoleUserRequest)">
             <summary>
                 获取角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUserAsync(Artemis.Shared.Identity.Services.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUserAsync(Artemis.Shared.Identity.Services.AddRoleUserRequest)">
             <summary>
                 添加角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUsersAsync(Artemis.Shared.Identity.Services.AddRoleUsersRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleUsersAsync(Artemis.Shared.Identity.Services.AddRoleUsersRequest)">
             <summary>
                 添加角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUserAsync(Artemis.Shared.Identity.Services.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUserAsync(Artemis.Shared.Identity.Services.RemoveRoleUserRequest)">
             <summary>
                 删除角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUsersAsync(Artemis.Shared.Identity.Services.RemoveRoleUsersRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleUsersAsync(Artemis.Shared.Identity.Services.RemoveRoleUsersRequest)">
             <summary>
                 删除角色用户
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRoleClaimsAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchRoleClaimsFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.FetchRoleClaimsAsync(Artemis.Shared.Identity.Services.FetchRoleClaimsRequest)">
             <summary>
                 查询角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleClaimAsync(Artemis.Shared.Identity.Services.GetRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.GetRoleClaimAsync(Artemis.Shared.Identity.Services.GetRoleClaimRequest)">
             <summary>
                 获取角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimAsync(Artemis.Shared.Identity.Services.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimAsync(Artemis.Shared.Identity.Services.AddRoleClaimRequest)">
             <summary>
                 添加角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimsAsync(Artemis.Shared.Identity.Services.AddRoleClaimsRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.AddRoleClaimsAsync(Artemis.Shared.Identity.Services.AddRoleClaimsRequest)">
             <summary>
                 添加角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimRequest)">
             <summary>
                 删除角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimsAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IRoleService.RemoveRoleClaimsAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest)">
             <summary>
                 删除角色凭据
             </summary>
             <param name="request">请求</param>
-            <param name="context">上下文</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.FetchRolesFilter">
@@ -668,6 +655,48 @@
                 角色名搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchRolesRequest">
+            <summary>
+                查询角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRolesRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRolesRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRolesRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RolesResponse">
+            <summary>
+                RoleInfo分页响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RolesResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RolesResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RolesResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetRoleRequest">
             <summary>
                 获取角色请求
@@ -676,6 +705,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetRoleRequest.RoleId">
             <summary>
                 角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RoleResponse">
+            <summary>
+                RoleInfo响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.CreateRoleRequest">
@@ -750,7 +794,7 @@
         </member>
         <member name="T:Artemis.Shared.Identity.Services.FetchRoleUsersFilter">
             <summary>
-                查询用户过滤器
+                查询角色用户过滤器
             </summary>
         </member>
         <member name="P:Artemis.Shared.Identity.Services.FetchRoleUsersFilter.RoleId">
@@ -773,6 +817,48 @@
                 电话号码搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchRoleUsersRequest">
+            <summary>
+                查询角色用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleUsersRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleUsersRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleUsersRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RoleUsersResponse">
+            <summary>
+                查询角色用户响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleUsersResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleUsersResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleUsersResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetRoleUserRequest">
             <summary>
                 获取角色用户请求
@@ -786,6 +872,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetRoleUserRequest.UserId">
             <summary>
                 用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RoleUserResponse">
+            <summary>
+                角色用户信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleUserResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleUserResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddRoleUserRequest">
@@ -863,6 +964,48 @@
                 凭据类型搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchRoleClaimsRequest">
+            <summary>
+                查询角色凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleClaimsRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleClaimsRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchRoleClaimsRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RoleClaimsResponse">
+            <summary>
+                角色凭据信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleClaimsResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleClaimsResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleClaimsResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetRoleClaimRequest">
             <summary>
                 获取角色凭据请求
@@ -876,6 +1019,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetRoleClaimRequest.RoleClaimId">
             <summary>
                 凭据标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.RoleClaimResponse">
+            <summary>
+                角色凭据信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleClaimResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.RoleClaimResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddRoleClaimRequest">
@@ -943,7 +1101,7 @@
                 用户服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUsersAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUsersFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUsersAsync(Artemis.Shared.Identity.Services.FetchUsersRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 搜索用户
             </summary>
@@ -957,9 +1115,7 @@
             </summary>
             <param name="request">请求</param>
             <param name="context">上下文</param>
-            <returns>角色信息
-                <see cref="T:Artemis.Shared.Identity.Transfer.UserInfo"/>
-            </returns>
+            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.UserInfo" /></returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IUserService.CreateUserAsync(Artemis.Shared.Identity.Services.CreateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
@@ -1009,7 +1165,7 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserRolesAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserRolesFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserRolesAsync(Artemis.Shared.Identity.Services.FetchUserRolesRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 查询用户角色
             </summary>
@@ -1057,7 +1213,7 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserClaimsAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserClaimsFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserClaimsAsync(Artemis.Shared.Identity.Services.FetchUserClaimsRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 查询用户凭据信息
             </summary>
@@ -1105,7 +1261,7 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserLoginsAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserLoginsFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserLoginsAsync(Artemis.Shared.Identity.Services.FetchUserLoginsRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 查询用户登录信息
             </summary>
@@ -1153,7 +1309,7 @@
             <param name="context">上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserTokensAsync(Artemis.Data.Core.PageRequest{Artemis.Shared.Identity.Services.FetchUserTokensFilter},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IUserService.FetchUserTokensAsync(Artemis.Shared.Identity.Services.FetchUserTokensRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 查询用户令牌信息
             </summary>
@@ -1221,6 +1377,48 @@
                 电话号码搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUsersRequest">
+            <summary>
+                查询用户请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUsersRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUsersRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUsersRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UsersResponse">
+            <summary>
+                查询用户响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UsersResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UsersResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UsersResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetUserRequest">
             <summary>
                 获取用户请求
@@ -1229,6 +1427,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetUserRequest.UserId">
             <summary>
                 用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserResponse">
+            <summary>
+                用户信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.CreateUserRequest">
@@ -1327,6 +1540,48 @@
                 用户名搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserRolesRequest">
+            <summary>
+                查询用户角色请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserRolesRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserRolesRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserRolesRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserRolesResponse">
+            <summary>
+                查询用户角色响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserRolesResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserRolesResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserRolesResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetUserRoleRequest">
             <summary>
                 获取用户角色请求
@@ -1340,6 +1595,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetUserRoleRequest.RoleId">
             <summary>
                 角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserRoleResponse">
+            <summary>
+                用户角色信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserRoleResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserRoleResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddUserRoleRequest">
@@ -1417,6 +1687,48 @@
                 凭据类型搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserClaimsRequest">
+            <summary>
+                查询用户凭据请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserClaimsRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserClaimsRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserClaimsRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserClaimsResponse">
+            <summary>
+                查询用户凭据响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserClaimsResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserClaimsResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserClaimsResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetUserClaimRequest">
             <summary>
                 获取用户凭据请求
@@ -1430,6 +1742,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetUserClaimRequest.UserClaimId">
             <summary>
                 凭据标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserClaimResponse">
+            <summary>
+                用户凭据信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserClaimResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserClaimResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddUserClaimRequest">
@@ -1507,6 +1834,48 @@
                 登录类型搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserLoginsRequest">
+            <summary>
+                查询用户登录请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserLoginsRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserLoginsRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserLoginsRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserLoginsResponse">
+            <summary>
+                查询用户登录信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserLoginsResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserLoginsResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserLoginsResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetUserLoginRequest">
             <summary>
                 获取用户登录信息请求
@@ -1520,6 +1889,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetUserLoginRequest.UserLoginId">
             <summary>
                 用户登录信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserLoginResponse">
+            <summary>
+                用户登录信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserLoginResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserLoginResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddUserLoginRequest">
@@ -1607,6 +1991,48 @@
                 令牌名搜索值
             </summary>
         </member>
+        <member name="T:Artemis.Shared.Identity.Services.FetchUserTokensRequest">
+            <summary>
+                查询用户令牌请求
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensRequest.Page">
+            <summary>
+                当前页码(从1开始)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensRequest.Size">
+            <summary>
+                页面大小
+            </summary>
+            <example>20</example>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.FetchUserTokensRequest.Filter">
+            <summary>
+                过滤条件
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserTokensResponse">
+            <summary>
+                用户令牌分页响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserTokensResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserTokensResponse.Page">
+            <summary>
+                分页信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserTokensResponse.Date">
+            <summary>
+                数据集
+            </summary>
+        </member>
         <member name="T:Artemis.Shared.Identity.Services.GetUserTokenRequest">
             <summary>
                 获取用户令牌信息请求
@@ -1620,6 +2046,21 @@
         <member name="P:Artemis.Shared.Identity.Services.GetUserTokenRequest.UserTokenId">
             <summary>
                 用户令牌信息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Shared.Identity.Services.UserTokenResponse">
+            <summary>
+                用户令牌信息响应
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserTokenResponse.Result">
+            <summary>
+                结果信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Shared.Identity.Services.UserTokenResponse.Data">
+            <summary>
+                结果数据
             </summary>
         </member>
         <member name="T:Artemis.Shared.Identity.Services.AddUserTokenRequest">

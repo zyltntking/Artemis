@@ -156,14 +156,14 @@ public sealed record TokenResponse : GrpcResponse<TokenResult>
     /// </summary>
     [Required]
     [DataMember(Order = 1)]
-    public override required GrpcPageResult Result { get; set; }
+    public override required GrpcResult Result { get; set; }
 
     /// <summary>
     ///     结果数据
     /// </summary>
     [Required]
     [DataMember(Order = 2)]
-    public override required TokenResult Data { get; set; }
+    public override required TokenResult? Data { get; set; }
 
     #endregion
 }

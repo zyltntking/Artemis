@@ -524,6 +524,220 @@
                 认证配置选项操作
             </summary>
         </member>
+        <member name="T:Artemis.Services.Identity.Logic.AccountService">
+            <summary>
+                账户服务
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.#ctor(Artemis.Services.Identity.Managers.IAccountManager)">
+            <summary>
+                账户服务
+            </summary>
+            <param name="accountManager">账户管理器依赖</param>
+        </member>
+        <member name="P:Artemis.Services.Identity.Logic.AccountService.AccountManager">
+            <summary>
+                角色管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest)">
+            <summary>
+                登录
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest)">
+            <summary>
+                注册
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest)">
+            <summary>
+                修改密码
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.ResetPasswordAsync(Artemis.Shared.Identity.Services.ResetPasswordRequest)">
+            <summary>
+                重置密码
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.ResetPasswordsAsync(Artemis.Shared.Identity.Services.ResetPasswordsRequest)">
+            <summary>
+                重置密码
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Services.Identity.Logic.RoleService">
+            <summary>
+            角色服务
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.#ctor(Artemis.Services.Identity.Managers.IRoleManager)">
+            <summary>
+                角色服务
+            </summary>
+            <param name="roleManager">角色管理器依赖</param>
+        </member>
+        <member name="P:Artemis.Services.Identity.Logic.RoleService.RoleManager">
+            <summary>
+                角色管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.FetchRolesAsync(Artemis.Shared.Identity.Services.FetchRolesRequest)">
+            <summary>
+                搜索角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.GetRoleAsync(Artemis.Shared.Identity.Services.GetRoleRequest)">
+            <summary>
+                获取角色
+            </summary>
+            <param name="request">请求</param>
+            <returns>角色信息<see cref="T:Artemis.Shared.Identity.Transfer.RoleInfo" /></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.CreateRoleAsync(Artemis.Shared.Identity.Services.CreateRoleRequest)">
+            <summary>
+                创建角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.CreateRolesAsync(Artemis.Shared.Identity.Services.CreateRolesRequest)">
+            <summary>
+                创建角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.UpdateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
+            <summary>
+                更新角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.UpdateRolesAsync(Artemis.Shared.Identity.Services.UpdateRolesRequest)">
+            <summary>
+                更新角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.UpdateOrCreateRoleAsync(Artemis.Shared.Identity.Services.UpdateRoleRequest)">
+            <summary>
+                更新或创建角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.DeleteRoleAsync(Artemis.Shared.Identity.Services.DeleteRoleRequest)">
+            <summary>
+                删除角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.DeleteRolesAsync(Artemis.Shared.Identity.Services.DeleteRolesRequest)">
+            <summary>
+                删除角色
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.FetchRoleUsersAsync(Artemis.Shared.Identity.Services.FetchRoleUsersRequest)">
+            <summary>
+                查询角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.GetRoleUserAsync(Artemis.Shared.Identity.Services.GetRoleUserRequest)">
+            <summary>
+                获取角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.AddRoleUserAsync(Artemis.Shared.Identity.Services.AddRoleUserRequest)">
+            <summary>
+                添加角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.AddRoleUsersAsync(Artemis.Shared.Identity.Services.AddRoleUsersRequest)">
+            <summary>
+                添加角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.RemoveRoleUserAsync(Artemis.Shared.Identity.Services.RemoveRoleUserRequest)">
+            <summary>
+                删除角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.RemoveRoleUsersAsync(Artemis.Shared.Identity.Services.RemoveRoleUsersRequest)">
+            <summary>
+                删除角色用户
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.FetchRoleClaimsAsync(Artemis.Shared.Identity.Services.FetchRoleClaimsRequest)">
+            <summary>
+                查询角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.GetRoleClaimAsync(Artemis.Shared.Identity.Services.GetRoleClaimRequest)">
+            <summary>
+                获取角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.AddRoleClaimAsync(Artemis.Shared.Identity.Services.AddRoleClaimRequest)">
+            <summary>
+                添加角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.AddRoleClaimsAsync(Artemis.Shared.Identity.Services.AddRoleClaimsRequest)">
+            <summary>
+                添加角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.RemoveRoleClaimAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimRequest)">
+            <summary>
+                删除角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.RoleService.RemoveRoleClaimsAsync(Artemis.Shared.Identity.Services.RemoveRoleClaimsRequest)">
+            <summary>
+                删除角色凭据
+            </summary>
+            <param name="request">请求</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Services.Identity.Managers.AccountManager">
             <summary>
                 账号管理器
