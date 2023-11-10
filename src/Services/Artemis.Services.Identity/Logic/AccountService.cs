@@ -112,8 +112,8 @@ public class AccountService : IAccountService
             request.OldPassword,
             request.NewPassword);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail(result.Message);
     }
 
@@ -128,8 +128,8 @@ public class AccountService : IAccountService
             request.UserId,
             request.Password);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail(result.Message);
     }
 
@@ -144,8 +144,8 @@ public class AccountService : IAccountService
             request.UserIds,
             request.Password);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail(result.Message);
     }
 

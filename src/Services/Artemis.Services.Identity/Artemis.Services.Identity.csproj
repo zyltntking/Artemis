@@ -52,9 +52,5 @@
 		<ProjectReference Include="..\..\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Logic\" />
-	</ItemGroup>
-
 </Project> 
 

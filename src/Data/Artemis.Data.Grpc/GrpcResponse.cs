@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 using System.Runtime.Serialization;
 using Artemis.Data.Core;
 
@@ -77,14 +76,33 @@ public abstract record GrpcPageResponse<T>
     ///     数据集
     /// </summary>
     [DataMember(Order = 3)]
-    public virtual required IEnumerable<T>? Date { get; set; }
+    public virtual required IEnumerable<T>? Data { get; set; }
 }
 
 /// <summary>
-/// Grpc响应辅助函数
+///     Grpc响应辅助函数
 /// </summary>
 public static class GrpcResponse
 {
+    /// <summary>
+    ///     生成数据结果
+    /// </summary>
+    /// <param name="code">结果状态编码</param>
+    /// <param name="message">结果消息</param>
+    /// <param name="exception"></param>
+    /// <returns>数据结果</returns>
+    private static GrpcResult GenerateResult(int code, string message, Exception? exception = null)
+    {
+        return new GrpcResult
+        {
+            Code = code,
+            Message = message,
+            Error = exception?.ToString(),
+            DateTime = DateTime.Now.ToLocalTime(),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+    }
+
     #region Result
 
     /// <summary>
@@ -114,7 +132,8 @@ public static class GrpcResponse
     /// <param name="code">结果编码</param>
     /// <param name="message">消息</param>
     /// <returns>异常结果</returns>
-    public static GrpcResult ExceptionResult(Exception exception, int code = ResultStatus.Exception, string message = "异常")
+    public static GrpcResult ExceptionResult(Exception exception, int code = ResultStatus.Exception,
+        string message = "异常")
     {
         return GenerateResult(code, message, exception);
     }
@@ -122,7 +141,6 @@ public static class GrpcResponse
     #endregion
 
     #region EmptyResponse
-
 
     /// <summary>
     ///     生成成功结果
@@ -159,7 +177,8 @@ public static class GrpcResponse
     /// <param name="code">结果编码</param>
     /// <param name="message">消息</param>
     /// <returns>异常结果</returns>
-    public static GrpcEmptyResponse EmptyException(Exception exception, int code = ResultStatus.Exception, string message = "异常")
+    public static GrpcEmptyResponse EmptyException(Exception exception, int code = ResultStatus.Exception,
+        string message = "异常")
     {
         return new GrpcEmptyResponse
         {
@@ -173,7 +192,7 @@ public static class GrpcResponse
     #region Page
 
     /// <summary>
-    /// 分页结果
+    ///     分页结果
     /// </summary>
     /// <param name="result"></param>
     /// <returns></returns>
@@ -183,7 +202,7 @@ public static class GrpcResponse
     }
 
     /// <summary>
-    /// 分页结果
+    ///     分页结果
     /// </summary>
     /// <param name="page"></param>
     /// <param name="size"></param>
@@ -202,23 +221,4 @@ public static class GrpcResponse
     }
 
     #endregion
-
-    /// <summary>
-    ///     生成数据结果
-    /// </summary>
-    /// <param name="code">结果状态编码</param>
-    /// <param name="message">结果消息</param>
-    /// <param name="exception"></param>
-    /// <returns>数据结果</returns>
-    private static GrpcResult GenerateResult(int code, string message, Exception? exception = null)
-    {
-        return new GrpcResult
-        {
-            Code = code,
-            Message = message,
-            Error = exception?.ToString(),
-            DateTime = DateTime.Now.ToLocalTime(),
-            Timestamp = DateTime.Now.ToUnixTimeStamp()
-        };
-    }
 }

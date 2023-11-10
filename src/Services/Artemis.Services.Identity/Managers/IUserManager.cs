@@ -49,7 +49,7 @@ public interface IUserManager : IManager<ArtemisUser>
     Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
         UserPackage package,
         string password,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     创建用户
@@ -59,7 +59,7 @@ public interface IUserManager : IManager<ArtemisUser>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateUsersAsync(
         IEnumerable<KeyValuePair<UserPackage, string>> packages,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     更新用户

@@ -6,7 +6,7 @@ using Artemis.Shared.Identity.Transfer;
 namespace Artemis.Services.Identity.Logic;
 
 /// <summary>
-/// 角色服务
+///     角色服务
 /// </summary>
 public class RoleService : IRoleService
 {
@@ -44,7 +44,7 @@ public class RoleService : IRoleService
         {
             Result = GrpcResponse.SuccessResult(),
             Page = GrpcResponse.PageResult(result),
-            Date = result.Data
+            Data = result.Data
         };
     }
 
@@ -58,20 +58,17 @@ public class RoleService : IRoleService
         var result = await RoleManager.GetRoleAsync(request.RoleId);
 
         if (result is null)
-        {
             return new RoleResponse
             {
                 Result = GrpcResponse.FailResult("角色不存在"),
                 Data = null
             };
-        }
 
         return new RoleResponse
         {
             Result = GrpcResponse.SuccessResult(),
             Data = result
         };
-
     }
 
     /// <summary>
@@ -84,13 +81,11 @@ public class RoleService : IRoleService
         var (result, role) = await RoleManager.CreateRoleAsync(request);
 
         if (result.Succeeded)
-        {
             return new RoleResponse
             {
                 Result = GrpcResponse.SuccessResult(),
                 Data = role
             };
-        }
 
         return new RoleResponse
         {
@@ -108,8 +103,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.CreateRolesAsync(request.RolePackages);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"创建失败。{result.DescribeError}");
     }
 
@@ -123,13 +118,11 @@ public class RoleService : IRoleService
         var (result, role) = await RoleManager.UpdateRoleAsync(request.RoleId, request.RolePackage);
 
         if (result.Succeeded)
-        {
             return new RoleResponse
             {
                 Result = GrpcResponse.SuccessResult(),
                 Data = role
             };
-        }
 
         return new RoleResponse
         {
@@ -147,8 +140,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.UpdateRolesAsync(request.RolePackages);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"更新失败。{result.DescribeError}");
     }
 
@@ -162,13 +155,11 @@ public class RoleService : IRoleService
         var (result, role) = await RoleManager.UpdateOrCreateRoleAsync(request.RoleId, request.RolePackage);
 
         if (result.Succeeded)
-        {
             return new RoleResponse
             {
                 Result = GrpcResponse.SuccessResult(),
                 Data = role
             };
-        }
 
         return new RoleResponse
         {
@@ -186,8 +177,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.DeleteRoleAsync(request.RoleId);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 
@@ -200,8 +191,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.DeleteRolesAsync(request.RoleIds);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 
@@ -226,7 +217,7 @@ public class RoleService : IRoleService
         {
             Result = GrpcResponse.SuccessResult(),
             Page = GrpcResponse.PageResult(result),
-            Date = result.Data
+            Data = result.Data
         };
     }
 
@@ -240,13 +231,11 @@ public class RoleService : IRoleService
         var result = await RoleManager.GetRoleUserAsync(request.RoleId, request.UserId);
 
         if (result is null)
-        {
             return new RoleUserResponse
             {
                 Result = GrpcResponse.FailResult("角色用户不存在"),
                 Data = null
             };
-        }
 
         return new RoleUserResponse
         {
@@ -264,8 +253,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.AddRoleUserAsync(request.RoleId, request.UserId);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"添加失败。{result.DescribeError}");
     }
 
@@ -278,8 +267,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.AddRoleUsersAsync(request.RoleId, request.UserIds);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"添加失败。{result.DescribeError}");
     }
 
@@ -292,8 +281,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.RemoveRoleUserAsync(request.RoleId, request.UserId);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 
@@ -306,8 +295,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.RemoveRoleUsersAsync(request.RoleId, request.UserIds);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 
@@ -330,7 +319,7 @@ public class RoleService : IRoleService
         {
             Result = GrpcResponse.SuccessResult(),
             Page = GrpcResponse.PageResult(result),
-            Date = result.Data
+            Data = result.Data
         };
     }
 
@@ -344,13 +333,11 @@ public class RoleService : IRoleService
         var result = await RoleManager.GetRoleClaimAsync(request.RoleId, request.RoleClaimId);
 
         if (result is null)
-        {
             return new RoleClaimResponse
             {
                 Result = GrpcResponse.FailResult("角色凭据不存在"),
                 Data = null
             };
-        }
 
         return new RoleClaimResponse
         {
@@ -368,8 +355,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.AddRoleClaimAsync(request.RoleId, request.ClaimPackage);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"添加失败。{result.DescribeError}");
     }
 
@@ -382,8 +369,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.AddRoleClaimsAsync(request.RoleId, request.ClaimPackages);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"添加失败。{result.DescribeError}");
     }
 
@@ -396,8 +383,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.RemoveRoleClaimAsync(request.RoleId, request.RoleClaimId);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 
@@ -410,8 +397,8 @@ public class RoleService : IRoleService
     {
         var result = await RoleManager.RemoveRoleClaimsAsync(request.RoleId, request.RoleClaimIds);
 
-        return result.Succeeded 
-            ? GrpcResponse.EmptySuccess() 
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
             : GrpcResponse.EmptyFail($"删除失败。{result.DescribeError}");
     }
 

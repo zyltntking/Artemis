@@ -198,7 +198,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     public async Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
         UserPackage package,
         string password,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -233,7 +233,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// <returns>创建结果</returns>
     public async Task<StoreResult> CreateUsersAsync(
         IEnumerable<KeyValuePair<UserPackage, string>> packages,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 

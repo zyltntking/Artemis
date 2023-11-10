@@ -388,7 +388,7 @@ public sealed record UsersResponse : GrpcPageResponse<UserInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserInfo>? Date { get; set; }
+    public override required IEnumerable<UserInfo>? Data { get; set; }
 
     #endregion
 }
@@ -634,7 +634,7 @@ public sealed record UserRolesResponse : GrpcPageResponse<RoleInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<RoleInfo>? Date { get; set; }
+    public override required IEnumerable<RoleInfo>? Data { get; set; }
 
     #endregion
 }
@@ -850,7 +850,7 @@ public sealed record UserClaimsResponse : GrpcPageResponse<UserClaimInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserClaimInfo>? Date { get; set; }
+    public override required IEnumerable<UserClaimInfo>? Data { get; set; }
 
     #endregion
 }
@@ -1065,7 +1065,7 @@ public sealed record UserLoginsResponse : GrpcPageResponse<UserLoginInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserLoginInfo>? Date { get; set; }
+    public override required IEnumerable<UserLoginInfo>? Data { get; set; }
 
     #endregion
 }
@@ -1282,7 +1282,7 @@ public sealed record UserTokensResponse : GrpcPageResponse<UserTokenInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserTokenInfo>? Date { get; set; }
+    public override required IEnumerable<UserTokenInfo>? Data { get; set; }
 
     #endregion
 }

@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Grpc;
 using Artemis.Shared.Identity.Transfer;
-using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -278,7 +277,7 @@ public sealed record RolesResponse : GrpcPageResponse<RoleInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<RoleInfo>? Date { get; set; }
+    public override required IEnumerable<RoleInfo>? Data { get; set; }
 
     #endregion
 }
@@ -518,7 +517,7 @@ public sealed record RoleUsersResponse : GrpcPageResponse<UserInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<UserInfo>? Date { get; set; }
+    public override required IEnumerable<UserInfo>? Data { get; set; }
 
     #endregion
 }
@@ -734,7 +733,7 @@ public sealed record RoleClaimsResponse : GrpcPageResponse<RoleClaimInfo>
     /// </summary>
     [Required]
     [DataMember(Order = 3)]
-    public override required IEnumerable<RoleClaimInfo>? Date { get; set; }
+    public override required IEnumerable<RoleClaimInfo>? Data { get; set; }
 
     #endregion
 }
