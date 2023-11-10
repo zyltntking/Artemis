@@ -20,7 +20,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("登录")]
-    Task<GrpcTokenResponse> SignInAsync(SignInRequest request);
+    Task<TokenResponse> SignInAsync(SignInRequest request);
 
     /// <summary>
     ///     注册
@@ -29,7 +29,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("注册")]
-    Task<GrpcTokenResponse> SignUpAsync(SignUpRequest request);
+    Task<TokenResponse> SignUpAsync(SignUpRequest request);
 
     /// <summary>
     ///     修改密码
@@ -147,7 +147,7 @@ public sealed record TokenResult : TokenPackage
 ///     Token响应
 /// </summary>
 [DataContract]
-public sealed record GrpcTokenResponse : GrpcResponse<TokenResult>
+public sealed record TokenResponse : GrpcResponse<TokenResult>
 {
     #region Overrides of GrpcResponse<TokenResult>
 

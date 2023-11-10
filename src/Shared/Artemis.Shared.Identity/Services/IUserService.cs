@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using Artemis.Data.Core;
+using Artemis.Data.Grpc;
 using Artemis.Shared.Identity.Transfer;
 using Grpc.Core;
 
@@ -22,8 +22,8 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("搜索用户")]
-    Task<DataResult<PageResult<UserInfo>>> FetchUsersAsync(
-        PageRequest<FetchUsersFilter> request,
+    Task<UsersResponse> FetchUsersAsync(
+        FetchUsersRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -34,7 +34,7 @@ public interface IUserService
     /// <returns>角色信息<see cref="UserInfo" /></returns>
     [OperationContract]
     [Description("获取用户")]
-    Task<DataResult<UserInfo>> GetUserAsync(
+    Task<UserResponse> GetUserAsync(
         GetUserRequest request,
         ServerCallContext? context = default);
 
@@ -46,7 +46,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("创建用户")]
-    Task<DataResult<UserInfo>> CreateUserAsync(
+    Task<UserResponse> CreateUserAsync(
         CreateUserRequest request,
         ServerCallContext? context = default);
 
@@ -58,7 +58,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("创建用户")]
-    Task<DataResult<EmptyRecord>> CreateUsersAsync(
+    Task<GrpcEmptyResponse> CreateUsersAsync(
         CreateUsersRequest request,
         ServerCallContext? context = default);
 
@@ -70,7 +70,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("更新用户")]
-    Task<DataResult<UserInfo>> UpdateUserAsync(
+    Task<UserResponse> UpdateUserAsync(
         UpdateUserRequest request,
         ServerCallContext? context = default);
 
@@ -82,7 +82,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("更新用户")]
-    Task<DataResult<EmptyRecord>> UpdateUsersAsync(
+    Task<GrpcEmptyResponse> UpdateUsersAsync(
         UpdateUsersRequest request,
         ServerCallContext? context = default);
 
@@ -94,7 +94,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户")]
-    Task<DataResult<EmptyRecord>> DeleteUserAsync(
+    Task<GrpcEmptyResponse> DeleteUserAsync(
         DeleteUserRequest request,
         ServerCallContext? context = default);
 
@@ -106,7 +106,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户")]
-    Task<DataResult<EmptyRecord>> DeleteUsersAsync(
+    Task<GrpcEmptyResponse> DeleteUsersAsync(
         DeleteUsersRequest request,
         ServerCallContext? context = default);
 
@@ -118,8 +118,8 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("查询用户角色")]
-    Task<DataResult<PageResult<RoleInfo>>> FetchUserRolesAsync(
-        PageRequest<FetchUserRolesFilter> request,
+    Task<UserRolesResponse> FetchUserRolesAsync(
+        FetchUserRolesRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -130,7 +130,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("获取用户角色")]
-    Task<DataResult<RoleInfo>> GetUserRoleAsync(
+    Task<UserRoleResponse> GetUserRoleAsync(
         GetUserRoleRequest request,
         ServerCallContext? context = default);
 
@@ -142,7 +142,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户角色")]
-    Task<DataResult<EmptyRecord>> AddUserRoleAsync(
+    Task<GrpcEmptyResponse> AddUserRoleAsync(
         AddUserRoleRequest request,
         ServerCallContext? context = default);
 
@@ -154,7 +154,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户角色")]
-    Task<DataResult<EmptyRecord>> AddUserRolesAsync(
+    Task<GrpcEmptyResponse> AddUserRolesAsync(
         AddUserRolesRequest request,
         ServerCallContext? context = default);
 
@@ -166,7 +166,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户角色")]
-    Task<DataResult<EmptyRecord>> RemoveUserRoleAsync(
+    Task<GrpcEmptyResponse> RemoveUserRoleAsync(
         RemoveUserRoleRequest request,
         ServerCallContext? context = default);
 
@@ -178,7 +178,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户角色")]
-    Task<DataResult<EmptyRecord>> RemoveUserRolesAsync(
+    Task<GrpcEmptyResponse> RemoveUserRolesAsync(
         RemoveUserRolesRequest request,
         ServerCallContext? context = default);
 
@@ -190,8 +190,8 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("查询用户凭据信息")]
-    Task<DataResult<PageResult<UserClaimInfo>>> FetchUserClaimsAsync(
-        PageRequest<FetchUserClaimsFilter> request,
+    Task<UserClaimsResponse> FetchUserClaimsAsync(
+        FetchUserClaimsRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -202,7 +202,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("获取用户凭据信息")]
-    Task<DataResult<UserClaimInfo>> GetUserClaimAsync(
+    Task<UserClaimResponse> GetUserClaimAsync(
         GetUserClaimRequest request,
         ServerCallContext? context = default);
 
@@ -214,7 +214,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户凭据信息")]
-    Task<DataResult<EmptyRecord>> AddUserClaimAsync(
+    Task<GrpcEmptyResponse> AddUserClaimAsync(
         AddUserClaimRequest request,
         ServerCallContext? context = default);
 
@@ -226,7 +226,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户凭据信息")]
-    Task<DataResult<EmptyRecord>> AddUserClaimsAsync(
+    Task<GrpcEmptyResponse> AddUserClaimsAsync(
         AddUserClaimsRequest request,
         ServerCallContext? context = default);
 
@@ -238,7 +238,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户凭据信息")]
-    Task<DataResult<EmptyRecord>> RemoveUserClaimAsync(
+    Task<GrpcEmptyResponse> RemoveUserClaimAsync(
         RemoveUserClaimRequest request,
         ServerCallContext? context = default);
 
@@ -250,7 +250,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户凭据信息")]
-    Task<DataResult<EmptyRecord>> RemoveUsersClaimAsync(
+    Task<GrpcEmptyResponse> RemoveUsersClaimAsync(
         RemoveUserClaimsRequest request,
         ServerCallContext? context = default);
 
@@ -262,8 +262,8 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("查询用户登录信息")]
-    Task<DataResult<PageResult<UserLoginInfo>>> FetchUserLoginsAsync(
-        PageRequest<FetchUserLoginsFilter> request,
+    Task<UserLoginsResponse> FetchUserLoginsAsync(
+        FetchUserLoginsRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -274,7 +274,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("获取用户登录信息")]
-    Task<DataResult<UserLoginInfo>> GetUserLoginAsync(
+    Task<UserLoginResponse> GetUserLoginAsync(
         GetUserLoginRequest request,
         ServerCallContext? context = default);
 
@@ -286,7 +286,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户登录信息")]
-    Task<DataResult<EmptyRecord>> AddUserLoginAsync(
+    Task<GrpcEmptyResponse> AddUserLoginAsync(
         AddUserLoginRequest request,
         ServerCallContext? context = default);
 
@@ -298,7 +298,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("替换用户登录信息")]
-    Task<DataResult<EmptyRecord>> ReplaceUserLoginAsync(
+    Task<GrpcEmptyResponse> ReplaceUserLoginAsync(
         ReplaceUserLoginRequest request,
         ServerCallContext? context = default);
 
@@ -310,7 +310,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户登录信息")]
-    Task<DataResult<EmptyRecord>> RemoveUserLoginAsync(
+    Task<GrpcEmptyResponse> RemoveUserLoginAsync(
         RemoveUserLoginRequest request,
         ServerCallContext? context = default);
 
@@ -322,7 +322,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户登录信息")]
-    Task<DataResult<EmptyRecord>> RemoveUserLoginsAsync(
+    Task<GrpcEmptyResponse> RemoveUserLoginsAsync(
         RemoveUserLoginsRequest request,
         ServerCallContext? context = default);
 
@@ -334,8 +334,8 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("查询用户令牌信息")]
-    Task<DataResult<PageResult<UserTokenInfo>>> FetchUserTokensAsync(
-        PageRequest<FetchUserTokensFilter> request,
+    Task<UserTokensResponse> FetchUserTokensAsync(
+        FetchUserTokensRequest request,
         ServerCallContext? context = default);
 
     /// <summary>
@@ -346,7 +346,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("获取用户令牌信息")]
-    Task<DataResult<UserTokenInfo>> GetUserTokenAsync(
+    Task<UserTokenResponse> GetUserTokenAsync(
         GetUserTokenRequest request,
         ServerCallContext? context = default);
 
@@ -358,7 +358,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("添加用户令牌信息")]
-    Task<DataResult<EmptyRecord>> AddUserTokenAsync(
+    Task<GrpcEmptyResponse> AddUserTokenAsync(
         AddUserTokenRequest request,
         ServerCallContext? context = default);
 
@@ -370,7 +370,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("替换用户令牌信息")]
-    Task<DataResult<EmptyRecord>> ReplaceUserTokenAsync(
+    Task<GrpcEmptyResponse> ReplaceUserTokenAsync(
         ReplaceUserTokenRequest request,
         ServerCallContext? context = default);
 
@@ -382,7 +382,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户令牌信息")]
-    Task<DataResult<EmptyRecord>> RemoveUserTokenAsync(
+    Task<GrpcEmptyResponse> RemoveUserTokenAsync(
         RemoveUserTokenRequest request,
         ServerCallContext? context = default);
 
@@ -394,7 +394,7 @@ public interface IUserService
     /// <returns></returns>
     [OperationContract]
     [Description("删除用户令牌信息")]
-    Task<DataResult<EmptyRecord>> RemoveUserTokensAsync(
+    Task<GrpcEmptyResponse> RemoveUserTokensAsync(
         RemoveUserTokensRequest request,
         ServerCallContext? context = default);
 }
@@ -425,6 +425,72 @@ public sealed record FetchUsersFilter
 }
 
 /// <summary>
+///     查询用户请求
+/// </summary>
+[DataContract]
+public sealed record FetchUsersRequest : GrpcPageRequest<FetchUsersFilter>
+{
+    #region Overrides of GrpcPageRequest<FetchUsersFilter>
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required int Page { get; set; }
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required int Size { get; set; }
+
+    /// <summary>
+    ///     过滤条件
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required FetchUsersFilter Filter { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     查询用户响应
+/// </summary>
+[DataContract]
+public sealed record UsersResponse : GrpcPageResponse<UserInfo>
+{
+    #region Overrides of GrpcPageResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     分页信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required GrpcPageResult Page { get; set; }
+
+    /// <summary>
+    ///     数据集
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required IEnumerable<UserInfo> Date { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     获取用户请求
 /// </summary>
 [DataContract]
@@ -436,6 +502,31 @@ public record GetUserRequest
     [Required]
     [DataMember(Order = 1)]
     public virtual required Guid UserId { get; set; }
+}
+
+/// <summary>
+///     用户信息响应
+/// </summary>
+[DataContract]
+public sealed record UserResponse : GrpcResponse<UserInfo>
+{
+    #region Overrides of GrpcResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required UserInfo Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -580,6 +671,72 @@ public sealed record FetchUserRolesFilter : GetUserRequest
 }
 
 /// <summary>
+///     查询用户角色请求
+/// </summary>
+[DataContract]
+public sealed record FetchUserRolesRequest : GrpcPageRequest<FetchUserRolesFilter>
+{
+    #region Overrides of GrpcPageRequest<FetchRolesFilter>
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required int Page { get; set; }
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required int Size { get; set; }
+
+    /// <summary>
+    ///     过滤条件
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required FetchUserRolesFilter Filter { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     查询用户角色响应
+/// </summary>
+[DataContract]
+public sealed record UserRolesResponse : GrpcPageResponse<RoleInfo>
+{
+    #region Overrides of GrpcPageResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     分页信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required GrpcPageResult Page { get; set; }
+
+    /// <summary>
+    ///     数据集
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required IEnumerable<RoleInfo> Date { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     获取用户角色请求
 /// </summary>
 [DataContract]
@@ -598,6 +755,31 @@ public sealed record GetUserRoleRequest : GetUserRequest
     [Required]
     [DataMember(Order = 2)]
     public required Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     用户角色信息响应
+/// </summary>
+[DataContract]
+public sealed record UserRoleResponse : GrpcResponse<RoleInfo>
+{
+    #region Overrides of GrpcResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required RoleInfo Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -705,6 +887,72 @@ public sealed record FetchUserClaimsFilter : GetUserRequest
 }
 
 /// <summary>
+///     查询用户凭据请求
+/// </summary>
+[DataContract]
+public sealed record FetchUserClaimsRequest : GrpcPageRequest<FetchUserClaimsFilter>
+{
+    #region Overrides of GrpcPageRequest<FetchRolesFilter>
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required int Page { get; set; }
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required int Size { get; set; }
+
+    /// <summary>
+    ///     过滤条件
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required FetchUserClaimsFilter Filter { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     查询用户凭据响应
+/// </summary>
+[DataContract]
+public sealed record UserClaimsResponse : GrpcPageResponse<UserClaimInfo>
+{
+    #region Overrides of GrpcPageResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     分页信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required GrpcPageResult Page { get; set; }
+
+    /// <summary>
+    ///     数据集
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required IEnumerable<UserClaimInfo> Date { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     获取用户凭据请求
 /// </summary>
 [DataContract]
@@ -723,6 +971,31 @@ public sealed record GetUserClaimRequest : GetUserRequest
     [Required]
     [DataMember(Order = 2)]
     public required int UserClaimId { get; set; }
+}
+
+/// <summary>
+///     用户凭据信息响应
+/// </summary>
+[DataContract]
+public sealed record UserClaimResponse : GrpcResponse<UserClaimInfo>
+{
+    #region Overrides of GrpcResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required UserClaimInfo Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -829,6 +1102,72 @@ public sealed record FetchUserLoginsFilter : GetUserRequest
 }
 
 /// <summary>
+///     查询用户登录请求
+/// </summary>
+[DataContract]
+public sealed record FetchUserLoginsRequest : GrpcPageRequest<FetchUserLoginsFilter>
+{
+    #region Overrides of GrpcPageRequest<FetchRolesFilter>
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required int Page { get; set; }
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required int Size { get; set; }
+
+    /// <summary>
+    ///     过滤条件
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required FetchUserLoginsFilter Filter { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     查询用户登录信息响应
+/// </summary>
+[DataContract]
+public sealed record UserLoginsResponse : GrpcPageResponse<UserLoginInfo>
+{
+    #region Overrides of GrpcPageResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     分页信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required GrpcPageResult Page { get; set; }
+
+    /// <summary>
+    ///     数据集
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required IEnumerable<UserLoginInfo> Date { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     获取用户登录信息请求
 /// </summary>
 [DataContract]
@@ -845,6 +1184,31 @@ public sealed record GetUserLoginRequest : GetUserRequest
     /// </summary>
     [DataMember(Order = 2)]
     public required int UserLoginId { get; set; }
+}
+
+/// <summary>
+///     用户登录信息响应
+/// </summary>
+[DataContract]
+public sealed record UserLoginResponse : GrpcResponse<UserLoginInfo>
+{
+    #region Overrides of GrpcResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required UserLoginInfo Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -955,6 +1319,72 @@ public sealed record FetchUserTokensFilter : GetUserRequest
 }
 
 /// <summary>
+///     查询用户令牌请求
+/// </summary>
+[DataContract]
+public sealed record FetchUserTokensRequest : GrpcPageRequest<FetchUserTokensFilter>
+{
+    #region Overrides of GrpcPageRequest<FetchRolesFilter>
+
+    /// <summary>
+    ///     当前页码(从1开始)
+    /// </summary>
+    /// <example>1</example>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required int Page { get; set; }
+
+    /// <summary>
+    ///     页面大小
+    /// </summary>
+    /// <example>20</example>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required int Size { get; set; }
+
+    /// <summary>
+    ///     过滤条件
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required FetchUserTokensFilter Filter { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     用户令牌分页响应
+/// </summary>
+[DataContract]
+public sealed record UserTokensResponse : GrpcPageResponse<UserTokenInfo>
+{
+    #region Overrides of GrpcPageResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     分页信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required GrpcPageResult Page { get; set; }
+
+    /// <summary>
+    ///     数据集
+    /// </summary>
+    [Required]
+    [DataMember(Order = 3)]
+    public override required IEnumerable<UserTokenInfo> Date { get; set; }
+
+    #endregion
+}
+
+/// <summary>
 ///     获取用户令牌信息请求
 /// </summary>
 [DataContract]
@@ -971,6 +1401,31 @@ public sealed record GetUserTokenRequest : GetUserRequest
     /// </summary>
     [DataMember(Order = 2)]
     public required int UserTokenId { get; set; }
+}
+
+/// <summary>
+///     用户令牌信息响应
+/// </summary>
+[DataContract]
+public sealed record UserTokenResponse : GrpcResponse<UserTokenInfo>
+{
+    #region Overrides of GrpcResponse<RoleInfo>
+
+    /// <summary>
+    ///     结果信息
+    /// </summary>
+    [Required]
+    [DataMember(Order = 1)]
+    public override required GrpcPageResult Result { get; set; }
+
+    /// <summary>
+    ///     结果数据
+    /// </summary>
+    [Required]
+    [DataMember(Order = 2)]
+    public override required UserTokenInfo Data { get; set; }
+
+    #endregion
 }
 
 /// <summary>

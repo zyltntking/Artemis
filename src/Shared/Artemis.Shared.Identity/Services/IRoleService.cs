@@ -22,7 +22,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("搜索角色")]
-    Task<RoleInfosResponse> FetchRolesAsync(
+    Task<RolesResponse> FetchRolesAsync(
         FetchRolesRequest request,
         ServerCallContext? context = default);
 
@@ -34,7 +34,7 @@ public interface IRoleService
     /// <returns>角色信息<see cref="RoleInfo" /></returns>
     [OperationContract]
     [Description("获取角色")]
-    Task<RoleInfoResponse> GetRoleAsync(
+    Task<RoleResponse> GetRoleAsync(
         GetRoleRequest request,
         ServerCallContext? context = default);
 
@@ -46,7 +46,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("创建角色")]
-    Task<RoleInfoResponse> CreateRoleAsync(
+    Task<RoleResponse> CreateRoleAsync(
         CreateRoleRequest request,
         ServerCallContext? context = default);
 
@@ -70,7 +70,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("更新角色")]
-    Task<RoleInfoResponse> UpdateRoleAsync(
+    Task<RoleResponse> UpdateRoleAsync(
         UpdateRoleRequest request,
         ServerCallContext? context = default);
 
@@ -94,7 +94,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("更新或创建角色")]
-    Task<RoleInfoResponse> UpdateOrCreateRoleAsync(
+    Task<RoleResponse> UpdateOrCreateRoleAsync(
         UpdateRoleRequest request,
         ServerCallContext? context = default);
 
@@ -130,7 +130,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("查询角色用户")]
-    Task<RoleUsersInfoResponse> FetchRoleUsersAsync(
+    Task<RoleUsersResponse> FetchRoleUsersAsync(
         FetchRoleUsersRequest request,
         ServerCallContext? context = default);
 
@@ -142,7 +142,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("获取角色用户")]
-    Task<RoleUserInfoResponse> GetRoleUserAsync(
+    Task<RoleUserResponse> GetRoleUserAsync(
         GetRoleUserRequest request,
         ServerCallContext? context = default);
 
@@ -202,7 +202,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("查询角色凭据")]
-    Task<RoleClaimsInfoResponse> FetchRoleClaimsAsync(
+    Task<RoleClaimsResponse> FetchRoleClaimsAsync(
         FetchRoleClaimsRequest request,
         ServerCallContext? context = default);
 
@@ -214,7 +214,7 @@ public interface IRoleService
     /// <returns></returns>
     [OperationContract]
     [Description("获取角色凭据")]
-    Task<RoleClaimInfoResponse> GetRoleClaimAsync(
+    Task<RoleClaimResponse> GetRoleClaimAsync(
         GetRoleClaimRequest request,
         ServerCallContext? context = default);
 
@@ -318,7 +318,7 @@ public sealed record FetchRolesRequest : GrpcPageRequest<FetchRolesFilter>
 ///     RoleInfo分页响应
 /// </summary>
 [DataContract]
-public sealed record RoleInfosResponse : GrpcPageResponse<RoleInfo>
+public sealed record RolesResponse : GrpcPageResponse<RoleInfo>
 {
     #region Overrides of GrpcPageResponse<RoleInfo>
 
@@ -364,7 +364,7 @@ public record GetRoleRequest
 ///     RoleInfo响应
 /// </summary>
 [DataContract]
-public sealed record RoleInfoResponse : GrpcResponse<RoleInfo>
+public sealed record RoleResponse : GrpcResponse<RoleInfo>
 {
     #region Overrides of GrpcResponse<RoleInfo>
 
@@ -558,7 +558,7 @@ public sealed record FetchRoleUsersRequest : GrpcPageRequest<FetchRoleUsersFilte
 ///     查询角色用户响应
 /// </summary>
 [DataContract]
-public sealed record RoleUsersInfoResponse : GrpcPageResponse<UserInfo>
+public sealed record RoleUsersResponse : GrpcPageResponse<UserInfo>
 {
     #region Overrides of GrpcPageResponse<RoleInfo>
 
@@ -611,7 +611,7 @@ public sealed record GetRoleUserRequest : GetRoleRequest
 ///     角色用户信息响应
 /// </summary>
 [DataContract]
-public sealed record RoleUserInfoResponse : GrpcResponse<UserInfo>
+public sealed record RoleUserResponse : GrpcResponse<UserInfo>
 {
     #region Overrides of GrpcResponse<RoleInfo>
 
@@ -774,7 +774,7 @@ public sealed record FetchRoleClaimsRequest : GrpcPageRequest<FetchRoleClaimsFil
 ///     角色凭据信息响应
 /// </summary>
 [DataContract]
-public sealed record RoleClaimsInfoResponse : GrpcPageResponse<RoleClaimInfo>
+public sealed record RoleClaimsResponse : GrpcPageResponse<RoleClaimInfo>
 {
     #region Overrides of GrpcPageResponse<RoleInfo>
 
@@ -827,7 +827,7 @@ public sealed record GetRoleClaimRequest : GetRoleRequest
 ///     角色凭据信息响应
 /// </summary>
 [DataContract]
-public sealed record RoleClaimInfoResponse : GrpcResponse<RoleClaimInfo>
+public sealed record RoleClaimResponse : GrpcResponse<RoleClaimInfo>
 {
     #region Overrides of GrpcResponse<RoleInfo>
 
