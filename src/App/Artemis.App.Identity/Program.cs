@@ -25,10 +25,8 @@ public static class Program
         LogHost.CreateWebApp(args, builder =>
         {
             // Add services to the container.
-            var connectionString = builder.Configuration
-                                       .GetConnectionString("IdentityContext") ??
-                                   throw new InvalidOperationException(
-                                       "ContextConnection string 'Identity' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("IdentityContext") ??
+                                   throw new InvalidOperationException("ContextConnection string 'Identity' not found.");
 
             builder.Services.AddIdentityService(new IdentityServiceOptions
             {
@@ -38,31 +36,6 @@ public static class Program
             }, builder.Environment.IsDevelopment());
 
             builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
-
-            //builder.Services.AddRazorPages();
-
-            //builder.Services
-            //    .AddControllers(option =>
-            //    {
-            //        option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            //    })
-            //    .AddMvcOptions(options =>
-            //    {
-            //        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-            //            name => $"×Ö¶Î:{name}ÊÇ±ØÒª×Ö¶Î.");
-            //    })
-            //    .AddJsonOptions(options =>
-            //    {
-            //        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-            //    });
-
-            //builder.Services.AddGrpc(options =>
-            //    {
-            //        options.EnableDetailedErrors = true;
-            //        options.Interceptors.Add<TokenInterceptor>();
-            //    })
-            //    .AddJsonTranscoding();
-            //builder.Services.AddGrpcReflection();
 
             builder.Services.AddCodeFirstGrpc(options =>
             {

@@ -153,7 +153,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Configuration.ArtemisConfiguration`1.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
             <summary>
-                Configures the entity of type<typeparamref name="TEntity"/>.
+                Configures the entity of type <typeparamref name="TEntity" />.
             </summary>
             <param name="builder">The builder to be used to configure the entity type.</param>
         </member>
@@ -688,21 +688,21 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Create(`0)">
             <summary>
-                在<paramref name="entity"/>存储中创建一个新的实体
+                在<paramref name="entity" />存储中创建一个新的实体
             </summary>
             <param name="entity">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Create(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中创建多个新的实体
+                在<paramref name="entities" />存储中创建多个新的实体
             </summary>
             <param name="entities">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.CreateAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中创建一个新的实体
+                在<paramref name="entity" />存储中创建一个新的实体
             </summary>
             <param name="entity">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -710,7 +710,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.CreateAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中创建多个新的实体
+                在<paramref name="entities" />存储中创建多个新的实体
             </summary>
             <param name="entities">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -718,21 +718,21 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Update(`0)">
             <summary>
-                在<paramref name="entity"/>存储中更新已存在的实体
+                在<paramref name="entity" />存储中更新已存在的实体
             </summary>
             <param name="entity">被更新实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Update(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中更新多个已存在的实体
+                在<paramref name="entities" />存储中更新多个已存在的实体
             </summary>
             <param name="entities">被更新实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.UpdateAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中更新已存在的实体
+                在<paramref name="entity" />存储中更新已存在的实体
             </summary>
             <param name="entity">被更新实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -740,7 +740,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中更新多个已存在的实体
+                在<paramref name="entities" />存储中更新多个已存在的实体
             </summary>
             <param name="entities">被更新实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -822,7 +822,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Delete(`0)">
             <summary>
-                在<paramref name="entity"/>存储中删除已存在的实体
+                在<paramref name="entity" />存储中删除已存在的实体
             </summary>
             <param name="entity">被删除实体</param>
             <returns></returns>
@@ -836,7 +836,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.Delete(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中删除已存在的实体
+                在<paramref name="entities" />存储中删除已存在的实体
             </summary>
             <param name="entities">被删除实体</param>
             <returns></returns>
@@ -851,7 +851,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.DeleteAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中删除已存在的实体
+                在<paramref name="entity" />存储中删除已存在的实体
             </summary>
             <param name="entity">被删除实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -867,7 +867,7 @@
         </member>
         <member name="M:Artemis.Data.Store.IStoreCommon`2.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中删除已存在的实体
+                在<paramref name="entities" />存储中删除已存在的实体
             </summary>
             <param name="entities">被删除实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -1536,53 +1536,53 @@
         </member>
         <member name="T:Artemis.Data.Store.Resources">
             <summary>
-                一个强类型的资源类，用于查找本地化的字符串等。
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.ResourceManager">
             <summary>
-                返回此类使用的缓存的 ResourceManager 实例。
+              Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.Culture">
             <summary>
-                重写当前线程的 CurrentUICulture 属性，对
-                使用此强类型资源类的所有资源查找执行重写。
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.ConcurrencyFailure">
             <summary>
-                查找类似 乐观并发失败，对象已被修改。 的本地化字符串。
+              Looks up a localized string similar to 乐观并发失败，对象已被修改。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.DefaultError">
             <summary>
-                查找类似 发生未知异常。 的本地化字符串。
+              Looks up a localized string similar to 发生未知异常。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.EnableCache">
             <summary>
-                查找类似 当前Store已启用具缓存策略。 的本地化字符串。
+              Looks up a localized string similar to 当前Store已启用具缓存策略。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.EntityHasBeenSet">
             <summary>
-                查找类似 对象&apos;{0}&apos;已被设置,Flag:&apos;{1}&apos;。 的本地化字符串。
+              Looks up a localized string similar to 对象&apos;{0}&apos;已被设置,Flag:&apos;{1}&apos;。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.EntityNotFound">
             <summary>
-                查找类似 未找到匹配的&apos;{0}&apos;对象,Flag:&apos;{1}&apos;。 的本地化字符串。
+              Looks up a localized string similar to 未找到匹配的&apos;{0}&apos;对象,Flag:&apos;{1}&apos;。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.NotFoundId">
             <summary>
-                查找类似 未查询到Id为 &apos;{0}&apos; 的对象。 的本地化字符串。
+              Looks up a localized string similar to 未查询到Id为 &apos;{0}&apos; 的对象。.
             </summary>
         </member>
         <member name="P:Artemis.Data.Store.Resources.PropertyIsNull">
             <summary>
-                查找类似 必要参数&apos;{0}&apos;的值为空。 的本地化字符串。
+              Looks up a localized string similar to 必要参数&apos;{0}&apos;的值为空。.
             </summary>
         </member>
         <member name="T:Artemis.Data.Store.Store`1">
@@ -1890,21 +1890,21 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Create(`0)">
             <summary>
-                在<paramref name="entity"/>存储中创建一个新的实体
+                在<paramref name="entity" />存储中创建一个新的实体
             </summary>
             <param name="entity">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Create(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中创建多个新的实体
+                在<paramref name="entities" />存储中创建多个新的实体
             </summary>
             <param name="entities">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.Store`3.CreateAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中创建一个新的实体
+                在<paramref name="entity" />存储中创建一个新的实体
             </summary>
             <param name="entity">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -1912,7 +1912,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.CreateAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中创建多个新的实体
+                在<paramref name="entities" />存储中创建多个新的实体
             </summary>
             <param name="entities">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -1920,21 +1920,21 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Update(`0)">
             <summary>
-                在<paramref name="entity"/>存储中更新已存在的实体
+                在<paramref name="entity" />存储中更新已存在的实体
             </summary>
             <param name="entity">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Update(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中更新多个已存在的实体
+                在<paramref name="entities" />存储中更新多个已存在的实体
             </summary>
             <param name="entities">被创建实体</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.Store`3.UpdateAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中更新已存在的实体
+                在<paramref name="entity" />存储中更新已存在的实体
             </summary>
             <param name="entity">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -1942,7 +1942,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中更新多个已存在的实体
+                在<paramref name="entities" />存储中更新多个已存在的实体
             </summary>
             <param name="entities">被创建实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -2024,7 +2024,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Delete(`0)">
             <summary>
-                在<paramref name="entity"/>存储中删除已存在的实体
+                在<paramref name="entity" />存储中删除已存在的实体
             </summary>
             <param name="entity">被删除实体</param>
             <returns></returns>
@@ -2038,7 +2038,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.Delete(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-                在<paramref name="entities"/>存储中删除已存在的实体
+                在<paramref name="entities" />存储中删除已存在的实体
             </summary>
             <param name="entities">被删除实体</param>
             <returns></returns>
@@ -2053,7 +2053,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.DeleteAsync(`0,System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entity"/>存储中删除已存在的实体
+                在<paramref name="entity" />存储中删除已存在的实体
             </summary>
             <param name="entity">被删除实体</param>
             <param name="cancellationToken">取消信号</param>
@@ -2069,7 +2069,7 @@
         </member>
         <member name="M:Artemis.Data.Store.Store`3.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
-                在<paramref name="entities"/>存储中删除已存在的实体
+                在<paramref name="entities" />存储中删除已存在的实体
             </summary>
             <param name="entities">被删除实体</param>
             <param name="cancellationToken">取消信号</param>

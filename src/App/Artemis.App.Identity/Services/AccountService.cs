@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Data.Grpc;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
-using Grpc.Core;
 
 namespace Artemis.App.Identity.Services;
 
@@ -30,16 +30,10 @@ public class AccountService : IAccountService
     ///     登录
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
-    public async Task<DataResult<TokenResult>> SignInAsync(
-        SignInRequest request,
-        ServerCallContext? context = default)
+    public async Task<TokenResponse> SignInAsync(SignInRequest request)
     {
-        var (result, token) = await AccountManager
-            .SignInAsync(
-                request,
-                context?.CancellationToken ?? default);
+        var (result, token) = await AccountManager.SignInAsync(request);
 
         if (result.Succeeded)
         {
@@ -55,27 +49,28 @@ public class AccountService : IAccountService
                 Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
             };
 
-            return DataResult.Success(tokenResult);
+            return new TokenResponse
+            {
+                Result = GrpcResponse.SuccessResult(),
+                Data = tokenResult
+            };
         }
 
-        return DataResult.Fail<TokenResult>(result.Message);
+        return new TokenResponse
+        {
+            Result = GrpcResponse.FailResult(result.Message),
+            Data = null
+        };
     }
 
     /// <summary>
     ///     注册
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
-    public async Task<DataResult<TokenResult>> SignUpAsync(
-        SignUpRequest request,
-        ServerCallContext? context = default)
+    public async Task<TokenResponse> SignUpAsync(SignUpRequest request)
     {
-        var (result, token) = await AccountManager
-            .SignUpAsync(
-                request,
-                request.Password,
-                context?.CancellationToken ?? default);
+        var (result, token) = await AccountManager.SignUpAsync(request, request.Password);
 
         if (result.Succeeded)
         {
@@ -91,68 +86,67 @@ public class AccountService : IAccountService
                 Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
             };
 
-            return DataResult.Success(tokenResult);
+            return new TokenResponse
+            {
+                Result = GrpcResponse.SuccessResult(),
+                Data = tokenResult
+            };
         }
 
-        return DataResult.Fail<TokenResult>(result.Message);
+        return new TokenResponse
+        {
+            Result = GrpcResponse.FailResult(result.Message),
+            Data = null
+        };
     }
 
     /// <summary>
     ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
-    public async Task<DataResult<EmptyRecord>> ChangePasswordAsync(
-        ChangePasswordRequest request,
-        ServerCallContext? context = default)
+    public async Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request)
     {
-        var result = await AccountManager
-            .ChangePasswordAsync(
-                request.UserSign,
-                request.OldPassword,
-                request.NewPassword,
-                context?.CancellationToken ?? default);
+        var result = await AccountManager.ChangePasswordAsync(
+            request.UserSign,
+            request.OldPassword,
+            request.NewPassword);
 
-        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
+            : GrpcResponse.EmptyFail(result.Message);
     }
 
     /// <summary>
     ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
-    public async Task<DataResult<EmptyRecord>> ResetPasswordAsync(
-        ResetPasswordRequest request,
-        ServerCallContext? context = default)
+    public async Task<GrpcEmptyResponse> ResetPasswordAsync(ResetPasswordRequest request)
     {
-        var result = await AccountManager
-            .ResetPasswordAsync(
-                request.UserId,
-                request.Password,
-                context?.CancellationToken ?? default);
+        var result = await AccountManager.ResetPasswordAsync(
+            request.UserId,
+            request.Password);
 
-        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
+            : GrpcResponse.EmptyFail(result.Message);
     }
 
     /// <summary>
     ///     重置密码
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">上下文</param>
     /// <returns></returns>
-    public async Task<DataResult<EmptyRecord>> ResetPasswordsAsync(
-        ResetPasswordsRequest request,
-        ServerCallContext? context = default)
+    public async Task<GrpcEmptyResponse> ResetPasswordsAsync(ResetPasswordsRequest request)
     {
-        var result = await AccountManager
-            .ResetPasswordsAsync(
-                request.UserIds,
-                request.Password,
-                context?.CancellationToken ?? default);
+        var result = await AccountManager.ResetPasswordsAsync(
+            request.UserIds,
+            request.Password);
 
-        return result.Succeeded ? DataResult.Success(new EmptyRecord()) : DataResult.Fail<EmptyRecord>(result.Message);
+        return result.Succeeded
+            ? GrpcResponse.EmptySuccess()
+            : GrpcResponse.EmptyFail(result.Message);
     }
 
     #endregion
