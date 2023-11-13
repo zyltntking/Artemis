@@ -4,6 +4,10 @@ using Artemis.Data.Core;
 
 namespace Artemis.Data.Grpc;
 
+/// <summary>
+///     grpc请求
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [DataContract]
 public abstract record GrpcPageRequest<T> : PageRequest<T>
 {

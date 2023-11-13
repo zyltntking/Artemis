@@ -7,25 +7,19 @@ message ChangePasswordRequest {
    string OldPassword = 2;
    string NewPassword = 3;
 }
-message DataResult_EmptyRecord {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   EmptyRecord Data = 7;
-}
-message DataResult_TokenResult {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   TokenResult Data = 7;
-}
 message EmptyRecord {
+}
+message GrpcEmptyResponse {
+   GrpcResult Result = 1;
+   EmptyRecord Data = 2;
+}
+message GrpcResult {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
 }
 message ResetPasswordRequest {
    string UserId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
@@ -45,14 +39,18 @@ message SignUpRequest {
    string Email = 3;
    string PhoneNumber = 4;
 }
+message TokenResponse {
+   GrpcResult Result = 1;
+   TokenResult Data = 2;
+}
 message TokenResult {
    string Token = 1;
    int64 Expire = 2;
 }
 service AccountService {
-   rpc ChangePassword (ChangePasswordRequest) returns (DataResult_EmptyRecord);
-   rpc ResetPassword (ResetPasswordRequest) returns (DataResult_EmptyRecord);
-   rpc ResetPasswords (ResetPasswordsRequest) returns (DataResult_EmptyRecord);
-   rpc SignIn (SignInRequest) returns (DataResult_TokenResult);
-   rpc SignUp (SignUpRequest) returns (DataResult_TokenResult);
+   rpc ChangePassword (ChangePasswordRequest) returns (GrpcEmptyResponse);
+   rpc ResetPassword (ResetPasswordRequest) returns (GrpcEmptyResponse);
+   rpc ResetPasswords (ResetPasswordsRequest) returns (GrpcEmptyResponse);
+   rpc SignIn (SignInRequest) returns (TokenResponse);
+   rpc SignUp (SignUpRequest) returns (TokenResponse);
 }

@@ -25,69 +25,6 @@ message CreateRoleRequest {
 message CreateRolesRequest {
    repeated RolePackage RolePackages = 1;
 }
-message DataResult_EmptyRecord {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   EmptyRecord Data = 7;
-}
-message DataResult_PageResult_RoleClaimInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   PageResult_RoleClaimInfo Data = 7;
-}
-message DataResult_PageResult_RoleInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   PageResult_RoleInfo Data = 7;
-}
-message DataResult_PageResult_UserInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   PageResult_UserInfo Data = 7;
-}
-message DataResult_RoleClaimInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   RoleClaimInfo Data = 7;
-}
-message DataResult_RoleInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   RoleInfo Data = 7;
-}
-message DataResult_UserInfo {
-   int32 Code = 1;
-   bool Succeeded = 2;
-   string Message = 3;
-   string Error = 4;
-   .google.protobuf.Timestamp DateTime = 5;
-   int64 Timestamp = 6;
-   UserInfo Data = 7;
-}
 message DeleteRoleRequest {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
 }
@@ -100,14 +37,29 @@ message FetchRoleClaimsFilter {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
    string ClaimTypeSearch = 2;
 }
+message FetchRoleClaimsRequest {
+   int32 Page = 1;
+   int32 Size = 2;
+   FetchRoleClaimsFilter Filter = 3;
+}
 message FetchRoleUsersFilter {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
    string UserNameSearch = 2;
    string EmailSearch = 3;
    string PhoneNumberSearch = 4;
 }
+message FetchRoleUsersRequest {
+   int32 Page = 1;
+   int32 Size = 2;
+   FetchRoleUsersFilter Filter = 3;
+}
 message FetchRolesFilter {
    string RoleNameSearch = 1;
+}
+message FetchRolesRequest {
+   int32 Page = 1;
+   int32 Size = 2;
+   FetchRolesFilter Filter = 3;
 }
 message GetRoleClaimRequest {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
@@ -120,41 +72,23 @@ message GetRoleUserRequest {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
    string UserId = 2; // default value could not be applied: 00000000-0000-0000-0000-000000000000
 }
-message PageRequest_FetchRoleClaimsFilter {
-   int32 Page = 1; // default value could not be applied: 1
-   int32 Size = 2; // default value could not be applied: 20
-   FetchRoleClaimsFilter Filter = 3;
+message GrpcEmptyResponse {
+   GrpcResult Result = 1;
+   EmptyRecord Data = 2;
 }
-message PageRequest_FetchRoleUsersFilter {
-   int32 Page = 1; // default value could not be applied: 1
-   int32 Size = 2; // default value could not be applied: 20
-   FetchRoleUsersFilter Filter = 3;
-}
-message PageRequest_FetchRolesFilter {
-   int32 Page = 1; // default value could not be applied: 1
-   int32 Size = 2; // default value could not be applied: 20
-   FetchRolesFilter Filter = 3;
-}
-message PageResult_RoleClaimInfo {
+message GrpcPageResult {
    int32 Page = 1;
    int32 Size = 2;
    int64 Count = 3;
    int64 Total = 4;
-   repeated RoleClaimInfo Data = 5;
 }
-message PageResult_RoleInfo {
-   int32 Page = 1;
-   int32 Size = 2;
-   int64 Count = 3;
-   int64 Total = 4;
-   repeated RoleInfo Data = 5;
-}
-message PageResult_UserInfo {
-   int32 Page = 1;
-   int32 Size = 2;
-   int64 Count = 3;
-   int64 Total = 4;
-   repeated UserInfo Data = 5;
+message GrpcResult {
+   int32 Code = 1;
+   bool Succeeded = 2;
+   string Message = 3;
+   string Error = 4;
+   .google.protobuf.Timestamp DateTime = 5;
+   int64 Timestamp = 6;
 }
 message RemoveRoleClaimRequest {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
@@ -186,6 +120,15 @@ message RoleClaimPackage {
    string CheckStamp = 3;
    string Description = 4;
 }
+message RoleClaimResponse {
+   GrpcResult Result = 1;
+   RoleClaimInfo Data = 2;
+}
+message RoleClaimsResponse {
+   GrpcResult Result = 1;
+   GrpcPageResult Page = 2;
+   repeated RoleClaimInfo Data = 3;
+}
 message RoleInfo {
    string Id = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
    string Name = 2;
@@ -194,6 +137,24 @@ message RoleInfo {
 message RolePackage {
    string Name = 1;
    string Description = 2;
+}
+message RoleResponse {
+   GrpcResult Result = 1;
+   RoleInfo Data = 2;
+}
+message RoleUserResponse {
+   GrpcResult Result = 1;
+   UserInfo Data = 2;
+}
+message RoleUsersResponse {
+   GrpcResult Result = 1;
+   GrpcPageResult Page = 2;
+   repeated UserInfo Data = 3;
+}
+message RolesResponse {
+   GrpcResult Result = 1;
+   GrpcPageResult Page = 2;
+   repeated RoleInfo Data = 3;
 }
 message UpdateRoleRequest {
    string RoleId = 1; // default value could not be applied: 00000000-0000-0000-0000-000000000000
@@ -211,25 +172,25 @@ message UserInfo {
    bool PhoneNumberConfirmed = 6;
 }
 service RoleService {
-   rpc AddRoleClaim (AddRoleClaimRequest) returns (DataResult_EmptyRecord);
-   rpc AddRoleClaims (AddRoleClaimsRequest) returns (DataResult_EmptyRecord);
-   rpc AddRoleUser (AddRoleUserRequest) returns (DataResult_EmptyRecord);
-   rpc AddRoleUsers (AddRoleUsersRequest) returns (DataResult_EmptyRecord);
-   rpc CreateRole (CreateRoleRequest) returns (DataResult_RoleInfo);
-   rpc CreateRoles (CreateRolesRequest) returns (DataResult_EmptyRecord);
-   rpc DeleteRole (DeleteRoleRequest) returns (DataResult_EmptyRecord);
-   rpc DeleteRoles (DeleteRolesRequest) returns (DataResult_EmptyRecord);
-   rpc FetchRoleClaims (PageRequest_FetchRoleClaimsFilter) returns (DataResult_PageResult_RoleClaimInfo);
-   rpc FetchRoles (PageRequest_FetchRolesFilter) returns (DataResult_PageResult_RoleInfo);
-   rpc FetchRoleUsers (PageRequest_FetchRoleUsersFilter) returns (DataResult_PageResult_UserInfo);
-   rpc GetRole (GetRoleRequest) returns (DataResult_RoleInfo);
-   rpc GetRoleClaim (GetRoleClaimRequest) returns (DataResult_RoleClaimInfo);
-   rpc GetRoleUser (GetRoleUserRequest) returns (DataResult_UserInfo);
-   rpc RemoveRoleClaim (RemoveRoleClaimRequest) returns (DataResult_EmptyRecord);
-   rpc RemoveRoleClaims (RemoveRoleClaimsRequest) returns (DataResult_EmptyRecord);
-   rpc RemoveRoleUser (RemoveRoleUserRequest) returns (DataResult_EmptyRecord);
-   rpc RemoveRoleUsers (RemoveRoleUsersRequest) returns (DataResult_EmptyRecord);
-   rpc UpdateOrCreateRole (UpdateRoleRequest) returns (DataResult_RoleInfo);
-   rpc UpdateRole (UpdateRoleRequest) returns (DataResult_RoleInfo);
-   rpc UpdateRoles (UpdateRolesRequest) returns (DataResult_EmptyRecord);
+   rpc AddRoleClaim (AddRoleClaimRequest) returns (GrpcEmptyResponse);
+   rpc AddRoleClaims (AddRoleClaimsRequest) returns (GrpcEmptyResponse);
+   rpc AddRoleUser (AddRoleUserRequest) returns (GrpcEmptyResponse);
+   rpc AddRoleUsers (AddRoleUsersRequest) returns (GrpcEmptyResponse);
+   rpc CreateRole (CreateRoleRequest) returns (RoleResponse);
+   rpc CreateRoles (CreateRolesRequest) returns (GrpcEmptyResponse);
+   rpc DeleteRole (DeleteRoleRequest) returns (GrpcEmptyResponse);
+   rpc DeleteRoles (DeleteRolesRequest) returns (GrpcEmptyResponse);
+   rpc FetchRoleClaims (FetchRoleClaimsRequest) returns (RoleClaimsResponse);
+   rpc FetchRoles (FetchRolesRequest) returns (RolesResponse);
+   rpc FetchRoleUsers (FetchRoleUsersRequest) returns (RoleUsersResponse);
+   rpc GetRole (GetRoleRequest) returns (RoleResponse);
+   rpc GetRoleClaim (GetRoleClaimRequest) returns (RoleClaimResponse);
+   rpc GetRoleUser (GetRoleUserRequest) returns (RoleUserResponse);
+   rpc RemoveRoleClaim (RemoveRoleClaimRequest) returns (GrpcEmptyResponse);
+   rpc RemoveRoleClaims (RemoveRoleClaimsRequest) returns (GrpcEmptyResponse);
+   rpc RemoveRoleUser (RemoveRoleUserRequest) returns (GrpcEmptyResponse);
+   rpc RemoveRoleUsers (RemoveRoleUsersRequest) returns (GrpcEmptyResponse);
+   rpc UpdateOrCreateRole (UpdateRoleRequest) returns (RoleResponse);
+   rpc UpdateRole (UpdateRoleRequest) returns (RoleResponse);
+   rpc UpdateRoles (UpdateRolesRequest) returns (GrpcEmptyResponse);
 }
