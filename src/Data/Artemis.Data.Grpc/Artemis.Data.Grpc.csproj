@@ -35,15 +35,15 @@
     </PropertyGroup>
 
 	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="protobuf-net.Core" Version="3.2.26"/>
+        <PackageReference Include="protobuf-net.Core" Version="3.2.26" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj"/>
+        <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
     </ItemGroup>
 
 </Project>
