@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-	    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-	    <FileVersion>1.0.2</FileVersion>
-	    <VersionPrefix>1.0.2</VersionPrefix>
+		<TargetFramework>net8.0</TargetFramework>
+	    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+	    <FileVersion>1.0.3</FileVersion>
+	    <VersionPrefix>1.0.3</VersionPrefix>
 	    <!--<VersionSuffix>bate1</VersionSuffix>-->
         <ImplicitUsings>enable</ImplicitUsings>
         <Authors>zyltntking</Authors>
@@ -35,17 +35,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="7.4.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.13"/>
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj"/>
+        <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
