@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.Extensions.Rpc</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Rpc.RpcGenerator">
+            <summary>
+            生成器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcGenerator.ProtocolBuffer``1(System.String)">
+            <summary>
+            生成协议缓冲文件
+            </summary>
+            <typeparam name="TSharedService">分享协议定义</typeparam>
+            <param name="path">生成路径</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -11,12 +11,12 @@ using ProtoBuf.Grpc.Server;
 namespace Artemis.App.Identity;
 
 /// <summary>
-/// 启动器配置
+///     启动器配置
 /// </summary>
 public class Startup : IWebAppStartup
 {
     /// <summary>
-    /// 启动器构造
+    ///     启动器构造
     /// </summary>
     public Startup()
     {
@@ -28,7 +28,7 @@ public class Startup : IWebAppStartup
     #region Implementation of IWebAppStartup
 
     /// <summary>
-    /// 配置服务
+    ///     配置服务
     /// </summary>
     /// <param name="builder">程序集</param>
     public void ConfigureBuilder(WebApplicationBuilder builder)
@@ -61,22 +61,16 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<TokenInterceptor>();
         });
 
-        if (builder.Environment.IsDevelopment())
-        {
-            builder.Services.AddCodeFirstGrpcReflection();
-        }
+        if (builder.Environment.IsDevelopment()) builder.Services.AddCodeFirstGrpcReflection();
 
-        builder.Services.AddArtemisMiddleWares(options =>
-        {
-            options.ServiceDomain.DomainName = "Identity";
-        });
+        builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.AddOpenApiDoc(DocConfig);
     }
 
     /// <summary>
-    /// 应用配置
+    ///     应用配置
     /// </summary>
     /// <param name="app"></param>
     public void ConfigureApplication(WebApplication app)
@@ -85,33 +79,22 @@ public class Startup : IWebAppStartup
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
-        {
             app.UseMigrationsEndPoint();
-        }
         else
-        {
             app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //app.UseHsts();
-        }
-        //app.UseHttpsRedirection();
-        //app.UseStaticFiles();
+
         app.UseRouting();
-        //app.UseAuthentication();
-        //app.UseAuthorization();
+
         app.UseArtemisMiddleWares();
         app.UseResponseCompression();
-        //app.UseCors();
-        //app.MapRazorPages();
-        //app.MapControllers();
+
         app.MapGrpcService<RoleService>();
         app.MapGrpcService<UserService>();
         app.MapGrpcService<AccountService>();
-        //app.MapGrpcHealthChecksService();
+
         if (app.Environment.IsDevelopment())
         {
             app.MapApiRouteTable();
-            //app.MapGrpcReflectionService();
             app.MapCodeFirstGrpcReflectionService();
         }
     }

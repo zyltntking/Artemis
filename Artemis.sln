@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Data.Store", "src\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Data", "src\Data\Artemis.Data\Artemis.Data.csproj", "{DA21FB95-2FCF-45BF-B026-EBB96BFC859E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Extensions.Rpc", "src\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj", "{D5D73164-779B-4AF9-A375-7EFB91DFD34B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{DA21FB95-2FCF-45BF-B026-EBB96BFC859E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA21FB95-2FCF-45BF-B026-EBB96BFC859E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA21FB95-2FCF-45BF-B026-EBB96BFC859E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D73164-779B-4AF9-A375-7EFB91DFD34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D73164-779B-4AF9-A375-7EFB91DFD34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D73164-779B-4AF9-A375-7EFB91DFD34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D73164-779B-4AF9-A375-7EFB91DFD34B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{B2CC1A10-47ED-4FC8-BF7A-A31B309EA4BE} = {80E9AB60-64BE-4FCC-9BF3-D3F73DB7998A}
 		{FF2FA4B1-CC42-4FE0-986D-C8AC2CF03559} = {80E9AB60-64BE-4FCC-9BF3-D3F73DB7998A}
 		{DA21FB95-2FCF-45BF-B026-EBB96BFC859E} = {80E9AB60-64BE-4FCC-9BF3-D3F73DB7998A}
+		{D5D73164-779B-4AF9-A375-7EFB91DFD34B} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

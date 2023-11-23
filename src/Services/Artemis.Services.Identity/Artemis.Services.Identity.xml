@@ -511,7 +511,7 @@
         </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.RegisterDbAction">
             <summary>
-            设置数据库操作
+                设置数据库操作
             </summary>
         </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.IdentityOptionsAction">

@@ -55,7 +55,7 @@ public static class LogHost
     }
 
     /// <summary>
-    /// 创建Web应用
+    ///     创建Web应用
     /// </summary>
     /// <typeparam name="TStartup"></typeparam>
     /// <param name="args"></param>

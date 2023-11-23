@@ -25,12 +25,14 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj" />
         <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web\Artemis.Extensions.Web.csproj" />
         <ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Properties\PublishProfiles\" />
+        <Folder Include="protos\" />
     </ItemGroup>
 
 </Project>

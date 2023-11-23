@@ -15,7 +15,7 @@ public sealed class IdentityServiceOptions
     public string? RedisCacheConnection { get; init; }
 
     /// <summary>
-    /// 设置数据库操作
+    ///     设置数据库操作
     /// </summary>
     [Required]
     public required Action<DbContextOptionsBuilder> RegisterDbAction { get; init; }

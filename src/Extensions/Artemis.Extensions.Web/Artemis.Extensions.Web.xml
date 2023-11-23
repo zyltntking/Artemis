@@ -379,19 +379,6 @@
                 域名
             </summary>
         </member>
-        <member name="T:Artemis.Extensions.Web.ResultExtensions">
-            <summary>
-                结果扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Web.ResultExtensions.Fail``1(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
-            <summary>
-                从ModelState格式化失败结果
-            </summary>
-            <typeparam name="T">数据类型</typeparam>
-            <param name="modelState">模型状态</param>
-            <returns></returns>
-        </member>
         <member name="T:Artemis.Extensions.Web.SharedKeys">
             <summary>
                 共享键
