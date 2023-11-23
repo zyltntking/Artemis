@@ -504,19 +504,14 @@
                 认证逻辑配置
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.ContextConnection">
-            <summary>
-                连接
-            </summary>
-        </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.RedisCacheConnection">
             <summary>
                 缓存连接
             </summary>
         </member>
-        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.AssemblyName">
+        <member name="P:Artemis.Services.Identity.IdentityServiceOptions.RegisterDbAction">
             <summary>
-                AssemblyName
+            设置数据库操作
             </summary>
         </member>
         <member name="P:Artemis.Services.Identity.IdentityServiceOptions.IdentityOptionsAction">

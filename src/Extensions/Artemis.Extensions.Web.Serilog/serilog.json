@@ -1,0 +1,30 @@
+{
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "Debug"
+      },
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "File",
+              "Args": {
+                "path": "logs/log.log",
+                "rollingInterval": "Day",
+                "retainedFileCountLimit": 30,
+                "rollOnFileSizeLimit": true,
+                "fileSizeLimitBytes": 314572800
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

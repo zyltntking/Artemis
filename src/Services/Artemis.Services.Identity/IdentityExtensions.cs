@@ -3,7 +3,6 @@ using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Managers;
 using Artemis.Services.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
@@ -27,20 +26,15 @@ public static class IdentityExtensions
         IdentityServiceOptions serviceOptions,
         bool isDevelopment)
     {
+        var registerDbAction = serviceOptions.RegisterDbAction;
+
         serviceCollection.AddDbContextPool<ArtemisIdentityContext>(options =>
             {
-                options.EnableServiceProviderCaching()
+                var contextBuilder = options.EnableServiceProviderCaching()
                     .EnableDetailedErrors(isDevelopment)
                     .EnableSensitiveDataLogging(isDevelopment)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .UseNpgsql(serviceOptions.ContextConnection, npgsqlOption =>
-                    {
-                        npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
-
-                        npgsqlOption.MigrationsAssembly(serviceOptions.AssemblyName);
-
-                        npgsqlOption.EnableRetryOnFailure(3);
-                    });
+                    .LogTo(Console.WriteLine, LogLevel.Information);
+                registerDbAction(contextBuilder);
             })
             .AddIdentity<ArtemisUser, ArtemisRole>()
             .AddEntityFrameworkStores<ArtemisIdentityContext>()

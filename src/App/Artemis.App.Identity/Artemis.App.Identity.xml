@@ -510,5 +510,27 @@
             <param name="request">请求</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.App.Identity.Startup">
+            <summary>
+            启动器配置
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Startup.#ctor">
+            <summary>
+            启动器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Startup.ConfigureBuilder(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            配置服务
+            </summary>
+            <param name="builder">程序集</param>
+        </member>
+        <member name="M:Artemis.App.Identity.Startup.ConfigureApplication(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            应用配置
+            </summary>
+            <param name="app"></param>
+        </member>
     </members>
 </doc>

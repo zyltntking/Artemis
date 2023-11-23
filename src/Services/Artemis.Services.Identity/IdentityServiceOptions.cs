@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Services.Identity;
 
@@ -9,21 +10,15 @@ namespace Artemis.Services.Identity;
 public sealed class IdentityServiceOptions
 {
     /// <summary>
-    ///     连接
-    /// </summary>
-    [Required]
-    public string ContextConnection { get; init; } = null!;
-
-    /// <summary>
     ///     缓存连接
     /// </summary>
     public string? RedisCacheConnection { get; init; }
 
     /// <summary>
-    ///     AssemblyName
+    /// 设置数据库操作
     /// </summary>
     [Required]
-    public string AssemblyName { get; init; } = null!;
+    public required Action<DbContextOptionsBuilder> RegisterDbAction { get; init; }
 
     /// <summary>
     ///     认证配置选项操作

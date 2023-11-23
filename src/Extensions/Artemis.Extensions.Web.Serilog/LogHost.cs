@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -18,14 +19,19 @@ public static class LogHost
     public static void CreateWebApp(string[] args, Action<WebApplicationBuilder> buildAction,
         Action<WebApplication> appAction)
     {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("serilog.json", false, true)
+            .Build();
+
+
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()
+            .ReadFrom.Configuration(configuration)
             .CreateLogger();
+
+        Log.Information("启动Web应用");
 
         try
         {
-            Log.Information("Starting web application");
-
             var builder = WebApplication.CreateBuilder(args);
 
             buildAction(builder);
@@ -40,11 +46,23 @@ public static class LogHost
         }
         catch (Exception exception)
         {
-            if (exception is not HostAbortedException) Log.Fatal(exception, "Application terminated unexpectedly");
+            if (exception is not HostAbortedException) Log.Fatal(exception, "异常停机");
         }
         finally
         {
             Log.CloseAndFlush();
         }
+    }
+
+    /// <summary>
+    /// 创建Web应用
+    /// </summary>
+    /// <typeparam name="TStartup"></typeparam>
+    /// <param name="args"></param>
+    public static void CreateWebApp<TStartup>(string[] args) where TStartup : IWebAppStartup, new()
+    {
+        var startup = new TStartup();
+
+        CreateWebApp(args, startup.ConfigureBuilder, startup.ConfigureApplication);
     }
 }
