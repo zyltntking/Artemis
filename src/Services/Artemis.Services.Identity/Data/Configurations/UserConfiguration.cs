@@ -116,7 +116,7 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .IsUnique();
 
         // Each User can have many UserClaims
-        builder.HasMany(user => user.Claims)
+        builder.HasMany(user => user.UserClaims)
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
             .HasConstraintName($"FK_{nameof(ArtemisUserClaim)}_{TableName}_Id")
@@ -124,7 +124,7 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .OnDelete(DeleteBehavior.Cascade);
 
         // Each User can have many UserLogins
-        builder.HasMany(user => user.Logins)
+        builder.HasMany(user => user.UserLogins)
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
             .HasConstraintName($"FK_{nameof(ArtemisUserLogin)}_{TableName}_Id")
@@ -132,10 +132,18 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .OnDelete(DeleteBehavior.Cascade);
 
         // Each User can have many UserTokens
-        builder.HasMany(user => user.Tokens)
+        builder.HasMany(user => user.UserTokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
             .HasConstraintName($"FK_{nameof(ArtemisUserToken)}_{TableName}_Id")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Each User can have many UserProfiles
+        builder.HasMany(user => user.UserProfiles)
+            .WithOne(userProfile => userProfile.User)
+            .HasForeignKey(userProfile => userProfile.UserId)
+            .HasConstraintName($"FK_{nameof(ArtemisUserProfile)}_{TableName}_Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

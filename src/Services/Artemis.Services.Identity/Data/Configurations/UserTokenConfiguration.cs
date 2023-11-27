@@ -28,7 +28,7 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
     {
         base.FieldConfigure(builder);
 
-        builder.Property(user => user.Id)
+        builder.Property(userToken => userToken.Id)
             .ValueGeneratedOnAdd()
             .HasComment("标识");
 

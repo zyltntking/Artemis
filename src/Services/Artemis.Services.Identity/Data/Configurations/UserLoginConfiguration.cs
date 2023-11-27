@@ -29,7 +29,7 @@ public class UserLoginConfiguration : IdentityConfiguration<ArtemisUserLogin>
     {
         base.FieldConfigure(builder);
 
-        builder.Property(user => user.Id)
+        builder.Property(userLogin => userLogin.Id)
             .ValueGeneratedOnAdd()
             .HasComment("标识");
 

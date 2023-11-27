@@ -24,17 +24,22 @@ public class ArtemisUser : User, IConcurrencyModelBase
     /// <summary>
     ///     用户凭据映射
     /// </summary>
-    public virtual ICollection<ArtemisUserClaim> Claims { get; } = new List<ArtemisUserClaim>();
+    public virtual ICollection<ArtemisUserClaim> UserClaims { get; } = new List<ArtemisUserClaim>();
 
     /// <summary>
     ///     用户登录映射
     /// </summary>
-    public virtual ICollection<ArtemisUserLogin> Logins { get; } = new List<ArtemisUserLogin>();
+    public virtual ICollection<ArtemisUserLogin> UserLogins { get; } = new List<ArtemisUserLogin>();
 
     /// <summary>
     ///     用户令牌映射
     /// </summary>
-    public virtual ICollection<ArtemisUserToken> Tokens { get; } = new List<ArtemisUserToken>();
+    public virtual ICollection<ArtemisUserToken> UserTokens { get; } = new List<ArtemisUserToken>();
+
+    /// <summary>
+    ///     用户信息
+    /// </summary>
+    public virtual ICollection<ArtemisUserProfile> UserProfiles { get; } = new List<ArtemisUserProfile>();
 
     #region Implementation of IMateSlot
 

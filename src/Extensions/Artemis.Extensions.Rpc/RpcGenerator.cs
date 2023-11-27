@@ -4,12 +4,12 @@ using ProtoBuf.Meta;
 namespace Artemis.Extensions.Rpc;
 
 /// <summary>
-/// 生成器
+///     生成器
 /// </summary>
 public static class RpcGenerator
 {
     /// <summary>
-    /// 生成协议缓冲文件
+    ///     生成协议缓冲文件
     /// </summary>
     /// <typeparam name="TSharedService">分享协议定义</typeparam>
     /// <param name="path">生成路径</param>

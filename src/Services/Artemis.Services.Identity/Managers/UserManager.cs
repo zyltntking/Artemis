@@ -697,7 +697,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
             var query = UserStore
                 .KeyMatchQuery(id)
-                .SelectMany(artemisUser => artemisUser.Claims);
+                .SelectMany(artemisUser => artemisUser.UserClaims);
 
             var total = await query.LongCountAsync(cancellationToken);
 
@@ -935,7 +935,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
             var query = UserStore
                 .KeyMatchQuery(id)
-                .SelectMany(artemisUser => artemisUser.Logins);
+                .SelectMany(artemisUser => artemisUser.UserLogins);
 
             var total = await query.LongCountAsync(cancellationToken);
 
@@ -1160,7 +1160,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
             var query = UserStore
                 .KeyMatchQuery(id)
-                .SelectMany(artemisUser => artemisUser.Tokens);
+                .SelectMany(artemisUser => artemisUser.UserTokens);
 
             var total = await query.LongCountAsync(cancellationToken);
 

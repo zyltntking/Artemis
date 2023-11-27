@@ -28,7 +28,7 @@ public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
     {
         base.FieldConfigure(builder);
 
-        builder.Property(user => user.Id)
+        builder.Property(userRole => userRole.Id)
             .ValueGeneratedOnAdd()
             .HasComment("标识");
 
