@@ -45,7 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Extensions.Rpc", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.BroadcastApi", "src\App\Artemis.App.BroadcastApi\Artemis.App.BroadcastApi.csproj", "{E59AD68F-4B43-4B94-914D-7BB48FA80B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Extensions.Rpc.Identity", "src\Extensions\Artemis.Extensions.Rpc.Identity\Artemis.Extensions.Rpc.Identity.csproj", "{87DFC886-3A11-4AEF-87B1-1E8FF776B670}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Extensions.Rpc.Identity", "src\Extensions\Artemis.Extensions.Rpc.Identity\Artemis.Extensions.Rpc.Identity.csproj", "{87DFC886-3A11-4AEF-87B1-1E8FF776B670}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3C4319C5-90C1-4772-92DD-C089103C302F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Test.CodeSegments", "test\Artemis.Test.CodeSegments\Artemis.Test.CodeSegments.csproj", "{50DEC04F-3C9E-4EB5-912A-6239C601CE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +125,10 @@ Global
 		{87DFC886-3A11-4AEF-87B1-1E8FF776B670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87DFC886-3A11-4AEF-87B1-1E8FF776B670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87DFC886-3A11-4AEF-87B1-1E8FF776B670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50DEC04F-3C9E-4EB5-912A-6239C601CE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50DEC04F-3C9E-4EB5-912A-6239C601CE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50DEC04F-3C9E-4EB5-912A-6239C601CE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50DEC04F-3C9E-4EB5-912A-6239C601CE71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +151,7 @@ Global
 		{D5D73164-779B-4AF9-A375-7EFB91DFD34B} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
 		{E59AD68F-4B43-4B94-914D-7BB48FA80B34} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{87DFC886-3A11-4AEF-87B1-1E8FF776B670} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
+		{50DEC04F-3C9E-4EB5-912A-6239C601CE71} = {3C4319C5-90C1-4772-92DD-C089103C302F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

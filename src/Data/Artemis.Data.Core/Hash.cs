@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Artemis.Data.Core.Fundamental.Kit;
+using Artemis.Data.Core.Fundamental.Kit.Crypto;
 
 namespace Artemis.Data.Core;
 
@@ -69,9 +70,7 @@ public static class Hash
     {
         var hasher = ArtemisHasher.Create();
 
-        var (success, _) = hasher.VerifyHash(hashedText, providedText);
-
-        return success;
+        return hasher.VerifyHash(hashedText, providedText);
     }
 
     /// <summary>
