@@ -4,8 +4,16 @@ using Serilog;
 
 namespace Artemis.App.BroadcastApi;
 
+/// <summary>
+///     Program
+/// </summary>
 public static class Program
 {
+    /// <summary>
+    ///     Main
+    /// </summary>
+    /// <param name="args"></param>
+    /// <exception cref="InvalidOperationException"></exception>
     public static void Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()
@@ -54,11 +62,6 @@ public static class Program
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            //app.UseHttpsRedirection();
-
-            //app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -132,7 +132,7 @@ public class ArtemisHasher
 
         var decodeHashedText = Convert.FromBase64String(hashedText);
 
-        // 读取散列格式标记
+        // 编码是否正确
         if (decodeHashedText.Length == 0) return false;
 
         return VerifyHash(decodeHashedText, providedText);
@@ -201,7 +201,6 @@ public class ArtemisHasher
         /// </summary>
         Sha512
     }
-
 
     #region KeyDerivation
 

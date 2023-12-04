@@ -3100,6 +3100,16 @@
 				构造
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Store.ValueConverter.StringNormalizeValueConverter">
+			<summary>
+				字符串规范化值转换器
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Store.ValueConverter.StringNormalizeValueConverter.#ctor">
+			<summary>
+				构造
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Store.ValueConverter.StringReverseValueConverter">
 			<summary>
 				字符串反转值转换器

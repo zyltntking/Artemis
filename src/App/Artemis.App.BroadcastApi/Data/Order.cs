@@ -8,7 +8,7 @@ namespace Artemis.App.BroadcastApi.Data;
 ///     订单模型
 /// </summary>
 [EntityTypeConfiguration(typeof(OrderConfiguration))]
-public class Order : ModelBase
+public class Order : ModelBase, IOrder
 {
     /// <summary>
     ///     车牌号

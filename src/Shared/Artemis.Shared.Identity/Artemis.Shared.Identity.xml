@@ -284,6 +284,31 @@
 				用户标识
 			</summary>
 		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserProfile">
+			<summary>
+				用户档案
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.Key">
+			<summary>
+				元数据键
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.Value">
+			<summary>
+				元数据值
+			</summary>
+		</member>
 		<member name="T:Artemis.Shared.Identity.Models.UserRole">
 			<summary>
 				用户角色映射

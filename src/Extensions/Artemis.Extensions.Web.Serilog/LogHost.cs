@@ -46,7 +46,10 @@ public static class LogHost
         }
         catch (Exception exception)
         {
-            if (exception is not HostAbortedException) Log.Fatal(exception, "异常停机");
+            if (exception is HostAbortedException)
+                Log.Information("启动中止，若当前进程为迁移进程，可忽略这条信息");
+            else
+                Log.Fatal(exception, "异常停机");
         }
         finally
         {

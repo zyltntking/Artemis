@@ -67,11 +67,11 @@ public class RoleClaimConfiguration : IdentityConfiguration<ArtemisRoleClaim>
             .HasName($"PK_{TableName}");
 
         // Role ClaimPackage Index
-        builder.HasIndex(roleClaim => roleClaim.ClaimType)
-            .HasDatabaseName($"IX_{TableName}_ClaimType");
+        builder.HasIndex(roleClaim => new { roleClaim.ClaimType, roleClaim.ClaimValue })
+            .HasDatabaseName($"IX_{TableName}_ClaimType_ClaimValue");
 
-        builder.HasIndex(roleClaim => new { roleClaim.CheckStamp, roleClaim.RoleId })
-            .HasDatabaseName($"IX_{TableName}_CheckStamp_RoleId")
+        builder.HasIndex(roleClaim => roleClaim.CheckStamp)
+            .HasDatabaseName($"IX_{TableName}_CheckStamp")
             .IsUnique();
     }
 

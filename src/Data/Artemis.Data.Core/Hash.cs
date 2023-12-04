@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Core.Fundamental.Kit.Crypto;
 
 namespace Artemis.Data.Core;

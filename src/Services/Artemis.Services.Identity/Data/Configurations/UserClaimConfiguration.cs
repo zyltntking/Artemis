@@ -67,11 +67,11 @@ public class UserClaimConfiguration : IdentityConfiguration<ArtemisUserClaim>
             .HasName($"PK_{TableName}");
 
         // User ClaimPackage Index
-        builder.HasIndex(userClaim => userClaim.ClaimType)
-            .HasDatabaseName($"IX_{TableName}_ClaimType");
+        builder.HasIndex(userClaim => new { userClaim.ClaimType, userClaim.ClaimValue })
+            .HasDatabaseName($"IX_{TableName}_ClaimType_ClaimValue");
 
-        builder.HasIndex(userClaim => new { userClaim.CheckStamp, userClaim.UserId })
-            .HasDatabaseName($"IX_{TableName}_CheckStamp_UserId")
+        builder.HasIndex(userClaim => userClaim.CheckStamp)
+            .HasDatabaseName($"IX_{TableName}_CheckStamp")
             .IsUnique();
     }
 
