@@ -10,6 +10,11 @@ namespace Artemis.Services.Identity;
 public sealed class IdentityServiceOptions
 {
     /// <summary>
+    /// 是否启用缓存
+    /// </summary>
+    public bool EnableCache { get; set; }
+
+    /// <summary>
     ///     缓存连接
     /// </summary>
     public string? RedisCacheConnection { get; init; }

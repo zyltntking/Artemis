@@ -70,7 +70,6 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
 
     #endregion
 
-
     #region Implementation of IAccountManager
 
     /// <summary>

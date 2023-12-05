@@ -1,12 +1,10 @@
-﻿using Artemis.Data.Store;
-using Artemis.Services.Identity.Data;
+﻿using Artemis.Services.Identity.Data;
 using Artemis.Services.Identity.Managers;
 using Artemis.Services.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using StackExchange.Redis;
 
 namespace Artemis.Services.Identity;
 
@@ -41,21 +39,12 @@ public static class IdentityExtensions
             .AddEntityFrameworkStores<ArtemisIdentityContext>()
             .AddDefaultTokenProviders();
 
-        if (serviceOptions.RedisCacheConnection is not null && serviceOptions.RedisCacheConnection != string.Empty)
+        if (serviceOptions.EnableCache && !string.IsNullOrWhiteSpace(serviceOptions.RedisCacheConnection))
         {
             serviceCollection.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = serviceOptions.RedisCacheConnection;
                 options.InstanceName = "Artemis:Identity:";
-            });
-
-            serviceCollection.TryAddSingleton<IConnectionMultiplexer>(
-                ConnectionMultiplexer.Connect(serviceOptions.RedisCacheConnection));
-
-            serviceCollection.Configure<ArtemisStoreOptions>(option =>
-            {
-                option.CachedManager = true;
-                option.CachedStore = true;
             });
         }
 

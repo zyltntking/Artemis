@@ -15,6 +15,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="logs\**" />
+      <Content Remove="logs\**" />
+      <EmbeddedResource Remove="logs\**" />
+      <None Remove="logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -25,6 +25,9 @@ public static class LogHost
 
 
         Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .Enrich.WithThreadId()
+            .Enrich.WithProcessId()
             .ReadFrom.Configuration(configuration)
             .CreateLogger();
 
@@ -41,6 +44,9 @@ public static class LogHost
             var app = builder.Build();
 
             appAction(app);
+
+            app.UseSerilogRequestLogging();
+            app.UseMiddleware<SupplementalLogMiddleware>();
 
             app.Run();
         }

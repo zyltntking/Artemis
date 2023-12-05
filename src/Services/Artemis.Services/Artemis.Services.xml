@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Services</name>
-	</assembly>
-	<members>
-	</members>
+    <assembly>
+        <name>Artemis.Services</name>
+    </assembly>
+    <members>
+    </members>
 </doc>

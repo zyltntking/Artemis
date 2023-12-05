@@ -39,6 +39,7 @@ public class Startup : IWebAppStartup
 
         builder.Services.AddIdentityService(new IdentityServiceOptions
         {
+            EnableCache = true,
             RedisCacheConnection = builder.Configuration.GetConnectionString("RedisCache"),
             RegisterDbAction = dbBuilder =>
             {
@@ -49,6 +50,8 @@ public class Startup : IWebAppStartup
                     npgsqlOption.MigrationsAssembly("Artemis.App.Identity");
 
                     npgsqlOption.EnableRetryOnFailure(3);
+
+                    npgsqlOption.CommandTimeout(30);
                 });
             }
         }, builder.Environment.IsDevelopment());

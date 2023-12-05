@@ -2,6 +2,7 @@
 using Artemis.Data.Grpc;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
+using Grpc.Core;
 
 namespace Artemis.Services.Identity.Logic;
 
@@ -30,8 +31,9 @@ internal class AccountService : IAccountService
     ///     登录
     /// </summary>
     /// <param name="request">请求</param>
+    /// <param name="context">服务上下文</param>
     /// <returns></returns>
-    public async Task<TokenResponse> SignInAsync(SignInRequest request)
+    public async Task<TokenResponse> SignInAsync(SignInRequest request, ServerCallContext context)
     {
         var (result, token) = await AccountManager.SignInAsync(request);
 
@@ -67,8 +69,9 @@ internal class AccountService : IAccountService
     ///     注册
     /// </summary>
     /// <param name="request">请求</param>
+    /// <param name="context">服务上下文</param>
     /// <returns></returns>
-    public async Task<TokenResponse> SignUpAsync(SignUpRequest request)
+    public async Task<TokenResponse> SignUpAsync(SignUpRequest request, ServerCallContext context)
     {
         var (result, token) = await AccountManager.SignUpAsync(request, request.Password);
 
