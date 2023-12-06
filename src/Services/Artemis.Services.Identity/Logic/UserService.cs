@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Logic;
 /// <summary>
 ///     用户服务
 /// </summary>
-internal class UserService : IUserService
+public class UserService : IUserService
 {
     /// <summary>
     ///     泛型API控制器

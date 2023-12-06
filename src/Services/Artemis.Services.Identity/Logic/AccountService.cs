@@ -1,23 +1,29 @@
-﻿using Artemis.Data.Core;
+﻿using System.Security.Cryptography;
+using Artemis.Data.Core;
 using Artemis.Data.Grpc;
+using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
-using Grpc.Core;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Artemis.Services.Identity.Logic;
 
 /// <summary>
 ///     账户服务
 /// </summary>
-internal class AccountService : IAccountService
+public class AccountService : IAccountService
 {
     /// <summary>
     ///     账户服务
     /// </summary>
     /// <param name="accountManager">账户管理器依赖</param>
-    public AccountService(IAccountManager accountManager)
+    /// <param name="cache">分布式缓存依赖</param>
+    public AccountService(
+        IAccountManager accountManager,
+        IDistributedCache cache)
     {
         AccountManager = accountManager;
+        Cache = cache;
     }
 
     /// <summary>
@@ -25,25 +31,30 @@ internal class AccountService : IAccountService
     /// </summary>
     private IAccountManager AccountManager { get; }
 
+    /// <summary>
+    /// 分布式缓存依赖
+    /// </summary>
+    private IDistributedCache Cache { get; }
+
     #region Implementation of IAccountService
 
     /// <summary>
     ///     登录
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">服务上下文</param>
     /// <returns></returns>
-    public async Task<TokenResponse> SignInAsync(SignInRequest request, ServerCallContext context)
+    public async Task<TokenResponse> SignInAsync(SignInRequest request)
     {
         var (result, token) = await AccountManager.SignInAsync(request);
 
         if (result.Succeeded)
         {
             // todo cache token
-
             var json = token!.Serialize();
 
             var replyToken = Hash.Md5Hash(json);
+
+            await Cache.SetAsync(replyToken, token!);
 
             var tokenResult = new TokenResult
             {
@@ -69,9 +80,8 @@ internal class AccountService : IAccountService
     ///     注册
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">服务上下文</param>
     /// <returns></returns>
-    public async Task<TokenResponse> SignUpAsync(SignUpRequest request, ServerCallContext context)
+    public async Task<TokenResponse> SignUpAsync(SignUpRequest request)
     {
         var (result, token) = await AccountManager.SignUpAsync(request, request.Password);
 

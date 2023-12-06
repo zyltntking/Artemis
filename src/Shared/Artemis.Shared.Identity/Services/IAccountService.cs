@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using Artemis.Data.Grpc;
 using Artemis.Shared.Identity.Transfer;
-using Grpc.Core;
 
 namespace Artemis.Shared.Identity.Services;
 
@@ -18,21 +17,19 @@ public interface IAccountService
     ///     登录
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">服务上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("登录")]
-    Task<TokenResponse> SignInAsync(SignInRequest request, ServerCallContext context);
+    Task<TokenResponse> SignInAsync(SignInRequest request);
 
     /// <summary>
     ///     注册
     /// </summary>
     /// <param name="request">请求</param>
-    /// <param name="context">服务上下文</param>
     /// <returns></returns>
     [OperationContract]
     [Description("注册")]
-    Task<TokenResponse> SignUpAsync(SignUpRequest request, ServerCallContext context);
+    Task<TokenResponse> SignUpAsync(SignUpRequest request);
 
     /// <summary>
     ///     修改密码

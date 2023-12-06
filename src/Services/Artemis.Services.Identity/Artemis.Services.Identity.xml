@@ -586,31 +586,35 @@
                 账户服务
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Logic.AccountService.#ctor(Artemis.Services.Identity.Managers.IAccountManager)">
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.#ctor(Artemis.Services.Identity.Managers.IAccountManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
             <summary>
                 账户服务
             </summary>
             <param name="accountManager">账户管理器依赖</param>
+            <param name="cache">分布式缓存依赖</param>
         </member>
         <member name="P:Artemis.Services.Identity.Logic.AccountService.AccountManager">
             <summary>
                 角色管理器
             </summary>
         </member>
-        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest,Grpc.Core.ServerCallContext)">
+        <member name="P:Artemis.Services.Identity.Logic.AccountService.Cache">
+            <summary>
+            分布式缓存依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest)">
             <summary>
                 登录
             </summary>
             <param name="request">请求</param>
-            <param name="context">服务上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Services.Identity.Logic.AccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest)">
             <summary>
                 注册
             </summary>
             <param name="request">请求</param>
-            <param name="context">服务上下文</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Services.Identity.Logic.AccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest)">

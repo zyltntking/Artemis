@@ -1,10 +1,10 @@
 ﻿using Artemis.App.Identity.Interceptors;
-using Artemis.App.Identity.Services;
 using Artemis.Extensions.Web.Builder;
 using Artemis.Extensions.Web.Middleware;
 using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
+using Artemis.Services.Identity.Logic;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
 

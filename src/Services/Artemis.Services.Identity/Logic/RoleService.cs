@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Logic;
 /// <summary>
 ///     角色服务
 /// </summary>
-internal class RoleService : IRoleService
+public class RoleService : IRoleService
 {
     /// <summary>
     ///     角色服务

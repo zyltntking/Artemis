@@ -363,20 +363,18 @@
                 账户服务接口
             </summary>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignInAsync(Artemis.Shared.Identity.Services.SignInRequest)">
             <summary>
                 登录
             </summary>
             <param name="request">请求</param>
-            <param name="context">服务上下文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Shared.Identity.Services.IAccountService.SignUpAsync(Artemis.Shared.Identity.Services.SignUpRequest)">
             <summary>
                 注册
             </summary>
             <param name="request">请求</param>
-            <param name="context">服务上下文</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Shared.Identity.Services.IAccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest)">

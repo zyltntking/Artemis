@@ -3139,719 +3139,458 @@
                 修补内容
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Socket.AsciiCharacter">
+            <summary>
+                Ascii显示字符
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Socket.AsciiCharacter.CharacterRange">
+            <summary>
+                字符范围
+            </summary>
+            <remarks>0x20 space</remarks>
+        </member>
+        <member name="P:Artemis.Data.Core.Socket.AsciiCharacter.DigitRange">
+            <summary>
+                数字范围
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Socket.AsciiCharacter.UpperCaseRange">
+            <summary>
+                大写字母范围
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Socket.AsciiCharacter.LowerCaseRange">
+            <summary>
+                小写字母范围
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsCharacter(System.Byte,System.Boolean)">
+            <summary>
+                编码是否为可打印字符
+            </summary>
+            <param name="code">字节码</param>
+            <param name="includeSpace">是否包括空格</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsCharacter(System.Char,System.Boolean)">
+            <summary>
+                字符是否是可打印字符
+            </summary>
+            <param name="character">字符</param>
+            <param name="includeSpace">是否包括空格</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsDigit(System.Byte)">
+            <summary>
+                编码是否是数字
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsDigit(System.Char)">
+            <summary>
+                字符是否是数字
+            </summary>
+            <param name="character">字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsUpperCase(System.Byte)">
+            <summary>
+                编码是否是大写字母
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsUpperCase(System.Char)">
+            <summary>
+                字符是否是大写字母
+            </summary>
+            <param name="character">字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLowerCase(System.Byte)">
+            <summary>
+                编码是否是小写字母
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLowerCase(System.Char)">
+            <summary>
+                字符是否是小写字母
+            </summary>
+            <param name="character">字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetter(System.Byte)">
+            <summary>
+                编码是否是字母
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetter(System.Char)">
+            <summary>
+                字符是否是字母
+            </summary>
+            <param name="character">字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetterOrDigit(System.Byte)">
+            <summary>
+                是否是字母和数字
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetterOrDigit(System.Char)">
+            <summary>
+                字符是否是字母和数字
+            </summary>
+            <param name="character">字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsNonAlphanumeric(System.Char)">
+            <summary>
+                字符是否是特殊字符
+            </summary>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsNonAlphanumeric(System.Byte)">
+            <summary>
+                是否是特殊字符
+            </summary>
+            <param name="code">字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomCharacters(System.Int32)">
+            <summary>
+             随机可打印字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomDigits(System.Int32)">
+            <summary>
+            随机数字字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomUpperCases(System.Int32)">
+            <summary>
+            随机大写字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLowerCases(System.Int32)">
+            <summary>
+            随机小写字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetters(System.Int32)">
+            <summary>
+            随机字母字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetterOrDigits(System.Int32)">
+            <summary>
+            随机字母和数字字符串
+            </summary>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomNonAlphanumeric(System.Int32)">
+            <summary>
+            随机特殊字符字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Data.Core.Socket.AsciiControl">
             <summary>
                 ASCII控制
             </summary>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Nul">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.NUL">
             <summary>
                 空字符
             </summary>
             <remarks>NULL</remarks>
+            <value>^@</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Soh">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SOH">
             <summary>
                 标题开始
             </summary>
             <remarks>Start Of Headling</remarks>
+            <value>^A</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Stx">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.STX">
             <summary>
                 正文开始
             </summary>
             <remarks>Start Of Text</remarks>
+            <value>^B</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Etx">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.ETX">
             <summary>
                 正文结束
             </summary>
             <remarks>End Of Text</remarks>
+            <value>^C</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Eot">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.EOT">
             <summary>
                 传输结束
             </summary>
             <remarks>End Of Transmission</remarks>
+            <value>^D</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Enq">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.ENQ">
             <summary>
                 请求
             </summary>
             <remarks>Enquiry</remarks>
+            <value>^E</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Ack">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.ACK">
             <summary>
                 回应/响应/收到通知
             </summary>
             <remarks>Acknowledge</remarks>
+            <value>^F</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Bel">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.BEL">
             <summary>
                 响铃
             </summary>
             <remarks>Bell</remarks>
+            <value>^G</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Bs">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.BS">
             <summary>
                 退格
             </summary>
             <remarks>Backspace</remarks>
+            <value>^H</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Ht">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.HT">
             <summary>
                 水平制表符
             </summary>
             <remarks>Horizontal Tab</remarks>
+            <value>^I</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Lf">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.LF">
             <summary>
                 换行键
             </summary>
             <remarks>Line Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Nl" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.NL" />
+            <value>^J</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Nl">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.NL">
             <summary>
                 换行键
             </summary>
             <remarks>New Line</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Lf" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.LF" />
+            <value>^J</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Vt">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.VT">
             <summary>
                 垂直制表符
             </summary>
             <remarks>Vertical Tab</remarks>
+            <value>^K</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Ff">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.FF">
             <summary>
                 换页键
             </summary>
             <remarks>Form Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Np" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.NP" />
+            <value>^L</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Np">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.NP">
             <summary>
                 换页键
             </summary>
             <remarks>New Page</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Ff" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.FF" />
+            <value>^L</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Cr">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.CR">
             <summary>
                 回车键
             </summary>
             <remarks>Carriage Return</remarks>
+            <value>^M</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.So">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SO">
             <summary>
                 不用切换
             </summary>
             <remarks>Shift Out</remarks>
+            <value>^N</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Si">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SI">
             <summary>
                 启用切换
             </summary>
             <remarks>Shift In</remarks>
+            <value>^O</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dle">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DLE">
             <summary>
                 数据链路转义
             </summary>
             <remarks>Data Link Escape</remarks>
+            <value>^P</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc1">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DC1">
             <summary>
                 设备控制1
             </summary>
             <remarks>Device Control 1</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Xon" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XON" />
+            <value>^Q</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Xon">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.XON">
             <summary>
                 传输开始
             </summary>
             <remarks>Transmission O</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc1" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.DC1" />
+            <value>^Q</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc2">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DC2">
             <summary>
                 设备控制2
             </summary>
             <remarks>Device Control 2</remarks>
+            <value>^R</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc3">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DC3">
             <summary>
                 设备控制3
             </summary>
             <remarks>Device Control 3</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOff" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOFF" />
+            <value>^S</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.XOff">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.XOFF">
             <summary>
                 传输中断
             </summary>
             <remarks>Transmission Off</remarks>
-            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.Dc3" />
+            <see cref="F:Artemis.Data.Core.Socket.AsciiControl.DC3" />
+            <value>^S</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Dc4">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DC4">
             <summary>
                 设备控制4
             </summary>
+            <remarks>Device Control 3</remarks>
+            <value>^T</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Nak">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.NAK">
             <summary>
                 无响应/非正常响应/拒绝接收
             </summary>
             <remarks>Negative Acknowledge</remarks>
+            <value>^U</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Syn">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SYN">
             <summary>
                 同步空闲
             </summary>
             <remarks>Synchronous Idle</remarks>
+            <value>^V</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Etb">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.ETB">
             <summary>
                 传输块结束/块传输终止
             </summary>
             <remarks>End of Transmission Block</remarks>
+            <value>^W</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Can">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.CAN">
             <summary>
                 取消
             </summary>
             <remarks>Cancel</remarks>
+            <value>^X</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Em">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.EM">
             <summary>
                 已到介质末端/介质存储已满/介质中断
             </summary>
             <remarks>End of Medium</remarks>
+            <value>^Y</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Sub">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SUB">
             <summary>
                 替补/替换
             </summary>
             <remarks>Substitute</remarks>
+            <value>^Z</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Esc">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.ESC">
             <summary>
                 逃离/取消
             </summary>
             <remarks>Escape</remarks>
+            <value>^[</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Fs">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.FS">
             <summary>
                 文件分割符
             </summary>
             <remarks>File Separator</remarks>
+            <value>^\</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Gs">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.GS">
             <summary>
                 组分隔符/分组符
             </summary>
             <remarks>Group Separator</remarks>
+            <value>^]</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Rs">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.RS">
             <summary>
                 记录分离符
             </summary>
             <remarks>Record Separator</remarks>
+            <value>^^</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Us">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.US">
             <summary>
                 单元分隔符
             </summary>
             <remarks>Unit Separator</remarks>
+            <value>^_</value>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Sp">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.SP">
             <summary>
                 空格
             </summary>
             <remarks>Space</remarks>
         </member>
-        <member name="F:Artemis.Data.Core.Socket.AsciiControl.Del">
+        <member name="F:Artemis.Data.Core.Socket.AsciiControl.DEL">
             <summary>
                 删除
             </summary>
             <remarks>Delete</remarks>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.ISocketRecord">
-            <summary>
-                Socket记录接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.Stx">
-            <summary>
-                报文开始位
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.Head">
-            <summary>
-                报文头段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.HeadRecord">
-            <summary>
-                报文头记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.Content">
-            <summary>
-                报文内容段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.Check">
-            <summary>
-                报文校验段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.CheckRecord">
-            <summary>
-                报文校验段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ISocketRecord.Etx">
-            <summary>
-                报文结束位
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.ICheckRecord">
-            <summary>
-                校验记录接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICheckRecord.Check">
-            <summary>
-                校验字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICheckRecord.CheckSum">
-            <summary>
-                求和校验位
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICheckRecord.CheckXor">
-            <summary>
-                异或校验位
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.IHeadRecord">
-            <summary>
-                头记录接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IHeadRecord.ContentLength">
-            <summary>
-                内容长度字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IHeadRecord.Length">
-            <summary>
-                长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IHeadRecord.CommandRecord">
-            <summary>
-                指令记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IHeadRecord.StatusRecord">
-            <summary>
-                状态记录
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.ICommandRecord">
-            <summary>
-                指令记录接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICommandRecord.Command">
-            <summary>
-                指令字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICommandRecord.CommandCategory">
-            <summary>
-                指令目录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.ICommandRecord.CommandItem">
-            <summary>
-                指令项目
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.IStatusRecord">
-            <summary>
-                状态记录接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IStatusRecord.Status">
-            <summary>
-                状态字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IStatusRecord.StatusCategory">
-            <summary>
-                状态目录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.IStatusRecord.StatusItem">
-            <summary>
-                状态项目
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.SocketProtocol">
-            <summary>
-                Socket协议
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GeneratorCommand(System.Byte,System.Byte)">
-            <summary>
-                生成指令
-            </summary>
-            <param name="commandCategory">指令目录</param>
-            <param name="commandItem">指令项目</param>
-            <returns>生成的指令</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GeneratorStatus(System.Byte,System.Byte)">
-            <summary>
-                生成状态
-            </summary>
-            <param name="statusCategory">状态目录</param>
-            <param name="statusItem">状态项目</param>
-            <returns>生成的状态</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GeneratorCheck(System.Byte,System.Byte)">
-            <summary>
-                生成校验段
-            </summary>
-            <param name="checkSum">求和校验位</param>
-            <param name="checkXor">异或校验位</param>
-            <returns></returns>
-            <remarks>|CHECKSUM|CHECKXOR|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.SeparateHead(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                分离头
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException">报文长度异常</exception>
-            <remarks>|STX|HEAD|OTHER|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.SeparateBody(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                分离Body
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException">报文长度异常</exception>
-            <remarks>|STX|HEAD|BODY|CHECK|ETX|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.SeparateHeadAndBody(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                分离头和报文内容
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException">报文长度异常</exception>
-            <remarks>|STX|HEAD|OTHER|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.SeparateCheck(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                分离校验位
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
-            <remarks>|OTHER|CHECK|ETX|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.IsStx(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                判断报文头
-            </summary>
-            <param name="message">报文</param>
-            <returns>判断结果</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.IsEtx(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                判断报文尾
-            </summary>
-            <param name="message">报文</param>
-            <returns>判断结果</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetCheckSum(System.Collections.Generic.IEnumerable{System.Byte})">
-            <summary>
-                获取求和校验位
-            </summary>
-            <param name="content">报文内容</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetCheckXor(System.Collections.Generic.IEnumerable{System.Byte})">
-            <summary>
-                获取异或校验位
-            </summary>
-            <param name="headAndContent">报文内容</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.Verify(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                验证报文
-            </summary>
-            <param name="message">报文</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.Verify(Artemis.Data.Core.Socket.ISocketRecord)">
-            <summary>
-            </summary>
-            <param name="record"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetSocketRecord(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                获取SocketRecord
-            </summary>
-            <param name="message">报文</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
-            <remarks>|STX|HEAD|BODY|CHECK|ETX|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetHeadRecord(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                获取报文头记录
-            </summary>
-            <param name="head">报文头字节码</param>
-            <returns>报文头记录</returns>
-            <exception cref="T:System.ArgumentException">指令长度异常</exception>
-            <remarks>|ContentLength|CommandCategory|CommandItem|StatusCategory|StatusItem|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetCommandRecord(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                获取指令记录
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-            <remarks>|CommandCategory|CommandItem|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetStatusRecord(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                获取状态记录
-            </summary>
-            <param name="status"></param>
-            <returns></returns>
-            <remarks>|StatusCategory|StatusItem|</remarks>
-        </member>
-        <member name="M:Artemis.Data.Core.Socket.SocketProtocol.GetCheckRecord(System.Collections.Generic.IReadOnlyList{System.Byte})">
-            <summary>
-                获取校验记录
-            </summary>
-            <param name="check"></param>
-            <returns></returns>
-            <remarks>|CheckSum|CheckXor|</remarks>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.ProtocolSetting">
-            <summary>
-                协议配置
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.StxLength">
-            <summary>
-                起始标识长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.ContentCountLength">
-            <summary>
-                报文内容长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CommandCategoryLength">
-            <summary>
-                指令目录长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CommandItemLength">
-            <summary>
-                指令项目长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.StatusCategoryLength">
-            <summary>
-                状态目录长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.StatusItemLength">
-            <summary>
-                状态项目长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CheckSumLength">
-            <summary>
-                求和校验位长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CheckXorLength">
-            <summary>
-                异或校验位长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.EtxLength">
-            <summary>
-                结束标识
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CommandLength">
-            <summary>
-                指令长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.StatusLength">
-            <summary>
-                状态长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.HeadLength">
-            <summary>
-                报文头长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.CheckLength">
-            <summary>
-                校验位长度
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Socket.ProtocolSetting.Shortest">
-            <summary>
-                最短长度
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.SocketRecord">
-            <summary>
-                Socket记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.Stx">
-            <summary>
-                报文开始位
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.Head">
-            <summary>
-                报文头段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.HeadRecord">
-            <summary>
-                报文头记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.Content">
-            <summary>
-                报文内容段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.Check">
-            <summary>
-                报文校验段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.CheckRecord">
-            <summary>
-                报文校验段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.SocketRecord.Etx">
-            <summary>
-                报文结束位
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.CheckRecord">
-            <summary>
-                校验记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CheckRecord.Check">
-            <summary>
-                校验字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CheckRecord.CheckSum">
-            <summary>
-                求和校验位
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CheckRecord.CheckXor">
-            <summary>
-                异或校验位
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.HeadRecord">
-            <summary>
-                头记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.HeadRecord.ContentLength">
-            <summary>
-                内容长度字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.HeadRecord.Length">
-            <summary>
-                长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.HeadRecord.CommandRecord">
-            <summary>
-                指令记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.HeadRecord.StatusRecord">
-            <summary>
-                状态记录
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.CommandRecord">
-            <summary>
-                指令记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CommandRecord.Command">
-            <summary>
-                指令字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CommandRecord.CommandCategory">
-            <summary>
-                指令目录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.CommandRecord.CommandItem">
-            <summary>
-                指令项目
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.Socket.StatusRecord">
-            <summary>
-                状态记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.StatusRecord.Status">
-            <summary>
-                状态字节段
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.StatusRecord.StatusCategory">
-            <summary>
-                状态目录
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Socket.StatusRecord.StatusItem">
-            <summary>
-                状态项目
-            </summary>
+            <value>^?</value>
         </member>
         <member name="T:Artemis.Data.Core.INode">
             <summary>

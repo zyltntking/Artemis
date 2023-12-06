@@ -36,6 +36,9 @@
 
     <ItemGroup>
       <Compile Remove="Fundamental\Kit\ArtemisHasher.cs" />
+      <Compile Remove="Socket\ISocketRecord.cs" />
+      <Compile Remove="Socket\SocketProtocol.cs" />
+      <Compile Remove="Socket\SocketRecord.cs" />
     </ItemGroup>
 
     <ItemGroup>

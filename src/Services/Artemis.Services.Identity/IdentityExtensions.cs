@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 namespace Artemis.Services.Identity;
 
@@ -46,6 +47,8 @@ public static class IdentityExtensions
                 options.Configuration = serviceOptions.RedisCacheConnection;
                 options.InstanceName = "Artemis:Identity:";
             });
+
+            //serviceCollection.TryAddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(serviceOptions.RedisCacheConnection));
         }
 
         serviceCollection.TryAddScoped<IArtemisClaimStore, ArtemisClaimStore>();
