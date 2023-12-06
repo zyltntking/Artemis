@@ -9,6 +9,17 @@
                 Token侦听器
             </summary>
         </member>
+        <member name="P:Artemis.App.Identity.Interceptors.TokenInterceptor.Logger">
+            <summary>
+            日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Interceptors.TokenInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Interceptors.TokenInterceptor})">
+            <summary>
+            侦听器构造
+            </summary>
+            <param name="logger"></param>
+        </member>
         <member name="M:Artemis.App.Identity.Interceptors.TokenInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
             <summary>
                 Server-side handler for intercepting and incoming unary call.

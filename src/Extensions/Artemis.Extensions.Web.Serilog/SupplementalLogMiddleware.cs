@@ -31,7 +31,6 @@ internal class SupplementalLogMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         var ip = context.Connection.RemoteIpAddress;
-
         Logger.LogInformation($"客户端IP：{ip}");
         await Next(context);
     }

@@ -1,4 +1,6 @@
-﻿using Grpc.Core;
+﻿using System.Text.Json.Serialization;
+using Artemis.Data.Core;
+using Grpc.Core;
 using Grpc.Core.Interceptors;
 
 namespace Artemis.App.Identity.Interceptors;
@@ -8,6 +10,22 @@ namespace Artemis.App.Identity.Interceptors;
 /// </summary>
 public class TokenInterceptor : Interceptor
 {
+
+    /// <summary>
+    /// 日志依赖
+    /// </summary>
+    private ILogger Logger { get; }
+
+    /// <summary>
+    /// 侦听器构造
+    /// </summary>
+    /// <param name="logger"></param>
+    public TokenInterceptor(ILogger<TokenInterceptor> logger)
+    {
+        Logger = logger;
+    }
+
+
     #region Overrides of Interceptor
 
     /// <summary>
@@ -32,9 +50,17 @@ public class TokenInterceptor : Interceptor
     ///     can simply return the return value from the continuation intact,
     ///     or an arbitrary response value as it sees fit.
     /// </returns>
-    public override Task<TResponse> UnaryServerHandler<TRequest, TResponse>(TRequest request, ServerCallContext context,
+    public override Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
+        TRequest request, 
+        ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
+        Logger.LogInformation($"客户端IP：{context.Peer}");
+
+        var json = request.Serialize();
+
+        Logger.LogInformation($"请求参数：{json}");
+
         return continuation(request, context);
     }
 

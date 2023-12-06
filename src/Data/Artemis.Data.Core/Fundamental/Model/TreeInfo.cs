@@ -47,6 +47,30 @@ public interface ITreeNodeInfo : INodeInfo, ITreeNodeInfo<Guid>
 {
 }
 
+/// <summary>
+/// 树节点接口
+/// </summary>
+/// <typeparam name="TNode">节点类型</typeparam>
+/// <typeparam name="TKey">键类型</typeparam>
+public interface ITreeNode<TNode, TKey> : INodeInfo<TKey> 
+    where TNode : ITreeNode<TNode, TKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    /// 子节点列表
+    /// </summary>
+    ICollection<TNode>? Children { get; set; }
+}
+
+/// <summary>
+/// 树节点接口
+/// </summary>
+/// <typeparam name="TNode"></typeparam>
+public interface ITreeNode<TNode> : ITreeNode<TNode, Guid>
+    where TNode : ITreeNode<TNode>
+{
+}
+
 #endregion
 
 #region NodeInfo
@@ -110,77 +134,132 @@ public abstract class TreeNodeInfo : TreeNodeInfo<Guid>, ITreeNodeInfo
 
 #endregion
 
+#region TreeNode
+
 /// <summary>
 ///     树节点
 /// </summary>
 /// <typeparam name="TKey">键类型</typeparam>
-/// <typeparam name="TNode">节点类型</typeparam>
-public abstract class TreeNode<TNode, TKey> : TreeNodeInfo<TKey>
-    where TNode : TreeNode<TNode, TKey>
+/// <typeparam name="TTreeNode">节点类型</typeparam>
+public abstract class TreeNode<TTreeNode, TKey> : NodeInfo<TKey>, ITreeNode<TTreeNode, TKey>
+    where TTreeNode : TreeNode<TTreeNode, TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     子节点列表
     /// </summary>
-    public ICollection<TNode>? Children { get; set; }
+    public ICollection<TTreeNode>? Children { get; set; }
 }
 
 /// <summary>
 ///     树节点
 /// </summary>
-public abstract class TreeNode<TNode> : TreeNode<TNode, Guid>
-    where TNode : TreeNode<TNode>
+public abstract class TreeNode<TTreeNode> : TreeNode<TTreeNode, Guid>, ITreeNode<TTreeNode>
+    where TTreeNode : TreeNode<TTreeNode>
 {
 }
+
+#endregion
 
 /// <summary>
 ///     树
 /// </summary>
-/// <typeparam name="TNode"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-public abstract class Tree<TNode, TKey> : TreeNode<TNode, TKey>
-    where TNode : TreeNode<TNode, TKey>
+/// <typeparam name="TTreeNode">节点模板</typeparam>
+/// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
+/// <typeparam name="TKey">键</typeparam>
+public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode, TKey>
+    where TTreeNode : TreeNode<TTreeNode, TKey>
+    where TTreeNodeInfo : ITreeNodeInfo<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    ///     构造树
+    /// 构造树
     /// </summary>
-    /// <param name="rootId"></param>
-    /// <param name="nodeList"></param>
-    public TNode? BuildTree(TKey rootId, IEnumerable<TNode> nodeList)
+    /// <param name="nodeList">节点列表</param>
+    /// <param name="rootId">根节点id</param>
+    protected Tree(IEnumerable<TTreeNodeInfo> nodeList, TKey rootId)
     {
-        var treeNodes = nodeList.ToList();
+        var rootNode = Generate(rootId, nodeList);
 
-        var root = treeNodes.FirstOrDefault(x => x.Id.Equals(rootId));
-
-        if (root != null)
+        if (rootNode != null)
         {
-            var children = treeNodes.Where(x => x.ParentId.Equals(rootId)).ToList();
+            Id = rootNode.Id;
+            Name = rootNode.Name;
+            Children = rootNode.Children;
+        }
+    }
+
+    /// <summary>
+    /// 树节点选择器
+    /// </summary>
+    protected abstract Func<TTreeNodeInfo, TTreeNode> TreeNodeSelector { get; }
+
+    /// <summary>
+    /// 生成
+    /// </summary>
+    /// <param name="rootId">根节点id</param>
+    /// <param name="treeNodeInfoList">节点列表</param>
+    /// <returns></returns>
+    protected TTreeNode? Generate(TKey rootId, IEnumerable<TTreeNodeInfo> treeNodeInfoList) => BuildTree(rootId, treeNodeInfoList);
+
+
+    /// <summary>
+    /// 构造树
+    /// </summary>
+    /// <typeparam name="TTreeNodeInfo"></typeparam>
+    /// <param name="rootId">根结点标识</param>
+    /// <param name="treeNodeInfos">节点信息列表</param>
+    /// <returns></returns>
+    protected virtual TTreeNode? BuildTree(TKey rootId, IEnumerable<TTreeNodeInfo> treeNodeInfos)
+    {
+        var treeNodeInfoList = treeNodeInfos.ToList();
+
+        var rootNode = treeNodeInfoList.Where(info => info.Id.Equals(rootId)).Select(TreeNodeSelector).FirstOrDefault();
+
+        if (rootNode != null)
+        {
+            var children = treeNodeInfoList
+                .Where(info => info.ParentId.Equals(rootId))
+                .Select(TreeNodeSelector)
+                .ToList();
 
             if (children.Count > 0)
             {
-                root.Children = new List<TNode>();
+                rootNode.Children = new List<TTreeNode>();
 
                 foreach (var child in children)
                 {
-                    var childNode = BuildTree(child.Id, treeNodes);
+                    var childNode = BuildTree(child.Id, treeNodeInfoList);
 
-                    if (childNode != null) root.Children.Add(childNode);
+                    if (childNode != null)
+                        rootNode.Children.Add(childNode);
                 }
 
-                if (root.Children.Count == 0) root.Children = null;
+                if (rootNode.Children.Count == 0) 
+                    rootNode.Children = null;
             }
         }
 
-        return root;
+        return rootNode;
     }
 }
 
 /// <summary>
 ///     树
 /// </summary>
-/// <typeparam name="TNode">子节点模板</typeparam>
-public abstract class Tree<TNode> : Tree<TNode, Guid>
-    where TNode : TreeNode<TNode, Guid>
+/// <typeparam name="TTreeNode">节点模板</typeparam>
+/// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
+public abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeInfo, Guid>
+    where TTreeNode : TreeNode<TTreeNode, Guid>
+    where TTreeNodeInfo : ITreeNodeInfo<Guid>
 {
+    /// <summary>
+    /// 构造树
+    /// </summary>
+    /// <param name="nodeList">节点信息列表</param>
+    /// <param name="rootId">根id</param>
+    protected Tree(IEnumerable<TTreeNodeInfo> nodeList, Guid rootId) : base(nodeList, rootId)
+    {
+    }
+
 }

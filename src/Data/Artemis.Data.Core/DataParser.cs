@@ -87,7 +87,7 @@ public static class DataParser
         var options = new JsonSerializerOptions
         {
             IgnoreReadOnlyProperties = true,
-            ReferenceHandler = ReferenceHandler.Preserve,
+            ReferenceHandler = ReferenceHandler.IgnoreCycles,
             WriteIndented = writeIndented,
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };

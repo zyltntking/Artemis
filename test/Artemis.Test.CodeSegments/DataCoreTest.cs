@@ -4,15 +4,17 @@ namespace Artemis.Test.CodeSegments;
 
 public class DataCoreTest
 {
-    [Fact]
-    public void BytesUtilityTest()
+    [Theory]
+    [InlineData("1q2w3e$R")]
+    [InlineData("1123581321")]
+    [InlineData("pAssworD")]
+    [InlineData("@!#$$%^^&")]
+    public void PasswordShouldVerifyHash(string password)
     {
-        var a = "";
+        var passwordHash = Hash.ArtemisHash(password);
 
-        var bb = string.Format(a,10);
+        var passwordVerify = Hash.ArtemisHashVerify(passwordHash, password);
 
-        var dd = Hash.ArtemisHash("1q2w3e$R");
-
-        var vary = Hash.ArtemisHashVerify(dd, "1q2w3e$R");
+        Assert.True(passwordVerify);
     }
 }
