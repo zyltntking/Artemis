@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 
@@ -55,13 +54,19 @@ public class TokenInterceptor : Interceptor
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
-        Logger.LogInformation($"客户端IP：{context.Peer}");
+        Logger.LogInformation($"客户端标识：{context.Peer}");
 
-        var json = request.Serialize();
+        var requestJson = request.Serialize();
 
-        Logger.LogInformation($"请求参数：{json}");
+        Logger.LogInformation($"请求参数：{requestJson}");
 
-        return continuation(request, context);
+        var response = continuation(request, context);
+
+        var responseJson = response.Serialize();
+
+        Logger.LogInformation($"响应结果：{responseJson}");
+
+        return response;
     }
 
     #endregion

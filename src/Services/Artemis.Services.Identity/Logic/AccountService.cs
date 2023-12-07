@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
 using Artemis.Data.Grpc;
 using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Managers;

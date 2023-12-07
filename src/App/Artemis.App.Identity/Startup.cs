@@ -1,7 +1,4 @@
 ﻿using Artemis.App.Identity.Interceptors;
-using Artemis.Extensions.Web.Builder;
-using Artemis.Extensions.Web.Middleware;
-using Artemis.Extensions.Web.OpenApi;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 using Artemis.Services.Identity.Logic;
@@ -15,16 +12,6 @@ namespace Artemis.App.Identity;
 /// </summary>
 public class Startup : IWebAppStartup
 {
-    /// <summary>
-    ///     启动器构造
-    /// </summary>
-    public Startup()
-    {
-        DocConfig = new DocumentConfig();
-    }
-
-    private DocumentConfig DocConfig { get; }
-
     #region Implementation of IWebAppStartup
 
     /// <summary>
@@ -64,12 +51,9 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<TokenInterceptor>();
         });
 
-        if (builder.Environment.IsDevelopment()) builder.Services.AddCodeFirstGrpcReflection();
+        if (builder.Environment.IsDevelopment()) 
+            builder.Services.AddCodeFirstGrpcReflection();
 
-        builder.Services.AddArtemisMiddleWares(options => { options.ServiceDomain.DomainName = "Identity"; });
-
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.AddOpenApiDoc(DocConfig);
     }
 
     /// <summary>
@@ -78,8 +62,6 @@ public class Startup : IWebAppStartup
     /// <param name="app"></param>
     public void ConfigureApplication(WebApplication app)
     {
-        app.UseOpenApiDoc(DocConfig);
-
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
             app.UseMigrationsEndPoint();
@@ -88,7 +70,7 @@ public class Startup : IWebAppStartup
 
         app.UseRouting();
 
-        app.UseArtemisMiddleWares();
+        //app.UseArtemisMiddleWares();
         app.UseResponseCompression();
 
         app.MapGrpcService<RoleService>();
@@ -97,7 +79,7 @@ public class Startup : IWebAppStartup
 
         if (app.Environment.IsDevelopment())
         {
-            app.MapApiRouteTable();
+            //app.MapApiRouteTable();
             app.MapCodeFirstGrpcReflectionService();
         }
     }

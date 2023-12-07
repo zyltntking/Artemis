@@ -80,14 +80,15 @@ public static class DataParser
     /// </summary>
     /// <typeparam name="T">实体类型</typeparam>
     /// <param name="model">实体模型</param>
+    /// <param name="preserveReference">序列化循环引用</param>
     /// <param name="writeIndented">是否启用格式化</param>
     /// <returns></returns>
-    public static string Serialize<T>(this T model, bool writeIndented = false) where T : class
+    public static string Serialize<T>(this T model, bool preserveReference = false,  bool writeIndented = false) where T : class
     {
         var options = new JsonSerializerOptions
         {
             IgnoreReadOnlyProperties = false,
-            ReferenceHandler = ReferenceHandler.Preserve,
+            ReferenceHandler = preserveReference ? ReferenceHandler.Preserve : ReferenceHandler.IgnoreCycles,
             WriteIndented = writeIndented,
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
@@ -100,13 +101,14 @@ public static class DataParser
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="json"></param>
+    /// <param name="preserveReference"></param>
     /// <returns></returns>
-    public static T? Deserialize<T>(this string json) where T : class
+    public static T? Deserialize<T>(this string json, bool preserveReference = false) where T : class
     {
         var options = new JsonSerializerOptions
         {
             IgnoreReadOnlyProperties = true,
-            ReferenceHandler = ReferenceHandler.Preserve
+            ReferenceHandler = preserveReference ? ReferenceHandler.Preserve : ReferenceHandler.IgnoreCycles
         };
 
         return JsonSerializer.Deserialize<T>(json, options);

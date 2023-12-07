@@ -46,7 +46,6 @@ public static class LogHost
             appAction(app);
 
             app.UseSerilogRequestLogging();
-            app.UseMiddleware<SupplementalLogMiddleware>();
 
             app.Run();
         }

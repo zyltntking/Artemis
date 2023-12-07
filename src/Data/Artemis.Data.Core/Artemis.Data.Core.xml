@@ -85,21 +85,23 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.DataParser.Serialize``1(``0,System.Boolean)">
+        <member name="M:Artemis.Data.Core.DataParser.Serialize``1(``0,System.Boolean,System.Boolean)">
             <summary>
                 序列化
             </summary>
             <typeparam name="T">实体类型</typeparam>
             <param name="model">实体模型</param>
+            <param name="preserveReference">序列化循环引用</param>
             <param name="writeIndented">是否启用格式化</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.DataParser.Deserialize``1(System.String)">
+        <member name="M:Artemis.Data.Core.DataParser.Deserialize``1(System.String,System.Boolean)">
             <summary>
                 反序列化
             </summary>
             <typeparam name="T"></typeparam>
             <param name="json"></param>
+            <param name="preserveReference"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.ByteParser">
@@ -3267,49 +3269,49 @@
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomCharacters(System.Int32)">
             <summary>
-             随机可打印字符串
+                随机可打印字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomDigits(System.Int32)">
             <summary>
-            随机数字字符串
+                随机数字字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomUpperCases(System.Int32)">
             <summary>
-            随机大写字符串
+                随机大写字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLowerCases(System.Int32)">
             <summary>
-            随机小写字符串
+                随机小写字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetters(System.Int32)">
             <summary>
-            随机字母字符串
+                随机字母字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetterOrDigits(System.Int32)">
             <summary>
-            随机字母和数字字符串
+                随机字母和数字字符串
             </summary>
             <param name="length"></param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomNonAlphanumeric(System.Int32)">
             <summary>
-            随机特殊字符字符串
+                随机特殊字符字符串
             </summary>
             <param name="length">长度</param>
             <returns></returns>
