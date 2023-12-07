@@ -9,20 +9,19 @@ namespace Artemis.App.Identity.Interceptors;
 /// </summary>
 public class TokenInterceptor : Interceptor
 {
-
     /// <summary>
-    /// 日志依赖
-    /// </summary>
-    private ILogger Logger { get; }
-
-    /// <summary>
-    /// 侦听器构造
+    ///     侦听器构造
     /// </summary>
     /// <param name="logger"></param>
     public TokenInterceptor(ILogger<TokenInterceptor> logger)
     {
         Logger = logger;
     }
+
+    /// <summary>
+    ///     日志依赖
+    /// </summary>
+    private ILogger Logger { get; }
 
 
     #region Overrides of Interceptor
@@ -50,7 +49,7 @@ public class TokenInterceptor : Interceptor
     ///     or an arbitrary response value as it sees fit.
     /// </returns>
     public override Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
-        TRequest request, 
+        TRequest request,
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {

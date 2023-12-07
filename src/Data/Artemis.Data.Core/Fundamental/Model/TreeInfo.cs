@@ -48,22 +48,22 @@ public interface ITreeNodeInfo : INodeInfo, ITreeNodeInfo<Guid>
 }
 
 /// <summary>
-/// 树节点接口
+///     树节点接口
 /// </summary>
 /// <typeparam name="TNode">节点类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface ITreeNode<TNode, TKey> : INodeInfo<TKey> 
+public interface ITreeNode<TNode, TKey> : INodeInfo<TKey>
     where TNode : ITreeNode<TNode, TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 子节点列表
+    ///     子节点列表
     /// </summary>
     ICollection<TNode>? Children { get; set; }
 }
 
 /// <summary>
-/// 树节点接口
+///     树节点接口
 /// </summary>
 /// <typeparam name="TNode"></typeparam>
 public interface ITreeNode<TNode> : ITreeNode<TNode, Guid>
@@ -173,7 +173,7 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode,
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 构造树
+    ///     构造树
     /// </summary>
     /// <param name="nodeList">节点列表</param>
     /// <param name="rootId">根节点id</param>
@@ -190,21 +190,24 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode,
     }
 
     /// <summary>
-    /// 树节点选择器
+    ///     树节点选择器
     /// </summary>
     protected abstract Func<TTreeNodeInfo, TTreeNode> TreeNodeSelector { get; }
 
     /// <summary>
-    /// 生成
+    ///     生成
     /// </summary>
     /// <param name="rootId">根节点id</param>
     /// <param name="treeNodeInfoList">节点列表</param>
     /// <returns></returns>
-    protected TTreeNode? Generate(TKey rootId, IEnumerable<TTreeNodeInfo> treeNodeInfoList) => BuildTree(rootId, treeNodeInfoList);
+    protected TTreeNode? Generate(TKey rootId, IEnumerable<TTreeNodeInfo> treeNodeInfoList)
+    {
+        return BuildTree(rootId, treeNodeInfoList);
+    }
 
 
     /// <summary>
-    /// 构造树
+    ///     构造树
     /// </summary>
     /// <typeparam name="TTreeNodeInfo"></typeparam>
     /// <param name="rootId">根结点标识</param>
@@ -235,7 +238,7 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode,
                         rootNode.Children.Add(childNode);
                 }
 
-                if (rootNode.Children.Count == 0) 
+                if (rootNode.Children.Count == 0)
                     rootNode.Children = null;
             }
         }
@@ -254,12 +257,11 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNode
     where TTreeNodeInfo : ITreeNodeInfo<Guid>
 {
     /// <summary>
-    /// 构造树
+    ///     构造树
     /// </summary>
     /// <param name="nodeList">节点信息列表</param>
     /// <param name="rootId">根id</param>
     protected Tree(IEnumerable<TTreeNodeInfo> nodeList, Guid rootId) : base(nodeList, rootId)
     {
     }
-
 }

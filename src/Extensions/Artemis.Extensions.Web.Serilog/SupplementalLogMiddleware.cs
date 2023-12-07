@@ -4,16 +4,12 @@ using Microsoft.Extensions.Logging;
 namespace Artemis.Extensions.Web.Serilog;
 
 /// <summary>
-/// 常规补充日志中间件
+///     常规补充日志中间件
 /// </summary>
 internal class SupplementalLogMiddleware
 {
-    private RequestDelegate Next { get; }
-
-    private ILogger Logger { get; }
-
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     /// <param name="next">请求代理</param>
     /// <param name="logger"></param>
@@ -23,8 +19,12 @@ internal class SupplementalLogMiddleware
         Logger = logger;
     }
 
+    private RequestDelegate Next { get; }
+
+    private ILogger Logger { get; }
+
     /// <summary>
-    /// 调用逻辑
+    ///     调用逻辑
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>

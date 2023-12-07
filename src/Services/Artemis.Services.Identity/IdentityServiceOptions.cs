@@ -10,7 +10,7 @@ namespace Artemis.Services.Identity;
 public sealed class IdentityServiceOptions
 {
     /// <summary>
-    /// 是否启用缓存
+    ///     是否启用缓存
     /// </summary>
     public bool EnableCache { get; set; }
 

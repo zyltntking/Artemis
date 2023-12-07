@@ -31,7 +31,7 @@ public class AccountService : IAccountService
     private IAccountManager AccountManager { get; }
 
     /// <summary>
-    /// 分布式缓存依赖
+    ///     分布式缓存依赖
     /// </summary>
     private IDistributedCache Cache { get; }
 

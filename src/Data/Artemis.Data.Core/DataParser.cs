@@ -83,7 +83,8 @@ public static class DataParser
     /// <param name="preserveReference">序列化循环引用</param>
     /// <param name="writeIndented">是否启用格式化</param>
     /// <returns></returns>
-    public static string Serialize<T>(this T model, bool preserveReference = false,  bool writeIndented = false) where T : class
+    public static string Serialize<T>(this T model, bool preserveReference = false, bool writeIndented = false)
+        where T : class
     {
         var options = new JsonSerializerOptions
         {

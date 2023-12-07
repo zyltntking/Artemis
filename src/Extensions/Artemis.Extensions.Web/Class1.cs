@@ -1,7 +1,5 @@
-﻿namespace Artemis.Extensions.Web
-{
-    public class Class1
-    {
+﻿namespace Artemis.Extensions.Web;
 
-    }
+public class Class1
+{
 }

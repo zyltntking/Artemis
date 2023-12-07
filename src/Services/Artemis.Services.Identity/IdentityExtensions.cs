@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using StackExchange.Redis;
 
 namespace Artemis.Services.Identity;
 
@@ -41,16 +40,12 @@ public static class IdentityExtensions
             .AddDefaultTokenProviders();
 
         if (serviceOptions.EnableCache && !string.IsNullOrWhiteSpace(serviceOptions.RedisCacheConnection))
-        {
             serviceCollection.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = serviceOptions.RedisCacheConnection;
                 options.InstanceName = "Artemis:Identity:";
             });
-
-            //serviceCollection.TryAddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(serviceOptions.RedisCacheConnection));
-        }
-
+        //serviceCollection.TryAddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(serviceOptions.RedisCacheConnection));
         serviceCollection.TryAddScoped<IArtemisClaimStore, ArtemisClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
         serviceCollection.TryAddScoped<IArtemisRoleStore, ArtemisRoleStore>();

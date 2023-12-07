@@ -3,7 +3,7 @@
 namespace Artemis.Test.DataTest;
 
 /// <summary>
-/// 测试代码片段
+///     测试代码片段
 /// </summary>
 public class SegmentTests
 {

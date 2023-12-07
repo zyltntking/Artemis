@@ -3,11 +3,10 @@
 namespace Artemis.Test.DataTest.Core;
 
 /// <summary>
-/// Socket测试
+///     Socket测试
 /// </summary>
 public class SocketTest
 {
-
     [Theory]
     [InlineData('0', true)]
     [InlineData('9', true)]

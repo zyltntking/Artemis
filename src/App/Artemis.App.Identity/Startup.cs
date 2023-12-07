@@ -51,9 +51,8 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<TokenInterceptor>();
         });
 
-        if (builder.Environment.IsDevelopment()) 
+        if (builder.Environment.IsDevelopment())
             builder.Services.AddCodeFirstGrpcReflection();
-
     }
 
     /// <summary>
@@ -78,10 +77,8 @@ public class Startup : IWebAppStartup
         app.MapGrpcService<AccountService>();
 
         if (app.Environment.IsDevelopment())
-        {
             //app.MapApiRouteTable();
             app.MapCodeFirstGrpcReflectionService();
-        }
     }
 
     #endregion
