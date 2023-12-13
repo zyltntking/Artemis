@@ -54,16 +54,18 @@ public static class Program
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddHealthChecks()
+                .AddDbContextCheck<BroadcastContext>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.MapControllers();
+
+            app.MapHealthChecks("/health");
 
             app.Run();
         }

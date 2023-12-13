@@ -3,6 +3,7 @@ using Artemis.Data.Grpc;
 using Artemis.Data.Store.Extensions;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Artemis.Services.Identity.Logic;
@@ -117,6 +118,7 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
+    [Authorize("RequireAdmin")]
     public async Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request)
     {
         var result = await AccountManager.ChangePasswordAsync(

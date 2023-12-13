@@ -1,4 +1,5 @@
-﻿using Artemis.App.BroadcastApi.Data.Configuration;
+﻿using System.ComponentModel.DataAnnotations;
+using Artemis.App.BroadcastApi.Data.Configuration;
 using Artemis.Data.Core;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,15 +14,18 @@ public class User : ModelBase
     /// <summary>
     ///     用户名
     /// </summary>
+    [MaxLength(32)]
     public string UserName { get; set; } = null!;
 
     /// <summary>
     ///     规范化用户名
     /// </summary>
+    [MaxLength(32)]
     public string NormalizedUserName { get; set; } = null!;
 
     /// <summary>
     ///     密码
     /// </summary>
+    [MaxLength(128)]
     public string Password { get; set; } = null!;
 }

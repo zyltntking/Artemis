@@ -88,16 +88,6 @@
 				价格
 			</summary>
 		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.PriceSearch">
-			<summary>
-				价格
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.MealTime">
-			<summary>
-				用餐时间
-			</summary>
-		</member>
 		<member name="T:Artemis.App.BroadcastApi.Controllers.FetchOrderInfosRequest">
 			<summary>
 				查询订单信息请求
@@ -148,14 +138,24 @@
 				价格
 			</summary>
 		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealTime">
+		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealDate">
 			<summary>
-				用餐时间
+				用餐日期
+			</summary>
+		</member>
+		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealType">
+			<summary>
+				餐类
 			</summary>
 		</member>
 		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Status">
 			<summary>
 				状态
+			</summary>
+		</member>
+		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.WaitFlag">
+			<summary>
+				排序
 			</summary>
 		</member>
 		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Remark">
@@ -274,9 +274,14 @@
 				价格
 			</summary>
 		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealTime">
+		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealDate">
 			<summary>
-				用餐时间
+				用餐日期
+			</summary>
+		</member>
+		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealType">
+			<summary>
+				餐类
 			</summary>
 		</member>
 		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Status">
@@ -284,9 +289,34 @@
 				状态
 			</summary>
 		</member>
+		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.WaitFlag">
+			<summary>
+				排序
+			</summary>
+		</member>
 		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Remark">
 			<summary>
 				备注
+			</summary>
+		</member>
+		<member name="T:Artemis.App.BroadcastApi.Data.MealType">
+			<summary>
+				餐类型
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Unknown">
+			<summary>
+				未知
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Lunch">
+			<summary>
+				午餐
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Dinner">
+			<summary>
+				晚餐
 			</summary>
 		</member>
 		<member name="T:Artemis.App.BroadcastApi.Data.Order">
@@ -309,14 +339,24 @@
 				价格
 			</summary>
 		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.MealTime">
+		<member name="P:Artemis.App.BroadcastApi.Data.Order.MealDate">
 			<summary>
-				用餐时间
+				用餐日期
+			</summary>
+		</member>
+		<member name="P:Artemis.App.BroadcastApi.Data.Order.MealType">
+			<summary>
+				用餐类型
 			</summary>
 		</member>
 		<member name="P:Artemis.App.BroadcastApi.Data.Order.Status">
 			<summary>
 				状态
+			</summary>
+		</member>
+		<member name="P:Artemis.App.BroadcastApi.Data.Order.WaitFlag">
+			<summary>
+				等待序列
 			</summary>
 		</member>
 		<member name="P:Artemis.App.BroadcastApi.Data.Order.Remark">
@@ -332,6 +372,21 @@
 		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.All">
 			<summary>
 				全部
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Normal">
+			<summary>
+				正常
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Complete">
+			<summary>
+				完成
+			</summary>
+		</member>
+		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Wait">
+			<summary>
+				等待
 			</summary>
 		</member>
 		<member name="T:Artemis.App.BroadcastApi.Data.User">
@@ -354,19 +409,19 @@
 				密码
 			</summary>
 		</member>
-		<member name="T:Artemis.App.BroadcastApi.Migrations.Init">
+		<member name="T:Artemis.App.BroadcastApi.Migrations.InitialOrder">
 			<inheritdoc />
 		</member>
 		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
 			<inheritdoc />
 		</member>
 		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
 			<inheritdoc />
 		</member>
 		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
 			<inheritdoc />
 		</member>
 		<member name="T:Artemis.App.BroadcastApi.Program">

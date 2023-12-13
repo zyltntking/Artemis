@@ -1,7 +1,9 @@
 ﻿using Artemis.App.Identity.Interceptors;
+using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 using Artemis.Services.Identity.Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
 
@@ -21,16 +23,16 @@ public class Startup : IWebAppStartup
     public void ConfigureBuilder(WebApplicationBuilder builder)
     {
         // Add services to the container.
-        var connectionString = builder.Configuration.GetConnectionString("IdentityContext") ??
-                               throw new InvalidOperationException("ContextConnection string 'Identity' not found.");
+        var pgsqlConnectionString = builder.Configuration.GetConnectionString("IdentityContext") ??
+                                    throw new InvalidOperationException(
+                                        "ContextConnection string 'Identity' not found.");
 
         builder.Services.AddIdentityService(new IdentityServiceOptions
         {
             EnableCache = true,
-            RedisCacheConnection = builder.Configuration.GetConnectionString("RedisCache"),
             RegisterDbAction = dbBuilder =>
             {
-                dbBuilder.UseNpgsql(connectionString, npgsqlOption =>
+                dbBuilder.UseNpgsql(pgsqlConnectionString, npgsqlOption =>
                 {
                     npgsqlOption.MigrationsHistoryTable("ArtemisIdentityHistory", "identity");
 
@@ -42,6 +44,46 @@ public class Startup : IWebAppStartup
                 });
             }
         }, builder.Environment.IsDevelopment());
+
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
+        });
+
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("RequireAnonymous", policy =>
+            {
+                policy.Requirements.Add(new AnonymousRequirement());
+            });
+
+            options.AddPolicy("RequireToken", policy =>
+            {
+                policy.Requirements.Add(new TokenRequirement());
+            });
+
+            options.AddPolicy("RequireAdmin", policy =>
+            {
+                policy.Requirements.Add(new RolesRequirement(new[]
+                {
+                    "Admin"
+                }));
+            });
+
+            options.AddPolicy("RequireLeftIsRightClaim", policy =>
+            {
+                policy.Requirements.Add(new ClaimRequirement(new[]
+                {
+                    new KeyValuePair<string, string>("Left", "Right")
+                }));
+            });
+
+
+        });
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddSingleton<IAuthorizationHandler, ArtemisIdentityHandler>();
+
 
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
@@ -63,13 +105,20 @@ public class Startup : IWebAppStartup
     {
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
+        {
             app.UseMigrationsEndPoint();
+        }
         else
+        {
             app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
 
         app.UseRouting();
 
-        //app.UseArtemisMiddleWares();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         app.UseResponseCompression();
 
         app.MapGrpcService<RoleService>();

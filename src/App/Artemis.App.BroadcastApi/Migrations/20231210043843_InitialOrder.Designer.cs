@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.BroadcastApi.Migrations
 {
     [DbContext(typeof(BroadcastContext))]
-    [Migration("20231124190428_Init")]
-    partial class Init
+    [Migration("20231210043843_InitialOrder")]
+    partial class InitialOrder
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,9 +50,17 @@ namespace Artemis.App.BroadcastApi.Migrations
                         .HasColumnType("character varying(10)")
                         .HasComment("车牌号");
 
-                    b.Property<DateTime>("MealTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasComment("用餐时间");
+                    b.Property<string>("MealDate")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasComment("用餐日期");
+
+                    b.Property<string>("MealType")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasComment("用餐类型");
 
                     b.Property<double>("Price")
                         .HasColumnType("double precision")
@@ -73,6 +81,10 @@ namespace Artemis.App.BroadcastApi.Migrations
                         .HasColumnType("TIMESTAMP")
                         .HasComment("更新时间,初始为创建时间");
 
+                    b.Property<int>("WaitFlag")
+                        .HasColumnType("integer")
+                        .HasComment("等待序列");
+
                     b.HasKey("Id")
                         .HasName("PK_Order");
 
@@ -82,14 +94,17 @@ namespace Artemis.App.BroadcastApi.Migrations
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("IX_Order_DeletedAt");
 
-                    b.HasIndex("MealTime")
-                        .HasDatabaseName("IX_Order_MealTime");
+                    b.HasIndex("MealDate")
+                        .HasDatabaseName("IX_Order_MealDate");
 
                     b.HasIndex("Status")
                         .HasDatabaseName("IX_Order_Status");
 
                     b.HasIndex("UpdatedAt")
                         .HasDatabaseName("IX_Order_UpdatedAt");
+
+                    b.HasIndex("WaitFlag")
+                        .HasDatabaseName("IX_Order_WaitFlag");
 
                     b.ToTable("Order", null, t =>
                         {

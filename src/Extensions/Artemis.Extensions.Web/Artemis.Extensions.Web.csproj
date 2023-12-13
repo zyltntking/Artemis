@@ -39,6 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
 		<ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
 	</ItemGroup>
 

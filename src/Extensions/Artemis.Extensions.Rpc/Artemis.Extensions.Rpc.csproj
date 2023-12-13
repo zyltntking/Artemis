@@ -42,4 +42,8 @@
 		<PackageReference Include="protobuf-net.Grpc.Reflection" Version="1.1.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
+	</ItemGroup>
+
 </Project>

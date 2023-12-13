@@ -42,6 +42,8 @@ public class BroadcastController : ControllerBase
     {
         var user = _context.Users.FirstOrDefault(u => u.UserName == request.UserName);
 
+        if (user == null) return DataResult.Fail<string>("用户不存在");
+
         return DataResult.Success("token", "成功");
     }
 
@@ -59,25 +61,28 @@ public class BroadcastController : ControllerBase
 
         var licenseSearch = filter.LicenseSearch ?? string.Empty;
 
-        var statusMatch = filter.StatusMatch.ToUpper();
+        var statusMatch = filter.StatusMatch ?? OrderStatus.All;
 
-        var priceSearch = filter.PriceSearch;
+        var query = _context.Orders.AsNoTracking();
 
-        var mealTime = filter.MealTime ?? DateTime.Today;
+        var total = await query.CountAsync(cancellationToken);
 
-        var total = await _context.Orders.AsNoTracking().CountAsync(cancellationToken);
+        var today = DateTime.Today;
 
-        var query = _context.Orders.AsNoTracking()
-            .WhereIf(licenseSearch != string.Empty,
-                order => EF.Functions.Like(order.License, $"%{licenseSearch}%"))
-            .WhereIf(statusMatch != OrderStatus.All.ToUpper(),
+        var tomorrow = today.AddDays(1);
+
+        query = query.WhereIf(licenseSearch != string.Empty,
+                order => EF.Functions.Like(
+                    order.License,
+                    $"%{licenseSearch}%"))
+            .WhereIf(statusMatch != OrderStatus.All,
                 order => order.Status == statusMatch)
-            .Where(order => order.Price >= priceSearch)
-            .Where(order => order.MealTime >= mealTime);
+            .Where(order => order.CreatedAt >= today)
+            .Where(order => order.CreatedAt <= tomorrow);
 
         var count = await query.CountAsync(cancellationToken);
 
-        var orderInfoList = await query.OrderBy(order => order.MealTime)
+        var orderInfoList = await query.OrderBy(order => order.WaitFlag)
             .Skip(request.Skip)
             .Take(request.Size)
             .ProjectToType<OrderInfo>()
@@ -213,19 +218,7 @@ public record OrderInfoFilter
     /// <summary>
     ///     价格
     /// </summary>
-    [Required]
-    public required string StatusMatch { get; set; }
-
-    /// <summary>
-    ///     价格
-    /// </summary>
-    [Required]
-    public required double PriceSearch { get; set; }
-
-    /// <summary>
-    ///     用餐时间
-    /// </summary>
-    public DateTime? MealTime { get; set; }
+    public string? StatusMatch { get; set; }
 }
 
 /// <summary>
@@ -284,16 +277,27 @@ public record OrderInfo : IOrder
     public required double Price { get; set; }
 
     /// <summary>
-    ///     用餐时间
+    ///     用餐日期
     /// </summary>
     [Required]
-    public required DateTime MealTime { get; set; } = DateTime.Now;
+    public required string MealDate { get; set; }
+
+    /// <summary>
+    ///     餐类
+    /// </summary>
+    [Required]
+    public required string MealType { get; set; } = null!;
 
     /// <summary>
     ///     状态
     /// </summary>
     [Required]
-    public required string Status { get; set; } = null!;
+    public required string Status { get; set; } = OrderStatus.Normal;
+
+    /// <summary>
+    ///     排序
+    /// </summary>
+    public int WaitFlag { get; set; } = 0;
 
     /// <summary>
     ///     备注

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+	    <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
 	    <AssemblyVersion>1.0.3.0</AssemblyVersion>
 	    <FileVersion>1.0.3</FileVersion>
 	    <VersionPrefix>1.0.3</VersionPrefix>
@@ -36,7 +36,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+      <ProjectReference Include="..\..\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj" />
     </ItemGroup>
 
 </Project>

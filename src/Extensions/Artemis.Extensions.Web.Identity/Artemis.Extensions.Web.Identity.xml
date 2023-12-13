@@ -1,9 +1,195 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Extensions.Web.Identity</name>
-	</assembly>
-	<members>
-	</members>
+    <assembly>
+        <name>Artemis.Extensions.Web.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel">
+            <summary>
+                认证等级
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel.Anonymous">
+            <summary>
+                匿名许可
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel.Token">
+            <summary>
+                认证令牌
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel.Role">
+            <summary>
+                认证角色
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityLevel.Claim">
+            <summary>
+                认证凭据
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.Constants">
+            <summary>
+                常量
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Identity.Constants.HeaderTokenKey">
+            <summary>
+                头Token键
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Identity.Constants.CacheTokenPrefix">
+            <summary>
+                缓存Token前缀
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler">
+            <summary>
+                Artemis凭据处理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Identity.ArtemisIdentityHandler})">
+            <summary>
+                构造
+            </summary>
+            <param name="httpContextAccessor">HttpContext访问器依赖</param>
+            <param name="cache">缓存依赖</param>
+            <param name="logger">日志依赖</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.HttpContextAccessor">
+            <summary>
+                HttpContext访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.Cache">
+            <summary>
+                缓存访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.Logger">
+            <summary>
+            日志访问器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.Web.Identity.IArtemisIdentityRequirement)">
+            <summary>
+                Makes a decision if authorization is allowed based on a specific requirement.
+            </summary>
+            <param name="context">The authorization context.</param>
+            <param name="requirement">The requirement to evaluate.</param>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.FetchHeaderToken(System.String)">
+            <summary>
+                获取Token
+            </summary>
+            <param name="headerKey">header 键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.FetchCacheToken(System.String)">
+            <summary>
+                获取缓存Token
+            </summary>
+            <param name="cacheTokenKey">缓存token键</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.IArtemisIdentityRequirement">
+            <summary>
+                Artemis认证策略接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.IArtemisIdentityRequirement.Level">
+            <summary>
+                认证等级
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.IArtemisIdentityTokenRequirement">
+            <summary>
+                Artemis Token认证策略接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.IArtemisIdentityTokenRequirement.HeaderTokenKey">
+            <summary>
+                令牌键
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.IArtemisIdentityTokenRequirement.CacheTokenPrefix">
+            <summary>
+                缓存令牌前缀
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.IdentityRequirement">
+            <summary>
+                Artemis认证策略实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.IdentityRequirement.#ctor(Artemis.Extensions.Web.Identity.ArtemisIdentityLevel)">
+            <summary>
+                认证策略构造
+            </summary>
+            <param name="level"></param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.IdentityRequirement.Level">
+            <summary>
+                认证等级
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.AnonymousRequirement">
+            <summary>
+                匿名许可要求
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.AnonymousRequirement.#ctor">
+            <summary>
+                匿名认证策略构造
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.TokenRequirement">
+            <summary>
+                令牌认证策略
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.TokenRequirement.#ctor(System.String,System.String)">
+            <summary>
+                认证策略构造
+            </summary>
+            <param name="headerKey">header key</param>
+            <param name="cacheTokenPrefix">cache token prefix</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.TokenRequirement.HeaderTokenKey">
+            <summary>
+                HeaderTokenKey
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.TokenRequirement.CacheTokenPrefix">
+            <summary>
+                CacheTokenPrefix
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Identity.RolesRequirement">
+            <summary>
+                角色认证要求
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Identity.RolesRequirement.#ctor(System.Collections.Generic.IEnumerable{System.String},System.String,System.String)">
+            <summary>
+                认证策略构造
+            </summary>
+            <param name="roles">角色</param>
+            <param name="headerKey">Header Token键</param>
+            <param name="cacheTokenPrefix">缓存 Token键</param>
+        </member>
+        <member name="P:Artemis.Extensions.Web.Identity.RolesRequirement.Roles">
+            <summary>
+                角色
+            </summary>
+        </member>
+    </members>
 </doc>

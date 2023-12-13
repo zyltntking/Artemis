@@ -44,14 +44,24 @@ public class OrderConfiguration : BroadcastConfiguration<Order>
             .IsRequired()
             .HasComment("餐价");
 
-        builder.Property(order => order.MealTime)
+        builder.Property(order => order.MealDate)
+            .HasMaxLength(32)
             .IsRequired()
-            .HasComment("用餐时间");
+            .HasComment("用餐日期");
+
+        builder.Property(order => order.MealType)
+            .HasMaxLength(32)
+            .IsRequired()
+            .HasComment("用餐类型");
 
         builder.Property(order => order.Status)
             .HasMaxLength(32)
             .IsRequired()
             .HasComment("状态");
+
+        builder.Property(order => order.WaitFlag)
+            .IsRequired()
+            .HasComment("等待序列");
 
         builder.Property(order => order.Remark)
             .HasMaxLength(256)
@@ -74,8 +84,11 @@ public class OrderConfiguration : BroadcastConfiguration<Order>
         builder.HasIndex(order => order.Status)
             .HasDatabaseName($"IX_{TableName}_Status");
 
-        builder.HasIndex(order => order.MealTime)
-            .HasDatabaseName($"IX_{TableName}_MealTime");
+        builder.HasIndex(order => order.MealDate)
+            .HasDatabaseName($"IX_{TableName}_MealDate");
+
+        builder.HasIndex(order => order.WaitFlag)
+            .HasDatabaseName($"IX_{TableName}_WaitFlag");
     }
 
     #endregion

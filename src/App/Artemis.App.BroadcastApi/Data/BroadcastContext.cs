@@ -14,6 +14,8 @@ public class BroadcastContext : DbContext
     public BroadcastContext(DbContextOptions<BroadcastContext> options)
         : base(options)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
     }
 
     /// <summary>

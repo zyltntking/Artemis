@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+	    <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
 	    <AssemblyVersion>1.0.3.0</AssemblyVersion>
 	    <FileVersion>1.0.3</FileVersion>
 	    <VersionPrefix>1.0.3</VersionPrefix>
@@ -36,14 +36,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Mvc" Version="7.1.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.5.0"/>
+        <PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.5.0" />
     </ItemGroup>
 
 </Project>

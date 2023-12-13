@@ -72,7 +72,7 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
     /// <returns></returns>
     public string NormalizeKey(string key)
     {
-        return key.Normalize().ToUpperInvariant();
+        return key.StringNormalize();
     }
 
     /// <summary>

@@ -15,11 +15,6 @@ public sealed class IdentityServiceOptions
     public bool EnableCache { get; set; }
 
     /// <summary>
-    ///     缓存连接
-    /// </summary>
-    public string? RedisCacheConnection { get; init; }
-
-    /// <summary>
     ///     设置数据库操作
     /// </summary>
     [Required]

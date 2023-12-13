@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Artemis.App.BroadcastApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialOrder : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,8 +19,10 @@ namespace Artemis.App.BroadcastApi.Migrations
                     License = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false, comment: "车牌号"),
                     Count = table.Column<int>(type: "integer", nullable: false, comment: "用餐人数"),
                     Price = table.Column<double>(type: "double precision", nullable: false, comment: "餐价"),
-                    MealTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "用餐时间"),
+                    MealDate = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用餐日期"),
+                    MealType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用餐类型"),
                     Status = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "状态"),
+                    WaitFlag = table.Column<int>(type: "integer", nullable: false, comment: "等待序列"),
                     Remark = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "备注"),
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
@@ -61,9 +63,9 @@ namespace Artemis.App.BroadcastApi.Migrations
                 column: "DeletedAt");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_MealTime",
+                name: "IX_Order_MealDate",
                 table: "Order",
-                column: "MealTime");
+                column: "MealDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_Status",
@@ -74,6 +76,11 @@ namespace Artemis.App.BroadcastApi.Migrations
                 name: "IX_Order_UpdatedAt",
                 table: "Order",
                 column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_WaitFlag",
+                table: "Order",
+                column: "WaitFlag");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_CreatedAt",
