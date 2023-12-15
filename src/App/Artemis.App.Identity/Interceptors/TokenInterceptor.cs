@@ -48,7 +48,7 @@ public class TokenInterceptor : Interceptor
     ///     can simply return the return value from the continuation intact,
     ///     or an arbitrary response value as it sees fit.
     /// </returns>
-    public override Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
+    public override async Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
         TRequest request,
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
@@ -59,7 +59,7 @@ public class TokenInterceptor : Interceptor
 
         Logger.LogInformation($"请求参数：{requestJson}");
 
-        var response = continuation(request, context);
+        var response = await continuation(request, context);
 
         var responseJson = response.Serialize();
 

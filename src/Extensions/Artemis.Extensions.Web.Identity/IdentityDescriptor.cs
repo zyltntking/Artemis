@@ -20,17 +20,11 @@ public static class IdentityDescriptor
     /// <returns></returns>
     public static string? FetchActionName(this RouteEndpoint endpoint)
     {
-        var pageAction = endpoint.HasMetadata<PageModelAttribute>();
+        if (endpoint.HasMetadata<PageModelAttribute>()) return endpoint.RoutePatternActionName();
 
-        var apiAction = endpoint.HasMetadata<ApiControllerAttribute>();
+        if (endpoint.HasMetadata<ApiControllerAttribute>()) return endpoint.ApiActionName();
 
-        var grpcAction = endpoint.HasMetadata<GrpcMethodMetadata>();
-
-        if (pageAction) return endpoint.RoutePatternActionName();
-
-        if (apiAction) return endpoint.ApiActionName();
-
-        if (grpcAction) return endpoint.RoutePatternActionName();
+        if (endpoint.HasMetadata<GrpcMethodMetadata>()) return endpoint.RoutePatternActionName();
 
         return null;
     }

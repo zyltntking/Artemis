@@ -3,7 +3,6 @@ using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 using Artemis.Services.Identity.Logic;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
 
@@ -50,36 +49,12 @@ public class Startup : IWebAppStartup
             options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
         });
 
-        builder.Services.AddAuthorization(options =>
+        builder.Services.AddArtemisAuthorization(new ArtemisAuthorizationOptions
         {
-            options.AddPolicy("Anonymous", policy => { policy.Requirements.Add(new AnonymousRequirement()); });
-
-            options.AddPolicy("Token", policy => { policy.Requirements.Add(new TokenRequirement()); });
-
-            options.AddPolicy("Admin", policy =>
-            {
-                policy.Requirements.Add(new RolesRequirement(new[]
-                {
-                    "Admin"
-                }));
-            });
-
-            options.AddPolicy("LeftIsRight", policy =>
-            {
-                policy.Requirements.Add(new ClaimRequirement(new[]
-                {
-                    new KeyValuePair<string, string>("Left", "Right")
-                }));
-            });
-
-            options.AddPolicy("ActionName", policy => { policy.Requirements.Add(new ActionNameClaimRequirement()); });
-
-            options.AddPolicy("RoutePath", policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
+            EnableAdvancedPolicy = false,
+            HeaderTokenKey = Constants.Token,
+            CacheTokenPrefix = Constants.CacheTokenPrefix
         });
-        builder.Services.AddHttpContextAccessor();
-
-        builder.Services.AddSingleton<IAuthorizationHandler, ArtemisIdentityHandler>();
-
 
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 

@@ -9,26 +9,6 @@ namespace Artemis.Extensions.Web.Identity;
 /// </summary>
 public interface IArtemisIdentityRequirement : IAuthorizationRequirement
 {
-    /// <summary>
-    ///     认证等级
-    /// </summary>
-    ArtemisIdentityLevel Level => ArtemisIdentityLevel.Anonymous;
-}
-
-/// <summary>
-///     Artemis Token认证策略接口
-/// </summary>
-file interface IArtemisIdentityTokenRequirement : IArtemisIdentityRequirement
-{
-    /// <summary>
-    ///     令牌键
-    /// </summary>
-    string HeaderTokenKey => Constants.HeaderTokenKey;
-
-    /// <summary>
-    ///     缓存令牌前缀
-    /// </summary>
-    string CacheTokenPrefix => Constants.CacheTokenPrefix;
 }
 
 #endregion
@@ -38,19 +18,6 @@ file interface IArtemisIdentityTokenRequirement : IArtemisIdentityRequirement
 /// </summary>
 public abstract class IdentityRequirement : IArtemisIdentityRequirement
 {
-    /// <summary>
-    ///     认证策略构造
-    /// </summary>
-    /// <param name="level"></param>
-    protected IdentityRequirement(ArtemisIdentityLevel level)
-    {
-        Level = level;
-    }
-
-    /// <summary>
-    ///     认证等级
-    /// </summary>
-    public ArtemisIdentityLevel Level { get; }
 }
 
 /// <summary>
@@ -61,7 +28,7 @@ public sealed class AnonymousRequirement : IdentityRequirement
     /// <summary>
     ///     匿名认证策略构造
     /// </summary>
-    public AnonymousRequirement() : base(ArtemisIdentityLevel.Anonymous)
+    public AnonymousRequirement()
     {
     }
 }
@@ -69,47 +36,27 @@ public sealed class AnonymousRequirement : IdentityRequirement
 /// <summary>
 ///     令牌认证策略
 /// </summary>
-public class TokenRequirement : IdentityRequirement, IArtemisIdentityTokenRequirement
+public abstract class TokenRequirement : IdentityRequirement
 {
-    /// <summary>
-    ///     认证策略构造
-    /// </summary>
-    /// <param name="headerKey">header key</param>
-    /// <param name="cacheTokenPrefix">cache token prefix</param>
-    public TokenRequirement(
-        string headerKey = Constants.HeaderTokenKey,
-        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(ArtemisIdentityLevel.Token)
-    {
-        HeaderTokenKey = headerKey;
-        CacheTokenPrefix = cacheTokenPrefix;
-    }
+}
 
-    /// <summary>
-    ///     HeaderTokenKey
-    /// </summary>
-    public string HeaderTokenKey { get; }
-
-    /// <summary>
-    ///     CacheTokenPrefix
-    /// </summary>
-    public string CacheTokenPrefix { get; }
+/// <summary>
+///     仅Token认证要求
+/// </summary>
+public sealed class TokenOnlyRequirement : TokenRequirement
+{
 }
 
 /// <summary>
 ///     角色认证要求
 /// </summary>
-public class RolesRequirement : TokenRequirement
+public sealed class RolesRequirement : TokenRequirement
 {
     /// <summary>
     ///     认证策略构造
     /// </summary>
     /// <param name="roles">角色</param>
-    /// <param name="headerKey">Header Token键</param>
-    /// <param name="cacheTokenPrefix">缓存 Token键</param>
-    public RolesRequirement(
-        IEnumerable<string> roles,
-        string headerKey = Constants.HeaderTokenKey,
-        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
+    public RolesRequirement(IEnumerable<string> roles)
     {
         Roles = roles;
     }
@@ -123,18 +70,13 @@ public class RolesRequirement : TokenRequirement
 /// <summary>
 ///     凭据认证要求
 /// </summary>
-public class ClaimRequirement : TokenRequirement
+public sealed class ClaimsRequirement : TokenRequirement
 {
     /// <summary>
     ///     认证策略构造
     /// </summary>
     /// <param name="claims">凭据</param>
-    /// <param name="headerKey">Header Token键</param>
-    /// <param name="cacheTokenPrefix">缓存 Token键</param>
-    public ClaimRequirement(
-        IEnumerable<KeyValuePair<string, string>> claims,
-        string headerKey = Constants.HeaderTokenKey,
-        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
+    public ClaimsRequirement(IEnumerable<KeyValuePair<string, string>> claims)
     {
         Claims = claims;
     }
@@ -150,16 +92,6 @@ public class ClaimRequirement : TokenRequirement
 /// </summary>
 public sealed class ActionNameClaimRequirement : TokenRequirement
 {
-    /// <summary>
-    ///     认证策略构造
-    /// </summary>
-    /// <param name="headerKey">Header Token键</param>
-    /// <param name="cacheTokenPrefix">缓存 Token键</param>
-    public ActionNameClaimRequirement(
-        string headerKey = Constants.HeaderTokenKey,
-        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
-    {
-    }
 }
 
 /// <summary>
@@ -167,14 +99,4 @@ public sealed class ActionNameClaimRequirement : TokenRequirement
 /// </summary>
 public sealed class RoutePathClaimRequirement : TokenRequirement
 {
-    /// <summary>
-    ///     认证策略构造
-    /// </summary>
-    /// <param name="headerKey">Header Token键</param>
-    /// <param name="cacheTokenPrefix">缓存 Token键</param>
-    public RoutePathClaimRequirement(
-        string headerKey = Constants.HeaderTokenKey,
-        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
-    {
-    }
 }

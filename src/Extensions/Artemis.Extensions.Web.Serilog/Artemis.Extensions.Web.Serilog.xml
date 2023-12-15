@@ -45,26 +45,5 @@
 			<typeparam name="TStartup"></typeparam>
 			<param name="args"></param>
 		</member>
-		<member name="T:Artemis.Extensions.Web.Serilog.SupplementalLogMiddleware">
-			<summary>
-				常规补充日志中间件
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Serilog.SupplementalLogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Serilog.SupplementalLogMiddleware})">
-			<summary>
-				构造
-			</summary>
-			<param name="next">请求代理</param>
-			<param name="logger"></param>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Serilog.SupplementalLogMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
-			<summary>
-				调用逻辑
-			</summary>
-			<param name="context"></param>
-			<returns></returns>
-		</member>
 	</members>
 </doc>

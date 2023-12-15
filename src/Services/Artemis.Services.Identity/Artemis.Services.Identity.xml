@@ -563,21 +563,6 @@
 			</summary>
 			<param name="builder"></param>
 		</member>
-		<member name="T:Artemis.Services.Identity.IdentityExtensions">
-			<summary>
-				认证扩展
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Services.Identity.IdentityExtensions.AddIdentityService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Artemis.Services.Identity.IdentityServiceOptions,System.Boolean)">
-			<summary>
-				添加认证服务
-			</summary>
-			<param name="serviceCollection"></param>
-			<param name="serviceOptions"></param>
-			<param name="isDevelopment"></param>
-			<returns></returns>
-		</member>
 		<member name="T:Artemis.Services.Identity.IdentityServiceOptions">
 			<summary>
 				认证逻辑配置
@@ -2823,6 +2808,21 @@
 			<param name="context">数据访问上下文</param>
 			<param name="cache">缓存依赖</param>
 			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="T:Artemis.Services.Identity.IdentityExtensions">
+			<summary>
+				认证扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Services.Identity.IdentityExtensions.AddIdentityService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Artemis.Services.Identity.IdentityServiceOptions,System.Boolean)">
+			<summary>
+				添加认证服务
+			</summary>
+			<param name="serviceCollection"></param>
+			<param name="serviceOptions"></param>
+			<param name="isDevelopment"></param>
+			<returns></returns>
 		</member>
 	</members>
 </doc>

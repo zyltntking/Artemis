@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Artemis.Extensions.Web.Identity;
 
@@ -18,12 +19,15 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     ///     构造
     /// </summary>
     /// <param name="cache">缓存依赖</param>
+    /// <param name="options">配置</param>
     /// <param name="logger">日志依赖</param>
     public ArtemisIdentityHandler(
         IDistributedCache cache,
-        ILogger<ArtemisIdentityHandler> logger)
+        IOptions<ArtemisAuthorizationOptions> options,
+        ILogger<InternalAuthorizationOptions> logger)
     {
         Cache = cache;
+        Options = options.Value;
         Logger = logger;
     }
 
@@ -31,6 +35,11 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     ///     缓存访问器
     /// </summary>
     private IDistributedCache Cache { get; }
+
+    /// <summary>
+    ///     配置访问器
+    /// </summary>
+    private InternalAuthorizationOptions Options { get; }
 
     /// <summary>
     ///     日志访问器
@@ -57,19 +66,27 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
         var failMessage = "未授权";
 
-        if (requirement is TokenRequirement tokenRequirement)
+        if (requirement is TokenRequirement)
         {
             if (context.Resource is HttpContext httpContext)
             {
-                var headerToken = IdentityDescriptor.FetchHeaderToken(httpContext, tokenRequirement.HeaderTokenKey);
+                var headerToken = IdentityDescriptor.FetchHeaderToken(httpContext, Options.HeaderTokenKey);
 
                 if (!string.IsNullOrWhiteSpace(headerToken))
                 {
-                    var cacheToken = IdentityDescriptor.FetchCacheToken(Cache,$"{tokenRequirement.CacheTokenPrefix}:{headerToken}");
+                    var cacheToken =
+                        IdentityDescriptor.FetchCacheToken(Cache, $"{Options.CacheTokenPrefix}:{headerToken}");
 
                     if (!string.IsNullOrWhiteSpace(cacheToken))
                     {
                         var tokenDocument = cacheToken.Deserialize<TokenDocument>();
+
+                        if (requirement is TokenOnlyRequirement)
+                        {
+                            context.Succeed(requirement);
+
+                            return Task.CompletedTask;
+                        }
 
                         if (HandleRolesRequirement(requirement, tokenDocument, ref failMessage))
                         {
@@ -127,13 +144,14 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     #endregion
 
     /// <summary>
-    /// 处理角色要求
+    ///     处理角色要求
     /// </summary>
     /// <param name="requirement">要求对象</param>
     /// <param name="document">令牌文档</param>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private bool HandleRolesRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document, ref string message)
+    private bool HandleRolesRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document,
+        ref string message)
     {
         if (requirement is not RolesRequirement rolesRequirement)
             return false;
@@ -147,10 +165,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                     .Contains(role.StringNormalize())
             );
 
-            if (roleMatch)
-            {
-                return true;
-            }
+            if (roleMatch) return true;
 
             message = "无有效角色";
         }
@@ -163,17 +178,19 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     }
 
     /// <summary>
-    /// 处理凭据要求
+    ///     处理凭据要求
     /// </summary>
     /// <param name="requirement">要求对象</param>
     /// <param name="document">令牌文档</param>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private bool HandleClaimRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document, ref string message)
+    private bool HandleClaimRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document,
+        ref string message)
     {
-        if (requirement is not ClaimRequirement claimRequirement)
+        if (requirement is not ClaimsRequirement claimRequirement)
             return false;
-        if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+        if (document is { UserClaims: not null, RoleClaims: not null } &&
+            (document.UserClaims.Any() || document.RoleClaims.Any()))
         {
             var requireClaimKeys = claimRequirement.Claims.Select(item => item.Key);
 
@@ -194,10 +211,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
             var claimMatch = claimStamps.Any(requireClaimStamps.Contains);
 
-            if (claimMatch)
-            {
-                return true;
-            }
+            if (claimMatch) return true;
 
             message = "无有效凭据";
         }
@@ -210,14 +224,15 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     }
 
     /// <summary>
-    /// 处理ActionName凭据要求
+    ///     处理ActionName凭据要求
     /// </summary>
     /// <param name="requirement">要求对象</param>
     /// <param name="context">http上下文</param>
     /// <param name="document">令牌文档</param>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private bool HandleActionNameClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context, TokenDocument? document, ref string message)
+    private bool HandleActionNameClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context,
+        TokenDocument? document, ref string message)
     {
         if (requirement is not ActionNameClaimRequirement)
             return false;
@@ -227,7 +242,8 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
             if (!string.IsNullOrWhiteSpace(actionName))
             {
-                if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+                if (document is { UserClaims: not null, RoleClaims: not null } &&
+                    (document.UserClaims.Any() || document.RoleClaims.Any()))
                 {
                     var userClaims = document
                         .UserClaims
@@ -239,10 +255,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                         .Where(claim => claim.ClaimType == ArtemisClaimTypes.ActionName)
                         .Any(claim => claim.ClaimValue == actionName);
 
-                    if (userClaims || roleClaims)
-                    {
-                        return true;
-                    }
+                    if (userClaims || roleClaims) return true;
 
                     message = "无有效操作名凭据";
                 }
@@ -265,14 +278,15 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     }
 
     /// <summary>
-    /// 处理RoutePath凭据要求
+    ///     处理RoutePath凭据要求
     /// </summary>
     /// <param name="requirement">要求对象</param>
     /// <param name="context">http上下文</param>
     /// <param name="document">令牌文档</param>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private bool HandleRoutePathClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context, TokenDocument? document, ref string message)
+    private bool HandleRoutePathClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context,
+        TokenDocument? document, ref string message)
     {
         if (requirement is RoutePathClaimRequirement)
         {
@@ -282,7 +296,8 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
                 if (!string.IsNullOrWhiteSpace(routePath))
                 {
-                    if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+                    if (document is { UserClaims: not null, RoleClaims: not null } &&
+                        (document.UserClaims.Any() || document.RoleClaims.Any()))
                     {
                         var userClaims = document
                             .UserClaims
@@ -294,10 +309,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                             .Where(claim => claim.ClaimType == ArtemisClaimTypes.RoutePath)
                             .Any(claim => claim.ClaimValue == routePath);
 
-                        if (userClaims || roleClaims)
-                        {
-                            return true;
-                        }
+                        if (userClaims || roleClaims) return true;
 
                         message = "无有效路由路径凭据";
                     }

@@ -39,12 +39,6 @@ public static class IdentityExtensions
             .AddEntityFrameworkStores<ArtemisIdentityContext>()
             .AddDefaultTokenProviders();
 
-        //if (serviceOptions.EnableCache && !string.IsNullOrWhiteSpace(serviceOptions.RedisCacheConnection))
-        //    serviceCollection.AddStackExchangeRedisCache(options =>
-        //    {
-        //        options.Configuration = serviceOptions.RedisCacheConnection;
-        //    });
-        //serviceCollection.TryAddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(serviceOptions.RedisCacheConnection));
         serviceCollection.TryAddScoped<IArtemisClaimStore, ArtemisClaimStore>();
         serviceCollection.TryAddScoped<IArtemisUserStore, ArtemisUserStore>();
         serviceCollection.TryAddScoped<IArtemisRoleStore, ArtemisRoleStore>();
