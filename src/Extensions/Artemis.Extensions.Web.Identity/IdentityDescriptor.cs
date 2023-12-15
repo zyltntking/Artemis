@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Artemis.Extensions.Web.Identity;
 
@@ -45,26 +44,13 @@ public static class IdentityDescriptor
     /// <param name="context">http 上下文</param>
     /// <param name="headerTokenKey">header 键</param>
     /// <returns></returns>
-    public static string? FetchHeaderToken(HttpContext context, string headerTokenKey)
+    public static string? FetchHeaderToken(this HttpContext context, string headerTokenKey)
     {
         var headers = context.Request.Headers;
 
         if (headers.TryGetValue(headerTokenKey, out var token)) return token;
 
         return null;
-    }
-
-    /// <summary>
-    ///     获取缓存Token
-    /// </summary>
-    /// <param name="cache">缓存</param>
-    /// <param name="cacheTokenKey">缓存token键</param>
-    /// <returns></returns>
-    public static string? FetchCacheToken(IDistributedCache cache, string cacheTokenKey)
-    {
-        var cacheToken = cache.GetString(cacheTokenKey);
-
-        return cacheToken;
     }
 
     #region ActionTyppeFilter

@@ -64,6 +64,7 @@ public static class WebExtensions
             options.EnableAdvancedPolicy = authorizationOptions.EnableAdvancedPolicy;
             options.HeaderTokenKey = authorizationOptions.HeaderTokenKey;
             options.CacheTokenPrefix = authorizationOptions.CacheTokenPrefix;
+            options.Expire = authorizationOptions.Expire;
         });
 
         return serviceCollection;

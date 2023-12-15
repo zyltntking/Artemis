@@ -70,17 +70,14 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
         {
             if (context.Resource is HttpContext httpContext)
             {
-                var headerToken = IdentityDescriptor.FetchHeaderToken(httpContext, Options.HeaderTokenKey);
+                var headerToken = httpContext.FetchHeaderToken(Options.HeaderTokenKey);
 
                 if (!string.IsNullOrWhiteSpace(headerToken))
                 {
-                    var cacheToken =
-                        IdentityDescriptor.FetchCacheToken(Cache, $"{Options.CacheTokenPrefix}:{headerToken}");
+                    var document = Cache.FetchToken($"{Options.CacheTokenPrefix}:{headerToken}");
 
-                    if (!string.IsNullOrWhiteSpace(cacheToken))
+                    if (document is not null)
                     {
-                        var tokenDocument = cacheToken.Deserialize<TokenDocument>();
-
                         if (requirement is TokenOnlyRequirement)
                         {
                             context.Succeed(requirement);
@@ -88,7 +85,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                             return Task.CompletedTask;
                         }
 
-                        if (HandleRolesRequirement(requirement, tokenDocument, ref failMessage))
+                        if (HandleRolesRequirement(requirement, document, ref failMessage))
                         {
                             context.Succeed(requirement);
 
@@ -96,7 +93,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                         }
 
 
-                        if (HandleClaimRequirement(requirement, tokenDocument, ref failMessage))
+                        if (HandleClaimRequirement(requirement, document, ref failMessage))
                         {
                             context.Succeed(requirement);
 
@@ -104,14 +101,14 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                         }
 
 
-                        if (HandleActionNameClaimRequirement(requirement, httpContext, tokenDocument, ref failMessage))
+                        if (HandleActionNameClaimRequirement(requirement, httpContext, document, ref failMessage))
                         {
                             context.Succeed(requirement);
 
                             return Task.CompletedTask;
                         }
 
-                        if (HandleRoutePathClaimRequirement(requirement, httpContext, tokenDocument, ref failMessage))
+                        if (HandleRoutePathClaimRequirement(requirement, httpContext, document, ref failMessage))
                         {
                             context.Succeed(requirement);
 

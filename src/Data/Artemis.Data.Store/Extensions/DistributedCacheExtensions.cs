@@ -29,7 +29,7 @@ public static class DistributedCacheExtensions
         {
             var options = new DistributedCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(expire)
+                SlidingExpiration = TimeSpan.FromSeconds(expire)
             };
 
             cache.SetString(key, entity.Serialize(), options);
@@ -60,7 +60,7 @@ public static class DistributedCacheExtensions
 
         var options = new DistributedCacheEntryOptions
         {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(expire)
+            SlidingExpiration = TimeSpan.FromSeconds(expire)
         };
 
         return cache.SetStringAsync(key, entity.Serialize(), options, cancellationToken);

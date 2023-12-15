@@ -53,7 +53,8 @@ public class Startup : IWebAppStartup
         {
             EnableAdvancedPolicy = false,
             HeaderTokenKey = Constants.Token,
-            CacheTokenPrefix = Constants.CacheTokenPrefix
+            CacheTokenPrefix = Constants.CacheTokenPrefix,
+            Expire = 604800
         });
 
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
