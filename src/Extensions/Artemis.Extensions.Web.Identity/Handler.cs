@@ -1,7 +1,9 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Shared.Identity;
 using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -15,31 +17,23 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     /// <summary>
     ///     构造
     /// </summary>
-    /// <param name="httpContextAccessor">HttpContext访问器依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <param name="logger">日志依赖</param>
     public ArtemisIdentityHandler(
-        IHttpContextAccessor httpContextAccessor, 
         IDistributedCache cache,
         ILogger<ArtemisIdentityHandler> logger)
     {
-        HttpContextAccessor = httpContextAccessor;
         Cache = cache;
         Logger = logger;
     }
 
     /// <summary>
-    ///     HttpContext访问器
-    /// </summary>
-    private IHttpContextAccessor HttpContextAccessor { get; }
-
-    /// <summary>
     ///     缓存访问器
     /// </summary>
     private IDistributedCache Cache { get; }
-    
+
     /// <summary>
-    /// 日志访问器
+    ///     日志访问器
     /// </summary>
     private ILogger Logger { get; }
 
@@ -50,7 +44,8 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
         IArtemisIdentityRequirement requirement)
     {
         if (requirement is AnonymousRequirement)
@@ -64,83 +59,61 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
         if (requirement is TokenRequirement tokenRequirement)
         {
-            var headerToken = FetchHeaderToken(tokenRequirement.HeaderTokenKey);
-
-            if (!string.IsNullOrWhiteSpace(headerToken))
+            if (context.Resource is HttpContext httpContext)
             {
-                var cacheToken = FetchCacheToken($"{tokenRequirement.CacheTokenPrefix}:{headerToken}");
+                var headerToken = IdentityDescriptor.FetchHeaderToken(httpContext, tokenRequirement.HeaderTokenKey);
 
-                if (!string.IsNullOrWhiteSpace(cacheToken))
+                if (!string.IsNullOrWhiteSpace(headerToken))
                 {
-                    var tokenDocument = cacheToken.Deserialize<TokenDocument>();
+                    var cacheToken = IdentityDescriptor.FetchCacheToken(Cache,$"{tokenRequirement.CacheTokenPrefix}:{headerToken}");
 
-                    if (requirement is RolesRequirement rolesRequirement)
+                    if (!string.IsNullOrWhiteSpace(cacheToken))
                     {
-                        if (tokenDocument is { Roles: not null } && tokenDocument.Roles.Any())
+                        var tokenDocument = cacheToken.Deserialize<TokenDocument>();
+
+                        if (HandleRolesRequirement(requirement, tokenDocument, ref failMessage))
                         {
-                            var roles = tokenDocument.Roles.Select(role => role.Name);
+                            context.Succeed(requirement);
 
-                            var roleMatch = roles.Any(
-                                role => rolesRequirement
-                                    .Roles
-                                    .Contains(role.StringNormalize())
-                                );
-
-                            if (roleMatch)
-                            {
-                                context.Succeed(requirement);
-
-                                return Task.CompletedTask;
-                            }
-
-                            failMessage = "无有效角色";
+                            return Task.CompletedTask;
                         }
-                        else
+
+
+                        if (HandleClaimRequirement(requirement, tokenDocument, ref failMessage))
                         {
-                            failMessage = "用户未分配角色";
+                            context.Succeed(requirement);
+
+                            return Task.CompletedTask;
+                        }
+
+
+                        if (HandleActionNameClaimRequirement(requirement, httpContext, tokenDocument, ref failMessage))
+                        {
+                            context.Succeed(requirement);
+
+                            return Task.CompletedTask;
+                        }
+
+                        if (HandleRoutePathClaimRequirement(requirement, httpContext, tokenDocument, ref failMessage))
+                        {
+                            context.Succeed(requirement);
+
+                            return Task.CompletedTask;
                         }
                     }
-
-                    if (requirement is ClaimRequirement claimRequirement)
+                    else
                     {
-                        if (tokenDocument is { UserClaims: not null, RoleClaims: not null} 
-                            && (tokenDocument.UserClaims.Any() || tokenDocument.RoleClaims.Any()) )
-                        {
-                            var claims = tokenDocument
-                                .UserClaims
-                                .Select(claim => claim.CheckStamp)
-                                .Union(tokenDocument.RoleClaims.Select(claim => claim.CheckStamp));
-
-                            var claimMatch = claims.Any(
-                                claim => claimRequirement
-                                    .Claims
-                                    .Select(pair => Hash.Md5Hash($"{pair.Key}:{pair.Value}"))
-                                    .Contains(claim));
-
-                            if (claimMatch)
-                            {
-                                context.Succeed(requirement);
-
-                                return Task.CompletedTask;
-                            }
-
-                            failMessage = "无有效凭据";
-
-                        }
-                        else
-                        {
-                            failMessage = "用户及其角色未分配凭据";
-                        }
+                        failMessage = "无效令牌";
                     }
                 }
                 else
                 {
-                    failMessage = "无效令牌";
+                    failMessage = "请求未携带令牌";
                 }
             }
             else
             {
-                failMessage = "请求未携带令牌";
+                failMessage = "无法获取传输的令牌信息";
             }
         }
 
@@ -154,28 +127,196 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     #endregion
 
     /// <summary>
-    ///     获取Token
+    /// 处理角色要求
     /// </summary>
-    /// <param name="headerKey">header 键</param>
+    /// <param name="requirement">要求对象</param>
+    /// <param name="document">令牌文档</param>
+    /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private string? FetchHeaderToken(string headerKey)
+    private bool HandleRolesRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document, ref string message)
     {
-        var headers = HttpContextAccessor.HttpContext?.Request.Headers;
+        if (requirement is not RolesRequirement rolesRequirement)
+            return false;
+        if (document is { Roles: not null } && document.Roles.Any())
+        {
+            var roles = document.Roles.Select(role => role.Name);
 
-        if (headers != null && headers.TryGetValue(headerKey, out var token)) return token;
+            var roleMatch = roles.Any(
+                role => rolesRequirement
+                    .Roles
+                    .Contains(role.StringNormalize())
+            );
 
-        return null;
+            if (roleMatch)
+            {
+                return true;
+            }
+
+            message = "无有效角色";
+        }
+        else
+        {
+            message = "用户未分配角色";
+        }
+
+        return false;
     }
 
     /// <summary>
-    ///     获取缓存Token
+    /// 处理凭据要求
     /// </summary>
-    /// <param name="cacheTokenKey">缓存token键</param>
+    /// <param name="requirement">要求对象</param>
+    /// <param name="document">令牌文档</param>
+    /// <param name="message">失败消息</param>
     /// <returns></returns>
-    private string? FetchCacheToken(string cacheTokenKey)
+    private bool HandleClaimRequirement(IArtemisIdentityRequirement requirement, TokenDocument? document, ref string message)
     {
-        var cacheToken = Cache.GetString(cacheTokenKey);
+        if (requirement is not ClaimRequirement claimRequirement)
+            return false;
+        if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+        {
+            var requireClaimKeys = claimRequirement.Claims.Select(item => item.Key);
 
-        return cacheToken;
+            var requireClaimStamps =
+                claimRequirement.Claims.Select(Normalize.KeyValuePairStampNormalize);
+
+            var userClaimStamps = document
+                .UserClaims
+                .Where(claim => requireClaimKeys.Contains(claim.ClaimType))
+                .Select(claim => claim.CheckStamp);
+
+            var roleClaimStamps = document
+                .RoleClaims
+                .Where(claim => requireClaimKeys.Contains(claim.ClaimType))
+                .Select(claim => claim.CheckStamp);
+
+            var claimStamps = userClaimStamps.Union(roleClaimStamps);
+
+            var claimMatch = claimStamps.Any(requireClaimStamps.Contains);
+
+            if (claimMatch)
+            {
+                return true;
+            }
+
+            message = "无有效凭据";
+        }
+        else
+        {
+            message = "用户及其角色未分配凭据";
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 处理ActionName凭据要求
+    /// </summary>
+    /// <param name="requirement">要求对象</param>
+    /// <param name="context">http上下文</param>
+    /// <param name="document">令牌文档</param>
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    private bool HandleActionNameClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context, TokenDocument? document, ref string message)
+    {
+        if (requirement is not ActionNameClaimRequirement)
+            return false;
+        if (context.GetEndpoint() is RouteEndpoint routeEndpoint)
+        {
+            var actionName = routeEndpoint.FetchActionName();
+
+            if (!string.IsNullOrWhiteSpace(actionName))
+            {
+                if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+                {
+                    var userClaims = document
+                        .UserClaims
+                        .Where(claim => claim.ClaimType == ArtemisClaimTypes.ActionName)
+                        .Any(claim => claim.ClaimValue == actionName);
+
+                    var roleClaims = document
+                        .RoleClaims
+                        .Where(claim => claim.ClaimType == ArtemisClaimTypes.ActionName)
+                        .Any(claim => claim.ClaimValue == actionName);
+
+                    if (userClaims || roleClaims)
+                    {
+                        return true;
+                    }
+
+                    message = "无有效操作名凭据";
+                }
+                else
+                {
+                    message = "用户及其角色未分配该操作需要的操作名凭据";
+                }
+            }
+            else
+            {
+                message = "无法解析操作名称";
+            }
+        }
+        else
+        {
+            message = "无法解析路由类型";
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 处理RoutePath凭据要求
+    /// </summary>
+    /// <param name="requirement">要求对象</param>
+    /// <param name="context">http上下文</param>
+    /// <param name="document">令牌文档</param>
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    private bool HandleRoutePathClaimRequirement(IArtemisIdentityRequirement requirement, HttpContext context, TokenDocument? document, ref string message)
+    {
+        if (requirement is RoutePathClaimRequirement)
+        {
+            if (context.GetEndpoint() is RouteEndpoint routeEndpoint)
+            {
+                var routePath = routeEndpoint.FetchRoutePath();
+
+                if (!string.IsNullOrWhiteSpace(routePath))
+                {
+                    if (document is { UserClaims: not null, RoleClaims: not null } && (document.UserClaims.Any() || document.RoleClaims.Any()))
+                    {
+                        var userClaims = document
+                            .UserClaims
+                            .Where(claim => claim.ClaimType == ArtemisClaimTypes.RoutePath)
+                            .Any(claim => claim.ClaimValue == routePath);
+
+                        var roleClaims = document
+                            .RoleClaims
+                            .Where(claim => claim.ClaimType == ArtemisClaimTypes.RoutePath)
+                            .Any(claim => claim.ClaimValue == routePath);
+
+                        if (userClaims || roleClaims)
+                        {
+                            return true;
+                        }
+
+                        message = "无有效路由路径凭据";
+                    }
+                    else
+                    {
+                        message = "用户及其角色未分配该操作需要的路由路径凭据";
+                    }
+                }
+                else
+                {
+                    message = "无法解析路由路径";
+                }
+            }
+            else
+            {
+                message = "无法解析路由类型";
+            }
+        }
+
+        return false;
     }
 }

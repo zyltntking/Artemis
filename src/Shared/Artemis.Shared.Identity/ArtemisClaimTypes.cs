@@ -3,9 +3,9 @@
 namespace Artemis.Shared.Identity;
 
 /// <summary>
-/// 预设凭据类型
+///     预设凭据类型
 /// </summary>
-public static class ClaimTypes
+public static class ArtemisClaimTypes
 {
     /// <summary>
     ///     路由路径凭据

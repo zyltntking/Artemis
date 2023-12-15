@@ -32,7 +32,7 @@ internal interface IClaim : ICheckStamp
     ///     生成校验戳
     /// </summary>
     /// <returns></returns>
-    string GenerateCheckStamp => Hash.Md5Hash(GenerateFlag);
+    string GenerateCheckStamp => Normalize.KeyValuePairStampNormalize(ClaimType, ClaimValue);
 
     /// <summary>
     ///     生成标识
@@ -84,7 +84,7 @@ public record ClaimPackage : IClaim
     ///     生成校验戳
     /// </summary>
     /// <returns></returns>
-    public string GenerateCheckStamp => Hash.Md5Hash(GenerateFlag);
+    public string GenerateCheckStamp => Normalize.KeyValuePairStampNormalize(ClaimType, ClaimValue);
 
     /// <summary>
     ///     生成标识

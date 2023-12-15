@@ -56,7 +56,7 @@ public abstract class IdentityRequirement : IArtemisIdentityRequirement
 /// <summary>
 ///     匿名许可要求
 /// </summary>
-public class AnonymousRequirement : IdentityRequirement
+public sealed class AnonymousRequirement : IdentityRequirement
 {
     /// <summary>
     ///     匿名认证策略构造
@@ -69,7 +69,7 @@ public class AnonymousRequirement : IdentityRequirement
 /// <summary>
 ///     令牌认证策略
 /// </summary>
-public class TokenRequirement : IdentityRequirement
+public class TokenRequirement : IdentityRequirement, IArtemisIdentityTokenRequirement
 {
     /// <summary>
     ///     认证策略构造
@@ -121,7 +121,7 @@ public class RolesRequirement : TokenRequirement
 }
 
 /// <summary>
-/// 凭据认证要求
+///     凭据认证要求
 /// </summary>
 public class ClaimRequirement : TokenRequirement
 {
@@ -132,7 +132,7 @@ public class ClaimRequirement : TokenRequirement
     /// <param name="headerKey">Header Token键</param>
     /// <param name="cacheTokenPrefix">缓存 Token键</param>
     public ClaimRequirement(
-        IEnumerable<KeyValuePair<string,string>> claims,
+        IEnumerable<KeyValuePair<string, string>> claims,
         string headerKey = Constants.HeaderTokenKey,
         string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
     {
@@ -140,7 +140,41 @@ public class ClaimRequirement : TokenRequirement
     }
 
     /// <summary>
-    /// 凭据键值对集合
+    ///     凭据键值对集合
     /// </summary>
     public IEnumerable<KeyValuePair<string, string>> Claims { get; }
+}
+
+/// <summary>
+///     操作名凭据认证要求
+/// </summary>
+public sealed class ActionNameClaimRequirement : TokenRequirement
+{
+    /// <summary>
+    ///     认证策略构造
+    /// </summary>
+    /// <param name="headerKey">Header Token键</param>
+    /// <param name="cacheTokenPrefix">缓存 Token键</param>
+    public ActionNameClaimRequirement(
+        string headerKey = Constants.HeaderTokenKey,
+        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
+    {
+    }
+}
+
+/// <summary>
+///     路由路径凭据认证要求
+/// </summary>
+public sealed class RoutePathClaimRequirement : TokenRequirement
+{
+    /// <summary>
+    ///     认证策略构造
+    /// </summary>
+    /// <param name="headerKey">Header Token键</param>
+    /// <param name="cacheTokenPrefix">缓存 Token键</param>
+    public RoutePathClaimRequirement(
+        string headerKey = Constants.HeaderTokenKey,
+        string cacheTokenPrefix = Constants.CacheTokenPrefix) : base(headerKey, cacheTokenPrefix)
+    {
+    }
 }

@@ -52,17 +52,11 @@ public class Startup : IWebAppStartup
 
         builder.Services.AddAuthorization(options =>
         {
-            options.AddPolicy("RequireAnonymous", policy =>
-            {
-                policy.Requirements.Add(new AnonymousRequirement());
-            });
+            options.AddPolicy("Anonymous", policy => { policy.Requirements.Add(new AnonymousRequirement()); });
 
-            options.AddPolicy("RequireToken", policy =>
-            {
-                policy.Requirements.Add(new TokenRequirement());
-            });
+            options.AddPolicy("Token", policy => { policy.Requirements.Add(new TokenRequirement()); });
 
-            options.AddPolicy("RequireAdmin", policy =>
+            options.AddPolicy("Admin", policy =>
             {
                 policy.Requirements.Add(new RolesRequirement(new[]
                 {
@@ -70,7 +64,7 @@ public class Startup : IWebAppStartup
                 }));
             });
 
-            options.AddPolicy("RequireLeftIsRightClaim", policy =>
+            options.AddPolicy("LeftIsRight", policy =>
             {
                 policy.Requirements.Add(new ClaimRequirement(new[]
                 {
@@ -78,7 +72,9 @@ public class Startup : IWebAppStartup
                 }));
             });
 
+            options.AddPolicy("ActionName", policy => { policy.Requirements.Add(new ActionNameClaimRequirement()); });
 
+            options.AddPolicy("RoutePath", policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
         });
         builder.Services.AddHttpContextAccessor();
 

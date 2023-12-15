@@ -118,7 +118,7 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
-    [Authorize("RequireAdmin")]
+    [Authorize("RoutePath")]
     public async Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request)
     {
         var result = await AccountManager.ChangePasswordAsync(
