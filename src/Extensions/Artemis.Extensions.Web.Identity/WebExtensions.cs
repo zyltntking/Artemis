@@ -20,22 +20,23 @@ public static class WebExtensions
     {
         serviceCollection.AddAuthorization(options =>
         {
-            options.AddPolicy(Constants.Anonymous, policy => { policy.Requirements.Add(new AnonymousRequirement()); });
+            options.AddPolicy(IdentityPolicy.Anonymous,
+                policy => { policy.Requirements.Add(new AnonymousRequirement()); });
 
-            options.AddPolicy(Constants.Token, policy => { policy.Requirements.Add(new TokenOnlyRequirement()); });
+            options.AddPolicy(IdentityPolicy.Token, policy => { policy.Requirements.Add(new TokenOnlyRequirement()); });
 
-            options.AddPolicy(Constants.Admin, policy =>
+            options.AddPolicy(IdentityPolicy.Admin, policy =>
             {
                 policy.Requirements.Add(new RolesRequirement(new[]
                 {
-                    Constants.Admin
+                    IdentityPolicy.Admin
                 }));
             });
 
-            options.AddPolicy(Constants.ActionName,
+            options.AddPolicy(IdentityPolicy.ActionName,
                 policy => { policy.Requirements.Add(new ActionNameClaimRequirement()); });
 
-            options.AddPolicy(Constants.RoutePath,
+            options.AddPolicy(IdentityPolicy.RoutePath,
                 policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
 
             if (authorizationOptions.EnableAdvancedPolicy)
@@ -58,6 +59,8 @@ public static class WebExtensions
         });
 
         serviceCollection.AddSingleton<IAuthorizationHandler, ArtemisIdentityHandler>();
+
+        serviceCollection.AddHttpContextAccessor();
 
         serviceCollection.Configure<InternalAuthorizationOptions>(options =>
         {

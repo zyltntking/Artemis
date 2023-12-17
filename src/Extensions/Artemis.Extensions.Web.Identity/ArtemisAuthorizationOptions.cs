@@ -23,9 +23,9 @@ file interface IArtemisAuthorizationOptions
     string CacheTokenPrefix { get; set; }
 
     /// <summary>
-    /// 过期时间
+    ///     过期时间
     /// </summary>
-    int Expire {get; set; }
+    int Expire { get; set; }
 }
 
 #endregion
@@ -53,7 +53,7 @@ public class InternalAuthorizationOptions : IArtemisAuthorizationOptions
     public required string CacheTokenPrefix { get; set; } = Constants.CacheTokenPrefix;
 
     /// <summary>
-    /// 过期时间
+    ///     过期时间
     /// </summary>
     public int Expire { get; set; } = 0;
 

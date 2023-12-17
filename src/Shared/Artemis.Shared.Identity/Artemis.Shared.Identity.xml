@@ -400,6 +400,12 @@
 			<param name="request">请求</param>
 			<returns></returns>
 		</member>
+		<member name="M:Artemis.Shared.Identity.Services.IAccountService.SignOutAsync">
+			<summary>
+				登出
+			</summary>
+			<returns></returns>
+		</member>
 		<member
 			name="M:Artemis.Shared.Identity.Services.IAccountService.ChangePasswordAsync(Artemis.Shared.Identity.Services.ChangePasswordRequest)">
 			<summary>

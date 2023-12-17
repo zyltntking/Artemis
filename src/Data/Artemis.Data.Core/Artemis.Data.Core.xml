@@ -96,12 +96,31 @@
 			<param name="writeIndented">是否启用格式化</param>
 			<returns></returns>
 		</member>
+		<member name="M:Artemis.Data.Core.DataParser.SerializeToBytes``1(``0,System.Boolean,System.Boolean)">
+			<summary>
+				序列化为字节码
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="model"></param>
+			<param name="preserveReference"></param>
+			<param name="writeIndented"></param>
+			<returns></returns>
+		</member>
 		<member name="M:Artemis.Data.Core.DataParser.Deserialize``1(System.String,System.Boolean)">
 			<summary>
 				反序列化
 			</summary>
 			<typeparam name="T"></typeparam>
 			<param name="json"></param>
+			<param name="preserveReference"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataParser.Deserialize``1(System.Byte[],System.Boolean)">
+			<summary>
+				自字节码反序列化
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="bytes"></param>
 			<param name="preserveReference"></param>
 			<returns></returns>
 		</member>

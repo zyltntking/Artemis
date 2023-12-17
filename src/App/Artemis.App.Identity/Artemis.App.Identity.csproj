@@ -1,47 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile>Artemis.App.Identity.xml</DocumentationFile>
-        <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
-        <CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>852d04c5-e8be-44d8-aa2f-0e084dd8010b</UserSecretsId>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <DockerfileContext>..\..\..</DockerfileContext>
-    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Artemis.App.Identity.xml</DocumentationFile>
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+		<CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>852d04c5-e8be-44d8-aa2f-0e084dd8010b</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <Compile Remove="logs\**" />
-      <Content Remove="logs\**" />
-      <EmbeddedResource Remove="logs\**" />
-      <None Remove="logs\**" />
-    </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="logs\**" />
+		<Content Remove="logs\**" />
+		<EmbeddedResource Remove="logs\**" />
+		<None Remove="logs\**" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
-        <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1" />
-        <PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.1.1" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+		<PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1" />
+		<PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.1.1" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj" />
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
-        <ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj" />
+		<ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Properties\PublishProfiles\" />
-        <Folder Include="protos\" />
-    </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Properties\PublishProfiles\" />
+		<Folder Include="protos\" />
+	</ItemGroup>
 
 </Project>

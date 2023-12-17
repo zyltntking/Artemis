@@ -52,7 +52,7 @@ public class Startup : IWebAppStartup
         builder.Services.AddArtemisAuthorization(new ArtemisAuthorizationOptions
         {
             EnableAdvancedPolicy = false,
-            HeaderTokenKey = Constants.Token,
+            HeaderTokenKey = Constants.HeaderTokenKey,
             CacheTokenPrefix = Constants.CacheTokenPrefix,
             Expire = 604800
         });

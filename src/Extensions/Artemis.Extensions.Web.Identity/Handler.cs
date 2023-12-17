@@ -19,14 +19,17 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     ///     构造
     /// </summary>
     /// <param name="cache">缓存依赖</param>
+    /// <param name="httpContextAccessor"></param>
     /// <param name="options">配置</param>
     /// <param name="logger">日志依赖</param>
     public ArtemisIdentityHandler(
         IDistributedCache cache,
-        IOptions<ArtemisAuthorizationOptions> options,
-        ILogger<InternalAuthorizationOptions> logger)
+        IHttpContextAccessor httpContextAccessor,
+        IOptions<InternalAuthorizationOptions> options,
+        ILogger<ArtemisIdentityHandler> logger)
     {
         Cache = cache;
+        HttpContextAccessor = httpContextAccessor;
         Options = options.Value;
         Logger = logger;
     }
@@ -46,6 +49,11 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     /// </summary>
     private ILogger Logger { get; }
 
+    /// <summary>
+    ///     Http上下文访问器
+    /// </summary>
+    private IHttpContextAccessor HttpContextAccessor { get; }
+
     #region Overrides of AuthorizationHandler<IdentityRequirement>
 
     /// <summary>
@@ -57,9 +65,13 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
         AuthorizationHandlerContext context,
         IArtemisIdentityRequirement requirement)
     {
+        var httpContext = HttpContextAccessor.HttpContext;
+
         if (requirement is AnonymousRequirement)
         {
             context.Succeed(requirement);
+
+            HttpContextAccessor.HttpContext?.Items.Add("dist", "i can dist");
 
             return Task.CompletedTask;
         }
@@ -68,7 +80,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
         if (requirement is TokenRequirement)
         {
-            if (context.Resource is HttpContext httpContext)
+            if (httpContext is not null)
             {
                 var headerToken = httpContext.FetchHeaderToken(Options.HeaderTokenKey);
 
@@ -78,6 +90,8 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
                     if (document is not null)
                     {
+                        httpContext.CacheToken(document);
+
                         if (requirement is TokenOnlyRequirement)
                         {
                             context.Succeed(requirement);

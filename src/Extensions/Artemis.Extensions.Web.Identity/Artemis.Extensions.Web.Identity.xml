@@ -25,6 +25,11 @@
 				缓存Token前缀
 			</summary>
 		</member>
+		<member name="P:Artemis.Extensions.Web.Identity.IArtemisAuthorizationOptions.Expire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
 		<member name="T:Artemis.Extensions.Web.Identity.InternalAuthorizationOptions">
 			<summary>
 				内部认证选项
@@ -43,6 +48,11 @@
 		<member name="P:Artemis.Extensions.Web.Identity.InternalAuthorizationOptions.CacheTokenPrefix">
 			<summary>
 				缓存Token前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.Identity.InternalAuthorizationOptions.Expire">
+			<summary>
+				过期时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Extensions.Web.Identity.ArtemisAuthorizationOptions">
@@ -105,27 +115,37 @@
 				缓存Token前缀
 			</summary>
 		</member>
-		<member name="F:Artemis.Extensions.Web.Identity.Constants.Anonymous">
+		<member name="F:Artemis.Extensions.Web.Identity.Constants.ContextItemKey">
+			<summary>
+				上下文项目键
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.Identity.IdentityPolicy">
+			<summary>
+				认证策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Web.Identity.IdentityPolicy.Anonymous">
 			<summary>
 				匿名策略名
 			</summary>
 		</member>
-		<member name="F:Artemis.Extensions.Web.Identity.Constants.Token">
+		<member name="F:Artemis.Extensions.Web.Identity.IdentityPolicy.Token">
 			<summary>
 				令牌认证策略名
 			</summary>
 		</member>
-		<member name="F:Artemis.Extensions.Web.Identity.Constants.Admin">
+		<member name="F:Artemis.Extensions.Web.Identity.IdentityPolicy.Admin">
 			<summary>
 				管理员角色认证策略名
 			</summary>
 		</member>
-		<member name="F:Artemis.Extensions.Web.Identity.Constants.ActionName">
+		<member name="F:Artemis.Extensions.Web.Identity.IdentityPolicy.ActionName">
 			<summary>
 				操作名凭据认证策略名
 			</summary>
 		</member>
-		<member name="F:Artemis.Extensions.Web.Identity.Constants.RoutePath">
+		<member name="F:Artemis.Extensions.Web.Identity.IdentityPolicy.RoutePath">
 			<summary>
 				路由路径认证凭据策略名
 			</summary>
@@ -136,11 +156,12 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Identity.ArtemisAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Identity.InternalAuthorizationOptions})">
+			name="M:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Identity.InternalAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Web.Identity.ArtemisIdentityHandler})">
 			<summary>
 				构造
 			</summary>
 			<param name="cache">缓存依赖</param>
+			<param name="httpContextAccessor"></param>
 			<param name="options">配置</param>
 			<param name="logger">日志依赖</param>
 		</member>
@@ -157,6 +178,11 @@
 		<member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.Logger">
 			<summary>
 				日志访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Web.Identity.ArtemisIdentityHandler.HttpContextAccessor">
+			<summary>
+				Http上下文访问器
 			</summary>
 		</member>
 		<member
@@ -240,18 +266,26 @@
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Extensions.Web.Identity.IdentityDescriptor.FetchCacheToken(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+			name="M:Artemis.Extensions.Web.Identity.IdentityDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
 			<summary>
-				获取缓存Token
+				查询端描述
 			</summary>
-			<param name="cache">缓存</param>
-			<param name="cacheTokenKey">缓存token键</param>
+			<param name="endpoint"></param>
 			<returns></returns>
 		</member>
 		<member
 			name="M:Artemis.Extensions.Web.Identity.IdentityDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
 			<summary>
 				判断元数据中是否包含指定类型
+			</summary>
+			<typeparam name="TMetadata"></typeparam>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.IdentityDescriptor.FetchMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
+			<summary>
+				查询指定类型的元数据
 			</summary>
 			<typeparam name="TMetadata"></typeparam>
 			<param name="endpoint"></param>
@@ -346,6 +380,70 @@
 			<summary>
 				路由路径凭据认证要求
 			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Web.Identity.TokenHandler">
+			<summary>
+				Token处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.TokenHandler.GenerateTokenKey(Artemis.Shared.Identity.Transfer.TokenDocument)">
+			<summary>
+				生成Token缓存键
+			</summary>
+			<param name="document">token 文档</param>
+			<param name="cacheTokenPrefix">缓存键前缀</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.TokenHandler.CacheToken(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Shared.Identity.Transfer.TokenDocument,System.String,System.Int32)">
+			<summary>
+				缓存Token
+			</summary>
+			<param name="cache">缓存依赖</param>
+			<param name="document">Token文档</param>
+			<param name="cacheTokenKey">缓存键</param>
+			<param name="expire">过期时间</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.TokenHandler.CacheToken(Microsoft.AspNetCore.Http.HttpContext,Artemis.Shared.Identity.Transfer.TokenDocument)">
+			<summary>
+				缓存token
+			</summary>
+			<param name="context"></param>
+			<param name="document"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.TokenHandler.RemoveToken(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+			<summary>
+				移除缓存中的Token
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Identity.TokenHandler.RemoveToken(Microsoft.AspNetCore.Http.HttpContext)">
+			<summary>
+				移除上下文中的Token
+			</summary>
+			<param name="context"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Web.Identity.TokenHandler.FetchToken(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+			<summary>
+				获取Token
+			</summary>
+			<param name="cache">缓存依赖</param>
+			<param name="cacheTokenKey">缓存键</param>
+			<param name="refreshToken">是否刷新缓存</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Web.Identity.TokenHandler.FetchToken(Microsoft.AspNetCore.Http.HttpContext)">
+			<summary>
+				从上下文中获取Token
+			</summary>
+			<param name="context"></param>
+			<returns></returns>
 		</member>
 		<member name="T:Artemis.Extensions.Web.Identity.WebExtensions">
 			<summary>

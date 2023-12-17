@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Extensions.Web.Identity;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 
@@ -53,7 +54,21 @@ public class TokenInterceptor : Interceptor
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
-        Logger.LogInformation($"客户端标识：{context.Peer}");
+        var httpContext = context.GetHttpContext();
+
+        var endpoint = httpContext.GetEndpoint();
+
+        var document = httpContext.FetchToken();
+
+        var userName = document?.UserName;
+
+        var userId = document?.UserId;
+
+        var description = "未知操作";
+
+        if (endpoint is RouteEndpoint routeEndpoint) description = routeEndpoint.FetchDescription();
+
+        Logger.LogInformation($"用户标识：{userId}，用户名称：{userName}，客户端标识：{context.Peer}, 操作描述：{description}");
 
         var requestJson = request.Serialize();
 

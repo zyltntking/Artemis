@@ -1,4 +1,5 @@
-﻿using Grpc.AspNetCore.Server;
+﻿using System.ComponentModel;
+using Grpc.AspNetCore.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
@@ -53,6 +54,18 @@ public static class IdentityDescriptor
         return null;
     }
 
+    /// <summary>
+    ///     查询端描述
+    /// </summary>
+    /// <param name="endpoint"></param>
+    /// <returns></returns>
+    public static string? FetchDescription(this RouteEndpoint endpoint)
+    {
+        var descriptionMetadata = endpoint.FetchMetadata<DescriptionAttribute>();
+
+        return descriptionMetadata?.Description;
+    }
+
     #region ActionTyppeFilter
 
     /// <summary>
@@ -64,6 +77,17 @@ public static class IdentityDescriptor
     private static bool HasMetadata<TMetadata>(this Endpoint endpoint)
     {
         return endpoint.Metadata.OfType<TMetadata>().Any();
+    }
+
+    /// <summary>
+    ///     查询指定类型的元数据
+    /// </summary>
+    /// <typeparam name="TMetadata"></typeparam>
+    /// <param name="endpoint"></param>
+    /// <returns></returns>
+    private static TMetadata? FetchMetadata<TMetadata>(this Endpoint endpoint)
+    {
+        return endpoint.Metadata.OfType<TMetadata>().FirstOrDefault();
     }
 
     #endregion

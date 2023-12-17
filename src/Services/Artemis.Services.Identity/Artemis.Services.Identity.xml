@@ -589,12 +589,14 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Services.Identity.Logic.AccountService.#ctor(Artemis.Services.Identity.Managers.IAccountManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+			name="M:Artemis.Services.Identity.Logic.AccountService.#ctor(Artemis.Services.Identity.Managers.IAccountManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Identity.InternalAuthorizationOptions})">
 			<summary>
 				账户服务
 			</summary>
 			<param name="accountManager">账户管理器依赖</param>
 			<param name="cache">分布式缓存依赖</param>
+			<param name="httpContextAccessor"></param>
+			<param name="options"></param>
 		</member>
 		<member name="P:Artemis.Services.Identity.Logic.AccountService.AccountManager">
 			<summary>
@@ -604,6 +606,16 @@
 		<member name="P:Artemis.Services.Identity.Logic.AccountService.Cache">
 			<summary>
 				分布式缓存依赖
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Logic.AccountService.HttpContextAccessor">
+			<summary>
+				Http上下文访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Services.Identity.Logic.AccountService.Options">
+			<summary>
+				内部认证配置项
 			</summary>
 		</member>
 		<member
@@ -620,6 +632,12 @@
 				注册
 			</summary>
 			<param name="request">请求</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Services.Identity.Logic.AccountService.SignOutAsync">
+			<summary>
+				登出
+			</summary>
 			<returns></returns>
 		</member>
 		<member

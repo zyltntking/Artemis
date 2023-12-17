@@ -43,7 +43,7 @@ public static class Hash
         foreach (var b in bytes)
             builder.Append(b.ToString("x2"));
 
-        return builder.ToString();
+        return builder.ToString().StringNormalize();
     }
 
     /// <summary>

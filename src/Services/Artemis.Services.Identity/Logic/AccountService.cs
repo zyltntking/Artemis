@@ -1,10 +1,12 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Grpc;
-using Artemis.Data.Store.Extensions;
+using Artemis.Extensions.Web.Identity;
 using Artemis.Services.Identity.Managers;
 using Artemis.Shared.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity.Logic;
 
@@ -18,12 +20,18 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="accountManager">账户管理器依赖</param>
     /// <param name="cache">分布式缓存依赖</param>
+    /// <param name="httpContextAccessor"></param>
+    /// <param name="options"></param>
     public AccountService(
         IAccountManager accountManager,
-        IDistributedCache cache)
+        IDistributedCache cache,
+        IHttpContextAccessor httpContextAccessor,
+        IOptions<InternalAuthorizationOptions> options)
     {
         AccountManager = accountManager;
         Cache = cache;
+        HttpContextAccessor = httpContextAccessor;
+        Options = options.Value;
     }
 
     /// <summary>
@@ -36,6 +44,16 @@ public class AccountService : IAccountService
     /// </summary>
     private IDistributedCache Cache { get; }
 
+    /// <summary>
+    ///     Http上下文访问器
+    /// </summary>
+    private IHttpContextAccessor HttpContextAccessor { get; }
+
+    /// <summary>
+    ///     内部认证配置项
+    /// </summary>
+    private InternalAuthorizationOptions Options { get; }
+
     #region Implementation of IAccountService
 
     /// <summary>
@@ -43,31 +61,30 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
+    [Authorize(IdentityPolicy.Anonymous)]
     public async Task<TokenResponse> SignInAsync(SignInRequest request)
     {
         var (result, token) = await AccountManager.SignInAsync(request);
 
         if (result.Succeeded)
-        {
-            // todo cache token
-            var json = token!.Serialize();
-
-            var replyToken = Hash.Md5Hash(json);
-
-            await Cache.SetAsync(replyToken, token!);
-
-            var tokenResult = new TokenResult
+            if (token is not null)
             {
-                Token = replyToken,
-                Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
-            };
+                var replyToken = token.GenerateTokenKey();
 
-            return new TokenResponse
-            {
-                Result = GrpcResponse.SuccessResult(),
-                Data = tokenResult
-            };
-        }
+                var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+
+                Cache.CacheToken(token, cacheKey, Options.Expire);
+
+                return new TokenResponse
+                {
+                    Result = GrpcResponse.SuccessResult(),
+                    Data = new TokenResult
+                    {
+                        Token = replyToken,
+                        Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
+                    }
+                };
+            }
 
         return new TokenResponse
         {
@@ -81,30 +98,30 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
+    [Authorize(IdentityPolicy.Anonymous)]
     public async Task<TokenResponse> SignUpAsync(SignUpRequest request)
     {
         var (result, token) = await AccountManager.SignUpAsync(request, request.Password);
 
         if (result.Succeeded)
-        {
-            // todo cache token
-
-            var json = token!.Serialize();
-
-            var replyToken = Hash.Md5Hash(json);
-
-            var tokenResult = new TokenResult
+            if (token is not null)
             {
-                Token = replyToken,
-                Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
-            };
+                var replyToken = token.GenerateTokenKey();
 
-            return new TokenResponse
-            {
-                Result = GrpcResponse.SuccessResult(),
-                Data = tokenResult
-            };
-        }
+                var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+
+                Cache.CacheToken(token, cacheKey, Options.Expire);
+
+                return new TokenResponse
+                {
+                    Result = GrpcResponse.SuccessResult(),
+                    Data = new TokenResult
+                    {
+                        Token = replyToken,
+                        Expire = DateTime.Now.AddDays(30).ToUnixTimeStamp()
+                    }
+                };
+            }
 
         return new TokenResponse
         {
@@ -114,13 +131,27 @@ public class AccountService : IAccountService
     }
 
     /// <summary>
+    ///     登出
+    /// </summary>
+    /// <returns></returns>
+    [Authorize(IdentityPolicy.ActionName)]
+    public Task<GrpcEmptyResponse> SignOutAsync()
+    {
+        var context = HttpContextAccessor.HttpContext;
+
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
     ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
-    [Authorize("Token")]
+    [Authorize(IdentityPolicy.Token)]
     public async Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request)
     {
+        var context = HttpContextAccessor.HttpContext;
+
         var result = await AccountManager.ChangePasswordAsync(
             request.UserSign,
             request.OldPassword,
@@ -136,6 +167,7 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
+    [Authorize(IdentityPolicy.Admin)]
     public async Task<GrpcEmptyResponse> ResetPasswordAsync(ResetPasswordRequest request)
     {
         var result = await AccountManager.ResetPasswordAsync(
@@ -152,6 +184,7 @@ public class AccountService : IAccountService
     /// </summary>
     /// <param name="request">请求</param>
     /// <returns></returns>
+    [Authorize(IdentityPolicy.Admin)]
     public async Task<GrpcEmptyResponse> ResetPasswordsAsync(ResetPasswordsRequest request)
     {
         var result = await AccountManager.ResetPasswordsAsync(

@@ -98,6 +98,27 @@ public static class DataParser
     }
 
     /// <summary>
+    ///     序列化为字节码
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="model"></param>
+    /// <param name="preserveReference"></param>
+    /// <param name="writeIndented"></param>
+    /// <returns></returns>
+    public static byte[] SerializeToBytes<T>(this T model, bool preserveReference = false, bool writeIndented = false)
+    {
+        var options = new JsonSerializerOptions
+        {
+            IgnoreReadOnlyProperties = false,
+            ReferenceHandler = preserveReference ? ReferenceHandler.Preserve : ReferenceHandler.IgnoreCycles,
+            WriteIndented = writeIndented,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
+
+        return JsonSerializer.SerializeToUtf8Bytes(model, options);
+    }
+
+    /// <summary>
     ///     反序列化
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -113,6 +134,24 @@ public static class DataParser
         };
 
         return JsonSerializer.Deserialize<T>(json, options);
+    }
+
+    /// <summary>
+    ///     自字节码反序列化
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="bytes"></param>
+    /// <param name="preserveReference"></param>
+    /// <returns></returns>
+    public static T? Deserialize<T>(this byte[] bytes, bool preserveReference = false) where T : class
+    {
+        var options = new JsonSerializerOptions
+        {
+            IgnoreReadOnlyProperties = true,
+            ReferenceHandler = preserveReference ? ReferenceHandler.Preserve : ReferenceHandler.IgnoreCycles
+        };
+
+        return JsonSerializer.Deserialize<T>(bytes, options);
     }
 
     #endregion

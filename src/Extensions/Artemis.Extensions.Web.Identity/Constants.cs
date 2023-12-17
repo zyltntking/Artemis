@@ -16,6 +16,17 @@ public static class Constants
     public const string CacheTokenPrefix = "Artemis:Identity:Token";
 
     /// <summary>
+    ///     上下文项目键
+    /// </summary>
+    internal const string ContextItemKey = "Token";
+}
+
+/// <summary>
+///     认证策略
+/// </summary>
+public static class IdentityPolicy
+{
+    /// <summary>
     ///     匿名策略名
     /// </summary>
     public const string Anonymous = nameof(Anonymous);

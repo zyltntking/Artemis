@@ -32,6 +32,14 @@ public interface IAccountService
     Task<TokenResponse> SignUpAsync(SignUpRequest request);
 
     /// <summary>
+    ///     登出
+    /// </summary>
+    /// <returns></returns>
+    [OperationContract]
+    [Description("登出")]
+    Task<GrpcEmptyResponse> SignOutAsync();
+
+    /// <summary>
     ///     修改密码
     /// </summary>
     /// <param name="request">请求</param>
