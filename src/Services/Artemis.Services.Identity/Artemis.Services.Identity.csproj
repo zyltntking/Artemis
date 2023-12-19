@@ -52,6 +52,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
+		<ProjectReference Include="..\Artemis.Services.Rpc\Artemis.Services.Rpc.csproj" />
 	</ItemGroup>
 
 </Project> 

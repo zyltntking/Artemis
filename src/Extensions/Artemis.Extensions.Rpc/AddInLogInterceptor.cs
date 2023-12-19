@@ -2,19 +2,22 @@
 using Artemis.Extensions.Web.Identity;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 
-namespace Artemis.App.Identity.Interceptors;
+namespace Artemis.Extensions.Rpc;
 
 /// <summary>
-///     Token侦听器
+///     补充日志侦听器
 /// </summary>
-public class TokenInterceptor : Interceptor
+public class AddInLogInterceptor : Interceptor
 {
     /// <summary>
     ///     侦听器构造
     /// </summary>
     /// <param name="logger"></param>
-    public TokenInterceptor(ILogger<TokenInterceptor> logger)
+    public AddInLogInterceptor(ILogger<AddInLogInterceptor> logger)
     {
         Logger = logger;
     }

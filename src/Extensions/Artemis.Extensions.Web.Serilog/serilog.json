@@ -5,13 +5,13 @@
       {
         "Name": "Console",
         "Args": {
-          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}){NewLine}{Exception}"
+          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}){Properties:j}{NewLine}{Exception}"
         }
       },
       {
         "Name": "Debug",
         "Args": {
-          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}){NewLine}{Exception}"
+          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}) {Properties:j}{NewLine}{Exception}"
         }
       },
       {
@@ -26,7 +26,7 @@
                 "retainedFileCountLimit": 30,
                 "rollOnFileSizeLimit": true,
                 "fileSizeLimitBytes": 314572800,
-                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.ffffff} [{Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}){NewLine}{Exception}"
+                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.ffffff} [{Level:u3}] [{ProcessId}|{ThreadId:000}] [{RequestId,22}] {Message:lj} from ({SourceContext}.{Method}) EventProperities: {Properties:j}{NewLine}{Exception}"
               }
             }
           ]

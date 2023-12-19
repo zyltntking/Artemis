@@ -2,6 +2,7 @@
 using Artemis.Data.Grpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Services.Identity.Managers;
+using Artemis.Services.Rpc;
 using Artemis.Shared.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,7 @@ namespace Artemis.Services.Identity.Logic;
 /// <summary>
 ///     账户服务
 /// </summary>
-public class AccountService : IAccountService
+public class AccountService : RpcServiceBase, IAccountService
 {
     /// <summary>
     ///     账户服务
@@ -26,12 +27,10 @@ public class AccountService : IAccountService
         IAccountManager accountManager,
         IDistributedCache cache,
         IHttpContextAccessor httpContextAccessor,
-        IOptions<InternalAuthorizationOptions> options)
+        IOptions<InternalAuthorizationOptions> options) : base(httpContextAccessor, options)
     {
         AccountManager = accountManager;
         Cache = cache;
-        HttpContextAccessor = httpContextAccessor;
-        Options = options.Value;
     }
 
     /// <summary>
@@ -44,16 +43,6 @@ public class AccountService : IAccountService
     /// </summary>
     private IDistributedCache Cache { get; }
 
-    /// <summary>
-    ///     Http上下文访问器
-    /// </summary>
-    private IHttpContextAccessor HttpContextAccessor { get; }
-
-    /// <summary>
-    ///     内部认证配置项
-    /// </summary>
-    private InternalAuthorizationOptions Options { get; }
-
     #region Implementation of IAccountService
 
     /// <summary>
@@ -64,7 +53,8 @@ public class AccountService : IAccountService
     [Authorize(IdentityPolicy.Anonymous)]
     public async Task<TokenResponse> SignInAsync(SignInRequest request)
     {
-        var (result, token) = await AccountManager.SignInAsync(request);
+        var (result, token) = await AccountManager
+            .SignInAsync(request, CancellationToken);
 
         if (result.Succeeded)
             if (token is not null)
@@ -101,7 +91,8 @@ public class AccountService : IAccountService
     [Authorize(IdentityPolicy.Anonymous)]
     public async Task<TokenResponse> SignUpAsync(SignUpRequest request)
     {
-        var (result, token) = await AccountManager.SignUpAsync(request, request.Password);
+        var (result, token) = await AccountManager
+            .SignUpAsync(request, request.Password, CancellationToken);
 
         if (result.Succeeded)
             if (token is not null)
@@ -137,7 +128,7 @@ public class AccountService : IAccountService
     [Authorize(IdentityPolicy.ActionName)]
     public Task<GrpcEmptyResponse> SignOutAsync()
     {
-        var context = HttpContextAccessor.HttpContext;
+        var token = CurrentToken;
 
         throw new NotImplementedException();
     }
@@ -150,12 +141,13 @@ public class AccountService : IAccountService
     [Authorize(IdentityPolicy.Token)]
     public async Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request)
     {
-        var context = HttpContextAccessor.HttpContext;
+        var token = CurrentToken;
 
         var result = await AccountManager.ChangePasswordAsync(
             request.UserSign,
             request.OldPassword,
-            request.NewPassword);
+            request.NewPassword, 
+            CancellationToken);
 
         return result.Succeeded
             ? GrpcResponse.EmptySuccess()
@@ -172,7 +164,8 @@ public class AccountService : IAccountService
     {
         var result = await AccountManager.ResetPasswordAsync(
             request.UserId,
-            request.Password);
+            request.Password,
+            CancellationToken);
 
         return result.Succeeded
             ? GrpcResponse.EmptySuccess()
@@ -189,7 +182,8 @@ public class AccountService : IAccountService
     {
         var result = await AccountManager.ResetPasswordsAsync(
             request.UserIds,
-            request.Password);
+            request.Password,
+            CancellationToken);
 
         return result.Succeeded
             ? GrpcResponse.EmptySuccess()

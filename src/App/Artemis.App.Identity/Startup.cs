@@ -1,8 +1,7 @@
-﻿using Artemis.App.Identity.Interceptors;
+﻿using Artemis.Extensions.Rpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
-using Artemis.Services.Identity.Logic;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
 
@@ -26,7 +25,7 @@ public class Startup : IWebAppStartup
                                     throw new InvalidOperationException(
                                         "ContextConnection string 'Identity' not found.");
 
-        builder.Services.AddIdentityService(new IdentityServiceOptions
+        builder.Services.AddArtemisIdentityService(new IdentityServiceOptions
         {
             EnableCache = true,
             RegisterDbAction = dbBuilder =>
@@ -62,7 +61,7 @@ public class Startup : IWebAppStartup
         builder.Services.AddCodeFirstGrpc(options =>
         {
             options.EnableDetailedErrors = true;
-            options.Interceptors.Add<TokenInterceptor>();
+            options.Interceptors.Add<AddInLogInterceptor>();
         });
 
         if (builder.Environment.IsDevelopment())
@@ -93,9 +92,7 @@ public class Startup : IWebAppStartup
 
         app.UseResponseCompression();
 
-        app.MapGrpcService<RoleService>();
-        app.MapGrpcService<UserService>();
-        app.MapGrpcService<AccountService>();
+        app.MapDefaultArtemisIdentityGrpcServices();
 
         if (app.Environment.IsDevelopment())
             //app.MapApiRouteTable();

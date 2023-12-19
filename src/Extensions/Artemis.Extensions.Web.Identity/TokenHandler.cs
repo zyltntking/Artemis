@@ -14,10 +14,8 @@ public static class TokenHandler
     ///     生成Token缓存键
     /// </summary>
     /// <param name="document">token 文档</param>
-    /// <param name="cacheTokenPrefix">缓存键前缀</param>
     /// <returns></returns>
-    public static string GenerateTokenKey(
-        this TokenDocument document)
+    public static string GenerateTokenKey(this TokenDocument document)
     {
         var stamp = DateTime.Now.ToUnixTimeStamp();
 
@@ -60,7 +58,9 @@ public static class TokenHandler
     /// </summary>
     /// <param name="context"></param>
     /// <param name="document"></param>
-    public static void CacheToken(this HttpContext context, TokenDocument document)
+    public static void CacheToken(
+        this HttpContext context, 
+        TokenDocument document)
     {
         if (context.Items.ContainsKey(Constants.ContextItemKey)) context.Items[Constants.ContextItemKey] = document;
 
@@ -72,7 +72,9 @@ public static class TokenHandler
     /// </summary>
     /// <param name="cache"></param>
     /// <param name="cacheTokenKey"></param>
-    public static void RemoveToken(this IDistributedCache cache, string cacheTokenKey)
+    public static void RemoveToken(
+        this IDistributedCache cache, 
+        string cacheTokenKey)
     {
         cache.Remove(cacheTokenKey);
     }

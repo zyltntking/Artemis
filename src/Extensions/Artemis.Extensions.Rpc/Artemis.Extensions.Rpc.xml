@@ -1,22 +1,61 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Extensions.Rpc</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Extensions.Rpc.RpcGenerator">
-			<summary>
-				生成器
-			</summary>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcGenerator.ProtocolBuffer``1(System.String)">
-			<summary>
-				生成协议缓冲文件
-			</summary>
-			<typeparam name="TSharedService">分享协议定义</typeparam>
-			<param name="path">生成路径</param>
-			<returns></returns>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Extensions.Rpc</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Rpc.AddInLogInterceptor">
+            <summary>
+                补充日志侦听器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.AddInLogInterceptor})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.AddInLogInterceptor.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <summary>
+                Server-side handler for intercepting and incoming unary call.
+            </summary>
+            <typeparam name="TRequest">Request message type for this method.</typeparam>
+            <typeparam name="TResponse">Response message type for this method.</typeparam>
+            <param name="request">The request value of the incoming invocation.</param>
+            <param name="context">
+                An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
+                the context of the invocation.
+            </param>
+            <param name="continuation">
+                A delegate that asynchronously proceeds with the invocation, calling
+                the next interceptor in the chain, or the service request handler,
+                in case of the last interceptor and return the response value of
+                the RPC. The interceptor can choose to call it zero or more times
+                at its discretion.
+            </param>
+            <returns>
+                A future representing the response value of the RPC. The interceptor
+                can simply return the return value from the continuation intact,
+                or an arbitrary response value as it sees fit.
+            </returns>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RpcGenerator">
+            <summary>
+                生成器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcGenerator.ProtocolBuffer``1(System.String)">
+            <summary>
+                生成协议缓冲文件
+            </summary>
+            <typeparam name="TSharedService">分享协议定义</typeparam>
+            <param name="path">生成路径</param>
+            <returns></returns>
+        </member>
+    </members>
 </doc>

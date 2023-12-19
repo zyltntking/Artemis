@@ -44,7 +44,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
-	  <ProjectReference Include="..\Artemis.Extensions.Web.OpenApi\Artemis.Extensions.Web.OpenApi.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
 	</ItemGroup>
 

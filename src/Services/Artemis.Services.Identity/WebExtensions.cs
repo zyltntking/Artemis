@@ -1,6 +1,9 @@
 ﻿using Artemis.Services.Identity.Data;
+using Artemis.Services.Identity.Logic;
 using Artemis.Services.Identity.Managers;
 using Artemis.Services.Identity.Stores;
+using Artemis.Shared.Identity.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,7 +23,7 @@ public static class IdentityExtensions
     /// <param name="serviceOptions"></param>
     /// <param name="isDevelopment"></param>
     /// <returns></returns>
-    public static IServiceCollection AddIdentityService(
+    public static IServiceCollection AddArtemisIdentityService(
         this IServiceCollection serviceCollection,
         IdentityServiceOptions serviceOptions,
         bool isDevelopment)
@@ -60,5 +63,35 @@ public static class IdentityExtensions
             serviceCollection.Configure(serviceOptions.IdentityOptionsAction);
 
         return serviceCollection;
+    }
+
+    /// <summary>
+    ///    添加认证服务
+    /// </summary>
+    /// <typeparam name="TUserService"></typeparam>
+    /// <typeparam name="TRoleService"></typeparam>
+    /// <typeparam name="TAccountService"></typeparam>
+    /// <param name="application"></param>
+    public static void MapArtemisIdentityGrpcServices<TUserService, TRoleService, TAccountService>(this WebApplication application)
+        where TUserService : class, IUserService
+        where TRoleService : class, IRoleService
+        where TAccountService : class, IAccountService
+    {
+
+        application.MapGrpcService<TUserService>();
+        application.MapGrpcService<TRoleService>();
+        application.MapGrpcService<TAccountService>();
+    }
+
+    /// <summary>
+    /// 添加默认认证服务
+    /// </summary>
+    /// <param name="application">Web应用创建器</param>
+    public static void MapDefaultArtemisIdentityGrpcServices(this WebApplication application)
+    {
+        application.MapArtemisIdentityGrpcServices<
+            UserService, 
+            RoleService, 
+            AccountService>();
     }
 }

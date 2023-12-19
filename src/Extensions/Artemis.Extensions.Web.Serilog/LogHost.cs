@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Exceptions;
 
 namespace Artemis.Extensions.Web.Serilog;
 
@@ -16,7 +17,9 @@ public static class LogHost
     /// <param name="args">应用控制参数</param>
     /// <param name="buildAction">应用创建行为</param>
     /// <param name="appAction">应用行为</param>
-    public static void CreateWebApp(string[] args, Action<WebApplicationBuilder> buildAction,
+    private static void CreateWebApp(
+        string[] args, 
+        Action<WebApplicationBuilder> buildAction,
         Action<WebApplication> appAction)
     {
         var configuration = new ConfigurationBuilder()
@@ -28,6 +31,7 @@ public static class LogHost
             .Enrich.FromLogContext()
             .Enrich.WithThreadId()
             .Enrich.WithProcessId()
+            .Enrich.WithExceptionDetails()
             .ReadFrom.Configuration(configuration)
             .CreateLogger();
 
