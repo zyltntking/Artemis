@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using Artemis.Data.Grpc;
+using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
 
 namespace Artemis.Shared.Identity.Services;
@@ -37,7 +37,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("登出")]
-    Task<GrpcEmptyResponse> SignOutAsync();
+    Task<EmptyResult> SignOutAsync();
 
     /// <summary>
     ///     修改密码
@@ -46,7 +46,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("修改密码")]
-    Task<GrpcEmptyResponse> ChangePasswordAsync(ChangePasswordRequest request);
+    Task<EmptyResult> ChangePasswordAsync(ChangePasswordRequest request);
 
     /// <summary>
     ///     重置密码
@@ -55,7 +55,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("重置密码")]
-    Task<GrpcEmptyResponse> ResetPasswordAsync(ResetPasswordRequest request);
+    Task<EmptyResult> ResetPasswordAsync(ResetPasswordRequest request);
 
     /// <summary>
     ///     重置密码
@@ -64,7 +64,7 @@ public interface IAccountService
     /// <returns></returns>
     [OperationContract]
     [Description("重置密码")]
-    Task<GrpcEmptyResponse> ResetPasswordsAsync(ResetPasswordsRequest request);
+    Task<EmptyResult> ResetPasswordsAsync(ResetPasswordsRequest request);
 }
 
 /// <summary>
@@ -155,26 +155,7 @@ public sealed record TokenResult : TokenPackage
 ///     Token响应
 /// </summary>
 [DataContract]
-public sealed record TokenResponse : GrpcResponse<TokenResult>
-{
-    #region Overrides of GrpcResponse<TokenResult>
-
-    /// <summary>
-    ///     结果信息
-    /// </summary>
-    [Required]
-    [DataMember(Order = 1)]
-    public override required GrpcResult Result { get; set; }
-
-    /// <summary>
-    ///     结果数据
-    /// </summary>
-    [Required]
-    [DataMember(Order = 2)]
-    public override required TokenResult? Data { get; set; }
-
-    #endregion
-}
+public sealed record TokenResponse : DataResult<TokenResult>;
 
 /// <summary>
 ///     修改密码请求
@@ -183,7 +164,7 @@ public sealed record TokenResponse : GrpcResponse<TokenResult>
 public sealed record ChangePasswordRequest
 {
     /// <summary>
-    ///     用户签名
+    ///     用户标识
     /// </summary>
     [Required]
     [DataMember(Order = 1)]

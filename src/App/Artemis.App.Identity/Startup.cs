@@ -1,9 +1,8 @@
-﻿using Artemis.Extensions.Rpc;
-using Artemis.Extensions.Web.Identity;
+﻿using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 using Microsoft.EntityFrameworkCore;
-using ProtoBuf.Grpc.Server;
+using Microsoft.OpenApi.Models;
 
 namespace Artemis.App.Identity;
 
@@ -58,14 +57,23 @@ public class Startup : IWebAppStartup
 
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
-        builder.Services.AddCodeFirstGrpc(options =>
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(options =>
         {
-            options.EnableDetailedErrors = true;
-            options.Interceptors.Add<AddInLogInterceptor>();
+            options.SwaggerDoc("v1",
+                new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
         });
 
-        if (builder.Environment.IsDevelopment())
-            builder.Services.AddCodeFirstGrpcReflection();
+        //builder.Services.AddCodeFirstGrpc(options =>
+        //{
+        //    options.EnableDetailedErrors = true;
+        //    options.Interceptors.Add<AddInLogInterceptor>();
+        //});
+
+        //if (builder.Environment.IsDevelopment())
+        //    builder.Services.AddCodeFirstGrpcReflection();
     }
 
     /// <summary>
@@ -87,16 +95,33 @@ public class Startup : IWebAppStartup
 
         app.UseRouting();
 
+        app.UseSwagger(options =>
+        {
+
+        });
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        });
+
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseResponseCompression();
 
-        app.MapDefaultArtemisIdentityGrpcServices();
+        //app.MapDefaultArtemisIdentityGrpcServices();
 
         if (app.Environment.IsDevelopment())
+        {
+            app.MapGet("api-route-table", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
+            {
+                var end = endpointSources.SelectMany(es => es.Endpoints);
+
+            });
+
             //app.MapApiRouteTable();
-            app.MapCodeFirstGrpcReflectionService();
+            //app.MapCodeFirstGrpcReflectionService();
+        }
     }
 
     #endregion

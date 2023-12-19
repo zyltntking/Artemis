@@ -2605,7 +2605,7 @@
             <param name="isDevelopment"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityExtensions.MapArtemisIdentityGrpcServices``3(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean)">
+        <member name="M:Artemis.Services.Identity.IdentityExtensions.MapArtemisIdentityGrpcServices``3(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
                添加认证服务
             </summary>
@@ -2613,14 +2613,12 @@
             <typeparam name="TRoleService"></typeparam>
             <typeparam name="TAccountService"></typeparam>
             <param name="application"></param>
-            <param name="enableWebAccess">是否允许Web访问</param>
         </member>
-        <member name="M:Artemis.Services.Identity.IdentityExtensions.MapDefaultArtemisIdentityGrpcServices(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean)">
+        <member name="M:Artemis.Services.Identity.IdentityExtensions.MapDefaultArtemisIdentityGrpcServices(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
             添加默认认证服务
             </summary>
             <param name="application">Web应用创建器</param>
-            <param name="enableWebAccess">是否允许Web访问</param>
         </member>
     </members>
 </doc>

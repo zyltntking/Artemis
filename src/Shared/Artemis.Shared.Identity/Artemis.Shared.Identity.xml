@@ -499,11 +499,6 @@
                 修改密码请求
             </summary>
         </member>
-        <member name="P:Artemis.Shared.Identity.Services.ChangePasswordRequest.UserSign">
-            <summary>
-                用户签名
-            </summary>
-        </member>
         <member name="P:Artemis.Shared.Identity.Services.ChangePasswordRequest.OldPassword">
             <summary>
                 原始密码

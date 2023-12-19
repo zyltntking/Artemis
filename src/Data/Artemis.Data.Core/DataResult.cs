@@ -18,7 +18,7 @@ file interface IResultBase
     /// <summary>
     ///     操作是否成功
     /// </summary>
-    bool Succeeded { set; get; }
+    bool Succeeded { get; }
 
     /// <summary>
     ///     消息
@@ -71,14 +71,7 @@ public abstract record AbstractResult : IResultBase
     /// <summary>
     ///     是否成功
     /// </summary>
-    public virtual bool Succeeded
-    {
-        get => Code == ResultStatus.Success;
-        set
-        {
-            //ignore
-        }
-    }
+    public virtual bool Succeeded => Code == ResultStatus.Success;
 
     /// <summary>
     ///     消息
@@ -110,49 +103,15 @@ public abstract record AbstractResult : IResultBase
 ///     数据结果协议模板接口
 /// </summary>
 /// <typeparam name="T">模板类型</typeparam>
-public sealed record DataResult<T> : AbstractResult, IResultBase<T>
+public record DataResult<T> : AbstractResult, IResultBase<T>
 {
-    /// <summary>
-    ///     空构造
-    /// </summary>
-    public DataResult()
-    {
-    }
-
-    /// <summary>
-    ///     异常构造
-    /// </summary>
-    /// <param name="code">消息码</param>
-    /// <param name="message">消息</param>
-    /// <param name="exception">异常</param>
-    public DataResult(int code, string message, Exception exception)
-    {
-        Code = code;
-        Message = message;
-        Error = exception.ToString();
-        Data = default;
-    }
-
-    /// <summary>
-    ///     成功构造
-    /// </summary>
-    /// <param name="code">消息码</param>
-    /// <param name="message">消息</param>
-    /// <param name="data">数据</param>
-    public DataResult(int code, string message, T? data = default)
-    {
-        Code = code;
-        Message = message;
-        Data = data;
-        Error = null;
-    }
 
     #region Implementation of IResultBase<T>
 
     /// <summary>
     ///     数据
     /// </summary>
-    public T? Data { get; set; }
+    public virtual T? Data { get; set; }
 
     #endregion
 
@@ -228,9 +187,9 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>成功结果</returns>
-    public static DataResult<EmptyRecord> Success(string message = "成功")
+    public static EmptyResult Success(string message = "成功")
     {
-        return GenerateResult(ResultStatus.Success, message, new EmptyRecord());
+        return GenerateEmptyResult(ResultStatus.Success, message);
     }
 
     /// <summary>
@@ -249,9 +208,9 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>失败结果</returns>
-    public static DataResult<EmptyRecord> Fail(string message = "失败")
+    public static EmptyResult Fail(string message = "失败")
     {
-        return GenerateResult<EmptyRecord>(ResultStatus.Fail, message);
+        return GenerateEmptyResult(ResultStatus.Fail, message);
     }
 
     /// <summary>
@@ -274,10 +233,10 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static DataResult<EmptyRecord> Exception(Exception exception, int code = ResultStatus.Exception,
+    public static EmptyResult Exception(Exception exception, int code = ResultStatus.Exception,
         string message = "异常")
     {
-        return GenerateResult<EmptyRecord>(code, message, default, exception);
+        return GenerateEmptyResult(code, message, exception);
     }
 
     /// <summary>
@@ -296,6 +255,35 @@ public static class DataResult
         {
             Code = code,
             Data = data,
+            Message = message,
+            Error = exception?.ToString(),
+            DateTime = DateTime.Now.ToLocalTime(),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+
+        if (exception != null)
+        {
+            result.SetException(exception);
+
+            result.AddDescriptor("Exception", exception.ToString());
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// 生成空数据结果
+    /// </summary>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <param name="exception">异常信息</param>
+    /// <returns></returns>
+    private static EmptyResult GenerateEmptyResult(int code, string message, Exception? exception = null)
+    {
+        var result = new EmptyResult
+        {
+            Code = code,
+            Data = new EmptyRecord(),
             Message = message,
             Error = exception?.ToString(),
             DateTime = DateTime.Now.ToLocalTime(),
@@ -338,6 +326,11 @@ public static class ResultStatus
 ///     空记录
 /// </summary>
 public record EmptyRecord;
+
+/// <summary>
+/// 空结果
+/// </summary>
+public record EmptyResult : DataResult<EmptyRecord>;
 
 /// <summary>
 ///     含键记录

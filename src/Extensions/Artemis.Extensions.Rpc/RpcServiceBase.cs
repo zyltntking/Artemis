@@ -3,7 +3,7 @@ using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace Artemis.Services.Rpc
+namespace Artemis.Extensions.Rpc
 {
     /// <summary>
     /// Rpc服务模板
@@ -37,6 +37,11 @@ namespace Artemis.Services.Rpc
         /// 查询当前用户Token
         /// </summary>
         protected TokenDocument? CurrentToken => HttpContext?.FetchToken();
+
+        /// <summary>
+        /// 请求头中的Token
+        /// </summary>
+        protected string? HeaderToken => HttpContext?.FetchHeaderToken(Options.HeaderTokenKey);
 
         /// <summary>
         /// 操作取消信号
