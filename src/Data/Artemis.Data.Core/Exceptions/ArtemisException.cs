@@ -1,9 +1,29 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
+#region MyRegion
+
+/// <summary>
+///     异常成员接口
+/// </summary>
+file interface IArtemisException
+{
+    /// <summary>
+    ///     错误信息
+    /// </summary>
+    string ErrorMessage { get; }
+
+    /// <summary>
+    ///     错误编码
+    /// </summary>
+    int ErrorCode { get; }
+}
+
+#endregion
+
 /// <summary>
 ///     Artemis系统日志
 /// </summary>
-public abstract class ArtemisException : Exception
+public abstract class ArtemisException : Exception, IArtemisException
 {
     /// <summary>
     ///     错误构造

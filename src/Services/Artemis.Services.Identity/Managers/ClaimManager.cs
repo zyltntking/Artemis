@@ -8,7 +8,6 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -22,14 +21,14 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// </summary>
     /// <param name="claimStore">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
-    /// <param name="optionsAccessor">配置依赖</param>
+    /// <param name="options">配置依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     public ClaimManager(
         IArtemisClaimStore claimStore,
         IDistributedCache? cache = null,
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
-        ILogger? logger = null) : base(claimStore, cache, optionsAccessor, logger)
+        IManagerOptions? options = null,
+        ILogger? logger = null) : base(claimStore, cache, options, logger)
     {
     }
 

@@ -9,7 +9,6 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -25,7 +24,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
     /// <param name="userStore">用户存储管理器</param>
     /// <param name="userRoleStore">用户角色存储访问器</param>
     /// <param name="roleClaimStore">角色凭据存储访问器</param>
-    /// <param name="optionsAccessor"></param>
+    /// <param name="options"></param>
     /// <param name="cache">缓存以来</param>
     /// <param name="logger">日志依赖</param>
     public RoleManager(
@@ -34,8 +33,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         IArtemisUserRoleStore userRoleStore,
         IArtemisRoleClaimStore roleClaimStore,
         ILogger? logger = null,
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
-        IDistributedCache? cache = null) : base(roleStore, cache, optionsAccessor, logger)
+        IManagerOptions? options = null,
+        IDistributedCache? cache = null) : base(roleStore, cache, options, logger)
     {
         UserStore = userStore;
         UserRoleStore = userRoleStore;

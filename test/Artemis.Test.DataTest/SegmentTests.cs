@@ -10,6 +10,8 @@ public class SegmentTests
     [Fact]
     public void Test()
     {
+        var bb = Convert.FromBase64String("AQUAAP8AjDo=");
+
         var str = AsciiCharacter.RandomNonAlphanumeric(8);
     }
 }

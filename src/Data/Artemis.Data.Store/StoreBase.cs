@@ -9,7 +9,8 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
-    where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+    where TEntity : IModelBase<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     已释放标识

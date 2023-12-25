@@ -65,12 +65,7 @@ public record ArtemisStoreOptions : IStoreOptions
     /// <summary>
     ///     是否启用具缓存存储策略
     /// </summary>
-    public bool CachedStore { get; set; }
-
-    /// <summary>
-    ///     是否启用具缓存管理器策略
-    /// </summary>
-    public bool CachedManager { get; set; }
+    public bool CachedStore { get; set; } = false;
 
     /// <summary>
     ///     过期时间(秒)

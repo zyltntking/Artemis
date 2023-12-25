@@ -4,7 +4,6 @@ using Artemis.Data.Store.Extensions;
 using Mapster;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Data.Store;
 
@@ -24,7 +23,7 @@ public interface IManager<TEntity> : IManager<TEntity, Guid>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IManager<TEntity, TKey>
+public interface IManager<TEntity, TKey> : IManagerOptions
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -126,14 +125,14 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     /// </summary>
     /// <param name="store">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
-    /// <param name="optionsAccessor">配置依赖</param>
+    /// <param name="options">配置依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Manager(
         IStore<TEntity> store,
         IDistributedCache? cache = null,
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
-        ILogger? logger = null) : base(store, cache, optionsAccessor, null, logger)
+        IManagerOptions? options = null,
+        ILogger? logger = null) : base(store, cache, options, null, logger)
     {
     }
 }
@@ -151,7 +150,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     ///     创建新的管理器实例
     /// </summary>
     /// <param name="store">存储访问器依赖</param>
-    /// <param name="optionsAccessor">配置依赖</param>
+    /// <param name="options">配置依赖</param>
     /// <param name="errors">错误依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <param name="cache">缓存依赖</param>
@@ -159,17 +158,16 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     protected Manager(
         IStore<TEntity, TKey> store,
         IDistributedCache? cache = null,
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
+        IManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
         ILogger? logger = null)
     {
         Store = store;
-        ArtemisStoreOptions = optionsAccessor?.Value ?? new ArtemisStoreOptions();
         Describer = errors ?? new StoreErrorDescriber();
         Logger = logger;
         Cache = cache;
 
-        Store.SetOptions(ArtemisStoreOptions);
+        SetManagerOptions(options ?? new ArtemisManagerOptions());
     }
 
     /// <summary>
@@ -185,7 +183,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="message">日志消息</param>
     protected void SetDebugLog(string message)
     {
-        if (ArtemisStoreOptions.DebugLogger)
+        if (DebugLogger)
             Logger?.LogDebug(message);
     }
 
@@ -222,6 +220,17 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         return string.Join(":", parameters);
     }
 
+    /// <summary>
+    ///     设置配置
+    /// </summary>
+    /// <param name="options"></param>
+    private void SetManagerOptions(IManagerOptions options)
+    {
+        CachedManager = options.CachedManager;
+        Expires = options.Expires;
+        DebugLogger = options.DebugLogger;
+    }
+
     #region Properties
 
     /// <summary>
@@ -235,16 +244,6 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     protected IDistributedCache? Cache { get; }
 
     /// <summary>
-    ///     缓存是否可用
-    /// </summary>
-    protected bool CacheAvailable => ArtemisStoreOptions.CachedManager;
-
-    /// <summary>
-    ///     配置访问器
-    /// </summary>
-    private ArtemisStoreOptions ArtemisStoreOptions { get; }
-
-    /// <summary>
     ///     错误报告生成器
     /// </summary>
     protected StoreErrorDescriber Describer { get; }
@@ -253,6 +252,61 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     ///     日志依赖访问器
     /// </summary>
     private ILogger? Logger { get; }
+
+    #endregion
+
+    #region Implementation of IManagerOptions
+
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    private bool _cachedManager;
+
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    public bool CachedManager
+    {
+        get => _cachedManager;
+        set => _cachedManager = value && Cache != null;
+    }
+
+    /// <summary>
+    ///     过期时间(秒)
+    /// </summary>
+    private int _expires;
+
+    /// <summary>
+    ///     过期时间(秒)
+    /// </summary>
+    public int Expires
+    {
+        get => _expires;
+        set
+        {
+            _expires = value;
+            CachedManager = _expires switch
+            {
+                > 0 => true,
+                < 0 => false,
+                _ => CachedManager
+            };
+        }
+    }
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    private bool _debugLogger;
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    public bool DebugLogger
+    {
+        get => _debugLogger;
+        set => _debugLogger = value && Logger != null;
+    }
 
     #endregion
 

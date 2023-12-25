@@ -22,12 +22,14 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="logger">日志依赖</param>
+    /// <param name="storeOptions"></param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Store(
         DbContext context,
+        IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, cache, logger)
+        ILogger? logger = null) : base(context, storeOptions, cache, logger)
     {
     }
 
@@ -70,12 +72,14 @@ public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
     /// </summary>
     /// <param name="context">数据访问上下文</param>
     /// <param name="logger">日志依赖</param>
+    /// <param name="storeOptions">配置依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Store(
         DbContext context,
+        IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, cache, logger)
+        ILogger? logger = null) : base(context, storeOptions, cache, logger)
     {
     }
 }
@@ -97,10 +101,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="context">数据访问上下文</param>
     /// <param name="logger">日志依赖</param>
     /// <param name="describer">操作异常描述者</param>
+    /// <param name="storeOptions">配置依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Store(
         TContext context,
+        IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null) : base(describer)
@@ -108,6 +114,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Context = context;
         Cache = cache;
         Logger = logger;
+        SetStoreOptions(storeOptions ?? new ArtemisStoreOptions());
     }
 
     #region DebugLogger
@@ -118,8 +125,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="message">日志消息</param>
     private void SetDebugLog(string message)
     {
-        if (DebugLogger)
-            Logger?.LogDebug(message);
+        Logger?.LogDebug(message);
     }
 
     #endregion
@@ -196,7 +202,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             Cache?.Set(entity.GenerateKey(Prefix), entity, Expires);
 
-            SetDebugLog("Entity Cached");
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Cached");
         }
     }
 
@@ -217,7 +223,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
             Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires, cancellationToken);
 
-            SetDebugLog("Entity Cached");
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Cached");
         }
 
         return Task.CompletedTask;
@@ -241,7 +247,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Cached {count} Entities");
+            if (DebugLogger) SetDebugLog($"Cached {count} {typeof(TEntity).Name} Entities");
         }
     }
 
@@ -266,7 +272,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Cached {count} Entities");
+            if (DebugLogger) SetDebugLog($"Cached {count} {typeof(TEntity).Name} Entities");
         }
 
         return Task.CompletedTask;
@@ -290,6 +296,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             entity.Id = key;
 
             entity = Cache?.Get<TEntity>(entity.GenerateKey(Prefix));
+
+            if (DebugLogger) SetDebugLog($"Get {typeof(TEntity).Name} Entity From Cache");
 
             return entity;
         }
@@ -318,6 +326,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             entity.Id = key;
 
             entity = await Cache?.GetAsync<TEntity>(entity.GenerateKey(Prefix), cancellationToken)!;
+
+            if (DebugLogger) SetDebugLog($"Get {typeof(TEntity).Name} Entity From Cache");
 
             return entity;
         }
@@ -351,6 +361,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 if (entity is not null)
                     list.Add(entity);
             }
+
+            if (DebugLogger) SetDebugLog($"Get {list.Count} {typeof(TEntity).Name} Entities From Cache");
 
             return list;
         }
@@ -387,6 +399,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                     list.Add(entity);
             }
 
+            if (DebugLogger) SetDebugLog($"Get {list.Count} {typeof(TEntity).Name} Entities From Cache");
+
             return list;
         }
 
@@ -410,7 +424,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             entity.Id = key;
 
             Cache?.Remove(entity.GenerateKey(Prefix));
-            SetDebugLog("Entity Remove");
+
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
         }
     }
 
@@ -426,7 +441,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 throw new InstanceNotImplementException(nameof(Cache));
 
             Cache?.Remove(entity.GenerateKey(Prefix));
-            SetDebugLog("Entity Remove");
+
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
         }
     }
 
@@ -447,7 +463,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             entity.Id = key;
 
             await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-            SetDebugLog("Entity Remove");
+
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
         }
     }
 
@@ -466,7 +483,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 throw new InstanceNotImplementException(nameof(Cache));
 
             await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-            SetDebugLog("Entity Remove");
+
+            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
         }
     }
 
@@ -492,7 +510,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Removed {count} Entities From Cache");
+            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
         }
     }
 
@@ -514,7 +532,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Removed {count} Entities From Cache");
+            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
         }
     }
 
@@ -543,7 +561,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Removed {count} Entities From Cache");
+            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
         }
     }
 
@@ -568,7 +586,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
                 count++;
             }
 
-            SetDebugLog($"Removed {count} Entities From Cache");
+            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
         }
     }
 
@@ -582,7 +600,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     private int SaveChanges()
     {
-        SetDebugLog(nameof(SaveChanges));
+        if (DebugLogger) SetDebugLog(nameof(SaveChanges));
+
         return AutoSaveChanges ? Context.SaveChanges() : 0;
     }
 
@@ -593,7 +612,8 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns>异步取消结果</returns>
     private Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(SaveChangesAsync));
+        if (DebugLogger) SetDebugLog(nameof(SaveChangesAsync));
+
         return AutoSaveChanges ? Context.SaveChangesAsync(cancellationToken) : Task.FromResult(0);
     }
 
@@ -698,15 +718,17 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <summary>
     ///     设置配置
     /// </summary>
-    /// <param name="artemisStoreOptions"></param>
-    public void SetOptions(ArtemisStoreOptions artemisStoreOptions)
+    /// <param name="options"></param>
+    private void SetStoreOptions(IStoreOptions options)
     {
-        AutoSaveChanges = artemisStoreOptions.AutoSaveChanges;
-        MetaDataHosting = artemisStoreOptions.MetaDataHosting;
-        SoftDelete = artemisStoreOptions.SoftDelete;
-        CachedStore = artemisStoreOptions.CachedStore;
-        Expires = artemisStoreOptions.Expires;
-        DebugLogger = artemisStoreOptions.DebugLogger;
+        AutoSaveChanges = options.AutoSaveChanges;
+        MetaDataHosting = options.MetaDataHosting;
+        SoftDelete = options.SoftDelete;
+        CachedStore = options.CachedStore;
+        Expires = options.Expires;
+        DebugLogger = options.DebugLogger;
+
+        if (DebugLogger) SetDebugLog(nameof(SetStoreOptions));
     }
 
     #endregion
@@ -720,15 +742,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public virtual StoreResult Create(TEntity entity)
     {
-        SetDebugLog(nameof(Create));
-
         OnActionExecuting(entity, nameof(entity));
 
         AddEntity(entity);
 
         var result = AttacheChange();
 
-        if (result.Succeeded) CacheEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Create {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
 
         return result;
     }
@@ -740,8 +765,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public virtual StoreResult Create(IEnumerable<TEntity> entities)
     {
-        SetDebugLog(nameof(Create));
-
         var list = entities.ToList();
 
         OnActionExecuting(list, nameof(entities));
@@ -750,7 +773,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        if (result.Succeeded) CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
 
         return result;
     }
@@ -765,15 +793,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(CreateAsync));
-
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
 
         AddEntity(entity);
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Create {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
 
         return result;
     }
@@ -788,8 +819,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(CreateAsync));
-
         var list = entities.ToList();
 
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -798,7 +827,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
 
         return result;
     }
@@ -814,15 +848,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult Update(TEntity entity)
     {
-        SetDebugLog(nameof(Update));
-
         OnActionExecuting(entity, nameof(entity));
 
         UpdateEntity(entity);
 
         var result = AttacheChange();
 
-        if (result.Succeeded) CacheEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Update {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
 
         return result;
     }
@@ -834,8 +871,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult Update(IEnumerable<TEntity> entities)
     {
-        SetDebugLog(nameof(Update));
-
         var list = entities.ToList();
 
         OnActionExecuting(list, nameof(entities));
@@ -844,7 +879,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        if (result.Succeeded) CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Update {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
 
         return result;
     }
@@ -859,15 +899,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(UpdateAsync));
-
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
 
         UpdateEntity(entity);
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Update {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
 
         return result;
     }
@@ -882,8 +925,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(UpdateAsync));
-
         var list = entities.ToList();
 
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -892,7 +933,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Update {list.Count} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
 
         return result;
     }
@@ -1119,8 +1165,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="id">被删除实体的主键</param>
     public StoreResult Delete(TKey id)
     {
-        SetDebugLog(nameof(Delete));
-
         OnActionExecuting(id, nameof(id));
 
         var entity = FindEntity(id);
@@ -1132,7 +1176,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        if (result.Succeeded) RemoveCachedEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+
+            RemoveCachedEntity(entity);
+        }
 
         return result;
     }
@@ -1144,15 +1193,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult Delete(TEntity entity)
     {
-        SetDebugLog(nameof(Delete));
-
         OnActionExecuting(entity, nameof(entity));
 
         DeleteEntity(entity);
 
         var result = AttacheChange();
 
-        if (result.Succeeded) RemoveCachedEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+
+            RemoveCachedEntity(entity);
+        }
 
         return result;
     }
@@ -1164,8 +1216,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult Delete(IEnumerable<TKey> ids)
     {
-        SetDebugLog(nameof(Delete));
-
         var idList = ids as List<TKey> ?? ids.ToList();
 
         OnActionExecuting(idList, nameof(ids));
@@ -1182,7 +1232,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        if (result.Succeeded) RemoveCachedEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            RemoveCachedEntities(list);
+        }
 
         return result;
     }
@@ -1194,8 +1249,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public StoreResult Delete(IEnumerable<TEntity> entities)
     {
-        SetDebugLog(nameof(Delete));
-
         var list = entities.ToList();
 
         OnActionExecuting(list, nameof(entities));
@@ -1204,7 +1257,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = AttacheChange();
 
-        if (result.Succeeded) RemoveCachedEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            RemoveCachedEntities(list);
+        }
 
         return result;
     }
@@ -1219,8 +1277,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(DeleteAsync));
-
         OnAsyncActionExecuting(id, nameof(id), cancellationToken);
 
         var entity = await FindEntityAsync(id, cancellationToken);
@@ -1232,7 +1288,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await RemoveCachedEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+
+            await RemoveCachedEntityAsync(entity, cancellationToken);
+        }
 
         return result;
     }
@@ -1247,15 +1308,18 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(DeleteAsync));
-
         OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
 
         DeleteEntity(entity);
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await RemoveCachedEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+
+            await RemoveCachedEntityAsync(entity, cancellationToken);
+        }
 
         return result;
     }
@@ -1270,8 +1334,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TKey> ids,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(DeleteAsync));
-
         var idList = ids as List<TKey> ?? ids.ToList();
 
         OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
@@ -1288,7 +1350,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await RemoveCachedEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await RemoveCachedEntitiesAsync(list, cancellationToken);
+        }
 
         return result;
     }
@@ -1303,8 +1370,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(DeleteAsync));
-
         var list = entities.ToList();
 
         OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
@@ -1313,7 +1378,12 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         var result = await AttacheChangeAsync(cancellationToken);
 
-        if (result.Succeeded) await RemoveCachedEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await RemoveCachedEntitiesAsync(list, cancellationToken);
+        }
 
         return result;
     }
@@ -1572,15 +1642,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             return cached.Adapt<TMapEntity>();
 
         return FindById<TMapEntity>(id);
-
-        //var entity = FindById(id);
-
-        //if (entity is not null)
-        //{
-        //    CacheEntity(entity);
-        //}
-
-        //return entity.Adapt<TMapEntity>();
     }
 
     /// <summary>
@@ -1630,15 +1691,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         return FindByIds<TMapEntity>(idArray);
-
-        //var entities = FindByIds(idArray).ToList();
-
-        //if (entities.Any())
-        //{
-        //    CacheEntities(entities);
-        //}
-
-        //return entities.Adapt<IEnumerable<TMapEntity>>();
     }
 
     /// <summary>
@@ -1683,15 +1735,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             return cached.Adapt<TMapEntity>();
 
         return await FindByIdAsync<TMapEntity>(id, cancellationToken);
-
-        //var entity = await FindByIdAsync(id, cancellationToken);
-
-        //if (entity is not null)
-        //{
-        //    await CacheEntityAsync(entity, cancellationToken);
-        //}
-
-        //return entity.Adapt<TMapEntity>();
     }
 
     /// <summary>
@@ -1747,15 +1790,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         }
 
         return await FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
-
-        //var entities = await FindByIdsAsync(ids, cancellationToken);
-
-        //if (entities.Any())
-        //{
-        //    await CacheEntitiesAsync(entities, cancellationToken);
-        //}
-
-        //return entities.Adapt<IEnumerable<TMapEntity>>();
     }
 
     #endregion
@@ -1769,7 +1803,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <returns></returns>
     public bool Exists(TKey id)
     {
-        SetDebugLog(nameof(Exists));
         OnActionExecuting(id, nameof(id));
         return KeyMatchQuery(id).Any();
     }
@@ -1784,7 +1817,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TKey id,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(ExistsAsync));
         OnActionExecuting(id, nameof(id));
         return KeyMatchQuery(id).AnyAsync(cancellationToken);
     }
@@ -1808,7 +1840,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TSource source,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(CreateNew));
         OnActionExecuting(source, nameof(source));
         config ??= IgnoreIdConfig<TSource>();
         var entity = source!.Adapt<TSource, TEntity>(config);
@@ -1816,7 +1847,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var result = AttacheChange();
-        CacheEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"CreateNew {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
         return result;
     }
 
@@ -1831,7 +1868,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         IEnumerable<TSource> sources,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(CreateNew));
         OnActionExecuting(sources, nameof(sources));
         config ??= IgnoreIdConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
@@ -1840,7 +1876,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         AddEntities(list);
         var result = AttacheChange();
-        CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
         return result;
     }
 
@@ -1857,7 +1899,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(CreateNewAsync));
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
         var entity = source!.Adapt<TSource, TEntity>(config);
@@ -1865,7 +1906,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entity));
         AddEntity(entity);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"CreateNew {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
         return result;
     }
 
@@ -1882,7 +1929,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(CreateNewAsync));
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
@@ -1891,7 +1937,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         AddEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
         return result;
     }
 
@@ -1910,7 +1962,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(Over));
         OnActionExecuting(source, nameof(source));
         config ??= IgnoreMetaConfig<TSource>();
         var entity = source.Adapt<TSource, TEntity>(config);
@@ -1918,7 +1969,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         var result = AttacheChange();
-        CacheEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
         return result;
     }
 
@@ -1935,7 +1992,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TEntity destination,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(Over));
         OnActionExecuting(source, nameof(source));
         config ??= IgnoreIdConfig<TSource>();
         source.Adapt(destination, config);
@@ -1943,7 +1999,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         var result = AttacheChange();
-        CacheEntity(destination);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+
+            CacheEntity(destination);
+        }
+
         return result;
     }
 
@@ -1959,7 +2021,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(Over));
         OnActionExecuting(sources, nameof(sources));
         config ??= IgnoreMetaConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
@@ -1968,7 +2029,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = AttacheChange();
-        CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
         return result;
     }
 
@@ -1990,7 +2057,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Func<TEntity, TJKey> destinationKeySelector,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(Over));
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdConfig<TSource>();
@@ -2004,7 +2070,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = AttacheChange();
-        CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
         return result;
     }
 
@@ -2021,7 +2093,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(OverAsync));
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
         config ??= IgnoreMetaConfig<TSource>();
         var entity = source.Adapt<TSource, TEntity>(config);
@@ -2029,7 +2100,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(entity));
         UpdateEntity(entity);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2048,7 +2125,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(OverAsync));
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
         source.Adapt(destination, config);
@@ -2056,7 +2132,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntityAsync(destination, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(destination, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2073,7 +2155,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(OverAsync));
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
         config ??= IgnoreMetaConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
@@ -2082,7 +2163,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2106,7 +2193,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(OverAsync));
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdConfig<TSource>();
@@ -2120,7 +2206,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2139,7 +2231,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TSource source,
         TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(Merge));
         OnActionExecuting(source, nameof(source));
         var entity = FindById(source.Id);
         if (entity is null)
@@ -2148,7 +2239,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(entity, config);
         UpdateEntity(entity);
         var result = AttacheChange();
-        CacheEntity(entity);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
         return result;
     }
 
@@ -2165,7 +2262,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TEntity destination,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(Merge));
         OnActionExecuting(source, nameof(source));
         config ??= IgnoreIdAndNullConfig<TSource>();
         source.Adapt(destination, config);
@@ -2173,7 +2269,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         var result = AttacheChange();
-        CacheEntity(destination);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+
+            CacheEntity(destination);
+        }
+
         return result;
     }
 
@@ -2189,7 +2291,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null)
         where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(Merge));
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
         var destinations = FindByIds(sourceList.Select(source => source.Id));
@@ -2202,7 +2303,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
         var result = AttacheChange();
-        CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
         return result;
     }
 
@@ -2224,7 +2331,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Func<TEntity, TJKey> destinationKeySelector,
         TypeAdapterConfig? config = null)
     {
-        SetDebugLog(nameof(Merge));
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
         config ??= IgnoreIdAndNullConfig<TSource>();
@@ -2238,7 +2344,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = AttacheChange();
-        CacheEntities(list);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
         return result;
     }
 
@@ -2255,7 +2367,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(MergeAsync));
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
         var entity = await FindByIdAsync(source.Id, cancellationToken);
         if (entity is null)
@@ -2264,7 +2375,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         source.Adapt(entity, config);
         UpdateEntity(entity);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntityAsync(entity, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2283,7 +2400,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(MergeAsync));
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
         config ??= IgnoreIdAndNullConfig<TSource>();
         source.Adapt(destination, config);
@@ -2291,7 +2407,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             throw new MapTargetNullException(nameof(destination));
         UpdateEntity(destination);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntityAsync(destination, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(destination, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2308,7 +2430,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
     {
-        SetDebugLog(nameof(MergeAsync));
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         var destinations = await FindByIdsAsync(sourceList.Select(source => source.Id), cancellationToken);
@@ -2321,7 +2442,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
             (source, destination) => source.Adapt(destination, config)).ToList();
         UpdateEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
         return result;
     }
 
@@ -2345,7 +2472,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        SetDebugLog(nameof(MergeAsync));
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
         config ??= IgnoreIdAndNullConfig<TSource>();
@@ -2359,7 +2485,13 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var list = entities.ToList();
         UpdateEntities(list);
         var result = await AttacheChangeAsync(cancellationToken);
-        await CacheEntitiesAsync(list, cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
         return result;
     }
 

@@ -21,16 +21,6 @@ public interface IStoreCommon<TEntity, in TKey> : IStoreOptions
     where TEntity : IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
-    #region IStoreOptions
-
-    /// <summary>
-    ///     设置配置
-    /// </summary>
-    /// <param name="artemisStoreOptions"></param>
-    void SetOptions(ArtemisStoreOptions artemisStoreOptions);
-
-    #endregion
-
     #region CreateEntity & CreateEntities
 
     /// <summary>

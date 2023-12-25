@@ -9,7 +9,6 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Services.Identity.Managers;
 
@@ -23,7 +22,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     /// </summary>
     /// <param name="userStore">存储访问器依赖</param>
     /// <param name="cache">缓存管理器</param>
-    /// <param name="optionsAccessor">配置依赖</param>
+    /// <param name="options">配置依赖</param>
     /// <param name="roleStore">角色存储访问器依赖</param>
     /// <param name="userRoleStore">用户角色存储访问器依赖</param>
     /// <param name="userTokenStore">用户令牌存储访问器依赖</param>
@@ -39,8 +38,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         IArtemisUserLoginStore userLoginStore,
         IArtemisUserTokenStore userTokenStore,
         ILogger? logger = null,
-        IOptions<ArtemisStoreOptions>? optionsAccessor = null,
-        IDistributedCache? cache = null) : base(userStore, cache, optionsAccessor, logger)
+        IManagerOptions? options = null,
+        IDistributedCache? cache = null) : base(userStore, cache, options, logger)
     {
         RoleStore = roleStore;
         UserRoleStore = userRoleStore;
