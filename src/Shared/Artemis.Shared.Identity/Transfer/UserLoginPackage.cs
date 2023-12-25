@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
@@ -37,9 +36,9 @@ internal interface IUserLogin
 }
 
 /// <summary>
-///     用户登录信息文档接口
+///     用户登录信息接口
 /// </summary>
-file interface IUserLoginDocument : IUserLogin
+file interface IUserLoginInfo : IUserLogin
 {
     /// <summary>
     ///     用户标识
@@ -52,7 +51,6 @@ file interface IUserLoginDocument : IUserLogin
 /// <summary>
 ///     基本用户登录信息
 /// </summary>
-[DataContract]
 public record UserLoginPackage : IUserLogin
 {
     #region DefaultImlement
@@ -71,23 +69,20 @@ public record UserLoginPackage : IUserLogin
     /// </summary>
     [Required]
     [MaxLength(32)]
-    [DataMember(Order = 1)]
-    public virtual required string LoginProvider { get; set; }
+    public required string LoginProvider { get; set; }
 
     /// <summary>
     ///     提供程序密钥
     /// </summary>
     [Required]
     [MaxLength(64)]
-    [DataMember(Order = 2)]
-    public virtual required string ProviderKey { get; set; }
+    public required string ProviderKey { get; set; }
 
     /// <summary>
     ///     提供程序显示名称
     /// </summary>
     [MaxLength(32)]
-    [DataMember(Order = 3)]
-    public virtual string? ProviderDisplayName { get; set; }
+    public string? ProviderDisplayName { get; set; }
 
     #endregion
 }
@@ -95,14 +90,12 @@ public record UserLoginPackage : IUserLogin
 /// <summary>
 ///     用户登录信息
 /// </summary>
-[DataContract]
-public sealed record UserLoginInfo : UserLoginPackage, IUserLoginDocument, IKeySlot<int>
+public sealed record UserLoginInfo : UserLoginPackage, IUserLoginInfo, IKeySlot<int>
 {
     /// <summary>
     ///     存储标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required int Id { get; set; }
 
 
@@ -110,29 +103,5 @@ public sealed record UserLoginInfo : UserLoginPackage, IUserLoginDocument, IKeyS
     ///     用户标识
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
     public required Guid UserId { get; set; }
-
-    /// <summary>
-    ///     登录提供程序
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    [DataMember(Order = 3)]
-    public override required string LoginProvider { get; set; }
-
-    /// <summary>
-    ///     提供程序密钥
-    /// </summary>
-    [Required]
-    [MaxLength(64)]
-    [DataMember(Order = 4)]
-    public override required string ProviderKey { get; set; }
-
-    /// <summary>
-    ///     提供程序显示名称
-    /// </summary>
-    [MaxLength(32)]
-    [DataMember(Order = 5)]
-    public override string? ProviderDisplayName { get; set; }
 }

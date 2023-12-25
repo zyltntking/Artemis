@@ -46,7 +46,7 @@ public static class DataParser
     ///     id转string
     /// </summary>
     /// <param name="id">The id to convert.</param>
-    /// <returns>An <see cref="string" /> representation of the provided <paramref name="id" />.</returns>
+    /// <returns>A <see cref="string" /> representation of the provided <paramref name="id" />.</returns>
     public static string? IdToString<TKey>(this TKey id) where TKey : IEquatable<TKey>
     {
         return Equals(id, default(TKey)) ? null : id.ToString();

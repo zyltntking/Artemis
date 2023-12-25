@@ -23,7 +23,9 @@ public static class Normalize
     /// <returns>戳</returns>
     public static string KeyValuePairStampNormalize(string key, string value)
     {
-        return Hash.Md5Hash($"{key}:{value}");
+        var flag = KeyValuePairFlagNormalize(key, value);
+
+        return Hash.Md5Hash(flag).StringNormalize();
     }
 
     /// <summary>
@@ -34,5 +36,26 @@ public static class Normalize
     public static string KeyValuePairStampNormalize(KeyValuePair<string, string> pair)
     {
         return KeyValuePairStampNormalize(pair.Key, pair.Value);
+    }
+
+    /// <summary>
+    ///     键值对标识标准化
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <param name="value">值</param>
+    /// <returns></returns>
+    public static string KeyValuePairFlagNormalize(string key, string value)
+    {
+        return $"{key}:{value}";
+    }
+
+    /// <summary>
+    ///     键值对标识标准化
+    /// </summary>
+    /// <param name="pair">键值对</param>
+    /// <returns></returns>
+    public static string KeyValuePairFlagNormalize(KeyValuePair<string, string> pair)
+    {
+        return KeyValuePairFlagNormalize(pair.Key, pair.Value);
     }
 }

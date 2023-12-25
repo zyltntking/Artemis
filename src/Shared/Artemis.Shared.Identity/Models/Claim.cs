@@ -7,7 +7,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     凭据字典
 /// </summary>
-public class Claim : IKeySlot<Guid>, IClaim
+public abstract class Claim : IKeySlot<Guid>, IClaim
 {
     /// <summary>
     ///     凭据类型

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace Artemis.Shared.Identity.Transfer;
 
@@ -26,7 +25,6 @@ file interface IToken
 /// <summary>
 ///     Token对象
 /// </summary>
-[DataContract]
 public record TokenPackage : IToken
 {
     #region Implementation of IToken
@@ -35,15 +33,13 @@ public record TokenPackage : IToken
     ///     Token
     /// </summary>
     [MaxLength(32)]
-    [DataMember(Order = 1)]
-    public virtual string? Token { get; set; }
+    public string? Token { get; set; }
 
     /// <summary>
     ///     过期时间
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
-    public virtual required long Expire { get; set; }
+    public required long Expire { get; set; }
 
     #endregion
 }
@@ -58,13 +54,13 @@ public record SignInPackage
     /// </summary>
     /// <remarks>用户名|电话号码|邮箱地址</remarks>
     [Required]
-    public virtual required string UserSign { get; set; }
+    public required string UserSign { get; set; }
 
     /// <summary>
     ///     密码
     /// </summary>
     [Required]
-    public virtual required string Password { get; set; }
+    public required string Password { get; set; }
 }
 
 /// <summary>

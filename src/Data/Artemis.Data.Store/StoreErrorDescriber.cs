@@ -181,12 +181,10 @@ public record StoreError : IStoreError
     /// <summary>
     ///     错误编码
     /// </summary>
-    [DataMember(Order = 1)]
     public string? Code { get; init; }
 
     /// <summary>
     ///     错误描述
     /// </summary>
-    [DataMember(Order = 2)]
     public string? Description { get; init; }
 }

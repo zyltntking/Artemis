@@ -10,7 +10,7 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户
 /// </summary>
-public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIdentityUserDocument
+public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIdentityUser
 {
     /// <summary>
     ///     并发锁

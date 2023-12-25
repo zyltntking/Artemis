@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
@@ -30,13 +29,8 @@ internal interface IUser
 /// <summary>
 ///     认证必要信息
 /// </summary>
-public interface IIdentityUserDocument
+public interface IIdentityUser
 {
-    /// <summary>
-    ///     标识
-    /// </summary>
-    Guid Id { get; set; }
-
     /// <summary>
     ///     用户名
     /// </summary>
@@ -53,7 +47,6 @@ public interface IIdentityUserDocument
 /// <summary>
 ///     基本用户信息
 /// </summary>
-[DataContract]
 public record UserPackage : IUser
 {
     /// <summary>
@@ -68,24 +61,21 @@ public record UserPackage : IUser
     /// </summary>
     [Required]
     [MaxLength(32)]
-    [DataMember(Order = 1)]
-    public virtual required string UserName { get; set; }
+    public required string UserName { get; set; }
 
     /// <summary>
     ///     电子邮件
     /// </summary>
     [EmailAddress]
     [MaxLength(128)]
-    [DataMember(Order = 2)]
-    public virtual string? Email { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
     [MaxLength(16)]
-    [DataMember(Order = 3)]
-    public virtual string? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     #endregion
 }
@@ -93,59 +83,32 @@ public record UserPackage : IUser
 /// <summary>
 ///     用户信息
 /// </summary>
-[DataContract]
 public sealed record UserInfo : UserPackage, IKeySlot
 {
     /// <summary>
     ///     用户标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required Guid Id { get; set; }
 
-    /// <summary>
-    ///     用户名
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    [DataMember(Order = 2)]
-    public override required string UserName { get; set; }
-
-    /// <summary>
-    ///     电子邮件
-    /// </summary>
-    [EmailAddress]
-    [MaxLength(128)]
-    [DataMember(Order = 3)]
-    public override string? Email { get; set; }
 
     /// <summary>
     ///     电子邮件确认戳
     /// </summary>
     [Required]
-    [DataMember(Order = 4)]
     public required bool EmailConfirmed { get; set; }
-
-    /// <summary>
-    ///     电话号码
-    /// </summary>
-    [Phone]
-    [MaxLength(16)]
-    [DataMember(Order = 5)]
-    public override string? PhoneNumber { get; set; }
 
     /// <summary>
     ///     电话号码确认戳
     /// </summary>
     [Required]
-    [DataMember(Order = 6)]
     public required bool PhoneNumberConfirmed { get; set; }
 }
 
 /// <summary>
 ///     认证用户文档
 /// </summary>
-public sealed record UserDocument : IIdentityUserDocument
+public sealed record UserDocument : IIdentityUser, IKeySlot
 {
     #region Implementation of IIdentityUserDocument
 

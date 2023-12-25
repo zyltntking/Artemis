@@ -113,6 +113,31 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     }
 
     /// <summary>
+    ///     根据凭据类型获取凭据列表
+    /// </summary>
+    /// <param name="claimTypeSearch">凭据类型</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<List<ClaimInfo>> GetClaimsAsync(string? claimTypeSearch, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+        claimTypeSearch ??= string.Empty;
+
+        var query = ClaimStore.EntityQuery;
+
+        query = query.WhereIf(
+            claimTypeSearch != string.Empty,
+            claim => EF.Functions.Like(
+                claim.ClaimType,
+                $"%{claimTypeSearch}%"));
+
+        return query
+            .OrderBy(claim => claim.ClaimType)
+            .ProjectToType<ClaimInfo>()
+            .ToListAsync(cancellationToken);
+    }
+
+    /// <summary>
     ///     根据凭据标识获取凭据
     /// </summary>
     /// <param name="id">凭据标识</param>
@@ -266,7 +291,7 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<(StoreResult result, ClaimInfo? role)> UpdateOrCreateClaimAsync(Guid id, ClaimPackage package,
+    public async Task<(StoreResult result, ClaimInfo? role)> CreateOrUpdateClaimAsync(Guid id, ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

@@ -757,7 +757,7 @@
 			<returns>更新结果</returns>
 		</member>
 		<member
-			name="M:Artemis.Services.Identity.Managers.ClaimManager.UpdateOrCreateClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+			name="M:Artemis.Services.Identity.Managers.ClaimManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
 			<summary>
 				创建或更新凭据
 			</summary>
@@ -904,7 +904,7 @@
 			<returns>更新结果</returns>
 		</member>
 		<member
-			name="M:Artemis.Services.Identity.Managers.IClaimManager.UpdateOrCreateClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+			name="M:Artemis.Services.Identity.Managers.IClaimManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
 			<summary>
 				创建或更新凭据
 			</summary>

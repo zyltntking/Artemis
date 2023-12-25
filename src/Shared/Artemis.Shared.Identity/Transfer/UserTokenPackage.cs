@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
@@ -52,7 +51,6 @@ file interface IUserTokenDocument : IUserToken
 /// <summary>
 ///     基本用户令牌信息
 /// </summary>
-[DataContract]
 public record UserTokenPackage : IUserToken
 {
     #region DefaultImlement
@@ -71,22 +69,19 @@ public record UserTokenPackage : IUserToken
     /// </summary>
     [Required]
     [MaxLength(32)]
-    [DataMember(Order = 1)]
-    public virtual required string LoginProvider { get; set; }
+    public required string LoginProvider { get; set; }
 
     /// <summary>
     ///     令牌名称
     /// </summary>
     [Required]
     [MaxLength(32)]
-    [DataMember(Order = 2)]
-    public virtual required string Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     ///     令牌值
     /// </summary>
-    [DataMember(Order = 3)]
-    public virtual string? Value { get; set; }
+    public string? Value { get; set; }
 
     #endregion
 }
@@ -94,14 +89,12 @@ public record UserTokenPackage : IUserToken
 /// <summary>
 ///     用户登录信息
 /// </summary>
-[DataContract]
 public sealed record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeySlot<int>
 {
     /// <summary>
     ///     存储标识
     /// </summary>
     [Required]
-    [DataMember(Order = 1)]
     public required int Id { get; set; }
 
 
@@ -109,28 +102,5 @@ public sealed record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeyS
     ///     用户标识
     /// </summary>
     [Required]
-    [DataMember(Order = 2)]
     public required Guid UserId { get; set; }
-
-    /// <summary>
-    ///     登录提供程序
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    [DataMember(Order = 3)]
-    public override required string LoginProvider { get; set; }
-
-    /// <summary>
-    ///     令牌名称
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    [DataMember(Order = 4)]
-    public override required string Name { get; set; }
-
-    /// <summary>
-    ///     令牌值
-    /// </summary>
-    [DataMember(Order = 5)]
-    public override string? Value { get; set; }
 }

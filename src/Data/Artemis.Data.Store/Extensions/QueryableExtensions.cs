@@ -33,15 +33,17 @@ public static class QueryableExtensions
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <param name="query">查询</param>
-    /// <param name="page">页码</param>
+    /// <param name="page">页码(自1开始编码)</param>
     /// <param name="size">数据条目</param>
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
         this IQueryable<TEntity> query,
-        int page,
-        int size)
+        int? page,
+        int? size)
     {
-        return query.Skip((page - 1) * size).Take(size);
+        if (page > 0 && size > 0) query = query.Skip((page.Value - 1) * size.Value);
+
+        return size is > 0 ? query.Take(size.Value) : query;
     }
 
     /// <summary>
@@ -55,12 +57,15 @@ public static class QueryableExtensions
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
         this IQueryable<TEntity> query,
-        int page,
-        int size,
+        int? page,
+        int? size,
         out long count)
     {
         count = query.LongCount();
-        return query.Skip((page - 1) * size).Take(size);
+
+        if (page > 0 && size > 0) query = query.Skip((page.Value - 1) * size.Value);
+
+        return size is > 0 ? query.Take(size.Value) : query;
     }
 
     /// <summary>
@@ -106,8 +111,8 @@ public static class QueryableExtensions
     /// <returns></returns>
     public static Task<List<TEntityInfo>> MapPageAsync<TEntity, TKey, TEntityInfo>(
         this IQueryable<TEntity> query,
-        int page,
-        int size,
+        int? page,
+        int? size,
         CancellationToken cancellationToken = default)
         where TEntity : class, IModelBase<TKey>
         where TKey : IEquatable<TKey>

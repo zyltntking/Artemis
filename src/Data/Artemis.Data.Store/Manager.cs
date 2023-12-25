@@ -49,7 +49,7 @@ public interface IManager<TEntity, TKey> : IManagerOptions
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>实体信息列表</returns>
-    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 20, int size = 1,
+    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -324,7 +324,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <returns>规范化后的键</returns>
     public string NormalizeKey(string key)
     {
-        return Store.NormalizeKey(key);
+        return key.StringNormalize();
     }
 
     #region BaseResourceManager
@@ -337,7 +337,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int page = 1, int size = 20,
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
