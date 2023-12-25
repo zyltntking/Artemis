@@ -1,4 +1,5 @@
-﻿using Artemis.Extensions.Web.Identity;
+﻿using Artemis.App.Identity.Services;
+using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,15 @@ public class Startup : IWebAppStartup
             options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
         });
 
+        builder.Services.AddGrpc().AddJsonTranscoding();
+        builder.Services.AddGrpcReflection();
+        builder.Services.AddGrpcSwagger();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1",
+                new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
+        });
+
         builder.Services.AddArtemisAuthorization(new ArtemisAuthorizationOptions
         {
             EnableAdvancedPolicy = false,
@@ -58,13 +68,13 @@ public class Startup : IWebAppStartup
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
 
-        builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1",
-                new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
-        });
+        //builder.Services.AddControllers();
+        //builder.Services.AddEndpointsApiExplorer();
+        //builder.Services.AddSwaggerGen(options =>
+        //{
+        //    options.SwaggerDoc("v1",
+        //        new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
+        //});
 
         //builder.Services.AddCodeFirstGrpc(options =>
         //{
@@ -95,19 +105,17 @@ public class Startup : IWebAppStartup
 
         app.UseRouting();
 
-        app.UseSwagger(options =>
-        {
-
-        });
-        app.UseSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        });
+        //app.UseSwagger(options => { });
+        //app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseResponseCompression();
+
+        app.UseSwagger();
+        app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+        app.MapGrpcService<GreeterService>();
 
         //app.MapDefaultArtemisIdentityGrpcServices();
 
@@ -116,12 +124,12 @@ public class Startup : IWebAppStartup
             app.MapGet("api-route-table", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
             {
                 var end = endpointSources.SelectMany(es => es.Endpoints);
-
             });
 
-            //app.MapApiRouteTable();
-            //app.MapCodeFirstGrpcReflectionService();
+            app.MapGrpcReflectionService();
         }
+        //app.MapApiRouteTable();
+        //app.MapCodeFirstGrpcReflectionService();
     }
 
     #endregion

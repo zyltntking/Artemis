@@ -1,58 +1,50 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-	    <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
-	    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-	    <FileVersion>1.0.3</FileVersion>
-	    <VersionPrefix>1.0.3</VersionPrefix>
-	    <!--<VersionSuffix>bate1</VersionSuffix>-->
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Authors>zyltntking</Authors>
-        <Company>Artemis</Company>
-        <Product>Artemis.Net</Product>
-        <Description>Artemis.NET App Build Tools</Description>
-        <Copyright>Copyright © zyltntking 2013</Copyright>
-        <Summary>Artemis.NET App Build Tools</Summary>
-        <Title>Artemis.NET</Title>
-        <PackageId>Artemis.Shared.Identity</PackageId>
-        <PackageTags>shared</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <RootNamespace>Artemis.Shared.Identity</RootNamespace>
-        <AssemblyName>Artemis.Shared.Identity</AssemblyName>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile>Artemis.Shared.Identity.xml</DocumentationFile>
-        <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
-        <CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
-        <Nullable>enable</Nullable>
-        <MinClientVersion>4.1.0</MinClientVersion>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net8.0;net7.0</TargetFrameworks>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+		<FileVersion>1.0.3</FileVersion>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<!--<VersionSuffix>bate1</VersionSuffix>-->
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Authors>zyltntking</Authors>
+		<Company>Artemis</Company>
+		<Product>Artemis.Net</Product>
+		<Description>Artemis.NET App Build Tools</Description>
+		<Copyright>Copyright © zyltntking 2013</Copyright>
+		<Summary>Artemis.NET App Build Tools</Summary>
+		<Title>Artemis.NET</Title>
+		<PackageId>Artemis.Shared.Identity</PackageId>
+		<PackageTags>shared</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RootNamespace>Artemis.Shared.Identity</RootNamespace>
+		<AssemblyName>Artemis.Shared.Identity</AssemblyName>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Artemis.Shared.Identity.xml</DocumentationFile>
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
+		<Nullable>enable</Nullable>
+		<MinClientVersion>4.1.0</MinClientVersion>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-    <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.0" />
-    </ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="System.ServiceModel.Primitives" Version="6.2.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-		<PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -24,4 +24,9 @@ public static class OrderStatus
     ///     等待
     /// </summary>
     public const string Wait = "等待";
+
+    /// <summary>
+    ///     进行
+    /// </summary>
+    public const string Underway = "进行";
 }

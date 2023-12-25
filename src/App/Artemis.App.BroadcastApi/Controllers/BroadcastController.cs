@@ -53,7 +53,7 @@ public class BroadcastController : ControllerBase
     /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<DataResult<PageResult<OrderInfo>>> FetchOrderInfos([FromBody] FetchOrderInfosRequest request)
+    public async Task<DataResult<PageResult<OrderData>>> FetchOrderInfos([FromBody] FetchOrderInfosRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
@@ -63,13 +63,11 @@ public class BroadcastController : ControllerBase
 
         var statusMatch = filter.StatusMatch ?? OrderStatus.All;
 
+        var mealDateMatch = filter.MealDateMatch ?? DateTime.Today.ToString("yyyy-MM-dd");
+
         var query = _context.Orders.AsNoTracking();
 
         var total = await query.CountAsync(cancellationToken);
-
-        var today = DateTime.Today;
-
-        var tomorrow = today.AddDays(1);
 
         query = query.WhereIf(licenseSearch != string.Empty,
                 order => EF.Functions.Like(
@@ -77,18 +75,17 @@ public class BroadcastController : ControllerBase
                     $"%{licenseSearch}%"))
             .WhereIf(statusMatch != OrderStatus.All,
                 order => order.Status == statusMatch)
-            .Where(order => order.CreatedAt >= today)
-            .Where(order => order.CreatedAt <= tomorrow);
+            .Where(order => order.MealDate == mealDateMatch);
 
         var count = await query.CountAsync(cancellationToken);
 
-        var orderInfoList = await query.OrderBy(order => order.WaitFlag)
+        var orderInfoList = await query.OrderBy(order => order.CreatedAt)
             .Skip(request.Skip)
             .Take(request.Size)
-            .ProjectToType<OrderInfo>()
+            .ProjectToType<OrderData>()
             .ToListAsync(cancellationToken);
 
-        var result = new PageResult<OrderInfo>
+        var result = new PageResult<OrderData>
         {
             Page = request.Page,
             Size = request.Size,
@@ -106,7 +103,7 @@ public class BroadcastController : ControllerBase
     /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<DataResult<OrderInfo>> CreateOrder([FromBody] CreateOrderRequest request)
+    public async Task<DataResult<OrderData>> CreateOrder([FromBody] CreateOrderRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
@@ -121,9 +118,9 @@ public class BroadcastController : ControllerBase
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
-        if (result > 0) return DataResult.Success(order.Adapt<OrderInfo>());
+        if (result > 0) return DataResult.Success(order.Adapt<OrderData>());
 
-        return DataResult.Fail<OrderInfo>("创建失败");
+        return DataResult.Fail<OrderData>("创建失败");
     }
 
     /// <summary>
@@ -132,7 +129,7 @@ public class BroadcastController : ControllerBase
     /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<DataResult<OrderInfo>> UpdateOrder([FromBody] UpdateOrderRequest request)
+    public async Task<DataResult<OrderData>> UpdateOrder([FromBody] UpdateOrderRequest request)
     {
         var cancellationToken = HttpContext.RequestAborted;
 
@@ -140,7 +137,7 @@ public class BroadcastController : ControllerBase
             .Where(item => item.Id == request.Id)
             .FirstOrDefaultAsync(cancellationToken);
 
-        if (order == null) return DataResult.Fail<OrderInfo>("订单不存在");
+        if (order == null) return DataResult.Fail<OrderData>("订单不存在");
 
         request.Adapt(order);
         order.License = request.License.ToUpper();
@@ -151,9 +148,38 @@ public class BroadcastController : ControllerBase
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
-        if (result > 0) return DataResult.Success(order.Adapt<OrderInfo>());
+        if (result > 0) return DataResult.Success(order.Adapt<OrderData>());
 
-        return DataResult.Fail<OrderInfo>("更新失败");
+        return DataResult.Fail<OrderData>("更新失败");
+    }
+
+    /// <summary>
+    ///     修改订单状态
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<DataResult<OrderData>> ChangeOrderStatus([FromBody] ChangeOrderStatusRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+
+        var order = await _context.Orders
+            .Where(item => item.Id == request.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (order == null)
+            return DataResult.Fail<OrderData>("订单不存在");
+
+        order.Status = request.Status;
+
+        _context.Orders.Update(order);
+
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        if (result > 0)
+            return DataResult.Success(order.Adapt<OrderData>());
+
+        return DataResult.Fail<OrderData>("更新失败");
     }
 
     /// <summary>
@@ -184,6 +210,60 @@ public class BroadcastController : ControllerBase
         }
 
         return DataResult.Fail<EmptyRecord>("删除失败");
+    }
+
+    /// <summary>
+    ///     订单统计
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<DataResult<OrderStatisticsResult>> OrderStatistics([FromBody] OrderStatisticsRequest request)
+    {
+        var cancellationToken = HttpContext.RequestAborted;
+
+        var mealDateMatch = request.MealDate ?? DateTime.Today.ToString("yyyy-MM-dd");
+
+        var totalItems = await _context.Orders.AsNoTracking()
+            .Where(order => order.MealDate == mealDateMatch)
+            .Select(order => new
+            {
+                order.Count,
+                order.Status
+            })
+            .ToListAsync(cancellationToken);
+
+
+        var totalNumber = totalItems.Count;
+
+        var totalCount = totalItems
+            .Sum(item => item.Count);
+
+        var completeNumber = totalItems
+            .Count(item => item.Status == OrderStatus.Complete);
+
+        var completeCount = totalItems
+            .Where(item => item.Status == OrderStatus.Complete)
+            .Sum(item => item.Count);
+
+        var normalNumber = totalItems
+            .Count(item => item.Status == OrderStatus.Normal);
+
+        var normalCount = totalItems
+            .Where(item => item.Status == OrderStatus.Normal)
+            .Sum(item => item.Count);
+
+        var result = new OrderStatisticsResult
+        {
+            TotalNumber = totalNumber,
+            TotalCount = totalCount,
+            CompleteNumber = completeNumber,
+            CompleteCount = completeCount,
+            NormalNumber = normalNumber,
+            NormalCount = normalCount
+        };
+
+        return DataResult.Success(result);
     }
 }
 
@@ -219,6 +299,11 @@ public record OrderInfoFilter
     ///     价格
     /// </summary>
     public string? StatusMatch { get; set; }
+
+    /// <summary>
+    ///     用餐日期
+    /// </summary>
+    public string? MealDateMatch { get; set; }
 }
 
 /// <summary>
@@ -234,18 +319,89 @@ public record CreateOrderRequest : OrderInfo;
 /// <summary>
 ///     更新订单请求
 /// </summary>
-public record UpdateOrderRequest : OrderInfo
+public record UpdateOrderRequest : OrderData;
+
+/// <summary>
+///     修改订单状态请求
+/// </summary>
+public record ChangeOrderStatusRequest
 {
     /// <summary>
-    ///     标识
+    ///     订单标识
     /// </summary>
-    public Guid Id { get; set; }
+    [Required]
+    public required Guid Id { get; set; }
+
+    /// <summary>
+    ///     目标状态
+    /// </summary>
+    [Required]
+    public required string Status { get; set; }
 }
 
 /// <summary>
 ///     删除订单请求
 /// </summary>
 public record DeleteOrderRequest
+{
+    /// <summary>
+    ///     标识
+    /// </summary>
+    [Required]
+    public Guid Id { get; set; }
+}
+
+/// <summary>
+///     订单统计请求
+/// </summary>
+public record OrderStatisticsRequest
+{
+    /// <summary>
+    ///     用餐时间
+    /// </summary>
+    public string? MealDate { get; set; }
+}
+
+/// <summary>
+///     订单统计结果
+/// </summary>
+public record OrderStatisticsResult
+{
+    /// <summary>
+    ///     总车次
+    /// </summary>
+    public required int TotalNumber { get; set; }
+
+    /// <summary>
+    ///     总人数
+    /// </summary>
+    public required int TotalCount { get; set; }
+
+    /// <summary>
+    ///     完成车次
+    /// </summary>
+    public required int CompleteNumber { get; set; }
+
+    /// <summary>
+    ///     完成人数
+    /// </summary>
+    public required int CompleteCount { get; set; }
+
+    /// <summary>
+    ///     剩余车次
+    /// </summary>
+    public required int NormalNumber { get; set; }
+
+    /// <summary>
+    ///     剩余人数
+    /// </summary>
+    public required int NormalCount { get; set; }
+}
+
+/// <summary>
+///     订单数据
+/// </summary>
+public record OrderData : OrderInfo
 {
     /// <summary>
     ///     标识

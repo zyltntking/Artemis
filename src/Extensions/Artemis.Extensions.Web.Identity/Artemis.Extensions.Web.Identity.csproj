@@ -40,14 +40,10 @@
     </ItemGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
+		<PackageReference Include="Grpc.AspNetCore.Server" Version="2.59.0" />
+	</ItemGroup>    
 
 	<ItemGroup>
-	  <PackageReference Include="Grpc.AspNetCore.Server" Version="2.59.0" />
-	</ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
       <ProjectReference Include="..\..\Shared\Artemis.Shared.Identity\Artemis.Shared.Identity.csproj" />
     </ItemGroup>

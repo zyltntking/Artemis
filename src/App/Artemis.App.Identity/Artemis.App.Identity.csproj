@@ -9,6 +9,7 @@
 		<CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
 		<UserSecretsId>852d04c5-e8be-44d8-aa2f-0e084dd8010b</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..\..</DockerfileContext>
@@ -33,6 +34,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj" />
+		<ProjectReference Include="..\..\Protos\Artemis.Protos.Identity\Artemis.Protos.Identity.csproj" />
 		<ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
 	</ItemGroup>
 

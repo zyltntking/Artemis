@@ -39,13 +39,17 @@ public static class Program
             builder.Services.AddDbContextPool<BroadcastContext>(dbOptions =>
             {
                 dbOptions.UseNpgsql(connectionString, npgsqlOptions =>
-                {
-                    npgsqlOptions.MigrationsHistoryTable("ArtemisBroadcastHistory");
+                    {
+                        npgsqlOptions.MigrationsHistoryTable("ArtemisBroadcastHistory");
 
-                    npgsqlOptions.MigrationsAssembly("Artemis.App.BroadcastApi");
+                        npgsqlOptions.MigrationsAssembly("Artemis.App.BroadcastApi");
 
-                    npgsqlOptions.EnableRetryOnFailure(3);
-                });
+                        npgsqlOptions.EnableRetryOnFailure(3);
+                    })
+                    .EnableServiceProviderCaching(builder.Environment.IsDevelopment())
+                    .EnableDetailedErrors(builder.Environment.IsDevelopment())
+                    .EnableSensitiveDataLogging(builder.Environment.IsDevelopment())
+                    .LogTo(Console.WriteLine, LogLevel.Information);
             });
 
 

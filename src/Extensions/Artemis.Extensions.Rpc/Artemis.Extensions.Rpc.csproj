@@ -39,12 +39,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="protobuf-net.Grpc.Reflection" Version="1.1.1" />
+	  <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
+	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.59.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger">
+	    <Version>0.8.0</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

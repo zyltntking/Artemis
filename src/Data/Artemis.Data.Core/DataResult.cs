@@ -105,7 +105,6 @@ public abstract record AbstractResult : IResultBase
 /// <typeparam name="T">模板类型</typeparam>
 public record DataResult<T> : AbstractResult, IResultBase<T>
 {
-
     #region Implementation of IResultBase<T>
 
     /// <summary>
@@ -272,7 +271,7 @@ public static class DataResult
     }
 
     /// <summary>
-    /// 生成空数据结果
+    ///     生成空数据结果
     /// </summary>
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
@@ -328,7 +327,7 @@ public static class ResultStatus
 public record EmptyRecord;
 
 /// <summary>
-/// 空结果
+///     空结果
 /// </summary>
 public record EmptyResult : DataResult<EmptyRecord>;
 

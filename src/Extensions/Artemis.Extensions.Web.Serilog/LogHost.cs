@@ -18,7 +18,7 @@ public static class LogHost
     /// <param name="buildAction">应用创建行为</param>
     /// <param name="appAction">应用行为</param>
     private static void CreateWebApp(
-        string[] args, 
+        string[] args,
         Action<WebApplicationBuilder> buildAction,
         Action<WebApplication> appAction)
     {

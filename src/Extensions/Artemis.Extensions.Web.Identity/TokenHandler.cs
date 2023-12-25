@@ -59,7 +59,7 @@ public static class TokenHandler
     /// <param name="context"></param>
     /// <param name="document"></param>
     public static void CacheToken(
-        this HttpContext context, 
+        this HttpContext context,
         TokenDocument document)
     {
         if (context.Items.ContainsKey(Constants.ContextItemKey)) context.Items[Constants.ContextItemKey] = document;
@@ -73,7 +73,7 @@ public static class TokenHandler
     /// <param name="cache"></param>
     /// <param name="cacheTokenKey"></param>
     public static void RemoveToken(
-        this IDistributedCache cache, 
+        this IDistributedCache cache,
         string cacheTokenKey)
     {
         cache.Remove(cacheTokenKey);
