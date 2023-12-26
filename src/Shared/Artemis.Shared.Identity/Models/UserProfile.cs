@@ -20,17 +20,4 @@ public class UserProfile : MetadataInfo, IKeySlot<Guid>
     /// </summary>
     [Required]
     public required Guid UserId { get; set; }
-
-    /// <summary>
-    ///     元数据键
-    /// </summary>
-    [Required]
-    [MaxLength(32)]
-    public override required string Key { get; set; }
-
-    /// <summary>
-    ///     元数据值
-    /// </summary>
-    [MaxLength(128)]
-    public override string? Value { get; set; } = null;
 }

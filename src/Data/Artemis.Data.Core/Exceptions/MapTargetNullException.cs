@@ -1,12 +1,20 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
 /// <summary>
-///     Represents errors that occur during an interop call from .NET to MapTargetNull.
+///     映射对象空异常
 /// </summary>
 public class MapTargetNullException : ArtemisException
 {
     /// <summary>
-    ///     Constructs an instance of <see cref="MapTargetNullException" />.
+    ///     构造
+    /// </summary>
+    /// <param name="type">对象类型</param>
+    public MapTargetNullException(Type type) : base($"映射对象{type.Name}为空", ExceptionCode.MapTargetNullException)
+    {
+    }
+
+    /// <summary>
+    ///     构造
     /// </summary>
     /// <param name="message">The exception message.</param>
     public MapTargetNullException(string message) : base(message, ExceptionCode.MapTargetNullException)

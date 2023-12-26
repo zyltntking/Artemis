@@ -3,7 +3,7 @@
 /// <summary>
 ///     实例未设置异常
 /// </summary>
-public class InstanceNotImplementException : ArtemisException
+public sealed class InstanceNotImplementException : ArtemisException
 {
     /// <summary>
     ///     错误构造

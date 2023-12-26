@@ -3,7 +3,7 @@
 /// <summary>
 ///     枚举类不匹配异常
 /// </summary>
-public class EnumerationNotMatchException : ArtemisException
+public sealed class EnumerationNotMatchException : ArtemisException
 {
     /// <summary>
     ///     错误构造

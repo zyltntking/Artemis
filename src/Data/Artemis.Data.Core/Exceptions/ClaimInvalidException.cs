@@ -3,7 +3,7 @@
 /// <summary>
 ///     凭据无效异常
 /// </summary>
-public class ClaimInvalidException : ArtemisException
+public sealed class ClaimInvalidException : ArtemisException
 {
     /// <summary>
     ///     构造

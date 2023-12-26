@@ -3,7 +3,7 @@
 /// <summary>
 ///     创建实例异常
 /// </summary>
-public class CreateInstanceException : ArtemisException
+public sealed class CreateInstanceException : ArtemisException
 {
     /// <summary>
     ///     构造

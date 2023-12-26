@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// </summary>
 public class ClaimConfiguration : IdentityConfiguration<ArtemisClaim>
 {
-    #region Overrides of ArtemisConfiguration<ArtemisClaim>
+    #region Overrides of ModelBaseConfiguration<ArtemisClaim>
 
     /// <summary>
     ///     数据集描述

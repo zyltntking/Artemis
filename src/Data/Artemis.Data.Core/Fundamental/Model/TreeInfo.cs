@@ -166,6 +166,25 @@ public abstract class TreeNode<TTreeNode> : TreeNode<TTreeNode, Guid>, ITreeNode
 /// </summary>
 /// <typeparam name="TTreeNode">节点模板</typeparam>
 /// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
+public abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeInfo, Guid>
+    where TTreeNode : TreeNode<TTreeNode, Guid>
+    where TTreeNodeInfo : ITreeNodeInfo<Guid>
+{
+    /// <summary>
+    ///     构造树
+    /// </summary>
+    /// <param name="nodeList">节点信息列表</param>
+    /// <param name="rootId">根id</param>
+    protected Tree(IEnumerable<TTreeNodeInfo> nodeList, Guid rootId) : base(nodeList, rootId)
+    {
+    }
+}
+
+/// <summary>
+///     树
+/// </summary>
+/// <typeparam name="TTreeNode">节点模板</typeparam>
+/// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
 /// <typeparam name="TKey">键</typeparam>
 public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode, TKey>
     where TTreeNode : TreeNode<TTreeNode, TKey>
@@ -244,24 +263,5 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode,
         }
 
         return rootNode;
-    }
-}
-
-/// <summary>
-///     树
-/// </summary>
-/// <typeparam name="TTreeNode">节点模板</typeparam>
-/// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
-public abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeInfo, Guid>
-    where TTreeNode : TreeNode<TTreeNode, Guid>
-    where TTreeNodeInfo : ITreeNodeInfo<Guid>
-{
-    /// <summary>
-    ///     构造树
-    /// </summary>
-    /// <param name="nodeList">节点信息列表</param>
-    /// <param name="rootId">根id</param>
-    protected Tree(IEnumerable<TTreeNodeInfo> nodeList, Guid rootId) : base(nodeList, rootId)
-    {
     }
 }

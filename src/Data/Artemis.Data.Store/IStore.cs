@@ -12,7 +12,7 @@ public interface IStore<TEntity> :
     IStoreBase<TEntity>,
     IStoreCommon<TEntity>,
     IStoreMap<TEntity>
-    where TEntity : class, IModelBase<Guid>
+    where TEntity : class, IModelBase
 {
 }
 

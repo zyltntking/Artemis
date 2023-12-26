@@ -16,17 +16,6 @@ public static class Base32
     private const string Base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
     /// <summary>
-    ///     若参数为空则抛出异常
-    /// </summary>
-    /// <param name="argument"></param>
-    /// <param name="paramName"></param>
-    /// <exception cref="ArgumentNullException"></exception>
-    private static void ThrowIfNull(object? argument, string? paramName = null)
-    {
-        if (argument is null) throw new ArgumentNullException(paramName);
-    }
-
-    /// <summary>
     ///     生成base32串
     /// </summary>
     /// <returns></returns>
@@ -70,7 +59,7 @@ public static class Base32
     /// <returns></returns>
     public static string ToBase32(byte[] input)
     {
-        ThrowIfNull(input);
+        ArgumentNullException.ThrowIfNull(input);
 
         var sb = new StringBuilder();
         for (var offset = 0; offset < input.Length;)
@@ -99,7 +88,7 @@ public static class Base32
     /// <exception cref="FormatException"></exception>
     public static byte[] FromBase32(string input)
     {
-        ThrowIfNull(input);
+        ArgumentNullException.ThrowIfNull(input);
 
         var trimmedInput = input.AsSpan().TrimEnd('=');
         if (trimmedInput.Length == 0) return Array.Empty<byte>();
@@ -136,8 +125,17 @@ public static class Base32
     }
 
     // returns the number of bytes that were output
-    private static int GetNextGroup(Span<byte> input, ref int offset, out byte a, out byte b, out byte c, out byte d,
-        out byte e, out byte f, out byte g, out byte h)
+    private static int GetNextGroup(
+        Span<byte> input,
+        ref int offset,
+        out byte a,
+        out byte b,
+        out byte c,
+        out byte d,
+        out byte e,
+        out byte f,
+        out byte g,
+        out byte h)
     {
         var retVal = (input.Length - offset) switch
         {

@@ -1,6 +1,6 @@
 ﻿namespace Artemis.Data.Core.Exceptions;
 
-#region MyRegion
+#region Interface
 
 /// <summary>
 ///     异常成员接口

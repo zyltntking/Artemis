@@ -8,7 +8,7 @@ namespace Artemis.Data.Store.Configuration;
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisPartitionConfiguration<TEntity> : ArtemisModelConfiguration<TEntity>
+public abstract class PartitionConfiguration<TEntity> : ModelConfiguration<TEntity>
     where TEntity : class, IPartitionBase
 {
     #region Overrides of ArtemisModelConfiguration<TEntity>
@@ -42,10 +42,10 @@ public abstract class ArtemisPartitionConfiguration<TEntity> : ArtemisModelConfi
 ///     模型存储配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisModelConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<TEntity>
     where TEntity : class, IModelBase, IKeySlot, IMateSlot
 {
-    #region Overrides of ArtemisMateSlotConfiguration<TEntity>
+    #region Overrides of MateSlotModelConfiguration<TEntity>
 
     /// <summary>
     ///     数据库字段配置
@@ -64,10 +64,10 @@ public abstract class ArtemisModelConfiguration<TEntity> : ArtemisMateSlotConfig
 ///     ArtemisMateSlot
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfiguration<TEntity>
+public abstract class MateSlotModelConfiguration<TEntity> : BaseConfiguration<TEntity>
     where TEntity : class, IMateSlot
 {
-    #region Overrides of ArtemisConfiguration<TEntity>
+    #region Overrides of ModelBaseConfiguration<TEntity>
 
     /// <summary>
     ///     数据库字段配置
@@ -102,14 +102,6 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
             .HasDatabaseName($"IX_{TableName}_DeletedAt");
     }
 
-    /// <summary>
-    ///     数据库关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-    }
-
     #endregion
 }
 
@@ -117,10 +109,10 @@ public abstract class ArtemisMateSlotConfiguration<TEntity> : ArtemisConfigurati
 ///     ArtemisKeySlot类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguration<TEntity>
+public abstract class KeySlotModelConfiguration<TEntity> : BaseConfiguration<TEntity>
     where TEntity : class, IKeySlot
 {
-    #region Overrides of ArtemisConfiguration<TEntity>
+    #region Overrides of ModelBaseConfiguration<TEntity>
 
     /// <summary>
     ///     数据库字段配置
@@ -138,7 +130,7 @@ public abstract class ArtemisKeySlotConfiguration<TEntity> : ArtemisConfiguratio
 ///     Artemis抽象类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class ArtemisConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+public abstract class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : class
 {
     #region Implementation of IEntityTypeConfiguration<TEntity>

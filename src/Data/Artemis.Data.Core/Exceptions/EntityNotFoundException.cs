@@ -3,7 +3,7 @@
 /// <summary>
 ///     实体未设置失败异常
 /// </summary>
-public class EntityNotFoundException : ArtemisException
+public sealed class EntityNotFoundException : ArtemisException
 {
     /// <summary>
     ///     错误构造

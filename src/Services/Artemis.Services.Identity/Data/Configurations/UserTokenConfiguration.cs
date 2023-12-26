@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// </summary>
 public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
 {
-    #region Overrides of ArtemisConfiguration<ArtemisUserToken>
+    #region Overrides of ModelBaseConfiguration<ArtemisUserToken>
 
     /// <summary>
     ///     数据集描述

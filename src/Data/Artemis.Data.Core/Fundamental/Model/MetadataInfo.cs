@@ -69,12 +69,12 @@ public abstract class MetadataInfo : IMetadata
     ///     元数据键
     /// </summary>
     [Required]
-    public virtual required string Key { get; set; }
+    public required string Key { get; set; }
 
     /// <summary>
     ///     元数据值
     /// </summary>
-    public virtual string? Value { get; set; }
+    public string? Value { get; set; }
 
     #endregion
 }
@@ -84,55 +84,40 @@ public abstract class MetadataInfo : IMetadata
 /// </summary>
 public abstract class DataDictInfo : MetadataInfo, IDataDict
 {
-    #region Overrides of MetadataInfo
-
-    /// <summary>
-    ///     元数据键
-    /// </summary>
-    [Required]
-    public override required string Key { get; set; }
-
-    /// <summary>
-    ///     元数据值
-    /// </summary>
-    public override string? Value { get; set; }
-
-    #endregion
-
     #region Implementation of IDataDict
 
     /// <summary>
     ///     数据标签
     /// </summary>
-    public virtual string? Label { get; set; }
+    public string? Label { get; set; }
 
     /// <summary>
     ///     数据排序
     /// </summary>
     [Required]
-    public virtual required int Order { get; set; }
+    public required int Order { get; set; }
 
     /// <summary>
     ///     数据类型
     /// </summary>
-    public virtual string? Type { get; set; }
+    public string? Type { get; set; }
 
     /// <summary>
     ///     数据是否锁定
     /// </summary>
     [Required]
-    public virtual required bool Lock { get; set; }
+    public required bool Lock { get; set; }
 
     /// <summary>
     ///     数据状态
     /// </summary>
     [Required]
-    public virtual required bool Status { get; set; }
+    public required bool Status { get; set; }
 
     /// <summary>
     ///     数据描述
     /// </summary>
-    public virtual string? Description { get; set; }
+    public string? Description { get; set; }
 
     #endregion
 }

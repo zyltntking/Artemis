@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Protos.Identity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Protos.Common", "src\Protos\Artemis.Protos.Common\Artemis.Protos.Common.csproj", "{7185E403-A07F-4522-BC0B-2DA533B92DC8}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Artemis.Protos.TypescriptLib", "src\Protos\Artemis.Protos.TypescriptLib\Artemis.Protos.TypescriptLib.esproj", "{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,12 @@ Global
 		{7185E403-A07F-4522-BC0B-2DA533B92DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7185E403-A07F-4522-BC0B-2DA533B92DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7185E403-A07F-4522-BC0B-2DA533B92DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +127,7 @@ Global
 		{0155169E-7847-4881-A15B-C47E9C74A257} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{47D29546-EA6A-4F94-B9DA-C23ABE7C541D} = {8CD76079-99ED-4DF1-B35C-04DEB4148C6D}
 		{7185E403-A07F-4522-BC0B-2DA533B92DC8} = {8CD76079-99ED-4DF1-B35C-04DEB4148C6D}
+		{32057C9F-F5AC-44A9-BDE7-A7513E44CEF4} = {8CD76079-99ED-4DF1-B35C-04DEB4148C6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

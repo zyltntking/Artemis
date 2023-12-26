@@ -151,10 +151,18 @@ public interface ICheckStamp
 /// <summary>
 ///     分区组件接口
 /// </summary>
-public interface IPartitionSlot
+public interface IPartitionSlot : IPartitionSlot<int>
+{
+}
+
+/// <summary>
+///     分区组件接口
+/// </summary>
+/// <typeparam name="TPartition">分区标识类型</typeparam>
+public interface IPartitionSlot<TPartition> where TPartition : IEquatable<TPartition>
 {
     /// <summary>
     ///     分区标识
     /// </summary>
-    int Partition { get; set; }
+    TPartition Partition { get; set; }
 }

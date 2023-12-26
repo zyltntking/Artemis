@@ -82,6 +82,33 @@ public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
         ILogger? logger = null) : base(context, storeOptions, cache, logger)
     {
     }
+
+    #region Overrides of StoreBase<TEntity,TKey>
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <returns>判断结果</returns>
+    public override bool IsDeleted(TEntity entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>判断结果</returns>
+    public override Task<bool> IsDeletedAsync(
+        TEntity entity,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }
 
 /// <summary>
@@ -114,7 +141,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         Context = context;
         Cache = cache;
         Logger = logger;
-        SetStoreOptions(storeOptions ?? new ArtemisStoreOptions());
+        StoreOptions = storeOptions ?? new ArtemisStoreOptions();
     }
 
     #region DebugLogger
@@ -623,113 +650,41 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
     #region IStoreOptions
 
+    private IStoreOptions StoreOptions { get; }
+
     #region Setting
 
     /// <summary>
     ///     设置是否自动保存更改
     /// </summary>
-    public bool AutoSaveChanges { get; set; } = true;
-
-    /// <summary>
-    ///     MetaDataHosting标记
-    /// </summary>
-    private bool _metaDataHosting = true;
+    protected bool AutoSaveChanges => StoreOptions.AutoSaveChanges;
 
     /// <summary>
     ///     设置是否启用元数据托管
     /// </summary>
-    public bool MetaDataHosting
-    {
-        get => _metaDataHosting;
-        set => _metaDataHosting = SoftDelete || value;
-    }
-
-    /// <summary>
-    ///     SoftDelete标记
-    /// </summary>
-    private bool _softDelete;
+    protected bool MetaDataHosting => StoreOptions.MetaDataHosting || StoreOptions.SoftDelete;
 
     /// <summary>
     ///     设置是否启用软删除
     /// </summary>
-    public bool SoftDelete
-    {
-        get => _softDelete;
-        set
-        {
-            _softDelete = value;
-            if (_softDelete) MetaDataHosting = _softDelete;
-        }
-    }
+    protected bool SoftDelete => StoreOptions.SoftDelete;
 
     /// <summary>
     ///     是否启用具缓存策略
     /// </summary>
-    private bool _cachedStore;
-
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    public bool CachedStore
-    {
-        get => _cachedStore;
-        set => _cachedStore = value && Cache != null;
-    }
+    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && Cache != null;
 
     /// <summary>
     ///     过期时间(秒)
     /// </summary>
-    private int _expires;
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    public int Expires
-    {
-        get => _expires;
-        set
-        {
-            _expires = value;
-            CachedStore = _expires switch
-            {
-                > 0 => true,
-                < 0 => false,
-                _ => CachedStore
-            };
-        }
-    }
+    protected int Expires => StoreOptions.Expires;
 
     /// <summary>
     ///     是否启用Debug日志
     /// </summary>
-    private bool _debugLogger;
-
-    /// <summary>
-    ///     是否启用Debug日志
-    /// </summary>
-    public bool DebugLogger
-    {
-        get => _debugLogger;
-        set => _debugLogger = value && Logger != null;
-    }
+    protected bool DebugLogger => StoreOptions.DebugLogger && Logger != null;
 
     #endregion
-
-    /// <summary>
-    ///     设置配置
-    /// </summary>
-    /// <param name="options"></param>
-    private void SetStoreOptions(IStoreOptions options)
-    {
-        AutoSaveChanges = options.AutoSaveChanges;
-        MetaDataHosting = options.MetaDataHosting;
-        SoftDelete = options.SoftDelete;
-        CachedStore = options.CachedStore;
-        Expires = options.Expires;
-        DebugLogger = options.DebugLogger;
-
-        if (DebugLogger) SetDebugLog(nameof(SetStoreOptions));
-    }
 
     #endregion
 

@@ -6,75 +6,84 @@ namespace Artemis.Data.Store;
 /// <summary>
 ///     抽象基本存储实现
 /// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TKey">键类型</typeparam>
-public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
-    where TEntity : IModelBase<TKey>
-    where TKey : IEquatable<TKey>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class StoreBase<TEntity> : StoreBase<TEntity, Guid>, IStoreBase<TEntity> where TEntity : IModelBase
 {
-    /// <summary>
-    ///     已释放标识
-    /// </summary>
-    private bool _disposed;
-
     /// <summary>
     ///     创建一个新的基本存储实例
     /// </summary>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    protected StoreBase(StoreErrorDescriber? describer = null)
+    protected StoreBase(StoreErrorDescriber? describer = null) : base(describer)
     {
-        Describer = describer ?? new StoreErrorDescriber();
     }
+}
 
-    #region Implementation of IDisposable
-
+/// <summary>
+///     抽象基本存储实现
+/// </summary>
+/// <typeparam name="TEntity">实体类型</typeparam>
+/// <typeparam name="TKey">键类型</typeparam>
+public abstract class StoreBase<TEntity, TKey> : MateLessStoreBase<TEntity, TKey>, IStoreBase<TEntity, TKey>
+    where TEntity : IModelBase<TKey>
+    where TKey : IEquatable<TKey>
+{
     /// <summary>
-    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    ///     创建一个新的基本存储实例
     /// </summary>
-    public void Dispose()
+    /// <param name="describer"></param>
+    /// <exception cref="StoreParameterNullException"></exception>
+    protected StoreBase(StoreErrorDescriber? describer = null) : base(describer)
     {
-        _disposed = true;
-        GC.SuppressFinalize(this);
-    }
-
-    #endregion
-
-    /// <summary>
-    ///     设置当前发生错误的错误描述者
-    /// </summary>
-    protected StoreErrorDescriber Describer { get; set; }
-
-    /// <summary>
-    ///     Throws if this class has been disposed.
-    /// </summary>
-    /// <exception cref="StoreDisposedException"></exception>
-    protected void ThrowIfDisposed()
-    {
-        if (_disposed) throw new StoreDisposedException(GetType());
     }
 
     #region Implementation of IStoreBase<in TEntity,TKey>
 
     /// <summary>
-    ///     生成Key
+    ///     是否被删除
     /// </summary>
-    /// <param name="args">生成参数</param>
-    /// <returns></returns>
-    protected string GenerateKey(params string[] args)
-    {
-        return string.Join(":", args);
-    }
+    /// <param name="entity">实体</param>
+    /// <returns>判断结果</returns>
+    public abstract bool IsDeleted(TEntity entity);
+    //{
+    //    OnActionExecuting(entity, nameof(entity));
+    //    return entity.DeletedAt is null;
+    //}
 
     /// <summary>
-    ///     规范化键
+    ///     是否被删除
     /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
-    public string NormalizeKey(string key)
+    /// <param name="entity">实体</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>判断结果</returns>
+    public abstract Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default);
+    //{
+    //    OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
+    //    return Task.FromResult(entity.DeletedAt is null);
+    //}
+
+    #endregion
+}
+
+/// <summary>
+///     无元数据模型基本存储
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class MateLessStoreBase<TEntity, TKey> : KeyLessStoreBase<TEntity>, IMateLessStoreBase<TEntity, TKey>
+    where TEntity : IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     创建一个新的基本存储实例
+    /// </summary>
+    /// <param name="describer"></param>
+    /// <exception cref="StoreParameterNullException"></exception>
+    protected MateLessStoreBase(StoreErrorDescriber? describer = null) : base(describer)
     {
-        return key.StringNormalize();
     }
+
+    #region Implementation of IMateLessStoreBase<in TEntity,TKey>
 
     /// <summary>
     ///     转换字符串到id
@@ -142,27 +151,63 @@ public abstract class StoreBase<TEntity, TKey> : IStoreBase<TEntity, TKey>
         return Task.FromResult(ConvertIdToString(entity.Id)!);
     }
 
+    #endregion
+}
+
+/// <summary>
+///     无键模型基本存储
+/// </summary>
+/// <typeparam name="TEntity">模型类型</typeparam>
+public abstract class KeyLessStoreBase<TEntity> : IKeyLessStoreBase<TEntity>
+{
     /// <summary>
-    ///     是否被删除
+    ///     已释放标识
     /// </summary>
-    /// <param name="entity">实体</param>
-    /// <returns>判断结果</returns>
-    public bool IsDeleted(TEntity entity)
+    private bool _disposed;
+
+    /// <summary>
+    ///     无键模型基本存储实例构造
+    /// </summary>
+    /// <param name="describer"></param>
+    /// <exception cref="StoreParameterNullException"></exception>
+    protected KeyLessStoreBase(StoreErrorDescriber? describer = null)
     {
-        OnActionExecuting(entity, nameof(entity));
-        return entity.DeletedAt is null;
+        Describer = describer ?? new StoreErrorDescriber();
     }
 
     /// <summary>
-    ///     是否被删除
+    ///     设置当前发生错误的错误描述者
     /// </summary>
-    /// <param name="entity">实体</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>判断结果</returns>
-    public Task<bool> IsDeletedAsync(TEntity entity, CancellationToken cancellationToken = default)
+    protected StoreErrorDescriber Describer { get; set; }
+
+    /// <summary>
+    ///     Throws if this class has been disposed.
+    /// </summary>
+    /// <exception cref="StoreDisposedException"></exception>
+    protected void ThrowIfDisposed()
     {
-        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-        return Task.FromResult(entity.DeletedAt is null);
+        if (_disposed) throw new StoreDisposedException(GetType());
+    }
+
+    #region IDisposable
+
+    /// <summary>
+    ///     规范化键
+    /// </summary>
+    /// <param name="value">键</param>
+    /// <returns></returns>
+    public string NormalizeKey(string value)
+    {
+        return value.StringNormalize();
+    }
+
+    /// <summary>
+    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+        _disposed = true;
+        GC.SuppressFinalize(this);
     }
 
     #endregion

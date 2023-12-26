@@ -3,7 +3,7 @@
 /// <summary>
 ///     实体已设置失败异常
 /// </summary>
-public class EntityHasBeenSetException : ArtemisException
+public sealed class EntityHasBeenSetException : ArtemisException
 {
     /// <summary>
     ///     错误构造

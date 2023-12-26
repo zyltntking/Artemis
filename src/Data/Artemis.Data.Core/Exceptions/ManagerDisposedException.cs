@@ -3,7 +3,7 @@
 /// <summary>
 ///     管理器已被释放异常
 /// </summary>
-public class ManagerDisposedException : ArtemisException
+public sealed class ManagerDisposedException : ArtemisException
 {
     /// <summary>
     ///     错误构造

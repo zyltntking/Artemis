@@ -66,35 +66,35 @@ public abstract record AbstractResult : IResultBase
     ///     消息码
     /// </summary>
     [Required]
-    public virtual required int Code { get; set; }
+    public required int Code { get; set; }
 
     /// <summary>
     ///     是否成功
     /// </summary>
-    public virtual bool Succeeded => Code == ResultStatus.Success;
+    public bool Succeeded => Code == ResultStatus.Success;
 
     /// <summary>
     ///     消息
     /// </summary>
     [Required]
-    public virtual required string Message { get; set; } = string.Empty;
+    public required string Message { get; set; } = string.Empty;
 
     /// <summary>
     ///     异常信息
     /// </summary>
-    public virtual string? Error { get; set; }
+    public string? Error { get; set; }
 
     /// <summary>
     ///     本地时间戳
     /// </summary>
     [Required]
-    public virtual required DateTime DateTime { get; set; }
+    public required DateTime DateTime { get; set; }
 
     /// <summary>
     ///     时间戳
     /// </summary>
     [Required]
-    public virtual required long Timestamp { get; set; }
+    public required long Timestamp { get; set; }
 
     #endregion
 }
@@ -303,7 +303,7 @@ public static class DataResult
 /// <summary>
 ///     结果状态
 /// </summary>
-public static class ResultStatus
+internal static class ResultStatus
 {
     /// <summary>
     ///     成功
@@ -324,7 +324,7 @@ public static class ResultStatus
 /// <summary>
 ///     空记录
 /// </summary>
-public record EmptyRecord;
+public readonly record struct EmptyRecord;
 
 /// <summary>
 ///     空结果
@@ -334,18 +334,7 @@ public record EmptyResult : DataResult<EmptyRecord>;
 /// <summary>
 ///     含键记录
 /// </summary>
-public record KeyRecord : KeyRecord<Guid>
-{
-    #region Overrides of KeyRecord<Guid>
-
-    /// <summary>
-    ///     标识
-    /// </summary>
-    [Required]
-    public override required Guid Id { get; set; }
-
-    #endregion
-}
+public record KeyRecord : KeyRecord<Guid>;
 
 /// <summary>
 ///     含键记录
@@ -357,5 +346,5 @@ public record KeyRecord<TKey> where TKey : IEquatable<TKey>
     ///     标识
     /// </summary>
     [Required]
-    public virtual required TKey Id { get; set; }
+    public required TKey Id { get; set; }
 }

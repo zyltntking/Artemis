@@ -3,11 +3,11 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
-///     可映射存储接口
+///     基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid>
-    where TEntity : IModelBase<Guid>
+    where TEntity : IModelBase
 {
 }
 
@@ -16,17 +16,37 @@ public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IStoreBase<in TEntity, TKey> : IDisposable
+public interface IStoreBase<in TEntity, TKey> : IMateLessStoreBase<TEntity, TKey>
     where TEntity : IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    ///     规范化键
+    ///     是否被删除
     /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
-    string NormalizeKey(string key);
+    /// <param name="entity">实体</param>
+    /// <returns>判断结果</returns>
+    bool IsDeleted(TEntity entity);
 
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>判断结果</returns>
+    Task<bool> IsDeletedAsync(
+        TEntity entity,
+        CancellationToken cancellationToken = default);
+}
+
+/// <summary>
+///     无元数据模型基本存储接口
+/// </summary>
+/// <typeparam name="TEntity">模型类型</typeparam>
+/// <typeparam name="TKey">键类型</typeparam>
+public interface IMateLessStoreBase<in TEntity, TKey> : IKeyLessStoreBase<TEntity>
+    where TEntity : IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
+{
     /// <summary>
     ///     转换字符串到id
     /// </summary>
@@ -74,21 +94,18 @@ public interface IStoreBase<in TEntity, TKey> : IDisposable
     Task<string> GetIdStringAsync(
         TEntity entity,
         CancellationToken cancellationToken = default);
+}
 
+/// <summary>
+///     无键模型基本存储接口
+/// </summary>
+/// <typeparam name="TEntity">模型类型</typeparam>
+public interface IKeyLessStoreBase<in TEntity> : IDisposable
+{
     /// <summary>
-    ///     是否被删除
+    ///     规范化键
     /// </summary>
-    /// <param name="entity">实体</param>
-    /// <returns>判断结果</returns>
-    bool IsDeleted(TEntity entity);
-
-    /// <summary>
-    ///     是否被删除
-    /// </summary>
-    /// <param name="entity">实体</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>判断结果</returns>
-    Task<bool> IsDeletedAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default);
+    /// <param name="value">被规范化的值</param>
+    /// <returns></returns>
+    string NormalizeKey(string value);
 }

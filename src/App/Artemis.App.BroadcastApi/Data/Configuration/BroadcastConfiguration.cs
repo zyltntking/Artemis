@@ -8,10 +8,10 @@ namespace Artemis.App.BroadcastApi.Data.Configuration;
 ///     广播模型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class BroadcastConfiguration<TEntity> : ArtemisMateSlotConfiguration<TEntity>
+public abstract class BroadcastConfiguration<TEntity> : MateSlotModelConfiguration<TEntity>
     where TEntity : class, IMateSlot
 {
-    #region Overrides of ArtemisConfiguration<TEntity>
+    #region Overrides of ModelBaseConfiguration<TEntity>
 
     /// <summary>
     ///     数据库类型
