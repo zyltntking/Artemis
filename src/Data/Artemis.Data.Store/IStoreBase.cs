@@ -3,63 +3,31 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
-///     基本存储接口
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-public interface IStoreBase<in TEntity> : IStoreBase<TEntity, Guid>
-    where TEntity : IModelBase
-{
-}
-
-/// <summary>
-///     基本存储接口
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TKey">键类型</typeparam>
-public interface IStoreBase<in TEntity, TKey> : IMateLessStoreBase<TEntity, TKey>
-    where TEntity : IModelBase<TKey>
-    where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     是否被删除
-    /// </summary>
-    /// <param name="entity">实体</param>
-    /// <returns>判断结果</returns>
-    bool IsDeleted(TEntity entity);
-
-    /// <summary>
-    ///     是否被删除
-    /// </summary>
-    /// <param name="entity">实体</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>判断结果</returns>
-    Task<bool> IsDeletedAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default);
-}
-
-/// <summary>
 ///     无元数据模型基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">模型类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IMateLessStoreBase<in TEntity, TKey> : IKeyLessStoreBase<TEntity>
-    where TEntity : IKeySlot<TKey>
+public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
+    where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
-    /// <summary>
-    ///     转换字符串到id
-    /// </summary>
-    /// <param name="id">id字符串</param>
-    /// <returns>id</returns>
-    TKey? ConvertIdFromString(string id);
+    #region Access
 
     /// <summary>
-    ///     转换Id为字符串
+    ///     键适配查询
     /// </summary>
-    /// <param name="id">id</param>
-    /// <returns>字符串</returns>
-    string? ConvertIdToString(TKey id);
+    IQueryable<TEntity> KeyMatchQuery(TKey key);
+
+    /// <summary>
+    ///     键适配查询
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns></returns>
+    IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys);
+
+    #endregion
+
+    #region GetId
 
     /// <summary>
     ///     获取指定实体Id
@@ -94,14 +62,69 @@ public interface IMateLessStoreBase<in TEntity, TKey> : IKeyLessStoreBase<TEntit
     Task<string> GetIdStringAsync(
         TEntity entity,
         CancellationToken cancellationToken = default);
+
+    #endregion
+
+    #region IsDelete
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <returns>判断结果</returns>
+    bool IsDeleted(TEntity entity);
+
+    /// <summary>
+    /// 是否被删除
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns></returns>
+    bool IsDeleted(TKey key);
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>判断结果</returns>
+    Task<bool> IsDeletedAsync(
+        TEntity entity,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 是否被删除
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<bool> IsDeletedAsync(
+        TKey key,
+        CancellationToken cancellationToken = default);
+
+    #endregion
 }
 
 /// <summary>
 ///     无键模型基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">模型类型</typeparam>
-public interface IKeyLessStoreBase<in TEntity> : IDisposable
+public interface IKeyLessStoreBase<out TEntity> : IDisposable
+    where TEntity : class
 {
+    #region Access
+
+    /// <summary>
+    ///     Entity有追踪访问器
+    /// </summary>
+    IQueryable<TEntity> TrackingQuery { get; }
+
+    /// <summary>
+    ///     Entity无追踪访问器
+    /// </summary>
+    IQueryable<TEntity> EntityQuery { get; }
+
+    #endregion
+
     /// <summary>
     ///     规范化键
     /// </summary>

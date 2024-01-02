@@ -40,7 +40,7 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="id">id字符串</param>
     /// <returns>id</returns>
-    public override Guid ConvertIdFromString(string id)
+    protected override Guid ConvertIdFromString(string id)
     {
         return id.GuidFromString();
     }
@@ -50,7 +50,7 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>字符串</returns>
-    public override string ConvertIdToString(Guid id)
+    protected override string ConvertIdToString(Guid id)
     {
         return id.GuidToString();
     }
@@ -62,29 +62,11 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
 ///     抽象存储实现
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TKey">数据上下文类型</typeparam>
-public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
+/// <typeparam name="TKey">键类型</typeparam>
+public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IStore<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
-    /// <summary>
-    ///     创建一个新的基本存储实例
-    /// </summary>
-    /// <param name="context">数据访问上下文</param>
-    /// <param name="logger">日志依赖</param>
-    /// <param name="storeOptions">配置依赖</param>
-    /// <param name="cache">缓存依赖</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    protected Store(
-        DbContext context,
-        IStoreOptions? storeOptions = null,
-        IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, cache, logger)
-    {
-    }
-
-    #region Overrides of StoreBase<TEntity,TKey>
-
     /// <summary>
     ///     是否被删除
     /// </summary>
@@ -108,20 +90,6 @@ public abstract class Store<TEntity, TKey> : Store<TEntity, DbContext, TKey>
         throw new NotImplementedException();
     }
 
-    #endregion
-}
-
-/// <summary>
-///     抽象存储实现
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TContext">数据上下文类型</typeparam>
-/// <typeparam name="TKey">键类型</typeparam>
-public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>, IStore<TEntity, TKey>
-    where TEntity : class, IModelBase<TKey>
-    where TContext : DbContext
-    where TKey : IEquatable<TKey>
-{
     /// <summary>
     ///     创建一个新的基本存储实例
     /// </summary>
@@ -132,517 +100,21 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Store(
-        TContext context,
+        DbContext context,
         IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(describer)
+        StoreErrorDescriber? describer = null) : base(context,cache, storeOptions, logger, describer)
     {
-        Context = context;
-        Cache = cache;
-        Logger = logger;
         StoreOptions = storeOptions ?? new ArtemisStoreOptions();
     }
-
-    #region DebugLogger
-
-    /// <summary>
-    ///     设置Debug日志
-    /// </summary>
-    /// <param name="message">日志消息</param>
-    private void SetDebugLog(string message)
-    {
-        Logger?.LogDebug(message);
-    }
-
-    #endregion
 
     #region DataAccess
 
     /// <summary>
-    ///     数据访问上下文
-    /// </summary>
-    private TContext Context { get; }
-
-    /// <summary>
-    ///     缓存依赖
-    /// </summary>
-    private IDistributedCache? Cache { get; }
-
-    /// <summary>
-    ///     日志依赖
-    /// </summary>
-    private ILogger? Logger { get; }
-
-    /// <summary>
-    ///     EntitySet访问器*Main Store Set*
-    /// </summary>
-    public DbSet<TEntity> EntitySet => Context.Set<TEntity>();
-
-    /// <summary>
     ///     Entity有追踪访问器
     /// </summary>
-    public IQueryable<TEntity> TrackingQuery => EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
-
-    /// <summary>
-    ///     Entity无追踪访问器
-    /// </summary>
-    public IQueryable<TEntity> EntityQuery => TrackingQuery.AsNoTracking();
-
-    /// <summary>
-    ///     键适配查询
-    /// </summary>
-    public IQueryable<TEntity> KeyMatchQuery(TKey key)
-    {
-        return EntityQuery.Where(entity => entity.Id.Equals(key));
-    }
-
-    /// <summary>
-    ///     键适配查询
-    /// </summary>
-    /// <param name="keys"></param>
-    /// <returns></returns>
-    public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys)
-    {
-        return EntityQuery.Where(item => keys.Contains(item.Id));
-    }
-
-    #endregion
-
-    #region Cache
-
-    /// <summary>
-    ///     缓存前缀
-    /// </summary>
-    protected virtual string Prefix => "Store";
-
-    /// <summary>
-    ///     缓存实体
-    /// </summary>
-    /// <param name="entity"></param>
-    private void CacheEntity(TEntity entity)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.Set(entity.GenerateKey(Prefix), entity, Expires);
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Cached");
-        }
-    }
-
-    /// <summary>
-    ///     缓存实体
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    private Task CacheEntityAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires, cancellationToken);
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Cached");
-        }
-
-        return Task.CompletedTask;
-    }
-
-    /// <summary>
-    ///     缓存实体
-    /// </summary>
-    /// <param name="entities"></param>
-    private void CacheEntities(IEnumerable<TEntity> entities)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-
-            foreach (var entity in entities)
-            {
-                Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires);
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"Cached {count} {typeof(TEntity).Name} Entities");
-        }
-    }
-
-    /// <summary>
-    ///     缓存实体
-    /// </summary>
-    /// <param name="entities"></param>
-    /// <param name="cancellationToken"></param>
-    private Task CacheEntitiesAsync(
-        IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null) throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-
-            foreach (var entity in entities)
-            {
-                Cache?.SetAsync(entity.GenerateKey(Prefix), entity, Expires, cancellationToken);
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"Cached {count} {typeof(TEntity).Name} Entities");
-        }
-
-        return Task.CompletedTask;
-    }
-
-    /// <summary>
-    ///     获取实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    private TEntity? GetEntity(TKey key)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = Instance.CreateInstance<TEntity>();
-
-            entity.Id = key;
-
-            entity = Cache?.Get<TEntity>(entity.GenerateKey(Prefix));
-
-            if (DebugLogger) SetDebugLog($"Get {typeof(TEntity).Name} Entity From Cache");
-
-            return entity;
-        }
-
-        return default;
-    }
-
-    /// <summary>
-    ///     获取实体
-    /// </summary>
-    /// <param name="key">缓存键</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    private async Task<TEntity?> GetEntityAsync(
-        TKey key,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = Instance.CreateInstance<TEntity>();
-
-            entity.Id = key;
-
-            entity = await Cache?.GetAsync<TEntity>(entity.GenerateKey(Prefix), cancellationToken)!;
-
-            if (DebugLogger) SetDebugLog($"Get {typeof(TEntity).Name} Entity From Cache");
-
-            return entity;
-        }
-
-        return default;
-    }
-
-    /// <summary>
-    ///     获取实体
-    /// </summary>
-    /// <param name="keys">实体键列表</param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    private IEnumerable<TEntity>? GetEntities(IEnumerable<TKey> keys)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var list = new List<TEntity>();
-
-            foreach (var key in keys)
-            {
-                var entity = Instance.CreateInstance<TEntity>();
-
-                entity.Id = key;
-
-                entity = Cache?.Get<TEntity>(entity.GenerateKey(Prefix));
-
-                if (entity is not null)
-                    list.Add(entity);
-            }
-
-            if (DebugLogger) SetDebugLog($"Get {list.Count} {typeof(TEntity).Name} Entities From Cache");
-
-            return list;
-        }
-
-        return default;
-    }
-
-    /// <summary>
-    ///     获取实体
-    /// </summary>
-    /// <param name="keys">实体键列表</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    private async Task<IEnumerable<TEntity>?> GetEntitiesAsync(
-        IEnumerable<TKey> keys,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var list = new List<TEntity>();
-
-            foreach (var key in keys)
-            {
-                var entity = Instance.CreateInstance<TEntity>();
-
-                entity.Id = key;
-
-                entity = await Cache?.GetAsync<TEntity>(entity.GenerateKey(Prefix), cancellationToken)!;
-
-                if (entity is not null)
-                    list.Add(entity);
-            }
-
-            if (DebugLogger) SetDebugLog($"Get {list.Count} {typeof(TEntity).Name} Entities From Cache");
-
-            return list;
-        }
-
-        return default;
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="key"></param>
-    /// <exception cref="InstanceNotImplementException"></exception>
-    private void RemoveCachedEntity(TKey key)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = Instance.CreateInstance<TEntity>();
-
-            entity.Id = key;
-
-            Cache?.Remove(entity.GenerateKey(Prefix));
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="entity"></param>
-    private void RemoveCachedEntity(TEntity entity)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.Remove(entity.GenerateKey(Prefix));
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="cancellationToken"></param>
-    private async Task RemoveCachedEntityAsync(TKey key, CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = Instance.CreateInstance<TEntity>();
-
-            entity.Id = key;
-
-            await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    private async Task RemoveCachedEntityAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-
-            if (DebugLogger) SetDebugLog($"{typeof(TEntity).Name} Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="keys"></param>
-    private void RemoveCachedEntities(IEnumerable<TKey> keys)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-            foreach (var key in keys)
-            {
-                var entity = Instance.CreateInstance<TEntity>();
-
-                entity.Id = key;
-
-                Cache?.Remove(entity.GenerateKey(Prefix));
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="entities"></param>
-    private void RemoveCachedEntities(IEnumerable<TEntity> entities)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-            foreach (var entity in entities)
-            {
-                Cache?.Remove(entity.GenerateKey(Prefix));
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="keys"></param>
-    /// <param name="cancellationToken"></param>
-    private async Task RemoveCachedEntitiesAsync(
-        IEnumerable<TKey> keys,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-            foreach (var key in keys)
-            {
-                var entity = Instance.CreateInstance<TEntity>();
-
-                entity.Id = key;
-
-                await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
-        }
-    }
-
-    /// <summary>
-    ///     移除被缓存的实体
-    /// </summary>
-    /// <param name="entities"></param>
-    /// <param name="cancellationToken"></param>
-    private async Task RemoveCachedEntitiesAsync(
-        IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-        {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var count = 0;
-            foreach (var entity in entities)
-            {
-                await Cache?.RemoveAsync(entity.GenerateKey(Prefix), cancellationToken)!;
-                count++;
-            }
-
-            if (DebugLogger) SetDebugLog($"{count} {typeof(TEntity).Name} Entities Removed From Cache");
-        }
-    }
-
-    #endregion
-
-    #region SaveChanges
-
-    /// <summary>
-    ///     保存当前存储
-    /// </summary>
-    /// <returns></returns>
-    private int SaveChanges()
-    {
-        if (DebugLogger) SetDebugLog(nameof(SaveChanges));
-
-        return AutoSaveChanges ? Context.SaveChanges() : 0;
-    }
-
-    /// <summary>
-    ///     保存当前存储
-    /// </summary>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>异步取消结果</returns>
-    private Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        if (DebugLogger) SetDebugLog(nameof(SaveChangesAsync));
-
-        return AutoSaveChanges ? Context.SaveChangesAsync(cancellationToken) : Task.FromResult(0);
-    }
+    public override IQueryable<TEntity> TrackingQuery => EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
 
     #endregion
 
@@ -655,11 +127,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     #region Setting
 
     /// <summary>
-    ///     设置是否自动保存更改
-    /// </summary>
-    protected bool AutoSaveChanges => StoreOptions.AutoSaveChanges;
-
-    /// <summary>
     ///     设置是否启用元数据托管
     /// </summary>
     protected bool MetaDataHosting => StoreOptions.MetaDataHosting || StoreOptions.SoftDelete;
@@ -668,21 +135,6 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     设置是否启用软删除
     /// </summary>
     protected bool SoftDelete => StoreOptions.SoftDelete;
-
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && Cache != null;
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    protected int Expires => StoreOptions.Expires;
-
-    /// <summary>
-    ///     是否启用Debug日志
-    /// </summary>
-    protected bool DebugLogger => StoreOptions.DebugLogger && Logger != null;
 
     #endregion
 
@@ -705,7 +157,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Create {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Create {typeof(TEntity).Name}");
 
             CacheEntity(entity);
         }
@@ -730,7 +182,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -756,7 +208,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Create {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Create {typeof(TEntity).Name}");
 
             await CacheEntityAsync(entity, cancellationToken);
         }
@@ -784,7 +236,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -811,7 +263,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Update {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Update {typeof(TEntity).Name}");
 
             CacheEntity(entity);
         }
@@ -836,7 +288,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Update {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Update {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -862,7 +314,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Update {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Update {typeof(TEntity).Name}");
 
             await CacheEntityAsync(entity, cancellationToken);
         }
@@ -890,7 +342,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Update {list.Count} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Update {list.Count} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -1133,7 +585,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
 
             RemoveCachedEntity(entity);
         }
@@ -1156,7 +608,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
 
             RemoveCachedEntity(entity);
         }
@@ -1189,7 +641,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             RemoveCachedEntities(list);
         }
@@ -1214,7 +666,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             RemoveCachedEntities(list);
         }
@@ -1245,7 +697,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
 
             await RemoveCachedEntityAsync(entity, cancellationToken);
         }
@@ -1271,7 +723,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
 
             await RemoveCachedEntityAsync(entity, cancellationToken);
         }
@@ -1307,7 +759,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await RemoveCachedEntitiesAsync(list, cancellationToken);
         }
@@ -1335,7 +787,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await RemoveCachedEntitiesAsync(list, cancellationToken);
         }
@@ -1804,7 +1256,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"CreateNew {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {typeof(TEntity).Name}");
 
             CacheEntity(entity);
         }
@@ -1833,7 +1285,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -1863,7 +1315,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"CreateNew {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {typeof(TEntity).Name}");
 
             await CacheEntityAsync(entity, cancellationToken);
         }
@@ -1894,7 +1346,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -1926,7 +1378,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
 
             CacheEntity(entity);
         }
@@ -1956,7 +1408,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
 
             CacheEntity(destination);
         }
@@ -1986,7 +1438,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2027,7 +1479,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2057,7 +1509,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
 
             await CacheEntityAsync(entity, cancellationToken);
         }
@@ -2089,7 +1541,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
 
             await CacheEntityAsync(destination, cancellationToken);
         }
@@ -2120,7 +1572,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2163,7 +1615,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2196,7 +1648,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
 
             CacheEntity(entity);
         }
@@ -2226,7 +1678,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
 
             CacheEntity(destination);
         }
@@ -2260,7 +1712,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2301,7 +1753,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2332,7 +1784,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
 
             await CacheEntityAsync(entity, cancellationToken);
         }
@@ -2364,7 +1816,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {typeof(TEntity).Name}");
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
 
             await CacheEntityAsync(destination, cancellationToken);
         }
@@ -2399,7 +1851,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2442,7 +1894,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) SetDebugLog($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2546,7 +1998,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     添加单个实体
     /// </summary>
     /// <param name="entity">实体</param>
-    private void AddEntity(TEntity entity)
+    protected override void AddEntity(TEntity entity)
     {
         if (MetaDataHosting)
         {
@@ -2562,7 +2014,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     添加多个实体
     /// </summary>
     /// <param name="entities">实体</param>
-    private void AddEntities(ICollection<TEntity> entities)
+    protected override void AddEntities(ICollection<TEntity> entities)
     {
         if (MetaDataHosting)
         {
@@ -2581,7 +2033,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     追踪一个实体更新
     /// </summary>
     /// <param name="entity">实体</param>
-    private void UpdateEntity(TEntity entity)
+    protected override void UpdateEntity(TEntity entity)
     {
         Context.Attach(entity);
 
@@ -2604,9 +2056,10 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     追踪多个实体更新
     /// </summary>
     /// <param name="entities">实体</param>
-    private void UpdateEntities(ICollection<TEntity> entities)
+    protected override void UpdateEntities(ICollection<TEntity> entities)
     {
         Context.AttachRange(entities);
+
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
@@ -2626,7 +2079,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query">查询</param>
     /// <param name="setter">更新委托</param>
     /// <returns></returns>
-    private int BatchUpdateEntity(
+    protected override int BatchUpdateEntity(
         IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
@@ -2643,7 +2096,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="setter">更新委托</param>
     /// <param name="cancellationToken">异步操作取消信号</param>
     /// <returns></returns>
-    private Task<int> BatchUpdateEntityAsync(
+    protected override Task<int> BatchUpdateEntityAsync(
         IQueryable<TEntity> query,
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
         CancellationToken cancellationToken = default)
@@ -2658,7 +2111,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     追踪一个实体删除
     /// </summary>
     /// <param name="entity">实体</param>
-    private void DeleteEntity(TEntity entity)
+    protected override void DeleteEntity(TEntity entity)
     {
         if (SoftDelete)
         {
@@ -2680,7 +2133,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     ///     追踪多个实体删除
     /// </summary>
     /// <param name="entities">实体</param>
-    private void DeleteEntities(ICollection<TEntity> entities)
+    protected override void DeleteEntities(ICollection<TEntity> entities)
     {
         if (SoftDelete)
         {
@@ -2708,7 +2161,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// </summary>
     /// <param name="query"></param>
     /// <returns></returns>
-    private int BatchDeleteEntity(IQueryable<TEntity> query)
+    protected override int BatchDeleteEntity(IQueryable<TEntity> query)
     {
         if (SoftDelete)
             return query.ExecuteUpdate(setter => setter
@@ -2724,7 +2177,7 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private Task<int> BatchDeleteEntityAsync(
+    protected override Task<int> BatchDeleteEntityAsync(
         IQueryable<TEntity> query,
         CancellationToken cancellationToken = default)
     {
@@ -2735,150 +2188,5 @@ public abstract class Store<TEntity, TContext, TKey> : StoreBase<TEntity, TKey>,
 
         return query.ExecuteDeleteAsync(cancellationToken);
     }
-
-    /// <summary>
-    ///     根据Id查询实体
-    /// </summary>
-    /// <param name="id">id</param>
-    /// <returns></returns>
-    private TEntity? FindById(TKey id)
-    {
-        return KeyMatchQuery(id).FirstOrDefault();
-    }
-
-    /// <summary>
-    ///     根据Id查询实体并映射到指定类型
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id">id</param>
-    /// <returns></returns>
-    private TMapEntity? FindById<TMapEntity>(TKey id)
-    {
-        return KeyMatchQuery(id)
-            .ProjectToType<TMapEntity>()
-            .FirstOrDefault();
-    }
-
-    /// <summary>
-    ///     根据Id查询实体
-    /// </summary>
-    /// <param name="ids">id表</param>
-    /// <returns></returns>
-    private IEnumerable<TEntity> FindByIds(IEnumerable<TKey> ids)
-    {
-        return KeyMatchQuery(ids).ToList();
-    }
-
-    /// <summary>
-    ///     根据Id查询实体并映射到指定类型
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="ids">id表</param>
-    /// <returns></returns>
-    private IEnumerable<TMapEntity> FindByIds<TMapEntity>(IEnumerable<TKey> ids)
-    {
-        return KeyMatchQuery(ids)
-            .ProjectToType<TMapEntity>()
-            .ToList();
-    }
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    private Task<TEntity?> FindByIdAsync(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        return KeyMatchQuery(id).FirstOrDefaultAsync(cancellationToken);
-    }
-
-    /// <summary>
-    ///     根据Id查询实体并映射到指定类型
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    private Task<TMapEntity?> FindByIdAsync<TMapEntity>(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        return KeyMatchQuery(id)
-            .ProjectToType<TMapEntity>()
-            .FirstOrDefaultAsync(cancellationToken);
-    }
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    private Task<List<TEntity>> FindByIdsAsync(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        return KeyMatchQuery(ids)
-            .ToListAsync(cancellationToken);
-    }
-
-    /// <summary>
-    ///     根据Id查询实体并映射到指定类型
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="ids"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    private Task<List<TMapEntity>> FindByIdsAsync<TMapEntity>(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        return KeyMatchQuery(ids)
-            .ProjectToType<TMapEntity>()
-            .ToListAsync(cancellationToken);
-    }
-
-    #endregion
-
-    #region OnActionExecution
-
-    /// <summary>
-    ///     保存追踪
-    /// </summary>
-    /// <returns></returns>
-    private StoreResult AttacheChange()
-    {
-        try
-        {
-            var changes = SaveChanges();
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     保存异步追踪
-    /// </summary>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    private async Task<StoreResult> AttacheChangeAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            var changes = await SaveChangesAsync(cancellationToken);
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
     #endregion
 }

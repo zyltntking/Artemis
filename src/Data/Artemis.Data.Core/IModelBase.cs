@@ -62,6 +62,26 @@ public interface IModelBase : IKeySlot, IModelBase<Guid>
 public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot
     where TKey : IEquatable<TKey>
 {
+}
+
+/// <summary>
+///     标识组件接口
+/// </summary>
+public interface IKeySlot : IKeySlot<Guid>
+{
+}
+
+/// <summary>
+///     标识组件接口
+/// </summary>
+/// <typeparam name="TKey">基本记录标识</typeparam>
+public interface IKeySlot<TKey> where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     存储标识
+    /// </summary>
+    TKey Id { get; set; }
+
     /// <summary>
     ///     生成键
     /// </summary>
@@ -84,25 +104,6 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot
 
         return string.Join(":", list);
     }
-}
-
-/// <summary>
-///     标识组件接口
-/// </summary>
-public interface IKeySlot : IKeySlot<Guid>
-{
-}
-
-/// <summary>
-///     标识组件接口
-/// </summary>
-/// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IKeySlot<TKey> where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    TKey Id { get; set; }
 }
 
 /// <summary>

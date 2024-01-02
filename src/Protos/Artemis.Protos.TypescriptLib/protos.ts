@@ -1,3 +1,5 @@
+export type EmptyResult = {}
+
 export type DataResult<TResult> = {
     code: number,
     succeeded: boolean,
@@ -8,4 +10,10 @@ export type DataResult<TResult> = {
     data?: TResult
 }
 
-export type EmptyResult = {}
+export type StringKeySlot = KeySlot<string>;
+
+export type NumberKeySlot = KeySlot<number>;
+
+export type KeySlot<TKey> = {
+    Id: TKey
+}
