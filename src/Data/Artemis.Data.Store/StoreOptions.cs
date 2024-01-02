@@ -19,7 +19,7 @@ public interface IStoreOptions : IKeyWithStoreOptions
 }
 
 /// <summary>
-/// 具缓存存储配置接口
+///     具缓存存储配置接口
 /// </summary>
 public interface IKeyWithStoreOptions : IKeyLessStoreOptions
 {
@@ -35,7 +35,7 @@ public interface IKeyWithStoreOptions : IKeyLessStoreOptions
 }
 
 /// <summary>
-/// 无键存储配置接口
+///     无键存储配置接口
 /// </summary>
 public interface IKeyLessStoreOptions
 {
@@ -73,7 +73,7 @@ public record ArtemisStoreOptions : KeyWithStoreOptions, IStoreOptions
 }
 
 /// <summary>
-/// 缓存存储配置
+///     缓存存储配置
 /// </summary>
 public record KeyWithStoreOptions : KeyLessStoreOptions, IKeyWithStoreOptions
 {
@@ -93,7 +93,7 @@ public record KeyWithStoreOptions : KeyLessStoreOptions, IKeyWithStoreOptions
 }
 
 /// <summary>
-/// 无键存储配置
+///     无键存储配置
 /// </summary>
 public record KeyLessStoreOptions : IKeyLessStoreOptions
 {

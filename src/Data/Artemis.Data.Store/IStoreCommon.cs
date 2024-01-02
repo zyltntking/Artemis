@@ -10,7 +10,7 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public interface IKeyWithStoreCommon<TEntity, in TKey> : IKeyLessStoreCommon<TEntity>
-    where TEntity : IModelBase<TKey>
+    where TEntity : IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
     #region BatchUpdateEntity & BatchUpdateEntities

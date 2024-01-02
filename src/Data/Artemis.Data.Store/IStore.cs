@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Core;
-using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Data.Store;
 
@@ -24,13 +23,5 @@ public interface IStore<TEntity, TKey> :
     IStoreMap<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
-{
-}
-
-/// <summary>
-///     无键模型存储
-/// </summary>
-/// <typeparam name="TEntity">模型类型</typeparam>
-public interface IKeyLessStore<TEntity> : IKeyLessStoreBase<TEntity>, IKeyLessStoreCommon<TEntity> where TEntity : class
 {
 }

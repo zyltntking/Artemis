@@ -63,33 +63,10 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IStore<TEntity, TKey>
+public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
-    /// <summary>
-    ///     是否被删除
-    /// </summary>
-    /// <param name="entity">实体</param>
-    /// <returns>判断结果</returns>
-    public override bool IsDeleted(TEntity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    /// <summary>
-    ///     是否被删除
-    /// </summary>
-    /// <param name="entity">实体</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>判断结果</returns>
-    public override Task<bool> IsDeletedAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     ///     创建一个新的基本存储实例
     /// </summary>
@@ -104,9 +81,36 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context,cache, storeOptions, logger, describer)
+        StoreErrorDescriber? describer = null) : base(context, cache, storeOptions, logger, describer)
     {
         StoreOptions = storeOptions ?? new ArtemisStoreOptions();
+    }
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <returns>判断结果</returns>
+    public override bool IsDeleted(TEntity entity)
+    {
+        if (MetaDataHosting) return entity.DeletedAt is not null;
+
+        return base.IsDeleted(entity);
+    }
+
+    /// <summary>
+    ///     是否被删除
+    /// </summary>
+    /// <param name="entity">实体</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>判断结果</returns>
+    public override Task<bool> IsDeletedAsync(
+        TEntity entity,
+        CancellationToken cancellationToken = default)
+    {
+        return MetaDataHosting
+            ? Task.FromResult(entity.DeletedAt is not null)
+            : base.IsDeletedAsync(entity, cancellationToken);
     }
 
     #region DataAccess
@@ -114,11 +118,10 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     /// <summary>
     ///     Entity有追踪访问器
     /// </summary>
-    public override IQueryable<TEntity> TrackingQuery => EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
+    public override IQueryable<TEntity> TrackingQuery =>
+        EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
 
     #endregion
-
-    #region Implementation of IStoreCommon<TEntity,in TKey>
 
     #region IStoreOptions
 
@@ -140,1098 +143,6 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
 
     #endregion
 
-    #region CreateEntity & CreateEntities
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中创建一个新的实体
-    /// </summary>
-    /// <param name="entity">被创建实体</param>
-    /// <returns></returns>
-    public virtual StoreResult Create(TEntity entity)
-    {
-        OnActionExecuting(entity, nameof(entity));
-
-        AddEntity(entity);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Create {typeof(TEntity).Name}");
-
-            CacheEntity(entity);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中创建多个新的实体
-    /// </summary>
-    /// <param name="entities">被创建实体</param>
-    /// <returns></returns>
-    public virtual StoreResult Create(IEnumerable<TEntity> entities)
-    {
-        var list = entities.ToList();
-
-        OnActionExecuting(list, nameof(entities));
-
-        AddEntities(list);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            CacheEntities(list);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中创建一个新的实体
-    /// </summary>
-    /// <param name="entity">被创建实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-
-        AddEntity(entity);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Create {typeof(TEntity).Name}");
-
-            await CacheEntityAsync(entity, cancellationToken);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中创建多个新的实体
-    /// </summary>
-    /// <param name="entities">被创建实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(
-        IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-    {
-        var list = entities.ToList();
-
-        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-
-        AddEntities(list);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            await CacheEntitiesAsync(list, cancellationToken);
-        }
-
-        return result;
-    }
-
-    #endregion
-
-    #region UpdateEntity & UpdateEntities
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中更新已存在的实体
-    /// </summary>
-    /// <param name="entity">被创建实体</param>
-    /// <returns></returns>
-    public StoreResult Update(TEntity entity)
-    {
-        OnActionExecuting(entity, nameof(entity));
-
-        UpdateEntity(entity);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Update {typeof(TEntity).Name}");
-
-            CacheEntity(entity);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中更新多个已存在的实体
-    /// </summary>
-    /// <param name="entities">被创建实体</param>
-    /// <returns></returns>
-    public StoreResult Update(IEnumerable<TEntity> entities)
-    {
-        var list = entities.ToList();
-
-        OnActionExecuting(list, nameof(entities));
-
-        UpdateEntities(list);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Update {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            CacheEntities(list);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中更新已存在的实体
-    /// </summary>
-    /// <param name="entity">被创建实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> UpdateAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-
-        UpdateEntity(entity);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Update {typeof(TEntity).Name}");
-
-            await CacheEntityAsync(entity, cancellationToken);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中更新多个已存在的实体
-    /// </summary>
-    /// <param name="entities">被创建实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> UpdateAsync(
-        IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-    {
-        var list = entities.ToList();
-
-        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-
-        UpdateEntities(list);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Update {list.Count} {typeof(TEntity).Name} Entities");
-
-            await CacheEntitiesAsync(list, cancellationToken);
-        }
-
-        return result;
-    }
-
-    #endregion
-
-    #region BatchUpdateEntity & BatchUpdateEntities
-
-    /// <summary>
-    ///     更新存储中的实体
-    /// </summary>
-    /// <param name="id">被更新实体的主键</param>
-    /// <param name="setter">更新行为</param>
-    /// <returns></returns>
-    public StoreResult BatchUpdate(
-        TKey id,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        OnActionExecuting(id, nameof(id));
-        try
-        {
-            var changes = BatchUpdateEntity(KeyMatchQuery(id), setter);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新已存在的实体
-    /// </summary>
-    /// <param name="ids">被更新实体的主键</param>
-    /// <param name="setter">更新行为</param>
-    /// <returns></returns>
-    public StoreResult BatchUpdate(
-        IEnumerable<TKey> ids,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        var idList = ids as List<TKey> ?? ids.ToList();
-        OnActionExecuting(idList, nameof(ids));
-        try
-        {
-            var changes = BatchUpdateEntity(KeyMatchQuery(idList), setter);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新符合条件的实体
-    /// </summary>
-    /// <param name="setter">更新行为</param>
-    /// <param name="predicate">查询表达式</param>
-    /// <returns></returns>
-    public StoreResult BatchUpdate(
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        Expression<Func<TEntity, bool>>? predicate = null)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        ThrowIfDisposed();
-        try
-        {
-            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
-
-            var changes = BatchUpdateEntity(query, setter);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新符合查询描述的实体
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="setter">更新行为</param>
-    /// <returns></returns>
-    public StoreResult BatchUpdate(
-        IQueryable<TEntity> query,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        ThrowIfDisposed();
-        try
-        {
-            var changes = BatchUpdateEntity(query, setter);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新已存在的实体
-    /// </summary>
-    /// <param name="id">被更新实体的主键</param>
-    /// <param name="setter">更新行为</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(
-        TKey id,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-        try
-        {
-            var changes = await BatchUpdateEntityAsync(KeyMatchQuery(id), setter, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新已存在的实体
-    /// </summary>
-    /// <param name="ids">被更新实体的主键</param>
-    /// <param name="setter">更新行为</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(
-        IEnumerable<TKey> ids,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        var idList = ids as List<TKey> ?? ids.ToList();
-        OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
-        try
-        {
-            var changes = await BatchUpdateEntityAsync(KeyMatchQuery(idList), setter, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新符合条件的实体
-    /// </summary>
-    /// <param name="setter">更新行为</param>
-    /// <param name="predicate">查询表达式</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        Expression<Func<TEntity, bool>>? predicate = null,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        ThrowIfDisposed();
-        cancellationToken.ThrowIfCancellationRequested();
-        try
-        {
-            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
-
-            var changes = await BatchUpdateEntityAsync(query, setter, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中更新符合查询描述的实体
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="setter">更新行为</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchUpdateAsync(
-        IQueryable<TEntity> query,
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        ThrowIfDisposed();
-        cancellationToken.ThrowIfCancellationRequested();
-        try
-        {
-            var changes = await BatchUpdateEntityAsync(query, setter, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    #endregion
-
-    #region DeleteEntity & DeleteEntities
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="id">被删除实体的主键</param>
-    public StoreResult Delete(TKey id)
-    {
-        OnActionExecuting(id, nameof(id));
-
-        var entity = FindEntity(id);
-
-        if (entity is null)
-            return StoreResult.Failed(Describer.NotFoundId(ConvertIdToString(id)));
-
-        DeleteEntity(entity);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
-
-            RemoveCachedEntity(entity);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中删除已存在的实体
-    /// </summary>
-    /// <param name="entity">被删除实体</param>
-    /// <returns></returns>
-    public StoreResult Delete(TEntity entity)
-    {
-        OnActionExecuting(entity, nameof(entity));
-
-        DeleteEntity(entity);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
-
-            RemoveCachedEntity(entity);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="ids">被删除实体的主键</param>
-    /// <returns></returns>
-    public StoreResult Delete(IEnumerable<TKey> ids)
-    {
-        var idList = ids as List<TKey> ?? ids.ToList();
-
-        OnActionExecuting(idList, nameof(ids));
-
-        var list = FindEntities(idList).ToList();
-
-        if (!list.Any())
-        {
-            var idsString = string.Join(",", idList.Select(ConvertIdToString));
-            return StoreResult.Failed(Describer.NotFoundId(idsString));
-        }
-
-        DeleteEntities(list);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            RemoveCachedEntities(list);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中删除已存在的实体
-    /// </summary>
-    /// <param name="entities">被删除实体</param>
-    /// <returns></returns>
-    public StoreResult Delete(IEnumerable<TEntity> entities)
-    {
-        var list = entities.ToList();
-
-        OnActionExecuting(list, nameof(entities));
-
-        DeleteEntities(list);
-
-        var result = AttacheChange();
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            RemoveCachedEntities(list);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="id">被删除实体的主键</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-
-        var entity = await FindEntityAsync(id, cancellationToken);
-
-        if (entity is null)
-            return StoreResult.Failed(Describer.NotFoundId(ConvertIdToString(id)));
-
-        DeleteEntity(entity);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
-
-            await RemoveCachedEntityAsync(entity, cancellationToken);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entity" />存储中删除已存在的实体
-    /// </summary>
-    /// <param name="entity">被删除实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(
-        TEntity entity,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(entity, nameof(entity), cancellationToken);
-
-        DeleteEntity(entity);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {typeof(TEntity).Name}");
-
-            await RemoveCachedEntityAsync(entity, cancellationToken);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="ids">被删除实体的主键</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        var idList = ids as List<TKey> ?? ids.ToList();
-
-        OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
-
-        var list = (await FindEntitiesAsync(idList, cancellationToken)).ToList();
-
-        if (!list.Any())
-        {
-            var idsString = string.Join(",", idList.Select(ConvertIdToString));
-            return StoreResult.Failed(Describer.NotFoundId(idsString));
-        }
-
-        DeleteEntities(list);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            await RemoveCachedEntitiesAsync(list, cancellationToken);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    ///     在<paramref name="entities" />存储中删除已存在的实体
-    /// </summary>
-    /// <param name="entities">被删除实体</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> DeleteAsync(
-        IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-    {
-        var list = entities.ToList();
-
-        OnAsyncActionExecuting(list, nameof(entities), cancellationToken);
-
-        DeleteEntities(list);
-
-        var result = await AttacheChangeAsync(cancellationToken);
-
-        if (result.Succeeded)
-        {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
-
-            await RemoveCachedEntitiesAsync(list, cancellationToken);
-        }
-
-        return result;
-    }
-
-    #endregion
-
-    #region BatchDeleteEntity & BatchDeleteEntities
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="id">被删除实体的主键</param>
-    public StoreResult BatchDelete(TKey id)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        OnActionExecuting(id, nameof(id));
-        try
-        {
-            var changes = BatchDeleteEntity(KeyMatchQuery(id));
-
-            if (changes > 0) RemoveCachedEntity(id);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="ids">被删除实体的主键</param>
-    /// <returns></returns>
-    public StoreResult BatchDelete(IEnumerable<TKey> ids)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        var idList = ids as List<TKey> ?? ids.ToList();
-
-        OnActionExecuting(idList, nameof(ids));
-        try
-        {
-            var changes = BatchDeleteEntity(KeyMatchQuery(idList));
-
-            if (changes > 0) RemoveCachedEntities(idList);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除符合条件的实体
-    /// </summary>
-    /// <param name="predicate">查询表达式</param>
-    /// <returns></returns>
-    public StoreResult BatchDelete(Expression<Func<TEntity, bool>>? predicate)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        ThrowIfDisposed();
-        try
-        {
-            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
-
-            var changes = BatchDeleteEntity(query);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除符合查询描述的实体
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public StoreResult BatchDelete(IQueryable<TEntity> query)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        ThrowIfDisposed();
-        try
-        {
-            var changes = BatchDeleteEntity(query);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="id">被删除实体的主键</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-        try
-        {
-            var changes = await BatchDeleteEntityAsync(KeyMatchQuery(id), cancellationToken);
-
-            if (changes > 0) await RemoveCachedEntityAsync(id, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除已存在的实体
-    /// </summary>
-    /// <param name="ids">被删除实体的主键</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        var idList = ids as List<TKey> ?? ids.ToList();
-        OnAsyncActionExecuting(idList, nameof(ids), cancellationToken);
-        try
-        {
-            var changes = await BatchDeleteEntityAsync(KeyMatchQuery(idList), cancellationToken);
-
-            if (changes > 0) await RemoveCachedEntitiesAsync(idList, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除符合条件的实体
-    /// </summary>
-    /// <param name="predicate">查询表达式</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(
-        Expression<Func<TEntity, bool>>? predicate,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore)
-            return StoreResult.Failed(Describer.EnableCache());
-
-        ThrowIfDisposed();
-        cancellationToken.ThrowIfCancellationRequested();
-        try
-        {
-            var query = predicate is not null ? EntityQuery.Where(predicate) : EntityQuery;
-
-            var changes = await BatchDeleteEntityAsync(query, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    /// <summary>
-    ///     在存储中删除符合查询描述的实体
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteAsync(
-        IQueryable<TEntity> query,
-        CancellationToken cancellationToken = default)
-    {
-        if (CachedStore) return StoreResult.Failed(Describer.EnableCache());
-        ThrowIfDisposed();
-        cancellationToken.ThrowIfCancellationRequested();
-        try
-        {
-            var changes = await BatchDeleteEntityAsync(query, cancellationToken);
-
-            return StoreResult.Success(changes);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            return StoreResult.Failed(Describer.ConcurrencyFailure());
-        }
-    }
-
-    #endregion
-
-    #region FindEntity & FindEntities
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public TEntity? FindEntity(TKey id)
-    {
-        OnActionExecuting(id, nameof(id));
-
-        var cached = GetEntity(id);
-
-        if (cached is not null) return cached;
-
-        var entity = FindById(id);
-
-        if (entity is not null) CacheEntity(entity);
-
-        return entity;
-    }
-
-    /// <summary>
-    ///     根据id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id">id</param>
-    /// <returns></returns>
-    public TMapEntity? FindMapEntity<TMapEntity>(TKey id)
-    {
-        OnActionExecuting(id, nameof(id));
-
-        var cached = GetEntity(id);
-
-        if (cached is not null)
-            return cached.Adapt<TMapEntity>();
-
-        return FindById<TMapEntity>(id);
-    }
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <returns></returns>
-    public IEnumerable<TEntity> FindEntities(IEnumerable<TKey> ids)
-    {
-        var idArray = ids as TKey[] ?? ids.ToArray();
-        OnActionExecuting(idArray, nameof(ids));
-
-        var cached = GetEntities(idArray);
-
-        if (cached is not null)
-        {
-            var list = cached.ToList();
-
-            if (list.Any()) return list;
-        }
-
-        var entities = FindByIds(idArray).ToList();
-
-        if (entities.Any()) CacheEntities(entities);
-
-        return entities;
-    }
-
-    /// <summary>
-    ///     根据id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="ids">ids</param>
-    /// <returns></returns>
-    public IEnumerable<TMapEntity> FindMapEntities<TMapEntity>(IEnumerable<TKey> ids)
-    {
-        var idArray = ids as TKey[] ?? ids.ToArray();
-        OnActionExecuting(idArray, nameof(ids));
-
-        var cached = GetEntities(idArray);
-
-        if (cached is not null)
-        {
-            var list = cached.ToList();
-
-            if (list.Any()) return list.Adapt<IEnumerable<TMapEntity>>();
-        }
-
-        return FindByIds<TMapEntity>(idArray);
-    }
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<TEntity?> FindEntityAsync(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-
-        var cached = await GetEntityAsync(id, cancellationToken);
-
-        if (cached is not null) return cached;
-
-        var entity = await FindByIdAsync(id, cancellationToken);
-
-        if (entity is not null) await CacheEntityAsync(entity, cancellationToken);
-
-        return entity;
-    }
-
-    /// <summary>
-    ///     根据Id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-
-        var cached = await GetEntityAsync(id, cancellationToken);
-
-        if (cached is not null)
-            return cached.Adapt<TMapEntity>();
-
-        return await FindByIdAsync<TMapEntity>(id, cancellationToken);
-    }
-
-    /// <summary>
-    ///     根据Id查找实体
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<IEnumerable<TEntity>> FindEntitiesAsync(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        var idArray = ids as TKey[] ?? ids.ToArray();
-        OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
-
-        var cached = await GetEntitiesAsync(idArray, cancellationToken);
-
-        if (cached is not null)
-        {
-            var list = cached.ToList();
-
-            if (list.Any()) return list;
-        }
-
-        var entities = await FindByIdsAsync(idArray, cancellationToken);
-
-        if (entities.Any()) await CacheEntitiesAsync(entities, cancellationToken);
-
-        return entities;
-    }
-
-    /// <summary>
-    ///     根据Id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="ids"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<IEnumerable<TMapEntity>> FindMapEntitiesAsync<TMapEntity>(
-        IEnumerable<TKey> ids,
-        CancellationToken cancellationToken = default)
-    {
-        var idArray = ids as TKey[] ?? ids.ToArray();
-        OnAsyncActionExecuting(idArray, nameof(ids), cancellationToken);
-
-        var cached = await GetEntitiesAsync(idArray, cancellationToken);
-
-        if (cached is not null)
-        {
-            var list = cached.ToList();
-
-            if (list.Any()) return list.Adapt<List<TMapEntity>>();
-        }
-
-        return await FindByIdsAsync<TMapEntity>(idArray, cancellationToken);
-    }
-
-    #endregion
-
-    #region Exists
-
-    /// <summary>
-    ///     判断实体是否存在
-    /// </summary>
-    /// <param name="id">实体键</param>
-    /// <returns></returns>
-    public bool Exists(TKey id)
-    {
-        OnActionExecuting(id, nameof(id));
-        return KeyMatchQuery(id).Any();
-    }
-
-    /// <summary>
-    ///     判断实体是否存在
-    /// </summary>
-    /// <param name="id">实体键</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task<bool> ExistsAsync(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        OnActionExecuting(id, nameof(id));
-        return KeyMatchQuery(id).AnyAsync(cancellationToken);
-    }
-
-    #endregion
-
-    #endregion
-
     #region Implementation of IStoreMap<TEntity,TKey>
 
     #region CreateEntity & CreateEntities
@@ -1248,7 +159,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entity = source!.Adapt<TSource, TEntity>(config);
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
@@ -1276,7 +187,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         TypeAdapterConfig? config = null)
     {
         OnActionExecuting(sources, nameof(sources));
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -1307,7 +218,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entity = source!.Adapt<TSource, TEntity>(config);
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
@@ -1337,7 +248,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entities = sources.Adapt<IEnumerable<TEntity>>(config);
         if (entities is null)
             throw new MapTargetNullException(nameof(entities));
@@ -1400,7 +311,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         source.Adapt(destination, config);
         if (destination is null)
             throw new MapTargetNullException(nameof(destination));
@@ -1466,7 +377,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     {
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entities = sourceList.Join(
             destinations,
             sourceKeySelector,
@@ -1533,7 +444,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         source.Adapt(destination, config);
         if (destination is null)
             throw new MapTargetNullException(nameof(destination));
@@ -1602,7 +513,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     {
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
-        config ??= IgnoreIdConfig<TSource>();
+        config ??= IgnoreIdAndMateConfig<TSource>();
         var entities = sourceList.Join(
             destinations,
             sourceKeySelector,
@@ -1642,7 +553,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         var entity = FindById(source.Id);
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
-        config ??= IgnoreNullConfig<TSource>();
+        config ??= IgnoreNullAndMateConfig<TSource>();
         source.Adapt(entity, config);
         UpdateEntity(entity);
         var result = AttacheChange();
@@ -1670,7 +581,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         TypeAdapterConfig? config = null)
     {
         OnActionExecuting(source, nameof(source));
-        config ??= IgnoreIdAndNullConfig<TSource>();
+        config ??= IgnoreIdAndNullAndMateConfig<TSource>();
         source.Adapt(destination, config);
         if (destination is null)
             throw new MapTargetNullException(nameof(destination));
@@ -1703,7 +614,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         var destinations = FindByIds(sourceList.Select(source => source.Id));
         if (destinations is null)
             throw new MapTargetNullException(nameof(destinations));
-        config ??= IgnoreNullConfig<TSource>();
+        config ??= IgnoreNullAndMateConfig<TSource>();
         var list = sourceList.Join(
             destinations, source => source.Id,
             destination => destination.Id,
@@ -1740,7 +651,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     {
         var sourceList = sources.ToList();
         OnActionExecuting(sourceList, nameof(sources));
-        config ??= IgnoreIdAndNullConfig<TSource>();
+        config ??= IgnoreIdAndNullAndMateConfig<TSource>();
         var entities = sourceList.Join(
             destinations,
             sourceKeySelector,
@@ -1778,7 +689,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         var entity = await FindByIdAsync(source.Id, cancellationToken);
         if (entity is null)
             throw new MapTargetNullException(nameof(entity));
-        config ??= IgnoreNullConfig<TSource>();
+        config ??= IgnoreNullAndMateConfig<TSource>();
         source.Adapt(entity, config);
         UpdateEntity(entity);
         var result = await AttacheChangeAsync(cancellationToken);
@@ -1808,7 +719,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(source, nameof(source), cancellationToken);
-        config ??= IgnoreIdAndNullConfig<TSource>();
+        config ??= IgnoreIdAndNullAndMateConfig<TSource>();
         source.Adapt(destination, config);
         if (destination is null)
             throw new MapTargetNullException(nameof(destination));
@@ -1842,7 +753,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
         var destinations = await FindByIdsAsync(sourceList.Select(source => source.Id), cancellationToken);
         if (destinations is null)
             throw new MapTargetNullException(nameof(destinations));
-        config ??= IgnoreNullConfig<TSource>();
+        config ??= IgnoreNullAndMateConfig<TSource>();
         var list = sourceList.Join(
             destinations, source => source.Id,
             destination => destination.Id,
@@ -1881,7 +792,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     {
         var sourceList = sources.ToList();
         OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
-        config ??= IgnoreIdAndNullConfig<TSource>();
+        config ??= IgnoreIdAndNullAndMateConfig<TSource>();
         var entities = sourceList.Join(
             destinations,
             sourceKeySelector,
@@ -1907,63 +818,71 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     #region MapConfig
 
     /// <summary>
-    ///     id和空值忽略缓存
+    ///     忽略标识和空值和元数据缓存
     /// </summary>
-    private TypeAdapterConfig? _ignoreIdAndNullConfig;
+    private TypeAdapterConfig? _ignoreIdAndNullAndMateConfig;
 
     /// <summary>
-    ///     在忽略目标实体元数据属性的基础上忽略源实体的Id属性和空值属性
+    ///     忽略源实体的空值属性和目标实体的Id和元数据属性
     /// </summary>
-    /// <typeparam name="TSource">源数据类型</typeparam>
-    /// <returns>映射配置</returns>
-    public TypeAdapterConfig IgnoreIdAndNullConfig<TSource>()
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdAndNullAndMateConfig<TSource>()
     {
-        if (_ignoreIdAndNullConfig is not null)
-            return _ignoreIdAndNullConfig;
-        _ignoreIdAndNullConfig = IgnoreNullConfig<TSource>().Clone();
-        _ignoreIdAndNullConfig.NewConfig<TSource, TEntity>()
-            .IgnoreNullValues(true);
-        return _ignoreIdAndNullConfig;
+        if (_ignoreIdAndNullAndMateConfig is not null)
+            return _ignoreIdAndNullAndMateConfig;
+        _ignoreIdAndNullAndMateConfig = IgnoreIdAndNullConfig<TSource>().Clone();
+        _ignoreIdAndNullAndMateConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true)
+            .Ignore(item => item.CreatedAt)
+            .Ignore(item => item.UpdatedAt)
+            .Ignore(item => item.DeletedAt!);
+        return _ignoreIdAndNullAndMateConfig;
     }
 
     /// <summary>
-    ///     空值或空字符值忽略缓存
+    ///     忽略空值和元数据缓存
     /// </summary>
-    private TypeAdapterConfig? _ignoreNullConfig;
+    private TypeAdapterConfig? _ignoreNullAndMateConfig;
 
     /// <summary>
-    ///     在忽略目标实体元数据属性的基础上忽略源实体的空值属性
+    ///     忽略源实体的空值属性和目标实体的元数据属性
     /// </summary>
-    /// <typeparam name="TSource">源数据类型</typeparam>
-    /// <returns>映射配置</returns>
-    public TypeAdapterConfig IgnoreNullConfig<TSource>()
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreNullAndMateConfig<TSource>()
     {
-        if (_ignoreNullConfig is not null)
-            return _ignoreNullConfig;
-        _ignoreNullConfig = IgnoreMetaConfig<TSource>().Clone();
-        _ignoreNullConfig.NewConfig<TSource, TEntity>()
-            .IgnoreNullValues(true);
-        return _ignoreNullConfig;
+        if (_ignoreNullAndMateConfig is not null)
+            return _ignoreNullAndMateConfig;
+        _ignoreNullAndMateConfig = IgnoreNullConfig<TSource>().Clone();
+        _ignoreNullAndMateConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true)
+            .Ignore(item => item.CreatedAt)
+            .Ignore(item => item.UpdatedAt)
+            .Ignore(item => item.DeletedAt!);
+        return _ignoreNullAndMateConfig;
     }
 
     /// <summary>
-    ///     Id忽略缓存
+    ///     忽略Id和元数据缓存
     /// </summary>
-    private TypeAdapterConfig? _ignoreIdConfig;
+    private TypeAdapterConfig? _ignoreIdAndMateConfig;
 
     /// <summary>
-    ///     在忽略目标实体元数据属性的基础上忽略目标实体的Id属性
+    ///     忽略目标实体的Id和元数据属性
     /// </summary>
-    /// <typeparam name="TSource">源数据类型</typeparam>
-    /// <returns>映射配置</returns>
-    public TypeAdapterConfig IgnoreIdConfig<TSource>()
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdAndMateConfig<TSource>()
     {
-        if (_ignoreIdConfig is not null)
-            return _ignoreIdConfig;
-        _ignoreIdConfig = IgnoreMetaConfig<TSource>().Clone();
-        _ignoreIdConfig.NewConfig<TSource, TEntity>()
-            .Ignore(item => item.Id);
-        return _ignoreIdConfig;
+        if (_ignoreIdAndMateConfig is not null)
+            return _ignoreIdAndMateConfig;
+        _ignoreIdAndMateConfig = IgnoreIdConfig<TSource>().Clone();
+        _ignoreIdAndMateConfig.NewConfig<TSource, TEntity>()
+            .Ignore(item => item.CreatedAt)
+            .Ignore(item => item.UpdatedAt)
+            .Ignore(item => item.DeletedAt!);
+        return _ignoreIdAndMateConfig;
     }
 
     /// <summary>
@@ -1976,7 +895,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
-    public TypeAdapterConfig IgnoreMetaConfig<TSource>()
+    protected TypeAdapterConfig IgnoreMetaConfig<TSource>()
     {
         if (_ignoreMetaConfig is not null)
             return _ignoreMetaConfig;
@@ -2188,5 +1107,6 @@ public abstract class Store<TEntity, TKey> : KeyWithStoreBase<TEntity, TKey>, IS
 
         return query.ExecuteDeleteAsync(cancellationToken);
     }
+
     #endregion
 }

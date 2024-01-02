@@ -18,7 +18,7 @@ public static class DistributedCacheExtensions
     /// <param name="expire">过期时间</param>
     public static void Set<T>(
         this IDistributedCache cache,
-        string key, 
+        string key,
         T entity,
         int expire = 0) where T : class
     {

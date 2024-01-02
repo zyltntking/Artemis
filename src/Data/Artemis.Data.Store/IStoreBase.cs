@@ -75,7 +75,7 @@ public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
     bool IsDeleted(TEntity entity);
 
     /// <summary>
-    /// 是否被删除
+    ///     是否被删除
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>
@@ -92,7 +92,7 @@ public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 是否被删除
+    ///     是否被删除
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -111,6 +111,13 @@ public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
 public interface IKeyLessStoreBase<out TEntity> : IDisposable
     where TEntity : class
 {
+    /// <summary>
+    ///     规范化键
+    /// </summary>
+    /// <param name="value">被规范化的值</param>
+    /// <returns></returns>
+    string NormalizeKey(string value);
+
     #region Access
 
     /// <summary>
@@ -124,11 +131,4 @@ public interface IKeyLessStoreBase<out TEntity> : IDisposable
     IQueryable<TEntity> EntityQuery { get; }
 
     #endregion
-
-    /// <summary>
-    ///     规范化键
-    /// </summary>
-    /// <param name="value">被规范化的值</param>
-    /// <returns></returns>
-    string NormalizeKey(string value);
 }

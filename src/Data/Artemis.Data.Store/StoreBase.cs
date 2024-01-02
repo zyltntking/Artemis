@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.Linq.Expressions;
+using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store.Extensions;
 using Mapster;
@@ -6,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
 
 namespace Artemis.Data.Store;
 
@@ -15,7 +15,9 @@ namespace Artemis.Data.Store;
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class KeyWithStoreBase<TEntity, TKey> : KeyLessStoreBase<TEntity>, IKeyWithStoreBase<TEntity, TKey>
+public abstract class KeyWithStoreBase<TEntity, TKey> :
+    KeyLessStoreBase<TEntity>,
+    IKeyWithStoreBase<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -86,6 +88,91 @@ public abstract class KeyWithStoreBase<TEntity, TKey> : KeyLessStoreBase<TEntity
     private int Expires => StoreOptions.Expires;
 
     #endregion
+
+    #endregion
+
+    #region MapConfigs
+
+    /// <summary>
+    ///     标识忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreIdConfig;
+
+    /// <summary>
+    ///     忽略目标实体的Id属性
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdConfig<TSource>()
+    {
+        if (_ignoreIdConfig is not null)
+            return _ignoreIdConfig;
+        _ignoreIdConfig = new TypeAdapterConfig();
+        _ignoreIdConfig.NewConfig<TSource, TEntity>()
+            .Ignore(dest => dest.Id);
+
+        return _ignoreIdConfig;
+    }
+
+    /// <summary>
+    ///     忽略空值和标识缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreIdAndNullConfig;
+
+    /// <summary>
+    ///     忽略目标实体的Id属性和源实体的空值属性
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdAndNullConfig<TSource>()
+    {
+        if (_ignoreIdAndNullConfig is not null)
+            return _ignoreIdAndNullConfig;
+        _ignoreIdAndNullConfig = IgnoreNullConfig<TSource>().Clone();
+        _ignoreIdAndNullConfig.NewConfig<TSource, TEntity>()
+            .Ignore(dest => dest.Id);
+        return _ignoreIdAndNullConfig;
+    }
+
+    /// <summary>
+    ///     忽略空字符串和标识缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreIdAndEmptyConfig;
+
+    /// <summary>
+    ///     忽略目标实体的Id属性和源实体的空字符串属性
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdAndEmptyConfig<TSource>()
+    {
+        if (_ignoreIdAndEmptyConfig is not null)
+            return _ignoreIdAndEmptyConfig;
+        _ignoreIdAndEmptyConfig = IgnoreEmptyStringConfig<TSource>().Clone();
+        _ignoreIdAndEmptyConfig.NewConfig<TSource, TEntity>()
+            .Ignore(dest => dest.Id);
+        return _ignoreIdAndEmptyConfig;
+    }
+
+    /// <summary>
+    ///     忽略空值和空字符串和标识缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreIdAndNullAndEmptyConfig;
+
+    /// <summary>
+    ///     忽略目标实体的Id属性和源实体的空值和空字符串属性
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreIdAndNullAndEmptyConfig<TSource>()
+    {
+        if (_ignoreIdAndNullAndEmptyConfig is not null)
+            return _ignoreIdAndNullAndEmptyConfig;
+        _ignoreIdAndNullAndEmptyConfig = IgnoreNullAndEmptyConfig<TSource>().Clone();
+        _ignoreIdAndNullAndEmptyConfig.NewConfig<TSource, TEntity>()
+            .Ignore(dest => dest.Id);
+        return _ignoreIdAndNullAndEmptyConfig;
+    }
 
     #endregion
 
@@ -828,6 +915,73 @@ public abstract class KeyLessStoreBase<TEntity> : IKeyLessStoreBase<TEntity> whe
     private bool AutoSaveChanges => StoreOptions.AutoSaveChanges;
 
     #endregion
+
+    #endregion
+
+    #region MapConfigs
+
+    /// <summary>
+    ///     空值忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreNullConfig;
+
+    /// <summary>
+    ///     忽略源实体的空值属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    protected TypeAdapterConfig IgnoreNullConfig<TSource>()
+    {
+        if (_ignoreNullConfig is not null)
+            return _ignoreNullConfig;
+        _ignoreNullConfig = new TypeAdapterConfig();
+        _ignoreNullConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true);
+        return _ignoreNullConfig;
+    }
+
+    /// <summary>
+    ///     空字符串忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreEmptyStringConfig;
+
+    /// <summary>
+    ///     忽略源实体的空字符串属性
+    /// </summary>
+    /// <typeparam name="TSource">源数据类型</typeparam>
+    /// <returns>映射配置</returns>
+    protected TypeAdapterConfig IgnoreEmptyStringConfig<TSource>()
+    {
+        if (_ignoreEmptyStringConfig is not null)
+            return _ignoreEmptyStringConfig;
+        _ignoreEmptyStringConfig = new TypeAdapterConfig();
+        _ignoreEmptyStringConfig.NewConfig<TSource, TEntity>()
+            .Fork(config =>
+                config.ForType<string, string>()
+                    .MapToTargetWith((src, dest) =>
+                        string.IsNullOrEmpty(src) ? dest : src));
+        return _ignoreEmptyStringConfig;
+    }
+
+    /// <summary>
+    ///     空值和空字符串忽略缓存
+    /// </summary>
+    private TypeAdapterConfig? _ignoreNullAndEmptyConfig;
+
+    /// <summary>
+    ///     忽略源实体中的空值和空字符串属性
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreNullAndEmptyConfig<TSource>()
+    {
+        if (_ignoreNullAndEmptyConfig is not null)
+            return _ignoreNullAndEmptyConfig;
+        _ignoreNullAndEmptyConfig = IgnoreEmptyStringConfig<TSource>().Clone();
+        _ignoreNullAndEmptyConfig.NewConfig<TSource, TEntity>()
+            .IgnoreNullValues(true);
+        return _ignoreNullAndEmptyConfig;
+    }
 
     #endregion
 
