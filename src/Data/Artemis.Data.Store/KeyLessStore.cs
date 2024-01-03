@@ -13,8 +13,7 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntity"></typeparam>
 public abstract class KeyLessStore<TEntity> :
     KeyLessStoreBase<TEntity>,
-    IKeyLessStoreCommon<TEntity>,
-    IKeyLessStoreMap<TEntity>
+    IKeyLessStore<TEntity>
     where TEntity : class
 {
     /// <summary>

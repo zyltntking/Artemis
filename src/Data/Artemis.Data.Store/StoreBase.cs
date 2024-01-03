@@ -80,7 +80,7 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// <summary>
     ///     是否启用具缓存策略
     /// </summary>
-    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && Cache != null;
+    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && Cache is not null;
 
     /// <summary>
     ///     过期时间(秒)

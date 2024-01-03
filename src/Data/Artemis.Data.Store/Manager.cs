@@ -23,21 +23,14 @@ public interface IManager<TEntity> : IManager<TEntity, Guid>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IManager<TEntity, TKey> : IManagerOptions
+public interface IManager<TEntity, TKey> : IKeyWithManager<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     实体存储
     /// </summary>
-    public IStore<TEntity, TKey> EntityStore { get; }
-
-    /// <summary>
-    ///     规范化键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns>规范化后的键</returns>
-    public string NormalizeKey(string key);
+    new IStore<TEntity, TKey> EntityStore { get; }
 
     #region BaseResourceManager
 
@@ -51,6 +44,26 @@ public interface IManager<TEntity, TKey> : IManagerOptions
     /// <returns>实体信息列表</returns>
     Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
         CancellationToken cancellationToken = default);
+
+    #endregion
+
+}
+
+/// <summary>
+/// 提供用于管理具键存储模型TEntity的存储器的API接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public interface IKeyWithManager<TEntity, TKey> : IKeyLessManager<TEntity>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     实体存储
+    /// </summary>
+    new IKeyWithStore<TEntity, TKey> EntityStore { get; }
+
+    #region BaseResourceManager
 
     /// <summary>
     ///     获取实体信息
@@ -112,6 +125,26 @@ public interface IManager<TEntity, TKey> : IManagerOptions
     #endregion
 }
 
+/// <summary>
+/// 提供用于管理无键存储模型TEntity的存储器的API接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface IKeyLessManager<TEntity> : IDisposable
+    where TEntity : class
+{
+    /// <summary>
+    ///     实体存储
+    /// </summary>
+    IKeyLessStore<TEntity> EntityStore { get; }
+
+    /// <summary>
+    ///     规范化键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns>规范化后的键</returns>
+    public string NormalizeKey(string key);
+}
+
 #endregion
 
 /// <summary>
@@ -142,7 +175,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposable
+public abstract class Manager<TEntity, TKey> : KeyWithManager<TEntity, TKey>, IManager<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -160,174 +193,22 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
         IDistributedCache? cache = null,
         IManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
-        ILogger? logger = null)
+        ILogger? logger = null): base(store, cache, options, errors, logger)
     {
         Store = store;
-        Describer = errors ?? new StoreErrorDescriber();
-        Logger = logger;
-        Cache = cache;
-
-        SetManagerOptions(options ?? new ArtemisManagerOptions());
     }
 
-    /// <summary>
-    ///     键前缀
-    /// </summary>
-    protected virtual string KeyPrefix => "Manager";
-
-    #region DebugLogger
-
-    /// <summary>
-    ///     设置Debug日志
-    /// </summary>
-    /// <param name="message">日志消息</param>
-    protected void SetDebugLog(string message)
-    {
-        if (DebugLogger)
-            Logger?.LogDebug(message);
-    }
-
-    #endregion
-
-    /// <summary>
-    ///     异步函数执行前
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    protected void OnAsyncActionExecuting(CancellationToken cancellationToken = default)
-    {
-        ThrowIfDisposed();
-
-        cancellationToken.ThrowIfCancellationRequested();
-    }
-
-    /// <summary>
-    ///     Throws if this class has been disposed.
-    /// </summary>
-    private void ThrowIfDisposed()
-    {
-        if (_disposed) throw new ManagerDisposedException(GetType().Name);
-    }
-
-    /// <summary>
-    ///     生成Key
-    /// </summary>
-    /// <param name="args">生成参数</param>
-    /// <returns></returns>
-    protected virtual string GenerateCacheKey(params string[] args)
-    {
-        var parameters = args.Prepend(KeyPrefix);
-
-        return string.Join(":", parameters);
-    }
-
-    /// <summary>
-    ///     设置配置
-    /// </summary>
-    /// <param name="options"></param>
-    private void SetManagerOptions(IManagerOptions options)
-    {
-        CachedManager = options.CachedManager;
-        Expires = options.Expires;
-        DebugLogger = options.DebugLogger;
-    }
-
-    #region Properties
+    #region Implementation of IManager<TEntity,TKey>
 
     /// <summary>
     ///     存储访问器
     /// </summary>
-    protected IStore<TEntity, TKey> Store { get; }
-
-    /// <summary>
-    ///     缓存访问器
-    /// </summary>
-    protected IDistributedCache? Cache { get; }
-
-    /// <summary>
-    ///     错误报告生成器
-    /// </summary>
-    protected StoreErrorDescriber Describer { get; }
-
-    /// <summary>
-    ///     日志依赖访问器
-    /// </summary>
-    private ILogger? Logger { get; }
-
-    #endregion
-
-    #region Implementation of IManagerOptions
-
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    private bool _cachedManager;
-
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    public bool CachedManager
-    {
-        get => _cachedManager;
-        set => _cachedManager = value && Cache != null;
-    }
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    private int _expires;
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    public int Expires
-    {
-        get => _expires;
-        set
-        {
-            _expires = value;
-            CachedManager = _expires switch
-            {
-                > 0 => true,
-                < 0 => false,
-                _ => CachedManager
-            };
-        }
-    }
-
-    /// <summary>
-    ///     是否启用Debug日志
-    /// </summary>
-    private bool _debugLogger;
-
-    /// <summary>
-    ///     是否启用Debug日志
-    /// </summary>
-    public bool DebugLogger
-    {
-        get => _debugLogger;
-        set => _debugLogger = value && Logger != null;
-    }
-
-    #endregion
-
-    #region Implementation of IManager<TEntity,in TKey>
+    protected new IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
     ///     实体存储
     /// </summary>
-    public IStore<TEntity, TKey> EntityStore => Store;
-
-    /// <summary>
-    ///     规范化键
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns>规范化后的键</returns>
-    public string NormalizeKey(string key)
-    {
-        return key.StringNormalize();
-    }
-
-    #region BaseResourceManager
+    public new IStore<TEntity, TKey> EntityStore => Store;
 
     /// <summary>
     ///     获取实体信息列表
@@ -337,8 +218,7 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
-        CancellationToken cancellationToken = default)
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -348,6 +228,82 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
                 size,
                 cancellationToken);
     }
+
+    #endregion
+}
+
+/// <summary>
+/// 提供用于管理具键存储模型TEntity的存储器的API
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, IKeyWithManager<TEntity, TKey> 
+    where TEntity : class, IKeySlot<TKey> 
+    where TKey : IEquatable<TKey>
+{
+
+    /// <summary>
+    ///     创建新的管理器实例
+    /// </summary>
+    /// <param name="store">存储访问器依赖</param>
+    /// <param name="options">配置依赖</param>
+    /// <param name="errors">错误依赖</param>
+    /// <param name="logger">日志依赖</param>
+    /// <param name="cache">缓存依赖</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    protected KeyWithManager(
+        IKeyWithStore<TEntity, TKey> store,
+        IDistributedCache? cache = null,
+        IKeyWithStoreManagerOptions? options = null,
+        StoreErrorDescriber? errors = null,
+        ILogger? logger = null) : base(store, options, errors, logger)
+    {
+        Store = store;
+        Options = options ?? new KeyWithStoreManagerOptions();
+        Cache = cache;
+    }
+
+    #region Properties
+
+    /// <summary>
+    ///     存储访问器
+    /// </summary>
+    protected new IKeyWithStore<TEntity, TKey> Store { get; }
+
+    /// <summary>
+    ///     缓存访问器
+    /// </summary>
+    protected IDistributedCache? Cache { get; }
+
+    /// <summary>
+    /// 具键存储管理器配置接口
+    /// </summary>
+    private IKeyWithStoreManagerOptions Options { get; }
+
+    #endregion
+
+    #region OptionsAccessor
+
+    /// <summary>
+    ///     是否启用具缓存策略
+    /// </summary>
+    public bool CachedManager => Options is { CachedManager: true, Expires: >= 0 } && Cache is not null;
+
+    /// <summary>
+    ///     过期时间(秒)
+    /// </summary>
+    public int Expires => Options.Expires;
+
+    #endregion
+
+    #region Implementation of IKeyWithManager<TEntity,TKey>
+
+    /// <summary>
+    ///     实体存储
+    /// </summary>
+    public new IKeyWithStore<TEntity, TKey> EntityStore => Store;
+
+    #region BaseResourceManager
 
     /// <summary>
     ///     获取实体信息
@@ -469,6 +425,115 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     #endregion
 
     #endregion
+}
+
+/// <summary>
+/// 提供用于管理无键存储模型TEntity的存储器的API
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where TEntity : class
+{
+
+    /// <summary>
+    ///     创建新的管理器实例
+    /// </summary>
+    /// <param name="store">存储访问器依赖</param>
+    /// <param name="options">配置依赖</param>
+    /// <param name="errors">错误依赖</param>
+    /// <param name="logger">日志依赖</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    protected KeyLessManager(
+        IKeyLessStore<TEntity> store,
+        IKeyLessStoreManagerOptions? options = null,
+        StoreErrorDescriber? errors = null,
+        ILogger? logger = null)
+    {
+        Store = store;
+        Describer = errors ?? new StoreErrorDescriber();
+        Options = options ?? new KeyLessStoreManagerOptions();
+        Logger = logger;
+    }
+
+    /// <summary>
+    ///     异步函数执行前
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    protected void OnAsyncActionExecuting(CancellationToken cancellationToken = default)
+    {
+        ThrowIfDisposed();
+
+        cancellationToken.ThrowIfCancellationRequested();
+    }
+
+    /// <summary>
+    ///     键前缀
+    /// </summary>
+    protected string KeyPrefix => "Manager";
+
+    /// <summary>
+    ///     生成Key
+    /// </summary>
+    /// <param name="args">生成参数</param>
+    /// <returns></returns>
+    protected string GenerateCacheKey(params string[] args)
+    {
+        var parameters = args.Prepend(KeyPrefix);
+
+        return string.Join(":", parameters);
+    }
+
+
+    #region Properties
+
+    /// <summary>
+    ///     存储访问器
+    /// </summary>
+    protected IKeyLessStore<TEntity> Store { get; }
+
+    /// <summary>
+    /// 具键存储管理器配置接口
+    /// </summary>
+    private IKeyLessStoreManagerOptions Options { get; }
+
+    /// <summary>
+    ///     错误报告生成器
+    /// </summary>
+    protected StoreErrorDescriber Describer { get; }
+
+    /// <summary>
+    ///     日志依赖访问器
+    /// </summary>
+    protected ILogger? Logger { get; }
+
+    #endregion
+
+    #region OptionsAccessor
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    public bool DebugLogger => Options.DebugLogger;
+
+    #endregion
+
+    #region Implementation of IKeyLessManager<TEntity>
+
+    /// <summary>
+    ///     实体存储
+    /// </summary>
+    public IKeyLessStore<TEntity> EntityStore => Store;
+
+    /// <summary>
+    ///     规范化键
+    /// </summary>
+    /// <param name="key">键</param>
+    /// <returns>规范化后的键</returns>
+    public string NormalizeKey(string key)
+    {
+        return key.StringNormalize();
+    }
+
+    #endregion
 
     #region IDisposable
 
@@ -505,6 +570,14 @@ public abstract class Manager<TEntity, TKey> : IManager<TEntity, TKey>, IDisposa
     ///     释放托管的Store
     /// </summary>
     protected abstract void StoreDispose();
+
+    /// <summary>
+    ///     Throws if this class has been disposed.
+    /// </summary>
+    protected void ThrowIfDisposed()
+    {
+        if (_disposed) throw new ManagerDisposedException(GetType().Name);
+    }
 
     #endregion
 }
