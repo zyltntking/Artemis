@@ -4,11 +4,12 @@ using Mapster;
 namespace Artemis.Data.Store;
 
 /// <summary>
-///     可映射存储接口
+///     具键可映射存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where TKey : IEquatable<TKey>
+public interface IKeyWithStoreMap<TEntity, TKey> : IKeyLessStoreMap<TEntity>
+    where TEntity : IKeySlot<TKey> where TKey : IEquatable<TKey>
 {
     #region FindMapEntity & FindMapEntities
 
@@ -52,6 +53,117 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
 
     #endregion
 
+    #region OverEntity & OverEntities
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Over<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Over<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> OverAsync<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> OverAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    #endregion
+
+    #region MergeEntity & MergeEntities
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    StoreResult Merge<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> MergeAsync<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> MergeAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
+
+    #endregion
+}
+
+/// <summary>
+///     无键可映射存储接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface IKeyLessStoreMap<TEntity>
+{
     #region CreateNewEntity & CreateNewEntities
 
     /// <summary>
@@ -107,17 +219,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     #region OverEntity & OverEntities
 
     /// <summary>
-    ///     通过类型映射覆盖对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="source">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <returns></returns>
-    StoreResult Over<TSource>(
-        TSource source,
-        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
-
-    /// <summary>
     ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
@@ -129,17 +230,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TSource source,
         TEntity destination,
         TypeAdapterConfig? config = null);
-
-    /// <summary>
-    ///     通过类型映射覆盖对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="sources">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <returns></returns>
-    StoreResult Over<TSource>(
-        IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
     ///     通过类型映射覆盖对应实体
@@ -160,19 +250,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TypeAdapterConfig? config = null);
 
     /// <summary>
-    ///     通过类型映射覆盖对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="source">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> OverAsync<TSource>(
-        TSource source,
-        TypeAdapterConfig? config = null,
-        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
-
-    /// <summary>
     ///     通过类型映射覆盖对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
@@ -186,19 +263,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     通过类型映射覆盖对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="sources">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> OverAsync<TSource>(
-        IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null,
-        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 
     /// <summary>
     ///     通过类型映射覆盖对应实体
@@ -225,17 +289,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
     #region MergeEntity & MergeEntities
 
     /// <summary>
-    ///     通过类型映射合并对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="source">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <returns></returns>
-    StoreResult Merge<TSource>(
-        TSource source,
-        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
-
-    /// <summary>
     ///     通过类型映射合并对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
@@ -247,17 +300,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TSource source,
         TEntity destination,
         TypeAdapterConfig? config = null);
-
-    /// <summary>
-    ///     通过类型映射合并对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="sources">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <returns></returns>
-    StoreResult Merge<TSource>(
-        IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>;
 
     /// <summary>
     ///     通过类型映射合并对应实体
@@ -278,19 +320,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TypeAdapterConfig? config = null);
 
     /// <summary>
-    ///     通过类型映射合并对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="source">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> MergeAsync<TSource>(
-        TSource source,
-        TypeAdapterConfig? config = null,
-        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
-
-    /// <summary>
     ///     通过类型映射合并对应实体
     /// </summary>
     /// <typeparam name="TSource">源类型</typeparam>
@@ -304,19 +333,6 @@ public interface IStoreMap<TEntity, TKey> where TEntity : IModelBase<TKey> where
         TEntity destination,
         TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     通过类型映射合并对应Id的实体
-    /// </summary>
-    /// <typeparam name="TSource">源类型</typeparam>
-    /// <param name="sources">源数据</param>
-    /// <param name="config">映射配置</param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    Task<StoreResult> MergeAsync<TSource>(
-        IEnumerable<TSource> sources,
-        TypeAdapterConfig? config = null,
-        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>;
 
     /// <summary>
     ///     通过类型映射合并对应实体

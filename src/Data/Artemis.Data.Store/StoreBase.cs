@@ -93,6 +93,42 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
 
     #region MapConfigs
 
+    #region Accessor
+
+    /// <summary>
+    ///     创建新对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected override TypeAdapterConfig CreateNewConfig<TSource>()
+    {
+        return IgnoreIdConfig<TSource>();
+    }
+
+    /// <summary>
+    ///     覆盖已有对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="alternate">覆盖对象是否明确</param>
+    /// <returns></returns>
+    protected override TypeAdapterConfig OverConfig<TSource>(bool alternate)
+    {
+        return alternate ? IgnoreIdConfig<TSource>() : EmptyConfig<TSource>();
+    }
+
+    /// <summary>
+    ///     合并对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="alternate">待合并对象是否明确</param>
+    /// <returns></returns>
+    protected override TypeAdapterConfig MergeConfig<TSource>(bool alternate)
+    {
+        return alternate ? IgnoreIdAndNullConfig<TSource>() : IgnoreNullConfig<TSource>();
+    }
+
+    #endregion
+
     /// <summary>
     ///     标识忽略缓存
     /// </summary>
@@ -684,7 +720,7 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// </summary>
     /// <param name="key">键</param>
     /// <returns></returns>
-    public virtual bool IsDeleted(TKey key)
+    public bool IsDeleted(TKey key)
     {
         return KeyMatchQuery(key).Any();
     }
@@ -706,7 +742,7 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public virtual async Task<bool> IsDeletedAsync(TKey key, CancellationToken cancellationToken = default)
+    public async Task<bool> IsDeletedAsync(TKey key, CancellationToken cancellationToken = default)
     {
         var exists = await KeyMatchQuery(key).AnyAsync(cancellationToken);
 
@@ -919,6 +955,61 @@ public abstract class KeyLessStoreBase<TEntity> : IKeyLessStoreBase<TEntity> whe
     #endregion
 
     #region MapConfigs
+
+    #region Accessor
+
+    /// <summary>
+    ///     创建新对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected virtual TypeAdapterConfig CreateNewConfig<TSource>()
+    {
+        return EmptyConfig<TSource>();
+    }
+
+    /// <summary>
+    ///     覆盖已有对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="alternate">覆盖对象是否明确</param>
+    /// <returns></returns>
+    protected virtual TypeAdapterConfig OverConfig<TSource>(bool alternate)
+    {
+        return EmptyConfig<TSource>();
+    }
+
+    /// <summary>
+    ///     合并对象的映射配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="alternate">待合并对象是否明确</param>
+    /// <returns></returns>
+    protected virtual TypeAdapterConfig MergeConfig<TSource>(bool alternate)
+    {
+        return IgnoreNullConfig<TSource>();
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     空配置缓存
+    /// </summary>
+    private TypeAdapterConfig? _emptyConfig;
+
+    /// <summary>
+    ///     空配置
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <returns></returns>
+    protected TypeAdapterConfig EmptyConfig<TSource>()
+    {
+        if (_emptyConfig is not null)
+            return _emptyConfig;
+        _emptyConfig = new TypeAdapterConfig();
+        _emptyConfig.NewConfig<TSource, TEntity>();
+        return _emptyConfig;
+    }
 
     /// <summary>
     ///     空值忽略缓存

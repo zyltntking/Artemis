@@ -20,7 +20,7 @@ public interface IStore<TEntity> :
 public interface IStore<TEntity, TKey> :
     IKeyWithStoreBase<TEntity, TKey>,
     IKeyWithStoreCommon<TEntity, TKey>,
-    IStoreMap<TEntity, TKey>
+    IKeyWithStoreMap<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {

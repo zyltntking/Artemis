@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -15,7 +16,9 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TKey"></typeparam>
 public abstract class KeyWithStore<TEntity, TKey> :
     KeyWithStoreBase<TEntity, TKey>,
-    IKeyWithStoreCommon<TEntity, TKey> where TEntity : class, IKeySlot<TKey>
+    IKeyWithStoreCommon<TEntity, TKey>,
+    IKeyWithStoreMap<TEntity, TKey>
+    where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
@@ -44,7 +47,7 @@ public abstract class KeyWithStore<TEntity, TKey> :
     /// </summary>
     /// <param name="entity">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Create(TEntity entity)
+    public StoreResult Create(TEntity entity)
     {
         OnActionExecuting(entity, nameof(entity));
 
@@ -67,7 +70,7 @@ public abstract class KeyWithStore<TEntity, TKey> :
     /// </summary>
     /// <param name="entities">被创建实体</param>
     /// <returns></returns>
-    public virtual StoreResult Create(IEnumerable<TEntity> entities)
+    public StoreResult Create(IEnumerable<TEntity> entities)
     {
         var list = entities.ToList();
 
@@ -93,7 +96,7 @@ public abstract class KeyWithStore<TEntity, TKey> :
     /// <param name="entity">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(
+    public async Task<StoreResult> CreateAsync(
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
@@ -119,7 +122,7 @@ public abstract class KeyWithStore<TEntity, TKey> :
     /// <param name="entities">被创建实体</param>
     /// <param name="cancellationToken">取消信号</param>
     /// <returns></returns>
-    public virtual async Task<StoreResult> CreateAsync(
+    public async Task<StoreResult> CreateAsync(
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
@@ -931,24 +934,6 @@ public abstract class KeyWithStore<TEntity, TKey> :
     }
 
     /// <summary>
-    ///     根据id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id">id</param>
-    /// <returns></returns>
-    public TMapEntity? FindMapEntity<TMapEntity>(TKey id)
-    {
-        OnActionExecuting(id, nameof(id));
-
-        var cached = GetEntity(id);
-
-        if (cached is not null)
-            return cached.Adapt<TMapEntity>();
-
-        return FindById<TMapEntity>(id);
-    }
-
-    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="ids"></param>
@@ -975,29 +960,6 @@ public abstract class KeyWithStore<TEntity, TKey> :
     }
 
     /// <summary>
-    ///     根据id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="ids">ids</param>
-    /// <returns></returns>
-    public IEnumerable<TMapEntity> FindMapEntities<TMapEntity>(IEnumerable<TKey> ids)
-    {
-        var idArray = ids as TKey[] ?? ids.ToArray();
-        OnActionExecuting(idArray, nameof(ids));
-
-        var cached = GetEntities(idArray);
-
-        if (cached is not null)
-        {
-            var list = cached.ToList();
-
-            if (list.Any()) return list.Adapt<IEnumerable<TMapEntity>>();
-        }
-
-        return FindByIds<TMapEntity>(idArray);
-    }
-
-    /// <summary>
     ///     根据Id查找实体
     /// </summary>
     /// <param name="id"></param>
@@ -1018,27 +980,6 @@ public abstract class KeyWithStore<TEntity, TKey> :
         if (entity is not null) await CacheEntityAsync(entity, cancellationToken);
 
         return entity;
-    }
-
-    /// <summary>
-    ///     根据Id查找映射实体
-    /// </summary>
-    /// <typeparam name="TMapEntity">映射类型</typeparam>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken">取消信号</param>
-    /// <returns></returns>
-    public async Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
-        TKey id,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
-
-        var cached = await GetEntityAsync(id, cancellationToken);
-
-        if (cached is not null)
-            return cached.Adapt<TMapEntity>();
-
-        return await FindByIdAsync<TMapEntity>(id, cancellationToken);
     }
 
     /// <summary>
@@ -1070,6 +1011,105 @@ public abstract class KeyWithStore<TEntity, TKey> :
         return entities;
     }
 
+    #endregion
+
+    #region Exists
+
+    /// <summary>
+    ///     判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <returns></returns>
+    public bool Exists(TKey id)
+    {
+        OnActionExecuting(id, nameof(id));
+        return KeyMatchQuery(id).Any();
+    }
+
+    /// <summary>
+    ///     判断实体是否存在
+    /// </summary>
+    /// <param name="id">实体键</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public Task<bool> ExistsAsync(
+        TKey id,
+        CancellationToken cancellationToken = default)
+    {
+        OnActionExecuting(id, nameof(id));
+        return KeyMatchQuery(id).AnyAsync(cancellationToken);
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Implementation of IKeyLessStoreMap<TEntity>
+
+    #region FindMapEntity & FindMapEntities
+
+    /// <summary>
+    ///     根据id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id">id</param>
+    /// <returns></returns>
+    public TMapEntity? FindMapEntity<TMapEntity>(TKey id)
+    {
+        OnActionExecuting(id, nameof(id));
+
+        var cached = GetEntity(id);
+
+        if (cached is not null)
+            return cached.Adapt<TMapEntity>();
+
+        return FindById<TMapEntity>(id);
+    }
+
+    /// <summary>
+    ///     根据id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="ids">ids</param>
+    /// <returns></returns>
+    public IEnumerable<TMapEntity> FindMapEntities<TMapEntity>(IEnumerable<TKey> ids)
+    {
+        var idArray = ids as TKey[] ?? ids.ToArray();
+        OnActionExecuting(idArray, nameof(ids));
+
+        var cached = GetEntities(idArray);
+
+        if (cached is not null)
+        {
+            var list = cached.ToList();
+
+            if (list.Any()) return list.Adapt<IEnumerable<TMapEntity>>();
+        }
+
+        return FindByIds<TMapEntity>(idArray);
+    }
+
+    /// <summary>
+    ///     根据Id查找映射实体
+    /// </summary>
+    /// <typeparam name="TMapEntity">映射类型</typeparam>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<TMapEntity?> FindMapEntityAsync<TMapEntity>(
+        TKey id,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(id, nameof(id), cancellationToken);
+
+        var cached = await GetEntityAsync(id, cancellationToken);
+
+        if (cached is not null)
+            return cached.Adapt<TMapEntity>();
+
+        return await FindByIdAsync<TMapEntity>(id, cancellationToken);
+    }
+
     /// <summary>
     ///     根据Id查找映射实体
     /// </summary>
@@ -1098,31 +1138,672 @@ public abstract class KeyWithStore<TEntity, TKey> :
 
     #endregion
 
-    #region Exists
+    #region CreateEntity & CreateEntities
 
     /// <summary>
-    ///     判断实体是否存在
+    ///     通过类型映射创建一个新实例
     /// </summary>
-    /// <param name="id">实体键</param>
-    /// <returns></returns>
-    public bool Exists(TKey id)
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns>映射后实体</returns>
+    public StoreResult CreateNew<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null)
     {
-        OnActionExecuting(id, nameof(id));
-        return KeyMatchQuery(id).Any();
+        OnActionExecuting(source, nameof(source));
+        config ??= CreateNewConfig<TSource>();
+        var entity = source!.Adapt<TSource, TEntity>(config);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        AddEntity(entity);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
+        return result;
     }
 
     /// <summary>
-    ///     判断实体是否存在
+    ///     通过类型映射创建一组新实例
     /// </summary>
-    /// <param name="id">实体键</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task<bool> ExistsAsync(
-        TKey id,
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns>创建结果</returns>
+    public StoreResult CreateNew<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null)
+    {
+        OnActionExecuting(sources, nameof(sources));
+        config ??= CreateNewConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        AddEntities(list);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns>创建结果</returns>
+    public async Task<StoreResult> CreateNewAsync<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null,
         CancellationToken cancellationToken = default)
     {
-        OnActionExecuting(id, nameof(id));
-        return KeyMatchQuery(id).AnyAsync(cancellationToken);
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        config ??= CreateNewConfig<TSource>();
+        var entity = source!.Adapt<TSource, TEntity>(config);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        AddEntity(entity);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射创建一个新实例
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns>创建结果</returns>
+    public async Task<StoreResult> CreateNewAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
+        config ??= CreateNewConfig<TSource>();
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        AddEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
+        return result;
+    }
+
+    #endregion
+
+    #region OverEntity & OverEntities
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Over<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    {
+        OnActionExecuting(source, nameof(source));
+        config ??= OverConfig<TSource>(false);
+        var entity = source.Adapt<TSource, TEntity>(config);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        UpdateEntity(entity);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Over<TSource>(
+        TSource source,
+        TEntity destination,
+        TypeAdapterConfig? config = null)
+    {
+        OnActionExecuting(source, nameof(source));
+        config ??= OverConfig<TSource>(true);
+        source.Adapt(destination, config);
+        if (destination is null)
+            throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
+
+            CacheEntity(destination);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Over<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null)
+        where TSource : IKeySlot<TKey>
+    {
+        OnActionExecuting(sources, nameof(sources));
+        config ??= OverConfig<TSource>(false);
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标连接键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="sourceKeySelector">源连接键选择器</param>
+    /// <returns></returns>
+    public StoreResult Over<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null)
+    {
+        var sourceList = sources.ToList();
+        OnActionExecuting(sourceList, nameof(sources));
+        config ??= OverConfig<TSource>(true);
+        var entities = sourceList.Join(
+            destinations,
+            sourceKeySelector,
+            destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> OverAsync<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        config ??= OverConfig<TSource>(false);
+        var entity = source.Adapt<TSource, TEntity>(config);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        UpdateEntity(entity);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> OverAsync<TSource>(
+        TSource source,
+        TEntity destination,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        config ??= OverConfig<TSource>(true);
+        source.Adapt(destination, config);
+        if (destination is null)
+            throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(destination, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> OverAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        OnAsyncActionExecuting(sources, nameof(sources), cancellationToken);
+        config ??= OverConfig<TSource>(false);
+        var entities = sources.Adapt<IEnumerable<TEntity>>(config);
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射覆盖对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public async Task<StoreResult> OverAsync<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        var sourceList = sources.ToList();
+        OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        config ??= OverConfig<TSource>(true);
+        var entities = sourceList.Join(
+            destinations,
+            sourceKeySelector,
+            destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
+        return result;
+    }
+
+    #endregion
+
+    #region MergeEntity & MergeEntities
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null) where TSource : IKeySlot<TKey>
+    {
+        OnActionExecuting(source, nameof(source));
+        var entity = FindById(source.Id);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        config ??= MergeConfig<TSource>(false);
+        source.Adapt(entity, config);
+        UpdateEntity(entity);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
+
+            CacheEntity(entity);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(
+        TSource source,
+        TEntity destination,
+        TypeAdapterConfig? config = null)
+    {
+        OnActionExecuting(source, nameof(source));
+        config ??= MergeConfig<TSource>(true);
+        source.Adapt(destination, config);
+        if (destination is null)
+            throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
+
+            CacheEntity(destination);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null)
+        where TSource : IKeySlot<TKey>
+    {
+        var sourceList = sources.ToList();
+        OnActionExecuting(sourceList, nameof(sources));
+        var destinations = FindByIds(sourceList.Select(source => source.Id));
+        if (destinations is null)
+            throw new MapTargetNullException(nameof(destinations));
+        config ??= MergeConfig<TSource>(false);
+        var list = sourceList.Join(
+            destinations, source => source.Id,
+            destination => destination.Id,
+            (source, destination) => source.Adapt(destination, config)).ToList();
+        UpdateEntities(list);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public StoreResult Merge<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null)
+    {
+        var sourceList = sources.ToList();
+        OnActionExecuting(sourceList, nameof(sources));
+        config ??= MergeConfig<TSource>(true);
+        var entities = sourceList.Join(
+            destinations,
+            sourceKeySelector,
+            destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = AttacheChange();
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            CacheEntities(list);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource>(
+        TSource source,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        var entity = await FindByIdAsync(source.Id, cancellationToken);
+        if (entity is null)
+            throw new MapTargetNullException(nameof(entity));
+        config ??= MergeConfig<TSource>(false);
+        source.Adapt(entity, config);
+        UpdateEntity(entity);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(entity, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="source">源数据</param>
+    /// <param name="destination">目标数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource>(
+        TSource source,
+        TEntity destination,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(source, nameof(source), cancellationToken);
+        config ??= MergeConfig<TSource>(true);
+        source.Adapt(destination, config);
+        if (destination is null)
+            throw new MapTargetNullException(nameof(destination));
+        UpdateEntity(destination);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {typeof(TEntity).Name}");
+
+            await CacheEntityAsync(destination, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应Id的实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource>(
+        IEnumerable<TSource> sources,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default) where TSource : IKeySlot<TKey>
+    {
+        var sourceList = sources.ToList();
+        OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        var destinations = await FindByIdsAsync(sourceList.Select(source => source.Id), cancellationToken);
+        if (destinations is null)
+            throw new MapTargetNullException(nameof(destinations));
+        config ??= MergeConfig<TSource>(false);
+        var list = sourceList.Join(
+            destinations, source => source.Id,
+            destination => destination.Id,
+            (source, destination) => source.Adapt(destination, config)).ToList();
+        UpdateEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     通过类型映射合并对应实体
+    /// </summary>
+    /// <typeparam name="TSource">源类型</typeparam>
+    /// <typeparam name="TJKey">连接键类型</typeparam>
+    /// <param name="sources">源数据</param>
+    /// <param name="destinations">目标数据</param>
+    /// <param name="destinationKeySelector">目标键选择器</param>
+    /// <param name="config">映射配置</param>
+    /// <param name="cancellationToken">取消信号</param>
+    /// <param name="sourceKeySelector">源键选择器</param>
+    /// <returns></returns>
+    public async Task<StoreResult> MergeAsync<TSource, TJKey>(
+        IEnumerable<TSource> sources,
+        IEnumerable<TEntity> destinations,
+        Func<TSource, TJKey> sourceKeySelector,
+        Func<TEntity, TJKey> destinationKeySelector,
+        TypeAdapterConfig? config = null,
+        CancellationToken cancellationToken = default)
+    {
+        var sourceList = sources.ToList();
+        OnAsyncActionExecuting(sourceList, nameof(sources), cancellationToken);
+        config ??= MergeConfig<TSource>(true);
+        var entities = sourceList.Join(
+            destinations,
+            sourceKeySelector,
+            destinationKeySelector,
+            (source, _) => source.Adapt<TSource, TEntity>(config));
+        if (entities is null)
+            throw new MapTargetNullException(nameof(entities));
+        var list = entities.ToList();
+        UpdateEntities(list);
+        var result = await AttacheChangeAsync(cancellationToken);
+        if (result.Succeeded)
+        {
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+
+            await CacheEntitiesAsync(list, cancellationToken);
+        }
+
+        return result;
     }
 
     #endregion
