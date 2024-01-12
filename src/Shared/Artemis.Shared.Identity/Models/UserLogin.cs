@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,14 +7,8 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户登录信息
 /// </summary>
-public class UserLogin : IdentityUserLogin<Guid>, IKeySlot<int>, IUserLogin
+public class UserLogin : IdentityUserLogin<Guid>, IUserLogin
 {
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [Required]
-    public virtual required int Id { get; set; }
-
     /// <summary>
     ///     登录提供程序
     /// </summary>

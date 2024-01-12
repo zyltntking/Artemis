@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     凭据管理器接口
 /// </summary>
-public interface IClaimManager : IManager<ArtemisClaim>
+public interface IClaimManager : IKeyWithManager<ArtemisClaim>
 {
     /// <summary>
     ///     根据凭据信息搜索凭据

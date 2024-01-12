@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户档案数据集
 /// </summary>
-public class UserProfileConfiguration : IdentityConfiguration<ArtemisUserProfile>
+public class UserProfileConfiguration : BaseConfiguration<ArtemisUserProfile>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUserProfile>
 
@@ -27,11 +28,6 @@ public class UserProfileConfiguration : IdentityConfiguration<ArtemisUserProfile
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserProfile> builder)
     {
-        base.FieldConfigure(builder);
-
-        builder.Property(userProfile => userProfile.Id)
-            .HasComment("标识");
-
         builder.Property(userProfile => userProfile.UserId)
             .HasComment("用户标识");
 
@@ -51,18 +47,12 @@ public class UserProfileConfiguration : IdentityConfiguration<ArtemisUserProfile
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserProfile> builder)
     {
-        MetaIndexConfigure(builder);
-
         // User Profile Key
-        builder.HasKey(userProfile => userProfile.Id)
+        builder.HasKey(userProfile => new { userProfile.UserId, userProfile.Key, userProfile.Value })
             .HasName($"PK_{TableName}");
 
-        // User Profile Index
-        builder.HasIndex(userLogin => new { userLogin.Key, userLogin.UserId })
-            .HasDatabaseName($"IX_{TableName}_Key_UserId")
-            .IsUnique();
-
-        builder.HasIndex(userLogin => new { userLogin.Key, userLogin.Value })
+        // User Profile index
+        builder.HasIndex(userProfile => new { userProfile.Key, userProfile.Value })
             .HasDatabaseName($"IX_{TableName}_Key_Value")
             .IsUnique();
     }

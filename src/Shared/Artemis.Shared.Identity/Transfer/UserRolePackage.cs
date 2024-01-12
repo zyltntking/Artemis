@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
@@ -48,11 +47,4 @@ public record UserRolePackage : IUserRole
 /// <summary>
 ///     用户角色信息
 /// </summary>
-public sealed record UserRoleInfo : UserRolePackage, IKeySlot<int>
-{
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [Required]
-    public required int Id { get; set; }
-}
+public sealed record UserRoleInfo : UserRolePackage;

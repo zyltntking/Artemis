@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户登录数据集
 /// </summary>
-public class UserLoginConfiguration : IdentityConfiguration<ArtemisUserLogin>
+public class UserLoginConfiguration : BaseConfiguration<ArtemisUserLogin>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUserLogin>
 
@@ -27,12 +28,6 @@ public class UserLoginConfiguration : IdentityConfiguration<ArtemisUserLogin>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
-        base.FieldConfigure(builder);
-
-        builder.Property(userLogin => userLogin.Id)
-            .ValueGeneratedOnAdd()
-            .HasComment("标识");
-
         builder.Property(userLogin => userLogin.UserId)
             .HasComment("用户标识");
 
@@ -57,15 +52,9 @@ public class UserLoginConfiguration : IdentityConfiguration<ArtemisUserLogin>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserLogin> builder)
     {
-        MetaIndexConfigure(builder);
-
         // User Login Key
         builder.HasKey(userLogin => new { userLogin.LoginProvider, userLogin.ProviderKey })
             .HasName($"PK_{TableName}");
-
-        // User Login Alternate Key
-        builder.HasAlternateKey(userLogin => userLogin.Id)
-            .HasName($"AK_{TableName}");
     }
 
     #endregion

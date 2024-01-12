@@ -7,7 +7,8 @@ namespace Artemis.Data.Store;
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 public interface IStore<TEntity> :
-    IStore<TEntity, Guid>
+    IStore<TEntity, Guid>,
+    IKeyWithStore<TEntity>
     where TEntity : class, IModelBase
 {
 }
@@ -24,7 +25,19 @@ public interface IStore<TEntity, TKey> : IKeyWithStore<TEntity, TKey>
 }
 
 /// <summary>
-/// 具键存储接口
+///     具键存储接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface IKeyWithStore<TEntity> : IKeyWithStore<TEntity, Guid>,
+    IKeyWithStoreBase<TEntity>,
+    IKeyWithStoreCommon<TEntity>,
+    IKeyWithStoreMap<TEntity>
+    where TEntity : class, IKeySlot
+{
+}
+
+/// <summary>
+///     具键存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -36,18 +49,16 @@ public interface IKeyWithStore<TEntity, TKey> :
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
-
 }
 
 /// <summary>
-/// 无键存储接口
+///     无键存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface IKeyLessStore<TEntity> : 
-    IKeyLessStoreBase<TEntity>, 
+public interface IKeyLessStore<TEntity> :
+    IKeyLessStoreBase<TEntity>,
     IKeyLessStoreCommon<TEntity>,
-    IKeyLessStoreMap<TEntity> 
+    IKeyLessStoreMap<TEntity>
     where TEntity : class
 {
-
 }

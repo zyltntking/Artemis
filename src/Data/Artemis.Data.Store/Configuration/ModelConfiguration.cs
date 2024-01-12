@@ -109,8 +109,19 @@ public abstract class MateSlotModelConfiguration<TEntity> : BaseConfiguration<TE
 ///     ArtemisKeySlot类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class KeySlotModelConfiguration<TEntity> : BaseConfiguration<TEntity>
+public abstract class KeySlotModelConfiguration<TEntity> : KeySlotModelConfiguration<TEntity, Guid>
     where TEntity : class, IKeySlot
+{
+}
+
+/// <summary>
+///     ArtemisKeySlot类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class KeySlotModelConfiguration<TEntity, TKey> : BaseConfiguration<TEntity>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
 {
     #region Overrides of ModelBaseConfiguration<TEntity>
 
@@ -153,7 +164,7 @@ public abstract class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEnt
     /// <summary>
     ///     数据库类型
     /// </summary>
-    protected virtual DbType DbType => DbType.SqlServer;
+    protected virtual DbType DbType => DbType.PostgreSql;
 
     /// <summary>
     ///     数据类型集合访问器

@@ -15,7 +15,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     角色管理器
 /// </summary>
-public class RoleManager : Manager<ArtemisRole>, IRoleManager
+public class RoleManager : KeyWithManager<ArtemisRole>, IRoleManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -34,7 +34,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
         IArtemisRoleClaimStore roleClaimStore,
         ILogger? logger = null,
         IManagerOptions? options = null,
-        IDistributedCache? cache = null) : base(roleStore, cache, options, logger)
+        IDistributedCache? cache = null) : base(roleStore, cache, options, null, logger)
     {
         UserStore = userStore;
         UserRoleStore = userRoleStore;
@@ -423,7 +423,7 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var users = await query
-                .OrderBy(user => user.CreatedAt)
+                .OrderBy(user => user.NormalizedUserName)
                 .Page(page, size)
                 .ProjectToType<UserInfo>()
                 .ToListAsync(cancellationToken);
@@ -688,7 +688,8 @@ public class RoleManager : Manager<ArtemisRole>, IRoleManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var roleClaims = await query
-                .OrderBy(role => role.CreatedAt)
+                .OrderBy(role => role.ClaimType)
+                .ThenBy(role => role.ClaimValue)
                 .ProjectToType<RoleClaimInfo>()
                 .Page(page, size)
                 .ToListAsync(cancellationToken);

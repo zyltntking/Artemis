@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户角色映射数据集配置
 /// </summary>
-public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
+public class UserRoleConfiguration : BaseConfiguration<ArtemisUserRole>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUserRole>
 
@@ -26,26 +27,11 @@ public class UserRoleConfiguration : IdentityConfiguration<ArtemisUserRole>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
     {
-        base.FieldConfigure(builder);
-
-        builder.Property(userRole => userRole.Id)
-            .ValueGeneratedOnAdd()
-            .HasComment("标识");
-
         builder.Property(userRole => userRole.UserId)
             .HasComment("用户标识");
 
         builder.Property(userRole => userRole.RoleId)
             .HasComment("角色标识");
-    }
-
-    /// <summary>
-    ///     数据库关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserRole> builder)
-    {
-        MetaIndexConfigure(builder);
     }
 
     #endregion

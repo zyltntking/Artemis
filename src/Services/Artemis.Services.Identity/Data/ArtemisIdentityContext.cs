@@ -30,6 +30,11 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
     /// </summary>
     public DbSet<ArtemisClaim> ArtemisClaims { get; set; } = default!;
 
+    /// <summary>
+    ///     ArtemisUserProfilesSet
+    /// </summary>
+    public DbSet<ArtemisUserProfile> ArtemisUserProfiles { get; set; } = default!;
+
     #region OnModelCreating
 
     /// <summary>
@@ -67,8 +72,6 @@ public sealed class ArtemisIdentityContext : IdentityDbContext<
                 {
                     userRoleJoin.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
                         .HasName($"PK_{nameof(ArtemisUserRole)}");
-
-                    userRoleJoin.HasAlternateKey(userRole => userRole.Id).HasName($"AK_{nameof(ArtemisUserRole)}");
                 });
     }
 

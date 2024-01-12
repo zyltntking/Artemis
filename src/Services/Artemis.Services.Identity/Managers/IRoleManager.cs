@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     角色管理器接口
 /// </summary>
-public interface IRoleManager : IManager<ArtemisRole>
+public interface IRoleManager : IKeyWithManager<ArtemisRole>
 {
     /// <summary>
     ///     根据角色名搜索角色

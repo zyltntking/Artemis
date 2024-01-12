@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户数据集配置
 /// </summary>
-public class UserConfiguration : IdentityConfiguration<ArtemisUser>
+public class UserConfiguration : KeySlotModelConfiguration<ArtemisUser>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUser>
 
@@ -26,8 +27,6 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUser> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(user => user.Id)
             .HasComment("标识");
 
@@ -96,8 +95,6 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUser> builder)
     {
-        MetaIndexConfigure(builder);
-
         // User Key
         builder.HasKey(user => user.Id)
             .HasName($"PK_{TableName}");
@@ -108,12 +105,10 @@ public class UserConfiguration : IdentityConfiguration<ArtemisUser>
             .IsUnique();
 
         builder.HasIndex(user => user.NormalizedEmail)
-            .HasDatabaseName($"IX_{TableName}_Email")
-            .IsUnique();
+            .HasDatabaseName($"IX_{TableName}_Email");
 
         builder.HasIndex(user => user.PhoneNumber)
-            .HasDatabaseName($"IX_{TableName}_PhoneNumber")
-            .IsUnique();
+            .HasDatabaseName($"IX_{TableName}_PhoneNumber");
 
         // Each User can have many UserClaims
         builder.HasMany(user => user.UserClaims)

@@ -7,7 +7,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     账号管理器接口
 /// </summary>
-public interface IAccountManager : IManager<ArtemisUser>
+public interface IAccountManager : IKeyWithManager<ArtemisUser>
 {
     /// <summary>
     ///     签到/登录

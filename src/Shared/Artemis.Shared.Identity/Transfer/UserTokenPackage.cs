@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
 
 namespace Artemis.Shared.Identity.Transfer;
 
@@ -89,15 +88,8 @@ public record UserTokenPackage : IUserToken
 /// <summary>
 ///     用户登录信息
 /// </summary>
-public sealed record UserTokenInfo : UserTokenPackage, IUserTokenDocument, IKeySlot<int>
+public sealed record UserTokenInfo : UserTokenPackage, IUserTokenDocument
 {
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [Required]
-    public required int Id { get; set; }
-
-
     /// <summary>
     ///     用户标识
     /// </summary>

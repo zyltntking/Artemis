@@ -13,7 +13,7 @@ namespace Artemis.Data.Store;
 ///     提供用于管理TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IManager<TEntity> : IManager<TEntity, Guid>
+public interface IManager<TEntity> : IManager<TEntity, Guid>, IKeyWithManager<TEntity>
     where TEntity : class, IModelBase
 {
 }
@@ -46,11 +46,19 @@ public interface IManager<TEntity, TKey> : IKeyWithManager<TEntity, TKey>
         CancellationToken cancellationToken = default);
 
     #endregion
-
 }
 
 /// <summary>
-/// 提供用于管理具键存储模型TEntity的存储器的API接口
+///     提供用于管理具键存储模型TEntity的存储器的API接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface IKeyWithManager<TEntity> : IKeyWithManager<TEntity, Guid>
+    where TEntity : class, IKeySlot
+{
+}
+
+/// <summary>
+///     提供用于管理具键存储模型TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -126,7 +134,7 @@ public interface IKeyWithManager<TEntity, TKey> : IKeyLessManager<TEntity>
 }
 
 /// <summary>
-/// 提供用于管理无键存储模型TEntity的存储器的API接口
+///     提供用于管理无键存储模型TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public interface IKeyLessManager<TEntity> : IDisposable
@@ -193,7 +201,7 @@ public abstract class Manager<TEntity, TKey> : KeyWithManager<TEntity, TKey>, IM
         IDistributedCache? cache = null,
         IManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
-        ILogger? logger = null): base(store, cache, options, errors, logger)
+        ILogger? logger = null) : base(store, cache, options, errors, logger)
     {
         Store = store;
     }
@@ -218,7 +226,8 @@ public abstract class Manager<TEntity, TKey> : KeyWithManager<TEntity, TKey>, IM
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size, CancellationToken cancellationToken = default)
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -233,15 +242,40 @@ public abstract class Manager<TEntity, TKey> : KeyWithManager<TEntity, TKey>, IM
 }
 
 /// <summary>
-/// 提供用于管理具键存储模型TEntity的存储器的API
+///     提供用于管理具键存储模型TEntity的存储器的API
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class KeyWithManager<TEntity> : KeyWithManager<TEntity, Guid>, IKeyWithManager<TEntity>
+    where TEntity : class, IKeySlot
+{
+    /// <summary>
+    ///     创建新的管理器实例
+    /// </summary>
+    /// <param name="store">存储访问器依赖</param>
+    /// <param name="options">配置依赖</param>
+    /// <param name="errors">错误依赖</param>
+    /// <param name="logger">日志依赖</param>
+    /// <param name="cache">缓存依赖</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    protected KeyWithManager(
+        IKeyWithStore<TEntity, Guid> store,
+        IDistributedCache? cache = null,
+        IKeyWithStoreManagerOptions? options = null,
+        StoreErrorDescriber? errors = null,
+        ILogger? logger = null) : base(store, cache, options, errors, logger)
+    {
+    }
+}
+
+/// <summary>
+///     提供用于管理具键存储模型TEntity的存储器的API
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, IKeyWithManager<TEntity, TKey> 
-    where TEntity : class, IKeySlot<TKey> 
+public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, IKeyWithManager<TEntity, TKey>
+    where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
-
     /// <summary>
     ///     创建新的管理器实例
     /// </summary>
@@ -276,7 +310,7 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
     protected IDistributedCache? Cache { get; }
 
     /// <summary>
-    /// 具键存储管理器配置接口
+    ///     具键存储管理器配置接口
     /// </summary>
     private IKeyWithStoreManagerOptions Options { get; }
 
@@ -428,12 +462,11 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
 }
 
 /// <summary>
-/// 提供用于管理无键存储模型TEntity的存储器的API
+///     提供用于管理无键存储模型TEntity的存储器的API
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where TEntity : class
 {
-
     /// <summary>
     ///     创建新的管理器实例
     /// </summary>
@@ -455,6 +488,20 @@ public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where T
     }
 
     /// <summary>
+    ///     键前缀
+    /// </summary>
+    protected string KeyPrefix => "Manager";
+
+    #region OptionsAccessor
+
+    /// <summary>
+    ///     是否启用Debug日志
+    /// </summary>
+    public bool DebugLogger => Options.DebugLogger;
+
+    #endregion
+
+    /// <summary>
     ///     异步函数执行前
     /// </summary>
     /// <param name="cancellationToken"></param>
@@ -464,11 +511,6 @@ public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where T
 
         cancellationToken.ThrowIfCancellationRequested();
     }
-
-    /// <summary>
-    ///     键前缀
-    /// </summary>
-    protected string KeyPrefix => "Manager";
 
     /// <summary>
     ///     生成Key
@@ -482,7 +524,6 @@ public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where T
         return string.Join(":", parameters);
     }
 
-
     #region Properties
 
     /// <summary>
@@ -491,7 +532,7 @@ public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where T
     protected IKeyLessStore<TEntity> Store { get; }
 
     /// <summary>
-    /// 具键存储管理器配置接口
+    ///     具键存储管理器配置接口
     /// </summary>
     private IKeyLessStoreManagerOptions Options { get; }
 
@@ -504,15 +545,6 @@ public abstract class KeyLessManager<TEntity> : IKeyLessManager<TEntity> where T
     ///     日志依赖访问器
     /// </summary>
     protected ILogger? Logger { get; }
-
-    #endregion
-
-    #region OptionsAccessor
-
-    /// <summary>
-    ///     是否启用Debug日志
-    /// </summary>
-    public bool DebugLogger => Options.DebugLogger;
 
     #endregion
 

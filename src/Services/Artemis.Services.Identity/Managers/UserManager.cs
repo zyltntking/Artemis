@@ -15,7 +15,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     用户管理器
 /// </summary>
-public class UserManager : Manager<ArtemisUser>, IUserManager
+public class UserManager : KeyWithManager<ArtemisUser>, IUserManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -38,8 +38,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         IArtemisUserLoginStore userLoginStore,
         IArtemisUserTokenStore userTokenStore,
         ILogger? logger = null,
-        IManagerOptions? options = null,
-        IDistributedCache? cache = null) : base(userStore, cache, options, logger)
+        IKeyWithStoreManagerOptions? options = null,
+        IDistributedCache? cache = null) : base(userStore, cache, options, null, logger)
     {
         RoleStore = roleStore;
         UserRoleStore = userRoleStore;
@@ -157,7 +157,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
         var count = await query.LongCountAsync(cancellationToken);
 
         var users = await query
-            .OrderByDescending(user => user.CreatedAt)
+            .OrderBy(user => user.NormalizedUserName)
             .Page(page, size)
             .ProjectToType<UserInfo>()
             .ToListAsync(cancellationToken);
@@ -447,7 +447,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var roles = await query
-                .OrderBy(role => role.CreatedAt)
+                .OrderBy(role => role.NormalizedName)
                 .Page(page, size)
                 .ProjectToType<RoleInfo>()
                 .ToListAsync(cancellationToken);
@@ -709,7 +709,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var userClaims = await query
-                .OrderBy(claim => claim.CreatedAt)
+                .OrderBy(claim => claim.ClaimType)
+                .ThenBy(claim => claim.ClaimValue)
                 .Page(page, size)
                 .ProjectToType<UserClaimInfo>()
                 .ToListAsync(cancellationToken);
@@ -947,7 +948,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var userLogins = await query
-                .OrderBy(userLogin => userLogin.CreatedAt)
+                .OrderBy(userLogin => userLogin.LoginProvider)
+                .ThenBy(userLogin => userLogin.ProviderKey)
                 .Page(page, size)
                 .ProjectToType<UserLoginInfo>()
                 .ToListAsync(cancellationToken);
@@ -969,19 +971,26 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     获取用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录信息标识</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
     public async Task<UserLoginInfo?> GetUserLoginAsync(
         Guid id,
-        int loginId,
+        string provider,
+        string providerKey,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
 
-        if (userExists) return await UserLoginStore.FindMapEntityAsync<UserLoginInfo>(loginId, cancellationToken);
+        if (userExists)
+            return await UserLoginStore.EntityQuery
+                .Where(login => login.LoginProvider == provider)
+                .Where(login => login.ProviderKey == providerKey)
+                .ProjectToType<UserLoginInfo>()
+                .FirstOrDefaultAsync(cancellationToken);
 
         throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString());
     }
@@ -1004,7 +1013,8 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var loginExists = await UserLoginStore.EntityQuery
+            var loginExists = await UserLoginStore
+                .EntityQuery
                 .Where(userLogin => userLogin.UserId == id)
                 .Where(userLogin => userLogin.LoginProvider == package.LoginProvider)
                 .Where(userLogin => userLogin.ProviderKey == package.ProviderKey)
@@ -1031,14 +1041,16 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     替换用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录信息标识</param>
-    /// <param name="package">登录信息</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
+    /// <param name="displayName">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>替换结果</returns>
     public async Task<StoreResult> ReplaceUserLoginAsync(
         Guid id,
-        int loginId,
-        UserLoginPackage package,
+        string provider,
+        string providerKey,
+        string? displayName,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1047,18 +1059,19 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var userLogin = await UserLoginStore.KeyMatchQuery(loginId)
-                .Where(userLogin => userLogin.UserId == id)
+            var userLogin = await UserLoginStore.EntityQuery
+                .Where(login => login.LoginProvider == provider)
+                .Where(login => login.ProviderKey == providerKey)
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (userLogin is not null)
             {
-                package.Adapt(userLogin);
+                userLogin.ProviderDisplayName = displayName;
 
                 return await UserLoginStore.UpdateAsync(userLogin, cancellationToken);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), loginId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), $"{provider}:{providerKey}");
         }
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
@@ -1068,12 +1081,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录标识</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveUserLoginAsync(
         Guid id,
-        int loginId,
+        string provider,
+        string providerKey,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1082,13 +1097,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var userLogin = await UserLoginStore.KeyMatchQuery(loginId)
-                .Where(userLogin => userLogin.UserId == id)
+            var userLogin = await UserLoginStore.EntityQuery
+                .Where(login => login.LoginProvider == provider)
+                .Where(login => login.ProviderKey == providerKey)
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (userLogin is not null) return await UserLoginStore.DeleteAsync(userLogin, cancellationToken);
 
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), loginId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), $"{provider}:{providerKey}");
         }
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
@@ -1098,12 +1114,12 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="loginIds">登录标识</param>
+    /// <param name="providerAndKeys">登录标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveUserLoginsAsync(
         Guid id,
-        IEnumerable<int> loginIds,
+        IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1112,15 +1128,29 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var loginIdList = loginIds.ToList();
+            var query = UserLoginStore.EntityQuery
+                .Where(userLogin => userLogin.UserId == id);
 
-            var userLogins = await UserLoginStore.KeyMatchQuery(loginIdList)
-                .Where(userLogin => userLogin.UserId == id)
-                .ToListAsync(cancellationToken);
+            var init = UserLoginStore.EntityQuery
+                .Where(userLogin => userLogin.UserId == id);
 
-            if (userLogins.Any()) return await UserLoginStore.DeleteAsync(userLogins, cancellationToken);
+            var keyValuePairs = providerAndKeys.ToList();
 
-            var flag = string.Join(',', loginIdList.Select(item => item.ToString()));
+            foreach (var (provider, providerKey) in keyValuePairs)
+            {
+                var segment = init
+                    .Where(userLogin => userLogin.LoginProvider == provider)
+                    .Where(userLogin => userLogin.ProviderKey == providerKey);
+
+                query = query.Union(segment);
+            }
+
+            var userLogins = await query.ToListAsync(cancellationToken);
+
+            if (userLogins.Any())
+                return await UserLoginStore.DeleteAsync(userLogins, cancellationToken);
+
+            var flag = string.Join(',', keyValuePairs.Select(item => $"{item.Key}:{item.Value}"));
 
             return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), flag);
         }
@@ -1178,7 +1208,7 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
             var count = await query.LongCountAsync(cancellationToken);
 
             var userTokens = await query
-                .OrderBy(userToken => userToken.CreatedAt)
+                .OrderBy(userToken => userToken.LoginProvider)
                 .Page(page, size)
                 .ProjectToType<UserTokenInfo>()
                 .ToListAsync(cancellationToken);
@@ -1200,19 +1230,26 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     获取用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌信息标识</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">令牌名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
     public async Task<UserTokenInfo?> GetUserTokenAsync(
         Guid id,
-        int tokenId,
+        string loginProvider,
+        string name,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
 
-        if (userExists) return await UserTokenStore.FindMapEntityAsync<UserTokenInfo>(tokenId, cancellationToken);
+        if (userExists)
+            return await UserTokenStore.EntityQuery
+                .Where(token => token.LoginProvider == loginProvider)
+                .Where(token => token.Name == name)
+                .ProjectToType<UserTokenInfo>()
+                .FirstOrDefaultAsync(cancellationToken);
 
         throw new EntityNotFoundException(nameof(ArtemisUser), id.ToString());
     }
@@ -1262,14 +1299,16 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     替换用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌信息标识</param>
-    /// <param name="package">令牌信息</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">令牌名</param>
+    /// <param name="value">令牌值</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>替换结果</returns>
     public async Task<StoreResult> ReplaceUserTokenAsync(
         Guid id,
-        int tokenId,
-        UserTokenPackage package,
+        string loginProvider,
+        string name,
+        string value,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1278,18 +1317,20 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var userToken = await UserTokenStore.KeyMatchQuery(tokenId)
+            var userToken = await UserTokenStore.EntityQuery
                 .Where(userToken => userToken.UserId == id)
+                .Where(userToken => userToken.LoginProvider == loginProvider)
+                .Where(userToken => userToken.Name == name)
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (userToken is not null)
             {
-                package.Adapt(userToken);
+                userToken.Value = value;
 
                 return await UserTokenStore.UpdateAsync(userToken, cancellationToken);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserToken), tokenId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserToken), $"{id}:{loginProvider}:{name}");
         }
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
@@ -1299,12 +1340,14 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     删除用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌标识</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">令牌名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveUserTokenAsync(
         Guid id,
-        int tokenId,
+        string loginProvider,
+        string name,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1313,13 +1356,15 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var userToken = await UserTokenStore.KeyMatchQuery(tokenId)
+            var userToken = await UserTokenStore.EntityQuery
                 .Where(userToken => userToken.UserId == id)
+                .Where(userToken => userToken.LoginProvider == loginProvider)
+                .Where(userToken => userToken.Name == name)
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (userToken is not null) return await UserTokenStore.DeleteAsync(userToken, cancellationToken);
 
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserToken), tokenId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserToken), $"{id}:{loginProvider}:{name}");
         }
 
         return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
@@ -1329,12 +1374,12 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="tokenIds">令牌标识</param>
+    /// <param name="providerAndKeys">令牌标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     public async Task<StoreResult> RemoveUserTokensAsync(
         Guid id,
-        IEnumerable<int> tokenIds,
+        IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -1343,15 +1388,28 @@ public class UserManager : Manager<ArtemisUser>, IUserManager
 
         if (userExists)
         {
-            var tokenIdList = tokenIds.ToList();
+            var query = UserTokenStore.EntityQuery
+                .Where(userLogin => userLogin.UserId == id);
 
-            var userTokens = await UserTokenStore.KeyMatchQuery(tokenIdList)
-                .Where(userToken => userToken.UserId == id)
-                .ToListAsync(cancellationToken);
+            var init = UserTokenStore.EntityQuery
+                .Where(userLogin => userLogin.UserId == id);
+
+            var keyValuePairs = providerAndKeys.ToList();
+
+            foreach (var (provider, name) in keyValuePairs)
+            {
+                var segment = init
+                    .Where(userLogin => userLogin.LoginProvider == provider)
+                    .Where(userLogin => userLogin.Name == name);
+
+                query = query.Union(segment);
+            }
+
+            var userTokens = await query.ToListAsync(cancellationToken);
 
             if (userTokens.Any()) return await UserTokenStore.DeleteAsync(userTokens, cancellationToken);
 
-            var flag = string.Join(',', tokenIdList.Select(item => item.ToString()));
+            var flag = string.Join(',', keyValuePairs.Select(item => $"{id}:{item.Key}:{item.Value}"));
 
             return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserToken), flag);
         }

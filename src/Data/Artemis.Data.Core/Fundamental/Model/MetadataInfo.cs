@@ -69,12 +69,12 @@ public abstract class MetadataInfo : IMetadata
     ///     元数据键
     /// </summary>
     [Required]
-    public required string Key { get; set; }
+    public virtual required string Key { get; set; }
 
     /// <summary>
     ///     元数据值
     /// </summary>
-    public string? Value { get; set; }
+    public virtual string? Value { get; set; }
 
     #endregion
 }

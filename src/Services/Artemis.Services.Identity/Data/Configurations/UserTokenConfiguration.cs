@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户令牌数据集配置
 /// </summary>
-public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
+public class UserTokenConfiguration : BaseConfiguration<ArtemisUserToken>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUserToken>
 
@@ -26,12 +27,6 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
-        base.FieldConfigure(builder);
-
-        builder.Property(userToken => userToken.Id)
-            .ValueGeneratedOnAdd()
-            .HasComment("标识");
-
         builder.Property(userToken => userToken.UserId)
             .HasComment("用户标识");
 
@@ -55,15 +50,9 @@ public class UserTokenConfiguration : IdentityConfiguration<ArtemisUserToken>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisUserToken> builder)
     {
-        MetaIndexConfigure(builder);
-
         // User Token Key
         builder.HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name })
             .HasName($"PK_{TableName}");
-
-        // User Token Alternate Key
-        builder.HasAlternateKey(userToken => userToken.Id)
-            .HasName($"AK_{TableName}");
     }
 
     #endregion

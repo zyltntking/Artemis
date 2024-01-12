@@ -917,7 +917,7 @@ public abstract class KeyLessStoreBase<TEntity> : IKeyLessStoreBase<TEntity> whe
     /// <summary>
     ///     EntitySet访问器*Main Store Set*
     /// </summary>
-    protected DbSet<TEntity> EntitySet => Context.Set<TEntity>();
+    public DbSet<TEntity> EntitySet => Context.Set<TEntity>();
 
     /// <summary>
     ///     Entity有追踪访问器

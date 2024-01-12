@@ -8,7 +8,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     用户管理器接口
 /// </summary>
-public interface IUserManager : IManager<ArtemisUser>
+public interface IUserManager : IKeyWithManager<ArtemisUser>
 {
     /// <summary>
     ///     根据用户信息搜索用户
@@ -278,12 +278,14 @@ public interface IUserManager : IManager<ArtemisUser>
     ///     获取用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录信息标识</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
     Task<UserLoginInfo?> GetUserLoginAsync(
         Guid id,
-        int loginId,
+        string provider,
+        string providerKey,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -302,38 +304,42 @@ public interface IUserManager : IManager<ArtemisUser>
     ///     替换用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录信息标识</param>
-    /// <param name="package">登录信息</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
+    /// <param name="displayName">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>替换结果</returns>
     Task<StoreResult> ReplaceUserLoginAsync(
         Guid id,
-        int loginId,
-        UserLoginPackage package,
+        string provider,
+        string providerKey,
+        string? displayName,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="loginId">登录标识</param>
+    /// <param name="provider">登录信息标识</param>
+    /// <param name="providerKey">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     Task<StoreResult> RemoveUserLoginAsync(
         Guid id,
-        int loginId,
+        string provider,
+        string providerKey,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="loginIds">登录标识</param>
+    /// <param name="providerAndKeys">登录标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     Task<StoreResult> RemoveUserLoginsAsync(
         Guid id,
-        IEnumerable<int> loginIds,
+        IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -359,12 +365,14 @@ public interface IUserManager : IManager<ArtemisUser>
     ///     获取用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌信息标识</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">登录提供程序</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>用户凭据信息</returns>
     Task<UserTokenInfo?> GetUserTokenAsync(
         Guid id,
-        int tokenId,
+        string loginProvider,
+        string name,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -383,37 +391,41 @@ public interface IUserManager : IManager<ArtemisUser>
     ///     替换用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌信息标识</param>
-    /// <param name="package">令牌信息</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">令牌名</param>
+    /// <param name="value">令牌值</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>替换结果</returns>
     Task<StoreResult> ReplaceUserTokenAsync(
         Guid id,
-        int tokenId,
-        UserTokenPackage package,
+        string loginProvider,
+        string name,
+        string value,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     删除用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
-    /// <param name="tokenId">令牌标识</param>
+    /// <param name="loginProvider">登录提供程序</param>
+    /// <param name="name">令牌名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     Task<StoreResult> RemoveUserTokenAsync(
         Guid id,
-        int tokenId,
+        string loginProvider,
+        string name,
         CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     删除用户登录信息
     /// </summary>
     /// <param name="id">角色标识</param>
-    /// <param name="tokenIds">令牌标识</param>
+    /// <param name="providerAndKeys">令牌标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
     Task<StoreResult> RemoveUserTokensAsync(
         Guid id,
-        IEnumerable<int> tokenIds,
+        IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default);
 }

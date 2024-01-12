@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Model;
 
 namespace Artemis.Shared.Identity.Models;
@@ -7,17 +6,24 @@ namespace Artemis.Shared.Identity.Models;
 /// <summary>
 ///     用户档案
 /// </summary>
-public class UserProfile : MetadataInfo, IKeySlot<Guid>
+public class UserProfile : MetadataInfo
 {
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [Required]
-    public required Guid Id { get; set; }
-
     /// <summary>
     ///     用户标识
     /// </summary>
     [Required]
-    public required Guid UserId { get; set; }
+    public virtual required Guid UserId { get; set; }
+
+    /// <summary>
+    ///     元数据键
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    public override required string Key { get; set; }
+
+    /// <summary>
+    ///     元数据值
+    /// </summary>
+    [MaxLength(128)]
+    public override string? Value { get; set; }
 }

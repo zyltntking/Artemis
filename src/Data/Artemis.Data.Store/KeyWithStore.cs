@@ -13,6 +13,57 @@ namespace Artemis.Data.Store;
 ///     具键模型存储基类
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
+public abstract class KeyWithStore<TEntity> :
+    KeyWithStore<TEntity, Guid>,
+    IKeyWithStore<TEntity>
+    where TEntity : class, IKeySlot
+{
+    /// <summary>
+    ///     具键模型存储构造
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cache"></param>
+    /// <param name="storeOptions"></param>
+    /// <param name="logger"></param>
+    /// <param name="describer"></param>
+    protected KeyWithStore(
+        DbContext context,
+        IDistributedCache? cache = null,
+        IKeyWithStoreOptions? storeOptions = null,
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, cache, storeOptions, logger, describer)
+    {
+    }
+
+    #region Overrides of StoreBase<TEntity,Guid>
+
+    /// <summary>
+    ///     转换字符串到id
+    /// </summary>
+    /// <param name="id">id字符串</param>
+    /// <returns>id</returns>
+    protected sealed override Guid ConvertIdFromString(string id)
+    {
+        return id.GuidFromString();
+    }
+
+    /// <summary>
+    ///     转换Id为字符串
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>字符串</returns>
+    protected sealed override string ConvertIdToString(Guid id)
+    {
+        return id.GuidToString();
+    }
+
+    #endregion
+}
+
+/// <summary>
+///     具键模型存储基类
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 public abstract class KeyWithStore<TEntity, TKey> :
     KeyWithStoreBase<TEntity, TKey>,

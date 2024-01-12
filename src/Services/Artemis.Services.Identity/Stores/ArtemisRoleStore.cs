@@ -7,14 +7,14 @@ namespace Artemis.Services.Identity.Stores;
 /// <summary>
 ///     ArtemisUserStore接口
 /// </summary>
-public interface IArtemisRoleStore : IStore<ArtemisRole>
+public interface IArtemisRoleStore : IKeyWithStore<ArtemisRole>
 {
 }
 
 /// <summary>
 ///     ArtemisUserStore
 /// </summary>
-public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
+public class ArtemisRoleStore : KeyWithStore<ArtemisRole>, IArtemisRoleStore
 {
     /// <summary>
     ///     创建一个新的基本存储实例
@@ -25,8 +25,8 @@ public class ArtemisRoleStore : Store<ArtemisRole>, IArtemisRoleStore
     /// <exception cref="ArgumentNullException"></exception>
     public ArtemisRoleStore(
         ArtemisIdentityContext context,
-        IStoreOptions? storeOptions = null,
-        IDistributedCache? cache = null) : base(context, storeOptions, cache)
+        IKeyWithStoreOptions? storeOptions = null,
+        IDistributedCache? cache = null) : base(context, cache, storeOptions)
     {
     }
 }

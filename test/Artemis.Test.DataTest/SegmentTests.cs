@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core.Socket;
+﻿using System.Net.Sockets;
+using Artemis.Data.Core.Socket;
 
 namespace Artemis.Test.DataTest;
 
@@ -13,5 +14,9 @@ public class SegmentTests
         var bb = Convert.FromBase64String("AQUAAP8AjDo=");
 
         var str = AsciiCharacter.RandomNonAlphanumeric(8);
+
+        var client = new TcpClient();
+
+        var stream = client.GetStream();
     }
 }

@@ -10,7 +10,7 @@ public interface IManagerOptions : IKeyWithStoreManagerOptions
 }
 
 /// <summary>
-/// 具键存储管理器配置接口
+///     具键存储管理器配置接口
 /// </summary>
 public interface IKeyWithStoreManagerOptions : IKeyLessStoreManagerOptions
 {
@@ -26,7 +26,7 @@ public interface IKeyWithStoreManagerOptions : IKeyLessStoreManagerOptions
 }
 
 /// <summary>
-/// 无键存储管理器配置接口
+///     无键存储管理器配置接口
 /// </summary>
 public interface IKeyLessStoreManagerOptions
 {
@@ -46,7 +46,7 @@ public class ArtemisManagerOptions : KeyWithStoreManagerOptions, IManagerOptions
 }
 
 /// <summary>
-/// 具键存储管理器配置实例
+///     具键存储管理器配置实例
 /// </summary>
 public class KeyWithStoreManagerOptions : KeyLessStoreManagerOptions, IKeyWithStoreManagerOptions
 {
@@ -66,7 +66,7 @@ public class KeyWithStoreManagerOptions : KeyLessStoreManagerOptions, IKeyWithSt
 }
 
 /// <summary>
-/// 无键存储管理器配置实例
+///     无键存储管理器配置实例
 /// </summary>
 public class KeyLessStoreManagerOptions : IKeyLessStoreManagerOptions
 {

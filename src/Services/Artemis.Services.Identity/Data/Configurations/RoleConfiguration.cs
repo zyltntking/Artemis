@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Services.Identity.Data.Configurations;
@@ -6,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     角色数据集配置
 /// </summary>
-public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
+public class RoleConfiguration : KeySlotModelConfiguration<ArtemisRole>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisRole>
 
@@ -26,8 +27,6 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
     /// <param name="builder"></param>
     protected override void FieldConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
-        base.FieldConfigure(builder);
-
         builder.Property(role => role.Id)
             .HasComment("标识");
 
@@ -57,8 +56,6 @@ public class RoleConfiguration : IdentityConfiguration<ArtemisRole>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisRole> builder)
     {
-        MetaIndexConfigure(builder);
-
         // Role Key
         builder.HasKey(role => role.Id)
             .HasName($"PK_{TableName}");

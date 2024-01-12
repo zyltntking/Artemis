@@ -8,6 +8,14 @@ namespace Artemis.Data.Store;
 ///     通用存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
+public interface IKeyWithStoreCommon<TEntity> : IKeyWithStoreCommon<TEntity, Guid> where TEntity : IKeySlot
+{
+}
+
+/// <summary>
+///     通用存储接口
+/// </summary>
+/// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
 public interface IKeyWithStoreCommon<TEntity, in TKey> : IKeyLessStoreCommon<TEntity>
     where TEntity : IKeySlot<TKey>

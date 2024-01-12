@@ -1,6 +1,15 @@
 ﻿using Artemis.Data.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Data.Store;
+
+/// <summary>
+///     无元数据模型基本存储接口
+/// </summary>
+/// <typeparam name="TEntity">模型类型</typeparam>
+public interface IKeyWithStoreBase<TEntity> : IKeyWithStoreBase<TEntity, Guid> where TEntity : class, IKeySlot
+{
+}
 
 /// <summary>
 ///     无元数据模型基本存储接口
@@ -108,7 +117,7 @@ public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
 ///     无键模型基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">模型类型</typeparam>
-public interface IKeyLessStoreBase<out TEntity> : IDisposable
+public interface IKeyLessStoreBase<TEntity> : IDisposable
     where TEntity : class
 {
     /// <summary>
@@ -119,6 +128,11 @@ public interface IKeyLessStoreBase<out TEntity> : IDisposable
     string NormalizeKey(string value);
 
     #region Access
+
+    /// <summary>
+    ///     Entity集合访问器
+    /// </summary>
+    DbSet<TEntity> EntitySet { get; }
 
     /// <summary>
     ///     Entity有追踪访问器

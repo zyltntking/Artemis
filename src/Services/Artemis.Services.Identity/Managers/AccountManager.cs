@@ -14,7 +14,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     账号管理器
 /// </summary>
-public class AccountManager : Manager<ArtemisUser>, IAccountManager
+public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -31,8 +31,8 @@ public class AccountManager : Manager<ArtemisUser>, IAccountManager
         IArtemisUserClaimStore userClaimStore,
         IArtemisRoleClaimStore roleClaimStore,
         IDistributedCache? cache = null,
-        IManagerOptions? options = null,
-        ILogger? logger = null) : base(store, cache, options, logger)
+        IKeyWithStoreManagerOptions? options = null,
+        ILogger? logger = null) : base(store, cache, options, null, logger)
     {
         UserClaimStore = userClaimStore;
         RoleClaimStore = roleClaimStore;

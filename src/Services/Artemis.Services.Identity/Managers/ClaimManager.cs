@@ -14,7 +14,7 @@ namespace Artemis.Services.Identity.Managers;
 /// <summary>
 ///     凭据管理器
 /// </summary>
-public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
+public class ClaimManager : KeyWithManager<ArtemisClaim>, IClaimManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -28,7 +28,7 @@ public class ClaimManager : Manager<ArtemisClaim>, IClaimManager
         IArtemisClaimStore claimStore,
         IDistributedCache? cache = null,
         IManagerOptions? options = null,
-        ILogger? logger = null) : base(claimStore, cache, options, logger)
+        ILogger? logger = null) : base(claimStore, cache, options, null, logger)
     {
     }
 
