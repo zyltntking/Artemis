@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="type.proto" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.25.1" />
 		<PackageReference Include="Grpc" Version="2.46.6" />
@@ -16,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="type.proto" />
 		<Protobuf Include="google/api/annotations.proto" />
 		<Protobuf Include="google/api/http.proto" />
 	</ItemGroup>

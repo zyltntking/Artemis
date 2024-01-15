@@ -12,11 +12,13 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <summary>
     ///     签到/登录
     /// </summary>
-    /// <param name="package">认证信息</param>
+    /// <param name="userSign">用户签名</param>
+    /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录后的Token信息</returns>
     Task<(SignResult result, TokenDocument? token)> SignInAsync(
-        SignInPackage package,
+        string userSign,
+        string password,
         CancellationToken cancellationToken = default);
 
     /// <summary>

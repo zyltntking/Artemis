@@ -74,22 +74,32 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     签到/登录
     /// </summary>
-    /// <param name="package">认证信息</param>
+    /// <param name="userSign">用户签名</param>
+    /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录后的Token信息</returns>
     public async Task<(SignResult result, TokenDocument? token)> SignInAsync(
-        SignInPackage package,
+        string userSign,
+        string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var normalizeSign = UserStore.NormalizeKey(package.UserSign);
+        var normalizeSign = UserStore.NormalizeKey(userSign);
+
+        var userNameQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedUserName == normalizeSign);
+
+        var emailQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedEmail == normalizeSign);
+
+        var phoneNumberQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedPhoneNumber == normalizeSign);
 
         var userDocument = await UserStore.EntityQuery
-            .Where(item =>
-                item.NormalizedUserName == normalizeSign ||
-                item.NormalizedEmail == normalizeSign ||
-                item.NormalizedPhoneNumber == normalizeSign)
+            .Union(userNameQuery)
+            .Union(emailQuery)
+            .Union(phoneNumberQuery)
             .ProjectToType<UserDocument>()
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -106,7 +116,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             return (result, default);
         }
 
-        var passwordValid = Hash.ArtemisHashVerify(userDocument.PasswordHash, package.Password);
+        var passwordValid = Hash.ArtemisHashVerify(userDocument.PasswordHash, password);
 
         if (!passwordValid)
         {
@@ -260,11 +270,19 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
 
         var normalizeSign = UserStore.NormalizeKey(userSign);
 
+        var userNameQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedUserName == normalizeSign);
+
+        var emailQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedEmail == normalizeSign);
+
+        var phoneNumberQuery = UserStore.EntityQuery
+            .Where(item => item.NormalizedPhoneNumber == normalizeSign);
+
         var user = await UserStore.EntityQuery
-            .Where(item =>
-                item.NormalizedUserName == normalizeSign ||
-                item.NormalizedEmail == normalizeSign ||
-                item.NormalizedPhoneNumber == normalizeSign)
+            .Union(userNameQuery)
+            .Union(emailQuery)
+            .Union(phoneNumberQuery)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (user is null)

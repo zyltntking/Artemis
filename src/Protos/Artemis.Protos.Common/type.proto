@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Protos.Common";
+
+package artemis.protos.common;
+
+// 基本页面结构
+message RequestRequest {
+  int32 page = 1;
+  int32 size = 2;
+}
+
+

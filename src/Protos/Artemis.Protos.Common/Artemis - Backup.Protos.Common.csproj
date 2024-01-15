@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="google\api\annotations.proto" />
-    <None Remove="google\api\http.proto" />
+    <None Remove="type.proto" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -21,9 +20,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="account.proto" />
-		<Protobuf Include="google\api\annotations.proto" />
-		<Protobuf Include="google\api\http.proto" />
+		<Protobuf Include="type.proto" />
+		<Protobuf Include="google/api/annotations.proto" />
+		<Protobuf Include="google/api/http.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="google\protobuf\" />
 	</ItemGroup>
 
 </Project>

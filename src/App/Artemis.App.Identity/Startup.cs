@@ -51,9 +51,9 @@ public class Startup : IWebAppStartup
         builder.Services.AddGrpc().AddJsonTranscoding();
         builder.Services.AddGrpcReflection();
         builder.Services.AddGrpcSwagger();
-        builder.Services.AddSwaggerGen(c =>
+        builder.Services.AddSwaggerGen(config =>
         {
-            c.SwaggerDoc("v1",
+            config.SwaggerDoc("v1",
                 new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
         });
 
@@ -115,7 +115,7 @@ public class Startup : IWebAppStartup
 
         app.UseSwagger();
         app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
-        app.MapGrpcService<GreeterService>();
+        app.MapGrpcService<AccountService>();
 
         //app.MapDefaultArtemisIdentityGrpcServices();
 

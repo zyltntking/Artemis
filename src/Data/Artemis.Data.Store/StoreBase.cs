@@ -63,7 +63,18 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// <returns></returns>
     public IQueryable<TEntity> KeyMatchQuery(IEnumerable<TKey> keys)
     {
-        return EntityQuery.Where(item => keys.Contains(item.Id));
+        var keyList = keys.ToList();
+
+        var query = EntityQuery;
+
+        foreach (var key in keyList)
+        {
+            var segment = EntityQuery.Where(entity => entity.Id.Equals(key));
+
+            query = query.Union(segment);
+        }
+
+        return query;
     }
 
     #endregion
