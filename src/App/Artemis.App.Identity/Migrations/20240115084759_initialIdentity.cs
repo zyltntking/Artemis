@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialIdentity : Migration
+    public partial class initialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,9 +21,6 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
@@ -41,9 +38,6 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "角色名"),
                     NormalizedName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "规范化角色名"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
@@ -61,9 +55,6 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     UserName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用户名"),
                     NormalizedUserName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "规范化用户名"),
                     Email = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "邮箱地址"),
@@ -93,9 +84,6 @@ namespace Artemis.App.Identity.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
@@ -122,9 +110,6 @@ namespace Artemis.App.Identity.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
@@ -151,18 +136,12 @@ namespace Artemis.App.Identity.Migrations
                 {
                     LoginProvider = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证提供程序"),
                     ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "认证提供程序提供的第三方标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     ProviderDisplayName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true, comment: "认证提供程序显示的用户名"),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
-                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArtemisUserLogin", x => new { x.LoginProvider, x.ProviderKey });
-                    table.UniqueConstraint("AK_ArtemisUserLogin", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ArtemisUserLogin_ArtemisUser_Id",
                         column: x => x.UserId,
@@ -178,17 +157,13 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
                     Key = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用户信息键"),
-                    Value = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "用户信息值"),
+                    Value = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "用户信息值"),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtemisUserProfile", x => x.Id);
+                    table.PrimaryKey("PK_ArtemisUserProfile", x => new { x.UserId, x.Key, x.Value });
                     table.ForeignKey(
                         name: "FK_ArtemisUserProfile_ArtemisUser_Id",
                         column: x => x.UserId,
@@ -205,17 +180,11 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
-                    RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
-                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArtemisUserRole", x => new { x.UserId, x.RoleId });
-                    table.UniqueConstraint("AK_ArtemisUserRole", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ArtemisUserRole_ArtemisRole_Id",
                         column: x => x.RoleId,
@@ -241,17 +210,11 @@ namespace Artemis.App.Identity.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
                     LoginProvider = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证提供程序"),
                     Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证令牌名"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
-                    Value = table.Column<string>(type: "text", nullable: true, comment: "认证令牌"),
-                    Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                    Value = table.Column<string>(type: "text", nullable: true, comment: "认证令牌")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArtemisUserToken", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.UniqueConstraint("AK_ArtemisUserToken", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ArtemisUserToken_ArtemisUser_Id",
                         column: x => x.UserId,
@@ -276,47 +239,11 @@ namespace Artemis.App.Identity.Migrations
                 columns: new[] { "ClaimType", "ClaimValue" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisClaim_CreatedAt",
-                schema: "identity",
-                table: "ArtemisClaim",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisClaim_DeletedAt",
-                schema: "identity",
-                table: "ArtemisClaim",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisClaim_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisClaim",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRole_CreatedAt",
-                schema: "identity",
-                table: "ArtemisRole",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRole_DeletedAt",
-                schema: "identity",
-                table: "ArtemisRole",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRole_Name",
                 schema: "identity",
                 table: "ArtemisRole",
                 column: "NormalizedName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRole_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisRole",
-                column: "UpdatedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRoleClaim_CheckStamp",
@@ -332,60 +259,22 @@ namespace Artemis.App.Identity.Migrations
                 columns: new[] { "ClaimType", "ClaimValue" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRoleClaim_CreatedAt",
-                schema: "identity",
-                table: "ArtemisRoleClaim",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRoleClaim_DeletedAt",
-                schema: "identity",
-                table: "ArtemisRoleClaim",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisRoleClaim_RoleId",
                 schema: "identity",
                 table: "ArtemisRoleClaim",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisRoleClaim_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisRoleClaim",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUser_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUser",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUser_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUser",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_Email",
                 schema: "identity",
                 table: "ArtemisUser",
-                column: "NormalizedEmail",
-                unique: true);
+                column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_PhoneNumber",
                 schema: "identity",
                 table: "ArtemisUser",
-                column: "PhoneNumber",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUser_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUser",
-                column: "UpdatedAt");
+                column: "PhoneNumber");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUser_UserName",
@@ -408,71 +297,16 @@ namespace Artemis.App.Identity.Migrations
                 columns: new[] { "ClaimType", "ClaimValue" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserClaim_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUserClaim",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserClaim_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUserClaim",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserClaim_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUserClaim",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserClaim_UserId",
                 schema: "identity",
                 table: "ArtemisUserClaim",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserLogin_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUserLogin",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserLogin_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUserLogin",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserLogin_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUserLogin",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserLogin_UserId",
                 schema: "identity",
                 table: "ArtemisUserLogin",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserProfile_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUserProfile",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserProfile_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUserProfile",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserProfile_Key_UserId",
-                schema: "identity",
-                table: "ArtemisUserProfile",
-                columns: new[] { "Key", "UserId" },
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserProfile_Key_Value",
@@ -482,58 +316,10 @@ namespace Artemis.App.Identity.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserProfile_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUserProfile",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserProfile_UserId",
-                schema: "identity",
-                table: "ArtemisUserProfile",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserRole_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUserRole",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserRole_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUserRole",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisUserRole_RoleId",
                 schema: "identity",
                 table: "ArtemisUserRole",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserRole_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUserRole",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserToken_CreatedAt",
-                schema: "identity",
-                table: "ArtemisUserToken",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserToken_DeletedAt",
-                schema: "identity",
-                table: "ArtemisUserToken",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisUserToken_UpdatedAt",
-                schema: "identity",
-                table: "ArtemisUserToken",
-                column: "UpdatedAt");
         }
 
         /// <inheritdoc />

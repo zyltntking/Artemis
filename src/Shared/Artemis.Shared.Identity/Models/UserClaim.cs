@@ -3,6 +3,8 @@ using Artemis.Data.Core;
 using Artemis.Shared.Identity.Transfer;
 using Microsoft.AspNetCore.Identity;
 
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+
 namespace Artemis.Shared.Identity.Models;
 
 /// <summary>

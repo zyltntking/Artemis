@@ -1,4 +1,5 @@
 ﻿using Artemis.App.Identity.Services;
+using Artemis.Extensions.Rpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
 using Artemis.Services.Identity;
@@ -48,7 +49,12 @@ public class Startup : IWebAppStartup
             options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
         });
 
-        builder.Services.AddGrpc().AddJsonTranscoding();
+        builder.Services.AddGrpc(options =>
+        {
+            options.EnableDetailedErrors = true;
+            options.Interceptors.Add<AddInLogInterceptor>();
+            options.Interceptors.Add<FriendlyExceptionInterceptor>();
+        }).AddJsonTranscoding();
         builder.Services.AddGrpcReflection();
         builder.Services.AddGrpcSwagger();
         builder.Services.AddSwaggerGen(config =>
@@ -114,7 +120,7 @@ public class Startup : IWebAppStartup
         app.UseResponseCompression();
 
         app.UseSwagger();
-        app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+        app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
         app.MapGrpcService<AccountService>();
 
         //app.MapDefaultArtemisIdentityGrpcServices();

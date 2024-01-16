@@ -12,11 +12,11 @@ public static class WebExtensions
     ///     添加Artemis认证鉴权服务
     /// </summary>
     /// <param name="serviceCollection"></param>
-    /// <param name="authorizationOptions"></param>
+    /// <param name="internalAuthorizationOptions"></param>
     /// <returns></returns>
     public static IServiceCollection AddArtemisAuthorization(
         this IServiceCollection serviceCollection,
-        ArtemisAuthorizationOptions authorizationOptions)
+        ArtemisAuthorizationOptions internalAuthorizationOptions)
     {
         serviceCollection.AddAuthorization(options =>
         {
@@ -39,17 +39,17 @@ public static class WebExtensions
             options.AddPolicy(IdentityPolicy.RoutePath,
                 policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
 
-            if (authorizationOptions.EnableAdvancedPolicy)
+            if (internalAuthorizationOptions.EnableAdvancedPolicy)
             {
-                if (authorizationOptions is { RolesBasedPolicyOptions: not null } &&
-                    authorizationOptions.RolesBasedPolicyOptions.Any())
-                    foreach (var rolesBasedPolicyOption in authorizationOptions.RolesBasedPolicyOptions)
+                if (internalAuthorizationOptions is { RolesBasedPolicyOptions: not null } &&
+                    internalAuthorizationOptions.RolesBasedPolicyOptions.Any())
+                    foreach (var rolesBasedPolicyOption in internalAuthorizationOptions.RolesBasedPolicyOptions)
                         options.AddPolicy(rolesBasedPolicyOption.Name,
                             policy => { policy.Requirements.Add(new RolesRequirement(rolesBasedPolicyOption.Roles)); });
 
-                if (authorizationOptions is { ClaimsBasedPolicyOptions: not null } &&
-                    authorizationOptions.ClaimsBasedPolicyOptions.Any())
-                    foreach (var claimsBasedPolicyOption in authorizationOptions.ClaimsBasedPolicyOptions)
+                if (internalAuthorizationOptions is { ClaimsBasedPolicyOptions: not null } &&
+                    internalAuthorizationOptions.ClaimsBasedPolicyOptions.Any())
+                    foreach (var claimsBasedPolicyOption in internalAuthorizationOptions.ClaimsBasedPolicyOptions)
                         options.AddPolicy(claimsBasedPolicyOption.Name,
                             policy =>
                             {
@@ -64,10 +64,10 @@ public static class WebExtensions
 
         serviceCollection.Configure<InternalAuthorizationOptions>(options =>
         {
-            options.EnableAdvancedPolicy = authorizationOptions.EnableAdvancedPolicy;
-            options.HeaderTokenKey = authorizationOptions.HeaderTokenKey;
-            options.CacheTokenPrefix = authorizationOptions.CacheTokenPrefix;
-            options.Expire = authorizationOptions.Expire;
+            options.EnableAdvancedPolicy = internalAuthorizationOptions.EnableAdvancedPolicy;
+            options.HeaderTokenKey = internalAuthorizationOptions.HeaderTokenKey;
+            options.CacheTokenPrefix = internalAuthorizationOptions.CacheTokenPrefix;
+            options.Expire = internalAuthorizationOptions.Expire;
         });
 
         return serviceCollection;

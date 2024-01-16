@@ -228,7 +228,6 @@ public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode,
     /// <summary>
     ///     构造树
     /// </summary>
-    /// <typeparam name="TTreeNodeInfo"></typeparam>
     /// <param name="rootId">根结点标识</param>
     /// <param name="treeNodeInfos">节点信息列表</param>
     /// <returns></returns>

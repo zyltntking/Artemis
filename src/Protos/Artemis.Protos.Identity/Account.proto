@@ -2,6 +2,7 @@
 
 option csharp_namespace = "Artemis.Protos.Identity";
 import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
 
 package artemis.protos.identity;
 
@@ -16,6 +17,12 @@ service Account {
   }
 }
 
+// 令牌响应
+message TokenReply{
+  string token = 1;
+  int64 expire = 2;
+}
+
 // 签入请求
 message SingInRequest {
   string userSign = 1;
@@ -24,5 +31,11 @@ message SingInRequest {
 
 // 签入响应
 message SignInResponse {
-  string message = 1;
+  int32 code = 1;
+  bool succeeded = 2;
+  string message = 3;
+  google.protobuf.StringValue error = 4;
+  string dateTime = 5;
+  int64 timestamp = 6;
+  TokenReply data = 7;
 }

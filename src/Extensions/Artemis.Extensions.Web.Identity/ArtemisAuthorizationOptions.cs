@@ -5,7 +5,7 @@
 /// <summary>
 ///     Artemis认证选项接口
 /// </summary>
-file interface IArtemisAuthorizationOptions
+file interface IAuthorizationOptions
 {
     /// <summary>
     ///     是否启用高级策略
@@ -33,7 +33,7 @@ file interface IArtemisAuthorizationOptions
 /// <summary>
 ///     内部认证选项
 /// </summary>
-public class InternalAuthorizationOptions : IArtemisAuthorizationOptions
+public class InternalAuthorizationOptions : IAuthorizationOptions
 {
     #region Implementation of IArtemisIdentityOptions
 

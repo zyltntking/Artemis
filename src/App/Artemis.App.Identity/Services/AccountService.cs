@@ -1,27 +1,37 @@
-﻿using Artemis.Protos.Identity;
+﻿using System.ComponentModel;
+using Artemis.Data.Core;
+using Artemis.Extensions.Web.Identity;
+using Artemis.Protos.Identity;
 using Artemis.Services.Identity.Managers;
+using Grpc.Core;
+using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
 
 namespace Artemis.App.Identity.Services;
 
 /// <summary>
-/// 账户服务
+///     账户服务
 /// </summary>
 public class AccountService : Account.AccountBase
 {
     /// <summary>
-    /// 账户服务
+    ///     账户服务
     /// </summary>
     /// <param name="accountManager">账户管理器依赖</param>
     /// <param name="cache">缓存依赖</param>
+    /// <param name="options">认证配置依赖</param>
     /// <param name="logger">日志依赖</param>
     public AccountService(
         IAccountManager accountManager,
         IDistributedCache cache,
+        IOptions<InternalAuthorizationOptions> options,
         ILogger<AccountService> logger)
     {
         AccountManager = accountManager;
         Cache = cache;
+        Options = options.Value;
         Logger = logger;
     }
 
@@ -36,8 +46,47 @@ public class AccountService : Account.AccountBase
     private IDistributedCache Cache { get; }
 
     /// <summary>
-    /// 日志依赖
+    ///     认证配置依赖
+    /// </summary>
+    private InternalAuthorizationOptions Options { get; }
+
+    /// <summary>
+    ///     日志依赖
     /// </summary>
     private ILogger<AccountService> Logger { get; }
 
+    #region Overrides of AccountBase
+
+    /// <summary>
+    ///     签入
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("签入")]
+    [Authorize(IdentityPolicy.Anonymous)]
+    public override async Task<SignInResponse> SignIn(SingInRequest request, ServerCallContext context)
+    {
+        var (result, token) =
+            await AccountManager.SignInAsync(request.UserSign, request.Password, context.CancellationToken);
+
+        if (result.Succeeded && token is not null)
+        {
+            var replyToken = token.GenerateTokenKey();
+
+            var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+
+            Cache.CacheToken(token, cacheKey, Options.Expire);
+
+            return DataResult.AdapterSuccess(new TokenReply
+            {
+                Token = replyToken,
+                Expire = DateTime.Now.AddSeconds(Options.Expire).ToUnixTimeStamp()
+            }).Adapt<SignInResponse>();
+        }
+
+        return DataResult.AdapterFail(result.Message).Adapt<SignInResponse>();
+    }
+
+    #endregion
 }
