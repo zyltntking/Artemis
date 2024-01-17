@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
+using Artemis.Extensions.Rpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Protos.Identity;
 using Artemis.Services.Identity.Managers;
+using Artemis.Shared.Identity.Transfer;
 using Grpc.Core;
-using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
@@ -58,14 +59,14 @@ public class AccountService : Account.AccountBase
     #region Overrides of AccountBase
 
     /// <summary>
-    ///     签入
+    ///     签到
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("签入")]
+    [Description("签到")]
     [Authorize(IdentityPolicy.Anonymous)]
-    public override async Task<SignInResponse> SignIn(SingInRequest request, ServerCallContext context)
+    public override async Task<TokenResponse> SignIn(SingInRequest request, ServerCallContext context)
     {
         var (result, token) =
             await AccountManager.SignInAsync(request.UserSign, request.Password, context.CancellationToken);
@@ -78,14 +79,63 @@ public class AccountService : Account.AccountBase
 
             Cache.CacheToken(token, cacheKey, Options.Expire);
 
-            return DataResult.AdapterSuccess(new TokenReply
+            return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
             {
                 Token = replyToken,
                 Expire = DateTime.Now.AddSeconds(Options.Expire).ToUnixTimeStamp()
-            }).Adapt<SignInResponse>();
+            });
         }
 
-        return DataResult.AdapterFail(result.Message).Adapt<SignInResponse>();
+        return RpcResultAdapter.Fail<TokenResponse>();
+    }
+
+    /// <summary>
+    /// 签入
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("签入")]
+    [Authorize(IdentityPolicy.Anonymous)]
+    public override async Task<TokenResponse> SignUp(SignUpRequest request, ServerCallContext context)
+    {
+        var (result, token) = await AccountManager
+            .SignUpAsync(new UserPackage
+            {
+                Email = request.Email,
+                UserName = request.UserName,
+                PhoneNumber = request.PhoneNumber
+            }, request.Password, context.CancellationToken);
+
+        if (result.Succeeded && token is not null)
+        {
+            var replyToken = token.GenerateTokenKey();
+
+            var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+
+            Cache.CacheToken(token, cacheKey, Options.Expire);
+
+            return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
+            {
+                Token = replyToken,
+                Expire = DateTime.Now.AddSeconds(Options.Expire).ToUnixTimeStamp()
+            });
+        }
+
+        return RpcResultAdapter.Fail<TokenResponse>();
+    }
+
+    /// <summary>
+    /// 签出
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("签出")]
+    [Authorize(IdentityPolicy.Token)]
+    public override Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
+    {
+        return Task.FromResult(RpcResultAdapter.Success<EmptyResponse>());
     }
 
     #endregion

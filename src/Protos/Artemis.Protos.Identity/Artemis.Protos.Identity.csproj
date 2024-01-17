@@ -34,11 +34,6 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="google\api\annotations.proto" />
-    <None Remove="google\api\http.proto" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
@@ -53,6 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="common.proto" />
 		<Protobuf Include="account.proto" />
 		<Protobuf Include="google\api\annotations.proto" />
 		<Protobuf Include="google\api\http.proto" />

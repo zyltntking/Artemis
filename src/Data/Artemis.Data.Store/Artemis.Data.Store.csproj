@@ -35,10 +35,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="KeyWithStore.cs~RF177ccd5.TMP" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 

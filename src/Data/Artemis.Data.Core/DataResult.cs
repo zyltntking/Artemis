@@ -106,7 +106,7 @@ file interface IAdapterResult<T> : IAdapterResult
 /// <summary>
 ///     抽象数据结果
 /// </summary>
-public record AbstractResult : IResultBase
+public abstract record AbstractResult : IResultBase
 {
     #region Implementation of IResultBase
 
@@ -150,7 +150,7 @@ public record AbstractResult : IResultBase
 /// <summary>
 ///     抽象数据结果
 /// </summary>
-public record AbstractAdapterResult : IAdapterResult
+public abstract record AbstractAdapterResult : IAdapterResult
 {
     #region Implementation of IResultBase
 
@@ -372,6 +372,23 @@ public static class DataResult
     }
 
     /// <summary>
+    /// 认证失败
+    /// </summary>
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    public static NullResult AuthFail(string message = "认证失败")
+    {
+        return new NullResult
+        {
+            Code = ResultStatus.AuthFail,
+            Message = message,
+            Error = null,
+            DateTime = DateTime.Now.ToLocalTime(),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+    }
+
+    /// <summary>
     ///     生成异常结果
     /// </summary>
     /// <param name="exception">异常</param>
@@ -506,6 +523,23 @@ public static class DataResult
     }
 
     /// <summary>
+    /// 认证失败
+    /// </summary>
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    public static NullAdapterResult AdapterAuthFail(string message = "认证失败")
+    {
+        return new NullAdapterResult
+        {
+            Code = ResultStatus.AuthFail,
+            Message = message,
+            Error = null,
+            DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+    }
+
+    /// <summary>
     ///     生成适应性异常结果
     /// </summary>
     /// <param name="exception">异常</param>
@@ -611,6 +645,11 @@ public static class ResultStatus
     public const int Fail = 1;
 
     /// <summary>
+    /// 认证失败
+    /// </summary>
+    public const int AuthFail = 4;
+
+    /// <summary>
     ///     异常
     /// </summary>
     public const int Exception = 9;
@@ -620,6 +659,16 @@ public static class ResultStatus
 ///     空记录
 /// </summary>
 public readonly record struct EmptyRecord;
+
+/// <summary>
+/// 无结果
+/// </summary>
+public record NullResult : AbstractResult;
+
+/// <summary>
+/// 适应性无结果
+/// </summary>
+public record NullAdapterResult : AbstractAdapterResult;
 
 /// <summary>
 ///     空结果
@@ -640,7 +689,7 @@ public record KeyRecord : KeyRecord<Guid>;
 ///     含键记录
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public record KeyRecord<TKey> where TKey : IEquatable<TKey>
+public record KeyRecord<TKey> : IKeySlot<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     标识

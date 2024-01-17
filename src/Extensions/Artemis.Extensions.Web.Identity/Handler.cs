@@ -71,8 +71,6 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
         {
             context.Succeed(requirement);
 
-            HttpContextAccessor.HttpContext?.Items.Add("dist", "i can dist");
-
             return Task.CompletedTask;
         }
 
@@ -146,6 +144,8 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
         }
 
         Logger.LogWarning(failMessage);
+
+        HttpContextAccessor.HttpContext?.Items.Add(SharedKey.AuthMessage, failMessage);
 
         context.Fail(new AuthorizationFailureReason(this, failMessage));
 

@@ -41,7 +41,8 @@ public static class QueryableExtensions
         int? page,
         int? size)
     {
-        if (page > 0 && size > 0) query = query.Skip((page.Value - 1) * size.Value);
+        if (page > 0 && size > 0) 
+            query = query.Skip((page.Value - 1) * size.Value);
 
         return size is > 0 ? query.Take(size.Value) : query;
     }
@@ -63,9 +64,7 @@ public static class QueryableExtensions
     {
         count = query.LongCount();
 
-        if (page > 0 && size > 0) query = query.Skip((page.Value - 1) * size.Value);
-
-        return size is > 0 ? query.Take(size.Value) : query;
+        return query.Page(page, size);
     }
 
     /// <summary>
@@ -114,11 +113,8 @@ public static class QueryableExtensions
         int? page,
         int? size,
         CancellationToken cancellationToken = default)
-        where TEntity : class, IModelBase<TKey>
-        where TKey : IEquatable<TKey>
     {
-        return query.OrderByDescending(item => item.CreatedAt)
-            .Page(page, size)
+        return query.Page(page, size)
             .ProjectToType<TEntityInfo>()
             .ToListAsync(cancellationToken);
     }
@@ -137,11 +133,8 @@ public static class QueryableExtensions
         this IQueryable<TEntity> query,
         IPageBase request,
         CancellationToken cancellationToken = default)
-        where TEntity : class, IModelBase<TKey>
-        where TKey : IEquatable<TKey>
     {
-        return query.OrderByDescending(item => item.CreatedAt)
-            .Page(request.Page, request.Size)
+        return query.Page(request.Page, request.Size)
             .ProjectToType<TEntityInfo>()
             .ToListAsync(cancellationToken);
     }

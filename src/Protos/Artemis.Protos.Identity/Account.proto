@@ -3,39 +3,78 @@
 option csharp_namespace = "Artemis.Protos.Identity";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+import "common.proto";
 
 package artemis.protos.identity;
 
 // 账户服务协议定义
 service Account {
-  // 签入
-  rpc SignIn (SingInRequest) returns (SignInResponse){
+  // 签到
+  rpc SignIn (SingInRequest) returns (TokenResponse){
 	  option (google.api.http) = {
 		  post: "/Account/SignIn",
 		  body: "*"
 	  };
   }
+
+  // 注入
+  rpc SignUp (SignUpRequest) returns (TokenResponse){
+	  option (google.api.http) = {
+		  post: "/Account/SignUp",
+		  body: "*"
+	  };
+  }
+
+  // 签出
+  rpc SignOut (Empty) returns (EmptyResponse){
+	  option (google.api.http) = {
+		  post: "/Account/SignOut"
+	  };
+  } 
 }
 
 // 令牌响应
 message TokenReply{
+  // 令牌
   string token = 1;
+  // 过期时间
   int64 expire = 2;
 }
 
 // 签入请求
 message SingInRequest {
+  // 用户签名
   string userSign = 1;
+  // 密码
   string password = 2;
 }
 
-// 签入响应
-message SignInResponse {
+// 令牌响应
+message TokenResponse {
+  // 状态码
   int32 code = 1;
+  // 是否成功
   bool succeeded = 2;
+  // 消息
   string message = 3;
+  // 错误
   google.protobuf.StringValue error = 4;
+  // 日期时间
   string dateTime = 5;
+  // 时间戳
   int64 timestamp = 6;
+  // 数据
   TokenReply data = 7;
+}
+
+// 注册请求
+message SignUpRequest {
+  // 用户名
+  string userName = 1;
+  // 密码
+  string password = 2;
+  // 邮箱
+  google.protobuf.StringValue email = 3;
+  // 手机号码
+  google.protobuf.StringValue phoneNumber = 4;
 }

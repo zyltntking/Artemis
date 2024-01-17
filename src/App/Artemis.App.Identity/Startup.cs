@@ -52,6 +52,7 @@ public class Startup : IWebAppStartup
         builder.Services.AddGrpc(options =>
         {
             options.EnableDetailedErrors = true;
+            options.Interceptors.Add<MessageValidationInterceptor>();
             options.Interceptors.Add<AddInLogInterceptor>();
             options.Interceptors.Add<FriendlyExceptionInterceptor>();
         }).AddJsonTranscoding();
@@ -61,6 +62,10 @@ public class Startup : IWebAppStartup
         {
             config.SwaggerDoc("v1",
                 new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
+
+            var filePath = Path.Combine(System.AppContext.BaseDirectory, "Artemis.Protos.Identity.xml");
+            config.IncludeXmlComments(filePath);
+            config.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
         });
 
         builder.Services.AddArtemisAuthorization(new ArtemisAuthorizationOptions

@@ -56,7 +56,7 @@ public static class WebExtensions
                                 policy.Requirements.Add(new ClaimsRequirement(claimsBasedPolicyOption.Claims));
                             });
             }
-        });
+        }).AddSingleton<IAuthorizationMiddlewareResultHandler, AuthorizationResultTransformer>();
 
         serviceCollection.AddSingleton<IAuthorizationHandler, ArtemisIdentityHandler>();
 

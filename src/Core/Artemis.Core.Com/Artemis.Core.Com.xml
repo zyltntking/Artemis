@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Core.Com</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Core.Com.Connection`1">
-			<summary>
-				连接
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Core.Com</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Core.Com.Connection`1">
+            <summary>
+                连接
+            </summary>
+        </member>
+    </members>
 </doc>

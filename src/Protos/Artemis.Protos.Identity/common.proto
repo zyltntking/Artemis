@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Protos.Identity";
+import "google/protobuf/wrappers.proto";
+
+package artemis.protos.identity;
+
+// 空消息包
+message Empty{
+
+}
+
+// 空响应
+message EmptyResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+}

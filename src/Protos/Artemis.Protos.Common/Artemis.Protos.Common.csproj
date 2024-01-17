@@ -35,11 +35,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="google/api/annotations.proto" />
-		<None Remove="google/api/http.proto" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 

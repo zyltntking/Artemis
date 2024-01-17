@@ -75,8 +75,6 @@ public abstract record PageBase : IPageBase
     /// </summary>
     /// <example>1</example>
     [Required]
-    [DefaultValue(1)]
-    [Range(0, int.MaxValue)]
     public virtual required int Page { get; set; } = 1;
 
     /// <summary>
@@ -84,8 +82,6 @@ public abstract record PageBase : IPageBase
     /// </summary>
     /// <example>20</example>
     [Required]
-    [DefaultValue(20)]
-    [Range(0, int.MaxValue)]
     public virtual required int Size { get; set; } = 20;
 
     #endregion
