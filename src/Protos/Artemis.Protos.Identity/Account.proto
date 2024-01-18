@@ -17,7 +17,7 @@ service Account {
 	  };
   }
 
-  // 注入
+  // 签入
   rpc SignUp (SignUpRequest) returns (TokenResponse){
 	  option (google.api.http) = {
 		  post: "/Account/SignUp",

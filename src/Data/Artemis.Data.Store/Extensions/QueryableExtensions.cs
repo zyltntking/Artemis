@@ -41,7 +41,7 @@ public static class QueryableExtensions
         int? page,
         int? size)
     {
-        if (page > 0 && size > 0) 
+        if (page > 0 && size > 0)
             query = query.Skip((page.Value - 1) * size.Value);
 
         return size is > 0 ? query.Take(size.Value) : query;

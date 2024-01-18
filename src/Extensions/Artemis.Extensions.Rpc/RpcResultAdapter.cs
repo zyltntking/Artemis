@@ -1,16 +1,15 @@
 ﻿using Artemis.Data.Core;
 using Mapster;
-using System;
 
 namespace Artemis.Extensions.Rpc;
 
 /// <summary>
-/// Rpc结果适配器
+///     Rpc结果适配器
 /// </summary>
 public static class RpcResultAdapter
 {
     /// <summary>
-    /// 成功结果
+    ///     成功结果
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <returns></returns>
@@ -20,7 +19,7 @@ public static class RpcResultAdapter
     }
 
     /// <summary>
-    /// 成功结果
+    ///     成功结果
     /// </summary>
     /// <typeparam name="TResult">结果类型</typeparam>
     /// <typeparam name="TData">数据类型</typeparam>
@@ -32,7 +31,7 @@ public static class RpcResultAdapter
     }
 
     /// <summary>
-    /// 失败结果
+    ///     失败结果
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <param name="message"></param>
@@ -43,7 +42,7 @@ public static class RpcResultAdapter
     }
 
     /// <summary>
-    /// 失败结果
+    ///     失败结果
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <typeparam name="TData"></typeparam>
@@ -55,25 +54,35 @@ public static class RpcResultAdapter
     }
 
     /// <summary>
-    /// 异常结果
+    ///     认证失败结果
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public static TResult AuthFail<TResult>(string message = "认证失败")
+    {
+        return DataResult.AdapterAuthFail(message).Adapt<TResult>();
+    }
+
+    /// <summary>
+    ///     校验失败结果
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public static TResult ValidateFail<TResult>(string message = "校验失败")
+    {
+        return DataResult.AdapterValidateFail(message).Adapt<TResult>();
+    }
+
+    /// <summary>
+    ///     异常结果
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <param name="exception"></param>
     /// <returns></returns>
     public static TResult Exception<TResult>(Exception exception)
     {
-        return DataResult.AdapterException(exception, ResultStatus.Exception, exception.Message).Adapt<TResult>();
-    }
-
-    /// <summary>
-    /// 异常结果
-    /// </summary>
-    /// <typeparam name="TResult"></typeparam>
-    /// <typeparam name="TData"></typeparam>
-    /// <param name="exception"></param>
-    /// <returns></returns>
-    public static TResult Exception<TResult, TData>(Exception exception)
-    {
-        return DataResult.AdapterException<TData>(exception, ResultStatus.Exception, exception.Message).Adapt<TResult>();
+        return DataResult.AdapterException(exception, message: exception.Message).Adapt<TResult>();
     }
 }

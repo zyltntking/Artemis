@@ -47,16 +47,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Protos\Artemis.Protos.Common\Artemis.Protos.Common.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.15"/>
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.15" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.1"/>
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.1" />
 	</ItemGroup>
 
 </Project>

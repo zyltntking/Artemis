@@ -1,6 +1,5 @@
 ﻿using Grpc.Core;
 using Grpc.Core.Interceptors;
-using Mapster;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Extensions.Rpc;
@@ -46,11 +45,7 @@ public class FriendlyExceptionInterceptor : Interceptor
         {
             Logger.LogInformation("格式化异常信息");
 
-            var result = RpcResultAdapter.Exception<TResponse>(exception);
-
-            var response = Activator.CreateInstance<TResponse>();
-
-            result.Adapt(response);
+            var response = RpcResultAdapter.Exception<TResponse>(exception);
 
             return response;
         }

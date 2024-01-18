@@ -1,4 +1,5 @@
 ﻿using Artemis.App.Identity.Services;
+using Artemis.App.Identity.Validator;
 using Artemis.Extensions.Rpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
@@ -56,6 +57,9 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<AddInLogInterceptor>();
             options.Interceptors.Add<FriendlyExceptionInterceptor>();
         }).AddJsonTranscoding();
+
+        builder.Services.AddValidator<SignUpRequestValidator>();
+
         builder.Services.AddGrpcReflection();
         builder.Services.AddGrpcSwagger();
         builder.Services.AddSwaggerGen(config =>
@@ -63,12 +67,12 @@ public class Startup : IWebAppStartup
             config.SwaggerDoc("v1",
                 new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
 
-            var filePath = Path.Combine(System.AppContext.BaseDirectory, "Artemis.Protos.Identity.xml");
+            var filePath = Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml");
             config.IncludeXmlComments(filePath);
-            config.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
+            config.IncludeGrpcXmlComments(filePath, true);
         });
 
-        builder.Services.AddArtemisAuthorization(new ArtemisAuthorizationOptions
+        builder.Services.AddArtemisAuthorization<RpcAuthorizationResultTransformer>(new ArtemisAuthorizationOptions
         {
             EnableAdvancedPolicy = false,
             HeaderTokenKey = Constants.HeaderTokenKey,

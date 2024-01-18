@@ -372,33 +372,23 @@ public static class DataResult
     }
 
     /// <summary>
-    /// 认证失败
+    ///     认证失败
     /// </summary>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
     public static NullResult AuthFail(string message = "认证失败")
     {
-        return new NullResult
-        {
-            Code = ResultStatus.AuthFail,
-            Message = message,
-            Error = null,
-            DateTime = DateTime.Now.ToLocalTime(),
-            Timestamp = DateTime.Now.ToUnixTimeStamp()
-        };
+        return GenerateNullResult(ResultStatus.AuthFail, message);
     }
 
     /// <summary>
-    ///     生成异常结果
+    ///     校验失败
     /// </summary>
-    /// <param name="exception">异常</param>
-    /// <param name="code">结果编码</param>
-    /// <param name="message">消息</param>
-    /// <returns>异常结果</returns>
-    public static DataResult<T> Exception<T>(Exception exception, int code = ResultStatus.Exception,
-        string message = "异常")
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    public static NullResult ValidateFail(string message = "校验失败")
     {
-        return GenerateResult<T>(code, message, default, exception);
+        return GenerateNullResult(ResultStatus.ValidateFail, message);
     }
 
     /// <summary>
@@ -408,10 +398,10 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static EmptyResult Exception(Exception exception, int code = ResultStatus.Exception,
+    public static NullResult Exception(Exception exception, int code = ResultStatus.Exception,
         string message = "异常")
     {
-        return GenerateEmptyResult(code, message, exception);
+        return GenerateNullResult(code, message, exception);
     }
 
     /// <summary>
@@ -475,6 +465,27 @@ public static class DataResult
         return result;
     }
 
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <param name="exception">异常信息</param>
+    /// <returns></returns>
+    private static NullResult GenerateNullResult(int code, string message, Exception? exception = null)
+    {
+        var result = new NullResult
+        {
+            Code = code,
+            Message = message,
+            Error = exception?.ToString(),
+            DateTime = DateTime.Now.ToLocalTime(),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+
+        return result;
+    }
+
     #endregion
 
     #region AdapterResult
@@ -523,33 +534,23 @@ public static class DataResult
     }
 
     /// <summary>
-    /// 认证失败
+    ///     认证失败
     /// </summary>
     /// <param name="message">失败消息</param>
     /// <returns></returns>
     public static NullAdapterResult AdapterAuthFail(string message = "认证失败")
     {
-        return new NullAdapterResult
-        {
-            Code = ResultStatus.AuthFail,
-            Message = message,
-            Error = null,
-            DateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-            Timestamp = DateTime.Now.ToUnixTimeStamp()
-        };
+        return GenerateNullAdapterResult(ResultStatus.AuthFail, message);
     }
 
     /// <summary>
-    ///     生成适应性异常结果
+    ///     校验失败
     /// </summary>
-    /// <param name="exception">异常</param>
-    /// <param name="code">结果编码</param>
-    /// <param name="message">消息</param>
-    /// <returns>异常结果</returns>
-    public static AdapterResult<T> AdapterException<T>(Exception exception, int code = ResultStatus.Exception,
-        string message = "异常")
+    /// <param name="message">失败消息</param>
+    /// <returns></returns>
+    public static NullAdapterResult AdapterValidateFail(string message = "校验失败")
     {
-        return GenerateAdapterResult<T>(code, message, default, exception);
+        return GenerateNullAdapterResult(ResultStatus.ValidateFail, message);
     }
 
     /// <summary>
@@ -559,10 +560,10 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static EmptyAdapterResult AdapterException(Exception exception, int code = ResultStatus.Exception,
+    public static NullAdapterResult AdapterException(Exception exception, int code = ResultStatus.Exception,
         string message = "异常")
     {
-        return GenerateEmptyAdapterResult(code, message, exception);
+        return GenerateNullAdapterResult(code, message, exception);
     }
 
     /// <summary>
@@ -626,13 +627,34 @@ public static class DataResult
         return result;
     }
 
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <param name="exception">异常信息</param>
+    /// <returns></returns>
+    private static NullAdapterResult GenerateNullAdapterResult(int code, string message, Exception? exception = null)
+    {
+        var result = new NullAdapterResult
+        {
+            Code = code,
+            Message = message,
+            Error = exception?.ToString(),
+            DateTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"),
+            Timestamp = DateTime.Now.ToUnixTimeStamp()
+        };
+
+        return result;
+    }
+
     #endregion
 }
 
 /// <summary>
 ///     结果状态
 /// </summary>
-public static class ResultStatus
+internal static class ResultStatus
 {
     /// <summary>
     ///     成功
@@ -645,9 +667,14 @@ public static class ResultStatus
     public const int Fail = 1;
 
     /// <summary>
-    /// 认证失败
+    ///     认证失败
     /// </summary>
     public const int AuthFail = 4;
+
+    /// <summary>
+    ///     校验失败
+    /// </summary>
+    public const int ValidateFail = 5;
 
     /// <summary>
     ///     异常
@@ -661,12 +688,12 @@ public static class ResultStatus
 public readonly record struct EmptyRecord;
 
 /// <summary>
-/// 无结果
+///     无结果
 /// </summary>
 public record NullResult : AbstractResult;
 
 /// <summary>
-/// 适应性无结果
+///     适应性无结果
 /// </summary>
 public record NullAdapterResult : AbstractAdapterResult;
 

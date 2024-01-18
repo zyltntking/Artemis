@@ -22,12 +22,12 @@ public static class Constants
 }
 
 /// <summary>
-/// 程序集内共享键
+///     程序集内共享键
 /// </summary>
 internal static class SharedKey
 {
     /// <summary>
-    /// 认证消息
+    ///     认证消息
     /// </summary>
     internal const string AuthMessage = nameof(AuthMessage);
 }

@@ -18,6 +18,21 @@ public static class WebExtensions
         this IServiceCollection serviceCollection,
         ArtemisAuthorizationOptions internalAuthorizationOptions)
     {
+        return serviceCollection.AddArtemisAuthorization<AuthorizationResultTransformer>(internalAuthorizationOptions);
+    }
+
+    /// <summary>
+    ///     添加Artemis认证鉴权服务
+    /// </summary>
+    /// <typeparam name="TAuthorizationMiddlewareResultHandler">认证结果处理程序</typeparam>
+    /// <param name="serviceCollection"></param>
+    /// <param name="internalAuthorizationOptions"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddArtemisAuthorization<TAuthorizationMiddlewareResultHandler>(
+        this IServiceCollection serviceCollection,
+        ArtemisAuthorizationOptions internalAuthorizationOptions)
+        where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
+    {
         serviceCollection.AddAuthorization(options =>
         {
             options.AddPolicy(IdentityPolicy.Anonymous,
@@ -56,7 +71,9 @@ public static class WebExtensions
                                 policy.Requirements.Add(new ClaimsRequirement(claimsBasedPolicyOption.Claims));
                             });
             }
-        }).AddSingleton<IAuthorizationMiddlewareResultHandler, AuthorizationResultTransformer>();
+        });
+
+        serviceCollection.AddSingleton<IAuthorizationMiddlewareResultHandler, TAuthorizationMiddlewareResultHandler>();
 
         serviceCollection.AddSingleton<IAuthorizationHandler, ArtemisIdentityHandler>();
 

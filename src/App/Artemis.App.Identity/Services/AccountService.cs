@@ -90,7 +90,7 @@ public class AccountService : Account.AccountBase
     }
 
     /// <summary>
-    /// 签入
+    ///     签入
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -126,7 +126,7 @@ public class AccountService : Account.AccountBase
     }
 
     /// <summary>
-    /// 签出
+    ///     签出
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -135,7 +135,7 @@ public class AccountService : Account.AccountBase
     [Authorize(IdentityPolicy.Token)]
     public override Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
 
         return Task.FromResult(RpcResultAdapter.Success<EmptyResponse>());
     }
