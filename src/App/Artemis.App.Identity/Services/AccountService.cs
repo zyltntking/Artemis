@@ -135,6 +135,8 @@ public class AccountService : Account.AccountBase
     [Authorize(IdentityPolicy.Token)]
     public override Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
     {
+        throw new NotImplementedException();
+
         return Task.FromResult(RpcResultAdapter.Success<EmptyResponse>());
     }
 

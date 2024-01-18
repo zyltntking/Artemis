@@ -104,16 +104,6 @@
             认证中间件结果处理程序
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.DefaultHandler">
-            <summary>
-            默认处理程序
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.#ctor">
-            <summary>
-            构造
-            </summary>
-        </member>
         <member name="M:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
             <summary>
             Evaluates the authorization requirement and processes the authorization result.

@@ -48,9 +48,9 @@ public class MessageValidationInterceptor : Interceptor
     {
         Logger.LogInformation("验证请求消息");
 
-        var result = await base.UnaryServerHandler(request, context, continuation);
+        var response = await base.UnaryServerHandler(request, context, continuation);
 
-        return result;
+        return response;
     }
 
     /// <summary>

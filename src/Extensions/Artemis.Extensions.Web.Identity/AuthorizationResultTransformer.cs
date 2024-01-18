@@ -10,19 +10,6 @@ namespace Artemis.Extensions.Web.Identity;
 /// </summary>
 public class AuthorizationResultTransformer : IAuthorizationMiddlewareResultHandler
 {
-    /// <summary>
-    /// 默认处理程序
-    /// </summary>
-    private IAuthorizationMiddlewareResultHandler DefaultHandler { get; }
-
-    /// <summary>
-    /// 构造
-    /// </summary>
-    public AuthorizationResultTransformer()
-    {
-        DefaultHandler = new AuthorizationMiddlewareResultHandler();
-    }
-
     #region Implementation of IAuthorizationMiddlewareResultHandler
 
     /// <summary>
