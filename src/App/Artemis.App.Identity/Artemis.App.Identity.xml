@@ -115,7 +115,8 @@
 				签入请求验证
 			</summary>
 		</member>
-		<member name="M:Artemis.App.Identity.Validator.SignUpRequestValidator.#ctor">
+		<member
+			name="M:Artemis.App.Identity.Validator.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
 			<summary>
 				验证器构造
 			</summary>

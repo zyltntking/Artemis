@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Artemis.Data.Core;
+using FluentValidation;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,7 +55,15 @@ public class MessageValidationInterceptor : Interceptor
 
             if (!validateResult.IsValid && validateResult.Errors.Any())
             {
-                var response = RpcResultAdapter.ValidateFail<TResponse>(validateResult.ToString());
+                var dictionary = new Dictionary<string, List<string>>();
+
+                foreach (var error in validateResult.Errors)
+                    if (dictionary.ContainsKey(error.PropertyName))
+                        dictionary[error.PropertyName].Add(error.ErrorMessage);
+                    else
+                        dictionary.Add(error.PropertyName, new List<string> { error.ErrorMessage });
+
+                var response = RpcResultAdapter.ValidateFail<TResponse>(dictionary.Serialize());
 
                 return Task.FromResult(response);
             }

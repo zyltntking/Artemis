@@ -1,4 +1,4 @@
-﻿namespace Artemis.Data.Core.Socket;
+﻿namespace Artemis.Data.Core.AscII;
 
 /// <summary>
 ///     ASCII控制

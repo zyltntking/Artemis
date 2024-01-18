@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Artemis.Data.Core.Socket;
+namespace Artemis.Data.Core.AscII;
 
 /// <summary>
 ///     Ascii显示字符

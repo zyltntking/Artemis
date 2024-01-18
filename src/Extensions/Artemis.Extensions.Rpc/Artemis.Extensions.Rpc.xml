@@ -195,15 +195,6 @@
 			<param name="exception"></param>
 			<returns></returns>
 		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Exception``2(System.Exception)">
-			<summary>
-				异常结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<typeparam name="TData"></typeparam>
-			<param name="exception"></param>
-			<returns></returns>
-		</member>
 		<member name="T:Artemis.Extensions.Rpc.WebExtensions">
 			<summary>
 				Web扩展

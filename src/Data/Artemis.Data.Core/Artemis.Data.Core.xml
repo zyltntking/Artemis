@@ -5,6 +5,485 @@
 		<name>Artemis.Data.Core</name>
 	</assembly>
 	<members>
+		<member name="T:Artemis.Data.Core.AscII.AsciiCharacter">
+			<summary>
+				Ascii显示字符
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.AscII.AsciiCharacter.CharacterRange">
+			<summary>
+				字符范围
+			</summary>
+			<remarks>0x20 space</remarks>
+		</member>
+		<member name="P:Artemis.Data.Core.AscII.AsciiCharacter.DigitRange">
+			<summary>
+				数字范围
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.AscII.AsciiCharacter.UpperCaseRange">
+			<summary>
+				大写字母范围
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.AscII.AsciiCharacter.LowerCaseRange">
+			<summary>
+				小写字母范围
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsCharacter(System.Byte,System.Boolean)">
+			<summary>
+				编码是否为可打印字符
+			</summary>
+			<param name="code">字节码</param>
+			<param name="includeSpace">是否包括空格</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsCharacter(System.Char,System.Boolean)">
+			<summary>
+				字符是否是可打印字符
+			</summary>
+			<param name="character">字符</param>
+			<param name="includeSpace">是否包括空格</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsDigit(System.Byte)">
+			<summary>
+				编码是否是数字
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsDigit(System.Char)">
+			<summary>
+				字符是否是数字
+			</summary>
+			<param name="character">字符</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsUpperCase(System.Byte)">
+			<summary>
+				编码是否是大写字母
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsUpperCase(System.Char)">
+			<summary>
+				字符是否是大写字母
+			</summary>
+			<param name="character">字符</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLowerCase(System.Byte)">
+			<summary>
+				编码是否是小写字母
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLowerCase(System.Char)">
+			<summary>
+				字符是否是小写字母
+			</summary>
+			<param name="character">字符</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLetter(System.Byte)">
+			<summary>
+				编码是否是字母
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLetter(System.Char)">
+			<summary>
+				字符是否是字母
+			</summary>
+			<param name="character">字符</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLetterOrDigit(System.Byte)">
+			<summary>
+				是否是字母和数字
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsLetterOrDigit(System.Char)">
+			<summary>
+				字符是否是字母和数字
+			</summary>
+			<param name="character">字符</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsNonAlphanumeric(System.Char)">
+			<summary>
+				字符是否是特殊字符
+			</summary>
+			<param name="character"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.IsNonAlphanumeric(System.Byte)">
+			<summary>
+				是否是特殊字符
+			</summary>
+			<param name="code">字节码</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomCharacters(System.Int32)">
+			<summary>
+				随机可打印字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomDigits(System.Int32)">
+			<summary>
+				随机数字字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomUpperCases(System.Int32)">
+			<summary>
+				随机大写字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomLowerCases(System.Int32)">
+			<summary>
+				随机小写字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomLetters(System.Int32)">
+			<summary>
+				随机字母字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomLetterOrDigits(System.Int32)">
+			<summary>
+				随机字母和数字字符串
+			</summary>
+			<param name="length"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiCharacter.RandomNonAlphanumeric(System.Int32)">
+			<summary>
+				随机特殊字符字符串
+			</summary>
+			<param name="length">长度</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Data.Core.AscII.AsciiControl">
+			<summary>
+				ASCII控制
+			</summary>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.NUL">
+			<summary>
+				空字符
+			</summary>
+			<remarks>NULL</remarks>
+			<value>^@</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SOH">
+			<summary>
+				标题开始
+			</summary>
+			<remarks>Start Of Headling</remarks>
+			<value>^A</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.STX">
+			<summary>
+				正文开始
+			</summary>
+			<remarks>Start Of Text</remarks>
+			<value>^B</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.ETX">
+			<summary>
+				正文结束
+			</summary>
+			<remarks>End Of Text</remarks>
+			<value>^C</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.EOT">
+			<summary>
+				传输结束
+			</summary>
+			<remarks>End Of Transmission</remarks>
+			<value>^D</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.ENQ">
+			<summary>
+				请求
+			</summary>
+			<remarks>Enquiry</remarks>
+			<value>^E</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.ACK">
+			<summary>
+				回应/响应/收到通知
+			</summary>
+			<remarks>Acknowledge</remarks>
+			<value>^F</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.BEL">
+			<summary>
+				响铃
+			</summary>
+			<remarks>Bell</remarks>
+			<value>^G</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.BS">
+			<summary>
+				退格
+			</summary>
+			<remarks>Backspace</remarks>
+			<value>^H</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.HT">
+			<summary>
+				水平制表符
+			</summary>
+			<remarks>Horizontal Tab</remarks>
+			<value>^I</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.LF">
+			<summary>
+				换行键
+			</summary>
+			<remarks>Line Feed</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.NL" />
+			<value>^J</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.NL">
+			<summary>
+				换行键
+			</summary>
+			<remarks>New Line</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.LF" />
+			<value>^J</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.VT">
+			<summary>
+				垂直制表符
+			</summary>
+			<remarks>Vertical Tab</remarks>
+			<value>^K</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.FF">
+			<summary>
+				换页键
+			</summary>
+			<remarks>Form Feed</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.NP" />
+			<value>^L</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.NP">
+			<summary>
+				换页键
+			</summary>
+			<remarks>New Page</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.FF" />
+			<value>^L</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.CR">
+			<summary>
+				回车键
+			</summary>
+			<remarks>Carriage Return</remarks>
+			<value>^M</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SO">
+			<summary>
+				不用切换
+			</summary>
+			<remarks>Shift Out</remarks>
+			<value>^N</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SI">
+			<summary>
+				启用切换
+			</summary>
+			<remarks>Shift In</remarks>
+			<value>^O</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DLE">
+			<summary>
+				数据链路转义
+			</summary>
+			<remarks>Data Link Escape</remarks>
+			<value>^P</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DC1">
+			<summary>
+				设备控制1
+			</summary>
+			<remarks>Device Control 1</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.XON" />
+			<value>^Q</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.XON">
+			<summary>
+				传输开始
+			</summary>
+			<remarks>Transmission O</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.DC1" />
+			<value>^Q</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DC2">
+			<summary>
+				设备控制2
+			</summary>
+			<remarks>Device Control 2</remarks>
+			<value>^R</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DC3">
+			<summary>
+				设备控制3
+			</summary>
+			<remarks>Device Control 3</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.XOFF" />
+			<value>^S</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.XOFF">
+			<summary>
+				传输中断
+			</summary>
+			<remarks>Transmission Off</remarks>
+			<see cref="F:Artemis.Data.Core.AscII.AsciiControl.DC3" />
+			<value>^S</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DC4">
+			<summary>
+				设备控制4
+			</summary>
+			<remarks>Device Control 3</remarks>
+			<value>^T</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.NAK">
+			<summary>
+				无响应/非正常响应/拒绝接收
+			</summary>
+			<remarks>Negative Acknowledge</remarks>
+			<value>^U</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SYN">
+			<summary>
+				同步空闲
+			</summary>
+			<remarks>Synchronous Idle</remarks>
+			<value>^V</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.ETB">
+			<summary>
+				传输块结束/块传输终止
+			</summary>
+			<remarks>End of Transmission Block</remarks>
+			<value>^W</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.CAN">
+			<summary>
+				取消
+			</summary>
+			<remarks>Cancel</remarks>
+			<value>^X</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.EM">
+			<summary>
+				已到介质末端/介质存储已满/介质中断
+			</summary>
+			<remarks>End of Medium</remarks>
+			<value>^Y</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SUB">
+			<summary>
+				替补/替换
+			</summary>
+			<remarks>Substitute</remarks>
+			<value>^Z</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.ESC">
+			<summary>
+				逃离/取消
+			</summary>
+			<remarks>Escape</remarks>
+			<value>^[</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.FS">
+			<summary>
+				文件分割符
+			</summary>
+			<remarks>File Separator</remarks>
+			<value>^\</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.GS">
+			<summary>
+				组分隔符/分组符
+			</summary>
+			<remarks>Group Separator</remarks>
+			<value>^]</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.RS">
+			<summary>
+				记录分离符
+			</summary>
+			<remarks>Record Separator</remarks>
+			<value>^^</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.US">
+			<summary>
+				单元分隔符
+			</summary>
+			<remarks>Unit Separator</remarks>
+			<value>^_</value>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.SP">
+			<summary>
+				空格
+			</summary>
+			<remarks>Space</remarks>
+		</member>
+		<member name="F:Artemis.Data.Core.AscII.AsciiControl.DEL">
+			<summary>
+				删除
+			</summary>
+			<remarks>Delete</remarks>
+			<value>^?</value>
+		</member>
+		<member name="T:Artemis.Data.Core.AscII.AsciiUtility">
+			<summary>
+				Ascii工具
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiUtility.IsContainLowerCase(System.String)">
+			<summary>
+				是否包含小写字母
+			</summary>
+			<param name="input">输入字符串</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiUtility.IsContainUpperCase(System.String)">
+			<summary>
+				是否包含大写字母
+			</summary>
+			<param name="input"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.AscII.AsciiUtility.IsContainNumber(System.String)">
+			<summary>
+				是否包含数字
+			</summary>
+			<param name="input"></param>
+			<returns></returns>
+		</member>
 		<member name="T:Artemis.Data.Core.IAttachResult`2">
 			<summary>
 				结果数据附加集合
@@ -426,15 +905,6 @@
 			<param name="message">失败消息</param>
 			<returns></returns>
 		</member>
-		<member name="M:Artemis.Data.Core.DataResult.Exception``1(System.Exception,System.Int32,System.String)">
-			<summary>
-				生成异常结果
-			</summary>
-			<param name="exception">异常</param>
-			<param name="code">结果编码</param>
-			<param name="message">消息</param>
-			<returns>异常结果</returns>
-		</member>
 		<member name="M:Artemis.Data.Core.DataResult.Exception(System.Exception,System.Int32,System.String)">
 			<summary>
 				生成异常结果
@@ -458,6 +928,15 @@
 		<member name="M:Artemis.Data.Core.DataResult.GenerateEmptyResult(System.Int32,System.String,System.Exception)">
 			<summary>
 				生成空数据结果
+			</summary>
+			<param name="code">结果编码</param>
+			<param name="message">结果消息</param>
+			<param name="exception">异常信息</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.GenerateNullResult(System.Int32,System.String,System.Exception)">
+			<summary>
+				生成无数据结果
 			</summary>
 			<param name="code">结果编码</param>
 			<param name="message">结果消息</param>
@@ -509,15 +988,6 @@
 			<param name="message">失败消息</param>
 			<returns></returns>
 		</member>
-		<member name="M:Artemis.Data.Core.DataResult.AdapterException``1(System.Exception,System.Int32,System.String)">
-			<summary>
-				生成适应性异常结果
-			</summary>
-			<param name="exception">异常</param>
-			<param name="code">结果编码</param>
-			<param name="message">消息</param>
-			<returns>异常结果</returns>
-		</member>
 		<member name="M:Artemis.Data.Core.DataResult.AdapterException(System.Exception,System.Int32,System.String)">
 			<summary>
 				生成适应性异常结果
@@ -542,6 +1012,15 @@
 		<member name="M:Artemis.Data.Core.DataResult.GenerateEmptyAdapterResult(System.Int32,System.String,System.Exception)">
 			<summary>
 				生成空数据结果
+			</summary>
+			<param name="code">结果编码</param>
+			<param name="message">结果消息</param>
+			<param name="exception">异常信息</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Data.Core.DataResult.GenerateNullAdapterResult(System.Int32,System.String,System.Exception)">
+			<summary>
+				生成无数据结果
 			</summary>
 			<param name="code">结果编码</param>
 			<param name="message">结果消息</param>
@@ -3397,459 +3876,6 @@
 			<summary>
 				修补内容
 			</summary>
-		</member>
-		<member name="T:Artemis.Data.Core.Socket.AsciiCharacter">
-			<summary>
-				Ascii显示字符
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.Socket.AsciiCharacter.CharacterRange">
-			<summary>
-				字符范围
-			</summary>
-			<remarks>0x20 space</remarks>
-		</member>
-		<member name="P:Artemis.Data.Core.Socket.AsciiCharacter.DigitRange">
-			<summary>
-				数字范围
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.Socket.AsciiCharacter.UpperCaseRange">
-			<summary>
-				大写字母范围
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.Socket.AsciiCharacter.LowerCaseRange">
-			<summary>
-				小写字母范围
-			</summary>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsCharacter(System.Byte,System.Boolean)">
-			<summary>
-				编码是否为可打印字符
-			</summary>
-			<param name="code">字节码</param>
-			<param name="includeSpace">是否包括空格</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsCharacter(System.Char,System.Boolean)">
-			<summary>
-				字符是否是可打印字符
-			</summary>
-			<param name="character">字符</param>
-			<param name="includeSpace">是否包括空格</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsDigit(System.Byte)">
-			<summary>
-				编码是否是数字
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsDigit(System.Char)">
-			<summary>
-				字符是否是数字
-			</summary>
-			<param name="character">字符</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsUpperCase(System.Byte)">
-			<summary>
-				编码是否是大写字母
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsUpperCase(System.Char)">
-			<summary>
-				字符是否是大写字母
-			</summary>
-			<param name="character">字符</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLowerCase(System.Byte)">
-			<summary>
-				编码是否是小写字母
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLowerCase(System.Char)">
-			<summary>
-				字符是否是小写字母
-			</summary>
-			<param name="character">字符</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetter(System.Byte)">
-			<summary>
-				编码是否是字母
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetter(System.Char)">
-			<summary>
-				字符是否是字母
-			</summary>
-			<param name="character">字符</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetterOrDigit(System.Byte)">
-			<summary>
-				是否是字母和数字
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsLetterOrDigit(System.Char)">
-			<summary>
-				字符是否是字母和数字
-			</summary>
-			<param name="character">字符</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsNonAlphanumeric(System.Char)">
-			<summary>
-				字符是否是特殊字符
-			</summary>
-			<param name="character"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.IsNonAlphanumeric(System.Byte)">
-			<summary>
-				是否是特殊字符
-			</summary>
-			<param name="code">字节码</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomCharacters(System.Int32)">
-			<summary>
-				随机可打印字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomDigits(System.Int32)">
-			<summary>
-				随机数字字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomUpperCases(System.Int32)">
-			<summary>
-				随机大写字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLowerCases(System.Int32)">
-			<summary>
-				随机小写字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetters(System.Int32)">
-			<summary>
-				随机字母字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomLetterOrDigits(System.Int32)">
-			<summary>
-				随机字母和数字字符串
-			</summary>
-			<param name="length"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Data.Core.Socket.AsciiCharacter.RandomNonAlphanumeric(System.Int32)">
-			<summary>
-				随机特殊字符字符串
-			</summary>
-			<param name="length">长度</param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Data.Core.Socket.AsciiControl">
-			<summary>
-				ASCII控制
-			</summary>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.NUL">
-			<summary>
-				空字符
-			</summary>
-			<remarks>NULL</remarks>
-			<value>^@</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SOH">
-			<summary>
-				标题开始
-			</summary>
-			<remarks>Start Of Headling</remarks>
-			<value>^A</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.STX">
-			<summary>
-				正文开始
-			</summary>
-			<remarks>Start Of Text</remarks>
-			<value>^B</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.ETX">
-			<summary>
-				正文结束
-			</summary>
-			<remarks>End Of Text</remarks>
-			<value>^C</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.EOT">
-			<summary>
-				传输结束
-			</summary>
-			<remarks>End Of Transmission</remarks>
-			<value>^D</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.ENQ">
-			<summary>
-				请求
-			</summary>
-			<remarks>Enquiry</remarks>
-			<value>^E</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.ACK">
-			<summary>
-				回应/响应/收到通知
-			</summary>
-			<remarks>Acknowledge</remarks>
-			<value>^F</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.BEL">
-			<summary>
-				响铃
-			</summary>
-			<remarks>Bell</remarks>
-			<value>^G</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.BS">
-			<summary>
-				退格
-			</summary>
-			<remarks>Backspace</remarks>
-			<value>^H</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.HT">
-			<summary>
-				水平制表符
-			</summary>
-			<remarks>Horizontal Tab</remarks>
-			<value>^I</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.LF">
-			<summary>
-				换行键
-			</summary>
-			<remarks>Line Feed</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.NL" />
-			<value>^J</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.NL">
-			<summary>
-				换行键
-			</summary>
-			<remarks>New Line</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.LF" />
-			<value>^J</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.VT">
-			<summary>
-				垂直制表符
-			</summary>
-			<remarks>Vertical Tab</remarks>
-			<value>^K</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.FF">
-			<summary>
-				换页键
-			</summary>
-			<remarks>Form Feed</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.NP" />
-			<value>^L</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.NP">
-			<summary>
-				换页键
-			</summary>
-			<remarks>New Page</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.FF" />
-			<value>^L</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.CR">
-			<summary>
-				回车键
-			</summary>
-			<remarks>Carriage Return</remarks>
-			<value>^M</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SO">
-			<summary>
-				不用切换
-			</summary>
-			<remarks>Shift Out</remarks>
-			<value>^N</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SI">
-			<summary>
-				启用切换
-			</summary>
-			<remarks>Shift In</remarks>
-			<value>^O</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DLE">
-			<summary>
-				数据链路转义
-			</summary>
-			<remarks>Data Link Escape</remarks>
-			<value>^P</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DC1">
-			<summary>
-				设备控制1
-			</summary>
-			<remarks>Device Control 1</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.XON" />
-			<value>^Q</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.XON">
-			<summary>
-				传输开始
-			</summary>
-			<remarks>Transmission O</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.DC1" />
-			<value>^Q</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DC2">
-			<summary>
-				设备控制2
-			</summary>
-			<remarks>Device Control 2</remarks>
-			<value>^R</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DC3">
-			<summary>
-				设备控制3
-			</summary>
-			<remarks>Device Control 3</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.XOFF" />
-			<value>^S</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.XOFF">
-			<summary>
-				传输中断
-			</summary>
-			<remarks>Transmission Off</remarks>
-			<see cref="F:Artemis.Data.Core.Socket.AsciiControl.DC3" />
-			<value>^S</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DC4">
-			<summary>
-				设备控制4
-			</summary>
-			<remarks>Device Control 3</remarks>
-			<value>^T</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.NAK">
-			<summary>
-				无响应/非正常响应/拒绝接收
-			</summary>
-			<remarks>Negative Acknowledge</remarks>
-			<value>^U</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SYN">
-			<summary>
-				同步空闲
-			</summary>
-			<remarks>Synchronous Idle</remarks>
-			<value>^V</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.ETB">
-			<summary>
-				传输块结束/块传输终止
-			</summary>
-			<remarks>End of Transmission Block</remarks>
-			<value>^W</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.CAN">
-			<summary>
-				取消
-			</summary>
-			<remarks>Cancel</remarks>
-			<value>^X</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.EM">
-			<summary>
-				已到介质末端/介质存储已满/介质中断
-			</summary>
-			<remarks>End of Medium</remarks>
-			<value>^Y</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SUB">
-			<summary>
-				替补/替换
-			</summary>
-			<remarks>Substitute</remarks>
-			<value>^Z</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.ESC">
-			<summary>
-				逃离/取消
-			</summary>
-			<remarks>Escape</remarks>
-			<value>^[</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.FS">
-			<summary>
-				文件分割符
-			</summary>
-			<remarks>File Separator</remarks>
-			<value>^\</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.GS">
-			<summary>
-				组分隔符/分组符
-			</summary>
-			<remarks>Group Separator</remarks>
-			<value>^]</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.RS">
-			<summary>
-				记录分离符
-			</summary>
-			<remarks>Record Separator</remarks>
-			<value>^^</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.US">
-			<summary>
-				单元分隔符
-			</summary>
-			<remarks>Unit Separator</remarks>
-			<value>^_</value>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.SP">
-			<summary>
-				空格
-			</summary>
-			<remarks>Space</remarks>
-		</member>
-		<member name="F:Artemis.Data.Core.Socket.AsciiControl.DEL">
-			<summary>
-				删除
-			</summary>
-			<remarks>Delete</remarks>
-			<value>^?</value>
 		</member>
 	</members>
 </doc>

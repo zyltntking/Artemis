@@ -1,5 +1,5 @@
 ﻿using System.Net.Sockets;
-using Artemis.Data.Core.Socket;
+using Artemis.Data.Core.AscII;
 
 namespace Artemis.Test.DataTest;
 

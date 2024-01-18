@@ -42,6 +42,14 @@ public class Startup : IWebAppStartup
 
                     npgsqlOption.CommandTimeout(30);
                 });
+            },
+            IdentityOptionsAction = options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
             }
         }, builder.Environment.IsDevelopment());
 

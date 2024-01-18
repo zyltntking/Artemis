@@ -1,4 +1,4 @@
-﻿using Artemis.Data.Core.Socket;
+﻿using Artemis.Data.Core.AscII;
 
 namespace Artemis.Test.DataTest.Core;
 

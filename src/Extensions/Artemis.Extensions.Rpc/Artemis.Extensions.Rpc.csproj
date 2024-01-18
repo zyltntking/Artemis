@@ -50,6 +50,7 @@
 	  <ProjectReference Include="..\..\Protos\Artemis.Protos.Common\Artemis.Protos.Common.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
+	  <ProjectReference Include="..\Artemis.Extensions.Web.Validators\Artemis.Extensions.Web.Validators.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">

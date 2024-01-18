@@ -105,22 +105,23 @@
 				认证中间件结果处理程序
 			</summary>
 		</member>
-		<member name="P:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.AuthMessage">
-			<summary>
-				认证消息
-			</summary>
-		</member>
 		<member
 			name="M:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
 			<summary>
 				Evaluates the authorization requirement and processes the authorization result.
 			</summary>
 			<param name="next">
-				The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not succeed.
+				The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
+				succeed.
 			</param>
 			<param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
 			<param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
 			<param name="authorizeResult">The result of authorization.</param>
+		</member>
+		<member name="P:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.AuthMessage">
+			<summary>
+				认证消息
+			</summary>
 		</member>
 		<member
 			name="M:Artemis.Extensions.Web.Identity.AuthorizationResultTransformer.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
