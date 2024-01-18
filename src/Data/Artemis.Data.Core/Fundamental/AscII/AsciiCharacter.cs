@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Artemis.Data.Core.AscII;
+namespace Artemis.Data.Core.Fundamental.AscII;
 
 /// <summary>
 ///     Ascii显示字符
@@ -177,20 +177,22 @@ public static class AsciiCharacter
     ///     字符是否是特殊字符
     /// </summary>
     /// <param name="character"></param>
+    /// <param name="includeSpace"></param>
     /// <returns></returns>
-    public static bool IsNonAlphanumeric(char character)
+    public static bool IsNonAlphanumeric(char character, bool includeSpace = false)
     {
-        return IsNonAlphanumeric((byte)character);
+        return IsNonAlphanumeric((byte)character, includeSpace);
     }
 
     /// <summary>
     ///     是否是特殊字符
     /// </summary>
     /// <param name="code">字节码</param>
+    /// <param name="includeSpace">是否包括空格</param>
     /// <returns></returns>
-    private static bool IsNonAlphanumeric(byte code)
+    private static bool IsNonAlphanumeric(byte code, bool includeSpace = false)
     {
-        return IsCharacter(code) && !IsLetterOrDigit(code);
+        return IsCharacter(code, includeSpace) && !IsLetterOrDigit(code);
     }
 
     #endregion

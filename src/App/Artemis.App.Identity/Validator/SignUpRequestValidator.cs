@@ -16,18 +16,26 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
     /// </summary>
     public SignUpRequestValidator(IOptions<IdentityOptions> options)
     {
-        var passwordOptions = options.Value.Password;
+        var password = options.Value.Password;
 
-        RuleFor(request => request.Password).NotEmpty().WithMessage("不能为空");
-        RuleFor(request => request.Password).MinimumLength(passwordOptions.RequiredLength)
-            .WithMessage($"必须大于或等于{passwordOptions.RequiredLength}个字符");
         RuleFor(request => request.Password)
-            .RequireLowerCase(passwordOptions.RequireLowercase)
-            .RequireUpperCase(passwordOptions.RequireUppercase)
-            .RequireDigit(passwordOptions.RequireDigit);
+            .NotEmptyOrWhiteSpace()
+            .RequireLength(password.RequiredLength)
+            .RequireDigit(password.RequireDigit)
+            .RequireUpperCase(password.RequireUppercase)
+            .RequireLowerCase(password.RequireLowercase)
+            .RequireNonAlphanumeric(password.RequireNonAlphanumeric)
+            .RequiredUniqueChars(password.RequiredUniqueChars);
 
-        RuleFor(request => request.UserName).NotEmpty().WithMessage("不能为空");
-        RuleFor(request => request.PhoneNumber).NotEmpty().WithMessage("不能为空");
-        RuleFor(request => request.Email).EmailAddress().WithMessage("不是有效的电子邮件地址");
+        RuleFor(request => request.UserName)
+            .NotEmptyOrWhiteSpace();
+
+        RuleFor(request => request.PhoneNumber)
+            .ShouldBePhone()
+            .When(request => !string.IsNullOrWhiteSpace(request.PhoneNumber));
+
+        RuleFor(request => request.Email)
+            .ShouldBeEmail()
+            .When(request => !string.IsNullOrWhiteSpace(request.Email));
     }
 }

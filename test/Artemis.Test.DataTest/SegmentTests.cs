@@ -1,5 +1,4 @@
-﻿using System.Net.Sockets;
-using Artemis.Data.Core.AscII;
+﻿using System.Text.RegularExpressions;
 
 namespace Artemis.Test.DataTest;
 
@@ -11,12 +10,11 @@ public class SegmentTests
     [Fact]
     public void Test()
     {
-        var bb = Convert.FromBase64String("AQUAAP8AjDo=");
+        var regex = new Regex(
+            @"^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[01256789]))\d{8}$");
 
-        var str = AsciiCharacter.RandomNonAlphanumeric(8);
+        var input = "13888888888";
 
-        var client = new TcpClient();
-
-        var stream = client.GetStream();
+        var bb = regex.IsMatch(input);
     }
 }

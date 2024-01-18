@@ -1,4 +1,4 @@
-﻿namespace Artemis.Data.Core.AscII;
+﻿namespace Artemis.Data.Core.Fundamental.AscII;
 
 /// <summary>
 ///     ASCII控制

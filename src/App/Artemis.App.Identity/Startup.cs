@@ -50,6 +50,7 @@ public class Startup : IWebAppStartup
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
+                options.Password.RequiredUniqueChars = 1;
             }
         }, builder.Environment.IsDevelopment());
 

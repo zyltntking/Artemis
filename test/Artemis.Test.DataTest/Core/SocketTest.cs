@@ -1,4 +1,4 @@
-﻿using Artemis.Data.Core.AscII;
+﻿using Artemis.Data.Core.Fundamental.AscII;
 
 namespace Artemis.Test.DataTest.Core;
 
