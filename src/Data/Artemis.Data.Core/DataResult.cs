@@ -345,9 +345,18 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>成功结果</returns>
-    public static EmptyResult Success(string message = "成功")
+    public static EmptyResult EmptySuccess(string message = "成功")
     {
         return GenerateEmptyResult(ResultStatus.Success, message);
+    }
+
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <returns></returns>
+    public static NullResult NullSuccess(string message = "成功")
+    {
+        return GenerateNullResult(ResultStatus.Success, message);
     }
 
     /// <summary>
@@ -366,9 +375,18 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>失败结果</returns>
-    public static EmptyResult Fail(string message = "失败")
+    public static EmptyResult EmptyFail(string message = "失败")
     {
         return GenerateEmptyResult(ResultStatus.Fail, message);
+    }
+
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <returns></returns>
+    public static NullResult NullFail(string message = "失败")
+    {
+        return GenerateNullResult(ResultStatus.Fail, message);
     }
 
     /// <summary>
@@ -398,7 +416,39 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static NullResult Exception(Exception exception, int code = ResultStatus.Exception,
+    public static DataResult<T> Exception<T>(
+        Exception exception,
+        int code = ResultStatus.Exception,
+        string message = "异常")
+    {
+        return GenerateResult<T>(code, message, default, exception);
+    }
+
+    /// <summary>
+    ///     生成异常结果
+    /// </summary>
+    /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <returns></returns>
+    public static EmptyResult EmptyException(
+        Exception exception,
+        int code = ResultStatus.Exception,
+        string message = "异常")
+    {
+        return GenerateEmptyResult(code, message, exception);
+    }
+
+    /// <summary>
+    ///     生成异常结果
+    /// </summary>
+    /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <returns></returns>
+    public static NullResult NullException(
+        Exception exception,
+        int code = ResultStatus.Exception,
         string message = "异常")
     {
         return GenerateNullResult(code, message, exception);
@@ -413,7 +463,10 @@ public static class DataResult
     /// <param name="data">结果数据</param>
     /// <param name="exception"></param>
     /// <returns>数据结果</returns>
-    private static DataResult<T> GenerateResult<T>(int code, string message, T? data = default,
+    private static DataResult<T> GenerateResult<T>(
+        int code,
+        string message,
+        T? data = default,
         Exception? exception = null)
     {
         var result = new DataResult<T>
@@ -443,7 +496,10 @@ public static class DataResult
     /// <param name="message">结果消息</param>
     /// <param name="exception">异常信息</param>
     /// <returns></returns>
-    private static EmptyResult GenerateEmptyResult(int code, string message, Exception? exception = null)
+    private static EmptyResult GenerateEmptyResult(
+        int code,
+        string message,
+        Exception? exception = null)
     {
         var result = new EmptyResult
         {
@@ -472,7 +528,10 @@ public static class DataResult
     /// <param name="message">结果消息</param>
     /// <param name="exception">异常信息</param>
     /// <returns></returns>
-    private static NullResult GenerateNullResult(int code, string message, Exception? exception = null)
+    private static NullResult GenerateNullResult(
+        int code,
+        string message,
+        Exception? exception = null)
     {
         var result = new NullResult
         {
@@ -507,9 +566,18 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>成功结果</returns>
-    public static EmptyAdapterResult AdapterSuccess(string message = "成功")
+    public static EmptyAdapterResult AdapterEmptySuccess(string message = "成功")
     {
         return GenerateEmptyAdapterResult(ResultStatus.Success, message);
+    }
+
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <returns></returns>
+    public static NullAdapterResult AdapterNullSuccess(string message = "成功")
+    {
+        return GenerateNullAdapterResult(ResultStatus.Success, message);
     }
 
     /// <summary>
@@ -528,9 +596,18 @@ public static class DataResult
     /// </summary>
     /// <param name="message">消息</param>
     /// <returns>失败结果</returns>
-    public static EmptyAdapterResult AdapterFail(string message = "失败")
+    public static EmptyAdapterResult AdapterEmptyFail(string message = "失败")
     {
         return GenerateEmptyAdapterResult(ResultStatus.Fail, message);
+    }
+
+    /// <summary>
+    ///     生成无数据结果
+    /// </summary>
+    /// <returns></returns>
+    public static NullAdapterResult AdapterNullFail(string message = "失败")
+    {
+        return GenerateNullAdapterResult(ResultStatus.Fail, message);
     }
 
     /// <summary>
@@ -560,7 +637,39 @@ public static class DataResult
     /// <param name="code">结果编码</param>
     /// <param name="message">结果消息</param>
     /// <returns></returns>
-    public static NullAdapterResult AdapterException(Exception exception, int code = ResultStatus.Exception,
+    public static AdapterResult<T> AdapterException<T>(
+        Exception exception,
+        int code = ResultStatus.Exception,
+        string message = "异常")
+    {
+        return GenerateAdapterResult<T>(code, message, default, exception);
+    }
+
+    /// <summary>
+    ///     生成适应性异常结果
+    /// </summary>
+    /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <returns></returns>
+    public static EmptyAdapterResult AdapterEmptyException(
+        Exception exception,
+        int code = ResultStatus.Exception,
+        string message = "异常")
+    {
+        return GenerateEmptyAdapterResult(code, message, exception);
+    }
+
+    /// <summary>
+    ///     生成适应性异常结果
+    /// </summary>
+    /// <param name="exception">异常</param>
+    /// <param name="code">结果编码</param>
+    /// <param name="message">结果消息</param>
+    /// <returns></returns>
+    public static NullAdapterResult AdapterNullException(
+        Exception exception,
+        int code = ResultStatus.Exception,
         string message = "异常")
     {
         return GenerateNullAdapterResult(code, message, exception);
@@ -575,7 +684,10 @@ public static class DataResult
     /// <param name="data">结果数据</param>
     /// <param name="exception"></param>
     /// <returns>数据结果</returns>
-    private static AdapterResult<T> GenerateAdapterResult<T>(int code, string message, T? data = default,
+    private static AdapterResult<T> GenerateAdapterResult<T>(
+        int code,
+        string message,
+        T? data = default,
         Exception? exception = null)
     {
         var result = new AdapterResult<T>
@@ -605,7 +717,10 @@ public static class DataResult
     /// <param name="message">结果消息</param>
     /// <param name="exception">异常信息</param>
     /// <returns></returns>
-    private static EmptyAdapterResult GenerateEmptyAdapterResult(int code, string message, Exception? exception = null)
+    private static EmptyAdapterResult GenerateEmptyAdapterResult(
+        int code,
+        string message,
+        Exception? exception = null)
     {
         var result = new EmptyAdapterResult
         {
@@ -634,7 +749,10 @@ public static class DataResult
     /// <param name="message">结果消息</param>
     /// <param name="exception">异常信息</param>
     /// <returns></returns>
-    private static NullAdapterResult GenerateNullAdapterResult(int code, string message, Exception? exception = null)
+    private static NullAdapterResult GenerateNullAdapterResult(
+        int code,
+        string message,
+        Exception? exception = null)
     {
         var result = new NullAdapterResult
         {

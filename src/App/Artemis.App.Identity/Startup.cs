@@ -1,8 +1,8 @@
 ﻿using Artemis.App.Identity.Services;
-using Artemis.App.Identity.Validator;
 using Artemis.Extensions.Rpc;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Extensions.Web.Serilog;
+using Artemis.Extensions.Web.Validators;
 using Artemis.Services.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -67,7 +67,7 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<FriendlyExceptionInterceptor>();
         }).AddJsonTranscoding();
 
-        builder.Services.AddValidator<SignUpRequestValidator>();
+        builder.Services.AddValidators();
 
         builder.Services.AddGrpcReflection();
         builder.Services.AddGrpcSwagger();
@@ -86,7 +86,9 @@ public class Startup : IWebAppStartup
             EnableAdvancedPolicy = false,
             HeaderTokenKey = Constants.HeaderTokenKey,
             CacheTokenPrefix = Constants.CacheTokenPrefix,
-            Expire = 604800
+            UserMapTokenPrefix = Constants.UserMapTokenPrefix,
+            Expire = 604800,
+            EnableMultiEnd = false
         });
 
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });

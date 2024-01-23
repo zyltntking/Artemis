@@ -88,43 +88,59 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
 
                     if (document is not null)
                     {
-                        httpContext.CacheToken(document);
+                        var continueHandler = true;
 
-                        if (requirement is TokenOnlyRequirement)
+                        // 处理不允许多终端的逻辑
+                        if (!Options.EnableMultiEnd)
                         {
-                            context.Succeed(requirement);
+                            var userMapToken = Cache.FetchUserMapToken($"{Options.UserMapTokenPrefix}:{document.UserId}");
 
-                            return Task.CompletedTask;
+                            if (userMapToken != headerToken)
+                            {
+                                continueHandler = false;
+                            }
                         }
 
-                        if (HandleRolesRequirement(requirement, document, ref failMessage))
+                        if (continueHandler)
                         {
-                            context.Succeed(requirement);
+                            httpContext.CacheToken(document);
 
-                            return Task.CompletedTask;
-                        }
+                            if (requirement is TokenOnlyRequirement)
+                            {
+                                context.Succeed(requirement);
+
+                                return Task.CompletedTask;
+                            }
+
+                            if (HandleRolesRequirement(requirement, document, ref failMessage))
+                            {
+                                context.Succeed(requirement);
+
+                                return Task.CompletedTask;
+                            }
 
 
-                        if (HandleClaimRequirement(requirement, document, ref failMessage))
-                        {
-                            context.Succeed(requirement);
+                            if (HandleClaimRequirement(requirement, document, ref failMessage))
+                            {
+                                context.Succeed(requirement);
 
-                            return Task.CompletedTask;
-                        }
+                                return Task.CompletedTask;
+                            }
 
 
-                        if (HandleActionNameClaimRequirement(requirement, httpContext, document, ref failMessage))
-                        {
-                            context.Succeed(requirement);
+                            if (HandleActionNameClaimRequirement(requirement, httpContext, document, ref failMessage))
+                            {
+                                context.Succeed(requirement);
 
-                            return Task.CompletedTask;
-                        }
+                                return Task.CompletedTask;
+                            }
 
-                        if (HandleRoutePathClaimRequirement(requirement, httpContext, document, ref failMessage))
-                        {
-                            context.Succeed(requirement);
+                            if (HandleRoutePathClaimRequirement(requirement, httpContext, document, ref failMessage))
+                            {
+                                context.Succeed(requirement);
 
-                            return Task.CompletedTask;
+                                return Task.CompletedTask;
+                            }
                         }
                     }
                     else

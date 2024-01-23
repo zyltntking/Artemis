@@ -6,7 +6,7 @@ import "google/protobuf/wrappers.proto";
 package artemis.protos.identity;
 
 // 空消息包
-message Empty{
+message EmptyPackage {
 
 }
 

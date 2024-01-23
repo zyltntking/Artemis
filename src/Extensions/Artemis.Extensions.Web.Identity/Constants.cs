@@ -11,9 +11,14 @@ public static class Constants
     public const string HeaderTokenKey = "Token";
 
     /// <summary>
-    ///     缓存Token前缀
+    ///     Token缓存键前缀
     /// </summary>
     public const string CacheTokenPrefix = "Artemis:Identity:Token";
+
+    /// <summary>
+    ///     用户对Token映射缓存键前缀
+    /// </summary>
+    public const string UserMapTokenPrefix = "Artemis:Identity:UserMapToken";
 
     /// <summary>
     ///     上下文项目键

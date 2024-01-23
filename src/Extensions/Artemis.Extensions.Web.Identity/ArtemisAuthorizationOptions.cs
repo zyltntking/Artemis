@@ -26,6 +26,11 @@ file interface IAuthorizationOptions
     ///     过期时间
     /// </summary>
     int Expire { get; set; }
+
+    /// <summary>
+    ///     是否启用多终端
+    /// </summary>
+    bool EnableMultiEnd { get; set; }
 }
 
 #endregion
@@ -53,9 +58,19 @@ public class InternalAuthorizationOptions : IAuthorizationOptions
     public required string CacheTokenPrefix { get; set; } = Constants.CacheTokenPrefix;
 
     /// <summary>
+    ///     用户对Token映射缓存键前缀
+    /// </summary>
+    public required string UserMapTokenPrefix { get; set; } = Constants.UserMapTokenPrefix;
+
+    /// <summary>
     ///     过期时间
     /// </summary>
     public int Expire { get; set; } = 0;
+
+    /// <summary>
+    ///     是否启用多终端
+    /// </summary>
+    public bool EnableMultiEnd { get; set; } = false;
 
     #endregion
 }

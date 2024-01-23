@@ -39,7 +39,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
 	  <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
 	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.60.0" />
 	  <PackageReference Include="Mapster" Version="7.4.0" />

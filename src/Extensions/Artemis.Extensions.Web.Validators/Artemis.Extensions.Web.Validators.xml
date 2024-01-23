@@ -1,102 +1,139 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Extensions.Web.Validators</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Extensions.Web.Validators.StringValidator">
-			<summary>
-				字符串验证器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.NotEmptyOrWhiteSpace``1(FluentValidation.IRuleBuilder{``0,System.String})">
-			<summary>
-				不能为空,空字符串或纯空格字符
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireLength``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
-			<summary>
-				必须大于或等于指定长度
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="length"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireDigit``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-			<summary>
-				必须包含数字字符
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="required"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireUpperCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-			<summary>
-				必须包含大写字母
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="required"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireLowerCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-			<summary>
-				必须包含小写字母
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="required"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireNonAlphanumeric``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-			<summary>
-				必须包含特殊字符
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="required"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.RequiredUniqueChars``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
-			<summary>
-				需要的字符种类(唯一字符数)
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="count"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldBeEmail``1(FluentValidation.IRuleBuilder{``0,System.String})">
-			<summary>
-				应当是有效的电子邮件地址
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldBePhone``1(FluentValidation.IRuleBuilder{``0,System.String},Artemis.Data.Core.Fundamental.PhoneMatcherMode)">
-			<summary>
-				应当是有效的手机号码
-			</summary>
-			<typeparam name="T"></typeparam>
-			<param name="ruleBuilder"></param>
-			<param name="mode"></param>
-			<returns></returns>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Extensions.Web.Validators</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Web.Validators.StringValidator">
+            <summary>
+                字符串验证器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldNotBeEmptyOrWhiteSpace``1(FluentValidation.IRuleBuilder{``0,System.String})">
+            <summary>
+                不能为空,空字符串或纯空格字符
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireLength``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
+            <summary>
+                必须大于或等于指定长度
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireDigit``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+            <summary>
+                必须包含数字字符
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="required"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireUpperCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+            <summary>
+                必须包含大写字母
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="required"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireLowerCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+            <summary>
+                必须包含小写字母
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="required"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequireNonAlphanumeric``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+            <summary>
+                必须包含特殊字符
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="required"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.RequiredUniqueChars``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
+            <summary>
+                需要的字符种类(唯一字符数)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldBePassword``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+                应当是有效的密码
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="requireLength"></param>
+            <param name="requireDigit"></param>
+            <param name="requireUppercase"></param>
+            <param name="requireLowercase"></param>
+            <param name="requireNonAlphanumeric"></param>
+            <param name="requiredUniqueChars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldBeEmail``1(FluentValidation.IRuleBuilder{``0,System.String})">
+            <summary>
+                应当是有效的电子邮件地址
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.StringValidator.ShouldBePhone``1(FluentValidation.IRuleBuilder{``0,System.String},Artemis.Data.Core.Fundamental.PhoneMatcherMode)">
+            <summary>
+                应当是有效的手机号码
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Web.Validators.WebExtensions">
+            <summary>
+                Web扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.WebExtensions.AddValidator(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+                添加验证器
+            </summary>
+            <param name="services"></param>
+            <param name="implementationType"></param>
+            <param name="lifetime"></param>
+            <exception cref="T:System.AggregateException"></exception>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.WebExtensions.AddValidator``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+                添加验证器
+            </summary>
+            <typeparam name="TValidator"></typeparam>
+            <param name="services"></param>
+            <param name="lifetime"></param>
+            <returns></returns>
+            <exception cref="T:System.AggregateException"></exception>
+        </member>
+        <member name="M:Artemis.Extensions.Web.Validators.WebExtensions.AddValidators(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+                添加当前域下所有验证器
+            </summary>
+            <param name="services"></param>
+            <param name="lifetime"></param>
+            <returns></returns>
+            <exception cref="T:System.AggregateException"></exception>
+        </member>
+    </members>
 </doc>

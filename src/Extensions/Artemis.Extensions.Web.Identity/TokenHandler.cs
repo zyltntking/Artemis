@@ -25,6 +25,55 @@ public static class TokenHandler
     }
 
     /// <summary>
+    /// 缓存字符串
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expire"></param>
+    private static void CacheString(this IDistributedCache cache, string key, string value, int expire)
+    {
+        if (expire <= 0)
+        {
+            cache.SetString(key, value);
+        }
+        else
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                SlidingExpiration = TimeSpan.FromSeconds(expire)
+            };
+
+            cache.SetString(key, value, options);
+        }
+    }
+
+    /// <summary>
+    /// 异步缓存字符串
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expire"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private static Task CacheStringAsync(this IDistributedCache cache, string key, string value, int expire,
+        CancellationToken cancellationToken = default)
+    {
+        if (expire <= 0)
+        {
+            return cache.SetStringAsync(key, value, cancellationToken);
+        }
+
+        var options = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = TimeSpan.FromSeconds(expire)
+        };
+
+        return cache.SetStringAsync(key, value, options, cancellationToken);
+    }
+
+    /// <summary>
     ///     缓存Token
     /// </summary>
     /// <param name="cache">缓存依赖</param>
@@ -38,19 +87,60 @@ public static class TokenHandler
         string cacheTokenKey,
         int expire = 0)
     {
-        if (expire <= 0)
-        {
-            cache.SetString(cacheTokenKey, document.Serialize());
-        }
-        else
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                SlidingExpiration = TimeSpan.FromSeconds(expire)
-            };
+        cache.CacheString(cacheTokenKey, document.Serialize(), expire);
+    }
 
-            cache.SetString(cacheTokenKey, document.Serialize(), options);
-        }
+    /// <summary>
+    ///     缓存Token
+    /// </summary>
+    /// <param name="cache">缓存依赖</param>
+    /// <param name="document">Token文档</param>
+    /// <param name="cacheTokenKey">缓存键</param>
+    /// <param name="expire">过期时间</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task CacheTokenAsync(
+        this IDistributedCache cache,
+        TokenDocument document,
+        string cacheTokenKey,
+        int expire = 0,
+        CancellationToken cancellationToken = default)
+    {
+        return cache.CacheStringAsync(cacheTokenKey, document.Serialize(), expire, cancellationToken);
+    }
+
+    /// <summary>
+    ///     缓存用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="token"></param>
+    /// <param name="expire"></param>
+    public static void CacheUserMapToken(
+        this IDistributedCache cache,
+        string cacheKey, 
+        string token, 
+        int expire = 0)
+    {
+        cache.CacheString(cacheKey, token, expire);
+    }
+
+    /// <summary>
+    ///     缓存用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="token"></param>
+    /// <param name="expire"></param>
+    /// <param name="cancellationToken"></param>
+    public static Task CacheUserMapTokenAsync(
+        this IDistributedCache cache,
+        string cacheKey,
+        string token,
+        int expire = 0,
+        CancellationToken cancellationToken = default)
+    {
+        return cache.CacheStringAsync(cacheKey, token, expire, cancellationToken);
     }
 
     /// <summary>
@@ -62,21 +152,10 @@ public static class TokenHandler
         this HttpContext context,
         TokenDocument document)
     {
-        if (context.Items.ContainsKey(Constants.ContextItemKey)) context.Items[Constants.ContextItemKey] = document;
+        if (context.Items.ContainsKey(Constants.ContextItemKey))
+            context.Items[Constants.ContextItemKey] = document;
 
         context.Items.Add(Constants.ContextItemKey, document);
-    }
-
-    /// <summary>
-    ///     移除缓存中的Token
-    /// </summary>
-    /// <param name="cache"></param>
-    /// <param name="cacheTokenKey"></param>
-    public static void RemoveToken(
-        this IDistributedCache cache,
-        string cacheTokenKey)
-    {
-        cache.Remove(cacheTokenKey);
     }
 
     /// <summary>
@@ -85,7 +164,8 @@ public static class TokenHandler
     /// <param name="context"></param>
     public static void RemoveToken(this HttpContext context)
     {
-        if (context.Items.ContainsKey(Constants.ContextItemKey)) context.Items.Remove(Constants.ContextItemKey);
+        if (context.Items.ContainsKey(Constants.ContextItemKey)) 
+            context.Items.Remove(Constants.ContextItemKey);
     }
 
     /// <summary>
@@ -108,6 +188,80 @@ public static class TokenHandler
         if (refreshToken) cache.Refresh(cacheTokenKey);
 
         return value.Deserialize<TokenDocument>();
+    }
+
+    /// <summary>
+    ///     获取Token
+    /// </summary>
+    /// <param name="cache">缓存依赖</param>
+    /// <param name="cacheTokenKey">缓存键</param>
+    /// <param name="refreshToken">是否刷新缓存</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static async Task<TokenDocument?> FetchTokenAsync(
+        this IDistributedCache cache,
+        string cacheTokenKey,
+        bool refreshToken = true,
+        CancellationToken cancellationToken = default)
+    {
+        var value = await cache.GetStringAsync(cacheTokenKey, cancellationToken);
+
+        if (value == null) 
+            return null;
+
+        // 刷新缓存
+        if (refreshToken) 
+            await cache.RefreshAsync(cacheTokenKey, cancellationToken);
+
+        return value.Deserialize<TokenDocument>();
+    }
+
+    /// <summary>
+    ///     获取用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="refreshToken"></param>
+    /// <returns></returns>
+    public static string? FetchUserMapToken(
+        this IDistributedCache cache,
+        string cacheKey,
+        bool refreshToken = true)
+    {
+        var value = cache.GetString(cacheKey);
+
+        if (value == null) return null;
+
+        // 刷新缓存
+        if (refreshToken) cache.Refresh(cacheKey);
+
+        return value;
+    }
+
+    /// <summary>
+    ///     获取用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="refreshToken"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static async Task<string?> FetchUserMapTokenAsync(
+        this IDistributedCache cache,
+        string cacheKey,
+        bool refreshToken = true,
+        CancellationToken cancellationToken = default)
+    {
+        var value = await cache.GetStringAsync(cacheKey, cancellationToken);
+
+        if (value == null) 
+            return null;
+
+        // 刷新缓存
+        if (refreshToken)
+            await cache.RefreshAsync(cacheKey, cancellationToken);
+
+        return value;
     }
 
     /// <summary>

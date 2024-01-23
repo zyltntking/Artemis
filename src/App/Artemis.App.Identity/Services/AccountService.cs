@@ -66,7 +66,7 @@ public class AccountService : Account.AccountBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签到")]
     [Authorize(IdentityPolicy.Anonymous)]
-    public override async Task<TokenResponse> SignIn(SingInRequest request, ServerCallContext context)
+    public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
         var (result, token) =
             await AccountManager.SignInAsync(request.UserSign, request.Password, context.CancellationToken);
@@ -75,9 +75,26 @@ public class AccountService : Account.AccountBase
         {
             var replyToken = token.GenerateTokenKey();
 
-            var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{replyToken}";
 
-            Cache.CacheToken(token, cacheKey, Options.Expire);
+            await Cache.CacheTokenAsync(token, cacheTokenKey, Options.Expire, context.CancellationToken);
+
+            // 不允许多终端登录处理
+            if (!Options.EnableMultiEnd)
+            {
+                var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{token.UserId}";
+
+                var oldToken = await Cache.FetchUserMapTokenAsync(userMapTokenKey, false, context.CancellationToken);
+
+                if (oldToken is not null)
+                {
+                    var cacheOldTokenKey = $"{Options.CacheTokenPrefix}:{oldToken}";
+
+                    await Cache.RemoveAsync(cacheOldTokenKey, context.CancellationToken);
+                }
+
+                await Cache.CacheUserMapTokenAsync(userMapTokenKey, replyToken, Options.Expire, context.CancellationToken);
+            }
 
             return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
             {
@@ -86,7 +103,7 @@ public class AccountService : Account.AccountBase
             });
         }
 
-        return RpcResultAdapter.Fail<TokenResponse>();
+        return RpcResultAdapter.Fail<TokenResponse>(result.Message);
     }
 
     /// <summary>
@@ -111,9 +128,17 @@ public class AccountService : Account.AccountBase
         {
             var replyToken = token.GenerateTokenKey();
 
-            var cacheKey = $"{Options.CacheTokenPrefix}:{replyToken}";
+            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{replyToken}";
 
-            Cache.CacheToken(token, cacheKey, Options.Expire);
+            await Cache.CacheTokenAsync(token, cacheTokenKey, Options.Expire, context.CancellationToken);
+
+            // 不允许多终端登录处理
+            if (!Options.EnableMultiEnd)
+            {
+                var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{token.UserId}";
+
+                await Cache.CacheUserMapTokenAsync(userMapTokenKey, replyToken, Options.Expire, context.CancellationToken);
+            }
 
             return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
             {
@@ -122,7 +147,7 @@ public class AccountService : Account.AccountBase
             });
         }
 
-        return RpcResultAdapter.Fail<TokenResponse>();
+        return RpcResultAdapter.Fail<TokenResponse>(result.Message);
     }
 
     /// <summary>
@@ -133,11 +158,34 @@ public class AccountService : Account.AccountBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签出")]
     [Authorize(IdentityPolicy.Token)]
-    public override Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
+    public override async Task<EmptyResponse> SignOut(EmptyPackage request, ServerCallContext context)
     {
-        //throw new NotImplementedException();
+        var token = context.RequestHeaders.Get(Options.HeaderTokenKey)?.Value;
 
-        return Task.FromResult(RpcResultAdapter.Success<EmptyResponse>());
+        if (token is not null)
+        {
+            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{token}";
+
+            // 不允许多终端登录处理
+            if (!Options.EnableMultiEnd)
+            {
+                var tokenDocument = await Cache.FetchTokenAsync(cacheTokenKey, false, context.CancellationToken);
+
+                if (tokenDocument is not null)
+                {
+                    var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{tokenDocument.UserId}";
+
+                    await Cache.RemoveAsync(userMapTokenKey, context.CancellationToken);
+                }
+            }
+
+            await Cache.RemoveAsync(cacheTokenKey, context.CancellationToken);
+
+
+            return RpcResultAdapter.Success<EmptyResponse>();
+        }
+
+        return RpcResultAdapter.Fail<EmptyResponse>();
     }
 
     #endregion

@@ -15,7 +15,7 @@ public static class StringValidator
     /// <typeparam name="T"></typeparam>
     /// <param name="ruleBuilder"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> NotEmptyOrWhiteSpace<T>(
+    public static IRuleBuilderOptions<T, string> ShouldNotBeEmptyOrWhiteSpace<T>(
         this IRuleBuilder<T, string> ruleBuilder)
     {
         return ruleBuilder.NotEmpty().WithMessage("不能为空,空字符串或纯空格字符");
@@ -28,7 +28,7 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="length"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequireLength<T>(
+    private static IRuleBuilderOptions<T, string> RequireLength<T>(
         this IRuleBuilder<T, string> ruleBuilder, int length)
     {
         return ruleBuilder.MinimumLength(length).WithMessage($"不得少于{length}个字符");
@@ -41,7 +41,7 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="required"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequireDigit<T>(
+    private static IRuleBuilderOptions<T, string> RequireDigit<T>(
         this IRuleBuilder<T, string> ruleBuilder,
         bool required = true)
     {
@@ -55,7 +55,7 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="required"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequireUpperCase<T>(
+    private static IRuleBuilderOptions<T, string> RequireUpperCase<T>(
         this IRuleBuilder<T, string> ruleBuilder,
         bool required = true)
     {
@@ -69,7 +69,7 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="required"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequireLowerCase<T>(
+    private static IRuleBuilderOptions<T, string> RequireLowerCase<T>(
         this IRuleBuilder<T, string> ruleBuilder,
         bool required = true)
     {
@@ -83,7 +83,7 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="required"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequireNonAlphanumeric<T>(
+    private static IRuleBuilderOptions<T, string> RequireNonAlphanumeric<T>(
         this IRuleBuilder<T, string> ruleBuilder,
         bool required = true)
     {
@@ -98,10 +98,41 @@ public static class StringValidator
     /// <param name="ruleBuilder"></param>
     /// <param name="count"></param>
     /// <returns></returns>
-    public static IRuleBuilderOptions<T, string> RequiredUniqueChars<T>(
-        this IRuleBuilder<T, string> ruleBuilder, int count)
+    private static IRuleBuilderOptions<T, string> RequiredUniqueChars<T>(
+        this IRuleBuilder<T, string> ruleBuilder,
+        int count)
     {
         return ruleBuilder.Must(input => AsciiUtility.UniqueCharsCount(input) >= count);
+    }
+
+    /// <summary>
+    ///     应当是有效的密码
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="ruleBuilder"></param>
+    /// <param name="requireLength"></param>
+    /// <param name="requireDigit"></param>
+    /// <param name="requireUppercase"></param>
+    /// <param name="requireLowercase"></param>
+    /// <param name="requireNonAlphanumeric"></param>
+    /// <param name="requiredUniqueChars"></param>
+    /// <returns></returns>
+    public static IRuleBuilderOptions<T, string> ShouldBePassword<T>(
+        this IRuleBuilder<T, string> ruleBuilder,
+        int requireLength,
+        bool requireDigit,
+        bool requireUppercase,
+        bool requireLowercase,
+        bool requireNonAlphanumeric,
+        int requiredUniqueChars)
+    {
+        return ruleBuilder.ShouldNotBeEmptyOrWhiteSpace()
+            .RequireLength(requireLength)
+            .RequireDigit(requireDigit)
+            .RequireUpperCase(requireUppercase)
+            .RequireLowerCase(requireLowercase)
+            .RequireNonAlphanumeric(requireNonAlphanumeric)
+            .RequiredUniqueChars(requiredUniqueChars);
     }
 
     /// <summary>

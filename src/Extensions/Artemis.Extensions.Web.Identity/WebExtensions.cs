@@ -12,13 +12,13 @@ public static class WebExtensions
     ///     添加Artemis认证鉴权服务
     /// </summary>
     /// <param name="serviceCollection"></param>
-    /// <param name="internalAuthorizationOptions"></param>
+    /// <param name="authorizationOptions"></param>
     /// <returns></returns>
     public static IServiceCollection AddArtemisAuthorization(
         this IServiceCollection serviceCollection,
-        ArtemisAuthorizationOptions internalAuthorizationOptions)
+        ArtemisAuthorizationOptions authorizationOptions)
     {
-        return serviceCollection.AddArtemisAuthorization<AuthorizationResultTransformer>(internalAuthorizationOptions);
+        return serviceCollection.AddArtemisAuthorization<AuthorizationResultTransformer>(authorizationOptions);
     }
 
     /// <summary>
@@ -26,11 +26,11 @@ public static class WebExtensions
     /// </summary>
     /// <typeparam name="TAuthorizationMiddlewareResultHandler">认证结果处理程序</typeparam>
     /// <param name="serviceCollection"></param>
-    /// <param name="internalAuthorizationOptions"></param>
+    /// <param name="authorizationOptions"></param>
     /// <returns></returns>
     public static IServiceCollection AddArtemisAuthorization<TAuthorizationMiddlewareResultHandler>(
         this IServiceCollection serviceCollection,
-        ArtemisAuthorizationOptions internalAuthorizationOptions)
+        ArtemisAuthorizationOptions authorizationOptions)
         where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
     {
         serviceCollection.AddAuthorization(options =>
@@ -54,17 +54,17 @@ public static class WebExtensions
             options.AddPolicy(IdentityPolicy.RoutePath,
                 policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
 
-            if (internalAuthorizationOptions.EnableAdvancedPolicy)
+            if (authorizationOptions.EnableAdvancedPolicy)
             {
-                if (internalAuthorizationOptions is { RolesBasedPolicyOptions: not null } &&
-                    internalAuthorizationOptions.RolesBasedPolicyOptions.Any())
-                    foreach (var rolesBasedPolicyOption in internalAuthorizationOptions.RolesBasedPolicyOptions)
+                if (authorizationOptions is { RolesBasedPolicyOptions: not null } &&
+                    authorizationOptions.RolesBasedPolicyOptions.Any())
+                    foreach (var rolesBasedPolicyOption in authorizationOptions.RolesBasedPolicyOptions)
                         options.AddPolicy(rolesBasedPolicyOption.Name,
                             policy => { policy.Requirements.Add(new RolesRequirement(rolesBasedPolicyOption.Roles)); });
 
-                if (internalAuthorizationOptions is { ClaimsBasedPolicyOptions: not null } &&
-                    internalAuthorizationOptions.ClaimsBasedPolicyOptions.Any())
-                    foreach (var claimsBasedPolicyOption in internalAuthorizationOptions.ClaimsBasedPolicyOptions)
+                if (authorizationOptions is { ClaimsBasedPolicyOptions: not null } &&
+                    authorizationOptions.ClaimsBasedPolicyOptions.Any())
+                    foreach (var claimsBasedPolicyOption in authorizationOptions.ClaimsBasedPolicyOptions)
                         options.AddPolicy(claimsBasedPolicyOption.Name,
                             policy =>
                             {
@@ -81,10 +81,12 @@ public static class WebExtensions
 
         serviceCollection.Configure<InternalAuthorizationOptions>(options =>
         {
-            options.EnableAdvancedPolicy = internalAuthorizationOptions.EnableAdvancedPolicy;
-            options.HeaderTokenKey = internalAuthorizationOptions.HeaderTokenKey;
-            options.CacheTokenPrefix = internalAuthorizationOptions.CacheTokenPrefix;
-            options.Expire = internalAuthorizationOptions.Expire;
+            options.EnableAdvancedPolicy = authorizationOptions.EnableAdvancedPolicy;
+            options.HeaderTokenKey = authorizationOptions.HeaderTokenKey;
+            options.CacheTokenPrefix = authorizationOptions.CacheTokenPrefix;
+            options.UserMapTokenPrefix = authorizationOptions.UserMapTokenPrefix;
+            options.Expire = authorizationOptions.Expire;
+            options.EnableMultiEnd = authorizationOptions.EnableMultiEnd;
         });
 
         return serviceCollection;

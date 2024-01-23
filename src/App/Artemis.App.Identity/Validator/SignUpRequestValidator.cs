@@ -19,16 +19,16 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
         var password = options.Value.Password;
 
         RuleFor(request => request.Password)
-            .NotEmptyOrWhiteSpace()
-            .RequireLength(password.RequiredLength)
-            .RequireDigit(password.RequireDigit)
-            .RequireUpperCase(password.RequireUppercase)
-            .RequireLowerCase(password.RequireLowercase)
-            .RequireNonAlphanumeric(password.RequireNonAlphanumeric)
-            .RequiredUniqueChars(password.RequiredUniqueChars);
+            .ShouldBePassword(
+                password.RequiredLength,
+                password.RequireDigit,
+                password.RequireUppercase,
+                password.RequireLowercase,
+                password.RequireNonAlphanumeric,
+                password.RequiredUniqueChars);
 
         RuleFor(request => request.UserName)
-            .NotEmptyOrWhiteSpace();
+            .ShouldNotBeEmptyOrWhiteSpace();
 
         RuleFor(request => request.PhoneNumber)
             .ShouldBePhone()
