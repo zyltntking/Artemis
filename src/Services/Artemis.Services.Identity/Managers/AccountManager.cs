@@ -242,13 +242,13 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     修改密码
     /// </summary>
-    /// <param name="userSign">用户名</param>
+    /// <param name="userId">用户标识</param>
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<SignResult> ChangePasswordAsync(
-        string userSign,
+        Guid userId,
         string oldPassword,
         string newPassword,
         CancellationToken cancellationToken = default)
@@ -268,22 +268,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             return result;
         }
 
-        var normalizeSign = UserStore.NormalizeKey(userSign);
-
-        var userNameQuery = UserStore.EntityQuery
-            .Where(item => item.NormalizedUserName == normalizeSign);
-
-        var emailQuery = UserStore.EntityQuery
-            .Where(item => item.NormalizedEmail == normalizeSign);
-
-        var phoneNumberQuery = UserStore.EntityQuery
-            .Where(item => item.NormalizedPhoneNumber == normalizeSign);
-
-        var user = await UserStore.EntityQuery
-            .Union(userNameQuery)
-            .Union(emailQuery)
-            .Union(phoneNumberQuery)
-            .FirstOrDefaultAsync(cancellationToken);
+        var user = await UserStore.KeyMatchQuery(userId).FirstOrDefaultAsync(cancellationToken);
 
         if (user is null)
         {
@@ -363,19 +348,28 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <summary>
     ///     批量修改密码
     /// </summary>
-    /// <param name="userIds">用户标识列表</param>
-    /// <param name="password">新密码</param>
+    /// <param name="packages">重置密码信息包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     public async Task<SignResult> ResetPasswordsAsync(
-        IEnumerable<Guid> userIds,
-        string password,
+        IEnumerable<KeyValuePair<Guid, string>> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var users = await UserStore.KeyMatchQuery(userIds)
-            .ToListAsync(cancellationToken);
+        var users = new List<ArtemisUser>();
+
+        foreach (var (userId, password) in packages)
+        {
+            var user = await UserStore
+                .KeyMatchQuery(userId)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (user is null) continue;
+
+            user.PasswordHash = Hash.ArtemisHash(password);
+            users.Add(user);
+        }
 
         var result = new SignResult
         {
@@ -390,8 +384,6 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             return result;
         }
 
-        foreach (var user in users) user.PasswordHash = Hash.ArtemisHash(password);
-
         var storeResult = await UserStore.UpdateAsync(users, cancellationToken);
 
         if (storeResult.Succeeded)
@@ -402,6 +394,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
         }
 
         return result;
+
     }
 
     #endregion

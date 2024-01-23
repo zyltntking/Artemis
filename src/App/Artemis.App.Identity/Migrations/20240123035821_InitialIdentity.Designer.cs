@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     [DbContext(typeof(ArtemisIdentityContext))]
-    [Migration("20240115084759_initialIdentity")]
-    partial class initialIdentity
+    [Migration("20240123035821_InitialIdentity")]
+    partial class InitialIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,10 +51,22 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(128)")
                         .HasComment("凭据值");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("创建时间,初始化后不再进行任何变更");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("删除时间,启用软删除时生效");
+
                     b.Property<string>("Description")
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("凭据描述");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("更新时间,初始为创建时间");
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisClaim");
@@ -62,6 +74,15 @@ namespace Artemis.App.Identity.Migrations
                     b.HasIndex("CheckStamp")
                         .IsUnique()
                         .HasDatabaseName("IX_ArtemisClaim_CheckStamp");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_DeletedAt");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisClaim_UpdatedAt");
 
                     b.HasIndex("ClaimType", "ClaimValue")
                         .HasDatabaseName("IX_ArtemisClaim_ClaimType_ClaimValue");
@@ -85,6 +106,14 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("并发锁");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("创建时间,初始化后不再进行任何变更");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("删除时间,启用软删除时生效");
+
                     b.Property<string>("Description")
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
@@ -102,12 +131,25 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(32)")
                         .HasComment("规范化角色名");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("更新时间,初始为创建时间");
+
                     b.HasKey("Id")
                         .HasName("PK_ArtemisRole");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisRole_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisRole_DeletedAt");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("IX_ArtemisRole_Name");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisRole_UpdatedAt");
 
                     b.ToTable("ArtemisRole", "identity", t =>
                         {
@@ -186,6 +228,14 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("并发锁");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("创建时间,初始化后不再进行任何变更");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("删除时间,启用软删除时生效");
+
                     b.Property<string>("Email")
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
@@ -243,6 +293,10 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("boolean")
                         .HasComment("是否允许双步认证");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("更新时间,初始为创建时间");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -251,6 +305,12 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisUser");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisUser_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisUser_DeletedAt");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("IX_ArtemisUser_Email");
@@ -261,6 +321,9 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("PhoneNumber")
                         .HasDatabaseName("IX_ArtemisUser_PhoneNumber");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisUser_UpdatedAt");
 
                     b.ToTable("ArtemisUser", "identity", t =>
                         {

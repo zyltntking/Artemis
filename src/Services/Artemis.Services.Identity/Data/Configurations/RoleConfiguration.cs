@@ -7,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     角色数据集配置
 /// </summary>
-public class RoleConfiguration : KeySlotModelConfiguration<ArtemisRole>
+public class RoleConfiguration : ModelConfiguration<ArtemisRole>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisRole>
 
@@ -48,6 +48,8 @@ public class RoleConfiguration : KeySlotModelConfiguration<ArtemisRole>
         builder.Property(role => role.Description)
             .HasMaxLength(128)
             .HasComment("角色描述");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
@@ -64,6 +66,8 @@ public class RoleConfiguration : KeySlotModelConfiguration<ArtemisRole>
         builder.HasIndex(role => role.NormalizedName)
             .HasDatabaseName($"IX_{TableName}_Name")
             .IsUnique();
+
+        MetaIndexConfigure(builder);
 
         // Each Role can have many associated RoleClaims
         builder.HasMany(role => role.RoleClaims)

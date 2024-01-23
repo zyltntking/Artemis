@@ -1,4 +1,5 @@
-﻿using Artemis.Services.Identity.Data.Configurations;
+﻿using Artemis.Data.Core;
+using Artemis.Services.Identity.Data.Configurations;
 using Artemis.Shared.Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace Artemis.Services.Identity.Data;
 ///     ArtemisRole
 /// </summary>
 [EntityTypeConfiguration(typeof(RoleConfiguration))]
-public class ArtemisRole : Role
+public class ArtemisRole : Role, IModelBase
 {
     /// <summary>
     ///     具备该角色的用户
@@ -24,4 +25,23 @@ public class ArtemisRole : Role
     ///     角色凭据映射
     /// </summary>
     public virtual ICollection<ArtemisRoleClaim> RoleClaims { get; } = new List<ArtemisRoleClaim>();
+
+    #region Implementation of IMateSlot
+
+    /// <summary>
+    ///     创建时间
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    /// <summary>
+    ///     更新时间
+    /// </summary>
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+    /// <summary>
+    ///     删除时间
+    /// </summary>
+    public DateTime? DeletedAt { get; set; }
+
+    #endregion
 }

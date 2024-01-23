@@ -7,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     用户数据集配置
 /// </summary>
-public class UserConfiguration : KeySlotModelConfiguration<ArtemisUser>
+public class UserConfiguration : ModelConfiguration<ArtemisUser>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisUser>
 
@@ -87,6 +87,8 @@ public class UserConfiguration : KeySlotModelConfiguration<ArtemisUser>
 
         builder.Property(user => user.AccessFailedCount)
             .HasComment("尝试错误数量");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
@@ -109,6 +111,8 @@ public class UserConfiguration : KeySlotModelConfiguration<ArtemisUser>
 
         builder.HasIndex(user => user.PhoneNumber)
             .HasDatabaseName($"IX_{TableName}_PhoneNumber");
+
+        MetaIndexConfigure(builder);
 
         // Each User can have many UserClaims
         builder.HasMany(user => user.UserClaims)

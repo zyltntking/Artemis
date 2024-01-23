@@ -66,9 +66,6 @@ public class Startup : IWebAppStartup
             options.Interceptors.Add<AddInLogInterceptor>();
             options.Interceptors.Add<FriendlyExceptionInterceptor>();
         }).AddJsonTranscoding();
-
-        builder.Services.AddValidators();
-
         builder.Services.AddGrpcReflection();
         builder.Services.AddGrpcSwagger();
         builder.Services.AddSwaggerGen(config =>
@@ -80,6 +77,8 @@ public class Startup : IWebAppStartup
             config.IncludeXmlComments(filePath);
             config.IncludeGrpcXmlComments(filePath, true);
         });
+
+        builder.Services.AddValidators();
 
         builder.Services.AddArtemisAuthorization<RpcAuthorizationResultTransformer>(new ArtemisAuthorizationOptions
         {

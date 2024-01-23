@@ -9,6 +9,21 @@
                 ArtemisClaim
             </summary>
         </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.CreatedAt">
+            <summary>
+                创建时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.UpdatedAt">
+            <summary>
+                更新时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisClaim.DeletedAt">
+            <summary>
+                删除时间
+            </summary>
+        </member>
         <member name="T:Artemis.Services.Identity.Data.ArtemisIdentityContext">
             <summary>
                 Artemis认证数据上下文
@@ -58,6 +73,21 @@
                 角色凭据映射
             </summary>
         </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.CreatedAt">
+            <summary>
+                创建时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.UpdatedAt">
+            <summary>
+                更新时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisRole.DeletedAt">
+            <summary>
+                删除时间
+            </summary>
+        </member>
         <member name="T:Artemis.Services.Identity.Data.ArtemisRoleClaim">
             <summary>
                 ArtemisRoleClaim
@@ -101,6 +131,21 @@
         <member name="P:Artemis.Services.Identity.Data.ArtemisUser.UserProfiles">
             <summary>
                 用户信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.CreatedAt">
+            <summary>
+                创建时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.UpdatedAt">
+            <summary>
+                更新时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Services.Identity.Data.ArtemisUser.DeletedAt">
+            <summary>
+                删除时间
             </summary>
         </member>
         <member name="T:Artemis.Services.Identity.Data.ArtemisUserClaim">

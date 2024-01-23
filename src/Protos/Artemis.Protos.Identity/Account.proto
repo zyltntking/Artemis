@@ -31,14 +31,30 @@ service Account {
 		  post: "/Account/SignOut"
 	  };
   } 
-}
 
-// 令牌响应
-message TokenReply{
-  // 令牌
-  string token = 1;
-  // 过期时间
-  int64 expire = 2;
+  // 修改密码
+  rpc ChangePassword (ChangePasswordRequest) returns (EmptyResponse){
+	  option (google.api.http) = {
+		  post: "/Account/ChangePassword",
+		  body: "*"
+	  };
+  }
+
+  // 重置密码
+  rpc ResetPassword (ResetPasswordRequest) returns (EmptyResponse){
+	  option (google.api.http) = {
+		  post: "/Account/ResetPassword",
+		  body: "*"
+	  };
+  }
+
+  // 批量重置密码
+  rpc BatchResetPasswords (BatchResetPasswordRequest) returns (EmptyResponse){
+	  option (google.api.http) = {
+		  post: "/Account/ResetPasswords",
+		  body: "*"
+	  };
+  }
 }
 
 // 签入请求
@@ -47,6 +63,48 @@ message SignInRequest {
   string userSign = 1;
   // 密码
   string password = 2;
+}
+
+// 注册请求
+message SignUpRequest {
+  // 用户名
+  string userName = 1;
+  // 密码
+  string password = 2;
+  // 邮箱
+  google.protobuf.StringValue email = 3;
+  // 手机号码
+  google.protobuf.StringValue phoneNumber = 4;
+}
+
+// 修改密码请求
+message ChangePasswordRequest {
+  // 旧密码
+  string oldPassword = 1;
+  // 新密码
+  string newPassword = 2;
+}
+
+// 重置密码请求
+message ResetPasswordRequest {
+  // 用户标识
+  string userId = 1;
+  // 目标密码
+  string password = 2;
+}
+
+// 重置密码请求
+message BatchResetPasswordRequest {
+  // 用户标识
+  repeated ResetPasswordRequest resetPasswordPackages = 1;
+}
+
+// 令牌响应
+message TokenReply{
+  // 令牌
+  string token = 1;
+  // 过期时间
+  int64 expire = 2;
 }
 
 // 令牌响应
@@ -65,16 +123,4 @@ message TokenResponse {
   int64 timestamp = 6;
   // 数据
   TokenReply data = 7;
-}
-
-// 注册请求
-message SignUpRequest {
-  // 用户名
-  string userName = 1;
-  // 密码
-  string password = 2;
-  // 邮箱
-  google.protobuf.StringValue email = 3;
-  // 手机号码
-  google.protobuf.StringValue phoneNumber = 4;
 }

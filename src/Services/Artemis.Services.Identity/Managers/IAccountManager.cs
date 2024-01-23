@@ -36,13 +36,13 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <summary>
     ///     修改密码
     /// </summary>
-    /// <param name="userSign">用户名</param>
+    /// <param name="userId">用户标识</param>
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<SignResult> ChangePasswordAsync(
-        string userSign,
+        Guid userId,
         string oldPassword,
         string newPassword,
         CancellationToken cancellationToken = default);
@@ -62,12 +62,10 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <summary>
     ///     批量修改密码
     /// </summary>
-    /// <param name="userIds">用户标识列表</param>
-    /// <param name="password">新密码</param>
+    /// <param name="packages">重置密码信息包</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<SignResult> ResetPasswordsAsync(
-        IEnumerable<Guid> userIds,
-        string password,
+        IEnumerable<KeyValuePair<Guid, string>> packages,
         CancellationToken cancellationToken = default);
 }

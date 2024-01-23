@@ -1,0 +1,8 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Protos.Identity";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package artemis.protos.identity;

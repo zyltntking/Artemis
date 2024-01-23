@@ -50,6 +50,7 @@
 	<ItemGroup>
 		<Protobuf Include="common.proto" />
 		<Protobuf Include="account.proto" />
+		<Protobuf Include="user.proto" />
 		<Protobuf Include="google\api\annotations.proto" />
 		<Protobuf Include="google\api\http.proto" />
 	</ItemGroup>

@@ -40,6 +40,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
+	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.60.0" />
 	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.60.0" />
 	  <PackageReference Include="Mapster" Version="7.4.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.1" />

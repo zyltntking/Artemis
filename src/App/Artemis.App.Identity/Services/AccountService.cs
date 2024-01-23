@@ -188,5 +188,82 @@ public class AccountService : Account.AccountBase
         return RpcResultAdapter.Fail<EmptyResponse>();
     }
 
+    /// <summary>
+    /// 修改密码
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("修改密码")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> ChangePassword(ChangePasswordRequest request, ServerCallContext context)
+    {
+        var token = context.RequestHeaders.Get(Options.HeaderTokenKey)?.Value;
+
+        if (token is not null)
+        {
+            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{token}";
+
+            var tokenDocument = await Cache.FetchTokenAsync(cacheTokenKey, false, context.CancellationToken);
+
+            if (tokenDocument is not null)
+            {
+                var result = await AccountManager.ChangePasswordAsync(tokenDocument.UserId, request.OldPassword, request.NewPassword, context.CancellationToken);
+
+                return result.Succeeded ? 
+                    RpcResultAdapter.Success<EmptyResponse>() : 
+                    RpcResultAdapter.Fail<EmptyResponse>(result.Message);
+            }
+
+        }
+
+        return RpcResultAdapter.Fail<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 重置密码
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("重置密码")]
+    [Authorize(IdentityPolicy.Admin)]
+    public override async Task<EmptyResponse> ResetPassword(ResetPasswordRequest request, ServerCallContext context)
+    {
+        var userId = request.UserId.GuidFromString();
+
+        var result = await AccountManager.ResetPasswordAsync(userId, request.Password, context.CancellationToken);
+
+        return result.Succeeded ? 
+            RpcResultAdapter.Success<EmptyResponse>() : 
+            RpcResultAdapter.Fail<EmptyResponse>(result.Message);
+    }
+
+    /// <summary>
+    /// 批量重置密码
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("重置密码")]
+    [Authorize(IdentityPolicy.Admin)]
+    public override async Task<EmptyResponse> BatchResetPasswords(BatchResetPasswordRequest request, ServerCallContext context)
+    {
+        var packages = new List<KeyValuePair<Guid, string>>();
+
+        foreach (var passwordPackage in request.ResetPasswordPackages)
+        {
+            var userId = passwordPackage.UserId.GuidFromString();
+
+            packages.Add(new KeyValuePair<Guid, string>(userId, passwordPackage.Password));
+        }
+
+        var result = await AccountManager.ResetPasswordsAsync(packages, context.CancellationToken);
+
+        return result.Succeeded ?
+            RpcResultAdapter.Success<EmptyResponse>() :
+            RpcResultAdapter.Fail<EmptyResponse>(result.Message);
+    }
+
     #endregion
 }

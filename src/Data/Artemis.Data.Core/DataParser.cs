@@ -70,7 +70,7 @@ public static class DataParser
     /// <returns></returns>
     public static string GuidToString(this Guid id)
     {
-        return id.ToString();
+        return id.ToString("D");
     }
 
     #region ModelBase

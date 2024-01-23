@@ -4,16 +4,16 @@
         <name>Artemis.App.Identity</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.Identity.Migrations.initialIdentity">
+        <member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.initialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.initialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Artemis.App.Identity.Migrations.initialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:Artemis.App.Identity.Program">

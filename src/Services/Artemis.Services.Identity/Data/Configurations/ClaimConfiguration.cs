@@ -7,7 +7,7 @@ namespace Artemis.Services.Identity.Data.Configurations;
 /// <summary>
 ///     凭据数据集配置
 /// </summary>
-public class ClaimConfiguration : KeySlotModelConfiguration<ArtemisClaim>
+public class ClaimConfiguration : ModelConfiguration<ArtemisClaim>
 {
     #region Overrides of ModelBaseConfiguration<ArtemisClaim>
 
@@ -48,6 +48,8 @@ public class ClaimConfiguration : KeySlotModelConfiguration<ArtemisClaim>
         builder.Property(roleClaims => roleClaims.Description)
             .HasMaxLength(128)
             .HasComment("凭据描述");
+
+        base.FieldConfigure(builder);
     }
 
     /// <summary>
@@ -56,17 +58,19 @@ public class ClaimConfiguration : KeySlotModelConfiguration<ArtemisClaim>
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<ArtemisClaim> builder)
     {
-        // Role ClaimPackage Key
+        // ClaimPackage Key
         builder.HasKey(roleClaim => roleClaim.Id)
             .HasName($"PK_{TableName}");
 
-        // Role ClaimPackage Index
+        // ClaimPackage Index
         builder.HasIndex(roleClaim => new { roleClaim.ClaimType, roleClaim.ClaimValue })
             .HasDatabaseName($"IX_{TableName}_ClaimType_ClaimValue");
 
         builder.HasIndex(roleClaim => roleClaim.CheckStamp)
             .HasDatabaseName($"IX_{TableName}_CheckStamp")
             .IsUnique();
+
+        MetaIndexConfigure(builder);
     }
 
     #endregion
