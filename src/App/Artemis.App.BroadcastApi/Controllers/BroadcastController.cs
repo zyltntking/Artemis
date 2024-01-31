@@ -44,7 +44,7 @@ public class BroadcastController : ControllerBase
 
         if (user == null) return DataResult.Fail<string>("用户不存在");
 
-        return DataResult.Success("token", "成功");
+        return DataResult.Success("token");
     }
 
     /// <summary>
@@ -79,7 +79,18 @@ public class BroadcastController : ControllerBase
 
         var count = await query.CountAsync(cancellationToken);
 
-        var orderInfoList = await query.OrderBy(order => order.CreatedAt)
+        // 常单自然排序，其他订单按确认序排序
+        if (statusMatch is OrderStatus.Normal or OrderStatus.All)
+        {
+            query = query.OrderBy(order => order.CreatedAt);
+        }
+        else
+        {
+            query = query.Where(order => order.WaitFlag > 0)
+                .OrderBy(order => order.WaitFlag);
+        }
+
+        var orderInfoList = await query
             .Skip(request.Skip)
             .Take(request.Size)
             .ProjectToType<OrderData>()
@@ -114,6 +125,24 @@ public class BroadcastController : ControllerBase
         order.CreatedAt = now;
         order.UpdatedAt = now;
 
+        if (order.Status == OrderStatus.Normal)
+        {
+            order.WaitFlag = 0;
+        }
+        else
+        {
+            if (order.WaitFlag == 0)
+            {
+                var mealDate = DateTime.Today.ToString("yyyy-MM-dd");
+
+                var pre = _context.Orders
+                    .Where(item => item.MealDate == mealDate)
+                    .Max(item => item.WaitFlag);
+
+                order.WaitFlag = pre + 1;
+            }
+        }
+
         await _context.Orders.AddAsync(order, cancellationToken);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
@@ -142,7 +171,26 @@ public class BroadcastController : ControllerBase
         request.Adapt(order);
         order.License = request.License.ToUpper();
 
-        order.UpdatedAt = DateTime.Now;
+        var now = DateTime.Now;
+        order.UpdatedAt = now;
+
+        if (order.Status == OrderStatus.Normal)
+        {
+            order.WaitFlag = 0;
+        }
+        else
+        {
+            if (order.WaitFlag == 0)
+            {
+                var mealDate = DateTime.Today.ToString("yyyy-MM-dd");
+
+                var pre = _context.Orders
+                    .Where(item => item.MealDate == mealDate)
+                    .Max(item => item.WaitFlag);
+
+                order.WaitFlag = pre + 1;
+            }
+        }
 
         _context.Orders.Update(order);
 
@@ -171,6 +219,24 @@ public class BroadcastController : ControllerBase
             return DataResult.Fail<OrderData>("订单不存在");
 
         order.Status = request.Status;
+
+        if (order.Status == OrderStatus.Normal)
+        {
+            order.WaitFlag = 0;
+        }
+        else
+        {
+            if (order.WaitFlag == 0)
+            {
+                var mealDate = DateTime.Today.ToString("yyyy-MM-dd");
+
+                var pre = _context.Orders
+                    .Where(item => item.MealDate == mealDate)
+                    .Max(item => item.WaitFlag);
+
+                order.WaitFlag = pre + 1;
+            }
+        }
 
         _context.Orders.Update(order);
 

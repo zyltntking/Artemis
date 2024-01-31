@@ -59,7 +59,7 @@ service Account {
 
 // 签入请求
 message SignInRequest {
-  // 用户签名
+  // 用户签名[required][range(1,8)]
   string userSign = 1;
   // 密码
   string password = 2;

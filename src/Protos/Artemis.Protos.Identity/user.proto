@@ -6,3 +6,60 @@ import "google/protobuf/wrappers.proto";
 import "common.proto";
 
 package artemis.protos.identity;
+
+// 用户服务协议定义
+service User {
+  // 获取用户信息
+  rpc GetUserInfo (FetchUserInfosRequest) returns (UserInfosResponse) {
+	option (google.api.http) = {
+	  get: "/Users"
+	};
+  }
+}
+
+message FetchUserInfosRequest{
+  // 用户名
+  google.protobuf.StringValue nameSearch = 1;
+  // 邮箱地址
+  google.protobuf.StringValue emailSearch = 2;
+  // 手机号码
+  google.protobuf.StringValue phoneNumberSearch = 3;
+  // 页码
+  google.protobuf.UInt32Value page = 4;
+  // 条目数
+  google.protobuf.UInt32Value size = 5;
+}
+
+// 用户信息响应
+message UserInfoReply{
+  // 用户标识
+  string userId = 1;
+  // 用户名
+  string userName = 2;
+  // 邮箱地址
+  google.protobuf.StringValue email = 3;
+  // 手机号码
+  google.protobuf.StringValue phoneNumber = 4;
+  // 邮箱验证标识
+  bool emailConfirmed = 5;
+  // 手机号码验证标识
+  bool phoneNumberConfirmed = 6;
+}
+
+// 令牌响应
+message UserInfosResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  repeated UserInfoReply data = 7;
+}

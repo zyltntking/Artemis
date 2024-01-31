@@ -73,9 +73,17 @@ public class Startup : IWebAppStartup
             config.SwaggerDoc("v1",
                 new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
 
-            var filePath = Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml");
-            config.IncludeXmlComments(filePath);
-            config.IncludeGrpcXmlComments(filePath, true);
+            var protosDocPath = Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml");
+            config.IncludeXmlComments(protosDocPath);
+            config.IncludeGrpcXmlComments(protosDocPath, true);
+
+            var servicesDocPath = Path.Combine(AppContext.BaseDirectory, "Artemis.App.Identity.xml");
+            config.IncludeXmlComments(servicesDocPath);
+            config.IncludeGrpcXmlComments(servicesDocPath, true);
+
+            config.OperationFilter<SomeFilter>();
+
+            config.SchemaFilter<SomeFilter2>();
         });
 
         builder.Services.AddValidators();
@@ -139,8 +147,20 @@ public class Startup : IWebAppStartup
         app.UseResponseCompression();
 
         app.UseSwagger();
-        app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        });
+
+        app.UseReDoc(c =>
+        {
+            c.RoutePrefix = "docs";
+            c.SpecUrl("/swagger/v1/swagger.json");
+            c.DocumentTitle = "Artemis Identity API";
+        });
+
         app.MapGrpcService<AccountService>();
+        app.MapGrpcService<UserService>();
 
         //app.MapDefaultArtemisIdentityGrpcServices();
 

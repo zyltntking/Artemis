@@ -84,7 +84,7 @@
         </member>
         <member name="P:Artemis.Protos.Identity.SignInRequest.UserSign">
             <summary>
-            用户签名
+            用户签名[required][range(1,8)]
             </summary>
         </member>
         <member name="F:Artemis.Protos.Identity.SignInRequest.PasswordFieldNumber">
@@ -570,6 +570,252 @@
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
         <member name="M:Artemis.Protos.Identity.Account.BindService(Grpc.Core.ServiceBinderBase,Artemis.Protos.Identity.Account.AccountBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="T:Artemis.Protos.Identity.UserReflection">
+            <summary>Holder for reflection information generated from user.proto</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserReflection.Descriptor">
+            <summary>File descriptor for user.proto</summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.FetchUserInfosRequest.NameSearchFieldNumber">
+            <summary>Field number for the "nameSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.FetchUserInfosRequest.NameSearch">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.FetchUserInfosRequest.EmailSearchFieldNumber">
+            <summary>Field number for the "emailSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.FetchUserInfosRequest.EmailSearch">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.FetchUserInfosRequest.PhoneNumberSearchFieldNumber">
+            <summary>Field number for the "phoneNumberSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.FetchUserInfosRequest.PhoneNumberSearch">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.FetchUserInfosRequest.PageFieldNumber">
+            <summary>Field number for the "page" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.FetchUserInfosRequest.Page">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.FetchUserInfosRequest.SizeFieldNumber">
+            <summary>Field number for the "size" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.FetchUserInfosRequest.Size">
+            <summary>
+            条目数
+            </summary>
+        </member>
+        <member name="T:Artemis.Protos.Identity.UserInfoReply">
+            <summary>
+            用户信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.UserIdFieldNumber">
+            <summary>Field number for the "userId" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.UserNameFieldNumber">
+            <summary>Field number for the "userName" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.EmailFieldNumber">
+            <summary>Field number for the "email" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.PhoneNumberFieldNumber">
+            <summary>Field number for the "phoneNumber" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.PhoneNumber">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.EmailConfirmedFieldNumber">
+            <summary>Field number for the "emailConfirmed" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.EmailConfirmed">
+            <summary>
+            邮箱验证标识
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfoReply.PhoneNumberConfirmedFieldNumber">
+            <summary>Field number for the "phoneNumberConfirmed" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfoReply.PhoneNumberConfirmed">
+            <summary>
+            手机号码验证标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Protos.Identity.UserInfosResponse">
+            <summary>
+            令牌响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.CodeFieldNumber">
+            <summary>Field number for the "code" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.SucceededFieldNumber">
+            <summary>Field number for the "succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.ErrorFieldNumber">
+            <summary>Field number for the "error" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Error">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.DateTimeFieldNumber">
+            <summary>Field number for the "dateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.DateTime">
+            <summary>
+            日期时间
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.TimestampFieldNumber">
+            <summary>Field number for the "timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Timestamp">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="F:Artemis.Protos.Identity.UserInfosResponse.DataFieldNumber">
+            <summary>Field number for the "data" field.</summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.UserInfosResponse.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Protos.Identity.User">
+            <summary>
+            用户服务协议定义
+            </summary>
+        </member>
+        <member name="P:Artemis.Protos.Identity.User.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Artemis.Protos.Identity.User.UserBase">
+            <summary>Base class for server-side implementations of User</summary>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserBase.GetUserInfo(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Protos.Identity.User.UserClient">
+            <summary>Client for User</summary>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for User</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for User that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.GetUserInfo(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.GetUserInfo(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.GetUserInfoAsync(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.GetUserInfoAsync(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.UserClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.BindService(Artemis.Protos.Identity.User.UserBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Artemis.Protos.Identity.User.BindService(Grpc.Core.ServiceBinderBase,Artemis.Protos.Identity.User.UserBase)">
             <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
             Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>

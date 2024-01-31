@@ -91,7 +91,6 @@ public sealed record UserInfo : UserPackage, IKeySlot
     [Required]
     public required Guid Id { get; set; }
 
-
     /// <summary>
     ///     电子邮件确认戳
     /// </summary>

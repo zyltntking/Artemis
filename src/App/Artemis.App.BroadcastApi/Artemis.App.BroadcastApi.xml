@@ -1,531 +1,514 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.BroadcastApi</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.BroadcastController">
-			<summary>
-				广播Api
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.BroadcastApi.Controllers.BroadcastController},Artemis.App.BroadcastApi.Data.BroadcastContext)">
-			<summary>
-				构造函数
-			</summary>
-			<param name="logger">日志依赖</param>
-			<param name="context">上下文依赖</param>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.SignIn(Artemis.App.BroadcastApi.Controllers.SignInRequest)">
-			<summary>
-				登录
-			</summary>
-			<param name="request">请求</param>
-			<returns>响应</returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.FetchOrderInfos(Artemis.App.BroadcastApi.Controllers.FetchOrderInfosRequest)">
-			<summary>
-				查询订单信息
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.CreateOrder(Artemis.App.BroadcastApi.Controllers.CreateOrderRequest)">
-			<summary>
-				创建订单
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.UpdateOrder(Artemis.App.BroadcastApi.Controllers.UpdateOrderRequest)">
-			<summary>
-				更新订单
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.ChangeOrderStatus(Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest)">
-			<summary>
-				修改订单状态
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.DeleteOrder(Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest)">
-			<summary>
-				删除订单
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.OrderStatistics(Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest)">
-			<summary>
-				订单统计
-			</summary>
-			<param name="request"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.SignInRequest">
-			<summary>
-				登录请求
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.SignInRequest.UserName">
-			<summary>
-				用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.SignInRequest.Password">
-			<summary>
-				密码
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter">
-			<summary>
-				订餐信息过滤器
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.LicenseSearch">
-			<summary>
-				车牌号
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.StatusMatch">
-			<summary>
-				价格
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.MealDateMatch">
-			<summary>
-				用餐日期
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.FetchOrderInfosRequest">
-			<summary>
-				查询订单信息请求
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.CreateOrderRequest">
-			<summary>
-				创建订单请求
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.UpdateOrderRequest">
-			<summary>
-				更新订单请求
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest">
-			<summary>
-				修改订单状态请求
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest.Id">
-			<summary>
-				订单标识
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest.Status">
-			<summary>
-				目标状态
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest">
-			<summary>
-				删除订单请求
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest.Id">
-			<summary>
-				标识
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest">
-			<summary>
-				订单统计请求
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest.MealDate">
-			<summary>
-				用餐时间
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult">
-			<summary>
-				订单统计结果
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.TotalNumber">
-			<summary>
-				总车次
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.TotalCount">
-			<summary>
-				总人数
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.CompleteNumber">
-			<summary>
-				完成车次
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.CompleteCount">
-			<summary>
-				完成人数
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.NormalNumber">
-			<summary>
-				剩余车次
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.NormalCount">
-			<summary>
-				剩余人数
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.OrderData">
-			<summary>
-				订单数据
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderData.Id">
-			<summary>
-				标识
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Controllers.OrderInfo">
-			<summary>
-				订单信息
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.License">
-			<summary>
-				车牌号
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Count">
-			<summary>
-				人数
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Price">
-			<summary>
-				价格
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealDate">
-			<summary>
-				用餐日期
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealType">
-			<summary>
-				餐类
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Status">
-			<summary>
-				状态
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.WaitFlag">
-			<summary>
-				排序
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Remark">
-			<summary>
-				备注
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.BroadcastContext">
-			<summary>
-				广播数据上下文
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Data.BroadcastContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.App.BroadcastApi.Data.BroadcastContext})">
-			<summary>
-				构造
-			</summary>
-			<param name="options">创建配置</param>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.BroadcastContext.Users">
-			<summary>
-				用户模型
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.BroadcastContext.Orders">
-			<summary>
-				订单模型
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.Configuration.BroadcastConfiguration`1">
-			<summary>
-				广播模型配置
-			</summary>
-			<typeparam name="TEntity"></typeparam>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Configuration.BroadcastConfiguration`1.DbType">
-			<summary>
-				数据库类型
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration">
-			<summary>
-				订单配置
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.Order})">
-			<summary>
-				数据库字段配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.Order})">
-			<summary>
-				数据库关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration">
-			<summary>
-				用户配置
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.User})">
-			<summary>
-				数据库字段配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.User})">
-			<summary>
-				数据库关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.IOrder">
-			<summary>
-				订单接口
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.License">
-			<summary>
-				车牌号
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Count">
-			<summary>
-				人数
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Price">
-			<summary>
-				价格
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealDate">
-			<summary>
-				用餐日期
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealType">
-			<summary>
-				餐类
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Status">
-			<summary>
-				状态
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.WaitFlag">
-			<summary>
-				排序
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.IOrder.Remark">
-			<summary>
-				备注
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.MealType">
-			<summary>
-				餐类型
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Unknown">
-			<summary>
-				未知
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Lunch">
-			<summary>
-				午餐
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.MealType.Dinner">
-			<summary>
-				晚餐
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.Order">
-			<summary>
-				订单模型
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.License">
-			<summary>
-				车牌号
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.Count">
-			<summary>
-				人数
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.Price">
-			<summary>
-				价格
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.MealDate">
-			<summary>
-				用餐日期
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.MealType">
-			<summary>
-				用餐类型
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.Status">
-			<summary>
-				状态
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.WaitFlag">
-			<summary>
-				等待序列
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.Order.Remark">
-			<summary>
-				备注
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.OrderStatus">
-			<summary>
-				订单状态
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.All">
-			<summary>
-				全部
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Normal">
-			<summary>
-				正常
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Complete">
-			<summary>
-				完成
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Wait">
-			<summary>
-				等待
-			</summary>
-		</member>
-		<member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Underway">
-			<summary>
-				进行
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Data.User">
-			<summary>
-				用户模型
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.User.UserName">
-			<summary>
-				用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.User.NormalizedUserName">
-			<summary>
-				规范化用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.App.BroadcastApi.Data.User.Password">
-			<summary>
-				密码
-			</summary>
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Migrations.InitialOrder">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.BroadcastApi.Program">
-			<summary>
-				Program
-			</summary>
-		</member>
-		<member name="M:Artemis.App.BroadcastApi.Program.Main(System.String[])">
-			<summary>
-				Main
-			</summary>
-			<param name="args"></param>
-			<exception cref="T:System.InvalidOperationException"></exception>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.BroadcastApi</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.BroadcastController">
+            <summary>
+                广播Api
+            </summary>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.App.BroadcastApi.Controllers.BroadcastController},Artemis.App.BroadcastApi.Data.BroadcastContext)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="logger">日志依赖</param>
+            <param name="context">上下文依赖</param>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.SignIn(Artemis.App.BroadcastApi.Controllers.SignInRequest)">
+            <summary>
+                登录
+            </summary>
+            <param name="request">请求</param>
+            <returns>响应</returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.FetchOrderInfos(Artemis.App.BroadcastApi.Controllers.FetchOrderInfosRequest)">
+            <summary>
+                查询订单信息
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.CreateOrder(Artemis.App.BroadcastApi.Controllers.CreateOrderRequest)">
+            <summary>
+                创建订单
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.UpdateOrder(Artemis.App.BroadcastApi.Controllers.UpdateOrderRequest)">
+            <summary>
+                更新订单
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.ChangeOrderStatus(Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest)">
+            <summary>
+                修改订单状态
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.DeleteOrder(Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest)">
+            <summary>
+                删除订单
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Controllers.BroadcastController.OrderStatistics(Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest)">
+            <summary>
+                订单统计
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.SignInRequest">
+            <summary>
+                登录请求
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.SignInRequest.UserName">
+            <summary>
+                用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.SignInRequest.Password">
+            <summary>
+                密码
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter">
+            <summary>
+                订餐信息过滤器
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.LicenseSearch">
+            <summary>
+                车牌号
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.StatusMatch">
+            <summary>
+                价格
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfoFilter.MealDateMatch">
+            <summary>
+                用餐日期
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.FetchOrderInfosRequest">
+            <summary>
+                查询订单信息请求
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.CreateOrderRequest">
+            <summary>
+                创建订单请求
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.UpdateOrderRequest">
+            <summary>
+                更新订单请求
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest">
+            <summary>
+                修改订单状态请求
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest.Id">
+            <summary>
+                订单标识
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.ChangeOrderStatusRequest.Status">
+            <summary>
+                目标状态
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest">
+            <summary>
+                删除订单请求
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.DeleteOrderRequest.Id">
+            <summary>
+                标识
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest">
+            <summary>
+                订单统计请求
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsRequest.MealDate">
+            <summary>
+                用餐时间
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult">
+            <summary>
+                订单统计结果
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.TotalNumber">
+            <summary>
+                总车次
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.TotalCount">
+            <summary>
+                总人数
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.CompleteNumber">
+            <summary>
+                完成车次
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.CompleteCount">
+            <summary>
+                完成人数
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.NormalNumber">
+            <summary>
+                剩余车次
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderStatisticsResult.NormalCount">
+            <summary>
+                剩余人数
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.OrderData">
+            <summary>
+                订单数据
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderData.Id">
+            <summary>
+                标识
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Controllers.OrderInfo">
+            <summary>
+                订单信息
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.License">
+            <summary>
+                车牌号
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Count">
+            <summary>
+                人数
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Price">
+            <summary>
+                价格
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealDate">
+            <summary>
+                用餐日期
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.MealType">
+            <summary>
+                餐类
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Status">
+            <summary>
+                状态
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.WaitFlag">
+            <summary>
+                排序
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Controllers.OrderInfo.Remark">
+            <summary>
+                备注
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.BroadcastContext">
+            <summary>
+                广播数据上下文
+            </summary>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Data.BroadcastContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.App.BroadcastApi.Data.BroadcastContext})">
+            <summary>
+                构造
+            </summary>
+            <param name="options">创建配置</param>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.BroadcastContext.Users">
+            <summary>
+                用户模型
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.BroadcastContext.Orders">
+            <summary>
+                订单模型
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.Configuration.BroadcastConfiguration`1">
+            <summary>
+                广播模型配置
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Configuration.BroadcastConfiguration`1.DbType">
+            <summary>
+                数据库类型
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration">
+            <summary>
+                订单配置
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.Order})">
+            <summary>
+                数据库字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Data.Configuration.OrderConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.Order})">
+            <summary>
+                数据库关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration">
+            <summary>
+                用户配置
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.User})">
+            <summary>
+                数据库字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Data.Configuration.UserConfiguration.RelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.App.BroadcastApi.Data.User})">
+            <summary>
+                数据库关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.IOrder">
+            <summary>
+                订单接口
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.License">
+            <summary>
+                车牌号
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.Count">
+            <summary>
+                人数
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.Price">
+            <summary>
+                价格
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealDate">
+            <summary>
+                用餐日期
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.MealType">
+            <summary>
+                餐类
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.Status">
+            <summary>
+                状态
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.WaitFlag">
+            <summary>
+                排序
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.IOrder.Remark">
+            <summary>
+                备注
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.MealType">
+            <summary>
+                餐类型
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.MealType.Unknown">
+            <summary>
+                未知
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.MealType.Lunch">
+            <summary>
+                午餐
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.MealType.Dinner">
+            <summary>
+                晚餐
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.Order">
+            <summary>
+                订单模型
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.License">
+            <summary>
+                车牌号
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.Count">
+            <summary>
+                人数
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.Price">
+            <summary>
+                价格
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.MealDate">
+            <summary>
+                用餐日期
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.MealType">
+            <summary>
+                用餐类型
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.Status">
+            <summary>
+                状态
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.WaitFlag">
+            <summary>
+                等待序列
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.Order.Remark">
+            <summary>
+                备注
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.OrderStatus">
+            <summary>
+                订单状态
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.All">
+            <summary>
+                全部
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Normal">
+            <summary>
+                正常
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Complete">
+            <summary>
+                完成
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Wait">
+            <summary>
+                等待
+            </summary>
+        </member>
+        <member name="F:Artemis.App.BroadcastApi.Data.OrderStatus.Underway">
+            <summary>
+                进行
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Data.User">
+            <summary>
+                用户模型
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.User.UserName">
+            <summary>
+                用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.User.NormalizedUserName">
+            <summary>
+                规范化用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.App.BroadcastApi.Data.User.Password">
+            <summary>
+                密码
+            </summary>
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Migrations.InitialOrder">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Migrations.InitialOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.BroadcastApi.Program">
+            <summary>
+                Program
+            </summary>
+        </member>
+        <member name="M:Artemis.App.BroadcastApi.Program.Main(System.String[])">
+            <summary>
+                Main
+            </summary>
+            <param name="args"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+    </members>
 </doc>

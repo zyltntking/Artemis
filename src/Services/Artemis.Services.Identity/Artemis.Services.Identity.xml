@@ -515,11 +515,11 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>登录后的Token信息</returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager.ChangePasswordAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.AccountManager.ChangePasswordAsync(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 修改密码
             </summary>
-            <param name="userSign">用户名</param>
+            <param name="userId">用户标识</param>
             <param name="oldPassword">原密码</param>
             <param name="newPassword">新密码</param>
             <param name="cancellationToken">操作取消信号</param>
@@ -534,12 +534,11 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.AccountManager.ResetPasswordsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.AccountManager.ResetPasswordsAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Guid,System.String}},System.Threading.CancellationToken)">
             <summary>
                 批量修改密码
             </summary>
-            <param name="userIds">用户标识列表</param>
-            <param name="password">新密码</param>
+            <param name="packages">重置密码信息包</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
@@ -677,11 +676,11 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>登录后的Token信息</returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IAccountManager.ChangePasswordAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IAccountManager.ChangePasswordAsync(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
                 修改密码
             </summary>
-            <param name="userSign">用户名</param>
+            <param name="userId">用户标识</param>
             <param name="oldPassword">原密码</param>
             <param name="newPassword">新密码</param>
             <param name="cancellationToken">操作取消信号</param>
@@ -696,12 +695,11 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Services.Identity.Managers.IAccountManager.ResetPasswordsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Services.Identity.Managers.IAccountManager.ResetPasswordsAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Guid,System.String}},System.Threading.CancellationToken)">
             <summary>
                 批量修改密码
             </summary>
-            <param name="userIds">用户标识列表</param>
-            <param name="password">新密码</param>
+            <param name="packages">重置密码信息包</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
