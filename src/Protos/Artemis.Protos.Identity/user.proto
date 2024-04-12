@@ -30,7 +30,7 @@ message FetchUserInfosRequest{
   google.protobuf.UInt32Value size = 5;
 }
 
-// 用户信息响应
+// 用户信息回应
 message UserInfoReply{
   // 用户标识
   string userId = 1;

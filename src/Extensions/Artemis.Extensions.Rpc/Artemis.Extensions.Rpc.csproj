@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net7.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyVersion>1.0.3.0</AssemblyVersion>
 		<FileVersion>1.0.3</FileVersion>
 		<VersionPrefix>1.0.3</VersionPrefix>
@@ -39,11 +39,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
-	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.60.0" />
-	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.60.0" />
+	  <PackageReference Include="Grpc.AspNetCore" Version="2.61.0" />
+	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.61.0" />
+	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.61.0" />
 	  <PackageReference Include="Mapster" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.2" />
 	  <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.5.0" />
 	</ItemGroup>
 
@@ -52,14 +53,6 @@
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
 	  <ProjectReference Include="..\Artemis.Extensions.Web.Validators\Artemis.Extensions.Web.Validators.csproj" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.15" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.1" />
 	</ItemGroup>
 
 </Project>

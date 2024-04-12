@@ -4,72 +4,16 @@ using System.Net.Sockets;
 namespace Artemis.Core.Com;
 
 /// <summary>
-/// Socket连接
+///     Socket连接
 /// </summary>
 internal class SocketConnection : Connection
 {
-
     private const int MinBuffSize = 1024;
-
-    /// <summary>
-    /// 套接字
-    /// </summary>
-    private Socket Socket { get; }
-
-    /// <summary>
-    /// 接收器
-    /// </summary>
-    private Receiver Receiver { get; }
-
-    /// <summary>
-    /// 发送器
-    /// </summary>
-    private Sender? Sender { get; set; }
-
-    /// <summary>
-    /// 发送池
-    /// </summary>
-    private SenderPool SenderPool { get; }
-
-    /// <summary>
-    /// 接受任务
-    /// </summary>
-    private Task? ReceiveTask { get; set; }
-
-    /// <summary>
-    /// 发送任务
-    /// </summary>
-    private Task? SendTask { get; set; }
-
-    /// <summary>
-    /// 传输管道
-    /// </summary>
-    private Pipe TransportPipe { get; }
-
-    /// <summary>
-    /// 应用管道
-    /// </summary>
-    private Pipe ApplicationPipe { get; }
-
-    /// <summary>
-    /// 关闭锁
-    /// </summary>
-    private object ShutdownLock { get; } = new();
 
     private volatile bool _socketDisposed;
 
     /// <summary>
-    ///    发送器
-    /// </summary>
-    public PipeWriter Output { get; }
-
-    /// <summary>
-    ///   接收器
-    /// </summary>
-    public PipeReader Input { get; }
-
-    /// <summary>
-    /// Socket连接构造
+    ///     Socket连接构造
     /// </summary>
     /// <param name="socket"></param>
     /// <param name="senderPool"></param>
@@ -82,8 +26,62 @@ internal class SocketConnection : Connection
         Output = TransportPipe.Writer;
         ApplicationPipe = new Pipe();
         Input = ApplicationPipe.Reader;
-
     }
+
+    /// <summary>
+    ///     套接字
+    /// </summary>
+    private Socket Socket { get; }
+
+    /// <summary>
+    ///     接收器
+    /// </summary>
+    private Receiver Receiver { get; }
+
+    /// <summary>
+    ///     发送器
+    /// </summary>
+    private Sender? Sender { get; set; }
+
+    /// <summary>
+    ///     发送池
+    /// </summary>
+    private SenderPool SenderPool { get; }
+
+    /// <summary>
+    ///     接受任务
+    /// </summary>
+    private Task? ReceiveTask { get; set; }
+
+    /// <summary>
+    ///     发送任务
+    /// </summary>
+    private Task? SendTask { get; set; }
+
+    /// <summary>
+    ///     传输管道
+    /// </summary>
+    private Pipe TransportPipe { get; }
+
+    /// <summary>
+    ///     应用管道
+    /// </summary>
+    private Pipe ApplicationPipe { get; }
+
+    /// <summary>
+    ///     关闭锁
+    /// </summary>
+    private object ShutdownLock { get; } = new();
+
+    /// <summary>
+    ///     发送器
+    /// </summary>
+    public PipeWriter Output { get; }
+
+    /// <summary>
+    ///     接收器
+    /// </summary>
+    public PipeReader Input { get; }
 
     #region Overrides of Connection
 
@@ -98,15 +96,9 @@ internal class SocketConnection : Connection
         await ApplicationPipe.Writer.CompleteAsync();
         try
         {
-            if (ReceiveTask != null)
-            {
-                await ReceiveTask;
-            }
+            if (ReceiveTask != null) await ReceiveTask;
 
-            if (SendTask != null)
-            {
-                await SendTask;
-            }
+            if (SendTask != null) await SendTask;
         }
         finally
         {
@@ -133,7 +125,7 @@ internal class SocketConnection : Connection
     }
 
     /// <summary>
-    /// 发送任务
+    ///     发送任务
     /// </summary>
     /// <returns></returns>
     private async Task SendWork()
@@ -143,10 +135,7 @@ internal class SocketConnection : Connection
             while (true)
             {
                 var result = await TransportPipe.Reader.ReadAsync();
-                if (result.IsCanceled)
-                {
-                    break;
-                }
+                if (result.IsCanceled) break;
                 var buff = result.Buffer;
                 if (!buff.IsEmpty)
                 {
@@ -155,11 +144,9 @@ internal class SocketConnection : Connection
                     SenderPool.Return(Sender);
                     Sender = null;
                 }
+
                 TransportPipe.Reader.AdvanceTo(buff.End);
-                if (result.IsCompleted)
-                {
-                    break;
-                }
+                if (result.IsCompleted) break;
             }
         }
         catch (Exception exception)
@@ -182,16 +169,10 @@ internal class SocketConnection : Connection
             {
                 var buff = ApplicationPipe.Writer.GetMemory(MinBuffSize);
                 var bytes = await Receiver.ReceiveAsync(Socket, buff);
-                if (bytes == 0)
-                {
-                    break;
-                }
+                if (bytes == 0) break;
                 ApplicationPipe.Writer.Advance(bytes);
                 var result = await ApplicationPipe.Writer.FlushAsync();
-                if (result.IsCanceled || result.IsCompleted)
-                {
-                    break;
-                }
+                if (result.IsCanceled || result.IsCompleted) break;
             }
         }
         catch (Exception e)
@@ -213,10 +194,7 @@ internal class SocketConnection : Connection
     {
         lock (ShutdownLock)
         {
-            if (_socketDisposed)
-            {
-                return;
-            }
+            if (_socketDisposed) return;
             _socketDisposed = true;
             try
             {

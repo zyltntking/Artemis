@@ -4,14 +4,14 @@ using Grpc.Core;
 namespace Artemis.App.Identity.Services;
 
 /// <summary>
-/// 用户服务
+///     用户服务
 /// </summary>
 public class UserService : User.UserBase
 {
     #region Overrides of UserBase
 
     /// <summary>
-    /// 获取用户信息
+    ///     获取用户信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>

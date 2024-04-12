@@ -84,7 +84,7 @@
         </member>
         <member name="P:Artemis.Protos.Identity.SignInRequest.UserSign">
             <summary>
-            用户签名[required][range(1,8)]
+            用户签名
             </summary>
         </member>
         <member name="F:Artemis.Protos.Identity.SignInRequest.PasswordFieldNumber">
@@ -189,7 +189,7 @@
         </member>
         <member name="T:Artemis.Protos.Identity.TokenReply">
             <summary>
-            令牌响应
+            令牌回应
             </summary>
         </member>
         <member name="F:Artemis.Protos.Identity.TokenReply.TokenFieldNumber">
@@ -623,7 +623,7 @@
         </member>
         <member name="T:Artemis.Protos.Identity.UserInfoReply">
             <summary>
-            用户信息响应
+            用户信息回应
             </summary>
         </member>
         <member name="F:Artemis.Protos.Identity.UserInfoReply.UserIdFieldNumber">

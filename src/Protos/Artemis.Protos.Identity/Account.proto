@@ -59,7 +59,7 @@ service Account {
 
 // 签入请求
 message SignInRequest {
-  // 用户签名[required][range(1,8)]
+  // 用户签名
   string userSign = 1;
   // 密码
   string password = 2;
@@ -99,7 +99,7 @@ message BatchResetPasswordRequest {
   repeated ResetPasswordRequest resetPasswordPackages = 1;
 }
 
-// 令牌响应
+// 令牌回应
 message TokenReply{
   // 令牌
   string token = 1;

@@ -394,7 +394,6 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
         }
 
         return result;
-
     }
 
     #endregion

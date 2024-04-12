@@ -31,6 +31,15 @@ internal interface IPool<TConnection>
 /// <typeparam name="TConnection"></typeparam>
 internal abstract class Pool<TConnection> : IPool<TConnection>, IDisposable
 {
+    /// <summary>
+    ///     池构造
+    /// </summary>
+    /// <param name="maxQueueSize">最大连接数</param>
+    protected Pool(int maxQueueSize = 128)
+    {
+        MaxQueueSize = maxQueueSize;
+    }
+
     #region IDisposable
 
     /// <summary>
@@ -46,15 +55,6 @@ internal abstract class Pool<TConnection> : IPool<TConnection>, IDisposable
     }
 
     #endregion
-
-    /// <summary>
-    /// 池构造
-    /// </summary>
-    /// <param name="maxQueueSize">最大连接数</param>
-    protected Pool(int maxQueueSize = 128)
-    {
-        MaxQueueSize = maxQueueSize;
-    }
 
     #region Fields
 

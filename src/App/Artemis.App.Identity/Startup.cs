@@ -81,9 +81,8 @@ public class Startup : IWebAppStartup
             config.IncludeXmlComments(servicesDocPath);
             config.IncludeGrpcXmlComments(servicesDocPath, true);
 
-            config.OperationFilter<SomeFilter>();
-
-            config.SchemaFilter<SomeFilter2>();
+            config.OperationFilter<RemoveDefaultResponse>();
+            config.DocumentFilter<RemoveDefaultSchemas>();
         });
 
         builder.Services.AddValidators();
@@ -147,10 +146,7 @@ public class Startup : IWebAppStartup
         app.UseResponseCompression();
 
         app.UseSwagger();
-        app.UseSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        });
+        app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 
         app.UseReDoc(c =>
         {

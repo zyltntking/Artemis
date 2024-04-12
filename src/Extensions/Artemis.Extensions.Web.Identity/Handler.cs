@@ -93,12 +93,10 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                         // 处理不允许多终端的逻辑
                         if (!Options.EnableMultiEnd)
                         {
-                            var userMapToken = Cache.FetchUserMapToken($"{Options.UserMapTokenPrefix}:{document.UserId}");
+                            var userMapToken =
+                                Cache.FetchUserMapToken($"{Options.UserMapTokenPrefix}:{document.UserId}");
 
-                            if (userMapToken != headerToken)
-                            {
-                                continueHandler = false;
-                            }
+                            if (userMapToken != headerToken) continueHandler = false;
                         }
 
                         if (continueHandler)

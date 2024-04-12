@@ -112,6 +112,31 @@
             <param name="validator"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Extensions.Rpc.RemoveDefaultResponse">
+            <summary>
+                移除默认响应
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RemoveDefaultResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+                实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RemoveDefaultSchemas">
+            <summary>
+                移除默认生成的模式
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RemoveDefaultSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+                执行
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:Artemis.Extensions.Rpc.RpcAuthorizationResultTransformer">
             <summary>
                 Rpc认证结果转换

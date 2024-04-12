@@ -1422,6 +1422,34 @@
             <param name="includeSpace">是否包括空格字符</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Bus.IBus">
+            <summary>
+                总线接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Bus.IBus.DataOperationAction(Artemis.Data.Core.Fundamental.Types.DataOperationType,System.String,System.Object)">
+            <summary>
+                数据操作事件
+            </summary>
+            <param name="operation">操作类型</param>
+            <param name="fieldName">域名称</param>
+            <param name="entity">实体参数</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Bus.IBus.EventRaiseAction(System.String,System.Object)">
+            <summary>
+                事件触发事件
+            </summary>
+            <param name="eventName"></param>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Bus.IBus.ServiceCallAction(System.String,System.Object,System.Object)">
+            <summary>
+                服务调用事件
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="input">输入参数</param>
+            <param name="output">输出参数</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.IEnumeration`1">
             <summary>
                 枚举接口
@@ -2639,6 +2667,58 @@
             <param name="treeNodeInfos">节点信息列表</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.BusType">
+            <summary>
+                总线类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.Unknown">
+            <summary>
+                未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.DataBus">
+            <summary>
+                数据总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.ControlBus">
+            <summary>
+                控制总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.EventBus">
+            <summary>
+                事件总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.ExpansionBus">
+            <summary>
+                扩展总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.LocalBus">
+            <summary>
+                局部总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.BusinessBus">
+            <summary>
+                业务总线
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.BusType.ServiceBuse">
+            <summary>
+                服务总线
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.BusType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.ChineseNation">
             <summary>
                 中华民族
@@ -3157,6 +3237,38 @@
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.CountyType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.DataOperationType">
+            <summary>
+                数据操作类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DataOperationType.Unknown">
+            <summary>
+                未知操作
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DataOperationType.Add">
+            <summary>
+                添加数据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DataOperationType.Update">
+            <summary>
+                更新数据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DataOperationType.Delete">
+            <summary>
+                删除数据
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.DataOperationType.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数
             </summary>

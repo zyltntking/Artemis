@@ -29,7 +29,7 @@ file interface IEnumeration<TEnum> : IComparable, IEquatable<TEnum>
 /// <summary>
 ///     枚举类
 /// </summary>
-public class Enumeration : IEnumeration<Enumeration>
+public abstract class Enumeration : IEnumeration<Enumeration>
 {
     /// <summary>
     ///     构造函数

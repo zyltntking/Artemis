@@ -25,7 +25,7 @@ public static class TokenHandler
     }
 
     /// <summary>
-    /// 缓存字符串
+    ///     缓存字符串
     /// </summary>
     /// <param name="cache"></param>
     /// <param name="key"></param>
@@ -49,7 +49,7 @@ public static class TokenHandler
     }
 
     /// <summary>
-    /// 异步缓存字符串
+    ///     异步缓存字符串
     /// </summary>
     /// <param name="cache"></param>
     /// <param name="key"></param>
@@ -60,10 +60,7 @@ public static class TokenHandler
     private static Task CacheStringAsync(this IDistributedCache cache, string key, string value, int expire,
         CancellationToken cancellationToken = default)
     {
-        if (expire <= 0)
-        {
-            return cache.SetStringAsync(key, value, cancellationToken);
-        }
+        if (expire <= 0) return cache.SetStringAsync(key, value, cancellationToken);
 
         var options = new DistributedCacheEntryOptions
         {
@@ -118,8 +115,8 @@ public static class TokenHandler
     /// <param name="expire"></param>
     public static void CacheUserMapToken(
         this IDistributedCache cache,
-        string cacheKey, 
-        string token, 
+        string cacheKey,
+        string token,
         int expire = 0)
     {
         cache.CacheString(cacheKey, token, expire);
@@ -164,7 +161,7 @@ public static class TokenHandler
     /// <param name="context"></param>
     public static void RemoveToken(this HttpContext context)
     {
-        if (context.Items.ContainsKey(Constants.ContextItemKey)) 
+        if (context.Items.ContainsKey(Constants.ContextItemKey))
             context.Items.Remove(Constants.ContextItemKey);
     }
 
@@ -206,11 +203,11 @@ public static class TokenHandler
     {
         var value = await cache.GetStringAsync(cacheTokenKey, cancellationToken);
 
-        if (value == null) 
+        if (value == null)
             return null;
 
         // 刷新缓存
-        if (refreshToken) 
+        if (refreshToken)
             await cache.RefreshAsync(cacheTokenKey, cancellationToken);
 
         return value.Deserialize<TokenDocument>();
@@ -254,7 +251,7 @@ public static class TokenHandler
     {
         var value = await cache.GetStringAsync(cacheKey, cancellationToken);
 
-        if (value == null) 
+        if (value == null)
             return null;
 
         // 刷新缓存

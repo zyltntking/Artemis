@@ -437,7 +437,7 @@
         </member>
         <member name="M:Artemis.Extensions.Web.Identity.TokenHandler.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
             <summary>
-            缓存字符串
+                缓存字符串
             </summary>
             <param name="cache"></param>
             <param name="key"></param>
@@ -446,7 +446,7 @@
         </member>
         <member name="M:Artemis.Extensions.Web.Identity.TokenHandler.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            异步缓存字符串
+                异步缓存字符串
             </summary>
             <param name="cache"></param>
             <param name="key"></param>
