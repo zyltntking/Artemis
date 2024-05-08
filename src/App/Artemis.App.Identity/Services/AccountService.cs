@@ -21,16 +21,19 @@ public class AccountService : Account.AccountBase
     ///     账户服务
     /// </summary>
     /// <param name="accountManager">账户管理器依赖</param>
+    /// <param name="userManager">用户管理器依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <param name="options">认证配置依赖</param>
     /// <param name="logger">日志依赖</param>
     public AccountService(
         IAccountManager accountManager,
+        IUserManager userManager,
         IDistributedCache cache,
         IOptions<InternalAuthorizationOptions> options,
         ILogger<AccountService> logger)
     {
         AccountManager = accountManager;
+        UserManager = userManager;
         Cache = cache;
         Options = options.Value;
         Logger = logger;
@@ -40,6 +43,8 @@ public class AccountService : Account.AccountBase
     ///     角色管理器
     /// </summary>
     private IAccountManager AccountManager { get; }
+
+    private IUserManager UserManager { get; }
 
     /// <summary>
     ///     分布式缓存依赖
@@ -82,13 +87,14 @@ public class AccountService : Account.AccountBase
 
             // 记录UserLogin
 
-            //var userLogin = new UserLogin
-            //{
-            //    UserId = token.UserId,
-            //    LoginProvider = "ArtemisIdentityService",
-            //    ProviderKey = clientType,
-            //    ProviderDisplayName = token.UserName
-            //};
+            var loginPackage = new UserLoginPackage
+            {
+                LoginProvider = "ArtemisIdentityService",
+                ProviderKey = clientType,
+                ProviderDisplayName = token.UserName
+            };
+
+            await UserManager.AddOrUpdateUserLoginAsync(token.UserId, loginPackage, context.CancellationToken);
 
             // 记录UserToken
 

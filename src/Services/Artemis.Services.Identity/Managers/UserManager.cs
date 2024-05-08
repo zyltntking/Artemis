@@ -996,85 +996,42 @@ public class UserManager : KeyWithManager<ArtemisUser>, IUserManager
     }
 
     /// <summary>
-    ///     添加用户登录信息
+    ///     添加或更新用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="package">登录信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>添加结果</returns>
-    public async Task<StoreResult> AddUserLoginAsync(
+    /// <returns>添加或更新结果</returns>
+    public async Task<StoreResult> AddOrUpdateUserLoginAsync(
         Guid id,
         UserLoginPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
+        var login = await UserLoginStore.EntityQuery
+            .Where(login => login.UserId == id)
+            .Where(login => login.LoginProvider == package.LoginProvider)
+            .Where(login => login.ProviderKey == package.ProviderKey)
+            .FirstOrDefaultAsync(cancellationToken);
 
-        if (userExists)
+        if (login == null)
         {
-            var loginExists = await UserLoginStore
-                .EntityQuery
-                .Where(userLogin => userLogin.UserId == id)
-                .Where(userLogin => userLogin.LoginProvider == package.LoginProvider)
-                .Where(userLogin => userLogin.ProviderKey == package.ProviderKey)
-                .AnyAsync(cancellationToken);
+            login = Instance.CreateInstance<ArtemisUserLogin, UserLoginPackage>(package);
 
-            if (loginExists)
-            {
-                var flag = $"userId:{id},login：{package.GenerateFlag}";
+            login.UserId = id;
 
-                return StoreResult.EntityFoundFailed(nameof(ArtemisUserLogin), flag);
-            }
-
-            var userLogin = Instance.CreateInstance<ArtemisUserLogin, UserLoginPackage>(package);
-
-            userLogin.UserId = id;
-
-            return await UserLoginStore.CreateAsync(userLogin, cancellationToken);
+            return await UserLoginStore.CreateAsync(login, cancellationToken);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
-    }
-
-    /// <summary>
-    ///     替换用户登录信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="provider">登录信息标识</param>
-    /// <param name="providerKey">登录信息标识</param>
-    /// <param name="displayName">登录信息标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>替换结果</returns>
-    public async Task<StoreResult> ReplaceUserLoginAsync(
-        Guid id,
-        string provider,
-        string providerKey,
-        string? displayName,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
-
-        if (userExists)
+        if (login.ProviderDisplayName == package.ProviderDisplayName)
         {
-            var userLogin = await UserLoginStore.EntityQuery
-                .Where(login => login.LoginProvider == provider)
-                .Where(login => login.ProviderKey == providerKey)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            if (userLogin is not null)
-            {
-                userLogin.ProviderDisplayName = displayName;
-
-                return await UserLoginStore.UpdateAsync(userLogin, cancellationToken);
-            }
-
-            return StoreResult.EntityNotFoundFailed(nameof(ArtemisUserLogin), $"{provider}:{providerKey}");
+            return StoreResult.Success(0);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(ArtemisUser), id.ToString());
+        login.ProviderDisplayName = package.ProviderDisplayName;
+
+        return await UserLoginStore.UpdateAsync(login, cancellationToken);
     }
 
     /// <summary>

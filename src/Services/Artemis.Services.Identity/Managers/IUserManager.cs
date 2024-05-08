@@ -289,31 +289,15 @@ public interface IUserManager : IKeyWithManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     添加用户登录信息
+    ///     添加或更新用户登录信息
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="package">登录信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserLoginAsync(
+    /// <returns>添加或更新结果</returns>
+    Task<StoreResult> AddOrUpdateUserLoginAsync(
         Guid id,
         UserLoginPackage package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     替换用户登录信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="provider">登录信息标识</param>
-    /// <param name="providerKey">登录信息标识</param>
-    /// <param name="displayName">登录信息标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>替换结果</returns>
-    Task<StoreResult> ReplaceUserLoginAsync(
-        Guid id,
-        string provider,
-        string providerKey,
-        string? displayName,
         CancellationToken cancellationToken = default);
 
     /// <summary>
