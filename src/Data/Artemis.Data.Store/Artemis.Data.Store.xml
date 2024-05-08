@@ -351,7 +351,7 @@
             <param name="count">数据规模</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.Page``1(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageBase)">
+        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.Page``1(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageSlot)">
             <summary>
                 分页扩展
             </summary>
@@ -360,7 +360,7 @@
             <param name="request">分页请求</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.Page``1(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageBase,System.Int64@)">
+        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.Page``1(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageSlot,System.Int64@)">
             <summary>
                 分页扩展
             </summary>
@@ -383,7 +383,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.MapPageAsync``3(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageBase,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Extensions.QueryableExtensions.MapPageAsync``3(System.Linq.IQueryable{``0},Artemis.Data.Core.IPageSlot,System.Threading.CancellationToken)">
             <summary>
                 映射式分页
             </summary>

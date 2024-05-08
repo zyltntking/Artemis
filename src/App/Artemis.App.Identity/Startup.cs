@@ -82,6 +82,7 @@ public class Startup : IWebAppStartup
             config.IncludeGrpcXmlComments(servicesDocPath, true);
 
             config.OperationFilter<RemoveDefaultResponse>();
+            config.OperationFilter<SimpleOperationFilter>();
             config.DocumentFilter<RemoveDefaultSchemas>();
         });
 
@@ -90,7 +91,7 @@ public class Startup : IWebAppStartup
         builder.Services.AddArtemisAuthorization<RpcAuthorizationResultTransformer>(new ArtemisAuthorizationOptions
         {
             EnableAdvancedPolicy = false,
-            HeaderTokenKey = Constants.HeaderTokenKey,
+            HeaderTokenKey = Constants.IdentityTokenKey,
             CacheTokenPrefix = Constants.CacheTokenPrefix,
             UserMapTokenPrefix = Constants.UserMapTokenPrefix,
             Expire = 604800,

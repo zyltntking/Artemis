@@ -33,7 +33,7 @@ public static class Normalize
     /// </summary>
     /// <param name="pair">键值对</param>
     /// <returns>戳</returns>
-    public static string KeyValuePairStampNormalize(KeyValuePair<string, string> pair)
+    public static string KeyValuePairStampNormalize(this KeyValuePair<string, string> pair)
     {
         return KeyValuePairStampNormalize(pair.Key, pair.Value);
     }
@@ -54,7 +54,7 @@ public static class Normalize
     /// </summary>
     /// <param name="pair">键值对</param>
     /// <returns></returns>
-    public static string KeyValuePairFlagNormalize(KeyValuePair<string, string> pair)
+    public static string KeyValuePairFlagNormalize(this KeyValuePair<string, string> pair)
     {
         return KeyValuePairFlagNormalize(pair.Key, pair.Value);
     }

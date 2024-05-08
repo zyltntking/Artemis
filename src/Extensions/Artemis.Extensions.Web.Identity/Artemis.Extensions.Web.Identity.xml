@@ -148,9 +148,14 @@
                 常量
             </summary>
         </member>
-        <member name="F:Artemis.Extensions.Web.Identity.Constants.HeaderTokenKey">
+        <member name="F:Artemis.Extensions.Web.Identity.Constants.IdentityTokenKey">
             <summary>
                 头Token键
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.Web.Identity.Constants.ClientKey">
+            <summary>
+            客户端类型
             </summary>
         </member>
         <member name="F:Artemis.Extensions.Web.Identity.Constants.CacheTokenPrefix">
@@ -163,7 +168,7 @@
                 用户对Token映射缓存键前缀
             </summary>
         </member>
-        <member name="F:Artemis.Extensions.Web.Identity.Constants.ContextItemKey">
+        <member name="F:Artemis.Extensions.Web.Identity.Constants.ContextIdentityItemKey">
             <summary>
                 上下文项目键
             </summary>

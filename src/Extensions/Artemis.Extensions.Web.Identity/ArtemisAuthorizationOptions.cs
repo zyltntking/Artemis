@@ -50,7 +50,7 @@ public class InternalAuthorizationOptions : IAuthorizationOptions
     /// <summary>
     ///     请求头Token键
     /// </summary>
-    public required string HeaderTokenKey { get; set; } = Constants.HeaderTokenKey;
+    public required string HeaderTokenKey { get; set; } = Constants.IdentityTokenKey;
 
     /// <summary>
     ///     缓存Token前缀

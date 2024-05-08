@@ -76,7 +76,7 @@ public static class QueryableExtensions
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
         this IQueryable<TEntity> query,
-        IPageBase request)
+        IPageSlot request)
     {
         return query.Page(request.Page, request.Size);
     }
@@ -91,7 +91,7 @@ public static class QueryableExtensions
     /// <returns></returns>
     public static IQueryable<TEntity> Page<TEntity>(
         this IQueryable<TEntity> query,
-        IPageBase request,
+        IPageSlot request,
         out long count)
     {
         return query.Page(request.Page, request.Size, out count);
@@ -131,7 +131,7 @@ public static class QueryableExtensions
     /// <returns></returns>
     public static Task<List<TEntityInfo>> MapPageAsync<TEntity, TKey, TEntityInfo>(
         this IQueryable<TEntity> query,
-        IPageBase request,
+        IPageSlot request,
         CancellationToken cancellationToken = default)
     {
         return query.Page(request.Page, request.Size)

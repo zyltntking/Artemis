@@ -8,7 +8,12 @@ public static class Constants
     /// <summary>
     ///     头Token键
     /// </summary>
-    public const string HeaderTokenKey = "Token";
+    public const string IdentityTokenKey = "Token";
+
+    /// <summary>
+    /// 客户端类型
+    /// </summary>
+    public const string ClientKey = "Client";
 
     /// <summary>
     ///     Token缓存键前缀
@@ -23,7 +28,7 @@ public static class Constants
     /// <summary>
     ///     上下文项目键
     /// </summary>
-    internal const string ContextItemKey = "Token";
+    internal const string ContextIdentityItemKey = IdentityTokenKey;
 }
 
 /// <summary>

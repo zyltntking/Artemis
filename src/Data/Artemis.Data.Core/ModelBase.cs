@@ -68,37 +68,14 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     public virtual TKey Id { get; set; } = default!;
 
     #endregion
-
-    #region Implementation of IModelBase<TKey>
-
-    /// <summary>
-    ///     生成键
-    /// </summary>
-    [NotMapped]
-    public string GenerateKey => Id.ToString()!;
-
-    #endregion
 }
 
-/// <summary>
-///     分区组件
-/// </summary>
-public abstract class PartitionSlot : IPartitionSlot
-{
-    #region Implementation of IPartitionSlot
-
-    /// <summary>
-    ///     分区标识
-    /// </summary>
-    public virtual int Partition { get; set; } = 0;
-
-    #endregion
-}
+#region KeySlot
 
 /// <summary>
 ///     标识组件
 /// </summary>
-public abstract class KeySlot : KeySlot<Guid>, IKeySlot
+public abstract class KeySlot : IKeySlot
 {
     #region Overrides of KeySlot<Guid>
 
@@ -107,27 +84,14 @@ public abstract class KeySlot : KeySlot<Guid>, IKeySlot
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public override Guid Id { get; set; } = Guid.NewGuid();
+    public virtual Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion
 }
 
-/// <summary>
-///     标识组件
-/// </summary>
-/// <typeparam name="TKey">记录标识</typeparam>
-public abstract class KeySlot<TKey> : IKeySlot<TKey> where TKey : IEquatable<TKey>
-{
-    #region Implementation of IKeySlot<TKey>
+#endregion
 
-    /// <summary>
-    ///     存储标识
-    /// </summary>
-    [Key]
-    public virtual TKey Id { get; set; } = default!;
-
-    #endregion
-}
+#region MateSlot
 
 /// <summary>
 ///     元数据组件
@@ -149,7 +113,9 @@ public abstract class MateSlot : IMateSlot
     /// <summary>
     ///     删除时间
     /// </summary>
-    public virtual DateTime? DeletedAt { get; set; }
+    public virtual DateTime? DeletedAt { get; set; } = null;
 
     #endregion
 }
+
+#endregion

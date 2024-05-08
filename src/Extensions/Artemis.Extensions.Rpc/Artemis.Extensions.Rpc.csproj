@@ -39,12 +39,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Grpc.AspNetCore" Version="2.61.0" />
-	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.61.0" />
-	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.61.0" />
+	  <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
+	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.62.0" />
+	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.62.0" />
 	  <PackageReference Include="Mapster" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.2" />
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.4" />
+	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.4" />
 	  <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.5.0" />
 	</ItemGroup>
 

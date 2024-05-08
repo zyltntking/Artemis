@@ -38,6 +38,11 @@
                 附加数据
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.DataCoreProvider">
+            <summary>
+            数据核心服务提供者
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.DataParser">
             <summary>
                 数据解析器
@@ -3742,7 +3747,7 @@
         </member>
         <member name="T:Artemis.Data.Core.IConcurrencyPartitionBase">
             <summary>
-                基本分区模型
+                基本并发分区模型
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.IConcurrencyPartitionBase`1">
@@ -3799,14 +3804,6 @@
             <summary>
                 存储标识
             </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.IKeySlot`1.GenerateKey(System.String,System.String,System.String)">
-            <summary>
-                生成键
-            </summary>
-            <param name="prefix">前缀</param>
-            <param name="space">空间</param>
-            <param name="key"></param>
         </member>
         <member name="T:Artemis.Data.Core.IMateSlot">
             <summary>
@@ -3906,38 +3903,12 @@
                 存储标识
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.ModelBase`1.GenerateKey">
-            <summary>
-                生成键
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.PartitionSlot">
-            <summary>
-                分区组件
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.PartitionSlot.Partition">
-            <summary>
-                分区标识
-            </summary>
-        </member>
         <member name="T:Artemis.Data.Core.KeySlot">
             <summary>
                 标识组件
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.KeySlot.Id">
-            <summary>
-                存储标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.KeySlot`1">
-            <summary>
-                标识组件
-            </summary>
-            <typeparam name="TKey">记录标识</typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.KeySlot`1.Id">
             <summary>
                 存储标识
             </summary>
@@ -4004,17 +3975,17 @@
             <param name="pair">键值对</param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Core.IPageBase">
+        <member name="T:Artemis.Data.Core.IPageSlot">
             <summary>
                 分页协议接口
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.IPageBase.Page">
+        <member name="P:Artemis.Data.Core.IPageSlot.Page">
             <summary>
                 当前页码(从0开始)
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.IPageBase.Size">
+        <member name="P:Artemis.Data.Core.IPageSlot.Size">
             <summary>
                 页面大小
             </summary>
@@ -4056,18 +4027,18 @@
                 数据包
             </summary>
         </member>
-        <member name="T:Artemis.Data.Core.PageBase">
+        <member name="T:Artemis.Data.Core.PageSlot">
             <summary>
                 基本分页处理
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.PageBase.Page">
+        <member name="P:Artemis.Data.Core.PageSlot.Page">
             <summary>
                 当前页码(从1开始)
             </summary>
             <example>1</example>
         </member>
-        <member name="P:Artemis.Data.Core.PageBase.Size">
+        <member name="P:Artemis.Data.Core.PageSlot.Size">
             <summary>
                 页面大小
             </summary>

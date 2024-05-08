@@ -7,7 +7,7 @@ namespace Artemis.Data.Core;
 /// <summary>
 ///     分页协议接口
 /// </summary>
-public interface IPageBase
+public interface IPageSlot
 {
     /// <summary>
     ///     当前页码(从0开始)
@@ -24,7 +24,7 @@ public interface IPageBase
 ///     分页请求协议接口
 /// </summary>
 /// <typeparam name="T">过滤条件</typeparam>
-file interface IPageRequest<T> : IPageBase
+file interface IPageRequest<T> : IPageSlot
 {
     /// <summary>
     ///     过滤条件
@@ -35,7 +35,7 @@ file interface IPageRequest<T> : IPageBase
 /// <summary>
 ///     分页响应协议接口
 /// </summary>
-file interface IPageResult : IPageBase
+file interface IPageResult : IPageSlot
 {
     /// <summary>
     ///     过滤后数据条数
@@ -65,9 +65,9 @@ file interface IPageResult<T> : IPageResult
 /// <summary>
 ///     基本分页处理
 /// </summary>
-public abstract record PageBase : IPageBase
+public abstract record PageSlot : IPageSlot
 {
-    #region Implementation of IPageBase
+    #region Implementation of IPageSlot
 
     /// <summary>
     ///     当前页码(从1开始)
@@ -90,7 +90,7 @@ public abstract record PageBase : IPageBase
 ///     分页请求
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public record PageRequest<T> : PageBase, IPageRequest<T>
+public record PageRequest<T> : PageSlot, IPageRequest<T>
 {
     #region Implementation of IPageRequest<T>
 
@@ -111,7 +111,7 @@ public record PageRequest<T> : PageBase, IPageRequest<T>
 /// <summary>
 ///     分页数据结果
 /// </summary>
-public abstract record AbstractPageResult : PageBase, IPageResult
+public abstract record AbstractPageResult : PageSlot, IPageResult
 {
     #region Implementation of IPageResult
 

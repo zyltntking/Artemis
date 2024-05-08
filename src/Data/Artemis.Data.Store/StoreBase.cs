@@ -237,7 +237,23 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// <returns></returns>
     protected virtual string GenerateKey(TEntity entity)
     {
-        return entity.GenerateKey(Prefix);
+        //    var list = new List<string>();
+
+        //    if (prefix is not null)
+        //        list.Add(prefix); //1
+
+        //    list.Add(GetType().Name); //2
+
+        //    if (space is not null)
+        //        list.Add(space); //3
+
+        //    list.Add(key ?? Id.ToString()!);
+
+        //    return string.Join(":", list);
+
+        //return entity.GenerateKey(Prefix);
+
+        return Prefix;
     }
 
     /// <summary>

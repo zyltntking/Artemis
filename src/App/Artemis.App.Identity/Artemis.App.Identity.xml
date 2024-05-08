@@ -144,7 +144,7 @@
                 签到请求验证
             </summary>
         </member>
-        <member name="M:Artemis.App.Identity.Validator.SignInRequestValidator.#ctor">
+        <member name="M:Artemis.App.Identity.Validator.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
             <summary>
                 验证器构造
             </summary>

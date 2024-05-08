@@ -211,5 +211,18 @@
             <param name="exception"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Extensions.Rpc.SimpleOperationFilter">
+            <summary>
+            操作过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.SimpleOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+             实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
     </members>
 </doc>

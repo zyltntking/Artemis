@@ -149,10 +149,10 @@ public static class TokenHandler
         this HttpContext context,
         TokenDocument document)
     {
-        if (context.Items.ContainsKey(Constants.ContextItemKey))
-            context.Items[Constants.ContextItemKey] = document;
+        if (context.Items.ContainsKey(Constants.ContextIdentityItemKey))
+            context.Items[Constants.ContextIdentityItemKey] = document;
 
-        context.Items.Add(Constants.ContextItemKey, document);
+        context.Items.Add(Constants.ContextIdentityItemKey, document);
     }
 
     /// <summary>
@@ -161,8 +161,8 @@ public static class TokenHandler
     /// <param name="context"></param>
     public static void RemoveToken(this HttpContext context)
     {
-        if (context.Items.ContainsKey(Constants.ContextItemKey))
-            context.Items.Remove(Constants.ContextItemKey);
+        if (context.Items.ContainsKey(Constants.ContextIdentityItemKey))
+            context.Items.Remove(Constants.ContextIdentityItemKey);
     }
 
     /// <summary>
@@ -268,7 +268,7 @@ public static class TokenHandler
     /// <returns></returns>
     public static TokenDocument? FetchToken(this HttpContext context)
     {
-        if (context.Items.TryGetValue(Constants.ContextItemKey, out var document))
+        if (context.Items.TryGetValue(Constants.ContextIdentityItemKey, out var document))
             if (document is TokenDocument tokenDocument)
                 return tokenDocument;
 

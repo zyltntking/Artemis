@@ -1,7 +1,9 @@
 ﻿namespace Artemis.Data.Core;
 
+#region PartitionBase
+
 /// <summary>
-///     基本分区模型
+///     基本并发分区模型
 /// </summary>
 public interface IConcurrencyPartitionBase : IPartitionBase, IConcurrencyPartitionBase<Guid>, IConcurrencyModelBase
 {
@@ -31,6 +33,10 @@ public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot
     where TKey : IEquatable<TKey>
 {
 }
+
+#endregion
+
+#region ModelBase
 
 /// <summary>
 ///     基本并发模型接口
@@ -64,6 +70,10 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot
 {
 }
 
+#endregion
+
+#region KeySlot
+
 /// <summary>
 ///     标识组件接口
 /// </summary>
@@ -81,30 +91,11 @@ public interface IKeySlot<TKey> where TKey : IEquatable<TKey>
     ///     存储标识
     /// </summary>
     TKey Id { get; set; }
-
-    /// <summary>
-    ///     生成键
-    /// </summary>
-    /// <param name="prefix">前缀</param>
-    /// <param name="space">空间</param>
-    /// <param name="key"></param>
-    string GenerateKey(string? prefix = null, string? space = null, string? key = null)
-    {
-        var list = new List<string>();
-
-        if (prefix is not null)
-            list.Add(prefix); //1
-
-        list.Add(GetType().Name); //2
-
-        if (space is not null)
-            list.Add(space); //3
-
-        list.Add(key ?? Id.ToString()!);
-
-        return string.Join(":", list);
-    }
 }
+
+#endregion
+
+#region MateSlot
 
 /// <summary>
 ///     元数据组件接口
@@ -126,6 +117,10 @@ public interface IMateSlot
     /// </summary>
     DateTime? DeletedAt { get; set; }
 }
+
+#endregion
+
+#region Stamp
 
 /// <summary>
 ///     并发锁组件接口
@@ -149,6 +144,10 @@ public interface ICheckStamp
     string CheckStamp { get; set; }
 }
 
+#endregion
+
+#region PartitionSlot
+
 /// <summary>
 ///     分区组件接口
 /// </summary>
@@ -167,3 +166,5 @@ public interface IPartitionSlot<TPartition> where TPartition : IEquatable<TParti
     /// </summary>
     TPartition Partition { get; set; }
 }
+
+#endregion

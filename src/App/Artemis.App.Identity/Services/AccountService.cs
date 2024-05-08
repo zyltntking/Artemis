@@ -68,12 +68,37 @@ public class AccountService : Account.AccountBase
     [Authorize(IdentityPolicy.Anonymous)]
     public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
+        var clientType = context.RequestHeaders
+            .Get(Constants.ClientKey)?.Value ?? "UnKnown";
+
+        Logger.LogInformation($"客户端类型：{clientType}");
+
         var (result, token) =
             await AccountManager.SignInAsync(request.UserSign, request.Password, context.CancellationToken);
 
         if (result.Succeeded && token is not null)
         {
             var replyToken = token.GenerateTokenKey();
+
+            // 记录UserLogin
+
+            //var userLogin = new UserLogin
+            //{
+            //    UserId = token.UserId,
+            //    LoginProvider = "ArtemisIdentityService",
+            //    ProviderKey = clientType,
+            //    ProviderDisplayName = token.UserName
+            //};
+
+            // 记录UserToken
+
+            //var userToken = new UserToken
+            //{
+            //    UserId = token.UserId,
+            //    LoginProvider = "ArtemisIdentityService",
+            //    Name = clientType,
+            //    Value = replyToken
+            //};
 
             var cacheTokenKey = $"{Options.CacheTokenPrefix}:{replyToken}";
 

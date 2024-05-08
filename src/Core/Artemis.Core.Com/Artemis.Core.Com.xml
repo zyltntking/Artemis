@@ -5,9 +5,330 @@
 		<name>Artemis.Core.Com</name>
 	</assembly>
 	<members>
-		<member name="T:Artemis.Core.Com.Connection`1">
+		<member name="T:Artemis.Core.Com.AwaitableEventArgs">
 			<summary>
-				连接
+				可等待事件参数
+			</summary>
+		</member>
+		<member name="F:Artemis.Core.Com.AwaitableEventArgs._source">
+			<summary>
+				可等待事件参数源
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.AwaitableEventArgs.#ctor">
+			<summary>
+				构造函数
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.AwaitableEventArgs.OnCompleted(System.Net.Sockets.SocketAsyncEventArgs)">
+			<summary>
+				完成事件
+			</summary>
+			<param name="eventArgs"></param>
+		</member>
+		<member name="M:Artemis.Core.Com.AwaitableEventArgs.GetResult(System.Int16)">
+			<summary>
+				Gets the result of the <see cref="T:System.Threading.Tasks.Sources.IValueTaskSource`1" />.
+			</summary>
+			<param name="token">
+				An opaque value that was provided to the <see cref="T:System.Threading.Tasks.ValueTask" />
+				constructor.
+			</param>
+			<returns>The result of the <see cref="T:System.Threading.Tasks.Sources.IValueTaskSource`1" />.</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.AwaitableEventArgs.GetStatus(System.Int16)">
+			<summary>
+				Gets the status of the current operation.
+			</summary>
+			<param name="token">
+				Opaque value that was provided to the <see cref="T:System.Threading.Tasks.ValueTask" />'s
+				constructor.
+			</param>
+			<returns>A value that indicates the status of the current operation.</returns>
+		</member>
+		<member
+			name="M:Artemis.Core.Com.AwaitableEventArgs.OnCompleted(System.Action{System.Object},System.Object,System.Int16,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)">
+			<summary>
+				Schedules the continuation action for this <see cref="T:System.Threading.Tasks.Sources.IValueTaskSource`1" />.
+			</summary>
+			<param name="continuation">The continuation to invoke when the operation has completed.</param>
+			<param name="state">The state object to pass to <paramref name="continuation" /> when it's invoked.</param>
+			<param name="token">
+				An opaque value that was provided to the <see cref="T:System.Threading.Tasks.ValueTask" />
+				constructor.
+			</param>
+			<param name="flags">The flags describing the behavior of the continuation.</param>
+		</member>
+		<member name="T:Artemis.Core.Com.IConnection">
+			<summary>
+				连接接口
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.IConnection.Start">
+			<summary>
+				启动连接
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.IConnection.Shutdown">
+			<summary>
+				关闭连接
+			</summary>
+		</member>
+		<member name="T:Artemis.Core.Com.Connection">
+			<summary>
+				抽象连接实现
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.Connection.DisposeAsync">
+			<summary>
+				Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources
+				asynchronously.
+			</summary>
+			<returns>A task that represents the asynchronous dispose operation.</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.Connection.Start">
+			<summary>
+				启动连接
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.Connection.Shutdown">
+			<summary>
+				关闭连接
+			</summary>
+		</member>
+		<member name="T:Artemis.Core.Com.IPool`1">
+			<summary>
+				连接池接口
+			</summary>
+			<typeparam name="TConnection">连接模板</typeparam>
+		</member>
+		<member name="M:Artemis.Core.Com.IPool`1.Rent">
+			<summary>
+				租用
+			</summary>
+			<returns>连接对象</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.IPool`1.Return(`0)">
+			<summary>
+				归还
+			</summary>
+			<param name="connection">归还连接对象</param>
+		</member>
+		<member name="T:Artemis.Core.Com.Pool`1">
+			<summary>
+				抽象连接池接口
+			</summary>
+			<typeparam name="TConnection"></typeparam>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.#ctor(System.Int32)">
+			<summary>
+				池构造
+			</summary>
+			<param name="maxQueueSize">最大连接数</param>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Dispose">
+			<summary>
+				Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.Pool`1.MaxQueueSize">
+			<summary>
+				最大连接数
+			</summary>
+		</member>
+		<member name="F:Artemis.Core.Com.Pool`1._queue">
+			<summary>
+				连接队列
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Create">
+			<summary>
+				创建连接
+			</summary>
+			<returns>连接对象</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Reset(`0)">
+			<summary>
+				重置连接
+			</summary>
+			<param name="connection">连接对象</param>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Release(`0)">
+			<summary>
+				释放连接
+			</summary>
+			<param name="connection">连接对象</param>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Rent">
+			<summary>
+				租用
+			</summary>
+			<returns>连接对象</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.Pool`1.Return(`0)">
+			<summary>
+				归还
+			</summary>
+			<param name="connection">归还连接对象</param>
+		</member>
+		<member name="T:Artemis.Core.Com.Receiver">
+			<summary>
+				接收器
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.Receiver.ReceiveAsync(System.Net.Sockets.Socket,System.Memory{System.Byte})">
+			<summary>
+				接收数据
+			</summary>
+			<param name="socket"></param>
+			<param name="memory"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Core.Com.Sender">
+			<summary>
+				发送器
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.Sender.SendAsync(System.Net.Sockets.Socket,System.ReadOnlyMemory{System.Byte}@)">
+			<summary>
+				发送数据
+			</summary>
+			<param name="socket"></param>
+			<param name="data"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Core.Com.Sender.SendAsync(System.Net.Sockets.Socket,System.Buffers.ReadOnlySequence{System.Byte}@)">
+			<summary>
+				发送数据
+			</summary>
+			<param name="socket"></param>
+			<param name="data"></param>
+			<returns></returns>
+			<exception cref="T:System.InvalidOperationException"></exception>
+		</member>
+		<member name="M:Artemis.Core.Com.Sender.Reset">
+			<summary>
+				清空发送器
+			</summary>
+		</member>
+		<member name="T:Artemis.Core.Com.SenderPool">
+			<summary>
+				发送池
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.SenderPool.#ctor(System.Int32)">
+			<summary>
+				发送池构造
+			</summary>
+			<param name="maxQueueSize">最大连接数</param>
+		</member>
+		<member name="M:Artemis.Core.Com.SenderPool.Create">
+			<summary>
+				创建连接
+			</summary>
+			<returns>连接对象</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.SenderPool.Reset(Artemis.Core.Com.Sender)">
+			<summary>
+				重置连接
+			</summary>
+			<param name="connection">连接对象</param>
+		</member>
+		<member name="M:Artemis.Core.Com.SenderPool.Release(Artemis.Core.Com.Sender)">
+			<summary>
+				释放连接
+			</summary>
+			<param name="connection">连接对象</param>
+		</member>
+		<member name="T:Artemis.Core.Com.SocketConnection">
+			<summary>
+				Socket连接
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.SocketConnection.#ctor(System.Net.Sockets.Socket,Artemis.Core.Com.SenderPool)">
+			<summary>
+				Socket连接构造
+			</summary>
+			<param name="socket"></param>
+			<param name="senderPool"></param>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.Socket">
+			<summary>
+				套接字
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.Receiver">
+			<summary>
+				接收器
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.Sender">
+			<summary>
+				发送器
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.SenderPool">
+			<summary>
+				发送池
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.ReceiveTask">
+			<summary>
+				接受任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.SendTask">
+			<summary>
+				发送任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.TransportPipe">
+			<summary>
+				传输管道
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.ApplicationPipe">
+			<summary>
+				应用管道
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.ShutdownLock">
+			<summary>
+				关闭锁
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.Output">
+			<summary>
+				发送器
+			</summary>
+		</member>
+		<member name="P:Artemis.Core.Com.SocketConnection.Input">
+			<summary>
+				接收器
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.SocketConnection.DisposeAsync">
+			<summary>
+				Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources
+				asynchronously.
+			</summary>
+			<returns>A task that represents the asynchronous dispose operation.</returns>
+		</member>
+		<member name="M:Artemis.Core.Com.SocketConnection.Start">
+			<summary>
+				启动连接
+			</summary>
+		</member>
+		<member name="M:Artemis.Core.Com.SocketConnection.SendWork">
+			<summary>
+				发送任务
+			</summary>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Core.Com.SocketConnection.Shutdown">
+			<summary>
+				关闭连接
 			</summary>
 		</member>
 	</members>
