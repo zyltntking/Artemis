@@ -31,12 +31,12 @@ public class RoleConfiguration : ModelConfiguration<ArtemisRole>
             .HasComment("标识");
 
         builder.Property(role => role.Name)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("角色名");
 
         builder.Property(role => role.NormalizedName)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("规范化角色名");
 
@@ -46,7 +46,7 @@ public class RoleConfiguration : ModelConfiguration<ArtemisRole>
             .HasComment("并发锁");
 
         builder.Property(role => role.Description)
-            .HasMaxLength(128)
+            .HasMaxLength(256)
             .HasComment("角色描述");
 
         base.FieldConfigure(builder);

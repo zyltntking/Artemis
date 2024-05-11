@@ -31,21 +31,21 @@ public class UserConfiguration : ModelConfiguration<ArtemisUser>
             .HasComment("标识");
 
         builder.Property(user => user.UserName)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("用户名");
 
         builder.Property(user => user.NormalizedUserName)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("规范化用户名");
 
         builder.Property(user => user.Email)
-            .HasMaxLength(128)
+            .HasMaxLength(256)
             .HasComment("邮箱地址");
 
         builder.Property(user => user.NormalizedEmail)
-            .HasMaxLength(128)
+            .HasMaxLength(256)
             .HasComment("规范化邮箱地址");
 
         builder.Property(user => user.EmailConfirmed)
@@ -57,8 +57,8 @@ public class UserConfiguration : ModelConfiguration<ArtemisUser>
             .HasComment("密码哈希");
 
         builder.Property(user => user.SecurityStamp)
-            .HasMaxLength(64)
-            .HasComment("密码锁");
+            .HasMaxLength(128)
+            .HasComment("加密锁");
 
         builder.Property(user => user.ConcurrencyStamp)
             .HasMaxLength(64)
@@ -66,11 +66,11 @@ public class UserConfiguration : ModelConfiguration<ArtemisUser>
             .HasComment("并发锁");
 
         builder.Property(user => user.PhoneNumber)
-            .HasMaxLength(16)
+            .HasMaxLength(32)
             .HasComment("电话号码");
 
         builder.Property(user => user.NormalizedPhoneNumber)
-            .HasMaxLength(16)
+            .HasMaxLength(32)
             .HasComment("规范化电话号码");
 
         builder.Property(user => user.PhoneNumberConfirmed)

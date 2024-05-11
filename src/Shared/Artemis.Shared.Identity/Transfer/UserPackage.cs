@@ -60,21 +60,21 @@ public record UserPackage : IUser
     ///     用户名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public required string UserName { get; set; }
 
     /// <summary>
     ///     电子邮件
     /// </summary>
     [EmailAddress]
-    [MaxLength(128)]
+    [MaxLength(256)]
     public string? Email { get; set; }
 
     /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
-    [MaxLength(16)]
+    [MaxLength(32)]
     public string? PhoneNumber { get; set; }
 
     #endregion

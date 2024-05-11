@@ -52,14 +52,14 @@ public record ClaimPackage : IClaim
     ///     凭据类型
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public required string ClaimType { get; set; }
 
     /// <summary>
     ///     凭据值
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(512)]
     public required string ClaimValue { get; set; }
 
     /// <summary>

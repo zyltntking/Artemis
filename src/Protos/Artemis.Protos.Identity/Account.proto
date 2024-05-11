@@ -3,6 +3,7 @@
 option csharp_namespace = "Artemis.Protos.Identity";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 import "common.proto";
 
 package artemis.protos.identity;
@@ -26,10 +27,9 @@ service Account {
   }
 
   // 签出
-  rpc SignOut (SignOutRequest) returns (EmptyResponse){
+  rpc SignOut (google.protobuf.Empty) returns (EmptyResponse){
 	  option (google.api.http) = {
 		  post: "/Account/SignOut"
-		  body: "*"
 	  };
   } 
 
@@ -78,12 +78,6 @@ message SignUpRequest {
   google.protobuf.StringValue email = 3;
   // 手机号码
   google.protobuf.StringValue phoneNumber = 4;
-}
-
-// 签入请求
-message SignOutRequest {
-  // 端类型
-  string endType = 1;
 }
 
 // 修改密码请求

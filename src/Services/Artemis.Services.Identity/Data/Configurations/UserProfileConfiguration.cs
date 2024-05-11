@@ -32,12 +32,12 @@ public class UserProfileConfiguration : BaseConfiguration<ArtemisUserProfile>
             .HasComment("用户标识");
 
         builder.Property(userProfile => userProfile.Key)
-            .HasMaxLength(32)
+            .HasMaxLength(64)
             .IsRequired()
             .HasComment("用户信息键");
 
         builder.Property(userProfile => userProfile.Value)
-            .HasMaxLength(128)
+            .HasMaxLength(256)
             .HasComment("用户信息值");
     }
 

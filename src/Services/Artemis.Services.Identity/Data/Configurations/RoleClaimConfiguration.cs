@@ -34,12 +34,12 @@ public class RoleClaimConfiguration : KeySlotModelConfiguration<ArtemisRoleClaim
             .HasComment("角色标识");
 
         builder.Property(roleClaim => roleClaim.ClaimType)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("凭据类型");
 
         builder.Property(roleClaim => roleClaim.ClaimValue)
-            .HasMaxLength(128)
+            .HasMaxLength(512)
             .IsRequired()
             .HasComment("凭据值");
 

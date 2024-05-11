@@ -25,7 +25,7 @@ public static class RpcResultAdapter
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <returns></returns>
-    public static TResult Success<TResult>()
+    public static TResult EmptySuccess<TResult>()
     {
         return DataResult.AdapterNullSuccess().Adapt<TResult>();
     }
@@ -48,7 +48,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult"></typeparam>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static TResult Fail<TResult>(string message = "失败")
+    public static TResult EmptyFail<TResult>(string message = "失败")
     {
         return DataResult.AdapterNullFail(message).Adapt<TResult>();
     }

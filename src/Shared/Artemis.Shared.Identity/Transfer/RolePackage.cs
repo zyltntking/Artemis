@@ -34,13 +34,13 @@ public record RolePackage : IRole
     ///     角色名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public required string Name { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(256)]
     public string? Description { get; set; }
 
     #endregion

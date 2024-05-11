@@ -23,15 +23,6 @@ internal interface IUserToken
     ///     令牌值
     /// </summary>
     string? Value { get; set; }
-
-    #region DefaultImlement
-
-    /// <summary>
-    ///     生成标识
-    /// </summary>
-    string GenerateFlag => $"{LoginProvider}:{Name}";
-
-    #endregion
 }
 
 /// <summary>
@@ -52,29 +43,20 @@ file interface IUserTokenDocument : IUserToken
 /// </summary>
 public record UserTokenPackage : IUserToken
 {
-    #region DefaultImlement
-
-    /// <summary>
-    ///     生成标识
-    /// </summary>
-    public string GenerateFlag => $"{LoginProvider}:{Name}";
-
-    #endregion
-
     #region Implementation of IUserToken
 
     /// <summary>
     ///     登录提供程序
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     public required string LoginProvider { get; set; }
 
     /// <summary>
     ///     令牌名称
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public required string Name { get; set; }
 
     /// <summary>

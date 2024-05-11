@@ -31,12 +31,12 @@ public class UserTokenConfiguration : BaseConfiguration<ArtemisUserToken>
             .HasComment("用户标识");
 
         builder.Property(userToken => userToken.LoginProvider)
-            .HasMaxLength(32)
+            .HasMaxLength(64)
             .IsRequired()
             .HasComment("认证提供程序");
 
         builder.Property(userToken => userToken.Name)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("认证令牌名");
 

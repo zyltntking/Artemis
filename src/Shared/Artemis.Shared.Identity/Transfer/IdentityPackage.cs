@@ -32,6 +32,11 @@ public sealed record TokenDocument
     public required string UserName { get; set; }
 
     /// <summary>
+    /// 端类型
+    /// </summary>
+    public required string EndType { get; set; }
+
+    /// <summary>
     ///     用户凭据
     /// </summary>
     public required IEnumerable<ClaimPackage> UserClaims { get; set; }

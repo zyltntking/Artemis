@@ -23,15 +23,6 @@ internal interface IUserLogin
     ///     提供程序显示名称
     /// </summary>
     string? ProviderDisplayName { get; set; }
-
-    #region DefaultImlement
-
-    /// <summary>
-    ///     生成标识
-    /// </summary>
-    string GenerateFlag => $"{LoginProvider}:{ProviderKey}:{ProviderDisplayName}";
-
-    #endregion
 }
 
 /// <summary>
@@ -52,35 +43,26 @@ file interface IUserLoginInfo : IUserLogin
 /// </summary>
 public record UserLoginPackage : IUserLogin
 {
-    #region DefaultImlement
-
-    /// <summary>
-    ///     生成标识
-    /// </summary>
-    public string GenerateFlag => $"{LoginProvider}:{ProviderKey}:{ProviderDisplayName}";
-
-    #endregion
-
     #region Implementation of IUserLogin
 
     /// <summary>
     ///     登录提供程序
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     public required string LoginProvider { get; set; }
 
     /// <summary>
     ///     提供程序密钥
     /// </summary>
     [Required]
-    [MaxLength(64)]
+    [MaxLength(256)]
     public required string ProviderKey { get; set; }
 
     /// <summary>
     ///     提供程序显示名称
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(128)]
     public string? ProviderDisplayName { get; set; }
 
     #endregion

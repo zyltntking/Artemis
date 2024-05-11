@@ -34,12 +34,12 @@ public class UserClaimConfiguration : KeySlotModelConfiguration<ArtemisUserClaim
             .HasComment("用户标识");
 
         builder.Property(userClaim => userClaim.ClaimType)
-            .HasMaxLength(32)
+            .HasMaxLength(128)
             .IsRequired()
             .HasComment("凭据类型");
 
         builder.Property(userClaim => userClaim.ClaimValue)
-            .HasMaxLength(128)
+            .HasMaxLength(512)
             .IsRequired()
             .HasComment("凭据类型");
 

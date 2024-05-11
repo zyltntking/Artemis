@@ -94,7 +94,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
                         if (!Options.EnableMultiEnd)
                         {
                             var userMapToken =
-                                Cache.FetchUserMapToken($"{Options.UserMapTokenPrefix}:{document.UserId}");
+                                Cache.FetchUserMapToken($"{Options.UserMapTokenPrefix}:{document.EndType}:{document.UserId}");
 
                             if (userMapToken != headerToken) continueHandler = false;
                         }

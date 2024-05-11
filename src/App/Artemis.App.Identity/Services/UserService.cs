@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using Artemis.Data.Core;
 using Artemis.Extensions.Web.Identity;
 using Artemis.Protos.Identity;
 using Artemis.Services.Identity.Managers;
 using Grpc.Core;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Artemis.App.Identity.Services;
@@ -48,7 +50,7 @@ public class UserService : User.UserBase
     public override async Task<FetchUserInfoResponse> FetchUserInfo(FetchUserInfosRequest request,
         ServerCallContext context)
     {
-        var userInfos = await UserManager.FetchUserAsync(
+        var pagedUserInfos = await UserManager.FetchUserAsync(
             request.NameSearch,
             request.EmailSearch,
             request.PhoneNumberSearch,
@@ -56,9 +58,13 @@ public class UserService : User.UserBase
             request.Size ?? 20,
             context.CancellationToken);
 
-        //var aa = userInfos.Adapt<UserInfoReply>();
+        var userReplies = pagedUserInfos.Items.Adapt<List<UserInfoReply>>();
 
-        throw new NotImplementedException();
+        var response = DataResult.Success(pagedUserInfos).Adapt<FetchUserInfoResponse>();
+
+        response.Data.Items.Add(userReplies);
+
+        return response;
     }
 
     #endregion

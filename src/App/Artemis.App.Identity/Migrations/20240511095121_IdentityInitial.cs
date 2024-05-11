@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialIdentity : Migration
+    public partial class IdentityInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,8 +24,8 @@ namespace Artemis.App.Identity.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
-                    ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
-                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
+                    ClaimType = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
@@ -44,10 +44,10 @@ namespace Artemis.App.Identity.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
-                    Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "角色名"),
-                    NormalizedName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "规范化角色名"),
+                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "角色名"),
+                    NormalizedName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "规范化角色名"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
-                    Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "角色描述")
+                    Description = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "角色描述")
                 },
                 constraints: table =>
                 {
@@ -64,21 +64,21 @@ namespace Artemis.App.Identity.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间,初始化后不再进行任何变更"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间,初始为创建时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间,启用软删除时生效"),
-                    UserName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用户名"),
-                    NormalizedUserName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "规范化用户名"),
-                    Email = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "邮箱地址"),
-                    NormalizedEmail = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "规范化邮箱地址"),
+                    UserName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "用户名"),
+                    NormalizedUserName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "规范化用户名"),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "邮箱地址"),
+                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "规范化邮箱地址"),
                     EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false, comment: "是否确认邮箱地址"),
-                    PasswordHash = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "密码哈希"),
-                    SecurityStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "密码锁"),
+                    PasswordHash = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "密码哈希"),
+                    SecurityStamp = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "加密锁"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
-                    PhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true, comment: "电话号码"),
+                    PhoneNumber = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true, comment: "电话号码"),
                     PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false, comment: "是否确认电话号码"),
                     TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false, comment: "是否允许双步认证"),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true, comment: "用户锁定到期时间标记"),
                     LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false, comment: "是否允许锁定用户"),
                     AccessFailedCount = table.Column<int>(type: "integer", nullable: false, comment: "尝试错误数量"),
-                    NormalizedPhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true, comment: "规范化电话号码")
+                    NormalizedPhoneNumber = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true, comment: "规范化电话号码")
                 },
                 constraints: table =>
                 {
@@ -94,8 +94,8 @@ namespace Artemis.App.Identity.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false, comment: "角色标识"),
-                    ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
-                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据值"),
+                    ClaimType = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
@@ -120,8 +120,8 @@ namespace Artemis.App.Identity.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false, comment: "标识")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
-                    ClaimType = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "凭据类型"),
-                    ClaimValue = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimType = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
+                    ClaimValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false, comment: "凭据类型"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
                     Description = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "凭据描述")
                 },
@@ -143,9 +143,9 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证提供程序"),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "认证提供程序提供的第三方标识"),
-                    ProviderDisplayName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true, comment: "认证提供程序显示的用户名"),
+                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "认证提供程序"),
+                    ProviderKey = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "认证提供程序提供的第三方标识"),
+                    ProviderDisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true, comment: "认证提供程序显示的用户名"),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识")
                 },
                 constraints: table =>
@@ -166,8 +166,8 @@ namespace Artemis.App.Identity.Migrations
                 schema: "identity",
                 columns: table => new
                 {
-                    Key = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "用户信息键"),
-                    Value = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "用户信息值"),
+                    Key = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "用户信息键"),
+                    Value = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "用户信息值"),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识")
                 },
                 constraints: table =>
@@ -217,8 +217,8 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, comment: "用户标识"),
-                    LoginProvider = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证提供程序"),
-                    Name = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "认证令牌名"),
+                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "认证提供程序"),
+                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "认证令牌名"),
                     Value = table.Column<string>(type: "text", nullable: true, comment: "认证令牌")
                 },
                 constraints: table =>

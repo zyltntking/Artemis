@@ -29,7 +29,7 @@ public class UserClaim : IdentityUserClaim<Guid>, IKeySlot<int>, IUserClaim
     ///     凭据值
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(512)]
     public override required string ClaimValue { get; set; }
 
     /// <summary>

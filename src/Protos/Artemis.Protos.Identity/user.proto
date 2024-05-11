@@ -33,7 +33,7 @@ message FetchUserInfosRequest{
 // 用户信息回应
 message UserInfoReply{
   // 用户标识
-  string userId = 1;
+  string id = 1;
   // 用户名
   string userName = 2;
   // 邮箱地址
@@ -49,13 +49,13 @@ message UserInfoReply{
 // 分页用户信息回应
 message PagedUserInfoReply{
   // 页码
-  google.protobuf.Int32Value page = 1;
+  int32 page = 1;
   // 条目数
-  google.protobuf.Int32Value size = 2;
+  int32 size = 2;
   // 总数
-  google.protobuf.Int64Value total = 3;
+  int64 total = 3;
   // 过滤后总数
-  google.protobuf.Int64Value count = 4;
+  int64 count = 4;
   // 数据
   repeated UserInfoReply items = 5;
 }

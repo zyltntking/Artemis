@@ -34,21 +34,21 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     ///     用户名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public override required string UserName { get; set; }
 
     /// <summary>
     ///     电子邮件
     /// </summary>
     [EmailAddress]
-    [MaxLength(128)]
+    [MaxLength(256)]
     public override string? Email { get; set; }
 
     /// <summary>
     ///     电话号码
     /// </summary>
     [Phone]
-    [MaxLength(16)]
+    [MaxLength(32)]
     public override string? PhoneNumber { get; set; }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     /// <summary>
     ///     标准化电子邮件
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(256)]
     public override string? NormalizedEmail { get; set; }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     /// <summary>
     ///     标准化电话号码
     /// </summary>
-    [MaxLength(16)]
+    [MaxLength(32)]
     public virtual string? NormalizedPhoneNumber { get; set; }
 
     /// <summary>
@@ -85,7 +85,7 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     /// <summary>
     ///     密码锁
     /// </summary>
-    [MaxLength(64)]
+    [MaxLength(128)]
     public override string? SecurityStamp { get; set; }
 
     /// <summary>

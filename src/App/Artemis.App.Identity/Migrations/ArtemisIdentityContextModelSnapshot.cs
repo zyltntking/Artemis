@@ -18,7 +18,7 @@ namespace Artemis.App.Identity.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("identity")
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -38,14 +38,14 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("凭据类型");
 
                     b.Property<string>("ClaimValue")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
                         .HasComment("凭据值");
 
                     b.Property<DateTime>("CreatedAt")
@@ -112,20 +112,20 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("删除时间,启用软删除时生效");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("角色描述");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("角色名");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("规范化角色名");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -171,14 +171,14 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("凭据类型");
 
                     b.Property<string>("ClaimValue")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
                         .HasComment("凭据值");
 
                     b.Property<string>("Description")
@@ -234,8 +234,8 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("删除时间,启用软删除时生效");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("邮箱地址");
 
                     b.Property<bool>("EmailConfirmed")
@@ -251,30 +251,30 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("用户锁定到期时间标记");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("规范化邮箱地址");
 
                     b.Property<string>("NormalizedPhoneNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
                         .HasComment("规范化电话号码");
 
                     b.Property<string>("NormalizedUserName")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("规范化用户名");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("密码哈希");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
                         .HasComment("电话号码");
 
                     b.Property<bool>("PhoneNumberConfirmed")
@@ -282,9 +282,9 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("是否确认电话号码");
 
                     b.Property<string>("SecurityStamp")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("密码锁");
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("加密锁");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean")
@@ -296,8 +296,8 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("用户名");
 
                     b.HasKey("Id")
@@ -345,14 +345,14 @@ namespace Artemis.App.Identity.Migrations
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("凭据类型");
 
                     b.Property<string>("ClaimValue")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
                         .HasComment("凭据类型");
 
                     b.Property<string>("Description")
@@ -385,18 +385,18 @@ namespace Artemis.App.Identity.Migrations
             modelBuilder.Entity("Artemis.Services.Identity.Data.ArtemisUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("认证提供程序");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("认证提供程序提供的第三方标识");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("认证提供程序显示的用户名");
 
                     b.Property<Guid>("UserId")
@@ -421,13 +421,13 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("用户标识");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("用户信息键");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasComment("用户信息值");
 
                     b.HasKey("UserId", "Key", "Value")
@@ -471,13 +471,13 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("用户标识");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("认证提供程序");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("认证令牌名");
 
                     b.Property<string>("Value")

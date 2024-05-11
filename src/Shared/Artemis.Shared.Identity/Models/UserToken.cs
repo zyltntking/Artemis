@@ -13,14 +13,14 @@ public class UserToken : IdentityUserToken<Guid>, IUserToken
     ///     登录提供程序
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     public override required string LoginProvider { get; set; }
 
     /// <summary>
     ///     令牌名称
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public override required string Name { get; set; }
 
     /// <summary>

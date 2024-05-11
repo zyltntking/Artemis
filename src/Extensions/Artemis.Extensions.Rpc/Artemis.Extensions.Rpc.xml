@@ -1,252 +1,239 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Extensions.Rpc</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Extensions.Rpc.AddIdentityToken">
-			<summary>
-				添加认证令牌操作过滤器
-			</summary>
-		</member>
-		<member name="P:Artemis.Extensions.Rpc.AddIdentityToken.Options">
-			<summary>
-				认证配置依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.AddIdentityToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Identity.SharedIdentityOptions})">
-			<summary>
-				构造
-			</summary>
-			<param name="options"></param>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.AddIdentityToken.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-			<summary>
-				实现
-			</summary>
-			<param name="operation"></param>
-			<param name="context"></param>
-			<exception cref="T:System.NotImplementedException"></exception>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.AddInLogInterceptor">
-			<summary>
-				补充日志侦听器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.AddInLogInterceptor})">
-			<summary>
-				侦听器构造
-			</summary>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Extensions.Rpc.AddInLogInterceptor.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-			<summary>
-				Server-side handler for intercepting and incoming unary call.
-			</summary>
-			<typeparam name="TRequest">Request message type for this method.</typeparam>
-			<typeparam name="TResponse">Response message type for this method.</typeparam>
-			<param name="request">The request value of the incoming invocation.</param>
-			<param name="context">
-				An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
-				the context of the invocation.
-			</param>
-			<param name="continuation">
-				A delegate that asynchronously proceeds with the invocation, calling
-				the next interceptor in the chain, or the service request handler,
-				in case of the last interceptor and return the response value of
-				the RPC. The interceptor can choose to call it zero or more times
-				at its discretion.
-			</param>
-			<returns>
-				A future representing the response value of the RPC. The interceptor
-				can simply return the return value from the continuation intact,
-				or an arbitrary response value as it sees fit.
-			</returns>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor">
-			<summary>
-				友好异常侦听器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.FriendlyExceptionInterceptor})">
-			<summary>
-				侦听器构造
-			</summary>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-			<summary>
-				侦听一元调用异常
-			</summary>
-			<typeparam name="TRequest"></typeparam>
-			<typeparam name="TResponse"></typeparam>
-			<param name="request"></param>
-			<param name="context"></param>
-			<param name="continuation"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.MessageValidationInterceptor">
-			<summary>
-				消息体验证拦截器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.MessageValidationInterceptor})">
-			<summary>
-				侦听器构造
-			</summary>
-			<param name="provider"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Extensions.Rpc.MessageValidationInterceptor.Provider">
-			<summary>
-				服务提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Extensions.Rpc.MessageValidationInterceptor.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-			<summary>
-				侦听一元调用
-			</summary>
-			<typeparam name="TRequest"></typeparam>
-			<typeparam name="TResponse"></typeparam>
-			<param name="request"></param>
-			<param name="context"></param>
-			<param name="continuation"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.TryGetValidator``1(FluentValidation.IValidator{``0}@)">
-			<summary>
-				获取验证器
-			</summary>
-			<typeparam name="TRequest"></typeparam>
-			<param name="validator"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.RemoveDefaultResponse">
-			<summary>
-				移除默认响应
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.RemoveDefaultResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-			<summary>
-				实现
-			</summary>
-			<param name="operation"></param>
-			<param name="context"></param>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.RemoveDefaultSchemas">
-			<summary>
-				移除默认生成的模式
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.RemoveDefaultSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
-			<summary>
-				执行
-			</summary>
-			<param name="swaggerDoc"></param>
-			<param name="context"></param>
-			<exception cref="T:System.NotImplementedException"></exception>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.RpcAuthorizationResultTransformer">
-			<summary>
-				Rpc认证结果转换
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Extensions.Rpc.RpcAuthorizationResultTransformer.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
-			<summary>
-				失败处理器
-			</summary>
-			<param name="context"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Extensions.Rpc.RpcResultAdapter">
-			<summary>
-				Rpc结果适配器
-			</summary>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Success``2(``1)">
-			<summary>
-				成功结果
-			</summary>
-			<typeparam name="TResult">结果类型</typeparam>
-			<typeparam name="TData">数据类型</typeparam>
-			<param name="data">载荷数据</param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Success``1">
-			<summary>
-				成功结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Fail``2(System.String)">
-			<summary>
-				失败结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<typeparam name="TData"></typeparam>
-			<param name="message"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Fail``1(System.String)">
-			<summary>
-				失败结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<param name="message"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.AuthFail``1(System.String)">
-			<summary>
-				认证失败结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<param name="message"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.ValidateFail``1(System.String)">
-			<summary>
-				校验失败结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<param name="message"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Exception``1(System.Exception)">
-			<summary>
-				异常结果
-			</summary>
-			<typeparam name="TResult"></typeparam>
-			<param name="exception"></param>
-			<returns></returns>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Extensions.Rpc</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Extensions.Rpc.AddIdentityToken">
+            <summary>
+                添加认证令牌操作过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddIdentityToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Web.Identity.SharedIdentityOptions})">
+            <summary>
+                构造
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddIdentityToken.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+                实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.AddIdentityToken.Options">
+            <summary>
+                认证配置依赖
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.AddInLogInterceptor">
+            <summary>
+                补充日志侦听器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.AddInLogInterceptor})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.AddInLogInterceptor.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.AddInLogInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <summary>
+                Server-side handler for intercepting and incoming unary call.
+            </summary>
+            <typeparam name="TRequest">Request message type for this method.</typeparam>
+            <typeparam name="TResponse">Response message type for this method.</typeparam>
+            <param name="request">The request value of the incoming invocation.</param>
+            <param name="context">
+                An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
+                the context of the invocation.
+            </param>
+            <param name="continuation">
+                A delegate that asynchronously proceeds with the invocation, calling
+                the next interceptor in the chain, or the service request handler,
+                in case of the last interceptor and return the response value of
+                the RPC. The interceptor can choose to call it zero or more times
+                at its discretion.
+            </param>
+            <returns>
+                A future representing the response value of the RPC. The interceptor
+                can simply return the return value from the continuation intact,
+                or an arbitrary response value as it sees fit.
+            </returns>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor">
+            <summary>
+                友好异常侦听器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.FriendlyExceptionInterceptor})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.FriendlyExceptionInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <summary>
+                侦听一元调用异常
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="request"></param>
+            <param name="context"></param>
+            <param name="continuation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.MessageValidationInterceptor">
+            <summary>
+                消息体验证拦截器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Rpc.MessageValidationInterceptor})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="provider"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.MessageValidationInterceptor.Provider">
+            <summary>
+                服务提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Rpc.MessageValidationInterceptor.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <summary>
+                侦听一元调用
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="request"></param>
+            <param name="context"></param>
+            <param name="continuation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.MessageValidationInterceptor.TryGetValidator``1(FluentValidation.IValidator{``0}@)">
+            <summary>
+                获取验证器
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <param name="validator"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RemoveDefaultResponse">
+            <summary>
+                移除默认响应
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RemoveDefaultResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+                实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RemoveDefaultSchemas">
+            <summary>
+                移除默认生成的模式
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RemoveDefaultSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+                执行
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RpcAuthorizationResultTransformer">
+            <summary>
+                Rpc认证结果转换
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcAuthorizationResultTransformer.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+                失败处理器
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.Rpc.RpcResultAdapter">
+            <summary>
+                Rpc结果适配器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Success``2(``1)">
+            <summary>
+                成功结果
+            </summary>
+            <typeparam name="TResult">结果类型</typeparam>
+            <typeparam name="TData">数据类型</typeparam>
+            <param name="data">载荷数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.EmptySuccess``1">
+            <summary>
+                成功结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Fail``2(System.String)">
+            <summary>
+                失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.EmptyFail``1(System.String)">
+            <summary>
+                失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.AuthFail``1(System.String)">
+            <summary>
+                认证失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.ValidateFail``1(System.String)">
+            <summary>
+                校验失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.RpcResultAdapter.Exception``1(System.Exception)">
+            <summary>
+                异常结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+    </members>
 </doc>

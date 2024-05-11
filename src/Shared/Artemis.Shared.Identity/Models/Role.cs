@@ -28,19 +28,19 @@ public class Role : IdentityRole<Guid>, IKeySlot, IConcurrencyStamp, IRole
     ///     角色名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public override required string Name { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(256)]
     public virtual string? Description { get; set; }
 
     /// <summary>
     ///     规范化角色名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     public override required string NormalizedName { get; set; }
 }

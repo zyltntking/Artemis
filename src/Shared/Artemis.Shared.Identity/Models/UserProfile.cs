@@ -18,12 +18,12 @@ public class UserProfile : MetadataInfo
     ///     元数据键
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     public override required string Key { get; set; }
 
     /// <summary>
     ///     元数据值
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(256)]
     public override string? Value { get; set; }
 }

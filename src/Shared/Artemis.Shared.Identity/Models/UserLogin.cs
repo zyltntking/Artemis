@@ -13,20 +13,20 @@ public class UserLogin : IdentityUserLogin<Guid>, IUserLogin
     ///     登录提供程序
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     public override required string LoginProvider { get; set; }
 
     /// <summary>
     ///     提供程序密钥
     /// </summary>
     [Required]
-    [MaxLength(64)]
+    [MaxLength(256)]
     public override required string ProviderKey { get; set; }
 
     /// <summary>
     ///     提供程序显示名称
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(128)]
     public override string? ProviderDisplayName { get; set; }
 
     /// <summary>

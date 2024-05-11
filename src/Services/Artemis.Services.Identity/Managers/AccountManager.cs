@@ -151,7 +151,8 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             UserName = userDocument.UserName,
             UserClaims = userClaims,
             Roles = userRoles,
-            RoleClaims = roleClaims
+            RoleClaims = roleClaims,
+            EndType = "SignInInitial"
         };
 
         return (result, token);
@@ -235,7 +236,8 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             UserName = user.UserName,
             UserClaims = userClaims,
             Roles = userRoles,
-            RoleClaims = roleClaims
+            RoleClaims = roleClaims,
+            EndType = "SignUpInitial"
         };
 
         return (result, token);

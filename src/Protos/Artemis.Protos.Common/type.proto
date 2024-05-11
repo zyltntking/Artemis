@@ -6,11 +6,6 @@ import "google/protobuf/wrappers.proto";
 
 package artemis.protos.common;
 
-// 空消息包
-message Empty{
-
-}
-
 // 空响应
 message EmptyResponse {
   // 状态码
@@ -51,6 +46,6 @@ message PageResponse {
   int32 size = 2;
   int64 count = 3;
   int64 total = 4;
-  repeated google.protobuf.Any data = 5;
+  repeated google.protobuf.Any items = 5;
 }
 
