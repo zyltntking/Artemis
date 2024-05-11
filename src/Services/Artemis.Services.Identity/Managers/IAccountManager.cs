@@ -15,7 +15,7 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <param name="userSign">用户签名</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>登录后的Token信息</returns>
+    /// <returns>登录结果和登录后的Token信息</returns>
     Task<(SignResult result, TokenDocument? token)> SignInAsync(
         string userSign,
         string password,
@@ -27,7 +27,7 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <param name="package">用户信息</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>登录后的Token信息</returns>
+    /// <returns>注册结果和登录后的Token信息</returns>
     Task<(SignResult result, TokenDocument? token)> SignUpAsync(
         UserPackage package,
         string password,
@@ -40,7 +40,7 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>修改结果</returns>
     Task<SignResult> ChangePasswordAsync(
         Guid userId,
         string oldPassword,
@@ -53,7 +53,7 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// <param name="userId">用户标识</param>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>重置结果</returns>
     Task<SignResult> ResetPasswordAsync(
         Guid userId,
         string password,
@@ -64,7 +64,7 @@ public interface IAccountManager : IKeyWithManager<ArtemisUser>
     /// </summary>
     /// <param name="packages">重置密码信息包</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>批量重置结果</returns>
     Task<SignResult> ResetPasswordsAsync(
         IEnumerable<KeyValuePair<Guid, string>> packages,
         CancellationToken cancellationToken = default);

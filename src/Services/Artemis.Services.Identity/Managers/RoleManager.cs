@@ -127,7 +127,7 @@ public class RoleManager : KeyWithManager<ArtemisRole>, IRoleManager
             Size = size,
             Count = count,
             Total = total,
-            Data = roles
+            Items = roles
         };
     }
 
@@ -434,7 +434,7 @@ public class RoleManager : KeyWithManager<ArtemisRole>, IRoleManager
                 Size = size,
                 Count = count,
                 Total = total,
-                Data = users
+                Items = users
             };
         }
 
@@ -700,7 +700,7 @@ public class RoleManager : KeyWithManager<ArtemisRole>, IRoleManager
                 Size = size,
                 Count = count,
                 Total = total,
-                Data = roleClaims
+                Items = roleClaims
             };
         }
 

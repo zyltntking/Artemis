@@ -52,7 +52,7 @@ public class UserConfiguration : ModelConfiguration<ArtemisUser>
             .HasComment("是否确认邮箱地址");
 
         builder.Property(user => user.PasswordHash)
-            .HasMaxLength(128)
+            .HasMaxLength(256)
             .IsRequired()
             .HasComment("密码哈希");
 

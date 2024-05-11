@@ -19,9 +19,9 @@ public static class TokenHandler
     {
         var stamp = DateTime.Now.ToUnixTimeStamp();
 
-        var user = document.UserName;
+        var (id, user) = (document.UserId, document.UserName);
 
-        return Hash.Md5Hash($"{user}:{stamp}");
+        return Hash.Md5Hash($"{id}|{user}:{stamp}");
     }
 
     /// <summary>

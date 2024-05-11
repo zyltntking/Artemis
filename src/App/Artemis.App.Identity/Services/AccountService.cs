@@ -29,7 +29,7 @@ public class AccountService : Account.AccountBase
         IAccountManager accountManager,
         IUserManager userManager,
         IDistributedCache cache,
-        IOptions<InternalAuthorizationOptions> options,
+        IOptions<SharedIdentityOptions> options,
         ILogger<AccountService> logger)
     {
         AccountManager = accountManager;
@@ -40,10 +40,13 @@ public class AccountService : Account.AccountBase
     }
 
     /// <summary>
-    ///     角色管理器
+    ///     账户管理器
     /// </summary>
     private IAccountManager AccountManager { get; }
 
+    /// <summary>
+    ///     用户管理器
+    /// </summary>
     private IUserManager UserManager { get; }
 
     /// <summary>
@@ -54,7 +57,7 @@ public class AccountService : Account.AccountBase
     /// <summary>
     ///     认证配置依赖
     /// </summary>
-    private InternalAuthorizationOptions Options { get; }
+    private SharedIdentityOptions Options { get; }
 
     /// <summary>
     ///     日志依赖
@@ -73,65 +76,19 @@ public class AccountService : Account.AccountBase
     [Authorize(IdentityPolicy.Anonymous)]
     public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
-        var clientType = context.RequestHeaders
-            .Get(Constants.ClientKey)?.Value ?? "UnKnown";
-
-        Logger.LogInformation($"客户端类型：{clientType}");
-
+        // 签到
         var (result, token) =
             await AccountManager.SignInAsync(request.UserSign, request.Password, context.CancellationToken);
 
         if (result.Succeeded && token is not null)
         {
-            var replyToken = token.GenerateTokenKey();
-
-            // 记录UserLogin
-
-            var loginPackage = new UserLoginPackage
-            {
-                LoginProvider = "ArtemisIdentityService",
-                ProviderKey = clientType,
-                ProviderDisplayName = token.UserName
-            };
-
-            await UserManager.AddOrUpdateUserLoginAsync(token.UserId, loginPackage, context.CancellationToken);
-
-            // 记录UserToken
-
-            //var userToken = new UserToken
-            //{
-            //    UserId = token.UserId,
-            //    LoginProvider = "ArtemisIdentityService",
-            //    Name = clientType,
-            //    Value = replyToken
-            //};
-
-            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{replyToken}";
-
-            await Cache.CacheTokenAsync(token, cacheTokenKey, Options.Expire, context.CancellationToken);
-
-            // 不允许多终端登录处理
-            if (!Options.EnableMultiEnd)
-            {
-                var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{token.UserId}";
-
-                var oldToken = await Cache.FetchUserMapTokenAsync(userMapTokenKey, false, context.CancellationToken);
-
-                if (oldToken is not null)
-                {
-                    var cacheOldTokenKey = $"{Options.CacheTokenPrefix}:{oldToken}";
-
-                    await Cache.RemoveAsync(cacheOldTokenKey, context.CancellationToken);
-                }
-
-                await Cache.CacheUserMapTokenAsync(userMapTokenKey, replyToken, Options.Expire,
-                    context.CancellationToken);
-            }
+            // 记录TokenDocument
+            var identityToken = await RecordTokenDocument(token, request.EndType, context.CancellationToken);
 
             return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
             {
-                Token = replyToken,
-                Expire = DateTime.Now.AddSeconds(Options.Expire).ToUnixTimeStamp()
+                Token = identityToken,
+                Expire = DateTime.Now.AddSeconds(Options.CacheIdentityTokenExpire).ToUnixTimeStamp()
             });
         }
 
@@ -158,25 +115,13 @@ public class AccountService : Account.AccountBase
 
         if (result.Succeeded && token is not null)
         {
-            var replyToken = token.GenerateTokenKey();
-
-            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{replyToken}";
-
-            await Cache.CacheTokenAsync(token, cacheTokenKey, Options.Expire, context.CancellationToken);
-
-            // 不允许多终端登录处理
-            if (!Options.EnableMultiEnd)
-            {
-                var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{token.UserId}";
-
-                await Cache.CacheUserMapTokenAsync(userMapTokenKey, replyToken, Options.Expire,
-                    context.CancellationToken);
-            }
+            // 记录TokenDocument
+            var identityToken = await RecordTokenDocument(token, Constants.EndForSignUp, context.CancellationToken);
 
             return RpcResultAdapter.Success<TokenResponse, TokenReply>(new TokenReply
             {
-                Token = replyToken,
-                Expire = DateTime.Now.AddSeconds(Options.Expire).ToUnixTimeStamp()
+                Token = identityToken,
+                Expire = DateTime.Now.AddSeconds(Options.CacheIdentityTokenExpire).ToUnixTimeStamp()
             });
         }
 
@@ -191,29 +136,13 @@ public class AccountService : Account.AccountBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签出")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> SignOut(EmptyPackage request, ServerCallContext context)
+    public override async Task<EmptyResponse> SignOut(SignOutRequest request, ServerCallContext context)
     {
-        var token = context.RequestHeaders.Get(Options.HeaderTokenKey)?.Value;
+        var token = context.RequestHeaders.Get(Options.HeaderIdentityTokenKey)?.Value;
 
         if (token is not null)
         {
-            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{token}";
-
-            // 不允许多终端登录处理
-            if (!Options.EnableMultiEnd)
-            {
-                var tokenDocument = await Cache.FetchTokenAsync(cacheTokenKey, false, context.CancellationToken);
-
-                if (tokenDocument is not null)
-                {
-                    var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{tokenDocument.UserId}";
-
-                    await Cache.RemoveAsync(userMapTokenKey, context.CancellationToken);
-                }
-            }
-
-            await Cache.RemoveAsync(cacheTokenKey, context.CancellationToken);
-
+            await EraseTokenDocument(token, request.EndType, context.CancellationToken);
 
             return RpcResultAdapter.Success<EmptyResponse>();
         }
@@ -231,11 +160,11 @@ public class AccountService : Account.AccountBase
     [Authorize(IdentityPolicy.Token)]
     public override async Task<EmptyResponse> ChangePassword(ChangePasswordRequest request, ServerCallContext context)
     {
-        var token = context.RequestHeaders.Get(Options.HeaderTokenKey)?.Value;
+        var token = context.RequestHeaders.Get(Options.HeaderIdentityTokenKey)?.Value;
 
         if (token is not null)
         {
-            var cacheTokenKey = $"{Options.CacheTokenPrefix}:{token}";
+            var cacheTokenKey = $"{Options.CacheIdentityTokenPrefix}:{token}";
 
             var tokenDocument = await Cache.FetchTokenAsync(cacheTokenKey, false, context.CancellationToken);
 
@@ -297,6 +226,100 @@ public class AccountService : Account.AccountBase
         return result.Succeeded
             ? RpcResultAdapter.Success<EmptyResponse>()
             : RpcResultAdapter.Fail<EmptyResponse>(result.Message);
+    }
+
+    #endregion
+
+    #region Logic
+
+    /// <summary>
+    ///     记录TokenDocument
+    /// </summary>
+    /// <param name="tokenDocument">tokenDocument</param>
+    /// <param name="endType">端类型</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>认证Token</returns>
+    private async Task<string> RecordTokenDocument(TokenDocument tokenDocument, string endType,
+        CancellationToken cancellationToken = default)
+    {
+        var identityToken = tokenDocument.GenerateTokenKey();
+
+        Logger.LogInformation($"生成认证Token：{identityToken}");
+
+        Logger.LogInformation("添加UserLogin记录");
+
+        // 记录UserLogin
+        var loginPackage = new UserLoginPackage
+        {
+            LoginProvider = Options.IdentityServiceProvider,
+            ProviderKey = endType,
+            ProviderDisplayName = tokenDocument.UserName
+        };
+
+        await UserManager.AddOrUpdateUserLoginAsync(tokenDocument.UserId, loginPackage, cancellationToken);
+
+        Logger.LogInformation("添加UserToken记录");
+
+        // 记录UserToken
+        var userToken = new UserTokenPackage
+        {
+            LoginProvider = Options.IdentityServiceProvider,
+            Name = endType,
+            Value = identityToken
+        };
+
+        await UserManager.AddOrUpdateUserTokenAsync(tokenDocument.UserId, userToken, cancellationToken);
+
+        // 缓存Token
+        var cacheTokenKey = $"{Options.CacheIdentityTokenPrefix}:{identityToken}";
+
+        await Cache.CacheTokenAsync(tokenDocument, cacheTokenKey, Options.CacheIdentityTokenExpire, cancellationToken);
+
+        // 不允许同终端多客户端登录处理
+        if (!Options.EnableMultiEnd)
+        {
+            //缓存映射Token
+            var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{tokenDocument.UserId}";
+
+            await Cache.CacheUserMapTokenAsync(userMapTokenKey, identityToken, Options.CacheIdentityTokenExpire,
+                cancellationToken);
+        }
+
+        return identityToken;
+    }
+
+    /// <summary>
+    ///     擦除TokenDocument
+    /// </summary>
+    /// <param name="identityToken">认证token</param>
+    /// <param name="endType">端类型</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    private async Task EraseTokenDocument(string identityToken, string endType,
+        CancellationToken cancellationToken = default)
+    {
+        var cacheTokenKey = $"{Options.CacheIdentityTokenPrefix}:{identityToken}";
+
+        var tokenDocument = await Cache.FetchTokenAsync(cacheTokenKey, false, cancellationToken);
+
+        if (tokenDocument is not null)
+        {
+            await UserManager.RemoveUserTokenAsync(tokenDocument.UserId, Options.IdentityServiceProvider, endType,
+                cancellationToken);
+
+            await UserManager.RemoveUserLoginAsync(tokenDocument.UserId, Options.IdentityServiceProvider, endType,
+                cancellationToken);
+
+            // 不允许同终端多客户端登录处理
+            if (!Options.EnableMultiEnd)
+            {
+                var userMapTokenKey = $"{Options.UserMapTokenPrefix}:{tokenDocument.UserId}";
+
+                await Cache.RemoveAsync(userMapTokenKey, cancellationToken);
+            }
+        }
+
+        await Cache.RemoveAsync(cacheTokenKey, cancellationToken);
     }
 
     #endregion

@@ -360,31 +360,15 @@ public interface IUserManager : IKeyWithManager<ArtemisUser>
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     添加用户令牌信息
+    ///     添加或更新用户令牌信息
     /// </summary>
     /// <param name="id">用户标识</param>
     /// <param name="package">令牌信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserTokenAsync(
+    /// <returns>添加或更新结果</returns>
+    Task<StoreResult> AddOrUpdateUserTokenAsync(
         Guid id,
         UserTokenPackage package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     替换用户令牌信息
-    /// </summary>
-    /// <param name="id">用户标识</param>
-    /// <param name="loginProvider">登录提供程序</param>
-    /// <param name="name">令牌名</param>
-    /// <param name="value">令牌值</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>替换结果</returns>
-    Task<StoreResult> ReplaceUserTokenAsync(
-        Guid id,
-        string loginProvider,
-        string name,
-        string value,
         CancellationToken cancellationToken = default);
 
     /// <summary>

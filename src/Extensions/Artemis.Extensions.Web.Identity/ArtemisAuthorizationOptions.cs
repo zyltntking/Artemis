@@ -5,7 +5,7 @@
 /// <summary>
 ///     Artemis认证选项接口
 /// </summary>
-file interface IAuthorizationOptions
+file interface IIdentityOptions
 {
     /// <summary>
     ///     是否启用高级策略
@@ -13,32 +13,45 @@ file interface IAuthorizationOptions
     bool EnableAdvancedPolicy { get; set; }
 
     /// <summary>
-    ///     请求头Token键
+    ///     请求头认证Token键
     /// </summary>
-    string HeaderTokenKey { get; set; }
+    string HeaderIdentityTokenKey { get; set; }
 
     /// <summary>
-    ///     缓存Token前缀
+    ///     缓存认证Token前缀
     /// </summary>
-    string CacheTokenPrefix { get; set; }
+    string CacheIdentityTokenPrefix { get; set; }
 
     /// <summary>
     ///     过期时间
     /// </summary>
-    int Expire { get; set; }
+    int CacheIdentityTokenExpire { get; set; }
 
     /// <summary>
     ///     是否启用多终端
     /// </summary>
     bool EnableMultiEnd { get; set; }
+
+    /// <summary>
+    ///     认证服务对提供者名称
+    /// </summary>
+    string IdentityServiceProvider { get; set; }
+}
+
+/// <summary>
+///     策略选项接口
+/// </summary>
+file interface IPolicyOptions
+{
+    string Name { get; set; }
 }
 
 #endregion
 
 /// <summary>
-///     内部认证选项
+///     传递认证选项
 /// </summary>
-public class InternalAuthorizationOptions : IAuthorizationOptions
+public class SharedIdentityOptions : IIdentityOptions
 {
     #region Implementation of IArtemisIdentityOptions
 
@@ -50,12 +63,12 @@ public class InternalAuthorizationOptions : IAuthorizationOptions
     /// <summary>
     ///     请求头Token键
     /// </summary>
-    public required string HeaderTokenKey { get; set; } = Constants.IdentityTokenKey;
+    public required string HeaderIdentityTokenKey { get; set; } = Constants.HeaderIdentityTokenKey;
 
     /// <summary>
     ///     缓存Token前缀
     /// </summary>
-    public required string CacheTokenPrefix { get; set; } = Constants.CacheTokenPrefix;
+    public required string CacheIdentityTokenPrefix { get; set; } = Constants.CacheIdentityTokenPrefix;
 
     /// <summary>
     ///     用户对Token映射缓存键前缀
@@ -65,12 +78,17 @@ public class InternalAuthorizationOptions : IAuthorizationOptions
     /// <summary>
     ///     过期时间
     /// </summary>
-    public int Expire { get; set; } = 0;
+    public int CacheIdentityTokenExpire { get; set; }
 
     /// <summary>
     ///     是否启用多终端
     /// </summary>
-    public bool EnableMultiEnd { get; set; } = false;
+    public bool EnableMultiEnd { get; set; }
+
+    /// <summary>
+    ///     认证服务对提供者名称
+    /// </summary>
+    public string IdentityServiceProvider { get; set; } = Constants.IdentityServiceProvider;
 
     #endregion
 }
@@ -78,7 +96,7 @@ public class InternalAuthorizationOptions : IAuthorizationOptions
 /// <summary>
 ///     Artemis认证选项
 /// </summary>
-public class ArtemisAuthorizationOptions : InternalAuthorizationOptions
+public class ArtemisIdentityOptions : SharedIdentityOptions
 {
     /// <summary>
     ///     基于角色的策略配置
@@ -94,7 +112,7 @@ public class ArtemisAuthorizationOptions : InternalAuthorizationOptions
 /// <summary>
 ///     策略配置
 /// </summary>
-public abstract class PolicyOptions
+public abstract class PolicyOptions : IPolicyOptions
 {
     /// <summary>
     ///     策略名称
@@ -110,7 +128,7 @@ public sealed class RolesBasedPolicyOptions : PolicyOptions
     /// <summary>
     ///     策略支持的角色列表
     /// </summary>
-    public required IEnumerable<string> Roles { get; set; }
+    public required IEnumerable<string> Roles { get; set; } = new List<string>();
 }
 
 /// <summary>
@@ -121,5 +139,5 @@ public sealed class ClaimsBasedPolicyOptions : PolicyOptions
     /// <summary>
     ///     策略支持的凭据字典
     /// </summary>
-    public required IDictionary<string, string> Claims { get; set; }
+    public required IDictionary<string, string> Claims { get; set; } = new Dictionary<string, string>();
 }

@@ -108,7 +108,7 @@ public class ClaimManager : KeyWithManager<ArtemisClaim>, IClaimManager
             Size = size,
             Count = count,
             Total = total,
-            Data = claims
+            Items = claims
         };
     }
 

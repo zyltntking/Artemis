@@ -25,7 +25,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     public ArtemisIdentityHandler(
         IDistributedCache cache,
         IHttpContextAccessor httpContextAccessor,
-        IOptions<InternalAuthorizationOptions> options,
+        IOptions<SharedIdentityOptions> options,
         ILogger<ArtemisIdentityHandler> logger)
     {
         Cache = cache;
@@ -42,7 +42,7 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
     /// <summary>
     ///     配置访问器
     /// </summary>
-    private InternalAuthorizationOptions Options { get; }
+    private SharedIdentityOptions Options { get; }
 
     /// <summary>
     ///     日志访问器
@@ -80,11 +80,11 @@ public class ArtemisIdentityHandler : AuthorizationHandler<IArtemisIdentityRequi
         {
             if (httpContext is not null)
             {
-                var headerToken = httpContext.FetchHeaderToken(Options.HeaderTokenKey);
+                var headerToken = httpContext.FetchHeaderToken(Options.HeaderIdentityTokenKey);
 
                 if (!string.IsNullOrWhiteSpace(headerToken))
                 {
-                    var document = Cache.FetchToken($"{Options.CacheTokenPrefix}:{headerToken}");
+                    var document = Cache.FetchToken($"{Options.CacheIdentityTokenPrefix}:{headerToken}");
 
                     if (document is not null)
                     {

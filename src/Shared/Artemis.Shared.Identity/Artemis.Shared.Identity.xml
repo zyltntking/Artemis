@@ -1,835 +1,836 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Shared.Identity</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Shared.Identity.ArtemisClaimTypes">
-            <summary>
-                预设凭据类型
-            </summary>
-        </member>
-        <member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.RoutePath">
-            <summary>
-                路由路径凭据
-            </summary>
-        </member>
-        <member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.ActionName">
-            <summary>
-                操作名凭据
-            </summary>
-        </member>
-        <member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.Signature">
-            <summary>
-                签名凭据
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.Claim">
-            <summary>
-                凭据字典
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Claim.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Claim.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Claim.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Claim.Description">
-            <summary>
-                凭据描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Claim.Id">
-            <summary>
-                凭据标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.Role">
-            <summary>
-                角色
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.ConcurrencyStamp">
-            <summary>
-                并发锁
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.Name">
-            <summary>
-                角色名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.Description">
-            <summary>
-                角色描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.Role.NormalizedName">
-            <summary>
-                规范化角色名
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.RoleClaim">
-            <summary>
-                角色凭据
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.Description">
-            <summary>
-                凭据描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.RoleClaim.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.User">
-            <summary>
-                用户
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.ConcurrencyStamp">
-            <summary>
-                并发锁
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.PasswordHash">
-            <summary>
-                密码哈希
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.Email">
-            <summary>
-                电子邮件
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.PhoneNumber">
-            <summary>
-                电话号码
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.NormalizedUserName">
-            <summary>
-                标准化用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.NormalizedEmail">
-            <summary>
-                标准化电子邮件
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.EmailConfirmed">
-            <summary>
-                电子邮件确认戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.NormalizedPhoneNumber">
-            <summary>
-                标准化电话号码
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.PhoneNumberConfirmed">
-            <summary>
-                电话号码确认戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.SecurityStamp">
-            <summary>
-                密码锁
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.TwoFactorEnabled">
-            <summary>
-                是否启用双因子认证
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.LockoutEnabled">
-            <summary>
-                是否启用锁定
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.AccessFailedCount">
-            <summary>
-                失败尝试次数
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.User.LockoutEnd">
-            <summary>
-                用户锁定到期时间标记
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.UserClaim">
-            <summary>
-                用户凭据
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.Description">
-            <summary>
-                凭据描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserClaim.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.UserLogin">
-            <summary>
-                用户登录信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserLogin.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderKey">
-            <summary>
-                提供程序密钥
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderDisplayName">
-            <summary>
-                提供程序显示名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserLogin.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.UserProfile">
-            <summary>
-                用户档案
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserProfile.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserProfile.Key">
-            <summary>
-                元数据键
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserProfile.Value">
-            <summary>
-                元数据值
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.UserRole">
-            <summary>
-                用户角色映射
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserRole.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserRole.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Models.UserToken">
-            <summary>
-                用户令牌
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserToken.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserToken.Name">
-            <summary>
-                令牌名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserToken.Value">
-            <summary>
-                令牌值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Models.UserToken.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IClaim">
-            <summary>
-                凭据项目接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IClaim.Description">
-            <summary>
-                描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateCheckStamp">
-            <summary>
-                生成校验戳
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.ClaimPackage">
-            <summary>
-                凭据项目实现
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.Description">
-            <summary>
-                描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateCheckStamp">
-            <summary>
-                生成校验戳
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.ClaimInfo">
-            <summary>
-                凭据项目实现
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.Id">
-            <summary>
-                凭据标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.SignResult">
-            <summary>
-                签入结果
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.SignResult.Succeeded">
-            <summary>
-                是否认证成功
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.SignResult.Message">
-            <summary>
-                认证消息
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.TokenDocument">
-            <summary>
-                Token信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserClaims">
-            <summary>
-                用户凭据
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.Roles">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.RoleClaims">
-            <summary>
-                角色凭据
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IRoleClaim">
-            <summary>
-                基本角色凭据接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IRoleClaimInfo">
-            <summary>
-                角色凭据信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IRoleClaimInfo.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.RoleClaimPackage">
-            <summary>
-                基本角色凭据信息
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.RoleClaimInfo">
-            <summary>
-                角色凭据信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.RoleClaimInfo.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.RoleClaimInfo.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IRole">
-            <summary>
-                基本角色接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IRole.Name">
-            <summary>
-                角色名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IRole.Description">
-            <summary>
-                角色描述
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.RolePackage">
-            <summary>
-                基本角色信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.RolePackage.Name">
-            <summary>
-                角色名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.RolePackage.Description">
-            <summary>
-                角色描述
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.RoleInfo">
-            <summary>
-                角色信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.RoleInfo.Id">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserClaim">
-            <summary>
-                基本用户凭据接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserClaimDocument">
-            <summary>
-                用户凭据文档接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserClaimDocument.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserClaimPackage">
-            <summary>
-                基本用户凭据信息
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserClaimInfo">
-            <summary>
-                用户凭据信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserLogin">
-            <summary>
-                基本用户登录信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderKey">
-            <summary>
-                提供程序密钥
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderDisplayName">
-            <summary>
-                提供程序显示名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserLoginInfo">
-            <summary>
-                用户登录信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserLoginInfo.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserLoginPackage">
-            <summary>
-                基本用户登录信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderKey">
-            <summary>
-                提供程序密钥
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderDisplayName">
-            <summary>
-                提供程序显示名称
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserLoginInfo">
-            <summary>
-                用户登录信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUser">
-            <summary>
-                基本用户接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUser.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUser.Email">
-            <summary>
-                电子邮件
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUser.PhoneNumber">
-            <summary>
-                电话号码
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IIdentityUser">
-            <summary>
-                认证必要信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IIdentityUser.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IIdentityUser.PasswordHash">
-            <summary>
-                密码哈希
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserPackage">
-            <summary>
-                基本用户信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserPackage.GenerateSecurityStamp">
-            <summary>
-                生成加密戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserPackage.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserPackage.Email">
-            <summary>
-                电子邮件
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserPackage.PhoneNumber">
-            <summary>
-                电话号码
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserInfo">
-            <summary>
-                用户信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserInfo.Id">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserInfo.EmailConfirmed">
-            <summary>
-                电子邮件确认戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserInfo.PhoneNumberConfirmed">
-            <summary>
-                电话号码确认戳
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserDocument">
-            <summary>
-                认证用户文档
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserDocument.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserDocument.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserDocument.PasswordHash">
-            <summary>
-                密码哈希
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserRole">
-            <summary>
-                基本用户角色信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserRole.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserRole.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserRolePackage">
-            <summary>
-                基本用户角色信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserRolePackage.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserRolePackage.RoleId">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserRoleInfo">
-            <summary>
-                用户角色信息
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserToken">
-            <summary>
-                基本用户令牌信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserToken.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Name">
-            <summary>
-                令牌名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Value">
-            <summary>
-                令牌值
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserToken.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.IUserTokenDocument">
-            <summary>
-                用户令牌信息文档接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.IUserTokenDocument.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserTokenPackage">
-            <summary>
-                基本用户令牌信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.GenerateFlag">
-            <summary>
-                生成标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.LoginProvider">
-            <summary>
-                登录提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Name">
-            <summary>
-                令牌名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Value">
-            <summary>
-                令牌值
-            </summary>
-        </member>
-        <member name="T:Artemis.Shared.Identity.Transfer.UserTokenInfo">
-            <summary>
-                用户登录信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Shared.Identity</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Shared.Identity.ArtemisClaimTypes">
+			<summary>
+				预设凭据类型
+			</summary>
+		</member>
+		<member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.RoutePath">
+			<summary>
+				路由路径凭据
+			</summary>
+		</member>
+		<member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.ActionName">
+			<summary>
+				操作名凭据
+			</summary>
+		</member>
+		<member name="F:Artemis.Shared.Identity.ArtemisClaimTypes.Signature">
+			<summary>
+				签名凭据
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.Claim">
+			<summary>
+				凭据字典
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Claim.Id">
+			<summary>
+				凭据标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.Role">
+			<summary>
+				角色
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Role.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Role.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Role.Name">
+			<summary>
+				角色名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Role.Description">
+			<summary>
+				角色描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.Role.NormalizedName">
+			<summary>
+				规范化角色名
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.RoleClaim">
+			<summary>
+				角色凭据
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.RoleClaim.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.User">
+			<summary>
+				用户
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.PasswordHash">
+			<summary>
+				密码哈希
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.Email">
+			<summary>
+				电子邮件
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.PhoneNumber">
+			<summary>
+				电话号码
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.NormalizedUserName">
+			<summary>
+				标准化用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.NormalizedEmail">
+			<summary>
+				标准化电子邮件
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.EmailConfirmed">
+			<summary>
+				电子邮件确认戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.NormalizedPhoneNumber">
+			<summary>
+				标准化电话号码
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.PhoneNumberConfirmed">
+			<summary>
+				电话号码确认戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.SecurityStamp">
+			<summary>
+				密码锁
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.TwoFactorEnabled">
+			<summary>
+				是否启用双因子认证
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.LockoutEnabled">
+			<summary>
+				是否启用锁定
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.AccessFailedCount">
+			<summary>
+				失败尝试次数
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.User.LockoutEnd">
+			<summary>
+				用户锁定到期时间标记
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserClaim">
+			<summary>
+				用户凭据
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserClaim.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserLogin">
+			<summary>
+				用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserLogin.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserLogin.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserLogin.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserProfile">
+			<summary>
+				用户档案
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.Key">
+			<summary>
+				元数据键
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserProfile.Value">
+			<summary>
+				元数据值
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserRole">
+			<summary>
+				用户角色映射
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserRole.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserRole.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Models.UserToken">
+			<summary>
+				用户令牌
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserToken.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserToken.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserToken.Value">
+			<summary>
+				令牌值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Models.UserToken.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IClaim">
+			<summary>
+				凭据项目接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateCheckStamp">
+			<summary>
+				生成校验戳
+			</summary>
+			<returns></returns>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IClaim.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.ClaimPackage">
+			<summary>
+				凭据项目实现
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateCheckStamp">
+			<summary>
+				生成校验戳
+			</summary>
+			<returns></returns>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimPackage.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.ClaimInfo">
+			<summary>
+				凭据项目实现
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.ClaimInfo.Id">
+			<summary>
+				凭据标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.SignResult">
+			<summary>
+				签入结果
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.SignResult.Succeeded">
+			<summary>
+				是否认证成功
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.SignResult.Message">
+			<summary>
+				认证消息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.TokenDocument">
+			<summary>
+				Token信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.UserClaims">
+			<summary>
+				用户凭据
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.Roles">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.TokenDocument.RoleClaims">
+			<summary>
+				角色凭据
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IRoleClaim">
+			<summary>
+				基本角色凭据接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IRoleClaimInfo">
+			<summary>
+				角色凭据信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IRoleClaimInfo.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.RoleClaimPackage">
+			<summary>
+				基本角色凭据信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.RoleClaimInfo">
+			<summary>
+				角色凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.RoleClaimInfo.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.RoleClaimInfo.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IRole">
+			<summary>
+				基本角色接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IRole.Name">
+			<summary>
+				角色名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IRole.Description">
+			<summary>
+				角色描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.RolePackage">
+			<summary>
+				基本角色信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.RolePackage.Name">
+			<summary>
+				角色名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.RolePackage.Description">
+			<summary>
+				角色描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.RoleInfo">
+			<summary>
+				角色信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.RoleInfo.Id">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserClaim">
+			<summary>
+				基本用户凭据接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserClaimDocument">
+			<summary>
+				用户凭据文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserClaimDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserClaimPackage">
+			<summary>
+				基本用户凭据信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserClaimInfo">
+			<summary>
+				用户凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserClaimInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserLogin">
+			<summary>
+				基本用户登录信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLogin.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserLoginInfo">
+			<summary>
+				用户登录信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserLoginInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserLoginPackage">
+			<summary>
+				基本用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderKey">
+			<summary>
+				提供程序密钥
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginPackage.ProviderDisplayName">
+			<summary>
+				提供程序显示名称
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserLoginInfo">
+			<summary>
+				用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserLoginInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUser">
+			<summary>
+				基本用户接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUser.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUser.Email">
+			<summary>
+				电子邮件
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUser.PhoneNumber">
+			<summary>
+				电话号码
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IIdentityUser">
+			<summary>
+				认证必要信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IIdentityUser.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IIdentityUser.PasswordHash">
+			<summary>
+				密码哈希
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserPackage">
+			<summary>
+				基本用户信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserPackage.GenerateSecurityStamp">
+			<summary>
+				生成加密戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserPackage.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserPackage.Email">
+			<summary>
+				电子邮件
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserPackage.PhoneNumber">
+			<summary>
+				电话号码
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserInfo">
+			<summary>
+				用户信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserInfo.Id">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserInfo.EmailConfirmed">
+			<summary>
+				电子邮件确认戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserInfo.PhoneNumberConfirmed">
+			<summary>
+				电话号码确认戳
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserDocument">
+			<summary>
+				认证用户文档
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserDocument.Id">
+			<summary>
+				标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserDocument.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserDocument.PasswordHash">
+			<summary>
+				密码哈希
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserRole">
+			<summary>
+				基本用户角色信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserRole.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserRole.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserRolePackage">
+			<summary>
+				基本用户角色信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserRolePackage.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserRolePackage.RoleId">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserRoleInfo">
+			<summary>
+				用户角色信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserToken">
+			<summary>
+				基本用户令牌信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.Value">
+			<summary>
+				令牌值
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserToken.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.IUserTokenDocument">
+			<summary>
+				用户令牌信息文档接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.IUserTokenDocument.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserTokenPackage">
+			<summary>
+				基本用户令牌信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.GenerateFlag">
+			<summary>
+				生成标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.LoginProvider">
+			<summary>
+				登录提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Name">
+			<summary>
+				令牌名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenPackage.Value">
+			<summary>
+				令牌值
+			</summary>
+		</member>
+		<member name="T:Artemis.Shared.Identity.Transfer.UserTokenInfo">
+			<summary>
+				用户登录信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Shared.Identity.Transfer.UserTokenInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+	</members>
 </doc>

@@ -57,7 +57,7 @@ file interface IPageResult<T> : IPageResult
     /// <summary>
     ///     数据包
     /// </summary>
-    IEnumerable<T>? Data { get; set; }
+    IEnumerable<T>? Items { get; set; }
 }
 
 #endregion
@@ -141,7 +141,7 @@ public sealed record PageResult<T> : AbstractPageResult, IPageResult<T>
     /// <summary>
     ///     数据包
     /// </summary>
-    public IEnumerable<T>? Data { get; set; }
+    public IEnumerable<T>? Items { get; set; }
 
     #endregion
 }

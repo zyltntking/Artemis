@@ -21,7 +21,7 @@ public class User : IdentityUser<Guid>, IKeySlot, IConcurrencyStamp, IUser, IIde
     /// <summary>
     ///     密码哈希
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(256)]
     public override required string PasswordHash { get; set; }
 
     /// <summary>

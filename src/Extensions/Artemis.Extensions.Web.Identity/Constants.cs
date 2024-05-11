@@ -8,17 +8,12 @@ public static class Constants
     /// <summary>
     ///     头Token键
     /// </summary>
-    public const string IdentityTokenKey = "Token";
-
-    /// <summary>
-    /// 客户端类型
-    /// </summary>
-    public const string ClientKey = "Client";
+    public const string HeaderIdentityTokenKey = "Token";
 
     /// <summary>
     ///     Token缓存键前缀
     /// </summary>
-    public const string CacheTokenPrefix = "Artemis:Identity:Token";
+    public const string CacheIdentityTokenPrefix = "Artemis:Identity:Token";
 
     /// <summary>
     ///     用户对Token映射缓存键前缀
@@ -26,9 +21,19 @@ public static class Constants
     public const string UserMapTokenPrefix = "Artemis:Identity:UserMapToken";
 
     /// <summary>
+    ///     认证服务对提供者名称
+    /// </summary>
+    public const string IdentityServiceProvider = "ArtemisIdentityService";
+
+    /// <summary>
     ///     上下文项目键
     /// </summary>
-    internal const string ContextIdentityItemKey = IdentityTokenKey;
+    internal const string ContextIdentityItemKey = HeaderIdentityTokenKey;
+
+    /// <summary>
+    ///     签入端
+    /// </summary>
+    public const string EndForSignUp = "SignUpOnly";
 }
 
 /// <summary>
@@ -71,4 +76,9 @@ public static class IdentityPolicy
     ///     路由路径认证凭据策略名
     /// </summary>
     public const string RoutePath = nameof(RoutePath);
+
+    /// <summary>
+    ///     需求Token策略
+    /// </summary>
+    public static readonly List<string> TokenPolicies = [Token, Admin, ActionName, RoutePath];
 }

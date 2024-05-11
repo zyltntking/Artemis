@@ -82,19 +82,19 @@ public class Startup : IWebAppStartup
             config.IncludeGrpcXmlComments(servicesDocPath, true);
 
             config.OperationFilter<RemoveDefaultResponse>();
-            config.OperationFilter<SimpleOperationFilter>();
+            config.OperationFilter<AddIdentityToken>();
             config.DocumentFilter<RemoveDefaultSchemas>();
         });
 
         builder.Services.AddValidators();
 
-        builder.Services.AddArtemisAuthorization<RpcAuthorizationResultTransformer>(new ArtemisAuthorizationOptions
+        builder.Services.AddArtemisAuthorization<RpcAuthorizationResultTransformer>(new ArtemisIdentityOptions
         {
             EnableAdvancedPolicy = false,
-            HeaderTokenKey = Constants.IdentityTokenKey,
-            CacheTokenPrefix = Constants.CacheTokenPrefix,
+            HeaderIdentityTokenKey = Constants.HeaderIdentityTokenKey,
+            CacheIdentityTokenPrefix = Constants.CacheIdentityTokenPrefix,
             UserMapTokenPrefix = Constants.UserMapTokenPrefix,
-            Expire = 604800,
+            CacheIdentityTokenExpire = 604800, //7 days
             EnableMultiEnd = false
         });
 
@@ -151,7 +151,7 @@ public class Startup : IWebAppStartup
 
         app.UseReDoc(c =>
         {
-            c.RoutePrefix = "docs";
+            c.RoutePrefix = "api-docs";
             c.SpecUrl("/swagger/v1/swagger.json");
             c.DocumentTitle = "Artemis Identity API";
         });

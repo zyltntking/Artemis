@@ -77,7 +77,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <param name="userSign">用户签名</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>登录后的Token信息</returns>
+    /// <returns>登录结果和登录后的Token信息</returns>
     public async Task<(SignResult result, TokenDocument? token)> SignInAsync(
         string userSign,
         string password,
@@ -163,7 +163,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <param name="package">用户信息</param>
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>登录后的Token信息</returns>
+    /// <returns>注册结果和登录后的Token信息</returns>
     public async Task<(SignResult result, TokenDocument? token)> SignUpAsync(
         UserPackage package,
         string password,
@@ -179,7 +179,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
         var result = new SignResult
         {
             Succeeded = false,
-            Message = "认证失败"
+            Message = "注册失败"
         };
 
         if (exists)
@@ -195,6 +195,8 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
 
         user.NormalizedEmail = package.Email is not null ? NormalizeKey(package.Email) : string.Empty;
 
+        user.NormalizedPhoneNumber = package.PhoneNumber is not null ? NormalizeKey(package.PhoneNumber) : string.Empty;
+
         user.PasswordHash = Hash.ArtemisHash(password);
 
         user.SecurityStamp = package.GenerateSecurityStamp;
@@ -208,7 +210,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
         }
 
         result.Succeeded = true;
-        result.Message = "认证成功";
+        result.Message = "用户创建成功";
 
         var userClaims = await UserClaimStore.EntityQuery
             .Where(item => item.UserId == user.Id)
@@ -246,7 +248,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <param name="oldPassword">原密码</param>
     /// <param name="newPassword">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>修改结果</returns>
     public async Task<SignResult> ChangePasswordAsync(
         Guid userId,
         string oldPassword,
@@ -305,7 +307,7 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     /// <param name="userId">用户标识</param>
     /// <param name="password">新密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>重置结果</returns>
     public async Task<SignResult> ResetPasswordAsync(
         Guid userId,
         string password,
@@ -346,30 +348,33 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
     }
 
     /// <summary>
-    ///     批量修改密码
+    ///     批量重置密码
     /// </summary>
     /// <param name="packages">重置密码信息包</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
+    /// <returns>批量重置结果</returns>
     public async Task<SignResult> ResetPasswordsAsync(
         IEnumerable<KeyValuePair<Guid, string>> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var users = new List<ArtemisUser>();
+        var keyValuePairs = packages.ToList();
 
-        foreach (var (userId, password) in packages)
-        {
-            var user = await UserStore
-                .KeyMatchQuery(userId)
-                .FirstOrDefaultAsync(cancellationToken);
+        var ids = keyValuePairs.Select(item => item.Key);
 
-            if (user is null) continue;
+        var matchedUsers = await UserStore.KeyMatchQuery(ids)
+            .ToListAsync(cancellationToken);
 
-            user.PasswordHash = Hash.ArtemisHash(password);
-            users.Add(user);
-        }
+        var users = matchedUsers.Join(
+            keyValuePairs,
+            user => user.Id,
+            pairs => pairs.Key, (user, pairs) =>
+            {
+                var (_, password) = pairs;
+                user.PasswordHash = Hash.ArtemisHash(password);
+                return user;
+            });
 
         var result = new SignResult
         {
@@ -377,14 +382,16 @@ public class AccountManager : KeyWithManager<ArtemisUser>, IAccountManager
             Message = "重置失败"
         };
 
-        if (!users.Any())
+        var artemisUsers = users as ArtemisUser[] ?? users.ToArray();
+
+        if (!artemisUsers.Any())
         {
             result.Message = "未找到匹配用户";
 
             return result;
         }
 
-        var storeResult = await UserStore.UpdateAsync(users, cancellationToken);
+        var storeResult = await UserStore.UpdateAsync(artemisUsers, cancellationToken);
 
         if (storeResult.Succeeded)
         {

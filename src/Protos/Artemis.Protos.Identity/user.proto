@@ -10,7 +10,7 @@ package artemis.protos.identity;
 // 用户服务协议定义
 service User {
   // 获取用户信息
-  rpc GetUserInfo (FetchUserInfosRequest) returns (UserInfosResponse) {
+  rpc FetchUserInfo (FetchUserInfosRequest) returns (FetchUserInfoResponse) {
 	option (google.api.http) = {
 	  get: "/Users"
 	};
@@ -25,9 +25,9 @@ message FetchUserInfosRequest{
   // 手机号码
   google.protobuf.StringValue phoneNumberSearch = 3;
   // 页码
-  google.protobuf.UInt32Value page = 4;
+  google.protobuf.Int32Value page = 4;
   // 条目数
-  google.protobuf.UInt32Value size = 5;
+  google.protobuf.Int32Value size = 5;
 }
 
 // 用户信息回应
@@ -46,8 +46,22 @@ message UserInfoReply{
   bool phoneNumberConfirmed = 6;
 }
 
-// 令牌响应
-message UserInfosResponse {
+// 分页用户信息回应
+message PagedUserInfoReply{
+  // 页码
+  google.protobuf.Int32Value page = 1;
+  // 条目数
+  google.protobuf.Int32Value size = 2;
+  // 总数
+  google.protobuf.Int64Value total = 3;
+  // 过滤后总数
+  google.protobuf.Int64Value count = 4;
+  // 数据
+  repeated UserInfoReply items = 5;
+}
+
+// 查询用户响应
+message FetchUserInfoResponse {
   // 状态码
   int32 code = 1;
   // 是否成功
@@ -61,5 +75,5 @@ message UserInfosResponse {
   // 时间戳
   int64 timestamp = 6;
   // 数据
-  repeated UserInfoReply data = 7;
+  PagedUserInfoReply data = 7;
 }
