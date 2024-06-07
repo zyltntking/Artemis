@@ -82,8 +82,9 @@ public class Startup : IWebAppStartup
             config.IncludeGrpcXmlComments(servicesDocPath, true);
 
             config.OperationFilter<RemoveDefaultResponse>();
-            config.OperationFilter<AddIdentityToken>();
             config.DocumentFilter<RemoveDefaultSchemas>();
+            config.OperationFilter<AddIdentityToken>();
+            //config.OperationFilter<MarkFieldFeature>();
         });
 
         builder.Services.AddValidators();
@@ -165,7 +166,7 @@ public class Startup : IWebAppStartup
         {
             app.MapGet("api-route-table", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
             {
-                var end = endpointSources.SelectMany(es => es.Endpoints);
+                var ends = endpointSources.SelectMany(es => es.Endpoints);
             });
 
             app.MapGrpcReflectionService();

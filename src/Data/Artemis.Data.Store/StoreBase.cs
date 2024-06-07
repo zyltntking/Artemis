@@ -15,9 +15,9 @@ namespace Artemis.Data.Store;
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class KeyWithStoreBase<TEntity, TKey> :
+public abstract class StoreBase<TEntity, TKey> :
     KeyLessStoreBase<TEntity>,
-    IKeyWithStoreBase<TEntity, TKey>
+    IStoreBase<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -30,7 +30,7 @@ public abstract class KeyWithStoreBase<TEntity, TKey> :
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    protected KeyWithStoreBase(
+    protected StoreBase(
         DbContext context,
         IDistributedCache? cache = null,
         IKeyWithStoreOptions? storeOptions = null,

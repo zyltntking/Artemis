@@ -15,7 +15,7 @@ namespace Artemis.Data.Core.Fundamental.Kit.Crypto;
 /// <summary>
 ///     密码摘要算法
 /// </summary>
-public class ArtemisHasher
+internal class ArtemisHasher
 {
     /// <summary>
     ///     默认实现
@@ -29,10 +29,19 @@ public class ArtemisHasher
     {
     }
 
+    /// <summary>
+    /// 迭代次数生成器
+    /// </summary>
     private int Iterations => RandomNumberGenerator.GetInt32(100_000, 500_000);
 
+    /// <summary>
+    /// 盐长度生成器
+    /// </summary>
     private int SaltSize => RandomNumberGenerator.GetInt32(16, 32);
 
+    /// <summary>
+    /// 派生密钥长度生成器
+    /// </summary>
     private int DerivedKeyLength => RandomNumberGenerator.GetInt32(32, 64);
 
     /// <summary>
@@ -199,7 +208,22 @@ public class ArtemisHasher
         /// <summary>
         ///     sha512
         /// </summary>
-        Sha512
+        Sha512,
+        /// <summary>
+        ///  sha3-256
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        Sha3_256,
+        /// <summary>
+        ///  sha3-384
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        Sha3_384,
+        /// <summary>
+        ///  sha3-512
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        Sha3_512
     }
 
     #region KeyDerivation
@@ -257,6 +281,9 @@ public class ArtemisHasher
             KeyDerivationPrf.Sha256 => HashAlgorithmName.SHA256,
             KeyDerivationPrf.Sha384 => HashAlgorithmName.SHA384,
             KeyDerivationPrf.Sha512 => HashAlgorithmName.SHA512,
+            KeyDerivationPrf.Sha3_256 => HashAlgorithmName.SHA3_256,
+            KeyDerivationPrf.Sha3_384 => HashAlgorithmName.SHA3_384,
+            KeyDerivationPrf.Sha3_512 => HashAlgorithmName.SHA3_512,
             _ => throw new ArgumentOutOfRangeException(nameof(prf))
         };
         return Rfc2898DeriveBytes.Pbkdf2(input, salt, iterations, hashAlgorithm, outputLength);

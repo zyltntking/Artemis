@@ -28,12 +28,6 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.Configuration.ModelConfiguration`1.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
         <member name="T:Artemis.Data.Store.Configuration.MateSlotModelConfiguration`1">
             <summary>
                 ArtemisMateSlot
@@ -64,12 +58,6 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
             <typeparam name="TKey"></typeparam>
-        </member>
-        <member name="M:Artemis.Data.Store.Configuration.KeySlotModelConfiguration`2.FieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
-            <summary>
-                数据库字段配置
-            </summary>
-            <param name="builder"></param>
         </member>
         <member name="T:Artemis.Data.Store.Configuration.BaseConfiguration`1">
             <summary>
@@ -476,24 +464,11 @@
         </member>
         <member name="T:Artemis.Data.Store.IStore`1">
             <summary>
-                存储接口
-            </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
-        </member>
-        <member name="T:Artemis.Data.Store.IStore`2">
-            <summary>
-                存储接口
-            </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
-            <typeparam name="TKey">键类型</typeparam>
-        </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStore`1">
-            <summary>
                 具键存储接口
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStore`2">
+        <member name="T:Artemis.Data.Store.IStore`2">
             <summary>
                 具键存储接口
             </summary>
@@ -506,39 +481,39 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreBase`1">
+        <member name="T:Artemis.Data.Store.IStoreBase`1">
             <summary>
                 无元数据模型基本存储接口
             </summary>
             <typeparam name="TEntity">模型类型</typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreBase`2">
+        <member name="T:Artemis.Data.Store.IStoreBase`2">
             <summary>
                 无元数据模型基本存储接口
             </summary>
             <typeparam name="TEntity">模型类型</typeparam>
             <typeparam name="TKey">键类型</typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.KeyMatchQuery(`1)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.KeyMatchQuery(`1)">
             <summary>
                 键适配查询
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.KeyMatchQuery(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.KeyMatchQuery(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 键适配查询
             </summary>
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.GetId(`0)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.GetId(`0)">
             <summary>
                 获取指定实体Id
             </summary>
             <param name="entity">实体</param>
             <returns>Id</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.GetIdAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.GetIdAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 获取指定实体Id
             </summary>
@@ -546,14 +521,14 @@
             <param name="cancellationToken">取消异步操作的信号</param>
             <returns>Id</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.GetIdString(`0)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.GetIdString(`0)">
             <summary>
                 获取指定实体Id字符串
             </summary>
             <param name="entity">实体</param>
             <returns>Id字符串</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.GetIdStringAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.GetIdStringAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 获取指定实体Id字符串
             </summary>
@@ -561,21 +536,21 @@
             <param name="cancellationToken">取消异步操作信号</param>
             <returns>Id字符串</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.IsDeleted(`0)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.IsDeleted(`0)">
             <summary>
                 是否被删除
             </summary>
             <param name="entity">实体</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.IsDeleted(`1)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.IsDeleted(`1)">
             <summary>
                 是否被删除
             </summary>
             <param name="key">键</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.IsDeletedAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.IsDeletedAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 是否被删除
             </summary>
@@ -583,7 +558,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreBase`2.IsDeletedAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreBase`2.IsDeletedAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 是否被删除
             </summary>
@@ -619,20 +594,20 @@
                 Entity无追踪访问器
             </summary>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreCommon`1">
+        <member name="T:Artemis.Data.Store.IStoreCommon`1">
             <summary>
                 通用存储接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreCommon`2">
+        <member name="T:Artemis.Data.Store.IStoreCommon`2">
             <summary>
                 通用存储接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
             <typeparam name="TKey">键类型</typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchUpdate(`1,System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}})">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchUpdate(`1,System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}})">
             <summary>
                 更新存储中的实体
             </summary>
@@ -640,7 +615,7 @@
             <param name="setter">更新行为</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchUpdate(System.Collections.Generic.IEnumerable{`1},System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}})">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchUpdate(System.Collections.Generic.IEnumerable{`1},System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}})">
             <summary>
                 在存储中更新已存在的实体
             </summary>
@@ -648,7 +623,7 @@
             <param name="setter">更新行为</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchUpdateAsync(`1,System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchUpdateAsync(`1,System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}},System.Threading.CancellationToken)">
             <summary>
                 在存储中更新已存在的实体
             </summary>
@@ -657,7 +632,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchUpdateAsync(System.Collections.Generic.IEnumerable{`1},System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchUpdateAsync(System.Collections.Generic.IEnumerable{`1},System.Linq.Expressions.Expression{System.Func{Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0},Microsoft.EntityFrameworkCore.Query.SetPropertyCalls{`0}}},System.Threading.CancellationToken)">
             <summary>
                 在存储中更新已存在的实体
             </summary>
@@ -666,49 +641,20 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.Delete(`1)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.Delete(`1)">
             <summary>
                 在存储中删除已存在的实体
             </summary>
             <param name="id">被删除实体的主键</param>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.Delete(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.Delete(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 在存储中删除已存在的实体
             </summary>
             <param name="ids">被删除实体的主键</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.DeleteAsync(`1,System.Threading.CancellationToken)">
-            <summary>
-                在存储中删除已存在的实体
-            </summary>
-            <param name="id">被删除实体的主键</param>
-            <param name="cancellationToken">取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.DeleteAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
-            <summary>
-                在存储中删除已存在的实体
-            </summary>
-            <param name="ids">被删除实体的主键</param>
-            <param name="cancellationToken">取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchDelete(`1)">
-            <summary>
-                在存储中删除已存在的实体
-            </summary>
-            <param name="id">被删除实体的主键</param>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchDelete(System.Collections.Generic.IEnumerable{`1})">
-            <summary>
-                在存储中删除已存在的实体
-            </summary>
-            <param name="ids">被删除实体的主键</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchDeleteAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.DeleteAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 在存储中删除已存在的实体
             </summary>
@@ -716,7 +662,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.BatchDeleteAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.DeleteAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 在存储中删除已存在的实体
             </summary>
@@ -724,21 +670,50 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.FindEntity(`1)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchDelete(`1)">
+            <summary>
+                在存储中删除已存在的实体
+            </summary>
+            <param name="id">被删除实体的主键</param>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchDelete(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+                在存储中删除已存在的实体
+            </summary>
+            <param name="ids">被删除实体的主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchDeleteAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+                在存储中删除已存在的实体
+            </summary>
+            <param name="id">被删除实体的主键</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.BatchDeleteAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+            <summary>
+                在存储中删除已存在的实体
+            </summary>
+            <param name="ids">被删除实体的主键</param>
+            <param name="cancellationToken">取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.FindEntity(`1)">
             <summary>
                 根据Id查找实体
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.FindEntities(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.FindEntities(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 根据Id查找实体
             </summary>
             <param name="ids"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.FindEntityAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.FindEntityAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 根据Id查找实体
             </summary>
@@ -746,7 +721,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.FindEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.FindEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 根据Id查找实体
             </summary>
@@ -754,14 +729,14 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.Exists(`1)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.Exists(`1)">
             <summary>
                 判断实体是否存在
             </summary>
             <param name="id">实体键</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreCommon`2.ExistsAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreCommon`2.ExistsAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 判断实体是否存在
             </summary>
@@ -928,20 +903,20 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreMap`1">
+        <member name="T:Artemis.Data.Store.IStoreMap`1">
             <summary>
-                具键可映射存储接口
+                可映射存储接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithStoreMap`2">
+        <member name="T:Artemis.Data.Store.IStoreMap`2">
             <summary>
-                具键可映射存储接口
+                可映射存储接口
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
             <typeparam name="TKey">键类型</typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.FindMapEntity``1(`1)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.FindMapEntity``1(`1)">
             <summary>
                 根据id查找映射实体
             </summary>
@@ -949,7 +924,7 @@
             <param name="id">id</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.FindMapEntities``1(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.FindMapEntities``1(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 根据id查找映射实体
             </summary>
@@ -957,7 +932,7 @@
             <param name="ids">ids</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.FindMapEntityAsync``1(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.FindMapEntityAsync``1(`1,System.Threading.CancellationToken)">
             <summary>
                 根据Id查找映射实体
             </summary>
@@ -966,7 +941,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.FindMapEntitiesAsync``1(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.FindMapEntitiesAsync``1(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 根据Id查找映射实体
             </summary>
@@ -975,7 +950,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.Over``1(``0,Mapster.TypeAdapterConfig)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Over``1(``0,Mapster.TypeAdapterConfig)">
             <summary>
                 通过类型映射覆盖对应Id的实体
             </summary>
@@ -984,7 +959,7 @@
             <param name="config">映射配置</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.Over``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Over``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
             <summary>
                 通过类型映射覆盖对应Id的实体
             </summary>
@@ -993,7 +968,7 @@
             <param name="config">映射配置</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.OverAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.OverAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
             <summary>
                 通过类型映射覆盖对应Id的实体
             </summary>
@@ -1003,7 +978,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.OverAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.OverAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
             <summary>
                 通过类型映射覆盖对应Id的实体
             </summary>
@@ -1013,7 +988,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.Merge``1(``0,Mapster.TypeAdapterConfig)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``1(``0,Mapster.TypeAdapterConfig)">
             <summary>
                 通过类型映射合并对应Id的实体
             </summary>
@@ -1022,7 +997,7 @@
             <param name="config">映射配置</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.Merge``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.Merge``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig)">
             <summary>
                 通过类型映射合并对应Id的实体
             </summary>
@@ -1031,7 +1006,7 @@
             <param name="config">映射配置</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.MergeAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``1(``0,Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
             <summary>
                 通过类型映射合并对应Id的实体
             </summary>
@@ -1041,7 +1016,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithStoreMap`2.MergeAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IStoreMap`2.MergeAsync``1(System.Collections.Generic.IEnumerable{``0},Mapster.TypeAdapterConfig,System.Threading.CancellationToken)">
             <summary>
                 通过类型映射合并对应Id的实体
             </summary>
@@ -2079,21 +2054,30 @@
         </member>
         <member name="T:Artemis.Data.Store.IManager`1">
             <summary>
-                提供用于管理TEntity的存储器的API接口
+                提供用于管理具键存储模型TEntity的存储器的API接口
             </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
+            <typeparam name="TEntity"></typeparam>
         </member>
         <member name="T:Artemis.Data.Store.IManager`2">
             <summary>
-                提供用于管理TEntity的存储器的API接口
+                提供用于管理具键存储模型TEntity的存储器的API接口
             </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
-            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
         </member>
         <member name="P:Artemis.Data.Store.IManager`2.EntityStore">
             <summary>
                 实体存储
             </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.IManager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
+            <summary>
+                获取实体信息
+            </summary>
+            <typeparam name="TEntityInfo">实体信息类型</typeparam>
+            <param name="id">实体标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.IManager`2.GetEntitiesAsync``1(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -2105,34 +2089,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>实体信息列表</returns>
         </member>
-        <member name="T:Artemis.Data.Store.IKeyWithManager`1">
-            <summary>
-                提供用于管理具键存储模型TEntity的存储器的API接口
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-        </member>
-        <member name="T:Artemis.Data.Store.IKeyWithManager`2">
-            <summary>
-                提供用于管理具键存储模型TEntity的存储器的API接口
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <typeparam name="TKey"></typeparam>
-        </member>
-        <member name="P:Artemis.Data.Store.IKeyWithManager`2.EntityStore">
-            <summary>
-                实体存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithManager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
-            <summary>
-                获取实体信息
-            </summary>
-            <typeparam name="TEntityInfo">实体信息类型</typeparam>
-            <param name="id">实体标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Store.IKeyWithManager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IManager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
             <summary>
                 创建实体
             </summary>
@@ -2142,7 +2099,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithManager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IManager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
             <summary>
                 更新实体
             </summary>
@@ -2153,7 +2110,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithManager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IManager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
             <summary>
                 更新或创建实体
             </summary>
@@ -2164,7 +2121,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新或创建结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.IKeyWithManager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IManager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 删除实体
             </summary>
@@ -2192,28 +2149,29 @@
         </member>
         <member name="T:Artemis.Data.Store.Manager`1">
             <summary>
-                提供用于管理TEntity的存储器的API
+                提供用于管理具键存储模型TEntity的存储器的API
             </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
+            <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.Manager`1.#ctor(Artemis.Data.Store.IStore{`0},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Data.Store.Manager`1.#ctor(Artemis.Data.Store.IStore{`0,System.Guid},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
             <param name="store">存储访问器依赖</param>
-            <param name="cache">缓存管理器</param>
             <param name="options">配置依赖</param>
+            <param name="errors">错误依赖</param>
             <param name="logger">日志依赖</param>
+            <param name="cache">缓存依赖</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="T:Artemis.Data.Store.Manager`2">
             <summary>
-                提供用于管理TEntity的存储器的API
+                提供用于管理具键存储模型TEntity的存储器的API
             </summary>
-            <typeparam name="TEntity">实体类型</typeparam>
-            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.Manager`2.#ctor(Artemis.Data.Store.IStore{`0,`1},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Data.Store.Manager`2.#ctor(Artemis.Data.Store.IStore{`0,`1},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -2229,10 +2187,39 @@
                 存储访问器
             </summary>
         </member>
+        <member name="P:Artemis.Data.Store.Manager`2.Cache">
+            <summary>
+                缓存访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.Manager`2.Options">
+            <summary>
+                具键存储管理器配置接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.Manager`2.CachedManager">
+            <summary>
+                是否启用具缓存策略
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.Manager`2.Expires">
+            <summary>
+                过期时间(秒)
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Store.Manager`2.EntityStore">
             <summary>
                 实体存储
             </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.Manager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
+            <summary>
+                获取实体信息
+            </summary>
+            <typeparam name="TEntityInfo">实体信息类型</typeparam>
+            <param name="id">实体标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Store.Manager`2.GetEntitiesAsync``1(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -2244,81 +2231,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>实体信息列表</returns>
         </member>
-        <member name="T:Artemis.Data.Store.KeyWithManager`1">
-            <summary>
-                提供用于管理具键存储模型TEntity的存储器的API
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-        </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`1.#ctor(Artemis.Data.Store.IKeyWithStore{`0,System.Guid},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="store">存储访问器依赖</param>
-            <param name="options">配置依赖</param>
-            <param name="errors">错误依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Artemis.Data.Store.KeyWithManager`2">
-            <summary>
-                提供用于管理具键存储模型TEntity的存储器的API
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <typeparam name="TKey"></typeparam>
-        </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.#ctor(Artemis.Data.Store.IKeyWithStore{`0,`1},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="store">存储访问器依赖</param>
-            <param name="options">配置依赖</param>
-            <param name="errors">错误依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="cache">缓存依赖</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.Store">
-            <summary>
-                存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.Cache">
-            <summary>
-                缓存访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.Options">
-            <summary>
-                具键存储管理器配置接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.CachedManager">
-            <summary>
-                是否启用具缓存策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.Expires">
-            <summary>
-                过期时间(秒)
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Store.KeyWithManager`2.EntityStore">
-            <summary>
-                实体存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.GetEntityAsync``1(`1,System.Threading.CancellationToken)">
-            <summary>
-                获取实体信息
-            </summary>
-            <typeparam name="TEntityInfo">实体信息类型</typeparam>
-            <param name="id">实体标识</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Manager`2.CreateEntityAsync``2(``1,System.Threading.CancellationToken)">
             <summary>
                 创建实体
             </summary>
@@ -2328,7 +2241,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Manager`2.UpdateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
             <summary>
                 更新实体
             </summary>
@@ -2339,7 +2252,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Manager`2.UpdateOrCreateEntityAsync``2(`1,``1,System.Threading.CancellationToken)">
             <summary>
                 更新或创建实体
             </summary>
@@ -2350,7 +2263,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新或创建结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithManager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.Manager`2.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 删除实体
             </summary>
@@ -2786,14 +2699,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Store.KeyWithStoreBase`2">
+        <member name="T:Artemis.Data.Store.StoreBase`2">
             <summary>
                 无元数据模型基本存储
             </summary>
             <typeparam name="TEntity"></typeparam>
             <typeparam name="TKey"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreOptions,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreOptions,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 创建一个新的基本存储实例
             </summary>
@@ -2804,46 +2717,46 @@
             <param name="describer"></param>
             <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
         </member>
-        <member name="P:Artemis.Data.Store.KeyWithStoreBase`2.Cache">
+        <member name="P:Artemis.Data.Store.StoreBase`2.Cache">
             <summary>
                 缓存依赖
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.KeyMatchQuery(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.KeyMatchQuery(`1)">
             <summary>
                 键适配查询
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.KeyMatchQuery(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.KeyMatchQuery(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 键适配查询
             </summary>
             <param name="keys"></param>
             <returns></returns>
         </member>
-        <member name="P:Artemis.Data.Store.KeyWithStoreBase`2.StoreOptions">
+        <member name="P:Artemis.Data.Store.StoreBase`2.StoreOptions">
             <summary>
                 无键存储配置
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.KeyWithStoreBase`2.CachedStore">
+        <member name="P:Artemis.Data.Store.StoreBase`2.CachedStore">
             <summary>
                 是否启用具缓存策略
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.KeyWithStoreBase`2.Expires">
+        <member name="P:Artemis.Data.Store.StoreBase`2.Expires">
             <summary>
                 过期时间(秒)
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.CreateNewConfig``1">
+        <member name="M:Artemis.Data.Store.StoreBase`2.CreateNewConfig``1">
             <summary>
                 创建新对象的映射配置
             </summary>
             <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.OverConfig``1(System.Boolean)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.OverConfig``1(System.Boolean)">
             <summary>
                 覆盖已有对象的映射配置
             </summary>
@@ -2851,7 +2764,7 @@
             <param name="alternate">覆盖对象是否明确</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.MergeConfig``1(System.Boolean)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.MergeConfig``1(System.Boolean)">
             <summary>
                 合并对象的映射配置
             </summary>
@@ -2859,73 +2772,73 @@
             <param name="alternate">待合并对象是否明确</param>
             <returns></returns>
         </member>
-        <member name="F:Artemis.Data.Store.KeyWithStoreBase`2._ignoreIdConfig">
+        <member name="F:Artemis.Data.Store.StoreBase`2._ignoreIdConfig">
             <summary>
                 标识忽略缓存
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IgnoreIdConfig``1">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IgnoreIdConfig``1">
             <summary>
                 忽略目标实体的Id属性
             </summary>
             <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
-        <member name="F:Artemis.Data.Store.KeyWithStoreBase`2._ignoreIdAndNullConfig">
+        <member name="F:Artemis.Data.Store.StoreBase`2._ignoreIdAndNullConfig">
             <summary>
                 忽略空值和标识缓存
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IgnoreIdAndNullConfig``1">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IgnoreIdAndNullConfig``1">
             <summary>
                 忽略目标实体的Id属性和源实体的空值属性
             </summary>
             <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
-        <member name="F:Artemis.Data.Store.KeyWithStoreBase`2._ignoreIdAndEmptyConfig">
+        <member name="F:Artemis.Data.Store.StoreBase`2._ignoreIdAndEmptyConfig">
             <summary>
                 忽略空字符串和标识缓存
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IgnoreIdAndEmptyConfig``1">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IgnoreIdAndEmptyConfig``1">
             <summary>
                 忽略目标实体的Id属性和源实体的空字符串属性
             </summary>
             <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
-        <member name="F:Artemis.Data.Store.KeyWithStoreBase`2._ignoreIdAndNullAndEmptyConfig">
+        <member name="F:Artemis.Data.Store.StoreBase`2._ignoreIdAndNullAndEmptyConfig">
             <summary>
                 忽略空值和空字符串和标识缓存
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IgnoreIdAndNullAndEmptyConfig``1">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IgnoreIdAndNullAndEmptyConfig``1">
             <summary>
                 忽略目标实体的Id属性和源实体的空值和空字符串属性
             </summary>
             <typeparam name="TSource"></typeparam>
             <returns></returns>
         </member>
-        <member name="P:Artemis.Data.Store.KeyWithStoreBase`2.Prefix">
+        <member name="P:Artemis.Data.Store.StoreBase`2.Prefix">
             <summary>
                 缓存前缀
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GenerateKey(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GenerateKey(`0)">
             <summary>
                 生成键
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.CacheEntity(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.CacheEntity(`0)">
             <summary>
                 缓存实体
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.CacheEntityAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.CacheEntityAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 缓存实体
             </summary>
@@ -2933,20 +2846,20 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.CacheEntities(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.CacheEntities(System.Collections.Generic.IEnumerable{`0})">
             <summary>
                 缓存实体
             </summary>
             <param name="entities"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.CacheEntitiesAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.CacheEntitiesAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
                 缓存实体
             </summary>
             <param name="entities"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetEntity(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetEntity(`1)">
             <summary>
                 获取实体
             </summary>
@@ -2954,7 +2867,7 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetEntityAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetEntityAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 获取实体
             </summary>
@@ -2963,7 +2876,7 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetEntities(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetEntities(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 获取实体
             </summary>
@@ -2971,7 +2884,7 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 获取实体
             </summary>
@@ -2979,81 +2892,81 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntity(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntity(`1)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="key"></param>
             <exception cref="T:Artemis.Data.Core.Exceptions.InstanceNotImplementException"></exception>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntity(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntity(`0)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="entity"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntityAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntityAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="key"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntityAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntityAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="entity"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntities(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntities(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="keys"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntities(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntities(System.Collections.Generic.IEnumerable{`0})">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="entities"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="keys"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.RemoveCachedEntitiesAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.RemoveCachedEntitiesAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
             <summary>
                 移除被缓存的实体
             </summary>
             <param name="entities"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.ConvertIdFromString(System.String)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.ConvertIdFromString(System.String)">
             <summary>
                 转换字符串到id
             </summary>
             <param name="id">id字符串</param>
             <returns>id</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.ConvertIdToString(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.ConvertIdToString(`1)">
             <summary>
                 转换Id为字符串
             </summary>
             <param name="id">id</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetId(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetId(`0)">
             <summary>
                 获取指定实体Id
             </summary>
             <param name="entity">实体</param>
             <returns>Id</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetIdAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetIdAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 获取指定实体Id
             </summary>
@@ -3061,14 +2974,14 @@
             <param name="cancellationToken">取消异步操作的信号</param>
             <returns>Id</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetIdString(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetIdString(`0)">
             <summary>
                 获取指定实体Id字符串
             </summary>
             <param name="entity">实体</param>
             <returns>Id字符串</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.GetIdStringAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.GetIdStringAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 获取指定实体Id字符串
             </summary>
@@ -3076,21 +2989,21 @@
             <param name="cancellationToken">取消异步操作信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IsDeleted(`0)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IsDeleted(`0)">
             <summary>
                 是否被删除
             </summary>
             <param name="entity">实体</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IsDeleted(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IsDeleted(`1)">
             <summary>
                 是否被删除
             </summary>
             <param name="key">键</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IsDeletedAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IsDeletedAsync(`0,System.Threading.CancellationToken)">
             <summary>
                 是否被删除
             </summary>
@@ -3098,7 +3011,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.IsDeletedAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.IsDeletedAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 是否被删除
             </summary>
@@ -3106,14 +3019,14 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindById(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindById(`1)">
             <summary>
                 根据Id查询实体
             </summary>
             <param name="id">id</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindById``1(`1)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindById``1(`1)">
             <summary>
                 根据Id查询实体并映射到指定类型
             </summary>
@@ -3121,14 +3034,14 @@
             <param name="id">id</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIds(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIds(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 根据Id查询实体
             </summary>
             <param name="ids">id表</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIds``1(System.Collections.Generic.IEnumerable{`1})">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIds``1(System.Collections.Generic.IEnumerable{`1})">
             <summary>
                 根据Id查询实体并映射到指定类型
             </summary>
@@ -3136,7 +3049,7 @@
             <param name="ids">id表</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIdAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIdAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 根据Id查找实体
             </summary>
@@ -3144,7 +3057,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIdAsync``1(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIdAsync``1(`1,System.Threading.CancellationToken)">
             <summary>
                 根据Id查询实体并映射到指定类型
             </summary>
@@ -3153,7 +3066,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIdsAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIdsAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 根据Id查找实体
             </summary>
@@ -3161,7 +3074,7 @@
             <param name="cancellationToken">取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.KeyWithStoreBase`2.FindByIdsAsync``1(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.StoreBase`2.FindByIdsAsync``1(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 根据Id查询实体并映射到指定类型
             </summary>

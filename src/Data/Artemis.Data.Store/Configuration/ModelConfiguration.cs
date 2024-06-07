@@ -22,8 +22,7 @@ public abstract class PartitionConfiguration<TEntity> : ModelConfiguration<TEnti
         base.FieldConfigure(builder);
 
         builder.Property(entity => entity.Partition)
-            .HasColumnType(DataTypeSet.Integer)
-            .HasComment("分区标识");
+            .HasColumnType(DataTypeSet.Integer);
     }
 
     /// <summary>
@@ -32,7 +31,8 @@ public abstract class PartitionConfiguration<TEntity> : ModelConfiguration<TEnti
     /// <param name="builder"></param>
     protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasIndex(entity => entity.Partition);
+        builder.HasIndex(entity => entity.Partition)
+            .HasDatabaseName($"IX_{TableName}_Partition");
     }
 
     #endregion
@@ -45,19 +45,6 @@ public abstract class PartitionConfiguration<TEntity> : ModelConfiguration<TEnti
 public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<TEntity>
     where TEntity : class, IModelBase, IKeySlot, IMateSlot
 {
-    #region Overrides of MateSlotModelConfiguration<TEntity>
-
-    /// <summary>
-    ///     数据库字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        builder.Property(entity => entity.Id).HasComment("标识");
-        base.FieldConfigure(builder);
-    }
-
-    #endregion
 }
 
 /// <summary>
@@ -76,16 +63,13 @@ public abstract class MateSlotModelConfiguration<TEntity> : BaseConfiguration<TE
     protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.CreatedAt)
-            .HasColumnType(DataTypeSet.DateTime)
-            .HasComment("创建时间,初始化后不再进行任何变更");
+            .HasColumnType(DataTypeSet.DateTime);
 
         builder.Property(entity => entity.UpdatedAt)
-            .HasColumnType(DataTypeSet.DateTime)
-            .HasComment("更新时间,初始为创建时间");
+            .HasColumnType(DataTypeSet.DateTime);
 
         builder.Property(entity => entity.DeletedAt)
-            .HasColumnType(DataTypeSet.DateTime)
-            .HasComment("删除时间,启用软删除时生效");
+            .HasColumnType(DataTypeSet.DateTime);
     }
 
     /// <summary>
@@ -123,18 +107,6 @@ public abstract class KeySlotModelConfiguration<TEntity, TKey> : BaseConfigurati
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
-    #region Overrides of ModelBaseConfiguration<TEntity>
-
-    /// <summary>
-    ///     数据库字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        builder.Property(entity => entity.Id).HasComment("标识");
-    }
-
-    #endregion
 }
 
 /// <summary>

@@ -17,25 +17,28 @@
 
 	<ItemGroup>
 		<Compile Remove="logs\**" />
+		<Compile Remove="Services\**" />
 		<Content Remove="logs\**" />
+		<Content Remove="Services\**" />
 		<EmbeddedResource Remove="logs\**" />
+		<EmbeddedResource Remove="Services\**" />
 		<None Remove="logs\**" />
+		<None Remove="Services\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.5" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.Rpc\Artemis.Extensions.Rpc.csproj" />
 		<ProjectReference Include="..\..\Protos\Artemis.Protos.Identity\Artemis.Protos.Identity.csproj" />
-		<ProjectReference Include="..\..\Services\Artemis.Services.Identity\Artemis.Services.Identity.csproj" />
 	</ItemGroup>
 
 </Project>

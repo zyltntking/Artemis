@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 namespace Artemis.App.Identity;
 
 /// <summary>
-/// Identity迁移上下文工厂
+///     Identity迁移上下文工厂
 /// </summary>
 public class MigrationDbContextFactory : IDesignTimeDbContextFactory<ArtemisIdentityContext>
 {
@@ -36,7 +36,7 @@ public class MigrationDbContextFactory : IDesignTimeDbContextFactory<ArtemisIden
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false);
+            .AddJsonFile("appsettings.json", false);
 
         return builder.Build();
     }

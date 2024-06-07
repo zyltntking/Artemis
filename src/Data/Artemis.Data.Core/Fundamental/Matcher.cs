@@ -48,6 +48,25 @@ public static class Matcher
         @"^(([^<>()[\]\\.,;:\s@""]+(\.[^<>()[\]\\.,;:\s@""]+)*)|("".+""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$";
 
     /// <summary>
+    /// 中括号内内容匹配模式
+    /// </summary>
+    private const string BracketContentPattern = @"\[(.*?)\]";
+
+    /// <summary>
+    /// 中括号内内容匹配器
+    /// </summary>
+    /// <param name="mode">匹配模式</param>
+    /// <returns></returns>
+    public static Regex ContentMatcher(ContentMatcherMode mode = ContentMatcherMode.Bracket)
+    {
+        return mode switch
+        {
+            ContentMatcherMode.Bracket => new Regex(BracketContentPattern),
+            _ => new Regex(BracketContentPattern)
+        };
+    }
+
+    /// <summary>
     ///     匹配电子邮件
     /// </summary>
     /// <returns></returns>
@@ -86,6 +105,25 @@ public static class Matcher
             _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
         };
     }
+}
+
+/// <summary>
+/// 内容匹配模式
+/// </summary>
+public enum ContentMatcherMode
+{
+    /// <summary>
+    /// 小括号内内容
+    /// </summary>
+    Parentheses,
+    /// <summary>
+    /// 中括号内内容
+    /// </summary>
+    Bracket,
+    /// <summary>
+    /// 大括号内内容
+    /// </summary>
+    Braces
 }
 
 /// <summary>

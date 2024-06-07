@@ -6,7 +6,7 @@
     <members>
         <member name="T:Artemis.App.Identity.MigrationDbContextFactory">
             <summary>
-            Identity迁移上下文工厂
+                Identity迁移上下文工厂
             </summary>
         </member>
         <member name="M:Artemis.App.Identity.MigrationDbContextFactory.CreateDbContext(System.String[])">
@@ -166,6 +166,70 @@
         <member name="M:Artemis.App.Identity.Services.UserService.FetchUserInfo(Artemis.Protos.Identity.FetchUserInfosRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 获取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.GetUserInfo(Artemis.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.CreateUser(Artemis.Protos.Identity.CreateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.UpdateUserInfo(Artemis.Protos.Identity.UpdateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.DeleteUser(Artemis.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.FetchUserRolesInfo(Artemis.Protos.Identity.FetchUserRolesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户角色信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.GetUserRoleInfo(Artemis.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                获取用户角色信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.AddUserRole(Artemis.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                对用户添加角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.RemoveUserRole(Artemis.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                对用户移除角色
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>

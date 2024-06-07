@@ -10,49 +10,10 @@ namespace Artemis.Data.Store;
 #region Interface
 
 /// <summary>
-///     提供用于管理TEntity的存储器的API接口
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-public interface IManager<TEntity> : IManager<TEntity, Guid>, IKeyWithManager<TEntity>
-    where TEntity : class, IModelBase
-{
-}
-
-/// <summary>
-///     提供用于管理TEntity的存储器的API接口
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TKey">键类型</typeparam>
-public interface IManager<TEntity, TKey> : IKeyWithManager<TEntity, TKey>
-    where TEntity : class, IModelBase<TKey>
-    where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    new IStore<TEntity, TKey> EntityStore { get; }
-
-    #region BaseResourceManager
-
-    /// <summary>
-    ///     获取实体信息列表
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="page">页码</param>
-    /// <param name="size">条目数</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>实体信息列表</returns>
-    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
-        CancellationToken cancellationToken = default);
-
-    #endregion
-}
-
-/// <summary>
 ///     提供用于管理具键存储模型TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface IKeyWithManager<TEntity> : IKeyWithManager<TEntity, Guid>
+public interface IManager<TEntity> : IManager<TEntity, Guid>
     where TEntity : class, IKeySlot
 {
 }
@@ -62,14 +23,14 @@ public interface IKeyWithManager<TEntity> : IKeyWithManager<TEntity, Guid>
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public interface IKeyWithManager<TEntity, TKey> : IKeyLessManager<TEntity>
+public interface IManager<TEntity, TKey> : IKeyLessManager<TEntity>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     实体存储
     /// </summary>
-    new IKeyWithStore<TEntity, TKey> EntityStore { get; }
+    new IStore<TEntity, TKey> EntityStore { get; }
 
     #region BaseResourceManager
 
@@ -81,6 +42,17 @@ public interface IKeyWithManager<TEntity, TKey> : IKeyLessManager<TEntity>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     Task<TEntityInfo?> GetEntityAsync<TEntityInfo>(TKey id, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     获取实体信息列表
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>实体信息列表</returns>
+    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     创建实体
@@ -156,96 +128,10 @@ public interface IKeyLessManager<TEntity> : IDisposable
 #endregion
 
 /// <summary>
-///     提供用于管理TEntity的存储器的API
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntity> where TEntity : class, IModelBase
-{
-    /// <summary>
-    ///     创建新的管理器实例
-    /// </summary>
-    /// <param name="store">存储访问器依赖</param>
-    /// <param name="cache">缓存管理器</param>
-    /// <param name="options">配置依赖</param>
-    /// <param name="logger">日志依赖</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    protected Manager(
-        IStore<TEntity> store,
-        IDistributedCache? cache = null,
-        IManagerOptions? options = null,
-        ILogger? logger = null) : base(store, cache, options, null, logger)
-    {
-    }
-}
-
-/// <summary>
-///     提供用于管理TEntity的存储器的API
-/// </summary>
-/// <typeparam name="TEntity">实体类型</typeparam>
-/// <typeparam name="TKey">键类型</typeparam>
-public abstract class Manager<TEntity, TKey> : KeyWithManager<TEntity, TKey>, IManager<TEntity, TKey>
-    where TEntity : class, IModelBase<TKey>
-    where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     创建新的管理器实例
-    /// </summary>
-    /// <param name="store">存储访问器依赖</param>
-    /// <param name="options">配置依赖</param>
-    /// <param name="errors">错误依赖</param>
-    /// <param name="logger">日志依赖</param>
-    /// <param name="cache">缓存依赖</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    protected Manager(
-        IStore<TEntity, TKey> store,
-        IDistributedCache? cache = null,
-        IManagerOptions? options = null,
-        StoreErrorDescriber? errors = null,
-        ILogger? logger = null) : base(store, cache, options, errors, logger)
-    {
-        Store = store;
-    }
-
-    #region Implementation of IManager<TEntity,TKey>
-
-    /// <summary>
-    ///     存储访问器
-    /// </summary>
-    protected new IStore<TEntity, TKey> Store { get; }
-
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    public new IStore<TEntity, TKey> EntityStore => Store;
-
-    /// <summary>
-    ///     获取实体信息列表
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="page">页码</param>
-    /// <param name="size">条目数</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        return Store.EntityQuery
-            .MapPageAsync<TEntity, TKey, TEntityInfo>(
-                page,
-                size,
-                cancellationToken);
-    }
-
-    #endregion
-}
-
-/// <summary>
 ///     提供用于管理具键存储模型TEntity的存储器的API
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class KeyWithManager<TEntity> : KeyWithManager<TEntity, Guid>, IKeyWithManager<TEntity>
+public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntity>
     where TEntity : class, IKeySlot
 {
     /// <summary>
@@ -257,8 +143,8 @@ public abstract class KeyWithManager<TEntity> : KeyWithManager<TEntity, Guid>, I
     /// <param name="logger">日志依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    protected KeyWithManager(
-        IKeyWithStore<TEntity, Guid> store,
+    protected Manager(
+        IStore<TEntity, Guid> store,
         IDistributedCache? cache = null,
         IKeyWithStoreManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
@@ -272,7 +158,7 @@ public abstract class KeyWithManager<TEntity> : KeyWithManager<TEntity, Guid>, I
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, IKeyWithManager<TEntity, TKey>
+public abstract class Manager<TEntity, TKey> : KeyLessManager<TEntity>, IManager<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -285,8 +171,8 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
     /// <param name="logger">日志依赖</param>
     /// <param name="cache">缓存依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    protected KeyWithManager(
-        IKeyWithStore<TEntity, TKey> store,
+    protected Manager(
+        IStore<TEntity, TKey> store,
         IDistributedCache? cache = null,
         IKeyWithStoreManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
@@ -302,7 +188,7 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
     /// <summary>
     ///     存储访问器
     /// </summary>
-    protected new IKeyWithStore<TEntity, TKey> Store { get; }
+    protected new IStore<TEntity, TKey> Store { get; }
 
     /// <summary>
     ///     缓存访问器
@@ -335,7 +221,7 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
     /// <summary>
     ///     实体存储
     /// </summary>
-    public new IKeyWithStore<TEntity, TKey> EntityStore => Store;
+    public new IStore<TEntity, TKey> EntityStore => Store;
 
     #region BaseResourceManager
 
@@ -351,6 +237,26 @@ public abstract class KeyWithManager<TEntity, TKey> : KeyLessManager<TEntity>, I
         OnAsyncActionExecuting(cancellationToken);
 
         return Store.FindMapEntityAsync<TEntityInfo>(id, cancellationToken);
+    }
+
+    /// <summary>
+    ///     获取实体信息列表
+    /// </summary>
+    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>实体信息列表</returns>
+    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        return Store.EntityQuery
+            .MapPageAsync<TEntity, TKey, TEntityInfo>(
+                page,
+                size,
+                cancellationToken);
     }
 
     /// <summary>

@@ -95,6 +95,18 @@
             <param name="continuation"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Extensions.Rpc.MarkFieldFeature">
+            <summary>
+            标记字段特性
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Rpc.MarkFieldFeature.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
         <member name="T:Artemis.Extensions.Rpc.MessageValidationInterceptor">
             <summary>
                 消息体验证拦截器

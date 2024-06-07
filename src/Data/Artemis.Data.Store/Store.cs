@@ -62,7 +62,7 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore<TEntity, TKey>
+public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
     where TKey : IEquatable<TKey>
 {
@@ -285,6 +285,8 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
             var now = DateTime.Now;
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
+
+            entity.ModifyBy = entity.CreateBy;
         }
 
         Context.Add(entity);
@@ -303,6 +305,8 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
             {
                 entity.CreatedAt = now;
                 entity.UpdatedAt = now;
+
+                entity.ModifyBy = entity.CreateBy;
             }
         }
 
@@ -329,7 +333,13 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
         Context.Update(entity);
 
         if (MetaDataHosting)
+        {
             Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+            Context.Entry(entity).Property(item => item.DeletedAt).IsModified = false;
+
+            Context.Entry(entity).Property(item => item.CreateBy).IsModified = false;
+            Context.Entry(entity).Property(item => item.RemoveBy).IsModified = false;
+        }
     }
 
     /// <summary>
@@ -349,8 +359,16 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
         Context.UpdateRange(entities);
 
         if (MetaDataHosting)
+        {
             foreach (var entity in entities)
+            {
                 Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+                Context.Entry(entity).Property(item => item.DeletedAt).IsModified = false;
+
+                Context.Entry(entity).Property(item => item.CreateBy).IsModified = false;
+                Context.Entry(entity).Property(item => item.RemoveBy).IsModified = false;
+            }
+        }
     }
 
     /// <summary>
@@ -397,11 +415,14 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
         {
             Context.Attach(entity);
             var now = DateTime.Now;
-            entity.UpdatedAt = now;
             entity.DeletedAt = now;
             Context.Update(entity);
 
             Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+            Context.Entry(entity).Property(item => item.UpdatedAt).IsModified = false;
+
+            Context.Entry(entity).Property(item => item.CreateBy).IsModified = false;
+            Context.Entry(entity).Property(item => item.ModifyBy).IsModified = false;
         }
         else
         {
@@ -428,7 +449,13 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>, IStore
             Context.UpdateRange(entities);
 
             foreach (var entity in entities)
+            {
                 Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
+                Context.Entry(entity).Property(item => item.UpdatedAt).IsModified = false;
+
+                Context.Entry(entity).Property(item => item.CreateBy).IsModified = false;
+                Context.Entry(entity).Property(item => item.ModifyBy).IsModified = false;
+            }
         }
         else
         {

@@ -68,6 +68,25 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     public virtual TKey Id { get; set; } = default!;
 
     #endregion
+
+    #region Implementation of IMarkSlot<TKey>
+
+    /// <summary>
+    /// 创建人
+    /// </summary>
+    public virtual TKey CreateBy { get; set; } = default!;
+
+    /// <summary>
+    /// 更新人
+    /// </summary>
+    public virtual TKey ModifyBy { get; set; } = default!;
+
+    /// <summary>
+    /// 移除人
+    /// </summary>
+    public TKey? RemoveBy { get; set; }
+
+    #endregion
 }
 
 #region KeySlot
@@ -103,11 +122,13 @@ public abstract class MateSlot : IMateSlot
     /// <summary>
     ///     创建时间
     /// </summary>
+    [Required]
     public virtual DateTime CreatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     更新时间
     /// </summary>
+    [Required]
     public virtual DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     /// <summary>

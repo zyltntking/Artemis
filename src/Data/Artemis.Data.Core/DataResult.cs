@@ -824,21 +824,3 @@ public record EmptyResult : DataResult<EmptyRecord>;
 ///     适应性空结果
 /// </summary>
 public record EmptyAdapterResult : AdapterResult<EmptyRecord>;
-
-/// <summary>
-///     含键记录
-/// </summary>
-public record KeyRecord : KeyRecord<Guid>;
-
-/// <summary>
-///     含键记录
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-public record KeyRecord<TKey> : IKeySlot<TKey> where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     标识
-    /// </summary>
-    [Required]
-    public required TKey Id { get; set; }
-}

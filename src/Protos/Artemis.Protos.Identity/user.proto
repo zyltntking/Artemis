@@ -10,14 +10,82 @@ package artemis.protos.identity;
 // 用户服务协议定义
 service User {
   // 获取用户信息
-  rpc FetchUserInfo (FetchUserInfosRequest) returns (FetchUserInfoResponse) {
-	option (google.api.http) = {
-	  get: "/Users"
-	};
+  rpc FetchUserInfo (UserInfoSearchPackage) returns (UserInfoSearchResponse) {
+    option (google.api.http) = {
+      get: "/Users"
+    };
+  }
+
+  // 获取用户信息
+  rpc GetUserInfo (UserIdPackage) returns (UserInfoResponse) {
+    option (google.api.http) = {
+      get: "/Users/{userId}"
+    };
+  }
+
+  //  创建用户
+  rpc CreateUser (UserPackage) returns (UserInfoResponse)
+  {
+    option (google.api.http) = {
+      post: "/Users"
+      body: "*"
+    };
+  }
+
+  // 更新用户信息
+  rpc UpdateUserInfo (UserWithIdPackage) returns (UserInfoResponse){
+    option (google.api.http) = {
+      put: "/Users/{userId}"
+      body: "*"
+    };
+  }
+
+  // 删除用户
+  rpc DeleteUser (UserIdPackage) returns (EmptyResponse) {
+    option (google.api.http) = {
+      delete: "/Users/{userId}"
+    };
+  }
+
+  // 获取用户角色信息
+  rpc FetchUserRolesInfo (UserRoleInfoSearchPackage) returns (RoleInfosResponse) {
+    option (google.api.http) = {
+      get: "/Users/{userId}/Roles"
+    };
+  }
+
+  // 获取用户角色信息
+  rpc GetUserRoleInfo (UserRoleIdRequest) returns (RoleInfoResponse) {
+    option (google.api.http) = {
+      get: "/Users/{userId}/Roles/{roleId}"
+    };
+  }
+
+  // 对用户添加角色
+  rpc AddUserRole (UserRoleIdRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      post: "/Users/{userId}/Roles"
+      body: "*"
+    };
+  }
+
+  // 对用户移除角色
+  rpc RemoveUserRole (UserRoleIdRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      delete: "/Users/{userId}/Roles/{roleId}"
+    };
+  }
+
+  // 获取用户凭据
+  rpc FetchUserClaimsInfo (FetchUserClaimsRequest) returns (UserClaimsResponse) {
+    option (google.api.http) = {
+      get: "/Users/{userId}/Claims"
+    };
   }
 }
 
-message FetchUserInfosRequest{
+// 查询用户信息数据包
+message UserInfoSearchPackage{
   // 用户名
   google.protobuf.StringValue nameSearch = 1;
   // 邮箱地址
@@ -60,8 +128,8 @@ message PagedUserInfoReply{
   repeated UserInfoReply items = 5;
 }
 
-// 查询用户响应
-message FetchUserInfoResponse {
+// 获取用户响应
+message UserInfoSearchResponse {
   // 状态码
   int32 code = 1;
   // 是否成功
@@ -76,4 +144,198 @@ message FetchUserInfoResponse {
   int64 timestamp = 6;
   // 数据
   PagedUserInfoReply data = 7;
+}
+
+// 用户标识数据包
+message UserIdPackage {
+  // 用户标识
+  string userId = 1;
+}
+
+// 获取用户信息响应
+message UserInfoResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  UserInfoReply data = 7;
+}
+
+// 创建用户请求
+message UserPackage{
+  // 用户名
+  string userName = 1;
+  // 邮箱地址
+  google.protobuf.StringValue email = 2;
+  // 手机号码
+  google.protobuf.StringValue phoneNumber = 3;
+  // 密码
+  string password = 4;
+}
+
+// 更新用户请求
+message UserWithIdPackage{
+  // 用户标识
+  string userId = 1;
+  // 用户数据包
+  UserPackage userPackage = 2;
+}
+
+// 查询角色信息数据包
+message RoleInfoSearchPackage{
+  // 角色名
+  google.protobuf.StringValue roleNameSearch = 2;
+  // 页码
+  google.protobuf.Int32Value page = 3;
+  // 条目数
+  google.protobuf.Int32Value size = 4;
+}
+
+// 获取用户角色信息请求
+message UserRoleInfoSearchPackage{
+  // 用户标识
+  string userId = 1;
+  // 角色名
+  google.protobuf.StringValue roleNameSearch = 2;
+  // 页码
+  google.protobuf.Int32Value page = 3;
+  // 条目数
+  google.protobuf.Int32Value size = 4;
+}
+
+// 角色信息回应
+message RoleInfoReply{
+  // 角色标识
+  string id = 1;
+  // 角色名
+  string name = 2;
+  // 角色描述
+  google.protobuf.StringValue description = 3;
+}
+
+// 分页角色信息回应
+message PagedRoleInfoReplay{
+  // 页码
+  int32 page = 1;
+  // 条目数
+  int32 size = 2;
+  // 总数
+  int64 total = 3;
+  // 过滤后总数
+  int64 count = 4;
+  // 数据
+  repeated RoleInfoReply items = 5;
+}
+
+// 获取角色响应
+message RoleInfosResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  PagedRoleInfoReplay data = 7;
+}
+
+// 用户角色标识请求
+message UserRoleIdRequest {
+  // 用户标识
+  string userId = 1;
+  // 角色标识
+  string roleId = 2;
+}
+
+// 获取角色信息响应
+message RoleInfoResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  RoleInfoReply data = 7;
+}
+
+// 获取用户凭据请求
+message FetchUserClaimsRequest{
+  // 用户标识
+  string userId = 1;
+  // 角色名
+  google.protobuf.StringValue claimTypeSearch = 2;
+  // 页码
+  google.protobuf.Int32Value page = 3;
+  // 条目数
+  google.protobuf.Int32Value size = 4;
+}
+
+// 用户凭据回应
+message UserClaimReply{
+  // 凭据标识
+  int32 id = 1;
+  // 用户标识
+  string userId = 2;
+  // 凭据类型
+  string claimType = 3;
+  // 凭据值
+  string claimValue = 4;
+  // 校验戳
+  string checkStamp = 5;
+  // 手机号码验证标识
+  google.protobuf.StringValue description = 6;
+}
+
+// 分页用户凭据回应
+message PagedUserClaimReply{
+  // 页码
+  int32 page = 1;
+  // 条目数
+  int32 size = 2;
+  // 总数
+  int64 total = 3;
+  // 过滤后总数
+  int64 count = 4;
+  // 数据
+  repeated UserClaimReply items = 5;
+}
+
+// 获取用户凭据响应
+message UserClaimsResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  PagedUserClaimReply data = 7;
 }

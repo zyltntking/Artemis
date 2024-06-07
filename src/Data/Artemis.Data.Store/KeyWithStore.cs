@@ -15,7 +15,7 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntity"></typeparam>
 public abstract class KeyWithStore<TEntity> :
     KeyWithStore<TEntity, Guid>,
-    IKeyWithStore<TEntity>
+    IStore<TEntity>
     where TEntity : class, IKeySlot
 {
     /// <summary>
@@ -66,8 +66,8 @@ public abstract class KeyWithStore<TEntity> :
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 public abstract class KeyWithStore<TEntity, TKey> :
-    KeyWithStoreBase<TEntity, TKey>,
-    IKeyWithStore<TEntity, TKey>
+    StoreBase<TEntity, TKey>,
+    IStore<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {

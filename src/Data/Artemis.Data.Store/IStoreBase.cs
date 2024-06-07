@@ -7,7 +7,7 @@ namespace Artemis.Data.Store;
 ///     无元数据模型基本存储接口
 /// </summary>
 /// <typeparam name="TEntity">模型类型</typeparam>
-public interface IKeyWithStoreBase<TEntity> : IKeyWithStoreBase<TEntity, Guid> where TEntity : class, IKeySlot
+public interface IStoreBase<TEntity> : IStoreBase<TEntity, Guid> where TEntity : class, IKeySlot
 {
 }
 
@@ -16,7 +16,7 @@ public interface IKeyWithStoreBase<TEntity> : IKeyWithStoreBase<TEntity, Guid> w
 /// </summary>
 /// <typeparam name="TEntity">模型类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IKeyWithStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
+public interface IStoreBase<TEntity, TKey> : IKeyLessStoreBase<TEntity>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {

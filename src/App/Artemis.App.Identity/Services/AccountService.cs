@@ -148,7 +148,7 @@ public class AccountService : Account.AccountBase
 
         if (token is not null)
         {
-            await EraseTokenDocument(token,context.CancellationToken);
+            await EraseTokenDocument(token, context.CancellationToken);
 
             return RpcResultAdapter.EmptySuccess<EmptyResponse>();
         }
@@ -307,10 +307,12 @@ public class AccountService : Account.AccountBase
 
         if (tokenDocument is not null)
         {
-            await UserManager.RemoveUserTokenAsync(tokenDocument.UserId, Options.IdentityServiceProvider, tokenDocument.EndType,
+            await UserManager.RemoveUserTokenAsync(tokenDocument.UserId, Options.IdentityServiceProvider,
+                tokenDocument.EndType,
                 cancellationToken);
 
-            await UserManager.RemoveUserLoginAsync(tokenDocument.UserId, Options.IdentityServiceProvider, tokenDocument.EndType, cancellationToken);
+            await UserManager.RemoveUserLoginAsync(tokenDocument.UserId, Options.IdentityServiceProvider,
+                $"{tokenDocument.EndType}:{tokenDocument.UserId}", cancellationToken);
 
             // 不允许同终端多客户端登录处理
             if (!Options.EnableMultiEnd)

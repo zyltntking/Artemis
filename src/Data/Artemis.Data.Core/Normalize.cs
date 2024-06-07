@@ -1,4 +1,6 @@
-﻿namespace Artemis.Data.Core;
+﻿using Artemis.Data.Core.Fundamental.Types;
+
+namespace Artemis.Data.Core;
 
 /// <summary>
 ///     标准化
@@ -25,7 +27,7 @@ public static class Normalize
     {
         var flag = KeyValuePairFlagNormalize(key, value);
 
-        return Hash.Md5Hash(flag).StringNormalize();
+        return Hash.HashData(flag, HashType.Md5).StringNormalize();
     }
 
     /// <summary>

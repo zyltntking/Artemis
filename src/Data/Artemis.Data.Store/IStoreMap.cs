@@ -4,20 +4,20 @@ using Mapster;
 namespace Artemis.Data.Store;
 
 /// <summary>
-///     具键可映射存储接口
+///     可映射存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
-public interface IKeyWithStoreMap<TEntity> : IKeyWithStoreMap<TEntity, Guid>
+public interface IStoreMap<TEntity> : IStoreMap<TEntity, Guid>
     where TEntity : IKeySlot
 {
 }
 
 /// <summary>
-///     具键可映射存储接口
+///     可映射存储接口
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">键类型</typeparam>
-public interface IKeyWithStoreMap<TEntity, TKey> : IKeyLessStoreMap<TEntity>
+public interface IStoreMap<TEntity, TKey> : IKeyLessStoreMap<TEntity>
     where TEntity : IKeySlot<TKey> where TKey : IEquatable<TKey>
 {
     #region FindMapEntity & FindMapEntities

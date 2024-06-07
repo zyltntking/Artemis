@@ -666,22 +666,6 @@
                 适应性空结果
             </summary>
         </member>
-        <member name="T:Artemis.Data.Core.KeyRecord">
-            <summary>
-                含键记录
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.KeyRecord`1">
-            <summary>
-                含键记录
-            </summary>
-            <typeparam name="TKey"></typeparam>
-        </member>
-        <member name="P:Artemis.Data.Core.KeyRecord`1.Id">
-            <summary>
-                标识
-            </summary>
-        </member>
         <member name="T:Artemis.Data.Core.Exceptions.IArtemisException">
             <summary>
                 异常成员接口
@@ -1933,6 +1917,21 @@
                 密码哈希器
             </summary>
         </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Iterations">
+            <summary>
+            迭代次数生成器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.SaltSize">
+            <summary>
+            盐长度生成器
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.DerivedKeyLength">
+            <summary>
+            派生密钥长度生成器
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Create">
             <summary>
                 创建实例
@@ -2003,6 +2002,21 @@
                 sha512
             </summary>
         </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_256">
+            <summary>
+             sha3-256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_384">
+            <summary>
+             sha3-384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_512">
+            <summary>
+             sha3-512
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Pbkdf2(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
             <summary>使用 PBKDF2 算法执行密钥派生</summary>
             <param name="input">原文</param>
@@ -2024,6 +2038,87 @@
             <param name="outputLength">输出长度</param>
             <returns></returns>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto">
+            <summary>
+            对称算法
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+            <summary>
+            对称加密串
+            </summary>
+            <param name="input">输入段</param>
+            <param name="key">密钥</param>
+            <param name="symmetricType">对称算法类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+            <summary>
+            对称解密串
+            </summary>
+            <param name="input">输入段</param>
+            <param name="key">密钥</param>
+            <param name="symmetricType">对称算法类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+            <summary>
+            对称加密
+            </summary>
+            <param name="input">输入段</param>
+            <param name="key">密钥</param>
+            <param name="iv">向量</param>
+            <param name="symmetricType">对称算法类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+            <summary>
+            对称解密
+            </summary>
+            <param name="input">输入段</param>
+            <param name="key">密钥</param>
+            <param name="iv">向量</param>
+            <param name="symmetricType">对称算法类型</param>
+            <returns></returns>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._encryptorTable">
+            <summary>
+            加密器表
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.EncryptorTable">
+            <summary>
+            加密器表
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._decryptorTable">
+            <summary>
+            解密器表
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.DecryptorTable">
+            <summary>
+            解密器表
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.GenerateSymmetricKey(System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+            <summary>
+            生成堆成密钥和向量对
+            </summary>
+            <param name="input">输入字符密钥</param>
+            <param name="symmetricType">对称算法类型</param>
+            <returns></returns>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._keyLengthTable">
+            <summary>
+            密钥长度表
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.KeyLengthTable">
+            <summary>
+            密钥长度表
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Kit.Crypto.SM4">
             <summary>
@@ -2086,6 +2181,18 @@
                 电子邮件匹配模式
             </summary>
         </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Matcher.BracketContentPattern">
+            <summary>
+            中括号内内容匹配模式
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.ContentMatcher(Artemis.Data.Core.Fundamental.ContentMatcherMode)">
+            <summary>
+            中括号内内容匹配器
+            </summary>
+            <param name="mode">匹配模式</param>
+            <returns></returns>
+        </member>
         <member name="P:Artemis.Data.Core.Fundamental.Matcher.EmailMatcher">
             <summary>
                 匹配电子邮件
@@ -2107,6 +2214,26 @@
             <param name="mode"></param>
             <returns></returns>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.ContentMatcherMode">
+            <summary>
+            内容匹配模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Parentheses">
+            <summary>
+            小括号内内容
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Bracket">
+            <summary>
+            中括号内内容
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Braces">
+            <summary>
+            大括号内内容
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.PhoneMatcherMode">
             <summary>
@@ -3248,6 +3375,43 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.SymmetricType">
+            <summary>
+            对称算法类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Unknown">
+            <summary>
+            未知类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Des">
+            <summary>
+            DES
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Rc2">
+            <summary>
+            RC2
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.TripleDes">
+            <summary>
+            TripleDES
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Aes">
+            <summary>
+            AES
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.SymmetricType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.DataOperationType">
             <summary>
                 数据操作类型
@@ -3342,7 +3506,79 @@
                 Sha512
             </summary>
         </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha3_256">
+            <summary>
+                Sha3_256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha3_384">
+            <summary>
+                Sha3_384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HashType.Sha3_512">
+            <summary>
+                Sha3_512
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.HashType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.HmacHashType">
+            <summary>
+                HMAC哈希类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.Unknown">
+            <summary>
+                未知
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacMd5">
+            <summary>
+                HMACMd5
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha1">
+            <summary>
+                HMACSha1
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha256">
+            <summary>
+                HMACSha256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha384">
+            <summary>
+                HMACSha384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha512">
+            <summary>
+                HMACSha512
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha3_256">
+            <summary>
+                HMACSha3_256
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha3_384">
+            <summary>
+                HMACSha3_384
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.HmacHashType.HmacSha3_512">
+            <summary>
+                HMACSha3_512
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.HmacHashType.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数
             </summary>
@@ -3593,12 +3829,15 @@
             <param name="providedText">原文</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.Md5Hash(System.String)">
+        <member name="F:Artemis.Data.Core.Hash._hashTable">
             <summary>
-                Md5哈希
+            hash委托缓存
             </summary>
-            <param name="input">输入字符串</param>
-            <returns>输出字符串</returns>
+        </member>
+        <member name="P:Artemis.Data.Core.Hash.HashTable">
+            <summary>
+            Hash委托
+            </summary>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Md5Hash(System.Byte[])">
             <summary>
@@ -3607,26 +3846,12 @@
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.Sha1Hash(System.String)">
-            <summary>
-                Sha1哈希
-            </summary>
-            <param name="input">输入字符串</param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Data.Core.Hash.Sha1Hash(System.Byte[])">
             <summary>
                 Sha1哈希
             </summary>
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Hash.Sha256Hash(System.String)">
-            <summary>
-                Sha256哈希
-            </summary>
-            <param name="input">输入字符串</param>
-            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Sha256Hash(System.Byte[])">
             <summary>
@@ -3635,26 +3860,12 @@
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.Sha384Hash(System.String)">
-            <summary>
-                Sha384哈希
-            </summary>
-            <param name="input">输入字符串</param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Data.Core.Hash.Sha384Hash(System.Byte[])">
             <summary>
                 Sha384哈希
             </summary>
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Hash.Sha512Hash(System.String)">
-            <summary>
-                Sha512哈希
-            </summary>
-            <param name="input">输入字符串</param>
-            <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Sha512Hash(System.Byte[])">
             <summary>
@@ -3663,14 +3874,44 @@
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacMd5Hash(System.String,System.String)">
+        <member name="M:Artemis.Data.Core.Hash.Sha3_256Hash(System.Byte[])">
             <summary>
-                HMACMd5哈希
+            Sha3_256哈希
             </summary>
-            <param name="input">输入字符串</param>
-            <param name="key"></param>
+            <param name="input">输入字节码</param>
+            <returns>输出字节码</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.Sha3_384Hash(System.Byte[])">
+            <summary>
+            Sha3_384哈希
+            </summary>
+            <param name="input">输入字节码</param>
+            <returns>输出字节码</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.Sha3_512Hash(System.Byte[])">
+            <summary>
+            Sha3_512哈希
+            </summary>
+            <param name="input">输入字节码</param>
+            <returns>输出字节码</returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HashType)">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="input">输入</param>
+            <param name="hashType">哈希类型</param>
             <returns></returns>
-            <remarks>以自身作为密钥对自身进行散列</remarks>
+        </member>
+        <member name="F:Artemis.Data.Core.Hash._hmacHashTable">
+            <summary>
+            HMAC Hash委托缓存
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Hash.HmacHashTable">
+            <summary>
+            HMAC Hash委托
+            </summary>
         </member>
         <member name="M:Artemis.Data.Core.Hash.HmacMd5Hash(System.Byte[],System.Byte[])">
             <summary>
@@ -3681,14 +3922,6 @@
             <returns></returns>
             <remarks>以自身作为密钥对自身进行散列</remarks>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacSha1Hash(System.String,System.String)">
-            <summary>
-                HMACSha1哈希
-            </summary>
-            <param name="input">输入字符串</param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Data.Core.Hash.HmacSha1Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha1哈希
@@ -3697,25 +3930,9 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacSha256Hash(System.String,System.String)">
-            <summary>
-                HMACSha256哈希
-            </summary>
-            <param name="input"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Data.Core.Hash.HmacSha256Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha256哈希
-            </summary>
-            <param name="input"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacSha384Hash(System.String,System.String)">
-            <summary>
-                HMACSha384哈希
             </summary>
             <param name="input"></param>
             <param name="key"></param>
@@ -3729,7 +3946,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacSha512Hash(System.String,System.String)">
+        <member name="M:Artemis.Data.Core.Hash.HmacSha512Hash(System.Byte[],System.Byte[])">
             <summary>
                 HMACSha512哈希
             </summary>
@@ -3737,12 +3954,37 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HmacSha512Hash(System.Byte[],System.Byte[])">
+        <member name="M:Artemis.Data.Core.Hash.HmacSha3_256Hash(System.Byte[],System.Byte[])">
             <summary>
-                HMACSha512哈希
+             HMACSha3_256哈希
             </summary>
             <param name="input"></param>
             <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.HmacSha3_384Hash(System.Byte[],System.Byte[])">
+            <summary>
+             HMACSha3_384哈希
+            </summary>
+            <param name="input"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.HmacSha3_512Hash(System.Byte[],System.Byte[])">
+            <summary>
+            HMACSha3_512哈希
+            </summary>
+            <param name="input"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HmacHashType,System.String)">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="input">输入</param>
+            <param name="hashType">哈希类型</param>
+            <param name="key">键</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.IConcurrencyPartitionBase">
@@ -3825,6 +4067,32 @@
                 删除时间
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.IMarkSlot">
+            <summary>
+            标记组件接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.IMarkSlot`1">
+            <summary>
+            标记组件接口
+            </summary>
+            <typeparam name="TMark"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.IMarkSlot`1.CreateBy">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IMarkSlot`1.ModifyBy">
+            <summary>
+            更新人
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.IMarkSlot`1.RemoveBy">
+            <summary>
+            移除人
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.IConcurrencyStamp">
             <summary>
                 并发锁组件接口
@@ -3901,6 +4169,21 @@
         <member name="P:Artemis.Data.Core.ModelBase`1.Id">
             <summary>
                 存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ModelBase`1.CreateBy">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ModelBase`1.ModifyBy">
+            <summary>
+            更新人
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.ModelBase`1.RemoveBy">
+            <summary>
+            移除人
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.KeySlot">

@@ -12,49 +12,49 @@ package artemis.protos.identity;
 service Account {
   // 签到
   rpc SignIn (SignInRequest) returns (TokenResponse){
-	  option (google.api.http) = {
-		  post: "/Account/SignIn",
-		  body: "*"
-	  };
+    option (google.api.http) = {
+      post: "/Account/SignIn",
+      body: "*"
+    };
   }
 
   // 签入
   rpc SignUp (SignUpRequest) returns (TokenResponse){
-	  option (google.api.http) = {
-		  post: "/Account/SignUp",
-		  body: "*"
-	  };
+    option (google.api.http) = {
+      post: "/Account/SignUp",
+      body: "*"
+    };
   }
 
   // 签出
   rpc SignOut (google.protobuf.Empty) returns (EmptyResponse){
-	  option (google.api.http) = {
-		  post: "/Account/SignOut"
-	  };
-  } 
+    option (google.api.http) = {
+      post: "/Account/SignOut"
+    };
+  }
 
   // 修改密码
   rpc ChangePassword (ChangePasswordRequest) returns (EmptyResponse){
-	  option (google.api.http) = {
-		  post: "/Account/ChangePassword",
-		  body: "*"
-	  };
+    option (google.api.http) = {
+      post: "/Account/ChangePassword",
+      body: "*"
+    };
   }
 
   // 重置密码
   rpc ResetPassword (ResetPasswordRequest) returns (EmptyResponse){
-	  option (google.api.http) = {
-		  post: "/Account/ResetPassword",
-		  body: "*"
-	  };
+    option (google.api.http) = {
+      post: "/Account/ResetPassword",
+      body: "*"
+    };
   }
 
   // 批量重置密码
   rpc BatchResetPasswords (BatchResetPasswordRequest) returns (EmptyResponse){
-	  option (google.api.http) = {
-		  post: "/Account/ResetPasswords",
-		  body: "*"
-	  };
+    option (google.api.http) = {
+      post: "/Account/ResetPasswords",
+      body: "*"
+    };
   }
 }
 
