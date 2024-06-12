@@ -53,7 +53,7 @@ public static class Hash
     /// <param name="input">输入原文</param>
     /// <returns></returns>
     /// <remarks>用于计算密码</remarks>
-    public static string ArtemisHash(string input)
+    public static string Password(string input)
     {
         var hash = ArtemisHasher.Create();
 
@@ -66,22 +66,49 @@ public static class Hash
     /// <param name="hashedText">密文</param>
     /// <param name="providedText">原文</param>
     /// <returns></returns>
-    public static bool ArtemisHashVerify(string hashedText, string providedText)
+    public static bool PasswordVerify(string hashedText, string providedText)
     {
         var hasher = ArtemisHasher.Create();
 
         return hasher.VerifyHash(hashedText, providedText);
     }
 
+    /// <summary>
+    ///     计算哈希值
+    /// </summary>
+    /// <param name="input">输入</param>
+    /// <param name="hashType">哈希类型</param>
+    /// <returns></returns>
+    public static string HashData(string input, HashType hashType)
+    {
+        if (hashType.Equals(HashType.Unknown)) hashType = HashType.Md5;
+
+        return Compute(HashTable[hashType], input);
+    }
+
+    /// <summary>
+    ///     计算哈希值
+    /// </summary>
+    /// <param name="input">输入</param>
+    /// <param name="hashType">哈希类型</param>
+    /// <param name="key">键</param>
+    /// <returns></returns>
+    public static string HashData(string input, HmacHashType hashType, string? key = null)
+    {
+        if (hashType.Equals(HmacHashType.Unknown)) hashType = HmacHashType.HmacMd5;
+
+        return Compute(bytes => HmacHashTable[hashType](bytes, KeyBytes(key)), input);
+    }
+
     #region HashTable
 
     /// <summary>
-    /// hash委托缓存
+    ///     hash委托缓存
     /// </summary>
     private static Dictionary<HashType, Func<byte[], byte[]>>? _hashTable;
 
     /// <summary>
-    /// Hash委托
+    ///     Hash委托
     /// </summary>
     private static Dictionary<HashType, Func<byte[], byte[]>> HashTable =>
         _hashTable ??= new Dictionary<HashType, Func<byte[], byte[]>>
@@ -147,7 +174,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// Sha3_256哈希
+    ///     Sha3_256哈希
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
@@ -157,7 +184,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// Sha3_384哈希
+    ///     Sha3_384哈希
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
@@ -167,7 +194,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// Sha3_512哈希
+    ///     Sha3_512哈希
     /// </summary>
     /// <param name="input">输入字节码</param>
     /// <returns>输出字节码</returns>
@@ -178,31 +205,15 @@ public static class Hash
 
     #endregion HashTable
 
-    /// <summary>
-    /// 计算哈希值
-    /// </summary>
-    /// <param name="input">输入</param>
-    /// <param name="hashType">哈希类型</param>
-    /// <returns></returns>
-    public static string HashData(string input, HashType hashType)
-    {
-        if (hashType.Equals(HashType.Unknown))
-        {
-            hashType = HashType.Md5;
-        }
-
-        return Compute(HashTable[hashType], input);
-    }
-
     #region HMACHashTable
 
     /// <summary>
-    /// HMAC Hash委托缓存
+    ///     HMAC Hash委托缓存
     /// </summary>
     private static Dictionary<HmacHashType, Func<byte[], byte[], byte[]>>? _hmacHashTable;
 
     /// <summary>
-    /// HMAC Hash委托
+    ///     HMAC Hash委托
     /// </summary>
     private static Dictionary<HmacHashType, Func<byte[], byte[], byte[]>> HmacHashTable =>
         _hmacHashTable ??= new Dictionary<HmacHashType, Func<byte[], byte[], byte[]>>
@@ -274,7 +285,7 @@ public static class Hash
     }
 
     /// <summary>
-    ///  HMACSha3_256哈希
+    ///     HMACSha3_256哈希
     /// </summary>
     /// <param name="input"></param>
     /// <param name="key"></param>
@@ -285,7 +296,7 @@ public static class Hash
     }
 
     /// <summary>
-    ///  HMACSha3_384哈希
+    ///     HMACSha3_384哈希
     /// </summary>
     /// <param name="input"></param>
     /// <param name="key"></param>
@@ -296,7 +307,7 @@ public static class Hash
     }
 
     /// <summary>
-    /// HMACSha3_512哈希
+    ///     HMACSha3_512哈希
     /// </summary>
     /// <param name="input"></param>
     /// <param name="key"></param>
@@ -307,21 +318,4 @@ public static class Hash
     }
 
     #endregion HMACHashTable
-
-    /// <summary>
-    /// 计算哈希值
-    /// </summary>
-    /// <param name="input">输入</param>
-    /// <param name="hashType">哈希类型</param>
-    /// <param name="key">键</param>
-    /// <returns></returns>
-    public static string HashData(string input, HmacHashType hashType, string? key = null)
-    {
-        if (hashType.Equals(HmacHashType.Unknown))
-        {
-            hashType = HmacHashType.HmacMd5;
-        }
-
-        return Compute(bytes => HmacHashTable[hashType](bytes, KeyBytes(key)), input);
-    }
 }

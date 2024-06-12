@@ -35,9 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Fundamental\AscII\ISocketRecord.cs" />
-		<Compile Remove="Fundamental\AscII\SocketProtocol.cs" />
-		<Compile Remove="Fundamental\AscII\SocketRecord.cs" />
+		<Compile Remove="Fundamental\Socket\SocketProtocol.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

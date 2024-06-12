@@ -72,17 +72,17 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     #region Implementation of IMarkSlot<TKey>
 
     /// <summary>
-    /// 创建人
+    ///     创建人
     /// </summary>
     public virtual TKey CreateBy { get; set; } = default!;
 
     /// <summary>
-    /// 更新人
+    ///     更新人
     /// </summary>
     public virtual TKey ModifyBy { get; set; } = default!;
 
     /// <summary>
-    /// 移除人
+    ///     移除人
     /// </summary>
     public TKey? RemoveBy { get; set; }
 

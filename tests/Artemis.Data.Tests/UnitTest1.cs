@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Artemis.Data.Core.Fundamental.Kit.Crypto;
+using Artemis.Data.Core.Fundamental.Socket;
 using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Data.Tests;
@@ -11,6 +12,20 @@ public class UnitTest1
     public void Test1()
     {
         var rsa = RSA.Create();
+
+        var aes = Aes.Create();
+
+        var status = new byte[2];
+
+        var sam = new StatusRecord(12, 17);
+
+        Array.Copy(aes.Key, status, 2);
+
+        var rec = new StatusRecord(status);
+
+        var head = new HeadRecord(10, 11, 20, 21, 30, 31,1987890782);
+
+        var head2 = new HeadRecord(head.Bytes!);
 
         var keys = rsa.ExportParameters(true);
 

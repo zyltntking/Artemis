@@ -915,6 +915,47 @@
             <param name="parameterName">参数名</param>
             <param name="errorCode">错误编码</param>
         </member>
+        <member name="T:Artemis.Data.Core.Features.CommentAttribute">
+            <summary>
+                注释属性
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Features.CommentAttribute.#ctor(System.String)">
+            <summary>
+                注释属性
+            </summary>
+            <param name="comment">注释</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Features.CommentAttribute.Comment">
+            <summary>
+                注释
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Features.PropertyAttribute">
+            <summary>
+            字段注记
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Features.PropertyAttribute.Order">
+            <summary>
+             序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Features.PropertyAttribute.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Features.PropertyAttribute.Type">
+            <summary>
+            转换器类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Features.PropertyAttribute.PaddingLeft">
+            <summary>
+            从左边开始填充，以修补字节码长度
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.AscII.AsciiCharacter">
             <summary>
                 Ascii显示字符
@@ -1919,17 +1960,17 @@
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Iterations">
             <summary>
-            迭代次数生成器
+                迭代次数生成器
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.SaltSize">
             <summary>
-            盐长度生成器
+                盐长度生成器
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.DerivedKeyLength">
             <summary>
-            派生密钥长度生成器
+                派生密钥长度生成器
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Create">
@@ -2004,17 +2045,17 @@
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_256">
             <summary>
-             sha3-256
+                sha3-256
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_384">
             <summary>
-             sha3-384
+                sha3-384
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf.Sha3_512">
             <summary>
-             sha3-512
+                sha3-512
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Pbkdf2(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
@@ -2041,12 +2082,12 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto">
             <summary>
-            对称算法
+                对称算法
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
-            对称加密串
+                对称加密串
             </summary>
             <param name="input">输入段</param>
             <param name="key">密钥</param>
@@ -2055,7 +2096,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
-            对称解密串
+                对称解密串
             </summary>
             <param name="input">输入段</param>
             <param name="key">密钥</param>
@@ -2064,7 +2105,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
-            对称加密
+                对称加密
             </summary>
             <param name="input">输入段</param>
             <param name="key">密钥</param>
@@ -2074,7 +2115,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
-            对称解密
+                对称解密
             </summary>
             <param name="input">输入段</param>
             <param name="key">密钥</param>
@@ -2084,27 +2125,27 @@
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._encryptorTable">
             <summary>
-            加密器表
+                加密器表
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.EncryptorTable">
             <summary>
-            加密器表
+                加密器表
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._decryptorTable">
             <summary>
-            解密器表
+                解密器表
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.DecryptorTable">
             <summary>
-            解密器表
+                解密器表
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.GenerateSymmetricKey(System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
-            生成堆成密钥和向量对
+                生成堆成密钥和向量对
             </summary>
             <param name="input">输入字符密钥</param>
             <param name="symmetricType">对称算法类型</param>
@@ -2112,12 +2153,12 @@
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto._keyLengthTable">
             <summary>
-            密钥长度表
+                密钥长度表
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.KeyLengthTable">
             <summary>
-            密钥长度表
+                密钥长度表
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Kit.Crypto.SM4">
@@ -2183,20 +2224,20 @@
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Matcher.BracketContentPattern">
             <summary>
-            中括号内内容匹配模式
+                中括号内内容匹配模式
             </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.Fundamental.Matcher.ContentMatcher(Artemis.Data.Core.Fundamental.ContentMatcherMode)">
-            <summary>
-            中括号内内容匹配器
-            </summary>
-            <param name="mode">匹配模式</param>
-            <returns></returns>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Matcher.EmailMatcher">
             <summary>
                 匹配电子邮件
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.ContentMatcher(Artemis.Data.Core.Fundamental.ContentMatcherMode)">
+            <summary>
+                中括号内内容匹配器
+            </summary>
+            <param name="mode">匹配模式</param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Matcher.PhoneMatcher(Artemis.Data.Core.Fundamental.PhoneMatcherMode)">
@@ -2217,22 +2258,22 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.ContentMatcherMode">
             <summary>
-            内容匹配模式
+                内容匹配模式
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Parentheses">
             <summary>
-            小括号内内容
+                小括号内内容
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Bracket">
             <summary>
-            中括号内内容
+                中括号内内容
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.ContentMatcherMode.Braces">
             <summary>
-            大括号内内容
+                大括号内内容
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.PhoneMatcherMode">
@@ -2798,6 +2839,384 @@
             <param name="rootId">根结点标识</param>
             <param name="treeNodeInfos">节点信息列表</param>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.BytesConverter">
+            <summary>
+            字节码转换器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.BytesConverter.FixedBytes(System.Byte[],System.Int64,System.Boolean)">
+            <summary>
+            修正字节码长度
+            </summary>
+            <param name="bytes">输入字节码</param>
+            <param name="length">修正长度</param>
+            <param name="left">自左边开始填充</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.BytesConverter.ToBytes(System.Byte)">
+            <summary>
+            byte转字节码
+            </summary>
+            <param name="byteCode">byte</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.BytesConverter.ToByte(System.Byte[])">
+            <summary>
+            自字节码转byte
+            </summary>
+            <param name="bytes">输入字节码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.BytesConverter.ToBytes(System.Int64,System.Boolean)">
+            <summary>
+            long转字节码
+            </summary>
+            <param name="input">long</param>
+            <param name="useBigEndian">是否启动高位优先</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.BytesConverter.ToLong(System.Byte[],System.Boolean)">
+            <summary>
+            自字节码转long
+            </summary>
+            <param name="bytes">输入字节码</param>
+            <param name="useBigEndian">是否启用高位优先</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1">
+            <summary>
+                Socket记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.RequireStx">
+            <summary>
+            是否需要报文开始位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.Stx">
+            <summary>
+                报文开始位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.HeadRecord">
+            <summary>
+                报文头记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.Content">
+            <summary>
+                报文内容段
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.RequireEtx">
+            <summary>
+            是否需要报文结束位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.ISocketRecord`1.Etx">
+            <summary>
+                报文结束位
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.IHeadRecord">
+            <summary>
+                头记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.IHeadRecord.Length">
+            <summary>
+                长度
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.IRecord">
+            <summary>
+            协议记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.IRecord.Bytes">
+            <summary>
+            记录转字节
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.IRecord.Valid">
+            <summary>
+            校验记录是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.RecordStructure">
+            <summary>
+            记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.RecordStructure.Length">
+            <summary>
+            记录长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.RecordStructure.Internal">
+            <summary>
+            属性结构值
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.RecordStructure.Properties">
+            <summary>
+            属性结构
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.InternalStructure">
+            <summary>
+            内部属性结构
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.InternalStructure.Offset">
+            <summary>
+            偏移量
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.PropertyStructure">
+            <summary>
+            属性结构
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.PropertyStructure.Order">
+            <summary>
+            属性序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.PropertyStructure.Name">
+            <summary>
+            属性名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.PropertyStructure.Length">
+            <summary>
+            属性长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.PropertyStructure.Type">
+            <summary>
+            属性类型
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1">
+            <summary>
+                Socket记录
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.#ctor(System.Byte[])">
+            <summary>
+            SocketRecord实现
+            </summary>
+            <param name="bytes">字节码</param>
+            <param name="layout">记录布局</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.RequireStx">
+            <summary>
+            是否需要报文开始位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.Stx">
+            <summary>
+                报文开始位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.HeadRecord">
+            <summary>
+                报文头记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.Content">
+            <summary>
+                报文内容段
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.CheckRecord">
+            <summary>
+                报文校验段
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.RequireEtx">
+            <summary>
+            是否需要报文结束位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.SocketRecord`1.Etx">
+            <summary>
+                报文结束位
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.CheckRecord">
+            <summary>
+                校验记录
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.CheckRecord.#ctor(System.Byte,System.Byte)">
+            <summary>
+            校验记录实现
+            </summary>
+            <param name="checkSum">求和校验位</param>
+            <param name="checkXor">异或校验位</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.CheckRecord.#ctor(System.Byte[])">
+            <summary>
+            校验记录实现
+            </summary>
+            <param name="bytes">输入字节码</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.CheckRecord.CheckSum">
+            <summary>
+                求和校验位
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.CheckRecord.CheckXor">
+            <summary>
+                异或校验位
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.HeadRecord">
+            <summary>
+                头记录
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.HeadRecord.#ctor(System.Byte,System.Byte,System.Byte,System.Byte,System.Int64)">
+            <summary>
+            头记录实现
+            </summary>
+            <param name="commandCategory">指令目录</param>
+            <param name="command">指令</param>
+            <param name="statusCategory">状态目录</param>
+            <param name="status">状态</param>
+            <param name="length">内容长度</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.HeadRecord.#ctor(System.Byte[])">
+            <summary>
+            HeadRecord实现
+            </summary>
+            <param name="bytes">字节码</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.HeadRecord.Length">
+            <summary>
+                长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.HeadRecord.CommandRecord">
+            <summary>
+                指令记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.HeadRecord.StatusRecord">
+            <summary>
+                状态记录
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.CommandRecord">
+            <summary>
+                指令记录
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.CommandRecord.#ctor(System.Byte,System.Byte)">
+            <summary>
+            CommandRecord实现
+            </summary>
+            <param name="category">指令目录</param>
+            <param name="command">指令</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.CommandRecord.#ctor(System.Byte[])">
+            <summary>
+            CommandRecord实现
+            </summary>
+            <param name="bytes">字节码</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.CommandRecord.Category">
+            <summary>
+                指令目录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.CommandRecord.Command">
+            <summary>
+                指令项目
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.StatusRecord">
+            <summary>
+                状态记录
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.StatusRecord.#ctor(System.Byte,System.Byte)">
+            <summary>
+            StatusRecord实现
+            </summary>
+            <param name="category"></param>
+            <param name="status"></param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.StatusRecord.#ctor(System.Byte[])">
+            <summary>
+            StatusRecord实现
+            </summary>
+            <param name="bytes">字节码</param>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.StatusRecord.Category">
+            <summary>
+                状态目录
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.StatusRecord.Status">
+            <summary>
+                状态项目
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Socket.Record">
+            <summary>
+            Record抽象实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.Record.#ctor">
+            <summary>
+            Record抽象实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.Record.#ctor(System.Byte[])">
+            <summary>
+            Record抽象实现
+            </summary>
+            <param name="bytes">字节码</param>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Socket.Record.SetBytes">
+            <summary>
+            设置字节码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.Record.Bytes">
+            <summary>
+            记录转字节
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.Record.Valid">
+            <summary>
+            校验记录是否有效
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Socket.Record._converterTable">
+            <summary>
+            转换器表缓存
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.Record.ConverterTable">
+            <summary>
+            转换器表访问器
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Socket.Record._recordStructure">
+            <summary>
+            记录结构缓存
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Socket.Record.RecordStructure">
+            <summary>
+            记录结构访问器
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.BusType">
             <summary>
@@ -3377,32 +3796,32 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.SymmetricType">
             <summary>
-            对称算法类型
+                对称算法类型
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Unknown">
             <summary>
-            未知类型
+                未知类型
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Des">
             <summary>
-            DES
+                DES
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Rc2">
             <summary>
-            RC2
+                RC2
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.TripleDes">
             <summary>
-            TripleDES
+                TripleDES
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SymmetricType.Aes">
             <summary>
-            AES
+                AES
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.SymmetricType.#ctor(System.Int32,System.String)">
@@ -3813,7 +4232,7 @@
             <param name="input">输入字符串</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.ArtemisHash(System.String)">
+        <member name="M:Artemis.Data.Core.Hash.Password(System.String)">
             <summary>
                 Artemis哈希
             </summary>
@@ -3821,7 +4240,7 @@
             <returns></returns>
             <remarks>用于计算密码</remarks>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.ArtemisHashVerify(System.String,System.String)">
+        <member name="M:Artemis.Data.Core.Hash.PasswordVerify(System.String,System.String)">
             <summary>
                 哈希校验
             </summary>
@@ -3829,14 +4248,31 @@
             <param name="providedText">原文</param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HashType)">
+            <summary>
+                计算哈希值
+            </summary>
+            <param name="input">输入</param>
+            <param name="hashType">哈希类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HmacHashType,System.String)">
+            <summary>
+                计算哈希值
+            </summary>
+            <param name="input">输入</param>
+            <param name="hashType">哈希类型</param>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
         <member name="F:Artemis.Data.Core.Hash._hashTable">
             <summary>
-            hash委托缓存
+                hash委托缓存
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Hash.HashTable">
             <summary>
-            Hash委托
+                Hash委托
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Md5Hash(System.Byte[])">
@@ -3876,41 +4312,33 @@
         </member>
         <member name="M:Artemis.Data.Core.Hash.Sha3_256Hash(System.Byte[])">
             <summary>
-            Sha3_256哈希
+                Sha3_256哈希
             </summary>
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Sha3_384Hash(System.Byte[])">
             <summary>
-            Sha3_384哈希
+                Sha3_384哈希
             </summary>
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
         <member name="M:Artemis.Data.Core.Hash.Sha3_512Hash(System.Byte[])">
             <summary>
-            Sha3_512哈希
+                Sha3_512哈希
             </summary>
             <param name="input">输入字节码</param>
             <returns>输出字节码</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HashType)">
-            <summary>
-            计算哈希值
-            </summary>
-            <param name="input">输入</param>
-            <param name="hashType">哈希类型</param>
-            <returns></returns>
-        </member>
         <member name="F:Artemis.Data.Core.Hash._hmacHashTable">
             <summary>
-            HMAC Hash委托缓存
+                HMAC Hash委托缓存
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Hash.HmacHashTable">
             <summary>
-            HMAC Hash委托
+                HMAC Hash委托
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Hash.HmacMd5Hash(System.Byte[],System.Byte[])">
@@ -3956,7 +4384,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Hash.HmacSha3_256Hash(System.Byte[],System.Byte[])">
             <summary>
-             HMACSha3_256哈希
+                HMACSha3_256哈希
             </summary>
             <param name="input"></param>
             <param name="key"></param>
@@ -3964,7 +4392,7 @@
         </member>
         <member name="M:Artemis.Data.Core.Hash.HmacSha3_384Hash(System.Byte[],System.Byte[])">
             <summary>
-             HMACSha3_384哈希
+                HMACSha3_384哈希
             </summary>
             <param name="input"></param>
             <param name="key"></param>
@@ -3972,19 +4400,10 @@
         </member>
         <member name="M:Artemis.Data.Core.Hash.HmacSha3_512Hash(System.Byte[],System.Byte[])">
             <summary>
-            HMACSha3_512哈希
+                HMACSha3_512哈希
             </summary>
             <param name="input"></param>
             <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HmacHashType,System.String)">
-            <summary>
-            计算哈希值
-            </summary>
-            <param name="input">输入</param>
-            <param name="hashType">哈希类型</param>
-            <param name="key">键</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.IConcurrencyPartitionBase">
@@ -4069,28 +4488,28 @@
         </member>
         <member name="T:Artemis.Data.Core.IMarkSlot">
             <summary>
-            标记组件接口
+                标记组件接口
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.IMarkSlot`1">
             <summary>
-            标记组件接口
+                标记组件接口
             </summary>
             <typeparam name="TMark"></typeparam>
         </member>
         <member name="P:Artemis.Data.Core.IMarkSlot`1.CreateBy">
             <summary>
-            创建人
+                创建人
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.IMarkSlot`1.ModifyBy">
             <summary>
-            更新人
+                更新人
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.IMarkSlot`1.RemoveBy">
             <summary>
-            移除人
+                移除人
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.IConcurrencyStamp">
@@ -4173,17 +4592,17 @@
         </member>
         <member name="P:Artemis.Data.Core.ModelBase`1.CreateBy">
             <summary>
-            创建人
+                创建人
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.ModelBase`1.ModifyBy">
             <summary>
-            更新人
+                更新人
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.ModelBase`1.RemoveBy">
             <summary>
-            移除人
+                移除人
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.KeySlot">

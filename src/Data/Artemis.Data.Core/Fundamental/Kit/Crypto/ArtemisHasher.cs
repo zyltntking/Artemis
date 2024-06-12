@@ -30,17 +30,17 @@ internal class ArtemisHasher
     }
 
     /// <summary>
-    /// 迭代次数生成器
+    ///     迭代次数生成器
     /// </summary>
     private int Iterations => RandomNumberGenerator.GetInt32(100_000, 500_000);
 
     /// <summary>
-    /// 盐长度生成器
+    ///     盐长度生成器
     /// </summary>
     private int SaltSize => RandomNumberGenerator.GetInt32(16, 32);
 
     /// <summary>
-    /// 派生密钥长度生成器
+    ///     派生密钥长度生成器
     /// </summary>
     private int DerivedKeyLength => RandomNumberGenerator.GetInt32(32, 64);
 
@@ -209,18 +209,21 @@ internal class ArtemisHasher
         ///     sha512
         /// </summary>
         Sha512,
+
         /// <summary>
-        ///  sha3-256
+        ///     sha3-256
         /// </summary>
         // ReSharper disable once InconsistentNaming
         Sha3_256,
+
         /// <summary>
-        ///  sha3-384
+        ///     sha3-384
         /// </summary>
         // ReSharper disable once InconsistentNaming
         Sha3_384,
+
         /// <summary>
-        ///  sha3-512
+        ///     sha3-512
         /// </summary>
         // ReSharper disable once InconsistentNaming
         Sha3_512

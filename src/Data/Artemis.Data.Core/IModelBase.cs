@@ -119,30 +119,30 @@ public interface IMateSlot
 }
 
 /// <summary>
-/// 标记组件接口
+///     标记组件接口
 /// </summary>
 public interface IMarkSlot : IMarkSlot<Guid>
 {
 }
 
 /// <summary>
-/// 标记组件接口
+///     标记组件接口
 /// </summary>
 /// <typeparam name="TMark"></typeparam>
 public interface IMarkSlot<TMark> where TMark : IEquatable<TMark>
 {
     /// <summary>
-    /// 创建人
+    ///     创建人
     /// </summary>
     TMark CreateBy { get; set; }
 
     /// <summary>
-    /// 更新人
+    ///     更新人
     /// </summary>
     TMark ModifyBy { get; set; }
 
     /// <summary>
-    /// 移除人
+    ///     移除人
     /// </summary>
     TMark? RemoveBy { get; set; }
 }

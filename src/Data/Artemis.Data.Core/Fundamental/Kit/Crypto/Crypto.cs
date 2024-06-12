@@ -5,14 +5,14 @@ using Artemis.Data.Core.Fundamental.Types;
 namespace Artemis.Data.Core.Fundamental.Kit.Crypto;
 
 /// <summary>
-/// 对称算法
+///     对称算法
 /// </summary>
 public static class Crypto
 {
     #region Symmetric
 
     /// <summary>
-    /// 对称加密串
+    ///     对称加密串
     /// </summary>
     /// <param name="input">输入段</param>
     /// <param name="key">密钥</param>
@@ -37,7 +37,7 @@ public static class Crypto
     }
 
     /// <summary>
-    /// 对称解密串
+    ///     对称解密串
     /// </summary>
     /// <param name="input">输入段</param>
     /// <param name="key">密钥</param>
@@ -62,7 +62,7 @@ public static class Crypto
     }
 
     /// <summary>
-    /// 对称加密
+    ///     对称加密
     /// </summary>
     /// <param name="input">输入段</param>
     /// <param name="key">密钥</param>
@@ -77,7 +77,7 @@ public static class Crypto
     }
 
     /// <summary>
-    /// 对称解密
+    ///     对称解密
     /// </summary>
     /// <param name="input">输入段</param>
     /// <param name="key">密钥</param>
@@ -94,12 +94,12 @@ public static class Crypto
     #region EncryptorTable
 
     /// <summary>
-    /// 加密器表
+    ///     加密器表
     /// </summary>
     private static Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>>? _encryptorTable;
 
     /// <summary>
-    /// 加密器表
+    ///     加密器表
     /// </summary>
     private static Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>> EncryptorTable =>
         _encryptorTable ??= new Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>>
@@ -115,12 +115,12 @@ public static class Crypto
     #region DecryptorTable
 
     /// <summary>
-    /// 解密器表
+    ///     解密器表
     /// </summary>
     private static Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>>? _decryptorTable;
 
     /// <summary>
-    /// 解密器表
+    ///     解密器表
     /// </summary>
     private static Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>> DecryptorTable =>
         _decryptorTable ??= new Dictionary<SymmetricType, Func<byte[], byte[]?, ICryptoTransform>>
@@ -136,7 +136,7 @@ public static class Crypto
     #region SymmetricKey
 
     /// <summary>
-    /// 生成堆成密钥和向量对
+    ///     生成堆成密钥和向量对
     /// </summary>
     /// <param name="input">输入字符密钥</param>
     /// <param name="symmetricType">对称算法类型</param>
@@ -163,14 +163,14 @@ public static class Crypto
 
         for (var i = 0; i < keyLength; i++)
         {
-            var keyOffset = (keyBlock * i) % hashLength;
+            var keyOffset = keyBlock * i % hashLength;
 
             key[i] = hashBytes[keyOffset];
         }
 
         for (var i = 0; i < ivLength; i++)
         {
-            var ivOffset = (ivBlock * i) % hashLength;
+            var ivOffset = ivBlock * i % hashLength;
 
             iv[i] = hashBytes[ivOffset];
         }
@@ -179,20 +179,20 @@ public static class Crypto
     }
 
     /// <summary>
-    /// 密钥长度表
+    ///     密钥长度表
     /// </summary>
     private static Dictionary<SymmetricType, (int KeyLength, int IvLength)>? _keyLengthTable;
 
     /// <summary>
-    /// 密钥长度表
+    ///     密钥长度表
     /// </summary>
     private static Dictionary<SymmetricType, (int KeyLength, int IvLength)> KeyLengthTable =>
         _keyLengthTable ??= new Dictionary<SymmetricType, (int KeyLength, int IvLength)>
         {
-            { SymmetricType.Des, new (8, 8) },
-            { SymmetricType.Rc2, new (16, 8) },
-            { SymmetricType.TripleDes, new (24, 8) },
-            { SymmetricType.Aes, new (32, 16) }
+            { SymmetricType.Des, new(8, 8) },
+            { SymmetricType.Rc2, new(16, 8) },
+            { SymmetricType.TripleDes, new(24, 8) },
+            { SymmetricType.Aes, new(32, 16) }
         };
 
     #endregion SymmetricKey

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+
 // ReSharper disable InconsistentNaming
 
 namespace Artemis.Data.Core.Fundamental.Types;
