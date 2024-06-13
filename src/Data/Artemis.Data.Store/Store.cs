@@ -85,6 +85,16 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         StoreOptions = storeOptions ?? new ArtemisStoreOptions();
     }
 
+    #region DataAccess
+
+    /// <summary>
+    ///     Entity有追踪访问器
+    /// </summary>
+    public override IQueryable<TEntity> TrackingQuery =>
+        EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
+
+    #endregion
+
     /// <summary>
     ///     是否被删除
     /// </summary>
@@ -111,16 +121,6 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
             ? Task.FromResult(entity.DeletedAt is not null)
             : base.IsDeletedAsync(entity, cancellationToken);
     }
-
-    #region DataAccess
-
-    /// <summary>
-    ///     Entity有追踪访问器
-    /// </summary>
-    public override IQueryable<TEntity> TrackingQuery =>
-        EntitySet.WhereIf(SoftDelete, entity => entity.DeletedAt != null);
-
-    #endregion
 
     #region IStoreOptions
 
@@ -359,7 +359,6 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         Context.UpdateRange(entities);
 
         if (MetaDataHosting)
-        {
             foreach (var entity in entities)
             {
                 Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
@@ -368,7 +367,6 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
                 Context.Entry(entity).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(entity).Property(item => item.RemoveBy).IsModified = false;
             }
-        }
     }
 
     /// <summary>

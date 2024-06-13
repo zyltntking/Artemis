@@ -101,11 +101,13 @@ public abstract class Record : IRecord
             //Record
             {
                 Constants.Type.CommandRecord,
-                (bytes => new CommandRecord(bytes), record => ((CommandRecord)record).Bytes, Constants.Length.CommandRecord)
+                (bytes => new CommandRecord(bytes), record => ((CommandRecord)record).Bytes,
+                    Constants.Length.CommandRecord)
             },
             {
                 Constants.Type.StatusRecord,
-                (bytes => new StatusRecord(bytes), record => ((StatusRecord)record).Bytes, Constants.Length.StatusRecord)
+                (bytes => new StatusRecord(bytes), record => ((StatusRecord)record).Bytes,
+                    Constants.Length.StatusRecord)
             },
             {
                 Constants.Type.CheckRecord,
