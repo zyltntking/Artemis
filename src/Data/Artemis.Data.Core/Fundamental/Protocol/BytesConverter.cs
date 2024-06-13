@@ -1,4 +1,4 @@
-﻿namespace Artemis.Data.Core.Fundamental.Socket;
+﻿namespace Artemis.Data.Core.Fundamental.Protocol;
 
 /// <summary>
 ///     字节码转换器

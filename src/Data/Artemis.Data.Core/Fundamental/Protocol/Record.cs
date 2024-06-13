@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Artemis.Data.Core.Fundamental.Socket;
+namespace Artemis.Data.Core.Fundamental.Protocol;
 
 #region Interface
 

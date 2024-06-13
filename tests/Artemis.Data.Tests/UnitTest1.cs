@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Artemis.Data.Core.Fundamental.Kit.Crypto;
-using Artemis.Data.Core.Fundamental.Socket;
+using Artemis.Data.Core.Fundamental.Protocol;
 using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Data.Tests;

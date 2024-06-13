@@ -1,4 +1,4 @@
-﻿namespace Artemis.Data.Core.Fundamental.Socket;
+﻿namespace Artemis.Data.Core.Fundamental.Protocol;
 
 /// <summary>
 ///     协议预定义常量
@@ -20,22 +20,22 @@ public static class Constants
         /// <summary>
         ///     记录状态
         /// </summary>
-        public const string StatusRecord = nameof(Socket.StatusRecord);
+        public const string StatusRecord = nameof(Protocol.StatusRecord);
 
         /// <summary>
         ///     记录命令
         /// </summary>
-        public const string CommandRecord = nameof(Socket.CommandRecord);
+        public const string CommandRecord = nameof(Protocol.CommandRecord);
 
         /// <summary>
         ///     记录校验
         /// </summary>
-        public const string CheckRecord = nameof(Socket.CheckRecord);
+        public const string CheckRecord = nameof(Protocol.CheckRecord);
 
         /// <summary>
         ///     记录头
         /// </summary>
-        public const string HeadRecord = nameof(Socket.HeadRecord);
+        public const string HeadRecord = nameof(Protocol.HeadRecord);
 
         #endregion
 
