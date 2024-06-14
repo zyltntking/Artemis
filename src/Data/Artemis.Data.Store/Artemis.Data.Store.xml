@@ -2269,7 +2269,7 @@
 			<typeparam name="TEntity"></typeparam>
 		</member>
 		<member
-			name="M:Artemis.Data.Store.Manager`1.#ctor(Artemis.Data.Store.IStore{`0,System.Guid},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Data.Store.Manager`1.#ctor(Artemis.Data.Store.IStore{`0,System.Guid},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				创建新的管理器实例
 			</summary>
@@ -2288,7 +2288,7 @@
 			<typeparam name="TKey"></typeparam>
 		</member>
 		<member
-			name="M:Artemis.Data.Store.Manager`2.#ctor(Artemis.Data.Store.IStore{`0,`1},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IKeyWithStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Data.Store.Manager`2.#ctor(Artemis.Data.Store.IStore{`0,`1},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Artemis.Data.Store.IStoreManagerOptions,Artemis.Data.Store.StoreErrorDescriber,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				创建新的管理器实例
 			</summary>
@@ -2495,17 +2495,17 @@
 				管理器配置接口
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Store.IKeyWithStoreManagerOptions">
+		<member name="T:Artemis.Data.Store.IStoreManagerOptions">
 			<summary>
 				具键存储管理器配置接口
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Store.IKeyWithStoreManagerOptions.CachedManager">
+		<member name="P:Artemis.Data.Store.IStoreManagerOptions.CachedManager">
 			<summary>
 				是否启用具缓存策略
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Store.IKeyWithStoreManagerOptions.Expires">
+		<member name="P:Artemis.Data.Store.IStoreManagerOptions.Expires">
 			<summary>
 				过期时间(秒)
 			</summary>
@@ -2525,17 +2525,17 @@
 				管理器配置接口
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Store.KeyWithStoreManagerOptions">
+		<member name="T:Artemis.Data.Store.StoreManagerOptions">
 			<summary>
 				具键存储管理器配置实例
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Store.KeyWithStoreManagerOptions.CachedManager">
+		<member name="P:Artemis.Data.Store.StoreManagerOptions.CachedManager">
 			<summary>
 				是否启用具缓存策略
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Store.KeyWithStoreManagerOptions.Expires">
+		<member name="P:Artemis.Data.Store.StoreManagerOptions.Expires">
 			<summary>
 				过期时间(秒)
 			</summary>

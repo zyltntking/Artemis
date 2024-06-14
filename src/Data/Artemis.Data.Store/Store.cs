@@ -95,6 +95,8 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
 
     #endregion
 
+    #region IsDeleted
+
     /// <summary>
     ///     是否被删除
     /// </summary>
@@ -102,7 +104,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// <returns>判断结果</returns>
     public override bool IsDeleted(TEntity entity)
     {
-        if (MetaDataHosting) return entity.DeletedAt is not null;
+        if (SoftDelete) return entity.DeletedAt is not null;
 
         return base.IsDeleted(entity);
     }
@@ -117,10 +119,12 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        return MetaDataHosting
+        return SoftDelete
             ? Task.FromResult(entity.DeletedAt is not null)
             : base.IsDeletedAsync(entity, cancellationToken);
     }
+
+    #endregion
 
     #region IStoreOptions
 
@@ -131,12 +135,12 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// <summary>
     ///     设置是否启用元数据托管
     /// </summary>
-    protected bool MetaDataHosting => StoreOptions.MetaDataHosting || StoreOptions.SoftDelete;
+    private bool MetaDataHosting => StoreOptions.MetaDataHosting || StoreOptions.SoftDelete;
 
     /// <summary>
     ///     设置是否启用软删除
     /// </summary>
-    protected bool SoftDelete => StoreOptions.SoftDelete;
+    private bool SoftDelete => StoreOptions.SoftDelete;
 
     #endregion
 
@@ -190,7 +194,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
-    protected TypeAdapterConfig IgnoreIdAndNullAndMetaConfig<TSource>()
+    private TypeAdapterConfig IgnoreIdAndNullAndMetaConfig<TSource>()
     {
         if (_ignoreIdAndNullAndMetaConfig is not null)
             return _ignoreIdAndNullAndMetaConfig;
@@ -199,7 +203,10 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
             .IgnoreNullValues(true)
             .Ignore(item => item.CreatedAt)
             .Ignore(item => item.UpdatedAt)
-            .Ignore(item => item.DeletedAt!);
+            .Ignore(item => item.DeletedAt!)
+            .Ignore(item => item.CreateBy)
+            .Ignore(item => item.ModifyBy)
+            .Ignore(item => item.RemoveBy!);
         return _ignoreIdAndNullAndMetaConfig;
     }
 
@@ -213,7 +220,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
-    protected TypeAdapterConfig IgnoreNullAndMetaConfig<TSource>()
+    private TypeAdapterConfig IgnoreNullAndMetaConfig<TSource>()
     {
         if (_ignoreNullAndMetaConfig is not null)
             return _ignoreNullAndMetaConfig;
@@ -222,7 +229,10 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
             .IgnoreNullValues(true)
             .Ignore(item => item.CreatedAt)
             .Ignore(item => item.UpdatedAt)
-            .Ignore(item => item.DeletedAt!);
+            .Ignore(item => item.DeletedAt!)
+            .Ignore(item => item.CreateBy)
+            .Ignore(item => item.ModifyBy)
+            .Ignore(item => item.RemoveBy!);
         return _ignoreNullAndMetaConfig;
     }
 
@@ -236,7 +246,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <returns></returns>
-    protected TypeAdapterConfig IgnoreIdAndMetaConfig<TSource>()
+    private TypeAdapterConfig IgnoreIdAndMetaConfig<TSource>()
     {
         if (_ignoreIdAndMetaConfig is not null)
             return _ignoreIdAndMetaConfig;
@@ -244,7 +254,10 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         _ignoreIdAndMetaConfig.NewConfig<TSource, TEntity>()
             .Ignore(item => item.CreatedAt)
             .Ignore(item => item.UpdatedAt)
-            .Ignore(item => item.DeletedAt!);
+            .Ignore(item => item.DeletedAt!)
+            .Ignore(item => item.CreateBy)
+            .Ignore(item => item.ModifyBy)
+            .Ignore(item => item.RemoveBy!);
         return _ignoreIdAndMetaConfig;
     }
 
@@ -258,7 +271,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// </summary>
     /// <typeparam name="TSource">源数据类型</typeparam>
     /// <returns>映射配置</returns>
-    protected TypeAdapterConfig IgnoreMetaConfig<TSource>()
+    private TypeAdapterConfig IgnoreMetaConfig<TSource>()
     {
         if (_ignoreMetaConfig is not null)
             return _ignoreMetaConfig;
@@ -266,7 +279,10 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         _ignoreMetaConfig.NewConfig<TSource, TEntity>()
             .Ignore(item => item.CreatedAt)
             .Ignore(item => item.UpdatedAt)
-            .Ignore(item => item.DeletedAt!);
+            .Ignore(item => item.DeletedAt!)
+            .Ignore(item => item.CreateBy)
+            .Ignore(item => item.ModifyBy)
+            .Ignore(item => item.RemoveBy!);
         return _ignoreMetaConfig;
     }
 
@@ -286,7 +302,13 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
 
-            entity.ModifyBy = entity.CreateBy;
+            if (HandlerRegister != null)
+            {
+                var handler = HandlerRegister.Invoke();
+
+                entity.CreateBy = handler;
+                entity.ModifyBy = handler;
+            }
         }
 
         Context.Add(entity);
@@ -301,12 +323,15 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
             foreach (var entity in entities)
             {
                 entity.CreatedAt = now;
                 entity.UpdatedAt = now;
 
-                entity.ModifyBy = entity.CreateBy;
+                entity.CreateBy = handler!;
+                entity.ModifyBy = handler!;
             }
         }
 
@@ -328,6 +353,12 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         {
             var now = DateTime.Now;
             entity.UpdatedAt = now;
+
+            if (HandlerRegister != null)
+            {
+                var handler = HandlerRegister.Invoke();
+                entity.ModifyBy = handler;
+            }
         }
 
         Context.Update(entity);
@@ -353,7 +384,13 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         if (MetaDataHosting)
         {
             var now = DateTime.Now;
-            foreach (var entity in entities) entity.UpdatedAt = now;
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
+            foreach (var entity in entities)
+            {
+                entity.UpdatedAt = now;
+                entity.ModifyBy = handler!;
+            }
         }
 
         Context.UpdateRange(entities);
@@ -370,7 +407,7 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     }
 
     /// <summary>
-    ///     批量删除实体
+    ///     批量更新实体
     /// </summary>
     /// <param name="query">查询</param>
     /// <param name="setter">更新委托</param>
@@ -380,13 +417,19 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setter)
     {
         if (MetaDataHosting)
-            query.ExecuteUpdate(metaSetter => metaSetter.SetProperty(entity => entity.UpdatedAt, DateTime.Now));
+        {
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
+            query.ExecuteUpdate(metaSetter => metaSetter
+                .SetProperty(entity => entity.UpdatedAt, DateTime.Now)
+                .SetProperty(entity => entity.ModifyBy, handler));
+        }
 
         return query.ExecuteUpdate(setter);
     }
 
     /// <summary>
-    ///     批量删除实体
+    ///     批量更新实体
     /// </summary>
     /// <param name="query">查询</param>
     /// <param name="setter">更新委托</param>
@@ -398,7 +441,14 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         CancellationToken cancellationToken = default)
     {
         if (MetaDataHosting)
-            query.ExecuteUpdate(metaSetter => metaSetter.SetProperty(entity => entity.UpdatedAt, DateTime.Now));
+        {
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
+
+            return query.ExecuteUpdateAsync(metaSetter => metaSetter
+                .SetProperty(entity => entity.UpdatedAt, DateTime.Now)
+                .SetProperty(entity => entity.ModifyBy, handler), cancellationToken);
+        }
 
         return query.ExecuteUpdateAsync(setter, cancellationToken);
     }
@@ -414,6 +464,12 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
             Context.Attach(entity);
             var now = DateTime.Now;
             entity.DeletedAt = now;
+            if (HandlerRegister != null)
+            {
+                var handler = HandlerRegister.Invoke();
+                entity.RemoveBy = handler;
+            }
+
             Context.Update(entity);
 
             Context.Entry(entity).Property(item => item.CreatedAt).IsModified = false;
@@ -438,10 +494,12 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         {
             Context.AttachRange(entities);
             var now = DateTime.Now;
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
             foreach (var entity in entities)
             {
-                entity.UpdatedAt = now;
                 entity.DeletedAt = now;
+                entity.RemoveBy = handler!;
             }
 
             Context.UpdateRange(entities);
@@ -469,9 +527,14 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     protected sealed override int BatchDeleteEntity(IQueryable<TEntity> query)
     {
         if (SoftDelete)
+        {
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
+
             return query.ExecuteUpdate(setter => setter
-                .SetProperty(entity => entity.UpdatedAt, DateTime.Now)
-                .SetProperty(entity => entity.DeletedAt, DateTime.Now));
+                .SetProperty(entity => entity.DeletedAt, DateTime.Now)
+                .SetProperty(entity => entity.RemoveBy, handler));
+        }
 
         return query.ExecuteDelete();
     }
@@ -487,9 +550,14 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         CancellationToken cancellationToken = default)
     {
         if (SoftDelete)
+        {
+            var handler = default(TKey);
+            if (HandlerRegister != null) handler = HandlerRegister.Invoke();
+
             return query.ExecuteUpdateAsync(setter => setter
-                .SetProperty(entity => entity.UpdatedAt, DateTime.Now)
-                .SetProperty(entity => entity.DeletedAt, DateTime.Now), cancellationToken);
+                .SetProperty(entity => entity.DeletedAt, DateTime.Now)
+                .SetProperty(entity => entity.RemoveBy, handler), cancellationToken);
+        }
 
         return query.ExecuteDeleteAsync(cancellationToken);
     }

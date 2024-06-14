@@ -3,16 +3,9 @@
 #region Interface
 
 /// <summary>
-///     管理器配置接口
-/// </summary>
-public interface IManagerOptions : IKeyWithStoreManagerOptions
-{
-}
-
-/// <summary>
 ///     具键存储管理器配置接口
 /// </summary>
-public interface IKeyWithStoreManagerOptions : IKeyLessStoreManagerOptions
+public interface IStoreManagerOptions : IKeyLessStoreManagerOptions
 {
     /// <summary>
     ///     是否启用具缓存策略
@@ -39,18 +32,11 @@ public interface IKeyLessStoreManagerOptions
 #endregion
 
 /// <summary>
-///     管理器配置接口
-/// </summary>
-public class ArtemisManagerOptions : KeyWithStoreManagerOptions, IManagerOptions
-{
-}
-
-/// <summary>
 ///     具键存储管理器配置实例
 /// </summary>
-public class KeyWithStoreManagerOptions : KeyLessStoreManagerOptions, IKeyWithStoreManagerOptions
+public class StoreManagerOptions : KeyLessStoreManagerOptions, IStoreManagerOptions
 {
-    #region Implementation of IKeyWithStoreManagerOptions
+    #region Implementation of IStoreManagerOptions
 
     /// <summary>
     ///     是否启用具缓存策略

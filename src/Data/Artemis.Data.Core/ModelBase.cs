@@ -69,7 +69,7 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
 
     #endregion
 
-    #region Implementation of IMarkSlot<TKey>
+    #region Implementation of IHandlerSlot<TKey>
 
     /// <summary>
     ///     创建人

@@ -32,6 +32,11 @@ public interface IManager<TEntity, TKey> : IKeyLessManager<TEntity>
     /// </summary>
     new IStore<TEntity, TKey> EntityStore { get; }
 
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    Func<TKey>? HandlerRegister { get; set; }
+
     #region BaseResourceManager
 
     /// <summary>
@@ -146,7 +151,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     protected Manager(
         IStore<TEntity, Guid> store,
         IDistributedCache? cache = null,
-        IKeyWithStoreManagerOptions? options = null,
+        IStoreManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
         ILogger? logger = null) : base(store, cache, options, errors, logger)
     {
@@ -174,12 +179,13 @@ public abstract class Manager<TEntity, TKey> : KeyLessManager<TEntity>, IManager
     protected Manager(
         IStore<TEntity, TKey> store,
         IDistributedCache? cache = null,
-        IKeyWithStoreManagerOptions? options = null,
+        IStoreManagerOptions? options = null,
         StoreErrorDescriber? errors = null,
         ILogger? logger = null) : base(store, options, errors, logger)
     {
         Store = store;
-        Options = options ?? new KeyWithStoreManagerOptions();
+        RegisterHandler();
+        Options = options ?? new StoreManagerOptions();
         Cache = cache;
     }
 
@@ -198,7 +204,7 @@ public abstract class Manager<TEntity, TKey> : KeyLessManager<TEntity>, IManager
     /// <summary>
     ///     具键存储管理器配置接口
     /// </summary>
-    private IKeyWithStoreManagerOptions Options { get; }
+    private IStoreManagerOptions Options { get; }
 
     #endregion
 
@@ -222,6 +228,27 @@ public abstract class Manager<TEntity, TKey> : KeyLessManager<TEntity>, IManager
     ///     实体存储
     /// </summary>
     public new IStore<TEntity, TKey> EntityStore => Store;
+
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    public abstract Func<TKey>? HandlerRegister { get; set; }
+
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    private void RegisterHandler()
+    {
+        RegisterStoreHandler();
+    }
+
+    /// <summary>
+    /// 注册存储操作员
+    /// </summary>
+    protected virtual void RegisterStoreHandler()
+    {
+        Store.HandlerRegister = HandlerRegister;
+    }
 
     #region BaseResourceManager
 

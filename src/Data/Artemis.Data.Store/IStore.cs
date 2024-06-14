@@ -27,6 +27,10 @@ public interface IStore<TEntity, TKey> :
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
 {
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    Func<TKey>? HandlerRegister { get; set; }
 }
 
 /// <summary>

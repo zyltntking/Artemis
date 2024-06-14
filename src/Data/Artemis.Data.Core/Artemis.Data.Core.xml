@@ -4510,28 +4510,28 @@
 				删除时间
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.IMarkSlot">
+		<member name="T:Artemis.Data.Core.IHandlerSlot">
 			<summary>
 				标记组件接口
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.IMarkSlot`1">
+		<member name="T:Artemis.Data.Core.IHandlerSlot`1">
 			<summary>
 				标记组件接口
 			</summary>
 			<typeparam name="TMark"></typeparam>
 		</member>
-		<member name="P:Artemis.Data.Core.IMarkSlot`1.CreateBy">
+		<member name="P:Artemis.Data.Core.IHandlerSlot`1.CreateBy">
 			<summary>
 				创建人
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Core.IMarkSlot`1.ModifyBy">
+		<member name="P:Artemis.Data.Core.IHandlerSlot`1.ModifyBy">
 			<summary>
 				更新人
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Core.IMarkSlot`1.RemoveBy">
+		<member name="P:Artemis.Data.Core.IHandlerSlot`1.RemoveBy">
 			<summary>
 				移除人
 			</summary>

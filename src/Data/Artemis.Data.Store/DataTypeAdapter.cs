@@ -22,56 +22,56 @@ internal static class DataTypeAdapter
                 {
                     DbType.Oracle, new DataTypeSet
                     {
+                        Guid = "CHAR(36)",
                         DateTime = "DATE",
                         Boolean = "NUMBER(1)",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "NUMBER(18, 4)",
-                        StringTemplate = "NVARCHAR2({0})"
+                        Double = "FLOAT"
                     }
                 },
                 {
                     DbType.SqlServer, new DataTypeSet
                     {
+                        Guid = "UNIQUEIDENTIFIER",
                         DateTime = "DATETIME",
                         Boolean = "BIT",
-                        Integer = "INTEGER",
-                        Long = "INTEGER",
-                        Double = "FLOAT",
-                        StringTemplate = "NVARCHAR({0})"
+                        Integer = "INT",
+                        Long = "BIGINT",
+                        Double = "FLOAT"
                     }
                 },
                 {
                     DbType.MySql, new DataTypeSet
                     {
+                        Guid = "CHAR(36)",
                         DateTime = "DATETIME",
                         Boolean = "BIT",
-                        Integer = "INTEGER",
-                        Long = "INTEGER",
-                        Double = "FLOAT",
-                        StringTemplate = "NVARCHAR({0})"
+                        Integer = "INT",
+                        Long = "BIGINT",
+                        Double = "FLOAT"
                     }
                 },
                 {
                     DbType.PostgreSql, new DataTypeSet
                     {
+                        Guid = "UUID",
                         DateTime = "TIMESTAMP",
                         Boolean = "BOOLEAN",
                         Integer = "INTEGER",
-                        Long = "INTEGER",
-                        Double = "DOUBLE PRECISION",
-                        StringTemplate = "NVARCHAR({0})"
+                        Long = "BIGINT",
+                        Double = "DOUBLE PRECISION"
                     }
                 },
                 {
                     DbType.Sqlite, new DataTypeSet
                     {
+                        Guid = "CHAR(36)",
                         DateTime = "DATETIME",
                         Boolean = "BOOLEAN",
                         Integer = "INTEGER",
                         Long = "INTEGER",
-                        Double = "FLOAT",
-                        StringTemplate = "NVARCHAR({0})"
+                        Double = "FLOAT"
                     }
                 }
             };
@@ -95,6 +95,11 @@ internal static class DataTypeAdapter
 public record DataTypeSet
 {
     /// <summary>
+    ///     Guid数据类型
+    /// </summary>
+    public string Guid { get; init; } = "UNIQUEIDENTIFIER";
+
+    /// <summary>
     ///     DateTime数据类型
     /// </summary>
     public string DateTime { get; init; } = "DATETIME";
@@ -107,30 +112,15 @@ public record DataTypeSet
     /// <summary>
     ///     Integer数据类型
     /// </summary>
-    public string Integer { get; init; } = "INTEGER";
+    public string Integer { get; init; } = "INT";
 
     /// <summary>
     ///     Long数据类型
     /// </summary>
-    public string Long { get; init; } = "INTEGER";
+    public string Long { get; init; } = "BIGINT";
 
     /// <summary>
     ///     Double数据类型
     /// </summary>
     public string Double { get; init; } = "FLOAT";
-
-    /// <summary>
-    ///     String数据类型
-    /// </summary>
-    public string StringTemplate { get; init; } = "VARCHAR({0})";
-
-    /// <summary>
-    ///     获取String数据类型
-    /// </summary>
-    /// <param name="length">字段长度</param>
-    /// <returns></returns>
-    public string String(int length)
-    {
-        return string.Format(StringTemplate, length);
-    }
 }

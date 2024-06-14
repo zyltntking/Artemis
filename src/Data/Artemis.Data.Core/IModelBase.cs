@@ -57,7 +57,7 @@ public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencySta
 /// <summary>
 ///     基本模型接口
 /// </summary>
-public interface IModelBase : IKeySlot, IModelBase<Guid>, IMarkSlot
+public interface IModelBase : IKeySlot, IModelBase<Guid>, IHandlerSlot
 {
 }
 
@@ -65,7 +65,7 @@ public interface IModelBase : IKeySlot, IModelBase<Guid>, IMarkSlot
 ///     基本模型接口
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot, IMarkSlot<TKey>
+public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot, IHandlerSlot<TKey>
     where TKey : IEquatable<TKey>
 {
 }
@@ -121,30 +121,30 @@ public interface IMateSlot
 /// <summary>
 ///     标记组件接口
 /// </summary>
-public interface IMarkSlot : IMarkSlot<Guid>
+public interface IHandlerSlot : IHandlerSlot<Guid>
 {
 }
 
 /// <summary>
 ///     标记组件接口
 /// </summary>
-/// <typeparam name="TMark"></typeparam>
-public interface IMarkSlot<TMark> where TMark : IEquatable<TMark>
+/// <typeparam name="THandler"></typeparam>
+public interface IHandlerSlot<THandler> where THandler : IEquatable<THandler>
 {
     /// <summary>
     ///     创建人
     /// </summary>
-    TMark CreateBy { get; set; }
+    THandler CreateBy { get; set; }
 
     /// <summary>
     ///     更新人
     /// </summary>
-    TMark ModifyBy { get; set; }
+    THandler ModifyBy { get; set; }
 
     /// <summary>
     ///     移除人
     /// </summary>
-    TMark? RemoveBy { get; set; }
+    THandler? RemoveBy { get; set; }
 }
 
 #endregion

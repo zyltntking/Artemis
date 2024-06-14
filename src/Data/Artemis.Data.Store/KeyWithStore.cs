@@ -88,6 +88,15 @@ public abstract class KeyWithStore<TEntity, TKey> :
     {
     }
 
+    #region Implementation of IStore<TEntity,TKey>
+
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    public abstract Func<TKey>? HandlerRegister { get; set; }
+
+    #endregion
+
     #region Implementation of IKeyWithStoreCommon<TEntity,in TKey>
 
     #region CreateEntity & CreateEntities
