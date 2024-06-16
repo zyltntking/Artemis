@@ -17,41 +17,18 @@ public abstract class PartitionConfiguration<TEntity> : ModelConfiguration<TEnti
     ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected sealed override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        base.FieldConfigure(builder);
-
-        PartitionFieldConfigure(builder);
-    }
-
-    /// <summary>
-    ///     分区字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    private void PartitionFieldConfigure(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.Partition)
             .IsRequired()
-            .HasComment("分区标识")
-            .HasColumnType(DataTypeSet.Integer);
+            .HasComment("分区标识");
     }
 
     /// <summary>
     ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected sealed override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
-    {
-        base.RelationConfigure(builder);
-
-        PartitionIndexConfigure(builder);
-    }
-
-    /// <summary>
-    ///     分区索引配置
-    /// </summary>
-    /// <param name="builder"></param>
-    private void PartitionIndexConfigure(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasIndex(entity => entity.Partition)
             .HasDatabaseName(IndexName("Partition"));
@@ -78,12 +55,10 @@ public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<T
     ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.Id)
-            .IsRequired()
-            .HasComment("标识")
-            .HasColumnType(DataTypeSet.Guid);
+            .HasComment("标识");
 
         EntityFieldConfigure(builder);
 
@@ -96,7 +71,9 @@ public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<T
     ///     实体字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 
     /// <summary>
     ///     标识字段配置
@@ -105,17 +82,14 @@ public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<T
     private void HandlerFieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.CreateBy)
-            .IsRequired()
             .HasComment("创建者标识")
             .HasColumnType(DataTypeSet.Guid);
 
         builder.Property(entity => entity.ModifyBy)
-            .IsRequired()
             .HasComment("更新者标识")
             .HasColumnType(DataTypeSet.Guid);
 
         builder.Property(entity => entity.RemoveBy)
-            .IsRequired(false)
             .HasComment("删除者标识")
             .HasColumnType(DataTypeSet.Guid);
     }
@@ -124,7 +98,7 @@ public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<T
     ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(entity => entity.Id)
             .HasName(KeyName);
@@ -140,7 +114,9 @@ public abstract class ModelConfiguration<TEntity> : MateSlotModelConfiguration<T
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 
     /// <summary>
     ///     标识索引配置
@@ -189,17 +165,14 @@ public abstract class MateSlotModelConfiguration<TEntity> : BaseConfiguration<TE
     private void MetaFieldConfigure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(entity => entity.CreatedAt)
-            .IsRequired()
             .HasComment("创建时间")
             .HasColumnType(DataTypeSet.DateTime);
 
         builder.Property(entity => entity.UpdatedAt)
-            .IsRequired()
             .HasComment("更新时间")
             .HasColumnType(DataTypeSet.DateTime);
 
         builder.Property(entity => entity.DeletedAt)
-            .IsRequired(false)
             .HasComment("删除时间")
             .HasColumnType(DataTypeSet.DateTime);
     }
@@ -225,6 +198,69 @@ public abstract class MateSlotModelConfiguration<TEntity> : BaseConfiguration<TE
             .HasDatabaseName(IndexName("UpdatedAt"));
         builder.HasIndex(entity => entity.DeletedAt)
             .HasDatabaseName(IndexName("DeletedAt"));
+    }
+
+    #endregion
+}
+
+/// <summary>
+///     ArtemisKeySlot类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public abstract class KeySlotModelConfiguration<TEntity> : KeySlotModelConfiguration<TEntity, Guid>
+    where TEntity : class, IKeySlot
+{
+}
+
+/// <summary>
+///     ArtemisKeySlot类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class KeySlotModelConfiguration<TEntity, TKey> : BaseConfiguration<TEntity>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
+{
+    #region Overrides of ModelBaseConfiguration<TEntity>
+
+    /// <summary>
+    ///     数据库字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void FieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        builder.Property(entity => entity.Id)
+            .HasComment("标识");
+
+        EntityFieldConfigure(builder);
+    }
+
+    /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected virtual void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
+
+    /// <summary>
+    ///     数据库关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+        builder.HasKey(entity => entity.Id)
+            .HasName(KeyName);
+
+        EntityRelationConfigure(builder);
+    }
+
+    /// <summary>
+    ///     实体关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected virtual void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
     }
 
     #endregion
@@ -282,16 +318,27 @@ public abstract class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEnt
     /// <summary>
     ///     生成主键名称
     /// </summary>
-    protected virtual string KeyName => $"PK_{TableName}";
+    protected string KeyName => $"PK_{TableName}";
 
     /// <summary>
     ///     生成索引名称
     /// </summary>
     /// <param name="properties">字段名称</param>
     /// <returns></returns>
-    protected virtual string IndexName(params string[] properties)
+    protected string IndexName(params string[] properties)
     {
         return $"IX_{TableName}_{string.Join('_', properties)}";
+    }
+
+    /// <summary>
+    ///     生成外键名称
+    /// </summary>
+    /// <param name="subTableName"></param>
+    /// <param name="mainTableName"></param>
+    /// <returns></returns>
+    protected string ForeignKeyName(string subTableName, string mainTableName)
+    {
+        return $"FK_{subTableName}_{mainTableName}";
     }
 
     /// <summary>
@@ -307,11 +354,15 @@ public abstract class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEnt
     ///     数据库字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void FieldConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void FieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 
     /// <summary>
     ///     数据库关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void RelationConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void RelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 }

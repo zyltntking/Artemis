@@ -104,7 +104,13 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
     /// <returns>判断结果</returns>
     public override bool IsDeleted(TEntity entity)
     {
-        if (SoftDelete) return entity.DeletedAt is not null;
+        if (SoftDelete)
+        {
+            if (entity is IMateSlot mateSlotEntity)
+            {
+                return mateSlotEntity.DeletedAt is not null;
+            }
+        }
 
         return base.IsDeleted(entity);
     }
@@ -119,9 +125,15 @@ public abstract class Store<TEntity, TKey> : KeyWithStore<TEntity, TKey>
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        return SoftDelete
-            ? Task.FromResult(entity.DeletedAt is not null)
-            : base.IsDeletedAsync(entity, cancellationToken);
+        if (SoftDelete)
+        {
+            if (entity is IMateSlot mateSlotEntity)
+            {
+                return Task.FromResult(mateSlotEntity.DeletedAt is not null);
+            }
+        }
+
+        return base.IsDeletedAsync(entity, cancellationToken);
     }
 
     #endregion

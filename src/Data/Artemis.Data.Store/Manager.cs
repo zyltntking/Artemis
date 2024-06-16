@@ -243,7 +243,7 @@ public abstract class Manager<TEntity, TKey> : KeyLessManager<TEntity>, IManager
     }
 
     /// <summary>
-    /// 注册存储操作员
+    ///     注册存储操作员
     /// </summary>
     protected virtual void RegisterStoreHandler()
     {

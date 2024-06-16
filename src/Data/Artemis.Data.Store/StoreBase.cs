@@ -749,7 +749,7 @@ public abstract class StoreBase<TEntity, TKey> :
     /// <returns></returns>
     public bool IsDeleted(TKey key)
     {
-        return KeyMatchQuery(key).Any();
+        return !KeyMatchQuery(key).Any();
     }
 
     /// <summary>

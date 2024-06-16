@@ -15,7 +15,7 @@ public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion
 }
@@ -31,7 +31,7 @@ public abstract class PartitionBase<TKey> : ModelBase<TKey>, IPartitionBase<TKey
     /// <summary>
     ///     分区标识
     /// </summary>
-    public virtual int Partition { get; set; } = 0;
+    public int Partition { get; set; } = 0;
 
     #endregion
 }
@@ -48,7 +48,19 @@ public abstract class ModelBase : ModelBase<Guid>, IModelBase
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    ///     创建人
+    /// </summary>
+    [Required]
+    public sealed override Guid CreateBy { get; set; } = Guid.Empty;
+
+    /// <summary>
+    ///     更新人
+    /// </summary>
+    [Required]
+    public sealed override Guid ModifyBy { get; set; } = Guid.Empty;
 
     #endregion
 }
@@ -74,17 +86,19 @@ public abstract class ModelBase<TKey> : MateSlot, IModelBase<TKey> where TKey : 
     /// <summary>
     ///     创建人
     /// </summary>
+    [Required]
     public virtual TKey CreateBy { get; set; } = default!;
 
     /// <summary>
     ///     更新人
     /// </summary>
+    [Required]
     public virtual TKey ModifyBy { get; set; } = default!;
 
     /// <summary>
     ///     移除人
     /// </summary>
-    public TKey? RemoveBy { get; set; }
+    public virtual TKey? RemoveBy { get; set; }
 
     #endregion
 }
@@ -103,7 +117,7 @@ public abstract class KeySlot : IKeySlot
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public virtual Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     #endregion
 }
@@ -123,18 +137,18 @@ public abstract class MateSlot : IMateSlot
     ///     创建时间
     /// </summary>
     [Required]
-    public virtual DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     更新时间
     /// </summary>
     [Required]
-    public virtual DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     删除时间
     /// </summary>
-    public virtual DateTime? DeletedAt { get; set; } = null;
+    public DateTime? DeletedAt { get; set; } = null;
 
     #endregion
 }
