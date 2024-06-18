@@ -3,44 +3,63 @@
 namespace Artemis.Data.Store;
 
 /// <summary>
-///     具键存储接口
+///     存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public interface IStore<TEntity> : IStore<TEntity, Guid>,
-    IStoreBase<TEntity>,
     IStoreCommon<TEntity>,
     IStoreMap<TEntity>
-    where TEntity : class, IKeySlot
-{
-}
+    where TEntity : class, IKeySlot;
 
 /// <summary>
-///     具键存储接口
+///     存储接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+public interface IStore<TEntity, THandler> : IStore<TEntity, Guid, THandler>
+    where TEntity : class, IKeySlot<Guid>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public interface IStore<TEntity, TKey> :
-    IKeyLessStore<TEntity>,
-    IStoreBase<TEntity, TKey>,
+/// <typeparam name="THandler"></typeparam>
+public interface IStore<TEntity, TKey, THandler> :
+    IKeyLessStore<TEntity, THandler>,
     IStoreCommon<TEntity, TKey>,
     IStoreMap<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     注册操作员
-    /// </summary>
-    Func<TKey>? HandlerRegister { get; set; }
-}
+    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     无键存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface IKeyLessStore<TEntity> :
-    IKeyLessStoreBase<TEntity>,
+public interface IKeyLessStore<TEntity> : IKeyLessStore<TEntity, Guid> where TEntity : class;
+
+/// <summary>
+///     无键存储接口
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+public interface IKeyLessStore<TEntity, THandler> :
     IKeyLessStoreCommon<TEntity>,
     IKeyLessStoreMap<TEntity>
     where TEntity : class
+    where THandler : IEquatable<THandler>
 {
+    /// <summary>
+    ///     注册操作员
+    /// </summary>
+    Func<THandler>? HandlerRegister { get; set; }
+
+    /// <summary>
+    ///     生成键
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    string GenerateKey(TEntity entity);
 }

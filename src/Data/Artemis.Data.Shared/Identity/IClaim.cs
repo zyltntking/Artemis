@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 凭据接口
+///     凭据接口
 /// </summary>
 public interface IClaim
 {

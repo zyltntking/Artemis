@@ -3,36 +3,92 @@
 #region PartitionBase
 
 /// <summary>
-///     基本并发分区模型
+///     基本并发模型接口
 /// </summary>
-public interface IConcurrencyPartitionBase : IPartitionBase, IConcurrencyPartitionBase<Guid>, IConcurrencyModelBase
-{
-}
+public interface IConcurrencyPartition : IPartitionBase, IConcurrencyPartition<Guid>;
+
+/// <summary>
+///     基本并发分区模型接口
+/// </summary>
+/// <typeparam name="THandler"></typeparam>
+public interface IConcurrencyPartition<THandler> :
+    IPartitionBase<THandler>,
+    IConcurrencyPartition<Guid, THandler>
+    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     基本并发分区模型接口
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public interface IConcurrencyPartitionBase<TKey> : IPartitionBase<TKey>, IConcurrencyModelBase<TKey>
+/// <typeparam name="THandler"></typeparam>
+public interface IConcurrencyPartition<TKey, THandler> :
+    IConcurrencyPartition<TKey, THandler, string>,
+    IConcurrencyStamp
     where TKey : IEquatable<TKey>
-{
-}
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本并发分区模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+/// <typeparam name="TConcurrencyStamp"></typeparam>
+public interface IConcurrencyPartition<TKey, THandler, TConcurrencyStamp> :
+    IConcurrencyPartition<TKey, THandler, TConcurrencyStamp, int>,
+    IPartitionBase<TKey, THandler>
+    where TKey : IEquatable<TKey>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本并发分区模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+/// <typeparam name="TConcurrencyStamp"></typeparam>
+/// <typeparam name="TPartition"></typeparam>
+public interface IConcurrencyPartition<TKey, THandler, TConcurrencyStamp, TPartition> :
+    IPartitionBase<TKey, THandler, TPartition>,
+    IConcurrencyStamp<TConcurrencyStamp>
+    where TKey : IEquatable<TKey>
+    where THandler : IEquatable<THandler>
+    where TPartition : IEquatable<TPartition>;
 
 /// <summary>
 ///     基本分区模型
 /// </summary>
-public interface IPartitionBase : IModelBase, IPartitionBase<Guid>
-{
-}
+public interface IPartitionBase : IModelBase, IPartitionBase<Guid>;
 
 /// <summary>
-///     基本分区模型
+///     基本分区模型接口
+/// </summary>
+/// <typeparam name="THandler"></typeparam>
+public interface IPartitionBase<THandler> :
+    IModelBase<THandler>,
+    IPartitionBase<Guid, THandler>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本分区模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+public interface IPartitionBase<TKey, THandler> :
+    IPartitionBase<TKey, THandler, int>,
+    IPartitionSlot
+    where TKey : IEquatable<TKey>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本分区模型接口
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot
+/// <typeparam name="THandler"></typeparam>
+/// <typeparam name="TPartition"></typeparam>
+public interface IPartitionBase<TKey, THandler, TPartition> :
+    IModelBase<TKey, THandler>, IPartitionSlot<TPartition>
     where TKey : IEquatable<TKey>
-{
-}
+    where THandler : IEquatable<THandler>
+    where TPartition : IEquatable<TPartition>;
 
 #endregion
 
@@ -41,45 +97,85 @@ public interface IPartitionBase<TKey> : IModelBase<TKey>, IPartitionSlot
 /// <summary>
 ///     基本并发模型接口
 /// </summary>
-public interface IConcurrencyModelBase : IModelBase, IConcurrencyModelBase<Guid>
-{
-}
+public interface IConcurrencyModel : IModelBase, IConcurrencyModel<Guid>;
+
+/// <summary>
+///     基本并发模型接口
+/// </summary>
+/// <typeparam name="THandler"></typeparam>
+public interface IConcurrencyModel<THandler> :
+    IModelBase<THandler>,
+    IConcurrencyModel<Guid, THandler>
+    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     基本并发模型接口
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public interface IConcurrencyModelBase<TKey> : IModelBase<TKey>, IConcurrencyStamp
+/// <typeparam name="THandler"></typeparam>
+public interface IConcurrencyModel<TKey, THandler> :
+    IConcurrencyModel<TKey, THandler, string>,
+    IConcurrencyStamp
     where TKey : IEquatable<TKey>
-{
-}
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本并发模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+/// <typeparam name="TConcurrencyStamp"></typeparam>
+public interface IConcurrencyModel<TKey, THandler, TConcurrencyStamp> : IModelBase<TKey, THandler>,
+    IConcurrencyStamp<TConcurrencyStamp>
+    where TKey : IEquatable<TKey>
+    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     基本模型接口
 /// </summary>
-public interface IModelBase : IKeySlot, IModelBase<Guid>, IHandlerSlot
-{
-}
+public interface IModelBase : IModelBase<Guid>, IHandlerSlot;
+
+/// <summary>
+///     基本模型接口
+/// </summary>
+/// <typeparam name="THandler"></typeparam>
+public interface IModelBase<THandler> :
+    IKeySlot,
+    IModelBase<Guid, THandler>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本模型接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="THandler"></typeparam>
+public interface IModelBase<TKey, THandler> :
+    IMateModelBase<TKey>,
+    IHandlerSlot<THandler>
+    where TKey : IEquatable<TKey>
+    where THandler : IEquatable<THandler>;
+
+/// <summary>
+///     基本模型接口
+/// </summary>
+public interface IMateModelBase : IKeySlot, IMateModelBase<Guid>;
 
 /// <summary>
 ///     基本模型接口
 /// </summary>
 /// <typeparam name="TKey">基本记录标识</typeparam>
-public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot, IHandlerSlot<TKey>
-    where TKey : IEquatable<TKey>
-{
-}
+public interface IMateModelBase<TKey> : IKeySlot<TKey>, IMateSlot where TKey : IEquatable<TKey>;
 
 #endregion
+
+#region Slot&Stamp
 
 #region KeySlot
 
 /// <summary>
 ///     标识组件接口
 /// </summary>
-public interface IKeySlot : IKeySlot<Guid>
-{
-}
+public interface IKeySlot : IKeySlot<Guid>;
 
 /// <summary>
 ///     标识组件接口
@@ -118,12 +214,14 @@ public interface IMateSlot
     DateTime? DeletedAt { get; set; }
 }
 
+#endregion
+
+#region HandlerSlot
+
 /// <summary>
 ///     标记组件接口
 /// </summary>
-public interface IHandlerSlot : IHandlerSlot<Guid>
-{
-}
+public interface IHandlerSlot : IHandlerSlot<Guid>;
 
 /// <summary>
 ///     标记组件接口
@@ -154,23 +252,33 @@ public interface IHandlerSlot<THandler> where THandler : IEquatable<THandler>
 /// <summary>
 ///     并发锁组件接口
 /// </summary>
-public interface IConcurrencyStamp
+public interface IConcurrencyStamp : IConcurrencyStamp<string>;
+
+/// <summary>
+///     并发锁组件接口
+/// </summary>
+public interface IConcurrencyStamp<TConcurrencyStamp>
 {
     /// <summary>
     ///     并发锁
     /// </summary>
-    string? ConcurrencyStamp { get; set; }
+    TConcurrencyStamp? ConcurrencyStamp { get; set; }
 }
 
 /// <summary>
 ///     检验戳组件接口
 /// </summary>
-public interface ICheckStamp
+public interface ICheckStamp : ICheckStamp<string>;
+
+/// <summary>
+///     检验戳组件接口
+/// </summary>
+public interface ICheckStamp<TCheckStamp>
 {
     /// <summary>
     ///     校验戳
     /// </summary>
-    string CheckStamp { get; set; }
+    TCheckStamp CheckStamp { get; set; }
 }
 
 #endregion
@@ -180,9 +288,7 @@ public interface ICheckStamp
 /// <summary>
 ///     分区组件接口
 /// </summary>
-public interface IPartitionSlot : IPartitionSlot<int>
-{
-}
+public interface IPartitionSlot : IPartitionSlot<int>;
 
 /// <summary>
 ///     分区组件接口
@@ -195,5 +301,7 @@ public interface IPartitionSlot<TPartition> where TPartition : IEquatable<TParti
     /// </summary>
     TPartition Partition { get; set; }
 }
+
+#endregion
 
 #endregion

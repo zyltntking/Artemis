@@ -5,28 +5,12 @@
 /// <summary>
 ///     具键存储管理器配置接口
 /// </summary>
-public interface IStoreManagerOptions : IKeyLessStoreManagerOptions
-{
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    bool CachedManager { get; set; }
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    int Expires { get; set; }
-}
-
-/// <summary>
-///     无键存储管理器配置接口
-/// </summary>
-public interface IKeyLessStoreManagerOptions
+public interface IManagerOptions
 {
     /// <summary>
     ///     是否启用Debug日志
     /// </summary>
-    bool DebugLogger { get; set; }
+    bool EnableLogger { get; set; }
 }
 
 #endregion
@@ -34,34 +18,14 @@ public interface IKeyLessStoreManagerOptions
 /// <summary>
 ///     具键存储管理器配置实例
 /// </summary>
-public class StoreManagerOptions : KeyLessStoreManagerOptions, IStoreManagerOptions
+public class ManagerOptions : IManagerOptions
 {
-    #region Implementation of IStoreManagerOptions
-
-    /// <summary>
-    ///     是否启用具缓存策略
-    /// </summary>
-    public bool CachedManager { get; set; } = false;
-
-    /// <summary>
-    ///     过期时间(秒)
-    /// </summary>
-    public int Expires { get; set; } = 0;
-
-    #endregion
-}
-
-/// <summary>
-///     无键存储管理器配置实例
-/// </summary>
-public class KeyLessStoreManagerOptions : IKeyLessStoreManagerOptions
-{
-    #region Implementation of IKeyLessStoreManagerOptions
+    #region Implementation of IManagerOptions
 
     /// <summary>
     ///     是否启用Debug日志
     /// </summary>
-    public bool DebugLogger { get; set; } = false;
+    public bool EnableLogger { get; set; } = true;
 
     #endregion
 }

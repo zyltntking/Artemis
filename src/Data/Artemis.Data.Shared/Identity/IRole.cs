@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 角色接口
+///     角色接口
 /// </summary>
 public interface IRole : IRoleInfo
 {
@@ -12,7 +12,7 @@ public interface IRole : IRoleInfo
 }
 
 /// <summary>
-/// 角色信息接口
+///     角色信息接口
 /// </summary>
 public interface IRoleInfo
 {

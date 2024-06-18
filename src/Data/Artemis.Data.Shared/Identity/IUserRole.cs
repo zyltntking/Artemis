@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 用户角色关系接口
+///     用户角色关系接口
 /// </summary>
 public interface IUserRole
 {

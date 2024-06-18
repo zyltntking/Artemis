@@ -8,6 +8,6 @@ namespace Artemis.Service.Identity.Context;
 ///     认证用户实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityUserConfiguration))]
-internal sealed class IdentityUser : User
+public sealed class IdentityUser : User
 {
 }

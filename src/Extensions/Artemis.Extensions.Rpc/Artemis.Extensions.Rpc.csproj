@@ -39,20 +39,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
-	  <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.62.0" />
-	  <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.62.0" />
-	  <PackageReference Include="Mapster" Version="7.4.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.5" />
-	  <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.5" />
-	  <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.6.2" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
+		<PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.62.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.62.0" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Protos\Artemis.Protos.Common\Artemis.Protos.Common.csproj" />
-	  <ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
-	  <ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
-	  <ProjectReference Include="..\Artemis.Extensions.Web.Validators\Artemis.Extensions.Web.Validators.csproj" />
+		<ProjectReference Include="..\..\Protos\Artemis.Protos.Common\Artemis.Protos.Common.csproj" />
+		<ProjectReference Include="..\Artemis.Extensions.Web.Identity\Artemis.Extensions.Web.Identity.csproj" />
+		<ProjectReference Include="..\Artemis.Extensions.Web.Serilog\Artemis.Extensions.Web.Serilog.csproj" />
+		<ProjectReference Include="..\Artemis.Extensions.Web.Validators\Artemis.Extensions.Web.Validators.csproj" />
 	</ItemGroup>
 
 </Project>

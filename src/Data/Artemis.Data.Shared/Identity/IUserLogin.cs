@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 用户登录接口
+///     用户登录接口
 /// </summary>
 public interface IUserLogin
 {

@@ -1,8 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
-using Artemis.Data.Core.Fundamental.Kit.Crypto;
 using Artemis.Data.Core.Fundamental.Protocol;
-using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Data.Tests;
 
@@ -11,6 +9,8 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
+        //var bbc = Generator.IsInherit<IdentityUser>(typeof(IHandlerSlot<>));
+
         var rsa = RSA.Create();
 
         var aes = Aes.Create();
@@ -23,7 +23,7 @@ public class UnitTest1
 
         var rec = new StatusRecord(status);
 
-        var head = new HeadRecord(10, 11, 20, 21, 30, 31,1987890782);
+        var head = new HeadRecord(10, 11, 20, 21, 30, 31, 1987890782);
 
         var head2 = new HeadRecord(head.Bytes!);
 
@@ -37,10 +37,7 @@ public class UnitTest1
 
         var bb = orgin.Split(',');
 
-        foreach (var b in bb)
-        {
-            abr.Add(byte.Parse(b));
-        }
+        foreach (var b in bb) abr.Add(byte.Parse(b));
 
         var ss = Encoding.Unicode.GetString(abr.ToArray());
 
@@ -48,10 +45,7 @@ public class UnitTest1
         {
             var value = int.Parse(item);
 
-            if (value < 0)
-            {
-                return (byte)(value + 256);
-            }
+            if (value < 0) return (byte)(value + 256);
 
             return (byte)value;
         }).ToArray();

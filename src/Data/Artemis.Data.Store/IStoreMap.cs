@@ -8,9 +8,7 @@ namespace Artemis.Data.Store;
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 public interface IStoreMap<TEntity> : IStoreMap<TEntity, Guid>
-    where TEntity : IKeySlot
-{
-}
+    where TEntity : IKeySlot;
 
 /// <summary>
 ///     可映射存储接口

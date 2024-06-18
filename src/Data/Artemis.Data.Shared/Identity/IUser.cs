@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 用户接口
+///     用户接口
 /// </summary>
 public interface IUser : IUserInfo
 {
@@ -59,11 +59,10 @@ public interface IUser : IUserInfo
     ///     失败尝试次数
     /// </summary>
     int AccessFailedCount { get; set; }
-
 }
 
 /// <summary>
-/// 基本用户信息接口
+///     基本用户信息接口
 /// </summary>
 public interface IUserInfo
 {

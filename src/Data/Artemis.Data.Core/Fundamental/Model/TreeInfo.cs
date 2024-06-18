@@ -23,9 +23,7 @@ public interface INodeInfo<TKey>
 /// <summary>
 ///     节点信息接口
 /// </summary>
-public interface INodeInfo : INodeInfo<Guid>
-{
-}
+public interface INodeInfo : INodeInfo<Guid>;
 
 /// <summary>
 ///     树节点信息接口
@@ -43,9 +41,7 @@ public interface ITreeNodeInfo<TKey> : INodeInfo<TKey>
 /// <summary>
 ///     树节点信息接口
 /// </summary>
-public interface ITreeNodeInfo : INodeInfo, ITreeNodeInfo<Guid>
-{
-}
+public interface ITreeNodeInfo : INodeInfo, ITreeNodeInfo<Guid>;
 
 /// <summary>
 ///     树节点接口
@@ -67,9 +63,7 @@ public interface ITreeNode<TNode, TKey> : INodeInfo<TKey>
 /// </summary>
 /// <typeparam name="TNode"></typeparam>
 public interface ITreeNode<TNode> : ITreeNode<TNode, Guid>
-    where TNode : ITreeNode<TNode>
-{
-}
+    where TNode : ITreeNode<TNode>;
 
 #endregion
 
@@ -100,9 +94,7 @@ public abstract class NodeInfo<TKey> : INodeInfo<TKey>
 /// <summary>
 ///     节点信息
 /// </summary>
-public abstract class NodeInfo : NodeInfo<Guid>, INodeInfo
-{
-}
+public abstract class NodeInfo : NodeInfo<Guid>, INodeInfo;
 
 #endregion
 
@@ -128,9 +120,7 @@ public abstract class TreeNodeInfo<TKey> : NodeInfo<TKey>, ITreeNodeInfo<TKey>
 /// <summary>
 ///     树节点信息
 /// </summary>
-public abstract class TreeNodeInfo : TreeNodeInfo<Guid>, ITreeNodeInfo
-{
-}
+public abstract class TreeNodeInfo : TreeNodeInfo<Guid>, ITreeNodeInfo;
 
 #endregion
 
@@ -155,9 +145,7 @@ public abstract class TreeNode<TTreeNode, TKey> : NodeInfo<TKey>, ITreeNode<TTre
 ///     树节点
 /// </summary>
 public abstract class TreeNode<TTreeNode> : TreeNode<TTreeNode, Guid>, ITreeNode<TTreeNode>
-    where TTreeNode : TreeNode<TTreeNode>
-{
-}
+    where TTreeNode : TreeNode<TTreeNode>;
 
 #endregion
 
