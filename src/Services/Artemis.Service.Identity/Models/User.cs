@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Models;
 /// <summary>
 ///     用户模型
 /// </summary>
-public class User : ModelBase, IUser, IConcurrencyStamp
+public class User : ConcurrencyModel, IUser
 {
     /// <summary>
     ///     用户名
@@ -76,13 +76,6 @@ public class User : ModelBase, IUser, IConcurrencyStamp
     [MaxLength(128)]
     [Comment("密码锁")]
     public string? SecurityStamp { get; set; }
-
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    [MaxLength(64)]
-    [Comment("并发锁")]
-    public string? ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
     /// <summary>
     ///     是否启用双因子认证

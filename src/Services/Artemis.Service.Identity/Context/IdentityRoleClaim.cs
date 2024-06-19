@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Context;
 ///     认证角色凭据实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityRoleClaimConfiguration))]
-internal sealed class IdentityRoleClaim : RoleClaim
+public sealed class IdentityRoleClaim : RoleClaim
 {
     /// <summary>
     ///     凭据所属角色

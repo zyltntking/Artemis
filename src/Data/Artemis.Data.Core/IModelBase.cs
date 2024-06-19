@@ -10,11 +10,11 @@ public interface IConcurrencyPartition : IPartitionBase, IConcurrencyPartition<G
 /// <summary>
 ///     基本并发分区模型接口
 /// </summary>
-/// <typeparam name="THandler"></typeparam>
-public interface IConcurrencyPartition<THandler> :
-    IPartitionBase<THandler>,
-    IConcurrencyPartition<Guid, THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IConcurrencyPartition<TKey> :
+    IPartitionBase<TKey>,
+    IConcurrencyPartition<TKey, Guid>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     基本并发分区模型接口
@@ -61,11 +61,11 @@ public interface IPartitionBase : IModelBase, IPartitionBase<Guid>;
 /// <summary>
 ///     基本分区模型接口
 /// </summary>
-/// <typeparam name="THandler"></typeparam>
-public interface IPartitionBase<THandler> :
-    IModelBase<THandler>,
-    IPartitionBase<Guid, THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IPartitionBase<TKey> :
+    IModelBase<TKey>,
+    IPartitionBase<TKey, Guid>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     基本分区模型接口
@@ -102,11 +102,11 @@ public interface IConcurrencyModel : IModelBase, IConcurrencyModel<Guid>;
 /// <summary>
 ///     基本并发模型接口
 /// </summary>
-/// <typeparam name="THandler"></typeparam>
-public interface IConcurrencyModel<THandler> :
-    IModelBase<THandler>,
-    IConcurrencyModel<Guid, THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IConcurrencyModel<TKey> :
+    IModelBase<TKey>,
+    IConcurrencyModel<TKey, Guid>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     基本并发模型接口
@@ -133,16 +133,15 @@ public interface IConcurrencyModel<TKey, THandler, TConcurrencyStamp> : IModelBa
 /// <summary>
 ///     基本模型接口
 /// </summary>
-public interface IModelBase : IModelBase<Guid>, IHandlerSlot;
+public interface IModelBase : IModelBase<Guid>, IKeySlot, IHandlerSlot;
 
 /// <summary>
 ///     基本模型接口
 /// </summary>
-/// <typeparam name="THandler"></typeparam>
-public interface IModelBase<THandler> :
-    IKeySlot,
-    IModelBase<Guid, THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IModelBase<TKey> :
+    IModelBase<TKey, Guid>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     基本模型接口

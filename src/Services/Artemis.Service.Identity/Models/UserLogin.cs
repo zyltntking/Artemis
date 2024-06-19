@@ -9,8 +9,6 @@ namespace Artemis.Service.Identity.Models;
 /// </summary>
 public class UserLogin : IUserLogin
 {
-    #region Implementation of IUserLogin
-
     /// <summary>
     ///     用户标识
     /// </summary>
@@ -40,6 +38,4 @@ public class UserLogin : IUserLogin
     [MaxLength(128)]
     [Comment("提供程序显示名称")]
     public string? ProviderDisplayName { get; set; }
-
-    #endregion
 }

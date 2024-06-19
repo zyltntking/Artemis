@@ -7,7 +7,7 @@ namespace Artemis.Service.Identity.Context.Configuration;
 /// <summary>
 ///     认证角色实体配置
 /// </summary>
-internal sealed class IdentityRoleConfiguration : ModelConfiguration<IdentityRole>
+internal sealed class IdentityRoleConfiguration : ConcurrencyModelEntityConfiguration<IdentityRole>
 {
     #region Overrides of ModelConfiguration<IdentityRole>
 

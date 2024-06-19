@@ -18,11 +18,11 @@ public abstract class ConcurrencyPartitionEntityConfiguration<TEntity> :
 ///     元数据模型类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, THandler> :
-    ConcurrencyPartitionEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IConcurrencyPartition<THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey> :
+    ConcurrencyPartitionEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IConcurrencyPartition<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -96,11 +96,11 @@ public abstract class PartitionBaseEntityConfiguration<TEntity> :
 ///     元数据模型类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class PartitionBaseEntityConfiguration<TEntity, THandler> :
-    PartitionBaseEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IPartitionBase<THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public abstract class PartitionBaseEntityConfiguration<TEntity, TKey> :
+    PartitionBaseEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IPartitionBase<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -210,11 +210,11 @@ public abstract class ConcurrencyModelEntityConfiguration<TEntity> :
 ///     元数据模型类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyModelEntityConfiguration<TEntity, THandler> :
-    ConcurrencyModelEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IConcurrencyModel<THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey> :
+    ConcurrencyModelEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IConcurrencyModel<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -318,11 +318,11 @@ public abstract class BaseModelEntityConfiguration<TEntity> :
 ///     元数据模型类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class BaseModelEntityConfiguration<TEntity, THandler> :
-    BaseModelEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IModelBase<THandler>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public abstract class BaseModelEntityConfiguration<TEntity, TKey> :
+    BaseModelEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IModelBase<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -474,7 +474,17 @@ public abstract class BaseModelEntityConfiguration<TEntity, TKey, THandler, TCon
 /// <typeparam name="TEntity"></typeparam>
 public abstract class MateModelEntityConfiguration<TEntity> :
     MateModelEntityConfiguration<TEntity, Guid>
-    where TEntity : class, IMateModelBase
+    where TEntity : class, IMateModelBase;
+
+/// <summary>
+///     元数据模型类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class MateModelEntityConfiguration<TEntity, TKey> :
+    MateModelEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IMateModelBase<TKey>
+    where TKey : IEquatable<TKey>
 {
     #region Slot
 
@@ -521,16 +531,6 @@ public abstract class MateModelEntityConfiguration<TEntity> :
 
     #endregion
 }
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity, THandler> :
-    MateModelEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IMateModelBase
-    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -644,7 +644,17 @@ public abstract class MateModelEntityConfiguration<TEntity, TKey, THandler, TCon
 /// <typeparam name="TEntity"></typeparam>
 public abstract class KeySlotEntityConfiguration<TEntity> :
     KeySlotEntityConfiguration<TEntity, Guid>
-    where TEntity : class, IKeySlot
+    where TEntity : class, IKeySlot;
+
+/// <summary>
+///     KeySlot类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class KeySlotEntityConfiguration<TEntity, TKey> :
+    KeySlotEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
 {
     #region Slot
 
@@ -691,16 +701,6 @@ public abstract class KeySlotEntityConfiguration<TEntity> :
 
     #endregion
 }
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity, THandler> :
-    KeySlotEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class, IKeySlot
-    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     KeySlot类型配置
@@ -839,6 +839,46 @@ public abstract class BaseEntityConfiguration<TEntity> :
     #region Slot
 
     /// <summary>
+    ///     键插件字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected sealed override void KeySlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
+    {
+        if (UseKeyConfiguration)
+            if (Generator.IsInherit<TEntity>(typeof(IKeySlot)))
+                builder.Property(entity => ((IKeySlot)entity).Id)
+                    .IsRequired()
+                    .HasComment("标识");
+    }
+
+    /// <summary>
+    ///     键插件关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected sealed override void KeySlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
+    {
+        if (UseKeyConfiguration)
+            if (Generator.IsInherit<TEntity>(typeof(IKeySlot)))
+                builder.HasKey(entity => ((IKeySlot)entity).Id)
+                    .HasName(KeyName);
+    }
+
+    #endregion
+}
+
+/// <summary>
+///     抽象实体类型配置
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class BaseEntityConfiguration<TEntity, TKey> :
+    BaseEntityConfiguration<TEntity, TKey, Guid>
+    where TEntity : class
+    where TKey : IEquatable<TKey>
+{
+    #region Slot
+
+    /// <summary>
     ///     操作者插件字段配置
     /// </summary>
     /// <param name="builder"></param>
@@ -877,46 +917,6 @@ public abstract class BaseEntityConfiguration<TEntity> :
                 builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
                     .HasDatabaseName(IndexName("RemoveBy"));
             }
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     抽象实体类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, THandler> :
-    BaseEntityConfiguration<TEntity, Guid, THandler>
-    where TEntity : class
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     键插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void KeySlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseKeyConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IKeySlot)))
-                builder.Property(entity => ((IKeySlot)entity).Id)
-                    .IsRequired()
-                    .HasComment("标识");
-    }
-
-    /// <summary>
-    ///     键插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void KeySlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseKeyConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IKeySlot)))
-                builder.HasKey(entity => ((IKeySlot)entity).Id)
-                    .HasName(KeyName);
     }
 
     #endregion
@@ -1002,8 +1002,8 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
 /// <typeparam name="THandler"></typeparam>
 /// <typeparam name="TConcurrencyStamp"></typeparam>
 /// <typeparam name="TPartition"></typeparam>
-public abstract class
-    BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> : IEntityTypeConfiguration<TEntity>
+public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> : 
+    IEntityTypeConfiguration<TEntity>
     where TEntity : class
     where TKey : IEquatable<TKey>
     where THandler : IEquatable<THandler>
@@ -1054,17 +1054,14 @@ public abstract class
     /// <summary>
     ///     生成主键名称
     /// </summary>
-    protected string KeyName => $"PK_{TableName}";
+    protected string KeyName => TableName.KeyName();
 
     /// <summary>
     ///     生成索引名称
     /// </summary>
     /// <param name="properties">字段名称</param>
     /// <returns></returns>
-    protected string IndexName(params string[] properties)
-    {
-        return $"IX_{TableName}_{string.Join('_', properties)}";
-    }
+    protected string IndexName(params string[] properties) => TableName.IndexName(properties);
 
     /// <summary>
     ///     生成外键名称
@@ -1072,10 +1069,7 @@ public abstract class
     /// <param name="subTableName"></param>
     /// <param name="mainTableName"></param>
     /// <returns></returns>
-    protected string ForeignKeyName(string subTableName, string mainTableName)
-    {
-        return $"FK_{subTableName}_{mainTableName}";
-    }
+    protected string ForeignKeyName(string subTableName, string mainTableName) => subTableName.ForeignKeyName(mainTableName);
 
     /// <summary>
     ///     表配置
@@ -1126,13 +1120,13 @@ public abstract class
     ///     实体字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder){}
 
     /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected abstract void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder);
+    protected virtual void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder){}
 
     #region SlotConfig
 

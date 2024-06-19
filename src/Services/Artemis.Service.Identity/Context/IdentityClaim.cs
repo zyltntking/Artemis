@@ -8,6 +8,6 @@ namespace Artemis.Service.Identity.Context;
 ///     认证凭据实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityClaimConfiguration))]
-internal sealed class IdentityClaim : Claim
+public sealed class IdentityClaim : Claim
 {
 }

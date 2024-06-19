@@ -9,14 +9,10 @@ namespace Artemis.Service.Identity.Models;
 /// </summary>
 public class UserClaim : Claim, IUserClaim
 {
-    #region Implementation of IUserClaim
-
     /// <summary>
     ///     用户标识
     /// </summary>
     [Required]
     [Comment("用户标识")]
     public Guid UserId { get; set; }
-
-    #endregion
 }

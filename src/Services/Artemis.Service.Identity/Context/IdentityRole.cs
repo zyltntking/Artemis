@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Context;
 ///     认证角色实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityRoleConfiguration))]
-internal sealed class IdentityRole : Role
+public sealed class IdentityRole : Role
 {
     /// <summary>
     ///     具备该角色的用户

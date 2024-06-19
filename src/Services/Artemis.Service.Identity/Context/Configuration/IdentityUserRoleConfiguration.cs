@@ -5,7 +5,7 @@ namespace Artemis.Service.Identity.Context.Configuration;
 /// <summary>
 ///     认证用户角色映射实体配置
 /// </summary>
-internal sealed class IdentityUserRoleConfiguration : BaseConfiguration<IdentityUserRole>
+internal sealed class IdentityUserRoleConfiguration : BaseEntityConfiguration<IdentityUserRole>
 {
     #region Overrides of BaseConfiguration<IdentityUserRole>
 

@@ -7,7 +7,7 @@ namespace Artemis.Service.Identity.Context.Configuration;
 /// <summary>
 ///     认证用户实体配置
 /// </summary>
-internal sealed class IdentityUserConfiguration : ModelConfiguration<IdentityUser>
+internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfiguration<IdentityUser>
 {
     #region Overrides of ModelConfiguration<IdentityUser>
 
@@ -37,6 +37,38 @@ internal sealed class IdentityUserConfiguration : ModelConfiguration<IdentityUse
 
         builder.HasIndex(user => user.PhoneNumber)
             .HasDatabaseName(IndexName("PhoneNumber"));
+
+        // Each User can have many UserClaims
+        builder.HasMany(user => user.UserClaims)
+            .WithOne(userClaim => userClaim.User)
+            .HasForeignKey(userClaim => userClaim.UserId)
+            .HasConstraintName(ForeignKeyName("IdentityUserClaim", "IdentityUser"))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Each User can have many UserLogins
+        builder.HasMany(user => user.UserLogins)
+            .WithOne(userLogin => userLogin.User)
+            .HasForeignKey(userLogin => userLogin.UserId)
+            .HasConstraintName(ForeignKeyName("IdentityUserLogin", "IdentityUser"))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Each User can have many UserTokens
+        builder.HasMany(user => user.UserTokens)
+            .WithOne(userToken => userToken.User)
+            .HasForeignKey(userToken => userToken.UserId)
+            .HasConstraintName(ForeignKeyName("IdentityUserToken", "IdentityUser"))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Each User can have many UserProfiles
+        //builder.HasMany(user => user.UserProfiles)
+        //    .WithOne(userProfile => userProfile.User)
+        //    .HasForeignKey(userProfile => userProfile.UserId)
+        //    .HasConstraintName($"FK_{nameof(ArtemisUserProfile)}_{TableName}_Id")
+        //    .IsRequired()
+        //    .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

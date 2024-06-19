@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Models;
 /// <summary>
 ///     凭据模型
 /// </summary>
-public class Claim : ModelBase, IClaim, ICheckStamp
+public class Claim : KeySlot<int>, IClaim, ICheckStamp
 {
     /// <summary>
     ///     凭据类型

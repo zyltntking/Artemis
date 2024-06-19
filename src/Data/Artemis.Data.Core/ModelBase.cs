@@ -8,16 +8,7 @@ namespace Artemis.Data.Core;
 /// <summary>
 ///     基本并发分区模型
 /// </summary>
-public abstract class ConcurrencyPartition : ConcurrencyPartition<Guid>, IConcurrencyPartition;
-
-/// <summary>
-///     基本并发分区模型
-/// </summary>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyPartition<THandler> :
-    ConcurrencyPartition<Guid, THandler>,
-    IConcurrencyPartition<THandler>
-    where THandler : IEquatable<THandler>
+public abstract class ConcurrencyPartition : ConcurrencyPartition<Guid>, IConcurrencyPartition
 {
     /// <summary>
     ///     存储标识
@@ -25,6 +16,17 @@ public abstract class ConcurrencyPartition<THandler> :
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public override Guid Id { get; set; } = Guid.NewGuid();
+}
+
+/// <summary>
+///     基本并发分区模型
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public abstract class ConcurrencyPartition<TKey> :
+    ConcurrencyPartition<TKey, Guid>,
+    IConcurrencyPartition<TKey>
+    where TKey : IEquatable<TKey>
+{
 }
 
 /// <summary>
@@ -41,6 +43,7 @@ public abstract class ConcurrencyPartition<TKey, THandler> :
     /// <summary>
     ///     并发锁
     /// </summary>
+    [MaxLength(64)]
     public override string? ConcurrencyStamp { get; set; } = Guid.NewGuid().IdToString();
 }
 
@@ -79,15 +82,7 @@ public abstract class ConcurrencyPartition<TKey, THandler, TConcurrencyStamp, TP
 /// <summary>
 ///     基本分区模型
 /// </summary>
-public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase;
-
-/// <summary>
-///     基本分区模型
-/// </summary>
-/// <typeparam name="THandler"></typeparam>
-public abstract class PartitionBase<THandler> :
-    PartitionBase<Guid, THandler>, IPartitionBase<THandler>
-    where THandler : IEquatable<THandler>
+public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase
 {
     /// <summary>
     ///     存储标识
@@ -95,6 +90,16 @@ public abstract class PartitionBase<THandler> :
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public sealed override Guid Id { get; set; } = Guid.NewGuid();
+}
+
+/// <summary>
+///     基本分区模型
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public abstract class PartitionBase<TKey> :
+    PartitionBase<TKey, Guid>, IPartitionBase<TKey>
+    where TKey : IEquatable<TKey>
+{
 }
 
 /// <summary>
@@ -135,16 +140,7 @@ public abstract class PartitionBase<TKey, THandler, TPartition> :
 /// <summary>
 ///     并发模型
 /// </summary>
-public abstract class ConcurrencyModel : ConcurrencyModel<Guid>, IConcurrencyModel;
-
-/// <summary>
-///     并发模型
-/// </summary>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyModel<THandler> :
-    ConcurrencyModel<Guid, THandler>,
-    IConcurrencyModel<THandler>
-    where THandler : IEquatable<THandler>
+public abstract class ConcurrencyModel : ConcurrencyModel<Guid>, IConcurrencyModel
 {
     /// <summary>
     ///     存储标识
@@ -152,6 +148,17 @@ public abstract class ConcurrencyModel<THandler> :
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public sealed override Guid Id { get; set; } = Guid.NewGuid();
+}
+
+/// <summary>
+///     并发模型
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public abstract class ConcurrencyModel<TKey> :
+    ConcurrencyModel<TKey, Guid>,
+    IConcurrencyModel<TKey>
+    where TKey : IEquatable<TKey>
+{
 }
 
 /// <summary>
@@ -168,6 +175,7 @@ public abstract class ConcurrencyModel<TKey, THandler> :
     /// <summary>
     ///     并发锁
     /// </summary>
+    [MaxLength(64)]
     public sealed override string? ConcurrencyStamp { get; set; } = Guid.NewGuid().IdToString();
 }
 
@@ -192,14 +200,7 @@ public abstract class ConcurrencyModel<TKey, THandler, TConcurrencyStamp> :
 /// <summary>
 ///     基本模型
 /// </summary>
-public abstract class ModelBase : ModelBase<Guid>, IModelBase;
-
-/// <summary>
-///     基本模型
-/// </summary>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ModelBase<THandler> : ModelBase<Guid, THandler>, IModelBase<THandler>
-    where THandler : IEquatable<THandler>
+public abstract class ModelBase : ModelBase<Guid>, IModelBase
 {
     /// <summary>
     ///     存储标识
@@ -207,6 +208,15 @@ public abstract class ModelBase<THandler> : ModelBase<Guid, THandler>, IModelBas
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public sealed override Guid Id { get; set; } = Guid.NewGuid();
+}
+
+/// <summary>
+///     基本模型
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public abstract class ModelBase<TKey> : ModelBase<TKey, Guid>, IModelBase<TKey>
+    where TKey : IEquatable<TKey>
+{
 }
 
 /// <summary>

@@ -8,15 +8,8 @@ namespace Artemis.Service.Identity.Models;
 /// <summary>
 ///     角色模型
 /// </summary>
-public class Role : ModelBase, IRole, IConcurrencyStamp
+public class Role : ConcurrencyModel, IRole
 {
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    [MaxLength(64)]
-    [Comment("并发锁")]
-    public string? ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
-
     /// <summary>
     ///     角色名
     /// </summary>

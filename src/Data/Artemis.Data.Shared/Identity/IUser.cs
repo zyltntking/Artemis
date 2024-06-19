@@ -36,11 +36,6 @@ public interface IUser : IUserInfo
     string? SecurityStamp { get; set; }
 
     /// <summary>
-    ///     并发锁
-    /// </summary>
-    string? ConcurrencyStamp { get; set; }
-
-    /// <summary>
     ///     是否启用双因子认证
     /// </summary>
     bool TwoFactorEnabled { get; set; }
