@@ -1,10 +1,10 @@
-﻿using Artemis.Data.Shared.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Artemis.Data.Shared.Identity;
 
 namespace Artemis.Service.Identity.Models;
 
 /// <summary>
-/// 用户令牌模型
+///     用户令牌模型
 /// </summary>
 public class UserToken : IUserToken
 {

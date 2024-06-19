@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Identity.Context;
 
 /// <summary>
-/// 认证数据集上下文
+///     认证数据集上下文
 /// </summary>
 public class IdentityContext : DbContext
 {
     /// <summary>
-    /// 构造函数
+    ///     构造函数
     /// </summary>
     /// <param name="options">配置</param>
     public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
@@ -17,49 +17,49 @@ public class IdentityContext : DbContext
     }
 
     /// <summary>
-    /// 凭据数据集
+    ///     凭据数据集
     /// </summary>
     public virtual DbSet<IdentityClaim> Claims { get; set; } = default!;
 
     /// <summary>
-    /// 用户数据集
+    ///     用户数据集
     /// </summary>
     public virtual DbSet<IdentityUser> Users { get; set; } = default!;
 
     /// <summary>
-    /// 用户凭据数据集
+    ///     用户凭据数据集
     /// </summary>
     public virtual DbSet<IdentityUserClaim> UserClaims { get; set; } = default!;
 
     /// <summary>
-    /// 用户登录数据集
+    ///     用户登录数据集
     /// </summary>
     public virtual DbSet<IdentityUserLogin> UserLogins { get; set; } = default!;
 
     /// <summary>
-    /// 用户令牌数据集
+    ///     用户令牌数据集
     /// </summary>
     public virtual DbSet<IdentityUserToken> UserTokens { get; set; } = default!;
 
     /// <summary>
-    /// 用户角色关系映射数据集
+    ///     用户角色关系映射数据集
     /// </summary>
     public virtual DbSet<IdentityUserRole> UserRoles { get; set; } = default!;
 
     /// <summary>
-    /// 角色数据集
+    ///     角色数据集
     /// </summary>
     public virtual DbSet<IdentityRole> Roles { get; set; } = default!;
 
     /// <summary>
-    /// 角色凭据数据集
+    ///     角色凭据数据集
     /// </summary>
     public virtual DbSet<IdentityRoleClaim> RoleClaims { get; set; } = default!;
 
     #region Overrides of DbContext
 
     /// <summary>
-    /// 配置数据模型
+    ///     配置数据模型
     /// </summary>
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -95,5 +95,4 @@ public class IdentityContext : DbContext
     }
 
     #endregion
-
 }

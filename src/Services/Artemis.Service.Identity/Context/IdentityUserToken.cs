@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Identity.Context;
 
 /// <summary>
-/// 认证用户令牌实体
+///     认证用户令牌实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityUserTokenConfiguration))]
 public sealed class IdentityUserToken : UserToken

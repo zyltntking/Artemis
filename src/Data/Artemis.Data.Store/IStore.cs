@@ -15,10 +15,10 @@ public interface IStore<TEntity> : IStore<TEntity, Guid>,
 ///     存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public interface IStore<TEntity, THandler> : IStore<TEntity, Guid, THandler>
-    where TEntity : class, IKeySlot<Guid>
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IStore<TEntity, TKey> : IStore<TEntity, TKey, Guid>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     存储接口

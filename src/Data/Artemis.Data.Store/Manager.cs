@@ -18,10 +18,10 @@ public interface IManager<TEntity> : IManager<TEntity, Guid> where TEntity : cla
 ///     提供用于管理具键存储模型TEntity的存储器的API接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public interface IManager<TEntity, THandler> : IManager<TEntity, Guid, THandler>
-    where TEntity : class, IKeySlot
-    where THandler : IEquatable<THandler>;
+/// <typeparam name="TKey"></typeparam>
+public interface IManager<TEntity, in TKey> : IManager<TEntity, TKey, Guid>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>;
 
 /// <summary>
 ///     提供用于管理具键存储模型TEntity的存储器的API接口
@@ -113,10 +113,6 @@ public interface IManager<TEntity, in TKey, THandler> : IKeyLessManager<TEntity,
 /// <typeparam name="TEntity"></typeparam>
 public interface IKeyLessManager<TEntity> : IKeyLessManager<TEntity, Guid> where TEntity : class
 {
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    new IKeyLessStore<TEntity> EntityStore { get; }
 }
 
 /// <summary>
@@ -128,11 +124,6 @@ public interface IKeyLessManager<TEntity, THandler> : IDisposable
     where TEntity : class
     where THandler : IEquatable<THandler>
 {
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    IKeyLessStore<TEntity, THandler> EntityStore { get; }
-
     /// <summary>
     ///     注册操作员
     /// </summary>
@@ -169,7 +160,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
     /// <summary>
     ///     实体存储
     /// </summary>
-    public new IStore<TEntity> EntityStore { get; }
+    protected new IStore<TEntity> EntityStore { get; }
 
     #endregion
 }
@@ -178,12 +169,12 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
 ///     提供用于管理具键存储模型TEntity的存储器的API
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class Manager<TEntity, THandler> :
-    Manager<TEntity, Guid, THandler>,
-    IManager<TEntity, THandler>
-    where TEntity : class, IKeySlot
-    where THandler : IEquatable<THandler>
+/// <typeparam name="TKey"></typeparam>
+public abstract class Manager<TEntity, TKey> :
+    Manager<TEntity, TKey, Guid>,
+    IManager<TEntity, TKey>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -193,7 +184,7 @@ public abstract class Manager<TEntity, THandler> :
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
     protected Manager(
-        IStore<TEntity, THandler> store,
+        IStore<TEntity, TKey> store,
         IManagerOptions? options = null,
         ILogger? logger = null) : base(store, options, logger)
     {
@@ -206,7 +197,7 @@ public abstract class Manager<TEntity, THandler> :
     /// <summary>
     ///     实体存储
     /// </summary>
-    public new IStore<TEntity, THandler> EntityStore { get; }
+    protected new IStore<TEntity, TKey> EntityStore { get; }
 
     #endregion
 }
@@ -245,10 +236,9 @@ public abstract class Manager<TEntity, TKey, THandler> :
     /// <summary>
     ///     实体存储
     /// </summary>
-    public new IStore<TEntity, TKey, THandler> EntityStore { get; }
+    protected new IStore<TEntity, TKey, THandler> EntityStore { get; }
 
     #endregion
-
 
     #region Implementation of IKeyWithManager<TEntity,TKey>
 
@@ -436,7 +426,7 @@ public abstract class KeyLessManager<TEntity> : KeyLessManager<TEntity, Guid>, I
     /// <summary>
     ///     实体存储
     /// </summary>
-    public new IKeyLessStore<TEntity> EntityStore { get; }
+    protected new IKeyLessStore<TEntity> EntityStore { get; }
 
     #endregion
 }
@@ -509,7 +499,7 @@ public abstract class KeyLessManager<TEntity, THandler> : IKeyLessManager<TEntit
     /// <summary>
     ///     实体存储
     /// </summary>
-    public IKeyLessStore<TEntity, THandler> EntityStore { get; }
+    protected IKeyLessStore<TEntity, THandler> EntityStore { get; }
 
     /// <summary>
     ///     注册操作员
@@ -545,6 +535,7 @@ public abstract class KeyLessManager<TEntity, THandler> : IKeyLessManager<TEntit
     {
         if (!disposing || _disposed)
             return;
+        EntityStore.Dispose();
         StoreDispose();
         _disposed = true;
     }

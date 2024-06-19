@@ -1,1 +1,0 @@
-﻿# Artemis.Protos.Identity

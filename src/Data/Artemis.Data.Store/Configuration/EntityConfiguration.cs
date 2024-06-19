@@ -1002,7 +1002,7 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
 /// <typeparam name="THandler"></typeparam>
 /// <typeparam name="TConcurrencyStamp"></typeparam>
 /// <typeparam name="TPartition"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> : 
+public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
     IEntityTypeConfiguration<TEntity>
     where TEntity : class
     where TKey : IEquatable<TKey>
@@ -1061,7 +1061,10 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// </summary>
     /// <param name="properties">字段名称</param>
     /// <returns></returns>
-    protected string IndexName(params string[] properties) => TableName.IndexName(properties);
+    protected string IndexName(params string[] properties)
+    {
+        return TableName.IndexName(properties);
+    }
 
     /// <summary>
     ///     生成外键名称
@@ -1069,7 +1072,10 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="subTableName"></param>
     /// <param name="mainTableName"></param>
     /// <returns></returns>
-    protected string ForeignKeyName(string subTableName, string mainTableName) => subTableName.ForeignKeyName(mainTableName);
+    protected string ForeignKeyName(string subTableName, string mainTableName)
+    {
+        return subTableName.ForeignKeyName(mainTableName);
+    }
 
     /// <summary>
     ///     表配置
@@ -1120,13 +1126,17 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     ///     实体字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected virtual void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder){}
+    protected virtual void EntityFieldConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 
     /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>
-    protected virtual void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder){}
+    protected virtual void EntityRelationConfigure(EntityTypeBuilder<TEntity> builder)
+    {
+    }
 
     #region SlotConfig
 

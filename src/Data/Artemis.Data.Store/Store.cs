@@ -30,30 +30,6 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
         describer)
     {
     }
-}
-
-/// <summary>
-///     存储实现
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class Store<TEntity, THandler> : Store<TEntity, Guid, THandler>, IStore<TEntity, THandler>
-    where TEntity : class, IKeySlot<Guid>
-    where THandler : IEquatable<THandler>
-{
-    /// <summary>
-    ///     基本存储实例构造
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="storeOptions"></param>
-    /// <param name="cache"></param>
-    /// <param name="logger"></param>
-    /// <param name="describer"></param>
-    protected Store(DbContext context, IStoreOptions? storeOptions = null, IDistributedCache? cache = null,
-        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger,
-        describer)
-    {
-    }
 
     #region Access
 
@@ -87,6 +63,30 @@ public abstract class Store<TEntity, THandler> : Store<TEntity, Guid, THandler>,
     }
 
     #endregion
+}
+
+/// <summary>
+///     存储实现
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+public abstract class Store<TEntity, TKey> : Store<TEntity, TKey, Guid>, IStore<TEntity, TKey>
+    where TEntity : class, IKeySlot<TKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     基本存储实例构造
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="storeOptions"></param>
+    /// <param name="cache"></param>
+    /// <param name="logger"></param>
+    /// <param name="describer"></param>
+    protected Store(DbContext context, IStoreOptions? storeOptions = null, IDistributedCache? cache = null,
+        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger,
+        describer)
+    {
+    }
 }
 
 /// <summary>

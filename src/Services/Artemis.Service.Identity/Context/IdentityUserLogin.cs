@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Identity.Context;
 
 /// <summary>
-/// 认证用户登录实体
+///     认证用户登录实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityUserLoginConfiguration))]
 public sealed class IdentityUserLogin : UserLogin
