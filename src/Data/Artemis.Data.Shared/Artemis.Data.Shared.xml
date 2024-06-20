@@ -100,11 +100,6 @@
 				密码锁
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Shared.Identity.IUser.ConcurrencyStamp">
-			<summary>
-				并发锁
-			</summary>
-		</member>
 		<member name="P:Artemis.Data.Shared.Identity.IUser.TwoFactorEnabled">
 			<summary>
 				是否启用双因子认证

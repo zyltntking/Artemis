@@ -4448,6 +4448,122 @@
 			<param name="key"></param>
 			<returns></returns>
 		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyPartition">
+			<summary>
+				基本并发模型接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyPartition`1">
+			<summary>
+				基本并发分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyPartition`2">
+			<summary>
+				基本并发分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyPartition`3">
+			<summary>
+				基本并发分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyPartition`4">
+			<summary>
+				基本并发分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+			<typeparam name="TPartition"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase">
+			<summary>
+				基本分区模型
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase`1">
+			<summary>
+				基本分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase`2">
+			<summary>
+				基本分区模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IPartitionBase`3">
+			<summary>
+				基本分区模型接口
+			</summary>
+			<typeparam name="TKey">基本记录标识</typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TPartition"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyModel">
+			<summary>
+				基本并发模型接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyModel`1">
+			<summary>
+				基本并发模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyModel`2">
+			<summary>
+				基本并发模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IConcurrencyModel`3">
+			<summary>
+				基本并发模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IModelBase">
+			<summary>
+				基本模型接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IModelBase`1">
+			<summary>
+				基本模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IModelBase`2">
+			<summary>
+				基本模型接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.IMateModelBase">
+			<summary>
+				基本模型接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IMateModelBase`1">
+			<summary>
+				基本模型接口
+			</summary>
+			<typeparam name="TKey">基本记录标识</typeparam>
+		</member>
 		<member name="T:Artemis.Data.Core.IKeySlot">
 			<summary>
 				标识组件接口
@@ -4556,6 +4672,192 @@
 				分区标识
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyPartition">
+			<summary>
+				基本并发分区模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyPartition.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyPartition`1">
+			<summary>
+				基本并发分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyPartition`2">
+			<summary>
+				基本并发分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyPartition`2.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyPartition`3">
+			<summary>
+				基本并发分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyPartition`4">
+			<summary>
+				基本并发分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+			<typeparam name="TPartition"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyPartition`4.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase">
+			<summary>
+				基本分区模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.PartitionBase.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase`1">
+			<summary>
+				基本分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase`2">
+			<summary>
+				基本分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.PartitionBase`3">
+			<summary>
+				基本分区模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TPartition"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.PartitionBase`3.Partition">
+			<summary>
+				分区标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyModel">
+			<summary>
+				并发模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyModel.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyModel`1">
+			<summary>
+				并发模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyModel`2">
+			<summary>
+				并发模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyModel`2.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ConcurrencyModel`3">
+			<summary>
+				并发模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+			<typeparam name="TConcurrencyStamp"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ConcurrencyModel`3.ConcurrencyStamp">
+			<summary>
+				并发锁
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ModelBase">
+			<summary>
+				基本模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ModelBase`1">
+			<summary>
+				基本模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="T:Artemis.Data.Core.ModelBase`2">
+			<summary>
+				基本模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<typeparam name="THandler"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase`2.CreateBy">
+			<summary>
+				创建人
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase`2.ModifyBy">
+			<summary>
+				更新人
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ModelBase`2.RemoveBy">
+			<summary>
+				移除人
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.MateModelBase">
+			<summary>
+				基本模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateModelBase.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.MateModelBase`1">
+			<summary>
+				基本模型
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.MateModelBase`1.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Core.KeySlot">
 			<summary>
 				标识组件
@@ -4575,6 +4877,26 @@
 		<member name="P:Artemis.Data.Core.KeySlot`1.Id">
 			<summary>
 				存储标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.MateSlot">
+			<summary>
+				元数据组件
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.CreatedAt">
+			<summary>
+				创建时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.UpdatedAt">
+			<summary>
+				更新时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.MateSlot.DeletedAt">
+			<summary>
+				删除时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Core.Normalize">

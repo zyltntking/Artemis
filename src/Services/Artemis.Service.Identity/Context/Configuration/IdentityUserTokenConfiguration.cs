@@ -19,7 +19,7 @@ public class IdentityUserTokenConfiguration : BaseEntityConfiguration<IdentityUs
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(IdentityUserLogin);
+    protected override string TableName => nameof(IdentityUserToken);
 
     /// <summary>
     ///     实体关系配置

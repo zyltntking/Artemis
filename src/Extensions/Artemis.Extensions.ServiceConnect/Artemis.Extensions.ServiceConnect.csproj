@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+		<FileVersion>1.0.3</FileVersion>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<!--<VersionSuffix>bate1</VersionSuffix>-->
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IsAspireSharedProject>true</IsAspireSharedProject>
+		<Authors>zyltntking</Authors>
+		<Company>Artemis</Company>
+		<Product>Artemis.Net</Product>
+		<Description>Artemis.NET App Build Tools</Description>
+		<Copyright>Copyright © zyltntking 2013</Copyright>
+		<Summary>Artemis.NET App Build Tools</Summary>
+		<Title>Artemis.NET</Title>
+		<PackageId>Artemis.Extensions.ServiceConnect</PackageId>
+		<PackageTags>extensions</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/zyltntking/Artemis</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/zyltntking/Artemis</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RootNamespace>Artemis.Extensions.ServiceConnect</RootNamespace>
+		<AssemblyName>Artemis.Extensions.ServiceConnect</AssemblyName>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Artemis.Extensions.ServiceConnect.xml</DocumentationFile>
+		<CopyDocumentationFilesFromPackages>True</CopyDocumentationFilesFromPackages>
+		<Nullable>enable</Nullable>
+		<MinClientVersion>4.1.0</MinClientVersion>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.1" />
+		<PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.1" />
+		<PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="8.0.1" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.6" />
+
+		<PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.6.0" />
+		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.1" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.9.0-beta.1" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+	</ItemGroup>
+
+</Project>
