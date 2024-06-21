@@ -1,6 +1,7 @@
 ﻿using System.IO.Compression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -42,6 +43,9 @@ public static class CommonExtensions
             options.Level = CompressionLevel.Fastest;
         });
 
+        builder.Services.AddAuthentication();
+        builder.Services.AddAuthorization();
+
         return builder;
     }
 
@@ -55,6 +59,7 @@ public static class CommonExtensions
         if (app.Environment.IsDevelopment())
         {
             app.UseMigrationsEndPoint();
+            app.UseDeveloperExceptionPage();
         }
         else
         {
@@ -66,10 +71,37 @@ public static class CommonExtensions
 
         app.UseRouting();
 
-        //app.UseAuthentication();
-        //app.UseAuthorization();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseResponseCompression();
+
+        return app;
+    }
+
+    /// <summary>
+    ///     映射迁移端点
+    /// </summary>
+    /// <typeparam name="TDbContext"></typeparam>
+    /// <param name="app"></param>
+    /// <param name="pattern"></param>
+    /// <returns></returns>
+    public static WebApplication MapMigrationEndpoint<TDbContext>(this WebApplication app, string pattern = "/migrate")
+        where TDbContext : DbContext
+    {
+        app.MapGet(pattern, (TDbContext context) =>
+        {
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch
+            {
+                return "Failed!";
+            }
+
+            return "Success!";
+        });
 
         return app;
     }

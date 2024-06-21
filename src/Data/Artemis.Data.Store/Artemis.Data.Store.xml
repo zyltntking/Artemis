@@ -915,8 +915,8 @@
 				添加setter内容
 			</summary>
 			<typeparam name="TEntity"></typeparam>
-			<param name="lhr"></param>
-			<param name="rhr"></param>
+			<param name="lhs"></param>
+			<param name="rhs"></param>
 			<returns></returns>
 		</member>
 		<member name="T:Artemis.Data.Store.Extensions.Instance">

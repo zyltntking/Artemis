@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -122,8 +123,30 @@ public static class AspireExtensions
             {
                 Predicate = r => r.Tags.Contains("live")
             });
+
+            // Health checks detail information
+            app.MapHealthChecks("/health-detail", new HealthCheckOptions
+            {
+                ResponseWriter = WriteResponse
+            });
         }
 
         return app;
+    }
+
+    private static Task WriteResponse(HttpContext context, HealthReport healthReport)
+    {
+        context.Response.ContentType = "application/json";
+
+        var result = new
+        {
+            status = healthReport.Status.ToString(),
+            errors = healthReport.Entries.Select(e => new
+            {
+                key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status)
+            })
+        };
+
+        return context.Response.WriteAsJsonAsync(result);
     }
 }

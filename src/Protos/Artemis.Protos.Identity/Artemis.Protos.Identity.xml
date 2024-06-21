@@ -275,7 +275,7 @@
 		</member>
 		<member name="T:Artemis.Protos.Identity.Account">
 			<summary>
-				账户服务协议定义
+				账户服务协议
 			</summary>
 		</member>
 		<member name="P:Artemis.Protos.Identity.Account.Descriptor">
@@ -1436,7 +1436,7 @@
 		</member>
 		<member name="T:Artemis.Protos.Identity.User">
 			<summary>
-				用户服务协议定义
+				用户服务协议
 			</summary>
 		</member>
 		<member name="P:Artemis.Protos.Identity.User.Descriptor">

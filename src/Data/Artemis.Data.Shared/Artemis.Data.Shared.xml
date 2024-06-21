@@ -215,5 +215,25 @@
 				令牌值
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Shared.Transfer.UserInfo">
+			<summary>
+				用户信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.UserInfo.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.UserInfo.Email">
+			<summary>
+				电子邮件
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.UserInfo.PhoneNumber">
+			<summary>
+				电话号码
+			</summary>
+		</member>
 	</members>
 </doc>

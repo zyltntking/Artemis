@@ -82,26 +82,60 @@
 			<param name="connectionName">连接名</param>
 			<returns></returns>
 		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddMongoDbComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加MongoDB组件
+			</summary>
+			<param name="builder"></param>
+			<param name="connectionName"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddRabbitMqComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加RabbitMQ组件
+			</summary>
+			<param name="builder"></param>
+			<param name="connectionName"></param>
+			<returns></returns>
+		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.GrpcExtensions">
 			<summary>
 				Grpc扩展
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.GrpcSwaggerConfig)">
 			<summary>
 				配置Grpc
 			</summary>
 			<param name="builder"></param>
+			<param name="config"></param>
 			<returns></returns>
 		</member>
 		<member
-			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.UseGrpc(Microsoft.AspNetCore.Builder.WebApplication)">
+			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.UseGrpcModify(Microsoft.AspNetCore.Builder.WebApplication)">
 			<summary>
-				使用Grpc
+				使用Grpc修饰
 			</summary>
 			<param name="app"></param>
 			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.GrpcSwaggerConfig">
+			<summary>
+				Grpc Swagger配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.GrpcSwaggerConfig.AppName">
+			<summary>
+				应用名
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.GrpcSwaggerConfig.XmlDocs">
+			<summary>
+				xml文档
+			</summary>
 		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException">
 			<summary>
@@ -237,6 +271,33 @@
 			<typeparam name="TResult"></typeparam>
 			<param name="exception"></param>
 			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultResponse">
+			<summary>
+				移除默认响应
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				实现
+			</summary>
+			<param name="operation"></param>
+			<param name="context"></param>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultSchemas">
+			<summary>
+				移除默认生成的模式
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				执行
+			</summary>
+			<param name="swaggerDoc"></param>
+			<param name="context"></param>
+			<exception cref="T:System.NotImplementedException"></exception>
 		</member>
 	</members>
 </doc>

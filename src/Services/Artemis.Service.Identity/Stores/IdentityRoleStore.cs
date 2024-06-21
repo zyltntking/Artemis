@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -30,7 +29,7 @@ public class IdentityRoleStore : Store<IdentityRole, Guid, Guid>, IIdentityRoleS
     /// <param name="logger"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public IdentityRoleStore(
-        DbContext context,
+        IdentityContext context,
         IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
         ILogger? logger = null) : base(context, storeOptions, cache, logger)

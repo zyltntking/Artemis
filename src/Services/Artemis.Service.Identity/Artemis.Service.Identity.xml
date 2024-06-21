@@ -348,6 +348,20 @@
 				认证用户管理接口
 			</summary>
 		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.FetchUserAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户信息搜索用户
+			</summary>
+			<param name="nameSearch">用户名搜索值</param>
+			<param name="emailSearch">邮箱搜索值</param>
+			<param name="phoneNumberSearch">电话号码搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
 		<member name="T:Artemis.Service.Identity.Managers.IdentityUserManager">
 			<summary>
 				认证用户管理
@@ -402,6 +416,20 @@
 			<summary>
 				用户令牌存储访问器
 			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityUserManager.FetchUserAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户信息搜索用户
+			</summary>
+			<param name="nameSearch">用户名搜索值</param>
+			<param name="emailSearch">邮箱搜索值</param>
+			<param name="phoneNumberSearch">电话号码搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
 		</member>
 		<member name="T:Artemis.Service.Identity.Models.Claim">
 			<summary>
@@ -603,10 +631,42 @@
 				令牌值
 			</summary>
 		</member>
+		<member name="T:Artemis.Service.Identity.Services.AccountService">
+			<summary>
+				账户服务
+			</summary>
+		</member>
 		<member name="T:Artemis.Service.Identity.Services.UserService">
 			<summary>
 				用户服务
 			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Services.UserService.UserManager">
+			<summary>
+				用户管理器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Services.UserService.Logger">
+			<summary>
+				日志
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Services.UserService.#ctor(Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Identity.Services.UserService})">
+			<summary>
+				用户管理器
+			</summary>
+			<param name="userManager"></param>
+			<param name="logger"></param>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Services.UserService.FetchUserInfo(Artemis.Protos.Identity.UserInfoSearchPackage,Grpc.Core.ServerCallContext)">
+			<summary>
+				获取用户信息
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
 		</member>
 		<member name="T:Artemis.Service.Identity.Stores.IIdentityClaimStore">
 			<summary>
@@ -619,7 +679,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityClaimStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityClaimStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				基本存储实例构造
 			</summary>
@@ -640,7 +700,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityRoleClaimStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityRoleClaimStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				基本存储实例构造
 			</summary>
@@ -661,7 +721,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityRoleStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityRoleStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				基本存储实例构造
 			</summary>
@@ -682,7 +742,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityUserClaimStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityUserClaimStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				基本存储实例构造
 			</summary>
@@ -703,7 +763,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityUserLoginStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityUserLoginStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				无键模型基本存储实例构造
 			</summary>
@@ -729,7 +789,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityUserRoleStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityUserRoleStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				无键模型基本存储实例构造
 			</summary>
@@ -750,7 +810,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityUserStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityUserStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				基本存储实例构造
 			</summary>
@@ -758,7 +818,6 @@
 			<param name="storeOptions"></param>
 			<param name="cache"></param>
 			<param name="logger"></param>
-			<param name="describer"></param>
 		</member>
 		<member name="T:Artemis.Service.Identity.Stores.IIdentityUserTokenStore">
 			<summary>
@@ -771,7 +830,7 @@
 			</summary>
 		</member>
 		<member
-			name="M:Artemis.Service.Identity.Stores.IdentityUserTokenStore.#ctor(Microsoft.EntityFrameworkCore.DbContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
+			name="M:Artemis.Service.Identity.Stores.IdentityUserTokenStore.#ctor(Artemis.Service.Identity.Context.IdentityContext,Artemis.Data.Store.IStoreOptions,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger)">
 			<summary>
 				无键模型基本存储实例构造
 			</summary>

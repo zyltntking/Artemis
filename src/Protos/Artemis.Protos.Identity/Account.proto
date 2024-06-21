@@ -8,7 +8,7 @@ import "common.proto";
 
 package artemis.protos.identity;
 
-// 账户服务协议定义
+// 账户服务协议
 service Account {
   // 签到
   rpc SignIn (SignInRequest) returns (TokenResponse){

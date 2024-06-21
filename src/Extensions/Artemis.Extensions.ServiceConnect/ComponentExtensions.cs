@@ -15,10 +15,35 @@ public static class ComponentExtensions
     /// <returns></returns>
     public static IHostApplicationBuilder AddRedisComponent(this IHostApplicationBuilder builder, string connectionName)
     {
-        builder.AddRedisClient("RedisInstance");
-        builder.AddRedisOutputCache("RedisInstance");
-        builder.AddRedisDistributedCache("RedisInstance");
+        builder.AddRedisClient(connectionName);
+        builder.AddRedisOutputCache(connectionName);
+        builder.AddRedisDistributedCache(connectionName);
+        return builder;
+    }
 
+    /// <summary>
+    ///     添加MongoDB组件
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="connectionName"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder AddMongoDbComponent(this IHostApplicationBuilder builder,
+        string connectionName)
+    {
+        builder.AddMongoDBClient(connectionName);
+        return builder;
+    }
+
+    /// <summary>
+    ///     添加RabbitMQ组件
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="connectionName"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder AddRabbitMqComponent(this IHostApplicationBuilder builder,
+        string connectionName)
+    {
+        builder.AddRabbitMQClient(connectionName);
         return builder;
     }
 }

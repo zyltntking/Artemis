@@ -12,8 +12,8 @@ public static class ExpressionExtensions
     ///     添加setter内容
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    /// <param name="lhr"></param>
-    /// <param name="rhr"></param>
+    /// <param name="lhs"></param>
+    /// <param name="rhs"></param>
     /// <returns></returns>
     public static Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> AppendSetProperty<TEntity>(
         this Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> lhs,

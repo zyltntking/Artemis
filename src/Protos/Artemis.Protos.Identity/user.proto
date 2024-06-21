@@ -7,7 +7,7 @@ import "common.proto";
 
 package artemis.protos.identity;
 
-// 用户服务协议定义
+// 用户服务协议
 service User {
   // 获取用户信息
   rpc FetchUserInfo (UserInfoSearchPackage) returns (UserInfoSearchResponse) {

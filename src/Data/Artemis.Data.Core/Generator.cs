@@ -29,7 +29,6 @@ public static class Generator
     ///     判断是否继承
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    /// <typeparam name="TInterface">接口类型</typeparam>
     /// <returns></returns>
     public static bool IsInherit<TEntity>(Type type) where TEntity : class
     {

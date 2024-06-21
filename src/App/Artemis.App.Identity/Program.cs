@@ -1,14 +1,22 @@
 using Artemis.Extensions.ServiceConnect;
-using Artemis.Extensions.ServiceConnect.Interceptors;
 using Artemis.Service.Identity.Context;
+using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Services;
+using Artemis.Service.Identity.Stores;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Artemis.App.Identity;
 
+/// <summary>
+///     应用程序入口
+/// </summary>
 public class Program
 {
+    /// <summary>
+    ///     主函数
+    /// </summary>
+    /// <param name="args"></param>
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +26,8 @@ public class Program
 
         // Add services to the container.
         builder.AddRedisComponent("RedisInstance");
+        builder.AddMongoDbComponent("MongoInstance");
+        builder.AddRabbitMqComponent("RabbitMqInstance");
 
         builder.AddNpgsqlDbContext<IdentityContext>("ArtemisDb", configureDbContextOptions: config =>
         {
@@ -32,52 +42,45 @@ public class Program
                 .LogTo(Console.WriteLine, LogLevel.Information);
         });
 
-        //builder.Services.AddAuthorization();
+        if (builder.Environment.IsDevelopment()) builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddGrpc(options =>
+        builder.Services.TryAddScoped<IIdentityClaimStore, IdentityClaimStore>();
+        builder.Services.TryAddScoped<IIdentityUserStore, IdentityUserStore>();
+        builder.Services.TryAddScoped<IIdentityRoleStore, IdentityRoleStore>();
+        builder.Services.TryAddScoped<IIdentityRoleClaimStore, IdentityRoleClaimStore>();
+        builder.Services.TryAddScoped<IIdentityUserRoleStore, IdentityUserRoleStore>();
+        builder.Services.TryAddScoped<IIdentityUserClaimStore, IdentityUserClaimStore>();
+        builder.Services.TryAddScoped<IIdentityUserLoginStore, IdentityUserLoginStore>();
+        builder.Services.TryAddScoped<IIdentityUserTokenStore, IdentityUserTokenStore>();
+
+        builder.Services.TryAddScoped<IIdentityUserManager, IdentityUserManager>();
+
+        builder.ConfigureGrpc(new GrpcSwaggerConfig
         {
-            options.EnableDetailedErrors = true;
-            options.Interceptors.Add<MessageValidator>();
-            options.Interceptors.Add<FriendlyException>();
-        }).AddJsonTranscoding();
-        builder.Services.AddGrpcReflection();
-        builder.Services.AddGrpcSwagger();
-        builder.Services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1",
-                new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
+            AppName = "认证服务",
+            XmlDocs =
+            [
+                Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml"),
+                Path.Combine(AppContext.BaseDirectory, "Artemis.Service.Identity.xml")
+            ]
         });
 
         var app = builder.Build();
 
+        // Configure the HTTP request pipeline.
         app.ConfigureAppCommon();
-
-        // todo 默认端点抽离分析
-        //app.MapDefaultEndpoints();
-
-        app.UseGrpc();
+        // Use Grpc Swagger Document
+        app.UseGrpcModify();
 
         // Configure the HTTP request pipeline.
+        app.MapGrpcService<AccountService>();
         app.MapGrpcService<UserService>();
 
+        // map default endpoints for health check
+        app.MapDefaultEndpoints();
 
-        //app.MapGet("/", (IdentityContext context, IDistributedCache cache) =>
-        //{
-        //    cache.SetString("foo", "bar");
-
-        //    var cc = cache.GetString("foo");
-
-        //    try
-        //    {
-        //        context.Database.Migrate();
-        //    }
-        //    catch
-        //    {
-        //        return "Failed!";
-        //    }
-
-        //    return "Success!";
-        //});
+        // map migration endpoint through "/migrate"
+        app.MapMigrationEndpoint<IdentityContext>();
 
         app.Run();
     }
