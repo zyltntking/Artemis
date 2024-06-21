@@ -6,7 +6,7 @@ namespace Artemis.Extensions.ServiceConnect.SwaggerFilters;
 /// <summary>
 ///     移除默认生成的模式
 /// </summary>
-public class RemoveDefaultSchemas : IDocumentFilter
+public class RemoveDefaultRpcSchemas : IDocumentFilter
 {
     #region Implementation of IDocumentFilter
 

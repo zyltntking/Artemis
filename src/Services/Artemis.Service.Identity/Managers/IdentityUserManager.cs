@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer;
+using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Identity.Context;

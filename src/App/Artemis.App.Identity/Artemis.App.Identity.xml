@@ -1,35 +1,51 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.Identity</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.Identity.Program">
-			<summary>
-				应用程序入口
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Program.Main(System.String[])">
-			<summary>
-				主函数
-			</summary>
-			<param name="args"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Identity.Program">
+            <summary>
+                应用程序入口
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Program.Main(System.String[])">
+            <summary>
+                主函数
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.SignInRequestValidator">
+            <summary>
+                签到请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.SignUpRequestValidator">
+            <summary>
+                签入请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+    </members>
 </doc>

@@ -1,9 +1,9 @@
 ﻿using Artemis.Extensions.ServiceConnect.Interceptors;
 using Artemis.Extensions.ServiceConnect.SwaggerFilters;
+using Artemis.Extensions.ServiceConnect.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace Artemis.Extensions.ServiceConnect;
 
@@ -18,7 +18,7 @@ public static class GrpcExtensions
     /// <param name="builder"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureGrpc(this IHostApplicationBuilder builder, GrpcSwaggerConfig config)
+    public static IHostApplicationBuilder ConfigureGrpc(this IHostApplicationBuilder builder, SwaggerConfig config)
     {
         builder.Services.AddGrpc(options =>
         {
@@ -27,28 +27,10 @@ public static class GrpcExtensions
             options.Interceptors.Add<FriendlyException>();
         }).AddJsonTranscoding();
         builder.Services.AddGrpcReflection();
-        builder.Services.AddGrpcSwagger();
 
-        builder.Services.AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1",
-                new OpenApiInfo
-                {
-                    Title = config.AppName,
-                    Version = "v1"
-                });
+        builder.Services.AddValidators();
 
-            foreach (var xmlDoc in config.XmlDocs)
-                if (Path.Exists(xmlDoc))
-                {
-                    options.IncludeXmlComments(xmlDoc);
-                    options.IncludeGrpcXmlComments(xmlDoc, true);
-                }
-
-            options.OperationFilter<RemoveDefaultResponse>();
-            options.DocumentFilter<RemoveDefaultSchemas>();
-            //options.OperationFilter<AddIdentityToken>();
-        });
+        builder.ConfigureSwagger(config, true);
 
         return builder;
     }
@@ -57,38 +39,12 @@ public static class GrpcExtensions
     ///     使用Grpc修饰
     /// </summary>
     /// <param name="app"></param>
+    /// <param name="config"></param>
     /// <returns></returns>
-    public static WebApplication UseGrpcModify(this WebApplication app)
+    public static WebApplication UseGrpcModify(this WebApplication app, SwaggerConfig config)
     {
-        app.UseSwagger();
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
-            app.UseReDoc(options =>
-            {
-                options.RoutePrefix = "api-docs";
-                options.SpecUrl("/swagger/v1/swagger.json");
-                options.DocumentTitle = "Artemis Identity API";
-            });
-            app.MapGrpcReflectionService();
-        }
+        app.MapSwagger(config, true);
 
         return app;
     }
-}
-
-/// <summary>
-///     Grpc Swagger配置
-/// </summary>
-public record GrpcSwaggerConfig
-{
-    /// <summary>
-    ///     应用名
-    /// </summary>
-    public required string AppName { get; init; }
-
-    /// <summary>
-    ///     xml文档
-    /// </summary>
-    public required string[] XmlDocs { get; init; }
 }
