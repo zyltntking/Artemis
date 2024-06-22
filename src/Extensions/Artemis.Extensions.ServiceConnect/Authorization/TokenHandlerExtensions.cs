@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -19,7 +18,7 @@ public static class TokenHandlerExtensions
     /// <param name="cacheTokenKey">缓存键</param>
     /// <param name="refreshToken">是否刷新缓存</param>
     /// <returns></returns>
-    public static TTokenDocument? FetchTokenFromCache<TTokenDocument>(
+    public static TTokenDocument? FetchTokenDocument<TTokenDocument>(
         this IDistributedCache cache,
         string cacheTokenKey,
         bool refreshToken = true) where TTokenDocument : class
@@ -42,7 +41,7 @@ public static class TokenHandlerExtensions
     /// <param name="cacheKey"></param>
     /// <param name="refreshToken"></param>
     /// <returns></returns>
-    public static string? FetchUserMapTokenFromCache(
+    public static string? FetchUserMapTokenSymbol(
         this IDistributedCache cache,
         string cacheKey,
         bool refreshToken = true)
@@ -67,7 +66,9 @@ public static class TokenHandlerExtensions
     /// <param name="context"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static TTokenDocument? FetchTokenDocumentFromContext<TTokenDocument>(this HttpContext context, string key) where TTokenDocument : class
+    public static TTokenDocument? FetchTokenDocument<TTokenDocument>(
+        this HttpContext context, 
+        string key) where TTokenDocument : class
     {
         if (context.Items.TryGetValue(key, out var document))
             if (document is TTokenDocument tokenDocument)
@@ -82,8 +83,10 @@ public static class TokenHandlerExtensions
     /// <param name="context"></param>
     /// <param name="key"></param>
     /// <param name="document"></param>
-    public static void CacheToken(
-        this HttpContext context, string key, TokenDocument document)
+    public static void CacheTokenDocument<TTokenDocument>(
+        this HttpContext context, 
+        string key,
+        TTokenDocument document) where TTokenDocument : class
     {
         if (context.Items.ContainsKey(key))
             context.Items[key] = document;
@@ -91,16 +94,16 @@ public static class TokenHandlerExtensions
         context.Items.Add(key, document);
     }
 
-    ///// <summary>
-    /////     移除上下文中的Token
-    ///// </summary>
-    ///// <param name="context"></param>
-    //public static void RemoveToken(this HttpContext context)
-    //{
-    //    if (context.Items.ContainsKey(Constants.ContextIdentityItemKey))
-    //        context.Items.Remove(Constants.ContextIdentityItemKey);
-    //}
-
+    /// <summary>
+    ///     移除上下文中的Token
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="key"></param>
+    public static void RemoveTokenDocument(this HttpContext context, string key)
+    {
+        if (context.Items.ContainsKey(key))
+            context.Items.Remove(key);
+    }
 
     /// <summary>
     /// 从请求头中获取Token串
@@ -108,7 +111,7 @@ public static class TokenHandlerExtensions
     /// <param name="context"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static string? FetchTokenFromRequestHeader(this HttpContext context, string key)
+    public static string? FetchTokenSymbol(this HttpContext context, string key)
     {
         var headers = context.Request.Headers;
 
@@ -118,4 +121,28 @@ public static class TokenHandlerExtensions
     }
 
     #endregion
+}
+
+/// <summary>
+/// TokenKey生成器
+/// </summary>
+public static class TokenKeyGenerator
+{
+    /// <summary>
+    /// 缓存Token键
+    /// </summary>
+    /// <param name="prefix">前缀</param>
+    /// <param name="symbol">Token符号</param>
+    /// <returns></returns>
+    public static string CacheTokenKey(string prefix, string symbol) => $"{prefix}:{symbol}";
+
+    /// <summary>
+    /// 缓存用户映射Token键
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <param name="prefix"></param>
+    /// <param name="end"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static string CacheUserMapTokenKey<TKey>(string prefix, string end, TKey id) where TKey:IEquatable<TKey> => $"{prefix}:{end}:{id}";
 }

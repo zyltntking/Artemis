@@ -10,7 +10,7 @@ namespace Artemis.Extensions.ServiceConnect.Interceptors;
 /// <summary>
 ///     消息校验侦听器
 /// </summary>
-public class MessageValidator : Interceptor
+internal sealed class MessageValidator : Interceptor
 {
     /// <summary>
     ///     侦听器构造
@@ -61,7 +61,7 @@ public class MessageValidator : Interceptor
                     if (dictionary.ContainsKey(error.PropertyName))
                         dictionary[error.PropertyName].Add(error.ErrorMessage);
                     else
-                        dictionary.Add(error.PropertyName, new List<string> { error.ErrorMessage });
+                        dictionary.Add(error.PropertyName, [error.ErrorMessage]);
 
                 var response = RpcResultAdapter.ValidateFail<TResponse>(dictionary.Serialize());
 

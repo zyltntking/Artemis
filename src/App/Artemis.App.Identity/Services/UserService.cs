@@ -3,13 +3,14 @@ using Artemis.Protos.Identity;
 using Artemis.Service.Identity.Managers;
 using Grpc.Core;
 using Mapster;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Components;
 
-namespace Artemis.Service.Identity.Services;
+namespace Artemis.App.Identity.Services;
 
 /// <summary>
 ///     用户服务
 /// </summary>
+[Route("api")]
 public class UserService : User.UserBase
 {
     /// <summary>

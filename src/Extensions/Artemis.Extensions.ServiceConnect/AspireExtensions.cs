@@ -1,4 +1,4 @@
-using Artemis.Extensions.ServiceConnect.Maps;
+using Artemis.Extensions.ServiceConnect.MapEndPoints;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;

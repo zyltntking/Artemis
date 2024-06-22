@@ -8,7 +8,7 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 /// 授权中间件结果处理器
 /// </summary>
-public class AuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
+internal class AuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
     #region Implementation of IAuthorizationMiddlewareResultHandler
 

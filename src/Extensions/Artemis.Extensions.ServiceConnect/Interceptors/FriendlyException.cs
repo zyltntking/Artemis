@@ -7,7 +7,7 @@ namespace Artemis.Extensions.ServiceConnect.Interceptors;
 /// <summary>
 ///     友好异常侦听器
 /// </summary>
-public class FriendlyException : Interceptor
+internal sealed class FriendlyException : Interceptor
 {
     /// <summary>
     ///     侦听器构造

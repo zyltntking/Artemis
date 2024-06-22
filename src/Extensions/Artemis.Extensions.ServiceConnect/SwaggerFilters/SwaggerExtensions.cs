@@ -8,7 +8,7 @@ namespace Artemis.Extensions.ServiceConnect.SwaggerFilters;
 /// <summary>
 ///     Swagger扩展
 /// </summary>
-public static class SwaggerExtensions
+internal static class SwaggerExtensions
 {
     /// <summary>
     ///     配置Grpc
@@ -17,7 +17,7 @@ public static class SwaggerExtensions
     /// <param name="config"></param>
     /// <param name="grpcSwagger"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureSwagger(
+    internal static IHostApplicationBuilder ConfigureSwagger(
         this IHostApplicationBuilder builder,
         SwaggerConfig config,
         bool grpcSwagger = false)
@@ -42,7 +42,8 @@ public static class SwaggerExtensions
             {
                 options.OperationFilter<RemoveDefaultRpcResponse>();
                 options.DocumentFilter<RemoveDefaultRpcSchemas>();
-                //options.OperationFilter<AddIdentityToken>();
+                options.OperationFilter<AddAuthorizationToken>();
+                //config.OperationFilter<MarkFieldFeature>();
             }
         });
 
@@ -56,7 +57,7 @@ public static class SwaggerExtensions
     /// <param name="config"></param>
     /// <param name="grpcSwagger"></param>
     /// <returns></returns>
-    public static WebApplication MapSwagger(
+    internal static WebApplication MapSwagger(
         this WebApplication app,
         SwaggerConfig config,
         bool grpcSwagger = false)
@@ -67,7 +68,7 @@ public static class SwaggerExtensions
             app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", config.AppName); });
             app.UseReDoc(options =>
             {
-                options.RoutePrefix = "api-docs";
+                options.RoutePrefix = "docs";
                 options.SpecUrl("/swagger/v1/swagger.json");
                 options.DocumentTitle = config.AppName;
             });

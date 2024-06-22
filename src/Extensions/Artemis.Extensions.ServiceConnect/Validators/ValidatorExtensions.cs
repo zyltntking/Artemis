@@ -6,7 +6,7 @@ namespace Artemis.Extensions.ServiceConnect.Validators;
 /// <summary>
 ///     Web扩展
 /// </summary>
-public static class ValidatorExtensions
+internal static class ValidatorExtensions
 {
     /// <summary>
     ///     添加验证器
@@ -15,7 +15,9 @@ public static class ValidatorExtensions
     /// <param name="implementationType"></param>
     /// <param name="lifetime"></param>
     /// <exception cref="AggregateException"></exception>
-    private static void AddValidator(IServiceCollection services, Type implementationType,
+    private static void AddValidator(
+        IServiceCollection services, 
+        Type implementationType,
         ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var validatorType = implementationType.GetInterfaces()
@@ -37,7 +39,7 @@ public static class ValidatorExtensions
     /// <param name="lifetime"></param>
     /// <returns></returns>
     /// <exception cref="AggregateException"></exception>
-    public static IServiceCollection AddValidator<TValidator>(
+    internal static IServiceCollection AddValidator<TValidator>(
         this IServiceCollection services,
         ServiceLifetime lifetime = ServiceLifetime.Singleton) where TValidator : class
     {
@@ -55,7 +57,8 @@ public static class ValidatorExtensions
     /// <param name="lifetime"></param>
     /// <returns></returns>
     /// <exception cref="AggregateException"></exception>
-    public static IServiceCollection AddValidators(this IServiceCollection services,
+    internal static IServiceCollection AddValidators(
+        this IServiceCollection services,
         ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var implementationTypes = AppDomain.CurrentDomain

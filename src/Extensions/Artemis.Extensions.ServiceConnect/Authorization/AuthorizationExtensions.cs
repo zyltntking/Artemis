@@ -8,7 +8,7 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 /// 授权扩展
 /// </summary>
-public static class AuthorizationExtensions
+internal static class AuthorizationExtensions
 {
     /// <summary>
     ///     配置授权服务
@@ -107,16 +107,16 @@ public static class AuthorizationExtensions
 
         builder.Services.AddSingleton<IAuthorizationHandler, ArtemisAuthorizationHandler>();
 
-        builder.Services.Configure<ArtemisAuthorizationConfig>(action =>
+        builder.Services.Configure<ArtemisAuthorizationConfig>(options =>
         {
-            action.ContextItemTokenKey = config.ContextItemTokenKey;
-            action.RequestHeaderTokenKey = config.RequestHeaderTokenKey;
-            action.CacheTokenPrefix = config.CacheTokenPrefix;
-            action.EnableMultiEnd = config.EnableMultiEnd;
-            action.IdentityServiceProvider = config.IdentityServiceProvider;
-            action.EnableAdvancedPolicy = config.EnableAdvancedPolicy;
-            action.RolesBasedPolicyOptions = config.RolesBasedPolicyOptions;
-            action.ClaimsBasedPolicyOptions = config.ClaimsBasedPolicyOptions;
+            options.ContextItemTokenKey = config.ContextItemTokenKey;
+            options.RequestHeaderTokenKey = config.RequestHeaderTokenKey;
+            options.CacheTokenPrefix = config.CacheTokenPrefix;
+            options.EnableMultiEnd = config.EnableMultiEnd;
+            options.IdentityServiceProvider = config.IdentityServiceProvider;
+            options.EnableAdvancedPolicy = config.EnableAdvancedPolicy;
+            options.RolesBasedPolicyOptions = config.RolesBasedPolicyOptions;
+            options.ClaimsBasedPolicyOptions = config.ClaimsBasedPolicyOptions;
         });
 
         return builder;

@@ -1,6 +1,8 @@
 ﻿using System.IO.Compression;
 using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Extensions.ServiceConnect.HttpLogging;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,30 +24,40 @@ public static class CommonExtensions
         // add common services
         builder.Services.AddHttpContextAccessor();
 
-        builder.Services.AddResponseCompression(options =>
+        if (!builder.Environment.IsDevelopment())
         {
-            options.Providers.Add<BrotliCompressionProvider>();
-            options.Providers.Add<GzipCompressionProvider>();
-            options.MimeTypes = ResponseCompressionDefaults
-                .MimeTypes
-                .Concat([
-                    "application/octet-stream"
-                ]);
-        });
+            builder.Services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+                options.MimeTypes = ResponseCompressionDefaults
+                    .MimeTypes
+                    .Concat([
+                        "application/octet-stream"
+                    ]);
+            });
 
-        builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-        {
-            options.Level = CompressionLevel.Fastest;
-        });
+            builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
 
-        builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-        {
-            options.Level = CompressionLevel.Fastest;
-        });
+            builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+        }
 
         builder.Services.AddAuthentication();
         //配置授权
         builder.ConfigureAuthorization();
+
+        builder.Services.AddHttpLogging(options =>
+        {
+            options.LoggingFields = HttpLoggingFields.RequestPath | HttpLoggingFields.Duration;
+        });
+
+        builder.Services.AddHttpLoggingInterceptor<ArtemisHttpLoggingInterceptor>();
 
         return builder;
     }
@@ -57,6 +69,8 @@ public static class CommonExtensions
     /// <returns></returns>
     public static WebApplication ConfigureAppCommon(this WebApplication app)
     {
+        app.UseHttpLogging();
+
         if (app.Environment.IsDevelopment())
         {
             app.UseMigrationsEndPoint();
@@ -75,7 +89,10 @@ public static class CommonExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseResponseCompression();
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseResponseCompression();
+        }
 
         return app;
     }

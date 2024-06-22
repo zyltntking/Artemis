@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Artemis.Extensions.ServiceConnect;
 
@@ -44,6 +47,38 @@ public static class ComponentExtensions
         string connectionName)
     {
         builder.AddRabbitMQClient(connectionName);
+        return builder;
+    }
+
+    /// <summary>
+    /// 添加Postgresql组件
+    /// </summary>
+    /// <typeparam name="TDbContext"></typeparam>
+    /// <param name="builder"></param>
+    /// <param name="connectionName"></param>
+    /// <param name="logger"></param>
+    /// <param name="logLevel"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder AddPostgreSqlComponent<TDbContext>(
+        this IHostApplicationBuilder builder, 
+        string connectionName, 
+        Action<string>? logger = null, 
+        LogLevel logLevel = LogLevel.Debug) where TDbContext : DbContext
+    {
+        logger ??= Console.WriteLine;
+
+        builder.AddNpgsqlDbContext<TDbContext>(connectionName, configureDbContextOptions: config =>
+        {
+            config.EnableServiceProviderCaching()
+                .EnableDetailedErrors(builder.Environment.IsDevelopment())
+                .EnableSensitiveDataLogging(builder.Environment.IsDevelopment())
+                .LogTo(logger, logLevel);
+        });
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        }
         return builder;
     }
 }

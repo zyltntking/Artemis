@@ -3,9 +3,8 @@ using Artemis.Protos.Identity;
 using Artemis.Service.Identity.Managers;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 
-namespace Artemis.Service.Identity.Services;
+namespace Artemis.App.Identity.Services;
 
 /// <summary>
 ///     账户服务

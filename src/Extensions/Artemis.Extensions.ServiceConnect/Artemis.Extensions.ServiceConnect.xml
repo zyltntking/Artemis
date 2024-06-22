@@ -81,6 +81,11 @@
                 认证服务对提供者名称
             </summary>
         </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.Policies">
+            <summary>
+            支持的策略
+            </summary>
+        </member>
         <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableAdvancedPolicy">
             <summary>
                 是否启用高级策略
@@ -139,6 +144,11 @@
         <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceProvider">
             <summary>
                 认证服务对提供者名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.Policies">
+            <summary>
+            支持的策略
             </summary>
         </member>
         <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableAdvancedPolicy">
@@ -454,6 +464,13 @@
             <param name="endpoint"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+            <summary>
+                查询端描述
+            </summary>
+            <param name="endpoint"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
             <summary>
                 判断元数据中是否包含指定类型
@@ -531,7 +548,7 @@
             令牌处理器扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenFromCache``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
             <summary>
                 从缓存获取Token
             </summary>
@@ -540,7 +557,7 @@
             <param name="refreshToken">是否刷新缓存</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenFromCache(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
             <summary>
                 从缓存获取用户对Token的映射
             </summary>
@@ -549,7 +566,7 @@
             <param name="refreshToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocumentFromContext``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>
                 从上下文中获取Token文档
             </summary>
@@ -557,7 +574,7 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheToken(Microsoft.AspNetCore.Http.HttpContext,System.String,Artemis.Data.Shared.Transfer.Identity.TokenDocument)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String,``0)">
             <summary>
                 缓存token到上下文
             </summary>
@@ -565,12 +582,42 @@
             <param name="key"></param>
             <param name="document"></param>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenFromRequestHeader(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.RemoveTokenDocument(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+                移除上下文中的Token
+            </summary>
+            <param name="context"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenSymbol(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>
             从请求头中获取Token串
             </summary>
             <param name="context"></param>
             <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator">
+            <summary>
+            TokenKey生成器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheTokenKey(System.String,System.String)">
+            <summary>
+            缓存Token键
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="symbol">Token符号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheUserMapTokenKey``1(System.String,System.String,``0)">
+            <summary>
+            缓存用户映射Token键
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <param name="prefix"></param>
+            <param name="end"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.CommonExtensions">
@@ -621,17 +668,29 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddPostgreSqlComponent``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String,System.Action{System.String},Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            添加Postgresql组件
+            </summary>
+            <typeparam name="TDbContext"></typeparam>
+            <param name="builder"></param>
+            <param name="connectionName"></param>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Extensions.ServiceConnect.GrpcExtensions">
             <summary>
                 Grpc扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig)">
+        <member name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig,System.Boolean)">
             <summary>
                 配置Grpc
             </summary>
             <param name="builder"></param>
             <param name="config"></param>
+            <param name="enableValidator"></param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.UseGrpcModify(Microsoft.AspNetCore.Builder.WebApplication,Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig)">
@@ -640,6 +699,103 @@
             </summary>
             <param name="app"></param>
             <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor">
+            <summary>
+            Http日志拦截器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
+            <summary>
+            A callback to customize the logging of the request and response.
+            </summary>
+            <remarks>
+            This is called when the request is first received and can be used to configure both request and response options. All settings will carry over to
+            <see cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" /> except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+            will be cleared after logging the request. <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.LoggingFields" /> may be changed per request to control the logging behavior.
+            If no request fields are enabled, and the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> collection is empty, no request logging will occur.
+            If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the request to response
+            and be logged together.
+            </remarks>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
+            <summary>A callback to customize the logging of the response.</summary>
+            <remarks>
+            This is called when the first write to the response happens, or the response ends without a write, just before anything is sent to the client. Settings are carried
+            over from <see cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" /> (except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />) and response settings may
+            still be modified. Changes to request settings will have no effect. If no response fields are enabled, and the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+            collection is empty, no response logging will occur.
+            If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the request to response
+            and be logged together. <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestBody" /> and <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseBody" />  can also be disabled in OnResponseAsync to prevent
+            logging any buffered body data.
+            </remarks>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog">
+            <summary>
+            日志加载项
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.ResolveTokenDocument(Artemis.Data.Shared.Transfer.Identity.TokenDocument)">
+            <summary>
+            解析Token文档到字符串
+            </summary>
+            <param name="tokenDocument"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1">
+            <summary>
+            日志加载项
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+            <summary>
+                侦听器构造
+            </summary>
+            <param name="logger"></param>
+            <param name="options"></param>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <summary>
+            Server-side handler for intercepting and incoming unary call.
+            </summary>
+            <typeparam name="TRequest">Request message type for this method.</typeparam>
+            <typeparam name="TResponse">Response message type for this method.</typeparam>
+            <param name="request">The request value of the incoming invocation.</param>
+            <param name="context">
+            An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
+            the context of the invocation.
+            </param>
+            <param name="continuation">
+            A delegate that asynchronously proceeds with the invocation, calling
+            the next interceptor in the chain, or the service request handler,
+            in case of the last interceptor and return the response value of
+            the RPC. The interceptor can choose to call it zero or more times
+            at its discretion.
+            </param>
+            <returns>
+            A future representing the response value of the RPC. The interceptor
+            can simply return the return value from the continuation intact,
+            or an arbitrary response value as it sees fit.
+            </returns>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.ResolveTokenDocument(`0)">
+            <summary>
+            解析Token文档到字符串
+            </summary>
+            <param name="tokenDocument"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException">
@@ -710,12 +866,12 @@
             <param name="validator"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Maps.MapExtensions">
+        <member name="T:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions">
             <summary>
                 端映射扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Maps.MapExtensions.MapMigrationEndpoint``1(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapMigrationEndpoint``1(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
             <summary>
                 映射迁移端点
             </summary>
@@ -724,7 +880,7 @@
             <param name="pattern"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Maps.MapExtensions.MapDetailHealthChecks(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapDetailHealthChecks(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
             <summary>
                 映射健康检查详细信息
             </summary>
@@ -732,7 +888,7 @@
             <param name="pattern"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Maps.MapExtensions.WriteResponse(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)">
+        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.WriteResponse(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)">
             <summary>
                 写入响应
             </summary>
@@ -801,6 +957,42 @@
             <typeparam name="TResult"></typeparam>
             <param name="exception"></param>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken">
+            <summary>
+                添加认证令牌操作过滤器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+            <summary>
+                构造
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+                实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Options">
+            <summary>
+                认证配置依赖
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.MarkFieldFeature">
+            <summary>
+            标记字段特性
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.MarkFieldFeature.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            实现
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse">
             <summary>

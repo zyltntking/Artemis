@@ -7,23 +7,19 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 ///     Artemis认证策略接口
 /// </summary>
-public interface IArtemisAuthorizationRequirement : IAuthorizationRequirement
-{
-}
+internal interface IArtemisAuthorizationRequirement : IAuthorizationRequirement;
 
 #endregion
 
 /// <summary>
 ///     Artemis认证策略实现
 /// </summary>
-public abstract class ArtemisAuthorizationRequirement : IArtemisAuthorizationRequirement
-{
-}
+internal abstract class ArtemisAuthorizationRequirement : IArtemisAuthorizationRequirement;
 
 /// <summary>
 ///     匿名许可要求
 /// </summary>
-public sealed class AnonymousRequirement : ArtemisAuthorizationRequirement
+internal sealed class AnonymousRequirement : ArtemisAuthorizationRequirement
 {
     /// <summary>
     ///     匿名认证策略构造
@@ -36,21 +32,17 @@ public sealed class AnonymousRequirement : ArtemisAuthorizationRequirement
 /// <summary>
 ///     令牌认证策略
 /// </summary>
-public abstract class TokenRequirement : ArtemisAuthorizationRequirement
-{
-}
+internal abstract class TokenRequirement : ArtemisAuthorizationRequirement;
 
 /// <summary>
 ///     仅Token认证要求
 /// </summary>
-public sealed class TokenOnlyRequirement : TokenRequirement
-{
-}
+internal sealed class TokenOnlyRequirement : TokenRequirement;
 
 /// <summary>
 ///     角色认证要求
 /// </summary>
-public class RolesRequirement : TokenRequirement
+internal class RolesRequirement : TokenRequirement
 {
     /// <summary>
     ///     认证策略构造
@@ -79,7 +71,7 @@ public class RolesRequirement : TokenRequirement
 /// <summary>
 /// 角色认证要求
 /// </summary>
-public sealed class RoleRequirement : RolesRequirement
+internal sealed class RoleRequirement : RolesRequirement
 {
     /// <summary>
     ///  认证策略构造
@@ -94,7 +86,7 @@ public sealed class RoleRequirement : RolesRequirement
 /// <summary>
 ///     凭据认证要求
 /// </summary>
-public class ClaimsRequirement : TokenRequirement
+internal class ClaimsRequirement : TokenRequirement
 {
     /// <summary>
     ///     认证策略构造
@@ -123,7 +115,7 @@ public class ClaimsRequirement : TokenRequirement
 /// <summary>
 /// 凭据认证要求
 /// </summary>
-public sealed class ClaimRequirement : ClaimsRequirement
+internal sealed class ClaimRequirement : ClaimsRequirement
 {
     /// <summary>
     ///     认证策略构造
@@ -146,13 +138,9 @@ public sealed class ClaimRequirement : ClaimsRequirement
 /// <summary>
 ///     操作名凭据认证要求
 /// </summary>
-public sealed class ActionNameClaimRequirement : TokenRequirement
-{
-}
+internal sealed class ActionNameClaimRequirement : TokenRequirement;
 
 /// <summary>
 ///     路由路径凭据认证要求
 /// </summary>
-public sealed class RoutePathClaimRequirement : TokenRequirement
-{
-}
+internal sealed class RoutePathClaimRequirement : TokenRequirement;

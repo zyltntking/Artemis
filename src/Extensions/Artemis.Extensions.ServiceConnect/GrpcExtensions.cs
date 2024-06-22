@@ -17,18 +17,26 @@ public static class GrpcExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="config"></param>
+    /// <param name="enableValidator"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureGrpc(this IHostApplicationBuilder builder, SwaggerConfig config)
+    public static IHostApplicationBuilder ConfigureGrpc(
+        this IHostApplicationBuilder builder, 
+        SwaggerConfig config, 
+        bool enableValidator = true)
     {
         builder.Services.AddGrpc(options =>
         {
             options.EnableDetailedErrors = true;
             options.Interceptors.Add<MessageValidator>();
+            options.Interceptors.Add<AddInsLog>();
             options.Interceptors.Add<FriendlyException>();
         }).AddJsonTranscoding();
         builder.Services.AddGrpcReflection();
 
-        builder.Services.AddValidators();
+        if (enableValidator)
+        {
+            builder.Services.AddValidators();
+        }
 
         builder.ConfigureSwagger(config, true);
 

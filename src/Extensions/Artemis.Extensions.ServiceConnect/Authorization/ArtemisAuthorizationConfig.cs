@@ -1,4 +1,6 @@
-﻿namespace Artemis.Extensions.ServiceConnect.Authorization;
+﻿using Artemis.Data.Shared.Transfer.Identity;
+
+namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 #region Interface
 
@@ -41,6 +43,11 @@ file interface IArtemisAuthorizationConfig
     ///     认证服务对提供者名称
     /// </summary>
     string IdentityServiceProvider { get; set; }
+
+    /// <summary>
+    /// 支持的策略
+    /// </summary>
+    IEnumerable<string> Policies { get; }
 
     /// <summary>
     ///     是否启用高级策略
@@ -111,9 +118,36 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
     public string IdentityServiceProvider { get; set; } = SharedKey.DefaultServiceProvider;
 
     /// <summary>
+    /// 支持的策略
+    /// </summary>
+    public IEnumerable<string> Policies
+    {
+        get
+        {
+            var roleBasedPolicies = RolesBasedPolicyOptions?.Select(item => item.Name);
+
+            var claimBasedPolicies = ClaimsBasedPolicyOptions?.Select(item => item.Name);
+
+            var policies = IdentityPolicy.TokenPolicies.AsEnumerable();
+
+            if (roleBasedPolicies != null)
+            {
+                policies = policies.Concat(roleBasedPolicies);
+            }
+
+            if (claimBasedPolicies != null)
+            {
+                policies = policies.Concat(claimBasedPolicies);
+            }
+
+            return policies;
+        }
+    }
+
+    /// <summary>
     ///     是否启用高级策略
     /// </summary>
-    public bool EnableAdvancedPolicy { get; set; } = false;
+    public bool EnableAdvancedPolicy { get; set; }
 
     /// <summary>
     ///     基于角色的策略配置

@@ -1,13 +1,11 @@
+using Artemis.App.Identity.Services;
 using Artemis.Extensions.ServiceConnect;
-using Artemis.Extensions.ServiceConnect.Maps;
+using Artemis.Extensions.ServiceConnect.MapEndPoints;
 using Artemis.Extensions.ServiceConnect.SwaggerFilters;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Managers;
-using Artemis.Service.Identity.Services;
 using Artemis.Service.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Artemis.App.Identity;
 
@@ -32,21 +30,7 @@ public class Program
         //builder.AddMongoDbComponent("MongoInstance");
         //builder.AddRabbitMqComponent("RabbitMqInstance");
 
-        builder.AddNpgsqlDbContext<IdentityContext>("ArtemisDb", configureDbContextOptions: config =>
-        {
-            config.UseNpgsql(options =>
-                {
-                    options.MigrationsHistoryTable("IdentityDbHistory", "identity");
-                    options.MigrationsAssembly("Artemis.App.Identity");
-                })
-                .EnableServiceProviderCaching()
-                .EnableDetailedErrors(builder.Environment.IsDevelopment())
-                .EnableSensitiveDataLogging(builder.Environment.IsDevelopment())
-                .LogTo(Console.WriteLine, LogLevel.Information);
-        });
-
-        if (builder.Environment.IsDevelopment())
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb");
 
         builder.Services.AddScoped<IIdentityClaimStore, IdentityClaimStore>();
         builder.Services.AddScoped<IIdentityUserStore, IdentityUserStore>();

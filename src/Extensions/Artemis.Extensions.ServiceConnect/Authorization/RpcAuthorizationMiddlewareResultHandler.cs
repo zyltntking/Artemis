@@ -6,7 +6,7 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 /// Rpc授权中间件结果处理器
 /// </summary>
-public class RpcAuthorizationMiddlewareResultHandler : AuthorizationMiddlewareResultHandler
+internal sealed class RpcAuthorizationMiddlewareResultHandler : AuthorizationMiddlewareResultHandler
 {
     #region Overrides of AuthorizationResultTransformer
 

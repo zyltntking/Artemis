@@ -12,7 +12,7 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 ///     Artemis凭据处理器
 /// </summary>
-public class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthorizationRequirement>
+internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthorizationRequirement>
 {
     /// <summary>
     ///     构造
@@ -79,30 +79,36 @@ public class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthoriz
         {
             if (httpContext is not null)
             {
-                var headerToken = httpContext.FetchTokenFromRequestHeader(Config.RequestHeaderTokenKey);
+                var tokenSymbol = httpContext.FetchTokenSymbol(Config.RequestHeaderTokenKey);
 
-                if (!string.IsNullOrWhiteSpace(headerToken))
+                if (!string.IsNullOrWhiteSpace(tokenSymbol))
                 {
-                    var document = Cache.FetchTokenFromCache<TokenDocument>($"{Config.CacheTokenPrefix}:{headerToken}");
+                    var cacheTokenKey = TokenKeyGenerator.CacheTokenKey(Config.CacheTokenPrefix, tokenSymbol);
+
+                    var document = Cache.FetchTokenDocument<TokenDocument>(cacheTokenKey);
 
                     if (document is not null)
                     {
+                        httpContext.CacheTokenDocument(Config.ContextItemTokenKey, document);
+
                         var continueHandler = true;
 
-                        // 处理不允许多终端的逻辑
+                        // 处理多终端登录逻辑
                         if (!Config.EnableMultiEnd)
                         {
-                            var userMapToken = Cache
-                                .FetchUserMapTokenFromCache($"{Config.CacheUserMapTokenPrefix}:{document.EndType}:{document.UserId}");
+                            var userMapTokenKey = TokenKeyGenerator.CacheUserMapTokenKey(
+                                Config.CacheUserMapTokenPrefix,
+                                document.EndType, 
+                                document.UserId);
 
-                            if (userMapToken != headerToken) 
+                            var userMapToken = Cache.FetchUserMapTokenSymbol(userMapTokenKey);
+
+                            if (userMapToken != tokenSymbol) 
                                 continueHandler = false;
                         }
 
                         if (continueHandler)
                         {
-                            httpContext.CacheToken(Config.ContextItemTokenKey, document);
-
                             if (requirement is TokenOnlyRequirement)
                             {
                                 context.Succeed(requirement);
@@ -139,6 +145,10 @@ public class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthoriz
 
                                 return Task.CompletedTask;
                             }
+                        }
+                        else
+                        {
+                            message = "该用户已在其他终端登录";
                         }
                     }
                     else

@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Artemis.Extensions.ServiceConnect.Maps;
+namespace Artemis.Extensions.ServiceConnect.MapEndPoints;
 
 /// <summary>
 ///     端映射扩展
 /// </summary>
-public static class MapExtensions
+public static class MapEndPointsExtensions
 {
     /// <summary>
     ///     映射迁移端点
@@ -44,7 +44,7 @@ public static class MapExtensions
     /// <param name="app"></param>
     /// <param name="pattern"></param>
     /// <returns></returns>
-    public static WebApplication MapDetailHealthChecks(this WebApplication app, string pattern = "/health-detail")
+    internal static WebApplication MapDetailHealthChecks(this WebApplication app, string pattern = "/health-detail")
     {
         app.MapHealthChecks(pattern, new HealthCheckOptions
         {
@@ -74,10 +74,8 @@ public static class MapExtensions
                 {
                     status = Enum.GetName(typeof(HealthStatus), entry.Value.Status),
                     description = entry.Value.Description,
-                    //data = entry.Value.Data,
                     exception = entry.Value.Exception?.Message,
                     tags = entry.Value.Tags
-                    //duration = entry.Value.Duration
                 }
             })
         };

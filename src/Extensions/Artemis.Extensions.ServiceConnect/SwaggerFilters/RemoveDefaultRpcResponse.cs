@@ -6,7 +6,7 @@ namespace Artemis.Extensions.ServiceConnect.SwaggerFilters;
 /// <summary>
 ///     移除默认响应
 /// </summary>
-public class RemoveDefaultRpcResponse : IOperationFilter
+internal sealed class RemoveDefaultRpcResponse : IOperationFilter
 {
     #region Implementation of IOperationFilter
 

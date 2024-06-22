@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
+using System.ComponentModel;
 
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
 /// 端描述器
 /// </summary>
-public static class EndpointDescriptor
+internal static class EndpointDescriptor
 {
     /// <summary>
     ///     查询操作名称
@@ -36,6 +37,18 @@ public static class EndpointDescriptor
     public static string? FetchRoutePath(this RouteEndpoint endpoint)
     {
         return endpoint.RoutePattern.RawText;
+    }
+
+    /// <summary>
+    ///     查询端描述
+    /// </summary>
+    /// <param name="endpoint"></param>
+    /// <returns></returns>
+    public static string? FetchDescription(this RouteEndpoint endpoint)
+    {
+        var descriptionMetadata = endpoint.FetchMetadata<DescriptionAttribute>();
+
+        return descriptionMetadata?.Description;
     }
 
     #region MatadataTypeFilter
