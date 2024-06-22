@@ -3,10 +3,15 @@
 /// <summary>
 ///     用户凭据接口
 /// </summary>
-public interface IUserClaim : IClaim
+public interface IUserClaim : IUserClaimPackage
 {
     /// <summary>
     ///     用户标识
     /// </summary>
     Guid UserId { get; set; }
 }
+
+/// <summary>
+///     用户凭据数据包接口
+/// </summary>
+public interface IUserClaimPackage : IClaimPackage;

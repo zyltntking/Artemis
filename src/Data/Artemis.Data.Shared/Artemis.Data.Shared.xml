@@ -39,17 +39,17 @@
                 标准化角色名
             </summary>
         </member>
-        <member name="T:Artemis.Data.Shared.Identity.IRoleInfo">
+        <member name="T:Artemis.Data.Shared.Identity.IRolePackage">
             <summary>
                 角色信息接口
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.Identity.IRoleInfo.Name">
+        <member name="P:Artemis.Data.Shared.Identity.IRolePackage.Name">
             <summary>
                 角色名
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.Identity.IRoleInfo.Description">
+        <member name="P:Artemis.Data.Shared.Identity.IRolePackage.Description">
             <summary>
                 角色描述
             </summary>
@@ -354,22 +354,22 @@
                 角色凭据
             </summary>
         </member>
-        <member name="T:Artemis.Data.Shared.Transfer.Identity.UserInfo">
+        <member name="T:Artemis.Data.Shared.Transfer.Identity.UserSign">
             <summary>
                 用户信息
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserInfo.UserName">
+        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserSign.UserName">
             <summary>
                 用户名
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserInfo.Email">
+        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserSign.Email">
             <summary>
                 电子邮件
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserInfo.PhoneNumber">
+        <member name="P:Artemis.Data.Shared.Transfer.Identity.UserSign.PhoneNumber">
             <summary>
                 电话号码
             </summary>

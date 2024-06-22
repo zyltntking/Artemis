@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Artemis.Data.Shared.Transfer.Identity;
+namespace Artemis.Data.Shared.Transfer;
 
 /// <summary>
 ///     预设凭据类型

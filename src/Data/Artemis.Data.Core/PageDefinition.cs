@@ -7,7 +7,7 @@ namespace Artemis.Data.Core;
 /// <summary>
 ///     分页协议接口
 /// </summary>
-public interface IPageSlot
+internal interface IPageSlot
 {
     /// <summary>
     ///     当前页码(从0开始)
@@ -84,6 +84,11 @@ public abstract record PageSlot : IPageSlot
     public virtual required int Size { get; set; } = 20;
 
     #endregion
+
+    /// <summary>
+    ///     跳过数
+    /// </summary>
+    public int Skip => (Page - 1) * Size;
 }
 
 /// <summary>
@@ -101,11 +106,6 @@ public record PageRequest<T> : PageSlot, IPageRequest<T>
     public virtual required T Filter { get; set; } = default!;
 
     #endregion
-
-    /// <summary>
-    ///     跳过数
-    /// </summary>
-    public int Skip => (Page - 1) * Size;
 }
 
 /// <summary>

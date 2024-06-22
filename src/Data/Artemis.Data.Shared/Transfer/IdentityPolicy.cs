@@ -1,4 +1,4 @@
-﻿namespace Artemis.Data.Shared.Transfer.Identity;
+﻿namespace Artemis.Data.Shared.Transfer;
 
 /// <summary>
 ///     认证策略

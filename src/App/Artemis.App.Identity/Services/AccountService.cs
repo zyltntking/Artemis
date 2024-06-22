@@ -1,4 +1,6 @@
-﻿using Artemis.Data.Shared.Transfer.Identity;
+﻿using Amazon.Runtime.Internal.Util;
+using Artemis.Data.Shared.Transfer;
+using Artemis.Extensions.ServiceConnect;
 using Artemis.Protos.Identity;
 using Artemis.Service.Identity.Managers;
 using Grpc.Core;
@@ -51,11 +53,31 @@ public class AccountService : Account.AccountBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Authorize(IdentityPolicy.Admin)]
-    public override Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
+    public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
-        Logger.LogInformation("用户 {0} 正在尝试登录", request.UserSign);
+        Logger.LogInformation($"用户 {request.UserSign} 正在尝试登录...");
 
-        return Task.FromResult(new TokenResponse());
+        var (result, token) = await AccountManager.SignInAsync(
+            request.UserSign, 
+            request.Password, 
+            context.CancellationToken);
+
+        Logger.LogInformation($"用户 {request.UserSign} 认证成功，准备编码授权信息...");
+
+        if (result.Succeeded && token is not null)
+        {
+            token.EndType = request.EndType;
+
+            // 记录TokenDocument
+            // var identityToken = await RecordTokenDocument(token, context.CancellationToken);
+
+            // todo ...
+
+
+            return new TokenResponse();
+        }
+
+        return RpcResultAdapter.EmptyFail<TokenResponse>(result.Message);
     }
 
     #endregion

@@ -1,4 +1,24 @@
-﻿namespace Artemis.Data.Shared.Transfer.Identity;
+﻿using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Data.Core;
+using Artemis.Data.Shared.Transfer.Identity;
+
+namespace Artemis.Data.Shared.Transfer;
+
+/// <summary>
+///     签入结果
+/// </summary>
+public sealed record SignResult
+{
+    /// <summary>
+    ///     是否认证成功
+    /// </summary>
+    public bool Succeeded { get; set; }
+
+    /// <summary>
+    ///     认证消息
+    /// </summary>
+    public required string Message { get; set; }
+}
 
 /// <summary>
 ///     Token信息
@@ -34,4 +54,9 @@ public sealed record TokenDocument
     ///     角色凭据
     /// </summary>
     public required IEnumerable<ClaimPackage> RoleClaims { get; set; }
+
+    /// <summary>
+    /// 生成Token符号
+    /// </summary>
+    public string TokenSymbol => Hash.HashData($"{UserId}:{UserName}:{DateTime.Now.ToUnixTimeStamp()}", HashType.Md5);
 }

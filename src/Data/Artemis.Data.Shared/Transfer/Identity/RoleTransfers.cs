@@ -3,9 +3,9 @@
 namespace Artemis.Data.Shared.Transfer.Identity;
 
 /// <summary>
-///     基本角色信息
+///     基本角色结构
 /// </summary>
-public record RolePackage : IRoleInfo
+public record RolePackage : IRolePackage
 {
     #region Implementation of IRole
 

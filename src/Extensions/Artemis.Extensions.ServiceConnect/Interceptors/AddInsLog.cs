@@ -1,4 +1,4 @@
-﻿using Artemis.Data.Shared.Transfer.Identity;
+﻿using Artemis.Data.Shared.Transfer;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Grpc.Core;
 using Grpc.Core.Interceptors;

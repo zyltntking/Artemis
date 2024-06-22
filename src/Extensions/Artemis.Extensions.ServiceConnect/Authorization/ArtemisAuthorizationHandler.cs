@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer.Identity;
+using Artemis.Data.Shared.Transfer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;

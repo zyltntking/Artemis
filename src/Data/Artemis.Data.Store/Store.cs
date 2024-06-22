@@ -143,6 +143,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
     /// </summary>
     public IQueryable<TEntity> KeyMatchQuery(TKey key)
     {
+
         return EntityQuery.Where(entity => entity.Id.Equals(key));
     }
 

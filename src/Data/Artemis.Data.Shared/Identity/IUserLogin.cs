@@ -3,13 +3,19 @@
 /// <summary>
 ///     用户登录接口
 /// </summary>
-public interface IUserLogin
+public interface IUserLogin : IUserLoginPackage
 {
     /// <summary>
     ///     用户标识
     /// </summary>
     Guid UserId { get; set; }
+}
 
+/// <summary>
+///     用户登录数据包接口
+/// </summary>
+public interface IUserLoginPackage
+{
     /// <summary>
     ///     登录提供程序
     /// </summary>

@@ -5,7 +5,7 @@ namespace Artemis.Data.Shared.Transfer.Identity;
 /// <summary>
 ///     凭据项目实现
 /// </summary>
-public record ClaimPackage : IClaim
+public record ClaimPackage : IClaimPackage
 {
     /// <summary>
     ///     凭据类型

@@ -3,13 +3,19 @@
 /// <summary>
 ///     基本用户令牌信息接口
 /// </summary>
-public interface IUserToken
+public interface IUserToken : IUserTokenPackage
 {
     /// <summary>
     ///     用户标识
     /// </summary>
     Guid UserId { get; set; }
+}
 
+/// <summary>
+///     基本用户令牌数据包接口
+/// </summary>
+public interface IUserTokenPackage
+{
     /// <summary>
     ///     登录提供程序
     /// </summary>

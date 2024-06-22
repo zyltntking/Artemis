@@ -1,7 +1,5 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
-using Artemis.Data.Store.Extensions;
-using Mapster;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Data.Store;
@@ -32,80 +30,7 @@ public interface IManager<TEntity, in TKey> : IManager<TEntity, TKey, Guid>
 public interface IManager<TEntity, in TKey, THandler> : IKeyLessManager<TEntity, THandler>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region BaseResourceManager
-
-    /// <summary>
-    ///     获取实体信息
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="id">实体标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<TEntityInfo?> GetEntityAsync<TEntityInfo>(TKey id, CancellationToken cancellationToken);
-
-    /// <summary>
-    ///     获取实体信息列表
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="page">页码</param>
-    /// <param name="size">条目数</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>实体信息列表</returns>
-    Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     创建实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="package">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>创建结果</returns>
-    Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
-        TEntityPack package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     更新实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="id">实体键</param>
-    /// <param name="pack">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>更新结果</returns>
-    Task<(StoreResult result, TEntityInfo? info)> UpdateEntityAsync<TEntityInfo, TEntityPack>(
-        TKey id,
-        TEntityPack pack,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     更新或创建实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="id">实体键</param>
-    /// <param name="package">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>更新或创建结果</returns>
-    Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
-        TKey id,
-        TEntityPack package,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///     删除实体
-    /// </summary>
-    /// <param name="id">标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>删除结果</returns>
-    Task<StoreResult> DeleteEntityAsync(TKey id, CancellationToken cancellationToken = default);
-
-    #endregion
-}
+    where THandler : IEquatable<THandler>;
 
 /// <summary>
 ///     提供用于管理无键存储模型TEntity的存储器的API接口
@@ -151,18 +76,7 @@ public abstract class Manager<TEntity> : Manager<TEntity, Guid>, IManager<TEntit
         IManagerOptions? options = null,
         ILogger? logger = null) : base(store, options, logger)
     {
-        EntityStore = store;
-        EntityStore.HandlerRegister = HandlerRegister;
     }
-
-    #region Implementation of IManager<TEntity>
-
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    protected new IStore<TEntity> EntityStore { get; }
-
-    #endregion
 }
 
 /// <summary>
@@ -188,18 +102,7 @@ public abstract class Manager<TEntity, TKey> :
         IManagerOptions? options = null,
         ILogger? logger = null) : base(store, options, logger)
     {
-        EntityStore = store;
-        EntityStore.HandlerRegister = HandlerRegister;
     }
-
-    #region Implementation of IManager<TEntity,THandler>
-
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    protected new IStore<TEntity, TKey> EntityStore { get; }
-
-    #endregion
 }
 
 /// <summary>
@@ -227,175 +130,7 @@ public abstract class Manager<TEntity, TKey, THandler> :
         IManagerOptions? options = null,
         ILogger? logger = null) : base(store, options, logger)
     {
-        EntityStore = store;
-        EntityStore.HandlerRegister = HandlerRegister;
     }
-
-    #region Properties
-
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    protected new IStore<TEntity, TKey, THandler> EntityStore { get; }
-
-    #endregion
-
-    #region Implementation of IKeyWithManager<TEntity,TKey>
-
-    #region BaseResourceManager
-
-    /// <summary>
-    ///     获取实体信息
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="id">实体标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    public Task<TEntityInfo?> GetEntityAsync<TEntityInfo>(TKey id, CancellationToken cancellationToken)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"GetEntityAsync<{typeof(TEntity).Name}>: {id}");
-
-        return EntityStore.FindMapEntityAsync<TEntityInfo>(id, cancellationToken);
-    }
-
-    /// <summary>
-    ///     获取实体信息列表
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <param name="page">页码</param>
-    /// <param name="size">条目数</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>实体信息列表</returns>
-    public Task<List<TEntityInfo>> GetEntitiesAsync<TEntityInfo>(int? page, int? size,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"GetEntitiesAsync<{typeof(TEntity).Name}>: {page} {size}");
-
-        return EntityStore.EntityQuery
-            .MapPageAsync<TEntity, TKey, TEntityInfo>(
-                page,
-                size,
-                cancellationToken);
-    }
-
-    /// <summary>
-    ///     创建实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="package">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>创建结果</returns>
-    public async Task<(StoreResult result, TEntityInfo? info)> CreateEntityAsync<TEntityInfo, TEntityPack>(
-        TEntityPack package,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"CreateEntityAsync<{typeof(TEntity).Name}>: {package}");
-
-        var entity = Instance.CreateInstance<TEntity, TEntityPack>(package);
-
-        var result = await EntityStore.CreateAsync(entity, cancellationToken);
-
-        return (result, entity.Adapt<TEntityInfo>());
-    }
-
-    /// <summary>
-    ///     更新实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="id">实体键</param>
-    /// <param name="pack">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>更新结果</returns>
-    public async Task<(StoreResult result, TEntityInfo? info)> UpdateEntityAsync<TEntityInfo, TEntityPack>(
-        TKey id,
-        TEntityPack pack,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"UpdateEntityAsync<{typeof(TEntity).Name}>: {id} {pack}");
-
-        var entity = await EntityStore.FindEntityAsync(id, cancellationToken);
-
-        if (entity is null)
-            return (StoreResult.EntityFoundFailed(typeof(TEntity).Name, id.ToString()!), default);
-
-        pack.Adapt(entity);
-
-        var result = await EntityStore.UpdateAsync(entity, cancellationToken);
-
-        return (result, entity.Adapt<TEntityInfo>());
-    }
-
-    /// <summary>
-    ///     更新或创建实体
-    /// </summary>
-    /// <typeparam name="TEntityInfo">实体信息类型</typeparam>
-    /// <typeparam name="TEntityPack">实体包类型</typeparam>
-    /// <param name="id">实体键</param>
-    /// <param name="package">实体包</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>更新或创建结果</returns>
-    public async Task<(StoreResult? result, TEntityInfo? info)> UpdateOrCreateEntityAsync<TEntityInfo, TEntityPack>(
-        TKey id,
-        TEntityPack package,
-        CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"UpdateOrCreateEntityAsync<{typeof(TEntity).Name}>: {id} {package}");
-
-        var entity = await EntityStore.FindEntityAsync(id, cancellationToken);
-
-        if (entity is null)
-        {
-            entity = Instance.CreateInstance<TEntity, TEntityPack>(package);
-
-            entity.Id = id;
-
-            var createResult = await EntityStore.CreateAsync(entity, cancellationToken);
-
-            return (createResult, entity.Adapt<TEntityInfo>());
-        }
-
-        package.Adapt(entity);
-
-        var updateResult = await EntityStore.UpdateAsync(entity, cancellationToken);
-
-        return (updateResult, entity.Adapt<TEntityInfo>());
-    }
-
-    /// <summary>
-    ///     删除实体
-    /// </summary>
-    /// <param name="id">标识</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>删除结果</returns>
-    public async Task<StoreResult> DeleteEntityAsync(TKey id, CancellationToken cancellationToken = default)
-    {
-        OnAsyncActionExecuting(cancellationToken);
-
-        if (EnableLogger) Logger?.LogDebug($"DeleteEntityAsync<{typeof(TEntity).Name}>: {id}");
-
-        var entity = await EntityStore.FindEntityAsync(id, cancellationToken);
-
-        if (entity is null)
-            return StoreResult.EntityFoundFailed(typeof(TEntity).Name, id.ToString()!);
-
-        return await EntityStore.DeleteAsync(entity, cancellationToken);
-    }
-
-    #endregion
-
-    #endregion
 }
 
 /// <summary>
@@ -417,18 +152,8 @@ public abstract class KeyLessManager<TEntity> : KeyLessManager<TEntity, Guid>, I
         IManagerOptions? options = null,
         ILogger? logger = null) : base(store, options, logger)
     {
-        EntityStore = store;
-        EntityStore.HandlerRegister = HandlerRegister;
     }
 
-    #region Properties
-
-    /// <summary>
-    ///     实体存储
-    /// </summary>
-    protected new IKeyLessStore<TEntity> EntityStore { get; }
-
-    #endregion
 }
 
 /// <summary>
@@ -454,8 +179,6 @@ public abstract class KeyLessManager<TEntity, THandler> : IKeyLessManager<TEntit
         ILogger? logger = null)
     {
         EntityStore = store;
-        EntityStore.HandlerRegister = HandlerRegister;
-
         Options = options ?? new ManagerOptions();
         Logger = logger;
     }
@@ -499,7 +222,7 @@ public abstract class KeyLessManager<TEntity, THandler> : IKeyLessManager<TEntit
     /// <summary>
     ///     实体存储
     /// </summary>
-    protected IKeyLessStore<TEntity, THandler> EntityStore { get; }
+    private IKeyLessStore<TEntity, THandler> EntityStore { get; }
 
     /// <summary>
     ///     注册操作员

@@ -3,7 +3,12 @@
 /// <summary>
 ///     凭据接口
 /// </summary>
-public interface IClaim
+public interface IClaim : IClaimPackage;
+
+/// <summary>
+/// 凭据数据包接口
+/// </summary>
+public interface IClaimPackage
 {
     /// <summary>
     ///     凭据类型

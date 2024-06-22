@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,21 @@ namespace Artemis.Extensions.ServiceConnect;
 /// </summary>
 public static class ComponentExtensions
 {
+    /// <summary>
+    ///     添加Aspire配置
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public static IHostApplicationBuilder AddAspireConfiguration(
+        this IHostApplicationBuilder builder,
+        string path = "aspire.Component.Setting.json")
+    {
+        builder.Configuration.AddJsonFile(path, true, true);
+
+        return builder;
+    }
+
     /// <summary>
     ///     添加Redis组件
     /// </summary>

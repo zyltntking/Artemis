@@ -3,7 +3,7 @@
 /// <summary>
 ///     角色接口
 /// </summary>
-public interface IRole : IRoleInfo
+public interface IRole : IRolePackage
 {
     /// <summary>
     ///     标准化角色名
@@ -12,9 +12,9 @@ public interface IRole : IRoleInfo
 }
 
 /// <summary>
-///     角色信息接口
+///     角色数据包接口
 /// </summary>
-public interface IRoleInfo
+public interface IRolePackage
 {
     /// <summary>
     ///     角色名

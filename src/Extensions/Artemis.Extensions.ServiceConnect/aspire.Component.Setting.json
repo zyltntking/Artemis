@@ -1,0 +1,29 @@
+{
+  "Aspire": {
+    "StackExchange": {
+      "Redis": {
+        "ConfigurationOptions": {
+          "ConnectTimeout": 5000,
+          "ConnectRetry": 3
+        }
+      },
+      "MongoDB": {
+        "Driver": {
+          "DisableHealthChecks": false
+        }
+      },
+      "RabbitMQ": {
+        "Client": {
+          "DisableHealthChecks": false
+        }
+      },
+      "Npgsql": {
+        "EntityFrameworkCore": {
+          "PostgreSQL": {
+            "DbContextPooling": true
+          }
+        }
+      }
+    }
+  }
+}

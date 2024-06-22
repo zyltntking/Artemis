@@ -36,11 +36,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="SwaggerFilters\AddIdentityToken.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="serilog.Setting.json" Pack="true" PackagePath="\" />
+		<None Include="aspire.Component.Setting.json" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,6 +64,11 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.9.0-beta.1" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.6.2" />
 	</ItemGroup>
 

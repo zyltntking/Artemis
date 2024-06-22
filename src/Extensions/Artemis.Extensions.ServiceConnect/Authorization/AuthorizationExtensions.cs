@@ -1,4 +1,4 @@
-﻿using Artemis.Data.Shared.Transfer.Identity;
+﻿using Artemis.Data.Shared.Transfer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,7 +43,8 @@ internal static class AuthorizationExtensions
     /// <param name="config"></param>
     /// <returns></returns>
     private static IHostApplicationBuilder ConfigureAuthorization<TAuthorizationMiddlewareResultHandler>(
-        this IHostApplicationBuilder builder, ArtemisAuthorizationConfig? config = null) where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
+        this IHostApplicationBuilder builder, 
+        ArtemisAuthorizationConfig? config = null) where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
     {
         config ??= new ArtemisAuthorizationConfig();
 
