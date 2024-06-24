@@ -6,7 +6,7 @@ using Serilog.Exceptions;
 namespace Artemis.Extensions.ServiceConnect;
 
 /// <summary>
-/// 配置扩展
+///     配置扩展
 /// </summary>
 public static class SerilogExtensions
 {
@@ -20,7 +20,6 @@ public static class SerilogExtensions
         this IHostApplicationBuilder builder,
         string path = "serilog.Setting.json")
     {
-
         builder.Configuration.AddJsonFile(path, true, true);
 
         builder.Services.AddSerilog((services, configuration) =>

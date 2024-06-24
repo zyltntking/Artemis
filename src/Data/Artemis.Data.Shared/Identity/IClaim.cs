@@ -6,7 +6,7 @@
 public interface IClaim : IClaimPackage;
 
 /// <summary>
-/// 凭据数据包接口
+///     凭据数据包接口
 /// </summary>
 public interface IClaimPackage
 {

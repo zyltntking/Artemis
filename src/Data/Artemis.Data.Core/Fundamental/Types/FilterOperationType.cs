@@ -3,19 +3,10 @@
 namespace Artemis.Data.Core.Fundamental.Types;
 
 /// <summary>
-/// 过滤操作类型
+///     过滤操作类型
 /// </summary>
 public class FilterOperationType : Enumeration
 {
-    /// <summary>
-    ///     构造函数
-    /// </summary>
-    /// <param name="id">枚举Id</param>
-    /// <param name="name">枚举名称</param>
-    private FilterOperationType(int id, string name) : base(id, name)
-    {
-    }
-
     /// <summary>
     ///     等于
     /// </summary>
@@ -50,4 +41,13 @@ public class FilterOperationType : Enumeration
     ///     包含
     /// </summary>
     [Description("包含")] public static FilterOperationType Like = new(18, nameof(Like));
+
+    /// <summary>
+    ///     构造函数
+    /// </summary>
+    /// <param name="id">枚举Id</param>
+    /// <param name="name">枚举名称</param>
+    private FilterOperationType(int id, string name) : base(id, name)
+    {
+    }
 }

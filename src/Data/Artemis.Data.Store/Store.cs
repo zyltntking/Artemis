@@ -143,7 +143,6 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
     /// </summary>
     public IQueryable<TEntity> KeyMatchQuery(TKey key)
     {
-
         return EntityQuery.Where(entity => entity.Id.Equals(key));
     }
 
@@ -2919,7 +2918,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     private void AddEntity(TEntity entity)
     {
         if (entity is IConcurrencyStamp concurrency)
-            concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+            concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
         if (MetaDataHosting)
         {
@@ -2958,7 +2957,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
             if (MetaDataHosting)
             {
@@ -2998,7 +2997,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         Context.Attach(entity);
 
-        if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+        if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
         if (MetaDataHosting)
         {
@@ -3036,7 +3035,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
             if (MetaDataHosting)
             {
@@ -3159,7 +3158,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         {
             Context.Attach(entity);
 
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
             if (entity is IMateSlot metaSlotChange) metaSlotChange.DeletedAt = DateTime.Now;
 
@@ -3198,7 +3197,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
             foreach (var entity in entities)
             {
-                if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Guid.NewGuid().IdToString();
+                if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
 
                 if (entity is IMateSlot metaSlot) metaSlot.DeletedAt = DateTime.Now;
 

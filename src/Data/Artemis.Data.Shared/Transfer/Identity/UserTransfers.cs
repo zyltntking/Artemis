@@ -5,7 +5,27 @@ namespace Artemis.Data.Shared.Transfer.Identity;
 /// <summary>
 ///     用户信息
 /// </summary>
-public class UserSign : IUserSign
+public sealed record UserInfo : UserPackage, IUserInfo
+{
+    #region Implementation of IKeySlot<Guid>
+
+    /// <summary>
+    ///     存储标识
+    /// </summary>
+    public Guid Id { get; set; }
+
+    #endregion
+}
+
+/// <summary>
+///     用户数据包
+/// </summary>
+public record UserPackage : UserSign, IUserPackage;
+
+/// <summary>
+///     用户标识信息
+/// </summary>
+public record UserSign : IUserSign
 {
     #region Implementation of IUserInfo
 
@@ -28,7 +48,7 @@ public class UserSign : IUserSign
 }
 
 /// <summary>
-/// 用户认证结构
+///     用户认证结构
 /// </summary>
 public sealed record UserAuthentication : IUserAuthentication
 {

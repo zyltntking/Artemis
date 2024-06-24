@@ -89,10 +89,7 @@ public static class CommonExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
-        if (!app.Environment.IsDevelopment())
-        {
-            app.UseResponseCompression();
-        }
+        if (!app.Environment.IsDevelopment()) app.UseResponseCompression();
 
         return app;
     }

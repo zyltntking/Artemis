@@ -10,7 +10,7 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 file interface IArtemisAuthorizationConfig
 {
     /// <summary>
-    /// 上下文项目Token键
+    ///     上下文项目Token键
     /// </summary>
     string ContextItemTokenKey { get; set; }
 
@@ -45,7 +45,7 @@ file interface IArtemisAuthorizationConfig
     string IdentityServiceProvider { get; set; }
 
     /// <summary>
-    /// 支持的策略
+    ///     支持的策略
     /// </summary>
     IEnumerable<string> Policies { get; }
 
@@ -83,7 +83,7 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
     #region Implementation of IArtemisIdentityOptions
 
     /// <summary>
-    /// 上下文项目Token键
+    ///     上下文项目Token键
     /// </summary>
     public string ContextItemTokenKey { get; set; } = SharedKey.Token;
 
@@ -118,7 +118,7 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
     public string IdentityServiceProvider { get; set; } = SharedKey.DefaultServiceProvider;
 
     /// <summary>
-    /// 支持的策略
+    ///     支持的策略
     /// </summary>
     public IEnumerable<string> Policies
     {
@@ -130,15 +130,9 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
 
             var policies = IdentityPolicy.TokenPolicies.AsEnumerable();
 
-            if (roleBasedPolicies != null)
-            {
-                policies = policies.Concat(roleBasedPolicies);
-            }
+            if (roleBasedPolicies != null) policies = policies.Concat(roleBasedPolicies);
 
-            if (claimBasedPolicies != null)
-            {
-                policies = policies.Concat(claimBasedPolicies);
-            }
+            if (claimBasedPolicies != null) policies = policies.Concat(claimBasedPolicies);
 
             return policies;
         }

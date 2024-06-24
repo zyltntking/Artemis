@@ -98,12 +98,12 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                         {
                             var userMapTokenKey = TokenKeyGenerator.CacheUserMapTokenKey(
                                 Config.CacheUserMapTokenPrefix,
-                                document.EndType, 
+                                document.EndType,
                                 document.UserId);
 
                             var userMapToken = Cache.FetchUserMapTokenSymbol(userMapTokenKey);
 
-                            if (userMapToken != tokenSymbol) 
+                            if (userMapToken != tokenSymbol)
                                 continueHandler = false;
                         }
 

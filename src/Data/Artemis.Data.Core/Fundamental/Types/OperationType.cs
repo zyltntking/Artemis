@@ -136,8 +136,7 @@ internal class OperationType : Enumeration
     /// <summary>
     ///     不为空或空白
     /// </summary>
-    [Description("不为空或空白")]
-    public static OperationType IsNotNullOrWhiteSpace = new(25, nameof(IsNotNullOrWhiteSpace));
+    [Description("不为空或空白")] public static OperationType IsNotNullOrWhiteSpace = new(25, nameof(IsNotNullOrWhiteSpace));
 
     /// <summary>
     ///     为空或Null

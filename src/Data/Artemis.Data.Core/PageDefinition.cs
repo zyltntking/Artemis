@@ -67,6 +67,11 @@ file interface IPageResult<T> : IPageResult
 /// </summary>
 public abstract record PageSlot : IPageSlot
 {
+    /// <summary>
+    ///     跳过数
+    /// </summary>
+    public int Skip => (Page - 1) * Size;
+
     #region Implementation of IPageSlot
 
     /// <summary>
@@ -84,11 +89,6 @@ public abstract record PageSlot : IPageSlot
     public virtual required int Size { get; set; } = 20;
 
     #endregion
-
-    /// <summary>
-    ///     跳过数
-    /// </summary>
-    public int Skip => (Page - 1) * Size;
 }
 
 /// <summary>

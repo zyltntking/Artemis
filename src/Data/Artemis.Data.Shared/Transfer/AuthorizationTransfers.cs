@@ -1,16 +1,16 @@
-﻿using Artemis.Data.Core.Fundamental.Types;
-using Artemis.Data.Core;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Shared.Transfer.Identity;
 
 namespace Artemis.Data.Shared.Transfer;
 
 /// <summary>
-///     签入结果
+///     签名结果
 /// </summary>
 public sealed record SignResult
 {
     /// <summary>
-    ///     是否认证成功
+    ///     是否签名成功
     /// </summary>
     public bool Succeeded { get; set; }
 
@@ -56,7 +56,7 @@ public sealed record TokenDocument
     public required IEnumerable<ClaimPackage> RoleClaims { get; set; }
 
     /// <summary>
-    /// 生成Token符号
+    ///     生成Token符号
     /// </summary>
     public string TokenSymbol => Hash.HashData($"{UserId}:{UserName}:{DateTime.Now.ToUnixTimeStamp()}", HashType.Md5);
 }

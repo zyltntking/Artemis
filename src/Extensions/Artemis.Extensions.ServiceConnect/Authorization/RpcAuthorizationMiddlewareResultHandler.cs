@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// Rpc授权中间件结果处理器
+///     Rpc授权中间件结果处理器
 /// </summary>
 internal sealed class RpcAuthorizationMiddlewareResultHandler : AuthorizationMiddlewareResultHandler
 {
@@ -18,7 +18,8 @@ internal sealed class RpcAuthorizationMiddlewareResultHandler : AuthorizationMid
     protected override Task FailHandler(HttpContext context)
     {
         if (context.Request.ContentType == "application/grpc")
-            throw new RpcException(new Status(StatusCode.PermissionDenied, AuthorizationMessage!), AuthorizationMessage!);
+            throw new RpcException(new Status(StatusCode.PermissionDenied, AuthorizationMessage!),
+                AuthorizationMessage!);
         //var result = RpcResultAdapter.AuthFail<EmptyResponse>(AuthMessage!);
         //var bytes = result.ToByteArray();
         //context.Response.ContentType = "application/grpc";

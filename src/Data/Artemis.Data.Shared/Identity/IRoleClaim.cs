@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 角色凭据接口
+///     角色凭据接口
 /// </summary>
 public interface IRoleClaim : IRoleClaimPackage
 {
@@ -14,6 +14,4 @@ public interface IRoleClaim : IRoleClaimPackage
 /// <summary>
 ///     角色凭据数据包接口
 /// </summary>
-public interface IRoleClaimPackage : IClaimPackage
-{
-}
+public interface IRoleClaimPackage : IClaimPackage;

@@ -67,7 +67,7 @@ public static class ComponentExtensions
     }
 
     /// <summary>
-    /// 添加Postgresql组件
+    ///     添加Postgresql组件
     /// </summary>
     /// <typeparam name="TDbContext"></typeparam>
     /// <param name="builder"></param>
@@ -76,9 +76,9 @@ public static class ComponentExtensions
     /// <param name="logLevel"></param>
     /// <returns></returns>
     public static IHostApplicationBuilder AddPostgreSqlComponent<TDbContext>(
-        this IHostApplicationBuilder builder, 
-        string connectionName, 
-        Action<string>? logger = null, 
+        this IHostApplicationBuilder builder,
+        string connectionName,
+        Action<string>? logger = null,
         LogLevel logLevel = LogLevel.Debug) where TDbContext : DbContext
     {
         logger ??= Console.WriteLine;
@@ -91,10 +91,7 @@ public static class ComponentExtensions
                 .LogTo(logger, logLevel);
         });
 
-        if (builder.Environment.IsDevelopment())
-        {
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-        }
+        if (builder.Environment.IsDevelopment()) builder.Services.AddDatabaseDeveloperPageExceptionFilter();
         return builder;
     }
 }

@@ -5,7 +5,7 @@ namespace Artemis.Data.Core;
 #region interface
 
 /// <summary>
-/// 过滤插件
+///     过滤插件
 /// </summary>
 file interface IFilterSlot
 {
@@ -15,7 +15,7 @@ file interface IFilterSlot
     string Field { get; set; }
 
     /// <summary>
-    /// 过滤操作
+    ///     过滤操作
     /// </summary>
     FilterOperationType Operation { get; set; }
 
@@ -28,7 +28,7 @@ file interface IFilterSlot
 #endregion
 
 /// <summary>
-/// 过滤定义
+///     过滤定义
 /// </summary>
 public record FilterDefinition : IFilterSlot
 {
@@ -40,14 +40,14 @@ public record FilterDefinition : IFilterSlot
     public required string Field { get; set; }
 
     /// <summary>
-    /// 过滤操作
+    ///     过滤操作
     /// </summary>
     public required FilterOperationType Operation { get; set; }
 
     /// <summary>
     ///     过滤值
     /// </summary>
-    public object? Value { get; set; }
+    public required object Value { get; set; }
 
     #endregion
 }

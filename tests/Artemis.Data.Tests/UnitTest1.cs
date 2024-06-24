@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Core.Fundamental.Protocol;
 
 namespace Artemis.Data.Tests;
@@ -9,6 +10,8 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
+        var stamp = Base32.GenerateBase32();
+
         //var bbc = Generator.IsInherit<IdentityUser>(typeof(IHandlerSlot<>));
 
         var rsa = RSA.Create();

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// 令牌处理器扩展
+///     令牌处理器扩展
 /// </summary>
 public static class TokenHandlerExtensions
 {
@@ -25,7 +25,7 @@ public static class TokenHandlerExtensions
     {
         var value = cache.GetString(cacheTokenKey);
 
-        if (value == null) 
+        if (value == null)
             return null;
 
         // 刷新缓存
@@ -67,7 +67,7 @@ public static class TokenHandlerExtensions
     /// <param name="key"></param>
     /// <returns></returns>
     public static TTokenDocument? FetchTokenDocument<TTokenDocument>(
-        this HttpContext context, 
+        this HttpContext context,
         string key) where TTokenDocument : class
     {
         if (context.Items.TryGetValue(key, out var document))
@@ -84,7 +84,7 @@ public static class TokenHandlerExtensions
     /// <param name="key"></param>
     /// <param name="document"></param>
     public static void CacheTokenDocument<TTokenDocument>(
-        this HttpContext context, 
+        this HttpContext context,
         string key,
         TTokenDocument document) where TTokenDocument : class
     {
@@ -106,7 +106,7 @@ public static class TokenHandlerExtensions
     }
 
     /// <summary>
-    /// 从请求头中获取Token串
+    ///     从请求头中获取Token串
     /// </summary>
     /// <param name="context"></param>
     /// <param name="key"></param>
@@ -124,25 +124,31 @@ public static class TokenHandlerExtensions
 }
 
 /// <summary>
-/// TokenKey生成器
+///     TokenKey生成器
 /// </summary>
 public static class TokenKeyGenerator
 {
     /// <summary>
-    /// 缓存Token键
+    ///     缓存Token键
     /// </summary>
     /// <param name="prefix">前缀</param>
     /// <param name="symbol">Token符号</param>
     /// <returns></returns>
-    public static string CacheTokenKey(string prefix, string symbol) => $"{prefix}:{symbol}";
+    public static string CacheTokenKey(string prefix, string symbol)
+    {
+        return $"{prefix}:{symbol}";
+    }
 
     /// <summary>
-    /// 缓存用户映射Token键
+    ///     缓存用户映射Token键
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <param name="prefix"></param>
     /// <param name="end"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static string CacheUserMapTokenKey<TKey>(string prefix, string end, TKey id) where TKey:IEquatable<TKey> => $"{prefix}:{end}:{id}";
+    public static string CacheUserMapTokenKey<TKey>(string prefix, string end, TKey id) where TKey : IEquatable<TKey>
+    {
+        return $"{prefix}:{end}:{id}";
+    }
 }

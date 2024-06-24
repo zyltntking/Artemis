@@ -16,7 +16,7 @@ internal static class ValidatorExtensions
     /// <param name="lifetime"></param>
     /// <exception cref="AggregateException"></exception>
     private static void AddValidator(
-        IServiceCollection services, 
+        IServiceCollection services,
         Type implementationType,
         ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {

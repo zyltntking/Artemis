@@ -1,5 +1,4 @@
-﻿using Amazon.Runtime.Internal.Util;
-using Artemis.Data.Shared.Transfer;
+﻿using Artemis.Data.Shared.Transfer;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Protos.Identity;
 using Artemis.Service.Identity.Managers;
@@ -58,8 +57,8 @@ public class AccountService : Account.AccountBase
         Logger.LogInformation($"用户 {request.UserSign} 正在尝试登录...");
 
         var (result, token) = await AccountManager.SignInAsync(
-            request.UserSign, 
-            request.Password, 
+            request.UserSign,
+            request.Password,
             context.CancellationToken);
 
         Logger.LogInformation($"用户 {request.UserSign} 认证成功，准备编码授权信息...");

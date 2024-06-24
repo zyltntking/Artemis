@@ -3,7 +3,12 @@
 /// <summary>
 ///     用户登录接口
 /// </summary>
-public interface IUserLogin : IUserLoginPackage
+public interface IUserLogin : IUserLoginInfo;
+
+/// <summary>
+///     用户登录信息接口
+/// </summary>
+public interface IUserLoginInfo : IUserLoginPackage
 {
     /// <summary>
     ///     用户标识

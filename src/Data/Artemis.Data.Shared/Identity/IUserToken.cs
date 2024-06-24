@@ -3,7 +3,12 @@
 /// <summary>
 ///     基本用户令牌信息接口
 /// </summary>
-public interface IUserToken : IUserTokenPackage
+public interface IUserToken : IUserTokenInfo;
+
+/// <summary>
+///     用户令牌信息接口
+/// </summary>
+public interface IUserTokenInfo : IUserTokenPackage
 {
     /// <summary>
     ///     用户标识

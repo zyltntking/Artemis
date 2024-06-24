@@ -53,7 +53,7 @@ public static class Hash
     /// <param name="input">输入原文</param>
     /// <returns></returns>
     /// <remarks>用于计算密码</remarks>
-    public static string Password(string input)
+    public static string PasswordHash(string input)
     {
         var hash = ArtemisHasher.Create();
 

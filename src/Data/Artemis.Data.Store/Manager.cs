@@ -153,7 +153,6 @@ public abstract class KeyLessManager<TEntity> : KeyLessManager<TEntity, Guid>, I
         ILogger? logger = null) : base(store, options, logger)
     {
     }
-
 }
 
 /// <summary>

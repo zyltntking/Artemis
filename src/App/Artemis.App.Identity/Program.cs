@@ -48,7 +48,7 @@ public class Program
             builder.Services.AddScoped<IIdentityUserStore, IdentityUserStore>();
             builder.Services.AddScoped<IIdentityRoleStore, IdentityRoleStore>();
             builder.Services.AddScoped<IIdentityRoleClaimStore, IdentityRoleClaimStore>();
-            //builder.Services.AddScoped<IIdentityUserRoleStore, IdentityUserRoleStore>();
+            builder.Services.AddScoped<IIdentityUserRoleStore, IdentityUserRoleStore>();
             builder.Services.AddScoped<IIdentityUserClaimStore, IdentityUserClaimStore>();
             builder.Services.AddScoped<IIdentityUserLoginStore, IdentityUserLoginStore>();
             builder.Services.AddScoped<IIdentityUserTokenStore, IdentityUserTokenStore>();
@@ -75,7 +75,7 @@ public class Program
                 XmlDocs =
                 [
                     Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml"),
-                Path.Combine(AppContext.BaseDirectory, "Artemis.Service.Identity.xml")
+                    Path.Combine(AppContext.BaseDirectory, "Artemis.Service.Identity.xml")
                 ]
             };
 
@@ -109,6 +109,5 @@ public class Program
         {
             Log.CloseAndFlush();
         }
-
     }
 }

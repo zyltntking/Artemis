@@ -6,30 +6,31 @@ using Microsoft.AspNetCore.Http;
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// 授权中间件结果处理器
+///     授权中间件结果处理器
 /// </summary>
 internal class AuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
     #region Implementation of IAuthorizationMiddlewareResultHandler
 
     /// <summary>
-    /// Evaluates the authorization requirement and processes the authorization result.
+    ///     Evaluates the authorization requirement and processes the authorization result.
     /// </summary>
     /// <param name="next">
-    /// The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not succeed.
+    ///     The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
+    ///     succeed.
     /// </param>
     /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
     /// <param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
     /// <param name="authorizeResult">The result of authorization.</param>
     public Task HandleAsync(
-        RequestDelegate next, 
-        HttpContext context, 
+        RequestDelegate next,
+        HttpContext context,
         AuthorizationPolicy policy,
         PolicyAuthorizationResult authorizeResult)
     {
         AuthorizationMessage = context.Items[SharedKey.AuthorizationMessage] as string;
 
-        if (!authorizeResult.Succeeded) 
+        if (!authorizeResult.Succeeded)
             return FailHandler(context);
 
         return next(context);

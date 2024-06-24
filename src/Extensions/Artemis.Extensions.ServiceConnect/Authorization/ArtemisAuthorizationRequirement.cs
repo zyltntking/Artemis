@@ -54,7 +54,7 @@ internal class RolesRequirement : TokenRequirement
     }
 
     /// <summary>
-    /// 认证策略构造
+    ///     认证策略构造
     /// </summary>
     /// <param name="roles"></param>
     public RolesRequirement(params string[] roles)
@@ -69,17 +69,16 @@ internal class RolesRequirement : TokenRequirement
 }
 
 /// <summary>
-/// 角色认证要求
+///     角色认证要求
 /// </summary>
 internal sealed class RoleRequirement : RolesRequirement
 {
     /// <summary>
-    ///  认证策略构造
+    ///     认证策略构造
     /// </summary>
     /// <param name="role"></param>
     public RoleRequirement(string role) : base(role)
     {
-
     }
 }
 
@@ -98,7 +97,7 @@ internal class ClaimsRequirement : TokenRequirement
     }
 
     /// <summary>
-    /// 认证策略构造
+    ///     认证策略构造
     /// </summary>
     /// <param name="claims"></param>
     public ClaimsRequirement(params KeyValuePair<string, string>[] claims)
@@ -113,7 +112,7 @@ internal class ClaimsRequirement : TokenRequirement
 }
 
 /// <summary>
-/// 凭据认证要求
+///     凭据认证要求
 /// </summary>
 internal sealed class ClaimRequirement : ClaimsRequirement
 {
@@ -126,11 +125,12 @@ internal sealed class ClaimRequirement : ClaimsRequirement
     }
 
     /// <summary>
-    /// 认证策略构造
+    ///     认证策略构造
     /// </summary>
     /// <param name="claimKey"></param>
     /// <param name="claimValue"></param>
-    public ClaimRequirement(string claimKey, string claimValue) : base(new KeyValuePair<string, string>(claimKey, claimValue))
+    public ClaimRequirement(string claimKey, string claimValue) : base(
+        new KeyValuePair<string, string>(claimKey, claimValue))
     {
     }
 }

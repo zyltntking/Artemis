@@ -1,15 +1,15 @@
-﻿using Grpc.AspNetCore.Server;
+﻿using System.ComponentModel;
+using Grpc.AspNetCore.Server;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
-using System.ComponentModel;
 
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// 端描述器
+///     端描述器
 /// </summary>
 internal static class EndpointDescriptor
 {

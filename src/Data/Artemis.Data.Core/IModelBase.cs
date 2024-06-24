@@ -280,6 +280,23 @@ public interface ICheckStamp<TCheckStamp>
     TCheckStamp CheckStamp { get; set; }
 }
 
+/// <summary>
+///     安全戳
+/// </summary>
+public interface ISecurityStamp : ISecurityStamp<string>;
+
+/// <summary>
+///     安全戳
+/// </summary>
+/// <typeparam name="TSecurityStamp"></typeparam>
+public interface ISecurityStamp<TSecurityStamp>
+{
+    /// <summary>
+    ///     安全戳
+    /// </summary>
+    TSecurityStamp? SecurityStamp { get; set; }
+}
+
 #endregion
 
 #region PartitionSlot

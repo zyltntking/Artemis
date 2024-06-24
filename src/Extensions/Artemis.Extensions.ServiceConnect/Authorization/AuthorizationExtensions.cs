@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// 授权扩展
+///     授权扩展
 /// </summary>
 internal static class AuthorizationExtensions
 {
@@ -43,64 +43,42 @@ internal static class AuthorizationExtensions
     /// <param name="config"></param>
     /// <returns></returns>
     private static IHostApplicationBuilder ConfigureAuthorization<TAuthorizationMiddlewareResultHandler>(
-        this IHostApplicationBuilder builder, 
-        ArtemisAuthorizationConfig? config = null) where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
+        this IHostApplicationBuilder builder,
+        ArtemisAuthorizationConfig? config = null)
+        where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
     {
         config ??= new ArtemisAuthorizationConfig();
 
         builder.Services.AddAuthorization(options =>
         {
-            options.AddPolicy(IdentityPolicy.Anonymous, policy =>
-            {
-                policy.Requirements.Add(new AnonymousRequirement());
-            });
+            options.AddPolicy(IdentityPolicy.Anonymous,
+                policy => { policy.Requirements.Add(new AnonymousRequirement()); });
 
-            options.AddPolicy(IdentityPolicy.Token, policy =>
-            {
-                policy.Requirements.Add(new TokenOnlyRequirement());
-            });
+            options.AddPolicy(IdentityPolicy.Token, policy => { policy.Requirements.Add(new TokenOnlyRequirement()); });
 
-            options.AddPolicy(IdentityPolicy.Admin, policy =>
-            {
-                policy.Requirements.Add(new RolesRequirement(new[]
-                {
-                    IdentityPolicy.Admin
-                }));
-            });
+            options.AddPolicy(IdentityPolicy.Admin,
+                policy => { policy.Requirements.Add(new RolesRequirement(IdentityPolicy.Admin)); });
 
-            options.AddPolicy(IdentityPolicy.ActionName, policy =>
-            {
-                policy.Requirements.Add(new ActionNameClaimRequirement());
-            });
+            options.AddPolicy(IdentityPolicy.ActionName,
+                policy => { policy.Requirements.Add(new ActionNameClaimRequirement()); });
 
-            options.AddPolicy(IdentityPolicy.RoutePath, policy =>
-            {
-                policy.Requirements.Add(new RoutePathClaimRequirement());
-            });
+            options.AddPolicy(IdentityPolicy.RoutePath,
+                policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
 
             if (config.EnableAdvancedPolicy)
             {
                 if (config is { RolesBasedPolicyOptions: not null } && config.RolesBasedPolicyOptions.Any())
-                {
                     foreach (var rolesBasedPolicyOption in config.RolesBasedPolicyOptions)
-                    {
-                        options.AddPolicy(rolesBasedPolicyOption.Name, policy =>
-                        {
-                            policy.Requirements.Add(new RolesRequirement(rolesBasedPolicyOption.Roles));
-                        });
-                    }
-                }
+                        options.AddPolicy(rolesBasedPolicyOption.Name,
+                            policy => { policy.Requirements.Add(new RolesRequirement(rolesBasedPolicyOption.Roles)); });
 
                 if (config is { ClaimsBasedPolicyOptions: not null } && config.ClaimsBasedPolicyOptions.Any())
-                {
                     foreach (var claimsBasedPolicyOption in config.ClaimsBasedPolicyOptions)
-                    {
-                        options.AddPolicy(claimsBasedPolicyOption.Name, policy =>
-                        {
-                            policy.Requirements.Add(new ClaimsRequirement(claimsBasedPolicyOption.Claims));
-                        });
-                    }
-                }
+                        options.AddPolicy(claimsBasedPolicyOption.Name,
+                            policy =>
+                            {
+                                policy.Requirements.Add(new ClaimsRequirement(claimsBasedPolicyOption.Claims));
+                            });
             }
         });
 

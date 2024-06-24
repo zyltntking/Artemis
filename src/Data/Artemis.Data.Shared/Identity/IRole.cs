@@ -1,4 +1,6 @@
-﻿namespace Artemis.Data.Shared.Identity;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
 ///     角色接口
@@ -10,6 +12,11 @@ public interface IRole : IRolePackage
     /// </summary>
     string NormalizedName { get; set; }
 }
+
+/// <summary>
+///     角色信息接口
+/// </summary>
+public interface IRoleInfo : IRolePackage, IKeySlot;
 
 /// <summary>
 ///     角色数据包接口

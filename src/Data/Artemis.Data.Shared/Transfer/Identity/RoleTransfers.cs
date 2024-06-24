@@ -25,7 +25,7 @@ public record RolePackage : IRolePackage
 /// <summary>
 ///     角色信息
 /// </summary>
-public sealed record RoleInfo : RolePackage
+public sealed record RoleInfo : RolePackage, IRoleInfo
 {
     /// <summary>
     ///     角色标识

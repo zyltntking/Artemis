@@ -5,7 +5,7 @@ namespace Artemis.Data.Shared.Identity;
 /// <summary>
 ///     用户接口
 /// </summary>
-public interface IUser : IUserSign, IPasswordHash, IAccountRecord
+public interface IUser : IUserPackage, ISecurityStamp, IPasswordHash, IAccountRecord
 {
     /// <summary>
     ///     标准化用户名
@@ -16,21 +16,25 @@ public interface IUser : IUserSign, IPasswordHash, IAccountRecord
     ///     标准化电子邮件
     /// </summary>
     string? NormalizedEmail { get; set; }
-
-    /// <summary>
-    ///     密码锁
-    /// </summary>
-    string? SecurityStamp { get; set; }
 }
 
 /// <summary>
-/// 用户认证数据包接口
+///     用户信息接口
+/// </summary>
+public interface IUserInfo : IKeySlot, IUserPackage;
+
+/// <summary>
+///     用户数据包接口
+/// </summary>
+public interface IUserPackage : IUserSign;
+
+/// <summary>
+///     用户认证数据包接口
 /// </summary>
 public interface IUserAuthentication : IKeySlot, IUserName, IPasswordHash;
 
-
 /// <summary>
-/// 密码哈希接口
+///     密码哈希接口
 /// </summary>
 public interface IPasswordHash
 {
@@ -41,7 +45,7 @@ public interface IPasswordHash
 }
 
 /// <summary>
-/// 账号记录数据包接口
+///     账号记录数据包接口
 /// </summary>
 public interface IAccountRecord
 {
@@ -93,7 +97,7 @@ public interface IUserSign : IUserName
 }
 
 /// <summary>
-/// 用户名接口
+///     用户名接口
 /// </summary>
 public interface IUserName
 {

@@ -1,8 +1,5 @@
-﻿using Artemis.Data.Core;
-using Artemis.Protos.Identity;
+﻿using Artemis.Protos.Identity;
 using Artemis.Service.Identity.Managers;
-using Grpc.Core;
-using Mapster;
 
 namespace Artemis.App.Identity.Services;
 
@@ -33,6 +30,4 @@ public class UserService : User.UserBase
     ///     日志
     /// </summary>
     private ILogger<UserService> Logger { get; }
-
-
 }

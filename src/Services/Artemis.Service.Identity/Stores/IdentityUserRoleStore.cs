@@ -9,16 +9,16 @@ namespace Artemis.Service.Identity.Stores;
 #region Interface
 
 /// <summary>
-///     认证用户角色关系存储接口
+///     认证用户令牌存储接口
 /// </summary>
-public interface IIdentityUserRoleStore : IKeyLessStore<IdentityUserRole>;
+public interface IIdentityUserTokenStore : IKeyLessStore<IdentityUserToken>;
 
 #endregion
 
 /// <summary>
-///     认证用户角色关系存储
+///     认证用户令牌存储
 /// </summary>
-public class IdentityUserRoleStore : KeyLessStore<IdentityUserRole>, IIdentityUserRoleStore
+public class IdentityUserTokenStore : KeyLessStore<IdentityUserToken>, IIdentityUserTokenStore
 {
     /// <summary>
     ///     无键模型基本存储实例构造
@@ -28,11 +28,17 @@ public class IdentityUserRoleStore : KeyLessStore<IdentityUserRole>, IIdentityUs
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    public IdentityUserRoleStore(
+    public IdentityUserTokenStore(
         IdentityContext context,
         IStoreOptions? storeOptions = null,
         IDistributedCache? cache = null,
         ILogger? logger = null) : base(context, storeOptions, cache, logger)
     {
     }
+
+    /// <summary>
+    ///     实体键生成委托
+    /// </summary>
+    protected override Func<IdentityUserToken, string>? EntityKey { get; init; } = userToken =>
+        $"{userToken.UserId}:{userToken.LoginProvider}:{userToken.Name}";
 }

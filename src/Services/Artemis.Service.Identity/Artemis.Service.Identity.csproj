@@ -35,17 +35,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Stores\IdentityUserRoleStore.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Data\Artemis.Data.Shared\Artemis.Data.Shared.csproj" />
 		<ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
-		<ProjectReference Include="..\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 
 </Project>
