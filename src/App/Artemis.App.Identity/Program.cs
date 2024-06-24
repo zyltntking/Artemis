@@ -54,6 +54,7 @@ public class Program
             builder.Services.AddScoped<IIdentityUserTokenStore, IdentityUserTokenStore>();
 
             builder.Services.AddScoped<IIdentityUserManager, IdentityUserManager>();
+            builder.Services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
             builder.Services.AddScoped<IIdentityAccountManager, IdentityAccountManager>();
 
             builder.Services.Configure<IdentityOptions>(options =>

@@ -1,4 +1,6 @@
-﻿namespace Artemis.Data.Shared.Identity;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
 ///     角色凭据接口
@@ -9,6 +11,17 @@ public interface IRoleClaim : IRoleClaimPackage
     ///     角色标识
     /// </summary>
     Guid RoleId { get; set; }
+}
+
+/// <summary>
+///     角色凭据信息接口
+/// </summary>
+public interface IRoleClaimInfo : IKeySlot<int>, IRoleClaimPackage
+{
+    /// <summary>
+    ///     用户标识
+    /// </summary>
+    Guid UserId { get; set; }
 }
 
 /// <summary>

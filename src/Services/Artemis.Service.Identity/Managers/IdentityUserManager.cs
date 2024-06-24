@@ -60,6 +60,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
         UserClaimStore.Dispose();
         UserLoginStore.Dispose();
         UserTokenStore.Dispose();
+        UserRoleStore.Dispose();
     }
 
     #endregion
@@ -310,7 +311,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return (result, user.Adapt<UserInfo>());
         }
 
-        return (StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString()), default);
+        return (StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString()), default);
     }
 
     /// <summary>
@@ -351,7 +352,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return await UserStore.UpdateAsync(users, cancellationToken);
         }
 
-        var flag = string.Join(',', ids.Select(id => id.ToString()));
+        var flag = string.Join(',', ids.Select(id => id.GuidToString()));
 
         return StoreResult.EntityFoundFailed(nameof(IdentityUser), flag);
     }
@@ -373,7 +374,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
         if (user != null)
             return await UserStore.DeleteAsync(user, cancellationToken);
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -397,7 +398,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
         if (userList.Any())
             return await UserStore.DeleteAsync(userList, cancellationToken);
 
-        var flag = string.Join(',', idList.Select(id => id.ToString()));
+        var flag = string.Join(',', idList.Select(id => id.GuidToString()));
 
         return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), flag);
     }
@@ -487,7 +488,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 .ProjectToType<RoleInfo>()
                 .FirstOrDefaultAsync(cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -528,10 +529,10 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 return await UserRoleStore.CreateAsync(userRole, cancellationToken);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), roleId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), roleId.GuidToString());
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -585,17 +586,17 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                     return await UserRoleStore.CreateAsync(userRoles, cancellationToken);
                 }
 
-                flag = string.Join(',', notSetRoleIds.Select(userId => userId.ToString()));
+                flag = string.Join(',', notSetRoleIds.Select(userId => userId.GuidToString()));
 
                 return StoreResult.EntityFoundFailed(nameof(IdentityUserRole), flag);
             }
 
-            flag = string.Join(',', roleIds.Select(item => item.ToString()));
+            flag = string.Join(',', roleIds.Select(item => item.GuidToString()));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -632,10 +633,10 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.GuidToString());
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -663,12 +664,12 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
 
             if (userRoles.Any()) return await UserRoleStore.DeleteAsync(userRoles, cancellationToken);
 
-            var flag = string.Join(',', roleIds.Select(item => item.ToString()));
+            var flag = string.Join(',', roleIds.Select(item => item.GuidToString()));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -738,7 +739,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             };
         }
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -759,7 +760,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
 
         if (userExists) return await UserClaimStore.FindMapEntityAsync<UserClaimInfo>(claimId, cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -802,7 +803,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return await UserClaimStore.CreateAsync(userClaim, cancellationToken);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -841,11 +842,12 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                     .Where(package => notSetCheckStamps.Contains(package.CheckStamp))
                     .Select(package =>
                     {
+                        var summery = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+
                         var userClaim = Instance.CreateInstance<IdentityUserClaim, UserClaimPackage>(package);
 
                         userClaim.UserId = id;
-                        userClaim.CheckStamp =
-                            Generator.CheckStamp(Generator.PairSummary(package.ClaimType, package.ClaimValue));
+                        userClaim.CheckStamp = Generator.CheckStamp(summery);
 
                         return userClaim;
                     })
@@ -860,7 +862,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityFoundFailed(nameof(IdentityUserClaim), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -890,7 +892,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserClaim), claimId.ToString());
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -924,7 +926,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserClaim), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -982,7 +984,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             };
         }
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1010,7 +1012,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 .ProjectToType<UserLoginInfo>()
                 .FirstOrDefaultAsync(cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1079,7 +1081,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserLogin), $"{provider}:{providerKey}");
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1127,7 +1129,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserLogin), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1199,7 +1201,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             };
         }
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1227,7 +1229,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 .ProjectToType<UserTokenInfo>()
                 .FirstOrDefaultAsync(cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityUser), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1297,7 +1299,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserToken), $"{id}:{loginProvider}:{name}");
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
@@ -1344,7 +1346,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserToken), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     #endregion
