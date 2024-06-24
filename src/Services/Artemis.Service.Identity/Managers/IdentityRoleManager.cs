@@ -297,12 +297,11 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<(StoreResult result, RoleInfo? role)> UpdateOrCreateRoleAsync(
+    public async Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default)
     {
-        //todo: 优化
         OnAsyncActionExecuting(cancellationToken);
 
         var exists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
@@ -829,6 +828,94 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
         }
 
         return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+    }
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateRoleClaimAsync(Guid id, int claimId, RoleClaimPackage package,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (roleExists)
+        {
+            var roleClaim = await RoleClaimStore.KeyMatchQuery(claimId)
+                .Where(roleClaim => roleClaim.RoleId == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+
+            if (roleClaim is not null)
+            {
+                roleClaim.ClaimType = package.ClaimType;
+                roleClaim.ClaimValue = package.ClaimValue;
+                roleClaim.CheckStamp = Generator.CheckStamp(summary);
+
+                return await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken);
+            }
+
+            var flag = $"roleId:{id},claim：{summary}";
+
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.GuidToString());
+    }
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="dictionary">凭据更新字典</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateRoleClaimsAsync(Guid id, IDictionary<int, RoleClaimPackage> dictionary,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var roleExists = id != default && await RoleStore.ExistsAsync(id, cancellationToken);
+
+        if (roleExists)
+        {
+            var ids = dictionary.Keys;
+
+            var roleClaims = await RoleClaimStore.KeyMatchQuery(ids)
+                .Where(roleClaim => roleClaim.RoleId == id)
+                .ToListAsync(cancellationToken);
+
+            if (roleClaims.Any())
+            {
+                roleClaims = roleClaims.Select(roleClaim =>
+                {
+                    var package = dictionary[roleClaim.Id];
+
+                    var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+
+                    roleClaim.ClaimType = package.ClaimType;
+                    roleClaim.ClaimValue = package.ClaimValue;
+                    roleClaim.CheckStamp = Generator.CheckStamp(summary);
+
+                    return roleClaim;
+                }).ToList();
+
+                return await RoleClaimStore.UpdateAsync(roleClaims, cancellationToken);
+            }
+
+            var flag = $"roleId:{id},claims:{string.Join(',', ids)}";
+
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.GuidToString());
     }
 
     /// <summary>

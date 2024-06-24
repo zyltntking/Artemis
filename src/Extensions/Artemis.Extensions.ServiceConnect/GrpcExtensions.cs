@@ -33,7 +33,8 @@ public static class GrpcExtensions
         }).AddJsonTranscoding();
         builder.Services.AddGrpcReflection();
 
-        if (enableValidator) builder.Services.AddValidators();
+        if (enableValidator)
+            builder.Services.AddValidators();
 
         builder.ConfigureSwagger(config, true);
 

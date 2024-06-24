@@ -7,7 +7,7 @@ namespace Artemis.Service.Identity.Context.Configuration;
 /// <summary>
 ///     认证凭据实体配置
 /// </summary>
-internal sealed class IdentityClaimConfiguration : KeySlotEntityConfiguration<IdentityClaim, int>
+internal sealed class IdentityClaimConfiguration : BaseModelEntityConfiguration<IdentityClaim>
 {
     #region Overrides of ModelConfiguration<IdentityClaim>
 

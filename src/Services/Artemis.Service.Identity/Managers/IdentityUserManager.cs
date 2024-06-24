@@ -866,6 +866,99 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     }
 
     /// <summary>
+    ///     更新用户凭据
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateUserClaimAsync(
+        Guid id,
+        int claimId,
+        UserClaimPackage package,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (userExists)
+        {
+            var userClaim = await UserClaimStore.KeyMatchQuery(claimId)
+                .Where(userClaim => userClaim.UserId == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+
+            if (userClaim is not null)
+            {
+                userClaim.ClaimType = package.ClaimType;
+                userClaim.ClaimValue = package.ClaimValue;
+                userClaim.CheckStamp = Generator.CheckStamp(summary);
+
+                return await UserClaimStore.UpdateAsync(userClaim, cancellationToken);
+            }
+
+            var flag = $"userId:{id},claim：{summary}";
+
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUserClaim), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
+    }
+
+    /// <summary>
+    ///     更新用户凭据
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="dictionary">凭据更新字典</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateUserClaimsAsync(
+        Guid id,
+        IDictionary<int, UserClaimPackage> dictionary,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = id != default && await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (userExists)
+        {
+            var ids = dictionary.Keys;
+
+            var userClaims = await UserClaimStore.KeyMatchQuery(ids)
+                .Where(userClaim => userClaim.UserId == id)
+                .ToListAsync(cancellationToken);
+
+            if (userClaims.Any())
+            {
+                userClaims = userClaims.Select(userClaim =>
+                {
+                    var package = dictionary[userClaim.Id];
+
+                    var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+
+                    userClaim.ClaimType = package.ClaimType;
+                    userClaim.ClaimValue = package.ClaimValue;
+                    userClaim.CheckStamp = Generator.CheckStamp(summary);
+
+                    return userClaim;
+                }).ToList();
+
+                return await UserClaimStore.UpdateAsync(userClaims, cancellationToken);
+            }
+
+            var flag = $"userId:{id},claims:{string.Join(',', ids)}";
+
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUserClaim), flag);
+        }
+
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
+    }
+
+    /// <summary>
     ///     删除用户凭据
     /// </summary>
     /// <param name="id">用户标识</param>

@@ -236,6 +236,32 @@ public interface IIdentityUserManager : IManager<IdentityUser, Guid, Guid>
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     更新用户凭据
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateUserClaimAsync(
+        Guid id,
+        int claimId,
+        UserClaimPackage package,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新用户凭据
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="dictionary">凭据更新字典</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateUserClaimsAsync(
+        Guid id,
+        IDictionary<int, UserClaimPackage> dictionary,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     ///     删除用户凭据
     /// </summary>
     /// <param name="id">用户标识</param>

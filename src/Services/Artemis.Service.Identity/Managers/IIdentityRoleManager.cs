@@ -85,7 +85,7 @@ public interface IIdentityRoleManager : IManager<IdentityRole, Guid, Guid>
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    Task<(StoreResult result, RoleInfo? role)> UpdateOrCreateRoleAsync(
+    Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default);
@@ -242,6 +242,32 @@ public interface IIdentityRoleManager : IManager<IdentityRole, Guid, Guid>
     Task<StoreResult> AddRoleClaimsAsync(
         Guid id,
         IEnumerable<RoleClaimPackage> packages,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="claimId">凭据标识</param>
+    /// <param name="package">凭据信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateRoleClaimAsync(
+        Guid id,
+        int claimId,
+        RoleClaimPackage package,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     更新角色凭据
+    /// </summary>
+    /// <param name="id">角色标识</param>
+    /// <param name="dictionary">凭据更新字典</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    Task<StoreResult> UpdateRoleClaimsAsync(
+        Guid id,
+        IDictionary<int, RoleClaimPackage> dictionary,
         CancellationToken cancellationToken = default);
 
     /// <summary>

@@ -6,6 +6,7 @@ using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Artemis.App.Identity;
@@ -56,6 +57,7 @@ public class Program
             builder.Services.AddScoped<IIdentityUserManager, IdentityUserManager>();
             builder.Services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
             builder.Services.AddScoped<IIdentityAccountManager, IdentityAccountManager>();
+            builder.Services.AddScoped<IIdentityResourceManager, IdentityResourceManager>();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -80,8 +82,19 @@ public class Program
                 ]
             };
 
+            var isMigration = false;
+
+            try
+            {
+                if (EF.IsDesignTime) isMigration = true;
+            }
+            catch
+            {
+                isMigration = true;
+            }
+
             // 配置 Grpc 服务， 包括swagger文档配置和验证器配置
-            builder.ConfigureGrpc(swaggerConfig);
+            builder.ConfigureGrpc(swaggerConfig, !isMigration);
 
             var app = builder.Build();
 
@@ -102,7 +115,8 @@ public class Program
 
             app.Run();
         }
-        catch (Exception exception)
+        catch (Exception exception) when (exception is not HostAbortedException &&
+                                          exception.Source != "Microsoft.EntityFrameworkCore.Design")
         {
             Log.Fatal(exception, "An unhandled exception occurred during bootstrapping");
         }

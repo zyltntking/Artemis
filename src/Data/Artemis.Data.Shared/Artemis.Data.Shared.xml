@@ -75,6 +75,16 @@
 				角色标识
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Shared.Identity.IRoleClaimInfo">
+			<summary>
+				角色凭据信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Identity.IRoleClaimInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Shared.Identity.IRoleClaimPackage">
 			<summary>
 				角色凭据数据包接口
@@ -453,6 +463,26 @@
 		<member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimPackage.Description">
 			<summary>
 				描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.Transfer.Identity.RoleClaimInfo">
+			<summary>
+				用户凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.Identity.RoleClaimInfo.Id">
+			<summary>
+				存储标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.Identity.RoleClaimInfo.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage">
+			<summary>
+				用户凭据数据包
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Shared.Transfer.Identity.RolePackage">

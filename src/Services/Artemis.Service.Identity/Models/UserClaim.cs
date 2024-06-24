@@ -7,7 +7,7 @@ namespace Artemis.Service.Identity.Models;
 /// <summary>
 ///     用户凭据模型
 /// </summary>
-public class UserClaim : Claim, IUserClaim
+public class UserClaim : StandardClaim, IUserClaim
 {
     /// <summary>
     ///     用户标识

@@ -365,6 +365,15 @@
 				释放托管的Store
 			</summary>
 		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.IssuedTokenDocument(Artemis.Data.Shared.Transfer.Identity.UserAuthentication,System.Threading.CancellationToken)">
+			<summary>
+				签发Token文档
+			</summary>
+			<param name="authentication">认证用户</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
 		<member name="P:Artemis.Service.Identity.Managers.IdentityAccountManager.UserStore">
 			<summary>
 				用户存储访问器
@@ -430,14 +439,284 @@
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>批量重置结果</returns>
 		</member>
-		<member
-			name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.IssuedTokenDocument(Artemis.Data.Shared.Transfer.Identity.UserAuthentication,System.Threading.CancellationToken)">
+		<member name="T:Artemis.Service.Identity.Managers.IdentityRoleManager">
 			<summary>
-				签发Token文档
+				认证角色管理器
 			</summary>
-			<param name="authentication">认证用户</param>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.#ctor(Artemis.Service.Identity.Stores.IIdentityRoleStore,Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Identity.Stores.IIdentityRoleClaimStore,Artemis.Service.Identity.Stores.IIdentityUserRoleStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="roleStore">存储访问器依赖</param>
+			<param name="userStore"></param>
+			<param name="roleClaimStore"></param>
+			<param name="userRoleStore"></param>
+			<param name="options">配置依赖</param>
+			<param name="logger">日志依赖</param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Managers.IdentityRoleManager.RoleStore">
+			<summary>
+				角色存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Managers.IdentityRoleManager.UserStore">
+			<summary>
+				用户存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Managers.IdentityRoleManager.RoleClaimStore">
+			<summary>
+				角色凭据存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Managers.IdentityRoleManager.UserRoleStore">
+			<summary>
+				用户角色关系存储访问器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据角色名搜索角色
+			</summary>
+			<param name="nameSearch">角色名搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				根据角色标识获取角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>角色实例</returns>
+			<remarks>当查询不到角色实例时返回空</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRoleAsync(Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>存储结果和创建成功的角色实例</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Data.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="packages">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>创建结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="dictionary">更新角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>创建或更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.DeleteRolesAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="ids">角色标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户信息搜索具有该角色标签的用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userNameSearch">用户名匹配值</param>
+			<param name="emailSearch">邮箱匹配值</param>
+			<param name="phoneSearch">电话匹配值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.GetRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				获取角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>用户信息</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleUsersAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userIds">用户标识列表</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.RemoveRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.RemoveRoleUsersAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userIds">用户标识列表</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				查询角色的凭据
+			</summary>
+			<param name="id">角色id</param>
+			<param name="claimTypeSearch">凭据类型</param>
+			<param name="page">页码</param>
+			<param name="size">页面尺寸</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页查询结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				获取角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>角色凭据</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				添加角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				添加角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="packages">凭据</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="package">凭据信息</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="dictionary">凭据更新字典</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.RemoveRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				删除角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.RemoveRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Int32},System.Threading.CancellationToken)">
+			<summary>
+				删除角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimIds">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
 		</member>
 		<member name="T:Artemis.Service.Identity.Managers.IdentityUserManager">
 			<summary>
@@ -681,6 +960,27 @@
 			<returns>添加结果</returns>
 		</member>
 		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Data.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				更新用户凭据
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="package">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Data.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				更新用户凭据
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="dictionary">凭据更新字典</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.Service.Identity.Managers.IdentityUserManager.RemoveUserClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
 			<summary>
 				删除用户凭据
@@ -865,6 +1165,247 @@
 			<param name="dictionary">重置密码信息字典</param>
 			<param name="cancellationToken">操作取消信号</param>
 			<returns>批量重置结果</returns>
+		</member>
+		<member name="T:Artemis.Service.Identity.Managers.IIdentityRoleManager">
+			<summary>
+				认证角色管理接口
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.FetchRolesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据角色名搜索角色
+			</summary>
+			<param name="nameSearch">角色名搜索值</param>
+			<param name="page">页码</param>
+			<param name="size">条目数</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.GetRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				根据角色标识获取角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>角色实例</returns>
+			<remarks>当查询不到角色实例时返回空</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRoleAsync(Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>存储结果和创建成功的角色实例</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Data.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+			<summary>
+				创建角色
+			</summary>
+			<param name="packages">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>创建结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+			<summary>
+				更新角色
+			</summary>
+			<param name="dictionary">更新角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+			<summary>
+				创建或更新角色
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">角色信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>创建或更新结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.DeleteRoleAsync(System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="id">角色id</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.DeleteRolesAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				删除角色
+			</summary>
+			<param name="ids">角色标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.FetchRoleUsersAsync(System.Guid,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				根据用户信息搜索具有该角色标签的用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userNameSearch">用户名匹配值</param>
+			<param name="emailSearch">邮箱匹配值</param>
+			<param name="phoneSearch">电话匹配值</param>
+			<param name="page">页码</param>
+			<param name="size">页面大小</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页搜索结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.GetRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				获取角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>用户信息</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleUsersAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				添加角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userIds">用户标识列表</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.RemoveRoleUserAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userId">用户标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.RemoveRoleUsersAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+			<summary>
+				删除角色用户
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="userIds">用户标识列表</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				查询角色的凭据
+			</summary>
+			<param name="id">角色id</param>
+			<param name="claimTypeSearch">凭据类型</param>
+			<param name="page">页码</param>
+			<param name="size">页面尺寸</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>分页查询结果</returns>
+			<remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.GetRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				获取角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>角色凭据</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				添加角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="package">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				添加角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="packages">凭据</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>添加结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="package">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Data.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				更新角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="dictionary">凭据更新字典</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.RemoveRoleClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				删除角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.RemoveRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Int32},System.Threading.CancellationToken)">
+			<summary>
+				删除角色凭据
+			</summary>
+			<param name="id">角色标识</param>
+			<param name="claimIds">凭据标识</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns>删除结果</returns>
 		</member>
 		<member name="T:Artemis.Service.Identity.Managers.IIdentityUserManager">
 			<summary>
@@ -1058,6 +1599,27 @@
 			<returns>添加结果</returns>
 		</member>
 		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Data.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+			<summary>
+				更新用户凭据
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="claimId">凭据标识</param>
+			<param name="package">凭据信息</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Data.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+			<summary>
+				更新用户凭据
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="dictionary">凭据更新字典</param>
+			<param name="cancellationToken">操作取消信号</param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.RemoveUserClaimAsync(System.Guid,System.Int32,System.Threading.CancellationToken)">
 			<summary>
 				删除用户凭据
@@ -1209,6 +1771,31 @@
 			</summary>
 		</member>
 		<member name="P:Artemis.Service.Identity.Models.Claim.Description">
+			<summary>
+				凭据描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Identity.Models.StandardClaim">
+			<summary>
+				标准凭据模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Models.StandardClaim.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Models.StandardClaim.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Models.StandardClaim.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Identity.Models.StandardClaim.Description">
 			<summary>
 				凭据描述
 			</summary>

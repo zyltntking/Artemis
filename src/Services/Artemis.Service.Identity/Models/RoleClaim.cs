@@ -7,7 +7,7 @@ namespace Artemis.Service.Identity.Models;
 /// <summary>
 ///     角色凭据模型
 /// </summary>
-public class RoleClaim : Claim, IRoleClaim
+public class RoleClaim : StandardClaim, IRoleClaim
 {
     /// <summary>
     ///     角色标识

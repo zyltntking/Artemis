@@ -1,4 +1,6 @@
-﻿namespace Artemis.Data.Shared.Identity;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
 ///     凭据接口
@@ -6,9 +8,16 @@
 public interface IClaim : IClaimPackage;
 
 /// <summary>
+///     凭据信息
+/// </summary>
+public interface IClaimInfo : IClaimPackage, IKeySlot
+{
+}
+
+/// <summary>
 ///     凭据数据包接口
 /// </summary>
-public interface IClaimPackage
+public interface IClaimPackage : ICheckStamp
 {
     /// <summary>
     ///     凭据类型
@@ -19,11 +28,6 @@ public interface IClaimPackage
     ///     凭据值
     /// </summary>
     string ClaimValue { get; set; }
-
-    /// <summary>
-    ///     校验戳
-    /// </summary>
-    string CheckStamp { get; set; }
 
     /// <summary>
     ///     描述
