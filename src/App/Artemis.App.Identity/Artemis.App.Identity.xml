@@ -1,274 +1,250 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.Identity</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.Identity.IdentityDbContextFactory">
-			<summary>
-				Identity迁移上下文工厂
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.IdentityDbContextFactory.CreateDbContext(System.String[])">
-			<summary>Creates a new instance of a derived context.</summary>
-			<param name="args">Arguments provided by the design-time service.</param>
-			<returns>An instance of ArtemisIdentityContext.</returns>
-		</member>
-		<member name="M:Artemis.App.Identity.IdentityDbContextFactory.BuildConfiguration">
-			<summary>
-				创建配置
-			</summary>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.Identity.Program">
-			<summary>
-				应用程序入口
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Program.Main(System.String[])">
-			<summary>
-				主函数
-			</summary>
-			<param name="args"></param>
-		</member>
-		<member name="T:Artemis.App.Identity.Services.AccountService">
-			<summary>
-				账户服务
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.#ctor(Artemis.Service.Identity.Managers.IIdentityAccountManager,Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
-			<summary>
-				账户服务
-			</summary>
-			<param name="accountManager">账户管理器</param>
-			<param name="userManager">用户管理器</param>
-			<param name="cache"></param>
-			<param name="options"></param>
-			<param name="logger">日志记录器</param>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.AccountService.AccountManager">
-			<summary>
-				账户管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.AccountService.UserManager">
-			<summary>
-				用户管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.AccountService.Cache">
-			<summary>
-				分布式缓存依赖
-			</summary>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.AccountService.Options">
-			<summary>
-				授权配置项
-			</summary>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.AccountService.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.SignIn(Artemis.Service.Protos.Identity.SignInRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				签到
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.SignUp(Artemis.Service.Protos.Identity.SignUpRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				签入
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.SignOut(Google.Protobuf.WellKnownTypes.Empty,Grpc.Core.ServerCallContext)">
-			<summary>
-				签出
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.ChangePassword(Artemis.Service.Protos.Identity.ChangePasswordRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				修改密码
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.ResetPassword(Artemis.Service.Protos.Identity.ResetPasswordRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				重置密码
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.BatchResetPasswords(Artemis.Service.Protos.Identity.BatchResetPasswordRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量重置密码
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.RecordTokenDocument(Artemis.Data.Shared.Transfer.TokenDocument,System.Threading.CancellationToken)">
-			<summary>
-				记录TokenDocument
-			</summary>
-			<param name="tokenDocument">tokenDocument</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>认证Token</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.AccountService.EraseTokenDocument(System.String,System.Threading.CancellationToken)">
-			<summary>
-				擦除TokenDocument
-			</summary>
-			<param name="identityToken">认证token</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.App.Identity.Services.RoleService">
-			<summary>
-				角色服务
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Services.UserService">
-			<summary>
-				用户服务
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.#ctor(Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
-			<summary>
-				账户服务
-			</summary>
-			<param name="userManager">用户管理器</param>
-			<param name="logger">日志记录器</param>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.UserService.UserManager">
-			<summary>
-				用户管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.App.Identity.Services.UserService.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.SearchUserInfo(Artemis.Service.Protos.Identity.SearchUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询用户
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.CreateUser(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建用户
-			</summary>
-			<param name="request"></param>
-			<param name="context"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.UpdateUserInfo(Artemis.Service.Protos.Identity.UpdateUserRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新用户信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取用户信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Services.UserService.DeleteUser(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除用户
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.SignInRequestValidator">
-			<summary>
-				签到请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.SignUpRequestValidator">
-			<summary>
-				签入请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Identity.IdentityDbContextFactory">
+            <summary>
+                Identity迁移上下文工厂
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.IdentityDbContextFactory.CreateDbContext(System.String[])">
+            <summary>Creates a new instance of a derived context.</summary>
+            <param name="args">Arguments provided by the design-time service.</param>
+            <returns>An instance of ArtemisIdentityContext.</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.IdentityDbContextFactory.BuildConfiguration">
+            <summary>
+                创建配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.ChangeIdentityClaimModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Identity.Program">
+            <summary>
+                应用程序入口
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Program.Main(System.String[])">
+            <summary>
+                主函数
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:Artemis.App.Identity.Services.AccountService">
+            <summary>
+                账户服务
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.#ctor(Artemis.Service.Identity.Managers.IIdentityAccountManager,Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
+            <summary>
+                账户服务
+            </summary>
+            <param name="accountManager">账户管理器</param>
+            <param name="userManager">用户管理器</param>
+            <param name="cache"></param>
+            <param name="options"></param>
+            <param name="logger">日志记录器</param>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.AccountService.AccountManager">
+            <summary>
+                账户管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.AccountService.UserManager">
+            <summary>
+                用户管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.AccountService.Cache">
+            <summary>
+                分布式缓存依赖
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.AccountService.Options">
+            <summary>
+                授权配置项
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.AccountService.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.SignIn(Artemis.Service.Protos.Identity.SignInRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                签到
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.SignUp(Artemis.Service.Protos.Identity.SignUpRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                签入
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.SignOut(Google.Protobuf.WellKnownTypes.Empty,Grpc.Core.ServerCallContext)">
+            <summary>
+                签出
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.ChangePassword(Artemis.Service.Protos.Identity.ChangePasswordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                修改密码
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.ResetPassword(Artemis.Service.Protos.Identity.ResetPasswordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                重置密码
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.BatchResetPasswords(Artemis.Service.Protos.Identity.BatchResetPasswordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量重置密码
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.RecordTokenDocument(Artemis.Data.Shared.Transfer.TokenDocument,System.Threading.CancellationToken)">
+            <summary>
+                记录TokenDocument
+            </summary>
+            <param name="tokenDocument">tokenDocument</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>认证Token</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.AccountService.EraseTokenDocument(System.String,System.Threading.CancellationToken)">
+            <summary>
+                擦除TokenDocument
+            </summary>
+            <param name="identityToken">认证token</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Services.RoleService">
+            <summary>
+                角色服务
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Services.UserService">
+            <summary>
+                用户服务
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.#ctor(Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
+            <summary>
+                账户服务
+            </summary>
+            <param name="userManager">用户管理器</param>
+            <param name="logger">日志记录器</param>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.UserService.UserManager">
+            <summary>
+                用户管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.UserService.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.SearchUserInfo(Artemis.Service.Protos.Identity.SearchUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.CreateUser(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建用户
+            </summary>
+            <param name="request"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.UpdateUserInfo(Artemis.Service.Protos.Identity.UpdateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.DeleteUser(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.SignInRequestValidator">
+            <summary>
+                签到请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.SignUpRequestValidator">
+            <summary>
+                签入请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+    </members>
 </doc>
