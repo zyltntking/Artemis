@@ -45,6 +45,11 @@ file interface IArtemisAuthorizationConfig
     string IdentityServiceProvider { get; set; }
 
     /// <summary>
+    ///     认证服务令牌名称后缀
+    /// </summary>
+    string IdentityServiceTokenNameSuffix { get; set; }
+
+    /// <summary>
     ///     支持的策略
     /// </summary>
     IEnumerable<string> Policies { get; }
@@ -116,6 +121,11 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
     ///     认证服务对提供者名称
     /// </summary>
     public string IdentityServiceProvider { get; set; } = SharedKey.DefaultServiceProvider;
+
+    /// <summary>
+    ///     认证服务令牌名称后缀
+    /// </summary>
+    public string IdentityServiceTokenNameSuffix { get; set; } = SharedKey.Token;
 
     /// <summary>
     ///     支持的策略

@@ -60,7 +60,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected override Task HandleRequirementAsync(
+    protected override async Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
         IArtemisAuthorizationRequirement requirement)
     {
@@ -70,7 +70,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
         {
             context.Succeed(requirement);
 
-            return Task.CompletedTask;
+            return;
         }
 
         var message = "未授权";
@@ -85,7 +85,8 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                 {
                     var cacheTokenKey = TokenKeyGenerator.CacheTokenKey(Config.CacheTokenPrefix, tokenSymbol);
 
-                    var document = Cache.FetchTokenDocument<TokenDocument>(cacheTokenKey);
+                    var document = await Cache.FetchTokenDocumentAsync<TokenDocument>(cacheTokenKey,
+                        cancellationToken: httpContext.RequestAborted);
 
                     if (document is not null)
                     {
@@ -101,7 +102,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                                 document.EndType,
                                 document.UserId);
 
-                            var userMapToken = Cache.FetchUserMapTokenSymbol(userMapTokenKey);
+                            var userMapToken = await Cache.FetchUserMapTokenSymbolAsync(userMapTokenKey);
 
                             if (userMapToken != tokenSymbol)
                                 continueHandler = false;
@@ -113,14 +114,14 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                             {
                                 context.Succeed(requirement);
 
-                                return Task.CompletedTask;
+                                return;
                             }
 
                             if (HandleRolesRequirement(requirement, document, ref message))
                             {
                                 context.Succeed(requirement);
 
-                                return Task.CompletedTask;
+                                return;
                             }
 
 
@@ -128,7 +129,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                             {
                                 context.Succeed(requirement);
 
-                                return Task.CompletedTask;
+                                return;
                             }
 
 
@@ -136,14 +137,14 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                             {
                                 context.Succeed(requirement);
 
-                                return Task.CompletedTask;
+                                return;
                             }
 
                             if (HandleRoutePathClaimRequirement(requirement, httpContext, document, ref message))
                             {
                                 context.Succeed(requirement);
 
-                                return Task.CompletedTask;
+                                return;
                             }
                         }
                         else
@@ -172,8 +173,6 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
         HttpContextAccessor.HttpContext?.Items.Add(SharedKey.AuthorizationMessage, message);
 
         context.Fail(new AuthorizationFailureReason(this, message));
-
-        return Task.CompletedTask;
     }
 
     #endregion

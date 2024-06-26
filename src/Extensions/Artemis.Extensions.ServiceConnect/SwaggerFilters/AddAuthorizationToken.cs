@@ -44,10 +44,10 @@ internal sealed class AddAuthorizationToken : IOperationFilter
             {
                 Name = Options.RequestHeaderTokenKey,
                 In = ParameterLocation.Header,
-                Required = false,
+                Required = true,
                 Schema = new OpenApiSchema
                 {
-                    Type = "String"
+                    Type = "string"
                 },
                 Description = "认证令牌"
             });

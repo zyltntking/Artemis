@@ -42,12 +42,12 @@ public interface IIdentityUserManager : IManager<IdentityUser, Guid, Guid>
     /// <summary>
     ///     创建用户
     /// </summary>
-    /// <param name="package">用户信息</param>
+    /// <param name="userSign">用户信息</param>
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的用户实例</returns>
-    Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage package,
+    Task<StoreResult> CreateUserAsync(
+        UserSign userSign,
         string password,
         CancellationToken cancellationToken = default);
 
@@ -58,7 +58,7 @@ public interface IIdentityUserManager : IManager<IdentityUser, Guid, Guid>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     Task<StoreResult> CreateUsersAsync(
-        IDictionary<UserPackage, string> dictionary,
+        IDictionary<UserSign, string> dictionary,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -68,7 +68,7 @@ public interface IIdentityUserManager : IManager<IdentityUser, Guid, Guid>
     /// <param name="package">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新后的实体</returns>
-    Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
+    Task<StoreResult> UpdateUserAsync(
         Guid id,
         UserPackage package,
         CancellationToken cancellationToken = default);

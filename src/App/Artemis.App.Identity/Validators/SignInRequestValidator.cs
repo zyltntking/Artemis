@@ -1,5 +1,5 @@
 ﻿using Artemis.Extensions.ServiceConnect.Validators;
-using Artemis.Protos.Identity;
+using Artemis.Service.Protos.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;

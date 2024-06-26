@@ -10,6 +10,11 @@
 				凭据接口
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Shared.Identity.IClaimInfo">
+			<summary>
+				凭据信息
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Shared.Identity.IClaimPackage">
 			<summary>
 				凭据数据包接口
@@ -23,11 +28,6 @@
 		<member name="P:Artemis.Data.Shared.Identity.IClaimPackage.ClaimValue">
 			<summary>
 				凭据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Shared.Identity.IClaimPackage.CheckStamp">
-			<summary>
-				校验戳
 			</summary>
 		</member>
 		<member name="P:Artemis.Data.Shared.Identity.IClaimPackage.Description">
@@ -385,6 +385,11 @@
 				签到初始化
 			</summary>
 		</member>
+		<member name="F:Artemis.Data.Shared.Transfer.EndType.SignUpEnd">
+			<summary>
+				签入端
+			</summary>
+		</member>
 		<member name="F:Artemis.Data.Shared.Transfer.EndType.Web">
 			<summary>
 				Web端
@@ -438,6 +443,16 @@
 		<member name="F:Artemis.Data.Shared.Transfer.IdentityPolicy.TokenPolicies">
 			<summary>
 				需求Token策略
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.Transfer.Identity.ClaimInfo">
+			<summary>
+				凭据信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimInfo.Id">
+			<summary>
+				存储标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Shared.Transfer.Identity.ClaimPackage">

@@ -1,0 +1,48 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Identity";
+import "google/api/annotations.proto";
+import "common.proto";
+import "identity/shared.proto";
+
+package artemis.service.protos.identity;
+
+// 用户服务协议
+service User {
+  // 查询用户信息
+  rpc SearchUserInfo (SearchUserRequest) returns (PagedUserInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/Users"
+    };
+  }
+
+  // 创建用户
+  rpc CreateUser (CreateUserRequest) returns (EmptyResponse) {
+	option (google.api.http) = {
+	  post: "/api/Users"
+	  body: "*"
+	};
+  }
+
+  // 更新用户信息
+  rpc UpdateUserInfo (UpdateUserRequest) returns (EmptyResponse) {
+	option (google.api.http) = {
+	  put: "/api/Users/{UserId}"
+	  body: "Sign"
+	};
+  }
+
+  // 读取用户信息
+  rpc ReadUserInfo (UserIdRequest) returns (UserInfoResponse) {
+	option (google.api.http) = {
+	  get: "/api/Users/{UserId}"
+	};
+  }
+
+  // 删除用户
+  rpc DeleteUser (UserIdRequest) returns (EmptyResponse) {
+	option (google.api.http) = {
+	  delete: "/api/Users/{UserId}"
+	};
+  }
+}

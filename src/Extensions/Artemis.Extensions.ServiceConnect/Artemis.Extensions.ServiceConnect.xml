@@ -87,6 +87,12 @@
 				认证服务对提供者名称
 			</summary>
 		</member>
+		<member
+			name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
+			</summary>
+		</member>
 		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.Policies">
 			<summary>
 				支持的策略
@@ -150,6 +156,12 @@
 		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceProvider">
 			<summary>
 				认证服务对提供者名称
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
 			</summary>
 		</member>
 		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.Policies">
@@ -580,6 +592,30 @@
 			</summary>
 		</member>
 		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32)">
+			<summary>
+				缓存Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="document"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="document"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
 			<summary>
 				从缓存获取Token
@@ -590,6 +626,40 @@
 			<returns></returns>
 		</member>
 		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存中获取Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
 			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
 			<summary>
 				从缓存获取用户对Token的映射
@@ -597,6 +667,39 @@
 			<param name="cache"></param>
 			<param name="cacheKey"></param>
 			<param name="refreshToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存获取用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
 			<returns></returns>
 		</member>
 		<member
@@ -657,6 +760,24 @@
 			<param name="prefix"></param>
 			<param name="end"></param>
 			<param name="id"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.LoginProviderKey``1(``0,System.String)">
+			<summary>
+				登录提供键
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="end">端类型</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.ProviderTokenName(System.String,System.String)">
+			<summary>
+				令牌名称
+			</summary>
+			<param name="end"></param>
+			<param name="suffix"></param>
 			<returns></returns>
 		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.CommonExtensions">

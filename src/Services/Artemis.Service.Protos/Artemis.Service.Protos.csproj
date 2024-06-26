@@ -35,6 +35,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="role.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
@@ -49,10 +53,12 @@
 
 	<ItemGroup>
 		<Protobuf Include="common.proto" />
-		<Protobuf Include="account.proto" />
+		<Protobuf Include="identity\account.proto" />
+		<Protobuf Include="identity\role.proto" />
+		<Protobuf Include="identity\user.proto" />
+		<Protobuf Include="identity\shared.proto" />
 		<Protobuf Include="google\api\annotations.proto" />
 		<Protobuf Include="google\api\http.proto" />
-		<Protobuf Include="user.proto" />
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Artemis.Extensions.ServiceConnect.Validators;
-using Artemis.Protos.Identity;
+using Artemis.Service.Protos.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -30,9 +30,9 @@ public class SignUpRequestValidator : AbstractValidator<SignUpRequest>
         RuleFor(request => request.UserName)
             .ShouldNotBeEmptyOrWhiteSpace();
 
-        RuleFor(request => request.PhoneNumber)
+        RuleFor(request => request.Phone)
             .ShouldBePhone()
-            .When(request => !string.IsNullOrWhiteSpace(request.PhoneNumber));
+            .When(request => !string.IsNullOrWhiteSpace(request.Phone));
 
         RuleFor(request => request.Email)
             .ShouldBeEmail()

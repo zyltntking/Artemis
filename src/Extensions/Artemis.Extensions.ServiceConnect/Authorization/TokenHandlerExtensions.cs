@@ -12,6 +12,47 @@ public static class TokenHandlerExtensions
     #region Cache
 
     /// <summary>
+    ///     缓存Token文档
+    /// </summary>
+    /// <typeparam name="TTokenDocument"></typeparam>
+    /// <param name="cache"></param>
+    /// <param name="cacheTokenKey"></param>
+    /// <param name="document"></param>
+    /// <param name="expire"></param>
+    public static void CacheTokenDocument<TTokenDocument>(
+        this IDistributedCache cache,
+        string cacheTokenKey,
+        TTokenDocument document,
+        int expire = 0) where TTokenDocument : class
+    {
+        var value = document.Serialize();
+
+        cache.CacheString(cacheTokenKey, value, expire);
+    }
+
+    /// <summary>
+    ///     异步缓存Token文档
+    /// </summary>
+    /// <typeparam name="TTokenDocument"></typeparam>
+    /// <param name="cache"></param>
+    /// <param name="cacheTokenKey"></param>
+    /// <param name="document"></param>
+    /// <param name="expire"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task CacheTokenDocumentAsync<TTokenDocument>(
+        this IDistributedCache cache,
+        string cacheTokenKey,
+        TTokenDocument document,
+        int expire = 0,
+        CancellationToken cancellationToken = default) where TTokenDocument : class
+    {
+        var value = document.Serialize();
+
+        return cache.CacheStringAsync(cacheTokenKey, value, expire, cancellationToken);
+    }
+
+    /// <summary>
     ///     从缓存获取Token
     /// </summary>
     /// <param name="cache">缓存依赖</param>
@@ -35,6 +76,67 @@ public static class TokenHandlerExtensions
     }
 
     /// <summary>
+    ///     从缓存中获取Token文档
+    /// </summary>
+    /// <typeparam name="TTokenDocument"></typeparam>
+    /// <param name="cache"></param>
+    /// <param name="cacheTokenKey"></param>
+    /// <param name="refreshToken"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static async Task<TTokenDocument?> FetchTokenDocumentAsync<TTokenDocument>(
+        this IDistributedCache cache,
+        string cacheTokenKey,
+        bool refreshToken = true,
+        CancellationToken cancellationToken = default) where TTokenDocument : class
+    {
+        var value = await cache.GetStringAsync(cacheTokenKey, cancellationToken);
+
+        if (value == null)
+            return null;
+
+        // 刷新缓存
+        if (refreshToken) await cache.RefreshAsync(cacheTokenKey, cancellationToken);
+
+        return value.Deserialize<TTokenDocument>();
+    }
+
+    /// <summary>
+    ///     缓存用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="tokenSymbol"></param>
+    /// <param name="expire"></param>
+    public static void CacheUserMapTokenSymbol(
+        this IDistributedCache cache,
+        string cacheKey,
+        string tokenSymbol,
+        int expire = 0)
+    {
+        cache.CacheString(cacheKey, tokenSymbol, expire);
+    }
+
+    /// <summary>
+    ///     缓存用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="tokenSymbol"></param>
+    /// <param name="expire"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task CacheUserMapTokenSymbolAsync(
+        this IDistributedCache cache,
+        string cacheKey,
+        string tokenSymbol,
+        int expire = 0,
+        CancellationToken cancellationToken = default)
+    {
+        return cache.CacheStringAsync(cacheKey, tokenSymbol, expire, cancellationToken);
+    }
+
+    /// <summary>
     ///     从缓存获取用户对Token的映射
     /// </summary>
     /// <param name="cache"></param>
@@ -55,6 +157,80 @@ public static class TokenHandlerExtensions
 
         return value;
     }
+
+    /// <summary>
+    ///     从缓存获取用户对Token的映射
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="refreshToken"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static async Task<string?> FetchUserMapTokenSymbolAsync(
+        this IDistributedCache cache,
+        string cacheKey,
+        bool refreshToken = true,
+        CancellationToken cancellationToken = default)
+    {
+        var value = await cache.GetStringAsync(cacheKey, cancellationToken);
+
+        if (value == null) return null;
+
+        // 刷新缓存
+        if (refreshToken) await cache.RefreshAsync(cacheKey, cancellationToken);
+
+        return value;
+    }
+
+    #region Loginc
+
+    /// <summary>
+    ///     缓存字符串
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expire"></param>
+    private static void CacheString(this IDistributedCache cache, string key, string value, int expire)
+    {
+        if (expire <= 0)
+        {
+            cache.SetString(key, value);
+        }
+        else
+        {
+            var options = new DistributedCacheEntryOptions
+            {
+                SlidingExpiration = TimeSpan.FromSeconds(expire)
+            };
+
+            cache.SetString(key, value, options);
+        }
+    }
+
+    /// <summary>
+    ///     异步缓存字符串
+    /// </summary>
+    /// <param name="cache"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expire"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private static Task CacheStringAsync(this IDistributedCache cache, string key, string value, int expire,
+        CancellationToken cancellationToken = default)
+    {
+        if (expire <= 0) return cache.SetStringAsync(key, value, cancellationToken);
+
+        var options = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = TimeSpan.FromSeconds(expire)
+        };
+
+        return cache.SetStringAsync(key, value, options, cancellationToken);
+    }
+
+    #endregion
 
     #endregion
 
@@ -150,5 +326,27 @@ public static class TokenKeyGenerator
     public static string CacheUserMapTokenKey<TKey>(string prefix, string end, TKey id) where TKey : IEquatable<TKey>
     {
         return $"{prefix}:{end}:{id}";
+    }
+
+    /// <summary>
+    ///     登录提供键
+    /// </summary>
+    /// <param name="id">用户标识</param>
+    /// <param name="end">端类型</param>
+    /// <returns></returns>
+    public static string LoginProviderKey<TKey>(TKey id, string end) where TKey : IEquatable<TKey>
+    {
+        return $"{id}:{end}";
+    }
+
+    /// <summary>
+    ///     令牌名称
+    /// </summary>
+    /// <param name="end"></param>
+    /// <param name="suffix"></param>
+    /// <returns></returns>
+    public static string ProviderTokenName(string end, string suffix)
+    {
+        return $"{end}:{suffix}";
     }
 }

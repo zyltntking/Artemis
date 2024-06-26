@@ -1,12 +1,12 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Protos.Identity";
+option csharp_namespace = "Artemis.Service.Protos.Identity";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "common.proto";
 
-package artemis.protos.identity;
+package artemis.service.protos.identity;
 
 // 账户服务协议
 service Account {
@@ -61,69 +61,69 @@ service Account {
 // 签入请求
 message SignInRequest {
   // 用户签名
-  string userSign = 1;
+  string UserSign = 1;
   // 密码
-  string password = 2;
+  string Password = 2;
   // 端类型
-  string endType = 3;
+  string EndType = 3;
 }
 
 // 注册请求
 message SignUpRequest {
   // 用户名
-  string userName = 1;
+  string UserName = 1;
   // 密码
-  string password = 2;
+  string Password = 2;
   // 邮箱
-  google.protobuf.StringValue email = 3;
+  google.protobuf.StringValue Email = 3;
   // 手机号码
-  google.protobuf.StringValue phoneNumber = 4;
+  google.protobuf.StringValue Phone = 4;
 }
 
 // 修改密码请求
 message ChangePasswordRequest {
   // 旧密码
-  string oldPassword = 1;
+  string OldPassword = 1;
   // 新密码
-  string newPassword = 2;
+  string NewPassword = 2;
 }
 
 // 重置密码请求
 message ResetPasswordRequest {
   // 用户标识
-  string userId = 1;
+  string UserId = 1;
   // 目标密码
-  string password = 2;
+  string Password = 2;
 }
 
 // 重置密码请求
 message BatchResetPasswordRequest {
   // 用户标识
-  repeated ResetPasswordRequest resetPasswordPackages = 1;
+  repeated ResetPasswordRequest Dictionary = 1;
 }
 
 // 令牌回应
 message TokenReply{
   // 令牌
-  string token = 1;
+  string Token = 1;
   // 过期时间
-  int64 expire = 2;
+  int64 Expire = 2;
 }
 
 // 令牌响应
 message TokenResponse {
   // 状态码
-  int32 code = 1;
+  int32 Code = 1;
   // 是否成功
-  bool succeeded = 2;
+  bool Succeeded = 2;
   // 消息
-  string message = 3;
+  string Message = 3;
   // 错误
-  google.protobuf.StringValue error = 4;
+  google.protobuf.StringValue Error = 4;
   // 日期时间
-  string dateTime = 5;
+  string DateTime = 5;
   // 时间戳
-  int64 timestamp = 6;
+  int64 Timestamp = 6;
   // 数据
-  TokenReply data = 7;
+  TokenReply Data = 7;
 }

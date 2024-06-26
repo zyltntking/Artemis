@@ -11,6 +11,11 @@ public static class EndType
     public const string SignInitial = nameof(SignInitial);
 
     /// <summary>
+    ///     签入端
+    /// </summary>
+    public const string SignUpEnd = nameof(SignUpEnd);
+
+    /// <summary>
     ///     Web端
     /// </summary>
     public const string Web = nameof(Web);

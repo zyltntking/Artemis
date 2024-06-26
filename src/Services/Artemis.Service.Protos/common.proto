@@ -1,22 +1,30 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Protos.Identity";
+option csharp_namespace = "Artemis.Service.Protos";
 import "google/protobuf/wrappers.proto";
 
-package artemis.protos.identity;
+package artemis.service.protos;
 
 // 空响应
 message EmptyResponse {
   // 状态码
-  int32 code = 1;
+  int32 Code = 1;
   // 是否成功
-  bool succeeded = 2;
+  bool Succeeded = 2;
   // 消息
-  string message = 3;
+  string Message = 3;
   // 错误
-  google.protobuf.StringValue error = 4;
+  google.protobuf.StringValue Error = 4;
   // 日期时间
-  string dateTime = 5;
+  string DateTime = 5;
   // 时间戳
-  int64 timestamp = 6;
+  int64 Timestamp = 6;
+}
+
+// 分页
+message PageSlot {
+  // 页码
+  google.protobuf.Int32Value Page = 4;
+  // 条目数
+  google.protobuf.Int32Value Size = 5;
 }

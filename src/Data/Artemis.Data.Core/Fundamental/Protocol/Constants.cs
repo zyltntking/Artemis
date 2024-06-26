@@ -3,7 +3,7 @@
 /// <summary>
 ///     协议预定义常量
 /// </summary>
-public static class Constants
+internal static class Constants
 {
     /// <summary>
     ///     类型

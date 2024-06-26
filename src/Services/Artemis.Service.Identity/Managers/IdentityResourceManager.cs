@@ -324,7 +324,7 @@ public class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIden
         if (claim is not null)
             return await ClaimStore.DeleteAsync(claim, cancellationToken);
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.IdToString()!);
     }
 
     /// <summary>
@@ -347,7 +347,7 @@ public class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIden
         if (claimList.Any())
             return await ClaimStore.DeleteAsync(claimList, cancellationToken);
 
-        var flag = string.Join(',', idList.Select(id => id.ToString()));
+        var flag = string.Join(',', idList.Select(id => id.IdToString()));
 
         return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), flag);
     }

@@ -47,7 +47,7 @@ public record FilterDefinition : IFilterSlot
     /// <summary>
     ///     过滤值
     /// </summary>
-    public required object Value { get; set; }
+    public object? Value { get; set; }
 
     #endregion
 }

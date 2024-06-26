@@ -91,8 +91,11 @@ internal static class AuthorizationExtensions
             options.ContextItemTokenKey = config.ContextItemTokenKey;
             options.RequestHeaderTokenKey = config.RequestHeaderTokenKey;
             options.CacheTokenPrefix = config.CacheTokenPrefix;
+            options.CacheUserMapTokenPrefix = config.CacheUserMapTokenPrefix;
+            options.CacheTokenExpire = config.CacheTokenExpire;
             options.EnableMultiEnd = config.EnableMultiEnd;
             options.IdentityServiceProvider = config.IdentityServiceProvider;
+            options.IdentityServiceTokenNameSuffix = config.IdentityServiceTokenNameSuffix;
             options.EnableAdvancedPolicy = config.EnableAdvancedPolicy;
             options.RolesBasedPolicyOptions = config.RolesBasedPolicyOptions;
             options.ClaimsBasedPolicyOptions = config.ClaimsBasedPolicyOptions;

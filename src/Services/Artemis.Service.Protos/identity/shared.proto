@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Identity";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package artemis.service.protos.identity;
+
+message Test{
+}
+
+// 用户标识数据包
+message UserSignPackage {
+  // 用户名
+  google.protobuf.StringValue UserName = 1;
+  // 邮箱地址
+  google.protobuf.StringValue Email = 2;
+  // 手机号码
+  google.protobuf.StringValue Phone = 3;
+}
+
+// 查询用户请求
+message SearchUserRequest {
+  // 用户标识
+  UserSignPackage Sign = 1;
+  // 页码
+  PageSlot PageSlot = 2;
+}
+
+// 用户信息数据包
+message UserInfoPackage{
+  // 用户标识
+  string Id = 1;
+  // 用户名
+  string UserName = 2;
+  // 邮箱地址
+  google.protobuf.StringValue Email = 3;
+  // 手机号码
+  google.protobuf.StringValue PhoneNumber = 4;
+}
+
+// 用户信息响应
+message UserInfoResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  google.protobuf.StringValue error = 4;
+  // 日期时间
+  string dateTime = 5;
+  // 时间戳
+  int64 timestamp = 6;
+  // 数据
+  UserInfoPackage data = 7;
+}
+
+
+// 分页用户信息回应
+message PagedUserInfoPackage{
+  // 页码
+  int32 Page = 1;
+  // 条目数
+  int32 Size = 2;
+  // 总数
+  int64 Total = 3;
+  // 过滤后总数
+  int64 Count = 4;
+  // 数据
+  repeated UserInfoPackage Items = 5;
+}
+
+// 查询用户信息响应
+message PagedUserInfoResponse {
+  // 状态码
+  int32 Code = 1;
+  // 是否成功
+  bool Succeeded = 2;
+  // 消息
+  string Message = 3;
+  // 错误
+  google.protobuf.StringValue Error = 4;
+  // 日期时间
+  string DateTime = 5;
+  // 时间戳
+  int64 Timestamp = 6;
+  // 数据
+  PagedUserInfoPackage Data = 7;
+}
+
+// 用户标识请求
+message UserIdRequest {
+  // 用户标识
+  string UserId = 1;
+}
+
+// 更新用户信息请求
+message UpdateUserRequest{
+  // 用户标识
+  string UserId = 1;
+  // 用户标识信息
+  UserSignPackage Sign = 2;
+}
+
+// 创建用户请求
+message CreateUserRequest{
+  // 用户标识
+  string Password = 1;
+  // 用户标识信息
+  UserSignPackage Sign = 2;
+}

@@ -248,7 +248,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return (result, role.Adapt<RoleInfo>());
         }
 
-        return (StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString()), default);
+        return (StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!), default);
     }
 
     /// <summary>
@@ -285,7 +285,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return await RoleStore.UpdateAsync(roles, cancellationToken);
         }
 
-        var flag = string.Join(',', ids.Select(item => item.ToString()));
+        var flag = string.Join(',', ids.Select(item => item.IdToString()));
 
         return StoreResult.EntityFoundFailed(nameof(IdentityRole), flag);
     }
@@ -329,7 +329,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
         if (role is not null)
             return await RoleStore.DeleteAsync(role, cancellationToken);
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -353,7 +353,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
         if (roleList.Any())
             return await RoleStore.DeleteAsync(roleList, cancellationToken);
 
-        var flag = string.Join(',', idList.Select(id => id.ToString()));
+        var flag = string.Join(',', idList.Select(id => id.IdToString()));
 
         return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), flag);
     }
@@ -437,7 +437,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             };
         }
 
-        throw new EntityNotFoundException(nameof(IdentityRole), id.ToString("D"));
+        throw new EntityNotFoundException(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -463,7 +463,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
                 .ProjectToType<UserInfo>()
                 .FirstOrDefaultAsync(cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityRole), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -504,10 +504,10 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
                 return await UserRoleStore.CreateAsync(userRole, cancellationToken);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.IdToString()!);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -561,17 +561,17 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
                     return await UserRoleStore.CreateAsync(userRoles, cancellationToken);
                 }
 
-                flag = string.Join(',', notSetUserIds.Select(userId => userId.ToString()));
+                flag = string.Join(',', notSetUserIds.Select(userId => userId.IdToString()));
 
                 return StoreResult.EntityFoundFailed(nameof(IdentityUserRole), flag);
             }
 
-            flag = string.Join(',', userIds.Select(item => item.ToString()));
+            flag = string.Join(',', userIds.Select(item => item.IdToString()));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -608,10 +608,10 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
                 return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
             }
 
-            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.IdToString()!);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -639,12 +639,12 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
 
             if (userRoles.Any()) return await UserRoleStore.DeleteAsync(userRoles, cancellationToken);
 
-            var flag = string.Join(',', userIds.Select(item => item.ToString()));
+            var flag = string.Join(',', userIds.Select(item => item.IdToString()));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -704,7 +704,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             };
         }
 
-        throw new EntityNotFoundException(nameof(IdentityRole), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -725,7 +725,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
 
         if (roleExists) return await RoleClaimStore.FindMapEntityAsync<RoleClaimInfo>(claimId, cancellationToken);
 
-        throw new EntityNotFoundException(nameof(IdentityRole), id.ToString());
+        throw new EntityNotFoundException(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -768,7 +768,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -827,7 +827,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return StoreResult.EntityFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -867,7 +867,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.GuidToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -915,7 +915,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
             return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.GuidToString());
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -942,10 +942,10 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
 
             if (roleClaim is not null) return await RoleClaimStore.DeleteAsync(roleClaim, cancellationToken);
 
-            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), claimId.ToString());
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), claimId.IdToString()!);
         }
 
-        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -974,12 +974,12 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
 
             if (roleClaims.Any()) return await RoleClaimStore.DeleteAsync(roleClaims, cancellationToken);
 
-            var flag = string.Join(',', claimIdList.Select(item => item.ToString()));
+            var flag = string.Join(',', claimIdList.Select(item => item.IdToString()));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.ToString());
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     #endregion

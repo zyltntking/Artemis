@@ -192,30 +192,30 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     /// <summary>
     ///     创建用户
     /// </summary>
-    /// <param name="package">用户信息</param>
+    /// <param name="userSign">用户信息</param>
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的用户实例</returns>
-    public async Task<(StoreResult result, UserInfo? user)> CreateUserAsync(
-        UserPackage package,
+    public async Task<StoreResult> CreateUserAsync(
+        UserSign userSign,
         string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var normalizedUserName = package.UserName.StringNormalize();
+        var normalizedUserName = userSign.UserName.StringNormalize();
 
         var exists = await UserStore.EntityQuery
             .AnyAsync(user => user.NormalizedUserName == normalizedUserName, cancellationToken);
 
         if (exists)
-            return (StoreResult.EntityFoundFailed(nameof(IdentityUser), package.UserName), default);
+            return StoreResult.EntityFoundFailed(nameof(IdentityUser), userSign.UserName);
 
-        var user = Instance.CreateInstance<IdentityUser, UserPackage>(package);
+        var user = Instance.CreateInstance<IdentityUser, UserSign>(userSign);
 
         user.NormalizedUserName = normalizedUserName;
 
-        user.NormalizedEmail = package.Email is not null ? package.Email.StringNormalize() : string.Empty;
+        user.NormalizedEmail = userSign.Email is not null ? userSign.Email.StringNormalize() : string.Empty;
 
         user.PasswordHash = Hash.PasswordHash(password);
 
@@ -223,7 +223,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
 
         var result = await UserStore.CreateAsync(user, cancellationToken);
 
-        return (result, user.Adapt<UserInfo>());
+        return result;
     }
 
     /// <summary>
@@ -233,7 +233,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
     public async Task<StoreResult> CreateUsersAsync(
-        IDictionary<UserPackage, string> dictionary,
+        IDictionary<UserSign, string> dictionary,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -259,7 +259,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
                 {
                     var (package, password) = item;
 
-                    var user = Instance.CreateInstance<IdentityUser, UserPackage>(package);
+                    var user = Instance.CreateInstance<IdentityUser, UserSign>(package);
 
                     user.NormalizedUserName = package.UserName.StringNormalize();
 
@@ -287,7 +287,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     /// <param name="package">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新后的实体</returns>
-    public async Task<(StoreResult result, UserInfo? user)> UpdateUserAsync(
+    public async Task<StoreResult> UpdateUserAsync(
         Guid id,
         UserPackage package,
         CancellationToken cancellationToken = default)
@@ -308,10 +308,10 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
 
             var result = await UserStore.UpdateAsync(user, cancellationToken);
 
-            return (result, user.Adapt<UserInfo>());
+            return result;
         }
 
-        return (StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString()), default);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
 
     /// <summary>
