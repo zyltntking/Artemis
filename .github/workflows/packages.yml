@@ -20,6 +20,9 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    # Install
+    - name: Install workload
+      run: dotnet workload restore Artemis.sln
     # Restore
     - name: Restore dependencies
       run: dotnet restore Artemis.sln
