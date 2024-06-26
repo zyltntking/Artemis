@@ -13,6 +13,8 @@ jobs:
   push:
     name: build, pack & push
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
     - uses: actions/checkout@v4
     # Setup
