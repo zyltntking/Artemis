@@ -13,8 +13,6 @@ jobs:
   push:
     name: build, pack & push
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     steps:
     - uses: actions/checkout@v4
     # Setup
@@ -34,6 +32,9 @@ jobs:
     # Pack
     - name: Pack
       run: dotnet pack ArtemisPackages.slnf --no-build --no-restore --configuration Release --output dist
-# Publish
+    # Authenticating
+    - name: Authenticate with GitHub Packages
+      run: dotnet nuget add source https://nuget.pkg.github.com/zyltntking/index.json --name github --username zyltntking --password ${{secrets.GITHUB_PACKAGE_ARTEMIS}} --store-password-in-clear-text
+    # Push
     - name: Push To GitHub Packages
       run: dotnet nuget push dist/*.nupkg --source https://nuget.pkg.github.com/zyltntking/index.json --api-key ${{secrets.GITHUB_PACKAGE_ARTEMIS}} --skip-duplicate
