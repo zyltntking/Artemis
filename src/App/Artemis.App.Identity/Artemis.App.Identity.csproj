@@ -18,8 +18,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="aspire.Component.Setting.json" />
-	  <Content Remove="serilog.Setting.json" />
+	  <Compile Remove="logs\**" />
+	  <Content Remove="logs\**" />
+	  <EmbeddedResource Remove="logs\**" />
+	  <None Remove="logs\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,9 +42,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
-		<ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
-		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
+	  <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
+	  <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
+	  <ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 
 </Project>
