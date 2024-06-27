@@ -39,7 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
+		<ProjectReference Include="..\Artemis.Data.Core\Artemis.Data.Core.csproj" />
 	</ItemGroup>
 
 </Project>

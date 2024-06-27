@@ -18,19 +18,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="logs\**" />
-	  <Content Remove="logs\**" />
-	  <EmbeddedResource Remove="logs\**" />
-	  <None Remove="logs\**" />
+		<Compile Remove="logs\**" />
+		<Content Remove="logs\**" />
+		<EmbeddedResource Remove="logs\**" />
+		<None Remove="logs\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="aspire.Component.Setting.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Include="serilog.Setting.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Include="aspire.Component.Setting.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="serilog.Setting.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,9 +42,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
-	  <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
-	  <ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
+		<ProjectReference
+			Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
+		<ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
+		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 
 </Project>

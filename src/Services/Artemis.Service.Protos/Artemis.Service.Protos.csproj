@@ -35,7 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="role.proto" />
+		<None Remove="role.proto" />
 	</ItemGroup>
 
 	<ItemGroup>
