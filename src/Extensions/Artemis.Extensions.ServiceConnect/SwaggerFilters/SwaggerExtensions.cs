@@ -63,18 +63,25 @@ internal static class SwaggerExtensions
         bool grpcSwagger = false)
     {
         app.UseSwagger();
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", config.AppName); });
-            if (grpcSwagger) app.MapGrpcReflectionService();
-        }
+        //if (app.Environment.IsDevelopment())
+        //{
+        //    app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", config.AppName); });
+        //    app.UseReDoc(options =>
+        //    {
+        //        options.RoutePrefix = "api-docs";
+        //        options.SpecUrl("/swagger/v1/swagger.json");
+        //        options.DocumentTitle = config.AppName;
+        //    });
+        //    if (grpcSwagger) app.MapGrpcReflectionService();
+        //}
+        app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", config.AppName); });
         app.UseReDoc(options =>
         {
             options.RoutePrefix = "api-docs";
             options.SpecUrl("/swagger/v1/swagger.json");
             options.DocumentTitle = config.AppName;
         });
-
+        if (grpcSwagger) app.MapGrpcReflectionService();
         return app;
     }
 }
