@@ -86,7 +86,7 @@ jobs:
           context: .
           file: src/App/Artemis.App.Identity/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{identityservice}}:${{timestamp}},${{identityservice}}:latest
+          tags: ${{env.identityservice}}:${{env.timestamp}},${{env.identityservice}}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
