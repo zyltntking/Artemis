@@ -23,8 +23,16 @@ env:
 
 
 jobs:
+  set-timestamp:
+    runs-on: ubuntu-latest
+    outputs:
+      steps: ${{ steps.timestamp.outputs }}
+    steps:
+      - name: Set Timestamp
+        id: timestamp
+        run: echo "TIMESTAMP=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_ENV
+        
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -78,7 +86,7 @@ jobs:
           context: .
           file: src/App/Artemis.App.Identity/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: $TIMESTAMP,latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
