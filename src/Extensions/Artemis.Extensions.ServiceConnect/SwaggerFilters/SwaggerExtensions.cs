@@ -66,14 +66,14 @@ internal static class SwaggerExtensions
         if (app.Environment.IsDevelopment())
         {
             app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", config.AppName); });
-            app.UseReDoc(options =>
-            {
-                options.RoutePrefix = "docs";
-                options.SpecUrl("/swagger/v1/swagger.json");
-                options.DocumentTitle = config.AppName;
-            });
             if (grpcSwagger) app.MapGrpcReflectionService();
         }
+        app.UseReDoc(options =>
+        {
+            options.RoutePrefix = "api-docs";
+            options.SpecUrl("/swagger/v1/swagger.json");
+            options.DocumentTitle = config.AppName;
+        });
 
         return app;
     }
