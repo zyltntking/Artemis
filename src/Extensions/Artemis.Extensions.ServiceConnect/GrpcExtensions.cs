@@ -16,12 +16,10 @@ public static class GrpcExtensions
     ///     配置Grpc
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="config"></param>
     /// <param name="enableValidator"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureGrpc(
+    public static void ConfigureGrpc(
         this IHostApplicationBuilder builder,
-        SwaggerConfig config,
         bool enableValidator = true)
     {
         builder.Services.AddGrpc(options =>
@@ -36,21 +34,16 @@ public static class GrpcExtensions
         if (enableValidator)
             builder.Services.AddValidators();
 
-        builder.ConfigureSwagger(config, true);
-
-        return builder;
+        builder.ConfigureSwagger();
     }
 
     /// <summary>
     ///     使用Grpc修饰
     /// </summary>
     /// <param name="app"></param>
-    /// <param name="config"></param>
     /// <returns></returns>
-    public static WebApplication UseGrpcModify(this WebApplication app, SwaggerConfig config)
+    public static void UseGrpcModify(this WebApplication app)
     {
-        app.MapSwagger(config, true);
-
-        return app;
+        app.MapSwagger();
     }
 }

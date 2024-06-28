@@ -40,7 +40,6 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
         ILogger? logger = null) : base(userStore, options, logger)
     {
         UserStore = userStore;
-        UserStore.HandlerRegister = HandlerRegister;
         RoleStore = roleStore;
         UserClaimStore = userClaimStore;
         UserLoginStore = userLoginStore;

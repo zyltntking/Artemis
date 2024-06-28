@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core.Exceptions;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
 using Microsoft.Extensions.Caching.Distributed;
@@ -25,14 +26,16 @@ public class IdentityUserClaimStore : Store<IdentityUserClaim, int, Guid>, IIden
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public IdentityUserClaimStore(
         IdentityContext context,
         IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, cache, logger)
+        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
     {
     }
 }

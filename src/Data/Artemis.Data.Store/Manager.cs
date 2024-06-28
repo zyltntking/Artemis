@@ -49,10 +49,6 @@ public interface IKeyLessManager<TEntity, THandler> : IDisposable
     where TEntity : class
     where THandler : IEquatable<THandler>
 {
-    /// <summary>
-    ///     注册操作员
-    /// </summary>
-    Func<THandler>? HandlerRegister { get; set; }
 }
 
 #endregion
@@ -222,11 +218,6 @@ public abstract class KeyLessManager<TEntity, THandler> : IKeyLessManager<TEntit
     ///     实体存储
     /// </summary>
     private IKeyLessStore<TEntity, THandler> EntityStore { get; }
-
-    /// <summary>
-    ///     注册操作员
-    /// </summary>
-    public Func<THandler>? HandlerRegister { get; set; }
 
     #endregion
 

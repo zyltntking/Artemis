@@ -19,7 +19,7 @@ public static class CommonExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder)
+    public static void AddServiceCommons(this IHostApplicationBuilder builder)
     {
         // add common services
         builder.Services.AddHttpContextAccessor();
@@ -58,8 +58,6 @@ public static class CommonExtensions
         });
 
         builder.Services.AddHttpLoggingInterceptor<ArtemisHttpLoggingInterceptor>();
-
-        return builder;
     }
 
     /// <summary>
@@ -67,7 +65,7 @@ public static class CommonExtensions
     /// </summary>
     /// <param name="app"></param>
     /// <returns></returns>
-    public static WebApplication ConfigureAppCommon(this WebApplication app)
+    public static void ConfigureAppCommon(this WebApplication app)
     {
         app.UseHttpLogging();
 
@@ -90,7 +88,5 @@ public static class CommonExtensions
         app.UseAuthorization();
 
         if (!app.Environment.IsDevelopment()) app.UseResponseCompression();
-
-        return app;
     }
 }

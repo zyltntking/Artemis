@@ -1,0 +1,6 @@
+{
+  "Application": "Identity Service",
+  "XmlDocs": [
+    "Artemis.Service.Protos.xml"
+  ]
+}

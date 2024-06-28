@@ -1,7 +1,8 @@
 using Artemis.App.Identity.Services;
+using Artemis.Data.Core;
 using Artemis.Extensions.ServiceConnect;
+using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
-using Artemis.Extensions.ServiceConnect.SwaggerFilters;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Stores;
@@ -43,7 +44,9 @@ public class Program
             //builder.AddMongoDbComponent("MongoInstance");
             //builder.AddRabbitMqComponent("RabbitMqInstance");
 
-            builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb");
+            builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb", Log.Debug);
+
+            builder.Services.AddScoped<IHandlerProxy, ArtemisHandlerProxy>();
 
             builder.Services.AddScoped<IIdentityClaimStore, IdentityClaimStore>();
             builder.Services.AddScoped<IIdentityUserStore, IdentityUserStore>();
@@ -59,28 +62,7 @@ public class Program
             builder.Services.AddScoped<IIdentityAccountManager, IdentityAccountManager>();
             builder.Services.AddScoped<IIdentityResourceManager, IdentityResourceManager>();
 
-            builder.Services.Configure<IdentityOptions>(options =>
-            {
-                options.Password = new PasswordOptions
-                {
-                    RequiredLength = 6,
-                    RequireDigit = true,
-                    RequireLowercase = true,
-                    RequireNonAlphanumeric = true,
-                    RequireUppercase = true,
-                    RequiredUniqueChars = 1
-                };
-            });
-
-            var swaggerConfig = new SwaggerConfig
-            {
-                AppName = "Identity Service",
-                XmlDocs =
-                [
-                    Path.Combine(AppContext.BaseDirectory, "Artemis.Protos.Identity.xml"),
-                    Path.Combine(AppContext.BaseDirectory, "Artemis.Service.Identity.xml")
-                ]
-            };
+            builder.Services.Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
 
             var isMigration = false;
 
@@ -94,14 +76,14 @@ public class Program
             }
 
             // 配置 Grpc 服务， 包括swagger文档配置和验证器配置
-            builder.ConfigureGrpc(swaggerConfig, !isMigration);
+            builder.ConfigureGrpc(!isMigration);
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             app.ConfigureAppCommon();
             // Use Grpc Swagger Document
-            app.UseGrpcModify(swaggerConfig);
+            app.UseGrpcModify();
 
             // Configure the HTTP request pipeline.
             app.MapGrpcService<AccountService>();

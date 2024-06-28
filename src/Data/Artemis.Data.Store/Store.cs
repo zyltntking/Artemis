@@ -22,11 +22,17 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
-    protected Store(DbContext context, IStoreOptions? storeOptions = null, IDistributedCache? cache = null,
-        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger,
+    protected Store(
+        DbContext context,
+        IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
         describer)
     {
     }
@@ -79,11 +85,17 @@ public abstract class Store<TEntity, TKey> : Store<TEntity, TKey, Guid>, IStore<
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
-    protected Store(DbContext context, IStoreOptions? storeOptions = null, IDistributedCache? cache = null,
-        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger,
+    protected Store(
+        DbContext context,
+        IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
         describer)
     {
     }
@@ -105,12 +117,18 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    protected Store(DbContext context, IStoreOptions? storeOptions = null, IDistributedCache? cache = null,
-        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger,
+    protected Store(
+        DbContext context,
+        IStoreOptions? storeOptions = null,
+        IHandlerProxy<THandler>? handlerProxy = null,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
         describer)
     {
     }
@@ -1220,6 +1238,7 @@ public abstract class KeyLessStore<TEntity> : KeyLessStore<TEntity, Guid>, IKeyL
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
@@ -1227,9 +1246,10 @@ public abstract class KeyLessStore<TEntity> : KeyLessStore<TEntity, Guid>, IKeyL
     protected KeyLessStore(
         DbContext context,
         IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, cache, logger, describer)
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
 }
@@ -1248,6 +1268,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
@@ -1255,12 +1276,14 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     protected KeyLessStore(
         DbContext context,
         IStoreOptions? storeOptions = null,
+        IHandlerProxy<THandler>? handlerProxy = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null)
     {
         Context = context ?? throw new StoreParameterNullException(nameof(context));
         StoreOptions = storeOptions ?? new StoreOptions();
+        HandlerProxy = handlerProxy;
         Cache = cache;
         Logger = logger;
         Describer = describer ?? new StoreErrorDescriber();
@@ -1296,11 +1319,6 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     #region Access
 
     /// <summary>
-    ///     注册操作员委托
-    /// </summary>
-    public Func<THandler>? HandlerRegister { get; set; }
-
-    /// <summary>
     ///     生成键
     /// </summary>
     /// <param name="entity"></param>
@@ -1331,6 +1349,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     ///     存储配置
     /// </summary>
     private IStoreOptions StoreOptions { get; }
+
+    /// <summary>
+    ///     操作人代理
+    /// </summary>
+    private IHandlerProxy<THandler>? HandlerProxy { get; }
 
     /// <summary>
     ///     设置当前发生错误的错误描述者
@@ -1969,7 +1992,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 _createNewConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
@@ -2021,7 +2044,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 _overDeCertaintyConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
@@ -2069,7 +2092,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                         .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-                if (HandlerHosting && HandlerRegister != null &&
+                if (HandlerHosting && HandlerProxy != null &&
                     Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                     _mergeCertaintyConfig.ForType<TSource, TEntity>()
                         .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
@@ -2094,7 +2117,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 _mergeDeCertaintyConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
@@ -2929,11 +2952,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 metaSlot.UpdatedAt = now;
             }
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
             {
-                var handler = HandlerRegister();
-                handlerSlot.CreateBy = handler;
-                handlerSlot.ModifyBy = handler;
+                handlerSlot.CreateBy = HandlerProxy.Handler;
+                handlerSlot.ModifyBy = HandlerProxy.Handler;
             }
         }
 
@@ -2944,7 +2966,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
             if (entity is IMateSlot metaSlot)
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
         }
     }
@@ -2968,10 +2990,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
                 {
-                    handlerSlot.CreateBy = HandlerRegister();
-                    handlerSlot.ModifyBy = HandlerRegister();
+                    handlerSlot.CreateBy = HandlerProxy.Handler;
+                    handlerSlot.ModifyBy = HandlerProxy.Handler;
                 }
             }
         }
@@ -2984,7 +3006,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 if (entity is IMateSlot metaSlot)
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
             }
     }
@@ -3003,8 +3025,8 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         {
             if (entity is IMateSlot metaSlot) metaSlot.UpdatedAt = DateTime.Now;
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
-                handlerSlot.ModifyBy = HandlerRegister();
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                handlerSlot.ModifyBy = HandlerProxy.Handler;
         }
 
         Context.Update(entity);
@@ -3017,7 +3039,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
             {
                 Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3045,11 +3067,8 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
-                {
-                    var handler = HandlerRegister();
-                    handlerSlot.ModifyBy = handler;
-                }
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                    handlerSlot.ModifyBy = HandlerProxy.Handler;
             }
         }
 
@@ -3064,7 +3083,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3097,12 +3116,12 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot<THandler>)entity).ModifyBy,
-                        HandlerRegister())
+                        HandlerProxy.Handler)
                 );
         }
 
@@ -3136,12 +3155,12 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot<THandler>)entity).ModifyBy,
-                        HandlerRegister())
+                        HandlerProxy.Handler)
                 );
         }
 
@@ -3162,8 +3181,8 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
             if (entity is IMateSlot metaSlotChange) metaSlotChange.DeletedAt = DateTime.Now;
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlotChange)
-                handlerSlotChange.RemoveBy = HandlerRegister();
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlotChange)
+                handlerSlotChange.RemoveBy = HandlerProxy.Handler;
 
             Context.Update(entity);
 
@@ -3173,7 +3192,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 Context.Entry(metaSlotKeep).Property(item => item.UpdatedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlotKeep)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlotKeep)
             {
                 Context.Entry(handlerSlotKeep).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlotKeep).Property(item => item.ModifyBy).IsModified = false;
@@ -3201,8 +3220,8 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
                 if (entity is IMateSlot metaSlot) metaSlot.DeletedAt = DateTime.Now;
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
-                    handlerSlot.RemoveBy = HandlerRegister();
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                    handlerSlot.RemoveBy = HandlerProxy.Handler;
             }
 
             Context.AttachRange(entities);
@@ -3215,7 +3234,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     Context.Entry(metaSlot).Property(item => item.UpdatedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerRegister != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.ModifyBy).IsModified = false;
@@ -3253,12 +3272,12 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot<THandler>)entity).RemoveBy,
-                        HandlerRegister())
+                        HandlerProxy.Handler)
                 );
 
             return query.ExecuteUpdate(setter);
@@ -3295,12 +3314,12 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerRegister != null &&
+            if (HandlerHosting && HandlerProxy != null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot<THandler>)entity).RemoveBy,
-                        HandlerRegister())
+                        HandlerProxy.Handler)
                 );
 
             return query.ExecuteUpdateAsync(setter, cancellationToken);

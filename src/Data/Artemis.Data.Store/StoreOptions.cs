@@ -65,7 +65,7 @@ public record StoreOptions : IStoreOptions
     /// <summary>
     ///     是否启用元数据托管
     /// </summary>
-    public bool MetaDataHosting { get; set; }
+    public bool MetaDataHosting { get; set; } = true;
 
     /// <summary>
     ///     是否启用软删除
@@ -75,7 +75,7 @@ public record StoreOptions : IStoreOptions
     /// <summary>
     ///     是否启用操作员托管
     /// </summary>
-    public bool HandlerHosting { get; set; }
+    public bool HandlerHosting { get; set; } = true;
 
     /// <summary>
     ///     是否启用具缓存存储策略

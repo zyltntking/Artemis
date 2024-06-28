@@ -52,11 +52,6 @@ public interface IKeyLessStore<TEntity, THandler> :
     where THandler : IEquatable<THandler>
 {
     /// <summary>
-    ///     注册操作员
-    /// </summary>
-    Func<THandler>? HandlerRegister { get; set; }
-
-    /// <summary>
     ///     生成键
     /// </summary>
     /// <param name="entity"></param>

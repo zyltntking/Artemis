@@ -29,7 +29,6 @@ public class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIden
         ILogger? logger = null) : base(claimStore, options, logger)
     {
         ClaimStore = claimStore;
-        ClaimStore.HandlerRegister = HandlerRegister;
     }
 
     #region StoreAccess

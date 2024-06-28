@@ -36,7 +36,6 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
         ILogger? logger = null) : base(roleStore, options, logger)
     {
         RoleStore = roleStore;
-        RoleStore.HandlerRegister = HandlerRegister;
         UserStore = userStore;
         RoleClaimStore = roleClaimStore;
         UserRoleStore = userRoleStore;

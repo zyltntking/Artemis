@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
@@ -24,13 +25,15 @@ public class IdentityUserStore : Store<IdentityUser, Guid, Guid>, IIdentityUserS
     /// </summary>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
+    /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
     public IdentityUserStore(
         IdentityContext context,
         IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, cache, logger)
+        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
     {
     }
 }

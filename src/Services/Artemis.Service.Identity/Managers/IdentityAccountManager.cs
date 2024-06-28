@@ -33,7 +33,6 @@ public sealed class IdentityAccountManager : Manager<IdentityUser, Guid, Guid>, 
         ILogger? logger = null) : base(userStore, options, logger)
     {
         UserStore = userStore;
-        UserStore.HandlerRegister = HandlerRegister;
         UserClaimStore = userClaimStore;
         RoleClaimStore = roleClaimStore;
     }
