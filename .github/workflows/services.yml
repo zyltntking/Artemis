@@ -19,7 +19,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}/identityservice
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -67,7 +67,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Get Time
+      - name: Generate Time Stamp
         id: time
         uses: nanzm/get-time-action@master
         with:
@@ -76,14 +76,17 @@ jobs:
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
+      - name: Build and push Identity Service Docker image
+        env:
+          identityservice: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/identityservice"
+          timestamp: "${{ steps.time.outputs.time }}"
         id: build-and-push
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: .
           file: src/App/Artemis.App.Identity/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.time.outputs.time }},latest
+          tags: ${{identityservice}}:${{timestamp}},${{identityservice}}:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
