@@ -17,13 +17,10 @@ public static class ComponentExtensions
     /// <param name="builder"></param>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder AddAspireConfiguration(
-        this IHostApplicationBuilder builder,
+    public static void AddAspireConfiguration(this IHostApplicationBuilder builder,
         string path = "aspire.Component.Setting.json")
     {
         builder.Configuration.AddJsonFile(path, true, true);
-
-        return builder;
     }
 
     /// <summary>
@@ -32,12 +29,11 @@ public static class ComponentExtensions
     /// <param name="builder">appBuilder</param>
     /// <param name="connectionName">连接名</param>
     /// <returns></returns>
-    public static IHostApplicationBuilder AddRedisComponent(this IHostApplicationBuilder builder, string connectionName)
+    public static void AddRedisComponent(this IHostApplicationBuilder builder, string connectionName)
     {
         builder.AddRedisClient(connectionName);
         builder.AddRedisOutputCache(connectionName);
         builder.AddRedisDistributedCache(connectionName);
-        return builder;
     }
 
     /// <summary>
@@ -75,8 +71,7 @@ public static class ComponentExtensions
     /// <param name="logger"></param>
     /// <param name="logLevel"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder AddPostgreSqlComponent<TDbContext>(
-        this IHostApplicationBuilder builder,
+    public static void AddPostgreSqlComponent<TDbContext>(this IHostApplicationBuilder builder,
         string connectionName,
         Action<string>? logger = null,
         LogLevel logLevel = LogLevel.Debug) where TDbContext : DbContext
@@ -92,6 +87,5 @@ public static class ComponentExtensions
         });
 
         if (builder.Environment.IsDevelopment()) builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-        return builder;
     }
 }

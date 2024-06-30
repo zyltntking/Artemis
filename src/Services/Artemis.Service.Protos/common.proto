@@ -15,16 +15,22 @@ message EmptyResponse {
   string Message = 3;
   // 错误
   google.protobuf.StringValue Error = 4;
-  // 日期时间
+  /*
+   * 响应时间
+   * @datetime
+   */
   string DateTime = 5;
-  // 时间戳
+  /*
+   * 响应时间戳
+   * @timestamp
+   */
   int64 Timestamp = 6;
 }
 
 // 分页
 message PageSlot {
   // 页码
-  google.protobuf.Int32Value Page = 4;
+  google.protobuf.Int32Value Page = 1;
   // 条目数
-  google.protobuf.Int32Value Size = 5;
+  google.protobuf.Int32Value Size = 2;
 }

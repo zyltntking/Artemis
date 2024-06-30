@@ -22,7 +22,7 @@ public class User : ConcurrencyModel, IUser
     ///     标准化用户名
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(128)]
     [Comment("标准化用户名")]
     public required string NormalizedUserName { get; set; }
 
@@ -73,7 +73,7 @@ public class User : ConcurrencyModel, IUser
     /// <summary>
     ///     密码锁
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(64)]
     [Comment("密码锁")]
     public string? SecurityStamp { get; set; }
 

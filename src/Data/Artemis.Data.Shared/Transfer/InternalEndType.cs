@@ -3,7 +3,7 @@
 /// <summary>
 ///     端类型
 /// </summary>
-public static class EndType
+public static class InternalEndType
 {
     /// <summary>
     ///     签到初始化

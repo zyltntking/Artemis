@@ -68,7 +68,10 @@ internal static class ValidatorExtensions
             .Where(t => !t.Name.Contains("AbstractValidator"))
             .ToList();
 
-        foreach (var implementationType in implementationTypes) AddValidator(services, implementationType, lifetime);
+        foreach (var implementationType in implementationTypes)
+        {
+            AddValidator(services, implementationType, lifetime);
+        }
 
         return services;
     }

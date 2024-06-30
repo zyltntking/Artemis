@@ -86,7 +86,7 @@ public sealed class IdentityAccountManager : Manager<IdentityUser, Guid, Guid>, 
             UserClaims = userClaims,
             Roles = userRoles,
             RoleClaims = roleClaims,
-            EndType = EndType.SignInitial
+            EndType = InternalEndType.SignInitial
         };
     }
 

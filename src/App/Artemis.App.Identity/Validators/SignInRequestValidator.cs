@@ -29,5 +29,8 @@ public class SignInRequestValidator : AbstractValidator<SignInRequest>
 
         RuleFor(request => request.UserSign)
             .ShouldNotBeEmptyOrWhiteSpace();
+
+        RuleFor(request => request.EndType.ToString("G"))
+            .ShouldNotBeEmptyOrWhiteSpace();
     }
 }

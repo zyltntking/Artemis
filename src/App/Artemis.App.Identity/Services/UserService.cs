@@ -53,9 +53,9 @@ public class UserService : User.UserBase
         ServerCallContext context)
     {
         var userInfos = await UserManager.FetchUserAsync(
-            request.Sign.UserName,
-            request.Sign.Email,
-            request.Sign.Phone,
+            request.Sign?.UserName,
+            request.Sign?.Email,
+            request.Sign?.Phone,
             request.PageSlot.Page ?? 0,
             request.PageSlot.Size ?? 0);
 

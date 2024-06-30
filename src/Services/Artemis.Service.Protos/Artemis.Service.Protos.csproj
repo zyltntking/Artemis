@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 		<Protobuf Include="common.proto" />
+		<Protobuf Include="sample.proto" />
 		<Protobuf Include="identity\account.proto" />
 		<Protobuf Include="identity\role.proto" />
 		<Protobuf Include="identity\user.proto" />

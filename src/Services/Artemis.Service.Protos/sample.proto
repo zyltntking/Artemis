@@ -1,0 +1,107 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package artemis.service.protos;
+
+// 样例服务协议
+service Sample {
+
+  // 测试
+  rpc Test(SampleRequest) returns (EmptyResponse){
+	option (google.api.http) = {
+	  post: "/api/Sample/Test",
+	  body: "*"
+	};
+  }
+}
+
+// 样例请求
+message SampleRequest {
+  /* 邮箱
+   * @email
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Email = 1;
+  /* 手机号码
+   * @phone
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Phone = 2;
+  /* 主机
+   * @hostname
+   */
+  google.protobuf.StringValue Host = 3;
+  /* Ipv4
+   * @ipv4
+   */
+  google.protobuf.StringValue Ipv4 = 4;
+  /* Ipv6
+   * @ipv6
+   */
+  google.protobuf.StringValue Ipv6 = 5;
+  /* Datetime
+   * @datetime
+   */
+  google.protobuf.StringValue Datetime = 6;
+  /* Uri
+   * @uri
+   */
+  google.protobuf.StringValue Uri = 7;
+  /* Date
+   * @date
+   */
+  google.protobuf.StringValue Date = 8;
+  /* Time
+   * @time
+   */
+  google.protobuf.StringValue Time = 9;
+  /* Md5
+   * @md5
+   */
+  google.protobuf.StringValue Md5 = 10;
+  /* Car
+   * @car
+   * @example(云A12345)
+   */
+  google.protobuf.StringValue Car = 11;
+  /* Guid
+   * @guid
+   */
+  google.protobuf.StringValue Guid = 12;
+  /* MinInt
+   * @min(1)
+   */
+  int32 MinInt = 13;
+  /*
+   * MaxInt
+   * @max(100)
+   */
+  int32 MaxInt = 14;
+  /* RangeInt
+   * @range(1,100)
+   */
+  int32 RangeInt = 15;
+  /* IdCard
+   * @idcard
+   */
+  string IdCard = 16;
+  /* TelPhone
+   * @tel
+   * @example(0871-68099999)
+   */
+  string TelPhone = 17;
+  /* Video
+   * @video-url
+   * @example(https://www.example.com/example.mp4)
+   */
+  string Video = 18;
+  /* Image
+   * @image-url
+   * @example(https://www.example.com/image.png)
+   */
+  string Image = 19;
+}

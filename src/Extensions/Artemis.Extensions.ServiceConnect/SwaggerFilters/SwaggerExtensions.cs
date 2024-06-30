@@ -58,6 +58,7 @@ internal static class SwaggerExtensions
                     options.DocumentFilter<RemoveDefaultRpcSchemas>();
                     options.OperationFilter<AddAuthorizationToken>();
                     //config.OperationFilter<MarkFieldFeature>();
+                    options.SchemaFilter<GrpcCommentDescriptor>();
                 }
             });
         }
@@ -83,6 +84,7 @@ internal static class SwaggerExtensions
                 options.DocumentTitle = $"{config.Application} Api Docs";
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", $"{config.Application} v1");
                 options.DefaultModelsExpandDepth(-1);
+                options.ShowCommonExtensions();
             });
             app.UseReDoc(options =>
             {

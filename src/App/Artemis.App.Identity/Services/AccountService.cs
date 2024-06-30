@@ -91,7 +91,7 @@ public class AccountService : Account.AccountBase
 
         if (result.Succeeded && token is not null)
         {
-            token.EndType = request.EndType;
+            token.EndType = request.EndType.ToString("G");
 
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
@@ -126,7 +126,7 @@ public class AccountService : Account.AccountBase
 
         if (result.Succeeded && token is not null)
         {
-            token.EndType = EndType.SignUpEnd;
+            token.EndType = InternalEndType.SignUpEnd;
 
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);

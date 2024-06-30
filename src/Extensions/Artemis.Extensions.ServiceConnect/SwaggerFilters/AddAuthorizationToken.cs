@@ -1,6 +1,8 @@
-﻿using Artemis.Extensions.ServiceConnect.Authorization;
+﻿using Artemis.Data.Core.Fundamental;
+using Artemis.Extensions.ServiceConnect.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -47,7 +49,12 @@ internal sealed class AddAuthorizationToken : IOperationFilter
                 Required = true,
                 Schema = new OpenApiSchema
                 {
-                    Type = "string"
+                    Type = "string",
+                    MinLength = 32,
+                    MaxLength = 32,
+                    Format = "md5",
+                    Pattern = Matcher.Md5Pattern(),
+                    Example = new OpenApiString("6BB0A25E549A723D3323F21E54570488")
                 },
                 Description = "认证令牌"
             });

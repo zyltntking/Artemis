@@ -6,12 +6,12 @@ using Microsoft.Extensions.Options;
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
 /// <summary>
-/// Artemis操作员代理实现
+///     Artemis操作员代理实现
 /// </summary>
 public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
 {
     /// <summary>
-    /// 代理实现
+    ///     代理实现
     /// </summary>
     /// <param name="httpContextAccessor"></param>
     /// <param name="options"></param>
@@ -24,12 +24,12 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
     }
 
     /// <summary>
-    /// http上下文访问器
+    ///     http上下文访问器
     /// </summary>
     private IHttpContextAccessor HttpContextAccessor { get; }
 
     /// <summary>
-    /// Artemis授权配置
+    ///     Artemis授权配置
     /// </summary>
     private ArtemisAuthorizationConfig Options { get; }
 
@@ -43,10 +43,7 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
         get
         {
             var httpContext = HttpContextAccessor.HttpContext;
-            if (httpContext == null)
-            {
-                return Guid.Empty;
-            }
+            if (httpContext == null) return Guid.Empty;
 
             var token = httpContext.FetchTokenDocument<TokenDocument>(Options.ContextItemTokenKey);
 

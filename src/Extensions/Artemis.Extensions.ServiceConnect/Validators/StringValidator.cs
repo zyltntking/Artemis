@@ -156,7 +156,7 @@ public static class StringValidator
     /// <returns></returns>
     public static IRuleBuilderOptions<T, string> ShouldBePhone<T>(
         this IRuleBuilder<T, string> ruleBuilder,
-        PhoneMatcherMode mode = PhoneMatcherMode.Normal)
+        PhonePatternMode mode = PhonePatternMode.Normal)
     {
         return ruleBuilder.Must(input => Matcher.PhoneMatcher(mode).IsMatch(input))
             .WithMessage("不是有效的手机号码");

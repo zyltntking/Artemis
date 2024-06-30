@@ -87,8 +87,8 @@ public class Program
 
             // Configure the HTTP request pipeline.
             app.MapGrpcService<AccountService>();
-            app.MapGrpcService<UserService>();
-            app.MapGrpcService<RoleService>();
+            //app.MapGrpcService<UserService>();
+            //app.MapGrpcService<RoleService>();
 
             // map default endpoints for health check
             app.MapDefaultEndpoints();
