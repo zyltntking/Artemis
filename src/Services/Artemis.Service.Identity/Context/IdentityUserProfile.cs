@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Identity.Context;
 
 /// <summary>
-/// 认证用户档案实体
+///     认证用户档案实体
 /// </summary>
 [EntityTypeConfiguration(typeof(IdentityUserProfileConfiguration))]
 public sealed class IdentityUserProfile : UserProfile

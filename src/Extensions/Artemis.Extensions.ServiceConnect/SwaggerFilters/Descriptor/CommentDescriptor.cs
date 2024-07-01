@@ -30,7 +30,6 @@ internal static class CommentDescriptor
         var result = new SchemaInfo();
 
         foreach (var comment in comments)
-        {
             if (comment.StartsWith('@'))
             {
                 var expression = ExpressionPicker.Match(comment).Groups[1].Value;
@@ -195,7 +194,6 @@ internal static class CommentDescriptor
             {
                 descriptions.Add(comment);
             }
-        }
 
         result.Description = string.Join(',', descriptions);
 

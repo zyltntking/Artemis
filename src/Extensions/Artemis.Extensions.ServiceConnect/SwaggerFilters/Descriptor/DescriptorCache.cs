@@ -56,7 +56,7 @@ internal static class DescriptorCache
     }
 
     /// <summary>
-    /// 格式化时间戳
+    ///     格式化时间戳
     /// </summary>
     /// <param name="schema"></param>
     private static void FormatTimestamp(SchemaInfo schema)
@@ -215,7 +215,7 @@ internal static class DescriptorCache
     }
 
     /// <summary>
-    /// 格式化异常
+    ///     格式化异常
     /// </summary>
     /// <param name="schema"></param>
     private static void FormatException(SchemaInfo schema)
@@ -255,7 +255,7 @@ internal static class DescriptorCache
             { "tel", FormatTelephone },
             { "video-url", FormatVideoUrl },
             { "image-url", FormatImageUrl },
-            { "exception", FormatException}
+            { "exception", FormatException }
         };
 
     #endregion

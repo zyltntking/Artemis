@@ -3,7 +3,7 @@
 namespace Artemis.Data.Shared.Identity;
 
 /// <summary>
-/// 用户档案接口
+///     用户档案接口
 /// </summary>
 public interface IUserProfile : IMetadata
 {

@@ -1,11 +1,11 @@
-﻿using Artemis.Data.Shared.Identity;
+﻿using System.ComponentModel.DataAnnotations;
+using Artemis.Data.Shared.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace Artemis.Service.Identity.Models;
 
 /// <summary>
-/// 用户档案模型
+///     用户档案模型
 /// </summary>
 public class UserProfile : IUserProfile
 {

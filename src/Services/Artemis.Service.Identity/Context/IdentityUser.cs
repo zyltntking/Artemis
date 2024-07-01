@@ -21,7 +21,7 @@ public sealed class IdentityUser : User
     public ICollection<IdentityUserRole>? UserRoles { get; set; }
 
     /// <summary>
-    ///    用户档案映射
+    ///     用户档案映射
     /// </summary>
     public ICollection<IdentityUserProfile>? UserProfiles { get; set; }
 

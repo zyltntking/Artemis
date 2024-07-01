@@ -33,5 +33,4 @@ internal class IdentityUserProfileConfiguration : BaseEntityConfiguration<Identi
     }
 
     #endregion
-
 }

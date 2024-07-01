@@ -39,7 +39,7 @@ public static class MapEndPointsExtensions
     }
 
     /// <summary>
-    /// 映射路由表
+    ///     映射路由表
     /// </summary>
     /// <param name="app"></param>
     /// <param name="pattern"></param>
@@ -47,12 +47,11 @@ public static class MapEndPointsExtensions
     public static void MapRouteTable(this WebApplication app, string pattern = "/route-table")
     {
         if (app.Environment.IsDevelopment())
-        {
-            app.MapGet(pattern, (IEnumerable<EndpointDataSource> endpointSources) =>
-            {
-                return string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
-            });
-        }
+            app.MapGet(pattern,
+                (IEnumerable<EndpointDataSource> endpointSources) =>
+                {
+                    return string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
+                });
     }
 
     /// <summary>

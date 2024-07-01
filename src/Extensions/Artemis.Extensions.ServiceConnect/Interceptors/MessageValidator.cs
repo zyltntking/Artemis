@@ -58,16 +58,10 @@ internal sealed class MessageValidator : Interceptor
                 var dictionary = new Dictionary<string, List<string>>();
 
                 foreach (var error in validateResult.Errors)
-                {
                     if (dictionary.ContainsKey(error.PropertyName))
-                    {
                         dictionary[error.PropertyName].Add(error.ErrorMessage);
-                    }
                     else
-                    {
                         dictionary.Add(error.PropertyName, [error.ErrorMessage]);
-                    }
-                }
 
                 var response = RpcResultAdapter.ValidateFail<TResponse>(dictionary.Serialize());
 
