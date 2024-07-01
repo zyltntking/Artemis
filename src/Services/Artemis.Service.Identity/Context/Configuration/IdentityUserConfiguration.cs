@@ -38,6 +38,14 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasIndex(user => user.PhoneNumber)
             .HasDatabaseName(IndexName("PhoneNumber"));
 
+        // Each User can have many UserProfiles
+        builder.HasMany(user => user.UserProfiles)
+            .WithOne(userProfile => userProfile.User)
+            .HasForeignKey(userProfile => userProfile.UserId)
+            .HasConstraintName(ForeignKeyName("IdentityUserProfile", "IdentityUser"))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
         // Each User can have many UserClaims
         builder.HasMany(user => user.UserClaims)
             .WithOne(userClaim => userClaim.User)

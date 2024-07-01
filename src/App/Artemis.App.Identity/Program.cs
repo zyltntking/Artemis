@@ -86,6 +86,7 @@ public class Program
             app.UseGrpcModify();
 
             // Configure the HTTP request pipeline.
+            app.MapGrpcService<SampleService>();
             app.MapGrpcService<AccountService>();
             //app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();
@@ -95,6 +96,9 @@ public class Program
 
             // map migration endpoint through "/migrate"
             app.MapMigrationEndpoint<IdentityContext>();
+
+            // map route table endpoint through "/route-table"
+            app.MapRouteTable();
 
             app.Run();
         }

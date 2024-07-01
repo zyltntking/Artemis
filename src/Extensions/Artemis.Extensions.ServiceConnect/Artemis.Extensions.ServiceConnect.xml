@@ -1042,6 +1042,14 @@
             <param name="pattern"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+            <summary>
+            映射路由表
+            </summary>
+            <param name="app"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapDetailHealthChecks(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
             <summary>
                 映射健康检查详细信息

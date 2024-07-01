@@ -10,13 +10,27 @@ package artemis.service.protos;
 // 样例服务协议
 service Sample {
 
-  // 测试
+  // 测试字段约束
   rpc Test(SampleRequest) returns (EmptyResponse){
 	option (google.api.http) = {
 	  post: "/api/Sample/Test",
 	  body: "*"
 	};
   }
+
+  // 测试服务器流式处理
+  rpc SayHelloStream (HelloRequest) returns (stream HelloResponse) {
+    option (google.api.http) = {
+      post: "/api/Sample/greeter"
+      body: "*"
+    };
+  }
+
+  // Client streaming
+  rpc StreamingFromClient (stream HelloRequest) returns (HelloResponse);
+
+  // Bi-directional streaming
+  rpc StreamingBothWays (stream HelloRequest) returns (stream HelloResponse);
 }
 
 // 样例请求
@@ -104,4 +118,44 @@ message SampleRequest {
    * @example(https://www.example.com/image.png)
    */
   string Image = 19;
+}
+
+// SayHelloStream request message.
+message HelloRequest {
+  // Name to say hello to.
+  string name = 1;
+  // Count of messages to send.
+  // @min(1)
+  int32 count = 2;
+}
+
+// SayHello response message.
+message HelloReply {
+  // Hello reply message.
+  string message = 1;
+}
+
+// HelloResponse
+message HelloResponse {
+  // 状态码
+  int32 Code = 1;
+  // 是否成功
+  bool Succeeded = 2;
+  // 消息
+  string Message = 3;
+  // 错误
+  // @exception
+  google.protobuf.StringValue Error = 4;
+  /* 响应时间
+   * @datetime
+   */
+  string DateTime = 5;
+  /* 响应时间戳
+   * @timestamp
+   */
+  int64 Timestamp = 6;
+  /* Hello响应数据
+   * @datetime
+   */
+  HelloReply Data = 7;
 }

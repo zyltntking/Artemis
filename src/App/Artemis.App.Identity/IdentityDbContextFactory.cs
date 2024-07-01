@@ -19,7 +19,7 @@ public class IdentityDbContextFactory : IDesignTimeDbContextFactory<IdentityCont
         var configuration = BuildConfiguration();
 
         var builder = new DbContextOptionsBuilder<IdentityContext>()
-            .UseNpgsql(configuration.GetConnectionString("IdentityContext"), options =>
+            .UseNpgsql(configuration.GetConnectionString("ArtemisDb"), options =>
             {
                 options.MigrationsHistoryTable("IdentityDbHistory", "identity");
                 options.MigrationsAssembly("Artemis.App.Identity");

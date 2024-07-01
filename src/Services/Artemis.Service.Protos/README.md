@@ -1,1 +1,1 @@
-﻿# Artemis.Protos.Identity
+﻿# Artemis.Service.Protos

@@ -109,6 +109,27 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="T:Artemis.Service.Identity.Context.Configuration.IdentityUserProfileConfiguration">
+            <summary>
+                认证用户角色登录实体配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Context.Configuration.IdentityUserProfileConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Context.Configuration.IdentityUserProfileConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Identity.Context.Configuration.IdentityUserProfileConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Identity.Context.IdentityUserProfile})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Artemis.Service.Identity.Context.Configuration.IdentityUserLoginConfiguration">
             <summary>
                 认证用户角色登录实体配置
@@ -192,6 +213,11 @@
                 用户数据集
             </summary>
         </member>
+        <member name="P:Artemis.Service.Identity.Context.IdentityContext.UserProfiles">
+            <summary>
+                用户档案数据集
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Identity.Context.IdentityContext.UserClaims">
             <summary>
                 用户凭据数据集
@@ -273,6 +299,11 @@
                 用户角色映射
             </summary>
         </member>
+        <member name="P:Artemis.Service.Identity.Context.IdentityUser.UserProfiles">
+            <summary>
+               用户档案映射
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Identity.Context.IdentityUser.UserClaims">
             <summary>
                 用户凭据映射
@@ -304,6 +335,16 @@
             </summary>
         </member>
         <member name="P:Artemis.Service.Identity.Context.IdentityUserLogin.User">
+            <summary>
+                所属用户
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Identity.Context.IdentityUserProfile">
+            <summary>
+            认证用户档案实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Context.IdentityUserProfile.User">
             <summary>
                 所属用户
             </summary>
@@ -2000,6 +2041,26 @@
         <member name="P:Artemis.Service.Identity.Models.UserLogin.ProviderDisplayName">
             <summary>
                 提供程序显示名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Identity.Models.UserProfile">
+            <summary>
+            用户档案模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserProfile.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserProfile.Key">
+            <summary>
+                数据键
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserProfile.Value">
+            <summary>
+                数据值
             </summary>
         </member>
         <member name="T:Artemis.Service.Identity.Models.UserRole">

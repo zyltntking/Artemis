@@ -7,7 +7,7 @@ namespace Artemis.Data.Core.Fundamental.Model;
 /// <summary>
 ///     元数据接口
 /// </summary>
-file interface IMetadata
+public interface IMetadata
 {
     /// <summary>
     ///     数据键
@@ -23,7 +23,7 @@ file interface IMetadata
 /// <summary>
 ///     数据字典
 /// </summary>
-file interface IDataDict : IMetadata
+public interface IDataDict : IMetadata
 {
     /// <summary>
     ///     数据标签

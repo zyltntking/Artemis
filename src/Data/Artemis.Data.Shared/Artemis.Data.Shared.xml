@@ -249,6 +249,16 @@
                 提供程序显示名称
             </summary>
         </member>
+        <member name="T:Artemis.Data.Shared.Identity.IUserProfile">
+            <summary>
+            用户档案接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.Identity.IUserProfile.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Shared.Identity.IUserRole">
             <summary>
                 用户角色关系接口
@@ -297,6 +307,51 @@
         <member name="P:Artemis.Data.Shared.Identity.IUserTokenPackage.Value">
             <summary>
                 令牌值
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.School.IClass">
+            <summary>
+            班级接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.ClassCode">
+            <summary>
+            班级编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.School.ISchool">
+            <summary>
+            学校接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.SchoolName">
+            <summary>
+            学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.SchoolCode">
+            <summary>
+            学校编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.School.IStudent">
+            <summary>
+            学生接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.StudentName">
+            <summary>
+            学生名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.StudentCode">
+            <summary>
+            学生编码
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.Transfer.SignResult">

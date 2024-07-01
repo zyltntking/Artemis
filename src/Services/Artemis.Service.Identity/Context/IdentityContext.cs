@@ -27,6 +27,11 @@ public class IdentityContext : DbContext
     public virtual DbSet<IdentityUser> Users { get; set; } = default!;
 
     /// <summary>
+    ///     用户档案数据集
+    /// </summary>
+    public virtual DbSet<IdentityUserProfile> UserProfiles { get; set; } = default!;
+
+    /// <summary>
     ///     用户凭据数据集
     /// </summary>
     public virtual DbSet<IdentityUserClaim> UserClaims { get; set; } = default!;

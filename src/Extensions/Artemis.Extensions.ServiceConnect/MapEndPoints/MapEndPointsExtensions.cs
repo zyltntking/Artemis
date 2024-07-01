@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Extensions.ServiceConnect.MapEndPoints;
 
@@ -18,7 +20,7 @@ public static class MapEndPointsExtensions
     /// <param name="app"></param>
     /// <param name="pattern"></param>
     /// <returns></returns>
-    public static WebApplication MapMigrationEndpoint<TDbContext>(this WebApplication app, string pattern = "/migrate")
+    public static void MapMigrationEndpoint<TDbContext>(this WebApplication app, string pattern = "/migrate")
         where TDbContext : DbContext
     {
         app.MapGet(pattern, (TDbContext context) =>
@@ -34,8 +36,23 @@ public static class MapEndPointsExtensions
 
             return "Success!";
         });
+    }
 
-        return app;
+    /// <summary>
+    /// 映射路由表
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="pattern"></param>
+    /// <returns></returns>
+    public static void MapRouteTable(this WebApplication app, string pattern = "/route-table")
+    {
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapGet(pattern, (IEnumerable<EndpointDataSource> endpointSources) =>
+            {
+                return string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
+            });
+        }
     }
 
     /// <summary>
@@ -44,14 +61,12 @@ public static class MapEndPointsExtensions
     /// <param name="app"></param>
     /// <param name="pattern"></param>
     /// <returns></returns>
-    internal static WebApplication MapDetailHealthChecks(this WebApplication app, string pattern = "/health-detail")
+    internal static void MapDetailHealthChecks(this WebApplication app, string pattern = "/health-detail")
     {
         app.MapHealthChecks(pattern, new HealthCheckOptions
         {
             ResponseWriter = WriteResponse
         });
-
-        return app;
     }
 
     /// <summary>
