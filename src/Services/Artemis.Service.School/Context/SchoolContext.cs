@@ -6,13 +6,13 @@ namespace Artemis.Service.School.Context;
 /// <summary>
 ///     学校业务上下文
 /// </summary>
-public class SchoolBusinessContext : DbContext
+public class SchoolContext : DbContext
 {
     /// <summary>
     ///     构造函数
     /// </summary>
     /// <param name="options">配置</param>
-    public SchoolBusinessContext(DbContextOptions<SchoolBusinessContext> options) : base(options)
+    public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
     {
     }
 

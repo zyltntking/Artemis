@@ -33,7 +33,7 @@ public sealed class IdentityUserProfileStore : KeyLessStore<IdentityUserProfile>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public IdentityUserProfileStore(
-        DbContext context,
+        IdentityContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,

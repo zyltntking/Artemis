@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Host.AppHost", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Protos", "src\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj", "{DC984B43-BAE2-4764-988A-FE5219405A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Service.School", "src\Services\Artemis.Service.School\Artemis.Service.School.csproj", "{3BAF25AE-7910-441C-B251-26BDABDC70AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.School", "src\Services\Artemis.Service.School\Artemis.Service.School.csproj", "{3BAF25AE-7910-441C-B251-26BDABDC70AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.School", "src\App\Artemis.App.School\Artemis.App.School.csproj", "{A3BE5214-00DE-4095-8C07-1926528BFEEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{3BAF25AE-7910-441C-B251-26BDABDC70AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BAF25AE-7910-441C-B251-26BDABDC70AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BAF25AE-7910-441C-B251-26BDABDC70AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{9D41123A-13F8-43EB-9745-AF4A71508803} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{DC984B43-BAE2-4764-988A-FE5219405A6A} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{3BAF25AE-7910-441C-B251-26BDABDC70AF} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
+		{A3BE5214-00DE-4095-8C07-1926528BFEEB} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

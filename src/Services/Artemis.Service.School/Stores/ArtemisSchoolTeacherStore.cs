@@ -33,7 +33,7 @@ public sealed class ArtemisSchoolTeacherStore : KeyLessStore<ArtemisSchoolTeache
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public ArtemisSchoolTeacherStore(
-        DbContext context,
+        SchoolContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,

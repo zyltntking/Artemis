@@ -42,7 +42,7 @@ public static class GrpcExtensions
     /// </summary>
     /// <param name="app"></param>
     /// <returns></returns>
-    public static void UseGrpcModify(this WebApplication app)
+    public static void UseGrpcSwagger(this WebApplication app)
     {
         app.MapSwagger();
     }

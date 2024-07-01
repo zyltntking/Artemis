@@ -32,4 +32,8 @@ builder.AddProject<Artemis_App_Identity>("IdentityService")
     //.WithReference(rabbitMq)
     .WithReference(artemisDb);
 
+builder.AddProject<Artemis_App_School>("SchoolService")
+    .WithReference(redis)
+    .WithReference(artemisDb);
+
 builder.Build().Run();

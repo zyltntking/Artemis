@@ -1,4 +1,5 @@
-﻿using Artemis.Service.School.Managers;
+﻿using Artemis.Data.Core;
+using Artemis.Service.School.Managers;
 using Artemis.Service.School.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,7 +15,7 @@ public static class ServiceExtensions
     ///     添加学校服务
     /// </summary>
     /// <param name="services"></param>
-    public static void AddSchoolServices(this IServiceCollection services)
+    public static IServiceCollection AddSchoolServices(this IServiceCollection services)
     {
         services.TryAddScoped<IArtemisSchoolStore, ArtemisSchoolStore>();
         services.TryAddScoped<IArtemisClassStore, ArtemisClassStore>();
@@ -27,5 +28,25 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisTeacherStudentStore, ArtemisTeacherStudentStore>();
 
         services.TryAddScoped<IArtemisSchoolManager, ArtemisSchoolManager>();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     添加学校服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="enableProxy"></param>
+    public static IServiceCollection AddSchoolServices<THandlerProxy>(this IServiceCollection services, bool enableProxy = true)
+        where THandlerProxy : class, IHandlerProxy
+    {
+        services.AddSchoolServices();
+
+        if (enableProxy)
+        {
+            services.AddScoped<IHandlerProxy, THandlerProxy>();
+        }
+
+        return services;
     }
 }

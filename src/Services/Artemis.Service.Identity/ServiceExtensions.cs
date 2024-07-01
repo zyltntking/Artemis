@@ -1,4 +1,5 @@
-﻿using Artemis.Service.Identity.Managers;
+﻿using Artemis.Data.Core;
+using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -11,10 +12,10 @@ namespace Artemis.Service.Identity;
 public static class ServiceExtensions
 {
     /// <summary>
-    ///     添加认证服务
+    /// 添加认证服务
     /// </summary>
     /// <param name="services"></param>
-    public static void AddIdentityServices(this IServiceCollection services)
+    public static IServiceCollection AddIdentityServices(this IServiceCollection services) 
     {
         services.TryAddScoped<IIdentityClaimStore, IdentityClaimStore>();
         services.TryAddScoped<IIdentityUserStore, IdentityUserStore>();
@@ -30,5 +31,25 @@ public static class ServiceExtensions
         services.TryAddScoped<IIdentityRoleManager, IdentityRoleManager>();
         services.TryAddScoped<IIdentityAccountManager, IdentityAccountManager>();
         services.TryAddScoped<IIdentityResourceManager, IdentityResourceManager>();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     添加认证服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="enableProxy"></param>
+    public static IServiceCollection AddIdentityServices<THandlerProxy>(this IServiceCollection services, bool enableProxy = true) 
+        where THandlerProxy : class, IHandlerProxy
+    {
+        services.AddIdentityServices();
+
+        if (enableProxy)
+        {
+            services.AddScoped<IHandlerProxy, THandlerProxy>();
+        }
+
+        return services;
     }
 }

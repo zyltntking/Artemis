@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Identity.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20240701003754_InitialIdentity")]
+    [Migration("20240701154045_InitialIdentity")]
     partial class InitialIdentity
     {
         /// <inheritdoc />
@@ -472,6 +472,31 @@ namespace Artemis.App.Identity.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Artemis.Service.Identity.Context.IdentityUserProfile", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasComment("用户标识");
+
+                    b.Property<string>("Key")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("用户档案数据键");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasComment("用户档案数据值");
+
+                    b.HasKey("UserId", "Key")
+                        .HasName("PK_IdentityUserProfile");
+
+                    b.ToTable("IdentityUserProfile", "identity", t =>
+                        {
+                            t.HasComment("认证用户角色档案数据集");
+                        });
+                });
+
             modelBuilder.Entity("Artemis.Service.Identity.Context.IdentityUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -554,6 +579,18 @@ namespace Artemis.App.Identity.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Artemis.Service.Identity.Context.IdentityUserProfile", b =>
+                {
+                    b.HasOne("Artemis.Service.Identity.Context.IdentityUser", "User")
+                        .WithMany("UserProfiles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_IdentityUserProfile_IdentityUser");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Artemis.Service.Identity.Context.IdentityUserRole", b =>
                 {
                     b.HasOne("Artemis.Service.Identity.Context.IdentityRole", "Role")
@@ -599,6 +636,8 @@ namespace Artemis.App.Identity.Migrations
                     b.Navigation("UserClaims");
 
                     b.Navigation("UserLogins");
+
+                    b.Navigation("UserProfiles");
 
                     b.Navigation("UserRoles");
 

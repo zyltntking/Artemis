@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace Artemis.Extensions.ServiceConnect;
 
@@ -68,11 +69,13 @@ public static class ComponentExtensions
     /// <typeparam name="TDbContext"></typeparam>
     /// <param name="builder"></param>
     /// <param name="connectionName"></param>
+    /// <param name="migrateAction"></param>
     /// <param name="logger"></param>
     /// <param name="logLevel"></param>
     /// <returns></returns>
-    public static void AddPostgreSqlComponent<TDbContext>(this IHostApplicationBuilder builder,
+    public static IServiceCollection AddPostgreSqlComponent<TDbContext>(this IHostApplicationBuilder builder,
         string connectionName,
+        Action<NpgsqlDbContextOptionsBuilder>? migrateAction = null,
         Action<string>? logger = null,
         LogLevel logLevel = LogLevel.Debug) where TDbContext : DbContext
     {
@@ -80,12 +83,20 @@ public static class ComponentExtensions
 
         builder.AddNpgsqlDbContext<TDbContext>(connectionName, configureDbContextOptions: config =>
         {
+            if (migrateAction != null)
+            {
+                config.UseNpgsql(migrateAction);
+            }
+
             config.EnableServiceProviderCaching()
                 .EnableDetailedErrors(builder.Environment.IsDevelopment())
                 .EnableSensitiveDataLogging(builder.Environment.IsDevelopment())
                 .LogTo(logger, logLevel);
         });
 
-        if (builder.Environment.IsDevelopment()) builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        if (builder.Environment.IsDevelopment()) 
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+        return builder.Services;
     }
 }

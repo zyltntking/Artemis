@@ -2,7 +2,6 @@
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.School.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -33,7 +32,7 @@ public sealed class ArtemisTeacherStudentStore : KeyLessStore<ArtemisTeacherStud
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public ArtemisTeacherStudentStore(
-        DbContext context,
+        SchoolContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,

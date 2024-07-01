@@ -1,13 +1,11 @@
-using Artemis.App.Identity.Services;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
-using Artemis.Service.Identity;
-using Artemis.Service.Identity.Context;
-using Microsoft.AspNetCore.Identity;
+using Artemis.Service.School;
+using Artemis.Service.School.Context;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace Artemis.App.Identity;
+namespace Artemis.App.School;
 
 /// <summary>
 ///     应用程序入口
@@ -40,13 +38,12 @@ public class Program
             //builder.AddMongoDbComponent("MongoInstance");
             //builder.AddRabbitMqComponent("RabbitMqInstance");
 
-            builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb", optionsBuilder =>
+            builder.AddPostgreSqlComponent<SchoolContext>("ArtemisDb", optionsBuilder =>
                 {
-                    optionsBuilder.MigrationsHistoryTable("IdentityDbHistory", "identity");
-                    optionsBuilder.MigrationsAssembly("Artemis.App.Identity");
+                    optionsBuilder.MigrationsHistoryTable("SchoolDbHistory", "school");
+                    optionsBuilder.MigrationsAssembly("Artemis.App.School");
                 }, Log.Debug)
-                .AddIdentityServices<ArtemisHandlerProxy>()
-                .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
+                .AddSchoolServices<ArtemisHandlerProxy>();
 
             var isMigration = false;
 
@@ -71,13 +68,13 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            app.MapGrpcService<SampleService>();
-            app.MapGrpcService<AccountService>();
+            //app.MapGrpcService<SampleService>();
+            //app.MapGrpcService<AccountService>();
             //app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();
 
             // map common endpoints
-            app.MapCommonEndpoints<IdentityContext>();
+            app.MapCommonEndpoints<SchoolContext>();
 
             app.Run();
         }

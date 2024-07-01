@@ -1,0 +1,10 @@
+{
+  "Swagger": {
+    "UserGrpc": true,
+    "EnableInProduction": true,
+    "Application": "School Service",
+    "XmlDocs": [
+      "Artemis.Service.Protos.xml"
+    ]
+  }
+}

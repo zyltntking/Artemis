@@ -76,7 +76,8 @@ internal static class SwaggerExtensions
 
         if (config != null)
         {
-            if (app.Environment.IsProduction() && !config.EnableInProduction) return;
+            if (app.Environment.IsProduction() && !config.EnableInProduction) 
+                return;
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

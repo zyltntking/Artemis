@@ -25,7 +25,8 @@ public static class AspireExtensions
     /// </summary>
     /// <param name="builder"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
+    /// <remarks>OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道</remarks>
+    public static void AddServiceDefaults(this IHostApplicationBuilder builder)
     {
         builder.ConfigureOpenTelemetry();
 
@@ -41,8 +42,6 @@ public static class AspireExtensions
             // Turn on service discovery by default
             http.AddServiceDiscovery();
         });
-
-        return builder;
     }
 
     /// <summary>
@@ -109,6 +108,7 @@ public static class AspireExtensions
     /// </summary>
     /// <param name="app"></param>
     /// <returns></returns>
+    /// <remarks>dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查</remarks>
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
         // Adding health checks endpoints to applications in non-development environments has security implications.
@@ -123,10 +123,10 @@ public static class AspireExtensions
             {
                 Predicate = r => r.Tags.Contains("live")
             });
-
-            // Health checks detail information, default map to /health-detail
-            app.MapDetailHealthChecks();
         }
+
+        // Health checks detail information, default map to /health-detail
+        app.MapDetailHealthChecks();
 
         return app;
     }

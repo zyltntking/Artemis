@@ -33,7 +33,7 @@ public sealed class ArtemisSchoolStore : Store<ArtemisSchool, Guid, Guid>, IArte
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public ArtemisSchoolStore(
-        DbContext context,
+        SchoolContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy<Guid>? handlerProxy = null,
         IDistributedCache? cache = null,
