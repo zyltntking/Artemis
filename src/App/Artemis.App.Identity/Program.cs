@@ -3,9 +3,8 @@ using Artemis.Data.Core;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
+using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
-using Artemis.Service.Identity.Managers;
-using Artemis.Service.Identity.Stores;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -48,19 +47,7 @@ public class Program
 
             builder.Services.AddScoped<IHandlerProxy, ArtemisHandlerProxy>();
 
-            builder.Services.AddScoped<IIdentityClaimStore, IdentityClaimStore>();
-            builder.Services.AddScoped<IIdentityUserStore, IdentityUserStore>();
-            builder.Services.AddScoped<IIdentityRoleStore, IdentityRoleStore>();
-            builder.Services.AddScoped<IIdentityRoleClaimStore, IdentityRoleClaimStore>();
-            builder.Services.AddScoped<IIdentityUserRoleStore, IdentityUserRoleStore>();
-            builder.Services.AddScoped<IIdentityUserClaimStore, IdentityUserClaimStore>();
-            builder.Services.AddScoped<IIdentityUserLoginStore, IdentityUserLoginStore>();
-            builder.Services.AddScoped<IIdentityUserTokenStore, IdentityUserTokenStore>();
-
-            builder.Services.AddScoped<IIdentityUserManager, IdentityUserManager>();
-            builder.Services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
-            builder.Services.AddScoped<IIdentityAccountManager, IdentityAccountManager>();
-            builder.Services.AddScoped<IIdentityResourceManager, IdentityResourceManager>();
+            builder.Services.AddIdentityServices();
 
             builder.Services.Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
 

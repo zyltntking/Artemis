@@ -17,7 +17,7 @@ internal sealed class ArtemisStudentConfiguration : ConcurrencyPartitionEntityCo
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => "Student";
+    protected override string TableName => nameof(ArtemisStudent);
 
     #endregion
 }

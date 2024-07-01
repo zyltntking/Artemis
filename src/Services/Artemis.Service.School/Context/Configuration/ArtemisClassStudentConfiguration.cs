@@ -19,7 +19,7 @@ internal sealed class ArtemisClassStudentConfiguration : BaseEntityConfiguration
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => "ClassStudent";
+    protected override string TableName => nameof(ArtemisClassStudent);
 
     /// <summary>
     ///     实体字段配置

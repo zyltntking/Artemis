@@ -19,7 +19,7 @@ public interface IIdentityUserLoginStore : IKeyLessStore<IdentityUserLogin>;
 /// <summary>
 ///     认证用户登录存储
 /// </summary>
-public class IdentityUserLoginStore : KeyLessStore<IdentityUserLogin>, IIdentityUserLoginStore
+public sealed class IdentityUserLoginStore : KeyLessStore<IdentityUserLogin>, IIdentityUserLoginStore
 {
     /// <summary>
     ///     无键模型基本存储实例构造

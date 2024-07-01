@@ -6,7 +6,7 @@
 public interface IClass
 {
     /// <summary>
-    /// 学校标识
+    ///     学校标识
     /// </summary>
     Guid SchoolId { get; set; }
 

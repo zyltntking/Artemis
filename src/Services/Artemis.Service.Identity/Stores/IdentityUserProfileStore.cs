@@ -2,6 +2,7 @@
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -10,16 +11,16 @@ namespace Artemis.Service.Identity.Stores;
 #region Interface
 
 /// <summary>
-///     认证用户令牌存储接口
+///     认证用户档案存储接口
 /// </summary>
-public interface IIdentityUserTokenStore : IKeyLessStore<IdentityUserToken>;
+public interface IIdentityUserProfileStore : IKeyLessStore<IdentityUserProfile>;
 
 #endregion
 
 /// <summary>
-///     认证用户令牌存储
+///     认证用户档案存储
 /// </summary>
-public sealed class IdentityUserTokenStore : KeyLessStore<IdentityUserToken>, IIdentityUserTokenStore
+public sealed class IdentityUserProfileStore : KeyLessStore<IdentityUserProfile>, IIdentityUserProfileStore
 {
     /// <summary>
     ///     无键模型基本存储实例构造
@@ -29,19 +30,21 @@ public sealed class IdentityUserTokenStore : KeyLessStore<IdentityUserToken>, II
     /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
+    /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    public IdentityUserTokenStore(
-        IdentityContext context,
+    public IdentityUserProfileStore(
+        DbContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
 
     /// <summary>
     ///     实体键生成委托
     /// </summary>
-    protected override Func<IdentityUserToken, string>? EntityKey { get; init; } = userToken =>
-        $"{userToken.UserId}:{userToken.LoginProvider}:{userToken.Name}";
+    protected override Func<IdentityUserProfile, string>? EntityKey { get; init; } =
+        userProfile => $"{userProfile.UserId}:{userProfile.Key}";
 }

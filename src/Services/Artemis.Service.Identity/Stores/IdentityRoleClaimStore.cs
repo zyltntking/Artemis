@@ -19,7 +19,7 @@ public interface IIdentityRoleClaimStore : IStore<IdentityRoleClaim, int, Guid>;
 /// <summary>
 ///     认证角色凭据存储
 /// </summary>
-public class IdentityRoleClaimStore : Store<IdentityRoleClaim, int, Guid>, IIdentityRoleClaimStore
+public sealed class IdentityRoleClaimStore : Store<IdentityRoleClaim, int, Guid>, IIdentityRoleClaimStore
 {
     /// <summary>
     ///     基本存储实例构造

@@ -315,6 +315,11 @@
 				班级接口
 			</summary>
 		</member>
+		<member name="P:Artemis.Data.Shared.School.IClass.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
 		<member name="P:Artemis.Data.Shared.School.IClass.ClassName">
 			<summary>
 				班级名称
@@ -323,6 +328,36 @@
 		<member name="P:Artemis.Data.Shared.School.IClass.ClassCode">
 			<summary>
 				班级编码
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.IClassStudent">
+			<summary>
+				班级学生对应接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.IClassStudent.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.IClassStudent.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.IClassTeacher">
+			<summary>
+				班级教师对应接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.IClassTeacher.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.IClassTeacher.TeacherId">
+			<summary>
+				教师标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Shared.School.ISchool">
@@ -340,6 +375,36 @@
 				学校编码
 			</summary>
 		</member>
+		<member name="T:Artemis.Data.Shared.School.ISchoolStudent">
+			<summary>
+				学校学生对应接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ISchoolStudent.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ISchoolStudent.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.ISchoolTeacher">
+			<summary>
+				学校教师对应接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ISchoolTeacher.SchoolId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ISchoolTeacher.TeacherId">
+			<summary>
+				教师标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Shared.School.IStudent">
 			<summary>
 				学生接口
@@ -353,6 +418,51 @@
 		<member name="P:Artemis.Data.Shared.School.IStudent.StudentCode">
 			<summary>
 				学生编码
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.ITeacher">
+			<summary>
+				教师接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITeacher.TeacherName">
+			<summary>
+				教师名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITeacher.TeacherCode">
+			<summary>
+				教师编码
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.ITeacherStudent">
+			<summary>
+				教师学生对应接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITeacherStudent.TeacherId">
+			<summary>
+				教师标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITeacherStudent.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Shared.School.ITransfer">
+			<summary>
+				流转接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITransfer.MoveIn">
+			<summary>
+				转入时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Shared.School.ITransfer.MoveOut">
+			<summary>
+				转出时间
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Shared.Transfer.SignResult">

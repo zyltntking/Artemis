@@ -1,25 +1,26 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
-using Artemis.Service.Identity.Context;
+using Artemis.Service.School.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
-namespace Artemis.Service.Identity.Stores;
+namespace Artemis.Service.School.Stores;
 
 #region Interface
 
 /// <summary>
-///     认证角色存储接口
+///     班级存储接口
 /// </summary>
-public interface IIdentityRoleStore : IStore<IdentityRole, Guid, Guid>;
+public interface IArtemisClassStore : IStore<ArtemisClass, Guid, Guid>;
 
 #endregion
 
 /// <summary>
-///     认证角色存储
+///     班级存储
 /// </summary>
-public sealed class IdentityRoleStore : Store<IdentityRole, Guid, Guid>, IIdentityRoleStore
+public sealed class ArtemisClassStore : Store<ArtemisClass, Guid, Guid>, IArtemisClassStore
 {
     /// <summary>
     ///     基本存储实例构造
@@ -29,13 +30,15 @@ public sealed class IdentityRoleStore : Store<IdentityRole, Guid, Guid>, IIdenti
     /// <param name="handlerProxy"></param>
     /// <param name="cache"></param>
     /// <param name="logger"></param>
+    /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    public IdentityRoleStore(
-        IdentityContext context,
+    public ArtemisClassStore(
+        DbContext context,
         IStoreOptions? storeOptions = null,
-        IHandlerProxy? handlerProxy = null,
+        IHandlerProxy<Guid>? handlerProxy = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
+        ILogger? logger = null,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
 }

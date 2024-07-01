@@ -16,7 +16,7 @@ public sealed class ArtemisClass : Class
     public required ArtemisSchool School { get; set; }
 
     /// <summary>
-    ///    班级学生对应关系
+    ///     班级学生对应关系
     /// </summary>
     public ICollection<ArtemisClassStudent>? ClassStudents { get; set; }
 
@@ -26,7 +26,7 @@ public sealed class ArtemisClass : Class
     public ICollection<ArtemisStudent>? Students { get; set; }
 
     /// <summary>
-    /// 班级老师对应关系
+    ///     班级老师对应关系
     /// </summary>
     public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }
 

@@ -17,54 +17,54 @@ public class SchoolBusinessContext : DbContext
     }
 
     /// <summary>
-    /// 学校数据集
+    ///     学校数据集
     /// </summary>
     public virtual DbSet<ArtemisSchool> Schools { get; set; } = default!;
 
     /// <summary>
-    /// 班级数据集
+    ///     班级数据集
     /// </summary>
     public virtual DbSet<ArtemisClass> Classes { get; set; } = default!;
 
     /// <summary>
-    /// 学生数据集
+    ///     学生数据集
     /// </summary>
     public virtual DbSet<ArtemisStudent> Students { get; set; } = default!;
 
     /// <summary>
-    /// 教师数据集
+    ///     教师数据集
     /// </summary>
     public virtual DbSet<ArtemisTeacher> Teachers { get; set; } = default!;
 
     /// <summary>
-    /// 班级学生数对应据集
+    ///     班级学生数对应据集
     /// </summary>
     public virtual DbSet<ArtemisClassStudent> ClassStudents { get; set; } = default!;
 
     /// <summary>
-    /// 班级教师数据集
+    ///     班级教师数据集
     /// </summary>
     public virtual DbSet<ArtemisClassTeacher> ClassTeachers { get; set; } = default!;
 
     /// <summary>
-    /// 学校教师数据集
+    ///     学校教师数据集
     /// </summary>
     public virtual DbSet<ArtemisSchoolTeacher> SchoolTeachers { get; set; } = default!;
 
     /// <summary>
-    /// 学校学生数据集
+    ///     学校学生数据集
     /// </summary>
     public virtual DbSet<ArtemisSchoolStudent> SchoolStudents { get; set; } = default!;
 
     /// <summary>
-    /// 教师学生数据集
+    ///     教师学生数据集
     /// </summary>
     public virtual DbSet<ArtemisTeacherStudent> TeacherStudents { get; set; } = default!;
 
     #region Overrides of DbContext
 
     /// <summary>
-    /// 配置数据模型
+    ///     配置数据模型
     /// </summary>
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -80,7 +80,7 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(classStudent => classStudent.Student)
                     .WithMany(student => student.ClassStudents)
                     .HasForeignKey(classStudent => classStudent.StudentId)
-                    .HasConstraintName("ClassStudent".ForeignKeyName("Student"))
+                    .HasConstraintName(nameof(ArtemisClassStudent).ForeignKeyName(nameof(ArtemisStudent)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(student => student.Id),
@@ -88,14 +88,14 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(classStudent => classStudent.Class)
                     .WithMany(iClass => iClass.ClassStudents)
                     .HasForeignKey(classStudent => classStudent.ClassId)
-                    .HasConstraintName("ClassStudent".ForeignKeyName("Class"))
+                    .HasConstraintName(nameof(ArtemisClassStudent).ForeignKeyName(nameof(ArtemisClass)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(iClass => iClass.Id),
                 classStudentJoin =>
                 {
                     classStudentJoin.HasKey(classStudent => new { classStudent.ClassId, classStudent.StudentId })
-                        .HasName("ClassStudent".KeyName());
+                        .HasName(nameof(ArtemisClassStudent).KeyName());
                 }
             );
 
@@ -108,7 +108,7 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(classTeacher => classTeacher.Teacher)
                     .WithMany(teacher => teacher.ClassTeachers)
                     .HasForeignKey(classTeacher => classTeacher.TeacherId)
-                    .HasConstraintName("ClassTeacher".ForeignKeyName("Teacher"))
+                    .HasConstraintName(nameof(ArtemisClassTeacher).ForeignKeyName(nameof(ArtemisTeacher)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(teacher => teacher.Id),
@@ -116,14 +116,14 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(classTeacher => classTeacher.Class)
                     .WithMany(iClass => iClass.ClassTeachers)
                     .HasForeignKey(classTeacher => classTeacher.ClassId)
-                    .HasConstraintName("ClassTeacher".ForeignKeyName("Class"))
+                    .HasConstraintName(nameof(ArtemisClassTeacher).ForeignKeyName(nameof(ArtemisClass)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(iClass => iClass.Id),
                 classTeacherJoin =>
                 {
                     classTeacherJoin.HasKey(classTeacher => new { classTeacher.ClassId, classTeacher.TeacherId })
-                        .HasName("ClassTeacher".KeyName());
+                        .HasName(nameof(ArtemisClassTeacher).KeyName());
                 });
 
         //School Student Map
@@ -135,7 +135,7 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(schoolStudent => schoolStudent.Student)
                     .WithMany(student => student.SchoolStudents)
                     .HasForeignKey(schoolStudent => schoolStudent.StudentId)
-                    .HasConstraintName("SchoolStudent".ForeignKeyName("Student"))
+                    .HasConstraintName(nameof(ArtemisSchoolStudent).ForeignKeyName(nameof(ArtemisStudent)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(student => student.Id),
@@ -143,14 +143,14 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(schoolStudent => schoolStudent.School)
                     .WithMany(school => school.SchoolStudents)
                     .HasForeignKey(schoolStudent => schoolStudent.SchoolId)
-                    .HasConstraintName("SchoolStudent".ForeignKeyName("School"))
+                    .HasConstraintName(nameof(ArtemisSchoolStudent).ForeignKeyName(nameof(ArtemisSchool)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(school => school.Id),
                 schoolStudentJoin =>
                 {
                     schoolStudentJoin.HasKey(schoolStudent => new { schoolStudent.SchoolId, schoolStudent.StudentId })
-                        .HasName("SchoolStudent".KeyName());
+                        .HasName(nameof(ArtemisSchoolStudent).KeyName());
                 });
 
         //School Teacher Map
@@ -162,7 +162,7 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(schoolTeacher => schoolTeacher.Teacher)
                     .WithMany(teacher => teacher.SchoolTeachers)
                     .HasForeignKey(schoolTeacher => schoolTeacher.TeacherId)
-                    .HasConstraintName("SchoolTeacher".ForeignKeyName("Teacher"))
+                    .HasConstraintName(nameof(ArtemisSchoolTeacher).ForeignKeyName(nameof(ArtemisTeacher)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(teacher => teacher.Id),
@@ -170,14 +170,14 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(schoolTeacher => schoolTeacher.School)
                     .WithMany(school => school.SchoolTeachers)
                     .HasForeignKey(schoolTeacher => schoolTeacher.SchoolId)
-                    .HasConstraintName("SchoolTeacher".ForeignKeyName("School"))
+                    .HasConstraintName(nameof(ArtemisSchoolTeacher).ForeignKeyName(nameof(ArtemisSchool)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(school => school.Id),
                 schoolTeacherJoin =>
                 {
                     schoolTeacherJoin.HasKey(schoolTeacher => new { schoolTeacher.SchoolId, schoolTeacher.TeacherId })
-                        .HasName("SchoolTeacher".KeyName());
+                        .HasName(nameof(ArtemisSchoolTeacher).KeyName());
                 });
 
         //Teacher Student Map
@@ -189,7 +189,7 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(teacherStudent => teacherStudent.Student)
                     .WithMany(student => student.TeacherStudents)
                     .HasForeignKey(teacherStudent => teacherStudent.StudentId)
-                    .HasConstraintName("TeacherStudent".ForeignKeyName("Student"))
+                    .HasConstraintName(nameof(ArtemisTeacherStudent).ForeignKeyName(nameof(ArtemisStudent)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(student => student.Id),
@@ -197,14 +197,15 @@ public class SchoolBusinessContext : DbContext
                     .HasOne(teacherStudent => teacherStudent.Teacher)
                     .WithMany(teacher => teacher.TeacherStudents)
                     .HasForeignKey(teacherStudent => teacherStudent.TeacherId)
-                    .HasConstraintName("TeacherStudent".ForeignKeyName("Teacher"))
+                    .HasConstraintName(nameof(ArtemisTeacherStudent).ForeignKeyName(nameof(ArtemisTeacher)))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(teacher => teacher.Id),
                 teacherStudentJoin =>
                 {
-                    teacherStudentJoin.HasKey(teacherStudent => new { teacherStudent.TeacherId, teacherStudent.StudentId })
-                        .HasName("TeacherStudent".KeyName());
+                    teacherStudentJoin
+                        .HasKey(teacherStudent => new { teacherStudent.TeacherId, teacherStudent.StudentId })
+                        .HasName(nameof(ArtemisTeacherStudent).KeyName());
                 });
     }
 

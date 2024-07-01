@@ -19,7 +19,7 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => "School";
+    protected override string TableName => nameof(ArtemisSchool);
 
     /// <summary>
     ///     实体关系配置
@@ -33,7 +33,7 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
         builder.HasMany(school => school.Classes)
             .WithOne(iClass => iClass.School)
             .HasForeignKey(iClass => iClass.SchoolId)
-            .HasConstraintName(ForeignKeyName("Class", "School"))
+            .HasConstraintName(ForeignKeyName("ArtemisClass", "ArtemisSchool"))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

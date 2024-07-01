@@ -18,7 +18,7 @@ public interface IIdentityUserStore : IStore<IdentityUser, Guid, Guid>;
 /// <summary>
 ///     认证用户存储
 /// </summary>
-public class IdentityUserStore : Store<IdentityUser, Guid, Guid>, IIdentityUserStore
+public sealed class IdentityUserStore : Store<IdentityUser, Guid, Guid>, IIdentityUserStore
 {
     /// <summary>
     ///     基本存储实例构造

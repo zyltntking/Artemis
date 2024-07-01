@@ -11,7 +11,7 @@ namespace Artemis.Service.School.Context;
 public sealed class ArtemisStudent : Student
 {
     /// <summary>
-    ///    班级学生对应关系
+    ///     班级学生对应关系
     /// </summary>
     public ICollection<ArtemisClassStudent>? ClassStudents { get; set; }
 
@@ -21,7 +21,7 @@ public sealed class ArtemisStudent : Student
     public ICollection<ArtemisClass>? Classes { get; set; }
 
     /// <summary>
-    /// 学校学生对应关系
+    ///     学校学生对应关系
     /// </summary>
     public ICollection<ArtemisSchoolStudent>? SchoolStudents { get; set; }
 
@@ -31,12 +31,12 @@ public sealed class ArtemisStudent : Student
     public ICollection<ArtemisSchool>? Schools { get; set; }
 
     /// <summary>
-    /// 学生教师对应关系
+    ///     学生教师对应关系
     /// </summary>
     public ICollection<ArtemisTeacherStudent>? TeacherStudents { get; set; }
 
     /// <summary>
-    /// 教过学生的老师
+    ///     教过学生的老师
     /// </summary>
     public ICollection<ArtemisTeacher>? Teachers { get; set; }
 }

@@ -19,7 +19,7 @@ public interface IIdentityClaimStore : IStore<IdentityClaim, Guid, Guid>;
 /// <summary>
 ///     认证凭据存储
 /// </summary>
-public class IdentityClaimStore : Store<IdentityClaim, Guid, Guid>, IIdentityClaimStore
+public sealed class IdentityClaimStore : Store<IdentityClaim, Guid, Guid>, IIdentityClaimStore
 {
     /// <summary>
     ///     基本存储实例构造

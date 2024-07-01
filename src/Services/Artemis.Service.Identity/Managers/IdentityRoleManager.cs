@@ -35,10 +35,10 @@ public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IId
         IManagerOptions? options = null,
         ILogger? logger = null) : base(roleStore, options, logger)
     {
-        RoleStore = roleStore;
-        UserStore = userStore;
-        RoleClaimStore = roleClaimStore;
-        UserRoleStore = userRoleStore;
+        RoleStore = roleStore ?? throw new ArgumentNullException(nameof(roleStore));
+        UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
+        RoleClaimStore = roleClaimStore ?? throw new ArgumentNullException(nameof(roleClaimStore));
+        UserRoleStore = userRoleStore ?? throw new ArgumentNullException(nameof(userRoleStore));
     }
 
     #region Overrides of KeyLessManager<IdentityRole,Guid>

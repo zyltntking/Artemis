@@ -14,7 +14,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证资源管理器
 /// </summary>
-public class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIdentityResourceManager
+public sealed class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIdentityResourceManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -28,7 +28,7 @@ public class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIden
         IManagerOptions? options = null,
         ILogger? logger = null) : base(claimStore, options, logger)
     {
-        ClaimStore = claimStore;
+        ClaimStore = claimStore ?? throw new ArgumentNullException(nameof(claimStore));
     }
 
     #region StoreAccess

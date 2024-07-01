@@ -32,9 +32,9 @@ public sealed class IdentityAccountManager : Manager<IdentityUser, Guid, Guid>, 
         IManagerOptions? options = null,
         ILogger? logger = null) : base(userStore, options, logger)
     {
-        UserStore = userStore;
-        UserClaimStore = userClaimStore;
-        RoleClaimStore = roleClaimStore;
+        UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
+        UserClaimStore = userClaimStore ?? throw new ArgumentNullException(nameof(userClaimStore));
+        RoleClaimStore = roleClaimStore ?? throw new ArgumentNullException(nameof(roleClaimStore));
     }
 
     #region Dispose

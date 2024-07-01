@@ -27,24 +27,27 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     /// <param name="logger">日志依赖</param>
     /// <param name="roleStore"></param>
     /// <param name="userClaimStore"></param>
+    /// <param name="userProfileStore"></param>
     /// <param name="userLoginStore"></param>
     /// <exception cref="ArgumentNullException"></exception>
     public IdentityUserManager(
         IIdentityUserStore userStore,
         IIdentityRoleStore roleStore,
         IIdentityUserClaimStore userClaimStore,
+        IIdentityUserProfileStore userProfileStore,
         IIdentityUserLoginStore userLoginStore,
         IIdentityUserTokenStore userTokenStore,
         IIdentityUserRoleStore userRoleStore,
         IManagerOptions? options = null,
         ILogger? logger = null) : base(userStore, options, logger)
     {
-        UserStore = userStore;
-        RoleStore = roleStore;
-        UserClaimStore = userClaimStore;
-        UserLoginStore = userLoginStore;
-        UserTokenStore = userTokenStore;
-        UserRoleStore = userRoleStore;
+        UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
+        RoleStore = roleStore ?? throw new ArgumentNullException(nameof(roleStore));
+        UserClaimStore = userClaimStore ?? throw new ArgumentNullException(nameof(userClaimStore));
+        UserProfileStore = userProfileStore ?? throw new ArgumentNullException(nameof(userProfileStore));
+        UserLoginStore = userLoginStore ?? throw new ArgumentNullException(nameof(userLoginStore));
+        UserTokenStore = userTokenStore ?? throw new ArgumentNullException(nameof(userTokenStore));
+        UserRoleStore = userRoleStore ?? throw new ArgumentNullException(nameof(userRoleStore));
     }
 
     #region Dispose
@@ -57,6 +60,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
         UserStore.Dispose();
         RoleStore.Dispose();
         UserClaimStore.Dispose();
+        UserProfileStore.Dispose();
         UserLoginStore.Dispose();
         UserTokenStore.Dispose();
         UserRoleStore.Dispose();
@@ -80,6 +84,11 @@ public sealed class IdentityUserManager : Manager<IdentityUser, Guid, Guid>, IId
     ///     用户凭据存储访问器
     /// </summary>
     private IIdentityUserClaimStore UserClaimStore { get; }
+
+    /// <summary>
+    ///     用户档案存储访问器
+    /// </summary>
+    private IIdentityUserProfileStore UserProfileStore { get; }
 
     /// <summary>
     ///     用户登录存储访问器
