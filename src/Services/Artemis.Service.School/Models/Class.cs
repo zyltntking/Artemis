@@ -13,6 +13,13 @@ public class Class : ConcurrencyPartition, IClass
     #region Implementation of IClass
 
     /// <summary>
+    ///     学校标识
+    /// </summary>
+    [Required]
+    [Comment("学校标识")]
+    public Guid SchoolId { get; set; }
+
+    /// <summary>
     ///     班级名称
     /// </summary>
     [Required]
