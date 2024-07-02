@@ -12,10 +12,10 @@ namespace Artemis.Service.Identity;
 public static class ServiceExtensions
 {
     /// <summary>
-    /// 添加认证服务
+    ///     添加认证服务
     /// </summary>
     /// <param name="services"></param>
-    public static IServiceCollection AddIdentityServices(this IServiceCollection services) 
+    public static IServiceCollection AddIdentityServices(this IServiceCollection services)
     {
         services.TryAddScoped<IIdentityClaimStore, IdentityClaimStore>();
         services.TryAddScoped<IIdentityUserStore, IdentityUserStore>();
@@ -40,15 +40,13 @@ public static class ServiceExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="enableProxy"></param>
-    public static IServiceCollection AddIdentityServices<THandlerProxy>(this IServiceCollection services, bool enableProxy = true) 
+    public static IServiceCollection AddIdentityServices<THandlerProxy>(this IServiceCollection services,
+        bool enableProxy = true)
         where THandlerProxy : class, IHandlerProxy
     {
         services.AddIdentityServices();
 
-        if (enableProxy)
-        {
-            services.AddScoped<IHandlerProxy, THandlerProxy>();
-        }
+        if (enableProxy) services.AddScoped<IHandlerProxy, THandlerProxy>();
 
         return services;
     }

@@ -31,8 +31,8 @@ internal sealed class IdentityUserClaimConfiguration : KeySlotEntityConfiguratio
         builder.HasIndex(userClaim => new { userClaim.ClaimType, userClaim.ClaimValue })
             .HasDatabaseName(IndexName("ClaimType", "ClaimValue"));
 
-        builder.HasIndex(userClaim => userClaim.CheckStamp)
-            .HasDatabaseName(IndexName("CheckStamp"))
+        builder.HasIndex(userClaim => new { userClaim.UserId, userClaim.CheckStamp })
+            .HasDatabaseName(IndexName("UserId", "CheckStamp"))
             .IsUnique();
     }
 

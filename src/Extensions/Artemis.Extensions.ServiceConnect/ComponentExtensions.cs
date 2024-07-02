@@ -83,10 +83,7 @@ public static class ComponentExtensions
 
         builder.AddNpgsqlDbContext<TDbContext>(connectionName, configureDbContextOptions: config =>
         {
-            if (migrateAction != null)
-            {
-                config.UseNpgsql(migrateAction);
-            }
+            if (migrateAction != null) config.UseNpgsql(migrateAction);
 
             config.EnableServiceProviderCaching()
                 .EnableDetailedErrors(builder.Environment.IsDevelopment())
@@ -94,7 +91,7 @@ public static class ComponentExtensions
                 .LogTo(logger, logLevel);
         });
 
-        if (builder.Environment.IsDevelopment()) 
+        if (builder.Environment.IsDevelopment())
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
         return builder.Services;

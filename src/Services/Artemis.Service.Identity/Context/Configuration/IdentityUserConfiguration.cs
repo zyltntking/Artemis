@@ -42,7 +42,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserProfiles)
             .WithOne(userProfile => userProfile.User)
             .HasForeignKey(userProfile => userProfile.UserId)
-            .HasConstraintName(ForeignKeyName("IdentityUserProfile", "IdentityUser"))
+            .HasConstraintName(ForeignKeyName(nameof(IdentityUserProfile), nameof(IdentityUser)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -50,7 +50,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserClaims)
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
-            .HasConstraintName(ForeignKeyName("IdentityUserClaim", "IdentityUser"))
+            .HasConstraintName(ForeignKeyName(nameof(IdentityUserClaim), nameof(IdentityUser)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -58,7 +58,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserLogins)
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
-            .HasConstraintName(ForeignKeyName("IdentityUserLogin", "IdentityUser"))
+            .HasConstraintName(ForeignKeyName(nameof(IdentityUserLogin), nameof(IdentityUser)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -66,17 +66,17 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserTokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
-            .HasConstraintName(ForeignKeyName("IdentityUserToken", "IdentityUser"))
+            .HasConstraintName(ForeignKeyName(nameof(IdentityUserToken), nameof(IdentityUser)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
         // Each User can have many UserProfiles
-        //builder.HasMany(user => user.UserProfiles)
-        //    .WithOne(userProfile => userProfile.User)
-        //    .HasForeignKey(userProfile => userProfile.UserId)
-        //    .HasConstraintName($"FK_{nameof(ArtemisUserProfile)}_{TableName}_Id")
-        //    .IsRequired()
-        //    .OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany(user => user.UserProfiles)
+            .WithOne(userProfile => userProfile.User)
+            .HasForeignKey(userProfile => userProfile.UserId)
+            .HasConstraintName(ForeignKeyName(nameof(IdentityUserProfile), nameof(IdentityUser)))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

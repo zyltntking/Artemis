@@ -2,7 +2,6 @@
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 

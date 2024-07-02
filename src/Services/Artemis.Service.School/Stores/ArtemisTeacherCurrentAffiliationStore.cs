@@ -10,16 +10,17 @@ namespace Artemis.Service.School.Stores;
 #region Interface
 
 /// <summary>
-///     教师学生关系存储接口
+///     教师当前所属关系存储接口
 /// </summary>
-public interface IArtemisTeacherStudentStore : IKeyLessStore<ArtemisTeacherStudent>;
+public interface IArtemisTeacherCurrentAffiliationStore : IKeyLessStore<ArtemisTeacherCurrentAffiliation>;
 
 #endregion
 
 /// <summary>
-///     教师学生关系存储
+///     教师当前所属关系存储
 /// </summary>
-public sealed class ArtemisTeacherStudentStore : KeyLessStore<ArtemisTeacherStudent>, IArtemisTeacherStudentStore
+public class ArtemisTeacherCurrentAffiliationStore : KeyLessStore<ArtemisTeacherCurrentAffiliation>,
+    IArtemisTeacherCurrentAffiliationStore
 {
     /// <summary>
     ///     无键模型基本存储实例构造
@@ -31,19 +32,19 @@ public sealed class ArtemisTeacherStudentStore : KeyLessStore<ArtemisTeacherStud
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
-    public ArtemisTeacherStudentStore(
+    public ArtemisTeacherCurrentAffiliationStore(
         SchoolContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
-        ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
+        ILogger? logger = null, StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy,
+        cache, logger, describer)
     {
     }
 
     /// <summary>
     ///     键生成委托
     /// </summary>
-    protected override Func<ArtemisTeacherStudent, string>? EntityKey { get; init; } = teacherStudent =>
-        $"{teacherStudent.TeacherId}:{teacherStudent.StudentId}";
+    protected override Func<ArtemisTeacherCurrentAffiliation, string>? EntityKey { get; init; } =
+        teacherCurrentAffiliation => $"{teacherCurrentAffiliation.TeacherId}";
 }

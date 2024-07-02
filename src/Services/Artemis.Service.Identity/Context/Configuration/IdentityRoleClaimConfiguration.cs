@@ -31,8 +31,8 @@ internal sealed class IdentityRoleClaimConfiguration : KeySlotEntityConfiguratio
         builder.HasIndex(roleClaim => new { roleClaim.ClaimType, roleClaim.ClaimValue })
             .HasDatabaseName(IndexName("ClaimType", "ClaimValue"));
 
-        builder.HasIndex(roleClaim => roleClaim.CheckStamp)
-            .HasDatabaseName(IndexName("CheckStamp"))
+        builder.HasIndex(roleClaim => new { roleClaim.RoleId, roleClaim.CheckStamp })
+            .HasDatabaseName(IndexName("RoleId", "CheckStamp"))
             .IsUnique();
     }
 

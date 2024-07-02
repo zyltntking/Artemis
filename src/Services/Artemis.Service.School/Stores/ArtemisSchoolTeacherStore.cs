@@ -2,7 +2,6 @@
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.School.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -41,4 +40,10 @@ public sealed class ArtemisSchoolTeacherStore : KeyLessStore<ArtemisSchoolTeache
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
+
+    /// <summary>
+    ///     键生成委托
+    /// </summary>
+    protected override Func<ArtemisSchoolTeacher, string>? EntityKey { get; init; } =
+        schoolTeacher => $"{schoolTeacher.SchoolId}:{schoolTeacher.TeacherId}";
 }

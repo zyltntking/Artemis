@@ -61,6 +61,16 @@ public class SchoolContext : DbContext
     /// </summary>
     public virtual DbSet<ArtemisTeacherStudent> TeacherStudents { get; set; } = default!;
 
+    /// <summary>
+    ///     教师当前所属关系数据集
+    /// </summary>
+    public virtual DbSet<ArtemisTeacherCurrentAffiliation> TeacherCurrentAffiliations { get; set; } = default!;
+
+    /// <summary>
+    ///     学生当前所属关系数据集
+    /// </summary>
+    public virtual DbSet<ArtemisStudentCurrentAffiliation> StudentCurrentAffiliations { get; set; } = default!;
+
     #region Overrides of DbContext
 
     /// <summary>
@@ -207,6 +217,23 @@ public class SchoolContext : DbContext
                         .HasKey(teacherStudent => new { teacherStudent.TeacherId, teacherStudent.StudentId })
                         .HasName(nameof(ArtemisTeacherStudent).KeyName());
                 });
+
+        // Current Affiliation One School Many Teachers
+        modelBuilder.Entity<ArtemisTeacherCurrentAffiliation>()
+            .HasOne(currentTeacher => currentTeacher.Teacher)
+            .WithOne(teacher => teacher.CurrentSchool)
+            .HasForeignKey<ArtemisTeacherCurrentAffiliation>(currentTeacher => currentTeacher.TeacherId)
+            .HasConstraintName(nameof(ArtemisTeacherCurrentAffiliation).ForeignKeyName(nameof(ArtemisTeacher)))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ArtemisTeacherCurrentAffiliation>()
+            .HasOne(currentTeacher => currentTeacher.School)
+            .WithMany(school => school.CurrentTeachers)
+            .HasForeignKey(currentTeacher => currentTeacher.SchoolId)
+            .HasConstraintName(nameof(ArtemisTeacherCurrentAffiliation).ForeignKeyName(nameof(ArtemisSchool)))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

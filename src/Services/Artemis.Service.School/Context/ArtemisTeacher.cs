@@ -21,6 +21,11 @@ public sealed class ArtemisTeacher : Teacher
     public ICollection<ArtemisSchool>? Schools { get; set; }
 
     /// <summary>
+    ///     教师当前所属关系
+    /// </summary>
+    public ArtemisTeacherCurrentAffiliation? CurrentSchool { get; set; }
+
+    /// <summary>
     ///     班级老师对应关系
     /// </summary>
     public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }

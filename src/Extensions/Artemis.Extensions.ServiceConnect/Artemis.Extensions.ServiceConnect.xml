@@ -1,1766 +1,1885 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Extensions.ServiceConnect</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Extensions.ServiceConnect.AspireExtensions">
-            <summary>
-                Aspire扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddServiceDefaults(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-                添加默认服务配置
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
-            <remarks>OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道</remarks>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.ConfigureOpenTelemetry(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-                配置OpenTelemetry
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddOpenTelemetryExporters(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-                添加OpenTelemetry导出器
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddDefaultHealthChecks(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-                添加默认健康检查
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.MapDefaultEndpoints(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-                映射默认端点
-            </summary>
-            <param name="app"></param>
-            <returns></returns>
-            <remarks>dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查</remarks>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig">
-            <summary>
-                Artemis认证选项接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ContextItemTokenKey">
-            <summary>
-                上下文项目Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RequestHeaderTokenKey">
-            <summary>
-                请求头认证Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenPrefix">
-            <summary>
-                缓存认证Token前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
-            <summary>
-                用户对Token映射缓存键前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenExpire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableMultiEnd">
-            <summary>
-                是否启用多终端
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IPolicyOptions">
-            <summary>
-                策略选项接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig">
-            <summary>
-                传递认证选项
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ContextItemTokenKey">
-            <summary>
-                上下文项目Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RequestHeaderTokenKey">
-            <summary>
-                请求头Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenPrefix">
-            <summary>
-                缓存Token前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
-            <summary>
-                用户对Token映射缓存键前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenExpire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableMultiEnd">
-            <summary>
-                是否启用多终端
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions">
-            <summary>
-                策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions.Name">
-            <summary>
-                策略名称
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions.Roles">
-            <summary>
-                策略支持的角色列表
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions.Claims">
-            <summary>
-                策略支持的凭据字典
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler">
-            <summary>
-                Artemis凭据处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
-            <summary>
-                构造
-            </summary>
-            <param name="cache">缓存依赖</param>
-            <param name="httpContextAccessor"></param>
-            <param name="options">配置</param>
-            <param name="logger">日志依赖</param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Cache">
-            <summary>
-                缓存访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Config">
-            <summary>
-                配置访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Logger">
-            <summary>
-                日志访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HttpContextAccessor">
-            <summary>
-                Http上下文访问器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement)">
-            <summary>
-                Makes a decision if authorization is allowed based on a specific requirement.
-            </summary>
-            <param name="context">The authorization context.</param>
-            <param name="requirement">The requirement to evaluate.</param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRolesRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理角色要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleActionNameClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理ActionName凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="context">http上下文</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRoutePathClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理RoutePath凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="context">http上下文</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement">
-            <summary>
-                Artemis认证策略接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationRequirement">
-            <summary>
-                Artemis认证策略实现
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.AnonymousRequirement">
-            <summary>
-                匿名许可要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AnonymousRequirement.#ctor">
-            <summary>
-                匿名认证策略构造
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenRequirement">
-            <summary>
-                令牌认证策略
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenOnlyRequirement">
-            <summary>
-                仅Token认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement">
-            <summary>
-                角色认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.#ctor(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="roles">角色</param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.#ctor(System.String[])">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="roles"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.Roles">
-            <summary>
-                角色
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RoleRequirement">
-            <summary>
-                角色认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.RoleRequirement.#ctor(System.String)">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="role"></param>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement">
-            <summary>
-                凭据认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claims">凭据</param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claims"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.Claims">
-            <summary>
-                凭据键值对集合
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement">
-            <summary>
-                凭据认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claim">凭据</param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement.#ctor(System.String,System.String)">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claimKey"></param>
-            <param name="claimValue"></param>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ActionNameClaimRequirement">
-            <summary>
-                操作名凭据认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RoutePathClaimRequirement">
-            <summary>
-                路由路径凭据认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy">
-            <summary>
-                Artemis操作员代理实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
-            <summary>
-                代理实现
-            </summary>
-            <param name="httpContextAccessor"></param>
-            <param name="options"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.HttpContextAccessor">
-            <summary>
-                http上下文访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.Options">
-            <summary>
-                Artemis授权配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.Handler">
-            <summary>
-                操作员
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions">
-            <summary>
-                授权扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureRpcAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler">
-            <summary>
-                授权中间件结果处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
-            <summary>
-                Evaluates the authorization requirement and processes the authorization result.
-            </summary>
-            <param name="next">
-                The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
-                succeed.
-            </param>
-            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
-            <param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
-            <param name="authorizeResult">The result of authorization.</param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.AuthorizationMessage">
-            <summary>
-                认证消息
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-                失败处理器
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor">
-            <summary>
-                端描述器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询操作名称
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchRoutePath(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询路由路径
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询端描述
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
-            <summary>
-                判断元数据中是否包含指定类型
-            </summary>
-            <typeparam name="TMetadata"></typeparam>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
-            <summary>
-                查询指定类型的元数据
-            </summary>
-            <typeparam name="TMetadata"></typeparam>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.ApiActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                Api控制器操作名
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.RoutePatternActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                路由匹配模式操作名
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler">
-            <summary>
-                Rpc授权中间件结果处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-                失败处理器
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.SharedKey">
-            <summary>
-                共享键
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.AuthorizationMessage">
-            <summary>
-                授权消息
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.Token">
-            <summary>
-                令牌
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.CacheSpace">
-            <summary>
-                缓存名空间
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.UserMapToken">
-            <summary>
-                用户对Token的映射
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.DefaultServiceProvider">
-            <summary>
-                默认服务提供者
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions">
-            <summary>
-                令牌处理器扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32)">
-            <summary>
-                缓存Token文档
-            </summary>
-            <typeparam name="TTokenDocument"></typeparam>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="document"></param>
-            <param name="expire"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                异步缓存Token文档
-            </summary>
-            <typeparam name="TTokenDocument"></typeparam>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="document"></param>
-            <param name="expire"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
-            <summary>
-                从缓存获取Token
-            </summary>
-            <param name="cache">缓存依赖</param>
-            <param name="cacheTokenKey">缓存键</param>
-            <param name="refreshToken">是否刷新缓存</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-                从缓存中获取Token文档
-            </summary>
-            <typeparam name="TTokenDocument"></typeparam>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="refreshToken"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
-            <summary>
-                缓存用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="tokenSymbol"></param>
-            <param name="expire"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                缓存用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="tokenSymbol"></param>
-            <param name="expire"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
-            <summary>
-                从缓存获取用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="refreshToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-                从缓存获取用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="refreshToken"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
-            <summary>
-                缓存字符串
-            </summary>
-            <param name="cache"></param>
-            <param name="key"></param>
-            <param name="value"></param>
-            <param name="expire"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                异步缓存字符串
-            </summary>
-            <param name="cache"></param>
-            <param name="key"></param>
-            <param name="value"></param>
-            <param name="expire"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-                从上下文中获取Token文档
-            </summary>
-            <param name="context"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String,``0)">
-            <summary>
-                缓存token到上下文
-            </summary>
-            <param name="context"></param>
-            <param name="key"></param>
-            <param name="document"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.RemoveTokenDocument(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-                移除上下文中的Token
-            </summary>
-            <param name="context"></param>
-            <param name="key"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenSymbol(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-                从请求头中获取Token串
-            </summary>
-            <param name="context"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator">
-            <summary>
-                TokenKey生成器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheTokenKey(System.String,System.String)">
-            <summary>
-                缓存Token键
-            </summary>
-            <param name="prefix">前缀</param>
-            <param name="symbol">Token符号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheUserMapTokenKey``1(System.String,System.String,``0)">
-            <summary>
-                缓存用户映射Token键
-            </summary>
-            <typeparam name="TKey"></typeparam>
-            <param name="prefix"></param>
-            <param name="end"></param>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.LoginProviderKey``1(``0,System.String)">
-            <summary>
-                登录提供键
-            </summary>
-            <param name="id">用户标识</param>
-            <param name="end">端类型</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.ProviderTokenName(System.String,System.String)">
-            <summary>
-                令牌名称
-            </summary>
-            <param name="end"></param>
-            <param name="suffix"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.CommonExtensions">
-            <summary>
-                常用配置扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.AddServiceCommons(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Boolean)">
-            <summary>
-                添加常用服务配置
-            </summary>
-            <param name="builder"></param>
-            <param name="includeDefaultService"></param>
-            <returns></returns>
-            <remarks>默认：OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道，常规：httpAccessor，压缩(生产环境)，认证，授权，http日志</remarks>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.ConfigureAppCommons(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-                配置默认程序
-            </summary>
-            <param name="app"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.MapCommonEndpoints(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean,System.Boolean)">
-            <summary>
-            映射常用端点
-            </summary>
-            <param name="app"></param>
-            <param name="includeDefaultEndpoints">是否包含默认端点</param>
-            <param name="useApiController"></param>
-            <returns></returns>
-            <remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table</remarks>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.MapCommonEndpoints``1(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean,System.Boolean)">
-            <summary>
-            映射常用端点
-            </summary>
-            <param name="app"></param>
-            <param name="includeDefaultEndpoints">是否包含默认端点</param>
-            <param name="useApiController">是否包含Api控制器</param>
-            <returns></returns>
-            <remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table，dev: /migrate</remarks>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.ComponentExtensions">
-            <summary>
-                Aspire组件扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddAspireConfiguration(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                添加Aspire配置
-            </summary>
-            <param name="builder"></param>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddRedisComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                添加Redis组件
-            </summary>
-            <param name="builder">appBuilder</param>
-            <param name="connectionName">连接名</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddMongoDbComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                添加MongoDB组件
-            </summary>
-            <param name="builder"></param>
-            <param name="connectionName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddRabbitMqComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                添加RabbitMQ组件
-            </summary>
-            <param name="builder"></param>
-            <param name="connectionName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddPostgreSqlComponent``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String,System.Action{Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.NpgsqlDbContextOptionsBuilder},System.Action{System.String},Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-                添加Postgresql组件
-            </summary>
-            <typeparam name="TDbContext"></typeparam>
-            <param name="builder"></param>
-            <param name="connectionName"></param>
-            <param name="migrateAction"></param>
-            <param name="logger"></param>
-            <param name="logLevel"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.GrpcExtensions">
-            <summary>
-                Grpc扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Boolean)">
-            <summary>
-                配置Grpc
-            </summary>
-            <param name="builder"></param>
-            <param name="enableValidator"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.UseGrpcSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-                使用Grpc修饰
-            </summary>
-            <param name="app"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor">
-            <summary>
-                Http日志拦截器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
-            <summary>
-                A callback to customize the logging of the request and response.
-            </summary>
-            <remarks>
-                This is called when the request is first received and can be used to configure both request and response options.
-                All settings will carry over to
-                <see
-                    cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
-                except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
-                will be cleared after logging the request.
-                <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.LoggingFields" /> may be changed per
-                request to control the logging behavior.
-                If no request fields are enabled, and the
-                <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> collection is empty, no
-                request logging will occur.
-                If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then
-                <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the
-                request to response
-                and be logged together.
-            </remarks>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
-            <summary>A callback to customize the logging of the response.</summary>
-            <remarks>
-                This is called when the first write to the response happens, or the response ends without a write, just before
-                anything is sent to the client. Settings are carried
-                over from
-                <see
-                    cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
-                (except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />) and
-                response settings may
-                still be modified. Changes to request settings will have no effect. If no response fields are enabled, and the
-                <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
-                collection is empty, no response logging will occur.
-                If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then
-                <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the
-                request to response
-                and be logged together. <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestBody" /> and
-                <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseBody" />  can also be disabled in
-                OnResponseAsync to prevent
-                logging any buffered body data.
-            </remarks>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog">
-            <summary>
-                日志加载项
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
-            <summary>
-                侦听器构造
-            </summary>
-            <param name="logger"></param>
-            <param name="options"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.ResolveTokenDocument(Artemis.Data.Shared.Transfer.TokenDocument)">
-            <summary>
-                解析Token文档到字符串
-            </summary>
-            <param name="tokenDocument"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1">
-            <summary>
-                日志加载项
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
-            <summary>
-                侦听器构造
-            </summary>
-            <param name="logger"></param>
-            <param name="options"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.Logger">
-            <summary>
-                日志依赖
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-            <summary>
-                Server-side handler for intercepting and incoming unary call.
-            </summary>
-            <typeparam name="TRequest">Request message type for this method.</typeparam>
-            <typeparam name="TResponse">Response message type for this method.</typeparam>
-            <param name="request">The request value of the incoming invocation.</param>
-            <param name="context">
-                An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
-                the context of the invocation.
-            </param>
-            <param name="continuation">
-                A delegate that asynchronously proceeds with the invocation, calling
-                the next interceptor in the chain, or the service request handler,
-                in case of the last interceptor and return the response value of
-                the RPC. The interceptor can choose to call it zero or more times
-                at its discretion.
-            </param>
-            <returns>
-                A future representing the response value of the RPC. The interceptor
-                can simply return the return value from the continuation intact,
-                or an arbitrary response value as it sees fit.
-            </returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.ResolveTokenDocument(`0)">
-            <summary>
-                解析Token文档到字符串
-            </summary>
-            <param name="tokenDocument"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException">
-            <summary>
-                友好异常侦听器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException})">
-            <summary>
-                侦听器构造
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.Logger">
-            <summary>
-                日志依赖
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-            <summary>
-                侦听一元调用异常
-            </summary>
-            <typeparam name="TRequest"></typeparam>
-            <typeparam name="TResponse"></typeparam>
-            <param name="request"></param>
-            <param name="context"></param>
-            <param name="continuation"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator">
-            <summary>
-                消息校验侦听器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator})">
-            <summary>
-                侦听器构造
-            </summary>
-            <param name="provider"></param>
-            <param name="logger"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.Provider">
-            <summary>
-                服务提供程序
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.Logger">
-            <summary>
-                日志依赖
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
-            <summary>
-                侦听一元调用
-            </summary>
-            <typeparam name="TRequest"></typeparam>
-            <typeparam name="TResponse"></typeparam>
-            <param name="request"></param>
-            <param name="context"></param>
-            <param name="continuation"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.TryGetValidator``1(FluentValidation.IValidator{``0}@)">
-            <summary>
-                获取验证器
-            </summary>
-            <typeparam name="TRequest"></typeparam>
-            <param name="validator"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions">
-            <summary>
-                端映射扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapMigrationEndpoint``1(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
-            <summary>
-                映射迁移端点
-            </summary>
-            <typeparam name="TDbContext"></typeparam>
-            <param name="app"></param>
-            <param name="pattern"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
-            <summary>
-                映射路由表
-            </summary>
-            <param name="app"></param>
-            <param name="pattern"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapDetailHealthChecks(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
-            <summary>
-                映射健康检查详细信息
-            </summary>
-            <param name="app"></param>
-            <param name="pattern"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.WriteResponse(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)">
-            <summary>
-                写入响应
-            </summary>
-            <param name="context"></param>
-            <param name="healthReport"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.RpcResultAdapter">
-            <summary>
-                Rpc结果适配器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Success``2(``1)">
-            <summary>
-                成功结果
-            </summary>
-            <typeparam name="TResult">结果类型</typeparam>
-            <typeparam name="TData">数据类型</typeparam>
-            <param name="data">载荷数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptySuccess``1">
-            <summary>
-                成功结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Fail``2(System.String)">
-            <summary>
-                失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <typeparam name="TData"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptyFail``1(System.String)">
-            <summary>
-                失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.AuthFail``1(System.String)">
-            <summary>
-                认证失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.ValidateFail``1(System.String)">
-            <summary>
-                校验失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Exception``1(System.Exception)">
-            <summary>
-                异常结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="exception"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SerilogExtensions">
-            <summary>
-                配置扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SerilogExtensions.ConfigureSerilog(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                添加Serilog配置
-            </summary>
-            <param name="builder"></param>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken">
-            <summary>
-                添加认证令牌操作过滤器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
-            <summary>
-                构造
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-            <summary>
-                实现
-            </summary>
-            <param name="operation"></param>
-            <param name="context"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Options">
-            <summary>
-                认证配置依赖
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor">
-            <summary>
-                注释描述器
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._expressionPicker">
-            <summary>
-                表达式提取器缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.ExpressionPicker">
-            <summary>
-                表达式提取器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.Describe(System.String[],System.Reflection.MemberInfo)">
-            <summary>
-                描述
-            </summary>
-            <param name="comments"></param>
-            <param name="memberInfo"></param>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._requiredResolve">
-            <summary>
-                必要性标识解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.RequiredResolve">
-            <summary>
-                必要性标识解析
-            </summary>
-            <example>@required</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._minResolve">
-            <summary>
-                最小值解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MinResolve">
-            <summary>
-                最小值解析
-            </summary>
-            <example>@min(0)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._maxResolve">
-            <summary>
-                最大值解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MaxResolve">
-            <summary>
-                最大值解析
-            </summary>
-            <example>@max(100)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._rangeResolve">
-            <summary>
-                值范围解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.RangeResolve">
-            <summary>
-                值范围解析
-            </summary>
-            <example>@range(0,100)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._minLengthResolve">
-            <summary>
-                最短长度缓存标识解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MinLengthResolve">
-            <summary>
-                最短长度缓存标识解析
-            </summary>
-            <example>@minLength(12)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._maxLengthResolve">
-            <summary>
-                长度缓存标识解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MaxLengthResolve">
-            <summary>
-                长度缓存标识解析
-            </summary>
-            <example>@maxLength(12)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._lengthResolve">
-            <summary>
-                长度缓存标识解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.LengthResolve">
-            <summary>
-                长度缓存标识解析
-            </summary>
-            <example>@length(12)</example>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._exampleResolve">
-            <summary>
-                示例解析缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.ExampleResolve">
-            <summary>
-                示例解析
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache">
-            <summary>
-                描述器缓存
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache._requiredFieldsMap">
-            <summary>
-                必要属性映射缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.RequiredFieldsMap">
-            <summary>
-                必要属性映射访问器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatDateTime(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化日期时间
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatDate(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化日期
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTime(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化时间
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTimestamp(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化时间戳
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatEmail(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化邮箱
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatPhone(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化手机号码
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatHostName(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化主机
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIpv4(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化ipv4
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIpv6(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化ipv6
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatUri(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化uri
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatMd5(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化md5
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatGuid(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化guid
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatCar(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化车牌号
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatPassword(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化密码
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIdCard(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化身份证号码
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTelephone(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化电话号码
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatVideoUrl(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化视频链接
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatImageUrl(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化图片链接
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatException(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
-            <summary>
-                格式化异常
-            </summary>
-            <param name="schema"></param>
-        </member>
-        <member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache._formatMap">
-            <summary>
-                格式化映射缓存
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatMap">
-            <summary>
-                格式化映射访问器
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo">
-            <summary>
-                架构信息接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Minimum">
-            <summary>
-                最小值
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Maximum">
-            <summary>
-                最大值
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.MinLength">
-            <summary>
-                最短长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.MaxLength">
-            <summary>
-                最长长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Format">
-            <summary>
-                格式
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Example">
-            <summary>
-                例子
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Pattern">
-            <summary>
-                匹配模式
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Description">
-            <summary>
-                描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.IsPassword">
-            <summary>
-                是否是密码
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo">
-            <summary>
-                架构信息
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Minimum">
-            <summary>
-                最小值
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Maximum">
-            <summary>
-                最大值
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.MinLength">
-            <summary>
-                最短长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.MaxLength">
-            <summary>
-                最长长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Format">
-            <summary>
-                格式
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Example">
-            <summary>
-                例子
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Pattern">
-            <summary>
-                匹配模式
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Description">
-            <summary>
-                描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.IsPassword">
-            <summary>
-                是否是密码
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor">
-            <summary>
-                Grpc注释描述器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-            <summary>
-                描述器构造
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
-            <summary>
-                实现
-            </summary>
-            <param name="schema"></param>
-            <param name="context"></param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.Options">
-            <summary>
-                认证配置依赖
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse">
-            <summary>
-                移除默认响应
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
-            <summary>
-                实现
-            </summary>
-            <param name="operation"></param>
-            <param name="context"></param>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcSchemas">
-            <summary>
-                移除默认生成的模式
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
-            <summary>
-                执行
-            </summary>
-            <param name="swaggerDoc"></param>
-            <param name="context"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions">
-            <summary>
-                Swagger扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions.ConfigureSwagger(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-            <summary>
-                配置Grpc
-            </summary>
-            <param name="builder"></param>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions.MapSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-                映射Swagger端
-            </summary>
-            <param name="app"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig">
-            <summary>
-                Swagger配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.UserGrpc">
-            <summary>
-                是否是GrpcSwagger
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.EnableInProduction">
-            <summary>
-                是否允许在生产环境中使用
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.Application">
-            <summary>
-                应用名
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.XmlDocs">
-            <summary>
-                xml文档
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Validators.StringValidator">
-            <summary>
-                字符串验证器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldNotBeEmptyOrWhiteSpace``1(FluentValidation.IRuleBuilder{``0,System.String})">
-            <summary>
-                不能为空,空字符串或纯空格字符
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireLength``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
-            <summary>
-                必须大于或等于指定长度
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="length"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireDigit``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-            <summary>
-                必须包含数字字符
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="required"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireUpperCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-            <summary>
-                必须包含大写字母
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="required"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireLowerCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-            <summary>
-                必须包含小写字母
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="required"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireNonAlphanumeric``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
-            <summary>
-                必须包含特殊字符
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="required"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequiredUniqueChars``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
-            <summary>
-                需要的字符种类(唯一字符数)
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBePassword``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32)">
-            <summary>
-                应当是有效的密码
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="requireLength"></param>
-            <param name="requireDigit"></param>
-            <param name="requireUppercase"></param>
-            <param name="requireLowercase"></param>
-            <param name="requireNonAlphanumeric"></param>
-            <param name="requiredUniqueChars"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBeEmail``1(FluentValidation.IRuleBuilder{``0,System.String})">
-            <summary>
-                应当是有效的电子邮件地址
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBePhone``1(FluentValidation.IRuleBuilder{``0,System.String},Artemis.Data.Core.Fundamental.PhonePatternMode)">
-            <summary>
-                应当是有效的手机号码
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="mode"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions">
-            <summary>
-                Web扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidator(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-                添加验证器
-            </summary>
-            <param name="services"></param>
-            <param name="implementationType"></param>
-            <param name="lifetime"></param>
-            <exception cref="T:System.AggregateException"></exception>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidator``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-                添加验证器
-            </summary>
-            <typeparam name="TValidator"></typeparam>
-            <param name="services"></param>
-            <param name="lifetime"></param>
-            <returns></returns>
-            <exception cref="T:System.AggregateException"></exception>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidators(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-                添加当前域下所有验证器
-            </summary>
-            <param name="services"></param>
-            <param name="lifetime"></param>
-            <returns></returns>
-            <exception cref="T:System.AggregateException"></exception>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Extensions.ServiceConnect</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Extensions.ServiceConnect.AspireExtensions">
+			<summary>
+				Aspire扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddServiceDefaults(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+			<summary>
+				添加默认服务配置
+			</summary>
+			<param name="builder"></param>
+			<returns></returns>
+			<remarks>OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.ConfigureOpenTelemetry(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+			<summary>
+				配置OpenTelemetry
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddOpenTelemetryExporters(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+			<summary>
+				添加OpenTelemetry导出器
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.AddDefaultHealthChecks(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+			<summary>
+				添加默认健康检查
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.AspireExtensions.MapDefaultEndpoints(Microsoft.AspNetCore.Builder.WebApplication)">
+			<summary>
+				映射默认端点
+			</summary>
+			<param name="app"></param>
+			<returns></returns>
+			<remarks>dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查</remarks>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig">
+			<summary>
+				Artemis认证选项接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ContextItemTokenKey">
+			<summary>
+				上下文项目Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RequestHeaderTokenKey">
+			<summary>
+				请求头认证Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenPrefix">
+			<summary>
+				缓存认证Token前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
+			<summary>
+				用户对Token映射缓存键前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenExpire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableMultiEnd">
+			<summary>
+				是否启用多终端
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceProvider">
+			<summary>
+				认证服务对提供者名称
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.Policies">
+			<summary>
+				支持的策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableAdvancedPolicy">
+			<summary>
+				是否启用高级策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.IPolicyOptions">
+			<summary>
+				策略选项接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig">
+			<summary>
+				传递认证选项
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ContextItemTokenKey">
+			<summary>
+				上下文项目Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RequestHeaderTokenKey">
+			<summary>
+				请求头Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenPrefix">
+			<summary>
+				缓存Token前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
+			<summary>
+				用户对Token映射缓存键前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenExpire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableMultiEnd">
+			<summary>
+				是否启用多终端
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceProvider">
+			<summary>
+				认证服务对提供者名称
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.Policies">
+			<summary>
+				支持的策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableAdvancedPolicy">
+			<summary>
+				是否启用高级策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions">
+			<summary>
+				策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions.Name">
+			<summary>
+				策略名称
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions.Roles">
+			<summary>
+				策略支持的角色列表
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions.Claims">
+			<summary>
+				策略支持的凭据字典
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler">
+			<summary>
+				Artemis凭据处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
+			<summary>
+				构造
+			</summary>
+			<param name="cache">缓存依赖</param>
+			<param name="httpContextAccessor"></param>
+			<param name="options">配置</param>
+			<param name="logger">日志依赖</param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Cache">
+			<summary>
+				缓存访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Config">
+			<summary>
+				配置访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Logger">
+			<summary>
+				日志访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HttpContextAccessor">
+			<summary>
+				Http上下文访问器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement)">
+			<summary>
+				Makes a decision if authorization is allowed based on a specific requirement.
+			</summary>
+			<param name="context">The authorization context.</param>
+			<param name="requirement">The requirement to evaluate.</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRolesRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+			<summary>
+				处理角色要求
+			</summary>
+			<param name="requirement">要求对象</param>
+			<param name="document">令牌文档</param>
+			<param name="message">失败消息</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+			<summary>
+				处理凭据要求
+			</summary>
+			<param name="requirement">要求对象</param>
+			<param name="document">令牌文档</param>
+			<param name="message">失败消息</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleActionNameClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+			<summary>
+				处理ActionName凭据要求
+			</summary>
+			<param name="requirement">要求对象</param>
+			<param name="context">http上下文</param>
+			<param name="document">令牌文档</param>
+			<param name="message">失败消息</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRoutePathClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+			<summary>
+				处理RoutePath凭据要求
+			</summary>
+			<param name="requirement">要求对象</param>
+			<param name="context">http上下文</param>
+			<param name="document">令牌文档</param>
+			<param name="message">失败消息</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement">
+			<summary>
+				Artemis认证策略接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationRequirement">
+			<summary>
+				Artemis认证策略实现
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.AnonymousRequirement">
+			<summary>
+				匿名许可要求
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.Authorization.AnonymousRequirement.#ctor">
+			<summary>
+				匿名认证策略构造
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenRequirement">
+			<summary>
+				令牌认证策略
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenOnlyRequirement">
+			<summary>
+				仅Token认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement">
+			<summary>
+				角色认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="roles">角色</param>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.#ctor(System.String[])">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="roles"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesRequirement.Roles">
+			<summary>
+				角色
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.RoleRequirement">
+			<summary>
+				角色认证要求
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.Authorization.RoleRequirement.#ctor(System.String)">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="role"></param>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement">
+			<summary>
+				凭据认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claims">凭据</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claims"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.Claims">
+			<summary>
+				凭据键值对集合
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement">
+			<summary>
+				凭据认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claim">凭据</param>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimRequirement.#ctor(System.String,System.String)">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claimKey"></param>
+			<param name="claimValue"></param>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ActionNameClaimRequirement">
+			<summary>
+				操作名凭据认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.RoutePathClaimRequirement">
+			<summary>
+				路由路径凭据认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy">
+			<summary>
+				Artemis操作员代理实现
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+			<summary>
+				代理实现
+			</summary>
+			<param name="httpContextAccessor"></param>
+			<param name="options"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.HttpContextAccessor">
+			<summary>
+				http上下文访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.Options">
+			<summary>
+				Artemis授权配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.Handler">
+			<summary>
+				操作员
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions">
+			<summary>
+				授权扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
+			<summary>
+				配置授权服务
+			</summary>
+			<param name="builder"></param>
+			<param name="config"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureRpcAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
+			<summary>
+				配置授权服务
+			</summary>
+			<param name="builder"></param>
+			<param name="config"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
+			<summary>
+				配置授权服务
+			</summary>
+			<param name="builder"></param>
+			<param name="config"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler">
+			<summary>
+				授权中间件结果处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
+			<summary>
+				Evaluates the authorization requirement and processes the authorization result.
+			</summary>
+			<param name="next">
+				The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
+				succeed.
+			</param>
+			<param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+			<param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
+			<param name="authorizeResult">The result of authorization.</param>
+		</member>
+		<member
+			name="P:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.AuthorizationMessage">
+			<summary>
+				认证消息
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
+			<summary>
+				失败处理器
+			</summary>
+			<param name="context"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor">
+			<summary>
+				端描述器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询操作名称
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchRoutePath(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询路由路径
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询端描述
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
+			<summary>
+				判断元数据中是否包含指定类型
+			</summary>
+			<typeparam name="TMetadata"></typeparam>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.FetchMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
+			<summary>
+				查询指定类型的元数据
+			</summary>
+			<typeparam name="TMetadata"></typeparam>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.ApiActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				Api控制器操作名
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.EndpointDescriptor.RoutePatternActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				路由匹配模式操作名
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler">
+			<summary>
+				Rpc授权中间件结果处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
+			<summary>
+				失败处理器
+			</summary>
+			<param name="context"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.SharedKey">
+			<summary>
+				共享键
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.AuthorizationMessage">
+			<summary>
+				授权消息
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.Token">
+			<summary>
+				令牌
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.CacheSpace">
+			<summary>
+				缓存名空间
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.UserMapToken">
+			<summary>
+				用户对Token的映射
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.DefaultServiceProvider">
+			<summary>
+				默认服务提供者
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions">
+			<summary>
+				令牌处理器扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32)">
+			<summary>
+				缓存Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="document"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,``0,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="document"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+			<summary>
+				从缓存获取Token
+			</summary>
+			<param name="cache">缓存依赖</param>
+			<param name="cacheTokenKey">缓存键</param>
+			<param name="refreshToken">是否刷新缓存</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocumentAsync``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存中获取Token文档
+			</summary>
+			<typeparam name="TTokenDocument"></typeparam>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+			<summary>
+				从缓存获取用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="refreshToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存获取用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+			<summary>
+				从上下文中获取Token文档
+			</summary>
+			<param name="context"></param>
+			<param name="key"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.CacheTokenDocument``1(Microsoft.AspNetCore.Http.HttpContext,System.String,``0)">
+			<summary>
+				缓存token到上下文
+			</summary>
+			<param name="context"></param>
+			<param name="key"></param>
+			<param name="document"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.RemoveTokenDocument(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+			<summary>
+				移除上下文中的Token
+			</summary>
+			<param name="context"></param>
+			<param name="key"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenSymbol(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+			<summary>
+				从请求头中获取Token串
+			</summary>
+			<param name="context"></param>
+			<param name="key"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator">
+			<summary>
+				TokenKey生成器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheTokenKey(System.String,System.String)">
+			<summary>
+				缓存Token键
+			</summary>
+			<param name="prefix">前缀</param>
+			<param name="symbol">Token符号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.CacheUserMapTokenKey``1(System.String,System.String,``0)">
+			<summary>
+				缓存用户映射Token键
+			</summary>
+			<typeparam name="TKey"></typeparam>
+			<param name="prefix"></param>
+			<param name="end"></param>
+			<param name="id"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.LoginProviderKey``1(``0,System.String)">
+			<summary>
+				登录提供键
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="end">端类型</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator.ProviderTokenName(System.String,System.String)">
+			<summary>
+				令牌名称
+			</summary>
+			<param name="end"></param>
+			<param name="suffix"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.CommonExtensions">
+			<summary>
+				常用配置扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.AddServiceCommons(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Boolean)">
+			<summary>
+				添加常用服务配置
+			</summary>
+			<param name="builder"></param>
+			<param name="includeDefaultService"></param>
+			<returns></returns>
+			<remarks>默认：OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道，常规：httpAccessor，压缩(生产环境)，认证，授权，http日志</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.ConfigureAppCommons(Microsoft.AspNetCore.Builder.WebApplication)">
+			<summary>
+				配置默认程序
+			</summary>
+			<param name="app"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.MapCommonEndpoints(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean,System.Boolean)">
+			<summary>
+				映射常用端点
+			</summary>
+			<param name="app"></param>
+			<param name="includeDefaultEndpoints">是否包含默认端点</param>
+			<param name="useApiController"></param>
+			<returns></returns>
+			<remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.CommonExtensions.MapCommonEndpoints``1(Microsoft.AspNetCore.Builder.WebApplication,System.Boolean,System.Boolean)">
+			<summary>
+				映射常用端点
+			</summary>
+			<param name="app"></param>
+			<param name="includeDefaultEndpoints">是否包含默认端点</param>
+			<param name="useApiController">是否包含Api控制器</param>
+			<returns></returns>
+			<remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table，dev: /migrate</remarks>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.ComponentExtensions">
+			<summary>
+				Aspire组件扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddAspireConfiguration(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加Aspire配置
+			</summary>
+			<param name="builder"></param>
+			<param name="path"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddRedisComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加Redis组件
+			</summary>
+			<param name="builder">appBuilder</param>
+			<param name="connectionName">连接名</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddMongoDbComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加MongoDB组件
+			</summary>
+			<param name="builder"></param>
+			<param name="connectionName"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddRabbitMqComponent(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加RabbitMQ组件
+			</summary>
+			<param name="builder"></param>
+			<param name="connectionName"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.ComponentExtensions.AddPostgreSqlComponent``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String,System.Action{Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.NpgsqlDbContextOptionsBuilder},System.Action{System.String},Microsoft.Extensions.Logging.LogLevel)">
+			<summary>
+				添加Postgresql组件
+			</summary>
+			<typeparam name="TDbContext"></typeparam>
+			<param name="builder"></param>
+			<param name="connectionName"></param>
+			<param name="migrateAction"></param>
+			<param name="logger"></param>
+			<param name="logLevel"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.GrpcExtensions">
+			<summary>
+				Grpc扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.ConfigureGrpc(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.Boolean)">
+			<summary>
+				配置Grpc
+			</summary>
+			<param name="builder"></param>
+			<param name="enableValidator"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.GrpcExtensions.UseGrpcSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
+			<summary>
+				使用Grpc修饰
+			</summary>
+			<param name="app"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor">
+			<summary>
+				Http日志拦截器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
+			<summary>
+				A callback to customize the logging of the request and response.
+			</summary>
+			<remarks>
+				This is called when the request is first received and can be used to configure both request and response options.
+				All settings will carry over to
+				<see
+					cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
+				except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+				will be cleared after logging the request.
+				<see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.LoggingFields" /> may be changed per
+				request to control the logging behavior.
+				If no request fields are enabled, and the
+				<see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> collection is empty, no
+				request logging will occur.
+				If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then
+				<see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the
+				request to response
+				and be logged together.
+			</remarks>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.HttpLogging.ArtemisHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)">
+			<summary>A callback to customize the logging of the response.</summary>
+			<remarks>
+				This is called when the first write to the response happens, or the response ends without a write, just before
+				anything is sent to the client. Settings are carried
+				over from
+				<see
+					cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
+				(except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />) and
+				response settings may
+				still be modified. Changes to request settings will have no effect. If no response fields are enabled, and the
+				<see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+				collection is empty, no response logging will occur.
+				If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then
+				<see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the
+				request to response
+				and be logged together. <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestBody" /> and
+				<see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseBody" />  can also be disabled in
+				OnResponseAsync to prevent
+				logging any buffered body data.
+			</remarks>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog">
+			<summary>
+				日志加载项
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+			<summary>
+				侦听器构造
+			</summary>
+			<param name="logger"></param>
+			<param name="options"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.ResolveTokenDocument(Artemis.Data.Shared.Transfer.TokenDocument)">
+			<summary>
+				解析Token文档到字符串
+			</summary>
+			<param name="tokenDocument"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1">
+			<summary>
+				日志加载项
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+			<summary>
+				侦听器构造
+			</summary>
+			<param name="logger"></param>
+			<param name="options"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.Logger">
+			<summary>
+				日志依赖
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+			<summary>
+				Server-side handler for intercepting and incoming unary call.
+			</summary>
+			<typeparam name="TRequest">Request message type for this method.</typeparam>
+			<typeparam name="TResponse">Response message type for this method.</typeparam>
+			<param name="request">The request value of the incoming invocation.</param>
+			<param name="context">
+				An instance of <see cref="T:Grpc.Core.ServerCallContext" /> representing
+				the context of the invocation.
+			</param>
+			<param name="continuation">
+				A delegate that asynchronously proceeds with the invocation, calling
+				the next interceptor in the chain, or the service request handler,
+				in case of the last interceptor and return the response value of
+				the RPC. The interceptor can choose to call it zero or more times
+				at its discretion.
+			</param>
+			<returns>
+				A future representing the response value of the RPC. The interceptor
+				can simply return the return value from the continuation intact,
+				or an arbitrary response value as it sees fit.
+			</returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.ResolveTokenDocument(`0)">
+			<summary>
+				解析Token文档到字符串
+			</summary>
+			<param name="tokenDocument"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException">
+			<summary>
+				友好异常侦听器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException})">
+			<summary>
+				侦听器构造
+			</summary>
+			<param name="logger"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.Logger">
+			<summary>
+				日志依赖
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.FriendlyException.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+			<summary>
+				侦听一元调用异常
+			</summary>
+			<typeparam name="TRequest"></typeparam>
+			<typeparam name="TResponse"></typeparam>
+			<param name="request"></param>
+			<param name="context"></param>
+			<param name="continuation"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator">
+			<summary>
+				消息校验侦听器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator})">
+			<summary>
+				侦听器构造
+			</summary>
+			<param name="provider"></param>
+			<param name="logger"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.Provider">
+			<summary>
+				服务提供程序
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.Logger">
+			<summary>
+				日志依赖
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+			<summary>
+				侦听一元调用
+			</summary>
+			<typeparam name="TRequest"></typeparam>
+			<typeparam name="TResponse"></typeparam>
+			<param name="request"></param>
+			<param name="context"></param>
+			<param name="continuation"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Interceptors.MessageValidator.TryGetValidator``1(FluentValidation.IValidator{``0}@)">
+			<summary>
+				获取验证器
+			</summary>
+			<typeparam name="TRequest"></typeparam>
+			<param name="validator"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions">
+			<summary>
+				端映射扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapMigrationEndpoint``1(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+			<summary>
+				映射迁移端点
+			</summary>
+			<typeparam name="TDbContext"></typeparam>
+			<param name="app"></param>
+			<param name="pattern"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapRouteTable(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+			<summary>
+				映射路由表
+			</summary>
+			<param name="app"></param>
+			<param name="pattern"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.MapDetailHealthChecks(Microsoft.AspNetCore.Builder.WebApplication,System.String)">
+			<summary>
+				映射健康检查详细信息
+			</summary>
+			<param name="app"></param>
+			<param name="pattern"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.MapEndPoints.MapEndPointsExtensions.WriteResponse(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)">
+			<summary>
+				写入响应
+			</summary>
+			<param name="context"></param>
+			<param name="healthReport"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.RpcResultAdapter">
+			<summary>
+				Rpc结果适配器
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Success``2(``1)">
+			<summary>
+				成功结果
+			</summary>
+			<typeparam name="TResult">结果类型</typeparam>
+			<typeparam name="TData">数据类型</typeparam>
+			<param name="data">载荷数据</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptySuccess``1">
+			<summary>
+				成功结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Fail``2(System.String)">
+			<summary>
+				失败结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<typeparam name="TData"></typeparam>
+			<param name="message"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptyFail``1(System.String)">
+			<summary>
+				失败结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<param name="message"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.AuthFail``1(System.String)">
+			<summary>
+				认证失败结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<param name="message"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.ValidateFail``1(System.String)">
+			<summary>
+				校验失败结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<param name="message"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Exception``1(System.Exception)">
+			<summary>
+				异常结果
+			</summary>
+			<typeparam name="TResult"></typeparam>
+			<param name="exception"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SerilogExtensions">
+			<summary>
+				配置扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SerilogExtensions.ConfigureSerilog(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				添加Serilog配置
+			</summary>
+			<param name="builder"></param>
+			<param name="path"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken">
+			<summary>
+				添加认证令牌操作过滤器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+			<summary>
+				构造
+			</summary>
+			<param name="options"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				实现
+			</summary>
+			<param name="operation"></param>
+			<param name="context"></param>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.Options">
+			<summary>
+				认证配置依赖
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor">
+			<summary>
+				注释描述器
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._expressionPicker">
+			<summary>
+				表达式提取器缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.ExpressionPicker">
+			<summary>
+				表达式提取器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.Describe(System.String[],System.Reflection.MemberInfo)">
+			<summary>
+				描述
+			</summary>
+			<param name="comments"></param>
+			<param name="memberInfo"></param>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._requiredResolve">
+			<summary>
+				必要性标识解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.RequiredResolve">
+			<summary>
+				必要性标识解析
+			</summary>
+			<example>@required</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._minResolve">
+			<summary>
+				最小值解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MinResolve">
+			<summary>
+				最小值解析
+			</summary>
+			<example>@min(0)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._maxResolve">
+			<summary>
+				最大值解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MaxResolve">
+			<summary>
+				最大值解析
+			</summary>
+			<example>@max(100)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._rangeResolve">
+			<summary>
+				值范围解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.RangeResolve">
+			<summary>
+				值范围解析
+			</summary>
+			<example>@range(0,100)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._minLengthResolve">
+			<summary>
+				最短长度缓存标识解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MinLengthResolve">
+			<summary>
+				最短长度缓存标识解析
+			</summary>
+			<example>@minLength(12)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._maxLengthResolve">
+			<summary>
+				长度缓存标识解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.MaxLengthResolve">
+			<summary>
+				长度缓存标识解析
+			</summary>
+			<example>@maxLength(12)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._lengthResolve">
+			<summary>
+				长度缓存标识解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.LengthResolve">
+			<summary>
+				长度缓存标识解析
+			</summary>
+			<example>@length(12)</example>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor._exampleResolve">
+			<summary>
+				示例解析缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.CommentDescriptor.ExampleResolve">
+			<summary>
+				示例解析
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache">
+			<summary>
+				描述器缓存
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache._requiredFieldsMap">
+			<summary>
+				必要属性映射缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.RequiredFieldsMap">
+			<summary>
+				必要属性映射访问器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatDateTime(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化日期时间
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatDate(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化日期
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTime(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化时间
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTimestamp(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化时间戳
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatEmail(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化邮箱
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatPhone(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化手机号码
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatHostName(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化主机
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIpv4(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化ipv4
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIpv6(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化ipv6
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatUri(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化uri
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatMd5(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化md5
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatGuid(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化guid
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatCar(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化车牌号
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatPassword(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化密码
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatIdCard(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化身份证号码
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatTelephone(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化电话号码
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatVideoUrl(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化视频链接
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatImageUrl(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化图片链接
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatException(Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo)">
+			<summary>
+				格式化异常
+			</summary>
+			<param name="schema"></param>
+		</member>
+		<member name="F:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache._formatMap">
+			<summary>
+				格式化映射缓存
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.DescriptorCache.FormatMap">
+			<summary>
+				格式化映射访问器
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo">
+			<summary>
+				架构信息接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Minimum">
+			<summary>
+				最小值
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Maximum">
+			<summary>
+				最大值
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.MinLength">
+			<summary>
+				最短长度
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.MaxLength">
+			<summary>
+				最长长度
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Format">
+			<summary>
+				格式
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Example">
+			<summary>
+				例子
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Pattern">
+			<summary>
+				匹配模式
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.ISchemaInfo.IsPassword">
+			<summary>
+				是否是密码
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo">
+			<summary>
+				架构信息
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Minimum">
+			<summary>
+				最小值
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Maximum">
+			<summary>
+				最大值
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.MinLength">
+			<summary>
+				最短长度
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.MaxLength">
+			<summary>
+				最长长度
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Format">
+			<summary>
+				格式
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Example">
+			<summary>
+				例子
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Pattern">
+			<summary>
+				匹配模式
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.Description">
+			<summary>
+				描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor.SchemaInfo.IsPassword">
+			<summary>
+				是否是密码
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor">
+			<summary>
+				Grpc注释描述器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				描述器构造
+			</summary>
+			<param name="options"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+			<summary>
+				实现
+			</summary>
+			<param name="schema"></param>
+			<param name="context"></param>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.GrpcCommentDescriptor.Options">
+			<summary>
+				认证配置依赖
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse">
+			<summary>
+				移除默认响应
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				实现
+			</summary>
+			<param name="operation"></param>
+			<param name="context"></param>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcSchemas">
+			<summary>
+				移除默认生成的模式
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcSchemas.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+			<summary>
+				执行
+			</summary>
+			<param name="swaggerDoc"></param>
+			<param name="context"></param>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions">
+			<summary>
+				Swagger扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions.ConfigureSwagger(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+			<summary>
+				配置Grpc
+			</summary>
+			<param name="builder"></param>
+			<param name="path"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerExtensions.MapSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
+			<summary>
+				映射Swagger端
+			</summary>
+			<param name="app"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig">
+			<summary>
+				Swagger配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.UserGrpc">
+			<summary>
+				是否是GrpcSwagger
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.EnableInProduction">
+			<summary>
+				是否允许在生产环境中使用
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.Application">
+			<summary>
+				应用名
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.ServiceConnect.SwaggerFilters.SwaggerConfig.XmlDocs">
+			<summary>
+				xml文档
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Validators.StringValidator">
+			<summary>
+				字符串验证器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldNotBeEmptyOrWhiteSpace``1(FluentValidation.IRuleBuilder{``0,System.String})">
+			<summary>
+				不能为空,空字符串或纯空格字符
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireLength``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
+			<summary>
+				必须大于或等于指定长度
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="length"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireDigit``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+			<summary>
+				必须包含数字字符
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="required"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireUpperCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+			<summary>
+				必须包含大写字母
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="required"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireLowerCase``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+			<summary>
+				必须包含小写字母
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="required"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequireNonAlphanumeric``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean)">
+			<summary>
+				必须包含特殊字符
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="required"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.RequiredUniqueChars``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
+			<summary>
+				需要的字符种类(唯一字符数)
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="count"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBePassword``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32)">
+			<summary>
+				应当是有效的密码
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="requireLength"></param>
+			<param name="requireDigit"></param>
+			<param name="requireUppercase"></param>
+			<param name="requireLowercase"></param>
+			<param name="requireNonAlphanumeric"></param>
+			<param name="requiredUniqueChars"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBeEmail``1(FluentValidation.IRuleBuilder{``0,System.String})">
+			<summary>
+				应当是有效的电子邮件地址
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBePhone``1(FluentValidation.IRuleBuilder{``0,System.String},Artemis.Data.Core.Fundamental.PhonePatternMode)">
+			<summary>
+				应当是有效的手机号码
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="mode"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions">
+			<summary>
+				Web扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidator(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+			<summary>
+				添加验证器
+			</summary>
+			<param name="services"></param>
+			<param name="implementationType"></param>
+			<param name="lifetime"></param>
+			<exception cref="T:System.AggregateException"></exception>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidator``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+			<summary>
+				添加验证器
+			</summary>
+			<typeparam name="TValidator"></typeparam>
+			<param name="services"></param>
+			<param name="lifetime"></param>
+			<returns></returns>
+			<exception cref="T:System.AggregateException"></exception>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions.AddValidators(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+			<summary>
+				添加当前域下所有验证器
+			</summary>
+			<param name="services"></param>
+			<param name="lifetime"></param>
+			<returns></returns>
+			<exception cref="T:System.AggregateException"></exception>
+		</member>
+	</members>
 </doc>

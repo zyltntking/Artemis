@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Artemis.Data.Shared.School;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.School.Models;
 
@@ -15,13 +15,13 @@ public class TeacherStudent : ITeacherStudent
     ///     转入时间
     /// </summary>
     [Required]
-    [Description("转入时间")]
+    [Comment("转入时间")]
     public DateTime MoveIn { get; set; }
 
     /// <summary>
     ///     转出时间
     /// </summary>
-    [Description("转出时间")]
+    [Comment("转出时间")]
     public DateTime? MoveOut { get; set; }
 
     #endregion
@@ -32,14 +32,14 @@ public class TeacherStudent : ITeacherStudent
     ///     教师标识
     /// </summary>
     [Required]
-    [Description("教师标识")]
+    [Comment("教师标识")]
     public Guid TeacherId { get; set; }
 
     /// <summary>
     ///     学生标识
     /// </summary>
     [Required]
-    [Description("学生标识")]
+    [Comment("学生标识")]
     public Guid StudentId { get; set; }
 
     #endregion

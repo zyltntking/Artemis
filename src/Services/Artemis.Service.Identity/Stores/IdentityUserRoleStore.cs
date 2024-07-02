@@ -38,4 +38,10 @@ public sealed class IdentityUserRoleStore : KeyLessStore<IdentityUserRole>, IIde
         ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
     {
     }
+
+    /// <summary>
+    ///     实体键生成委托
+    /// </summary>
+    protected override Func<IdentityUserRole, string>? EntityKey { get; init; } =
+        userProfile => $"{userProfile.RoleId}:{userProfile.UserId}";
 }

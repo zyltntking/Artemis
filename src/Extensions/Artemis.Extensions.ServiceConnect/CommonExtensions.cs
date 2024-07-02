@@ -23,12 +23,10 @@ public static class CommonExtensions
     /// <param name="includeDefaultService"></param>
     /// <returns></returns>
     /// <remarks>默认：OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道，常规：httpAccessor，压缩(生产环境)，认证，授权，http日志</remarks>
-    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder, bool includeDefaultService = true)
+    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder,
+        bool includeDefaultService = true)
     {
-        if (includeDefaultService)
-        {
-            builder.AddServiceDefaults();
-        }
+        if (includeDefaultService) builder.AddServiceDefaults();
 
         builder.Services.AddControllers();
 
@@ -100,33 +98,30 @@ public static class CommonExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
-        if (!app.Environment.IsDevelopment()) 
+        if (!app.Environment.IsDevelopment())
             app.UseResponseCompression();
 
         return app;
     }
 
     /// <summary>
-    /// 映射常用端点
+    ///     映射常用端点
     /// </summary>
     /// <param name="app"></param>
     /// <param name="includeDefaultEndpoints">是否包含默认端点</param>
     /// <param name="useApiController"></param>
     /// <returns></returns>
     /// <remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table</remarks>
-    public static WebApplication MapCommonEndpoints(this WebApplication app, bool includeDefaultEndpoints = true, bool useApiController = false)
+    public static WebApplication MapCommonEndpoints(this WebApplication app, bool includeDefaultEndpoints = true,
+        bool useApiController = false)
     {
         if (useApiController)
-        {
             // map controllers
             app.MapControllers();
-        }
 
         if (includeDefaultEndpoints)
-        {
             // map default endpoints for health check
             app.MapDefaultEndpoints();
-        }
 
         // map route table endpoint through "/route-table"
         app.MapRouteTable();
@@ -135,20 +130,19 @@ public static class CommonExtensions
     }
 
     /// <summary>
-    /// 映射常用端点
+    ///     映射常用端点
     /// </summary>
     /// <param name="app"></param>
     /// <param name="includeDefaultEndpoints">是否包含默认端点</param>
     /// <param name="useApiController">是否包含Api控制器</param>
     /// <returns></returns>
     /// <remarks>默认:dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查|常用：apicontroller, /route-table，dev: /migrate</remarks>
-    public static WebApplication MapCommonEndpoints<TDbContext>(this WebApplication app, bool includeDefaultEndpoints = true, bool useApiController = false) where TDbContext : DbContext
+    public static WebApplication MapCommonEndpoints<TDbContext>(this WebApplication app,
+        bool includeDefaultEndpoints = true, bool useApiController = false) where TDbContext : DbContext
     {
         if (app.Environment.IsDevelopment())
-        {
             // map migration endpoint through "/migrate"
             app.MapMigrationEndpoint<TDbContext>();
-        }
 
         return app.MapCommonEndpoints(includeDefaultEndpoints, useApiController);
     }

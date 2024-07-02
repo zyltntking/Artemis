@@ -26,6 +26,8 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisClassTeacherStore, ArtemisClassTeacherStore>();
         services.TryAddScoped<IArtemisClassStudentStore, ArtemisClassStudentStore>();
         services.TryAddScoped<IArtemisTeacherStudentStore, ArtemisTeacherStudentStore>();
+        services.TryAddScoped<IArtemisTeacherCurrentAffiliationStore, ArtemisTeacherCurrentAffiliationStore>();
+        services.TryAddScoped<IArtemisStudentCurrentAffiliationStore, ArtemisStudentCurrentAffiliationStore>();
 
         services.TryAddScoped<IArtemisSchoolManager, ArtemisSchoolManager>();
 
@@ -37,15 +39,13 @@ public static class ServiceExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="enableProxy"></param>
-    public static IServiceCollection AddSchoolServices<THandlerProxy>(this IServiceCollection services, bool enableProxy = true)
+    public static IServiceCollection AddSchoolServices<THandlerProxy>(this IServiceCollection services,
+        bool enableProxy = true)
         where THandlerProxy : class, IHandlerProxy
     {
         services.AddSchoolServices();
 
-        if (enableProxy)
-        {
-            services.AddScoped<IHandlerProxy, THandlerProxy>();
-        }
+        if (enableProxy) services.AddScoped<IHandlerProxy, THandlerProxy>();
 
         return services;
     }

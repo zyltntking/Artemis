@@ -5,31 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.School.Models;
 
 /// <summary>
-///     学校老师关系模型
+///     教师当前所属关系模型
 /// </summary>
-public class SchoolTeacher : ISchoolTeacher
+public class TeacherCurrentAffiliation : ITeacherCurrentAffiliation
 {
-    #region Implementation of ITransfer
+    #region Implementation of ITeacherCurrentAffiliation
 
     /// <summary>
-    ///     转入时间
-    /// </summary>
-    [Required]
-    [Comment("转入时间")]
-    public required DateTime MoveIn { get; set; }
-
-    /// <summary>
-    ///     转出时间
-    /// </summary>
-    [Comment("转出时间")]
-    public DateTime? MoveOut { get; set; }
-
-    #endregion
-
-    #region Implementation of ISchoolTeacher
-
-    /// <summary>
-    ///     班级标识
+    ///     学校标识
     /// </summary>
     [Required]
     [Comment("学校标识")]

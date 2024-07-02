@@ -28,11 +28,9 @@ internal sealed class ArtemisClassStudentConfiguration : BaseEntityConfiguration
     protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisClassStudent> builder)
     {
         builder.Property(classStudent => classStudent.MoveIn)
-            .HasComment("转入时间")
             .HasColumnType(DataTypeSet.DateTime);
 
         builder.Property(classStudent => classStudent.MoveOut)
-            .HasComment("转出时间")
             .HasColumnType(DataTypeSet.DateTime);
     }
 

@@ -27,13 +27,11 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisSchool> builder)
     {
-        // Role Index
-
-        // Each Role can have many associated RoleClaims
+        // Each School can have many Classes
         builder.HasMany(school => school.Classes)
             .WithOne(iClass => iClass.School)
             .HasForeignKey(iClass => iClass.SchoolId)
-            .HasConstraintName(ForeignKeyName("ArtemisClass", "ArtemisSchool"))
+            .HasConstraintName(ForeignKeyName(nameof(ArtemisClass), nameof(ArtemisSchool)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
