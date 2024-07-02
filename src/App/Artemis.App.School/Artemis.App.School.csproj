@@ -12,6 +12,8 @@
 	  <InvariantGlobalization>true</InvariantGlobalization>
 	  <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
     <UserSecretsId>1731dd40-6627-4853-9baa-1e7065e1bb6a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
 
 	<ItemGroup>
