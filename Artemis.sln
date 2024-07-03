@@ -35,7 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Protos", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.School", "src\Services\Artemis.Service.School\Artemis.Service.School.csproj", "{3BAF25AE-7910-441C-B251-26BDABDC70AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.School", "src\App\Artemis.App.School\Artemis.App.School.csproj", "{A3BE5214-00DE-4095-8C07-1926528BFEEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.School", "src\App\Artemis.App.School\Artemis.App.School.csproj", "{A3BE5214-00DE-4095-8C07-1926528BFEEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Service.Task", "src\Services\Artemis.Service.Task\Artemis.Service.Task.csproj", "{49E837DC-906E-425E-B9AC-1019B5A3C8D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.Task", "src\App\Artemis.App.Task\Artemis.App.Task.csproj", "{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,14 @@ Global
 		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3BE5214-00DE-4095-8C07-1926528BFEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E837DC-906E-425E-B9AC-1019B5A3C8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E837DC-906E-425E-B9AC-1019B5A3C8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E837DC-906E-425E-B9AC-1019B5A3C8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E837DC-906E-425E-B9AC-1019B5A3C8D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +120,8 @@ Global
 		{DC984B43-BAE2-4764-988A-FE5219405A6A} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{3BAF25AE-7910-441C-B251-26BDABDC70AF} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{A3BE5214-00DE-4095-8C07-1926528BFEEB} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
+		{49E837DC-906E-425E-B9AC-1019B5A3C8D1} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
+		{ACCFC0A6-C401-4DA2-80D7-E0B3B29FF069} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

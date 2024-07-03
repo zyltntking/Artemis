@@ -12,14 +12,14 @@ namespace Artemis.Service.Identity.Stores;
 /// <summary>
 ///     认证凭据存储接口
 /// </summary>
-public interface IIdentityClaimStore : IStore<IdentityClaim, Guid, Guid>;
+public interface IIdentityClaimStore : IStore<IdentityClaim>;
 
 #endregion
 
 /// <summary>
 ///     认证凭据存储
 /// </summary>
-public sealed class IdentityClaimStore : Store<IdentityClaim, Guid, Guid>, IIdentityClaimStore
+public sealed class IdentityClaimStore : Store<IdentityClaim>, IIdentityClaimStore
 {
     /// <summary>
     ///     基本存储实例构造

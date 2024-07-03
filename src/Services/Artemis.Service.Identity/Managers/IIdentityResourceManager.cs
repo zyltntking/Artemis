@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证资源管理接口
 /// </summary>
-public interface IIdentityResourceManager : IManager<IdentityClaim, Guid, Guid>
+public interface IIdentityResourceManager : IManager<IdentityClaim>
 {
     #region IdentityClaim
 

@@ -43,8 +43,4 @@
 		<ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Managers\" />
-	</ItemGroup>
-
 </Project>

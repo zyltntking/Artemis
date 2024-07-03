@@ -12,14 +12,14 @@ namespace Artemis.Service.School.Stores;
 /// <summary>
 ///     学校存储接口
 /// </summary>
-public interface IArtemisSchoolStore : IStore<ArtemisSchool, Guid, Guid>;
+public interface IArtemisSchoolStore : IStore<ArtemisSchool>;
 
 #endregion
 
 /// <summary>
 ///     学校存储
 /// </summary>
-public sealed class ArtemisSchoolStore : Store<ArtemisSchool, Guid, Guid>, IArtemisSchoolStore
+public sealed class ArtemisSchoolStore : Store<ArtemisSchool>, IArtemisSchoolStore
 {
     /// <summary>
     ///     基本存储实例构造
@@ -34,7 +34,7 @@ public sealed class ArtemisSchoolStore : Store<ArtemisSchool, Guid, Guid>, IArte
     public ArtemisSchoolStore(
         SchoolContext context,
         IStoreOptions? storeOptions = null,
-        IHandlerProxy<Guid>? handlerProxy = null,
+        IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)

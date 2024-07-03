@@ -14,7 +14,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证资源管理器
 /// </summary>
-public sealed class IdentityResourceManager : Manager<IdentityClaim, Guid, Guid>, IIdentityResourceManager
+public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityResourceManager
 {
     /// <summary>
     ///     创建新的管理器实例

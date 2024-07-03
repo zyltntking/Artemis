@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证用户管理接口
 /// </summary>
-public interface IIdentityUserManager : IManager<IdentityUser, Guid, Guid>
+public interface IIdentityUserManager : IManager<IdentityUser>
 {
     /// <summary>
     ///     根据用户信息搜索用户

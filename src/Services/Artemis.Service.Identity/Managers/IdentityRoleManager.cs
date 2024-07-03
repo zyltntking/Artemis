@@ -15,7 +15,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证角色管理器
 /// </summary>
-public sealed class IdentityRoleManager : Manager<IdentityRole, Guid, Guid>, IIdentityRoleManager
+public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleManager
 {
     /// <summary>
     ///     创建新的管理器实例

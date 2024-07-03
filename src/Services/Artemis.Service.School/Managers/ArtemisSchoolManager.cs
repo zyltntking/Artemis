@@ -8,7 +8,7 @@ namespace Artemis.Service.School.Managers;
 /// <summary>
 ///     学校管理器
 /// </summary>
-public class ArtemisSchoolManager : Manager<ArtemisSchool, Guid, Guid>, IArtemisSchoolManager
+public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoolManager
 {
     /// <summary>
     ///     创建新的管理器实例

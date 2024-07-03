@@ -8,7 +8,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证角色管理接口
 /// </summary>
-public interface IIdentityRoleManager : IManager<IdentityRole, Guid, Guid>
+public interface IIdentityRoleManager : IManager<IdentityRole>
 {
     /// <summary>
     ///     根据角色名搜索角色
