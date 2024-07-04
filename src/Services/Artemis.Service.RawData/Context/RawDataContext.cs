@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Shared;
 using Microsoft.EntityFrameworkCore;
 
-namespace Artemis.Service.RwaData.Context;
+namespace Artemis.Service.RawData.Context;
 
 /// <summary>
 ///     原始数据上下文

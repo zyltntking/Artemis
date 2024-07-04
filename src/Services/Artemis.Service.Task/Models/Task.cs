@@ -11,12 +11,6 @@ namespace Artemis.Service.Task.Models;
 public class Task : ConcurrencyPartition, ITask
 {
     /// <summary>
-    ///    父任务标识
-    /// </summary>
-    [Comment("父任务Id")]
-    public Guid ParentId { get; set; } = Guid.Empty;
-
-    /// <summary>
     ///     任务名称
     /// </summary>
     [Required]
@@ -50,4 +44,10 @@ public class Task : ConcurrencyPartition, ITask
     /// </summary>
     [Comment("任务结束时间")]
     public DateTime? EndTime { get; set; }
+
+    /// <summary>
+    ///     父任务标识
+    /// </summary>
+    [Comment("父任务Id")]
+    public Guid ParentId { get; set; } = Guid.Empty;
 }

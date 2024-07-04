@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Shared;
 using Artemis.Data.Store.Configuration;
 
-namespace Artemis.Service.RwaData.Context.Configuration;
+namespace Artemis.Service.RawData.Context.Configuration;
 
 /// <summary>
 ///     视力表数据集配置

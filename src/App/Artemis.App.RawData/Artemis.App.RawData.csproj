@@ -4,7 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<DocumentationFile>Artemis.App.Task.xml</DocumentationFile>
+		<DocumentationFile>Artemis.App.Identity.xml</DocumentationFile>
 		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 		<CopyDocumentationFilesFromPackages>false</CopyDocumentationFilesFromPackages>
 		<Nullable>enable</Nullable>
@@ -12,7 +12,7 @@
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
 		<!--<PublishAot>true</PublishAot>-->
-		<UserSecretsId>6d219595-4090-4275-9e01-bbd2456848ae</UserSecretsId>
+		<UserSecretsId>1b22a0a7-958a-40f5-8101-582ce3d20ad7</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..\..</DockerfileContext>
 	</PropertyGroup>
@@ -47,7 +47,7 @@
 	<ItemGroup>
 		<ProjectReference
 			Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
-		<ProjectReference Include="..\..\Services\Artemis.Service.Task\Artemis.Service.Task.csproj" />
+		<ProjectReference Include="..\..\Services\Artemis.Service.RawData\Artemis.Service.RawData.csproj" />
 		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 

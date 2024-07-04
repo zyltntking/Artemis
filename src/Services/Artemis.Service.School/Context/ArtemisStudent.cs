@@ -34,9 +34,4 @@ public sealed class ArtemisStudent : Student
     ///     学生所属关系
     /// </summary>
     public ArtemisStudentCurrentAffiliation CurrentAffiliation { get; set; }
-
-    /// <summary>
-    ///     教过学生的老师
-    /// </summary>
-    public ICollection<ArtemisTeacher>? Teachers { get; set; }
 }

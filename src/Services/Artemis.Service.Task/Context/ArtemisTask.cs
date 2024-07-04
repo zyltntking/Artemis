@@ -10,7 +10,7 @@ namespace Artemis.Service.Task.Context;
 public sealed class ArtemisTask : Models.Task
 {
     /// <summary>
-    ///    父任务
+    ///     父任务
     /// </summary>
     public ArtemisTask? Parent { get; set; }
 

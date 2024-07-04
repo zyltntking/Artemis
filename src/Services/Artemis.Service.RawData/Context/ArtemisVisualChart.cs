@@ -1,8 +1,8 @@
-﻿using Artemis.Service.RwaData.Context.Configuration;
-using Artemis.Service.RwaData.Models;
+﻿using Artemis.Service.RawData.Context.Configuration;
+using Artemis.Service.RawData.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Artemis.Service.RwaData.Context;
+namespace Artemis.Service.RawData.Context;
 
 /// <summary>
 ///     视力表数据

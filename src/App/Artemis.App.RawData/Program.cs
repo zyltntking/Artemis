@@ -1,12 +1,12 @@
 using Artemis.Data.Shared;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Service.RawData.Context;
 using Artemis.Service.School;
-using Artemis.Service.School.Context;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace Artemis.App.School;
+namespace Artemis.App.RawData;
 
 /// <summary>
 ///     应用程序入口
@@ -39,12 +39,11 @@ public class Program
             //builder.AddMongoDbComponent("MongoInstance");
             //builder.AddRabbitMqComponent("RabbitMqInstance");
 
-            builder.AddPostgreSqlComponent<SchoolContext>("ArtemisDb", optionsBuilder =>
-                {
-                    optionsBuilder.MigrationsHistoryTable("SchoolDbHistory", Project.Schemas.School);
-                    optionsBuilder.MigrationsAssembly("Artemis.App.School");
-                }, Log.Debug)
-                .AddSchoolServices<ArtemisHandlerProxy>();
+            builder.AddPostgreSqlComponent<RawDataContext>("ArtemisDb", optionsBuilder =>
+            {
+                optionsBuilder.MigrationsHistoryTable("RawDataDbHistory", Project.Schemas.RawData);
+                optionsBuilder.MigrationsAssembly("Artemis.App.RawData");
+            }, Log.Debug).AddRawDataServices<ArtemisHandlerProxy>();
 
             var isMigration = false;
 
@@ -75,7 +74,7 @@ public class Program
             //app.MapGrpcService<RoleService>();
 
             // map common endpoints
-            app.MapCommonEndpoints<SchoolContext>();
+            app.MapCommonEndpoints<RawDataContext>();
 
             app.Run();
         }

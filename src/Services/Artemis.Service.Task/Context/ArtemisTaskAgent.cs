@@ -11,7 +11,7 @@ namespace Artemis.Service.Task.Context;
 public sealed class ArtemisTaskAgent : TaskAgent
 {
     /// <summary>
-    ///    任务
+    ///     任务
     /// </summary>
     public required ArtemisTask Task { get; set; }
 

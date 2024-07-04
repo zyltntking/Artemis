@@ -29,13 +29,13 @@ internal sealed class
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisTeacherCurrentAffiliation> builder)
     {
-        builder.HasKey(currentTeacher => currentTeacher.TeacherId)
+        builder.HasKey(currentAffiliation => currentAffiliation.TeacherId)
             .HasName(KeyName);
 
-        // One Teacher One Current Teacher
-        builder.HasOne(currentTeacher => currentTeacher.Teacher)
-            .WithOne(teacher => teacher.CurrentSchool)
-            .HasForeignKey<ArtemisTeacherCurrentAffiliation>(currentTeacher => currentTeacher.TeacherId)
+        // One Teacher One Current Affiliation
+        builder.HasOne(currentAffiliation => currentAffiliation.Teacher)
+            .WithOne(currentAffiliation => currentAffiliation.CurrentAffiliation)
+            .HasForeignKey<ArtemisTeacherCurrentAffiliation>(currentAffiliation => currentAffiliation.TeacherId)
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacherCurrentAffiliation).TableName(),
                 nameof(ArtemisTeacher).TableName()))
@@ -43,23 +43,23 @@ internal sealed class
             .OnDelete(DeleteBehavior.Cascade);
 
         // One School Many Current Teachers
-        builder.HasOne(currentTeacher => currentTeacher.School)
-            .WithMany(school => school.CurrentTeachers)
-            .HasForeignKey(currentTeacher => currentTeacher.SchoolId)
+        builder.HasOne(currentAffiliation => currentAffiliation.School)
+            .WithMany(currentAffiliation => currentAffiliation.CurrentTeachers)
+            .HasForeignKey(currentAffiliation => currentAffiliation.SchoolId)
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacherCurrentAffiliation).TableName(),
                 nameof(ArtemisSchool).TableName()))
-            .IsRequired()
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
 
         // One Class Many Current Teachers
-        builder.HasOne(currentTeacher => currentTeacher.Class)
-            .WithMany(schoolClass => schoolClass.CurrentTeachers)
-            .HasForeignKey(currentTeacher => currentTeacher.ClassId)
+        builder.HasOne(currentAffiliation => currentAffiliation.Class)
+            .WithMany(currentAffiliation => currentAffiliation.CurrentTeachers)
+            .HasForeignKey(currentAffiliation => currentAffiliation.ClassId)
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacherCurrentAffiliation).TableName(),
                 nameof(ArtemisClass).TableName()))
-            .IsRequired()
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
     }
 
