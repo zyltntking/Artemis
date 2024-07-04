@@ -38,7 +38,7 @@ internal sealed class IdentityRoleConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(roleClaim => roleClaim.Role)
             .HasForeignKey(roleClaim => roleClaim.RoleId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityRoleClaim).TableName(), 
+                nameof(IdentityRoleClaim).TableName(),
                 nameof(IdentityRole).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);

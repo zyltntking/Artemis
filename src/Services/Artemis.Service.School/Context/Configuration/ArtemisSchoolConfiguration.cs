@@ -33,7 +33,7 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
             .WithOne(iClass => iClass.School)
             .HasForeignKey(iClass => iClass.SchoolId)
             .HasConstraintName(ForeignKeyName(
-                nameof(ArtemisClass).TableName(), 
+                nameof(ArtemisClass).TableName(),
                 nameof(ArtemisSchool).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);

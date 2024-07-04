@@ -75,7 +75,7 @@ public class SchoolContext : DbContext
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("school");
+        modelBuilder.HasDefaultSchema(Project.Schemas.School);
 
         //Class Student Map
         modelBuilder.Entity<ArtemisClass>()
@@ -101,8 +101,9 @@ public class SchoolContext : DbContext
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(iClass => iClass.Id),
                 classStudentJoin =>
-                {   
-                    classStudentJoin.HasKey(classStudent => new { classStudent.ClassId, classStudent.StudentId, classStudent.MoveIn })
+                {
+                    classStudentJoin.HasKey(classStudent =>
+                            new { classStudent.ClassId, classStudent.StudentId, classStudent.MoveIn })
                         .HasName(nameof(ArtemisClassStudent).TableName().KeyName());
                 }
             );
@@ -117,7 +118,7 @@ public class SchoolContext : DbContext
                     .WithMany(teacher => teacher.ClassTeachers)
                     .HasForeignKey(classTeacher => classTeacher.TeacherId)
                     .HasConstraintName(nameof(ArtemisClassTeacher).TableName()
-                        .ForeignKeyName(nameof(ArtemisTeacher).TableName()))    
+                        .ForeignKeyName(nameof(ArtemisTeacher).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(teacher => teacher.Id),
@@ -132,7 +133,8 @@ public class SchoolContext : DbContext
                     .HasPrincipalKey(iClass => iClass.Id),
                 classTeacherJoin =>
                 {
-                    classTeacherJoin.HasKey(classTeacher => new { classTeacher.ClassId, classTeacher.TeacherId, classTeacher.MoveIn })
+                    classTeacherJoin.HasKey(classTeacher =>
+                            new { classTeacher.ClassId, classTeacher.TeacherId, classTeacher.MoveIn })
                         .HasName(nameof(ArtemisClassTeacher).TableName().KeyName());
                 });
 
@@ -161,7 +163,8 @@ public class SchoolContext : DbContext
                     .HasPrincipalKey(school => school.Id),
                 schoolStudentJoin =>
                 {
-                    schoolStudentJoin.HasKey(schoolStudent => new { schoolStudent.SchoolId, schoolStudent.StudentId, schoolStudent.MoveIn })
+                    schoolStudentJoin.HasKey(schoolStudent => new
+                            { schoolStudent.SchoolId, schoolStudent.StudentId, schoolStudent.MoveIn })
                         .HasName(nameof(ArtemisSchoolStudent).TableName().KeyName());
                 });
 
@@ -179,7 +182,7 @@ public class SchoolContext : DbContext
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(teacher => teacher.Id),
-                right => right  
+                right => right
                     .HasOne(schoolTeacher => schoolTeacher.School)
                     .WithMany(school => school.SchoolTeachers)
                     .HasForeignKey(schoolTeacher => schoolTeacher.SchoolId)
@@ -190,7 +193,8 @@ public class SchoolContext : DbContext
                     .HasPrincipalKey(school => school.Id),
                 schoolTeacherJoin =>
                 {
-                    schoolTeacherJoin.HasKey(schoolTeacher => new { schoolTeacher.SchoolId, schoolTeacher.TeacherId, schoolTeacher.MoveIn })
+                    schoolTeacherJoin.HasKey(schoolTeacher => new
+                            { schoolTeacher.SchoolId, schoolTeacher.TeacherId, schoolTeacher.MoveIn })
                         .HasName(nameof(ArtemisSchoolTeacher).TableName().KeyName());
                 });
     }

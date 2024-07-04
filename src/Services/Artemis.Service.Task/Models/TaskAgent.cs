@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Core;
 using Artemis.Data.Shared.Task;
 using Microsoft.EntityFrameworkCore;
 

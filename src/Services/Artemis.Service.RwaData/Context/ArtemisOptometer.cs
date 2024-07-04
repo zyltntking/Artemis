@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.RwaData.Context;
 
 /// <summary>
-/// 验光仪数据
+///     验光仪数据
 /// </summary>
 [EntityTypeConfiguration(typeof(ArtemisOptometerConfiguration))]
 public sealed class ArtemisOptometer : Optometer

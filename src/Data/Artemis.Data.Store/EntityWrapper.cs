@@ -1,17 +1,15 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
 
 namespace Artemis.Data.Store;
 
-internal class EntityWrapper<TDbContext,TEntity> where TDbContext: DbContext 
+internal class EntityWrapper<TDbContext, TEntity> where TDbContext : DbContext
     where TEntity : class
 {
     /// <summary>
-    /// 实体包装类
+    ///     实体包装类
     /// </summary>
     /// <param name="context"></param>
     /// <param name="proxy"></param>
@@ -158,7 +156,7 @@ internal class EntityWrapper<TDbContext,TEntity> where TDbContext: DbContext
     private bool _disposed;
 
     /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
     public void Dispose()
     {

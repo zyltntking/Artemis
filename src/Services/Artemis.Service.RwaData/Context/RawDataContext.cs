@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.RwaData.Context;
 
 /// <summary>
-/// 原始数据上下文
+///     原始数据上下文
 /// </summary>
 public class RawDataContext : DbContext
 {
@@ -17,12 +17,12 @@ public class RawDataContext : DbContext
     }
 
     /// <summary>
-    /// 验光仪数据
+    ///     验光仪数据
     /// </summary>
     public virtual DbSet<ArtemisOptometer> Optometers { get; set; } = default!;
 
     /// <summary>
-    /// 视力表数据
+    ///     视力表数据
     /// </summary>
     public virtual DbSet<ArtemisVisualChart> VisualCharts { get; set; } = default!;
 

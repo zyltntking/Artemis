@@ -48,7 +48,7 @@ public class TaskContext : DbContext
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("task");
+        modelBuilder.HasDefaultSchema(Project.Schemas.Task);
 
         // Task Unit Task Agent Map
         modelBuilder.Entity<ArtemisTaskUnit>()

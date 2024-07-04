@@ -4,7 +4,7 @@ using Artemis.Data.Store.Configuration;
 namespace Artemis.Service.RwaData.Context.Configuration;
 
 /// <summary>
-/// 验光仪数据集配置
+///     验光仪数据集配置
 /// </summary>
 internal sealed class ArtemisOptometerConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisOptometer>
 {

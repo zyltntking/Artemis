@@ -1,7 +1,5 @@
 ﻿using Artemis.Data.Shared;
 using Artemis.Data.Store.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Service.Task.Context.Configuration;
 
@@ -21,7 +19,6 @@ internal sealed class ArtemisAgentConfiguration : ConcurrencyPartitionEntityConf
     ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisAgent).TableName();
-
 
     #endregion
 }

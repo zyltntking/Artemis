@@ -5,10 +5,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.RwaData.Context;
 
 /// <summary>
-/// 视力表数据
+///     视力表数据
 /// </summary>
 [EntityTypeConfiguration(typeof(ArtemisVisualChartConfiguration))]
 public class ArtemisVisualChart : VisualChart
 {
-    
 }

@@ -1,11 +1,10 @@
 ﻿using Artemis.Data.Shared;
 using Artemis.Data.Store.Configuration;
-using Artemis.Service.RwaData.Models;
 
 namespace Artemis.Service.RwaData.Context.Configuration;
 
 /// <summary>
-/// 视力表数据集配置
+///     视力表数据集配置
 /// </summary>
 internal sealed class ArtemisVisualChartConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisVisualChart>
 {

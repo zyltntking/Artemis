@@ -44,7 +44,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(userProfile => userProfile.User)
             .HasForeignKey(userProfile => userProfile.UserId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityUserProfile).TableName(), 
+                nameof(IdentityUserProfile).TableName(),
                 nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
@@ -54,7 +54,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityUserClaim).TableName(), 
+                nameof(IdentityUserClaim).TableName(),
                 nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
@@ -64,7 +64,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityUserLogin).TableName(), 
+                nameof(IdentityUserLogin).TableName(),
                 nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
@@ -74,7 +74,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityUserToken).TableName(), 
+                nameof(IdentityUserToken).TableName(),
                 nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
@@ -84,7 +84,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
             .WithOne(userProfile => userProfile.User)
             .HasForeignKey(userProfile => userProfile.UserId)
             .HasConstraintName(ForeignKeyName(
-                nameof(IdentityUserProfile).TableName(), 
+                nameof(IdentityUserProfile).TableName(),
                 nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);

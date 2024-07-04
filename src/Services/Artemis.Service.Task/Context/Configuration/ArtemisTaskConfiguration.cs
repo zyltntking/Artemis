@@ -33,7 +33,7 @@ internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfi
             .WithOne(taskUnit => taskUnit.Task)
             .HasForeignKey(taskUnit => taskUnit.TaskId)
             .HasConstraintName(ForeignKeyName(
-                nameof(ArtemisTaskUnit).TableName(), 
+                nameof(ArtemisTaskUnit).TableName(),
                 nameof(ArtemisTask).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
