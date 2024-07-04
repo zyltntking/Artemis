@@ -37,6 +37,16 @@ internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfi
                 nameof(ArtemisTask).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Each Task can have many Children Task
+        builder.HasMany(task => task.Children)
+            .WithOne(child => child.Parent)
+            .HasForeignKey(child => child.ParentId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisTask).TableName(),
+                nameof(ArtemisTask).TableName()))
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

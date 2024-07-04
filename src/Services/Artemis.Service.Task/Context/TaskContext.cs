@@ -50,7 +50,7 @@ public class TaskContext : DbContext
     {
         modelBuilder.HasDefaultSchema(Project.Schemas.Task);
 
-        // Task Unit Task Agent Map
+        // Task Unit Agent Map
         modelBuilder.Entity<ArtemisTaskUnit>()
             .HasMany(taskUnit => taskUnit.Agents) //left side
             .WithMany(agent => agent.TaskUnits) //right side
@@ -78,5 +78,29 @@ public class TaskContext : DbContext
                     taskAgentJoin.HasKey(taskAgent => new { taskAgent.TaskUnitId, taskAgent.AgentId })
                         .HasName(nameof(ArtemisTaskAgent).TableName().KeyName());
                 });
+
+        // Task Agent Map
+        modelBuilder.Entity<ArtemisTask>()
+            .HasMany(task => task.Agents) //left side
+            .WithMany(agent => agent.Tasks) //right side
+            .UsingEntity<ArtemisTaskAgent>(
+                left => left
+                    .HasOne(taskAgent => taskAgent.Agent)
+                    .WithMany(agent => agent.TaskAgents)
+                    .HasForeignKey(taskAgent => taskAgent.AgentId)
+                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                        .ForeignKeyName(nameof(ArtemisAgent).TableName()))
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(agent => agent.Id),
+                right => right
+                    .HasOne(taskAgent => taskAgent.Task)
+                    .WithMany(task => task.TaskAgents)
+                    .HasForeignKey(taskAgent => taskAgent.TaskId)
+                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                        .ForeignKeyName(nameof(ArtemisTask).TableName()))
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(unit => unit.Id));
     }
 }

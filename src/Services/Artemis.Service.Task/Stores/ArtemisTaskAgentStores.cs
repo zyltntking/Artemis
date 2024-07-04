@@ -38,4 +38,10 @@ public sealed class ArtemisTaskAgentStores : KeyLessStore<ArtemisTaskAgent>, IAr
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
+
+    /// <summary>
+    ///     实体键生成委托
+    /// </summary>
+    protected override Func<ArtemisTaskAgent, string>? EntityKey { get; init; } =
+        taskAgent => $"{taskAgent.TaskUnitId}:{taskAgent.AgentId}";
 }

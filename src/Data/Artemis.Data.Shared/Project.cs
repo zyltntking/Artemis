@@ -13,7 +13,7 @@ public static class Project
     /// <summary>
     ///     项目前缀
     /// </summary>
-    public const string Prefix = "Lenneth";
+    public static string Prefix { get; set; } = "Artemis";
 
     /// <summary>
     ///     获取配置表名

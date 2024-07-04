@@ -1,3 +1,4 @@
+using Artemis.Data.Shared;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Task;
@@ -40,7 +41,7 @@ public class Program
 
             builder.AddPostgreSqlComponent<TaskContext>("ArtemisDb", optionsBuilder =>
                 {
-                    optionsBuilder.MigrationsHistoryTable("TaskDbHistory", "task");
+                    optionsBuilder.MigrationsHistoryTable("TaskDbHistory", Project.Schemas.Task);
                     optionsBuilder.MigrationsAssembly("Artemis.App.Task");
                 }, Log.Debug)
                 .AddTaskServices<ArtemisHandlerProxy>();

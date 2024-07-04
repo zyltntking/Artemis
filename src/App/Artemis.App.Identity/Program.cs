@@ -1,4 +1,5 @@
 using Artemis.App.Identity.Services;
+using Artemis.Data.Shared;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Identity;
@@ -42,7 +43,7 @@ public class Program
 
             builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb", optionsBuilder =>
                 {
-                    optionsBuilder.MigrationsHistoryTable("IdentityDbHistory", "identity");
+                    optionsBuilder.MigrationsHistoryTable("IdentityDbHistory", Project.Schemas.Identity);
                     optionsBuilder.MigrationsAssembly("Artemis.App.Identity");
                 }, Log.Debug)
                 .AddIdentityServices<ArtemisHandlerProxy>()

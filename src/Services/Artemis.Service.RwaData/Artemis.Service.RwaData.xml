@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.Service.RwaData</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Service.RwaData.Context.ArtemisOptometer">
+            <summary>
+                验光仪数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Context.ArtemisVisualChart">
+            <summary>
+                视力表数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Context.Configuration.ArtemisOptometerConfiguration">
+            <summary>
+                验光仪数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.Configuration.ArtemisOptometerConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.Configuration.ArtemisOptometerConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Context.Configuration.ArtemisVisualChartConfiguration">
+            <summary>
+                视力表数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.Configuration.ArtemisVisualChartConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.Configuration.ArtemisVisualChartConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Context.RawDataContext">
+            <summary>
+                原始数据上下文
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.RwaData.Context.RawDataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.RwaData.Context.RawDataContext})">
+            <summary>
+                构造函数
+            </summary>
+            <param name="options">配置</param>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.RawDataContext.Optometers">
+            <summary>
+                验光仪数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RwaData.Context.RawDataContext.VisualCharts">
+            <summary>
+                视力表数据
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.RwaData.Context.RawDataContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                配置数据模型
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Models.Optometer">
+            <summary>
+                筛查仪数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RwaData.Models.VisualChart">
+            <summary>
+                视力表数据模型
+            </summary>
+        </member>
+    </members>
+</doc>
