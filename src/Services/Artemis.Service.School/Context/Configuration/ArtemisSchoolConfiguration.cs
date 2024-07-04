@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisSchool);
+    protected override string TableName => nameof(ArtemisSchool).TableName();
 
     /// <summary>
     ///     实体关系配置
@@ -31,7 +32,9 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
         builder.HasMany(school => school.Classes)
             .WithOne(iClass => iClass.School)
             .HasForeignKey(iClass => iClass.SchoolId)
-            .HasConstraintName(ForeignKeyName(nameof(ArtemisClass), nameof(ArtemisSchool)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisClass).TableName(), 
+                nameof(ArtemisSchool).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

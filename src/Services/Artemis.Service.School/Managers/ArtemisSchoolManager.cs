@@ -14,7 +14,6 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
     ///     创建新的管理器实例
     /// </summary>
     /// <param name="schoolStore">存储访问器依赖</param>
-    /// <param name="teacherStudentStore"></param>
     /// <param name="teacherCurrentAffiliationStore"></param>
     /// <param name="options">配置依赖</param>
     /// <param name="logger">日志依赖</param>
@@ -36,7 +35,6 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
         IArtemisSchoolStudentStore schoolStudentStore,
         IArtemisClassTeacherStore classTeacherStore,
         IArtemisClassStudentStore classStudentStore,
-        IArtemisTeacherStudentStore teacherStudentStore,
         IArtemisStudentCurrentAffiliationStore studentCurrentAffiliationStore,
         IArtemisTeacherCurrentAffiliationStore teacherCurrentAffiliationStore,
         IManagerOptions? options = null,
@@ -50,7 +48,6 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
         SchoolStudentStore = schoolStudentStore ?? throw new ArgumentNullException(nameof(schoolStudentStore));
         ClassTeacherStore = classTeacherStore ?? throw new ArgumentNullException(nameof(classTeacherStore));
         ClassStudentStore = classStudentStore ?? throw new ArgumentNullException(nameof(classStudentStore));
-        TeacherStudentStore = teacherStudentStore ?? throw new ArgumentNullException(nameof(teacherStudentStore));
         StudentCurrentAffiliationStore = studentCurrentAffiliationStore ??
                                          throw new ArgumentNullException(nameof(studentCurrentAffiliationStore));
         TeacherCurrentAffiliationStore = teacherCurrentAffiliationStore ??
@@ -72,7 +69,6 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
         SchoolStudentStore.Dispose();
         ClassTeacherStore.Dispose();
         ClassStudentStore.Dispose();
-        TeacherStudentStore.Dispose();
         StudentCurrentAffiliationStore.Dispose();
         TeacherCurrentAffiliationStore.Dispose();
     }
@@ -120,11 +116,6 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
     ///     班级学生关系存储访问器
     /// </summary>
     private IArtemisClassStudentStore ClassStudentStore { get; }
-
-    /// <summary>
-    ///     教师学生关系存储访问器
-    /// </summary>
-    private IArtemisTeacherStudentStore TeacherStudentStore { get; }
 
     /// <summary>
     ///     学生当前关系存储访问器

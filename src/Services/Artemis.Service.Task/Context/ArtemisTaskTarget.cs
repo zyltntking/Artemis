@@ -11,11 +11,6 @@ namespace Artemis.Service.Task.Context;
 public class ArtemisTaskTarget : TaskTarget
 {
     /// <summary>
-    ///     任务
-    /// </summary>
-    public required ArtemisTask Task { get; set; }
-
-    /// <summary>
     ///     任务单元
     /// </summary>
     public required ArtemisTaskUnit TaskUnit { get; set; }

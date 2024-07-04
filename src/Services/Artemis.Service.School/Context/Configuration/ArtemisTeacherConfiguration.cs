@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 
 namespace Artemis.Service.School.Context.Configuration;
 
@@ -17,7 +18,7 @@ internal sealed class ArtemisTeacherConfiguration : ConcurrencyPartitionEntityCo
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisTeacher);
+    protected override string TableName => nameof(ArtemisTeacher).TableName();
 
     #endregion
 }

@@ -25,7 +25,6 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisSchoolStudentStore, ArtemisSchoolStudentStore>();
         services.TryAddScoped<IArtemisClassTeacherStore, ArtemisClassTeacherStore>();
         services.TryAddScoped<IArtemisClassStudentStore, ArtemisClassStudentStore>();
-        services.TryAddScoped<IArtemisTeacherStudentStore, ArtemisTeacherStudentStore>();
         services.TryAddScoped<IArtemisTeacherCurrentAffiliationStore, ArtemisTeacherCurrentAffiliationStore>();
         services.TryAddScoped<IArtemisStudentCurrentAffiliationStore, ArtemisStudentCurrentAffiliationStore>();
 

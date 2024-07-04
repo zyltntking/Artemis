@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class IdentityRoleClaimConfiguration : KeySlotEntityConfiguratio
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(IdentityRoleClaim);
+    protected override string TableName => nameof(IdentityRoleClaim).TableName();
 
     /// <summary>
     ///     实体关系配置

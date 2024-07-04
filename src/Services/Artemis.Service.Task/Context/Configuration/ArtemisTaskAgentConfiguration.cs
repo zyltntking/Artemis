@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 
 namespace Artemis.Service.Task.Context.Configuration;
 
@@ -17,7 +18,7 @@ internal sealed class ArtemisTaskAgentConfiguration : BaseEntityConfiguration<Ar
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisTaskAgent);
+    protected override string TableName => nameof(ArtemisTaskAgent).TableName();
 
     #endregion
 }

@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityC
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisTaskUnit);
+    protected override string TableName => nameof(ArtemisTaskUnit).TableName();
 
     /// <summary>
     ///     实体关系配置
@@ -32,14 +33,6 @@ internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityC
             .WithOne(taskTarget => taskTarget.TaskUnit)
             .HasForeignKey(taskTarget => taskTarget.TaskUnitId)
             .HasConstraintName(ForeignKeyName(nameof(ArtemisTaskTarget), nameof(ArtemisTaskUnit)))
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
-        // Each Task Unit can have many Task Agents
-        builder.HasMany(taskUnit => taskUnit.TaskAgents)
-            .WithOne(taskAgent => taskAgent.TaskUnit)
-            .HasForeignKey(taskAgent => taskAgent.TaskUnitId)
-            .HasConstraintName(ForeignKeyName(nameof(ArtemisTaskAgent), nameof(ArtemisTaskUnit)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

@@ -11,14 +11,14 @@ namespace Artemis.Service.Task.Stores;
 /// <summary>
 ///     任务代理存储接口
 /// </summary>
-public interface IArtemisTaskAgentStores : IStore<ArtemisTaskAgent>;
+public interface IArtemisTaskAgentStores : IKeyLessStore<ArtemisTaskAgent>;
 
 #endregion
 
 /// <summary>
 ///     任务代理存储
 /// </summary>
-public sealed class ArtemisTaskAgentStores : Store<ArtemisTaskAgent>, IArtemisTaskAgentStores
+public sealed class ArtemisTaskAgentStores : KeyLessStore<ArtemisTaskAgent>, IArtemisTaskAgentStores
 {
     /// <summary>
     ///     基本存储实例构造

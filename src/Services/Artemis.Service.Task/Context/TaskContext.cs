@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Task.Context;
 
@@ -47,5 +49,34 @@ public class TaskContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("task");
+
+        // Task Unit Task Agent Map
+        modelBuilder.Entity<ArtemisTaskUnit>()
+            .HasMany(taskUnit => taskUnit.Agents) //left side
+            .WithMany(agent => agent.TaskUnits) //right side
+            .UsingEntity<ArtemisTaskAgent>(
+                left => left
+                    .HasOne(taskAgent => taskAgent.Agent)
+                    .WithMany(agent => agent.TaskAgents)
+                    .HasForeignKey(taskAgent => taskAgent.AgentId)
+                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                        .ForeignKeyName(nameof(ArtemisAgent).TableName()))
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(agent => agent.Id),
+                right => right
+                    .HasOne(taskAgent => taskAgent.TaskUnit)
+                    .WithMany(unit => unit.TaskAgents)
+                    .HasForeignKey(taskAgent => taskAgent.TaskUnitId)
+                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                        .ForeignKeyName(nameof(ArtemisTaskUnit).TableName()))
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasPrincipalKey(unit => unit.Id),
+                taskAgentJoin =>
+                {
+                    taskAgentJoin.HasKey(taskAgent => new { taskAgent.TaskUnitId, taskAgent.AgentId })
+                        .HasName(nameof(ArtemisTaskAgent).TableName().KeyName());
+                });
     }
 }

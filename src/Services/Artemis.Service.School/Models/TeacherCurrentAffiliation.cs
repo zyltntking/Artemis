@@ -19,6 +19,13 @@ public class TeacherCurrentAffiliation : ITeacherCurrentAffiliation
     public required Guid SchoolId { get; set; }
 
     /// <summary>
+    ///     班级标识
+    /// </summary>
+    [Required]
+    [Comment("班级标识")]
+    public required Guid ClassId { get; set; }
+
+    /// <summary>
     ///     教师标识
     /// </summary>
     [Required]

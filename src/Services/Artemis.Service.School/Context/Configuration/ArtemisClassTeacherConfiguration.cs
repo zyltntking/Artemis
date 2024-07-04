@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class ArtemisClassTeacherConfiguration : BaseEntityConfiguration
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisClassTeacher);
+    protected override string TableName => nameof(ArtemisClassTeacher).TableName();
 
     /// <summary>
     ///     实体字段配置

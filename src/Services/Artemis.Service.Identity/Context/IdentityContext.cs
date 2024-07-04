@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Identity.Context;
@@ -69,7 +70,7 @@ public class IdentityContext : DbContext
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("identity");
+        modelBuilder.HasDefaultSchema(Project.Schemas.Identity);
 
         // User Role Map
         modelBuilder.Entity<IdentityRole>()
@@ -80,7 +81,8 @@ public class IdentityContext : DbContext
                     .HasOne(userRole => userRole.User)
                     .WithMany(user => user.UserRoles)
                     .HasForeignKey(userRole => userRole.UserId)
-                    .HasConstraintName(nameof(IdentityUserRole).ForeignKeyName(nameof(IdentityUser)))
+                    .HasConstraintName(nameof(IdentityUserRole).TableName()
+                        .ForeignKeyName(nameof(IdentityUser).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(user => user.Id),
@@ -88,14 +90,15 @@ public class IdentityContext : DbContext
                     .HasOne(userRole => userRole.Role)
                     .WithMany(role => role.UserRoles)
                     .HasForeignKey(userRole => userRole.RoleId)
-                    .HasConstraintName(nameof(IdentityUserRole).ForeignKeyName(nameof(IdentityRole)))
+                    .HasConstraintName(nameof(IdentityUserRole).TableName()
+                        .ForeignKeyName(nameof(IdentityRole).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(role => role.Id),
                 userRoleJoin =>
                 {
                     userRoleJoin.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
-                        .HasName(nameof(IdentityUserRole).KeyName());
+                        .HasName(nameof(IdentityUserRole).TableName().KeyName());
                 });
     }
 

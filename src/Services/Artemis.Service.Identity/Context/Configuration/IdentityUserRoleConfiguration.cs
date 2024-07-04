@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 
 namespace Artemis.Service.Identity.Context.Configuration;
 
@@ -17,7 +18,7 @@ internal sealed class IdentityUserRoleConfiguration : BaseEntityConfiguration<Id
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(IdentityUserRole);
+    protected override string TableName => nameof(IdentityUserRole).TableName();
 
     #endregion
 }

@@ -36,11 +36,6 @@ public sealed class ArtemisTeacher : Teacher
     public ICollection<ArtemisClass>? Classes { get; set; }
 
     /// <summary>
-    ///     教师学生对应关系
-    /// </summary>
-    public ICollection<ArtemisTeacherStudent>? TeacherStudents { get; set; }
-
-    /// <summary>
     ///     教师教过的学生
     /// </summary>
     public ICollection<ArtemisStudent>? Students { get; set; }

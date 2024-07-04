@@ -11,6 +11,11 @@ public interface ITeacherCurrentAffiliation
     Guid SchoolId { get; set; }
 
     /// <summary>
+    ///     班级标识
+    /// </summary>
+    Guid ClassId { get; set; }
+
+    /// <summary>
     ///     教师标识
     /// </summary>
     Guid TeacherId { get; set; }

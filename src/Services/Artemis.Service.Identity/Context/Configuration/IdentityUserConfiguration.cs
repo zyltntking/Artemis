@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(IdentityUser);
+    protected override string TableName => nameof(IdentityUser).TableName();
 
     /// <summary>
     ///     实体关系配置
@@ -42,7 +43,9 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserProfiles)
             .WithOne(userProfile => userProfile.User)
             .HasForeignKey(userProfile => userProfile.UserId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityUserProfile), nameof(IdentityUser)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityUserProfile).TableName(), 
+                nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -50,7 +53,9 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserClaims)
             .WithOne(userClaim => userClaim.User)
             .HasForeignKey(userClaim => userClaim.UserId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityUserClaim), nameof(IdentityUser)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityUserClaim).TableName(), 
+                nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -58,7 +63,9 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserLogins)
             .WithOne(userLogin => userLogin.User)
             .HasForeignKey(userLogin => userLogin.UserId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityUserLogin), nameof(IdentityUser)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityUserLogin).TableName(), 
+                nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -66,7 +73,9 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserTokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityUserToken), nameof(IdentityUser)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityUserToken).TableName(), 
+                nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -74,7 +83,9 @@ internal sealed class IdentityUserConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(user => user.UserProfiles)
             .WithOne(userProfile => userProfile.User)
             .HasForeignKey(userProfile => userProfile.UserId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityUserProfile), nameof(IdentityUser)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityUserProfile).TableName(), 
+                nameof(IdentityUser).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

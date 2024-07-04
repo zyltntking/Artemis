@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 
 namespace Artemis.Service.Task.Context.Configuration;
 
@@ -17,7 +18,7 @@ internal sealed class ArtemisTaskTargetConfiguration : ConcurrencyPartitionEntit
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisTaskTarget);
+    protected override string TableName => nameof(ArtemisTaskTarget).TableName();
 
     #endregion
 }

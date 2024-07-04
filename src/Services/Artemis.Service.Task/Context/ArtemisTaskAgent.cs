@@ -10,10 +10,6 @@ namespace Artemis.Service.Task.Context;
 [EntityTypeConfiguration(typeof(ArtemisTaskAgentConfiguration))]
 public sealed class ArtemisTaskAgent : TaskAgent
 {
-    /// <summary>
-    ///     任务
-    /// </summary>
-    public required ArtemisTask Task { get; set; }
 
     /// <summary>
     ///     任务单元

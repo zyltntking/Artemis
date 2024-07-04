@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,7 +21,7 @@ internal sealed class
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisStudentCurrentAffiliation);
+    protected override string TableName => nameof(ArtemisStudentCurrentAffiliation).TableName();
 
     /// <summary>
     ///     实体关系配置
@@ -31,24 +32,32 @@ internal sealed class
         builder.HasKey(currentStudent => currentStudent.StudentId)
             .HasName(KeyName);
 
-        // Current Affiliation One School Many Student & One Class Many Students
+        // One Student One Current Students
         builder.HasOne(currentStudent => currentStudent.Student)
             .WithOne(student => student.CurrentAffiliation)
             .HasForeignKey<ArtemisStudentCurrentAffiliation>(currentStudent => currentStudent.StudentId)
-            .HasConstraintName(nameof(ArtemisStudentCurrentAffiliation).ForeignKeyName(nameof(ArtemisStudent)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisStudentCurrentAffiliation).TableName(),
+                nameof(ArtemisStudent).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
+        // One School Many Current Students
         builder.HasOne(currentStudent => currentStudent.School)
             .WithMany(school => school.CurrentStudents)
             .HasForeignKey(currentStudent => currentStudent.SchoolId)
-            .HasConstraintName(nameof(ArtemisStudentCurrentAffiliation).ForeignKeyName(nameof(ArtemisSchool)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisStudentCurrentAffiliation).TableName(),
+                nameof(ArtemisSchool).TableName()))
             .OnDelete(DeleteBehavior.Cascade);
 
+        // One Class Many Current Students
         builder.HasOne(currentStudent => currentStudent.Class)
             .WithMany(schoolClass => schoolClass.CurrentStudents)
             .HasForeignKey(currentStudent => currentStudent.ClassId)
-            .HasConstraintName(nameof(ArtemisStudentCurrentAffiliation).ForeignKeyName(nameof(ArtemisClass)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisStudentCurrentAffiliation).TableName(),
+                nameof(ArtemisClass).TableName()))
             .OnDelete(DeleteBehavior.Cascade);
     }
 

@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Shared;
+using Artemis.Data.Store.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,7 @@ internal sealed class IdentityRoleConfiguration : ConcurrencyModelEntityConfigur
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(IdentityRole);
+    protected override string TableName => nameof(IdentityRole).TableName();
 
     /// <summary>
     ///     实体关系配置
@@ -36,7 +37,9 @@ internal sealed class IdentityRoleConfiguration : ConcurrencyModelEntityConfigur
         builder.HasMany(role => role.RoleClaims)
             .WithOne(roleClaim => roleClaim.Role)
             .HasForeignKey(roleClaim => roleClaim.RoleId)
-            .HasConstraintName(ForeignKeyName(nameof(IdentityRoleClaim), nameof(IdentityRole)))
+            .HasConstraintName(ForeignKeyName(
+                nameof(IdentityRoleClaim).TableName(), 
+                nameof(IdentityRole).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

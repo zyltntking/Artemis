@@ -18,5 +18,10 @@ public sealed class ArtemisTeacherCurrentAffiliation : TeacherCurrentAffiliation
     /// <summary>
     ///     学校
     /// </summary>
-    public required ArtemisSchool School { get; set; }
+    public ArtemisSchool? School { get; set; }
+
+    /// <summary>
+    ///     班级
+    /// </summary>
+    public ArtemisClass? Class { get; set; }
 }

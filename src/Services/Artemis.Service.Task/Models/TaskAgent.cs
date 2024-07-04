@@ -8,7 +8,7 @@ namespace Artemis.Service.Task.Models;
 /// <summary>
 ///     任务代理模型
 /// </summary>
-public class TaskAgent : ConcurrencyPartition, ITaskAgent
+public class TaskAgent : ITaskAgent
 {
     /// <summary>
     ///     任务Id
