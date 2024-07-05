@@ -1202,9 +1202,25 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserBase.CreateUser(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchCreateUser(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1218,9 +1234,9 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchUpdateUserInfo(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            读取用户信息
+            批量更新用户信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1229,6 +1245,14 @@
         <member name="M:Artemis.Service.Protos.Identity.User.UserBase.DeleteUser(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchDeleteUser(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1360,6 +1384,42 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfoAsync(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfoAsync(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取用户信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.CreateUser(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             创建用户
@@ -1391,6 +1451,42 @@
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.CreateUserAsync(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.CallOptions)">
             <summary>
             创建用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchCreateUser(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchCreateUser(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchCreateUserAsync(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchCreateUserAsync(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建用户
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -1432,9 +1528,9 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserInfo(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            读取用户信息
+            批量更新用户信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1442,17 +1538,17 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserInfo(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.CallOptions)">
             <summary>
-            读取用户信息
+            批量更新用户信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfoAsync(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserInfoAsync(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            读取用户信息
+            批量更新用户信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -1460,9 +1556,9 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserInfoAsync(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserInfoAsync(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.CallOptions)">
             <summary>
-            读取用户信息
+            批量更新用户信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -1499,6 +1595,42 @@
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.DeleteUserAsync(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.CallOptions)">
             <summary>
             删除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUser(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUser(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserAsync(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserAsync(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除用户
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -2367,6 +2499,7 @@
         <member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Items">
             <summary>
             用户信息数据
+            @required
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Identity.PagedRoleInfoPackage">
@@ -2416,6 +2549,7 @@
         <member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Items">
             <summary>
             角色信息数据
+            @required
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Identity.PagedUserClaimInfoPackage">
@@ -2465,6 +2599,7 @@
         <member name="P:Artemis.Service.Protos.Identity.PagedUserClaimInfoPackage.Items">
             <summary>
             用户凭据信息数据
+            @required
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Identity.PagedUserInfoResponse">
@@ -2814,6 +2949,44 @@
         <member name="P:Artemis.Service.Protos.Identity.CreateUserRequest.Sign">
             <summary>
             用户标识信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchCreateUserRequest">
+            <summary>
+            批量创建用户请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchCreateUserRequest.CreatesFieldNumber">
+            <summary>Field number for the "Creates" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchCreateUserRequest.Creates">
+            <summary>
+            创建用户列表
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchUpdateUserRequest">
+            <summary>
+            批量更新用户请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.UpdatesFieldNumber">
+            <summary>Field number for the "Updates" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.Updates">
+            <summary>
+            更新用户列表
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchDeleteUserRequest.UserIdsFieldNumber">
+            <summary>Field number for the "UserIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchDeleteUserRequest.UserIds">
+            <summary>
+            用户标识列表
+            @required
+            @guid
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Identity.AddUserRoleRequest">

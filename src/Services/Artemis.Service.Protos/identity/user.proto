@@ -16,6 +16,13 @@ service User {
     };
   }
 
+	// 读取用户信息
+	rpc ReadUserInfo (UserIdRequest) returns (UserInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}"
+		};
+	}
+
   // 创建用户
   rpc CreateUser (CreateUserRequest) returns (EmptyResponse) {
 		option (google.api.http) = {
@@ -23,6 +30,14 @@ service User {
 			body: "*"
 		};
   }
+	
+	// 批量创建用户
+	rpc BatchCreateUser (BatchCreateUserRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/BatchCreate"
+			body: "*"
+		};
+	}
 
   // 更新用户信息
   rpc UpdateUserInfo (UpdateUserRequest) returns (EmptyResponse) {
@@ -31,13 +46,14 @@ service User {
 			body: "Sign"
 		};
   }
-
-  // 读取用户信息
-  rpc ReadUserInfo (UserIdRequest) returns (UserInfoResponse) {
+	
+	// 批量更新用户信息
+	rpc BatchUpdateUserInfo (BatchUpdateUserRequest) returns (EmptyResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}"
+			put: "/api/Users/BatchUpdate"
+			body: "*"
 		};
-  }
+	}
 
   // 删除用户
   rpc DeleteUser (UserIdRequest) returns (EmptyResponse) {
@@ -45,6 +61,14 @@ service User {
 			delete: "/api/Users/{UserId}"
 		};
   }
+	
+	// 批量删除用户
+	rpc BatchDeleteUser (BatchDeleteUserRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/BatchDelete"
+			body: "*"
+		};
+	}
 
 	// 查询用户角色信息
 	rpc SearchUserRoleInfo (SearchUserRoleRequest) returns (PagedRoleInfoResponse) {

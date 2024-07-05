@@ -208,6 +208,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.App.Identity.Services.UserService.CreateUser(Artemis.Service.Protos.Identity.CreateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 创建用户
@@ -215,6 +223,14 @@
             <param name="request"></param>
             <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchCreateUser(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.UpdateUserInfo(Artemis.Service.Protos.Identity.UpdateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
@@ -224,17 +240,17 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.App.Identity.Services.UserService.ReadUserInfo(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.App.Identity.Services.UserService.DeleteUser(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
-                读取用户信息
+                删除用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.App.Identity.Services.UserService.DeleteUser(Artemis.Service.Protos.Identity.UserIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchDeleteUser(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
-                删除用户
+            批量删除用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -318,6 +334,16 @@
             </summary>
         </member>
         <member name="M:Artemis.App.Identity.Validators.AddUserRoleRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchDeleteUserRequestValidator">
+            <summary>
+                批量删除用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchDeleteUserRequestValidator.#ctor">
             <summary>
                 验证器构造
             </summary>

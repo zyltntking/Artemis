@@ -39,18 +39,21 @@ internal sealed class GrpcCommentDescriptor : ISchemaFilter
 
             var schemaInfo = CommentDescriptor.Describe(comments, context.MemberInfo);
 
-            schema.Minimum = schemaInfo.Minimum;
-            schema.Maximum = schemaInfo.Maximum;
-            schema.MinLength = schemaInfo.MinLength;
-            schema.MaxLength = schemaInfo.MaxLength;
-            schema.Format = schemaInfo.Format;
-            schema.Pattern = schemaInfo.Pattern;
-            schema.Example = schemaInfo.Example is not null ? new OpenApiString(schemaInfo.Example) : null;
+            if (schema.Type != "array")
+            {
+                schema.Minimum = schemaInfo.Minimum;
+                schema.Maximum = schemaInfo.Maximum;
+                schema.MinLength = schemaInfo.MinLength;
+                schema.MaxLength = schemaInfo.MaxLength;
+                schema.Format = schemaInfo.Format;
+                schema.Pattern = schemaInfo.Pattern;
+                schema.Example = schemaInfo.Example is not null ? new OpenApiString(schemaInfo.Example) : null;
+
+                if (schemaInfo.IsPassword) schema.MinLength = Options.Password.RequiredLength;
+                // todo password schema logic
+            }
 
             schema.Description = schemaInfo.Description ?? string.Empty;
-
-            if (schemaInfo.IsPassword) schema.MinLength = Options.Password.RequiredLength;
-            // todo password schema logic
         }
 
         if (DescriptorCache.RequiredFieldsMap.ContainsKey(context.Type.Name))

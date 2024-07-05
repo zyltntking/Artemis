@@ -70,6 +70,25 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
+    ///     读取用户信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("读取用户信息")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<UserInfoResponse> ReadUserInfo(UserIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var userInfo = await UserManager.GetUserAsync(userId, context.CancellationToken);
+
+        if (userInfo is null) return DataResult.Fail<UserInfo>().Adapt<UserInfoResponse>();
+
+        return DataResult.Success(userInfo).Adapt<UserInfoResponse>();
+    }
+
+    /// <summary>
     ///     创建用户
     /// </summary>
     /// <param name="request"></param>
@@ -79,12 +98,38 @@ public class UserService : User.UserBase
     [Authorize(IdentityPolicy.Token)]
     public override async Task<EmptyResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
-        var result = await UserManager.CreateUserAsync(new UserPackage
+        var result = await UserManager.CreateUserAsync(new UserSign
         {
             UserName = request.Sign.UserName,
             Email = request.Sign?.Email,
             PhoneNumber = request.Sign?.Phone
         }, request.Password, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 批量创建用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量创建用户")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchCreateUser(BatchCreateUserRequest request, ServerCallContext context)
+    {
+        var dictionary = request.Creates.ToDictionary(
+            create => new UserSign
+            {
+                UserName = create.Sign.UserName, 
+                Email = create.Sign?.Email, 
+                PhoneNumber = create.Sign?.Phone
+            }, 
+            create => create.Password);
+
+        var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
 
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 
@@ -116,22 +161,27 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    ///     读取用户信息
+    /// 批量更新用户信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("读取用户信息")]
-    [Authorize(IdentityPolicy.Token)]
-    public override async Task<UserInfoResponse> ReadUserInfo(UserIdRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchUpdateUserInfo(BatchUpdateUserRequest request, ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var dictionary = request.Updates.ToDictionary(
+            update => Guid.Parse(update.UserId),
+            update => new UserPackage
+            {
+                UserName = update.Sign.UserName,
+                Email = update.Sign?.Email,
+                PhoneNumber = update.Sign?.Phone
+            });
 
-        var userInfo = await UserManager.GetUserAsync(userId, context.CancellationToken);
+        var result = await UserManager.UpdateUsersAsync(dictionary, context.CancellationToken);
 
-        if (userInfo is null) return DataResult.Fail<UserInfo>().Adapt<UserInfoResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 
-        return DataResult.Success(userInfo).Adapt<UserInfoResponse>();
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
     }
 
     /// <summary>
@@ -147,6 +197,25 @@ public class UserService : User.UserBase
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.DeleteUserAsync(userId, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 批量删除用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除用户")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchDeleteUser(BatchDeleteUserRequest request, ServerCallContext context)
+    {
+        var idList = request.UserIds.Select(Guid.Parse).ToList();
+
+        var result = await UserManager.DeleteUsersAsync(idList, context.CancellationToken);
 
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 

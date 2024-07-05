@@ -6,387 +6,390 @@ import "common.proto";
 
 package artemis.service.protos.identity;
 
-// ²éÑ¯ÓÃ»§ÇëÇó
+// æŸ¥è¯¢ç”¨æˆ·è¯·æ±‚
 message SearchUserRequest {
-  /* ÓÃ»§Ãû
+  /* ç”¨æˆ·å
    * @length(1,128)
    */
   google.protobuf.StringValue UserName = 1;
-  /* ÓÊÏä
+  /* é‚®ç®±
    * @email
    * @length(0,128)
    */
   google.protobuf.StringValue Email = 2;
-  /* ÊÖ»úºÅÂë
+  /* æ‰‹æœºå·ç 
    * @phone
    * @length(0,128)
    */
   google.protobuf.StringValue Phone = 3;
-  /* Ò³Âë
+  /* é¡µç 
    * @min(0)
    */
   google.protobuf.Int32Value Page = 4;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   google.protobuf.Int32Value Size = 5;
 }
 
-// ²éÑ¯ÓÃ»§½ÇÉ«ÇëÇó
+// æŸ¥è¯¢ç”¨æˆ·è§’è‰²è¯·æ±‚
 message SearchUserRoleRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ½ÇÉ«Ãû³Æ
+  /* è§’è‰²åç§°
    * @length(1,128)
    */
   google.protobuf.StringValue RoleName = 2;
-  /* Ò³Âë
+  /* é¡µç 
    * @min(0)
    */
   google.protobuf.Int32Value Page = 3;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   google.protobuf.Int32Value Size = 4;
 }
 
-// ²éÑ¯ÓÃ»§Æ¾¾İÇëÇó
+// æŸ¥è¯¢ç”¨æˆ·å‡­æ®è¯·æ±‚
 message SearchUserClaimRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ÀàĞÍ
+  /* ç±»å‹
    * @length(1,128)
    */
   google.protobuf.StringValue ClaimType = 2;
-  /* Öµ
+  /* å€¼
    * @length(1,512)
    */
   google.protobuf.StringValue ClaimValue = 3;
-  /* Ò³Âë
+  /* é¡µç 
   * @min(0)
   */
   google.protobuf.Int32Value Page = 4;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   google.protobuf.Int32Value Size = 5;
 }
 
-// ÓÃ»§ĞÅÏ¢Êı¾İ°ü
+// ç”¨æˆ·ä¿¡æ¯æ•°æ®åŒ…
 message UserInfoPackage{
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string Id = 1;
   /*
-   * ÓÃ»§Ãû
+   * ç”¨æˆ·å
    * @required
    * @length(1,128)
    */
   string UserName = 2;
-  /* ÓÊÏä
+  /* é‚®ç®±
    * @email
    * @length(0,128)
    */
   google.protobuf.StringValue Email = 3;
-  /* ÊÖ»úºÅÂë
+  /* æ‰‹æœºå·ç 
    * @phone
    * @length(0,128)
    */
   google.protobuf.StringValue PhoneNumber = 4;
 }
 
-// ½ÇÉ«ĞÅÏ¢Êı¾İ°ü
+// è§’è‰²ä¿¡æ¯æ•°æ®åŒ…
 message RoleInfoPackage{
-  /* ½ÇÉ«±êÊ¶
+  /* è§’è‰²æ ‡è¯†
    * @required
    * @guid
    */
   string Id = 1;
-  /* ½ÇÉ«Ãû³Æ
+  /* è§’è‰²åç§°
    * @required
    * @length(1,128)
    */
   string RoleName = 2;
-  // ÃèÊö
+  // æè¿°
   google.protobuf.StringValue Description = 3;
 }
 
 message UserClaimInfoPackage {
-  /* Æ¾¾İ±êÊ¶
+  /* å‡­æ®æ ‡è¯†
    * @required
    */
   int32 Id = 1;
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 2;
-  /* Æ¾¾İÀàĞÍ
+  /* å‡­æ®ç±»å‹
    * @required
    * @length(1,128)
    */
   string ClaimType = 3;
-  /* Æ¾¾İÖµ
+  /* å‡­æ®å€¼
    * @required
    * @length(1,512)
    */
   string ClaimValue = 4;
-  /* Ğ£Ñé´Á
+  /* æ ¡éªŒæˆ³
    * @required
    * @md5
    */
   string CheckStamp = 5;
-  // ÃèÊö
+  // æè¿°
   google.protobuf.StringValue Description = 6;
 }
 
-// ÓÃ»§ĞÅÏ¢ÏìÓ¦
+// ç”¨æˆ·ä¿¡æ¯å“åº”
 message UserInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ÓÃ»§ĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·ä¿¡æ¯æ•°æ®
    */
   UserInfoPackage Data = 7;
 }
 
-// ½ÇÉ«ĞÅÏ¢ÏìÓ¦
+// è§’è‰²ä¿¡æ¯å“åº”
 message RoleInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ½ÇÉ«ĞÅÏ¢Êı¾İ
+  /* è§’è‰²ä¿¡æ¯æ•°æ®
    */
   RoleInfoPackage Data = 7;
 }
 
-// ÓÃ»§Æ¾¾İĞÅÏ¢ÏìÓ¦
+// ç”¨æˆ·å‡­æ®ä¿¡æ¯å“åº”
 message UserClaimInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ÓÃ»§Æ¾¾İĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·å‡­æ®ä¿¡æ¯æ•°æ®
    */
   UserClaimInfoPackage data = 7;
 }
 
-// ·ÖÒ³ÓÃ»§ĞÅÏ¢»ØÓ¦
+// åˆ†é¡µç”¨æˆ·ä¿¡æ¯å›åº”
 message PagedUserInfoPackage{
-  /* Ò³Âë
+  /* é¡µç 
    * @min(0)
    */
   int32 Page = 1;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   int32 Size = 2;
-  /* Êı¾İ×ÜÊı
+  /* æ•°æ®æ€»æ•°
    * @min(0)
    */
   int64 Total = 3;
-  /* Ìõ¼ş¹ıÂËºóµÄÊı¾İÁ¿
+  /* æ¡ä»¶è¿‡æ»¤åçš„æ•°æ®é‡
    * @min(0)
    */
   int64 Count = 4;
-  /* ÓÃ»§ĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·ä¿¡æ¯æ•°æ®
+   * @required
    */
   repeated UserInfoPackage Items = 5;
 }
 
-// ·ÖÒ³½ÇÉ«ĞÅÏ¢»ØÓ¦
+// åˆ†é¡µè§’è‰²ä¿¡æ¯å›åº”
 message PagedRoleInfoPackage{
-  /* Ò³Âë
+  /* é¡µç 
    * @min(0)
    */
   int32 Page = 1;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   int32 Size = 2;
-  /* Êı¾İ×ÜÊı
+  /* æ•°æ®æ€»æ•°
    * @min(0)
    */
   int64 Total = 3;
-  /* Ìõ¼ş¹ıÂËºóµÄÊı¾İÁ¿
+  /* æ¡ä»¶è¿‡æ»¤åçš„æ•°æ®é‡
    * @min(0)
    */
   int64 Count = 4;
-  /* ½ÇÉ«ĞÅÏ¢Êı¾İ
+  /* è§’è‰²ä¿¡æ¯æ•°æ®
+   * @required
    */
   repeated RoleInfoPackage Items = 5;
 }
 
-// ·ÖÒ³ÓÃ»§Æ¾¾İĞÅÏ¢»ØÓ¦
+// åˆ†é¡µç”¨æˆ·å‡­æ®ä¿¡æ¯å›åº”
 message PagedUserClaimInfoPackage {
-  /* Ò³Âë
+  /* é¡µç 
    * @min(0)
    */
   int32 Page = 1;
-  /* ÌõÄ¿Êı
+  /* æ¡ç›®æ•°
    * @min(0)
    */
   int32 Size = 2;
-  /* Êı¾İ×ÜÊı
+  /* æ•°æ®æ€»æ•°
    * @min(0)
    */
   int64 Total = 3;
-  /* Ìõ¼ş¹ıÂËºóµÄÊı¾İÁ¿
+  /* æ¡ä»¶è¿‡æ»¤åçš„æ•°æ®é‡
    * @min(0)
    */
   int64 Count = 4;
-  /* ÓÃ»§Æ¾¾İĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·å‡­æ®ä¿¡æ¯æ•°æ®
+   * @required
    */
   repeated UserClaimInfoPackage Items = 5;
 }
 
-// ²éÑ¯ÓÃ»§ĞÅÏ¢ÏìÓ¦
+// æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯å“åº”
 message PagedUserInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ÓÃ»§·ÖÒ³ĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·åˆ†é¡µä¿¡æ¯æ•°æ®
    */
   PagedUserInfoPackage Data = 7;
 }
 
-// ²éÑ¯½ÇÉ«ĞÅÏ¢ÏìÓ¦
+// æŸ¥è¯¢è§’è‰²ä¿¡æ¯å“åº”
 message PagedRoleInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ½ÇÉ«·ÖÒ³ĞÅÏ¢Êı¾İ
+  /* è§’è‰²åˆ†é¡µä¿¡æ¯æ•°æ®
    */
   PagedRoleInfoPackage Data = 7;
 }
 
-// ²éÑ¯ÓÃ»§Æ¾¾İĞÅÏ¢ÏìÓ¦
+// æŸ¥è¯¢ç”¨æˆ·å‡­æ®ä¿¡æ¯å“åº”
 message PagedUserClaimInfoResponse {
-  // ×´Ì¬Âë
+  // çŠ¶æ€ç 
   int32 Code = 1;
-  // ÊÇ·ñ³É¹¦
+  // æ˜¯å¦æˆåŠŸ
   bool Succeeded = 2;
-  // ÏûÏ¢
+  // æ¶ˆæ¯
   string Message = 3;
-  // ´íÎó
+  // é”™è¯¯
   // @exception
   google.protobuf.StringValue Error = 4;
-  /* ÏìÓ¦Ê±¼ä
+  /* å“åº”æ—¶é—´
    * @datetime
    */
   string DateTime = 5;
-  /* ÏìÓ¦Ê±¼ä´Á
+  /* å“åº”æ—¶é—´æˆ³
    * @timestamp
    */
   int64 Timestamp = 6;
-  /* ÓÃ»§Æ¾¾İ·ÖÒ³ĞÅÏ¢Êı¾İ
+  /* ç”¨æˆ·å‡­æ®åˆ†é¡µä¿¡æ¯æ•°æ®
    */
   PagedUserClaimInfoPackage Data = 7;
 }
 
-// ÓÃ»§±êÊ¶ÇëÇó
+// ç”¨æˆ·æ ‡è¯†è¯·æ±‚
 message UserIdRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
 }
 
-// ½ÇÉ«±êÊ¶ÇëÇó
+// è§’è‰²æ ‡è¯†è¯·æ±‚
 message RoleIdRequest {
-  /* ½ÇÉ«±êÊ¶
+  /* è§’è‰²æ ‡è¯†
    * @required
    * @guid
    */
   string RoleId = 1;
 }
 
-// ÓÃ»§½ÇÉ«±êÊ¶ÇëÇó
+// ç”¨æˆ·è§’è‰²æ ‡è¯†è¯·æ±‚
 message UserRoleIdRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ½ÇÉ«±êÊ¶
+  /* è§’è‰²æ ‡è¯†
    * @required
    * @guid
    */
@@ -394,114 +397,138 @@ message UserRoleIdRequest {
 }
 
 message UserClaimIdRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ÓÃ»§Æ¾¾İ±êÊ¶
+  /* ç”¨æˆ·å‡­æ®æ ‡è¯†
    * @required
    * @min(1)
    */
   int32 ClaimId = 2;
 }
 
-// ÓÃ»§±êÊ¶Êı¾İ°ü
+// ç”¨æˆ·æ ‡è¯†æ•°æ®åŒ…
 message UserSignPackage{
-  /* ÓÃ»§Ãû
+  /* ç”¨æˆ·å
    * @required
    * @length(1,128)
    */
   string UserName = 1;
-  /* ÓÊÏä
+  /* é‚®ç®±
    * @email
    * @length(0,128)
    */
   google.protobuf.StringValue Email = 2;
-  /* ÊÖ»úºÅÂë
+  /* æ‰‹æœºå·ç 
    * @phone
    * @length(0,128)
    */
   google.protobuf.StringValue Phone = 3;
 }
 
-// ¸üĞÂÓÃ»§ĞÅÏ¢ÇëÇó
+// æ›´æ–°ç”¨æˆ·ä¿¡æ¯è¯·æ±‚
 message UpdateUserRequest{
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ÓÃ»§±êÊ¶ĞÅÏ¢
+  /* ç”¨æˆ·æ ‡è¯†ä¿¡æ¯
    */
   UserSignPackage Sign = 2;
 }
 
-// ´´½¨ÓÃ»§ÇëÇó
+// åˆ›å»ºç”¨æˆ·è¯·æ±‚
 message CreateUserRequest{
-  /* Ä¿±êÃÜÂë
+  /* ç›®æ ‡å¯†ç 
    * @required
    * @password
    * @example(1q2w3e$R)
    */
   string Password = 1;
-  /* ÓÃ»§±êÊ¶ĞÅÏ¢
+  /* ç”¨æˆ·æ ‡è¯†ä¿¡æ¯
    */
   UserSignPackage Sign = 2;
 }
 
-// Ìí¼ÓÓÃ»§½ÇÉ«ÇëÇó
+// æ‰¹é‡åˆ›å»ºç”¨æˆ·è¯·æ±‚
+message BatchCreateUserRequest{
+  /* åˆ›å»ºç”¨æˆ·åˆ—è¡¨
+   * @required
+   */
+  repeated CreateUserRequest Creates = 1;
+}
+
+// æ‰¹é‡æ›´æ–°ç”¨æˆ·è¯·æ±‚
+message BatchUpdateUserRequest{
+  /* æ›´æ–°ç”¨æˆ·åˆ—è¡¨
+   * @required
+   */
+  repeated UpdateUserRequest Updates = 1;
+}
+
+message BatchDeleteUserRequest{
+  /* ç”¨æˆ·æ ‡è¯†åˆ—è¡¨
+   * @required
+   * @guid
+   */
+  repeated string UserIds = 1;
+}
+
+// æ·»åŠ ç”¨æˆ·è§’è‰²è¯·æ±‚
 message AddUserRoleRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ½ÇÉ«±êÊ¶ĞÅÏ¢
+  /* è§’è‰²æ ‡è¯†ä¿¡æ¯
    */
   RoleIdRequest Role = 2;
 }
 
-// Ìí¼ÓÆ¾¾İÇëÇó
+// æ·»åŠ å‡­æ®è¯·æ±‚
 message AddClaimRequest {
-  /* Æ¾¾İÀàĞÍ
+  /* å‡­æ®ç±»å‹
    * @required
    * @length(1,128)
    */
   string ClaimType = 1;
-  /* Æ¾¾İÖµ
+  /* å‡­æ®å€¼
    * @required
    * @length(1,512)
    */
   string ClaimValue = 2;
-  // ÃèÊö
+  // æè¿°
   google.protobuf.StringValue Description = 3;
 }
 
-// Ìí¼ÓÓÃ»§Æ¾¾İÇëÇó
+// æ·»åŠ ç”¨æˆ·å‡­æ®è¯·æ±‚
 message AddUserClaimRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* Æ¾¾İĞÅÏ¢
+  /* å‡­æ®ä¿¡æ¯
    */
   AddClaimRequest Claim = 2;
 }
 
 message UpdateUserClaimRequest {
-  /* ÓÃ»§±êÊ¶
+  /* ç”¨æˆ·æ ‡è¯†
    * @required
    * @guid
    */
   string UserId = 1;
-  /* ÓÃ»§Æ¾¾İ±êÊ¶
+  /* ç”¨æˆ·å‡­æ®æ ‡è¯†
    * @required
    * @min(1)
    */
   int32 ClaimId = 2;
-  /* Æ¾¾İĞÅÏ¢
+  /* å‡­æ®ä¿¡æ¯
    */
   AddClaimRequest Claim = 3;
 }
