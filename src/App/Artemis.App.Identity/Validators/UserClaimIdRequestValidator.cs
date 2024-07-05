@@ -7,21 +7,17 @@ namespace Artemis.App.Identity.Validators;
 /// <summary>
 ///     查找用户角色请求验证
 /// </summary>
-public class SearchUserClaimRequestValidator : AbstractValidator<SearchUserClaimRequest>
+public class UpdateUserClaimRequestValidator : AbstractValidator<UpdateUserClaimRequest>
 {
     /// <summary>
     ///     验证器构造
     /// </summary>
-    public SearchUserClaimRequestValidator()
+    public UpdateUserClaimRequestValidator()
     {
         RuleFor(request => request.UserId)
             .ShouldNotBeEmptyOrWhiteSpace()
             .ShouldBeGuid();
 
-        RuleFor(request => request.Page).GreaterThanOrEqualTo(0)
-            .When(request => request.Page != null);
-
-        RuleFor(request => request.Size).GreaterThanOrEqualTo(0)
-            .When(request => request.Size != null);
+        RuleFor(request => request.ClaimId).GreaterThanOrEqualTo(0);
     }
 }

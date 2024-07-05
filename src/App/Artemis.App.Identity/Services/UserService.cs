@@ -53,11 +53,11 @@ public class UserService : User.UserBase
         ServerCallContext context)
     {
         var userInfos = await UserManager.FetchUserAsync(
-            request.Search?.UserName ?? null,
-            request.Search?.Email ?? null,
-            request.Search?.Phone ?? null,
-            request.Pagination?.Page ?? 0,
-            request.Pagination?.Size ?? 0,
+            request.UserName,
+            request.Email,
+            request.Phone,
+            request.Page ?? 0,
+            request.Size ?? 0,
             context.CancellationToken);
 
         var userReplies = userInfos.Items!.Select(item => item.Adapt<UserInfoPackage>());
@@ -168,9 +168,9 @@ public class UserService : User.UserBase
 
         var roleInfos = await UserManager.FetchUserRolesAsync(
             userId,
-            request.Role?.Search?.RoleName,
-            request.Role?.Pagination.Page ?? 0,
-            request.Role?.Pagination.Size ?? 0,
+            request.RoleName,
+            request.Page ?? 0,
+            request.Size ?? 0,
             context.CancellationToken);
 
         var roleReplies = roleInfos.Items!.Select(item => item.Adapt<RoleInfoPackage>());
@@ -243,6 +243,130 @@ public class UserService : User.UserBase
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 
         return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 查询用户凭据信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询用户凭据信息")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<PagedUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var userClaimInfos = await UserManager.FetchUserClaimsAsync(
+            userId, 
+            request.ClaimType, 
+            request.ClaimValue, 
+            request.Page ?? 0, 
+            request.Size ?? 0,
+        context.CancellationToken);
+
+        var userClaimReplies = userClaimInfos.Items!.Select(item => item.Adapt<UserClaimInfoPackage>());
+
+        var response = DataResult.Success(userClaimInfos).Adapt<PagedUserClaimInfoResponse>();
+
+        response.Data.Items.Add(userClaimReplies);
+
+        return response;
+    }
+
+    /// <summary>
+    /// 获取用户凭据信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取用户凭据信息")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<UserClaimInfoResponse> ReadUserClaimInfo(UserClaimIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var userClaimInfo = await UserManager.GetUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
+
+        if (userClaimInfo is null) return DataResult.Fail<UserClaimInfo>().Adapt<UserClaimInfoResponse>();
+
+        return DataResult.Success(userClaimInfo).Adapt<UserClaimInfoResponse>();
+    }
+
+    /// <summary>
+    /// 添加用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("添加用户凭据")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await UserManager.AddUserClaimAsync(
+            userId, 
+            new UserClaimPackage
+            {
+                ClaimType = request.Claim.ClaimType,
+                ClaimValue = request.Claim.ClaimValue,
+                CheckStamp = string.Empty,
+                Description = request.Claim.Description
+            },
+            context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 更新用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("更新用户凭据")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> UpdateUserClaim(UpdateUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await UserManager.UpdateUserClaimAsync(
+            userId, 
+            request.ClaimId, 
+            new UserClaimPackage
+            {
+                ClaimType = request.Claim.ClaimType,
+                ClaimValue = request.Claim.ClaimValue,
+                CheckStamp = string.Empty,
+                Description = request.Claim.Description
+            },
+            context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 删除用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除用户凭据")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
     }
 
     #endregion

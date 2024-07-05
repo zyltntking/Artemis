@@ -7,12 +7,12 @@ namespace Artemis.App.Identity.Validators;
 /// <summary>
 ///     查找用户角色请求验证
 /// </summary>
-public class SearchUserClaimRequestValidator : AbstractValidator<SearchUserClaimRequest>
+public class SearchUserRoleRequestValidator : AbstractValidator<SearchUserRoleRequest>
 {
     /// <summary>
     ///     验证器构造
     /// </summary>
-    public SearchUserClaimRequestValidator()
+    public SearchUserRoleRequestValidator()
     {
         RuleFor(request => request.UserId)
             .ShouldNotBeEmptyOrWhiteSpace()

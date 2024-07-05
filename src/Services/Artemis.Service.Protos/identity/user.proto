@@ -74,4 +74,41 @@ service User {
 			delete: "/api/Users/{UserId}/Roles/{RoleId}"
 		};
 	}
+
+	// 查询用户凭据信息
+	rpc SearchUserClaimInfo (SearchUserClaimRequest) returns (PagedUserClaimInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Claims"
+		};
+	}
+
+	// 获取用户凭据信息
+	rpc ReadUserClaimInfo (UserClaimIdRequest) returns (UserClaimInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Claims/{ClaimId}"
+		};
+	}
+
+	// 添加用户凭据
+	rpc AddUserClaim (AddUserClaimRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Claims"
+			body: "Claim"
+		};
+	}
+	
+	// 更新用户凭据
+	rpc UpdateUserClaim (UpdateUserClaimRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			put: "/api/Users/{UserId}/Claims/{ClaimId}"
+			body: "Claim"
+		};
+	}
+	
+	// 删除用户凭据
+	rpc DeleteUserClaim (UserClaimIdRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}/Claims/{ClaimId}"
+		};
+	}
 }

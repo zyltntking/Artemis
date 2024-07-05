@@ -14,21 +14,21 @@ public class SearchUserRequestValidator : AbstractValidator<SearchUserRequest>
     /// </summary>
     public SearchUserRequestValidator()
     {
-        RuleFor(request => request.Search.UserName)
+        RuleFor(request => request.UserName)
             .ShouldNotBeEmptyOrWhiteSpace();
 
-        RuleFor(request => request.Search.Phone)
+        RuleFor(request => request.Phone)
             .ShouldBePhone()
-            .When(request => !string.IsNullOrWhiteSpace(request.Search?.Phone));
+            .When(request => !string.IsNullOrWhiteSpace(request.Phone));
 
-        RuleFor(request => request.Search.Email)
+        RuleFor(request => request.Email)
             .ShouldBeEmail()
-            .When(request => !string.IsNullOrWhiteSpace(request.Search?.Email));
+            .When(request => !string.IsNullOrWhiteSpace(request.Email));
 
-        RuleFor(request => request.Pagination.Page).GreaterThanOrEqualTo(0)
-            .When(request => request.Pagination?.Page != null);
+        RuleFor(request => request.Page).GreaterThanOrEqualTo(0)
+            .When(request => request.Page != null);
 
-        RuleFor(request => request.Pagination.Size).GreaterThanOrEqualTo(0)
-            .When(request => request.Pagination?.Size != null);
+        RuleFor(request => request.Size).GreaterThanOrEqualTo(0)
+            .When(request => request.Size != null);
     }
 }

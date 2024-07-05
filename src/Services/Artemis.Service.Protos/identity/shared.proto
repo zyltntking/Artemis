@@ -6,8 +6,8 @@ import "common.proto";
 
 package artemis.service.protos.identity;
 
-// 用户搜索数据包
-message UserSearchPackage {
+// 查询用户请求
+message SearchUserRequest {
   /* 用户名
    * @length(1,128)
    */
@@ -22,30 +22,14 @@ message UserSearchPackage {
    * @length(0,128)
    */
   google.protobuf.StringValue Phone = 3;
-}
-
-// 角色搜索数据包
-message RoleSearchPackager{
-  /* 角色名称
-   * @length(1,128)
+  /* 页码
+   * @min(0)
    */
-  google.protobuf.StringValue RoleName = 1;
-}
-
-// 查询用户请求
-message SearchUserRequest {
-  // 用户标识
-  UserSearchPackage Search = 1;
-  // 页码
-  Pagination Pagination = 2;
-}
-
-// 查询角色请求
-message SearchRoleRequest {
-  // 角色标识
-  RoleSearchPackager Search = 1;
-  // 页码
-  Pagination Pagination = 2;
+  google.protobuf.Int32Value Page = 4;
+  /* 条目数
+   * @min(0)
+   */
+  google.protobuf.Int32Value Size = 5;
 }
 
 // 查询用户角色请求
@@ -55,8 +39,43 @@ message SearchUserRoleRequest {
    * @guid
    */
   string UserId = 1;
-  // 角色查询参数
-  SearchRoleRequest Role = 2;
+  /* 角色名称
+   * @length(1,128)
+   */
+  google.protobuf.StringValue RoleName = 2;
+  /* 页码
+   * @min(0)
+   */
+  google.protobuf.Int32Value Page = 3;
+  /* 条目数
+   * @min(0)
+   */
+  google.protobuf.Int32Value Size = 4;
+}
+
+// 查询用户凭据请求
+message SearchUserClaimRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  /* 类型
+   * @length(1,128)
+   */
+  google.protobuf.StringValue ClaimType = 2;
+  /* 值
+   * @length(1,512)
+   */
+  google.protobuf.StringValue ClaimValue = 3;
+  /* 页码
+  * @min(0)
+  */
+  google.protobuf.Int32Value Page = 4;
+  /* 条目数
+   * @min(0)
+   */
+  google.protobuf.Int32Value Size = 5;
 }
 
 // 用户信息数据包
@@ -100,52 +119,105 @@ message RoleInfoPackage{
   google.protobuf.StringValue Description = 3;
 }
 
+message UserClaimInfoPackage {
+  /* 凭据标识
+   * @required
+   */
+  int32 Id = 1;
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 2;
+  /* 凭据类型
+   * @required
+   * @length(1,128)
+   */
+  string ClaimType = 3;
+  /* 凭据值
+   * @required
+   * @length(1,512)
+   */
+  string ClaimValue = 4;
+  /* 校验戳
+   * @required
+   * @md5
+   */
+  string CheckStamp = 5;
+  // 描述
+  google.protobuf.StringValue Description = 6;
+}
+
 // 用户信息响应
 message UserInfoResponse {
   // 状态码
-  int32 code = 1;
+  int32 Code = 1;
   // 是否成功
-  bool succeeded = 2;
+  bool Succeeded = 2;
   // 消息
-  string message = 3;
+  string Message = 3;
   // 错误
   // @exception
-  google.protobuf.StringValue error = 4;
+  google.protobuf.StringValue Error = 4;
   /* 响应时间
    * @datetime
    */
-  string dateTime = 5;
+  string DateTime = 5;
   /* 响应时间戳
    * @timestamp
    */
-  int64 timestamp = 6;
+  int64 Timestamp = 6;
   /* 用户信息数据
    */
-  UserInfoPackage data = 7;
+  UserInfoPackage Data = 7;
 }
 
 // 角色信息响应
 message RoleInfoResponse {
   // 状态码
-  int32 code = 1;
+  int32 Code = 1;
   // 是否成功
-  bool succeeded = 2;
+  bool Succeeded = 2;
   // 消息
-  string message = 3;
+  string Message = 3;
   // 错误
   // @exception
-  google.protobuf.StringValue error = 4;
+  google.protobuf.StringValue Error = 4;
   /* 响应时间
    * @datetime
    */
-  string dateTime = 5;
+  string DateTime = 5;
   /* 响应时间戳
    * @timestamp
    */
-  int64 timestamp = 6;
+  int64 Timestamp = 6;
   /* 角色信息数据
    */
-  RoleInfoPackage data = 7;
+  RoleInfoPackage Data = 7;
+}
+
+// 用户凭据信息响应
+message UserClaimInfoResponse {
+  // 状态码
+  int32 Code = 1;
+  // 是否成功
+  bool Succeeded = 2;
+  // 消息
+  string Message = 3;
+  // 错误
+  // @exception
+  google.protobuf.StringValue Error = 4;
+  /* 响应时间
+   * @datetime
+   */
+  string DateTime = 5;
+  /* 响应时间戳
+   * @timestamp
+   */
+  int64 Timestamp = 6;
+  /* 用户凭据信息数据
+   */
+  UserClaimInfoPackage data = 7;
 }
 
 // 分页用户信息回应
@@ -192,6 +264,29 @@ message PagedRoleInfoPackage{
   /* 角色信息数据
    */
   repeated RoleInfoPackage Items = 5;
+}
+
+// 分页用户凭据信息回应
+message PagedUserClaimInfoPackage {
+  /* 页码
+   * @min(0)
+   */
+  int32 Page = 1;
+  /* 条目数
+   * @min(0)
+   */
+  int32 Size = 2;
+  /* 数据总数
+   * @min(0)
+   */
+  int64 Total = 3;
+  /* 条件过滤后的数据量
+   * @min(0)
+   */
+  int64 Count = 4;
+  /* 用户凭据信息数据
+   */
+  repeated UserClaimInfoPackage Items = 5;
 }
 
 // 查询用户信息响应
@@ -242,6 +337,30 @@ message PagedRoleInfoResponse {
   PagedRoleInfoPackage Data = 7;
 }
 
+// 查询用户凭据信息响应
+message PagedUserClaimInfoResponse {
+  // 状态码
+  int32 Code = 1;
+  // 是否成功
+  bool Succeeded = 2;
+  // 消息
+  string Message = 3;
+  // 错误
+  // @exception
+  google.protobuf.StringValue Error = 4;
+  /* 响应时间
+   * @datetime
+   */
+  string DateTime = 5;
+  /* 响应时间戳
+   * @timestamp
+   */
+  int64 Timestamp = 6;
+  /* 用户凭据分页信息数据
+   */
+  PagedUserClaimInfoPackage Data = 7;
+}
+
 // 用户标识请求
 message UserIdRequest {
   /* 用户标识
@@ -274,6 +393,19 @@ message UserRoleIdRequest {
   string RoleId = 2;
 }
 
+message UserClaimIdRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  /* 用户凭据标识
+   * @required
+   * @min(1)
+   */
+  int32 ClaimId = 2;
+}
+
 // 用户标识数据包
 message UserSignPackage{
   /* 用户名
@@ -300,7 +432,8 @@ message UpdateUserRequest{
    * @guid
    */
   string UserId = 1;
-  // 用户标识信息
+  /* 用户标识信息
+   */
   UserSignPackage Sign = 2;
 }
 
@@ -312,7 +445,8 @@ message CreateUserRequest{
    * @example(1q2w3e$R)
    */
   string Password = 1;
-  // 用户标识信息
+  /* 用户标识信息
+   */
   UserSignPackage Sign = 2;
 }
 
@@ -323,6 +457,53 @@ message AddUserRoleRequest {
    * @guid
    */
   string UserId = 1;
-  // 角色标识
+  /* 角色标识信息
+   */
   RoleIdRequest Role = 2;
 }
+
+// 添加凭据请求
+message AddClaimRequest {
+  /* 凭据类型
+   * @required
+   * @length(1,128)
+   */
+  string ClaimType = 1;
+  /* 凭据值
+   * @required
+   * @length(1,512)
+   */
+  string ClaimValue = 2;
+  // 描述
+  google.protobuf.StringValue Description = 3;
+}
+
+// 添加用户凭据请求
+message AddUserClaimRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  /* 凭据信息
+   */
+  AddClaimRequest Claim = 2;
+}
+
+message UpdateUserClaimRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  /* 用户凭据标识
+   * @required
+   * @min(1)
+   */
+  int32 ClaimId = 2;
+  /* 凭据信息
+   */
+  AddClaimRequest Claim = 3;
+}
+
+
