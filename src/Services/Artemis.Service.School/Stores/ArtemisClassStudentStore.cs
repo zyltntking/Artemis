@@ -45,5 +45,5 @@ public sealed class ArtemisClassStudentStore : KeyLessStore<ArtemisClassStudent>
     ///     键生成委托
     /// </summary>
     protected override Func<ArtemisClassStudent, string>? EntityKey { get; init; } =
-        classStudent => $"{classStudent.ClassId}:{classStudent.StudentId}";
+        classStudent => $"{classStudent.ClassId}:{classStudent.StudentId}:{classStudent.MoveIn:yy-MMM-dd}";
 }

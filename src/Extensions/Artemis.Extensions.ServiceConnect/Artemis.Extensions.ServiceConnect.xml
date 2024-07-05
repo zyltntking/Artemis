@@ -1663,6 +1663,20 @@
 				认证配置依赖
 			</summary>
 		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.ParameterDescriptionModify">
+			<summary>
+				参数描述修饰
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.ParameterDescriptionModify.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+			<summary>
+				应用
+			</summary>
+			<param name="operation"></param>
+			<param name="context"></param>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.SwaggerFilters.RemoveDefaultRpcResponse">
 			<summary>
 				移除默认响应
@@ -1843,6 +1857,17 @@
 			<typeparam name="T"></typeparam>
 			<param name="ruleBuilder"></param>
 			<param name="mode"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldBeGuid``1(FluentValidation.IRuleBuilder{``0,System.String},Artemis.Data.Core.Fundamental.GuidFormat,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
+			<summary>
+				应当是有效的GUID
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="format"></param>
+			<param name="caseMode"></param>
 			<returns></returns>
 		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions">

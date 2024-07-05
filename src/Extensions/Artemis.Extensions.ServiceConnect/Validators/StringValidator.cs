@@ -156,9 +156,26 @@ public static class StringValidator
     /// <returns></returns>
     public static IRuleBuilderOptions<T, string> ShouldBePhone<T>(
         this IRuleBuilder<T, string> ruleBuilder,
-        PhonePatternMode mode = PhonePatternMode.Normal)
+        PhonePatternMode mode = PhonePatternMode.Lax)
     {
         return ruleBuilder.Must(input => Matcher.PhoneMatcher(mode).IsMatch(input))
             .WithMessage("不是有效的手机号码");
+    }
+
+    /// <summary>
+    ///     应当是有效的GUID
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="ruleBuilder"></param>
+    /// <param name="format"></param>
+    /// <param name="caseMode"></param>
+    /// <returns></returns>
+    public static IRuleBuilderOptions<T, string> ShouldBeGuid<T>(
+        this IRuleBuilder<T, string> ruleBuilder,
+        GuidFormat format = GuidFormat.D,
+        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+    {
+        return ruleBuilder.Must(input => Matcher.GuidMatcher(format, caseMode).IsMatch(input))
+            .WithMessage("不是有效的GUID标识");
     }
 }

@@ -93,7 +93,7 @@ message SignInRequest {
 // 注册请求
 message SignUpRequest {
   /*
-   * 用户标识
+   * 用户名
    * @required
    * @length(1,128)
    */
@@ -114,7 +114,6 @@ message SignUpRequest {
    * @length(0,128)
    */
   google.protobuf.StringValue Phone = 4;
-
 }
 
 // 修改密码请求

@@ -40,6 +40,9 @@ internal static class SwaggerExtensions
                     Version = "v1"
                 });
 
+                options.IgnoreObsoleteActions();
+                options.IgnoreObsoleteProperties();
+
                 foreach (var xmlDoc in config.XmlDocs)
                 {
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlDoc);
@@ -57,8 +60,8 @@ internal static class SwaggerExtensions
                     options.OperationFilter<RemoveDefaultRpcResponse>();
                     options.DocumentFilter<RemoveDefaultRpcSchemas>();
                     options.OperationFilter<AddAuthorizationToken>();
-                    //config.OperationFilter<MarkFieldFeature>();
                     options.SchemaFilter<GrpcCommentDescriptor>();
+                    options.OperationFilter<ParameterDescriptionModify>();
                 }
             });
         }

@@ -181,8 +181,11 @@ public class AccountService : Account.AccountBase
 
         if (token is not null)
         {
-            var result = await AccountManager.ChangePasswordAsync(token.UserId, request.OldPassword,
-                request.NewPassword, context.CancellationToken);
+            var result = await AccountManager.ChangePasswordAsync(
+                token.UserId,
+                request.OldPassword,
+                request.NewPassword,
+                context.CancellationToken);
 
             return result.Succeeded
                 ? RpcResultAdapter.EmptySuccess<EmptyResponse>()
@@ -204,7 +207,10 @@ public class AccountService : Account.AccountBase
     {
         var userId = request.UserId.GuidFromString();
 
-        var result = await AccountManager.ResetPasswordAsync(userId, request.Password, context.CancellationToken);
+        var result = await AccountManager.ResetPasswordAsync(
+            userId,
+            request.Password,
+            context.CancellationToken);
 
         return result.Succeeded
             ? RpcResultAdapter.EmptySuccess<EmptyResponse>()

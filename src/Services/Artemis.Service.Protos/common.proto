@@ -27,10 +27,14 @@ message EmptyResponse {
   int64 Timestamp = 6;
 }
 
-// 分页
-message PageSlot {
-  // 页码
+// 分页插件
+message Pagination {
+  /* 页码
+   * @min(0)
+   */
   google.protobuf.Int32Value Page = 1;
-  // 条目数
+  /* 条目数
+   * @min(0)
+   */
   google.protobuf.Int32Value Size = 2;
 }

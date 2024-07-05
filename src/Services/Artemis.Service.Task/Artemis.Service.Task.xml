@@ -296,11 +296,6 @@
 				任务模型
 			</summary>
 		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.ParentId">
-			<summary>
-				父任务标识
-			</summary>
-		</member>
 		<member name="P:Artemis.Service.Task.Models.Task.TaskName">
 			<summary>
 				任务名称
@@ -324,6 +319,11 @@
 		<member name="P:Artemis.Service.Task.Models.Task.EndTime">
 			<summary>
 				任务结束时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.ParentId">
+			<summary>
+				父任务标识
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Task.Models.TaskAgent">

@@ -72,9 +72,8 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            app.MapGrpcService<SampleService>();
             app.MapGrpcService<AccountService>();
-            //app.MapGrpcService<UserService>();
+            app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();
 
             // map common endpoints

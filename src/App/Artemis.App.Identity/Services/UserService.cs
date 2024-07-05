@@ -53,11 +53,12 @@ public class UserService : User.UserBase
         ServerCallContext context)
     {
         var userInfos = await UserManager.FetchUserAsync(
-            request.Sign?.UserName,
-            request.Sign?.Email,
-            request.Sign?.Phone,
-            request.PageSlot.Page ?? 0,
-            request.PageSlot.Size ?? 0);
+            request.Search?.UserName ?? null,
+            request.Search?.Email ?? null,
+            request.Search?.Phone ?? null,
+            request.Pagination?.Page ?? 0,
+            request.Pagination?.Size ?? 0,
+            context.CancellationToken);
 
         var userReplies = userInfos.Items!.Select(item => item.Adapt<UserInfoPackage>());
 
@@ -74,14 +75,15 @@ public class UserService : User.UserBase
     /// <param name="request"></param>
     /// <param name="context"></param>
     /// <returns></returns>
+    [Description("创建用户")]
     [Authorize(IdentityPolicy.Token)]
     public override async Task<EmptyResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
         var result = await UserManager.CreateUserAsync(new UserPackage
         {
             UserName = request.Sign.UserName,
-            Email = request.Sign.Email,
-            PhoneNumber = request.Sign.Phone
+            Email = request.Sign?.Email,
+            PhoneNumber = request.Sign?.Phone
         }, request.Password, context.CancellationToken);
 
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
@@ -104,8 +106,8 @@ public class UserService : User.UserBase
         var result = await UserManager.UpdateUserAsync(userId, new UserPackage
         {
             UserName = request.Sign.UserName,
-            Email = request.Sign.Email,
-            PhoneNumber = request.Sign.Phone
+            Email = request.Sign?.Email,
+            PhoneNumber = request.Sign?.Phone
         }, context.CancellationToken);
 
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
@@ -149,6 +151,98 @@ public class UserService : User.UserBase
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 
         return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    ///     查询用户角色信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询用户角色信息")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<PagedRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleRequest request,
+        ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var roleInfos = await UserManager.FetchUserRolesAsync(
+            userId,
+            request.Role?.Search?.RoleName,
+            request.Role?.Pagination.Page ?? 0,
+            request.Role?.Pagination.Size ?? 0,
+            context.CancellationToken);
+
+        var roleReplies = roleInfos.Items!.Select(item => item.Adapt<RoleInfoPackage>());
+
+        var response = DataResult.Success(roleInfos).Adapt<PagedRoleInfoResponse>();
+
+        response.Data.Items.Add(roleReplies);
+
+        return response;
+    }
+
+    /// <summary>
+    ///     获取用户角色信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取用户角色信息")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<RoleInfoResponse> ReadUserRoleInfo(UserRoleIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
+
+        var roleInfo = await UserManager.GetUserRoleAsync(
+            userId,
+            roleId,
+            context.CancellationToken);
+
+        if (roleInfo is null) return DataResult.Fail<RoleInfo>().Adapt<RoleInfoResponse>();
+
+        return DataResult.Success(roleInfo).Adapt<RoleInfoResponse>();
+    }
+
+    /// <summary>
+    ///     添加用户角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("添加用户角色")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.Role.RoleId);
+
+        var result = await UserManager.AddUserRoleAsync(userId, roleId, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    ///     移除用户角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("移除用户角色")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> RemoveUserRole(UserRoleIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
+
+        var result = await UserManager.RemoveUserRoleAsync(userId, roleId, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<EmptyResponse>();
     }
 
     #endregion

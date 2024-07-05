@@ -262,6 +262,116 @@
 			<param name="context">The context of the server-side call handler being invoked.</param>
 			<returns>The response to send back to the client (wrapped by a task).</returns>
 		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.UserService.SearchUserRoleInfo(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.UserService.ReadUserRoleInfo(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.UserService.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Services.UserService.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.AddUserRoleRequestValidator">
+			<summary>
+				获取用户角色请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.AddUserRoleRequestValidator.#ctor">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.BatchResetPasswordRequestValidator">
+			<summary>
+				批量重置密码请求验证
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Validators.BatchResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.ChangePasswordRequestValidator">
+			<summary>
+				修改密码请求验证
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Validators.ChangePasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.CreateUserRequestValidator">
+			<summary>
+				创建用户请求验证
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Validators.CreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.ResetPasswordRequestValidator">
+			<summary>
+				重置密码请求验证
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.App.Identity.Validators.ResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.SearchUserRequestValidator">
+			<summary>
+				查找用户请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.SearchUserRequestValidator.#ctor">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.SearchUserRoleRequestValidator">
+			<summary>
+				查找用户角色请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.SearchUserRoleRequestValidator.#ctor">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
 		<member name="T:Artemis.App.Identity.Validators.SignInRequestValidator">
 			<summary>
 				签到请求验证
@@ -280,6 +390,36 @@
 		</member>
 		<member
 			name="M:Artemis.App.Identity.Validators.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.UpdateUserRequestValidator">
+			<summary>
+				更新用户请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.UpdateUserRequestValidator.#ctor">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.UserIdRequestValidator">
+			<summary>
+				更新用户请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.UserIdRequestValidator.#ctor">
+			<summary>
+				验证器构造
+			</summary>
+		</member>
+		<member name="T:Artemis.App.Identity.Validators.UserRoleIdRequestValidator">
+			<summary>
+				获取用户角色请求验证
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Identity.Validators.UserRoleIdRequestValidator.#ctor">
 			<summary>
 				验证器构造
 			</summary>

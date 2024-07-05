@@ -6,37 +6,98 @@ import "common.proto";
 
 package artemis.service.protos.identity;
 
-message Test{
+// 用户搜索数据包
+message UserSearchPackage {
+  /* 用户名
+   * @length(1,128)
+   */
+  google.protobuf.StringValue UserName = 1;
+  /* 邮箱
+   * @email
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Email = 2;
+  /* 手机号码
+   * @phone
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Phone = 3;
 }
 
-// 用户标识数据包
-message UserSignPackage {
-  // 用户名
-  google.protobuf.StringValue UserName = 1;
-  // 邮箱地址
-  google.protobuf.StringValue Email = 2;
-  // 手机号码
-  google.protobuf.StringValue Phone = 3;
+// 角色搜索数据包
+message RoleSearchPackager{
+  /* 角色名称
+   * @length(1,128)
+   */
+  google.protobuf.StringValue RoleName = 1;
 }
 
 // 查询用户请求
 message SearchUserRequest {
   // 用户标识
-  UserSignPackage Sign = 1;
+  UserSearchPackage Search = 1;
   // 页码
-  PageSlot PageSlot = 2;
+  Pagination Pagination = 2;
+}
+
+// 查询角色请求
+message SearchRoleRequest {
+  // 角色标识
+  RoleSearchPackager Search = 1;
+  // 页码
+  Pagination Pagination = 2;
+}
+
+// 查询用户角色请求
+message SearchUserRoleRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  // 角色查询参数
+  SearchRoleRequest Role = 2;
 }
 
 // 用户信息数据包
 message UserInfoPackage{
-  // 用户标识
+  /* 用户标识
+   * @required
+   * @guid
+   */
   string Id = 1;
-  // 用户名
+  /*
+   * 用户名
+   * @required
+   * @length(1,128)
+   */
   string UserName = 2;
-  // 邮箱地址
+  /* 邮箱
+   * @email
+   * @length(0,128)
+   */
   google.protobuf.StringValue Email = 3;
-  // 手机号码
+  /* 手机号码
+   * @phone
+   * @length(0,128)
+   */
   google.protobuf.StringValue PhoneNumber = 4;
+}
+
+// 角色信息数据包
+message RoleInfoPackage{
+  /* 角色标识
+   * @required
+   * @guid
+   */
+  string Id = 1;
+  /* 角色名称
+   * @required
+   * @length(1,128)
+   */
+  string RoleName = 2;
+  // 描述
+  google.protobuf.StringValue Description = 3;
 }
 
 // 用户信息响应
@@ -48,28 +109,89 @@ message UserInfoResponse {
   // 消息
   string message = 3;
   // 错误
+  // @exception
   google.protobuf.StringValue error = 4;
-  // 日期时间
+  /* 响应时间
+   * @datetime
+   */
   string dateTime = 5;
-  // 时间戳
+  /* 响应时间戳
+   * @timestamp
+   */
   int64 timestamp = 6;
-  // 数据
+  /* 用户信息数据
+   */
   UserInfoPackage data = 7;
 }
 
+// 角色信息响应
+message RoleInfoResponse {
+  // 状态码
+  int32 code = 1;
+  // 是否成功
+  bool succeeded = 2;
+  // 消息
+  string message = 3;
+  // 错误
+  // @exception
+  google.protobuf.StringValue error = 4;
+  /* 响应时间
+   * @datetime
+   */
+  string dateTime = 5;
+  /* 响应时间戳
+   * @timestamp
+   */
+  int64 timestamp = 6;
+  /* 角色信息数据
+   */
+  RoleInfoPackage data = 7;
+}
 
 // 分页用户信息回应
 message PagedUserInfoPackage{
-  // 页码
+  /* 页码
+   * @min(0)
+   */
   int32 Page = 1;
-  // 条目数
+  /* 条目数
+   * @min(0)
+   */
   int32 Size = 2;
-  // 总数
+  /* 数据总数
+   * @min(0)
+   */
   int64 Total = 3;
-  // 过滤后总数
+  /* 条件过滤后的数据量
+   * @min(0)
+   */
   int64 Count = 4;
-  // 数据
+  /* 用户信息数据
+   */
   repeated UserInfoPackage Items = 5;
+}
+
+// 分页角色信息回应
+message PagedRoleInfoPackage{
+  /* 页码
+   * @min(0)
+   */
+  int32 Page = 1;
+  /* 条目数
+   * @min(0)
+   */
+  int32 Size = 2;
+  /* 数据总数
+   * @min(0)
+   */
+  int64 Total = 3;
+  /* 条件过滤后的数据量
+   * @min(0)
+   */
+  int64 Count = 4;
+  /* 角色信息数据
+   */
+  repeated RoleInfoPackage Items = 5;
 }
 
 // 查询用户信息响应
@@ -81,24 +203,102 @@ message PagedUserInfoResponse {
   // 消息
   string Message = 3;
   // 错误
+  // @exception
   google.protobuf.StringValue Error = 4;
-  // 日期时间
+  /* 响应时间
+   * @datetime
+   */
   string DateTime = 5;
-  // 时间戳
+  /* 响应时间戳
+   * @timestamp
+   */
   int64 Timestamp = 6;
-  // 数据
+  /* 用户分页信息数据
+   */
   PagedUserInfoPackage Data = 7;
+}
+
+// 查询角色信息响应
+message PagedRoleInfoResponse {
+  // 状态码
+  int32 Code = 1;
+  // 是否成功
+  bool Succeeded = 2;
+  // 消息
+  string Message = 3;
+  // 错误
+  // @exception
+  google.protobuf.StringValue Error = 4;
+  /* 响应时间
+   * @datetime
+   */
+  string DateTime = 5;
+  /* 响应时间戳
+   * @timestamp
+   */
+  int64 Timestamp = 6;
+  /* 角色分页信息数据
+   */
+  PagedRoleInfoPackage Data = 7;
 }
 
 // 用户标识请求
 message UserIdRequest {
-  // 用户标识
+  /* 用户标识
+   * @required
+   * @guid
+   */
   string UserId = 1;
+}
+
+// 角色标识请求
+message RoleIdRequest {
+  /* 角色标识
+   * @required
+   * @guid
+   */
+  string RoleId = 1;
+}
+
+// 用户角色标识请求
+message UserRoleIdRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  /* 角色标识
+   * @required
+   * @guid
+   */
+  string RoleId = 2;
+}
+
+// 用户标识数据包
+message UserSignPackage{
+  /* 用户名
+   * @required
+   * @length(1,128)
+   */
+  string UserName = 1;
+  /* 邮箱
+   * @email
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Email = 2;
+  /* 手机号码
+   * @phone
+   * @length(0,128)
+   */
+  google.protobuf.StringValue Phone = 3;
 }
 
 // 更新用户信息请求
 message UpdateUserRequest{
-  // 用户标识
+  /* 用户标识
+   * @required
+   * @guid
+   */
   string UserId = 1;
   // 用户标识信息
   UserSignPackage Sign = 2;
@@ -106,8 +306,23 @@ message UpdateUserRequest{
 
 // 创建用户请求
 message CreateUserRequest{
-  // 用户标识
+  /* 目标密码
+   * @required
+   * @password
+   * @example(1q2w3e$R)
+   */
   string Password = 1;
   // 用户标识信息
   UserSignPackage Sign = 2;
+}
+
+// 添加用户角色请求
+message AddUserRoleRequest {
+  /* 用户标识
+   * @required
+   * @guid
+   */
+  string UserId = 1;
+  // 角色标识
+  RoleIdRequest Role = 2;
 }

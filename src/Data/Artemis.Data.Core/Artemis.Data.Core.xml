@@ -5378,36 +5378,6 @@
 				分区标识
 			</summary>
 		</member>
-		<member name="T:Artemis.Data.Core.IEntityProxy">
-			<summary>
-				实体代理接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.IEntityProxy.EnableCacheProxy">
-			<summary>
-				是否允许缓存代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.IEntityProxy.CacheProxy">
-			<summary>
-				缓存代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Data.Core.IEntityProxy.EnableHandlerProxy">
-			<summary>
-				是否允许操作者代理
-			</summary>
-		</member>
-		<member name="M:Artemis.Data.Core.IEntityProxy.HandlerProxy``1">
-			<summary>
-				操作者代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Data.Core.IEntityCacheProxy">
-			<summary>
-				缓存代理接口
-			</summary>
-		</member>
 		<member name="T:Artemis.Data.Core.ConcurrencyPartition">
 			<summary>
 				基本并发分区模型

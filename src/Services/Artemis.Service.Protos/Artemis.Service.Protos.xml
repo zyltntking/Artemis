@@ -83,25 +83,27 @@
 				@timestamp
 			</summary>
 		</member>
-		<member name="T:Artemis.Service.Protos.PageSlot">
+		<member name="T:Artemis.Service.Protos.Pagination">
 			<summary>
-				分页
+				分页插件
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.PageSlot.PageFieldNumber">
+		<member name="F:Artemis.Service.Protos.Pagination.PageFieldNumber">
 			<summary>Field number for the "Page" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.PageSlot.Page">
+		<member name="P:Artemis.Service.Protos.Pagination.Page">
 			<summary>
 				页码
+				@min(0)
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.PageSlot.SizeFieldNumber">
+		<member name="F:Artemis.Service.Protos.Pagination.SizeFieldNumber">
 			<summary>Field number for the "Size" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.PageSlot.Size">
+		<member name="P:Artemis.Service.Protos.Pagination.Size">
 			<summary>
 				条目数
+				@min(0)
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.SampleReflection">
@@ -647,7 +649,7 @@
 		<member name="P:Artemis.Service.Protos.Identity.SignUpRequest.UserName">
 			<summary>
 
-				用户标识
+				用户名
 				@required
 				@length(1,128)
 			</summary>
@@ -1293,6 +1295,42 @@
 			<param name="context">The context of the server-side call handler being invoked.</param>
 			<returns>The response to send back to the client (wrapped by a task).</returns>
 		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserBase.SearchUserRoleInfo(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserBase.ReadUserRoleInfo(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserBase.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserBase.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request received from the client.</param>
+			<param name="context">The context of the server-side call handler being invoked.</param>
+			<returns>The response to send back to the client (wrapped by a task).</returns>
+		</member>
 		<member name="T:Artemis.Service.Protos.Identity.User.UserClient">
 			<summary>Client for User</summary>
 		</member>
@@ -1512,6 +1550,166 @@
 			<returns>The call object.</returns>
 		</member>
 		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.SearchUserRoleInfo(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.SearchUserRoleInfo(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.CallOptions)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.SearchUserRoleInfoAsync(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.SearchUserRoleInfoAsync(Artemis.Service.Protos.Identity.SearchUserRoleRequest,Grpc.Core.CallOptions)">
+			<summary>
+				查询用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserRoleInfo(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserRoleInfo(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.CallOptions)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserRoleInfoAsync(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.ReadUserRoleInfoAsync(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.CallOptions)">
+			<summary>
+				获取用户角色信息
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
+			<summary>
+				添加用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.CallOptions)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The response received from the server.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+			<param name="cancellationToken">An optional token for canceling the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
+			name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.CallOptions)">
+			<summary>
+				移除用户角色
+			</summary>
+			<param name="request">The request to send to the server.</param>
+			<param name="options">The options for the call.</param>
+			<returns>The call object.</returns>
+		</member>
+		<member
 			name="M:Artemis.Service.Protos.Identity.User.UserClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
 			<summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
 		</member>
@@ -1534,33 +1732,52 @@
 		<member name="P:Artemis.Service.Protos.Identity.SharedReflection.Descriptor">
 			<summary>File descriptor for identity/shared.proto</summary>
 		</member>
-		<member name="T:Artemis.Service.Protos.Identity.UserSignPackage">
+		<member name="T:Artemis.Service.Protos.Identity.UserSearchPackage">
 			<summary>
-				用户标识数据包
+				用户搜索数据包
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.UserNameFieldNumber">
+		<member name="F:Artemis.Service.Protos.Identity.UserSearchPackage.UserNameFieldNumber">
 			<summary>Field number for the "UserName" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.UserName">
+		<member name="P:Artemis.Service.Protos.Identity.UserSearchPackage.UserName">
 			<summary>
 				用户名
+				@length(1,128)
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.EmailFieldNumber">
+		<member name="F:Artemis.Service.Protos.Identity.UserSearchPackage.EmailFieldNumber">
 			<summary>Field number for the "Email" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.Email">
+		<member name="P:Artemis.Service.Protos.Identity.UserSearchPackage.Email">
 			<summary>
-				邮箱地址
+				邮箱
+				@email
+				@length(0,128)
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.PhoneFieldNumber">
+		<member name="F:Artemis.Service.Protos.Identity.UserSearchPackage.PhoneFieldNumber">
 			<summary>Field number for the "Phone" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.Phone">
+		<member name="P:Artemis.Service.Protos.Identity.UserSearchPackage.Phone">
 			<summary>
 				手机号码
+				@phone
+				@length(0,128)
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.RoleSearchPackager">
+			<summary>
+				角色搜索数据包
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleSearchPackager.RoleNameFieldNumber">
+			<summary>Field number for the "RoleName" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleSearchPackager.RoleName">
+			<summary>
+				角色名称
+				@length(1,128)
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.SearchUserRequest">
@@ -1568,20 +1785,64 @@
 				查询用户请求
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.Identity.SearchUserRequest.SignFieldNumber">
-			<summary>Field number for the "Sign" field.</summary>
+		<member name="F:Artemis.Service.Protos.Identity.SearchUserRequest.SearchFieldNumber">
+			<summary>Field number for the "Search" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.Identity.SearchUserRequest.Sign">
+		<member name="P:Artemis.Service.Protos.Identity.SearchUserRequest.Search">
 			<summary>
 				用户标识
 			</summary>
 		</member>
-		<member name="F:Artemis.Service.Protos.Identity.SearchUserRequest.PageSlotFieldNumber">
-			<summary>Field number for the "PageSlot" field.</summary>
+		<member name="F:Artemis.Service.Protos.Identity.SearchUserRequest.PaginationFieldNumber">
+			<summary>Field number for the "Pagination" field.</summary>
 		</member>
-		<member name="P:Artemis.Service.Protos.Identity.SearchUserRequest.PageSlot">
+		<member name="P:Artemis.Service.Protos.Identity.SearchUserRequest.Pagination">
 			<summary>
 				页码
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.SearchRoleRequest">
+			<summary>
+				查询角色请求
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.SearchRoleRequest.SearchFieldNumber">
+			<summary>Field number for the "Search" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.SearchRoleRequest.Search">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.SearchRoleRequest.PaginationFieldNumber">
+			<summary>Field number for the "Pagination" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.SearchRoleRequest.Pagination">
+			<summary>
+				页码
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.SearchUserRoleRequest">
+			<summary>
+				查询用户角色请求
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.SearchUserRoleRequest.UserIdFieldNumber">
+			<summary>Field number for the "UserId" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.SearchUserRoleRequest.UserId">
+			<summary>
+				用户标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.SearchUserRoleRequest.RoleFieldNumber">
+			<summary>Field number for the "Role" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.SearchUserRoleRequest.Role">
+			<summary>
+				角色查询参数
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.UserInfoPackage">
@@ -1595,6 +1856,8 @@
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoPackage.Id">
 			<summary>
 				用户标识
+				@required
+				@guid
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoPackage.UserNameFieldNumber">
@@ -1602,7 +1865,10 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoPackage.UserName">
 			<summary>
+
 				用户名
+				@required
+				@length(1,128)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoPackage.EmailFieldNumber">
@@ -1610,7 +1876,9 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoPackage.Email">
 			<summary>
-				邮箱地址
+				邮箱
+				@email
+				@length(0,128)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoPackage.PhoneNumberFieldNumber">
@@ -1619,6 +1887,41 @@
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoPackage.PhoneNumber">
 			<summary>
 				手机号码
+				@phone
+				@length(0,128)
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.RoleInfoPackage">
+			<summary>
+				角色信息数据包
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoPackage.IdFieldNumber">
+			<summary>Field number for the "Id" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoPackage.Id">
+			<summary>
+				角色标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoPackage.RoleNameFieldNumber">
+			<summary>Field number for the "RoleName" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoPackage.RoleName">
+			<summary>
+				角色名称
+				@required
+				@length(1,128)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoPackage.DescriptionFieldNumber">
+			<summary>Field number for the "Description" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoPackage.Description">
+			<summary>
+				描述
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.UserInfoResponse">
@@ -1656,6 +1959,7 @@
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoResponse.Error">
 			<summary>
 				错误
+				@exception
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoResponse.DateTimeFieldNumber">
@@ -1663,7 +1967,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoResponse.DateTime">
 			<summary>
-				日期时间
+				响应时间
+				@datetime
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoResponse.TimestampFieldNumber">
@@ -1671,7 +1976,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoResponse.Timestamp">
 			<summary>
-				时间戳
+				响应时间戳
+				@timestamp
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UserInfoResponse.DataFieldNumber">
@@ -1679,7 +1985,71 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.UserInfoResponse.Data">
 			<summary>
-				数据
+				用户信息数据
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.RoleInfoResponse">
+			<summary>
+				角色信息响应
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.CodeFieldNumber">
+			<summary>Field number for the "code" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Code">
+			<summary>
+				状态码
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.SucceededFieldNumber">
+			<summary>Field number for the "succeeded" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Succeeded">
+			<summary>
+				是否成功
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.MessageFieldNumber">
+			<summary>Field number for the "message" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Message">
+			<summary>
+				消息
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.ErrorFieldNumber">
+			<summary>Field number for the "error" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Error">
+			<summary>
+				错误
+				@exception
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.DateTimeFieldNumber">
+			<summary>Field number for the "dateTime" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.DateTime">
+			<summary>
+				响应时间
+				@datetime
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.TimestampFieldNumber">
+			<summary>Field number for the "timestamp" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Timestamp">
+			<summary>
+				响应时间戳
+				@timestamp
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleInfoResponse.DataFieldNumber">
+			<summary>Field number for the "data" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleInfoResponse.Data">
+			<summary>
+				角色信息数据
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.PagedUserInfoPackage">
@@ -1693,6 +2063,7 @@
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Page">
 			<summary>
 				页码
+				@min(0)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoPackage.SizeFieldNumber">
@@ -1701,6 +2072,7 @@
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Size">
 			<summary>
 				条目数
+				@min(0)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoPackage.TotalFieldNumber">
@@ -1708,7 +2080,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Total">
 			<summary>
-				总数
+				数据总数
+				@min(0)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoPackage.CountFieldNumber">
@@ -1716,7 +2089,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Count">
 			<summary>
-				过滤后总数
+				条件过滤后的数据量
+				@min(0)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoPackage.ItemsFieldNumber">
@@ -1724,7 +2098,56 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoPackage.Items">
 			<summary>
-				数据
+				用户信息数据
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.PagedRoleInfoPackage">
+			<summary>
+				分页角色信息回应
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.PageFieldNumber">
+			<summary>Field number for the "Page" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Page">
+			<summary>
+				页码
+				@min(0)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.SizeFieldNumber">
+			<summary>Field number for the "Size" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Size">
+			<summary>
+				条目数
+				@min(0)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.TotalFieldNumber">
+			<summary>Field number for the "Total" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Total">
+			<summary>
+				数据总数
+				@min(0)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.CountFieldNumber">
+			<summary>Field number for the "Count" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Count">
+			<summary>
+				条件过滤后的数据量
+				@min(0)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.ItemsFieldNumber">
+			<summary>Field number for the "Items" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoPackage.Items">
+			<summary>
+				角色信息数据
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.PagedUserInfoResponse">
@@ -1762,6 +2185,7 @@
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoResponse.Error">
 			<summary>
 				错误
+				@exception
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoResponse.DateTimeFieldNumber">
@@ -1769,7 +2193,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoResponse.DateTime">
 			<summary>
-				日期时间
+				响应时间
+				@datetime
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoResponse.TimestampFieldNumber">
@@ -1777,7 +2202,8 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoResponse.Timestamp">
 			<summary>
-				时间戳
+				响应时间戳
+				@timestamp
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.PagedUserInfoResponse.DataFieldNumber">
@@ -1785,7 +2211,71 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.PagedUserInfoResponse.Data">
 			<summary>
-				数据
+				用户分页信息数据
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.PagedRoleInfoResponse">
+			<summary>
+				查询角色信息响应
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.CodeFieldNumber">
+			<summary>Field number for the "Code" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Code">
+			<summary>
+				状态码
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.SucceededFieldNumber">
+			<summary>Field number for the "Succeeded" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Succeeded">
+			<summary>
+				是否成功
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.MessageFieldNumber">
+			<summary>Field number for the "Message" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Message">
+			<summary>
+				消息
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.ErrorFieldNumber">
+			<summary>Field number for the "Error" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Error">
+			<summary>
+				错误
+				@exception
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.DateTimeFieldNumber">
+			<summary>Field number for the "DateTime" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.DateTime">
+			<summary>
+				响应时间
+				@datetime
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.TimestampFieldNumber">
+			<summary>Field number for the "Timestamp" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Timestamp">
+			<summary>
+				响应时间戳
+				@timestamp
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.DataFieldNumber">
+			<summary>Field number for the "Data" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.PagedRoleInfoResponse.Data">
+			<summary>
+				角色分页信息数据
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.UserIdRequest">
@@ -1799,6 +2289,83 @@
 		<member name="P:Artemis.Service.Protos.Identity.UserIdRequest.UserId">
 			<summary>
 				用户标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.RoleIdRequest">
+			<summary>
+				角色标识请求
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.RoleIdRequest.RoleIdFieldNumber">
+			<summary>Field number for the "RoleId" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.RoleIdRequest.RoleId">
+			<summary>
+				角色标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.UserRoleIdRequest">
+			<summary>
+				用户角色标识请求
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.UserRoleIdRequest.UserIdFieldNumber">
+			<summary>Field number for the "UserId" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.UserRoleIdRequest.UserId">
+			<summary>
+				用户标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.UserRoleIdRequest.RoleIdFieldNumber">
+			<summary>Field number for the "RoleId" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.UserRoleIdRequest.RoleId">
+			<summary>
+				角色标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.UserSignPackage">
+			<summary>
+				用户标识数据包
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.UserNameFieldNumber">
+			<summary>Field number for the "UserName" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.UserName">
+			<summary>
+				用户名
+				@required
+				@length(1,128)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.EmailFieldNumber">
+			<summary>Field number for the "Email" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.Email">
+			<summary>
+				邮箱
+				@email
+				@length(0,128)
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.UserSignPackage.PhoneFieldNumber">
+			<summary>Field number for the "Phone" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.UserSignPackage.Phone">
+			<summary>
+				手机号码
+				@phone
+				@length(0,128)
 			</summary>
 		</member>
 		<member name="T:Artemis.Service.Protos.Identity.UpdateUserRequest">
@@ -1812,6 +2379,8 @@
 		<member name="P:Artemis.Service.Protos.Identity.UpdateUserRequest.UserId">
 			<summary>
 				用户标识
+				@required
+				@guid
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.UpdateUserRequest.SignFieldNumber">
@@ -1832,7 +2401,10 @@
 		</member>
 		<member name="P:Artemis.Service.Protos.Identity.CreateUserRequest.Password">
 			<summary>
-				用户标识
+				目标密码
+				@required
+				@password
+				@example(1q2w3e$R)
 			</summary>
 		</member>
 		<member name="F:Artemis.Service.Protos.Identity.CreateUserRequest.SignFieldNumber">
@@ -1841,6 +2413,29 @@
 		<member name="P:Artemis.Service.Protos.Identity.CreateUserRequest.Sign">
 			<summary>
 				用户标识信息
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Protos.Identity.AddUserRoleRequest">
+			<summary>
+				添加用户角色请求
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.AddUserRoleRequest.UserIdFieldNumber">
+			<summary>Field number for the "UserId" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.AddUserRoleRequest.UserId">
+			<summary>
+				用户标识
+				@required
+				@guid
+			</summary>
+		</member>
+		<member name="F:Artemis.Service.Protos.Identity.AddUserRoleRequest.RoleFieldNumber">
+			<summary>Field number for the "Role" field.</summary>
+		</member>
+		<member name="P:Artemis.Service.Protos.Identity.AddUserRoleRequest.Role">
+			<summary>
+				角色标识
 			</summary>
 		</member>
 		<member name="T:Google.Api.AnnotationsReflection">

@@ -18,31 +18,60 @@ service User {
 
   // 创建用户
   rpc CreateUser (CreateUserRequest) returns (EmptyResponse) {
-	option (google.api.http) = {
-	  post: "/api/Users"
-	  body: "*"
-	};
+		option (google.api.http) = {
+			post: "/api/Users"
+			body: "*"
+		};
   }
 
   // 更新用户信息
   rpc UpdateUserInfo (UpdateUserRequest) returns (EmptyResponse) {
-	option (google.api.http) = {
-	  put: "/api/Users/{UserId}"
-	  body: "Sign"
-	};
+		option (google.api.http) = {
+			put: "/api/Users/{UserId}"
+			body: "Sign"
+		};
   }
 
   // 读取用户信息
   rpc ReadUserInfo (UserIdRequest) returns (UserInfoResponse) {
-	option (google.api.http) = {
-	  get: "/api/Users/{UserId}"
-	};
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}"
+		};
   }
 
   // 删除用户
   rpc DeleteUser (UserIdRequest) returns (EmptyResponse) {
-	option (google.api.http) = {
-	  delete: "/api/Users/{UserId}"
-	};
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}"
+		};
   }
+
+	// 查询用户角色信息
+	rpc SearchUserRoleInfo (SearchUserRoleRequest) returns (PagedRoleInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Roles"
+		};
+	}
+
+	// 获取用户角色信息
+	rpc ReadUserRoleInfo (UserRoleIdRequest) returns (RoleInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Roles/{RoleId}"
+		};
+	}
+	
+	// 添加用户角色
+	rpc AddUserRole (AddUserRoleRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles"
+			body: "Role"
+		};
+	}
+
+	// 移除用户角色
+	rpc RemoveUserRole (UserRoleIdRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}/Roles/{RoleId}"
+		};
+	}
 }

@@ -23,7 +23,7 @@ internal static class CommentDescriptor
     /// </summary>
     /// <param name="comments"></param>
     /// <param name="memberInfo"></param>
-    internal static ISchemaInfo Describe(string[] comments, MemberInfo? memberInfo)
+    internal static ISchemaInfo Describe(string[] comments, MemberInfo? memberInfo = null)
     {
         var descriptions = new List<string>();
 
@@ -199,6 +199,7 @@ internal static class CommentDescriptor
 
         return result;
     }
+
 
     #region Required @required
 
