@@ -9,6 +9,21 @@ namespace Artemis.Data.Core;
 public static class Normalize
 {
     /// <summary>
+    ///     生成并发戳
+    /// </summary>
+    public static string ConcurrencyStamp => Guid.NewGuid().ToString("D");
+
+    /// <summary>
+    ///     生成加密戳
+    /// </summary>
+    public static string SecurityStamp => Base32.GenerateBase32();
+
+    /// <summary>
+    ///     生成签名
+    /// </summary>
+    public static string Signature => Guid.NewGuid().ToString("N");
+
+    /// <summary>
     ///     输入字符串标准化
     /// </summary>
     /// <param name="input">输入字符串</param>
@@ -71,19 +86,4 @@ public static class Normalize
     {
         return Hash.HashData(key.StringNormalize(), HashType.Md5).Normalize();
     }
-
-    /// <summary>
-    ///     生成并发戳
-    /// </summary>
-    public static string ConcurrencyStamp => Guid.NewGuid().ToString("D");
-
-    /// <summary>
-    ///     生成加密戳
-    /// </summary>
-    public static string SecurityStamp => Base32.GenerateBase32();
-
-    /// <summary>
-    ///     生成签名
-    /// </summary>
-    public static string Signature => Guid.NewGuid().ToString("N");
 }

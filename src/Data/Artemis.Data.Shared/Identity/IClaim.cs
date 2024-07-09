@@ -15,7 +15,7 @@ public interface IClaimInfo : IClaimDocument, IKeySlot
 }
 
 /// <summary>
-/// 凭据文档接口
+///     凭据文档接口
 /// </summary>
 public interface IClaimDocument : IClaimPackage, ICheckStamp;
 

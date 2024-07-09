@@ -296,10 +296,7 @@ public static class TokenHandlerExtensions
         {
             string token = headers[key]!;
 
-            if (token.StartsWith(schema, StringComparison.OrdinalIgnoreCase))
-            {
-                token = token[schema.Length..];
-            }
+            if (token.StartsWith(schema, StringComparison.OrdinalIgnoreCase)) token = token[schema.Length..];
 
             return token;
         }

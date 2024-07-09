@@ -29,13 +29,18 @@ internal sealed class
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisTeacherCurrentAffiliation> builder)
     {
-        builder.HasKey(currentAffiliation => currentAffiliation.TeacherId)
+        builder.HasKey(currentAffiliation => new
+            {
+                currentAffiliation.SchoolId,
+                currentAffiliation.ClassId,
+                currentAffiliation.TeacherId
+            })
             .HasName(KeyName);
 
-        // One Teacher One Current Affiliation
+        // One Teacher Many Current Affiliation
         builder.HasOne(currentAffiliation => currentAffiliation.Teacher)
-            .WithOne(currentAffiliation => currentAffiliation.CurrentAffiliation)
-            .HasForeignKey<ArtemisTeacherCurrentAffiliation>(currentAffiliation => currentAffiliation.TeacherId)
+            .WithMany(currentAffiliation => currentAffiliation.CurrentAffiliations)
+            .HasForeignKey(currentAffiliation => currentAffiliation.TeacherId)
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacherCurrentAffiliation).TableName(),
                 nameof(ArtemisTeacher).TableName()))

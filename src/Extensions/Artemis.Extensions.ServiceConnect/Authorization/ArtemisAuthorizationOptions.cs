@@ -15,7 +15,7 @@ file interface IArtemisAuthorizationOptions
     string ContextItemTokenKey { get; set; }
 
     /// <summary>
-    /// 请求头认证Token架构
+    ///     请求头认证Token架构
     /// </summary>
     string RequestHeaderTokenSchema { get; set; }
 
@@ -98,7 +98,7 @@ public class ArtemisAuthorizationOptions : IArtemisAuthorizationOptions
     public string ContextItemTokenKey { get; set; } = SharedKey.Token;
 
     /// <summary>
-    /// 请求头认证Token架构
+    ///     请求头认证Token架构
     /// </summary>
     public string RequestHeaderTokenSchema { get; set; } = SharedKey.Schema;
 

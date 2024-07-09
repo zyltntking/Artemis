@@ -2,7 +2,6 @@
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Extensions.ServiceConnect.HttpLogging;
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -59,10 +58,7 @@ public static class CommonExtensions
         }
 
         builder.Services.AddAuthentication()
-            .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", options =>
-            {
-
-            });
+            .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", options => { });
         //配置授权
         builder.ConfigureAuthorization();
 
@@ -83,10 +79,7 @@ public static class CommonExtensions
     /// <returns></returns>
     public static WebApplication ConfigureAppCommons(this WebApplication app)
     {
-        app.UseWhen(ctx => ctx.Request.ContentType != "application/grpc", builder =>
-        {
-            builder.UseHttpLogging();
-        });
+        app.UseWhen(ctx => ctx.Request.ContentType != "application/grpc", builder => { builder.UseHttpLogging(); });
 
         if (app.Environment.IsDevelopment())
         {

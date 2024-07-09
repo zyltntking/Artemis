@@ -73,7 +73,7 @@ internal static class SwaggerExtensions
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Artemis",
+                                Id = "Artemis"
                             }
                         },
                         new string[] { }

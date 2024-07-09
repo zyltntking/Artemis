@@ -79,7 +79,8 @@ internal class ArtemisAuthorizationHandlerStandOnly : AuthorizationHandler<IArte
         {
             if (httpContext is not null)
             {
-                var tokenSymbol = httpContext.FetchTokenSymbol(Options.RequestHeaderTokenKey, Options.RequestHeaderTokenSchema);
+                var tokenSymbol =
+                    httpContext.FetchTokenSymbol(Options.RequestHeaderTokenKey, Options.RequestHeaderTokenSchema);
 
                 if (!string.IsNullOrWhiteSpace(tokenSymbol))
                 {

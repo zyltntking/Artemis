@@ -48,6 +48,6 @@ public class Task : ConcurrencyPartition, ITask
     /// <summary>
     ///     父任务标识
     /// </summary>
-    [Comment("父任务Id")]
+    [Comment("父任务标识")]
     public Guid ParentId { get; set; } = Guid.Empty;
 }

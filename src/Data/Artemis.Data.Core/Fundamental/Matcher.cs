@@ -86,10 +86,10 @@ public static class Matcher
         {
             { (Md5DigestMode.Digest16, CharacterCaseMode.UpperCase), "^[A-F0-9]{16}$" },
             { (Md5DigestMode.Digest16, CharacterCaseMode.LowerCase), "^[a-f0-9]{16}$" },
-            { (Md5DigestMode.Digest16, CharacterCaseMode.Mix), "^([A-F0-9]{32}|[a-f0-9]{16})$" },
+            { (Md5DigestMode.Digest16, CharacterCaseMode.Mix), "^([A-F0-9]{16})|([a-f0-9]{16})$" },
             { (Md5DigestMode.Digest32, CharacterCaseMode.UpperCase), "^[A-F0-9]{32}$" },
             { (Md5DigestMode.Digest32, CharacterCaseMode.LowerCase), "^[a-f0-9]{32}$" },
-            { (Md5DigestMode.Digest32, CharacterCaseMode.Mix), "^([A-F0-9]{32}|[a-f0-9]{32})$" }
+            { (Md5DigestMode.Digest32, CharacterCaseMode.Mix), "^([A-F0-9]{32})|([a-f0-9]{32})$" }
         };
 
     /// <summary>
@@ -140,16 +140,34 @@ public static class Matcher
             { (GuidFormat.N, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{32})$" },
             { (GuidFormat.D, CharacterCaseMode.UpperCase), "^([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$" },
             { (GuidFormat.D, CharacterCaseMode.LowerCase), "^([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$" },
-            { (GuidFormat.D, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12})$" },
+            {
+                (GuidFormat.D, CharacterCaseMode.Mix),
+                "^([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$"
+            },
             { (GuidFormat.B, CharacterCaseMode.UpperCase), @"^(\{[A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\})$" },
             { (GuidFormat.B, CharacterCaseMode.LowerCase), @"^(\{[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\})$" },
-            { (GuidFormat.B, CharacterCaseMode.Mix), @"^(\{[(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12}\})$" },
+            {
+                (GuidFormat.B, CharacterCaseMode.Mix),
+                @"^(\{[A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\})|(\{[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\})$"
+            },
             { (GuidFormat.P, CharacterCaseMode.UpperCase), @"^(\([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\))$" },
             { (GuidFormat.P, CharacterCaseMode.LowerCase), @"^(\([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\))$" },
-            { (GuidFormat.P, CharacterCaseMode.Mix), @"^(\([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12}\))$" },
-            { (GuidFormat.Mix, CharacterCaseMode.UpperCase), "^([A-F0-9]{32})|([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$" },
-            { (GuidFormat.Mix, CharacterCaseMode.LowerCase), "^([a-f0-9]{32})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$" },
-            { (GuidFormat.Mix, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{32})|([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12})$" }
+            {
+                (GuidFormat.P, CharacterCaseMode.Mix),
+                @"^(\([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\))|(\([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\))$"
+            },
+            {
+                (GuidFormat.Mix, CharacterCaseMode.UpperCase),
+                "^([A-F0-9]{32})|([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$"
+            },
+            {
+                (GuidFormat.Mix, CharacterCaseMode.LowerCase),
+                "^([a-f0-9]{32})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$"
+            },
+            {
+                (GuidFormat.Mix, CharacterCaseMode.Mix),
+                "^([A-F0-9]{32})|([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})|([a-f0-9]{32})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$"
+            }
         };
 
     /// <summary>

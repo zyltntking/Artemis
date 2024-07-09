@@ -32,7 +32,7 @@ internal sealed class
         builder.HasKey(currentAffiliation => currentAffiliation.StudentId)
             .HasName(KeyName);
 
-        // One Student One Current Affiliation
+        // One Student One Current Affiliation Student
         builder.HasOne(currentAffiliation => currentAffiliation.Student)
             .WithOne(student => student.CurrentAffiliation)
             .HasForeignKey<ArtemisStudentCurrentAffiliation>(currentAffiliation => currentAffiliation.StudentId)
@@ -42,7 +42,7 @@ internal sealed class
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        // One School Many Current Affiliation
+        // One School Many Current Affiliation Student
         builder.HasOne(currentAffiliation => currentAffiliation.School)
             .WithMany(school => school.CurrentStudents)
             .HasForeignKey(currentAffiliation => currentAffiliation.SchoolId)
@@ -52,7 +52,7 @@ internal sealed class
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // One Class Many Current Affiliation
+        // One Class Many Current Affiliation Student
         builder.HasOne(currentAffiliation => currentAffiliation.Class)
             .WithMany(schoolClass => schoolClass.CurrentStudents)
             .HasForeignKey(currentAffiliation => currentAffiliation.ClassId)

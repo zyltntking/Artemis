@@ -1,6 +1,5 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Types;
-using Artemis.Data.Shared.Identity;
 using Artemis.Data.Shared.Transfer.Identity;
 
 namespace Artemis.Data.Shared.Transfer;

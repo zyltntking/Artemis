@@ -108,7 +108,6 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
 
                     if (requirement is ActionNameClaimRequirement)
                     {
-
                         var requireActionName = user
                             .Claims
                             .Where(claim => claim.Type == ClaimTypes.MateActionName)
@@ -154,16 +153,12 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
 
                         message = "该用户无有效路由路径凭据";
                     }
-
-
                 }
                 else
                 {
                     message = "未通过认证，请尝试重新登录";
                 }
-
             }
-
         }
 
         Logger.LogWarning(message);
@@ -174,5 +169,4 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
     }
 
     #endregion
-
 }

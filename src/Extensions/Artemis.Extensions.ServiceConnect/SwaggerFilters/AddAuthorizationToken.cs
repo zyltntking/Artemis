@@ -1,5 +1,4 @@
-﻿using Artemis.Data.Core.Fundamental;
-using Artemis.Extensions.ServiceConnect.Authorization;
+﻿using Artemis.Extensions.ServiceConnect.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Any;

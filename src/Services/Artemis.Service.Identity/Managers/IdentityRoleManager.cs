@@ -791,8 +791,8 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
         {
             var packageList = packages.ToList();
 
-            var checkStamps = packageList.Select(package => 
-                Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
+            var checkStamps = packageList.Select(package =>
+                    Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
                 .ToList();
 
             var storedClaimsCheckStamp = await RoleClaimStore.EntityQuery
@@ -806,7 +806,9 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
             if (notSetClaimsCheckStamp.Any())
             {
                 var roleClaims = packageList
-                    .Where(package => notSetClaimsCheckStamp.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
+                    .Where(package =>
+                        notSetClaimsCheckStamp.Contains(Normalize.KeyValuePairStamp(package.ClaimType,
+                            package.ClaimValue)))
                     .Select(package =>
                     {
                         var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);

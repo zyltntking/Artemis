@@ -39,6 +39,11 @@ public static class Project
         public const string Identity = nameof(Identity);
 
         /// <summary>
+        ///     资源服务模式
+        /// </summary>
+        public const string Resource = nameof(Resource);
+
+        /// <summary>
         ///     原始数据服务模式
         /// </summary>
         public const string RawData = nameof(RawData);

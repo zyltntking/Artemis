@@ -11,15 +11,13 @@ public record ClaimInfo : ClaimDocument, IClaimInfo
     ///     存储标识
     /// </summary>
     public required Guid Id { get; set; }
-
 }
 
 /// <summary>
-/// 凭据文档
+///     凭据文档
 /// </summary>
 public record ClaimDocument : ClaimPackage, IClaimDocument
 {
-
     /// <summary>
     ///     校验戳
     /// </summary>

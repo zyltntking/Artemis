@@ -1,6 +1,4 @@
 ﻿using Artemis.Data.Core.Exceptions;
-using Artemis.Data.Core.Fundamental.Kit;
-using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Data.Core;
 

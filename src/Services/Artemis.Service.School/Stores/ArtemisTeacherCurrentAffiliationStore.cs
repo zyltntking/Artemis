@@ -46,5 +46,6 @@ public class ArtemisTeacherCurrentAffiliationStore : KeyLessStore<ArtemisTeacher
     ///     键生成委托
     /// </summary>
     protected override Func<ArtemisTeacherCurrentAffiliation, string>? EntityKey { get; init; } =
-        teacherCurrentAffiliation => $"{teacherCurrentAffiliation.TeacherId}";
+        teacherCurrentAffiliation =>
+            $"{teacherCurrentAffiliation.SchoolId}:{teacherCurrentAffiliation.ClassId}:{teacherCurrentAffiliation.TeacherId}";
 }

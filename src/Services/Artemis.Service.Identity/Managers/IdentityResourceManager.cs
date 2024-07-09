@@ -197,7 +197,8 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
 
         var claimPackages = packages.ToList();
 
-        var checkStamps = claimPackages.Select(claim => Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue)).ToList();
+        var checkStamps = claimPackages.Select(claim => Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue))
+            .ToList();
 
         var storedCheckStamps = await ClaimStore.EntityQuery
             .Where(claim => checkStamps.Contains(claim.CheckStamp))
@@ -209,7 +210,8 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
         if (notSetCheckStamps.Any())
         {
             var claims = claimPackages
-                .Where(claim => notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue)))
+                .Where(claim =>
+                    notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue)))
                 .Select(Instance.CreateInstance<IdentityClaim, ClaimPackage>)
                 .ToList();
 

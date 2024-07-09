@@ -25,7 +25,7 @@ public interface IUserClaimInfo : IKeySlot<int>, IUserClaimPackage
 }
 
 /// <summary>
-/// 用户凭据文档接口
+///     用户凭据文档接口
 /// </summary>
 public interface IUserClaimDocument : IUserClaimPackage, ICheckStamp;
 

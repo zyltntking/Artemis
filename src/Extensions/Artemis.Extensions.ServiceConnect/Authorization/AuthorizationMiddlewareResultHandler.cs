@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Core;
-using Grpc.AspNetCore.Server;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Policy;

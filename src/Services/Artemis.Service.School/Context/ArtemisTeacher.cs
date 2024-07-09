@@ -23,7 +23,7 @@ public sealed class ArtemisTeacher : Teacher
     /// <summary>
     ///     教师当前所属关系
     /// </summary>
-    public ArtemisTeacherCurrentAffiliation? CurrentAffiliation { get; set; }
+    public ICollection<ArtemisTeacherCurrentAffiliation>? CurrentAffiliations { get; set; }
 
     /// <summary>
     ///     班级老师对应关系

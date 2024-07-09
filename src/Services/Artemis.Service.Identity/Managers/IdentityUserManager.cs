@@ -8,7 +8,6 @@ using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Stores;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Artemis.Service.Identity.Managers;
 
@@ -37,7 +36,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         IIdentityUserLoginStore userLoginStore,
         IIdentityUserTokenStore userTokenStore,
         IIdentityUserRoleStore userRoleStore,
-        IManagerOptions? options = null) : base(userStore, options, null)
+        IManagerOptions? options = null) : base(userStore, options)
     {
         UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
         RoleStore = roleStore ?? throw new ArgumentNullException(nameof(roleStore));
@@ -833,8 +832,8 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         {
             var packageList = packages.ToList();
 
-            var checkStamps = packageList.Select(package => 
-                Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
+            var checkStamps = packageList.Select(package =>
+                    Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
                 .ToList();
 
             var storedClaimCheckStamp = await UserClaimStore.EntityQuery
@@ -848,7 +847,8 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             if (notSetCheckStamps.Any())
             {
                 var userClaims = packageList
-                    .Where(package => notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
+                    .Where(package =>
+                        notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
                     .Select(package =>
                     {
                         var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
@@ -1226,7 +1226,8 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             if (userLogins.Any())
                 return await UserLoginStore.DeleteAsync(userLogins, cancellationToken);
 
-            var flag = string.Join(',', keyValuePairs.Select(item => Normalize.KeyValuePairSummary(item.Key, item.Value)));
+            var flag = string.Join(',',
+                keyValuePairs.Select(item => Normalize.KeyValuePairSummary(item.Key, item.Value)));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserLogin), flag);
         }

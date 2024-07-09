@@ -338,14 +338,15 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量移除用户角色
+    ///     批量移除用户角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchRemoveUserRole(BatchUserRoleIdRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchRemoveUserRole(BatchUserRoleIdRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleIds = request.RoleIds.Select(Guid.Parse).ToList();
@@ -435,14 +436,15 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量添加用户凭据
+    ///     批量添加用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchAddUserClaim(BatchAddUserClaimRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -489,12 +491,13 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量更新用户凭据
+    ///     批量更新用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<EmptyResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -534,14 +537,15 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量删除用户凭据
+    ///     批量删除用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 

@@ -38,10 +38,9 @@ public static class ClaimTypes
     [Description("路由凭据")] public static string RoutePath = nameof(RoutePath);
 
     /// <summary>
-    /// 元路由路径凭据
+    ///     元路由路径凭据
     /// </summary>
-    [Description("元路由路径凭据")]
-    public static string MateRoutePath = nameof(MateRoutePath);
+    [Description("元路由路径凭据")] public static string MateRoutePath = nameof(MateRoutePath);
 
     /// <summary>
     ///     操作名凭据
@@ -49,10 +48,9 @@ public static class ClaimTypes
     [Description("操作名凭据")] public static string ActionName = nameof(ActionName);
 
     /// <summary>
-    /// 元操作名凭据
+    ///     元操作名凭据
     /// </summary>
-    [Description("元操作名凭据")]
-    public static string MateActionName = nameof(MateActionName);
+    [Description("元操作名凭据")] public static string MateActionName = nameof(MateActionName);
 
     /// <summary>
     ///     签名凭据
