@@ -702,12 +702,12 @@
 				学校模型
 			</summary>
 		</member>
-		<member name="P:Artemis.Service.School.Models.School.SchoolName">
+		<member name="P:Artemis.Service.School.Models.School.Name">
 			<summary>
 				学校名称
 			</summary>
 		</member>
-		<member name="P:Artemis.Service.School.Models.School.SchoolCode">
+		<member name="P:Artemis.Service.School.Models.School.Code">
 			<summary>
 				学校编码
 			</summary>

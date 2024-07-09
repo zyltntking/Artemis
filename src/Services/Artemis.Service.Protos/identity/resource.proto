@@ -1,10 +1,9 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Service.Protos.Identity";
+option csharp_namespace = "Artemis.Service.Protos.Identity.Resource";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "common.proto";
-//import "identity/shared.proto";
 
 package artemis.service.protos.identity;
 
@@ -39,8 +38,8 @@ service Resource {
   // 更新凭据
   rpc UpdateClaim(UpdateClaimRequest) returns (AffectedResponse) {
     option (google.api.http) = {
-      put: "/api/Claims/{Id}"
-      body: "*"
+      put: "/api/Claims/{ClaimId}"
+      body: "Claim"
     };
   }
   // 批量更新凭据
@@ -53,14 +52,14 @@ service Resource {
   // 删除凭据
   rpc DeleteClaim(DeleteClaimRequest) returns (AffectedResponse) {
     option (google.api.http) = {
-      delete: "/api/Claims/{Id}"
+      delete: "/api/Claims/{ClaimId}"
     };
   }
   // 批量删除凭据
   rpc BatchDeleteClaim(BatchDeleteClaimRequest) returns (AffectedResponse) {
     option (google.api.http) = {
       delete: "/api/Claims/BatchDelete"
-      body: "Ids"
+      body: "ClaimIds"
     };
   }
 }
@@ -230,27 +229,33 @@ message BatchCreateClaimRequest {
   repeated CreateClaimRequest Batch = 1;
 }
 
+// 更新凭据数据包
+message UpdateClaimPacket {
+  /* 凭据类型
+   * @maxLength(128)
+   */
+  google.protobuf.StringValue ClaimType = 1;
+  /* 凭据值
+   * @maxLength(512)
+   */
+  google.protobuf.StringValue ClaimValue = 2;
+  /* 描述
+   * @maxLength(128)
+   */
+  google.protobuf.StringValue Description = 3;
+}
+
 // 更新凭据请求
 message UpdateClaimRequest {
   /* 凭据标识
    * @required
    * @guid
    */
-  string Id = 1;
-  /* 凭据类型
+  string ClaimId = 1;
+  /* 更新凭据数据包
    * @required
-   * @maxLength(128)
    */
-  string ClaimType = 2;
-  /* 凭据值
-   * @required
-   * @maxLength(512)
-   */
-  string ClaimValue = 3;
-  /* 描述
-   * @maxLength(128)
-   */
-  google.protobuf.StringValue Description = 4;
+  UpdateClaimPacket Claim = 2;
 }
 
 // 批量更新凭据请求
@@ -267,7 +272,7 @@ message DeleteClaimRequest {
    * @required
    * @guid
    */
-  string Id = 1;
+  string ClaimId = 1;
 }
 
 // 批量删除凭据请求
@@ -275,5 +280,5 @@ message BatchDeleteClaimRequest {
   /* 批量删除凭据标识
    * @required
    */
-  repeated string Ids = 1;
+  repeated string ClaimIds = 1;
 }

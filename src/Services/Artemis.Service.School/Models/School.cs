@@ -18,7 +18,7 @@ public class School : ConcurrencyPartition, ISchool
     [Required]
     [MaxLength(128)]
     [Comment("学校名称")]
-    public required string SchoolName { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     ///     学校编码
@@ -26,7 +26,15 @@ public class School : ConcurrencyPartition, ISchool
     [Required]
     [MaxLength(128)]
     [Comment("学校编码")]
-    public required string SchoolCode { get; set; }
+    public required string Code { get; set; }
+
+    /// <summary>
+    ///     学校类型
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [Comment("学校类型")]
+    public required string Type { get; set; }
 
     #endregion
 }

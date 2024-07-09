@@ -27,6 +27,11 @@ public class ResourceContext : DbContext
     public virtual DbSet<ArtemisDivision> Divisions { get; set; }
 
     /// <summary>
+    ///     设备数据集
+    /// </summary>
+    public virtual DbSet<ArtemisDevice> Devices { get; set; }
+
+    /// <summary>
     ///     数据字典数据集
     /// </summary>
     public virtual DbSet<ArtemisDataDictionary> DataDictionaries { get; set; }

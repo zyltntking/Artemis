@@ -24,7 +24,7 @@ public class Device : ConcurrencyModel, IDevice
     ///     设备类型
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("设备类型")]
     public required string Type { get; set; }
 
@@ -40,9 +40,50 @@ public class Device : ConcurrencyModel, IDevice
     ///     设备型号
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(64)]
     [Comment("设备型号")]
     public required string Model { get; set; }
+
+    /// <summary>
+    ///     设备序列号
+    /// </summary>
+    [Required]
+    [MaxLength(128)]
+    [Comment("设备序列号")]
+    public required string SerialNumber { get; set; }
+
+    /// <summary>
+    ///     设备状态
+    /// </summary>
+    [Required]
+    [MaxLength(64)]
+    [Comment("设备状态")]
+    public required string Status { get; set; }
+
+    /// <summary>
+    ///     购买日期
+    /// </summary>
+    [Required]
+    [Comment("购买日期")]
+    public DateTime PurchaseDate { get; set; }
+
+    /// <summary>
+    ///     安装日期
+    /// </summary>
+    [Comment("安装日期")]
+    public DateTime? InstallDate { get; set; }
+
+    /// <summary>
+    ///     保修日期
+    /// </summary>
+    [Comment("保修日期")]
+    public DateTime? WarrantyDate { get; set; }
+
+    /// <summary>
+    ///     维护日期
+    /// </summary>
+    [Comment("维护日期")]
+    public DateTime? MaintenanceDate { get; set; }
 
     /// <summary>
     ///     设备描述

@@ -5,6 +5,7 @@ using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Identity;
+using Artemis.Service.Protos.Identity.User;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -49,7 +50,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<PagedUserInfoResponse> SearchUserInfo(SearchUserRequest request,
+    public override async Task<SearchUserInfoResponse> SearchUserInfo(SearchUserInfoRequest request,
         ServerCallContext context)
     {
         var userInfos = await UserManager.FetchUserAsync(
@@ -60,9 +61,9 @@ public class UserService : User.UserBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var userReplies = userInfos.Items!.Select(item => item.Adapt<UserInfoPackage>());
+        var userReplies = userInfos.Items!.Select(item => item.Adapt<UserInfoPacket>());
 
-        var response = DataResult.Success(userInfos).Adapt<PagedUserInfoResponse>();
+        var response = DataResult.Success(userInfos).Adapt<SearchUserInfoResponse>();
 
         response.Data.Items.Add(userReplies);
 
@@ -77,15 +78,15 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取用户信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<UserInfoResponse> ReadUserInfo(UserIdRequest request, ServerCallContext context)
+    public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var userInfo = await UserManager.GetUserAsync(userId, context.CancellationToken);
 
-        if (userInfo is null) return DataResult.Fail<UserInfo>().Adapt<UserInfoResponse>();
+        if (userInfo is null) return DataResult.Fail<UserInfo>().Adapt<ReadUserInfoResponse>();
 
-        return DataResult.Success(userInfo).Adapt<UserInfoResponse>();
+        return DataResult.Success(userInfo).Adapt<ReadUserInfoResponse>();
     }
 
     /// <summary>
@@ -96,18 +97,18 @@ public class UserService : User.UserBase
     /// <returns></returns>
     [Description("创建用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
         var result = await UserManager.CreateUserAsync(new UserSign
         {
-            UserName = request.Sign.UserName,
-            Email = request.Sign?.Email,
-            PhoneNumber = request.Sign?.Phone
+            UserName = request.UserName,
+            Email = request.Email,
+            PhoneNumber = request.PhoneNumber
         }, request.Password, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -118,22 +119,22 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchCreateUser(BatchCreateUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request, ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
             create => new UserSign
             {
-                UserName = create.Sign.UserName,
-                Email = create.Sign?.Email,
-                PhoneNumber = create.Sign?.Phone
+                UserName = create.UserName,
+                Email = create.Email,
+                PhoneNumber = create.PhoneNumber
             },
             create => create.Password);
 
         var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -144,20 +145,20 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> UpdateUserInfo(UpdateUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateUser(UpdateUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.UpdateUserAsync(userId, new UserPackage
         {
-            UserName = request.Sign.UserName,
-            Email = request.Sign?.Email,
-            PhoneNumber = request.Sign?.Phone
+            UserName = request.User.UserName,
+            Email = request.User.Email,
+            PhoneNumber = request.User.PhoneNumber
         }, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -166,23 +167,23 @@ public class UserService : User.UserBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<EmptyResponse> BatchUpdateUserInfo(BatchUpdateUserRequest request,
+    public override async Task<AffectedResponse> BatchUpdateUser(BatchUpdateUserRequest request,
         ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
             update => Guid.Parse(update.UserId),
             update => new UserPackage
             {
-                UserName = update.Sign.UserName,
-                Email = update.Sign?.Email,
-                PhoneNumber = update.Sign?.Phone
+                UserName = update.User.UserName,
+                Email = update.User.Email,
+                PhoneNumber = update.User.PhoneNumber
             });
 
         var result = await UserManager.UpdateUsersAsync(dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -193,15 +194,15 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> DeleteUser(UserIdRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteUser(DeleteUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.DeleteUserAsync(userId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -212,15 +213,15 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchDeleteUser(BatchDeleteUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request, ServerCallContext context)
     {
         var idList = request.UserIds.Select(Guid.Parse).ToList();
 
         var result = await UserManager.DeleteUsersAsync(idList, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -231,7 +232,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户角色信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<PagedRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleRequest request,
+    public override async Task<SearchUserRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleInfoRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -243,9 +244,9 @@ public class UserService : User.UserBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var roleReplies = roleInfos.Items!.Select(item => item.Adapt<RoleInfoPackage>());
+        var roleReplies = roleInfos.Items!.Select(item => item.Adapt<UserRoleInfoPacket>());
 
-        var response = DataResult.Success(roleInfos).Adapt<PagedRoleInfoResponse>();
+        var response = DataResult.Success(roleInfos).Adapt<SearchUserRoleInfoResponse>();
 
         response.Data.Items.Add(roleReplies);
 
@@ -260,7 +261,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户角色信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<RoleInfoResponse> ReadUserRoleInfo(UserRoleIdRequest request, ServerCallContext context)
+    public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
@@ -270,9 +271,9 @@ public class UserService : User.UserBase
             roleId,
             context.CancellationToken);
 
-        if (roleInfo is null) return DataResult.Fail<RoleInfo>().Adapt<RoleInfoResponse>();
+        if (roleInfo is null) return DataResult.Fail<RoleInfo>().Adapt<ReadUserRoleInfoResponse>();
 
-        return DataResult.Success(roleInfo).Adapt<RoleInfoResponse>();
+        return DataResult.Success(roleInfo).Adapt<ReadUserRoleInfoResponse>();
     }
 
     /// <summary>
@@ -283,16 +284,16 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.Role.RoleId);
 
         var result = await UserManager.AddUserRoleAsync(userId, roleId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -303,7 +304,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchAddUserRole(BatchUserRoleIdRequest request,
+    public override async Task<AffectedResponse> BatchAddUserRole(BatchAddUserRoleRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -312,9 +313,9 @@ public class UserService : User.UserBase
 
         var result = await UserManager.AddUserRolesAsync(userId, roleIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -325,16 +326,16 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> RemoveUserRole(UserRoleIdRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
 
         var result = await UserManager.RemoveUserRoleAsync(userId, roleId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -345,7 +346,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchRemoveUserRole(BatchUserRoleIdRequest request,
+    public override async Task<AffectedResponse> BatchRemoveUserRole(BatchRemoveUserRoleRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -353,9 +354,9 @@ public class UserService : User.UserBase
 
         var result = await UserManager.RemoveUserRolesAsync(userId, roleIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -366,7 +367,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户凭据信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<PagedUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimRequest request,
+    public override async Task<SearchUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimInfoRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -379,9 +380,9 @@ public class UserService : User.UserBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var userClaimReplies = userClaimInfos.Items!.Select(item => item.Adapt<UserClaimInfoPackage>());
+        var userClaimReplies = userClaimInfos.Items!.Select(item => item.Adapt<UserClaimInfoPacket>());
 
-        var response = DataResult.Success(userClaimInfos).Adapt<PagedUserClaimInfoResponse>();
+        var response = DataResult.Success(userClaimInfos).Adapt<SearchUserClaimInfoResponse>();
 
         response.Data.Items.Add(userClaimReplies);
 
@@ -396,16 +397,16 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户凭据信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<UserClaimInfoResponse> ReadUserClaimInfo(UserClaimIdRequest request,
+    public override async Task<ReadUserClaimInfoResponse> ReadUserClaimInfo(ReadUserClaimInfoRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var userClaimInfo = await UserManager.GetUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
 
-        if (userClaimInfo is null) return DataResult.Fail<UserClaimInfo>().Adapt<UserClaimInfoResponse>();
+        if (userClaimInfo is null) return DataResult.Fail<UserClaimInfo>().Adapt<ReadUserClaimInfoResponse>();
 
-        return DataResult.Success(userClaimInfo).Adapt<UserClaimInfoResponse>();
+        return DataResult.Success(userClaimInfo).Adapt<ReadUserClaimInfoResponse>();
     }
 
     /// <summary>
@@ -416,7 +417,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -424,15 +425,15 @@ public class UserService : User.UserBase
             userId,
             new UserClaimPackage
             {
-                ClaimType = request.Claim.ClaimType,
-                ClaimValue = request.Claim.ClaimValue,
-                Description = request.Claim.Description
+                ClaimType = request.UserClaim.ClaimType,
+                ClaimValue = request.UserClaim.ClaimValue,
+                Description = request.UserClaim.Description
             },
             context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -443,7 +444,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
+    public override async Task<AffectedResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -457,9 +458,9 @@ public class UserService : User.UserBase
 
         var result = await UserManager.AddUserClaimsAsync(userId, userClaimPackages, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -470,7 +471,7 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> UpdateUserClaim(UpdateUserClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -479,15 +480,15 @@ public class UserService : User.UserBase
             request.ClaimId,
             new UserClaimPackage
             {
-                ClaimType = request.Claim.ClaimType,
-                ClaimValue = request.Claim.ClaimValue,
-                Description = request.Claim.Description
+                ClaimType = request.UserClaim.ClaimType,
+                ClaimValue = request.UserClaim.ClaimValue,
+                Description = request.UserClaim.Description
             },
             context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -496,7 +497,7 @@ public class UserService : User.UserBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<EmptyResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request,
+    public override async Task<AffectedResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -512,9 +513,9 @@ public class UserService : User.UserBase
 
         var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -525,15 +526,15 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     /// <summary>
@@ -544,16 +545,16 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<EmptyResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
+    public override async Task<AffectedResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.RemoveUserClaimsAsync(userId, request.ClaimIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
 
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
     }
 
     #endregion

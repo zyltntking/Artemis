@@ -61,7 +61,7 @@ public interface IDataDict : IMetadata
 /// <summary>
 ///     元数据信息
 /// </summary>
-public abstract class MetadataInfo : IMetadata
+file abstract class MetadataInfo : IMetadata
 {
     #region Implementation of IMeta
 
@@ -82,7 +82,7 @@ public abstract class MetadataInfo : IMetadata
 /// <summary>
 ///     数据字典信息
 /// </summary>
-public abstract class DataDictInfo : MetadataInfo, IDataDict
+file abstract class DataDictInfo : MetadataInfo, IDataDict
 {
     #region Implementation of IDataDict
 

@@ -8,10 +8,15 @@ public interface ISchool
     /// <summary>
     ///     学校名称
     /// </summary>
-    string SchoolName { get; set; }
+    string Name { get; set; }
 
     /// <summary>
     ///     学校编码
     /// </summary>
-    string SchoolCode { get; set; }
+    string Code { get; set; }
+
+    /// <summary>
+    ///     学校类型
+    /// </summary>
+    string Type { get; set; }
 }

@@ -66,7 +66,7 @@ file interface INormalizedAddress
 /// <summary>
 ///     地址信息
 /// </summary>
-public abstract class AddressInfo : IAddress
+file abstract class AddressInfo : IAddress
 {
     #region Overrides of Object
 
@@ -133,7 +133,7 @@ public abstract class AddressInfo : IAddress
 /// <summary>
 ///     地址结构
 /// </summary>
-public abstract class AddressStructure : AddressInfo, INormalizedAddress
+file abstract class AddressStructure : AddressInfo, INormalizedAddress
 {
     #region Implementation of INormalizedAddress
 

@@ -23,7 +23,7 @@ file interface IClaim : ICheckStamp
 /// <summary>
 ///     凭据信息
 /// </summary>
-public abstract class ClaimInfo : IClaim
+file abstract class ClaimInfo : IClaim
 {
     #region Implementation of ICheckStamp
 

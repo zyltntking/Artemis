@@ -3,7 +3,7 @@ using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
-using Artemis.Service.Protos.Identity;
+using Artemis.Service.Protos.Identity.Resource;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;

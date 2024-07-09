@@ -34,8 +34,37 @@ public class Division : ConcurrencyModel, IDivision
     public required int Level { get; set; }
 
     /// <summary>
-    ///     父级行政区划标识
+    ///     行政区划类型
     /// </summary>
-    [Comment("父级行政区划标识")]
+    [Required]
+    [MaxLength(32)]
+    [Comment("行政区划类型")]
+    public required string Type { get; set; }
+
+    /// <summary>
+    ///     行政区划全名
+    /// </summary>
+    [MaxLength(256)]
+    [Comment("行政区划全名")]
+    public string? FullName { get; set; }
+
+    /// <summary>
+    ///     行政区划拼音
+    /// </summary>
+    [MaxLength(256)]
+    [Comment("行政区划拼音")]
+    public string? Pinyin { get; set; }
+
+    /// <summary>
+    ///     行政区划备注
+    /// </summary>
+    [MaxLength(512)]
+    [Comment("行政区划备注")]
+    public string? Remark { get; set; }
+
+    /// <summary>
+    ///     上级行政区划标识
+    /// </summary>
+    [Comment("上级行政区划标识")]
     public Guid ParentId { get; set; } = Guid.Empty;
 }
