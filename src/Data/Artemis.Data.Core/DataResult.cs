@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Artemis.Data.Core;
 
+// todo clean up
+
 #region interface
 
 /// <summary>
@@ -772,7 +774,7 @@ public static class DataResult
 /// <summary>
 ///     结果状态
 /// </summary>
-internal static class ResultStatus
+public static class ResultStatus
 {
     /// <summary>
     ///     成功

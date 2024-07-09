@@ -54,4 +54,8 @@
 		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Validators\Resource\" />
+	</ItemGroup>
+
 </Project>

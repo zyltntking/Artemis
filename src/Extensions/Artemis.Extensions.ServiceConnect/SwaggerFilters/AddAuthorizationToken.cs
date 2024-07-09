@@ -18,7 +18,7 @@ internal sealed class AddAuthorizationToken : IOperationFilter
     /// </summary>
     /// <param name="options"></param>
     public AddAuthorizationToken(
-        IOptions<ArtemisAuthorizationConfig> options)
+        IOptions<ArtemisAuthorizationOptions> options)
     {
         Options = options.Value;
     }
@@ -50,11 +50,11 @@ internal sealed class AddAuthorizationToken : IOperationFilter
                 Schema = new OpenApiSchema
                 {
                     Type = "string",
-                    MinLength = 32,
-                    MaxLength = 32,
-                    Format = "md5",
-                    Pattern = Matcher.Md5Pattern(),
-                    Example = new OpenApiString("6BB0A25E549A723D3323F21E54570488")
+                    MinLength = 40,
+                    MaxLength = 40,
+                    Format = "token",
+                    Pattern = @"Artemis [A-F0-9]{32}",
+                    Example = new OpenApiString("Artemis 6BB0A25E549A723D3323F21E54570488")
                 },
                 Description = "认证令牌"
             });
@@ -65,5 +65,5 @@ internal sealed class AddAuthorizationToken : IOperationFilter
     /// <summary>
     ///     认证配置依赖
     /// </summary>
-    private ArtemisAuthorizationConfig Options { get; }
+    private ArtemisAuthorizationOptions Options { get; }
 }

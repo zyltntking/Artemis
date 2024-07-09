@@ -4862,21 +4862,6 @@
                 实例辅助类
             </summary>
         </member>
-        <member name="P:Artemis.Data.Core.Generator.ConcurrencyStamp">
-            <summary>
-                生成并发戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Generator.SecurityStamp">
-            <summary>
-                生成加密戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.Generator.Signature">
-            <summary>
-                生成签名
-            </summary>
-        </member>
         <member name="M:Artemis.Data.Core.Generator.CreateInstance``1">
             <summary>
                 创建实例
@@ -4890,21 +4875,6 @@
                 判断是否继承
             </summary>
             <typeparam name="TEntity">实体类型</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Generator.CheckStamp(System.String)">
-            <summary>
-                生成检查戳
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Data.Core.Generator.PairSummary(System.String,System.String)">
-            <summary>
-                键值对摘要
-            </summary>
-            <param name="key"></param>
-            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.Hash">
@@ -5585,7 +5555,7 @@
             <param name="input">输入字符串</param>
             <returns>标准化字符串</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairStampNormalize(System.String,System.String)">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairStamp(System.String,System.String)">
             <summary>
                 键值对戳标准化
             </summary>
@@ -5593,14 +5563,14 @@
             <param name="value">值</param>
             <returns>戳</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairStampNormalize(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairStamp(System.Collections.Generic.KeyValuePair{System.String,System.String})">
             <summary>
                 键值对戳标准化
             </summary>
             <param name="pair">键值对</param>
             <returns>戳</returns>
         </member>
-        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairFlagNormalize(System.String,System.String)">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairSummary(System.String,System.String)">
             <summary>
                 键值对标识标准化
             </summary>
@@ -5608,12 +5578,34 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairFlagNormalize(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairSummary(System.Collections.Generic.KeyValuePair{System.String,System.String})">
             <summary>
                 键值对标识标准化
             </summary>
             <param name="pair">键值对</param>
             <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.Normalize.CheckStamp(System.String)">
+            <summary>
+                生成检查戳
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Artemis.Data.Core.Normalize.ConcurrencyStamp">
+            <summary>
+                生成并发戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Normalize.SecurityStamp">
+            <summary>
+                生成加密戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Normalize.Signature">
+            <summary>
+                生成签名
+            </summary>
         </member>
         <member name="T:Artemis.Data.Core.IPageSlot">
             <summary>

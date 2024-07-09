@@ -11,9 +11,14 @@ internal static class SharedKey
     public const string AuthorizationMessage = nameof(AuthorizationMessage);
 
     /// <summary>
+    /// Token架构
+    /// </summary>
+    public const string Schema = "Artemis";
+
+    /// <summary>
     ///     令牌
     /// </summary>
-    public const string Token = nameof(Token);
+    public const string Token = "Authorization";
 
     /// <summary>
     ///     缓存名空间

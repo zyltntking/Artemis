@@ -111,7 +111,7 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量创建用户
+    ///     批量创建用户
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -120,13 +120,13 @@ public class UserService : User.UserBase
     [Authorize(IdentityPolicy.Token)]
     public override async Task<EmptyResponse> BatchCreateUser(BatchCreateUserRequest request, ServerCallContext context)
     {
-        var dictionary = request.Creates.ToDictionary(
+        var dictionary = request.Batch.ToDictionary(
             create => new UserSign
             {
-                UserName = create.Sign.UserName, 
-                Email = create.Sign?.Email, 
+                UserName = create.Sign.UserName,
+                Email = create.Sign?.Email,
                 PhoneNumber = create.Sign?.Phone
-            }, 
+            },
             create => create.Password);
 
         var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
@@ -161,14 +161,15 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量更新用户信息
+    ///     批量更新用户信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<EmptyResponse> BatchUpdateUserInfo(BatchUpdateUserRequest request, ServerCallContext context)
+    public override async Task<EmptyResponse> BatchUpdateUserInfo(BatchUpdateUserRequest request,
+        ServerCallContext context)
     {
-        var dictionary = request.Updates.ToDictionary(
+        var dictionary = request.Batch.ToDictionary(
             update => Guid.Parse(update.UserId),
             update => new UserPackage
             {
@@ -204,7 +205,7 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 批量删除用户
+    ///     批量删除用户
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -295,6 +296,28 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
+    ///     批量添加用户角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量添加用户角色")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchAddUserRole(BatchUserRoleIdRequest request,
+        ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var roleIds = request.RoleIds.Select(Guid.Parse).ToList();
+
+        var result = await UserManager.AddUserRolesAsync(userId, roleIds, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
     ///     移除用户角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
@@ -315,24 +338,45 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 查询用户凭据信息
+    /// 批量移除用户角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量移除用户角色")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchRemoveUserRole(BatchUserRoleIdRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+        var roleIds = request.RoleIds.Select(Guid.Parse).ToList();
+
+        var result = await UserManager.RemoveUserRolesAsync(userId, roleIds, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    ///     查询用户凭据信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户凭据信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<PagedUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimRequest request, ServerCallContext context)
+    public override async Task<PagedUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var userClaimInfos = await UserManager.FetchUserClaimsAsync(
-            userId, 
-            request.ClaimType, 
-            request.ClaimValue, 
-            request.Page ?? 0, 
+            userId,
+            request.ClaimType,
+            request.ClaimValue,
+            request.Page ?? 0,
             request.Size ?? 0,
-        context.CancellationToken);
+            context.CancellationToken);
 
         var userClaimReplies = userClaimInfos.Items!.Select(item => item.Adapt<UserClaimInfoPackage>());
 
@@ -344,14 +388,15 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 获取用户凭据信息
+    ///     获取用户凭据信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户凭据信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<UserClaimInfoResponse> ReadUserClaimInfo(UserClaimIdRequest request, ServerCallContext context)
+    public override async Task<UserClaimInfoResponse> ReadUserClaimInfo(UserClaimIdRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -363,7 +408,7 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 添加用户凭据
+    ///     添加用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -375,12 +420,11 @@ public class UserService : User.UserBase
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.AddUserClaimAsync(
-            userId, 
+            userId,
             new UserClaimPackage
             {
                 ClaimType = request.Claim.ClaimType,
                 ClaimValue = request.Claim.ClaimValue,
-                CheckStamp = string.Empty,
                 Description = request.Claim.Description
             },
             context.CancellationToken);
@@ -391,7 +435,33 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 更新用户凭据
+    /// 批量添加用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量添加用户凭据")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchAddUserClaim(BatchAddUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var userClaimPackages = request.Batch.Select(claim => new UserClaimPackage
+        {
+            ClaimType = claim.ClaimType,
+            ClaimValue = claim.ClaimValue,
+            Description = claim.Description
+        }).ToList();
+
+        var result = await UserManager.AddUserClaimsAsync(userId, userClaimPackages, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    ///     更新用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -403,13 +473,12 @@ public class UserService : User.UserBase
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.UpdateUserClaimAsync(
-            userId, 
-            request.ClaimId, 
+            userId,
+            request.ClaimId,
             new UserClaimPackage
             {
                 ClaimType = request.Claim.ClaimType,
                 ClaimValue = request.Claim.ClaimValue,
-                CheckStamp = string.Empty,
                 Description = request.Claim.Description
             },
             context.CancellationToken);
@@ -420,7 +489,33 @@ public class UserService : User.UserBase
     }
 
     /// <summary>
-    /// 删除用户凭据
+    /// 批量更新用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override async Task<EmptyResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var dictionary = request.Batch.ToDictionary(
+            update => update.ClaimId,
+            update => new UserClaimPackage
+            {
+                ClaimType = update.Claim.ClaimType,
+                ClaimValue = update.Claim.ClaimValue,
+                Description = update.Claim.Description
+            });
+
+        var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    ///     删除用户凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -432,6 +527,25 @@ public class UserService : User.UserBase
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
+
+        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+
+        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 批量删除用户凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除用户凭据")]
+    [Authorize(IdentityPolicy.Token)]
+    public override async Task<EmptyResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await UserManager.RemoveUserClaimsAsync(userId, request.ClaimIds, context.CancellationToken);
 
         if (result.Succeeded) return DataResult.EmptySuccess().Adapt<EmptyResponse>();
 

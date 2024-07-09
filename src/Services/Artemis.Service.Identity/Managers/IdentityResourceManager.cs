@@ -161,27 +161,26 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果和创建成功的凭据实例</returns>
-    public async Task<(StoreResult result, ClaimInfo? claim)> CreateClaimAsync(
+    public async Task<StoreResult> CreateClaimAsync(
         ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var exists = await ClaimStore.EntityQuery
-            .Where(claim => claim.CheckStamp == package.CheckStamp)
+            .Where(claim => claim.ClaimType == package.ClaimType)
+            .Where(claim => claim.ClaimValue == package.ClaimValue)
             .AnyAsync(cancellationToken);
 
-        var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+        var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
-        if (exists) return (StoreResult.EntityFoundFailed(nameof(IdentityClaim), summary), default);
+        if (exists) return StoreResult.EntityFoundFailed(nameof(IdentityClaim), summary);
 
         var claim = Instance.CreateInstance<IdentityClaim, ClaimPackage>(package);
 
-        claim.CheckStamp = Generator.CheckStamp(summary);
+        claim.CheckStamp = summary.CheckStamp();
 
-        var result = await ClaimStore.CreateAsync(claim, cancellationToken);
-
-        return (result, claim.Adapt<ClaimInfo>());
+        return await ClaimStore.CreateAsync(claim, cancellationToken);
     }
 
     /// <summary>
@@ -198,7 +197,7 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
 
         var claimPackages = packages.ToList();
 
-        var checkStamps = claimPackages.Select(claim => claim.CheckStamp).ToList();
+        var checkStamps = claimPackages.Select(claim => Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue)).ToList();
 
         var storedCheckStamps = await ClaimStore.EntityQuery
             .Where(claim => checkStamps.Contains(claim.CheckStamp))
@@ -210,7 +209,7 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
         if (notSetCheckStamps.Any())
         {
             var claims = claimPackages
-                .Where(claim => notSetCheckStamps.Contains(claim.CheckStamp))
+                .Where(claim => notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(claim.ClaimType, claim.ClaimValue)))
                 .Select(Instance.CreateInstance<IdentityClaim, ClaimPackage>)
                 .ToList();
 
@@ -218,7 +217,7 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
         }
 
         var flag =
-            $"{string.Join(',', claimPackages.Select(item => Generator.PairSummary(item.ClaimType, item.ClaimValue)))}";
+            $"{string.Join(',', claimPackages.Select(item => Normalize.KeyValuePairSummary(item.ClaimType, item.ClaimValue)))}";
 
         return StoreResult.EntityFoundFailed(nameof(IdentityClaim), flag);
     }
@@ -230,7 +229,7 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
-    public async Task<(StoreResult result, ClaimInfo? claim)> UpdateClaimAsync(Guid id, ClaimPackage package,
+    public async Task<StoreResult> UpdateClaimAsync(Guid id, ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -241,12 +240,10 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
         {
             package.Adapt(claim);
 
-            var result = await ClaimStore.UpdateAsync(claim, cancellationToken);
-
-            return (result, claim.Adapt<ClaimInfo>());
+            return await ClaimStore.UpdateAsync(claim, cancellationToken);
         }
 
-        return (StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.IdToString()!), default);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.IdToString()!);
     }
 
     /// <summary>
@@ -295,7 +292,7 @@ public sealed class IdentityResourceManager : Manager<IdentityClaim>, IIdentityR
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<(StoreResult result, ClaimInfo? role)> CreateOrUpdateClaimAsync(Guid id, ClaimPackage package,
+    public async Task<StoreResult> CreateOrUpdateClaimAsync(Guid id, ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

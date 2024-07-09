@@ -25,7 +25,8 @@ public static class GrpcExtensions
         builder.Services.AddGrpc(options =>
         {
             options.EnableDetailedErrors = true;
-            if (enableValidator) options.Interceptors.Add<MessageValidator>();
+            if (enableValidator) 
+                options.Interceptors.Add<MessageValidator>();
             options.Interceptors.Add<AddInsLog>();
             options.Interceptors.Add<FriendlyException>();
         }).AddJsonTranscoding();

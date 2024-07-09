@@ -1,4 +1,6 @@
 ﻿using Artemis.Data.Core;
+using Grpc.AspNetCore.Server;
+using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Http;
@@ -50,7 +52,11 @@ internal class AuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareRe
     /// <returns></returns>
     protected virtual Task FailHandler(HttpContext context)
     {
-        var result = DataResult.AdapterAuthFail(AuthorizationMessage ?? string.Empty);
+        var result = DataResult.AuthFail(AuthorizationMessage ?? string.Empty);
+
+        if (context.Request.ContentType == "application/grpc")
+            throw new RpcException(new Status(StatusCode.PermissionDenied, AuthorizationMessage!),
+                AuthorizationMessage!);
 
         return context.Response.WriteAsJsonAsync(result);
     }

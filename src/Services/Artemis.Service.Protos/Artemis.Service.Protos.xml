@@ -51,7 +51,7 @@
         </member>
         <member name="P:Artemis.Service.Protos.EmptyResponse.Message">
             <summary>
-            消息
+            响应消息
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.EmptyResponse.ErrorFieldNumber">
@@ -60,6 +60,7 @@
         <member name="P:Artemis.Service.Protos.EmptyResponse.Error">
             <summary>
             错误
+            @exception
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.EmptyResponse.DateTimeFieldNumber">
@@ -81,6 +82,73 @@
              响应时间戳
              @timestamp
              </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.AffectedResponse">
+            <summary>
+            受影响响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Message">
+            <summary>
+            响应消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.DateTime">
+             <summary>
+            
+             响应时间
+             @datetime
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Timestamp">
+             <summary>
+            
+             响应时间戳
+             @timestamp
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.AffectedResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.AffectedResponse.Data">
+            <summary>
+            受影响行数
+            @min(0)
+            </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Pagination">
             <summary>
@@ -105,361 +173,392 @@
             @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.SampleReflection">
-            <summary>Holder for reflection information generated from sample.proto</summary>
+        <member name="T:Artemis.Service.Protos.Identity.ResourceReflection">
+            <summary>Holder for reflection information generated from identity/resource.proto</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleReflection.Descriptor">
-            <summary>File descriptor for sample.proto</summary>
+        <member name="P:Artemis.Service.Protos.Identity.ResourceReflection.Descriptor">
+            <summary>File descriptor for identity/resource.proto</summary>
         </member>
-        <member name="T:Artemis.Service.Protos.SampleRequest">
+        <member name="T:Artemis.Service.Protos.Identity.SearchClaimInfoRequest">
             <summary>
-            样例请求
+            查询凭据信息请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.EmailFieldNumber">
-            <summary>Field number for the "Email" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.ClaimTypeFieldNumber">
+            <summary>Field number for the "ClaimType" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Email">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.ClaimType">
             <summary>
-            邮箱
-            @email
-            @length(0,128)
+            类型
+            @length(1,128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.PhoneFieldNumber">
-            <summary>Field number for the "Phone" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.ClaimValueFieldNumber">
+            <summary>Field number for the "ClaimValue" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Phone">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.ClaimValue">
             <summary>
-            手机号码
-            @phone
-            @length(0,128)
+            值
+            @length(1,512)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.HostFieldNumber">
-            <summary>Field number for the "Host" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Host">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.Page">
             <summary>
-            主机
-            @hostname
+            页码
+            @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.Ipv4FieldNumber">
-            <summary>Field number for the "Ipv4" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Ipv4">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoRequest.Size">
             <summary>
-            Ipv4
-            @ipv4
+            条目数
+            @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.Ipv6FieldNumber">
-            <summary>Field number for the "Ipv6" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Ipv6">
+        <member name="T:Artemis.Service.Protos.Identity.ClaimInfoPacket">
             <summary>
-            Ipv6
-            @ipv6
+            凭据信息数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.DatetimeFieldNumber">
-            <summary>Field number for the "Datetime" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimInfoPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Datetime">
+        <member name="P:Artemis.Service.Protos.Identity.ClaimInfoPacket.Id">
             <summary>
-            Datetime
-            @datetime
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.UriFieldNumber">
-            <summary>Field number for the "Uri" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Uri">
-            <summary>
-            Uri
-            @uri
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.DateFieldNumber">
-            <summary>Field number for the "Date" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Date">
-            <summary>
-            Date
-            @date
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.TimeFieldNumber">
-            <summary>Field number for the "Time" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Time">
-            <summary>
-            Time
-            @time
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.Md5FieldNumber">
-            <summary>Field number for the "Md5" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Md5">
-            <summary>
-            Md5
-            @md5
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.CarFieldNumber">
-            <summary>Field number for the "Car" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Car">
-            <summary>
-            Car
-            @car
-            @example(云A12345)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.GuidFieldNumber">
-            <summary>Field number for the "Guid" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Guid">
-            <summary>
-            Guid
+            凭据标识
+            @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.MinIntFieldNumber">
-            <summary>Field number for the "MinInt" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimInfoPacket.ClaimTypeFieldNumber">
+            <summary>Field number for the "ClaimType" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.MinInt">
+        <member name="P:Artemis.Service.Protos.Identity.ClaimInfoPacket.ClaimType">
             <summary>
-            MinInt
-            @min(1)
+            凭据类型
+            @required
+            @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.MaxIntFieldNumber">
-            <summary>Field number for the "MaxInt" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimInfoPacket.ClaimValueFieldNumber">
+            <summary>Field number for the "ClaimValue" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.MaxInt">
-             <summary>
-            
-             MaxInt
-             @max(100)
-             </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.RangeIntFieldNumber">
-            <summary>Field number for the "RangeInt" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.RangeInt">
+        <member name="P:Artemis.Service.Protos.Identity.ClaimInfoPacket.ClaimValue">
             <summary>
-            RangeInt
-            @range(1,100)
+            凭据值
+            @required
+            @maxLength(512)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.IdCardFieldNumber">
-            <summary>Field number for the "IdCard" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimInfoPacket.CheckStampFieldNumber">
+            <summary>Field number for the "CheckStamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.IdCard">
+        <member name="P:Artemis.Service.Protos.Identity.ClaimInfoPacket.CheckStamp">
             <summary>
-            IdCard
-            @idcard
+            校验戳
+            @required
+            @md5
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.TelPhoneFieldNumber">
-            <summary>Field number for the "TelPhone" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimInfoPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.TelPhone">
+        <member name="P:Artemis.Service.Protos.Identity.ClaimInfoPacket.Description">
             <summary>
-            TelPhone
-            @tel
-            @example(0871-68099999)
+            描述
+            @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.VideoFieldNumber">
-            <summary>Field number for the "Video" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Video">
+        <member name="T:Artemis.Service.Protos.Identity.PagedClaimInfoPacket">
             <summary>
-            Video
-            @video-url
-            @example(https://www.example.com/example.mp4)
+            分页查询凭据信息数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.SampleRequest.ImageFieldNumber">
-            <summary>Field number for the "Image" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.SampleRequest.Image">
+        <member name="P:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.Page">
             <summary>
-            Image
-            @image-url
-            @example(https://www.example.com/image.png)
+            页码
+            @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.HelloRequest">
+        <member name="F:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.Size">
             <summary>
-            SayHelloStream request message.
+            条目数
+            @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloRequest.NameFieldNumber">
-            <summary>Field number for the "name" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloRequest.Name">
+        <member name="P:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.Total">
             <summary>
-            Name to say hello to.
+            数据总数
+            @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloRequest.CountFieldNumber">
-            <summary>Field number for the "count" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloRequest.Count">
+        <member name="P:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.Count">
             <summary>
-            Count of messages to send.
-            @min(1)
+            条件过滤后的数据量
+            @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.HelloReply">
+        <member name="F:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.PagedClaimInfoPacket.Items">
             <summary>
-            SayHello response message.
+            凭据信息列表
+            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloReply.MessageFieldNumber">
-            <summary>Field number for the "message" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.HelloReply.Message">
+        <member name="T:Artemis.Service.Protos.Identity.SearchClaimInfoResponse">
             <summary>
-            Hello reply message.
+            查询凭据信息响应
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.HelloResponse">
-            <summary>
-            HelloResponse
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Code">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Message">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Message">
             <summary>
-            消息
+            响应消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Error">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.HelloResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.HelloResponse.Data">
+        <member name="P:Artemis.Service.Protos.Identity.SearchClaimInfoResponse.Data">
             <summary>
-            Hello响应数据
+            分页凭据信息数据包
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.ReadClaimInfoRequest">
+            <summary>
+            读取凭据信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoRequest.ClaimIdFieldNumber">
+            <summary>Field number for the "ClaimId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoRequest.ClaimId">
+            <summary>
+            凭据标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.ReadClaimInfoResponse">
+            <summary>
+            读取凭据信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Message">
+            <summary>
+            响应消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.DateTime">
+            <summary>
+            响应时间
             @datetime
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Sample">
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Timestamp">
             <summary>
-            样例服务协议
+            响应时间戳
+            @timestamp
             </summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Sample.Descriptor">
+        <member name="F:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ReadClaimInfoResponse.Data">
+            <summary>
+            凭据信息数据包
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.CreateClaimRequest">
+            <summary>
+            创建凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.CreateClaimRequest.ClaimTypeFieldNumber">
+            <summary>Field number for the "ClaimType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.CreateClaimRequest.ClaimType">
+            <summary>
+            凭据类型
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.CreateClaimRequest.ClaimValueFieldNumber">
+            <summary>Field number for the "ClaimValue" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.CreateClaimRequest.ClaimValue">
+            <summary>
+            凭据值
+            @required
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.CreateClaimRequest.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.CreateClaimRequest.Description">
+            <summary>
+            描述
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.Resource">
+            <summary>
+            资源服务协议
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.Resource.Descriptor">
             <summary>Service descriptor</summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Sample.SampleBase">
-            <summary>Base class for server-side implementations of Sample</summary>
+        <member name="T:Artemis.Service.Protos.Identity.Resource.ResourceBase">
+            <summary>Base class for server-side implementations of Resource</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleBase.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.SearchClaimInfo(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            测试字段约束
+            查询凭据信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleBase.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.HelloResponse},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.ReadClaimInfo(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            测试服务器流式处理
+            读取凭据信息
             </summary>
             <param name="request">The request received from the client.</param>
-            <param name="responseStream">Used for sending responses back to the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>A task indicating completion of the handler.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleBase.StreamingFromClient(Grpc.Core.IAsyncStreamReader{Artemis.Service.Protos.HelloRequest},Grpc.Core.ServerCallContext)">
-            <summary>
-            Client streaming
-            </summary>
-            <param name="requestStream">Used for reading requests from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleBase.StreamingBothWays(Grpc.Core.IAsyncStreamReader{Artemis.Service.Protos.HelloRequest},Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.HelloResponse},Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.CreateClaim(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            Bi-directional streaming
+            创建凭据
             </summary>
-            <param name="requestStream">Used for reading requests from the client.</param>
-            <param name="responseStream">Used for sending responses back to the client.</param>
+            <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>A task indicating completion of the handler.</returns>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="T:Artemis.Service.Protos.Sample.SampleClient">
-            <summary>Client for Sample</summary>
+        <member name="T:Artemis.Service.Protos.Identity.Resource.ResourceClient">
+            <summary>Client for Resource</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.ChannelBase)">
-            <summary>Creates a new client for Sample</summary>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for Resource</summary>
             <param name="channel">The channel to use to make remote calls.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.CallInvoker)">
-            <summary>Creates a new client for Sample that uses a custom <c>CallInvoker</c>.</summary>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for Resource that uses a custom <c>CallInvoker</c>.</summary>
             <param name="callInvoker">The callInvoker to use to make remote calls.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.#ctor">
             <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.SearchClaimInfo(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            测试字段约束
+            查询凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -467,17 +566,17 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.SearchClaimInfo(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            测试字段约束
+            查询凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.TestAsync(Artemis.Service.Protos.SampleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.SearchClaimInfoAsync(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            测试字段约束
+            查询凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -485,17 +584,35 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.TestAsync(Artemis.Service.Protos.SampleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.SearchClaimInfoAsync(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            测试字段约束
+            查询凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.ReadClaimInfo(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            测试服务器流式处理
+            读取凭据信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.ReadClaimInfo(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取凭据信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.ReadClaimInfoAsync(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -503,54 +620,58 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.ReadClaimInfoAsync(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            测试服务器流式处理
+            读取凭据信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingFromClient(Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.CreateClaim(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            Client streaming
+            创建凭据
             </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.CreateClaim(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.CreateClaimAsync(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
             <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingFromClient(Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.CreateClaimAsync(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.CallOptions)">
             <summary>
-            Client streaming
+            创建凭据
             </summary>
+            <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingBothWays(Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            Bi-directional streaming
-            </summary>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingBothWays(Grpc.Core.CallOptions)">
-            <summary>
-            Bi-directional streaming
-            </summary>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Sample.SampleClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
             <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.BindService(Artemis.Service.Protos.Sample.SampleBase)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.BindService(Artemis.Service.Protos.Identity.Resource.ResourceBase)">
             <summary>Creates service definition that can be registered with a server</summary>
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Sample.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Protos.Sample.SampleBase)">
+        <member name="M:Artemis.Service.Protos.Identity.Resource.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Protos.Identity.Resource.ResourceBase)">
             <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
             Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
@@ -727,10 +848,10 @@
             重置密码请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.BatchResetPasswordRequest.DictionaryFieldNumber">
-            <summary>Field number for the "Dictionary" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.BatchResetPasswordRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.BatchResetPasswordRequest.Dictionary">
+        <member name="P:Artemis.Service.Protos.Identity.BatchResetPasswordRequest.Batch">
             <summary>
             重置对象列表
             @required
@@ -1282,9 +1403,25 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserBase.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
             移除用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除用户角色
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1314,6 +1451,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchAddUserClaim(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserBase.UpdateUserClaim(Artemis.Service.Protos.Identity.UpdateUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             更新用户凭据
@@ -1322,9 +1467,25 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchUpdateUserClaim(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserBase.DeleteUserClaim(Artemis.Service.Protos.Identity.UserClaimIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserBase.BatchDeleteUserClaim(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除用户凭据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1744,6 +1905,42 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             移除用户角色
@@ -1775,6 +1972,42 @@
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.CallOptions)">
             <summary>
             移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除用户角色
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -1888,6 +2121,42 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserClaim(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserClaim(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserClaimAsync(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchAddUserClaimAsync(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.UpdateUserClaim(Artemis.Service.Protos.Identity.UpdateUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新用户凭据
@@ -1924,6 +2193,42 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserClaim(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserClaim(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserClaimAsync(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchUpdateUserClaimAsync(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.DeleteUserClaim(Artemis.Service.Protos.Identity.UserClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除用户凭据
@@ -1955,6 +2260,42 @@
         <member name="M:Artemis.Service.Protos.Identity.User.UserClient.DeleteUserClaimAsync(Artemis.Service.Protos.Identity.UserClaimIdRequest,Grpc.Core.CallOptions)">
             <summary>
             删除用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserClaim(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserClaim(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserClaimAsync(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.User.UserClient.BatchDeleteUserClaimAsync(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除用户凭据
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -2201,6 +2542,11 @@
         <member name="P:Artemis.Service.Protos.Identity.RoleInfoPackage.Description">
             <summary>
             描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.UserClaimInfoPackage">
+            <summary>
+            用户凭据信息数据包
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Identity.UserClaimInfoPackage.IdFieldNumber">
@@ -2956,10 +3302,10 @@
             批量创建用户请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.BatchCreateUserRequest.CreatesFieldNumber">
-            <summary>Field number for the "Creates" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.BatchCreateUserRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.BatchCreateUserRequest.Creates">
+        <member name="P:Artemis.Service.Protos.Identity.BatchCreateUserRequest.Batch">
             <summary>
             创建用户列表
             @required
@@ -2970,10 +3316,10 @@
             批量更新用户请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.UpdatesFieldNumber">
-            <summary>Field number for the "Updates" field.</summary>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.Updates">
+        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateUserRequest.Batch">
             <summary>
             更新用户列表
             @required
@@ -3012,37 +3358,80 @@
             角色标识信息
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Identity.AddClaimRequest">
+        <member name="T:Artemis.Service.Protos.Identity.BatchUserRoleIdRequest">
             <summary>
-            添加凭据请求
+            批量添加用户角色请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.AddClaimRequest.ClaimTypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.BatchUserRoleIdRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUserRoleIdRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUserRoleIdRequest.RoleIdsFieldNumber">
+            <summary>Field number for the "RoleIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUserRoleIdRequest.RoleIds">
+            <summary>
+            角色标识列表
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.AddSubClaimRequest">
+            <summary>
+            凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AddSubClaimRequest.ClaimTypeFieldNumber">
             <summary>Field number for the "ClaimType" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.AddClaimRequest.ClaimType">
+        <member name="P:Artemis.Service.Protos.Identity.AddSubClaimRequest.ClaimType">
             <summary>
             凭据类型
             @required
             @length(1,128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.AddClaimRequest.ClaimValueFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.AddSubClaimRequest.ClaimValueFieldNumber">
             <summary>Field number for the "ClaimValue" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.AddClaimRequest.ClaimValue">
+        <member name="P:Artemis.Service.Protos.Identity.AddSubClaimRequest.ClaimValue">
             <summary>
             凭据值
             @required
             @length(1,512)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.AddClaimRequest.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.AddSubClaimRequest.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.AddClaimRequest.Description">
+        <member name="P:Artemis.Service.Protos.Identity.AddSubClaimRequest.Description">
             <summary>
             描述
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateSubClaimRequest.ClaimIdFieldNumber">
+            <summary>Field number for the "ClaimId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateSubClaimRequest.ClaimId">
+            <summary>
+            用户凭据标识
+            @required
+            @min(1)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateSubClaimRequest.ClaimFieldNumber">
+            <summary>Field number for the "Claim" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateSubClaimRequest.Claim">
+            <summary>
+            凭据信息
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Identity.AddUserClaimRequest">
@@ -3066,6 +3455,35 @@
         <member name="P:Artemis.Service.Protos.Identity.AddUserClaimRequest.Claim">
             <summary>
             凭据信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchAddUserClaimRequest">
+            <summary>
+            批量添加用户凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchAddUserClaimRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchAddUserClaimRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchAddUserClaimRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchAddUserClaimRequest.Batch">
+            <summary>
+            凭据信息列表
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.UpdateUserClaimRequest">
+            <summary>
+            更新用户凭据请求
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Identity.UpdateUserClaimRequest.UserIdFieldNumber">
@@ -3095,6 +3513,506 @@
             <summary>
             凭据信息
             </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest">
+            <summary>
+            批量更新用户凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest.Batch">
+            <summary>
+            凭据信息列表
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest">
+            <summary>
+            批量删除用户凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest.ClaimIdsFieldNumber">
+            <summary>Field number for the "ClaimIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest.ClaimIds">
+            <summary>
+            用户凭据标识列表
+            @required
+            @min(1)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.SampleReflection">
+            <summary>Holder for reflection information generated from sample.proto</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleReflection.Descriptor">
+            <summary>File descriptor for sample.proto</summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.SampleRequest">
+            <summary>
+            样例请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.EmailFieldNumber">
+            <summary>Field number for the "Email" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Email">
+            <summary>
+            邮箱
+            @email
+            @length(0,128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.PhoneFieldNumber">
+            <summary>Field number for the "Phone" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Phone">
+            <summary>
+            手机号码
+            @phone
+            @length(0,128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.HostFieldNumber">
+            <summary>Field number for the "Host" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Host">
+            <summary>
+            主机
+            @hostname
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.Ipv4FieldNumber">
+            <summary>Field number for the "Ipv4" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Ipv4">
+            <summary>
+            Ipv4
+            @ipv4
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.Ipv6FieldNumber">
+            <summary>Field number for the "Ipv6" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Ipv6">
+            <summary>
+            Ipv6
+            @ipv6
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.DatetimeFieldNumber">
+            <summary>Field number for the "Datetime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Datetime">
+            <summary>
+            Datetime
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.UriFieldNumber">
+            <summary>Field number for the "Uri" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Uri">
+            <summary>
+            Uri
+            @uri
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.DateFieldNumber">
+            <summary>Field number for the "Date" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Date">
+            <summary>
+            Date
+            @date
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.TimeFieldNumber">
+            <summary>Field number for the "Time" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Time">
+            <summary>
+            Time
+            @time
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.Md5FieldNumber">
+            <summary>Field number for the "Md5" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Md5">
+            <summary>
+            Md5
+            @md5
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.CarFieldNumber">
+            <summary>Field number for the "Car" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Car">
+            <summary>
+            Car
+            @car
+            @example(云A12345)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.GuidFieldNumber">
+            <summary>Field number for the "Guid" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Guid">
+            <summary>
+            Guid
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.MinIntFieldNumber">
+            <summary>Field number for the "MinInt" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.MinInt">
+            <summary>
+            MinInt
+            @min(1)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.MaxIntFieldNumber">
+            <summary>Field number for the "MaxInt" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.MaxInt">
+             <summary>
+            
+             MaxInt
+             @max(100)
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.RangeIntFieldNumber">
+            <summary>Field number for the "RangeInt" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.RangeInt">
+            <summary>
+            RangeInt
+            @range(1,100)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.IdCardFieldNumber">
+            <summary>Field number for the "IdCard" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.IdCard">
+            <summary>
+            IdCard
+            @idcard
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.TelPhoneFieldNumber">
+            <summary>Field number for the "TelPhone" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.TelPhone">
+            <summary>
+            TelPhone
+            @tel
+            @example(0871-68099999)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.VideoFieldNumber">
+            <summary>Field number for the "Video" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Video">
+            <summary>
+            Video
+            @video-url
+            @example(https://www.example.com/example.mp4)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.SampleRequest.ImageFieldNumber">
+            <summary>Field number for the "Image" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.SampleRequest.Image">
+            <summary>
+            Image
+            @image-url
+            @example(https://www.example.com/image.png)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.HelloRequest">
+            <summary>
+            SayHelloStream request message.
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloRequest.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloRequest.Name">
+            <summary>
+            Name to say hello to.
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloRequest.CountFieldNumber">
+            <summary>Field number for the "count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloRequest.Count">
+            <summary>
+            Count of messages to send.
+            @min(1)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.HelloReply">
+            <summary>
+            SayHello response message.
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloReply.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloReply.Message">
+            <summary>
+            Hello reply message.
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.HelloResponse">
+            <summary>
+            HelloResponse
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.HelloResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.HelloResponse.Data">
+            <summary>
+            Hello响应数据
+            @datetime
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Sample">
+            <summary>
+            样例服务协议
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Sample.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Sample.SampleBase">
+            <summary>Base class for server-side implementations of Sample</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleBase.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            测试字段约束
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleBase.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.HelloResponse},Grpc.Core.ServerCallContext)">
+            <summary>
+            测试服务器流式处理
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="responseStream">Used for sending responses back to the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>A task indicating completion of the handler.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleBase.StreamingFromClient(Grpc.Core.IAsyncStreamReader{Artemis.Service.Protos.HelloRequest},Grpc.Core.ServerCallContext)">
+            <summary>
+            Client streaming
+            </summary>
+            <param name="requestStream">Used for reading requests from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleBase.StreamingBothWays(Grpc.Core.IAsyncStreamReader{Artemis.Service.Protos.HelloRequest},Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.HelloResponse},Grpc.Core.ServerCallContext)">
+            <summary>
+            Bi-directional streaming
+            </summary>
+            <param name="requestStream">Used for reading requests from the client.</param>
+            <param name="responseStream">Used for sending responses back to the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>A task indicating completion of the handler.</returns>
+        </member>
+        <member name="T:Artemis.Service.Protos.Sample.SampleClient">
+            <summary>Client for Sample</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for Sample</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for Sample that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            测试字段约束
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.Test(Artemis.Service.Protos.SampleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            测试字段约束
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.TestAsync(Artemis.Service.Protos.SampleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            测试字段约束
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.TestAsync(Artemis.Service.Protos.SampleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            测试字段约束
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            测试服务器流式处理
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.SayHelloStream(Artemis.Service.Protos.HelloRequest,Grpc.Core.CallOptions)">
+            <summary>
+            测试服务器流式处理
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingFromClient(Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Client streaming
+            </summary>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingFromClient(Grpc.Core.CallOptions)">
+            <summary>
+            Client streaming
+            </summary>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingBothWays(Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Bi-directional streaming
+            </summary>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.StreamingBothWays(Grpc.Core.CallOptions)">
+            <summary>
+            Bi-directional streaming
+            </summary>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.SampleClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.BindService(Artemis.Service.Protos.Sample.SampleBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Sample.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Protos.Sample.SampleBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
         <member name="T:Google.Api.AnnotationsReflection">
             <summary>Holder for reflection information generated from google/api/annotations.proto</summary>

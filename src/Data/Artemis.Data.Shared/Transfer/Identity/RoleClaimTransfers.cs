@@ -5,7 +5,7 @@ namespace Artemis.Data.Shared.Transfer.Identity;
 /// <summary>
 ///     用户凭据信息
 /// </summary>
-public record RoleClaimInfo : RoleClaimPackage, IRoleClaimInfo
+public record RoleClaimInfo : ClaimDocument, IRoleClaimInfo
 {
     #region Implementation of IKeySlot<int>
 

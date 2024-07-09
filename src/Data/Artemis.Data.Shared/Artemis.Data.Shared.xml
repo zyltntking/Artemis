@@ -14,6 +14,11 @@
                 凭据信息
             </summary>
         </member>
+        <member name="T:Artemis.Data.Shared.Identity.IClaimDocument">
+            <summary>
+            凭据文档接口
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Shared.Identity.IClaimPackage">
             <summary>
                 凭据数据包接口
@@ -82,6 +87,11 @@
         <member name="P:Artemis.Data.Shared.Identity.IRoleClaimInfo.UserId">
             <summary>
                 用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.Identity.IRoleClaimDocument">
+            <summary>
+            角色凭据文档接口
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.Identity.IRoleClaimPackage">
@@ -207,6 +217,11 @@
         <member name="P:Artemis.Data.Shared.Identity.IUserClaimInfo.UserId">
             <summary>
                 用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.Identity.IUserClaimDocument">
+            <summary>
+            用户凭据文档接口
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.Identity.IUserClaimPackage">
@@ -751,14 +766,49 @@
                 预设凭据类型
             </summary>
         </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.UserId">
+            <summary>
+                用户标识凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.UserName">
+            <summary>
+                用户名凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.EndType">
+            <summary>
+                端类型凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.Role">
+            <summary>
+                角色标识凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.Authorization">
+            <summary>
+                认证令牌凭据
+            </summary>
+        </member>
         <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.RoutePath">
             <summary>
                 路由路径凭据
             </summary>
         </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.MateRoutePath">
+            <summary>
+            元路由路径凭据
+            </summary>
+        </member>
         <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.ActionName">
             <summary>
                 操作名凭据
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.MateActionName">
+            <summary>
+            元操作名凭据
             </summary>
         </member>
         <member name="F:Artemis.Data.Shared.Transfer.ClaimTypes.Signature">
@@ -811,6 +861,16 @@
                 存储标识
             </summary>
         </member>
+        <member name="T:Artemis.Data.Shared.Transfer.Identity.ClaimDocument">
+            <summary>
+            凭据文档
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimDocument.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Shared.Transfer.Identity.ClaimPackage">
             <summary>
                 凭据项目实现
@@ -824,11 +884,6 @@
         <member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimPackage.ClaimValue">
             <summary>
                 凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimPackage.CheckStamp">
-            <summary>
-                校验戳
             </summary>
         </member>
         <member name="P:Artemis.Data.Shared.Transfer.Identity.ClaimPackage.Description">

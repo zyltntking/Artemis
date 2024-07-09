@@ -465,7 +465,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             RemoveCachedEntities(list);
         }
@@ -528,7 +528,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await RemoveCachedEntitiesAsync(list, cancellationToken);
         }
@@ -915,7 +915,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -972,7 +972,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -1035,7 +1035,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -1097,7 +1097,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -1471,7 +1471,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Create {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -1522,7 +1522,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Create {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Create {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -1574,7 +1574,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Update {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Update {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -1791,7 +1791,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             RemoveCachedEntities(list);
         }
@@ -1842,7 +1842,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Delete {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Delete {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await RemoveCachedEntitiesAsync(list, cancellationToken);
         }
@@ -2177,7 +2177,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2235,7 +2235,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"CreateNew {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2310,7 +2310,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2381,7 +2381,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Over {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Over {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2450,7 +2450,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = AttacheChange();
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             CacheEntities(list);
         }
@@ -2521,7 +2521,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         var result = await AttacheChangeAsync(cancellationToken);
         if (result.Succeeded)
         {
-            if (DebugLogger) Logger?.LogDebug($"Merge {result.EffectRows} {typeof(TEntity).Name} Entities");
+            if (DebugLogger) Logger?.LogDebug($"Merge {result.AffectRows} {typeof(TEntity).Name} Entities");
 
             await CacheEntitiesAsync(list, cancellationToken);
         }
@@ -2941,7 +2941,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     private void AddEntity(TEntity entity)
     {
         if (entity is IConcurrencyStamp concurrency)
-            concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+            concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
         if (MetaDataHosting)
         {
@@ -2979,7 +2979,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
             if (MetaDataHosting)
             {
@@ -3019,7 +3019,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         Context.Attach(entity);
 
-        if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+        if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
         if (MetaDataHosting)
         {
@@ -3057,7 +3057,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
             if (MetaDataHosting)
             {
@@ -3177,7 +3177,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         {
             Context.Attach(entity);
 
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
             if (entity is IMateSlot metaSlotChange) metaSlotChange.DeletedAt = DateTime.Now;
 
@@ -3216,7 +3216,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
             foreach (var entity in entities)
             {
-                if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Generator.ConcurrencyStamp;
+                if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
                 if (entity is IMateSlot metaSlot) metaSlot.DeletedAt = DateTime.Now;
 

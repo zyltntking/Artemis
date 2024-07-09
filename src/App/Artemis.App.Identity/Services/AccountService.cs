@@ -33,7 +33,7 @@ public class AccountService : Account.AccountBase
         IIdentityAccountManager accountManager,
         IIdentityUserManager userManager,
         IDistributedCache cache,
-        IOptions<ArtemisAuthorizationConfig> options,
+        IOptions<ArtemisAuthorizationOptions> options,
         ILogger<AccountService> logger)
     {
         AccountManager = accountManager;
@@ -61,7 +61,7 @@ public class AccountService : Account.AccountBase
     /// <summary>
     ///     授权配置项
     /// </summary>
-    private ArtemisAuthorizationConfig Options { get; }
+    private ArtemisAuthorizationOptions Options { get; }
 
     /// <summary>
     ///     日志依赖
@@ -103,7 +103,9 @@ public class AccountService : Account.AccountBase
             }).Adapt<TokenResponse>();
         }
 
-        return RpcResultAdapter.EmptyFail<TokenResponse>(result.Message);
+        var response = RpcResultAdapter.EmptyFail<TokenResponse>(result.Message);
+
+        return response;
     }
 
     /// <summary>
@@ -153,7 +155,7 @@ public class AccountService : Account.AccountBase
     {
         var httpContext = context.GetHttpContext();
 
-        var token = httpContext.FetchTokenSymbol(Options.RequestHeaderTokenKey);
+        var token = httpContext.FetchTokenSymbol(Options.RequestHeaderTokenKey, Options.RequestHeaderTokenSchema);
 
         if (token is not null)
         {
@@ -230,7 +232,7 @@ public class AccountService : Account.AccountBase
     {
         var dictionary = new Dictionary<Guid, string>();
 
-        foreach (var resetPassword in request.Dictionary)
+        foreach (var resetPassword in request.Batch)
         {
             var userId = resetPassword.UserId.GuidFromString();
             var password = resetPassword.Password;

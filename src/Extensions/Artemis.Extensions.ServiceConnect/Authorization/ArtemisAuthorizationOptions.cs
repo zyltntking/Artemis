@@ -7,12 +7,17 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// <summary>
 ///     Artemis认证选项接口
 /// </summary>
-file interface IArtemisAuthorizationConfig
+file interface IArtemisAuthorizationOptions
 {
     /// <summary>
     ///     上下文项目Token键
     /// </summary>
     string ContextItemTokenKey { get; set; }
+
+    /// <summary>
+    /// 请求头认证Token架构
+    /// </summary>
+    string RequestHeaderTokenSchema { get; set; }
 
     /// <summary>
     ///     请求头认证Token键
@@ -83,7 +88,7 @@ file interface IPolicyOptions
 /// <summary>
 ///     传递认证选项
 /// </summary>
-public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
+public class ArtemisAuthorizationOptions : IArtemisAuthorizationOptions
 {
     #region Implementation of IArtemisIdentityOptions
 
@@ -91,6 +96,11 @@ public class ArtemisAuthorizationConfig : IArtemisAuthorizationConfig
     ///     上下文项目Token键
     /// </summary>
     public string ContextItemTokenKey { get; set; } = SharedKey.Token;
+
+    /// <summary>
+    /// 请求头认证Token架构
+    /// </summary>
+    public string RequestHeaderTokenSchema { get; set; } = SharedKey.Schema;
 
     /// <summary>
     ///     请求头Token键

@@ -17,7 +17,7 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
     /// <param name="options"></param>
     public ArtemisHandlerProxy(
         IHttpContextAccessor httpContextAccessor,
-        IOptions<ArtemisAuthorizationConfig> options)
+        IOptions<ArtemisAuthorizationOptions> options)
     {
         HttpContextAccessor = httpContextAccessor;
         Options = options.Value;
@@ -31,7 +31,7 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
     /// <summary>
     ///     Artemis授权配置
     /// </summary>
-    private ArtemisAuthorizationConfig Options { get; }
+    private ArtemisAuthorizationOptions Options { get; }
 
     #region Overrides of AbstractHandlerProxy<Guid>
 

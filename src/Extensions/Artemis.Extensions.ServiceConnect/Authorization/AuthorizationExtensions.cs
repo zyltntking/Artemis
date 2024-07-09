@@ -18,7 +18,7 @@ internal static class AuthorizationExtensions
     /// <returns></returns>
     public static IHostApplicationBuilder ConfigureAuthorization(
         this IHostApplicationBuilder builder,
-        ArtemisAuthorizationConfig? config = null)
+        ArtemisAuthorizationOptions? config = null)
     {
         return builder.ConfigureAuthorization<AuthorizationMiddlewareResultHandler>(config);
     }
@@ -29,25 +29,12 @@ internal static class AuthorizationExtensions
     /// <param name="builder"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureRpcAuthorization(
-        this IHostApplicationBuilder builder,
-        ArtemisAuthorizationConfig? config = null)
-    {
-        return builder.ConfigureAuthorization<RpcAuthorizationMiddlewareResultHandler>(config);
-    }
-
-    /// <summary>
-    ///     配置授权服务
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="config"></param>
-    /// <returns></returns>
     private static IHostApplicationBuilder ConfigureAuthorization<TAuthorizationMiddlewareResultHandler>(
         this IHostApplicationBuilder builder,
-        ArtemisAuthorizationConfig? config = null)
+        ArtemisAuthorizationOptions? config = null)
         where TAuthorizationMiddlewareResultHandler : class, IAuthorizationMiddlewareResultHandler
     {
-        config ??= new ArtemisAuthorizationConfig();
+        config ??= new ArtemisAuthorizationOptions();
 
         builder.Services.AddAuthorization(options =>
         {
@@ -86,7 +73,7 @@ internal static class AuthorizationExtensions
 
         builder.Services.AddSingleton<IAuthorizationHandler, ArtemisAuthorizationHandler>();
 
-        builder.Services.Configure<ArtemisAuthorizationConfig>(options =>
+        builder.Services.Configure<ArtemisAuthorizationOptions>(options =>
         {
             options.ContextItemTokenKey = config.ContextItemTokenKey;
             options.RequestHeaderTokenKey = config.RequestHeaderTokenKey;

@@ -833,7 +833,7 @@
                 认证用户管理
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Identity.Stores.IIdentityRoleStore,Artemis.Service.Identity.Stores.IIdentityUserClaimStore,Artemis.Service.Identity.Stores.IIdentityUserProfileStore,Artemis.Service.Identity.Stores.IIdentityUserLoginStore,Artemis.Service.Identity.Stores.IIdentityUserTokenStore,Artemis.Service.Identity.Stores.IIdentityUserRoleStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Identity.Stores.IIdentityRoleStore,Artemis.Service.Identity.Stores.IIdentityUserClaimStore,Artemis.Service.Identity.Stores.IIdentityUserProfileStore,Artemis.Service.Identity.Stores.IIdentityUserLoginStore,Artemis.Service.Identity.Stores.IIdentityUserTokenStore,Artemis.Service.Identity.Stores.IIdentityUserRoleStore,Artemis.Data.Store.IManagerOptions)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -841,7 +841,6 @@
             <param name="userTokenStore"></param>
             <param name="userRoleStore"></param>
             <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
             <param name="roleStore"></param>
             <param name="userClaimStore"></param>
             <param name="userProfileStore"></param>

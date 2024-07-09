@@ -72,6 +72,7 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
+            app.MapGrpcService<ResourceService>();
             app.MapGrpcService<AccountService>();
             app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();

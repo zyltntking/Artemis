@@ -3314,7 +3314,7 @@
                 指示操作是否成功的标志
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.IStoreResult.EffectRows">
+        <member name="P:Artemis.Data.Store.IStoreResult.AffectRows">
             <summary>
                 指示操作受影响行数
             </summary>
@@ -3334,7 +3334,7 @@
                 指示操作是否成功的标志
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.StoreResult.EffectRows">
+        <member name="P:Artemis.Data.Store.StoreResult.AffectRows">
             <summary>
                 指示操作受影响行数
             </summary>

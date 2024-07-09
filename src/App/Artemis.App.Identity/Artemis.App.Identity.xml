@@ -32,7 +32,7 @@
                 账户服务
             </summary>
         </member>
-        <member name="M:Artemis.App.Identity.Services.AccountService.#ctor(Artemis.Service.Identity.Managers.IIdentityAccountManager,Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
+        <member name="M:Artemis.App.Identity.Services.AccountService.#ctor(Artemis.Service.Identity.Managers.IIdentityAccountManager,Artemis.Service.Identity.Managers.IIdentityUserManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.AccountService})">
             <summary>
                 账户服务
             </summary>
@@ -131,6 +131,52 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.App.Identity.Services.ResourceService">
+            <summary>
+            资源服务
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.ResourceService.#ctor(Artemis.Service.Identity.Managers.IIdentityResourceManager,Microsoft.Extensions.Logging.ILogger{Artemis.App.Identity.Services.ResourceService})">
+            <summary>
+            资源服务
+            </summary>
+            <param name="resourceManager">认证资源管理器依赖</param>
+            <param name="logger">日志依赖</param>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.ResourceService.ResourceManager">
+            <summary>
+            资源管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.App.Identity.Services.ResourceService.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.ResourceService.SearchClaimInfo(Artemis.Service.Protos.Identity.SearchClaimInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询凭据信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.ResourceService.ReadClaimInfo(Artemis.Service.Protos.Identity.ReadClaimInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取凭据信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.ResourceService.CreateClaim(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.App.Identity.Services.RoleService">
             <summary>
                 角色服务
@@ -226,7 +272,7 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.BatchCreateUser(Artemis.Service.Protos.Identity.BatchCreateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            批量创建用户
+                批量创建用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -235,6 +281,14 @@
         <member name="M:Artemis.App.Identity.Services.UserService.UpdateUserInfo(Artemis.Service.Protos.Identity.UpdateUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 更新用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchUpdateUserInfo(Artemis.Service.Protos.Identity.BatchUpdateUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新用户信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -250,7 +304,7 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.BatchDeleteUser(Artemis.Service.Protos.Identity.BatchDeleteUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            批量删除用户
+                批量删除用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -280,6 +334,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量添加用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.App.Identity.Services.UserService.RemoveUserRole(Artemis.Service.Protos.Identity.UserRoleIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 移除用户角色
@@ -288,9 +350,17 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchUserRoleIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.App.Identity.Services.UserService.SearchUserClaimInfo(Artemis.Service.Protos.Identity.SearchUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            查询用户凭据信息
+                查询用户凭据信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -298,7 +368,7 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.ReadUserClaimInfo(Artemis.Service.Protos.Identity.UserClaimIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            获取用户凭据信息
+                获取用户凭据信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -306,7 +376,15 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.AddUserClaim(Artemis.Service.Protos.Identity.AddUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            添加用户凭据
+                添加用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchAddUserClaim(Artemis.Service.Protos.Identity.BatchAddUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加用户凭据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -314,7 +392,15 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.UpdateUserClaim(Artemis.Service.Protos.Identity.UpdateUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            更新用户凭据
+                更新用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchUpdateUserClaim(Artemis.Service.Protos.Identity.BatchUpdateUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新用户凭据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -322,11 +408,29 @@
         </member>
         <member name="M:Artemis.App.Identity.Services.UserService.DeleteUserClaim(Artemis.Service.Protos.Identity.UserClaimIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            删除用户凭据
+                删除用户凭据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.App.Identity.Services.UserService.BatchDeleteUserClaim(Artemis.Service.Protos.Identity.BatchDeleteUserClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除用户凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.AddUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.AddUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
         </member>
         <member name="T:Artemis.App.Identity.Validators.AddUserRoleRequestValidator">
             <summary>
@@ -334,6 +438,36 @@
             </summary>
         </member>
         <member name="M:Artemis.App.Identity.Validators.AddUserRoleRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchAddUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchAddUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchCreateUserRequestValidator">
+            <summary>
+                批量删除用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchCreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchDeleteUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchDeleteUserClaimRequestValidator.#ctor">
             <summary>
                 验证器构造
             </summary>
@@ -354,6 +488,36 @@
             </summary>
         </member>
         <member name="M:Artemis.App.Identity.Validators.BatchResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchUpdateUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchUpdateUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchUpdateUserRequestValidator">
+            <summary>
+                批量删除用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchUpdateUserRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.BatchUserRoleIdRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.BatchUserRoleIdRequestValidator.#ctor">
             <summary>
                 验证器构造
             </summary>

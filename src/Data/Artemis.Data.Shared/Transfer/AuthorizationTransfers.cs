@@ -1,5 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Data.Shared.Identity;
 using Artemis.Data.Shared.Transfer.Identity;
 
 namespace Artemis.Data.Shared.Transfer;
@@ -43,7 +44,7 @@ public sealed record TokenDocument
     /// <summary>
     ///     用户凭据
     /// </summary>
-    public required IEnumerable<ClaimPackage> UserClaims { get; set; }
+    public required IEnumerable<ClaimDocument> UserClaims { get; set; }
 
     /// <summary>
     ///     角色标识
@@ -53,7 +54,7 @@ public sealed record TokenDocument
     /// <summary>
     ///     角色凭据
     /// </summary>
-    public required IEnumerable<ClaimPackage> RoleClaims { get; set; }
+    public required IEnumerable<ClaimDocument> RoleClaims { get; set; }
 
     /// <summary>
     ///     生成Token符号

@@ -64,7 +64,7 @@ public sealed class IdentityAccountManager : Manager<IdentityUser>, IIdentityAcc
     {
         var userClaims = await UserClaimStore.EntityQuery
             .Where(claim => claim.UserId == authentication.Id)
-            .ProjectToType<ClaimPackage>()
+            .ProjectToType<ClaimDocument>()
             .ToListAsync(cancellationToken);
 
         var userRoles = await UserStore.KeyMatchQuery(authentication.Id)
@@ -76,7 +76,7 @@ public sealed class IdentityAccountManager : Manager<IdentityUser>, IIdentityAcc
 
         var roleClaims = await RoleClaimStore.EntityQuery
             .Where(claim => roleIds.Contains(claim.RoleId))
-            .ProjectToType<ClaimPackage>()
+            .ProjectToType<ClaimDocument>()
             .ToListAsync(cancellationToken);
 
         return new TokenDocument
@@ -212,7 +212,7 @@ public sealed class IdentityAccountManager : Manager<IdentityUser>, IIdentityAcc
 
         user.PasswordHash = Hash.PasswordHash(password);
 
-        user.SecurityStamp = Generator.SecurityStamp;
+        user.SecurityStamp = Normalize.SecurityStamp;
 
         var storeResult = await UserStore.CreateAsync(user, cancellationToken);
 

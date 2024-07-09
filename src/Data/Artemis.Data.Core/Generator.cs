@@ -10,21 +10,6 @@ namespace Artemis.Data.Core;
 public static class Generator
 {
     /// <summary>
-    ///     生成并发戳
-    /// </summary>
-    public static string ConcurrencyStamp => Guid.NewGuid().ToString("D");
-
-    /// <summary>
-    ///     生成加密戳
-    /// </summary>
-    public static string SecurityStamp => Base32.GenerateBase32();
-
-    /// <summary>
-    ///     生成签名
-    /// </summary>
-    public static string Signature => Guid.NewGuid().ToString("N");
-
-    /// <summary>
     ///     创建实例
     /// </summary>
     /// <typeparam name="TEntity">实例类型</typeparam>
@@ -50,26 +35,5 @@ public static class Generator
     public static bool IsInherit<TEntity>(Type type) where TEntity : class
     {
         return typeof(TEntity).GetInterfaces().Any(item => item == type);
-    }
-
-    /// <summary>
-    ///     生成检查戳
-    /// </summary>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    public static string CheckStamp(string key)
-    {
-        return Hash.HashData(key, HashType.Md5);
-    }
-
-    /// <summary>
-    ///     键值对摘要
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static string PairSummary(string key, string value)
-    {
-        return $"{key}:{value}";
     }
 }

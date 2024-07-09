@@ -5,16 +5,16 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators;
 
 /// <summary>
-///     批量删除用户请求验证
+///     获取用户角色请求验证
 /// </summary>
-public class BatchDeleteUserRequestValidator : AbstractValidator<BatchDeleteUserRequest>
+public class AddUserClaimRequestValidator : AbstractValidator<AddUserClaimRequest>
 {
     /// <summary>
     ///     验证器构造
     /// </summary>
-    public BatchDeleteUserRequestValidator()
+    public AddUserClaimRequestValidator()
     {
-        RuleForEach(request => request.UserIds)
+        RuleFor(request => request.UserId)
             .ShouldNotBeEmptyOrWhiteSpace()
             .ShouldBeGuid();
     }

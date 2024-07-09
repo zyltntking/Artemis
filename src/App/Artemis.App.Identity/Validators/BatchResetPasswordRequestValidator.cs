@@ -1,5 +1,4 @@
-﻿using Artemis.Extensions.ServiceConnect.Validators;
-using Artemis.Service.Protos.Identity;
+﻿using Artemis.Service.Protos.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -16,21 +15,6 @@ public class BatchResetPasswordRequestValidator : AbstractValidator<BatchResetPa
     /// </summary>
     public BatchResetPasswordRequestValidator(IOptions<IdentityOptions> options)
     {
-        var password = options.Value.Password;
-
-        RuleForEach(request => request.Dictionary).ChildRules(reset =>
-        {
-            reset.RuleFor(request => request.UserId)
-                .ShouldBeGuid();
-
-            reset.RuleFor(request => request.Password)
-                .ShouldBePassword(
-                    password.RequiredLength,
-                    password.RequireDigit,
-                    password.RequireUppercase,
-                    password.RequireLowercase,
-                    password.RequireNonAlphanumeric,
-                    password.RequiredUniqueChars);
-        });
+        RuleForEach(request => request.Batch).SetValidator(new ResetPasswordRequestValidator(options));
     }
 }

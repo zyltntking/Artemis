@@ -21,7 +21,7 @@ internal sealed class AddInsLog : AddInsLog<TokenDocument>
     /// <param name="options"></param>
     public AddInsLog(
         ILogger<AddInsLog> logger,
-        IOptions<ArtemisAuthorizationConfig> options) : base(logger, options)
+        IOptions<ArtemisAuthorizationOptions> options) : base(logger, options)
     {
     }
 
@@ -58,7 +58,7 @@ internal abstract class AddInsLog<TTokenDocument> : Interceptor where TTokenDocu
     /// <param name="options"></param>
     public AddInsLog(
         ILogger logger,
-        IOptions<ArtemisAuthorizationConfig> options)
+        IOptions<ArtemisAuthorizationOptions> options)
     {
         Logger = logger;
         Options = options.Value;
@@ -69,7 +69,7 @@ internal abstract class AddInsLog<TTokenDocument> : Interceptor where TTokenDocu
     /// </summary>
     private ILogger Logger { get; }
 
-    private ArtemisAuthorizationConfig Options { get; }
+    private ArtemisAuthorizationOptions Options { get; }
 
     #region Overrides of Interceptor
 

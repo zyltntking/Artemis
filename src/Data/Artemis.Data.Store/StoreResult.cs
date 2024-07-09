@@ -18,7 +18,7 @@ file interface IStoreResult
     /// <summary>
     ///     指示操作受影响行数
     /// </summary>
-    int EffectRows { get; protected init; }
+    int AffectRows { get; protected init; }
 
     /// <summary>
     ///     包含存储过程中产生的所有错误的实例
@@ -45,7 +45,7 @@ public record StoreResult : IStoreResult
     ///     指示操作受影响行数
     /// </summary>
     [Required]
-    public required int EffectRows { get; init; }
+    public required int AffectRows { get; init; }
 
     /// <summary>
     ///     包含存储过程中产生的所有错误的实例
@@ -74,7 +74,7 @@ public record StoreResult : IStoreResult
     /// <param name="effectRows">收影响行数</param>
     public static StoreResult Success(int effectRows)
     {
-        return new StoreResult { Succeeded = true, EffectRows = effectRows };
+        return new StoreResult { Succeeded = true, AffectRows = effectRows };
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public record StoreResult : IStoreResult
         var result = new StoreResult
         {
             Succeeded = false,
-            EffectRows = 0
+            AffectRows = 0
         };
         if (errors is not null)
             result._errors.AddRange(errors);

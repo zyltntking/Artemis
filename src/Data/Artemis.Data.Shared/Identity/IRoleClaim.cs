@@ -25,6 +25,11 @@ public interface IRoleClaimInfo : IKeySlot<int>, IRoleClaimPackage
 }
 
 /// <summary>
+/// 角色凭据文档接口
+/// </summary>
+public interface IRoleClaimDocument : IRoleClaimPackage, ICheckStamp;
+
+/// <summary>
 ///     角色凭据数据包接口
 /// </summary>
 public interface IRoleClaimPackage : IClaimPackage;

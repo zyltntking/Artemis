@@ -55,11 +55,36 @@ internal static class SwaggerExtensions
                     }
                 }
 
+                //添加Authorization
+                options.AddSecurityDefinition("Artemis", new OpenApiSecurityScheme
+                {
+                    Description = "Artemis架构的认证Token,Artemis {token} 即可，注意两者之间有空格",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Scheme = "Artemis",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Artemis",
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+
                 if (config.UserGrpc)
                 {
                     options.OperationFilter<RemoveDefaultRpcResponse>();
                     options.DocumentFilter<RemoveDefaultRpcSchemas>();
-                    options.OperationFilter<AddAuthorizationToken>();
+                    //options.OperationFilter<AddAuthorizationToken>();
                     options.SchemaFilter<GrpcCommentDescriptor>();
                     options.OperationFilter<ParameterDescriptionModify>();
                 }

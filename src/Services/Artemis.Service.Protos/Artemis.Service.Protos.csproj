@@ -35,12 +35,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+      <None Remove="identity\resource.proto" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.27.2"/>
-        <PackageReference Include="Grpc" Version="2.46.6"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.27.2" />
+        <PackageReference Include="Grpc" Version="2.46.6" />
         <PackageReference Include="Grpc.Tools" Version="2.64.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -48,14 +52,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="common.proto"/>
-        <Protobuf Include="sample.proto"/>
-        <Protobuf Include="identity\account.proto"/>
-        <Protobuf Include="identity\role.proto"/>
-        <Protobuf Include="identity\user.proto"/>
-        <Protobuf Include="identity\shared.proto"/>
-        <Protobuf Include="google\api\annotations.proto"/>
-        <Protobuf Include="google\api\http.proto"/>
+        <Protobuf Include="common.proto" />
+        <Protobuf Include="identity\resource.proto" />
+        <Protobuf Include="sample.proto" />
+        <Protobuf Include="identity\account.proto" />
+        <Protobuf Include="identity\role.proto" />
+        <Protobuf Include="identity\user.proto" />
+        <Protobuf Include="identity\shared.proto" />
+        <Protobuf Include="google\api\annotations.proto" />
+        <Protobuf Include="google\api\http.proto" />
     </ItemGroup>
 
 </Project>

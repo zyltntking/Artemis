@@ -286,12 +286,23 @@ public static class TokenHandlerExtensions
     /// </summary>
     /// <param name="context"></param>
     /// <param name="key"></param>
+    /// <param name="schema"></param>
     /// <returns></returns>
-    public static string? FetchTokenSymbol(this HttpContext context, string key)
+    public static string? FetchTokenSymbol(this HttpContext context, string key, string schema)
     {
         var headers = context.Request.Headers;
 
-        if (headers.TryGetValue(key, out var token)) return token;
+        if (headers.ContainsKey(key))
+        {
+            string token = headers[key]!;
+
+            if (token.StartsWith(schema, StringComparison.OrdinalIgnoreCase))
+            {
+                token = token[schema.Length..];
+            }
+
+            return token;
+        }
 
         return null;
     }

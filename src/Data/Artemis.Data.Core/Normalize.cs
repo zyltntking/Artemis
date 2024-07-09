@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core.Fundamental.Types;
+﻿using Artemis.Data.Core.Fundamental.Kit;
+using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Data.Core;
 
@@ -23,11 +24,11 @@ public static class Normalize
     /// <param name="key">键</param>
     /// <param name="value">值</param>
     /// <returns>戳</returns>
-    public static string KeyValuePairStampNormalize(string key, string value)
+    public static string KeyValuePairStamp(string key, string value)
     {
-        var flag = KeyValuePairFlagNormalize(key, value);
+        var flag = KeyValuePairSummary(key, value);
 
-        return Hash.HashData(flag, HashType.Md5).StringNormalize();
+        return flag.CheckStamp();
     }
 
     /// <summary>
@@ -35,9 +36,9 @@ public static class Normalize
     /// </summary>
     /// <param name="pair">键值对</param>
     /// <returns>戳</returns>
-    public static string KeyValuePairStampNormalize(this KeyValuePair<string, string> pair)
+    public static string KeyValuePairStamp(this KeyValuePair<string, string> pair)
     {
-        return KeyValuePairStampNormalize(pair.Key, pair.Value);
+        return KeyValuePairStamp(pair.Key, pair.Value);
     }
 
     /// <summary>
@@ -46,7 +47,7 @@ public static class Normalize
     /// <param name="key">键</param>
     /// <param name="value">值</param>
     /// <returns></returns>
-    public static string KeyValuePairFlagNormalize(string key, string value)
+    public static string KeyValuePairSummary(string key, string value)
     {
         return $"{key}:{value}";
     }
@@ -56,8 +57,33 @@ public static class Normalize
     /// </summary>
     /// <param name="pair">键值对</param>
     /// <returns></returns>
-    public static string KeyValuePairFlagNormalize(this KeyValuePair<string, string> pair)
+    public static string KeyValuePairSummary(this KeyValuePair<string, string> pair)
     {
-        return KeyValuePairFlagNormalize(pair.Key, pair.Value);
+        return KeyValuePairSummary(pair.Key, pair.Value);
     }
+
+    /// <summary>
+    ///     生成检查戳
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static string CheckStamp(this string key)
+    {
+        return Hash.HashData(key.StringNormalize(), HashType.Md5).Normalize();
+    }
+
+    /// <summary>
+    ///     生成并发戳
+    /// </summary>
+    public static string ConcurrencyStamp => Guid.NewGuid().ToString("D");
+
+    /// <summary>
+    ///     生成加密戳
+    /// </summary>
+    public static string SecurityStamp => Base32.GenerateBase32();
+
+    /// <summary>
+    ///     生成签名
+    /// </summary>
+    public static string Signature => Guid.NewGuid().ToString("N");
 }

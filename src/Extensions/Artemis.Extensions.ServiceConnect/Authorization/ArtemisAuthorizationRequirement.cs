@@ -91,7 +91,7 @@ internal class ClaimsRequirement : TokenRequirement
     ///     认证策略构造
     /// </summary>
     /// <param name="claims">凭据</param>
-    public ClaimsRequirement(IEnumerable<KeyValuePair<string, string>> claims)
+    public ClaimsRequirement(IDictionary<string, string> claims)
     {
         Claims = claims;
     }

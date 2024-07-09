@@ -122,6 +122,12 @@ public static class Matcher
 
     #endregion
 
+    #region Token
+
+    
+
+    #endregion
+
     #region Guid
 
     /// <summary>

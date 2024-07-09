@@ -44,7 +44,7 @@ public abstract class ConcurrencyPartition<TKey, THandler> :
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public override string? ConcurrencyStamp { get; set; } = Generator.ConcurrencyStamp;
+    public override string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
 }
 
 /// <summary>
@@ -176,7 +176,7 @@ public abstract class ConcurrencyModel<TKey, THandler> :
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public sealed override string? ConcurrencyStamp { get; set; } = Generator.ConcurrencyStamp;
+    public sealed override string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
 }
 
 /// <summary>

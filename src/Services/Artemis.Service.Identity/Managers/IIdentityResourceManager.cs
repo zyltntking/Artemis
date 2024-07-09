@@ -55,7 +55,7 @@ public interface IIdentityResourceManager : IManager<IdentityClaim>
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果和创建成功的凭据实例</returns>
-    Task<(StoreResult result, ClaimInfo? claim)> CreateClaimAsync(
+    Task<StoreResult> CreateClaimAsync(
         ClaimPackage package,
         CancellationToken cancellationToken = default);
 
@@ -76,7 +76,7 @@ public interface IIdentityResourceManager : IManager<IdentityClaim>
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
-    Task<(StoreResult result, ClaimInfo? claim)> UpdateClaimAsync(
+    Task<StoreResult> UpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -98,7 +98,7 @@ public interface IIdentityResourceManager : IManager<IdentityClaim>
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    Task<(StoreResult result, ClaimInfo? role)> CreateOrUpdateClaimAsync(
+    Task<StoreResult> CreateOrUpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default);

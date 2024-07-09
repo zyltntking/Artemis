@@ -5,12 +5,25 @@ namespace Artemis.Data.Shared.Transfer.Identity;
 /// <summary>
 ///     凭据信息
 /// </summary>
-public record ClaimInfo : ClaimPackage, IClaimInfo
+public record ClaimInfo : ClaimDocument, IClaimInfo
 {
     /// <summary>
     ///     存储标识
     /// </summary>
     public required Guid Id { get; set; }
+
+}
+
+/// <summary>
+/// 凭据文档
+/// </summary>
+public record ClaimDocument : ClaimPackage, IClaimDocument
+{
+
+    /// <summary>
+    ///     校验戳
+    /// </summary>
+    public required string CheckStamp { get; set; }
 }
 
 /// <summary>
@@ -27,11 +40,6 @@ public record ClaimPackage : IClaimPackage
     ///     凭据值
     /// </summary>
     public required string ClaimValue { get; set; }
-
-    /// <summary>
-    ///     校验戳
-    /// </summary>
-    public required string CheckStamp { get; set; }
 
     /// <summary>
     ///     描述

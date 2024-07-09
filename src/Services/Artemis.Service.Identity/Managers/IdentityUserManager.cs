@@ -24,7 +24,6 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
     /// <param name="userTokenStore"></param>
     /// <param name="userRoleStore"></param>
     /// <param name="options">配置依赖</param>
-    /// <param name="logger">日志依赖</param>
     /// <param name="roleStore"></param>
     /// <param name="userClaimStore"></param>
     /// <param name="userProfileStore"></param>
@@ -38,8 +37,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         IIdentityUserLoginStore userLoginStore,
         IIdentityUserTokenStore userTokenStore,
         IIdentityUserRoleStore userRoleStore,
-        IManagerOptions? options = null,
-        ILogger? logger = null) : base(userStore, options, logger)
+        IManagerOptions? options = null) : base(userStore, options, null)
     {
         UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
         RoleStore = roleStore ?? throw new ArgumentNullException(nameof(roleStore));
@@ -227,7 +225,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
 
         user.PasswordHash = Hash.PasswordHash(password);
 
-        user.SecurityStamp = Generator.SecurityStamp;
+        user.SecurityStamp = Normalize.SecurityStamp;
 
         var result = await UserStore.CreateAsync(user, cancellationToken);
 
@@ -275,7 +273,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
 
                     user.PasswordHash = Hash.PasswordHash(password);
 
-                    user.SecurityStamp = Generator.SecurityStamp;
+                    user.SecurityStamp = Normalize.SecurityStamp;
 
                     return user;
                 }).ToList();
@@ -312,7 +310,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
 
             user.NormalizedEmail = package.Email is not null ? package.Email.StringNormalize() : string.Empty;
 
-            user.SecurityStamp = Generator.SecurityStamp;
+            user.SecurityStamp = Normalize.SecurityStamp;
 
             var result = await UserStore.UpdateAsync(user, cancellationToken);
 
@@ -352,7 +350,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
 
                 user.NormalizedEmail = package.Email is not null ? package.Email.StringNormalize() : string.Empty;
 
-                user.SecurityStamp = Generator.SecurityStamp;
+                user.SecurityStamp = Normalize.SecurityStamp;
 
                 return user;
             }).ToList();
@@ -791,10 +789,11 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         {
             var claimExists = await UserClaimStore.EntityQuery
                 .Where(userClaim => userClaim.UserId == id)
-                .Where(userClaim => userClaim.CheckStamp == package.CheckStamp)
+                .Where(userClaim => userClaim.ClaimType == package.ClaimType)
+                .Where(userClaim => userClaim.ClaimValue == package.ClaimValue)
                 .AnyAsync(cancellationToken);
 
-            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+            var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
             if (claimExists)
             {
@@ -806,7 +805,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             var userClaim = Instance.CreateInstance<IdentityUserClaim, UserClaimPackage>(package);
 
             userClaim.UserId = id;
-            userClaim.CheckStamp = Generator.CheckStamp(summary);
+            userClaim.CheckStamp = summary.CheckStamp();
 
             return await UserClaimStore.CreateAsync(userClaim, cancellationToken);
         }
@@ -834,7 +833,9 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         {
             var packageList = packages.ToList();
 
-            var checkStamps = packageList.Select(package => package.CheckStamp).ToList();
+            var checkStamps = packageList.Select(package => 
+                Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
+                .ToList();
 
             var storedClaimCheckStamp = await UserClaimStore.EntityQuery
                 .Where(userClaim => userClaim.UserId == id)
@@ -847,15 +848,15 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             if (notSetCheckStamps.Any())
             {
                 var userClaims = packageList
-                    .Where(package => notSetCheckStamps.Contains(package.CheckStamp))
+                    .Where(package => notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
                     .Select(package =>
                     {
-                        var summery = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+                        var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
                         var userClaim = Instance.CreateInstance<IdentityUserClaim, UserClaimPackage>(package);
 
                         userClaim.UserId = id;
-                        userClaim.CheckStamp = Generator.CheckStamp(summery);
+                        userClaim.CheckStamp = summery.CheckStamp();
 
                         return userClaim;
                     })
@@ -865,7 +866,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             }
 
             var flag =
-                $"userId:{id},claims:{string.Join(',', packageList.Select(item => Generator.PairSummary(item.ClaimType, item.ClaimValue)))}";
+                $"userId:{id},claims:{string.Join(',', packageList.Select(item => Normalize.KeyValuePairSummary(item.ClaimType, item.ClaimValue)))}";
 
             return StoreResult.EntityFoundFailed(nameof(IdentityUserClaim), flag);
         }
@@ -897,13 +898,13 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
                 .Where(userClaim => userClaim.UserId == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+            var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
             if (userClaim is not null)
             {
                 userClaim.ClaimType = package.ClaimType;
                 userClaim.ClaimValue = package.ClaimValue;
-                userClaim.CheckStamp = Generator.CheckStamp(summary);
+                userClaim.CheckStamp = summary.CheckStamp();
 
                 return await UserClaimStore.UpdateAsync(userClaim, cancellationToken);
             }
@@ -946,11 +947,11 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
                 {
                     var package = dictionary[userClaim.Id];
 
-                    var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+                    var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
                     userClaim.ClaimType = package.ClaimType;
                     userClaim.ClaimValue = package.ClaimValue;
-                    userClaim.CheckStamp = Generator.CheckStamp(summary);
+                    userClaim.CheckStamp = summary.CheckStamp();
 
                     return userClaim;
                 }).ToList();
@@ -1225,7 +1226,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
             if (userLogins.Any())
                 return await UserLoginStore.DeleteAsync(userLogins, cancellationToken);
 
-            var flag = string.Join(',', keyValuePairs.Select(item => Generator.PairSummary(item.Key, item.Value)));
+            var flag = string.Join(',', keyValuePairs.Select(item => Normalize.KeyValuePairSummary(item.Key, item.Value)));
 
             return StoreResult.EntityNotFoundFailed(nameof(IdentityUserLogin), flag);
         }

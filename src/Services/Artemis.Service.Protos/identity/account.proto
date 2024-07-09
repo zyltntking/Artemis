@@ -54,7 +54,7 @@ service Account {
   rpc BatchResetPasswords (BatchResetPasswordRequest) returns (EmptyResponse){
     option (google.api.http) = {
       post: "/api/Account/ResetPasswords",
-      body: "*"
+      body: "Batch"
     };
   }
 }
@@ -152,7 +152,7 @@ message BatchResetPasswordRequest {
   /* 重置对象列表
    * @required
    */
-  repeated ResetPasswordRequest Dictionary = 1;
+  repeated ResetPasswordRequest Batch = 1;
 }
 
 // 令牌回应

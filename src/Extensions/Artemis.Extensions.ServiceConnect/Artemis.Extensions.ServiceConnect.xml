@@ -43,169 +43,45 @@
             <returns></returns>
             <remarks>dev:/health 健康检查, dev:/alive 存活检查, prod:/health-detail 详细健康检查</remarks>
         </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig">
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler">
             <summary>
-                Artemis认证选项接口
+            认证处理器
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ContextItemTokenKey">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationOptions},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder)">
             <summary>
-                上下文项目Token键
+            Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1" />.
+            </summary>
+            <param name="options">The monitor for the options instance.</param>
+            <param name="authorizationOptions"></param>
+            <param name="cache"></param>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
+            <param name="encoder">The <see cref="T:System.Text.Encodings.Web.UrlEncoder" />.</param>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler.Cache">
+            <summary>
+                缓存访问器
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RequestHeaderTokenKey">
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler.AuthorizationOptions">
             <summary>
-                请求头认证Token键
+            授权选项
             </summary>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenPrefix">
-            <summary>
-                缓存认证Token前缀
-            </summary>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>Allows derived types to handle authentication.</summary>
+            <returns>The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.</returns>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationHandler.ValidateToken(System.String)">
             <summary>
-                用户对Token映射缓存键前缀
+            认证Token
             </summary>
+            <param name="token"></param>
+            <returns></returns>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.CacheTokenExpire">
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthenticationOptions">
             <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableMultiEnd">
-            <summary>
-                是否启用多终端
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IPolicyOptions">
-            <summary>
-                策略选项接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig">
-            <summary>
-                传递认证选项
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ContextItemTokenKey">
-            <summary>
-                上下文项目Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RequestHeaderTokenKey">
-            <summary>
-                请求头Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenPrefix">
-            <summary>
-                缓存Token前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheUserMapTokenPrefix">
-            <summary>
-                用户对Token映射缓存键前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.CacheTokenExpire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableMultiEnd">
-            <summary>
-                是否启用多终端
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions">
-            <summary>
-                策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions.Name">
-            <summary>
-                策略名称
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions.Roles">
-            <summary>
-                策略支持的角色列表
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions.Claims">
-            <summary>
-                策略支持的凭据字典
+            认证选项
             </summary>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler">
@@ -213,21 +89,14 @@
                 Artemis凭据处理器
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
             <summary>
                 构造
             </summary>
-            <param name="cache">缓存依赖</param>
-            <param name="httpContextAccessor"></param>
             <param name="options">配置</param>
             <param name="logger">日志依赖</param>
         </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Cache">
-            <summary>
-                缓存访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Config">
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Options">
             <summary>
                 配置访问器
             </summary>
@@ -235,11 +104,6 @@
         <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Logger">
             <summary>
                 日志访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HttpContextAccessor">
-            <summary>
-                Http上下文访问器
             </summary>
         </member>
         <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement)">
@@ -286,6 +150,260 @@
             <param name="document">令牌文档</param>
             <param name="message">失败消息</param>
             <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly">
+            <summary>
+                Artemis凭据处理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly})">
+            <summary>
+                构造
+            </summary>
+            <param name="cache">缓存依赖</param>
+            <param name="httpContextAccessor"></param>
+            <param name="options">配置</param>
+            <param name="logger">日志依赖</param>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.Cache">
+            <summary>
+                缓存访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.Options">
+            <summary>
+                配置访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.Logger">
+            <summary>
+                日志访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HttpContextAccessor">
+            <summary>
+                Http上下文访问器
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement)">
+            <summary>
+                Makes a decision if authorization is allowed based on a specific requirement.
+            </summary>
+            <param name="context">The authorization context.</param>
+            <param name="requirement">The requirement to evaluate.</param>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HandleRolesRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+            <summary>
+                处理角色要求
+            </summary>
+            <param name="requirement">要求对象</param>
+            <param name="document">令牌文档</param>
+            <param name="message">失败消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HandleClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+            <summary>
+                处理凭据要求
+            </summary>
+            <param name="requirement">要求对象</param>
+            <param name="document">令牌文档</param>
+            <param name="message">失败消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HandleActionNameClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+            <summary>
+                处理ActionName凭据要求
+            </summary>
+            <param name="requirement">要求对象</param>
+            <param name="context">http上下文</param>
+            <param name="document">令牌文档</param>
+            <param name="message">失败消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly.HandleRoutePathClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
+            <summary>
+                处理RoutePath凭据要求
+            </summary>
+            <param name="requirement">要求对象</param>
+            <param name="context">http上下文</param>
+            <param name="document">令牌文档</param>
+            <param name="message">失败消息</param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions">
+            <summary>
+                Artemis认证选项接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.ContextItemTokenKey">
+            <summary>
+                上下文项目Token键
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.RequestHeaderTokenSchema">
+            <summary>
+            请求头认证Token架构
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.RequestHeaderTokenKey">
+            <summary>
+                请求头认证Token键
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.CacheTokenPrefix">
+            <summary>
+                缓存认证Token前缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.CacheUserMapTokenPrefix">
+            <summary>
+                用户对Token映射缓存键前缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.CacheTokenExpire">
+            <summary>
+                过期时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.EnableMultiEnd">
+            <summary>
+                是否启用多终端
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.IdentityServiceProvider">
+            <summary>
+                认证服务对提供者名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.IdentityServiceTokenNameSuffix">
+            <summary>
+                认证服务令牌名称后缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.Policies">
+            <summary>
+                支持的策略
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.EnableAdvancedPolicy">
+            <summary>
+                是否启用高级策略
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.RolesBasedPolicyOptions">
+            <summary>
+                基于角色的策略配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationOptions.ClaimsBasedPolicyOptions">
+            <summary>
+                基于凭据的策略配置
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IPolicyOptions">
+            <summary>
+                策略选项接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions">
+            <summary>
+                传递认证选项
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.ContextItemTokenKey">
+            <summary>
+                上下文项目Token键
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.RequestHeaderTokenSchema">
+            <summary>
+            请求头认证Token架构
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.RequestHeaderTokenKey">
+            <summary>
+                请求头Token键
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.CacheTokenPrefix">
+            <summary>
+                缓存Token前缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.CacheUserMapTokenPrefix">
+            <summary>
+                用户对Token映射缓存键前缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.CacheTokenExpire">
+            <summary>
+                过期时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.EnableMultiEnd">
+            <summary>
+                是否启用多终端
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.IdentityServiceProvider">
+            <summary>
+                认证服务对提供者名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.IdentityServiceTokenNameSuffix">
+            <summary>
+                认证服务令牌名称后缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.Policies">
+            <summary>
+                支持的策略
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.EnableAdvancedPolicy">
+            <summary>
+                是否启用高级策略
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.RolesBasedPolicyOptions">
+            <summary>
+                基于角色的策略配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions.ClaimsBasedPolicyOptions">
+            <summary>
+                基于凭据的策略配置
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions">
+            <summary>
+                策略配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.PolicyOptions.Name">
+            <summary>
+                策略名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions">
+            <summary>
+                基于角色的策略配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.RolesBasedPolicyOptions.Roles">
+            <summary>
+                策略支持的角色列表
+            </summary>
+        </member>
+        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions">
+            <summary>
+                基于凭据的策略配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ClaimsBasedPolicyOptions.Claims">
+            <summary>
+                策略支持的凭据字典
+            </summary>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement">
             <summary>
@@ -355,7 +473,7 @@
                 凭据认证要求
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ClaimsRequirement.#ctor(System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
                 认证策略构造
             </summary>
@@ -405,7 +523,7 @@
                 Artemis操作员代理实现
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions})">
             <summary>
                 代理实现
             </summary>
@@ -432,7 +550,7 @@
                 授权扩展
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions)">
             <summary>
                 配置授权服务
             </summary>
@@ -440,15 +558,7 @@
             <param name="config"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureRpcAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions)">
             <summary>
                 配置授权服务
             </summary>
@@ -541,18 +651,6 @@
             <param name="endpoint"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler">
-            <summary>
-                Rpc授权中间件结果处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.RpcAuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-                失败处理器
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Authorization.SharedKey">
             <summary>
                 共享键
@@ -561,6 +659,11 @@
         <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.AuthorizationMessage">
             <summary>
                 授权消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.Schema">
+            <summary>
+            Token架构
             </summary>
         </member>
         <member name="F:Artemis.Extensions.ServiceConnect.Authorization.SharedKey.Token">
@@ -712,12 +815,13 @@
             <param name="context"></param>
             <param name="key"></param>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenSymbol(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.TokenHandlerExtensions.FetchTokenSymbol(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String)">
             <summary>
                 从请求头中获取Token串
             </summary>
             <param name="context"></param>
             <param name="key"></param>
+            <param name="schema"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Authorization.TokenKeyGenerator">
@@ -923,7 +1027,7 @@
                 日志加载项
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions})">
             <summary>
                 侦听器构造
             </summary>
@@ -942,7 +1046,7 @@
                 日志加载项
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Interceptors.AddInsLog`1.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions})">
             <summary>
                 侦听器构造
             </summary>
@@ -1171,7 +1275,7 @@
                 添加认证令牌操作过滤器
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationConfig})">
+        <member name="M:Artemis.Extensions.ServiceConnect.SwaggerFilters.AddAuthorizationToken.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions})">
             <summary>
                 构造
             </summary>

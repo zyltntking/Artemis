@@ -747,10 +747,11 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
         {
             var claimExists = await RoleClaimStore.EntityQuery
                 .Where(claim => claim.RoleId == id)
-                .Where(claim => claim.CheckStamp == package.CheckStamp)
+                .Where(claim => claim.ClaimType == package.ClaimType)
+                .Where(claim => claim.ClaimValue == package.ClaimValue)
                 .AnyAsync(cancellationToken);
 
-            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+            var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
             if (claimExists)
             {
@@ -762,7 +763,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
             var roleClaim = Instance.CreateInstance<IdentityRoleClaim, ClaimPackage>(package);
 
             roleClaim.RoleId = id;
-            roleClaim.CheckStamp = Generator.CheckStamp(summary);
+            roleClaim.CheckStamp = summary.CheckStamp();
 
             return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
         }
@@ -790,7 +791,9 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
         {
             var packageList = packages.ToList();
 
-            var checkStamps = packageList.Select(package => package.CheckStamp).ToList();
+            var checkStamps = packageList.Select(package => 
+                Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue))
+                .ToList();
 
             var storedClaimsCheckStamp = await RoleClaimStore.EntityQuery
                 .Where(claim => claim.RoleId == id)
@@ -803,15 +806,15 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
             if (notSetClaimsCheckStamp.Any())
             {
                 var roleClaims = packageList
-                    .Where(package => notSetClaimsCheckStamp.Contains(package.CheckStamp))
+                    .Where(package => notSetClaimsCheckStamp.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
                     .Select(package =>
                     {
-                        var summery = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+                        var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
                         var roleClaim = Instance.CreateInstance<IdentityRoleClaim, ClaimPackage>(package);
 
                         roleClaim.RoleId = id;
-                        roleClaim.CheckStamp = Generator.CheckStamp(summery);
+                        roleClaim.CheckStamp = summery.CheckStamp();
 
                         return roleClaim;
                     })
@@ -821,7 +824,7 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
             }
 
             var flag =
-                $"roleId:{id},claims:{string.Join(',', packageList.Select(item => Generator.PairSummary(item.ClaimType, item.ClaimValue)))}";
+                $"roleId:{id},claims:{string.Join(',', packageList.Select(item => Normalize.KeyValuePairSummary(item.ClaimType, item.ClaimValue)))}";
 
             return StoreResult.EntityFoundFailed(nameof(IdentityRoleClaim), flag);
         }
@@ -850,13 +853,13 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
                 .Where(roleClaim => roleClaim.RoleId == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+            var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
             if (roleClaim is not null)
             {
                 roleClaim.ClaimType = package.ClaimType;
                 roleClaim.ClaimValue = package.ClaimValue;
-                roleClaim.CheckStamp = Generator.CheckStamp(summary);
+                roleClaim.CheckStamp = summary.CheckStamp();
 
                 return await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken);
             }
@@ -897,11 +900,11 @@ public sealed class IdentityRoleManager : Manager<IdentityRole>, IIdentityRoleMa
                 {
                     var package = dictionary[roleClaim.Id];
 
-                    var summary = Generator.PairSummary(package.ClaimType, package.ClaimValue);
+                    var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
 
                     roleClaim.ClaimType = package.ClaimType;
                     roleClaim.ClaimValue = package.ClaimValue;
-                    roleClaim.CheckStamp = Generator.CheckStamp(summary);
+                    roleClaim.CheckStamp = summary.CheckStamp();
 
                     return roleClaim;
                 }).ToList();
