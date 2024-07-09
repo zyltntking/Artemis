@@ -173,7 +173,7 @@ public static class StringValidator
     public static IRuleBuilderOptions<T, string> ShouldBeGuid<T>(
         this IRuleBuilder<T, string> ruleBuilder,
         GuidFormat format = GuidFormat.D,
-        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+        CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
         return ruleBuilder.Must(input => Matcher.GuidMatcher(format, caseMode).IsMatch(input))
             .WithMessage("不是有效的GUID标识");

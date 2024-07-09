@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
-using Artemis.Data.Store;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Identity;

@@ -2,7 +2,6 @@
 using Artemis.Data.Shared.Transfer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 
@@ -14,20 +13,12 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
     /// <summary>
     ///     构造
     /// </summary>
-    /// <param name="options">配置</param>
     /// <param name="logger">日志依赖</param>
     public ArtemisAuthorizationHandler(
-        IOptions<ArtemisAuthorizationOptions> options,
         ILogger<ArtemisAuthorizationHandler> logger)
     {
-        Options = options.Value;
         Logger = logger;
     }
-
-    /// <summary>
-    ///     配置访问器
-    /// </summary>
-    private ArtemisAuthorizationOptions Options { get; }
 
     /// <summary>
     ///     日志访问器

@@ -19,9 +19,13 @@
 
 	<ItemGroup>
 		<Compile Remove="logs\**" />
+		<Compile Remove="Validators\**" />
 		<Content Remove="logs\**" />
+		<Content Remove="Validators\**" />
 		<EmbeddedResource Remove="logs\**" />
+		<EmbeddedResource Remove="Validators\**" />
 		<None Remove="logs\**" />
+		<None Remove="Validators\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -52,10 +56,6 @@
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
 		<ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
 		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Validators\Resource\" />
 	</ItemGroup>
 
 </Project>

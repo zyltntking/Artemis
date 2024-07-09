@@ -89,17 +89,11 @@
                 Artemis凭据处理器
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Options.IOptions{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
+        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler})">
             <summary>
                 构造
             </summary>
-            <param name="options">配置</param>
             <param name="logger">日志依赖</param>
-        </member>
-        <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Options">
-            <summary>
-                配置访问器
-            </summary>
         </member>
         <member name="P:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.Logger">
             <summary>
@@ -112,44 +106,6 @@
             </summary>
             <param name="context">The authorization context.</param>
             <param name="requirement">The requirement to evaluate.</param>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRolesRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理角色要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleActionNameClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理ActionName凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="context">http上下文</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandler.HandleRoutePathClaimRequirement(Artemis.Extensions.ServiceConnect.Authorization.IArtemisAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,Artemis.Data.Shared.Transfer.TokenDocument,System.String@)">
-            <summary>
-                处理RoutePath凭据要求
-            </summary>
-            <param name="requirement">要求对象</param>
-            <param name="context">http上下文</param>
-            <param name="document">令牌文档</param>
-            <param name="message">失败消息</param>
-            <returns></returns>
         </member>
         <member name="T:Artemis.Extensions.ServiceConnect.Authorization.ArtemisAuthorizationHandlerStandOnly">
             <summary>

@@ -503,6 +503,107 @@
             @maxLength(128)
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchCreateClaimRequest">
+            <summary>
+            批量创建凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchCreateClaimRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchCreateClaimRequest.Batch">
+            <summary>
+            批量创建凭据请求
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.UpdateClaimRequest">
+            <summary>
+            更新凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateClaimRequest.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateClaimRequest.Id">
+            <summary>
+            凭据标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateClaimRequest.ClaimTypeFieldNumber">
+            <summary>Field number for the "ClaimType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateClaimRequest.ClaimType">
+            <summary>
+            凭据类型
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateClaimRequest.ClaimValueFieldNumber">
+            <summary>Field number for the "ClaimValue" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateClaimRequest.ClaimValue">
+            <summary>
+            凭据值
+            @required
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.UpdateClaimRequest.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.UpdateClaimRequest.Description">
+            <summary>
+            描述
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchUpdateClaimRequest">
+            <summary>
+            批量更新凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchUpdateClaimRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchUpdateClaimRequest.Batch">
+            <summary>
+            批量更新凭据请求
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.DeleteClaimRequest">
+            <summary>
+            删除凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.DeleteClaimRequest.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.DeleteClaimRequest.Id">
+            <summary>
+            凭据标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.BatchDeleteClaimRequest">
+            <summary>
+            批量删除凭据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.BatchDeleteClaimRequest.IdsFieldNumber">
+            <summary>Field number for the "Ids" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.BatchDeleteClaimRequest.Ids">
+            <summary>
+            批量删除凭据标识
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Identity.Resource">
             <summary>
             资源服务协议
@@ -533,6 +634,46 @@
         <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.CreateClaim(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.BatchCreateClaim(Artemis.Service.Protos.Identity.BatchCreateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.UpdateClaim(Artemis.Service.Protos.Identity.UpdateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.BatchUpdateClaim(Artemis.Service.Protos.Identity.BatchUpdateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.DeleteClaim(Artemis.Service.Protos.Identity.DeleteClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceBase.BatchDeleteClaim(Artemis.Service.Protos.Identity.BatchDeleteClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除凭据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -659,6 +800,186 @@
         <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.CreateClaimAsync(Artemis.Service.Protos.Identity.CreateClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchCreateClaim(Artemis.Service.Protos.Identity.BatchCreateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchCreateClaim(Artemis.Service.Protos.Identity.BatchCreateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchCreateClaimAsync(Artemis.Service.Protos.Identity.BatchCreateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchCreateClaimAsync(Artemis.Service.Protos.Identity.BatchCreateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.UpdateClaim(Artemis.Service.Protos.Identity.UpdateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.UpdateClaim(Artemis.Service.Protos.Identity.UpdateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.UpdateClaimAsync(Artemis.Service.Protos.Identity.UpdateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.UpdateClaimAsync(Artemis.Service.Protos.Identity.UpdateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchUpdateClaim(Artemis.Service.Protos.Identity.BatchUpdateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchUpdateClaim(Artemis.Service.Protos.Identity.BatchUpdateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchUpdateClaimAsync(Artemis.Service.Protos.Identity.BatchUpdateClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchUpdateClaimAsync(Artemis.Service.Protos.Identity.BatchUpdateClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.DeleteClaim(Artemis.Service.Protos.Identity.DeleteClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.DeleteClaim(Artemis.Service.Protos.Identity.DeleteClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.DeleteClaimAsync(Artemis.Service.Protos.Identity.DeleteClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.DeleteClaimAsync(Artemis.Service.Protos.Identity.DeleteClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchDeleteClaim(Artemis.Service.Protos.Identity.BatchDeleteClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchDeleteClaim(Artemis.Service.Protos.Identity.BatchDeleteClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchDeleteClaimAsync(Artemis.Service.Protos.Identity.BatchDeleteClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除凭据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.Resource.ResourceClient.BatchDeleteClaimAsync(Artemis.Service.Protos.Identity.BatchDeleteClaimRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除凭据
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

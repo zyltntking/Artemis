@@ -86,10 +86,10 @@ public static class Matcher
         {
             { (Md5DigestMode.Digest16, CharacterCaseMode.UpperCase), "^[A-F0-9]{16}$" },
             { (Md5DigestMode.Digest16, CharacterCaseMode.LowerCase), "^[a-f0-9]{16}$" },
-            { (Md5DigestMode.Digest16, CharacterCaseMode.Mix), "^[a-fA-F0-9]{16}$" },
+            { (Md5DigestMode.Digest16, CharacterCaseMode.Mix), "^([A-F0-9]{32}|[a-f0-9]{16})$" },
             { (Md5DigestMode.Digest32, CharacterCaseMode.UpperCase), "^[A-F0-9]{32}$" },
             { (Md5DigestMode.Digest32, CharacterCaseMode.LowerCase), "^[a-f0-9]{32}$" },
-            { (Md5DigestMode.Digest32, CharacterCaseMode.Mix), "^[a-fA-F0-9]{32}$" }
+            { (Md5DigestMode.Digest32, CharacterCaseMode.Mix), "^([A-F0-9]{32}|[a-f0-9]{32})$" }
         };
 
     /// <summary>
@@ -100,7 +100,7 @@ public static class Matcher
     /// <returns></returns>
     public static string Md5Pattern(
         Md5DigestMode digestMode = Md5DigestMode.Digest32,
-        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+        CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
         if (Md5PatternCache.ContainsKey((digestMode, caseMode))) return Md5PatternCache[(digestMode, caseMode)];
 
@@ -115,16 +115,10 @@ public static class Matcher
     /// <returns></returns>
     public static Regex Md5Matcher(
         Md5DigestMode digestMode = Md5DigestMode.Digest32,
-        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+        CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
         return new Regex(Md5Pattern(digestMode, caseMode));
     }
-
-    #endregion
-
-    #region Token
-
-    
 
     #endregion
 
@@ -143,28 +137,19 @@ public static class Matcher
         {
             { (GuidFormat.N, CharacterCaseMode.UpperCase), "^([A-F0-9]{32})$" },
             { (GuidFormat.N, CharacterCaseMode.LowerCase), "^([a-f0-9]{32})$" },
-            { (GuidFormat.N, CharacterCaseMode.Mix), "^([a-fA-F0-9]{32})$" },
+            { (GuidFormat.N, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{32})$" },
             { (GuidFormat.D, CharacterCaseMode.UpperCase), "^([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$" },
             { (GuidFormat.D, CharacterCaseMode.LowerCase), "^([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$" },
-            { (GuidFormat.D, CharacterCaseMode.Mix), "^([a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$" },
+            { (GuidFormat.D, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12})$" },
             { (GuidFormat.B, CharacterCaseMode.UpperCase), @"^(\{[A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\})$" },
             { (GuidFormat.B, CharacterCaseMode.LowerCase), @"^(\{[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\})$" },
-            { (GuidFormat.B, CharacterCaseMode.Mix), @"^(\{[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}\})" },
-            { (GuidFormat.P, CharacterCaseMode.UpperCase), @"(\([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\))" },
-            { (GuidFormat.P, CharacterCaseMode.LowerCase), @"(\([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\))" },
-            { (GuidFormat.P, CharacterCaseMode.Mix), @"(\([a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}\))" },
-            {
-                (GuidFormat.Mix, CharacterCaseMode.UpperCase),
-                "^([A-F0-9]{32})|([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$"
-            },
-            {
-                (GuidFormat.Mix, CharacterCaseMode.LowerCase),
-                "^([a-f0-9]{32})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$"
-            },
-            {
-                (GuidFormat.Mix, CharacterCaseMode.Mix),
-                "^([a-fA-F0-9]{32})|([a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$"
-            }
+            { (GuidFormat.B, CharacterCaseMode.Mix), @"^(\{[(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12}\})$" },
+            { (GuidFormat.P, CharacterCaseMode.UpperCase), @"^(\([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12}\))$" },
+            { (GuidFormat.P, CharacterCaseMode.LowerCase), @"^(\([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}\))$" },
+            { (GuidFormat.P, CharacterCaseMode.Mix), @"^(\([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12}\))$" },
+            { (GuidFormat.Mix, CharacterCaseMode.UpperCase), "^([A-F0-9]{32})|([A-F0-9]{8}-([A-F0-9]{4}-){3}[A-F0-9]{12})$" },
+            { (GuidFormat.Mix, CharacterCaseMode.LowerCase), "^([a-f0-9]{32})|([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})$" },
+            { (GuidFormat.Mix, CharacterCaseMode.Mix), "^([(A-F|a-f)0-9]{32})|([(A-F|a-f)0-9]{8}-([(A-F|a-f)0-9]{4}-){3}[(A-F|a-f)0-9]{12})$" }
         };
 
     /// <summary>
@@ -175,7 +160,7 @@ public static class Matcher
     /// <returns></returns>
     public static string GuidPattern(
         GuidFormat guidMode = GuidFormat.D,
-        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+        CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
         if (GuidPatternCache.ContainsKey((guidMode, caseMode))) return GuidPatternCache[(guidMode, caseMode)];
 
@@ -190,7 +175,7 @@ public static class Matcher
     /// <returns></returns>
     public static Regex GuidMatcher(
         GuidFormat guidMode = GuidFormat.D,
-        CharacterCaseMode caseMode = CharacterCaseMode.UpperCase)
+        CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
         return new Regex(GuidPattern(guidMode, caseMode));
     }

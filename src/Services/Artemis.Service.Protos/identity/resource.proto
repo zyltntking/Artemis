@@ -29,6 +29,40 @@ service Resource {
       body: "*"
     };
   }
+  // 批量创建凭据
+  rpc BatchCreateClaim(BatchCreateClaimRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      post: "/api/Claims/BatchCreate"
+      body: "Batch"
+    };
+  }
+  // 更新凭据
+  rpc UpdateClaim(UpdateClaimRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      put: "/api/Claims/{Id}"
+      body: "*"
+    };
+  }
+  // 批量更新凭据
+  rpc BatchUpdateClaim(BatchUpdateClaimRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      put: "/api/Claims/BatchUpdate"
+      body: "Batch"
+    };
+  }
+  // 删除凭据
+  rpc DeleteClaim(DeleteClaimRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      delete: "/api/Claims/{Id}"
+    };
+  }
+  // 批量删除凭据
+  rpc BatchDeleteClaim(BatchDeleteClaimRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      delete: "/api/Claims/BatchDelete"
+      body: "Ids"
+    };
+  }
 }
 
 // 查询凭据信息请求
@@ -186,4 +220,60 @@ message CreateClaimRequest {
    * @maxLength(128)
    */
   google.protobuf.StringValue Description = 3;
+}
+
+// 批量创建凭据请求
+message BatchCreateClaimRequest {
+  /* 批量创建凭据请求
+   * @required
+   */
+  repeated CreateClaimRequest Batch = 1;
+}
+
+// 更新凭据请求
+message UpdateClaimRequest {
+  /* 凭据标识
+   * @required
+   * @guid
+   */
+  string Id = 1;
+  /* 凭据类型
+   * @required
+   * @maxLength(128)
+   */
+  string ClaimType = 2;
+  /* 凭据值
+   * @required
+   * @maxLength(512)
+   */
+  string ClaimValue = 3;
+  /* 描述
+   * @maxLength(128)
+   */
+  google.protobuf.StringValue Description = 4;
+}
+
+// 批量更新凭据请求
+message BatchUpdateClaimRequest {
+  /* 批量更新凭据请求
+   * @required
+   */
+  repeated UpdateClaimRequest Batch = 1;
+}
+
+// 删除凭据请求
+message DeleteClaimRequest {
+  /* 凭据标识
+   * @required
+   * @guid
+   */
+  string Id = 1;
+}
+
+// 批量删除凭据请求
+message BatchDeleteClaimRequest {
+  /* 批量删除凭据标识
+   * @required
+   */
+  repeated string Ids = 1;
 }
