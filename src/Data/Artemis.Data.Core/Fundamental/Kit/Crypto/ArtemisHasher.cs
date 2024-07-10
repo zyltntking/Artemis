@@ -15,7 +15,7 @@ namespace Artemis.Data.Core.Fundamental.Kit.Crypto;
 /// <summary>
 ///     密码摘要算法
 /// </summary>
-internal class ArtemisHasher
+internal sealed class ArtemisHasher
 {
     /// <summary>
     ///     默认实现

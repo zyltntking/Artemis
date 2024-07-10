@@ -154,7 +154,7 @@ public abstract class TreeNode<TTreeNode> : TreeNode<TTreeNode, Guid>, ITreeNode
 /// </summary>
 /// <typeparam name="TTreeNode">节点模板</typeparam>
 /// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
-file abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeInfo, Guid>
+public abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeInfo, Guid>
     where TTreeNode : TreeNode<TTreeNode, Guid>
     where TTreeNodeInfo : ITreeNodeInfo<Guid>
 {
@@ -174,7 +174,7 @@ file abstract class Tree<TTreeNode, TTreeNodeInfo> : Tree<TTreeNode, TTreeNodeIn
 /// <typeparam name="TTreeNode">节点模板</typeparam>
 /// <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
 /// <typeparam name="TKey">键</typeparam>
-file abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode, TKey>
+public abstract class Tree<TTreeNode, TTreeNodeInfo, TKey> : TreeNode<TTreeNode, TKey>
     where TTreeNode : TreeNode<TTreeNode, TKey>
     where TTreeNodeInfo : ITreeNodeInfo<TKey>
     where TKey : IEquatable<TKey>

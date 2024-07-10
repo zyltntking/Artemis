@@ -22,7 +22,7 @@ public class Division : ConcurrencyModel, IDivision
     ///     行政区划代码
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("行政区划代码")]
     public required string Code { get; set; }
 
@@ -44,14 +44,14 @@ public class Division : ConcurrencyModel, IDivision
     /// <summary>
     ///     行政区划全名
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("行政区划全名")]
     public string? FullName { get; set; }
 
     /// <summary>
     ///     行政区划拼音
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("行政区划拼音")]
     public string? Pinyin { get; set; }
 

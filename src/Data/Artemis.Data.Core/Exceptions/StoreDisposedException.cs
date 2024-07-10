@@ -3,7 +3,7 @@
 /// <summary>
 ///     存储已被释放异常
 /// </summary>
-public class StoreDisposedException : ArtemisException
+public sealed class StoreDisposedException : ArtemisException
 {
     /// <summary>
     ///     错误构造

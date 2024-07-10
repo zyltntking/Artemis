@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     行政区划等级
 /// </summary>
 [Description("行政区划等级")]
-public class RegionLevel : Enumeration
+public sealed class RegionLevel : Enumeration
 {
     /// <summary>
     ///     未知等级
@@ -44,7 +44,7 @@ public class RegionLevel : Enumeration
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>
-    protected RegionLevel(int id, string name) : base(id, name)
+    private RegionLevel(int id, string name) : base(id, name)
     {
     }
 }

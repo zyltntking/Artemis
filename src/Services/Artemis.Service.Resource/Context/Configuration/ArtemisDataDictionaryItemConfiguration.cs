@@ -19,7 +19,7 @@ internal sealed class
     /// <summary>
     ///     表名
     /// </summary>
-    protected override string TableName => nameof(ArtemisDataDictionary).TableName();
+    protected override string TableName => nameof(ArtemisDataDictionaryItem).TableName();
 
     #endregion
 }

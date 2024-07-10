@@ -58,7 +58,7 @@ file interface IPosition
 /// <summary>
 ///     位置信息
 /// </summary>
-file abstract class PositionInfo : IPosition
+public abstract class PositionInfo : IPosition
 {
     #region Overrides of Object
 

@@ -3,7 +3,7 @@
 /// <summary>
 ///     存储参数空异常
 /// </summary>
-public class StoreParameterNullException : ArtemisException
+public sealed class StoreParameterNullException : ArtemisException
 {
     /// <summary>
     ///     错误构造

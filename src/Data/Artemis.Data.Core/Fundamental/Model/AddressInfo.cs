@@ -31,6 +31,16 @@ file interface IAddress
     ///     乡
     /// </summary>
     string? Township { get; set; }
+
+    /// <summary>
+    ///    村
+    /// </summary>
+    string? Village { get; set; }
+
+    /// <summary>
+    /// 门牌号
+    /// </summary>
+    string? HouseNumber { get; set; }
 }
 
 file interface INormalizedAddress
@@ -59,6 +69,16 @@ file interface INormalizedAddress
     ///     乡
     /// </summary>
     string? NormalizedTownship { get; set; }
+
+    /// <summary>
+    /// 村
+    /// </summary>
+    string? NormalizedVillage { get; set; }
+
+    /// <summary>
+    /// 门牌号
+    /// </summary>
+    string? NormalizedHouseNumber { get; set; }
 }
 
 #endregion
@@ -66,7 +86,7 @@ file interface INormalizedAddress
 /// <summary>
 ///     地址信息
 /// </summary>
-file abstract class AddressInfo : IAddress
+public abstract class AddressInfo : IAddress
 {
     #region Overrides of Object
 
@@ -92,6 +112,12 @@ file abstract class AddressInfo : IAddress
 
         if (!string.IsNullOrWhiteSpace(Township))
             segments.Add(Township);
+
+        if (!string.IsNullOrWhiteSpace(Village))
+            segments.Add(Village);
+
+        if (!string.IsNullOrWhiteSpace(HouseNumber))
+            segments.Add(HouseNumber);
 
         var address = string.Join(" ", segments);
 
@@ -127,13 +153,23 @@ file abstract class AddressInfo : IAddress
     /// </summary>
     public string? Township { get; set; }
 
+    /// <summary>
+    ///    村
+    /// </summary>
+    public string? Village { get; set; }
+
+    /// <summary>
+    /// 门牌号
+    /// </summary>
+    public string? HouseNumber { get; set; }
+
     #endregion
 }
 
 /// <summary>
 ///     地址结构
 /// </summary>
-file abstract class AddressStructure : AddressInfo, INormalizedAddress
+public abstract class AddressStructure : AddressInfo, INormalizedAddress
 {
     #region Implementation of INormalizedAddress
 
@@ -161,6 +197,16 @@ file abstract class AddressStructure : AddressInfo, INormalizedAddress
     ///     乡
     /// </summary>
     public string? NormalizedTownship { get; set; }
+
+    /// <summary>
+    /// 村
+    /// </summary>
+    public string? NormalizedVillage { get; set; }
+
+    /// <summary>
+    /// 门牌号
+    /// </summary>
+    public string? NormalizedHouseNumber { get; set; }
 
     #endregion
 }

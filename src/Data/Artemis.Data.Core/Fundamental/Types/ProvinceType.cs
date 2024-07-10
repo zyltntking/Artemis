@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     省级行政区划类型
 /// </summary>
 [Description("省级行政区划类型")]
-public class ProvinceType : Enumeration
+public sealed class ProvinceType : Enumeration
 {
     /// <summary>
     ///     未知类型
@@ -40,7 +40,7 @@ public class ProvinceType : Enumeration
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>
-    protected ProvinceType(int id, string name) : base(id, name)
+    private ProvinceType(int id, string name) : base(id, name)
     {
     }
 }

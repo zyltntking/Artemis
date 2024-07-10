@@ -616,14 +616,59 @@
                 学校标识
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.School.IClass.ClassName">
+        <member name="P:Artemis.Data.Shared.School.IClass.HeadTeacherId">
+            <summary>
+               班主任标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.Name">
             <summary>
                 班级名称
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.School.IClass.ClassCode">
+        <member name="P:Artemis.Data.Shared.School.IClass.Type">
+            <summary>
+            班级类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.Major">
+            <summary>
+            所学专业
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.Code">
             <summary>
                 班级编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.StudyPhase">
+            <summary>
+            学段
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.SchoolLength">
+            <summary>
+            学制
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.Length">
+            <summary>
+            学制长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.SerialNumber">
+            <summary>
+            班级序号
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IClass.EstablishTime">
+            <summary>
+            班级创建时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Shared.School.IClassRoom">
+            <summary>
+            教室接口
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.School.IClassStudent">
@@ -746,14 +791,59 @@
                 学生接口
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.School.IStudent.StudentName">
+        <member name="P:Artemis.Data.Shared.School.IStudent.Name">
             <summary>
                 学生名称
             </summary>
         </member>
-        <member name="P:Artemis.Data.Shared.School.IStudent.StudentCode">
+        <member name="P:Artemis.Data.Shared.School.IStudent.Gender">
+            <summary>
+               学生性别
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Major">
+            <summary>
+            专业
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Birthday">
+            <summary>
+               学生生日
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Nation">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Code">
             <summary>
                 学生编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.StudentNumber">
+            <summary>
+            学籍号
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Cert">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.EnrollmentDate">
+            <summary>
+            入学时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.DivisionCode">
+            <summary>
+             住址区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.IStudent.Address">
+            <summary>
+            住址
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.School.IStudentCurrentAffiliation">

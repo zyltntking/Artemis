@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     乡级行政区划类型
 /// </summary>
 [Description("乡级行政区划类型")]
-public class TownshipType : Enumeration
+public sealed class TownshipType : Enumeration
 {
     /// <summary>
     ///     未知类型
@@ -38,7 +38,7 @@ public class TownshipType : Enumeration
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>
-    protected TownshipType(int id, string name) : base(id, name)
+    private TownshipType(int id, string name) : base(id, name)
     {
     }
 }

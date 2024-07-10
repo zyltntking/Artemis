@@ -47,3 +47,29 @@ public record AttachResult<TResult, TAttach> : IAttachResult<TResult, TAttach>
     [Required]
     public required TAttach Attach { get; init; }
 }
+
+/// <summary>
+///     结果附加扩展
+/// </summary>
+public static class AttachResultExtensions
+{
+    /// <summary>
+    ///     附加
+    /// </summary>
+    /// <typeparam name="TAttach">附加数据类型</typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="result">结果</param>
+    /// <param name="attach">附加数据</param>
+    /// <returns></returns>
+    public static AttachResult<TResult, TAttach> Attach<TResult, TAttach>(
+        this TResult result, TAttach attach)
+        where TAttach : class 
+        where TResult : class
+    {
+        return new AttachResult<TResult, TAttach>
+        {
+            Result = result,
+            Attach = attach
+        };
+    }
+}

@@ -3,7 +3,7 @@
 /// <summary>
 ///     映射对象空异常
 /// </summary>
-public class MapTargetNullException : ArtemisException
+public sealed class MapTargetNullException : ArtemisException
 {
     /// <summary>
     ///     构造

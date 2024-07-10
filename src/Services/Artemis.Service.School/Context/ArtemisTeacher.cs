@@ -34,4 +34,9 @@ public sealed class ArtemisTeacher : Teacher
     ///     教师教过的班级
     /// </summary>
     public ICollection<ArtemisClass>? Classes { get; set; }
+
+    /// <summary>
+    /// 班主任班级
+    /// </summary>
+    public ArtemisClass? HeadTeacherClass { get; set; }
 }

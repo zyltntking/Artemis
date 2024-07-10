@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     对称算法类型
 /// </summary>
 [Description("对称算法类型")]
-public class SymmetricType : Enumeration
+public sealed class SymmetricType : Enumeration
 {
     /// <summary>
     ///     未知类型

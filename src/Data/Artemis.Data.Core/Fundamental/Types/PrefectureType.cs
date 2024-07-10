@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     地区级行政区划类型
 /// </summary>
 [Description("地区级行政区划类型")]
-public class PrefectureType : Enumeration
+public sealed class PrefectureType : Enumeration
 {
     /// <summary>
     ///     未知类型

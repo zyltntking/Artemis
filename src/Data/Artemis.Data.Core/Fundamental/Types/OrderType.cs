@@ -6,7 +6,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 ///     排序类型
 /// </summary>
 [Description("排序类型")]
-public class OrderType : Enumeration
+public sealed class OrderType : Enumeration
 {
     /// <summary>
     ///     正序
