@@ -36,5 +36,40 @@ public class School : ConcurrencyPartition, ISchool
     [Comment("学校类型")]
     public required string Type { get; set; }
 
+    /// <summary>
+    /// 组织机构代码
+    /// </summary>
+    public string? OrganizationCode { get; set; }
+
+    /// <summary>
+    /// 学校所在地行政区划代码
+    /// </summary>
+    public string? DivisionCode { get; set; }
+
+    /// <summary>
+    ///    学校地址
+    /// </summary>
+    public string? Address { get; set; }
+
+    /// <summary>
+    /// 学校邮箱
+    /// </summary>
+    public string? Email { get; set; }
+
+    /// <summary>
+    /// 学校网站
+    /// </summary>
+    public string? WebSite { get; set; }
+
+    /// <summary>
+    /// 学校联系电话
+    /// </summary>
+    public string? ContactNumber { get; set; }
+
+    /// <summary>
+    /// 学校建立时间
+    /// </summary>
+    public DateTime? EstablishTime { get; set; }
+
     #endregion
 }

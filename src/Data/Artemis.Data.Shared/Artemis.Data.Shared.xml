@@ -551,14 +551,34 @@
                 机构名称
             </summary>
         </member>
+        <member name="P:Artemis.Data.Shared.Resource.IOrganization.Code">
+            <summary>
+               机构编码
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Shared.Resource.IOrganization.Type">
             <summary>
                 机构类型
             </summary>
         </member>
+        <member name="P:Artemis.Data.Shared.Resource.IOrganization.EstablishTime">
+            <summary>
+               机构成立时间
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Shared.Resource.IOrganization.Email">
             <summary>
                 机构邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.Resource.IOrganization.WebSite">
+            <summary>
+            机构网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.Resource.IOrganization.ContactNumber">
+            <summary>
+            机构联系电话
             </summary>
         </member>
         <member name="P:Artemis.Data.Shared.Resource.IOrganization.PostCode">
@@ -569,6 +589,11 @@
         <member name="P:Artemis.Data.Shared.Resource.IOrganization.Status">
             <summary>
                 机构状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.Resource.IOrganization.DivisionCode">
+            <summary>
+               机构所在地行政区划代码
             </summary>
         </member>
         <member name="P:Artemis.Data.Shared.Resource.IOrganization.Address">
@@ -649,6 +674,41 @@
         <member name="P:Artemis.Data.Shared.School.ISchool.Type">
             <summary>
                 学校类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.OrganizationCode">
+            <summary>
+            组织机构代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.DivisionCode">
+            <summary>
+            学校所在地行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.Address">
+            <summary>
+               学校地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.Email">
+            <summary>
+            学校邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.WebSite">
+            <summary>
+            学校网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.ContactNumber">
+            <summary>
+            学校联系电话
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Shared.School.ISchool.EstablishTime">
+            <summary>
+            学校建立时间
             </summary>
         </member>
         <member name="T:Artemis.Data.Shared.School.ISchoolStudent">

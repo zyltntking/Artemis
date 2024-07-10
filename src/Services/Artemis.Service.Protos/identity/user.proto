@@ -737,7 +737,7 @@ message ReadUserClaimInfoResponse {
 }
 
 // 创建凭据数据包
-message CreateClaimPacket {
+message AddUserClaimPacket {
 	/* 凭据类型
 	 * @required
 	 * @length(1,128)
@@ -764,7 +764,7 @@ message AddUserClaimRequest {
 	/* 凭据
 	 * @required
 	 */
-	CreateClaimPacket UserClaim = 2;
+	AddUserClaimPacket UserClaim = 2;
 }
 
 // 批量添加用户凭据请求
@@ -777,11 +777,11 @@ message BatchAddUserClaimRequest {
 	/* 凭据数据
 	 * @required
 	 */
-	repeated CreateClaimPacket Batch = 2;
+	repeated AddUserClaimPacket Batch = 2;
 }
 
 // 更新用户凭据数据包
-message UpdateClaimPacket {
+message UpdateUserClaimPacket {
 	/* 凭据类型
 	 * @length(1,128)
 	 */
@@ -810,11 +810,11 @@ message UpdateUserClaimRequest {
 	/* 凭据
 	 * @required
 	 */
-	UpdateClaimPacket UserClaim = 3;
+	UpdateUserClaimPacket UserClaim = 3;
 }
 
-// 更新用户凭据数据包
-message UpdateUserClaimPacket {
+// 批量更新用户凭据数据包
+message BatchUpdateUserClaimPacket {
 	/* 用户标识
 	 * @required
 	 */
@@ -822,7 +822,7 @@ message UpdateUserClaimPacket {
 	/* 凭据数据
 	 * @required
 	 */
-	UpdateClaimPacket Claim = 2;
+	UpdateUserClaimPacket Claim = 2;
 }
 
 // 批量更新用户凭据请求
@@ -835,7 +835,7 @@ message BatchUpdateUserClaimRequest {
 	/* 凭据数据
 	 * @required
 	 */
-	repeated UpdateUserClaimPacket Batch = 2;
+	repeated BatchUpdateUserClaimPacket Batch = 2;
 }
 
 // 删除用户凭据请求

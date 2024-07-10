@@ -4,7 +4,6 @@ using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
-using Artemis.Service.Protos.Identity;
 using Artemis.Service.Protos.Identity.User;
 using Grpc.Core;
 using Mapster;

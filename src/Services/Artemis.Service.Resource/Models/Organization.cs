@@ -19,6 +19,14 @@ public class Organization : ConcurrencyModel, IOrganization
     public required string Name { get; set; }
 
     /// <summary>
+    ///    机构编码
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [Comment("机构编码")]
+    public required string Code { get; set; }
+
+    /// <summary>
     ///     机构类型
     /// </summary>
     [Required]
@@ -27,11 +35,31 @@ public class Organization : ConcurrencyModel, IOrganization
     public required string Type { get; set; }
 
     /// <summary>
+    ///    机构成立时间
+    /// </summary>
+    [Comment("机构成立时间")]
+    public DateTime? EstablishTime { get; set; }
+
+    /// <summary>
     ///     机构邮箱
     /// </summary>
     [MaxLength(128)]
     [Comment("机构邮箱")]
     public string? Email { get; set; }
+
+    /// <summary>
+    /// 机构网站
+    /// </summary>
+    [MaxLength(128)]
+    [Comment("机构网站")]
+    public string? WebSite { get; set; }
+
+    /// <summary>
+    /// 机构联系电话
+    /// </summary>
+    [MaxLength(32)]
+    [Comment("机构联系电话")]
+    public string? ContactNumber { get; set; }
 
     /// <summary>
     ///     机构邮编
@@ -47,6 +75,13 @@ public class Organization : ConcurrencyModel, IOrganization
     [MaxLength(64)]
     [Comment("机构状态")]
     public required string Status { get; set; }
+
+    /// <summary>
+    ///    机构所在地行政区划代码
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    public string? DivisionCode { get; set; }
 
     /// <summary>
     ///     机构地址

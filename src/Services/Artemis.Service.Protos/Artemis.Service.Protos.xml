@@ -2816,35 +2816,35 @@
             用户凭据信息数据
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Identity.User.UserClaimPacket">
+        <member name="T:Artemis.Service.Protos.Identity.User.AddUserClaimPacket">
             <summary>
-            用户凭据数据包
+            创建凭据数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.User.UserClaimPacket.ClaimTypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.ClaimTypeFieldNumber">
             <summary>Field number for the "ClaimType" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.User.UserClaimPacket.ClaimType">
+        <member name="P:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.ClaimType">
             <summary>
             凭据类型
             @required
             @length(1,128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.User.UserClaimPacket.ClaimValueFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.ClaimValueFieldNumber">
             <summary>Field number for the "ClaimValue" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.User.UserClaimPacket.ClaimValue">
+        <member name="P:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.ClaimValue">
             <summary>
             凭据值
             @required
             @length(1,512)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.User.UserClaimPacket.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.User.UserClaimPacket.Description">
+        <member name="P:Artemis.Service.Protos.Identity.User.AddUserClaimPacket.Description">
             <summary>
             描述
             @length(0,256)
@@ -2898,6 +2898,38 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket">
+            <summary>
+            更新用户凭据数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimTypeFieldNumber">
+            <summary>Field number for the "ClaimType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimType">
+            <summary>
+            凭据类型
+            @length(1,128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimValueFieldNumber">
+            <summary>Field number for the "ClaimValue" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimValue">
+            <summary>
+            凭据值
+            @length(1,512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.Description">
+            <summary>
+            描述
+            @length(0,256)
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Identity.User.UpdateUserClaimRequest">
             <summary>
             更新用户凭据请求
@@ -2931,24 +2963,24 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket">
+        <member name="T:Artemis.Service.Protos.Identity.User.BatchUpdateUserClaimPacket">
             <summary>
-            更新用户凭据数据包
+            批量更新用户凭据数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.User.BatchUpdateUserClaimPacket.ClaimIdFieldNumber">
             <summary>Field number for the "ClaimId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimId">
+        <member name="P:Artemis.Service.Protos.Identity.User.BatchUpdateUserClaimPacket.ClaimId">
             <summary>
             用户标识
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.ClaimFieldNumber">
+        <member name="F:Artemis.Service.Protos.Identity.User.BatchUpdateUserClaimPacket.ClaimFieldNumber">
             <summary>Field number for the "Claim" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Identity.User.UpdateUserClaimPacket.Claim">
+        <member name="P:Artemis.Service.Protos.Identity.User.BatchUpdateUserClaimPacket.Claim">
             <summary>
             凭据数据
             @required
