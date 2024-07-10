@@ -40,17 +40,24 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
     /// <summary>
     ///     操作员
     /// </summary>
-    public override Guid Handler
+    public override string Handler
     {
         get
         {
             var httpContext = HttpContextAccessor.HttpContext;
 
-            if (httpContext == null) return Guid.Empty;
+            if (httpContext?.User is { Claims: not null, Identity.IsAuthenticated: true })
+            {
+                var userId = httpContext.User
+                    .Claims
+                    .Where(claim => claim.Type == ClaimTypes.UserId)
+                    .Select(claim => claim.Value)
+                    .FirstOrDefault();
 
-            var token = httpContext.FetchTokenDocument<TokenDocument>(Options.ContextItemTokenKey);
+                if (!string.IsNullOrWhiteSpace(userId)) return userId;
+            }
 
-            return token?.UserId ?? Guid.Empty;
+            return Guid.Empty.IdToString()!;
         }
     }
 

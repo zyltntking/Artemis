@@ -77,7 +77,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取用户信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request, ServerCallContext context)
+    public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -118,7 +119,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request,
+        ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
             create => new UserSign
@@ -212,7 +214,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request,
+        ServerCallContext context)
     {
         var idList = request.UserIds.Select(Guid.Parse).ToList();
 
@@ -260,7 +263,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户角色信息")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request, ServerCallContext context)
+    public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
@@ -325,7 +329,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除用户角色")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
@@ -470,7 +475,8 @@ public class UserService : User.UserBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户凭据")]
     [Authorize(IdentityPolicy.Token)]
-    public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 

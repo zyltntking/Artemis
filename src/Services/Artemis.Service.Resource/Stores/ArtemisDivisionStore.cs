@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Service.Resource.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +16,7 @@ public interface IArtemisDivisionStore : IStore<ArtemisDivision>;
 #endregion
 
 /// <summary>
-/// 行政区划存储
+///     行政区划存储
 /// </summary>
 public class ArtemisDivisionStore : Store<ArtemisDivision>, IArtemisDivisionStore
 {
@@ -31,11 +30,11 @@ public class ArtemisDivisionStore : Store<ArtemisDivision>, IArtemisDivisionStor
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     public ArtemisDivisionStore(
-        ResourceContext context, 
+        ResourceContext context,
         IStoreOptions? storeOptions = null,
-        IHandlerProxy? handlerProxy = null, 
-        IDistributedCache? cache = null, 
-        ILogger? logger = null, 
+        IHandlerProxy? handlerProxy = null,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }

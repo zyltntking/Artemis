@@ -20,50 +20,19 @@ public abstract class ConcurrencyPartitionEntityConfiguration<TEntity> :
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey> :
-    ConcurrencyPartitionEntityConfiguration<TEntity, TKey, Guid>
+    PartitionBaseEntityConfiguration<TEntity, TKey>
     where TEntity : class, IConcurrencyPartition<TKey>
-    where TKey : IEquatable<TKey>;
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THandler> :
-    ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IConcurrencyPartition<TKey, THandler>
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IConcurrencyPartition<TKey, THandler, TConcurrencyStamp>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    PartitionBaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IConcurrencyPartition<TKey, THandler, TConcurrencyStamp, TPartition>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
 {
+    #region Config
+
+    /// <summary>
+    ///     启用并发戳字段配置
+    /// </summary>
+    protected override bool UseConcurrencyStampFieldConfiguration => true;
+
+    #endregion
+
     #region Slot
 
     /// <summary>
@@ -72,9 +41,10 @@ public abstract class ConcurrencyPartitionEntityConfiguration<TEntity, TKey, THa
     /// <param name="builder"></param>
     protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.ConcurrencyStamp)
-            .IsConcurrencyToken()
-            .HasComment("并发锁");
+        if (UseConcurrencyStampFieldConfiguration)
+            builder.Property(entity => entity.ConcurrencyStamp)
+                .IsConcurrencyToken()
+                .HasComment("并发锁");
     }
 
     #endregion
@@ -98,73 +68,16 @@ public abstract class PartitionBaseEntityConfiguration<TEntity> :
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 public abstract class PartitionBaseEntityConfiguration<TEntity, TKey> :
-    PartitionBaseEntityConfiguration<TEntity, TKey, Guid>
+    BaseModelEntityConfiguration<TEntity, TKey>
     where TEntity : class, IPartitionBase<TKey>
-    where TKey : IEquatable<TKey>;
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class PartitionBaseEntityConfiguration<TEntity, TKey, THandler> :
-    PartitionBaseEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IPartitionBase<TKey, THandler>
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     并发锁字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
-            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
-                .IsConcurrencyToken()
-                .HasComment("并发锁");
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class PartitionBaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    PartitionBaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IPartitionBase<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class PartitionBaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    BaseModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IPartitionBase<TKey, THandler, TPartition>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
 {
     #region Config
 
     /// <summary>
     ///     启用分区配置
     /// </summary>
-    protected sealed override bool UsePartitionConfiguration => true;
+    protected override bool UsePartitionConfiguration => true;
 
     #endregion
 
@@ -176,9 +89,10 @@ public abstract class PartitionBaseEntityConfiguration<TEntity, TKey, THandler, 
     /// <param name="builder"></param>
     protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.Partition)
-            .IsRequired()
-            .HasComment("分区标识");
+        if (UsePartitionConfiguration)
+            builder.Property(entity => entity.Partition)
+                .IsRequired()
+                .HasComment("分区标识");
     }
 
     /// <summary>
@@ -187,8 +101,9 @@ public abstract class PartitionBaseEntityConfiguration<TEntity, TKey, THandler, 
     /// <param name="builder"></param>
     protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasIndex(entity => entity.Partition)
-            .HasDatabaseName(IndexName("Partition"));
+        if (UsePartitionConfiguration)
+            builder.HasIndex(entity => entity.Partition)
+                .HasDatabaseName(IndexName("Partition"));
     }
 
     #endregion
@@ -211,81 +126,19 @@ public abstract class ConcurrencyModelEntityConfiguration<TEntity> :
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey> :
-    ConcurrencyModelEntityConfiguration<TEntity, TKey, Guid>
+public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey> : BaseModelEntityConfiguration<TEntity, TKey>
     where TEntity : class, IConcurrencyModel<TKey>
-    where TKey : IEquatable<TKey>;
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey, THandler> :
-    ConcurrencyModelEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IConcurrencyModel<TKey, THandler>
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    ConcurrencyModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IConcurrencyModel<TKey, THandler, TConcurrencyStamp>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
 {
-    #region Slot
+    #region Config
 
     /// <summary>
-    ///     分区标识插件字段配置
+    ///     启用并发戳字段配置
     /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.Property(entity => ((IPartitionSlot)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     分区标识插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
-    }
+    protected override bool UseConcurrencyStampFieldConfiguration => true;
 
     #endregion
-}
 
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    BaseModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IConcurrencyModel<TKey, THandler, TConcurrencyStamp>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
-{
     #region Slot
 
     /// <summary>
@@ -294,9 +147,10 @@ public abstract class ConcurrencyModelEntityConfiguration<TEntity, TKey, THandle
     /// <param name="builder"></param>
     protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.ConcurrencyStamp)
-            .IsConcurrencyToken()
-            .HasComment("并发锁");
+        if (UseConcurrencyStampFieldConfiguration)
+            builder.Property(entity => entity.ConcurrencyStamp)
+                .IsConcurrencyToken()
+                .HasComment("并发锁");
     }
 
     #endregion
@@ -319,174 +173,79 @@ public abstract class BaseModelEntityConfiguration<TEntity> :
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class BaseModelEntityConfiguration<TEntity, TKey> :
-    BaseModelEntityConfiguration<TEntity, TKey, Guid>
+public abstract class BaseModelEntityConfiguration<TEntity, TKey> : KeySlotEntityConfiguration<TEntity, TKey>
     where TEntity : class, IModelBase<TKey>
-    where TKey : IEquatable<TKey>;
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class BaseModelEntityConfiguration<TEntity, TKey, THandler> :
-    BaseModelEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IModelBase<TKey, THandler>
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     并发锁字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
-            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
-                .IsConcurrencyToken()
-                .HasComment("并发锁");
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class BaseModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    BaseModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IModelBase<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     分区标识插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.Property(entity => ((IPartitionSlot)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     分区标识插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class BaseModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    MateModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IModelBase<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
 {
     #region Config
 
     /// <summary>
-    ///     是否启用操作者配置
+    ///     启用操作者索引配置
     /// </summary>
-    protected sealed override bool UseHandlerFieldConfiguration => true;
+    protected override bool UseHandlerIndexConfiguration => true;
 
+    /// <summary>
+    ///     启用操作者字段配置
+    /// </summary>
+    protected override bool UseHandlerFieldConfiguration => true;
 
     /// <summary>
     ///     启用元数据索引配置
     /// </summary>
-    protected sealed override bool UseHandlerIndexConfiguration => true;
+    protected override bool UseMateIndexConfiguration => true;
+
+    /// <summary>
+    ///     启用元数据字段配置
+    /// </summary>
+    protected override bool UseMateFieldConfiguration => true;
 
     #endregion
 
     #region Slot
 
+    #region MateSlot
+
     /// <summary>
-    ///     操作者插件字段配置
+    ///     元数据插件字段配置
     /// </summary>
     /// <param name="builder"></param>
-    protected sealed override void HandlerSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void MateSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.CreateBy)
-            .HasComment("创建者标识")
-            .HasColumnType(DataTypeSet.Guid);
+        if (UseMateFieldConfiguration)
+        {
+            builder.Property(entity => entity.CreatedAt)
+                .HasComment("创建时间")
+                .IsRequired();
 
-        builder.Property(entity => entity.ModifyBy)
-            .HasComment("更新者标识")
-            .HasColumnType(DataTypeSet.Guid);
+            builder.Property(entity => entity.UpdatedAt)
+                .HasComment("更新时间")
+                .IsRequired();
 
-        builder.Property(entity => entity.RemoveBy)
-            .HasComment("删除者标识")
-            .HasColumnType(DataTypeSet.Guid);
+            builder.Property(entity => entity.DeletedAt)
+                .HasComment("删除时间");
+        }
     }
 
     /// <summary>
-    ///     操作者插件关系配置
+    ///     元数据插件索引配置
     /// </summary>
     /// <param name="builder"></param>
-    protected sealed override void HandlerSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
+    protected sealed override void MateSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasIndex(entity => entity.CreateBy)
-            .HasDatabaseName(IndexName("CreateBy"));
-        builder.HasIndex(entity => entity.ModifyBy)
-            .HasDatabaseName(IndexName("ModifyBy"));
-        builder.HasIndex(entity => entity.RemoveBy)
-            .HasDatabaseName(IndexName("RemoveBy"));
+        if (UseMateIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IMateSlot)))
+        {
+            builder.HasIndex(entity => entity.CreatedAt)
+                .HasDatabaseName(IndexName("CreatedAt"));
+            builder.HasIndex(entity => entity.UpdatedAt)
+                .HasDatabaseName(IndexName("UpdatedAt"));
+            builder.HasIndex(entity => entity.DeletedAt)
+                .HasDatabaseName(IndexName("DeletedAt"));
+        }
     }
 
     #endregion
-}
 
-#endregion
-
-#region MateModelEntityConfiguration
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity> :
-    MateModelEntityConfiguration<TEntity, Guid>
-    where TEntity : class, IMateModelBase;
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity, TKey> :
-    MateModelEntityConfiguration<TEntity, TKey, Guid>
-    where TEntity : class, IMateModelBase<TKey>
-    where TKey : IEquatable<TKey>
-{
-    #region Slot
+    #region HandlerSlot
 
     /// <summary>
     ///     操作者插件字段配置
@@ -495,20 +254,18 @@ public abstract class MateModelEntityConfiguration<TEntity, TKey> :
     protected sealed override void HandlerSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
         if (UseHandlerFieldConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.Property(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasComment("创建者标识")
-                    .HasColumnType(DataTypeSet.Guid);
+        {
+            builder.Property(entity => entity.CreateBy)
+                .HasComment("创建者标识")
+                .IsRequired();
 
-                builder.Property(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasComment("更新者标识")
-                    .HasColumnType(DataTypeSet.Guid);
+            builder.Property(entity => entity.ModifyBy)
+                .HasComment("更新者标识")
+                .IsRequired();
 
-                builder.Property(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasComment("删除者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-            }
+            builder.Property(entity => entity.RemoveBy)
+                .HasComment("删除者标识");
+        }
     }
 
     /// <summary>
@@ -518,118 +275,17 @@ public abstract class MateModelEntityConfiguration<TEntity, TKey> :
     protected sealed override void HandlerSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
         if (UseHandlerIndexConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.HasIndex(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasDatabaseName(IndexName("CreateBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasDatabaseName(IndexName("ModifyBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasDatabaseName(IndexName("RemoveBy"));
-            }
+        {
+            builder.HasIndex(entity => entity.CreateBy)
+                .HasDatabaseName(IndexName("CreateBy"));
+            builder.HasIndex(entity => entity.ModifyBy)
+                .HasDatabaseName(IndexName("ModifyBy"));
+            builder.HasIndex(entity => entity.RemoveBy)
+                .HasDatabaseName(IndexName("RemoveBy"));
+        }
     }
 
     #endregion
-}
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity, TKey, THandler> :
-    MateModelEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IMateModelBase<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     并发锁字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
-            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
-                .IsConcurrencyToken()
-                .HasComment("并发锁");
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    MateModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IMateModelBase<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     分区标识插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.Property(entity => ((IPartitionSlot)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     分区标识插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     元数据模型类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class MateModelEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IMateModelBase<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
-{
-    #region Config
-
-    /// <summary>
-    ///     启用元数据字段配置
-    /// </summary>
-    protected sealed override bool UseMateFieldConfiguration => true;
-
-    /// <summary>
-    ///     启用元数据索引配置
-    /// </summary>
-    protected sealed override bool UseMateIndexConfiguration => true;
 
     #endregion
 }
@@ -642,8 +298,7 @@ public abstract class MateModelEntityConfiguration<TEntity, TKey, THandler, TCon
 ///     KeySlot类型配置
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity> :
-    KeySlotEntityConfiguration<TEntity, Guid>
+public abstract class KeySlotEntityConfiguration<TEntity> : KeySlotEntityConfiguration<TEntity, Guid>
     where TEntity : class, IKeySlot;
 
 /// <summary>
@@ -651,150 +306,16 @@ public abstract class KeySlotEntityConfiguration<TEntity> :
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity, TKey> :
-    KeySlotEntityConfiguration<TEntity, TKey, Guid>
+public abstract class KeySlotEntityConfiguration<TEntity, TKey> : BaseEntityConfiguration<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
-{
-    #region Slot
-
-    /// <summary>
-    ///     操作者插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void HandlerSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseHandlerFieldConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.Property(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasComment("创建者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-
-                builder.Property(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasComment("更新者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-
-                builder.Property(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasComment("删除者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-            }
-    }
-
-    /// <summary>
-    ///     操作者插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void HandlerSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseHandlerIndexConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.HasIndex(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasDatabaseName(IndexName("CreateBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasDatabaseName(IndexName("ModifyBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasDatabaseName(IndexName("RemoveBy"));
-            }
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity, TKey, THandler> :
-    KeySlotEntityConfiguration<TEntity, TKey, THandler, string>
-    where TEntity : class, IKeySlot<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     并发锁字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
-            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
-                .IsConcurrencyToken()
-                .HasComment("并发锁");
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class, IKeySlot<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     分区标识插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.Property(entity => ((IPartitionSlot)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     分区标识插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     KeySlot类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition>
-    where TEntity : class, IKeySlot<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
 {
     #region Config
 
     /// <summary>
     ///     启用键配置
     /// </summary>
-    protected sealed override bool UseKeyConfiguration => true;
+    protected override bool UseKeyConfiguration => true;
 
     #endregion
 
@@ -806,9 +327,10 @@ public abstract class KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcu
     /// <param name="builder"></param>
     protected sealed override void KeySlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.Property(entity => entity.Id)
-            .IsRequired()
-            .HasComment("标识");
+        if (UseKeyConfiguration)
+            builder.Property(entity => entity.Id)
+                .IsRequired()
+                .HasComment("标识");
     }
 
     /// <summary>
@@ -817,8 +339,9 @@ public abstract class KeySlotEntityConfiguration<TEntity, TKey, THandler, TConcu
     /// <param name="builder"></param>
     protected sealed override void KeySlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasKey(entity => entity.Id)
-            .HasName(KeyName);
+        if (UseKeyConfiguration)
+            builder.HasKey(entity => entity.Id)
+                .HasName(KeyName);
     }
 
     #endregion
@@ -837,6 +360,8 @@ public abstract class BaseEntityConfiguration<TEntity> :
     where TEntity : class
 {
     #region Slot
+
+    #region KeySlot
 
     /// <summary>
     ///     键插件字段配置
@@ -864,60 +389,6 @@ public abstract class BaseEntityConfiguration<TEntity> :
     }
 
     #endregion
-}
-
-/// <summary>
-///     抽象实体类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, TKey> :
-    BaseEntityConfiguration<TEntity, TKey, Guid>
-    where TEntity : class
-    where TKey : IEquatable<TKey>
-{
-    #region Slot
-
-    /// <summary>
-    ///     操作者插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void HandlerSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseHandlerFieldConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.Property(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasComment("创建者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-
-                builder.Property(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasComment("更新者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-
-                builder.Property(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasComment("删除者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-            }
-    }
-
-    /// <summary>
-    ///     操作者插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void HandlerSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UseHandlerIndexConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
-            {
-                builder.HasIndex(entity => ((IHandlerSlot)entity).CreateBy)
-                    .HasDatabaseName(IndexName("CreateBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).ModifyBy)
-                    .HasDatabaseName(IndexName("ModifyBy"));
-                builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
-                    .HasDatabaseName(IndexName("RemoveBy"));
-            }
-    }
 
     #endregion
 }
@@ -927,87 +398,9 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> :
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, TKey, THandler> :
-    BaseEntityConfiguration<TEntity, TKey, THandler, string>
+public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfiguration<TEntity>
     where TEntity : class
     where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     并发锁字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
-            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
-                .IsConcurrencyToken()
-                .HasComment("并发锁");
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     抽象实体类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp> :
-    BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, int>
-    where TEntity : class
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    #region Slot
-
-    /// <summary>
-    ///     分区标识插件字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.Property(entity => ((IPartitionSlot)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
-    }
-
-    /// <summary>
-    ///     分区标识插件关系配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected sealed override void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
-    {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
-                builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
-    }
-
-    #endregion
-}
-
-/// <summary>
-///     抽象实体类型配置
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurrencyStamp, TPartition> :
-    IEntityTypeConfiguration<TEntity>
-    where TEntity : class
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
 {
     #region Implementation of IEntityTypeConfiguration<TEntity>
 
@@ -1025,16 +418,6 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     }
 
     #endregion
-
-    /// <summary>
-    ///     数据库类型
-    /// </summary>
-    protected virtual DbType DbType => DbType.PostgreSql;
-
-    /// <summary>
-    ///     数据类型集合访问器
-    /// </summary>
-    protected DataTypeSet DataTypeSet => DataTypeAdapter.GetDataTypeSet(DbType);
 
     /// <summary>
     ///     数据集描述
@@ -1096,7 +479,11 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
 
         EntityFieldConfigure(builder);
 
+        SecurityStampFieldConfiguration(builder);
+
         ConcurrencyStampFieldConfiguration(builder);
+
+        CheckStampFieldConfiguration(builder);
 
         PartitionSlotFieldConfiguration(builder);
 
@@ -1114,6 +501,8 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
         KeySlotRelationConfiguration(builder);
 
         EntityRelationConfigure(builder);
+
+        CheckStampRelationConfiguration(builder);
 
         PartitionSlotRelationConfiguration(builder);
 
@@ -1151,28 +540,86 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     protected virtual bool UsePartitionConfiguration => false;
 
     /// <summary>
-    ///     是否启用元数据字段配置
+    ///     启用校验戳配置
+    /// </summary>
+    protected virtual bool UseCheckStampConfiguration => false;
+
+    /// <summary>
+    ///     启用安全戳配置
+    /// </summary>
+    protected virtual bool UseSecurityStampFieldConfiguration => false;
+
+    /// <summary>
+    ///     启用并发戳字段配置
+    /// </summary>
+    protected virtual bool UseConcurrencyStampFieldConfiguration => false;
+
+    /// <summary>
+    ///     启用元数据字段配置
     /// </summary>
     protected virtual bool UseMateFieldConfiguration => false;
 
     /// <summary>
-    ///     是否启用元数据索引配置
+    ///     启用元数据索引配置
     /// </summary>
     protected virtual bool UseMateIndexConfiguration => false;
 
     /// <summary>
-    ///     是否启用操作者配置
+    ///     启用操作者配置
     /// </summary>
     protected virtual bool UseHandlerFieldConfiguration => false;
 
     /// <summary>
-    ///     是否启用操作者配置
+    ///     启用操作者配置
     /// </summary>
     protected virtual bool UseHandlerIndexConfiguration => false;
 
     #endregion
 
     #region Slot
+
+    #region SecurityStamp
+
+    /// <summary>
+    ///     加密戳插件字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    private void SecurityStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
+    {
+        if (UseSecurityStampFieldConfiguration && Generator.IsInherit<TEntity>(typeof(ISecurityStamp)))
+            builder.Property(entity => ((ISecurityStamp)entity).SecurityStamp)
+                .HasComment("加密戳")
+                .IsRequired();
+    }
+
+    #endregion
+
+    #region CheckStamp
+
+    /// <summary>
+    ///     校验戳插件字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    private void CheckStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
+    {
+        if (UseCheckStampConfiguration && Generator.IsInherit<TEntity>(typeof(ICheckStamp)))
+            builder.Property(entity => ((ICheckStamp)entity).CheckStamp)
+                .HasComment("校验戳")
+                .IsRequired();
+    }
+
+    /// <summary>
+    ///     校验戳插件关系配置
+    /// </summary>
+    /// <param name="builder"></param>
+    private void CheckStampRelationConfiguration(EntityTypeBuilder<TEntity> builder)
+    {
+        if (UseCheckStampConfiguration && Generator.IsInherit<TEntity>(typeof(ICheckStamp)))
+            builder.HasIndex(entity => ((ICheckStamp)entity).CheckStamp)
+                .HasDatabaseName(IndexName("CheckStamp"));
+    }
+
+    #endregion
 
     #region ConcurrencyStamp
 
@@ -1182,8 +629,8 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void ConcurrencyStampFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp<TConcurrencyStamp>)))
-            builder.Property(entity => ((IConcurrencyStamp<TConcurrencyStamp>)entity).ConcurrencyStamp)
+        if (UseConcurrencyStampFieldConfiguration && Generator.IsInherit<TEntity>(typeof(IConcurrencyStamp)))
+            builder.Property(entity => ((IConcurrencyStamp)entity).ConcurrencyStamp)
                 .IsConcurrencyToken()
                 .HasComment("并发锁");
     }
@@ -1198,11 +645,10 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void KeySlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseKeyConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IKeySlot<TKey>)))
-                builder.Property(entity => ((IKeySlot<TKey>)entity).Id)
-                    .IsRequired()
-                    .HasComment("标识");
+        if (UseKeyConfiguration && Generator.IsInherit<TEntity>(typeof(IKeySlot<TKey>)))
+            builder.Property(entity => ((IKeySlot<TKey>)entity).Id)
+                .IsRequired()
+                .HasComment("标识");
     }
 
     /// <summary>
@@ -1211,10 +657,9 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void KeySlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseKeyConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IKeySlot<TKey>)))
-                builder.HasKey(entity => ((IKeySlot<TKey>)entity).Id)
-                    .HasName(KeyName);
+        if (UseKeyConfiguration && Generator.IsInherit<TEntity>(typeof(IKeySlot<TKey>)))
+            builder.HasKey(entity => ((IKeySlot<TKey>)entity).Id)
+                .HasName(KeyName);
     }
 
     #endregion
@@ -1227,11 +672,10 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void PartitionSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot<TPartition>)))
-                builder.Property(entity => ((IPartitionSlot<TPartition>)entity).Partition)
-                    .IsRequired()
-                    .HasComment("分区标识");
+        if (UsePartitionConfiguration && Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
+            builder.Property(entity => ((IPartitionSlot)entity).Partition)
+                .HasComment("分区标识")
+                .IsRequired();
     }
 
     /// <summary>
@@ -1240,10 +684,9 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void PartitionSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UsePartitionConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IPartitionSlot<TPartition>)))
-                builder.HasIndex(entity => ((IPartitionSlot<TPartition>)entity).Partition)
-                    .HasDatabaseName(IndexName("Partition"));
+        if (UsePartitionConfiguration && Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
+            builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
+                .HasDatabaseName(IndexName("Partition"));
     }
 
     #endregion
@@ -1254,41 +697,38 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     ///     元数据插件字段配置
     /// </summary>
     /// <param name="builder"></param>
-    private void MateSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
+    protected virtual void MateSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseMateFieldConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IMateSlot)))
-            {
-                builder.Property(entity => ((IMateSlot)entity).CreatedAt)
-                    .HasComment("创建时间")
-                    .HasColumnType(DataTypeSet.DateTime);
+        if (UseMateFieldConfiguration && Generator.IsInherit<TEntity>(typeof(IMateSlot)))
+        {
+            builder.Property(entity => ((IMateSlot)entity).CreatedAt)
+                .HasComment("创建时间")
+                .IsRequired();
 
-                builder.Property(entity => ((IMateSlot)entity).UpdatedAt)
-                    .HasComment("更新时间")
-                    .HasColumnType(DataTypeSet.DateTime);
+            builder.Property(entity => ((IMateSlot)entity).UpdatedAt)
+                .HasComment("更新时间")
+                .IsRequired();
 
-                builder.Property(entity => ((IMateSlot)entity).DeletedAt)
-                    .HasComment("删除时间")
-                    .HasColumnType(DataTypeSet.DateTime);
-            }
+            builder.Property(entity => ((IMateSlot)entity).DeletedAt)
+                .HasComment("删除时间");
+        }
     }
 
     /// <summary>
     ///     元数据插件索引配置
     /// </summary>
     /// <param name="builder"></param>
-    private void MateSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
+    protected virtual void MateSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseMateIndexConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IMateSlot)))
-            {
-                builder.HasIndex(entity => ((IMateSlot)entity).CreatedAt)
-                    .HasDatabaseName(IndexName("CreatedAt"));
-                builder.HasIndex(entity => ((IMateSlot)entity).UpdatedAt)
-                    .HasDatabaseName(IndexName("UpdatedAt"));
-                builder.HasIndex(entity => ((IMateSlot)entity).DeletedAt)
-                    .HasDatabaseName(IndexName("DeletedAt"));
-            }
+        if (UseMateIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IMateSlot)))
+        {
+            builder.HasIndex(entity => ((IMateSlot)entity).CreatedAt)
+                .HasDatabaseName(IndexName("CreatedAt"));
+            builder.HasIndex(entity => ((IMateSlot)entity).UpdatedAt)
+                .HasDatabaseName(IndexName("UpdatedAt"));
+            builder.HasIndex(entity => ((IMateSlot)entity).DeletedAt)
+                .HasDatabaseName(IndexName("DeletedAt"));
+        }
     }
 
     #endregion
@@ -1301,21 +741,19 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void HandlerSlotFieldConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseHandlerFieldConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
-            {
-                builder.Property(entity => ((IHandlerSlot<THandler>)entity).CreateBy)
-                    .HasComment("创建者标识")
-                    .HasColumnType(DataTypeSet.Guid);
+        if (UseHandlerFieldConfiguration && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
+        {
+            builder.Property(entity => ((IHandlerSlot)entity).CreateBy)
+                .HasComment("创建者标识")
+                .IsRequired();
 
-                builder.Property(entity => ((IHandlerSlot<THandler>)entity).ModifyBy)
-                    .HasComment("更新者标识")
-                    .HasColumnType(DataTypeSet.Guid);
+            builder.Property(entity => ((IHandlerSlot)entity).ModifyBy)
+                .HasComment("更新者标识")
+                .IsRequired();
 
-                builder.Property(entity => ((IHandlerSlot<THandler>)entity).RemoveBy)
-                    .HasComment("删除者标识")
-                    .HasColumnType(DataTypeSet.Guid);
-            }
+            builder.Property(entity => ((IHandlerSlot)entity).RemoveBy)
+                .HasComment("删除者标识");
+        }
     }
 
     /// <summary>
@@ -1324,16 +762,15 @@ public abstract class BaseEntityConfiguration<TEntity, TKey, THandler, TConcurre
     /// <param name="builder"></param>
     protected virtual void HandlerSlotRelationConfiguration(EntityTypeBuilder<TEntity> builder)
     {
-        if (UseHandlerIndexConfiguration)
-            if (Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
-            {
-                builder.HasIndex(entity => ((IHandlerSlot<THandler>)entity).CreateBy)
-                    .HasDatabaseName(IndexName("CreateBy"));
-                builder.HasIndex(entity => ((IHandlerSlot<THandler>)entity).ModifyBy)
-                    .HasDatabaseName(IndexName("ModifyBy"));
-                builder.HasIndex(entity => ((IHandlerSlot<THandler>)entity).RemoveBy)
-                    .HasDatabaseName(IndexName("RemoveBy"));
-            }
+        if (UseHandlerIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
+        {
+            builder.HasIndex(entity => ((IHandlerSlot)entity).CreateBy)
+                .HasDatabaseName(IndexName("CreateBy"));
+            builder.HasIndex(entity => ((IHandlerSlot)entity).ModifyBy)
+                .HasDatabaseName(IndexName("ModifyBy"));
+            builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
+                .HasDatabaseName(IndexName("RemoveBy"));
+        }
     }
 
     #endregion

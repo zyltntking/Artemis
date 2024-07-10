@@ -76,41 +76,9 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public abstract class Store<TEntity, TKey> : Store<TEntity, TKey, Guid>, IStore<TEntity, TKey>
+public abstract class Store<TEntity, TKey> : KeyLessStore<TEntity>, IStore<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>
-{
-    /// <summary>
-    ///     基本存储实例构造
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="storeOptions"></param>
-    /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
-    /// <param name="logger"></param>
-    /// <param name="describer"></param>
-    protected Store(
-        DbContext context,
-        IStoreOptions? storeOptions = null,
-        IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
-        ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
-        describer)
-    {
-    }
-}
-
-/// <summary>
-///     存储实现
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THandler>, IStore<TEntity, TKey, THandler>
-    where TEntity : class, IKeySlot<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
 {
     /// <summary>
     ///     基本存储实例构造
@@ -125,7 +93,7 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
     protected Store(
         DbContext context,
         IStoreOptions? storeOptions = null,
-        IHandlerProxy<THandler>? handlerProxy = null,
+        IHandlerProxy? handlerProxy = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
@@ -1228,10 +1196,11 @@ public abstract class Store<TEntity, TKey, THandler> : KeyLessStore<TEntity, THa
 }
 
 /// <summary>
-///     无键模型存储接
+///     无键数据模型存储
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
-public abstract class KeyLessStore<TEntity> : KeyLessStore<TEntity, Guid>, IKeyLessStore<TEntity> where TEntity : class
+/// <typeparam name="TEntity">模型类型</typeparam>
+public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
+    where TEntity : class
 {
     /// <summary>
     ///     无键模型基本存储实例构造
@@ -1247,36 +1216,6 @@ public abstract class KeyLessStore<TEntity> : KeyLessStore<TEntity, Guid>, IKeyL
         DbContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
-        ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
-    {
-    }
-}
-
-/// <summary>
-///     无键数据模型存储
-/// </summary>
-/// <typeparam name="TEntity">模型类型</typeparam>
-/// <typeparam name="THandler">操作者类型</typeparam>
-public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, THandler>
-    where TEntity : class
-    where THandler : IEquatable<THandler>
-{
-    /// <summary>
-    ///     无键模型基本存储实例构造
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="storeOptions"></param>
-    /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
-    /// <param name="logger"></param>
-    /// <param name="describer"></param>
-    /// <exception cref="StoreParameterNullException"></exception>
-    protected KeyLessStore(
-        DbContext context,
-        IStoreOptions? storeOptions = null,
-        IHandlerProxy<THandler>? handlerProxy = null,
         IDistributedCache? cache = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null)
@@ -1353,7 +1292,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     /// <summary>
     ///     操作人代理
     /// </summary>
-    private IHandlerProxy<THandler>? HandlerProxy { get; }
+    private IHandlerProxy? HandlerProxy { get; }
 
     /// <summary>
     ///     设置当前发生错误的错误描述者
@@ -1993,11 +1932,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _createNewConfig.ForType<TSource, TEntity>()
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).ModifyBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).RemoveBy!);
+                    .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).ModifyBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).RemoveBy!);
         }
 
         return _createNewConfig;
@@ -2045,11 +1984,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _overDeCertaintyConfig.ForType<TSource, TEntity>()
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).ModifyBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).RemoveBy!);
+                    .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).ModifyBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).RemoveBy!);
         }
 
         return _overDeCertaintyConfig;
@@ -2093,11 +2032,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                         .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
                 if (HandlerHosting && HandlerProxy != null &&
-                    Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                    Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                     _mergeCertaintyConfig.ForType<TSource, TEntity>()
-                        .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
-                        .Ignore(dest => ((IHandlerSlot<THandler>)dest).ModifyBy)
-                        .Ignore(dest => ((IHandlerSlot<THandler>)dest).RemoveBy!);
+                        .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
+                        .Ignore(dest => ((IHandlerSlot)dest).ModifyBy)
+                        .Ignore(dest => ((IHandlerSlot)dest).RemoveBy!);
             }
 
             return _mergeCertaintyConfig;
@@ -2118,11 +2057,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _mergeDeCertaintyConfig.ForType<TSource, TEntity>()
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).CreateBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).ModifyBy)
-                    .Ignore(dest => ((IHandlerSlot<THandler>)dest).RemoveBy!);
+                    .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).ModifyBy)
+                    .Ignore(dest => ((IHandlerSlot)dest).RemoveBy!);
         }
 
         return _mergeDeCertaintyConfig;
@@ -2943,6 +2882,9 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         if (entity is IConcurrencyStamp concurrency)
             concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
+        if (entity is ISecurityStamp security)
+            security.SecurityStamp = Normalize.SecurityStamp;
+
         if (MetaDataHosting)
         {
             if (entity is IMateSlot metaSlot)
@@ -2952,7 +2894,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 metaSlot.UpdatedAt = now;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
             {
                 handlerSlot.CreateBy = HandlerProxy.Handler;
                 handlerSlot.ModifyBy = HandlerProxy.Handler;
@@ -2966,7 +2908,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
             if (entity is IMateSlot metaSlot)
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
         }
     }
@@ -2979,7 +2921,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency)
+                concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+
+            if (entity is ISecurityStamp security)
+                security.SecurityStamp = Normalize.SecurityStamp;
 
             if (MetaDataHosting)
             {
@@ -2990,7 +2936,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                 {
                     handlerSlot.CreateBy = HandlerProxy.Handler;
                     handlerSlot.ModifyBy = HandlerProxy.Handler;
@@ -3006,7 +2952,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 if (entity is IMateSlot metaSlot)
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
             }
     }
@@ -3019,13 +2965,17 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
     {
         Context.Attach(entity);
 
-        if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+        if (entity is IConcurrencyStamp concurrency)
+            concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+
+        if (entity is ISecurityStamp security)
+            security.SecurityStamp = Normalize.SecurityStamp;
 
         if (MetaDataHosting)
         {
             if (entity is IMateSlot metaSlot) metaSlot.UpdatedAt = DateTime.Now;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                 handlerSlot.ModifyBy = HandlerProxy.Handler;
         }
 
@@ -3039,7 +2989,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
             {
                 Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3057,7 +3007,11 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
         foreach (var entity in entities)
         {
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency)
+                concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+
+            if (entity is ISecurityStamp security)
+                security.SecurityStamp = Normalize.SecurityStamp;
 
             if (MetaDataHosting)
             {
@@ -3067,7 +3021,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                     handlerSlot.ModifyBy = HandlerProxy.Handler;
             }
         }
@@ -3083,7 +3037,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3105,7 +3059,13 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
             setter = setter.AppendSetProperty(stampSetter => stampSetter
                 .SetProperty(
                     entity => ((IConcurrencyStamp)entity).ConcurrencyStamp,
-                    Guid.NewGuid().IdToString()));
+                    Normalize.ConcurrencyStamp));
+
+        if (Generator.IsInherit<TEntity>(typeof(ISecurityStamp)))
+            setter = setter.AppendSetProperty(stampSetter => stampSetter
+                .SetProperty(
+                    entity => ((ISecurityStamp)entity).SecurityStamp,
+                    Normalize.SecurityStamp));
 
         if (MetaDataHosting)
         {
@@ -3117,10 +3077,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 );
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
-                        entity => ((IHandlerSlot<THandler>)entity).ModifyBy,
+                        entity => ((IHandlerSlot)entity).ModifyBy,
                         HandlerProxy.Handler)
                 );
         }
@@ -3144,7 +3104,13 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
             setter = setter.AppendSetProperty(stampSetter => stampSetter
                 .SetProperty(
                     entity => ((IConcurrencyStamp)entity).ConcurrencyStamp,
-                    Guid.NewGuid().IdToString()));
+                    Normalize.ConcurrencyStamp));
+
+        if (Generator.IsInherit<TEntity>(typeof(ISecurityStamp)))
+            setter = setter.AppendSetProperty(stampSetter => stampSetter
+                .SetProperty(
+                    entity => ((ISecurityStamp)entity).SecurityStamp,
+                    Normalize.SecurityStamp));
 
         if (MetaDataHosting)
         {
@@ -3156,10 +3122,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 );
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
-                        entity => ((IHandlerSlot<THandler>)entity).ModifyBy,
+                        entity => ((IHandlerSlot)entity).ModifyBy,
                         HandlerProxy.Handler)
                 );
         }
@@ -3177,11 +3143,16 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
         {
             Context.Attach(entity);
 
-            if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+            if (entity is IConcurrencyStamp concurrency)
+                concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
 
-            if (entity is IMateSlot metaSlotChange) metaSlotChange.DeletedAt = DateTime.Now;
+            if (entity is ISecurityStamp security)
+                security.SecurityStamp = Normalize.SecurityStamp;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlotChange)
+            if (entity is IMateSlot metaSlotChange)
+                metaSlotChange.DeletedAt = DateTime.Now;
+
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlotChange)
                 handlerSlotChange.RemoveBy = HandlerProxy.Handler;
 
             Context.Update(entity);
@@ -3192,7 +3163,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 Context.Entry(metaSlotKeep).Property(item => item.UpdatedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlotKeep)
+            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlotKeep)
             {
                 Context.Entry(handlerSlotKeep).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlotKeep).Property(item => item.ModifyBy).IsModified = false;
@@ -3216,11 +3187,15 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
 
             foreach (var entity in entities)
             {
-                if (entity is IConcurrencyStamp concurrency) concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+                if (entity is IConcurrencyStamp concurrency)
+                    concurrency.ConcurrencyStamp = Normalize.ConcurrencyStamp;
+
+                if (entity is ISecurityStamp security)
+                    security.SecurityStamp = Normalize.SecurityStamp;
 
                 if (entity is IMateSlot metaSlot) metaSlot.DeletedAt = DateTime.Now;
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                     handlerSlot.RemoveBy = HandlerProxy.Handler;
             }
 
@@ -3234,7 +3209,7 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                     Context.Entry(metaSlot).Property(item => item.UpdatedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot<THandler> handlerSlot)
+                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.ModifyBy).IsModified = false;
@@ -3263,7 +3238,13 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 setter = setter.AppendSetProperty(stampSetter => stampSetter
                     .SetProperty(
                         entity => ((IConcurrencyStamp)entity).ConcurrencyStamp,
-                        Guid.NewGuid().IdToString()));
+                        Normalize.ConcurrencyStamp));
+
+            if (Generator.IsInherit<TEntity>(typeof(ISecurityStamp)))
+                setter = setter.AppendSetProperty(stampSetter => stampSetter
+                    .SetProperty(
+                        entity => ((ISecurityStamp)entity).SecurityStamp,
+                        Normalize.SecurityStamp));
 
             if (Generator.IsInherit<TEntity>(typeof(IMateSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
@@ -3273,10 +3254,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 );
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
-                        entity => ((IHandlerSlot<THandler>)entity).RemoveBy,
+                        entity => ((IHandlerSlot)entity).RemoveBy,
                         HandlerProxy.Handler)
                 );
 
@@ -3305,7 +3286,13 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 setter = setter.AppendSetProperty(stampSetter => stampSetter
                     .SetProperty(
                         entity => ((IConcurrencyStamp)entity).ConcurrencyStamp,
-                        Guid.NewGuid().IdToString()));
+                        Normalize.ConcurrencyStamp));
+
+            if (Generator.IsInherit<TEntity>(typeof(ISecurityStamp)))
+                setter = setter.AppendSetProperty(stampSetter => stampSetter
+                    .SetProperty(
+                        entity => ((ISecurityStamp)entity).SecurityStamp,
+                        Normalize.SecurityStamp));
 
             if (Generator.IsInherit<TEntity>(typeof(IMateSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
@@ -3315,10 +3302,10 @@ public abstract class KeyLessStore<TEntity, THandler> : IKeyLessStore<TEntity, T
                 );
 
             if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot<THandler>)))
+                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
-                        entity => ((IHandlerSlot<THandler>)entity).RemoveBy,
+                        entity => ((IHandlerSlot)entity).RemoveBy,
                         HandlerProxy.Handler)
                 );
 

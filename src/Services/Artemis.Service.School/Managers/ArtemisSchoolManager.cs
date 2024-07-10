@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.School.Context;
 using Artemis.Service.School.Stores;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +7,7 @@ namespace Artemis.Service.School.Managers;
 /// <summary>
 ///     学校管理器
 /// </summary>
-public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoolManager
+public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -38,7 +37,7 @@ public sealed class ArtemisSchoolManager : Manager<ArtemisSchool>, IArtemisSchoo
         IArtemisStudentCurrentAffiliationStore studentCurrentAffiliationStore,
         IArtemisTeacherCurrentAffiliationStore teacherCurrentAffiliationStore,
         IManagerOptions? options = null,
-        ILogger? logger = null) : base(schoolStore, options, logger)
+        ILogger? logger = null) : base(options, logger)
     {
         SchoolStore = schoolStore ?? throw new ArgumentNullException(nameof(schoolStore));
         ClassStore = classStore ?? throw new ArgumentNullException(nameof(classStore));

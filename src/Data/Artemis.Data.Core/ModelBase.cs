@@ -22,61 +22,18 @@ public abstract class ConcurrencyPartition : ConcurrencyPartition<Guid>, IConcur
 ///     基本并发分区模型
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class ConcurrencyPartition<TKey> :
-    ConcurrencyPartition<TKey, Guid>,
-    IConcurrencyPartition<TKey>
+public abstract class ConcurrencyPartition<TKey> : PartitionBase<TKey>, IConcurrencyPartition<TKey>
     where TKey : IEquatable<TKey>
 {
-}
+    #region Implementation of IConcurrencyStamp
 
-/// <summary>
-///     基本并发分区模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyPartition<TKey, THandler> :
-    ConcurrencyPartition<TKey, THandler, string>,
-    IConcurrencyPartition<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
     /// <summary>
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public override string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
-}
+    public string? ConcurrencyStamp { get; set; }
 
-/// <summary>
-///     基本并发分区模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class ConcurrencyPartition<TKey, THandler, TConcurrencyStamp> :
-    ConcurrencyPartition<TKey, THandler, TConcurrencyStamp, int>,
-    IConcurrencyPartition<TKey, THandler, TConcurrencyStamp>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     基本并发分区模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class ConcurrencyPartition<TKey, THandler, TConcurrencyStamp, TPartition> :
-    PartitionBase<TKey, THandler, TPartition>,
-    IConcurrencyPartition<TKey, THandler, TConcurrencyStamp, TPartition>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
-{
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    public virtual TConcurrencyStamp? ConcurrencyStamp { get; set; }
+    #endregion
 }
 
 /// <summary>
@@ -96,41 +53,17 @@ public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase
 ///     基本分区模型
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class PartitionBase<TKey> :
-    PartitionBase<TKey, Guid>, IPartitionBase<TKey>
-    where TKey : IEquatable<TKey>
+public abstract class PartitionBase<TKey> : ModelBase<TKey>, IPartitionBase<TKey> where TKey : IEquatable<TKey>
 {
-}
+    #region Implementation of IPartitionSlot
 
-/// <summary>
-///     基本分区模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class PartitionBase<TKey, THandler> :
-    PartitionBase<TKey, THandler, int>,
-    IPartitionBase<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
-///     基本分区模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TPartition"></typeparam>
-public abstract class PartitionBase<TKey, THandler, TPartition> :
-    ModelBase<TKey, THandler>,
-    IPartitionBase<TKey, THandler, TPartition>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-    where TPartition : IEquatable<TPartition>
-{
     /// <summary>
     ///     分区标识
     /// </summary>
     [Required]
-    public virtual TPartition Partition { get; set; } = default!;
+    public int Partition { get; set; }
+
+    #endregion
 }
 
 #endregion
@@ -154,47 +87,17 @@ public abstract class ConcurrencyModel : ConcurrencyModel<Guid>, IConcurrencyMod
 ///     并发模型
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class ConcurrencyModel<TKey> :
-    ConcurrencyModel<TKey, Guid>,
-    IConcurrencyModel<TKey>
-    where TKey : IEquatable<TKey>
+public abstract class ConcurrencyModel<TKey> : ModelBase<TKey>, IConcurrencyModel<TKey> where TKey : IEquatable<TKey>
 {
-}
+    #region Implementation of IConcurrencyStamp
 
-/// <summary>
-///     并发模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ConcurrencyModel<TKey, THandler> :
-    ConcurrencyModel<TKey, THandler, string>,
-    IConcurrencyModel<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
     /// <summary>
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public sealed override string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
-}
+    public string? ConcurrencyStamp { get; set; }
 
-/// <summary>
-///     并发模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-/// <typeparam name="TConcurrencyStamp"></typeparam>
-public abstract class ConcurrencyModel<TKey, THandler, TConcurrencyStamp> :
-    ModelBase<TKey, THandler>,
-    IConcurrencyModel<TKey, THandler, TConcurrencyStamp>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
-    /// <summary>
-    ///     并发锁
-    /// </summary>
-    public virtual TConcurrencyStamp? ConcurrencyStamp { get; set; }
+    #endregion
 }
 
 /// <summary>
@@ -214,42 +117,37 @@ public abstract class ModelBase : ModelBase<Guid>, IModelBase
 ///     基本模型
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class ModelBase<TKey> : ModelBase<TKey, Guid>, IModelBase<TKey>
-    where TKey : IEquatable<TKey>
+public abstract class ModelBase<TKey> : MateModelBase<TKey>, IHandlerSlot where TKey : IEquatable<TKey>
 {
-}
+    #region Implementation of IHandlerSlot
 
-/// <summary>
-///     基本模型
-/// </summary>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public abstract class ModelBase<TKey, THandler> : MateModelBase<TKey>, IModelBase<TKey, THandler>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>
-{
     /// <summary>
     ///     创建人
     /// </summary>
     [Required]
-    public THandler CreateBy { get; set; } = default!;
+    [MaxLength(64)]
+    public string CreateBy { get; set; } = null!;
 
     /// <summary>
     ///     更新人
     /// </summary>
     [Required]
-    public THandler ModifyBy { get; set; } = default!;
+    [MaxLength(64)]
+    public string ModifyBy { get; set; } = null!;
 
     /// <summary>
     ///     移除人
     /// </summary>
-    public THandler? RemoveBy { get; set; }
+    [MaxLength(64)]
+    public string? RemoveBy { get; set; }
+
+    #endregion
 }
 
 /// <summary>
 ///     基本模型
 /// </summary>
-public abstract class MateModelBase : MateModelBase<Guid>, IMateModelBase
+public abstract class MateModelBase : MateModelBase<Guid>, IKeySlot
 {
     /// <summary>
     ///     存储标识
@@ -263,7 +161,7 @@ public abstract class MateModelBase : MateModelBase<Guid>, IMateModelBase
 ///     基本模型
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public abstract class MateModelBase<TKey> : MateSlot, IMateModelBase<TKey> where TKey : IEquatable<TKey>
+public abstract class MateModelBase<TKey> : MateSlot, IKeySlot<TKey> where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     存储标识

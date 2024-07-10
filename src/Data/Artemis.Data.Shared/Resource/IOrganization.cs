@@ -11,7 +11,7 @@ public interface IOrganization
     string Name { get; set; }
 
     /// <summary>
-    ///    机构编码
+    ///     机构编码
     /// </summary>
     string Code { get; set; }
 
@@ -21,7 +21,7 @@ public interface IOrganization
     string Type { get; set; }
 
     /// <summary>
-    ///    机构成立时间
+    ///     机构成立时间
     /// </summary>
     DateTime? EstablishTime { get; set; }
 
@@ -31,12 +31,12 @@ public interface IOrganization
     string? Email { get; set; }
 
     /// <summary>
-    /// 机构网站
+    ///     机构网站
     /// </summary>
     string? WebSite { get; set; }
 
     /// <summary>
-    /// 机构联系电话
+    ///     机构联系电话
     /// </summary>
     string? ContactNumber { get; set; }
 
@@ -51,7 +51,7 @@ public interface IOrganization
     string Status { get; set; }
 
     /// <summary>
-    ///    机构所在地行政区划代码
+    ///     机构所在地行政区划代码
     /// </summary>
     string? DivisionCode { get; set; }
 

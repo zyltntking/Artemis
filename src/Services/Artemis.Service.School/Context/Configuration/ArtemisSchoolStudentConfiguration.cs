@@ -23,19 +23,6 @@ internal sealed class ArtemisSchoolStudentConfiguration : BaseEntityConfiguratio
     protected override string TableName => nameof(ArtemisSchoolStudent).TableName();
 
     /// <summary>
-    ///     实体字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisSchoolStudent> builder)
-    {
-        builder.Property(classStudent => classStudent.MoveIn)
-            .HasColumnType(DataTypeSet.DateTime);
-
-        builder.Property(classStudent => classStudent.MoveOut)
-            .HasColumnType(DataTypeSet.DateTime);
-    }
-
-    /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>

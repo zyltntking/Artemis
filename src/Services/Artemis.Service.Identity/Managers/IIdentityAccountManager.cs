@@ -1,14 +1,13 @@
 ﻿using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Data.Store;
-using Artemis.Service.Identity.Context;
 
 namespace Artemis.Service.Identity.Managers;
 
 /// <summary>
 ///     认证账号管理接口
 /// </summary>
-public interface IIdentityAccountManager : IManager<IdentityUser>
+public interface IIdentityAccountManager : IManager
 {
     /// <summary>
     ///     签到/登录

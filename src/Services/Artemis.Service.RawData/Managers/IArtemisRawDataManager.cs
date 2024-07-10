@@ -1,11 +1,10 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.RawData.Context;
 
 namespace Artemis.Service.RawData.Managers;
 
 /// <summary>
 ///     原始数据管理器
 /// </summary>
-public interface IArtemisRawDataManager : IManager<ArtemisOptometer>
+public interface IArtemisRawDataManager : IManager
 {
 }

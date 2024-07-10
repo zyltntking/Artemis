@@ -20,7 +20,7 @@ public class Class : ConcurrencyPartition, IClass
     public Guid SchoolId { get; set; }
 
     /// <summary>
-    ///    班主任标识
+    ///     班主任标识
     /// </summary>
     [Required]
     [Comment("班主任标识")]
@@ -34,14 +34,14 @@ public class Class : ConcurrencyPartition, IClass
     public string? Name { get; set; }
 
     /// <summary>
-    /// 班级类型
+    ///     班级类型
     /// </summary>
     [MaxLength(32)]
     [Comment("班级类型")]
     public string? Type { get; set; }
 
     /// <summary>
-    /// 所学专业
+    ///     所学专业
     /// </summary>
     [MaxLength(128)]
     [Comment("所学专业")]
@@ -56,7 +56,7 @@ public class Class : ConcurrencyPartition, IClass
     public required string Code { get; set; }
 
     /// <summary>
-    /// 学段
+    ///     学段
     /// </summary>
     [Required]
     [MaxLength(32)]
@@ -64,7 +64,7 @@ public class Class : ConcurrencyPartition, IClass
     public required string StudyPhase { get; set; }
 
     /// <summary>
-    /// 学制
+    ///     学制
     /// </summary>
     [Required]
     [MaxLength(32)]
@@ -72,21 +72,21 @@ public class Class : ConcurrencyPartition, IClass
     public required string SchoolLength { get; set; }
 
     /// <summary>
-    /// 学制长度
+    ///     学制长度
     /// </summary>
     [Required]
     [Comment("学制长度")]
     public required int Length { get; set; }
 
     /// <summary>
-    /// 班级序号
+    ///     班级序号
     /// </summary>
     [Required]
     [Comment("班级序号")]
     public required int SerialNumber { get; set; }
 
     /// <summary>
-    /// 班级创建时间
+    ///     班级创建时间
     /// </summary>
     [Required]
     [Comment("班级创建时间")]

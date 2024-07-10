@@ -1,14 +1,13 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.Resource.Context;
 using Artemis.Service.Resource.Stores;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Service.Resource.Managers;
 
 /// <summary>
-/// 资源管理器
+///     资源管理器
 /// </summary>
-public class ArtemisResourceManager : Manager<ArtemisDevice>, IArtemisResourceManager
+public class ArtemisResourceManager : Manager, IArtemisResourceManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -22,17 +21,18 @@ public class ArtemisResourceManager : Manager<ArtemisDevice>, IArtemisResourceMa
     /// <param name="divisionStore"></param>
     /// <exception cref="ArgumentNullException"></exception>
     public ArtemisResourceManager(
-        IArtemisDeviceStore deviceStore, 
+        IArtemisDeviceStore deviceStore,
         IArtemisDataDictionaryStore dataDictionaryStore,
         IArtemisDataDictionaryItemStore dataDictionaryItemStore,
         IArtemisDivisionStore divisionStore,
         IArtemisOrganizationStore organizationStore,
-        IManagerOptions? options = null, 
-        ILogger? logger = null) : base(deviceStore, options, logger)
+        IManagerOptions? options = null,
+        ILogger? logger = null) : base(options, logger)
     {
         DeviceStore = deviceStore ?? throw new ArgumentNullException(nameof(deviceStore));
         DataDictionaryStore = dataDictionaryStore ?? throw new ArgumentNullException(nameof(dataDictionaryStore));
-        DataDictionaryItemStore = dataDictionaryItemStore ?? throw new ArgumentNullException(nameof(dataDictionaryItemStore));
+        DataDictionaryItemStore =
+            dataDictionaryItemStore ?? throw new ArgumentNullException(nameof(dataDictionaryItemStore));
         DivisionStore = divisionStore ?? throw new ArgumentNullException(nameof(divisionStore));
         OrganizationStore = organizationStore ?? throw new ArgumentNullException(nameof(organizationStore));
     }
@@ -56,27 +56,27 @@ public class ArtemisResourceManager : Manager<ArtemisDevice>, IArtemisResourceMa
     #region StoreAccess
 
     /// <summary>
-    /// 设备存储访问器
+    ///     设备存储访问器
     /// </summary>
     private IArtemisDeviceStore DeviceStore { get; }
 
     /// <summary>
-    /// 数据字典存储访问器
+    ///     数据字典存储访问器
     /// </summary>
     private IArtemisDataDictionaryStore DataDictionaryStore { get; }
 
     /// <summary>
-    /// 数据字典项存储访问器
+    ///     数据字典项存储访问器
     /// </summary>
     private IArtemisDataDictionaryItemStore DataDictionaryItemStore { get; }
 
     /// <summary>
-    /// 行政区划存储访问器
+    ///     行政区划存储访问器
     /// </summary>
     private IArtemisDivisionStore DivisionStore { get; }
 
     /// <summary>
-    /// 组织机构存储访问器
+    ///     组织机构存储访问器
     /// </summary>
     private IArtemisOrganizationStore OrganizationStore { get; }
 

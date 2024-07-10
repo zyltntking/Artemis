@@ -37,49 +37,49 @@ public class School : ConcurrencyPartition, ISchool
     public required string Type { get; set; }
 
     /// <summary>
-    /// 组织机构代码
+    ///     组织机构代码
     /// </summary>
     [MaxLength(32)]
     [Comment("组织机构代码")]
     public string? OrganizationCode { get; set; }
 
     /// <summary>
-    /// 学校所在地行政区划代码
+    ///     学校所在地行政区划代码
     /// </summary>
     [MaxLength(32)]
     [Comment("学校所在地行政区划代码")]
     public string? DivisionCode { get; set; }
 
     /// <summary>
-    ///    学校地址
+    ///     学校地址
     /// </summary>
     [MaxLength(256)]
     [Comment("学校地址")]
     public string? Address { get; set; }
 
     /// <summary>
-    /// 学校邮箱
+    ///     学校邮箱
     /// </summary>
     [MaxLength(128)]
     [Comment("学校邮箱")]
     public string? Email { get; set; }
 
     /// <summary>
-    /// 学校网站
+    ///     学校网站
     /// </summary>
     [MaxLength(128)]
     [Comment("学校网站")]
     public string? WebSite { get; set; }
 
     /// <summary>
-    /// 学校联系电话
+    ///     学校联系电话
     /// </summary>
     [MaxLength(32)]
     [Comment("学校联系电话")]
     public string? ContactNumber { get; set; }
 
     /// <summary>
-    /// 学校建立时间
+    ///     学校建立时间
     /// </summary>
     [Comment("学校建立时间")]
     public DateTime? EstablishTime { get; set; }

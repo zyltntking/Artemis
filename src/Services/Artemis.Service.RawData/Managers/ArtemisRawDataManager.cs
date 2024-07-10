@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.RawData.Context;
 using Artemis.Service.RawData.Stores;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +7,7 @@ namespace Artemis.Service.RawData.Managers;
 /// <summary>
 ///     原始数据管理器
 /// </summary>
-public class ArtemisRawDataManager : Manager<ArtemisOptometer>, IArtemisRawDataManager
+public class ArtemisRawDataManager : Manager, IArtemisRawDataManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -22,7 +21,7 @@ public class ArtemisRawDataManager : Manager<ArtemisOptometer>, IArtemisRawDataM
         IArtemisOptometerStore optometerStore,
         IArtemisVisualChartStore visualChartStore,
         IManagerOptions? options = null,
-        ILogger? logger = null) : base(optometerStore, options, logger)
+        ILogger? logger = null) : base(options, logger)
     {
         OptometerStore = optometerStore ?? throw new ArgumentNullException(nameof(optometerStore));
         VisualChartStore = visualChartStore ?? throw new ArgumentNullException(nameof(visualChartStore));

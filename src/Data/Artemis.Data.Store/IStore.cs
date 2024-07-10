@@ -16,40 +16,21 @@ public interface IStore<TEntity> : IStore<TEntity, Guid>,
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public interface IStore<TEntity, TKey> : IStore<TEntity, TKey, Guid>
+public interface IStore<TEntity, TKey> :
+    IKeyLessStore<TEntity>,
+    IStoreCommon<TEntity, TKey>,
+    IStoreMap<TEntity, TKey>
     where TEntity : class, IKeySlot<TKey>
     where TKey : IEquatable<TKey>;
 
 /// <summary>
-///     存储接口
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public interface IStore<TEntity, TKey, THandler> :
-    IKeyLessStore<TEntity, THandler>,
-    IStoreCommon<TEntity, TKey>,
-    IStoreMap<TEntity, TKey>
-    where TEntity : class, IKeySlot<TKey>
-    where TKey : IEquatable<TKey>
-    where THandler : IEquatable<THandler>;
-
-/// <summary>
 ///     无键存储接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface IKeyLessStore<TEntity> : IKeyLessStore<TEntity, Guid> where TEntity : class;
-
-/// <summary>
-///     无键存储接口
-/// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="THandler"></typeparam>
-public interface IKeyLessStore<TEntity, THandler> :
+public interface IKeyLessStore<TEntity> :
     IKeyLessStoreCommon<TEntity>,
     IKeyLessStoreMap<TEntity>
     where TEntity : class
-    where THandler : IEquatable<THandler>
 {
     /// <summary>
     ///     生成键

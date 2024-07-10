@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Artemis.Data.Store;
+﻿namespace Artemis.Data.Store;
 
 #region Interface
 
@@ -175,7 +173,6 @@ public sealed record StoreErrorDescriber : IStoreErrorDescriber
 /// <summary>
 ///     存储子系统错误封装
 /// </summary>
-[DataContract]
 public record StoreError : IStoreError
 {
     /// <summary>

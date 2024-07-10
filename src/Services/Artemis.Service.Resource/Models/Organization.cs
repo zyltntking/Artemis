@@ -19,7 +19,7 @@ public class Organization : ConcurrencyModel, IOrganization
     public required string Name { get; set; }
 
     /// <summary>
-    ///    机构编码
+    ///     机构编码
     /// </summary>
     [Required]
     [MaxLength(32)]
@@ -35,7 +35,7 @@ public class Organization : ConcurrencyModel, IOrganization
     public required string Type { get; set; }
 
     /// <summary>
-    ///    机构成立时间
+    ///     机构成立时间
     /// </summary>
     [Comment("机构成立时间")]
     public DateTime? EstablishTime { get; set; }
@@ -48,14 +48,14 @@ public class Organization : ConcurrencyModel, IOrganization
     public string? Email { get; set; }
 
     /// <summary>
-    /// 机构网站
+    ///     机构网站
     /// </summary>
     [MaxLength(128)]
     [Comment("机构网站")]
     public string? WebSite { get; set; }
 
     /// <summary>
-    /// 机构联系电话
+    ///     机构联系电话
     /// </summary>
     [MaxLength(32)]
     [Comment("机构联系电话")]
@@ -77,7 +77,7 @@ public class Organization : ConcurrencyModel, IOrganization
     public required string Status { get; set; }
 
     /// <summary>
-    ///    机构所在地行政区划代码
+    ///     机构所在地行政区划代码
     /// </summary>
     [Required]
     [MaxLength(32)]

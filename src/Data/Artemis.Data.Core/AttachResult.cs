@@ -63,7 +63,7 @@ public static class AttachResultExtensions
     /// <returns></returns>
     public static AttachResult<TResult, TAttach> Attach<TResult, TAttach>(
         this TResult result, TAttach attach)
-        where TAttach : class 
+        where TAttach : class
         where TResult : class
     {
         return new AttachResult<TResult, TAttach>

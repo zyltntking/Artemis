@@ -33,12 +33,12 @@ file interface IAddress
     string? Township { get; set; }
 
     /// <summary>
-    ///    村
+    ///     村
     /// </summary>
     string? Village { get; set; }
 
     /// <summary>
-    /// 门牌号
+    ///     门牌号
     /// </summary>
     string? HouseNumber { get; set; }
 }
@@ -71,12 +71,12 @@ file interface INormalizedAddress
     string? NormalizedTownship { get; set; }
 
     /// <summary>
-    /// 村
+    ///     村
     /// </summary>
     string? NormalizedVillage { get; set; }
 
     /// <summary>
-    /// 门牌号
+    ///     门牌号
     /// </summary>
     string? NormalizedHouseNumber { get; set; }
 }
@@ -154,12 +154,12 @@ public abstract class AddressInfo : IAddress
     public string? Township { get; set; }
 
     /// <summary>
-    ///    村
+    ///     村
     /// </summary>
     public string? Village { get; set; }
 
     /// <summary>
-    /// 门牌号
+    ///     门牌号
     /// </summary>
     public string? HouseNumber { get; set; }
 
@@ -199,12 +199,12 @@ public abstract class AddressStructure : AddressInfo, INormalizedAddress
     public string? NormalizedTownship { get; set; }
 
     /// <summary>
-    /// 村
+    ///     村
     /// </summary>
     public string? NormalizedVillage { get; set; }
 
     /// <summary>
-    /// 门牌号
+    ///     门牌号
     /// </summary>
     public string? NormalizedHouseNumber { get; set; }
 

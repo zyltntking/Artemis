@@ -17,7 +17,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult Success<TResult, TData>(TData data)
     {
-        return DataResult.AdapterSuccess(data).Adapt<TResult>();
+        return DataResult.Success(data).Adapt<TResult>();
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult EmptySuccess<TResult>()
     {
-        return DataResult.AdapterNullSuccess().Adapt<TResult>();
+        return DataResult.NullSuccess().Adapt<TResult>();
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult Fail<TResult, TData>(string message = "失败")
     {
-        return DataResult.AdapterFail<TData>(message).Adapt<TResult>();
+        return DataResult.Fail<TData>(message).Adapt<TResult>();
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult EmptyFail<TResult>(string message = "失败")
     {
-        return DataResult.AdapterNullFail(message).Adapt<TResult>();
+        return DataResult.NullFail(message).Adapt<TResult>();
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult AuthFail<TResult>(string message = "认证失败")
     {
-        return DataResult.AdapterAuthFail(message).Adapt<TResult>();
+        return DataResult.AuthFail(message).Adapt<TResult>();
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult ValidateFail<TResult>(string message = "校验失败")
     {
-        return DataResult.AdapterValidateFail(message).Adapt<TResult>();
+        return DataResult.ValidateFail(message).Adapt<TResult>();
     }
 
     /// <summary>
@@ -83,6 +83,6 @@ public static class RpcResultAdapter
     /// <returns></returns>
     public static TResult Exception<TResult>(Exception exception)
     {
-        return DataResult.AdapterNullException(exception, message: exception.Message).Adapt<TResult>();
+        return DataResult.NullException(exception, message: exception.Message).Adapt<TResult>();
     }
 }

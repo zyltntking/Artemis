@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.Task.Context;
 using Artemis.Service.Task.Stores;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +7,7 @@ namespace Artemis.Service.Task.Managers;
 /// <summary>
 ///     任务管理器
 /// </summary>
-public sealed class ArtemisTaskManager : Manager<ArtemisTask>, IArtemisTaskManager
+public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -28,7 +27,7 @@ public sealed class ArtemisTaskManager : Manager<ArtemisTask>, IArtemisTaskManag
         IArtemisTaskTargetStore taskTargetStore,
         IArtemisTaskAgentStores taskAgentStores,
         IManagerOptions? options = null,
-        ILogger? logger = null) : base(taskStore, options, logger)
+        ILogger? logger = null) : base(options, logger)
     {
         TaskStore = taskStore ?? throw new ArgumentNullException(nameof(taskStore));
         AgentStore = agentStore ?? throw new ArgumentNullException(nameof(agentStore));

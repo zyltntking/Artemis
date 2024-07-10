@@ -1,14 +1,13 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Data.Store;
-using Artemis.Service.Identity.Context;
 
 namespace Artemis.Service.Identity.Managers;
 
 /// <summary>
 ///     认证角色管理接口
 /// </summary>
-public interface IIdentityRoleManager : IManager<IdentityRole>
+public interface IIdentityRoleManager : IManager
 {
     /// <summary>
     ///     根据角色名搜索角色

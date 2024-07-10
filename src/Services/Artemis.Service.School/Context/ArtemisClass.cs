@@ -16,7 +16,7 @@ public sealed class ArtemisClass : Class
     public required ArtemisSchool School { get; set; }
 
     /// <summary>
-    /// 班主任
+    ///     班主任
     /// </summary>
     public required ArtemisTeacher HeadTeacher { get; set; }
 

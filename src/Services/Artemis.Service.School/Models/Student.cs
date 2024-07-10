@@ -21,7 +21,7 @@ public class Student : ConcurrencyPartition, IStudent
     public required string Name { get; set; }
 
     /// <summary>
-    ///    学生性别
+    ///     学生性别
     /// </summary>
     [Required]
     [MaxLength(8)]
@@ -29,21 +29,21 @@ public class Student : ConcurrencyPartition, IStudent
     public required string Gender { get; set; }
 
     /// <summary>
-    /// 专业
+    ///     专业
     /// </summary>
     [MaxLength(128)]
     [Comment("专业")]
     public string? Major { get; set; }
 
     /// <summary>
-    ///    学生生日
+    ///     学生生日
     /// </summary>
     [Required]
     [Comment("学生生日")]
     public required DateOnly Birthday { get; set; }
 
     /// <summary>
-    /// 民族
+    ///     民族
     /// </summary>
     [MaxLength(32)]
     [Comment("民族")]
@@ -58,7 +58,7 @@ public class Student : ConcurrencyPartition, IStudent
     public required string Code { get; set; }
 
     /// <summary>
-    /// 学籍号
+    ///     学籍号
     /// </summary>
     [Required]
     [MaxLength(32)]
@@ -66,28 +66,28 @@ public class Student : ConcurrencyPartition, IStudent
     public required string StudentNumber { get; set; }
 
     /// <summary>
-    /// 证件号码
+    ///     证件号码
     /// </summary>
     [MaxLength(32)]
     [Comment("证件号码")]
     public string? Cert { get; set; }
 
     /// <summary>
-    /// 入学时间
+    ///     入学时间
     /// </summary>
     [Required]
     [Comment("入学时间")]
     public required DateTime EnrollmentDate { get; set; }
 
     /// <summary>
-    ///  住址区划代码
+    ///     住址区划代码
     /// </summary>
     [MaxLength(32)]
     [Comment("住址区划代码")]
     public string? DivisionCode { get; set; }
 
     /// <summary>
-    /// 住址
+    ///     住址
     /// </summary>
     [MaxLength(256)]
     [Comment("住址")]

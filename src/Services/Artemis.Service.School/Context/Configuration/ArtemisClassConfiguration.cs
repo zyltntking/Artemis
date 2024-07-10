@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Shared;
 using Artemis.Data.Store.Configuration;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Service.School.Context.Configuration;
 

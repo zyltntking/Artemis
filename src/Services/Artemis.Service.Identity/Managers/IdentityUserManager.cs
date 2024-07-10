@@ -14,7 +14,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证用户管理
 /// </summary>
-public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserManager
+public sealed class IdentityUserManager : Manager, IIdentityUserManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -36,7 +36,7 @@ public sealed class IdentityUserManager : Manager<IdentityUser>, IIdentityUserMa
         IIdentityUserLoginStore userLoginStore,
         IIdentityUserTokenStore userTokenStore,
         IIdentityUserRoleStore userRoleStore,
-        IManagerOptions? options = null) : base(userStore, options)
+        IManagerOptions? options = null) : base(options)
     {
         UserStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
         RoleStore = roleStore ?? throw new ArgumentNullException(nameof(roleStore));

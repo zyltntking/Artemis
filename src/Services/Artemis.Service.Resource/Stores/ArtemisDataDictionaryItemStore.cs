@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Service.Resource.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +16,7 @@ public interface IArtemisDataDictionaryItemStore : IStore<ArtemisDataDictionaryI
 #endregion
 
 /// <summary>
-/// 数据字典项目存储
+///     数据字典项目存储
 /// </summary>
 public class ArtemisDataDictionaryItemStore : Store<ArtemisDataDictionaryItem>, IArtemisDataDictionaryItemStore
 {
@@ -31,11 +30,11 @@ public class ArtemisDataDictionaryItemStore : Store<ArtemisDataDictionaryItem>, 
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     public ArtemisDataDictionaryItemStore(
-        ResourceContext context, 
-        IStoreOptions? storeOptions = null, 
-        IHandlerProxy? handlerProxy = null, 
-        IDistributedCache? cache = null, 
-        ILogger? logger = null, 
+        ResourceContext context,
+        IStoreOptions? storeOptions = null,
+        IHandlerProxy? handlerProxy = null,
+        IDistributedCache? cache = null,
+        ILogger? logger = null,
         StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
     {
     }
