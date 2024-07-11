@@ -38,7 +38,7 @@ public sealed class PrefectureType : Enumeration
     /// </summary>
     /// <param name="id">枚举Id</param>
     /// <param name="name">枚举名称</param>
-    protected PrefectureType(int id, string name) : base(id, name)
+    private PrefectureType(int id, string name) : base(id, name)
     {
     }
 }

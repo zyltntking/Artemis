@@ -93,8 +93,23 @@ public interface ICacheProxy
 /// <summary>
 ///     抽象缓存代理实现
 /// </summary>
-public abstract class AbstractCacheProxy : ICacheProxy
+/// <typeparam name="TCacheImplement"></typeparam>
+public abstract class AbstractCacheProxy<TCacheImplement> : ICacheProxy
 {
+    /// <summary>
+    ///     抽象缓存代理实现
+    /// </summary>
+    /// <param name="cache"></param>
+    protected AbstractCacheProxy(TCacheImplement cache)
+    {
+        Cache = cache;
+    }
+
+    /// <summary>
+    ///     缓存依赖
+    /// </summary>
+    protected TCacheImplement Cache { get; }
+
     #region Implementation of ICacheProxy
 
     /// <summary>

@@ -1,0 +1,865 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Identity.Protos";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "Protos/common.proto";
+
+package artemis.service.identity.protos;
+
+// 用户服务协议
+service UserService {
+  // 查询用户信息
+  rpc SearchUserInfo (SearchUserInfoRequest) returns (SearchUserInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/Users"
+    };
+  }
+
+	// 读取用户信息
+	rpc ReadUserInfo (ReadUserInfoRequest) returns (ReadUserInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}"
+		};
+	}
+
+  // 创建用户
+  rpc CreateUser (CreateUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users"
+			body: "*"
+		};
+  }
+	
+	// 批量创建用户
+	rpc BatchCreateUser (BatchCreateUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+  // 更新用户
+  rpc UpdateUser (UpdateUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Users/{UserId}"
+			body: "User"
+		};
+  }
+	
+	// 批量更新用户
+	rpc BatchUpdateUser (BatchUpdateUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Users/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+  // 删除用户
+  rpc DeleteUser (DeleteUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}"
+		};
+  }
+	
+	// 批量删除用户
+	rpc BatchDeleteUser (BatchDeleteUserRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/BatchDelete"
+			body: "UserIds"
+		};
+	}
+
+	// 查询用户角色信息
+	rpc SearchUserRoleInfo (SearchUserRoleInfoRequest) returns (SearchUserRoleInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Roles"
+		};
+	}
+
+	// 读取用户角色信息
+	rpc ReadUserRoleInfo (ReadUserRoleInfoRequest) returns (ReadUserRoleInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Roles/{RoleId}"
+		};
+	}
+	
+	// 添加用户角色
+	rpc AddUserRole (AddUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles"
+			body: "Role"
+		};
+	}
+	
+	// 批量添加用户角色
+	rpc BatchAddUserRole (BatchAddUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles/BatchAdd"
+			body: "RoleIds"
+		};
+	}
+
+	// 移除用户角色
+	rpc RemoveUserRole (RemoveUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}/Roles/{RoleId}"
+		};
+	}
+	
+	// 批量移除用户角色
+	rpc BatchRemoveUserRole (BatchRemoveUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles/BatchRemove"
+			body: "RoleIds"
+		};
+	}
+
+	// 查询用户凭据信息
+	rpc SearchUserClaimInfo (SearchUserClaimInfoRequest) returns (SearchUserClaimInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Claims"
+		};
+	}
+
+	// 读取用户凭据信息
+	rpc ReadUserClaimInfo (ReadUserClaimInfoRequest) returns (ReadUserClaimInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Users/{UserId}/Claims/{ClaimId}"
+		};
+	}
+
+	// 添加用户凭据
+	rpc AddUserClaim (AddUserClaimRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Claims"
+			body: "UserClaim"
+		};
+	}
+	
+	// 批量添加用户凭据
+	rpc BatchAddUserClaim (BatchAddUserClaimRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Claims/BatchAdd"
+			body: "Batch"
+		};
+	}
+	
+	// 更新用户凭据
+	rpc UpdateUserClaim (UpdateUserClaimRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Users/{UserId}/Claims/{ClaimId}"
+			body: "UserClaim"
+		};
+	}
+	
+	// 批量更新用户凭据
+	rpc BatchUpdateUserClaim (BatchUpdateUserClaimRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Users/{UserId}/Claims/BatchUpdate"
+			body: "Batch"
+		};
+	}
+	
+	// 删除用户凭据
+	rpc DeleteUserClaim (UserClaimIdRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}/Claims/{ClaimId}"
+		};
+	}
+	
+	// 批量删除用户凭据
+	rpc BatchDeleteUserClaim (BatchDeleteUserClaimRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Claims/BatchDelete"
+			body: "ClaimIds"
+		};
+	}
+}
+
+// 查询用户信息请求
+message SearchUserInfoRequest {
+	/* 用户名
+   * @length(1,128)
+   */
+	google.protobuf.StringValue UserName = 1;
+	/* 邮箱
+   * @email
+   * @length(0,128)
+   */
+	google.protobuf.StringValue Email = 2;
+	/* 手机号码
+   * @phone
+   * @length(0,128)
+   */
+	google.protobuf.StringValue Phone = 3;
+	/* 页码
+   * @min(0)
+   */
+	google.protobuf.Int32Value Page = 4;
+	/* 条目数
+   * @min(0)
+   */
+	google.protobuf.Int32Value Size = 5;
+}
+
+// 用户信息数据包
+message UserInfoPacket {
+	/* 用户标识
+   * @required
+   * @guid
+   */
+	string Id = 1;
+	/*
+   * 用户名
+   * @required
+   * @length(1,128)
+   */
+	string UserName = 2;
+	/* 邮箱
+   * @email
+   * @length(0,128)
+   */
+	google.protobuf.StringValue Email = 3;
+	/* 手机号码
+   * @phone
+   * @length(0,128)
+   */
+	google.protobuf.StringValue PhoneNumber = 4;
+}
+
+// 分页用户信息数据包
+message PagedUserInfoPacket {
+	/* 页码
+   * @min(0)
+   */
+	int32 Page = 1;
+	/* 条目数
+   * @min(0)
+   */
+	int32 Size = 2;
+	/* 数据总数
+   * @min(0)
+   */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+   * @min(0)
+   */
+	int64 Count = 4;
+	/* 用户信息数据
+   * @required
+   */
+	repeated UserInfoPacket Items = 5;
+}
+
+// 查询用户信息响应
+message SearchUserInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+   * @datetime
+   */
+	string DateTime = 5;
+	/* 响应时间戳
+   * @timestamp
+   */
+	int64 Timestamp = 6;
+	/* 用户信息数据
+   */
+	PagedUserInfoPacket Data = 7;
+}
+
+// 读取用户信息请求
+message ReadUserInfoRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+}
+
+// 读取用户信息响应
+message ReadUserInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+   * @datetime
+   */
+	string DateTime = 5;
+	/* 响应时间戳
+   * @timestamp
+   */
+	int64 Timestamp = 6;
+	/* 用户信息数据
+   */
+	UserInfoPacket Data = 7;
+}
+
+// 创建用户请求
+message CreateUserRequest {
+	/* 用户名
+	 * @required
+	 * @length(1,128)
+	 */
+	string UserName = 1;
+	/* 密码
+	 * @required
+	 * @length(6,128)
+	 */
+	string Password = 2;
+	/* 邮箱
+	 * @email
+	 * @length(0,128)
+	 */
+	google.protobuf.StringValue Email = 3;
+	/* 手机号码
+	 * @phone
+	 * @length(0,128)
+	 */
+	google.protobuf.StringValue PhoneNumber = 4;
+}
+
+// 批量创建用户请求
+message BatchCreateUserRequest {
+	/* 用户数据
+	 * @required
+	 */
+	repeated CreateUserRequest Batch = 1;
+}
+
+// 更新用户数据包
+message UpdateUserPacket {
+	/* 用户名
+	 * @length(1,128)
+	 */
+	google.protobuf.StringValue UserName = 1;
+	/* 密码
+	 * @length(6,128)
+	 */
+	google.protobuf.StringValue Password = 2;
+	/* 邮箱
+	 * @email
+	 * @length(0,128)
+	 */
+	google.protobuf.StringValue Email = 3;
+	/* 手机号码
+	 * @phone
+	 * @length(0,128)
+	 */
+	google.protobuf.StringValue PhoneNumber = 4;
+}
+
+// 更新用户请求
+message UpdateUserRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 用户
+	 * @required
+	 */
+	UpdateUserPacket User = 2;
+}
+
+// 批量更新用户请求
+message BatchUpdateUserRequest {
+	/* 用户数据
+	 * @required
+	 */
+	repeated UpdateUserRequest Batch = 1;
+}
+
+// 删除用户请求
+message DeleteUserRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+}
+
+// 批量删除用户请求
+message BatchDeleteUserRequest {
+	/* 用户标识
+	 * @required
+	 */
+	repeated string UserIds = 1;
+}
+
+// 查询用户角色信息请求
+message SearchUserRoleInfoRequest {
+	/* 用户标识
+   * @required
+   * @guid
+   */
+	string UserId = 1;
+	/* 角色名称
+   * @length(1,128)
+   */
+	google.protobuf.StringValue RoleName = 2;
+	/* 页码
+   * @min(0)
+   */
+	google.protobuf.Int32Value Page = 3;
+	/* 条目数
+   * @min(0)
+   */
+	google.protobuf.Int32Value Size = 4;
+}
+
+// 用户角色信息数据包
+message UserRoleInfoPacket {
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	string RoleId = 2;
+	/* 角色名称
+	 * @required
+	 * @length(1,128)
+	 */
+	string Name = 3;
+	/* 角色描述
+	 * @length(0,256)
+	 */
+	google.protobuf.StringValue Description = 4;
+}
+
+// 分页用户角色信息数据包
+message PagedUserRoleInfoPacket {
+	/* 页码
+	 * @min(0)
+	 */
+	int32 Page = 1;
+	/* 条目数
+	 * @min(0)
+	 */
+	int32 Size = 2;
+	/* 数据总数
+	 * @min(0)
+	 */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+	 * @min(0)
+	 */
+	int64 Count = 4;
+	/* 用户角色信息数据
+	 * @required
+	 */
+	repeated UserRoleInfoPacket Items = 5;
+}
+
+// 查询用户角色信息响应
+message SearchUserRoleInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 用户角色信息数据
+	 */
+	PagedUserRoleInfoPacket Data = 7;
+}
+
+// 读取用户角色信息请求
+message ReadUserRoleInfoRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	string RoleId = 2;
+}
+
+// 读取用户角色信息响应
+message ReadUserRoleInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 用户角色信息数据
+	 */
+	UserRoleInfoPacket Data = 7;
+}
+
+// 角色标识数据包
+message RoleIdPacket {
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	string RoleId = 1;
+}
+
+// 添加用户角色请求
+message AddUserRoleRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	RoleIdPacket Role = 2;
+}
+
+// 批量添加用户角色请求
+message BatchAddUserRoleRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	repeated string RoleIds = 2;
+}
+
+// 移除用户角色请求
+message RemoveUserRoleRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	string RoleId = 2;
+}
+
+// 批量移除用户角色请求
+message BatchRemoveUserRoleRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 角色标识
+	 * @required
+	 * @guid
+	 */
+	repeated string RoleIds = 2;
+}
+
+// 查询用户凭据信息请求
+message SearchUserClaimInfoRequest {
+	/* 用户标识
+   * @required
+   * @guid
+   */
+	string UserId = 1;
+	/* 类型
+   * @length(1,128)
+   */
+	google.protobuf.StringValue ClaimType = 2;
+	/* 值
+   * @length(1,512)
+   */
+	google.protobuf.StringValue ClaimValue = 3;
+	/* 页码
+  * @min(0)
+  */
+	google.protobuf.Int32Value Page = 4;
+	/* 条目数
+   * @min(0)
+   */
+	google.protobuf.Int32Value Size = 5;
+}
+
+// 用户凭据信息数据包
+message UserClaimInfoPacket {
+	/* 凭据标识
+   * @required
+   */
+	int32 Id = 1;
+	/* 用户标识
+   * @required
+   * @guid
+   */
+	string UserId = 2;
+	/* 凭据类型
+   * @required
+   * @length(1,128)
+   */
+	string ClaimType = 3;
+	/* 凭据值
+   * @required
+   * @length(1,512)
+   */
+	string ClaimValue = 4;
+	/* 校验戳
+   * @required
+   * @md5
+   */
+	string CheckStamp = 5;
+	// 描述
+	google.protobuf.StringValue Description = 6;
+}
+
+// 分页用户凭据信息数据包
+message PagedUserClaimInfoPacket {
+	/* 页码
+	 * @min(0)
+	 */
+	int32 Page = 1;
+	/* 条目数
+	 * @min(0)
+	 */
+	int32 Size = 2;
+	/* 数据总数
+	 * @min(0)
+	 */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+	 * @min(0)
+	 */
+	int64 Count = 4;
+	/* 用户凭据信息数据
+	 * @required
+	 */
+	repeated UserClaimInfoPacket Items = 5;
+}
+
+// 查询用户凭据信息响应
+message SearchUserClaimInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 用户凭据信息数据
+	 */
+	PagedUserClaimInfoPacket Data = 7;
+}
+
+// 读取用户凭据信息请求
+message ReadUserClaimInfoRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据标识
+	 * @required
+	 */
+	int32 ClaimId = 2;
+}
+
+// 读取用户凭据信息响应
+message ReadUserClaimInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 用户凭据信息数据
+	 */
+	UserClaimInfoPacket Data = 7;
+}
+
+// 创建凭据数据包
+message AddUserClaimPacket {
+	/* 凭据类型
+	 * @required
+	 * @length(1,128)
+	 */
+	string ClaimType = 1;
+	/* 凭据值
+	 * @required
+	 * @length(1,512)
+	 */
+	string ClaimValue = 2;
+	/* 描述
+	 * @length(0,256)
+	 */
+	google.protobuf.StringValue Description = 3;
+}
+
+// 添加用户凭据请求
+message AddUserClaimRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据
+	 * @required
+	 */
+	AddUserClaimPacket UserClaim = 2;
+}
+
+// 批量添加用户凭据请求
+message BatchAddUserClaimRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据数据
+	 * @required
+	 */
+	repeated AddUserClaimPacket Batch = 2;
+}
+
+// 更新用户凭据数据包
+message UpdateUserClaimPacket {
+	/* 凭据类型
+	 * @length(1,128)
+	 */
+	google.protobuf.StringValue ClaimType = 1;
+	/* 凭据值
+	 * @length(1,512)
+	 */
+	google.protobuf.StringValue ClaimValue = 2;
+	/* 描述
+	 * @length(0,256)
+	 */
+	google.protobuf.StringValue Description = 3;
+}
+
+// 更新用户凭据请求
+message UpdateUserClaimRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据标识
+	 * @required
+	 */
+	int32 ClaimId = 2;
+	/* 凭据
+	 * @required
+	 */
+	UpdateUserClaimPacket UserClaim = 3;
+}
+
+// 批量更新用户凭据数据包
+message BatchUpdateUserClaimPacket {
+	/* 用户标识
+	 * @required
+	 */
+	int32 ClaimId = 1;
+	/* 凭据数据
+	 * @required
+	 */
+	UpdateUserClaimPacket Claim = 2;
+}
+
+// 批量更新用户凭据请求
+message BatchUpdateUserClaimRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据数据
+	 * @required
+	 */
+	repeated BatchUpdateUserClaimPacket Batch = 2;
+}
+
+// 删除用户凭据请求
+message UserClaimIdRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据标识
+	 * @required
+	 */
+	int32 ClaimId = 2;
+}
+
+// 批量删除用户凭据请求
+message BatchDeleteUserClaimRequest {
+	/* 用户标识
+	 * @required
+	 * @guid
+	 */
+	string UserId = 1;
+	/* 凭据标识
+	 * @required
+	 */
+	repeated int32 ClaimIds = 2;
+}

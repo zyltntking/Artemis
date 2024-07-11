@@ -5,8 +5,7 @@ using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Identity.Managers;
-using Artemis.Service.Protos;
-using Artemis.Service.Protos.Identity;
+using Artemis.Service.Identity.Protos;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Mapster;
@@ -19,7 +18,7 @@ namespace Artemis.App.Identity.Services;
 /// <summary>
 ///     账户服务
 /// </summary>
-public class AccountService : Account.AccountBase
+public class AccountServiceLogic : AccountService.AccountServiceBase
 {
     /// <summary>
     ///     账户服务
@@ -29,12 +28,12 @@ public class AccountService : Account.AccountBase
     /// <param name="cache"></param>
     /// <param name="options"></param>
     /// <param name="logger">日志记录器</param>
-    public AccountService(
+    public AccountServiceLogic(
         IIdentityAccountManager accountManager,
         IIdentityUserManager userManager,
         IDistributedCache cache,
         IOptions<ArtemisAuthorizationOptions> options,
-        ILogger<AccountService> logger)
+        ILogger<AccountServiceLogic> logger)
     {
         AccountManager = accountManager;
         UserManager = userManager;
@@ -66,7 +65,7 @@ public class AccountService : Account.AccountBase
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<AccountService> Logger { get; }
+    private ILogger<AccountServiceLogic> Logger { get; }
 
     #region Overrides of AccountBase
 

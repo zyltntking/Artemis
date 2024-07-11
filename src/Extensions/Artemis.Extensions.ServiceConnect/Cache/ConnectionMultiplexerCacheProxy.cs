@@ -1,18 +1,18 @@
 ﻿using Artemis.Data.Core;
-using Microsoft.Extensions.Caching.Distributed;
+using StackExchange.Redis;
 
 namespace Artemis.Extensions.ServiceConnect.Cache;
 
 /// <summary>
-///     分布式缓存代理
+///     ConnectionMultiplexer缓存代理
 /// </summary>
-public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
+public class ConnectionMultiplexerCacheProxy : AbstractCacheProxy<IConnectionMultiplexer>
 {
     /// <summary>
-    ///     分布式缓存代理
+    ///     抽象缓存代理实现
     /// </summary>
-    /// <param name="cache">缓存依赖</param>
-    public DistributedCacheProxy(IDistributedCache cache) : base(cache)
+    /// <param name="cache"></param>
+    public ConnectionMultiplexerCacheProxy(IConnectionMultiplexer cache) : base(cache)
     {
     }
 
@@ -28,18 +28,9 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     public override void Set<TEntity>(string key, TEntity value, int expire = 0)
     {
         if (expire <= 0)
-        {
-            Cache.SetString(key, value.Serialize());
-        }
+            Cache.GetDatabase().StringSet(key, value.Serialize());
         else
-        {
-            var options = new DistributedCacheEntryOptions
-            {
-                SlidingExpiration = TimeSpan.FromSeconds(expire)
-            };
-
-            Cache.SetString(key, value.Serialize(), options);
-        }
+            Cache.GetDatabase().StringSet(key, value.Serialize(), TimeSpan.FromSeconds(expire));
     }
 
     /// <summary>
@@ -56,14 +47,10 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        if (expire <= 0) return Cache.SetStringAsync(key, Cache.Serialize(), cancellationToken);
+        if (expire <= 0)
+            return Cache.GetDatabase().StringSetAsync(key, value.Serialize());
 
-        var options = new DistributedCacheEntryOptions
-        {
-            SlidingExpiration = TimeSpan.FromSeconds(expire)
-        };
-
-        return Cache.SetStringAsync(key, value.Serialize(), options, cancellationToken);
+        return Cache.GetDatabase().StringSetAsync(key, value.Serialize(), TimeSpan.FromSeconds(expire));
     }
 
     /// <summary>
@@ -74,9 +61,9 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     /// <returns>值</returns>
     public override TEntity? Get<TEntity>(string key) where TEntity : class
     {
-        var value = Cache.GetString(key);
+        var value = Cache.GetDatabase().StringGet(key);
 
-        return value?.Deserialize<TEntity>();
+        return value.HasValue ? value.ToString().Deserialize<TEntity>() : null;
     }
 
     /// <summary>
@@ -86,15 +73,14 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     /// <param name="key">键</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public override Task<TEntity?> GetAsync<TEntity>(string key, CancellationToken cancellationToken = default)
+    public override async Task<TEntity?> GetAsync<TEntity>(string key, CancellationToken cancellationToken = default)
         where TEntity : class
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var value = Cache.GetString(key);
-        return value is null
-            ? Task.FromResult(default(TEntity))
-            : Task.FromResult(value.Deserialize<TEntity>());
+        var value = await Cache.GetDatabase().StringGetAsync(key);
+
+        return value.HasValue ? value.ToString().Deserialize<TEntity>() : null;
     }
 
     /// <summary>
@@ -103,7 +89,7 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     /// <param name="key">键</param>
     public override void Remove(string key)
     {
-        Cache.Remove(key);
+        Cache.GetDatabase().KeyDelete(key);
     }
 
     /// <summary>
@@ -114,7 +100,9 @@ public class DistributedCacheProxy : AbstractCacheProxy<IDistributedCache>
     /// <returns></returns>
     public override Task RemoveAsync(string key, CancellationToken cancellationToken = default)
     {
-        return Cache.RemoveAsync(key, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return Cache.GetDatabase().KeyDeleteAsync(key);
     }
 
     #endregion

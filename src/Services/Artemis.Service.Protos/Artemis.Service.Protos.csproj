@@ -35,6 +35,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="identity\**" />
+      <EmbeddedResource Remove="identity\**" />
+      <None Remove="identity\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
@@ -49,11 +55,7 @@
 
     <ItemGroup>
         <Protobuf Include="common.proto" />
-        <Protobuf Include="identity\resource.proto" />
         <Protobuf Include="sample.proto" />
-        <Protobuf Include="identity\account.proto" />
-        <Protobuf Include="identity\role.proto" />
-        <Protobuf Include="identity\user.proto" />
         <Protobuf Include="google\api\annotations.proto" />
         <Protobuf Include="google\api\http.proto" />
     </ItemGroup>

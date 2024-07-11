@@ -2,8 +2,7 @@
 using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
-using Artemis.Service.Protos;
-using Artemis.Service.Protos.Identity.Resource;
+using Artemis.Service.Identity.Protos;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -13,16 +12,16 @@ namespace Artemis.App.Identity.Services;
 /// <summary>
 ///     资源服务
 /// </summary>
-public class ResourceService : Resource.ResourceBase
+public class ResourceServiceLogic : ResourceService.ResourceServiceBase
 {
     /// <summary>
     ///     资源服务
     /// </summary>
     /// <param name="resourceManager">认证资源管理器依赖</param>
     /// <param name="logger">日志依赖</param>
-    public ResourceService(
+    public ResourceServiceLogic(
         IIdentityResourceManager resourceManager,
-        ILogger<ResourceService> logger)
+        ILogger<ResourceServiceLogic> logger)
     {
         ResourceManager = resourceManager;
         Logger = logger;
@@ -36,7 +35,7 @@ public class ResourceService : Resource.ResourceBase
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<ResourceService> Logger { get; }
+    private ILogger<ResourceServiceLogic> Logger { get; }
 
     #region Overrides of ResourceBase
 

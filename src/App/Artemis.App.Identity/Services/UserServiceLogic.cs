@@ -3,8 +3,7 @@ using Artemis.Data.Core;
 using Artemis.Data.Shared.Transfer;
 using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
-using Artemis.Service.Protos;
-using Artemis.Service.Protos.Identity.User;
+using Artemis.Service.Identity.Protos;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +13,16 @@ namespace Artemis.App.Identity.Services;
 /// <summary>
 ///     用户服务
 /// </summary>
-public class UserService : User.UserBase
+public class UserServiceLogic : UserService.UserServiceBase
 {
     /// <summary>
     ///     账户服务
     /// </summary>
     /// <param name="userManager">用户管理器</param>
     /// <param name="logger">日志记录器</param>
-    public UserService(
+    public UserServiceLogic(
         IIdentityUserManager userManager,
-        ILogger<AccountService> logger)
+        ILogger<AccountServiceLogic> logger)
     {
         UserManager = userManager;
         Logger = logger;
@@ -37,7 +36,7 @@ public class UserService : User.UserBase
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<AccountService> Logger { get; }
+    private ILogger<AccountServiceLogic> Logger { get; }
 
     #region Overrides of UserBase
 
