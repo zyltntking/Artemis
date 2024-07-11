@@ -2,7 +2,6 @@
 using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Service.Identity.Context;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Service.Identity.Stores;
@@ -27,15 +26,15 @@ public sealed class IdentityUserTokenStore : KeyLessStore<IdentityUserToken>, II
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
     /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
+    /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <exception cref="StoreParameterNullException"></exception>
     public IdentityUserTokenStore(
         IdentityContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
-        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cache, logger)
+        ICacheProxy? cacheProxy = null,
+        ILogger? logger = null) : base(context, storeOptions, handlerProxy, cacheProxy, logger)
     {
     }
 

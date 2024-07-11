@@ -2567,7 +2567,7 @@
 				存储配置
 			</summary>
 		</member>
-		<member name="P:Artemis.Data.Store.KeyLessStore`2.HandlerProxy">
+		<member name="P:Artemis.Data.Store.KeyLessStore`2.IHandlerProxy">
 			<summary>
 				操作人代理
 			</summary>

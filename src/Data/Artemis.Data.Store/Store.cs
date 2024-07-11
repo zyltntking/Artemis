@@ -5,7 +5,6 @@ using Artemis.Data.Store.Extensions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Data.Store;
@@ -23,16 +22,16 @@ public abstract class Store<TEntity> : Store<TEntity, Guid>, IStore<TEntity>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
     /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
+    /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     protected Store(
         DbContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
+        ICacheProxy? cacheProxy = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cacheProxy, logger,
         describer)
     {
     }
@@ -86,7 +85,7 @@ public abstract class Store<TEntity, TKey> : KeyLessStore<TEntity>, IStore<TEnti
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
     /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
+    /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
@@ -94,9 +93,9 @@ public abstract class Store<TEntity, TKey> : KeyLessStore<TEntity>, IStore<TEnti
         DbContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
+        ICacheProxy? cacheProxy = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger,
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cacheProxy, logger,
         describer)
     {
     }
@@ -1208,7 +1207,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
     /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
+    /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     /// <exception cref="StoreParameterNullException"></exception>
@@ -1216,14 +1215,14 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         DbContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
+        ICacheProxy? cacheProxy = null,
         ILogger? logger = null,
         StoreErrorDescriber? describer = null)
     {
         Context = context ?? throw new StoreParameterNullException(nameof(context));
         StoreOptions = storeOptions ?? new StoreOptions();
         HandlerProxy = handlerProxy;
-        Cache = cache;
+        CacheProxy = cacheProxy;
         Logger = logger;
         Describer = describer ?? new StoreErrorDescriber();
     }
@@ -1270,11 +1269,6 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     }
 
     /// <summary>
-    ///     缓存依赖
-    /// </summary>
-    protected IDistributedCache? Cache { get; }
-
-    /// <summary>
     ///     数据访问上下文
     /// </summary>
     private DbContext Context { get; }
@@ -1293,6 +1287,11 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     ///     操作人代理
     /// </summary>
     private IHandlerProxy? HandlerProxy { get; }
+
+    /// <summary>
+    ///     缓存代理
+    /// </summary>
+    private ICacheProxy? CacheProxy { get; }
 
     /// <summary>
     ///     设置当前发生错误的错误描述者
@@ -1322,7 +1321,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <summary>
     ///     实体键生成委托
     /// </summary>
-    protected virtual Func<TEntity, string>? EntityKey { get; init; } = null;
+    protected abstract Func<TEntity, string>? EntityKey { get; init; }
 
     #endregion
 
@@ -1356,8 +1355,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <summary>
     ///     是否启用缓存
     /// </summary>
-    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && Cache is not null &&
-                                  EntityKey is not null;
+    protected bool CachedStore => StoreOptions is { CachedStore: true, Expires: >= 0 } && EntityKey is not null;
 
     /// <summary>
     ///     缓存过期时间
@@ -1931,8 +1929,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
+            if (HandlerHosting && HandlerProxy is not null && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _createNewConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
                     .Ignore(dest => ((IHandlerSlot)dest).ModifyBy)
@@ -1983,7 +1980,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerProxy != null &&
+            if (HandlerHosting && HandlerProxy is not null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _overDeCertaintyConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
@@ -2031,7 +2028,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                         .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                         .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-                if (HandlerHosting && HandlerProxy != null &&
+                if (HandlerHosting && HandlerProxy is not null &&
                     Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                     _mergeCertaintyConfig.ForType<TSource, TEntity>()
                         .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
@@ -2056,7 +2053,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     .Ignore(dest => ((IMateSlot)dest).UpdatedAt)
                     .Ignore(dest => ((IMateSlot)dest).DeletedAt!);
 
-            if (HandlerHosting && HandlerProxy != null &&
+            if (HandlerHosting && HandlerProxy is not null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 _mergeDeCertaintyConfig.ForType<TSource, TEntity>()
                     .Ignore(dest => ((IHandlerSlot)dest).CreateBy)
@@ -2503,12 +2500,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="entity"></param>
     protected void CacheEntity(TEntity entity)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.Set(CacheKey(entity), entity, Expires);
+            CacheProxy.Set(CacheKey(entity), entity, Expires);
 
             if (DebugLogger)
                 Logger?.LogDebug($"{typeof(TEntity).Name} Cached");
@@ -2525,14 +2519,12 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
+            CacheProxy.SetAsync(CacheKey(entity), entity, Expires, cancellationToken);
 
-            Cache?.SetAsync(CacheKey(entity), entity, Expires, cancellationToken);
-
-            if (DebugLogger) Logger?.LogDebug($"{typeof(TEntity).Name} Cached");
+            if (DebugLogger)
+                Logger?.LogDebug($"{typeof(TEntity).Name} Cached");
         }
 
         return Task.CompletedTask;
@@ -2544,20 +2536,18 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="entities"></param>
     protected void CacheEntities(IEnumerable<TEntity> entities)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
 
             foreach (var entity in entities)
             {
-                Cache?.SetAsync(CacheKey(entity), entity, Expires);
+                CacheProxy.SetAsync(CacheKey(entity), entity, Expires);
                 count++;
             }
 
-            if (DebugLogger) Logger?.LogDebug($"Cached {count} {typeof(TEntity).Name} Entities");
+            if (DebugLogger)
+                Logger?.LogDebug($"Cached {count} {typeof(TEntity).Name} Entities");
         }
     }
 
@@ -2570,16 +2560,13 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
 
             foreach (var entity in entities)
             {
-                Cache?.SetAsync(CacheKey(entity), entity, Expires, cancellationToken);
+                CacheProxy.SetAsync(CacheKey(entity), entity, Expires, cancellationToken);
                 count++;
             }
 
@@ -2597,12 +2584,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <exception cref="NotImplementedException"></exception>
     protected TEntity? GetEntity(string key)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = Cache?.Get<TEntity>(CacheKey(key));
+            var entity = CacheProxy.Get<TEntity>(CacheKey(key));
 
             if (DebugLogger) Logger?.LogDebug($"Get {typeof(TEntity).Name} Entity From Cache");
 
@@ -2623,12 +2607,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         string key,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            var entity = await Cache?.GetAsync<TEntity>(CacheKey(key), cancellationToken)!;
+            var entity = await CacheProxy.GetAsync<TEntity>(CacheKey(key), cancellationToken);
 
             if (DebugLogger) Logger?.LogDebug($"Get {typeof(TEntity).Name} Entity From Cache");
 
@@ -2646,16 +2627,13 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <exception cref="NotImplementedException"></exception>
     protected IEnumerable<TEntity>? GetEntities(IEnumerable<string> keys)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var list = new List<TEntity>();
 
             foreach (var key in keys)
             {
-                var entity = Cache?.Get<TEntity>(CacheKey(key));
+                var entity = CacheProxy.Get<TEntity>(CacheKey(key));
 
                 if (entity is not null)
                     list.Add(entity);
@@ -2679,16 +2657,13 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         IEnumerable<string> keys,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var list = new List<TEntity>();
 
             foreach (var key in keys)
             {
-                var entity = await Cache?.GetAsync<TEntity>(CacheKey(key), cancellationToken)!;
+                var entity = await CacheProxy.GetAsync<TEntity>(CacheKey(key), cancellationToken);
 
                 if (entity is not null)
                     list.Add(entity);
@@ -2709,12 +2684,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <exception cref="InstanceNotImplementException"></exception>
     protected void RemoveCachedEntity(string key)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.Remove(CacheKey(key));
+            CacheProxy.Remove(CacheKey(key));
 
             if (DebugLogger) Logger?.LogDebug($"{typeof(TEntity).Name} Removed From Cache");
         }
@@ -2726,12 +2698,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="entity"></param>
     protected void RemoveCachedEntity(TEntity entity)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            Cache?.Remove(CacheKey(entity));
+            CacheProxy.Remove(CacheKey(entity));
 
             if (DebugLogger) Logger?.LogDebug($"{typeof(TEntity).Name} Removed From Cache");
         }
@@ -2744,12 +2713,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="cancellationToken"></param>
     protected async Task RemoveCachedEntityAsync(string key, CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            await Cache?.RemoveAsync(CacheKey(key), cancellationToken)!;
+            await CacheProxy.RemoveAsync(CacheKey(key), cancellationToken);
 
             if (DebugLogger) Logger?.LogDebug($"{typeof(TEntity).Name} Removed From Cache");
         }
@@ -2764,12 +2730,9 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
-            await Cache?.RemoveAsync(CacheKey(entity), cancellationToken)!;
+            await CacheProxy.RemoveAsync(CacheKey(entity), cancellationToken);
 
             if (DebugLogger) Logger?.LogDebug($"{typeof(TEntity).Name} Removed From Cache");
         }
@@ -2781,15 +2744,12 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="keys"></param>
     protected void RemoveCachedEntities(IEnumerable<string> keys)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
             foreach (var key in keys)
             {
-                Cache?.Remove(CacheKey(key));
+                CacheProxy.Remove(CacheKey(key));
                 count++;
             }
 
@@ -2803,15 +2763,12 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
     /// <param name="entities"></param>
     protected void RemoveCachedEntities(IEnumerable<TEntity> entities)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
             foreach (var entity in entities)
             {
-                Cache?.Remove(CacheKey(entity));
+                CacheProxy.Remove(CacheKey(entity));
                 count++;
             }
 
@@ -2828,15 +2785,12 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         IEnumerable<string> keys,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
             foreach (var key in keys)
             {
-                await Cache?.RemoveAsync(CacheKey(key), cancellationToken)!;
+                await CacheProxy.RemoveAsync(CacheKey(key), cancellationToken);
                 count++;
             }
 
@@ -2853,15 +2807,12 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         IEnumerable<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
-        if (CachedStore)
+        if (CachedStore && CacheProxy is not null)
         {
-            if (Cache is null)
-                throw new InstanceNotImplementException(nameof(Cache));
-
             var count = 0;
             foreach (var entity in entities)
             {
-                await Cache?.RemoveAsync(CacheKey(entity), cancellationToken)!;
+                await CacheProxy.RemoveAsync(CacheKey(entity), cancellationToken);
                 count++;
             }
 
@@ -2894,7 +2845,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                 metaSlot.UpdatedAt = now;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
             {
                 handlerSlot.CreateBy = HandlerProxy.Handler;
                 handlerSlot.ModifyBy = HandlerProxy.Handler;
@@ -2908,7 +2859,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
             if (entity is IMateSlot metaSlot)
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
         }
     }
@@ -2936,7 +2887,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                 {
                     handlerSlot.CreateBy = HandlerProxy.Handler;
                     handlerSlot.ModifyBy = HandlerProxy.Handler;
@@ -2952,7 +2903,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                 if (entity is IMateSlot metaSlot)
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
             }
     }
@@ -2975,7 +2926,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
         {
             if (entity is IMateSlot metaSlot) metaSlot.UpdatedAt = DateTime.Now;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                 handlerSlot.ModifyBy = HandlerProxy.Handler;
         }
 
@@ -2989,7 +2940,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                 Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
             {
                 Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3021,7 +2972,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     metaSlot.UpdatedAt = now;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                     handlerSlot.ModifyBy = HandlerProxy.Handler;
             }
         }
@@ -3037,7 +2988,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     Context.Entry(metaSlot).Property(item => item.DeletedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.RemoveBy).IsModified = false;
@@ -3076,7 +3027,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerProxy != null &&
+            if (HandlerHosting && HandlerProxy is not null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
@@ -3121,7 +3072,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerProxy != null &&
+            if (HandlerHosting && HandlerProxy is not null &&
                 Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
@@ -3152,7 +3103,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
             if (entity is IMateSlot metaSlotChange)
                 metaSlotChange.DeletedAt = DateTime.Now;
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlotChange)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlotChange)
                 handlerSlotChange.RemoveBy = HandlerProxy.Handler;
 
             Context.Update(entity);
@@ -3163,7 +3114,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                 Context.Entry(metaSlotKeep).Property(item => item.UpdatedAt).IsModified = false;
             }
 
-            if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlotKeep)
+            if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlotKeep)
             {
                 Context.Entry(handlerSlotKeep).Property(item => item.CreateBy).IsModified = false;
                 Context.Entry(handlerSlotKeep).Property(item => item.ModifyBy).IsModified = false;
@@ -3195,11 +3146,11 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
 
                 if (entity is IMateSlot metaSlot) metaSlot.DeletedAt = DateTime.Now;
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                     handlerSlot.RemoveBy = HandlerProxy.Handler;
             }
 
-            Context.AttachRange(entities);
+            Context.UpdateRange(entities);
 
             foreach (var entity in entities)
             {
@@ -3209,7 +3160,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                     Context.Entry(metaSlot).Property(item => item.UpdatedAt).IsModified = false;
                 }
 
-                if (HandlerHosting && HandlerProxy != null && entity is IHandlerSlot handlerSlot)
+                if (HandlerHosting && HandlerProxy is not null && entity is IHandlerSlot handlerSlot)
                 {
                     Context.Entry(handlerSlot).Property(item => item.CreateBy).IsModified = false;
                     Context.Entry(handlerSlot).Property(item => item.ModifyBy).IsModified = false;
@@ -3253,8 +3204,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
+            if (HandlerHosting && HandlerProxy is not null && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot)entity).RemoveBy,
@@ -3301,8 +3251,7 @@ public abstract class KeyLessStore<TEntity> : IKeyLessStore<TEntity>
                         DateTime.Now)
                 );
 
-            if (HandlerHosting && HandlerProxy != null &&
-                Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
+            if (HandlerHosting && HandlerProxy is not null && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
                 setter = setter.AppendSetProperty(mateSetter => mateSetter
                     .SetProperty(
                         entity => ((IHandlerSlot)entity).RemoveBy,

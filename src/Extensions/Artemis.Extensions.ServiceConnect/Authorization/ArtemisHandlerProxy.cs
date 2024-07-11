@@ -10,8 +10,6 @@ namespace Artemis.Extensions.ServiceConnect.Authorization;
 /// </summary>
 public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
 {
-    //todo Deal with the following warning
-
     /// <summary>
     ///     代理实现
     /// </summary>

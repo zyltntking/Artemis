@@ -14,8 +14,9 @@ public abstract class ConcurrencyPartition : ConcurrencyPartition<Guid>, IConcur
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public override Guid Id { get; set; } = Guid.NewGuid();
+    public override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -31,7 +32,7 @@ public abstract class ConcurrencyPartition<TKey> : PartitionBase<TKey>, IConcurr
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public string? ConcurrencyStamp { get; set; }
+    public string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
 
     #endregion
 }
@@ -45,8 +46,9 @@ public abstract class PartitionBase : PartitionBase<Guid>, IPartitionBase
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -61,7 +63,7 @@ public abstract class PartitionBase<TKey> : ModelBase<TKey>, IPartitionBase<TKey
     ///     分区标识
     /// </summary>
     [Required]
-    public int Partition { get; set; }
+    public required int Partition { get; set; } = 0;
 
     #endregion
 }
@@ -79,8 +81,9 @@ public abstract class ConcurrencyModel : ConcurrencyModel<Guid>, IConcurrencyMod
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -95,7 +98,7 @@ public abstract class ConcurrencyModel<TKey> : ModelBase<TKey>, IConcurrencyMode
     ///     并发锁
     /// </summary>
     [MaxLength(64)]
-    public string? ConcurrencyStamp { get; set; }
+    public string? ConcurrencyStamp { get; set; } = Normalize.ConcurrencyStamp;
 
     #endregion
 }
@@ -109,8 +112,9 @@ public abstract class ModelBase : ModelBase<Guid>, IModelBase
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -126,20 +130,20 @@ public abstract class ModelBase<TKey> : MateModelBase<TKey>, IHandlerSlot where 
     /// </summary>
     [Required]
     [MaxLength(64)]
-    public string CreateBy { get; set; } = null!;
+    public required string CreateBy { get; set; } = Guid.Empty.ToString("D");
 
     /// <summary>
     ///     更新人
     /// </summary>
     [Required]
     [MaxLength(64)]
-    public string ModifyBy { get; set; } = null!;
+    public required string ModifyBy { get; set; } = Guid.Empty.ToString("D");
 
     /// <summary>
     ///     移除人
     /// </summary>
     [MaxLength(64)]
-    public string? RemoveBy { get; set; }
+    public string? RemoveBy { get; set; } = null;
 
     #endregion
 }
@@ -153,8 +157,9 @@ public abstract class MateModelBase : MateModelBase<Guid>, IKeySlot
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -167,7 +172,8 @@ public abstract class MateModelBase<TKey> : MateSlot, IKeySlot<TKey> where TKey 
     ///     存储标识
     /// </summary>
     [Key]
-    public virtual TKey Id { get; set; } = default!;
+    [Required]
+    public virtual required TKey Id { get; set; } = default!;
 }
 
 #endregion
@@ -183,8 +189,9 @@ public abstract class KeySlot : KeySlot<Guid>, IKeySlot
     ///     存储标识
     /// </summary>
     [Key]
+    [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public sealed override Guid Id { get; set; } = Guid.NewGuid();
+    public sealed override required Guid Id { get; set; } = Guid.NewGuid();
 }
 
 /// <summary>
@@ -197,7 +204,8 @@ public abstract class KeySlot<TKey> : IKeySlot<TKey> where TKey : IEquatable<TKe
     ///     存储标识
     /// </summary>
     [Key]
-    public virtual TKey Id { get; set; } = default!;
+    [Required]
+    public virtual required TKey Id { get; set; } = default!;
 }
 
 #endregion
@@ -213,13 +221,13 @@ public abstract class MateSlot : IMateSlot
     ///     创建时间
     /// </summary>
     [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public required DateTime CreatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     更新时间
     /// </summary>
     [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public required DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     删除时间

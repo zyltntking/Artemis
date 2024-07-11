@@ -1,7 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Service.Task.Context;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Service.Task.Stores;
@@ -26,16 +25,17 @@ public sealed class ArtemisTaskTargetStore : Store<ArtemisTaskTarget>, IArtemisT
     /// <param name="context"></param>
     /// <param name="storeOptions"></param>
     /// <param name="handlerProxy"></param>
-    /// <param name="cache"></param>
+    /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     public ArtemisTaskTargetStore(
         TaskContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
-        IDistributedCache? cache = null,
+        ICacheProxy? cacheProxy = null,
         ILogger? logger = null,
-        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cache, logger, describer)
+        StoreErrorDescriber? describer = null) : base(context, storeOptions, handlerProxy, cacheProxy, logger,
+        describer)
     {
     }
 }
