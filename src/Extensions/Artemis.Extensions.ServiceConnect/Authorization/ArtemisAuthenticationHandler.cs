@@ -1,14 +1,15 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer;
+using Artemis.Service.Shared.Transfer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ClaimTypes = Artemis.Data.Shared.Transfer.ClaimTypes;
+//////
+using ClaimTypes = Artemis.Service.Shared.Transfer.ClaimTypes;
 
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 

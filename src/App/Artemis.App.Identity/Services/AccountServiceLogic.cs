@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer;
-using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
+using Artemis.Service.Shared.Transfer;
+using Artemis.Service.Shared.Transfer.Identity;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Mapster;

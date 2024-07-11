@@ -1,6 +1,6 @@
-﻿using Artemis.Data.Shared.Transfer;
-using Artemis.Data.Shared.Transfer.Identity;
-using Artemis.Data.Store;
+﻿using Artemis.Data.Store;
+using Artemis.Service.Shared.Transfer;
+using Artemis.Service.Shared.Transfer.Identity;
 
 namespace Artemis.Service.Identity.Managers;
 

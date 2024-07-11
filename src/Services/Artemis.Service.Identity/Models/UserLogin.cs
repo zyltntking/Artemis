@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Artemis.Data.Shared.Identity;
+using Artemis.Service.Shared.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Identity.Models;

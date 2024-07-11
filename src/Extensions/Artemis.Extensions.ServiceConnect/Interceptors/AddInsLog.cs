@@ -1,5 +1,5 @@
-﻿using Artemis.Data.Shared.Transfer;
-using Artemis.Extensions.ServiceConnect.Authorization;
+﻿using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Service.Shared.Transfer;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.AspNetCore.Http;

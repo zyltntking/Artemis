@@ -1,1 +1,0 @@
-﻿# Artemis.Service.Protos

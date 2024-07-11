@@ -1,4 +1,4 @@
-﻿using Artemis.Data.Shared;
+﻿using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.RawData.Context;

@@ -43,7 +43,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
 		<ProjectReference Include="..\..\Services\Artemis.Service.Resource\Artemis.Service.Resource.csproj" />
-		<ProjectReference Include="..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
-using Artemis.Data.Shared;
+
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Service.Shared;
 using Artemis.Service.Task;
 using Artemis.Service.Task.Context;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,6 @@
-﻿using Artemis.Data.Shared.Transfer;
+﻿
+
+using Artemis.Service.Shared.Transfer;
 
 namespace Artemis.Extensions.ServiceConnect.Authorization;
 

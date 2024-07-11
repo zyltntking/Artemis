@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.RawData;
+using Artemis.Service.Shared.RawData;
 
 namespace Artemis.Service.RawData.Models;
 

@@ -1,8 +1,8 @@
-using Artemis.Data.Shared;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.RawData.Context;
 using Artemis.Service.School;
+using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 

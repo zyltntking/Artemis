@@ -1,8 +1,8 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer;
-using Artemis.Data.Shared.Transfer.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
+using Artemis.Service.Shared.Transfer;
+using Artemis.Service.Shared.Transfer.Identity;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;

@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Shared.Transfer;
+using Artemis.Service.Shared.Transfer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 

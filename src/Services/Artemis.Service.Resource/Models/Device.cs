@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Artemis.Data.Core;
-using Artemis.Data.Shared.Resource;
+using Artemis.Service.Shared.Resource;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Resource.Models;

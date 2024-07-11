@@ -1,9 +1,9 @@
 using Artemis.App.Identity.Services;
-using Artemis.Data.Shared;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
+using Artemis.Service.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;

@@ -1,5 +1,5 @@
-﻿using Artemis.Data.Shared;
-using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Store.Configuration;
+using Artemis.Service.Shared;
 
 namespace Artemis.Service.Task.Context.Configuration;
 
