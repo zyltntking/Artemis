@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Artemis.Data.Core.Exceptions;
@@ -38,7 +39,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <param name="name">枚举名称</param>
     protected Enumeration(int id, string name)
     {
-        (Id, Name) = (id, name.ToUpper());
+        (Id, Name) = (id, name.Normalize());
     }
 
     /// <summary>
@@ -106,7 +107,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <returns>枚举成员</returns>
     public static T FromName<T>(string name) where T : Enumeration
     {
-        var matchingItem = Parse<T, string>(name, "name", item => item.Name == name.ToUpper());
+        var matchingItem = Parse<T, string>(name, "name", item => item.Name == name.Normalize());
         return matchingItem;
     }
 
@@ -154,6 +155,16 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     /// <summary>
+    ///     获取枚举类的所有枚举成员
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static IEnumerable<string> GetAllName<T>() where T : Enumeration
+    {
+        return GetAll<T>().Select(item => item.Name);
+    }
+
+    /// <summary>
     ///     获取id枚举成员
     /// </summary>
     /// <param name="type">枚举类</param>
@@ -187,6 +198,50 @@ public abstract class Enumeration : IEnumeration<Enumeration>
 
         return matchingItem ??
                throw new EnumerationNotMatchException($"'{value}' is not a valid {description} in {typeof(T)}");
+    }
+
+    /// <summary>
+    ///     转为记录字典
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="valid"></param>
+    /// <returns></returns>
+    public static EnumerationRecord ToRecordDictionary<T>(bool valid = true) where T : Enumeration
+    {
+        var prefix = "Artemis";
+
+        var description = typeof(T).GetCustomAttribute<DescriptionAttribute>()?
+            .Description
+            .TrimStart(prefix);
+
+        var record = new EnumerationRecord
+        {
+            TypeName = typeof(T).Name.TrimStart(prefix),
+            Description = description,
+            Valid = valid
+        };
+
+        var fieldList = typeof(T)
+            .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
+            .Select(info =>
+            {
+                var enumeration = info.GetValue(null) as T;
+
+                var item = Generator.CreateInstance<EnumerationItemRecord>();
+
+                if (enumeration is not null)
+                {
+                    item.ItemKey = enumeration.Name;
+                    item.ItemValue = enumeration.Name;
+                    item.Description = info.GetCustomAttribute<DescriptionAttribute>()?.Description;
+                }
+
+                return item;
+            });
+
+        record.Records = fieldList.ToList();
+
+        return record;
     }
 
     #region Overrides of Object
@@ -271,4 +326,51 @@ public static class EnumerationExtensions
     {
         options.Converters.Add(new EnumerationJsonConverter<T>());
     }
+}
+
+/// <summary>
+///     枚举记录
+/// </summary>
+public record struct EnumerationRecord
+{
+    /// <summary>
+    ///     类型名
+    /// </summary>
+    public required string TypeName { get; init; }
+
+    /// <summary>
+    ///     描述
+    /// </summary>
+    public string? Description { get; init; }
+
+    /// <summary>
+    ///     是否有效
+    /// </summary>
+    public required bool Valid { get; init; }
+
+    /// <summary>
+    ///     记录项目集合
+    /// </summary>
+    public ICollection<EnumerationItemRecord> Records { get; set; }
+}
+
+/// <summary>
+///     枚举项目记录
+/// </summary>
+public record struct EnumerationItemRecord
+{
+    /// <summary>
+    ///     项目键
+    /// </summary>
+    public required string ItemKey { get; set; }
+
+    /// <summary>
+    ///     项目值
+    /// </summary>
+    public required string ItemValue { get; set; }
+
+    /// <summary>
+    ///     描述
+    /// </summary>
+    public string? Description { get; set; }
 }

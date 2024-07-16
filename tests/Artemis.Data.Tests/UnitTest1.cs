@@ -1,7 +1,11 @@
 using System.Security.Cryptography;
 using System.Text;
+using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental;
 using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Core.Fundamental.Protocol;
+using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Service.Resource.Models;
 
 namespace Artemis.Data.Tests;
 
@@ -10,6 +14,40 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
+        var record = Enumeration.ToRecordDictionary<DictionaryType>();
+
+
+        var dictionary = new DataDictionary
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test",
+            Description = "Test",
+            Valid = true,
+            Code = "Test",
+            Type = "Dic",
+            CreatedAt = default,
+            UpdatedAt = default,
+            CreateBy = Guid.Empty.GuidToString(),
+            ModifyBy = Guid.Empty.GuidToString()
+        };
+
+        var dictionaryItem = new DataDictionaryItem
+        {
+            DataDictionaryId = default,
+            Key = null,
+            Value = null,
+            Description = null,
+            Valid = false,
+            CreatedAt = default,
+            UpdatedAt = default,
+            Id = default,
+            CreateBy = null,
+            ModifyBy = null
+        };
+
+        var d = Generator.CreateInstance<DataDictionary>();
+
+
         var stamp = Base32.GenerateBase32();
 
         //var bbc = Generator.IsInherit<IdentityUser>(typeof(IHandlerSlot<>));

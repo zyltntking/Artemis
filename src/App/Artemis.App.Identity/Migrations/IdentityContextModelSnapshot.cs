@@ -18,7 +18,7 @@ namespace Artemis.App.Identity.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Identity")
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -47,16 +47,18 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(512)")
                         .HasComment("凭据值");
 
-                    b.Property<Guid>("CreateBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("创建者标识");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
@@ -64,16 +66,19 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(128)")
                         .HasComment("凭据描述");
 
-                    b.Property<Guid>("ModifyBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("ModifyBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("更新者标识");
 
-                    b.Property<Guid>("RemoveBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("RemoveBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("删除者标识");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("更新时间");
 
                     b.HasKey("Id")
@@ -86,20 +91,11 @@ namespace Artemis.App.Identity.Migrations
                     b.HasIndex("CreateBy")
                         .HasDatabaseName("IX_IdentityClaim_CreateBy");
 
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("IX_IdentityClaim_CreatedAt");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("IX_IdentityClaim_DeletedAt");
-
                     b.HasIndex("ModifyBy")
                         .HasDatabaseName("IX_IdentityClaim_ModifyBy");
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_IdentityClaim_RemoveBy");
-
-                    b.HasIndex("UpdatedAt")
-                        .HasDatabaseName("IX_IdentityClaim_UpdatedAt");
 
                     b.HasIndex("ClaimType", "ClaimValue")
                         .HasDatabaseName("IX_IdentityClaim_ClaimType_ClaimValue");
@@ -122,16 +118,18 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("并发锁");
 
-                    b.Property<Guid>("CreateBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("创建者标识");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
@@ -139,8 +137,10 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(256)")
                         .HasComment("角色描述");
 
-                    b.Property<Guid>("ModifyBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("ModifyBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("更新者标识");
 
                     b.Property<string>("Name")
@@ -155,12 +155,13 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(128)")
                         .HasComment("标准化角色名");
 
-                    b.Property<Guid>("RemoveBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("RemoveBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("删除者标识");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("更新时间");
 
                     b.HasKey("Id")
@@ -168,12 +169,6 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("CreateBy")
                         .HasDatabaseName("IX_IdentityRole_CreateBy");
-
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("IX_IdentityRole_CreatedAt");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("IX_IdentityRole_DeletedAt");
 
                     b.HasIndex("ModifyBy")
                         .HasDatabaseName("IX_IdentityRole_ModifyBy");
@@ -184,9 +179,6 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_IdentityRole_RemoveBy");
-
-                    b.HasIndex("UpdatedAt")
-                        .HasDatabaseName("IX_IdentityRole_UpdatedAt");
 
                     b.ToTable("IdentityRole", "Identity", t =>
                         {
@@ -262,16 +254,18 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("并发锁");
 
-                    b.Property<Guid>("CreateBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("创建者标识");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("删除时间");
 
                     b.Property<string>("Email")
@@ -291,8 +285,10 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasComment("用户锁定到期时间标记");
 
-                    b.Property<Guid>("ModifyBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("ModifyBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("更新者标识");
 
                     b.Property<string>("NormalizedEmail")
@@ -321,8 +317,9 @@ namespace Artemis.App.Identity.Migrations
                         .HasColumnType("boolean")
                         .HasComment("电话号码确认戳");
 
-                    b.Property<Guid>("RemoveBy")
-                        .HasColumnType("UUID")
+                    b.Property<string>("RemoveBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
                         .HasComment("删除者标识");
 
                     b.Property<string>("SecurityStamp")
@@ -335,7 +332,7 @@ namespace Artemis.App.Identity.Migrations
                         .HasComment("是否启用双因子认证");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TIMESTAMP")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("更新时间");
 
                     b.Property<string>("UserName")
@@ -349,12 +346,6 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("CreateBy")
                         .HasDatabaseName("IX_IdentityUser_CreateBy");
-
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("IX_IdentityUser_CreatedAt");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("IX_IdentityUser_DeletedAt");
 
                     b.HasIndex("ModifyBy")
                         .HasDatabaseName("IX_IdentityUser_ModifyBy");
@@ -371,9 +362,6 @@ namespace Artemis.App.Identity.Migrations
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_IdentityUser_RemoveBy");
-
-                    b.HasIndex("UpdatedAt")
-                        .HasDatabaseName("IX_IdentityUser_UpdatedAt");
 
                     b.ToTable("IdentityUser", "Identity", t =>
                         {

@@ -5,7 +5,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 /// <summary>
 ///     中华民族
 /// </summary>
-[Description("中华民族")]
+[Description("民族类型")]
 public sealed class ChineseNation : Enumeration
 {
     /// <summary>

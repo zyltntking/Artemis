@@ -75,7 +75,7 @@ public class User : ConcurrencyModel, IUser
     /// </summary>
     [MaxLength(64)]
     [Comment("密码锁")]
-    public string? SecurityStamp { get; set; }
+    public string? SecurityStamp { get; set; } = Normalize.SecurityStamp;
 
     /// <summary>
     ///     是否启用双因子认证

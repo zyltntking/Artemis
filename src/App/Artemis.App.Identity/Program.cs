@@ -1,6 +1,5 @@
 using Artemis.App.Identity.Services;
 using Artemis.Extensions.ServiceConnect;
-using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Shared;
@@ -46,7 +45,7 @@ public class Program
                     optionsBuilder.MigrationsHistoryTable("IdentityDbHistory", Project.Schemas.Identity);
                     optionsBuilder.MigrationsAssembly("Artemis.App.Identity");
                 }, Log.Debug)
-                .AddIdentityServices<ArtemisHandlerProxy>()
+                .AddIdentityServices()
                 .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
 
             var isMigration = false;

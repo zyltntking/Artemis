@@ -1,5 +1,4 @@
-﻿using Artemis.Extensions.ServiceConnect.Authorization;
-using Artemis.Service.Shared.Transfer;
+﻿using Artemis.Extensions.Identity;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +11,7 @@ namespace Artemis.Extensions.ServiceConnect.Interceptors;
 /// <summary>
 ///     日志加载项
 /// </summary>
-internal sealed class AddInsLog : AddInsLog<TokenDocument>
+internal sealed class AddInsLog : AddInsLog<TokenRecord>
 {
     /// <summary>
     ///     侦听器构造
@@ -21,7 +20,7 @@ internal sealed class AddInsLog : AddInsLog<TokenDocument>
     /// <param name="options"></param>
     public AddInsLog(
         ILogger<AddInsLog> logger,
-        IOptions<ArtemisAuthorizationOptions> options) : base(logger, options)
+        IOptions<ArtemisIdentityOptions> options) : base(logger, options)
     {
     }
 
@@ -32,7 +31,7 @@ internal sealed class AddInsLog : AddInsLog<TokenDocument>
     /// </summary>
     /// <param name="tokenDocument"></param>
     /// <returns></returns>
-    protected override string ResolveTokenDocument(TokenDocument? tokenDocument)
+    protected override string ResolveTokenDocument(TokenRecord? tokenDocument)
     {
         if (tokenDocument == null) return string.Empty;
 
@@ -58,7 +57,7 @@ internal abstract class AddInsLog<TTokenDocument> : Interceptor where TTokenDocu
     /// <param name="options"></param>
     public AddInsLog(
         ILogger logger,
-        IOptions<ArtemisAuthorizationOptions> options)
+        IOptions<ArtemisIdentityOptions> options)
     {
         Logger = logger;
         Options = options.Value;
@@ -69,7 +68,7 @@ internal abstract class AddInsLog<TTokenDocument> : Interceptor where TTokenDocu
     /// </summary>
     private ILogger Logger { get; }
 
-    private ArtemisAuthorizationOptions Options { get; }
+    private ArtemisIdentityOptions Options { get; }
 
     #region Overrides of Interceptor
 
@@ -102,16 +101,18 @@ internal abstract class AddInsLog<TTokenDocument> : Interceptor where TTokenDocu
 
         var endpoint = httpContext.GetEndpoint();
 
-        var document = httpContext.FetchTokenDocument<TTokenDocument>(Options.ContextItemTokenKey);
+        //var document = httpContext.FetchTokenDocument<TTokenDocument>(Options.ContextItemTokenKey);
 
-        var documentResolved = ResolveTokenDocument(document);
+        //var documentResolved = ResolveTokenDocument(document);
 
         var description = "未知操作";
 
         if (endpoint is RouteEndpoint routeEndpoint)
             description = routeEndpoint.FetchDescription();
 
-        var logInfo = $"标识文档：{documentResolved}，客户端标识：{context.Peer}, 操作: {context.Method}, 描述：{description}";
+        //var logInfo = $"标识文档：{documentResolved}，客户端标识：{context.Peer}, 操作: {context.Method}, 描述：{description}";
+
+        var logInfo = "需要修改";
 
         Logger.LogInformation(logInfo);
 

@@ -1,4 +1,4 @@
-﻿using Artemis.Extensions.ServiceConnect.Authorization;
+﻿using Artemis.Extensions.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Any;
@@ -17,7 +17,7 @@ internal sealed class AddAuthorizationToken : IOperationFilter
     /// </summary>
     /// <param name="options"></param>
     public AddAuthorizationToken(
-        IOptions<ArtemisAuthorizationOptions> options)
+        IOptions<ArtemisIdentityOptions> options)
     {
         Options = options.Value;
     }
@@ -52,7 +52,7 @@ internal sealed class AddAuthorizationToken : IOperationFilter
                     MinLength = 40,
                     MaxLength = 40,
                     Format = "token",
-                    Pattern = @"Artemis [A-F0-9]{32}",
+                    Pattern = "Artemis [A-F0-9]{32}",
                     Example = new OpenApiString("Artemis 6BB0A25E549A723D3323F21E54570488")
                 },
                 Description = "认证令牌"
@@ -64,5 +64,5 @@ internal sealed class AddAuthorizationToken : IOperationFilter
     /// <summary>
     ///     认证配置依赖
     /// </summary>
-    private ArtemisAuthorizationOptions Options { get; }
+    private ArtemisIdentityOptions Options { get; }
 }

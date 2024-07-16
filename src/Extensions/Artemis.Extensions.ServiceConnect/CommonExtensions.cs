@@ -1,5 +1,5 @@
 ﻿using System.IO.Compression;
-using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect.HttpLogging;
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
 using Microsoft.AspNetCore.Builder;
@@ -58,7 +58,7 @@ public static class CommonExtensions
         }
 
         builder.Services.AddAuthentication()
-            .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", options => { });
+            .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
         //配置授权
         builder.ConfigureAuthorization();
 

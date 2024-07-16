@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
-using Artemis.Extensions.ServiceConnect;
-using Artemis.Extensions.ServiceConnect.Authorization;
+using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer;
 using Artemis.Service.Shared.Transfer.Identity;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
@@ -32,7 +31,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         IIdentityAccountManager accountManager,
         IIdentityUserManager userManager,
         IDistributedCache cache,
-        IOptions<ArtemisAuthorizationOptions> options,
+        IOptions<ArtemisIdentityOptions> options,
         ILogger<AccountServiceLogic> logger)
     {
         AccountManager = accountManager;
@@ -60,7 +59,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <summary>
     ///     授权配置项
     /// </summary>
-    private ArtemisAuthorizationOptions Options { get; }
+    private ArtemisIdentityOptions Options { get; }
 
     /// <summary>
     ///     日志依赖
@@ -76,7 +75,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签到")]
-    [Authorize(IdentityPolicy.Anonymous)]
+    [Authorize(ArtemisAuthorizePolicy.Anonymous)]
     public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
         Logger.LogInformation($"用户 {request.UserSign} 正在尝试登录...");
@@ -102,9 +101,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             }).Adapt<TokenResponse>();
         }
 
-        var response = RpcResultAdapter.EmptyFail<TokenResponse>(result.Message);
-
-        return response;
+        return DataResult.Fail<TokenReply>().Adapt<TokenResponse>();
     }
 
     /// <summary>
@@ -114,7 +111,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签入")]
-    [Authorize(IdentityPolicy.Anonymous)]
+    [Authorize(ArtemisAuthorizePolicy.Anonymous)]
     public override async Task<TokenResponse> SignUp(SignUpRequest request, ServerCallContext context)
     {
         var (result, token) = await AccountManager
@@ -127,7 +124,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
 
         if (result.Succeeded && token is not null)
         {
-            token.EndType = InternalEndType.SignUpEnd;
+            token.EndType = EndType.SignUpEnd.Name;
 
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
@@ -139,7 +136,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             }).Adapt<TokenResponse>();
         }
 
-        return RpcResultAdapter.EmptyFail<TokenResponse>(result.Message);
+        return DataResult.Fail<TokenReply>().Adapt<TokenResponse>();
     }
 
     /// <summary>
@@ -149,21 +146,24 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签出")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
     {
-        var httpContext = context.GetHttpContext();
+        var authorizationToken = context
+            .GetHttpContext()
+            .User.Claims
+            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization.Name)
+            .Select(claim => claim.Value)
+            .FirstOrDefault();
 
-        var token = httpContext.FetchTokenSymbol(Options.RequestHeaderTokenKey, Options.RequestHeaderTokenSchema);
-
-        if (token is not null)
+        if (authorizationToken is not null)
         {
-            await EraseTokenDocument(token, context.CancellationToken);
+            await EraseTokenDocument(authorizationToken, context.CancellationToken);
 
-            return RpcResultAdapter.EmptySuccess<EmptyResponse>();
+            return DataResult.EmptySuccess().Adapt<EmptyResponse>();
         }
 
-        return RpcResultAdapter.EmptyFail<EmptyResponse>();
+        return DataResult.EmptyFail().Adapt<EmptyResponse>();
     }
 
     /// <summary>
@@ -173,27 +173,32 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("修改密码")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<EmptyResponse> ChangePassword(ChangePasswordRequest request, ServerCallContext context)
     {
-        var httpContext = context.GetHttpContext();
+        var userIdString = context
+            .GetHttpContext()
+            .User.Claims
+            .Where(claim => claim.Type == ArtemisClaimTypes.UserId.Name)
+            .Select(claim => claim.Value)
+            .FirstOrDefault();
 
-        var token = httpContext.FetchTokenDocument<TokenDocument>(Options.ContextItemTokenKey);
+        var valid = Guid.TryParse(userIdString, out var userId);
 
-        if (token is not null)
+        if (valid)
         {
             var result = await AccountManager.ChangePasswordAsync(
-                token.UserId,
+                userId,
                 request.OldPassword,
                 request.NewPassword,
                 context.CancellationToken);
 
             return result.Succeeded
-                ? RpcResultAdapter.EmptySuccess<EmptyResponse>()
-                : RpcResultAdapter.EmptyFail<EmptyResponse>(result.Message);
+                ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
+                : DataResult.EmptyFail(result.Message).Adapt<EmptyResponse>();
         }
 
-        return RpcResultAdapter.EmptyFail<EmptyResponse>();
+        return DataResult.EmptySuccess().Adapt<EmptyResponse>();
     }
 
     /// <summary>
@@ -203,7 +208,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(IdentityPolicy.Admin)]
+    [Authorize(ArtemisAuthorizePolicy.Admin)]
     public override async Task<EmptyResponse> ResetPassword(ResetPasswordRequest request, ServerCallContext context)
     {
         var userId = request.UserId.GuidFromString();
@@ -214,8 +219,8 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             context.CancellationToken);
 
         return result.Succeeded
-            ? RpcResultAdapter.EmptySuccess<EmptyResponse>()
-            : RpcResultAdapter.EmptyFail<EmptyResponse>(result.Message);
+            ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
+            : DataResult.Fail<TokenReply>().Adapt<EmptyResponse>();
     }
 
     /// <summary>
@@ -225,7 +230,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(IdentityPolicy.Admin)]
+    [Authorize(ArtemisAuthorizePolicy.Admin)]
     public override async Task<EmptyResponse> BatchResetPasswords(BatchResetPasswordRequest request,
         ServerCallContext context)
     {
@@ -242,8 +247,8 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         var result = await AccountManager.ResetPasswordsAsync(dictionary, context.CancellationToken);
 
         return result.Succeeded
-            ? RpcResultAdapter.EmptySuccess<EmptyResponse>()
-            : RpcResultAdapter.EmptyFail<EmptyResponse>(result.Message);
+            ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
+            : DataResult.Fail<TokenReply>().Adapt<EmptyResponse>();
     }
 
     #endregion
@@ -253,13 +258,14 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <summary>
     ///     记录TokenDocument
     /// </summary>
-    /// <param name="tokenDocument">tokenDocument</param>
+    /// <param name="record">Token记录</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>认证Token</returns>
-    private async Task<string> RecordTokenDocument(TokenDocument tokenDocument,
+    private async Task<string> RecordTokenDocument(
+        TokenRecord record,
         CancellationToken cancellationToken = default)
     {
-        var tokenSymbol = tokenDocument.TokenSymbol;
+        var tokenSymbol = record.TokenSymbol();
 
         Logger.LogInformation($"生成认证Token：{tokenSymbol}");
 
@@ -269,11 +275,11 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         var loginPackage = new UserLoginPackage
         {
             LoginProvider = Options.IdentityServiceProvider,
-            ProviderKey = TokenKeyGenerator.LoginProviderKey(tokenDocument.UserId, tokenDocument.EndType),
-            ProviderDisplayName = tokenDocument.UserName
+            ProviderKey = TokenKeyGenerator.LoginProviderKey(record.UserId, record.EndType),
+            ProviderDisplayName = record.UserName
         };
 
-        await UserManager.AddOrUpdateUserLoginAsync(tokenDocument.UserId, loginPackage, cancellationToken);
+        await UserManager.AddOrUpdateUserLoginAsync(record.UserId, loginPackage, cancellationToken);
 
         Logger.LogInformation("添加UserToken记录");
 
@@ -281,25 +287,23 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         var userToken = new UserTokenPackage
         {
             LoginProvider = Options.IdentityServiceProvider,
-            Name = TokenKeyGenerator.ProviderTokenName(tokenDocument.EndType, Options.IdentityServiceTokenNameSuffix),
+            Name = TokenKeyGenerator.ProviderTokenName(record.EndType, Options.IdentityServiceTokenNameSuffix),
             Value = tokenSymbol
         };
 
-        await UserManager.AddOrUpdateUserTokenAsync(tokenDocument.UserId, userToken, cancellationToken);
+        await UserManager.AddOrUpdateUserTokenAsync(record.UserId, userToken, cancellationToken);
 
         // 缓存Token
         var cacheTokenKey = TokenKeyGenerator.CacheTokenKey(Options.CacheTokenPrefix, tokenSymbol);
 
-        await Cache.CacheTokenDocumentAsync(cacheTokenKey, tokenDocument, Options.CacheTokenExpire, cancellationToken);
+        await Cache.CacheTokenRecordAsync(cacheTokenKey, record, cancellationToken);
 
         // 不允许同终端多客户端登录处理
         if (!Options.EnableMultiEnd)
         {
             //缓存映射Token
-            var userMapTokenKey = TokenKeyGenerator.CacheUserMapTokenKey(
-                Options.CacheUserMapTokenPrefix,
-                tokenDocument.EndType,
-                tokenDocument.UserId);
+            var userMapTokenKey =
+                TokenKeyGenerator.CacheUserMapTokenKey(Options.CacheUserMapTokenPrefix, record.EndType, record.UserId);
 
             await Cache.CacheUserMapTokenSymbolAsync(userMapTokenKey, tokenSymbol, Options.CacheTokenExpire,
                 cancellationToken);
@@ -318,7 +322,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     {
         var cacheTokenKey = TokenKeyGenerator.CacheTokenKey(Options.CacheTokenPrefix, identityToken);
 
-        var tokenDocument = await Cache.FetchTokenDocumentAsync<TokenDocument>(cacheTokenKey, false, cancellationToken);
+        var tokenDocument = await Cache.FetchTokenRecordAsync(cacheTokenKey, false, cancellationToken);
 
         if (tokenDocument is not null)
         {

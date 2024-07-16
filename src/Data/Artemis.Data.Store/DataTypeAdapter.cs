@@ -97,30 +97,30 @@ public record DataTypeSet
     /// <summary>
     ///     Guid数据类型
     /// </summary>
-    public string Guid { get; init; } = "UNIQUEIDENTIFIER";
+    public required string Guid { get; init; } = "UNIQUEIDENTIFIER";
 
     /// <summary>
     ///     DateTime数据类型
     /// </summary>
-    public string DateTime { get; init; } = "DATETIME";
+    public required string DateTime { get; init; } = "DATETIME";
 
     /// <summary>
     ///     Boolean数据类型
     /// </summary>
-    public string Boolean { get; init; } = "BIT";
+    public required string Boolean { get; init; } = "BIT";
 
     /// <summary>
     ///     Integer数据类型
     /// </summary>
-    public string Integer { get; init; } = "INT";
+    public required string Integer { get; init; } = "INT";
 
     /// <summary>
     ///     Long数据类型
     /// </summary>
-    public string Long { get; init; } = "BIGINT";
+    public required string Long { get; init; } = "BIGINT";
 
     /// <summary>
     ///     Double数据类型
     /// </summary>
-    public string Double { get; init; } = "FLOAT";
+    public required string Double { get; init; } = "FLOAT";
 }

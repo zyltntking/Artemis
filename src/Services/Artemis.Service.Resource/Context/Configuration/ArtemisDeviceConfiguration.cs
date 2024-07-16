@@ -1,5 +1,7 @@
 ﻿using Artemis.Data.Store.Configuration;
 using Artemis.Service.Shared;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Service.Resource.Context.Configuration;
 
@@ -19,6 +21,25 @@ internal sealed class ArtemisDeviceConfiguration : ConcurrencyModelEntityConfigu
     ///     表明
     /// </summary>
     protected override string TableName => nameof(ArtemisDevice).TableName();
+
+    /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisDevice> builder)
+    {
+        builder.Property(entity => entity.PurchaseDate)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(entity => entity.InstallDate)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(entity => entity.WarrantyDate)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(entity => entity.MaintenanceDate)
+            .HasColumnType(DataTypeSet.DateTime);
+    }
 
     #endregion
 }

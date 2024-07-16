@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Store.Configuration;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Store.Configuration;
 using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -100,6 +101,43 @@ public class IdentityContext : DbContext
                     userRoleJoin.HasKey(userRole => new { userRole.UserId, userRole.RoleId })
                         .HasName(nameof(IdentityUserRole).TableName().KeyName());
                 });
+
+        // seed admin role
+        var roleName = "Admin";
+
+        var adminRole = Generator.CreateInstance<IdentityRole>();
+        adminRole.Id = Guid.NewGuid();
+        adminRole.Name = roleName;
+        adminRole.NormalizedName = roleName.Normalize();
+        adminRole.Description = "默认管理员";
+
+        // seed admin users
+        var adminUserNames = new[] { "admin" };
+
+        var adminUsers = adminUserNames.Select(userName =>
+        {
+            var user = Generator.CreateInstance<IdentityUser>();
+            user.Id = Guid.NewGuid();
+            user.UserName = userName;
+            user.NormalizedUserName = userName.Normalize();
+            user.PasswordHash = Hash.PasswordHash("1q2w3e$R");
+
+            return user;
+        }).ToList();
+
+        // seed admin user role
+        var adminUserRoles = adminUsers.Select(user =>
+        {
+            var userRoles = Generator.CreateInstance<IdentityUserRole>();
+            userRoles.RoleId = adminRole.Id;
+            userRoles.UserId = user.Id;
+
+            return userRoles;
+        }).ToList();
+
+        modelBuilder.Entity<IdentityRole>().HasData(adminRole);
+        modelBuilder.Entity<IdentityUser>().HasData(adminUsers);
+        modelBuilder.Entity<IdentityUserRole>().HasData(adminUserRoles);
     }
 
     #endregion

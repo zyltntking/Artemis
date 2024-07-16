@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer;
 using Artemis.Service.Shared.Transfer.Identity;
 using Grpc.Core;
 using Mapster;
@@ -47,7 +47,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<SearchUserInfoResponse> SearchUserInfo(SearchUserInfoRequest request,
         ServerCallContext context)
     {
@@ -75,7 +75,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取用户信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request,
         ServerCallContext context)
     {
@@ -95,7 +95,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context"></param>
     /// <returns></returns>
     [Description("创建用户")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
         var result = await UserManager.CreateUserAsync(new UserSign
@@ -117,7 +117,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建用户")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request,
         ServerCallContext context)
     {
@@ -144,7 +144,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateUser(UpdateUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -193,7 +193,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteUser(DeleteUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -212,7 +212,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request,
         ServerCallContext context)
     {
@@ -232,7 +232,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户角色信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<SearchUserRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleInfoRequest request,
         ServerCallContext context)
     {
@@ -261,7 +261,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户角色信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request,
         ServerCallContext context)
     {
@@ -285,7 +285,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户角色")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -305,7 +305,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户角色")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchAddUserRole(BatchAddUserRoleRequest request,
         ServerCallContext context)
     {
@@ -327,7 +327,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除用户角色")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request,
         ServerCallContext context)
     {
@@ -348,7 +348,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除用户角色")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchRemoveUserRole(BatchRemoveUserRoleRequest request,
         ServerCallContext context)
     {
@@ -369,7 +369,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户凭据信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<SearchUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -399,7 +399,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户凭据信息")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<ReadUserClaimInfoResponse> ReadUserClaimInfo(ReadUserClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -419,7 +419,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户凭据")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -446,7 +446,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户凭据")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
         ServerCallContext context)
     {
@@ -473,7 +473,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户凭据")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request,
         ServerCallContext context)
     {
@@ -529,7 +529,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户凭据")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -548,7 +548,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户凭据")]
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
         ServerCallContext context)
     {

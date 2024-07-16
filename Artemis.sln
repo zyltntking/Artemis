@@ -45,7 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Resource", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Resource", "src\App\Artemis.App.Resource\Artemis.App.Resource.csproj", "{5E4F2F01-4EF6-4723-AE43-C2EC695647FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Service.Shared", "src\Services\Artemis.Service.Shared\Artemis.Service.Shared.csproj", "{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Shared", "src\Services\Artemis.Service.Shared\Artemis.Service.Shared.csproj", "{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Extensions.Identity", "src\Extensions\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj", "{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +123,10 @@ Global
 		{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +149,7 @@ Global
 		{7D622E35-9A02-4D7F-B627-8548D32BA2C2} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{5E4F2F01-4EF6-4723-AE43-C2EC695647FC} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
+		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

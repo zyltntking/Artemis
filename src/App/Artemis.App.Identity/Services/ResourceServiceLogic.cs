@@ -1,7 +1,7 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer;
 using Artemis.Service.Shared.Transfer.Identity;
 using Grpc.Core;
 using Mapster;
@@ -45,7 +45,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<SearchClaimInfoResponse> SearchClaimInfo(SearchClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -71,7 +71,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<ReadClaimInfoResponse> ReadClaimInfo(ReadClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -90,7 +90,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(IdentityPolicy.Token)]
+    [Authorize(ArtemisAuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateClaim(CreateClaimRequest request, ServerCallContext context)
     {
         var result = await ResourceManager.CreateClaimAsync(

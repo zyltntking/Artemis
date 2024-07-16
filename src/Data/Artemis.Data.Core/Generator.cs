@@ -32,6 +32,7 @@ public static class Generator
     /// <returns></returns>
     public static bool IsInherit<TEntity>(Type type) where TEntity : class
     {
-        return typeof(TEntity).IsAssignableFrom(type);
+        return typeof(TEntity).GetInterfaces().Any(item => item == type);
+        //return typeof(TEntity).IsAssignableFrom(type);
     }
 }

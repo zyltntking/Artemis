@@ -1,5 +1,5 @@
 ﻿using Artemis.Data.Store;
-using Artemis.Service.Shared.Transfer;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Shared.Transfer.Identity;
 
 namespace Artemis.Service.Identity.Managers;
@@ -16,7 +16,7 @@ public interface IIdentityAccountManager : IManager
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录结果和登录后的Token信息</returns>
-    Task<(SignResult result, TokenDocument? token)> SignInAsync(
+    Task<(SignResult result, TokenRecord? token)> SignInAsync(
         string userSign,
         string password,
         CancellationToken cancellationToken = default);
@@ -28,7 +28,7 @@ public interface IIdentityAccountManager : IManager
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>注册结果和登录后的Token信息</returns>
-    Task<(SignResult result, TokenDocument? token)> SignUpAsync(
+    Task<(SignResult result, TokenRecord? token)> SignUpAsync(
         UserSign userSign,
         string password,
         CancellationToken cancellationToken = default);

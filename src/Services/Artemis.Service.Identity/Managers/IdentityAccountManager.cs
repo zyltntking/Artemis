@@ -1,9 +1,10 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Stores;
-using Artemis.Service.Shared.Transfer;
 using Artemis.Service.Shared.Transfer.Identity;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -59,34 +60,35 @@ public sealed class IdentityAccountManager : Manager, IIdentityAccountManager
     /// <param name="authentication">认证用户</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    private async Task<TokenDocument> IssuedTokenDocument(UserAuthentication authentication,
+    private async Task<TokenRecord> IssuedTokenDocument(UserAuthentication authentication,
         CancellationToken cancellationToken = default)
     {
         var userClaims = await UserClaimStore.EntityQuery
             .Where(claim => claim.UserId == authentication.Id)
-            .ProjectToType<ClaimDocument>()
+            .ProjectToType<ClaimRecord>()
             .ToListAsync(cancellationToken);
 
         var userRoles = await UserStore.KeyMatchQuery(authentication.Id)
             .SelectMany(user => user.Roles!)
-            .ProjectToType<RoleInfo>()
+            .ProjectToType<RoleRecord>()
             .ToListAsync(cancellationToken);
 
         var roleIds = userRoles.Select(item => item.Id);
 
         var roleClaims = await RoleClaimStore.EntityQuery
             .Where(claim => roleIds.Contains(claim.RoleId))
-            .ProjectToType<ClaimDocument>()
+            .ProjectToType<ClaimRecord>()
             .ToListAsync(cancellationToken);
 
-        return new TokenDocument
+        return new TokenRecord
         {
             UserId = authentication.Id,
             UserName = authentication.UserName,
+            EndType = EndType.SignInitial.Name,
+            Expire = 0,
             UserClaims = userClaims,
             Roles = userRoles,
-            RoleClaims = roleClaims,
-            EndType = InternalEndType.SignInitial
+            RoleClaims = roleClaims
         };
     }
 
@@ -120,7 +122,7 @@ public sealed class IdentityAccountManager : Manager, IIdentityAccountManager
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>登录结果和登录后的Token信息</returns>
-    public async Task<(SignResult result, TokenDocument? token)> SignInAsync(
+    public async Task<(SignResult result, TokenRecord? token)> SignInAsync(
         string userSign,
         string password,
         CancellationToken cancellationToken = default)
@@ -181,7 +183,7 @@ public sealed class IdentityAccountManager : Manager, IIdentityAccountManager
     /// <param name="password">密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>注册结果和登录后的Token信息</returns>
-    public async Task<(SignResult result, TokenDocument? token)> SignUpAsync(UserSign userSign, string password,
+    public async Task<(SignResult result, TokenRecord? token)> SignUpAsync(UserSign userSign, string password,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

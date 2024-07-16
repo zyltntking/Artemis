@@ -60,7 +60,7 @@ service AccountService {
 }
 
 // 端类型
-enum EndType {
+enum SignEndType {
     // WEB端
     WEB = 0;
     // 移动端
@@ -87,7 +87,7 @@ message SignInRequest {
   /* 端类型
    * @required
    */
-  EndType EndType = 3;
+  SignEndType EndType = 3;
 }
 
 // 注册请求

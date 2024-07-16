@@ -1,5 +1,5 @@
+using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
-using Artemis.Extensions.ServiceConnect.Authorization;
 using Artemis.Service.Resource;
 using Artemis.Service.Resource.Context;
 using Artemis.Service.Shared;

@@ -214,14 +214,17 @@ public abstract class BaseModelEntityConfiguration<TEntity, TKey> : KeySlotEntit
         if (UseMateFieldConfiguration)
         {
             builder.Property(entity => entity.CreatedAt)
+                .HasColumnType(DataTypeSet.DateTime)
                 .HasComment("创建时间")
                 .IsRequired();
 
             builder.Property(entity => entity.UpdatedAt)
+                .HasColumnType(DataTypeSet.DateTime)
                 .HasComment("更新时间")
                 .IsRequired();
 
             builder.Property(entity => entity.DeletedAt)
+                .HasColumnType(DataTypeSet.DateTime)
                 .HasComment("删除时间");
         }
     }
@@ -418,6 +421,16 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
     }
 
     #endregion
+
+    /// <summary>
+    ///     数据库类型
+    /// </summary>
+    protected virtual DbType DbType => DbType.PostgreSql;
+
+    /// <summary>
+    ///     数据类型适配器
+    /// </summary>
+    protected DataTypeSet DataTypeSet => DataTypeAdapter.GetDataTypeSet(DbType);
 
     /// <summary>
     ///     数据集描述
@@ -703,13 +716,16 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
         {
             builder.Property(entity => ((IMateSlot)entity).CreatedAt)
                 .HasComment("创建时间")
+                .HasColumnType(DataTypeSet.DateTime)
                 .IsRequired();
 
             builder.Property(entity => ((IMateSlot)entity).UpdatedAt)
                 .HasComment("更新时间")
+                .HasColumnType(DataTypeSet.DateTime)
                 .IsRequired();
 
             builder.Property(entity => ((IMateSlot)entity).DeletedAt)
+                .HasColumnType(DataTypeSet.DateTime)
                 .HasComment("删除时间");
         }
     }

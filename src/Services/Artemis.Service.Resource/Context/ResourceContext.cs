@@ -1,4 +1,7 @@
-﻿using Artemis.Service.Shared;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental;
+using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Resource.Context;
@@ -48,5 +51,47 @@ public class ResourceContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(Project.Schemas.Resource);
+
+        // seed dictionary
+        var dictionaries = new List<EnumerationRecord>
+        {
+            Enumeration.ToRecordDictionary<ArtemisClaimTypes>(),
+            Enumeration.ToRecordDictionary<ArtemisIdentityPolicy>(),
+            Enumeration.ToRecordDictionary<ChineseNation>(),
+            Enumeration.ToRecordDictionary<ChineseNationEn>(false),
+            Enumeration.ToRecordDictionary<DictionaryType>(),
+            Enumeration.ToRecordDictionary<EndType>(),
+            Enumeration.ToRecordDictionary<Gender>(),
+            Enumeration.ToRecordDictionary<RegionLevel>()
+        };
+
+        foreach (var dictionary in dictionaries)
+        {
+            var dataDictionary = Generator.CreateInstance<ArtemisDataDictionary>();
+
+            dataDictionary.Id = Guid.NewGuid();
+            dataDictionary.Name = dictionary.TypeName;
+            dataDictionary.Code = dictionary.TypeName;
+            dataDictionary.Valid = dictionary.Valid;
+            dataDictionary.Type = DictionaryType.Public.Name;
+            dataDictionary.Description = dictionary.Description;
+
+            modelBuilder.Entity<ArtemisDataDictionary>().HasData(dataDictionary);
+
+            var dictionaryItems = dictionary.Records.Select(item =>
+            {
+                var dataDictionaryItem = Generator.CreateInstance<ArtemisDataDictionaryItem>();
+
+                dataDictionaryItem.Id = Guid.NewGuid();
+                dataDictionaryItem.DataDictionaryId = dataDictionary.Id;
+                dataDictionaryItem.Key = item.ItemKey;
+                dataDictionaryItem.Value = item.ItemValue;
+                dataDictionaryItem.Description = item.Description;
+
+                return dataDictionaryItem;
+            });
+
+            modelBuilder.Entity<ArtemisDataDictionaryItem>().HasData(dictionaryItems);
+        }
     }
 }

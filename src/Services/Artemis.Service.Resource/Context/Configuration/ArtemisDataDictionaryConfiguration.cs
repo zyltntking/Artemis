@@ -28,6 +28,13 @@ internal sealed class ArtemisDataDictionaryConfiguration : ConcurrencyModelEntit
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDataDictionary> builder)
     {
+        builder.HasIndex(entity => entity.Name)
+            .HasDatabaseName(IndexName("Name"));
+
+        builder.HasIndex(entity => entity.Code)
+            .HasDatabaseName(IndexName("Code"))
+            .IsUnique();
+
         // Each DataDictionary can have many DataDictionaryItems
         builder.HasMany(dataDictionary => dataDictionary.Items)
             .WithOne(item => item.DataDictionary)

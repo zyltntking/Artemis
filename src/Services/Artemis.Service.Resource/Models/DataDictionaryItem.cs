@@ -47,7 +47,7 @@ public class DataDictionaryItem : ConcurrencyModel, IDataDictionaryItem
     /// </summary>
     [Required]
     [Comment("数据项目是否有效")]
-    public required bool Valid { get; set; }
+    public required bool Valid { get; set; } = true;
 
     #endregion
 }

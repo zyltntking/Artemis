@@ -5,7 +5,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 /// <summary>
 ///     过滤操作类型
 /// </summary>
-public class FilterOperationType : Enumeration
+public sealed class FilterOperationType : Enumeration
 {
     /// <summary>
     ///     等于

@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Stores;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,28 @@ public static class ServiceExtensions
     ///     添加认证服务
     /// </summary>
     /// <param name="services"></param>
-    public static IServiceCollection AddIdentityServices(this IServiceCollection services)
+    /// <param name="enableHandlerProxy"></param>
+    /// <param name="enableCacheProxy"></param>
+    public static IServiceCollection AddIdentityServices(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true,
+        bool enableCacheProxy = true)
+    {
+        return services.AddIdentityServices<ArtemisHandlerProxy>(enableHandlerProxy, enableCacheProxy);
+    }
+
+    /// <summary>
+    ///     添加认证服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="enableHandlerProxy"></param>
+    /// <param name="enableCacheProxy"></param>
+    private static IServiceCollection AddIdentityServices<THandlerProxy /*, TCacheProxy*/>(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true,
+        bool enableCacheProxy = true)
+        where THandlerProxy : class, IHandlerProxy
+    //where TCacheProxy : class, ICacheProxy
     {
         services.TryAddScoped<IIdentityClaimStore, IdentityClaimStore>();
         services.TryAddScoped<IIdentityUserStore, IdentityUserStore>();
@@ -32,21 +54,11 @@ public static class ServiceExtensions
         services.TryAddScoped<IIdentityAccountManager, IdentityAccountManager>();
         services.TryAddScoped<IIdentityResourceManager, IdentityResourceManager>();
 
-        return services;
-    }
+        if (enableHandlerProxy)
+            services.TryAddScoped<IHandlerProxy, THandlerProxy>();
 
-    /// <summary>
-    ///     添加认证服务
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="enableProxy"></param>
-    public static IServiceCollection AddIdentityServices<THandlerProxy>(this IServiceCollection services,
-        bool enableProxy = true)
-        where THandlerProxy : class, IHandlerProxy
-    {
-        services.AddIdentityServices();
-
-        if (enableProxy) services.AddScoped<IHandlerProxy, THandlerProxy>();
+        //if (enableCacheProxy)
+        //    services.TryAddScoped<ICacheProxy, TCacheProxy>();
 
         return services;
     }

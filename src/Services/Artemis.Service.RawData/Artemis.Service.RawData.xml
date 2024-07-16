@@ -1,188 +1,188 @@
 <?xml version="1.0"?>
 
 <doc>
-	<assembly>
-		<name>Artemis.Service.RawData</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Service.RawData.Context.ArtemisOptometer">
-			<summary>
-				验光仪数据
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Context.ArtemisVisualChart">
-			<summary>
-				视力表数据
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration">
-			<summary>
-				验光仪数据集配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration">
-			<summary>
-				视力表数据集配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Context.RawDataContext">
-			<summary>
-				原始数据上下文
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.RawData.Context.RawDataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.RawData.Context.RawDataContext})">
-			<summary>
-				构造函数
-			</summary>
-			<param name="options">配置</param>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.RawDataContext.Optometers">
-			<summary>
-				验光仪数据
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Context.RawDataContext.VisualCharts">
-			<summary>
-				视力表数据
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.RawData.Context.RawDataContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<summary>
-				配置数据模型
-			</summary>
-			<param name="modelBuilder"></param>
-		</member>
-		<member name="T:Artemis.Service.RawData.Managers.ArtemisRawDataManager">
-			<summary>
-				原始数据管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.#ctor(Artemis.Service.RawData.Stores.IArtemisOptometerStore,Artemis.Service.RawData.Stores.IArtemisVisualChartStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-			<summary>
-				创建新的管理器实例
-			</summary>
-			<param name="optometerStore">存储访问器依赖</param>
-			<param name="visualChartStore"></param>
-			<param name="options">配置依赖</param>
-			<param name="logger">日志依赖</param>
-			<exception cref="T:System.ArgumentNullException"></exception>
-		</member>
-		<member name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.StoreDispose">
-			<summary>
-				释放托管的Store
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Managers.ArtemisRawDataManager.OptometerStore">
-			<summary>
-				验光仪存储访问器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.RawData.Managers.ArtemisRawDataManager.VisualChartStore">
-			<summary>
-				视力表存储访问器
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Managers.IArtemisRawDataManager">
-			<summary>
-				原始数据管理器
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Models.Optometer">
-			<summary>
-				筛查仪数据
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Models.VisualChart">
-			<summary>
-				视力表数据模型
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Stores.IArtemisOptometerStore">
-			<summary>
-				验光仪存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Stores.ArtemisOptometerStore">
-			<summary>
-				验光仪存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.RawData.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cache"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.RawData.Stores.IArtemisVisualChartStore">
-			<summary>
-				验光仪存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.RawData.Stores.ArtemisVisualChartStore">
-			<summary>
-				验光仪存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.RawData.Stores.ArtemisVisualChartStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cache"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.School.ServiceExtensions">
-			<summary>
-				服务扩展
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-			<summary>
-				添加原始数据服务
-			</summary>
-			<param name="services"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-			<summary>
-				添加原始数据服务
-			</summary>
-			<param name="services"></param>
-			<param name="enableProxy"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Service.RawData</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Service.RawData.Context.ArtemisOptometer">
+            <summary>
+                验光仪数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Context.ArtemisVisualChart">
+            <summary>
+                视力表数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration">
+            <summary>
+                验光仪数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisOptometerConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration">
+            <summary>
+                视力表数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.Configuration.ArtemisVisualChartConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Context.RawDataContext">
+            <summary>
+                原始数据上下文
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.RawData.Context.RawDataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.RawData.Context.RawDataContext})">
+            <summary>
+                构造函数
+            </summary>
+            <param name="options">配置</param>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.RawDataContext.Optometers">
+            <summary>
+                验光仪数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Context.RawDataContext.VisualCharts">
+            <summary>
+                视力表数据
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.RawData.Context.RawDataContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                配置数据模型
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.RawData.Managers.ArtemisRawDataManager">
+            <summary>
+                原始数据管理器
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.#ctor(Artemis.Service.RawData.Stores.IArtemisOptometerStore,Artemis.Service.RawData.Stores.IArtemisVisualChartStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                创建新的管理器实例
+            </summary>
+            <param name="optometerStore">存储访问器依赖</param>
+            <param name="visualChartStore"></param>
+            <param name="options">配置依赖</param>
+            <param name="logger">日志依赖</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Managers.ArtemisRawDataManager.OptometerStore">
+            <summary>
+                验光仪存储访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.RawData.Managers.ArtemisRawDataManager.VisualChartStore">
+            <summary>
+                视力表存储访问器
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Managers.IArtemisRawDataManager">
+            <summary>
+                原始数据管理器
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Models.Optometer">
+            <summary>
+                筛查仪数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Models.VisualChart">
+            <summary>
+                视力表数据模型
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Stores.IArtemisOptometerStore">
+            <summary>
+                验光仪存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Stores.ArtemisOptometerStore">
+            <summary>
+                验光仪存储
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.RawData.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.RawData.Stores.IArtemisVisualChartStore">
+            <summary>
+                验光仪存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Stores.ArtemisVisualChartStore">
+            <summary>
+                验光仪存储
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.RawData.Stores.ArtemisVisualChartStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.School.ServiceExtensions">
+            <summary>
+                服务扩展
+            </summary>
+        </member>
+        <member
+                name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                添加原始数据服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member
+                name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+            <summary>
+                添加原始数据服务
+            </summary>
+            <param name="services"></param>
+            <param name="enableProxy"></param>
+        </member>
+    </members>
 </doc>

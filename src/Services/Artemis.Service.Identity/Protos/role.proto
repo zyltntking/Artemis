@@ -1,13 +1,96 @@
 ﻿syntax = "proto3";
 
 option csharp_namespace = "Artemis.Service.Identity.Protos";
-//import "google/api/annotations.proto";
-//import "common.proto";
-//import "identity/shared.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "Protos/common.proto";
 
 package artemis.service.identity.protos;
 
 // 角色服务协议
 service RoleService {
 
+}
+
+// 查询角色信息请求
+message SearchRoleInfoRequest {
+  /* 角色名
+   * @length(1,128)
+   */
+	google.protobuf.StringValue RoleName = 1;
+  /* 页码
+   * @min(0)
+   */
+	google.protobuf.Int32Value Page = 2;
+  /* 条目数
+   * @min(0)
+   */
+	google.protobuf.Int32Value Size = 3;
+}
+
+// 角色信息数据包
+message RoleInfoPacket {
+  /* 角色标识
+   * @required
+   * @guid
+   */
+	string Id = 1;
+  /*
+   * 角色名
+   * @required
+   * @length(1,128)
+   */
+	string RoleName = 2;
+  /* 角色描述
+   * @length(0,256)
+   */
+	google.protobuf.StringValue Description = 3;
+}
+
+// 分页角色信息数据包
+message PagedRoleInfoPacket {
+	/* 页码
+   * @min(0)
+   */
+	int32 Page = 1;
+	/* 条目数
+   * @min(0)
+   */
+	int32 Size = 2;
+	/* 数据总数
+   * @min(0)
+   */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+   * @min(0)
+   */
+	int64 Count = 4;
+	/* 角色信息数据
+   * @required
+   */
+	repeated RoleInfoPacket Items = 5;
+}
+
+// 查询角色信息响应
+message SearchRoleInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+  /* 响应时间
+   * @datetime
+   */
+	string DateTime = 5;
+	/* 响应时间戳
+   * @timestamp
+   */
+	int64 Timestamp = 6;
+	/* 用户信息数据
+   */
+	PagedRoleInfoPacket Data = 7;
 }

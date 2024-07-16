@@ -21,12 +21,12 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "创建时间"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "更新时间"),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "删除时间"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     ClaimType = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "凭据类型"),
                     ClaimValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false, comment: "凭据值"),
                     CheckStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "校验戳"),
@@ -44,12 +44,12 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "创建时间"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "更新时间"),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "删除时间"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
                     Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "角色名"),
                     NormalizedName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "标准化角色名"),
@@ -67,12 +67,12 @@ namespace Artemis.App.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false, comment: "标识"),
-                    CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
-                    UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
-                    DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "创建时间"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "更新时间"),
+                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "删除时间"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
                     UserName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "用户名"),
                     NormalizedUserName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "标准化用户名"),
@@ -262,18 +262,6 @@ namespace Artemis.App.Identity.Migrations
                 column: "CreateBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityClaim_CreatedAt",
-                schema: "Identity",
-                table: "IdentityClaim",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityClaim_DeletedAt",
-                schema: "Identity",
-                table: "IdentityClaim",
-                column: "DeletedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_IdentityClaim_ModifyBy",
                 schema: "Identity",
                 table: "IdentityClaim",
@@ -286,28 +274,10 @@ namespace Artemis.App.Identity.Migrations
                 column: "RemoveBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityClaim_UpdatedAt",
-                schema: "Identity",
-                table: "IdentityClaim",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_IdentityRole_CreateBy",
                 schema: "Identity",
                 table: "IdentityRole",
                 column: "CreateBy");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityRole_CreatedAt",
-                schema: "Identity",
-                table: "IdentityRole",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityRole_DeletedAt",
-                schema: "Identity",
-                table: "IdentityRole",
-                column: "DeletedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityRole_ModifyBy",
@@ -329,12 +299,6 @@ namespace Artemis.App.Identity.Migrations
                 column: "RemoveBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityRole_UpdatedAt",
-                schema: "Identity",
-                table: "IdentityRole",
-                column: "UpdatedAt");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_IdentityRoleClaim_ClaimType_ClaimValue",
                 schema: "Identity",
                 table: "IdentityRoleClaim",
@@ -352,18 +316,6 @@ namespace Artemis.App.Identity.Migrations
                 schema: "Identity",
                 table: "IdentityUser",
                 column: "CreateBy");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityUser_CreatedAt",
-                schema: "Identity",
-                table: "IdentityUser",
-                column: "CreatedAt");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityUser_DeletedAt",
-                schema: "Identity",
-                table: "IdentityUser",
-                column: "DeletedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityUser_Email",
@@ -388,12 +340,6 @@ namespace Artemis.App.Identity.Migrations
                 schema: "Identity",
                 table: "IdentityUser",
                 column: "RemoveBy");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityUser_UpdatedAt",
-                schema: "Identity",
-                table: "IdentityUser",
-                column: "UpdatedAt");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityUser_UserName",

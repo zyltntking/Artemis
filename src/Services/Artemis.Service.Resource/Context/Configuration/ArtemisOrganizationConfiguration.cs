@@ -21,6 +21,16 @@ internal sealed class ArtemisOrganizationConfiguration : ConcurrencyModelEntityC
     protected override string TableName => nameof(ArtemisOrganization).TableName();
 
     /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisOrganization> builder)
+    {
+        builder.Property(entity => entity.EstablishTime)
+            .HasColumnType(DataTypeSet.DateTime);
+    }
+
+    /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>
