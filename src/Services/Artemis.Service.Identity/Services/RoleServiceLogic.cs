@@ -1,6 +1,6 @@
 ﻿using Artemis.Service.Identity.Protos;
 
-namespace Artemis.App.Identity.Services;
+namespace Artemis.Service.Identity.Services;
 
 /// <summary>
 ///     角色服务

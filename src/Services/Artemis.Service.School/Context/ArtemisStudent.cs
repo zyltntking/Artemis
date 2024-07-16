@@ -33,5 +33,5 @@ public sealed class ArtemisStudent : Student
     /// <summary>
     ///     学生所属关系
     /// </summary>
-    public ArtemisStudentCurrentAffiliation CurrentAffiliation { get; set; }
+    public ArtemisStudentCurrentAffiliation? CurrentAffiliation { get; set; }
 }

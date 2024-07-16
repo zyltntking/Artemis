@@ -10,9 +10,10 @@ using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Artemis.App.Identity.Services;
+namespace Artemis.Service.Identity.Services;
 
 /// <summary>
 ///     账户服务

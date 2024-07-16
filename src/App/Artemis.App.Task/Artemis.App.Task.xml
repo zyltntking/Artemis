@@ -1,23 +1,20 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.App.Task</name>
     </assembly>
     <members>
         <member name="T:Artemis.App.Task.Migrations.InitialTask">
-            <inheritdoc/>
+            <inheritdoc />
         </member>
-        <member
-                name="M:Artemis.App.Task.Migrations.InitialTask.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc/>
+        <member name="M:Artemis.App.Task.Migrations.InitialTask.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
-        <member
-                name="M:Artemis.App.Task.Migrations.InitialTask.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc/>
+        <member name="M:Artemis.App.Task.Migrations.InitialTask.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
         <member name="M:Artemis.App.Task.Migrations.InitialTask.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc/>
+            <inheritdoc />
         </member>
         <member name="T:Artemis.App.Task.Program">
             <summary>

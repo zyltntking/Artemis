@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.Service.Task</name>
@@ -155,8 +154,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
             <summary>
                 实体关系配置
             </summary>
@@ -192,8 +190,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
             <summary>
                 实体关系配置
             </summary>
@@ -204,8 +201,7 @@
                 任务业务上下文
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
+        <member name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
             <summary>
                 构造函数
             </summary>
@@ -247,8 +243,7 @@
                 任务管理器
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -426,15 +421,13 @@
                 服务扩展
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
                 添加学校服务
             </summary>
             <param name="services"></param>
         </member>
-        <member
-                name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
             <summary>
                 添加学校服务
             </summary>
@@ -451,8 +444,7 @@
                 代理存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -473,8 +465,7 @@
                 任务代理存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -500,8 +491,7 @@
                 任务存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -522,8 +512,7 @@
                 任务目标存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -544,8 +533,7 @@
                 任务单元存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

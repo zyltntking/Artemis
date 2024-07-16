@@ -18,14 +18,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="logs\**"/>
-        <Compile Remove="Validators\**"/>
-        <Content Remove="logs\**"/>
-        <Content Remove="Validators\**"/>
-        <EmbeddedResource Remove="logs\**"/>
-        <EmbeddedResource Remove="Validators\**"/>
-        <None Remove="logs\**"/>
-        <None Remove="Validators\**"/>
+        <Compile Remove="logs\**" />
+        <Compile Remove="Validators\**" />
+        <Content Remove="logs\**" />
+        <Content Remove="Validators\**" />
+        <EmbeddedResource Remove="logs\**" />
+        <EmbeddedResource Remove="Validators\**" />
+        <None Remove="logs\**" />
+        <None Remove="Validators\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -45,17 +45,17 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj"/>
-        <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj"/>
+        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
+        <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
     </ItemGroup>
 
     <ProjectExtensions>
         <VisualStudio>
-            <UserProperties aspire_1component_1setting_1json__JsonSchema="https://json.schemastore.org/appsettings.json"/>
+            <UserProperties aspire_1component_1setting_1json__JsonSchema="https://json.schemastore.org/appsettings.json" />
         </VisualStudio>
     </ProjectExtensions>
 

@@ -1,10 +1,21 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.App.Resource</name>
     </assembly>
     <members>
+        <member name="T:Artemis.App.Resource.Migrations.InitialResource">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.InitialResource.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.InitialResource.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.InitialResource.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Resource.Program">
             <summary>
                 应用程序入口

@@ -6,8 +6,9 @@ using Artemis.Service.Shared.Transfer.Identity;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
-namespace Artemis.App.Identity.Services;
+namespace Artemis.Service.Identity.Services;
 
 /// <summary>
 ///     资源服务

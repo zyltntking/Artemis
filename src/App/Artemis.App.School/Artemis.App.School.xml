@@ -1,24 +1,20 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.App.School</name>
     </assembly>
     <members>
         <member name="T:Artemis.App.School.Migrations.InitialSchool">
-            <inheritdoc/>
+            <inheritdoc />
         </member>
-        <member
-                name="M:Artemis.App.School.Migrations.InitialSchool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc/>
+        <member name="M:Artemis.App.School.Migrations.InitialSchool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
-        <member
-                name="M:Artemis.App.School.Migrations.InitialSchool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc/>
+        <member name="M:Artemis.App.School.Migrations.InitialSchool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
-        <member
-                name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc/>
+        <member name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
         <member name="T:Artemis.App.School.Program">
             <summary>

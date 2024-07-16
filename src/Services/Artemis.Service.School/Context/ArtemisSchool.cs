@@ -37,10 +37,10 @@ public sealed class ArtemisSchool : Models.School
     /// <summary>
     ///     教师当前所属关系
     /// </summary>
-    public ICollection<ArtemisTeacherCurrentAffiliation> CurrentTeachers { get; set; }
+    public ICollection<ArtemisTeacherCurrentAffiliation>? CurrentTeachers { get; set; }
 
     /// <summary>
     ///     学生当前所属关系
     /// </summary>
-    public ICollection<ArtemisStudentCurrentAffiliation> CurrentStudents { get; set; }
+    public ICollection<ArtemisStudentCurrentAffiliation>? CurrentStudents { get; set; }
 }

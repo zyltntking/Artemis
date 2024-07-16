@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.Service.School</name>
@@ -270,8 +269,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
             <summary>
                 实体关系配置
             </summary>
@@ -292,8 +290,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassStudent})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassStudent})">
             <summary>
                 实体关系配置
             </summary>
@@ -314,8 +311,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassTeacher})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassTeacher})">
             <summary>
                 实体关系配置
             </summary>
@@ -336,8 +332,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchool})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchool})">
             <summary>
                 实体关系配置
             </summary>
@@ -358,8 +353,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolStudent})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolStudent})">
             <summary>
                 实体关系配置
             </summary>
@@ -380,8 +374,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolTeacher})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolTeacher})">
             <summary>
                 实体关系配置
             </summary>
@@ -407,8 +400,7 @@
                 学生当前所属关系配置
             </summary>
         </member>
-        <member
-                name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.DataSetDescription">
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.DataSetDescription">
             <summary>
                 数据集描述
             </summary>
@@ -418,8 +410,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation})">
             <summary>
                 实体关系配置
             </summary>
@@ -445,8 +436,7 @@
                 教师当前所属关系配置
             </summary>
         </member>
-        <member
-                name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.DataSetDescription">
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.DataSetDescription">
             <summary>
                 数据集描述
             </summary>
@@ -456,8 +446,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation})">
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation})">
             <summary>
                 实体关系配置
             </summary>
@@ -468,8 +457,7 @@
                 学校业务上下文
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.SchoolContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.School.Context.SchoolContext})">
+        <member name="M:Artemis.Service.School.Context.SchoolContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.School.Context.SchoolContext})">
             <summary>
                 构造函数
             </summary>
@@ -525,8 +513,7 @@
                 学生当前所属关系数据集
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
             </summary>
@@ -537,8 +524,7 @@
                 学校管理器
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore,Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore,Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -951,15 +937,13 @@
                 服务扩展
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
                 添加学校服务
             </summary>
             <param name="services"></param>
         </member>
-        <member
-                name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+        <member name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
             <summary>
                 添加学校服务
             </summary>
@@ -976,8 +960,7 @@
                 班级存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisClassStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisClassStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -999,8 +982,7 @@
                 班级学生关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisClassStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisClassStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1027,8 +1009,7 @@
                 班级教师关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisClassTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisClassTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1055,8 +1036,7 @@
                 学校存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisSchoolStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -1078,8 +1058,7 @@
                 学校学生关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1106,8 +1085,7 @@
                 学校教师关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1134,8 +1112,7 @@
                 学生当前所属关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1162,8 +1139,7 @@
                 学生存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -1185,8 +1161,7 @@
                 教师当前所属关系存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 无键模型基本存储实例构造
             </summary>
@@ -1213,8 +1188,7 @@
                 教师存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.Stores.ArtemisTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

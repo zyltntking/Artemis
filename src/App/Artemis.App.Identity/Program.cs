@@ -1,7 +1,7 @@
-using Artemis.App.Identity.Services;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
+using Artemis.Service.Identity.Services;
 using Artemis.Service.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

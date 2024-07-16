@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.Service.RawData</name>
@@ -50,8 +49,7 @@
                 原始数据上下文
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.RawData.Context.RawDataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.RawData.Context.RawDataContext})">
+        <member name="M:Artemis.Service.RawData.Context.RawDataContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.RawData.Context.RawDataContext})">
             <summary>
                 构造函数
             </summary>
@@ -67,8 +65,7 @@
                 视力表数据
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.RawData.Context.RawDataContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:Artemis.Service.RawData.Context.RawDataContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
             </summary>
@@ -79,8 +76,7 @@
                 原始数据管理器
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.#ctor(Artemis.Service.RawData.Stores.IArtemisOptometerStore,Artemis.Service.RawData.Stores.IArtemisVisualChartStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.RawData.Managers.ArtemisRawDataManager.#ctor(Artemis.Service.RawData.Stores.IArtemisOptometerStore,Artemis.Service.RawData.Stores.IArtemisVisualChartStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -130,8 +126,7 @@
                 验光仪存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.RawData.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.RawData.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -152,8 +147,7 @@
                 验光仪存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.RawData.Stores.ArtemisVisualChartStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.RawData.Stores.ArtemisVisualChartStore.#ctor(Artemis.Service.RawData.Context.RawDataContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -169,15 +163,13 @@
                 服务扩展
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
                 添加原始数据服务
             </summary>
             <param name="services"></param>
         </member>
-        <member
-                name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+        <member name="M:Artemis.Service.School.ServiceExtensions.AddRawDataServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
             <summary>
                 添加原始数据服务
             </summary>

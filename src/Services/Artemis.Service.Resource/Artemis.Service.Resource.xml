@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.Service.Resource</name>
@@ -75,8 +74,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
             <summary>
                 实体关系配置
             </summary>
@@ -87,8 +85,7 @@
                 数据字典项目配置
             </summary>
         </member>
-        <member
-                name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
             <summary>
                 数据集描述
             </summary>
@@ -98,8 +95,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
             <summary>
                 实体关系配置
             </summary>
@@ -120,8 +116,7 @@
                 表明
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
             <summary>
                 实体字段配置
             </summary>
@@ -142,8 +137,7 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
             <summary>
                 实体关系配置
             </summary>
@@ -164,15 +158,13 @@
                 表名
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
             <summary>
                 实体字段配置
             </summary>
             <param name="builder"></param>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
             <summary>
                 实体关系配置
             </summary>
@@ -183,8 +175,7 @@
                 资源上下文
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
+        <member name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
             <summary>
                 初始化资源上下文
             </summary>
@@ -215,8 +206,7 @@
                 数据字典项数据集
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
             </summary>
@@ -227,8 +217,7 @@
                 资源管理器
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDeviceStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDeviceStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -516,15 +505,13 @@
                 服务扩展
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
                 添加资源服务
             </summary>
             <param name="services"></param>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
             <summary>
                 添加资源服务
             </summary>
@@ -541,8 +528,7 @@
                 数据字典项目存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -563,8 +549,7 @@
                 数据字典存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -585,8 +570,7 @@
                 设备存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -607,8 +591,7 @@
                 行政区划存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
@@ -629,8 +612,7 @@
                 组织机构存储
             </summary>
         </member>
-        <member
-                name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

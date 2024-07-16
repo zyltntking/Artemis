@@ -15,45 +15,45 @@ service UserService {
       get: "/api/Users"
     };
   }
-
-	// 读取用户信息
-	rpc ReadUserInfo (ReadUserInfoRequest) returns (ReadUserInfoResponse) {
-		option (google.api.http) = {
-			get: "/api/Users/{UserId}"
-		};
-	}
+  
+  // 读取用户信息
+  rpc ReadUserInfo (ReadUserInfoRequest) returns (ReadUserInfoResponse) {
+	option (google.api.http) = {
+	  get: "/api/Users/{UserId}"
+	};
+  }
 
   // 创建用户
   rpc CreateUser (CreateUserRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			post: "/api/Users"
-			body: "*"
-		};
+	option (google.api.http) = {
+      post: "/api/Users"
+	  body: "*"
+	};
   }
-	
-	// 批量创建用户
-	rpc BatchCreateUser (BatchCreateUserRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			post: "/api/Users/BatchCreate"
-			body: "Batch"
-		};
-	}
+  
+  // 批量创建用户
+  rpc BatchCreateUser (BatchCreateUserRequest) returns (AffectedResponse) {
+	option (google.api.http) = {
+      post: "/api/Users/BatchCreate"
+	  body: "Batch"
+	};
+  }
 
   // 更新用户
   rpc UpdateUser (UpdateUserRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			put: "/api/Users/{UserId}"
-			body: "User"
-		};
+	option (google.api.http) = {
+	  put: "/api/Users/{UserId}"
+	  body: "User"
+	};
   }
-	
-	// 批量更新用户
-	rpc BatchUpdateUser (BatchUpdateUserRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			put: "/api/Users/BatchUpdate"
-			body: "Batch"
-		};
-	}
+  
+  // 批量更新用户
+  rpc BatchUpdateUser (BatchUpdateUserRequest) returns (AffectedResponse) {
+    option (google.api.http) = {
+      put: "/api/Users/BatchUpdate"
+      body: "Batch"
+	};
+  }
 
   // 删除用户
   rpc DeleteUser (DeleteUserRequest) returns (AffectedResponse) {
@@ -549,7 +549,6 @@ message AddUserRoleRequest {
 	string UserId = 1;
 	/* 角色标识
 	 * @required
-	 * @guid
 	 */
 	RoleIdPacket Role = 2;
 }

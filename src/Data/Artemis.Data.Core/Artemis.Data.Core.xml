@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <doc>
     <assembly>
         <name>Artemis.Data.Core</name>
@@ -78,20 +77,14 @@
                 string转id
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>An instance of
-                <typeparamref name="TKey"/>
-                representing the provided<paramref name="id"/>.
-            </returns>
+            <returns>An instance of <typeparamref name="TKey" /> representing the provided <paramref name="id" />.</returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.IdToString``1(``0)">
             <summary>
                 id转string
             </summary>
             <param name="id">The id to convert.</param>
-            <returns>A
-                <see cref="T:System.String"/>
-                representation of the provided<paramref name="id"/>.
-            </returns>
+            <returns>A <see cref="T:System.String" /> representation of the provided <paramref name="id" />.</returns>
         </member>
         <member name="M:Artemis.Data.Core.DataParser.GuidFromString(System.String)">
             <summary>
@@ -508,8 +501,7 @@
                 实体已设置失败异常
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Exceptions.EntityHasBeenSetException.#ctor(System.String,System.String,System.Int32)">
+        <member name="M:Artemis.Data.Core.Exceptions.EntityHasBeenSetException.#ctor(System.String,System.String,System.Int32)">
             <summary>
                 错误构造
             </summary>
@@ -981,7 +973,7 @@
                 换行键
             </summary>
             <remarks>Line Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NL"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NL" />
             <value>^J</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NL">
@@ -989,7 +981,7 @@
                 换行键
             </summary>
             <remarks>New Line</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.LF"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.LF" />
             <value>^J</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.VT">
@@ -1004,7 +996,7 @@
                 换页键
             </summary>
             <remarks>Form Feed</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NP"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NP" />
             <value>^L</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.NP">
@@ -1012,7 +1004,7 @@
                 换页键
             </summary>
             <remarks>New Page</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.FF"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.FF" />
             <value>^L</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.CR">
@@ -1048,7 +1040,7 @@
                 设备控制1
             </summary>
             <remarks>Device Control 1</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XON"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XON" />
             <value>^Q</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XON">
@@ -1056,7 +1048,7 @@
                 传输开始
             </summary>
             <remarks>Transmission O</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC1"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC1" />
             <value>^Q</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC2">
@@ -1071,7 +1063,7 @@
                 设备控制3
             </summary>
             <remarks>Device Control 3</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XOFF"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XOFF" />
             <value>^S</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.XOFF">
@@ -1079,7 +1071,7 @@
                 传输中断
             </summary>
             <remarks>Transmission Off</remarks>
-            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC3"/>
+            <see cref="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC3" />
             <value>^S</value>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.AscII.AsciiControl.DC4">
@@ -1212,8 +1204,7 @@
             <param name="input">输入字符串</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.AscII.AsciiUtility.IsContainNonAlphanumeric(System.String,System.Boolean)">
+        <member name="M:Artemis.Data.Core.Fundamental.AscII.AsciiUtility.IsContainNonAlphanumeric(System.String,System.Boolean)">
             <summary>
                 是否包含非字母数字字符(可打印的特殊字符)
             </summary>
@@ -1226,8 +1217,7 @@
                 总线接口
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Bus.IBus.DataOperationAction(Artemis.Data.Core.Fundamental.Types.DataOperationType,System.String,System.Object)">
+        <member name="M:Artemis.Data.Core.Fundamental.Bus.IBus.DataOperationAction(Artemis.Data.Core.Fundamental.Types.DataOperationType,System.String,System.Object)">
             <summary>
                 数据操作事件
             </summary>
@@ -1299,11 +1289,8 @@
             <summary>Indicates whether the current object is equal to another object of the same type.</summary>
             <param name="other">An object to compare with this object.</param>
             <returns>
-                <see langword="true"/>
-                if the current object is equal to the
-                <paramref name="other"/>
-                parameter; otherwise,
-                <see langword="false"/>.
+                <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise,
+                <see langword="false" />.
             </returns>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.FromValue``1(System.Int32)">
@@ -1322,8 +1309,7 @@
             <param name="name">枚举成员名称</param>
             <returns>枚举成员</returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Enumeration.AbsoluteDifference(Artemis.Data.Core.Fundamental.Enumeration,Artemis.Data.Core.Fundamental.Enumeration)">
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.AbsoluteDifference(Artemis.Data.Core.Fundamental.Enumeration,Artemis.Data.Core.Fundamental.Enumeration)">
             <summary>
                 绝对值差
             </summary>
@@ -1359,8 +1345,7 @@
             <param name="type">枚举类</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.Parse``2(``1,System.String,System.Func{``0,System.Boolean})">
             <summary>
                 转换函数
             </summary>
@@ -1405,17 +1390,14 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type<typeparamref name="T"/>.
-            </summary>
+        <member name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
             <returns>The converted value.</returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+        <member name="M:Artemis.Data.Core.Fundamental.EnumerationJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
             <summary>Writes a specified value as JSON.</summary>
             <param name="writer">The writer to write to.</param>
             <param name="value">The value to convert to JSON.</param>
@@ -1426,8 +1408,7 @@
                 枚举类扩展
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.EnumerationExtensions.AddEnumerationConverter``1(System.Text.Json.JsonSerializerOptions)">
+        <member name="M:Artemis.Data.Core.Fundamental.EnumerationExtensions.AddEnumerationConverter``1(System.Text.Json.JsonSerializerOptions)">
             <summary>
                 添加转换器
             </summary>
@@ -1547,7 +1528,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte)(value >> 8),
@@ -1563,7 +1544,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte)(value >> 8),
@@ -1579,7 +1560,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return (bytes[0] << 24) |
                    bytes[1] << 16;
             ]]>
@@ -1593,7 +1574,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return (bytes[0] << 24) |
                    bytes[1] << 16;
             ]]>
@@ -1607,7 +1588,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte)(value >> 24),
@@ -1625,7 +1606,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte)(value >> 24),
@@ -1643,7 +1624,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return (bytes[0] << 24) |
                    (bytes[1] << 16) |
                    (bytes[2] << 8) |
@@ -1659,7 +1640,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return (uint)((bytes[0] << 24) |
                           (bytes[1] << 16) |
                           (bytes[2] << 8) |
@@ -1675,7 +1656,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte) (value >> 56),
@@ -1697,7 +1678,7 @@
             </summary>
             <param name="value"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return new[]
             {
                 (byte)(value >> 56),
@@ -1718,7 +1699,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return ((long)bytes[0] << 56) |
                    ((long)bytes[1] << 48) |
                    ((long)bytes[2] << 40) |
@@ -1738,7 +1719,7 @@
             </summary>
             <param name="bytes"></param>
             <code>
-                <![CDATA[
+            <![CDATA[
             return ((ulong)bytes[0] << 56) |
                    ((ulong)bytes[1] << 48) |
                    ((ulong)bytes[2] << 40) |
@@ -1832,8 +1813,7 @@
             <param name="input">原文</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.ComputeHashBytes(System.String,Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32,System.Int32)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.ComputeHashBytes(System.String,Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32,System.Int32)">
             <summary>
                 生成哈希字节码
             </summary>
@@ -1898,8 +1878,7 @@
                 sha3-512
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Pbkdf2(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.Pbkdf2(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
             <summary>使用 PBKDF2 算法执行密钥派生</summary>
             <param name="input">原文</param>
             <param name="salt">盐</param>
@@ -1909,8 +1888,7 @@
             <returns>派生密钥</returns>
             <remarks>PBKDF2 算法在 RFC 2898 中指定。</remarks>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.DeriveKey(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.DeriveKey(System.String,System.Byte[],Artemis.Data.Core.Fundamental.Kit.Crypto.ArtemisHasher.KeyDerivationPrf,System.Int32,System.Int32)">
             <summary>
                 派生密钥
             </summary>
@@ -1927,8 +1905,7 @@
                 对称算法
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
                 对称加密串
             </summary>
@@ -1937,8 +1914,7 @@
             <param name="symmetricType">对称算法类型</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.String,System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
                 对称解密串
             </summary>
@@ -1947,8 +1923,7 @@
             <param name="symmetricType">对称算法类型</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Encrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
                 对称加密
             </summary>
@@ -1958,8 +1933,7 @@
             <param name="symmetricType">对称算法类型</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.Decrypt(System.Byte[],System.Byte[],System.Byte[],Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
                 对称解密
             </summary>
@@ -1989,8 +1963,7 @@
                 解密器表
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.GenerateSymmetricKey(System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.Crypto.Crypto.GenerateSymmetricKey(System.String,Artemis.Data.Core.Fundamental.Types.SymmetricType)">
             <summary>
                 生成堆成密钥和向量对
             </summary>
@@ -2034,8 +2007,7 @@
                 身份证号码匹配模式缓存
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.IdentityCardNumberPattern(Artemis.Data.Core.Fundamental.IdCardGenerationMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.IdentityCardNumberPattern(Artemis.Data.Core.Fundamental.IdCardGenerationMode)">
             <summary>
                 身份证号码匹配模式
             </summary>
@@ -2043,8 +2015,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.IdentityCardNumberMatcher(Artemis.Data.Core.Fundamental.IdCardGenerationMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.IdentityCardNumberMatcher(Artemis.Data.Core.Fundamental.IdCardGenerationMode)">
             <summary>
                 身份证号码匹配器
             </summary>
@@ -2061,8 +2032,7 @@
                 Md5匹配模式缓存
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.Md5Pattern(Artemis.Data.Core.Fundamental.Md5DigestMode,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.Md5Pattern(Artemis.Data.Core.Fundamental.Md5DigestMode,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
             <summary>
                 Md5匹配模式
             </summary>
@@ -2070,8 +2040,7 @@
             <param name="caseMode"></param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.Md5Matcher(Artemis.Data.Core.Fundamental.Md5DigestMode,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.Md5Matcher(Artemis.Data.Core.Fundamental.Md5DigestMode,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
             <summary>
                 Md5哈希码匹配器
             </summary>
@@ -2089,8 +2058,7 @@
                 Guid匹配模式缓存
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.GuidPattern(Artemis.Data.Core.Fundamental.GuidFormat,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.GuidPattern(Artemis.Data.Core.Fundamental.GuidFormat,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
             <summary>
                 Guid匹配模式
             </summary>
@@ -2098,8 +2066,7 @@
             <param name="caseMode"></param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.GuidMatcher(Artemis.Data.Core.Fundamental.GuidFormat,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.GuidMatcher(Artemis.Data.Core.Fundamental.GuidFormat,Artemis.Data.Core.Fundamental.CharacterCaseMode)">
             <summary>
                 Guid匹配器
             </summary>
@@ -2175,16 +2142,14 @@
                 内容匹配模式缓存
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.ContentPattern(Artemis.Data.Core.Fundamental.ContentPatternMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.ContentPattern(Artemis.Data.Core.Fundamental.ContentPatternMode)">
             <summary>
                 内容匹配模式
             </summary>
             <param name="mode"></param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.ContentMatcher(Artemis.Data.Core.Fundamental.ContentPatternMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.ContentMatcher(Artemis.Data.Core.Fundamental.ContentPatternMode)">
             <summary>
                 中括号内内容匹配器
             </summary>
@@ -2287,16 +2252,14 @@
                 车牌号匹配模式缓存
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.CarPattern(Artemis.Data.Core.Fundamental.LicensePlateNumberPatternMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.CarPattern(Artemis.Data.Core.Fundamental.LicensePlateNumberPatternMode)">
             <summary>
                 车牌号匹配模式
             </summary>
             <param name="mode"></param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Matcher.CarMatcher(Artemis.Data.Core.Fundamental.LicensePlateNumberPatternMode)">
+        <member name="M:Artemis.Data.Core.Fundamental.Matcher.CarMatcher(Artemis.Data.Core.Fundamental.LicensePlateNumberPatternMode)">
             <summary>
                 匹配车牌号
             </summary>
@@ -2787,8 +2750,7 @@
             <typeparam name="TTreeNode">节点模板</typeparam>
             <typeparam name="TTreeNodeInfo">节点信息模板</typeparam>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Model.Tree`2.#ctor(System.Collections.Generic.IEnumerable{`1},System.Guid)">
+        <member name="M:Artemis.Data.Core.Fundamental.Model.Tree`2.#ctor(System.Collections.Generic.IEnumerable{`1},System.Guid)">
             <summary>
                 构造树
             </summary>
@@ -3017,8 +2979,7 @@
                 字节码转换器
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Protocol.BytesConverter.FixedBytes(System.Byte[],System.Int64,System.Boolean)">
+        <member name="M:Artemis.Data.Core.Fundamental.Protocol.BytesConverter.FixedBytes(System.Byte[],System.Int64,System.Boolean)">
             <summary>
                 修正字节码长度
             </summary>
@@ -3353,8 +3314,7 @@
                 头记录
             </summary>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Fundamental.Protocol.HeadRecord.#ctor(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Int64)">
+        <member name="M:Artemis.Data.Core.Fundamental.Protocol.HeadRecord.#ctor(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Int64)">
             <summary>
                 头记录实现
             </summary>
@@ -5043,8 +5003,7 @@
             <param name="hashType">哈希类型</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HmacHashType,System.String)">
+        <member name="M:Artemis.Data.Core.Hash.HashData(System.String,Artemis.Data.Core.Fundamental.Types.HmacHashType,System.String)">
             <summary>
                 计算哈希值
             </summary>
@@ -5525,8 +5484,7 @@
             <param name="value">值</param>
             <returns>戳</returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Normalize.KeyValuePairStamp(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairStamp(System.Collections.Generic.KeyValuePair{System.String,System.String})">
             <summary>
                 键值对戳标准化
             </summary>
@@ -5541,8 +5499,7 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
-        <member
-                name="M:Artemis.Data.Core.Normalize.KeyValuePairSummary(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+        <member name="M:Artemis.Data.Core.Normalize.KeyValuePairSummary(System.Collections.Generic.KeyValuePair{System.String,System.String})">
             <summary>
                 键值对标识标准化
             </summary>
@@ -5743,8 +5700,7 @@
             <param name="value">值</param>
             <param name="expire">过期时间</param>
         </member>
-        <member
-                name="M:Artemis.Data.Core.ICacheProxy.SetAsync``1(System.String,``0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Core.ICacheProxy.SetAsync``1(System.String,``0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 异步设置缓存
             </summary>
@@ -5812,8 +5768,7 @@
             <param name="value">值</param>
             <param name="expire">过期时间</param>
         </member>
-        <member
-                name="M:Artemis.Data.Core.AbstractCacheProxy`1.SetAsync``1(System.String,``0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Core.AbstractCacheProxy`1.SetAsync``1(System.String,``0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 异步设置缓存
             </summary>
