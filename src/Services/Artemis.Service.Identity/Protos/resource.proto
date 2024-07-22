@@ -58,7 +58,7 @@ service ResourceService {
   // 批量删除凭据
   rpc BatchDeleteClaim(BatchDeleteClaimRequest) returns (AffectedResponse) {
     option (google.api.http) = {
-      delete: "/api/Claims/BatchDelete"
+      post: "/api/Claims/BatchDelete"
       body: "ClaimIds"
     };
   }
@@ -67,11 +67,11 @@ service ResourceService {
 // 查询凭据信息请求
 message SearchClaimInfoRequest {
   /* 类型
-   * @length(1,128)
+   * @maxLength(128)
    */
   google.protobuf.StringValue ClaimType = 1;
   /* 值
-   * @length(1,512)
+   * @maxLength(512)
    */
   google.protobuf.StringValue ClaimValue = 2;
   /* 页码

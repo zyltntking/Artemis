@@ -175,7 +175,39 @@ public static class StringValidator
         GuidFormat format = GuidFormat.D,
         CharacterCaseMode caseMode = CharacterCaseMode.Mix)
     {
-        return ruleBuilder.Must(input => Matcher.GuidMatcher(format, caseMode).IsMatch(input))
+        return ruleBuilder
+            .Must(input => Matcher.GuidMatcher(format, caseMode).IsMatch(input))
             .WithMessage("不是有效的GUID标识");
+    }
+
+    /// <summary>
+    ///    应当短于指定长度
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="ruleBuilder"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
+    public static IRuleBuilderOptions<T, string> ShouldShorterThan<T>(
+        this IRuleBuilder<T, string> ruleBuilder, int max)
+    {
+        return ruleBuilder
+            .MaximumLength(max)
+            .WithMessage($"有效长度不得超过{max}");
+    }
+
+    /// <summary>
+    ///     不能为空,空字符串或纯空格字符
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="ruleBuilder"></param>
+    /// <param name="min">最小值</param>
+    /// <param name="max">最大值</param>
+    /// <returns></returns>
+    public static IRuleBuilderOptions<T, string> ShouldAtRange<T>(
+        this IRuleBuilder<T, string> ruleBuilder, int min, int max)
+    {
+        return ruleBuilder
+            .Length(min, max)
+            .WithMessage($"所提供值的长度必须在{min}到{max}之间");
     }
 }

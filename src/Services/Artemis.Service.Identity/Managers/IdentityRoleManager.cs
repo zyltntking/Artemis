@@ -767,7 +767,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             var roleClaim = Instance.CreateInstance<IdentityRoleClaim, ClaimPackage>(package);
 
             roleClaim.RoleId = id;
-            roleClaim.CheckStamp = summary.CheckStamp();
+            roleClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
             return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
         }
@@ -815,12 +815,9 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
                             package.ClaimValue)))
                     .Select(package =>
                     {
-                        var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
-
                         var roleClaim = Instance.CreateInstance<IdentityRoleClaim, ClaimPackage>(package);
-
                         roleClaim.RoleId = id;
-                        roleClaim.CheckStamp = summery.CheckStamp();
+                        roleClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                         return roleClaim;
                     })
@@ -865,7 +862,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             {
                 roleClaim.ClaimType = package.ClaimType;
                 roleClaim.ClaimValue = package.ClaimValue;
-                roleClaim.CheckStamp = summary.CheckStamp();
+                roleClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                 return await RoleClaimStore.UpdateAsync(roleClaim, cancellationToken);
             }
@@ -905,12 +902,9 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
                 roleClaims = roleClaims.Select(roleClaim =>
                 {
                     var package = dictionary[roleClaim.Id];
-
-                    var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
-
                     roleClaim.ClaimType = package.ClaimType;
                     roleClaim.ClaimValue = package.ClaimValue;
-                    roleClaim.CheckStamp = summary.CheckStamp();
+                    roleClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                     return roleClaim;
                 }).ToList();

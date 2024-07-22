@@ -519,68 +519,6 @@
             路由描述
             </summary>
         </member>
-        <member name="T:Artemis.Extensions.ServiceConnect.RpcResultAdapter">
-            <summary>
-                Rpc结果适配器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Success``2(``1)">
-            <summary>
-                成功结果
-            </summary>
-            <typeparam name="TResult">结果类型</typeparam>
-            <typeparam name="TData">数据类型</typeparam>
-            <param name="data">载荷数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptySuccess``1">
-            <summary>
-                成功结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Fail``2(System.String)">
-            <summary>
-                失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <typeparam name="TData"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.EmptyFail``1(System.String)">
-            <summary>
-                失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.AuthFail``1(System.String)">
-            <summary>
-                认证失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.ValidateFail``1(System.String)">
-            <summary>
-                校验失败结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.ServiceConnect.RpcResultAdapter.Exception``1(System.Exception)">
-            <summary>
-                异常结果
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="exception"></param>
-            <returns></returns>
-        </member>
         <member name="T:Artemis.Extensions.ServiceConnect.SerilogExtensions">
             <summary>
                 配置扩展

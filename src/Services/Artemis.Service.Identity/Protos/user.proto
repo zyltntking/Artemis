@@ -162,7 +162,7 @@ service UserService {
 	}
 	
 	// 删除用户凭据
-	rpc DeleteUserClaim (UserClaimIdRequest) returns (AffectedResponse) {
+	rpc DeleteUserClaim (DeleteUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			delete: "/api/Users/{UserId}/Claims/{ClaimId}"
 		};
@@ -347,20 +347,16 @@ message UpdateUserPacket {
 	 * @length(1,128)
 	 */
 	google.protobuf.StringValue UserName = 1;
-	/* 密码
-	 * @length(6,128)
-	 */
-	google.protobuf.StringValue Password = 2;
 	/* 邮箱
 	 * @email
 	 * @length(0,128)
 	 */
-	google.protobuf.StringValue Email = 3;
+	google.protobuf.StringValue Email = 2;
 	/* 手机号码
 	 * @phone
 	 * @length(0,128)
 	 */
-	google.protobuf.StringValue PhoneNumber = 4;
+	google.protobuf.StringValue PhoneNumber = 3;
 }
 
 // 更新用户请求
@@ -838,7 +834,7 @@ message BatchUpdateUserClaimRequest {
 }
 
 // 删除用户凭据请求
-message UserClaimIdRequest {
+message DeleteUserClaimRequest {
 	/* 用户标识
 	 * @required
 	 * @guid

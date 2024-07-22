@@ -90,12 +90,9 @@ public class UserServiceLogic : UserService.UserServiceBase
     [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
-        var result = await UserManager.CreateUserAsync(new UserSign
-        {
-            UserName = request.UserName,
-            Email = request.Email,
-            PhoneNumber = request.PhoneNumber
-        }, request.Password, context.CancellationToken);
+        var sign = request.Adapt<UserSign>();
+
+        var result = await UserManager.CreateUserAsync(sign, request.Password, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -112,13 +109,8 @@ public class UserServiceLogic : UserService.UserServiceBase
         ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
-            create => new UserSign
-            {
-                UserName = create.UserName,
-                Email = create.Email,
-                PhoneNumber = create.PhoneNumber
-            },
-            create => create.Password);
+            item => item.Adapt<UserSign>(),
+            item => item.Password);
 
         var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
 
@@ -137,12 +129,9 @@ public class UserServiceLogic : UserService.UserServiceBase
     {
         var userId = Guid.Parse(request.UserId);
 
-        var result = await UserManager.UpdateUserAsync(userId, new UserPackage
-        {
-            UserName = request.User.UserName,
-            Email = request.User.Email,
-            PhoneNumber = request.User.PhoneNumber
-        }, context.CancellationToken);
+        var package = request.User.Adapt<UserPackage>();
+
+        var result = await UserManager.UpdateUserAsync(userId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -160,13 +149,8 @@ public class UserServiceLogic : UserService.UserServiceBase
         ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
-            update => Guid.Parse(update.UserId),
-            update => new UserPackage
-            {
-                UserName = update.User.UserName,
-                Email = update.User.Email,
-                PhoneNumber = update.User.PhoneNumber
-            });
+            item => Guid.Parse(item.UserId),
+            item => item.Adapt<UserPackage>());
 
         var result = await UserManager.UpdateUsersAsync(dictionary, context.CancellationToken);
 
@@ -245,10 +229,7 @@ public class UserServiceLogic : UserService.UserServiceBase
         var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
 
-        var roleInfo = await UserManager.GetUserRoleAsync(
-            userId,
-            roleId,
-            context.CancellationToken);
+        var roleInfo = await UserManager.GetUserRoleAsync(userId, roleId, context.CancellationToken);
 
         return roleInfo.ReadInfoResponse<ReadUserRoleInfoResponse, RoleInfo>();
     }
@@ -322,7 +303,7 @@ public class UserServiceLogic : UserService.UserServiceBase
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
-        var roleIds = request.RoleIds.Select(Guid.Parse).ToList();
+        var roleIds = request.RoleIds.Select(Guid.Parse);
 
         var result = await UserManager.RemoveUserRolesAsync(userId, roleIds, context.CancellationToken);
 
@@ -442,13 +423,8 @@ public class UserServiceLogic : UserService.UserServiceBase
         var userId = Guid.Parse(request.UserId);
 
         var dictionary = request.Batch.ToDictionary(
-            update => update.ClaimId,
-            update => new UserClaimPackage
-            {
-                ClaimType = update.Claim.ClaimType,
-                ClaimValue = update.Claim.ClaimValue,
-                Description = update.Claim.Description
-            });
+            item => item.ClaimId,
+            item => item.Claim.Adapt<UserClaimPackage>());
 
         var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
 
@@ -463,7 +439,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteUserClaim(DeleteUserClaimRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 

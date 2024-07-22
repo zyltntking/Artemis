@@ -804,7 +804,7 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
             var userClaim = Instance.CreateInstance<IdentityUserClaim, UserClaimPackage>(package);
 
             userClaim.UserId = id;
-            userClaim.CheckStamp = summary.CheckStamp();
+            userClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
             return await UserClaimStore.CreateAsync(userClaim, cancellationToken);
         }
@@ -851,12 +851,10 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
                         notSetCheckStamps.Contains(Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue)))
                     .Select(package =>
                     {
-                        var summery = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimValue);
-
                         var userClaim = Instance.CreateInstance<IdentityUserClaim, UserClaimPackage>(package);
 
                         userClaim.UserId = id;
-                        userClaim.CheckStamp = summery.CheckStamp();
+                        userClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                         return userClaim;
                     })
@@ -904,7 +902,7 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
             {
                 userClaim.ClaimType = package.ClaimType;
                 userClaim.ClaimValue = package.ClaimValue;
-                userClaim.CheckStamp = summary.CheckStamp();
+                userClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                 return await UserClaimStore.UpdateAsync(userClaim, cancellationToken);
             }
@@ -951,7 +949,7 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
 
                     userClaim.ClaimType = package.ClaimType;
                     userClaim.ClaimValue = package.ClaimValue;
-                    userClaim.CheckStamp = summary.CheckStamp();
+                    userClaim.CheckStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
                     return userClaim;
                 }).ToList();

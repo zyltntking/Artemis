@@ -142,7 +142,9 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchUpdateClaim(BatchUpdateClaimRequest request, ServerCallContext context)
     {
-        var packages = request.Batch.Adapt<IDictionary<Guid, ClaimPackage>>();
+        var packages = request.Batch.ToDictionary(
+            item => Guid.Parse(item.ClaimId), 
+            item => item.Claim.Adapt<ClaimPackage>());
 
         var result = await ResourceManager.UpdateClaimsAsync(packages, context.CancellationToken);
 

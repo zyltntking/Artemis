@@ -784,12 +784,13 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 查询角色的凭据
             </summary>
             <param name="id">角色id</param>
             <param name="claimTypeSearch">凭据类型</param>
+            <param name="claimValueSearch"></param>
             <param name="page">页码</param>
             <param name="size">页面尺寸</param>
             <param name="cancellationToken">操作取消信号</param>
@@ -1500,12 +1501,13 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.FetchRoleClaimsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 查询角色的凭据
             </summary>
             <param name="id">角色id</param>
             <param name="claimTypeSearch">凭据类型</param>
+            <param name="claimValueSearch"></param>
             <param name="page">页码</param>
             <param name="size">页面尺寸</param>
             <param name="cancellationToken">操作取消信号</param>
@@ -2467,6 +2469,102 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.AddRoleUser(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加角色用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchAddRoleUser(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加角色用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.RemoveRoleUser(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            移除角色用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchRemoveRoleUser(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除角色用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.SearchRoleClaimInfo(Artemis.Service.Identity.Protos.SearchRoleClaimInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询角色凭据信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.ReadRoleClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取角色凭据信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.AddRoleClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchAddRoleClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.UpdateRoleClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchUpdateRoleClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.DeleteRoleClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchDeleteRoleClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除角色凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.Service.Identity.Services.UserServiceLogic">
             <summary>
                 用户服务
@@ -2649,7 +2747,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Services.UserServiceLogic.DeleteUserClaim(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Services.UserServiceLogic.DeleteUserClaim(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 删除用户凭据
             </summary>
@@ -3618,7 +3716,7 @@
         <member name="P:Artemis.Service.Identity.Protos.SearchClaimInfoRequest.ClaimType">
             <summary>
             类型
-            @length(1,128)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Identity.Protos.SearchClaimInfoRequest.ClaimValueFieldNumber">
@@ -3627,7 +3725,7 @@
         <member name="P:Artemis.Service.Identity.Protos.SearchClaimInfoRequest.ClaimValue">
             <summary>
             值
-            @length(1,512)
+            @maxLength(512)
             </summary>
         </member>
         <member name="F:Artemis.Service.Identity.Protos.SearchClaimInfoRequest.PageFieldNumber">
@@ -7204,15 +7302,6 @@
             @length(1,128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Identity.Protos.UpdateUserPacket.PasswordFieldNumber">
-            <summary>Field number for the "Password" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Identity.Protos.UpdateUserPacket.Password">
-            <summary>
-            密码
-            @length(6,128)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Identity.Protos.UpdateUserPacket.EmailFieldNumber">
             <summary>Field number for the "Email" field.</summary>
         </member>
@@ -8212,25 +8301,25 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Identity.Protos.UserClaimIdRequest">
+        <member name="T:Artemis.Service.Identity.Protos.DeleteUserClaimRequest">
             <summary>
             删除用户凭据请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Identity.Protos.UserClaimIdRequest.UserIdFieldNumber">
+        <member name="F:Artemis.Service.Identity.Protos.DeleteUserClaimRequest.UserIdFieldNumber">
             <summary>Field number for the "UserId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Identity.Protos.UserClaimIdRequest.UserId">
+        <member name="P:Artemis.Service.Identity.Protos.DeleteUserClaimRequest.UserId">
             <summary>
             用户标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Identity.Protos.UserClaimIdRequest.ClaimIdFieldNumber">
+        <member name="F:Artemis.Service.Identity.Protos.DeleteUserClaimRequest.ClaimIdFieldNumber">
             <summary>Field number for the "ClaimId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Identity.Protos.UserClaimIdRequest.ClaimId">
+        <member name="P:Artemis.Service.Identity.Protos.DeleteUserClaimRequest.ClaimId">
             <summary>
             凭据标识
             @required
@@ -8431,7 +8520,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceBase.DeleteUserClaim(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceBase.DeleteUserClaim(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除用户凭据
             </summary>
@@ -9185,7 +9274,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除用户凭据
             </summary>
@@ -9195,7 +9284,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             删除用户凭据
             </summary>
@@ -9203,7 +9292,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除用户凭据
             </summary>
@@ -9213,7 +9302,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.UserClaimIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.UserService.UserServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.DeleteUserClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             删除用户凭据
             </summary>
