@@ -29,12 +29,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="aspire.Component.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="serilog.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
         <None Include="swagger.Setting.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
@@ -52,11 +46,5 @@
         <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
         <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
     </ItemGroup>
-
-    <ProjectExtensions>
-        <VisualStudio>
-            <UserProperties aspire_1component_1setting_1json__JsonSchema="https://json.schemastore.org/appsettings.json" />
-        </VisualStudio>
-    </ProjectExtensions>
 
 </Project>

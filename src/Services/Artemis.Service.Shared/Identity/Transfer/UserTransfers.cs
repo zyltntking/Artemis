@@ -1,6 +1,6 @@
 ﻿using Artemis.Service.Shared.Identity;
 
-namespace Artemis.Service.Shared.Transfer.Identity;
+namespace Artemis.Service.Shared.Identity.Transfer;
 
 /// <summary>
 ///     用户信息

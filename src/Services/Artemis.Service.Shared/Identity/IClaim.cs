@@ -5,22 +5,15 @@ namespace Artemis.Service.Shared.Identity;
 /// <summary>
 ///     凭据接口
 /// </summary>
-public interface IClaim : IClaimDocument;
+public interface IClaim : IClaimInfo;
 
 /// <summary>
 ///     凭据信息
 /// </summary>
-public interface IClaimInfo : IClaimDocument, IKeySlot
-{
-}
+public interface IClaimInfo : IClaimPackage, ICheckStamp, IKeySlot;
 
 /// <summary>
-///     凭据文档接口
-/// </summary>
-public interface IClaimDocument : IClaimPackage, ICheckStamp;
-
-/// <summary>
-///     凭据数据包接口
+/// 凭据数据包
 /// </summary>
 public interface IClaimPackage
 {

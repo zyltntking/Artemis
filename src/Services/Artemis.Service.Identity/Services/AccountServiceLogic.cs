@@ -4,10 +4,9 @@ using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
@@ -76,7 +75,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签到")]
-    [Authorize(ArtemisAuthorizePolicy.Anonymous)]
+    [Authorize(AuthorizePolicy.Anonymous)]
     public override async Task<TokenResponse> SignIn(SignInRequest request, ServerCallContext context)
     {
         Logger.LogInformation($"用户 {request.UserSign} 正在尝试登录...");
@@ -95,14 +94,16 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
 
-            return DataResult.Success(new TokenReply
+            var reply = new TokenReply
             {
                 Token = identityToken,
                 Expire = DateTime.Now.AddSeconds(Options.CacheTokenExpire).ToUnixTimeStamp()
-            }).Adapt<TokenResponse>();
+            };
+
+            return ResultAdapter.AdaptSuccess<TokenResponse, TokenReply>(reply);
         }
 
-        return DataResult.Fail<TokenReply>().Adapt<TokenResponse>();
+        return ResultAdapter.AdaptEmptyFail<TokenResponse>();
     }
 
     /// <summary>
@@ -112,7 +113,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签入")]
-    [Authorize(ArtemisAuthorizePolicy.Anonymous)]
+    [Authorize(AuthorizePolicy.Anonymous)]
     public override async Task<TokenResponse> SignUp(SignUpRequest request, ServerCallContext context)
     {
         var (result, token) = await AccountManager
@@ -130,14 +131,16 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
 
-            return DataResult.Success(new TokenReply
+            var reply = new TokenReply
             {
                 Token = identityToken,
                 Expire = DateTime.Now.AddSeconds(Options.CacheTokenExpire).ToUnixTimeStamp()
-            }).Adapt<TokenResponse>();
+            };
+
+            return ResultAdapter.AdaptSuccess<TokenResponse, TokenReply>(reply);
         }
 
-        return DataResult.Fail<TokenReply>().Adapt<TokenResponse>();
+        return ResultAdapter.AdaptEmptyFail<TokenResponse>();
     }
 
     /// <summary>
@@ -147,7 +150,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签出")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
     {
         var authorizationToken = context
@@ -161,10 +164,10 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         {
             await EraseTokenDocument(authorizationToken, context.CancellationToken);
 
-            return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+            return ResultAdapter.AdaptEmptySuccess<EmptyResponse>();
         }
 
-        return DataResult.EmptyFail().Adapt<EmptyResponse>();
+        return ResultAdapter.AdaptEmptyFail<EmptyResponse>();
     }
 
     /// <summary>
@@ -174,7 +177,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("修改密码")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> ChangePassword(ChangePasswordRequest request, ServerCallContext context)
     {
         var userIdString = context
@@ -195,11 +198,11 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
                 context.CancellationToken);
 
             return result.Succeeded
-                ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
-                : DataResult.EmptyFail(result.Message).Adapt<EmptyResponse>();
+                ? ResultAdapter.AdaptEmptySuccess<EmptyResponse>()
+                : ResultAdapter.AdaptEmptyFail<EmptyResponse>(result.Message);
         }
 
-        return DataResult.EmptySuccess().Adapt<EmptyResponse>();
+        return ResultAdapter.AdaptEmptySuccess<EmptyResponse>();
     }
 
     /// <summary>
@@ -209,7 +212,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(ArtemisAuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<EmptyResponse> ResetPassword(ResetPasswordRequest request, ServerCallContext context)
     {
         var userId = request.UserId.GuidFromString();
@@ -220,8 +223,8 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
             context.CancellationToken);
 
         return result.Succeeded
-            ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
-            : DataResult.Fail<TokenReply>().Adapt<EmptyResponse>();
+            ? ResultAdapter.AdaptEmptySuccess<EmptyResponse>()
+            : ResultAdapter.AdaptEmptyFail<EmptyResponse>(result.Message);
     }
 
     /// <summary>
@@ -231,7 +234,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(ArtemisAuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<EmptyResponse> BatchResetPasswords(BatchResetPasswordRequest request,
         ServerCallContext context)
     {
@@ -248,13 +251,13 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
         var result = await AccountManager.ResetPasswordsAsync(dictionary, context.CancellationToken);
 
         return result.Succeeded
-            ? DataResult.EmptySuccess().Adapt<EmptyResponse>()
-            : DataResult.Fail<TokenReply>().Adapt<EmptyResponse>();
+            ? ResultAdapter.AdaptEmptySuccess<EmptyResponse>()
+            : ResultAdapter.AdaptEmptyFail<EmptyResponse>(result.Message);
     }
 
     #endregion
 
-    #region Logic
+    #region InternalLogic
 
     /// <summary>
     ///     记录TokenDocument

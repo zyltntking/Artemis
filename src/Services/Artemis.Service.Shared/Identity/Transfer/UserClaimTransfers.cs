@@ -1,25 +1,25 @@
-﻿using Artemis.Service.Shared.Identity;
-
-namespace Artemis.Service.Shared.Transfer.Identity;
+﻿namespace Artemis.Service.Shared.Identity.Transfer;
 
 /// <summary>
 ///     用户凭据信息
 /// </summary>
-public record UserClaimInfo : ClaimDocument, IUserClaimInfo
+public record UserClaimInfo : UserClaimPackage, IUserClaimInfo
 {
-    #region Implementation of IKeySlot<int>
-
     /// <summary>
     ///     存储标识
     /// </summary>
-    public int Id { get; set; }
+    public required int Id { get; set; }
 
     /// <summary>
     ///     用户标识
     /// </summary>
-    public required Guid UserId { get; set; }
+    public Guid UserId { get; set; }
 
-    #endregion
+    /// <summary>
+    ///     校验戳
+    /// </summary>
+    public required string CheckStamp { get; set; }
+
 }
 
 /// <summary>

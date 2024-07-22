@@ -1,3 +1,4 @@
+using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
@@ -12,7 +13,7 @@ namespace Artemis.App.Identity;
 /// <summary>
 ///     应用程序入口
 /// </summary>
-public class Program
+public abstract class Program
 {
     /// <summary>
     ///     主函数
@@ -29,9 +30,6 @@ public class Program
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
-            builder.AddAspireConfiguration();
-
-            builder.ConfigureSerilog();
 
             builder.AddServiceCommons();
 
@@ -47,6 +45,13 @@ public class Program
                 }, Log.Debug)
                 .AddIdentityServices()
                 .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
+
+            //配置认证
+            builder.Services.AddAuthentication()
+                .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
+
+            //配置授权
+            builder.ConfigureAuthorization();
 
             var isMigration = false;
 
@@ -74,7 +79,7 @@ public class Program
             app.MapGrpcService<ResourceServiceLogic>();
             app.MapGrpcService<AccountServiceLogic>();
             app.MapGrpcService<UserServiceLogic>();
-            //app.MapGrpcService<RoleServiceLogic>();
+            app.MapGrpcService<RoleServiceLogic>();
 
             // map common endpoints
             app.MapCommonEndpoints<IdentityContext>();

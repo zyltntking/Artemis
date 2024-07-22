@@ -56,7 +56,7 @@ public class ResourceContext : DbContext
         var dictionaries = new List<EnumerationRecord>
         {
             Enumeration.ToRecordDictionary<ArtemisClaimTypes>(),
-            Enumeration.ToRecordDictionary<ArtemisIdentityPolicy>(),
+            Enumeration.ToRecordDictionary<IdentityPolicy>(),
             Enumeration.ToRecordDictionary<ChineseNation>(),
             Enumeration.ToRecordDictionary<ChineseNationEn>(false),
             Enumeration.ToRecordDictionary<DictionaryType>(),

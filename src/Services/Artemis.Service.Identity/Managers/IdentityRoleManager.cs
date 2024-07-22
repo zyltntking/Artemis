@@ -5,7 +5,7 @@ using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Stores;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -152,8 +152,8 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// </summary>
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>存储结果和创建成功的角色实例</returns>
-    public async Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
+    /// <returns>存储结果</returns>
+    public async Task<StoreResult> CreateRoleAsync(
         RolePackage package,
         CancellationToken cancellationToken = default)
     {
@@ -165,15 +165,13 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             .AnyAsync(role => role.NormalizedName == normalizedName, cancellationToken);
 
         if (exists)
-            return (StoreResult.EntityFoundFailed(nameof(IdentityRole), package.Name), default);
+            return StoreResult.EntityFoundFailed(nameof(IdentityRole), package.Name);
 
         var role = Instance.CreateInstance<IdentityRole, RolePackage>(package);
 
         role.NormalizedName = normalizedName;
 
-        var result = await RoleStore.CreateAsync(role, cancellationToken);
-
-        return (result, role.Adapt<RoleInfo>());
+        return await RoleStore.CreateAsync(role, cancellationToken);
     }
 
     /// <summary>
@@ -227,7 +225,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public async Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
+    public async Task<StoreResult> UpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default)
@@ -242,12 +240,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             role.NormalizedName = package.Name.StringNormalize();
 
-            var result = await RoleStore.UpdateAsync(role, cancellationToken);
-
-            return (result, role.Adapt<RoleInfo>());
+            return await RoleStore.UpdateAsync(role, cancellationToken);
         }
 
-        return (StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!), default);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -296,7 +292,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
+    public async Task<StoreResult> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default)
@@ -651,6 +647,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// </summary>
     /// <param name="id">角色id</param>
     /// <param name="claimTypeSearch">凭据类型</param>
+    /// <param name="claimValueSearch"></param>
     /// <param name="page">页码</param>
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -659,6 +656,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     public async Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         Guid id,
         string? claimTypeSearch = null,
+        string? claimValueSearch = null,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
@@ -682,6 +680,12 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
                 claim => EF.Functions.Like(
                     claim.ClaimType,
                     $"%{claimTypeSearch}%"));
+
+            query = query.WhereIf(
+                claimValueSearch != string.Empty,
+                claim => EF.Functions.Like(
+                    claim.ClaimValue,
+                    $"%{claimValueSearch}%"));
 
             var count = await query.LongCountAsync(cancellationToken);
 

@@ -8,7 +8,7 @@ namespace Artemis.Extensions.ServiceConnect;
 /// <summary>
 ///     配置扩展
 /// </summary>
-public static class SerilogExtensions
+internal static class SerilogExtensions
 {
     /// <summary>
     ///     添加Serilog配置
@@ -16,11 +16,15 @@ public static class SerilogExtensions
     /// <param name="builder"></param>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static IHostApplicationBuilder ConfigureSerilog(
-        this IHostApplicationBuilder builder,
+    internal static void ConfigureSerilog(this IHostApplicationBuilder builder,
         string path = "serilog.Setting.json")
     {
-        builder.Configuration.AddJsonFile(path, true, true);
+        var serilogConfiguration = builder.Configuration.GetSection("Serilog");
+
+        if (Path.Exists(path) && !serilogConfiguration.Exists())
+        {
+            builder.Configuration.AddJsonFile(path, true, true);
+        }
 
         builder.Services.AddSerilog((services, configuration) =>
             configuration
@@ -30,7 +34,5 @@ public static class SerilogExtensions
                 .Enrich.WithProcessId()
                 .Enrich.WithThreadId()
                 .Enrich.WithExceptionDetails());
-
-        return builder;
     }
 }

@@ -1,12 +1,11 @@
-﻿using Artemis.Data.Core;
-using Mapster;
+﻿using Mapster;
 
-namespace Artemis.Extensions.ServiceConnect;
+namespace Artemis.Data.Core;
 
 /// <summary>
-///     Rpc结果适配器
+///     结果适配器
 /// </summary>
-public static class RpcResultAdapter
+public static class ResultAdapter
 {
     /// <summary>
     ///     成功结果
@@ -14,8 +13,9 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult">结果类型</typeparam>
     /// <typeparam name="TData">数据类型</typeparam>
     /// <param name="data">载荷数据</param>
+    /// <param name="usePagedResultConfig"></param>
     /// <returns></returns>
-    public static TResult Success<TResult, TData>(TData data)
+    public static TResult AdaptSuccess<TResult, TData>(TData data, bool usePagedResultConfig = false)
     {
         return DataResult.Success(data).Adapt<TResult>();
     }
@@ -25,7 +25,7 @@ public static class RpcResultAdapter
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <returns></returns>
-    public static TResult EmptySuccess<TResult>()
+    public static TResult AdaptEmptySuccess<TResult>()
     {
         return DataResult.NullSuccess().Adapt<TResult>();
     }
@@ -37,7 +37,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TData"></typeparam>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static TResult Fail<TResult, TData>(string message = "失败")
+    public static TResult AdaptFail<TResult, TData>(string message = "失败")
     {
         return DataResult.Fail<TData>(message).Adapt<TResult>();
     }
@@ -48,7 +48,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult"></typeparam>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static TResult EmptyFail<TResult>(string message = "失败")
+    public static TResult AdaptEmptyFail<TResult>(string message = "失败")
     {
         return DataResult.NullFail(message).Adapt<TResult>();
     }
@@ -59,7 +59,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult"></typeparam>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static TResult AuthFail<TResult>(string message = "认证失败")
+    public static TResult AdaptAuthFail<TResult>(string message = "认证失败")
     {
         return DataResult.AuthFail(message).Adapt<TResult>();
     }
@@ -70,7 +70,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult"></typeparam>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static TResult ValidateFail<TResult>(string message = "校验失败")
+    public static TResult AdaptValidateFail<TResult>(string message = "校验失败")
     {
         return DataResult.ValidateFail(message).Adapt<TResult>();
     }
@@ -81,7 +81,7 @@ public static class RpcResultAdapter
     /// <typeparam name="TResult"></typeparam>
     /// <param name="exception"></param>
     /// <returns></returns>
-    public static TResult Exception<TResult>(Exception exception)
+    public static TResult AdaptException<TResult>(Exception exception)
     {
         return DataResult.NullException(exception, message: exception.Message).Adapt<TResult>();
     }

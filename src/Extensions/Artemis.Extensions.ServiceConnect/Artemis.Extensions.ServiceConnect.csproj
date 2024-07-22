@@ -36,51 +36,49 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="Authorization\**"/>
-        <EmbeddedResource Remove="Authorization\**"/>
-        <None Remove="Authorization\**"/>
+        <Compile Remove="Authorization\**" />
+        <EmbeddedResource Remove="Authorization\**" />
+        <None Remove="Authorization\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
-        <None Include="serilog.Setting.json" Pack="true" PackagePath="\"/>
-        <None Include="aspire.Component.Setting.json" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="serilog.Setting.json" Pack="true" PackagePath="\" />
+        <None Include="aspire.Component.Setting.json" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-        <PackageReference Include="Aspire.MongoDB.Driver" Version="8.0.2"/>
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2"/>
-        <PackageReference Include="Aspire.RabbitMQ.Client" Version="8.0.2"/>
-        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.2"/>
-        <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="8.0.2"/>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.63.0"/>
-        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0"/>
-        <PackageReference Include="Mapster" Version="7.4.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.7"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Aspire.MongoDB.Driver" Version="8.0.2" />
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+        <PackageReference Include="Aspire.RabbitMQ.Client" Version="8.0.2" />
+        <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.2" />
+        <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="8.0.2" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.7" />
 
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.7.0"/>
-        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.2"/>
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0"/>
-        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0"/>
-        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0"/>
-        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0"/>
-        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0"/>
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1"/>
-        <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0"/>
-        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
-        <PackageReference Include="Serilog.Exceptions" Version="8.4.0"/>
-        <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.6.2"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.7.0" />
+        <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="8.0.2" />
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+        <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+        <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.6.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj"/>
-        <ProjectReference Include="..\..\Services\Artemis.Service.Shared\Artemis.Service.Shared.csproj"/>
-        <ProjectReference Include="..\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj"/>
+        <ProjectReference Include="..\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj" />
     </ItemGroup>
 
 </Project>

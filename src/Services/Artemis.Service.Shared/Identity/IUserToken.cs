@@ -21,6 +21,7 @@ public interface IUserTokenInfo : IUserTokenPackage
 /// </summary>
 public interface IUserTokenPackage
 {
+
     /// <summary>
     ///     登录提供程序
     /// </summary>

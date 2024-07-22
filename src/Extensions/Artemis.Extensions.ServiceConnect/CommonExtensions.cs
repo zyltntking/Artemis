@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect.HttpLogging;
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
 using Microsoft.AspNetCore.Builder;
@@ -23,10 +22,12 @@ public static class CommonExtensions
     /// <param name="includeDefaultService"></param>
     /// <returns></returns>
     /// <remarks>默认：OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道，常规：httpAccessor，压缩(生产环境)，认证，授权，http日志</remarks>
-    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder,
-        bool includeDefaultService = true)
+    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder, bool includeDefaultService = true)
     {
-        if (includeDefaultService) builder.AddServiceDefaults();
+        builder.ConfigureSerilog();
+
+        if (includeDefaultService) 
+            builder.AddServiceDefaults();
 
         builder.Services.AddControllers();
 
@@ -56,11 +57,6 @@ public static class CommonExtensions
                 options.Level = CompressionLevel.Fastest;
             });
         }
-
-        builder.Services.AddAuthentication()
-            .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
-        //配置授权
-        builder.ConfigureAuthorization();
 
         builder.Services.AddHttpLogging(options =>
         {

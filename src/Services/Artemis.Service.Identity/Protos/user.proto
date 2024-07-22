@@ -5,7 +5,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "Protos/common.proto";
 
-package artemis.service.identity.protos;
+package Artemis.Service.Identity.Protos;
 
 // 用户服务协议
 service UserService {

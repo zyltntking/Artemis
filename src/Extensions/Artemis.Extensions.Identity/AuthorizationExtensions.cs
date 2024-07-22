@@ -38,23 +38,23 @@ public static class AuthorizationExtensions
         builder.Services.AddAuthorization(options =>
         {
             options.AddPolicy(
-                ArtemisAuthorizePolicy.Anonymous,
+                AuthorizePolicy.Anonymous,
                 policy => { policy.Requirements.Add(new AnonymousRequirement()); });
 
             options.AddPolicy(
-                ArtemisAuthorizePolicy.Token,
+                AuthorizePolicy.Token,
                 policy => { policy.Requirements.Add(new TokenOnlyRequirement()); });
 
             options.AddPolicy(
-                ArtemisAuthorizePolicy.Admin,
-                policy => { policy.Requirements.Add(new RolesRequirement(ArtemisAuthorizePolicy.Admin)); });
+                AuthorizePolicy.Admin,
+                policy => { policy.Requirements.Add(new RolesRequirement(AuthorizePolicy.Admin)); });
 
             options.AddPolicy(
-                ArtemisAuthorizePolicy.ActionName,
+                AuthorizePolicy.ActionName,
                 policy => { policy.Requirements.Add(new ActionNameClaimRequirement()); });
 
             options.AddPolicy(
-                ArtemisAuthorizePolicy.RoutePath,
+                AuthorizePolicy.RoutePath,
                 policy => { policy.Requirements.Add(new RoutePathClaimRequirement()); });
 
             if (config.EnableAdvancedPolicy)

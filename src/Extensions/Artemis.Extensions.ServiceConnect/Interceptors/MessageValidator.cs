@@ -63,7 +63,7 @@ internal sealed class MessageValidator : Interceptor
                     else
                         dictionary.Add(error.PropertyName, [error.ErrorMessage]);
 
-                var response = RpcResultAdapter.ValidateFail<TResponse>(dictionary.Serialize());
+                var response = ResultAdapter.AdaptValidateFail<TResponse>(dictionary.Serialize());
 
                 return Task.FromResult(response);
             }

@@ -1,8 +1,8 @@
-﻿using Artemis.Data.Core;
+﻿using System.ComponentModel;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -46,7 +46,8 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Description("查询凭据信息")]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<SearchClaimInfoResponse> SearchClaimInfo(SearchClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -57,13 +58,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var claimPackets = claimInfos.Items!.Select(item => item.Adapt<ClaimInfoPacket>());
-
-        var response = DataResult.Success(claimInfos).Adapt<SearchClaimInfoResponse>();
-
-        response.Data.Items.Add(claimPackets);
-
-        return response;
+        return claimInfos.PagedResponse<SearchClaimInfoResponse, ClaimInfo>();
     }
 
     /// <summary>
@@ -72,7 +67,8 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Description("读取凭据信息")]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<ReadClaimInfoResponse> ReadClaimInfo(ReadClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -80,9 +76,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
 
         var claimInfo = await ResourceManager.GetClaimAsync(claimId, context.CancellationToken);
 
-        if (claimInfo is null) return DataResult.Fail<ClaimInfoPacket>().Adapt<ReadClaimInfoResponse>();
-
-        return DataResult.Success(claimInfo).Adapt<ReadClaimInfoResponse>();
+        return claimInfo.ReadInfoResponse<ReadClaimInfoResponse, ClaimInfo>();
     }
 
     /// <summary>
@@ -91,26 +85,102 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Description("创建凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> CreateClaim(CreateClaimRequest request, ServerCallContext context)
     {
-        var result = await ResourceManager.CreateClaimAsync(
-            new ClaimPackage
-            {
-                ClaimType = request.ClaimType,
-                ClaimValue = request.ClaimValue,
-                Description = request.Description
-            },
-            context.CancellationToken);
+        var package = request.Adapt<ClaimPackage>();
 
-        if (result.Succeeded)
-        {
-            var response = DataResult.EmptySuccess().Adapt<AffectedResponse>();
-            response.Data = result.AffectRows;
-            return response;
-        }
+        var result = await ResourceManager.CreateClaimAsync(package, context.CancellationToken);
 
-        return await base.CreateClaim(request, context);
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量创建凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量创建凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchCreateClaim(BatchCreateClaimRequest request, ServerCallContext context)
+    {
+        var claims = request.Batch.Adapt<IEnumerable<ClaimPackage>>();
+
+        var result = await ResourceManager.CreateClaimsAsync(claims, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 更新凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("更新凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> UpdateClaim(UpdateClaimRequest request, ServerCallContext context)
+    {
+        var claimId = Guid.Parse(request.ClaimId);
+
+        var claimPackage = request.Claim.Adapt<ClaimPackage>();
+
+        var result = await ResourceManager.UpdateClaimAsync(claimId, claimPackage, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量更新凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量更新凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchUpdateClaim(BatchUpdateClaimRequest request, ServerCallContext context)
+    {
+        var packages = request.Batch.Adapt<IDictionary<Guid, ClaimPackage>>();
+
+        var result = await ResourceManager.UpdateClaimsAsync(packages, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 删除凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> DeleteClaim(DeleteClaimRequest request, ServerCallContext context)
+    {
+        var claimId = Guid.Parse(request.ClaimId);
+
+        var result = await ResourceManager.DeleteClaimAsync(claimId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量删除凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchDeleteClaim(BatchDeleteClaimRequest request, ServerCallContext context)
+    {
+        var claimIds = request.ClaimIds.Select(Guid.Parse);
+
+        var result = await ResourceManager.DeleteClaimsAsync(claimIds, context.CancellationToken);
+
+        return result.AffectedResponse();
     }
 
     #endregion

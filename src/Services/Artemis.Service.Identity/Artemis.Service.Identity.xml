@@ -374,6 +374,46 @@
                 所属用户
             </summary>
         </member>
+        <member name="T:Artemis.Service.Identity.InternalExtensions">
+            <summary>
+            内部扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Identity.InternalExtensions.AffectedResponse(Artemis.Data.Store.StoreResult)">
+            <summary>
+            存储结果转换为影响行数响应
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.InternalExtensions.PagedResponse``2(Artemis.Data.Core.PageResult{``1})">
+            <summary>
+            分页结果转换为分页响应
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.InternalExtensions.ReadInfoResponse``2(``1)">
+            <summary>
+            实体结果转换为读取实体响应
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Artemis.Service.Identity.InternalExtensions._pagedResultConfig">
+            <summary>
+            分页结果映射配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.InternalExtensions.PagedResultConfig">
+            <summary>
+            分页结果映射配置访问器
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Identity.Managers.IdentityAccountManager">
             <summary>
                 认证账号管理
@@ -395,7 +435,7 @@
                 释放托管的Store
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.IssuedTokenDocument(Artemis.Service.Shared.Transfer.Identity.UserAuthentication,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.IssuedTokenDocument(Artemis.Service.Shared.Identity.Transfer.UserAuthentication,System.Threading.CancellationToken)">
             <summary>
                 签发Token文档
             </summary>
@@ -427,7 +467,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>登录结果和登录后的Token信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.SignUpAsync(Artemis.Service.Shared.Transfer.Identity.UserSign,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityAccountManager.SignUpAsync(Artemis.Service.Shared.Identity.Transfer.UserSign,System.String,System.Threading.CancellationToken)">
             <summary>
                 报名/注册
             </summary>
@@ -499,14 +539,6 @@
             <returns>分页搜索结果</returns>
             <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.GetClaimsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据凭据类型获取凭据列表
-            </summary>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 根据凭据标识获取凭据
@@ -515,15 +547,15 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
-            <param name="package">凭据信息</param>
             <param name="cancellationToken">操作取消信号</param>
-            <returns>创建结果和创建成功的凭据实例</returns>
+            <param name="package">凭据</param>
+            <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -531,7 +563,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -540,7 +572,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新成功的凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage}},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -548,7 +580,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新凭据
             </summary>
@@ -635,15 +667,15 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRoleAsync(Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRoleAsync(Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
             <param name="package">角色信息</param>
             <param name="cancellationToken">操作取消信号</param>
-            <returns>存储结果和创建成功的角色实例</returns>
+            <returns>存储结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.RolePackage},System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
@@ -651,7 +683,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -660,7 +692,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage},System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -668,7 +700,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色
             </summary>
@@ -773,7 +805,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>角色凭据</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 添加角色凭据
             </summary>
@@ -782,7 +814,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 添加角色凭据
             </summary>
@@ -791,7 +823,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -801,7 +833,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -908,7 +940,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>查询不到用户实例时返回空</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.CreateUserAsync(Artemis.Service.Shared.Transfer.Identity.UserSign,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.CreateUserAsync(Artemis.Service.Shared.Identity.Transfer.UserSign,System.String,System.Threading.CancellationToken)">
             <summary>
                 创建用户
             </summary>
@@ -917,7 +949,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>存储结果和创建成功的用户实例</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.CreateUsersAsync(System.Collections.Generic.IDictionary{Artemis.Service.Shared.Transfer.Identity.UserSign,System.String},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.CreateUsersAsync(System.Collections.Generic.IDictionary{Artemis.Service.Shared.Identity.Transfer.UserSign,System.String},System.Threading.CancellationToken)">
             <summary>
                 创建用户
             </summary>
@@ -925,7 +957,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserPackage,System.Threading.CancellationToken)">
             <summary>
                 更新用户
             </summary>
@@ -934,7 +966,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新后的实体</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUsersAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Transfer.Identity.UserPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUsersAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.UserPackage},System.Threading.CancellationToken)">
             <summary>
                 更新用户
             </summary>
@@ -1037,7 +1069,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 添加用户凭据
             </summary>
@@ -1046,7 +1078,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.UserClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 添加用户凭据
             </summary>
@@ -1055,7 +1087,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新用户凭据
             </summary>
@@ -1065,7 +1097,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新用户凭据
             </summary>
@@ -1114,7 +1146,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddOrUpdateUserLoginAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserLoginPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddOrUpdateUserLoginAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserLoginPackage,System.Threading.CancellationToken)">
             <summary>
                 添加或更新用户登录信息
             </summary>
@@ -1165,7 +1197,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddOrUpdateUserTokenAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserTokenPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddOrUpdateUserTokenAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserTokenPackage,System.Threading.CancellationToken)">
             <summary>
                 添加或更新用户令牌信息
             </summary>
@@ -1207,7 +1239,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>登录结果和登录后的Token信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityAccountManager.SignUpAsync(Artemis.Service.Shared.Transfer.Identity.UserSign,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityAccountManager.SignUpAsync(Artemis.Service.Shared.Identity.Transfer.UserSign,System.String,System.Threading.CancellationToken)">
             <summary>
                 报名/注册
             </summary>
@@ -1260,14 +1292,6 @@
             <returns>分页搜索结果</returns>
             <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.GetClaimsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-                根据凭据类型获取凭据列表
-            </summary>
-            <param name="claimTypeSearch">凭据类型</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns></returns>
-        </member>
         <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 根据凭据标识获取凭据
@@ -1276,15 +1300,15 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
-            <param name="package">凭据信息</param>
             <param name="cancellationToken">操作取消信号</param>
-            <returns>创建结果和创建成功的凭据实例</returns>
+            <param name="package">凭据</param>
+            <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -1292,7 +1316,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -1301,7 +1325,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新成功的凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage}},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -1309,7 +1333,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新凭据
             </summary>
@@ -1359,15 +1383,15 @@
             <returns>角色实例</returns>
             <remarks>当查询不到角色实例时返回空</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRoleAsync(Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRoleAsync(Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
             <param name="package">角色信息</param>
             <param name="cancellationToken">操作取消信号</param>
-            <returns>存储结果和创建成功的角色实例</returns>
+            <returns>存储结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateRolesAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.RolePackage},System.Threading.CancellationToken)">
             <summary>
                 创建角色
             </summary>
@@ -1375,7 +1399,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -1384,7 +1408,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRolesAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage},System.Threading.CancellationToken)">
             <summary>
                 更新角色
             </summary>
@@ -1392,7 +1416,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RolePackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.CreateOrUpdateRoleAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RolePackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新角色
             </summary>
@@ -1497,7 +1521,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>角色凭据</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 添加角色凭据
             </summary>
@@ -1506,7 +1530,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.AddRoleClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 添加角色凭据
             </summary>
@@ -1515,7 +1539,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -1525,7 +1549,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Transfer.Identity.RoleClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityRoleManager.UpdateRoleClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新角色凭据
             </summary>
@@ -1578,7 +1602,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>查询不到用户实例时返回空</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.CreateUserAsync(Artemis.Service.Shared.Transfer.Identity.UserSign,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.CreateUserAsync(Artemis.Service.Shared.Identity.Transfer.UserSign,System.String,System.Threading.CancellationToken)">
             <summary>
                 创建用户
             </summary>
@@ -1587,7 +1611,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>存储结果和创建成功的用户实例</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.CreateUsersAsync(System.Collections.Generic.IDictionary{Artemis.Service.Shared.Transfer.Identity.UserSign,System.String},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.CreateUsersAsync(System.Collections.Generic.IDictionary{Artemis.Service.Shared.Identity.Transfer.UserSign,System.String},System.Threading.CancellationToken)">
             <summary>
                 创建用户
             </summary>
@@ -1595,7 +1619,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserPackage,System.Threading.CancellationToken)">
             <summary>
                 更新用户
             </summary>
@@ -1604,7 +1628,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新后的实体</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUsersAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Transfer.Identity.UserPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUsersAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.UserPackage},System.Threading.CancellationToken)">
             <summary>
                 更新用户
             </summary>
@@ -1707,7 +1731,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserClaimAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 添加用户凭据
             </summary>
@@ -1716,7 +1740,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserClaimsAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.UserClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 添加用户凭据
             </summary>
@@ -1725,7 +1749,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>添加结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimAsync(System.Guid,System.Int32,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新用户凭据
             </summary>
@@ -1735,7 +1759,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Transfer.Identity.UserClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserClaimsAsync(System.Guid,System.Collections.Generic.IDictionary{System.Int32,Artemis.Service.Shared.Identity.Transfer.UserClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新用户凭据
             </summary>
@@ -1784,7 +1808,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddOrUpdateUserLoginAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserLoginPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddOrUpdateUserLoginAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserLoginPackage,System.Threading.CancellationToken)">
             <summary>
                 添加或更新用户登录信息
             </summary>
@@ -1835,7 +1859,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>用户凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddOrUpdateUserTokenAsync(System.Guid,Artemis.Service.Shared.Transfer.Identity.UserTokenPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddOrUpdateUserTokenAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.UserTokenPackage,System.Threading.CancellationToken)">
             <summary>
                 添加或更新用户令牌信息
             </summary>
@@ -1888,31 +1912,6 @@
                 凭据描述
             </summary>
         </member>
-        <member name="T:Artemis.Service.Identity.Models.StandardClaim">
-            <summary>
-                标准凭据模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Identity.Models.StandardClaim.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Identity.Models.StandardClaim.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Identity.Models.StandardClaim.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Identity.Models.StandardClaim.Description">
-            <summary>
-                凭据描述
-            </summary>
-        </member>
         <member name="T:Artemis.Service.Identity.Models.Role">
             <summary>
                 角色模型
@@ -1941,6 +1940,26 @@
         <member name="P:Artemis.Service.Identity.Models.RoleClaim.RoleId">
             <summary>
                 角色标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.RoleClaim.ClaimType">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.RoleClaim.ClaimValue">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.RoleClaim.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.RoleClaim.Description">
+            <summary>
+                凭据描述
             </summary>
         </member>
         <member name="T:Artemis.Service.Identity.Models.User">
@@ -2021,6 +2040,26 @@
         <member name="P:Artemis.Service.Identity.Models.UserClaim.UserId">
             <summary>
                 用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserClaim.ClaimType">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserClaim.ClaimValue">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserClaim.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Models.UserClaim.Description">
+            <summary>
+                凭据描述
             </summary>
         </member>
         <member name="T:Artemis.Service.Identity.Models.UserLogin">
@@ -2113,15 +2152,22 @@
                 服务扩展
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.ServiceExtensions.AddIdentityServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
+        <member name="M:Artemis.Service.Identity.ServiceExtensions.AddIdentityServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
                 添加认证服务
             </summary>
             <param name="services"></param>
-            <param name="enableHandlerProxy"></param>
-            <param name="enableCacheProxy"></param>
         </member>
-        <member name="M:Artemis.Service.Identity.ServiceExtensions.AddIdentityServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
+        <member name="M:Artemis.Service.Identity.ServiceExtensions.AddIdentityServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+            <summary>
+                添加认证服务
+            </summary>
+            <typeparam name="THandlerProxy">操作者代理</typeparam>
+            <param name="services"></param>
+            <param name="enableHandlerProxy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.ServiceExtensions.AddIdentityServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
             <summary>
                 添加认证服务
             </summary>
@@ -2279,10 +2325,147 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceLogic.BatchCreateClaim(Artemis.Service.Identity.Protos.BatchCreateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceLogic.UpdateClaim(Artemis.Service.Identity.Protos.UpdateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceLogic.BatchUpdateClaim(Artemis.Service.Identity.Protos.BatchUpdateClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceLogic.DeleteClaim(Artemis.Service.Identity.Protos.DeleteClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceLogic.BatchDeleteClaim(Artemis.Service.Identity.Protos.BatchDeleteClaimRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除凭据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.Service.Identity.Services.RoleServiceLogic">
             <summary>
                 角色服务
             </summary>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.#ctor(Artemis.Service.Identity.Managers.IIdentityRoleManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Identity.Services.RoleServiceLogic})">
+            <summary>
+                账户服务
+            </summary>
+            <param name="roleManager">角色管理器</param>
+            <param name="logger">日志记录器</param>
+        </member>
+        <member name="P:Artemis.Service.Identity.Services.RoleServiceLogic.RoleManager">
+            <summary>
+                角色管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Identity.Services.RoleServiceLogic.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.SearchRoleInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询角色信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.ReadRoleInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取角色信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.CreateRole(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchCreateRole(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.UpdateRole(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchUpdateRole(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.DeleteRole(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.BatchDeleteRole(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.SearchRoleUserInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询角色用户信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.RoleServiceLogic.ReadRoleUserInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取用户角色信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
         <member name="T:Artemis.Service.Identity.Services.UserServiceLogic">
             <summary>
@@ -2308,7 +2491,7 @@
         </member>
         <member name="M:Artemis.Service.Identity.Services.UserServiceLogic.SearchUserInfo(Artemis.Service.Identity.Protos.SearchUserInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
-                查询用户
+                查询用户信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -5652,7 +5835,7 @@
         <member name="T:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase">
             <summary>Base class for server-side implementations of RoleService</summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.SearchUserInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.SearchRoleInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             查询角色信息
             </summary>
@@ -5660,7 +5843,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadUserInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadRoleInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取角色信息
             </summary>
@@ -5668,7 +5851,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.CreateUser(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.CreateRole(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建角色
             </summary>
@@ -5676,7 +5859,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchCreateUser(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchCreateRole(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量创建角色
             </summary>
@@ -5684,7 +5867,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.UpdateUser(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.UpdateRole(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             更新角色
             </summary>
@@ -5692,7 +5875,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchUpdateUser(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchUpdateRole(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量更新角色
             </summary>
@@ -5700,7 +5883,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.DeleteUser(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.DeleteRole(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除角色
             </summary>
@@ -5708,7 +5891,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchDeleteUser(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchDeleteRole(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除角色
             </summary>
@@ -5716,7 +5899,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.SearchUserRoleInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.SearchRoleUserInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             查询角色用户信息
             </summary>
@@ -5724,7 +5907,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadUserRoleInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadRoleUserInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取用户角色信息
             </summary>
@@ -5732,7 +5915,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.AddUserRole(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.AddRoleUser(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             添加角色用户
             </summary>
@@ -5740,7 +5923,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchAddUserRole(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchAddRoleUser(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量添加角色用户
             </summary>
@@ -5748,7 +5931,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.RemoveUserRole(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.RemoveRoleUser(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             移除角色用户
             </summary>
@@ -5756,7 +5939,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchRemoveUserRole(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchRemoveRoleUser(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量移除角色用户
             </summary>
@@ -5772,7 +5955,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadUserClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.ReadRoleClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取角色凭据信息
             </summary>
@@ -5780,7 +5963,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.AddUserClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.AddRoleClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             添加角色凭据
             </summary>
@@ -5788,7 +5971,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchAddUserClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchAddRoleClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量添加角色凭据
             </summary>
@@ -5796,7 +5979,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.UpdateUserClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.UpdateRoleClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             更新角色凭据
             </summary>
@@ -5804,7 +5987,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchUpdateUserClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchUpdateRoleClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量更新角色凭据
             </summary>
@@ -5812,7 +5995,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.DeleteUserClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.DeleteRoleClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除角色凭据
             </summary>
@@ -5820,7 +6003,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchDeleteUserClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceBase.BatchDeleteRoleClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除角色凭据
             </summary>
@@ -5846,7 +6029,7 @@
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询角色信息
             </summary>
@@ -5856,7 +6039,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleInfo(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询角色信息
             </summary>
@@ -5864,7 +6047,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserInfoAsync(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleInfoAsync(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询角色信息
             </summary>
@@ -5874,7 +6057,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserInfoAsync(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleInfoAsync(Artemis.Service.Identity.Protos.SearchRoleInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询角色信息
             </summary>
@@ -5882,7 +6065,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取角色信息
             </summary>
@@ -5892,7 +6075,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleInfo(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取角色信息
             </summary>
@@ -5900,7 +6083,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserInfoAsync(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleInfoAsync(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取角色信息
             </summary>
@@ -5910,7 +6093,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserInfoAsync(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleInfoAsync(Artemis.Service.Identity.Protos.ReadRoleInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取角色信息
             </summary>
@@ -5918,7 +6101,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateUser(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateRole(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             创建角色
             </summary>
@@ -5928,7 +6111,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateUser(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateRole(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             创建角色
             </summary>
@@ -5936,7 +6119,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateUserAsync(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateRoleAsync(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             创建角色
             </summary>
@@ -5946,7 +6129,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateUserAsync(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.CreateRoleAsync(Artemis.Service.Identity.Protos.CreateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             创建角色
             </summary>
@@ -5954,7 +6137,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateUser(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateRole(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量创建角色
             </summary>
@@ -5964,7 +6147,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateUser(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateRole(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量创建角色
             </summary>
@@ -5972,7 +6155,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateUserAsync(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateRoleAsync(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量创建角色
             </summary>
@@ -5982,7 +6165,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateUserAsync(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchCreateRoleAsync(Artemis.Service.Identity.Protos.BatchCreateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量创建角色
             </summary>
@@ -5990,7 +6173,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUser(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRole(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新角色
             </summary>
@@ -6000,7 +6183,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUser(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRole(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             更新角色
             </summary>
@@ -6008,7 +6191,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserAsync(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleAsync(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新角色
             </summary>
@@ -6018,7 +6201,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserAsync(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleAsync(Artemis.Service.Identity.Protos.UpdateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             更新角色
             </summary>
@@ -6026,7 +6209,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUser(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRole(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新角色
             </summary>
@@ -6036,7 +6219,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUser(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRole(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新角色
             </summary>
@@ -6044,7 +6227,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新角色
             </summary>
@@ -6054,7 +6237,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新角色
             </summary>
@@ -6062,7 +6245,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUser(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRole(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除角色
             </summary>
@@ -6072,7 +6255,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUser(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRole(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             删除角色
             </summary>
@@ -6080,7 +6263,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserAsync(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleAsync(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除角色
             </summary>
@@ -6090,7 +6273,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserAsync(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleAsync(Artemis.Service.Identity.Protos.DeleteRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             删除角色
             </summary>
@@ -6098,7 +6281,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUser(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRole(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除角色
             </summary>
@@ -6108,7 +6291,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUser(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRole(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除角色
             </summary>
@@ -6116,7 +6299,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除角色
             </summary>
@@ -6126,7 +6309,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除角色
             </summary>
@@ -6134,7 +6317,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserRoleInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleUserInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询角色用户信息
             </summary>
@@ -6144,7 +6327,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserRoleInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleUserInfo(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询角色用户信息
             </summary>
@@ -6152,7 +6335,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserRoleInfoAsync(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleUserInfoAsync(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询角色用户信息
             </summary>
@@ -6162,7 +6345,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchUserRoleInfoAsync(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.SearchRoleUserInfoAsync(Artemis.Service.Identity.Protos.SearchRoleUserInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询角色用户信息
             </summary>
@@ -6170,7 +6353,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserRoleInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleUserInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取用户角色信息
             </summary>
@@ -6180,7 +6363,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserRoleInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleUserInfo(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取用户角色信息
             </summary>
@@ -6188,7 +6371,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserRoleInfoAsync(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleUserInfoAsync(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取用户角色信息
             </summary>
@@ -6198,7 +6381,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserRoleInfoAsync(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleUserInfoAsync(Artemis.Service.Identity.Protos.ReadRoleUserInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取用户角色信息
             </summary>
@@ -6206,7 +6389,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserRole(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleUser(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             添加角色用户
             </summary>
@@ -6216,7 +6399,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserRole(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleUser(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             添加角色用户
             </summary>
@@ -6224,7 +6407,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserRoleAsync(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleUserAsync(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             添加角色用户
             </summary>
@@ -6234,7 +6417,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserRoleAsync(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleUserAsync(Artemis.Service.Identity.Protos.AddRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             添加角色用户
             </summary>
@@ -6242,7 +6425,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserRole(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleUser(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量添加角色用户
             </summary>
@@ -6252,7 +6435,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserRole(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleUser(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             批量添加角色用户
             </summary>
@@ -6260,7 +6443,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserRoleAsync(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleUserAsync(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量添加角色用户
             </summary>
@@ -6270,7 +6453,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserRoleAsync(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleUserAsync(Artemis.Service.Identity.Protos.BatchAddRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             批量添加角色用户
             </summary>
@@ -6278,7 +6461,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveUserRole(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveRoleUser(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             移除角色用户
             </summary>
@@ -6288,7 +6471,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveUserRole(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveRoleUser(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             移除角色用户
             </summary>
@@ -6296,7 +6479,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveUserRoleAsync(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveRoleUserAsync(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             移除角色用户
             </summary>
@@ -6306,7 +6489,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveUserRoleAsync(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.RemoveRoleUserAsync(Artemis.Service.Identity.Protos.RemoveRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             移除角色用户
             </summary>
@@ -6314,7 +6497,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveUserRole(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveRoleUser(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量移除角色用户
             </summary>
@@ -6324,7 +6507,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveUserRole(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveRoleUser(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             批量移除角色用户
             </summary>
@@ -6332,7 +6515,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveRoleUserAsync(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量移除角色用户
             </summary>
@@ -6342,7 +6525,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchRemoveRoleUserAsync(Artemis.Service.Identity.Protos.BatchRemoveRoleUserRequest,Grpc.Core.CallOptions)">
             <summary>
             批量移除角色用户
             </summary>
@@ -6386,7 +6569,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取角色凭据信息
             </summary>
@@ -6396,7 +6579,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleClaimInfo(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取角色凭据信息
             </summary>
@@ -6404,7 +6587,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserClaimInfoAsync(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleClaimInfoAsync(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取角色凭据信息
             </summary>
@@ -6414,7 +6597,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadUserClaimInfoAsync(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.ReadRoleClaimInfoAsync(Artemis.Service.Identity.Protos.ReadRoleClaimInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取角色凭据信息
             </summary>
@@ -6422,7 +6605,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             添加角色凭据
             </summary>
@@ -6432,7 +6615,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleClaim(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             添加角色凭据
             </summary>
@@ -6440,7 +6623,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserClaimAsync(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleClaimAsync(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             添加角色凭据
             </summary>
@@ -6450,7 +6633,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddUserClaimAsync(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.AddRoleClaimAsync(Artemis.Service.Identity.Protos.AddRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             添加角色凭据
             </summary>
@@ -6458,7 +6641,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量添加角色凭据
             </summary>
@@ -6468,7 +6651,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleClaim(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量添加角色凭据
             </summary>
@@ -6476,7 +6659,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserClaimAsync(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleClaimAsync(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量添加角色凭据
             </summary>
@@ -6486,7 +6669,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddUserClaimAsync(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchAddRoleClaimAsync(Artemis.Service.Identity.Protos.BatchAddRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量添加角色凭据
             </summary>
@@ -6494,7 +6677,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新角色凭据
             </summary>
@@ -6504,7 +6687,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleClaim(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             更新角色凭据
             </summary>
@@ -6512,7 +6695,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserClaimAsync(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleClaimAsync(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新角色凭据
             </summary>
@@ -6522,7 +6705,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateUserClaimAsync(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.UpdateRoleClaimAsync(Artemis.Service.Identity.Protos.UpdateRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             更新角色凭据
             </summary>
@@ -6530,7 +6713,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新角色凭据
             </summary>
@@ -6540,7 +6723,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleClaim(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新角色凭据
             </summary>
@@ -6548,7 +6731,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserClaimAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleClaimAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新角色凭据
             </summary>
@@ -6558,7 +6741,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateUserClaimAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchUpdateRoleClaimAsync(Artemis.Service.Identity.Protos.BatchUpdateRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新角色凭据
             </summary>
@@ -6566,7 +6749,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除角色凭据
             </summary>
@@ -6576,7 +6759,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleClaim(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.CallOptions)">
             <summary>
             删除角色凭据
             </summary>
@@ -6584,7 +6767,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleClaimAsync(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除角色凭据
             </summary>
@@ -6594,7 +6777,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteUserClaimAsync(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.DeleteRoleClaimAsync(Artemis.Service.Identity.Protos.RoleClaimIdRequest,Grpc.Core.CallOptions)">
             <summary>
             删除角色凭据
             </summary>
@@ -6602,7 +6785,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除角色凭据
             </summary>
@@ -6612,7 +6795,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleClaim(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除角色凭据
             </summary>
@@ -6620,7 +6803,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserClaimAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleClaimAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除角色凭据
             </summary>
@@ -6630,7 +6813,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteUserClaimAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Identity.Protos.RoleService.RoleServiceClient.BatchDeleteRoleClaimAsync(Artemis.Service.Identity.Protos.BatchDeleteRoleClaimRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除角色凭据
             </summary>

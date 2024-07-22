@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using Artemis.Data.Core;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Protos;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -42,13 +41,13 @@ public class UserServiceLogic : UserService.UserServiceBase
     #region Overrides of UserBase
 
     /// <summary>
-    ///     查询用户
+    ///     查询用户信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("查询用户")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Description("查询用户信息")]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<SearchUserInfoResponse> SearchUserInfo(SearchUserInfoRequest request,
         ServerCallContext context)
     {
@@ -60,13 +59,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var userReplies = userInfos.Items!.Select(item => item.Adapt<UserInfoPacket>());
-
-        var response = DataResult.Success(userInfos).Adapt<SearchUserInfoResponse>();
-
-        response.Data.Items.Add(userReplies);
-
-        return response;
+        return userInfos.PagedResponse<SearchUserInfoResponse, UserInfo>();
     }
 
     /// <summary>
@@ -76,7 +69,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取用户信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request,
         ServerCallContext context)
     {
@@ -84,9 +77,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var userInfo = await UserManager.GetUserAsync(userId, context.CancellationToken);
 
-        if (userInfo is null) return DataResult.Fail<UserInfo>().Adapt<ReadUserInfoResponse>();
-
-        return DataResult.Success(userInfo).Adapt<ReadUserInfoResponse>();
+        return userInfo.ReadInfoResponse<ReadUserInfoResponse, UserInfo>();
     }
 
     /// <summary>
@@ -96,7 +87,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context"></param>
     /// <returns></returns>
     [Description("创建用户")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
     {
         var result = await UserManager.CreateUserAsync(new UserSign
@@ -106,9 +97,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             PhoneNumber = request.PhoneNumber
         }, request.Password, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -118,7 +107,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建用户")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request,
         ServerCallContext context)
     {
@@ -133,9 +122,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"创建失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -145,7 +132,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> UpdateUser(UpdateUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -157,9 +144,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             PhoneNumber = request.User.PhoneNumber
         }, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -168,7 +153,10 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<AffectedResponse> BatchUpdateUser(BatchUpdateUserRequest request,
+    [Description("批量更新用户信息")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchUpdateUser(
+        BatchUpdateUserRequest request,
         ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
@@ -182,9 +170,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.UpdateUsersAsync(dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -194,16 +180,14 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> DeleteUser(DeleteUserRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.DeleteUserAsync(userId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -213,17 +197,15 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request,
         ServerCallContext context)
     {
-        var idList = request.UserIds.Select(Guid.Parse).ToList();
+        var ids = request.UserIds.Select(Guid.Parse);
 
-        var result = await UserManager.DeleteUsersAsync(idList, context.CancellationToken);
+        var result = await UserManager.DeleteUsersAsync(ids, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -233,7 +215,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户角色信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<SearchUserRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleInfoRequest request,
         ServerCallContext context)
     {
@@ -246,13 +228,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var roleReplies = roleInfos.Items!.Select(item => item.Adapt<UserRoleInfoPacket>());
-
-        var response = DataResult.Success(roleInfos).Adapt<SearchUserRoleInfoResponse>();
-
-        response.Data.Items.Add(roleReplies);
-
-        return response;
+        return roleInfos.PagedResponse<SearchUserRoleInfoResponse, RoleInfo>();
     }
 
     /// <summary>
@@ -262,7 +238,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户角色信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request,
         ServerCallContext context)
     {
@@ -274,9 +250,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             roleId,
             context.CancellationToken);
 
-        if (roleInfo is null) return DataResult.Fail<RoleInfo>().Adapt<ReadUserRoleInfoResponse>();
-
-        return DataResult.Success(roleInfo).Adapt<ReadUserRoleInfoResponse>();
+        return roleInfo.ReadInfoResponse<ReadUserRoleInfoResponse, RoleInfo>();
     }
 
     /// <summary>
@@ -286,7 +260,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户角色")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
@@ -294,9 +268,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.AddUserRoleAsync(userId, roleId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -306,19 +278,17 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户角色")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchAddUserRole(BatchAddUserRoleRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var roleIds = request.RoleIds.Select(Guid.Parse).ToList();
+        var roleIds = request.RoleIds.Select(Guid.Parse);
 
         var result = await UserManager.AddUserRolesAsync(userId, roleIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -328,7 +298,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除用户角色")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request,
         ServerCallContext context)
     {
@@ -337,9 +307,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.RemoveUserRoleAsync(userId, roleId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -349,7 +317,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除用户角色")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchRemoveUserRole(BatchRemoveUserRoleRequest request,
         ServerCallContext context)
     {
@@ -358,9 +326,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.RemoveUserRolesAsync(userId, roleIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"移除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -370,7 +336,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户凭据信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<SearchUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -384,13 +350,7 @@ public class UserServiceLogic : UserService.UserServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var userClaimReplies = userClaimInfos.Items!.Select(item => item.Adapt<UserClaimInfoPacket>());
-
-        var response = DataResult.Success(userClaimInfos).Adapt<SearchUserClaimInfoResponse>();
-
-        response.Data.Items.Add(userClaimReplies);
-
-        return response;
+        return userClaimInfos.PagedResponse<SearchUserClaimInfoResponse, UserClaimInfo>();
     }
 
     /// <summary>
@@ -400,7 +360,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户凭据信息")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<ReadUserClaimInfoResponse> ReadUserClaimInfo(ReadUserClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -408,9 +368,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var userClaimInfo = await UserManager.GetUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
 
-        if (userClaimInfo is null) return DataResult.Fail<UserClaimInfo>().Adapt<ReadUserClaimInfoResponse>();
-
-        return DataResult.Success(userClaimInfo).Adapt<ReadUserClaimInfoResponse>();
+        return userClaimInfo.ReadInfoResponse<ReadUserClaimInfoResponse, UserClaimInfo>();
     }
 
     /// <summary>
@@ -420,24 +378,16 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加用户凭据")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var result = await UserManager.AddUserClaimAsync(
-            userId,
-            new UserClaimPackage
-            {
-                ClaimType = request.UserClaim.ClaimType,
-                ClaimValue = request.UserClaim.ClaimValue,
-                Description = request.UserClaim.Description
-            },
-            context.CancellationToken);
+        var package = request.UserClaim.Adapt<UserClaimPackage>();
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
+        var result = await UserManager.AddUserClaimAsync(userId, package, context.CancellationToken);
 
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -447,24 +397,17 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加用户凭据")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var userClaimPackages = request.Batch.Select(claim => new UserClaimPackage
-        {
-            ClaimType = claim.ClaimType,
-            ClaimValue = claim.ClaimValue,
-            Description = claim.Description
-        }).ToList();
+        var packages = request.Batch.Adapt<IEnumerable<UserClaimPackage>>();
 
-        var result = await UserManager.AddUserClaimsAsync(userId, userClaimPackages, context.CancellationToken);
+        var result = await UserManager.AddUserClaimsAsync(userId, packages, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"添加失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -474,26 +417,17 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户凭据")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request,
         ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var result = await UserManager.UpdateUserClaimAsync(
-            userId,
-            request.ClaimId,
-            new UserClaimPackage
-            {
-                ClaimType = request.UserClaim.ClaimType,
-                ClaimValue = request.UserClaim.ClaimValue,
-                Description = request.UserClaim.Description
-            },
-            context.CancellationToken);
+        var package = request.UserClaim.Adapt<UserClaimPackage>();
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
+        var result = await UserManager.UpdateUserClaimAsync(userId, request.ClaimId, package, context.CancellationToken);
 
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -518,9 +452,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"更新失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -530,16 +462,14 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户凭据")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> DeleteUserClaim(UserClaimIdRequest request, ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
         var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -549,7 +479,7 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户凭据")]
-    [Authorize(ArtemisAuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<AffectedResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
         ServerCallContext context)
     {
@@ -557,9 +487,7 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var result = await UserManager.RemoveUserClaimsAsync(userId, request.ClaimIds, context.CancellationToken);
 
-        if (result.Succeeded) return DataResult.EmptySuccess().Adapt<AffectedResponse>();
-
-        return DataResult.EmptyFail($"删除失败。{result.DescribeError}").Adapt<AffectedResponse>();
+        return result.AffectedResponse();
     }
 
     #endregion

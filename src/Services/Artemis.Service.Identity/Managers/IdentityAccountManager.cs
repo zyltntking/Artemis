@@ -5,7 +5,7 @@ using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Context;
 using Artemis.Service.Identity.Stores;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

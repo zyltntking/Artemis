@@ -1,6 +1,7 @@
 using Artemis.Extensions.ServiceConnect.MapEndPoints;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,8 @@ public static class AspireExtensions
     /// <remarks>OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道</remarks>
     public static void AddServiceDefaults(this IHostApplicationBuilder builder)
     {
+        builder.AddAspireConfiguration();
+
         builder.ConfigureOpenTelemetry();
 
         builder.AddDefaultHealthChecks();
@@ -42,6 +45,24 @@ public static class AspireExtensions
             // Turn on service discovery by default
             http.AddServiceDiscovery();
         });
+    }
+
+    /// <summary>
+    ///     添加Aspire配置
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    private static void AddAspireConfiguration(
+        this IHostApplicationBuilder builder,
+        string path = "aspire.Component.Setting.json")
+    {
+        var aspireConfiguration = builder.Configuration.GetSection("Aspire");
+
+        if (Path.Exists(path) && !aspireConfiguration.Exists())
+        {
+            builder.Configuration.AddJsonFile(path, true, true);
+        }
     }
 
     /// <summary>

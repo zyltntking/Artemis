@@ -41,32 +41,32 @@ internal static class IdentityShared
 /// <summary>
 ///     预定义的Artemis授权策略
 /// </summary>
-public static class ArtemisAuthorizePolicy
+public static class AuthorizePolicy
 {
     /// <summary>
     ///     匿名策略
     /// </summary>
-    public const string Anonymous = nameof(ArtemisIdentityPolicy.Anonymous);
+    public const string Anonymous = nameof(IdentityPolicy.Anonymous);
 
     /// <summary>
     ///     令牌策略
     /// </summary>
-    public const string Token = nameof(ArtemisIdentityPolicy.Token);
+    public const string Token = nameof(IdentityPolicy.Token);
 
     /// <summary>
     ///     管理员策略
     /// </summary>
-    public const string Admin = nameof(ArtemisIdentityPolicy.Admin);
+    public const string Admin = nameof(IdentityPolicy.Admin);
 
     /// <summary>
     ///     操作名策略
     /// </summary>
-    public const string ActionName = nameof(ArtemisIdentityPolicy.ActionName);
+    public const string ActionName = nameof(IdentityPolicy.ActionName);
 
     /// <summary>
     ///     路由路径策略
     /// </summary>
-    public const string RoutePath = nameof(ArtemisIdentityPolicy.RoutePath);
+    public const string RoutePath = nameof(IdentityPolicy.RoutePath);
 
     /// <summary>
     ///     需求Token策略

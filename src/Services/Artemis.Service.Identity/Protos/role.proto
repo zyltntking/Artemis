@@ -5,26 +5,26 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "Protos/common.proto";
 
-package artemis.service.identity.protos;
+package Artemis.Service.Identity.Protos;
 
 // 角色服务协议
 service RoleService {
 	// 查询角色信息
-	rpc SearchUserInfo (SearchRoleInfoRequest) returns (SearchRoleInfoResponse) {
+	rpc SearchRoleInfo (SearchRoleInfoRequest) returns (SearchRoleInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Roles"
 		};
 	}
 
 	// 读取角色信息
-	rpc ReadUserInfo (ReadRoleInfoRequest) returns (ReadRoleInfoResponse) {
+	rpc ReadRoleInfo (ReadRoleInfoRequest) returns (ReadRoleInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Roles/{RoleId}"
 		};
 	}
 
 	// 创建角色
-	rpc CreateUser (CreateRoleRequest) returns (AffectedResponse) {
+	rpc CreateRole (CreateRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles"
 			body: "*"
@@ -32,7 +32,7 @@ service RoleService {
 	}
 
 	// 批量创建角色
-	rpc BatchCreateUser (BatchCreateRoleRequest) returns (AffectedResponse) {
+	rpc BatchCreateRole (BatchCreateRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/BatchCreate"
 			body: "Batch"
@@ -40,7 +40,7 @@ service RoleService {
 	}
 
 	// 更新角色
-	rpc UpdateUser (UpdateRoleRequest) returns (AffectedResponse) {
+	rpc UpdateRole (UpdateRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			put: "/api/Roles/{RoleId}"
 			body: "Role"
@@ -48,7 +48,7 @@ service RoleService {
 	}
 
 	// 批量更新角色
-	rpc BatchUpdateUser (BatchUpdateRoleRequest) returns (AffectedResponse) {
+	rpc BatchUpdateRole (BatchUpdateRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			put: "/api/Roles/BatchUpdate"
 			body: "Batch"
@@ -56,14 +56,14 @@ service RoleService {
 	}
 
 	// 删除角色
-	rpc DeleteUser (DeleteRoleRequest) returns (AffectedResponse) {
+	rpc DeleteRole (DeleteRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			delete: "/api/Roles/{RoleId}"
 		};
 	}
 
 	// 批量删除角色
-	rpc BatchDeleteUser (BatchDeleteRoleRequest) returns (AffectedResponse) {
+	rpc BatchDeleteRole (BatchDeleteRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/BatchDelete"
 			body: "RoleIds"
@@ -71,21 +71,21 @@ service RoleService {
 	}
 
 	// 查询角色用户信息
-	rpc SearchUserRoleInfo (SearchRoleUserInfoRequest) returns (SearchRoleUserInfoResponse) {
+	rpc SearchRoleUserInfo (SearchRoleUserInfoRequest) returns (SearchRoleUserInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Roles/{RoleId}/Users"
 		};
 	}
 
 	// 读取用户角色信息
-	rpc ReadUserRoleInfo (ReadRoleUserInfoRequest) returns (ReadRoleUserInfoResponse) {
+	rpc ReadRoleUserInfo (ReadRoleUserInfoRequest) returns (ReadRoleUserInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Roles/{RoleId}/Users/{UserId}"
 		};
 	}
 
 	// 添加角色用户
-	rpc AddUserRole (AddRoleUserRequest) returns (AffectedResponse) {
+	rpc AddRoleUser (AddRoleUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Users"
 			body: "User"
@@ -93,7 +93,7 @@ service RoleService {
 	}
 
 	// 批量添加角色用户
-	rpc BatchAddUserRole (BatchAddRoleUserRequest) returns (AffectedResponse) {
+	rpc BatchAddRoleUser (BatchAddRoleUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Users/BatchAdd"
 			body: "UserIds"
@@ -101,14 +101,14 @@ service RoleService {
 	}
 
 	// 移除角色用户
-	rpc RemoveUserRole (RemoveRoleUserRequest) returns (AffectedResponse) {
+	rpc RemoveRoleUser (RemoveRoleUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			delete: "/api/Roles/{RoleId}/Users/{UserId}"
 		};
 	}
 
 	// 批量移除角色用户
-	rpc BatchRemoveUserRole (BatchRemoveRoleUserRequest) returns (AffectedResponse) {
+	rpc BatchRemoveRoleUser (BatchRemoveRoleUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Users/BatchRemove"
 			body: "UserIds"
@@ -123,14 +123,14 @@ service RoleService {
 	}
 
 	// 读取角色凭据信息
-	rpc ReadUserClaimInfo (ReadRoleClaimInfoRequest) returns (ReadRoleClaimInfoResponse) {
+	rpc ReadRoleClaimInfo (ReadRoleClaimInfoRequest) returns (ReadRoleClaimInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Roles/{RoleId}/Claims/{ClaimId}"
 		};
 	}
 
 	// 添加角色凭据
-	rpc AddUserClaim (AddRoleClaimRequest) returns (AffectedResponse) {
+	rpc AddRoleClaim (AddRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Claims"
 			body: "RoleClaim"
@@ -138,7 +138,7 @@ service RoleService {
 	}
 
 	// 批量添加角色凭据
-	rpc BatchAddUserClaim (BatchAddRoleClaimRequest) returns (AffectedResponse) {
+	rpc BatchAddRoleClaim (BatchAddRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Claims/BatchAdd"
 			body: "Batch"
@@ -146,7 +146,7 @@ service RoleService {
 	}
 
 	// 更新角色凭据
-	rpc UpdateUserClaim (UpdateRoleClaimRequest) returns (AffectedResponse) {
+	rpc UpdateRoleClaim (UpdateRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			put: "/api/Roles/{RoleId}/Claims/{ClaimId}"
 			body: "RoleClaim"
@@ -154,7 +154,7 @@ service RoleService {
 	}
 
 	// 批量更新角色凭据
-	rpc BatchUpdateUserClaim (BatchUpdateRoleClaimRequest) returns (AffectedResponse) {
+	rpc BatchUpdateRoleClaim (BatchUpdateRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			put: "/api/Roles/{RoleId}/Claims/BatchUpdate"
 			body: "Batch"
@@ -162,14 +162,14 @@ service RoleService {
 	}
 
 	// 删除角色凭据
-	rpc DeleteUserClaim (RoleClaimIdRequest) returns (AffectedResponse) {
+	rpc DeleteRoleClaim (RoleClaimIdRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			delete: "/api/Roles/{RoleId}/Claims/{ClaimId}"
 		};
 	}
 
 	// 批量删除角色凭据
-	rpc BatchDeleteUserClaim (BatchDeleteRoleClaimRequest) returns (AffectedResponse) {
+	rpc BatchDeleteRoleClaim (BatchDeleteRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/Roles/{RoleId}/Claims/BatchDelete"
 			body: "ClaimIds"

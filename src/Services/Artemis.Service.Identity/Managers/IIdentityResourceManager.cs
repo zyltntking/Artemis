@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 
 namespace Artemis.Service.Identity.Managers;
 
@@ -29,16 +29,6 @@ public interface IIdentityResourceManager : IManager
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///     根据凭据类型获取凭据列表
-    /// </summary>
-    /// <param name="claimTypeSearch">凭据类型</param>
-    /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns></returns>
-    Task<List<ClaimInfo>> GetClaimsAsync(
-        string? claimTypeSearch,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///     根据凭据标识获取凭据
     /// </summary>
     /// <param name="id">凭据标识</param>
@@ -51,9 +41,9 @@ public interface IIdentityResourceManager : IManager
     /// <summary>
     ///     创建凭据
     /// </summary>
-    /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>创建结果和创建成功的凭据实例</returns>
+    /// <param name="package">凭据</param>
+    /// <returns>创建结果</returns>
     Task<StoreResult> CreateClaimAsync(
         ClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -87,7 +77,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
     Task<StoreResult> UpdateClaimsAsync(
-        IEnumerable<KeyValuePair<Guid, ClaimPackage>> packages,
+        IDictionary<Guid, ClaimPackage> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Extensions.Identity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Extensions.ServiceConnect.MapEndPoints;
 
@@ -46,12 +48,41 @@ public static class MapEndPointsExtensions
     /// <returns></returns>
     public static void MapRouteTable(this WebApplication app, string pattern = "/route-table")
     {
-        if (app.Environment.IsDevelopment())
-            app.MapGet(pattern,
-                (IEnumerable<EndpointDataSource> endpointSources) =>
-                {
-                    return string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
-                });
+        app.MapGet(pattern,
+            (IEnumerable<EndpointDataSource> endpointSources) =>
+            {
+                var endpointDataSources = endpointSources.ToList();
+
+                var endpoints = endpointDataSources
+                    .SelectMany(source => source.Endpoints)
+                    .Select(endPoint =>
+                    {
+                        if (endPoint is RouteEndpoint routeEndpoint)
+                        {
+                            var path = routeEndpoint.FetchRoutePath() ?? string.Empty;
+
+                            var routeType = path.Contains("/api") ? RouteType.Restful : RouteType.gRpc;
+
+                            return new RouteInfo
+                            {
+                                RouteType = routeType.Name,
+                                Path = path,
+                                Description = routeEndpoint.FetchDescription()
+                            };
+                        }
+
+                        return null;
+
+                    })
+                    .Where(route => route != null)
+                    .Where(route => route != null && !route.Path.Contains("unimplemented", StringComparison.OrdinalIgnoreCase))
+                    .Where(route => route != null && !route.Path.Contains("reflection", StringComparison.OrdinalIgnoreCase))
+                    .Where(route => (route != null && route.Path.StartsWith("/api", StringComparison.OrdinalIgnoreCase)) || 
+                                    (route != null && route.Path.StartsWith("/Artemis", StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+
+                return endpoints.Serialize();
+            });
     }
 
     /// <summary>
@@ -96,4 +127,25 @@ public static class MapEndPointsExtensions
 
         return context.Response.WriteAsJsonAsync(result);
     }
+}
+
+/// <summary>
+/// 路由信息
+/// </summary>
+public record RouteInfo
+{
+    /// <summary>
+    /// 路由类型
+    /// </summary>
+    public required string RouteType { get; init; }
+
+    /// <summary>
+    /// 路由路径
+    /// </summary>
+    public required string Path { get; init; }
+
+    /// <summary>
+    /// 路由描述
+    /// </summary>
+    public string? Description { get; init; }
 }

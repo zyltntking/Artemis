@@ -12,17 +12,6 @@ namespace Artemis.Extensions.ServiceConnect;
 /// </summary>
 public static class ComponentExtensions
 {
-    /// <summary>
-    ///     添加Aspire配置
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    public static void AddAspireConfiguration(this IHostApplicationBuilder builder,
-        string path = "aspire.Component.Setting.json")
-    {
-        builder.Configuration.AddJsonFile(path, true, true);
-    }
 
     /// <summary>
     ///     添加Redis组件

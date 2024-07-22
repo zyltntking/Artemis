@@ -3,7 +3,7 @@
 option csharp_namespace = "Artemis.Service.Identity.Protos";
 import "google/protobuf/wrappers.proto";
 
-package artemis.service.identity.protos;
+package Artemis.Service.Identity.Protos;
 
 // 空响应
 message EmptyResponse {

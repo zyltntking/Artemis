@@ -3564,43 +3564,6 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
-        <member name="T:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy">
-            <summary>
-                Artemis认证策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.Anonymous">
-            <summary>
-                匿名策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.Token">
-            <summary>
-                令牌策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.Admin">
-            <summary>
-                管理员策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.ActionName">
-            <summary>
-                操作名策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.RoutePath">
-            <summary>
-                路由路径策略
-            </summary>
-        </member>
-        <member name="M:Artemis.Data.Core.Fundamental.Types.ArtemisIdentityPolicy.#ctor(System.Int32,System.String)">
-            <summary>
-                构造函数
-            </summary>
-            <param name="id">枚举Id</param>
-            <param name="name">枚举名称</param>
-        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.BusType">
             <summary>
                 总线类型
@@ -4508,6 +4471,43 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.IdentityPolicy">
+            <summary>
+                Artemis认证策略
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.Anonymous">
+            <summary>
+                匿名策略
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.Token">
+            <summary>
+                令牌策略
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.Admin">
+            <summary>
+                管理员策略
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.ActionName">
+            <summary>
+                操作名策略
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.RoutePath">
+            <summary>
+                路由路径策略
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.IdentityPolicy.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.OperationType">
             <summary>
                 过滤操作类型
@@ -4849,6 +4849,28 @@
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.RegionLevel.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.RouteType">
+            <summary>
+            路由类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.RouteType.gRpc">
+            <summary>
+            gRpc
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.RouteType.Restful">
+            <summary>
+            Restful
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.RouteType.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数
             </summary>
@@ -5849,6 +5871,69 @@
             <summary>
                 是否启用分页
             </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.ResultAdapter">
+            <summary>
+                结果适配器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptSuccess``2(``1,System.Boolean)">
+            <summary>
+                成功结果
+            </summary>
+            <typeparam name="TResult">结果类型</typeparam>
+            <typeparam name="TData">数据类型</typeparam>
+            <param name="data">载荷数据</param>
+            <param name="usePagedResultConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptEmptySuccess``1">
+            <summary>
+                成功结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptFail``2(System.String)">
+            <summary>
+                失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptEmptyFail``1(System.String)">
+            <summary>
+                失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptAuthFail``1(System.String)">
+            <summary>
+                认证失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptValidateFail``1(System.String)">
+            <summary>
+                校验失败结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptException``1(System.Exception)">
+            <summary>
+                异常结果
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="exception"></param>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Data.Core.ISortSlot">
             <summary>

@@ -146,7 +146,7 @@ public class ArtemisIdentityOptions : IArtemisIdentityOptions
 
             var claimBasedPolicies = ClaimsBasedPolicyOptions?.Select(item => item.Name);
 
-            var policies = ArtemisAuthorizePolicy.TokenPolicies.AsEnumerable();
+            var policies = AuthorizePolicy.TokenPolicies.AsEnumerable();
 
             if (roleBasedPolicies != null) policies = policies.Concat(roleBasedPolicies);
 

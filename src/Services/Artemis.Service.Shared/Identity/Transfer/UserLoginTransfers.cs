@@ -1,20 +1,16 @@
 ﻿using Artemis.Service.Shared.Identity;
 
-namespace Artemis.Service.Shared.Transfer.Identity;
+namespace Artemis.Service.Shared.Identity.Transfer;
 
 /// <summary>
 ///     用户登录信息
 /// </summary>
 public record UserLoginInfo : UserLoginPackage, IUserLoginInfo
 {
-    #region Implementation of IUserLoginInfo
-
     /// <summary>
     ///     用户标识
     /// </summary>
     public Guid UserId { get; set; }
-
-    #endregion
 }
 
 /// <summary>

@@ -6,7 +6,7 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "Protos/common.proto";
 
-package artemis.service.identity.protos;
+package Artemis.Service.Identity.Protos;
 
 // 账户服务协议
 service AccountService {

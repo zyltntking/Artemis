@@ -1,6 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store;
-using Artemis.Service.Shared.Transfer.Identity;
+using Artemis.Service.Shared.Identity.Transfer;
 
 namespace Artemis.Service.Identity.Managers;
 
@@ -40,8 +40,8 @@ public interface IIdentityRoleManager : IManager
     /// </summary>
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
-    /// <returns>存储结果和创建成功的角色实例</returns>
-    Task<(StoreResult result, RoleInfo? role)> CreateRoleAsync(
+    /// <returns>存储结果</returns>
+    Task<StoreResult> CreateRoleAsync(
         RolePackage package,
         CancellationToken cancellationToken = default);
 
@@ -62,7 +62,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<(StoreResult result, RoleInfo? role)> UpdateRoleAsync(
+    Task<StoreResult> UpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default);
@@ -84,7 +84,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    Task<(StoreResult result, RoleInfo? role)> CreateOrUpdateRoleAsync(
+    Task<StoreResult> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default);
@@ -195,6 +195,7 @@ public interface IIdentityRoleManager : IManager
     /// </summary>
     /// <param name="id">角色id</param>
     /// <param name="claimTypeSearch">凭据类型</param>
+    /// <param name="claimValueSearch"></param>
     /// <param name="page">页码</param>
     /// <param name="size">页面尺寸</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -203,6 +204,7 @@ public interface IIdentityRoleManager : IManager
     Task<PageResult<RoleClaimInfo>> FetchRoleClaimsAsync(
         Guid id,
         string? claimTypeSearch = null,
+        string? claimValueSearch = null,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);

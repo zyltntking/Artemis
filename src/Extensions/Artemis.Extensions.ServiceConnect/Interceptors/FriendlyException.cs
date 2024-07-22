@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Artemis.Data.Core;
+using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
 
@@ -45,7 +46,7 @@ internal sealed class FriendlyException : Interceptor
         {
             Logger.LogInformation("格式化异常信息");
 
-            var response = RpcResultAdapter.Exception<TResponse>(exception);
+            var response = ResultAdapter.AdaptException<TResponse>(exception);
 
             return response;
         }
