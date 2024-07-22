@@ -44,8 +44,8 @@ public static class ServiceExtensions
     /// <param name="enableHandlerProxy"></param>
     /// <returns></returns>
     public static IServiceCollection AddIdentityServices<THandlerProxy>(
-        this IServiceCollection services, 
-        bool enableHandlerProxy = true) 
+        this IServiceCollection services,
+        bool enableHandlerProxy = true)
         where THandlerProxy : class, IHandlerProxy
     {
         services.AddIdentityServices();
@@ -66,7 +66,7 @@ public static class ServiceExtensions
         this IServiceCollection services,
         bool enableHandlerProxy = true,
         bool enableCacheProxy = true)
-        where THandlerProxy : class, IHandlerProxy 
+        where THandlerProxy : class, IHandlerProxy
         where TCacheProxy : class, ICacheProxy
     {
         services.AddIdentityServices<THandlerProxy>(enableHandlerProxy);

@@ -22,11 +22,12 @@ public static class CommonExtensions
     /// <param name="includeDefaultService"></param>
     /// <returns></returns>
     /// <remarks>默认：OpenTelemetry, 默认健康检查，服务发现，云原生Http客户端信道，常规：httpAccessor，压缩(生产环境)，认证，授权，http日志</remarks>
-    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder, bool includeDefaultService = true)
+    public static IHostApplicationBuilder AddServiceCommons(this IHostApplicationBuilder builder,
+        bool includeDefaultService = true)
     {
         builder.ConfigureSerilog();
 
-        if (includeDefaultService) 
+        if (includeDefaultService)
             builder.AddServiceDefaults();
 
         builder.Services.AddControllers();

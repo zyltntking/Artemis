@@ -3,22 +3,20 @@
 namespace Artemis.Data.Core.Fundamental.Types;
 
 /// <summary>
-/// 路由类型
+///     路由类型
 /// </summary>
 [Description("路由类型")]
 public class RouteType : Enumeration
 {
     /// <summary>
-    /// gRpc
+    ///     gRpc
     /// </summary>
-    [Description("gRpc")]
-    public static RouteType gRpc = new RouteType(1, nameof(gRpc));
+    [Description("gRpc")] public static RouteType gRpc = new(1, nameof(gRpc));
 
     /// <summary>
-    /// Restful
+    ///     Restful
     /// </summary>
-    [Description("Restful")]
-    public static RouteType Restful = new RouteType(2, nameof(Restful));
+    [Description("Restful")] public static RouteType Restful = new(2, nameof(Restful));
 
     /// <summary>
     ///     构造函数

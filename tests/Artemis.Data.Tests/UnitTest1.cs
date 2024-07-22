@@ -1,11 +1,9 @@
 using System.Security.Cryptography;
 using System.Text;
-using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental;
 using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Core.Fundamental.Protocol;
 using Artemis.Data.Core.Fundamental.Types;
-using Artemis.Service.Resource.Models;
 
 namespace Artemis.Data.Tests;
 

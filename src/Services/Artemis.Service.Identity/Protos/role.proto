@@ -162,7 +162,7 @@ service RoleService {
 	}
 
 	// 删除角色凭据
-	rpc DeleteRoleClaim (RoleClaimIdRequest) returns (AffectedResponse) {
+	rpc DeleteRoleClaim (DeleteRoleClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			delete: "/api/Roles/{RoleId}/Claims/{ClaimId}"
 		};
@@ -385,7 +385,7 @@ message SearchRoleUserInfoRequest {
    * @phone
    * @length(0,128)
    */
-	google.protobuf.StringValue Phone = 4;
+	google.protobuf.StringValue PhoneNumber = 4;
 	/* 页码
    * @min(0)
    */
@@ -819,7 +819,7 @@ message BatchUpdateRoleClaimRequest {
 }
 
 // 删除角色凭据请求
-message RoleClaimIdRequest {
+message DeleteRoleClaimRequest {
 	/* 用户标识
 	 * @required
 	 * @guid

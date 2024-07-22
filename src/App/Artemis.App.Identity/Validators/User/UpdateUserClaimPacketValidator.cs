@@ -5,16 +5,15 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.User;
 
 /// <summary>
-/// 更新用户凭据数据包验证
+///     更新用户凭据数据包验证
 /// </summary>
 public class UpdateUserClaimPacketValidator : AbstractValidator<UpdateUserClaimPacket>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public UpdateUserClaimPacketValidator()
     {
-
         RuleFor(request => request.ClaimType)
             .ShouldShorterThan(128)
             .When(request => request.ClaimType != null);

@@ -5,12 +5,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.User;
 
 /// <summary>
-/// 添加用户凭据数据包验证
+///     添加用户凭据数据包验证
 /// </summary>
 public class AddUserClaimPacketValidator : AbstractValidator<AddUserClaimPacket>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public AddUserClaimPacketValidator()
     {

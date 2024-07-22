@@ -1,548 +1,560 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Service.Task</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Service.Task.Context.ArtemisAgent">
-            <summary>
-                代理实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.Tasks">
-            <summary>
-                任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnits">
-            <summary>
-                任务单元
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskAgents">
-            <summary>
-                任务代理
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.ArtemisTask">
-            <summary>
-                任务实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Parent">
-            <summary>
-                父任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Children">
-            <summary>
-                子任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskUnits">
-            <summary>
-                任务单元
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskAgents">
-            <summary>
-                任务代理
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Agents">
-            <summary>
-                代理
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.ArtemisTaskAgent">
-            <summary>
-                任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Task">
-            <summary>
-                任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.TaskUnit">
-            <summary>
-                任务单元
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Agent">
-            <summary>
-                代理
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.ArtemisTaskTarget">
-            <summary>
-                任务目标实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskTarget.TaskUnit">
-            <summary>
-                任务单元
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.ArtemisTaskUnit">
-            <summary>
-                任务单元实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Task">
-            <summary>
-                任务
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskTargets">
-            <summary>
-                任务目标
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskAgents">
-            <summary>
-                任务代理
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Agents">
-            <summary>
-                代理
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration">
-            <summary>
-                代理数据集配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration">
-            <summary>
-                任务代理配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration">
-            <summary>
-                任务配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration">
-            <summary>
-                任务目标配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration">
-            <summary>
-                任务单元配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Context.TaskContext">
-            <summary>
-                任务业务上下文
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
-            <summary>
-                构造函数
-            </summary>
-            <param name="options">配置</param>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.TaskContext.Tasks">
-            <summary>
-                任务数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.TaskContext.Agents">
-            <summary>
-                代理数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnits">
-            <summary>
-                任务单元数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskTargets">
-            <summary>
-                任务目标数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskAgents">
-            <summary>
-                任务代理数据集
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Context.TaskContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-                配置数据模型
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Managers.ArtemisTaskManager">
-            <summary>
-                任务管理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="taskStore">存储访问器依赖</param>
-            <param name="taskAgentStores"></param>
-            <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="agentStore"></param>
-            <param name="taskUnitStore"></param>
-            <param name="taskTargetStore"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.StoreDispose">
-            <summary>
-                释放托管的Store
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Managers.IArtemisTaskManager">
-            <summary>
-                任务管理接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Models.Agent">
-            <summary>
-                代理模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Agent.AgentName">
-            <summary>
-                代理名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Agent.AgentType">
-            <summary>
-                代理类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Agent.AgentCode">
-            <summary>
-                代理编码
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Models.Task">
-            <summary>
-                任务模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.TaskName">
-            <summary>
-                任务名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.TaskStatus">
-            <summary>
-                任务状态
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.Description">
-            <summary>
-                任务描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.StartTime">
-            <summary>
-                任务开始时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.EndTime">
-            <summary>
-                任务结束时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.Task.ParentId">
-            <summary>
-                父任务标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Models.TaskAgent">
-            <summary>
-                任务代理模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskAgent.TaskId">
-            <summary>
-                任务Id
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskAgent.TaskUnitId">
-            <summary>
-                任务单元Id
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskAgent.AgentId">
-            <summary>
-                代理Id
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Models.TaskTarget">
-            <summary>
-                任务目标模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskId">
-            <summary>
-                任务Id
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskUnitId">
-            <summary>
-                任务单元Id
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.TargetId">
-            <summary>
-                目标Id
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskStatus">
-            <summary>
-                任务状态
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.Description">
-            <summary>
-                任务描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.StartTime">
-            <summary>
-                任务开始时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskTarget.EndTime">
-            <summary>
-                任务结束时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Models.TaskUnit">
-            <summary>
-                任务单元模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.TaskId">
-            <summary>
-                任务标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.UnitName">
-            <summary>
-                任务单元名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.TaskStatus">
-            <summary>
-                任务状态
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.Description">
-            <summary>
-                任务描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.StartTime">
-            <summary>
-                任务开始时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Task.Models.TaskUnit.EndTime">
-            <summary>
-                任务结束时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.ServiceExtensions">
-            <summary>
-                服务扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-                添加学校服务
-            </summary>
-            <param name="services"></param>
-        </member>
-        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-            <summary>
-                添加学校服务
-            </summary>
-            <param name="services"></param>
-            <param name="enableProxy"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisAgentStore">
-            <summary>
-                代理存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisAgentStore">
-            <summary>
-                代理存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskAgentStores">
-            <summary>
-                任务代理存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskAgentStores">
-            <summary>
-                任务代理存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="P:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.EntityKey">
-            <summary>
-                实体键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskStore">
-            <summary>
-                任务存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskStore">
-            <summary>
-                任务存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskTargetStore">
-            <summary>
-                任务目标存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskTargetStore">
-            <summary>
-                任务目标存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitStore">
-            <summary>
-                任务单元存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitStore">
-            <summary>
-                任务单元存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Service.Task</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Service.Task.Context.ArtemisAgent">
+			<summary>
+				代理实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.Tasks">
+			<summary>
+				任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnits">
+			<summary>
+				任务单元
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskAgents">
+			<summary>
+				任务代理
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.ArtemisTask">
+			<summary>
+				任务实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Parent">
+			<summary>
+				父任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Children">
+			<summary>
+				子任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskUnits">
+			<summary>
+				任务单元
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskAgents">
+			<summary>
+				任务代理
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Agents">
+			<summary>
+				代理
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.ArtemisTaskAgent">
+			<summary>
+				任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Task">
+			<summary>
+				任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.TaskUnit">
+			<summary>
+				任务单元
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Agent">
+			<summary>
+				代理
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.ArtemisTaskTarget">
+			<summary>
+				任务目标实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskTarget.TaskUnit">
+			<summary>
+				任务单元
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.ArtemisTaskUnit">
+			<summary>
+				任务单元实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Task">
+			<summary>
+				任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskTargets">
+			<summary>
+				任务目标
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskAgents">
+			<summary>
+				任务代理
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Agents">
+			<summary>
+				代理
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration">
+			<summary>
+				代理数据集配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration">
+			<summary>
+				任务代理配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration">
+			<summary>
+				任务配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration">
+			<summary>
+				任务目标配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration">
+			<summary>
+				任务单元配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Context.TaskContext">
+			<summary>
+				任务业务上下文
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
+			<summary>
+				构造函数
+			</summary>
+			<param name="options">配置</param>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.TaskContext.Tasks">
+			<summary>
+				任务数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.TaskContext.Agents">
+			<summary>
+				代理数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnits">
+			<summary>
+				任务单元数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskTargets">
+			<summary>
+				任务目标数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskAgents">
+			<summary>
+				任务代理数据集
+			</summary>
+		</member>
+		<member name="M:Artemis.Service.Task.Context.TaskContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<summary>
+				配置数据模型
+			</summary>
+			<param name="modelBuilder"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Managers.ArtemisTaskManager">
+			<summary>
+				任务管理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="taskStore">存储访问器依赖</param>
+			<param name="taskAgentStores"></param>
+			<param name="options">配置依赖</param>
+			<param name="logger">日志依赖</param>
+			<param name="agentStore"></param>
+			<param name="taskUnitStore"></param>
+			<param name="taskTargetStore"></param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Managers.IArtemisTaskManager">
+			<summary>
+				任务管理接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Models.Agent">
+			<summary>
+				代理模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Agent.AgentName">
+			<summary>
+				代理名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Agent.AgentType">
+			<summary>
+				代理类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Agent.AgentCode">
+			<summary>
+				代理编码
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Models.Task">
+			<summary>
+				任务模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.TaskName">
+			<summary>
+				任务名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.TaskStatus">
+			<summary>
+				任务状态
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.Description">
+			<summary>
+				任务描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.StartTime">
+			<summary>
+				任务开始时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.EndTime">
+			<summary>
+				任务结束时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.Task.ParentId">
+			<summary>
+				父任务标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Models.TaskAgent">
+			<summary>
+				任务代理模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskAgent.TaskId">
+			<summary>
+				任务Id
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskAgent.TaskUnitId">
+			<summary>
+				任务单元Id
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskAgent.AgentId">
+			<summary>
+				代理Id
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Models.TaskTarget">
+			<summary>
+				任务目标模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskId">
+			<summary>
+				任务Id
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskUnitId">
+			<summary>
+				任务单元Id
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.TargetId">
+			<summary>
+				目标Id
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskStatus">
+			<summary>
+				任务状态
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.Description">
+			<summary>
+				任务描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.StartTime">
+			<summary>
+				任务开始时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskTarget.EndTime">
+			<summary>
+				任务结束时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Models.TaskUnit">
+			<summary>
+				任务单元模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.TaskId">
+			<summary>
+				任务标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.UnitName">
+			<summary>
+				任务单元名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.TaskStatus">
+			<summary>
+				任务状态
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.Description">
+			<summary>
+				任务描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.StartTime">
+			<summary>
+				任务开始时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Task.Models.TaskUnit.EndTime">
+			<summary>
+				任务结束时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.ServiceExtensions">
+			<summary>
+				服务扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+			<summary>
+				添加学校服务
+			</summary>
+			<param name="services"></param>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+			<summary>
+				添加学校服务
+			</summary>
+			<param name="services"></param>
+			<param name="enableProxy"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.IArtemisAgentStore">
+			<summary>
+				代理存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.ArtemisAgentStore">
+			<summary>
+				代理存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskAgentStores">
+			<summary>
+				任务代理存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskAgentStores">
+			<summary>
+				任务代理存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="P:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.EntityKey">
+			<summary>
+				实体键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskStore">
+			<summary>
+				任务存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskStore">
+			<summary>
+				任务存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskTargetStore">
+			<summary>
+				任务目标存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskTargetStore">
+			<summary>
+				任务目标存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitStore">
+			<summary>
+				任务单元存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitStore">
+			<summary>
+				任务单元存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+	</members>
 </doc>

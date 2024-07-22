@@ -5,12 +5,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.User;
 
 /// <summary>
-/// 读取用户凭据信息请求验证
+///     读取用户凭据信息请求验证
 /// </summary>
 public class ReadUserClaimInfoRequestValidator : AbstractValidator<ReadUserClaimInfoRequest>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public ReadUserClaimInfoRequestValidator()
     {

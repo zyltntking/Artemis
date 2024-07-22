@@ -140,7 +140,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     {
         OnAsyncActionExecuting(cancellationToken);
 
-       var checkStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
+        var checkStamp = Normalize.KeyValuePairStamp(package.ClaimType, package.ClaimValue);
 
         var exists = await ClaimStore.EntityQuery
             .Where(claim => claim.CheckStamp == checkStamp)
@@ -213,7 +213,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
     public async Task<StoreResult> UpdateClaimAsync(
-        Guid id, 
+        Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
@@ -281,7 +281,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
     public async Task<StoreResult> CreateOrUpdateClaimAsync(
-        Guid id, 
+        Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default)
     {

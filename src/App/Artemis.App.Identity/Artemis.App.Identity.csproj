@@ -43,8 +43,4 @@
         <ProjectReference Include="..\..\Services\Artemis.Service.Identity\Artemis.Service.Identity.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Validators\Role\" />
-    </ItemGroup>
-
 </Project>

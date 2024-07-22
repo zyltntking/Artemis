@@ -72,13 +72,15 @@ public static class MapEndPointsExtensions
                         }
 
                         return null;
-
                     })
                     .Where(route => route != null)
-                    .Where(route => route != null && !route.Path.Contains("unimplemented", StringComparison.OrdinalIgnoreCase))
-                    .Where(route => route != null && !route.Path.Contains("reflection", StringComparison.OrdinalIgnoreCase))
-                    .Where(route => (route != null && route.Path.StartsWith("/api", StringComparison.OrdinalIgnoreCase)) || 
-                                    (route != null && route.Path.StartsWith("/Artemis", StringComparison.OrdinalIgnoreCase)))
+                    .Where(route =>
+                        route != null && !route.Path.Contains("unimplemented", StringComparison.OrdinalIgnoreCase))
+                    .Where(route =>
+                        route != null && !route.Path.Contains("reflection", StringComparison.OrdinalIgnoreCase))
+                    .Where(route =>
+                        (route != null && route.Path.StartsWith("/api", StringComparison.OrdinalIgnoreCase)) ||
+                        (route != null && route.Path.StartsWith("/Artemis", StringComparison.OrdinalIgnoreCase)))
                     .ToList();
 
                 return endpoints.Serialize();
@@ -130,22 +132,22 @@ public static class MapEndPointsExtensions
 }
 
 /// <summary>
-/// 路由信息
+///     路由信息
 /// </summary>
 public record RouteInfo
 {
     /// <summary>
-    /// 路由类型
+    ///     路由类型
     /// </summary>
     public required string RouteType { get; init; }
 
     /// <summary>
-    /// 路由路径
+    ///     路由路径
     /// </summary>
     public required string Path { get; init; }
 
     /// <summary>
-    /// 路由描述
+    ///     路由描述
     /// </summary>
     public string? Description { get; init; }
 }

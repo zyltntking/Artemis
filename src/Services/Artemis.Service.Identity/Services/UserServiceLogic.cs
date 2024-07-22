@@ -406,7 +406,8 @@ public class UserServiceLogic : UserService.UserServiceBase
 
         var package = request.UserClaim.Adapt<UserClaimPackage>();
 
-        var result = await UserManager.UpdateUserClaimAsync(userId, request.ClaimId, package, context.CancellationToken);
+        var result =
+            await UserManager.UpdateUserClaimAsync(userId, request.ClaimId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -439,7 +440,8 @@ public class UserServiceLogic : UserService.UserServiceBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteUserClaim(DeleteUserClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteUserClaim(DeleteUserClaimRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 

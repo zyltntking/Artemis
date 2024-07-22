@@ -21,10 +21,7 @@ internal static class SerilogExtensions
     {
         var serilogConfiguration = builder.Configuration.GetSection("Serilog");
 
-        if (Path.Exists(path) && !serilogConfiguration.Exists())
-        {
-            builder.Configuration.AddJsonFile(path, true, true);
-        }
+        if (Path.Exists(path) && !serilogConfiguration.Exists()) builder.Configuration.AddJsonFile(path, true, true);
 
         builder.Services.AddSerilog((services, configuration) =>
             configuration

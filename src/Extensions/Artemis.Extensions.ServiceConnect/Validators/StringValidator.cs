@@ -181,7 +181,7 @@ public static class StringValidator
     }
 
     /// <summary>
-    ///    应当短于指定长度
+    ///     应当短于指定长度
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="ruleBuilder"></param>

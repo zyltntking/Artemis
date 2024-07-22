@@ -14,11 +14,10 @@ public record ClaimInfo : ClaimPackage, IClaimInfo
     ///     校验戳
     /// </summary>
     public required string CheckStamp { get; set; }
-
 }
 
 /// <summary>
-/// 凭据数据包
+///     凭据数据包
 /// </summary>
 public record ClaimPackage : IClaimPackage
 {

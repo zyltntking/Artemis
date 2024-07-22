@@ -13,7 +13,7 @@ public interface IClaim : IClaimInfo;
 public interface IClaimInfo : IClaimPackage, ICheckStamp, IKeySlot;
 
 /// <summary>
-/// 凭据数据包
+///     凭据数据包
 /// </summary>
 public interface IClaimPackage
 {

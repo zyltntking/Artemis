@@ -59,10 +59,7 @@ public static class AspireExtensions
     {
         var aspireConfiguration = builder.Configuration.GetSection("Aspire");
 
-        if (Path.Exists(path) && !aspireConfiguration.Exists())
-        {
-            builder.Configuration.AddJsonFile(path, true, true);
-        }
+        if (Path.Exists(path) && !aspireConfiguration.Exists()) builder.Configuration.AddJsonFile(path, true, true);
     }
 
     /// <summary>

@@ -4,12 +4,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.Resource;
 
 /// <summary>
-/// 批量更新凭据请求验证
+///     批量更新凭据请求验证
 /// </summary>
 public class BatchUpdateClaimRequestValidator : AbstractValidator<BatchUpdateClaimRequest>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public BatchUpdateClaimRequestValidator()
     {

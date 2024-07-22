@@ -5,12 +5,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.Resource;
 
 /// <summary>
-/// 查询凭据信息请求验证
+///     查询凭据信息请求验证
 /// </summary>
 public class SearchClaimInfoRequestValidator : AbstractValidator<SearchClaimInfoRequest>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public SearchClaimInfoRequestValidator()
     {
@@ -19,7 +19,7 @@ public class SearchClaimInfoRequestValidator : AbstractValidator<SearchClaimInfo
             .When(request => request.ClaimType != null);
 
         RuleFor(request => request.ClaimValue)
-            .ShouldShorterThan( 512)
+            .ShouldShorterThan(512)
             .When(request => request.ClaimValue != null);
 
         RuleFor(request => request.Page)

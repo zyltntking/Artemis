@@ -5,7 +5,6 @@
 /// </summary>
 public record RoleClaimInfo : RoleClaimPackage, IRoleClaimInfo
 {
-
     /// <summary>
     ///     存储标识
     /// </summary>
@@ -20,7 +19,6 @@ public record RoleClaimInfo : RoleClaimPackage, IRoleClaimInfo
     ///     校验戳
     /// </summary>
     public required string CheckStamp { get; set; }
-
 }
 
 /// <summary>

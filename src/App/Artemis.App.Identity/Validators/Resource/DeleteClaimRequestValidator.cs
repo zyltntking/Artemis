@@ -5,12 +5,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.Resource;
 
 /// <summary>
-/// 删除凭据请求验证
+///     删除凭据请求验证
 /// </summary>
 public class DeleteClaimRequestValidator : AbstractValidator<DeleteClaimRequest>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public DeleteClaimRequestValidator()
     {

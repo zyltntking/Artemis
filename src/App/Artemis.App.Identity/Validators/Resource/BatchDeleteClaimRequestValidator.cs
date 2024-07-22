@@ -5,12 +5,12 @@ using FluentValidation;
 namespace Artemis.App.Identity.Validators.Resource;
 
 /// <summary>
-/// 批量删除凭据请求验证
+///     批量删除凭据请求验证
 /// </summary>
 public class BatchDeleteClaimRequestValidator : AbstractValidator<BatchDeleteClaimRequest>
 {
     /// <summary>
-    /// 构造
+    ///     构造
     /// </summary>
     public BatchDeleteClaimRequestValidator()
     {

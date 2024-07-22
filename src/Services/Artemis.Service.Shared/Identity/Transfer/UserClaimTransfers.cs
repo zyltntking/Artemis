@@ -19,7 +19,6 @@ public record UserClaimInfo : UserClaimPackage, IUserClaimInfo
     ///     校验戳
     /// </summary>
     public required string CheckStamp { get; set; }
-
 }
 
 /// <summary>

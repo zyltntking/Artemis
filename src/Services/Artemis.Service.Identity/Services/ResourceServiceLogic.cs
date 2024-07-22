@@ -97,14 +97,15 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     }
 
     /// <summary>
-    /// 批量创建凭据
+    ///     批量创建凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateClaim(BatchCreateClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateClaim(BatchCreateClaimRequest request,
+        ServerCallContext context)
     {
         var claims = request.Batch.Adapt<IEnumerable<ClaimPackage>>();
 
@@ -114,7 +115,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     }
 
     /// <summary>
-    /// 更新凭据
+    ///     更新凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -133,17 +134,18 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     }
 
     /// <summary>
-    /// 批量更新凭据
+    ///     批量更新凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchUpdateClaim(BatchUpdateClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchUpdateClaim(BatchUpdateClaimRequest request,
+        ServerCallContext context)
     {
         var packages = request.Batch.ToDictionary(
-            item => Guid.Parse(item.ClaimId), 
+            item => Guid.Parse(item.ClaimId),
             item => item.Claim.Adapt<ClaimPackage>());
 
         var result = await ResourceManager.UpdateClaimsAsync(packages, context.CancellationToken);
@@ -152,7 +154,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     }
 
     /// <summary>
-    /// 删除凭据
+    ///     删除凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -169,14 +171,15 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     }
 
     /// <summary>
-    /// 批量删除凭据
+    ///     批量删除凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteClaim(BatchDeleteClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteClaim(BatchDeleteClaimRequest request,
+        ServerCallContext context)
     {
         var claimIds = request.ClaimIds.Select(Guid.Parse);
 
