@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Shared", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Extensions.Identity", "src\Extensions\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj", "{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Task", "src\App\Artemis.App.Task\Artemis.App.Task.csproj", "{36809708-FFBA-4D13-8AE9-CE18A06B86E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36809708-FFBA-4D13-8AE9-CE18A06B86E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36809708-FFBA-4D13-8AE9-CE18A06B86E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36809708-FFBA-4D13-8AE9-CE18A06B86E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36809708-FFBA-4D13-8AE9-CE18A06B86E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{7D622E35-9A02-4D7F-B627-8548D32BA2C2} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{E3DA2068-8CFC-4FB0-A8D3-15CDA0EE8245} = {D5E44F9E-966F-4AE9-9F37-D2590AEF09F8}
 		{B5ED9E12-01D4-40A5-9088-6C0FB7E13CCE} = {E5C1D629-668C-42F2-81A2-4395D4F83BAE}
+		{36809708-FFBA-4D13-8AE9-CE18A06B86E4} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

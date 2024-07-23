@@ -7,15 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore.Server" Version="2.63.0"/>
+        <PackageReference Include="Grpc.AspNetCore.Server" Version="2.64.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj"/>
+        <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
     </ItemGroup>
 
 </Project>

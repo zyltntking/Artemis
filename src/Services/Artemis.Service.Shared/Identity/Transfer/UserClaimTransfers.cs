@@ -8,7 +8,7 @@ public record UserClaimInfo : UserClaimPackage, IUserClaimInfo
     /// <summary>
     ///     存储标识
     /// </summary>
-    public required int Id { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     ///     用户标识

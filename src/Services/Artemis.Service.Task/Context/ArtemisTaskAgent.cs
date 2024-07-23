@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Task.Context;
 
 /// <summary>
-///     任务
+///     任务代理
 /// </summary>
 [EntityTypeConfiguration(typeof(ArtemisTaskAgentConfiguration))]
 public sealed class ArtemisTaskAgent : TaskAgent
@@ -14,11 +14,6 @@ public sealed class ArtemisTaskAgent : TaskAgent
     ///     任务
     /// </summary>
     public required ArtemisTask Task { get; set; }
-
-    /// <summary>
-    ///     任务单元
-    /// </summary>
-    public required ArtemisTaskUnit TaskUnit { get; set; }
 
 
     /// <summary>

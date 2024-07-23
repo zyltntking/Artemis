@@ -17,7 +17,7 @@ namespace Artemis.Service.Identity.Services;
 /// <summary>
 ///     账户服务
 /// </summary>
-public class AccountServiceLogic : AccountService.AccountServiceBase
+public class AccountServiceImplement : AccountService.AccountServiceBase
 {
     /// <summary>
     ///     账户服务
@@ -27,12 +27,12 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <param name="cache"></param>
     /// <param name="options"></param>
     /// <param name="logger">日志记录器</param>
-    public AccountServiceLogic(
+    public AccountServiceImplement(
         IIdentityAccountManager accountManager,
         IIdentityUserManager userManager,
         IDistributedCache cache,
         IOptions<ArtemisIdentityOptions> options,
-        ILogger<AccountServiceLogic> logger)
+        ILogger<AccountServiceImplement> logger)
     {
         AccountManager = accountManager;
         UserManager = userManager;
@@ -64,7 +64,7 @@ public class AccountServiceLogic : AccountService.AccountServiceBase
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<AccountServiceLogic> Logger { get; }
+    private ILogger<AccountServiceImplement> Logger { get; }
 
     #region Overrides of AccountBase
 

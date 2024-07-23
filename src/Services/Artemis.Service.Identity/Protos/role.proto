@@ -181,7 +181,7 @@ service RoleService {
 // 查询角色信息请求
 message SearchRoleInfoRequest {
   /* 角色名
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue RoleName = 1;
   /* 页码
@@ -204,11 +204,11 @@ message RoleInfoPacket {
   /*
    * 角色名
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
 	string RoleName = 2;
   /* 角色描述
-   * @length(0,256)
+   * @maxLength(256)
    */
 	google.protobuf.StringValue Description = 3;
 }
@@ -298,11 +298,11 @@ message ReadRoleInfoResponse {
 message CreateRoleRequest {
 	/* 角色名
 	 * @required
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	string RoleName = 1;
 	/* 角色描述
-   * @length(0,256)
+   * @maxLength(256)
    */
 	google.protobuf.StringValue Description = 2;
 }
@@ -318,11 +318,11 @@ message BatchCreateRoleRequest {
 // 更新角色数据包
 message UpdateRolePacket {
 	/* 角色名
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue RoleName = 1;
 	/* 角色描述
-   * @length(0,256)
+   * @maxLength(256)
    */
 	google.protobuf.StringValue Description = 2;
 }
@@ -373,17 +373,17 @@ message SearchRoleUserInfoRequest {
    */
 	string RoleId = 1;
 	/* 用户名
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue UserName = 2;
 	/* 邮箱
    * @email
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue Email = 3;
 	/* 手机号码
    * @phone
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue PhoneNumber = 4;
 	/* 页码
@@ -411,17 +411,17 @@ message RoleUserInfoPacket {
 	/*
    * 用户名
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
 	string UserName = 3;
 	/* 邮箱
    * @email
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue Email = 4;
 	/* 手机号码
    * @phone
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue PhoneNumber = 5;
 }
@@ -584,11 +584,11 @@ message SearchRoleClaimInfoRequest {
    */
 	string RoleId = 1;
 	/* 类型
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue ClaimType = 2;
 	/* 值
-   * @length(1,512)
+   * @maxLength(512)
    */
 	google.protobuf.StringValue ClaimValue = 3;
 	/* 页码
@@ -614,12 +614,12 @@ message RoleClaimInfoPacket {
 	string RoleId = 2;
 	/* 凭据类型
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
 	string ClaimType = 3;
 	/* 凭据值
    * @required
-   * @length(1,512)
+   * @maxLength(512)
    */
 	string ClaimValue = 4;
 	/* 校验戳
@@ -720,16 +720,16 @@ message ReadRoleClaimInfoResponse {
 message AddRoleClaimPacket {
 	/* 凭据类型
 	 * @required
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	string ClaimType = 1;
 	/* 凭据值
 	 * @required
-	 * @length(1,512)
+	 * @maxLength(512)
 	 */
 	string ClaimValue = 2;
 	/* 描述
-	 * @length(0,256)
+	 * @maxLength(256)
 	 */
 	google.protobuf.StringValue Description = 3;
 }
@@ -763,15 +763,15 @@ message BatchAddRoleClaimRequest {
 // 更新角色凭据数据包
 message UpdateRoleClaimPacket {
 	/* 凭据类型
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue ClaimType = 1;
 	/* 凭据值
-	 * @length(1,512)
+	 * @maxLength(512)
 	 */
 	google.protobuf.StringValue ClaimValue = 2;
 	/* 描述
-	 * @length(0,256)
+	 * @maxLength(256)
 	 */
 	google.protobuf.StringValue Description = 3;
 }

@@ -180,17 +180,17 @@ service UserService {
 // 查询用户信息请求
 message SearchUserInfoRequest {
 	/* 用户名
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue UserName = 1;
 	/* 邮箱
    * @email
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue Email = 2;
 	/* 手机号码
    * @phone
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue Phone = 3;
 	/* 页码
@@ -213,17 +213,17 @@ message UserInfoPacket {
 	/*
    * 用户名
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
 	string UserName = 2;
 	/* 邮箱
    * @email
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue Email = 3;
 	/* 手机号码
    * @phone
-   * @length(0,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue PhoneNumber = 4;
 }
@@ -313,7 +313,7 @@ message ReadUserInfoResponse {
 message CreateUserRequest {
 	/* 用户名
 	 * @required
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	string UserName = 1;
 	/* 密码
@@ -323,12 +323,12 @@ message CreateUserRequest {
 	string Password = 2;
 	/* 邮箱
 	 * @email
-	 * @length(0,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue Email = 3;
 	/* 手机号码
 	 * @phone
-	 * @length(0,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue PhoneNumber = 4;
 }
@@ -344,17 +344,17 @@ message BatchCreateUserRequest {
 // 更新用户数据包
 message UpdateUserPacket {
 	/* 用户名
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue UserName = 1;
 	/* 邮箱
 	 * @email
-	 * @length(0,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue Email = 2;
 	/* 手机号码
 	 * @phone
-	 * @length(0,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue PhoneNumber = 3;
 }
@@ -405,7 +405,7 @@ message SearchUserRoleInfoRequest {
    */
 	string UserId = 1;
 	/* 角色名称
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue RoleName = 2;
 	/* 页码
@@ -432,11 +432,11 @@ message UserRoleInfoPacket {
 	string RoleId = 2;
 	/* 角色名称
 	 * @required
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	string Name = 3;
 	/* 角色描述
-	 * @length(0,256)
+	 * @maxLength(256)
 	 */
 	google.protobuf.StringValue Description = 4;
 }
@@ -599,11 +599,11 @@ message SearchUserClaimInfoRequest {
    */
 	string UserId = 1;
 	/* 类型
-   * @length(1,128)
+   * @maxLength(128)
    */
 	google.protobuf.StringValue ClaimType = 2;
 	/* 值
-   * @length(1,512)
+   * @maxLength(512)
    */
 	google.protobuf.StringValue ClaimValue = 3;
 	/* 页码
@@ -629,12 +629,12 @@ message UserClaimInfoPacket {
 	string UserId = 2;
 	/* 凭据类型
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
 	string ClaimType = 3;
 	/* 凭据值
    * @required
-   * @length(1,512)
+   * @maxLength(512)
    */
 	string ClaimValue = 4;
 	/* 校验戳
@@ -735,16 +735,16 @@ message ReadUserClaimInfoResponse {
 message AddUserClaimPacket {
 	/* 凭据类型
 	 * @required
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	string ClaimType = 1;
 	/* 凭据值
 	 * @required
-	 * @length(1,512)
+	 * @maxLength(512)
 	 */
 	string ClaimValue = 2;
 	/* 描述
-	 * @length(0,256)
+	 * @maxLength(256)
 	 */
 	google.protobuf.StringValue Description = 3;
 }
@@ -778,15 +778,15 @@ message BatchAddUserClaimRequest {
 // 更新用户凭据数据包
 message UpdateUserClaimPacket {
 	/* 凭据类型
-	 * @length(1,128)
+	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue ClaimType = 1;
 	/* 凭据值
-	 * @length(1,512)
+	 * @maxLength(512)
 	 */
 	google.protobuf.StringValue ClaimValue = 2;
 	/* 描述
-	 * @length(0,256)
+	 * @maxLength(256)
 	 */
 	google.protobuf.StringValue Description = 3;
 }

@@ -3,6 +3,7 @@ using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Shared;
 using Artemis.Service.Task;
 using Artemis.Service.Task.Context;
+using Artemis.Service.Task.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -28,9 +29,6 @@ public class Program
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
-            builder.AddAspireConfiguration();
-
-            builder.ConfigureSerilog();
 
             builder.AddServiceCommons();
 
@@ -44,7 +42,14 @@ public class Program
                     optionsBuilder.MigrationsHistoryTable("TaskDbHistory", Project.Schemas.Task);
                     optionsBuilder.MigrationsAssembly("Artemis.App.Task");
                 }, Log.Debug)
-                .AddTaskServices<ArtemisHandlerProxy>();
+                .AddTaskServices();
+
+            //≈‰÷√»œ÷§
+            builder.Services.AddAuthentication()
+                .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
+
+            //≈‰÷√ ⁄»®
+            builder.ConfigureAuthorization();
 
             var isMigration = false;
 
@@ -69,10 +74,7 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            //app.MapGrpcService<SampleService>();
-            //app.MapGrpcService<AccountService>();
-            //app.MapGrpcService<UserService>();
-            //app.MapGrpcService<RoleService>();
+            app.MapGrpcService<TaskServiceImplement>();
 
             // map common endpoints
             app.MapCommonEndpoints<TaskContext>();

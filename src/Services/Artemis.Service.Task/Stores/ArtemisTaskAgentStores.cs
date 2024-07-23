@@ -43,5 +43,5 @@ public sealed class ArtemisTaskAgentStores : KeyLessStore<ArtemisTaskAgent>, IAr
     ///     实体键生成委托
     /// </summary>
     protected override Func<ArtemisTaskAgent, string>? EntityKey { get; init; } =
-        taskAgent => $"{taskAgent.TaskUnitId}:{taskAgent.AgentId}";
+        taskAgent => $"{taskAgent.TaskId}:{taskAgent.AgentId}";
 }

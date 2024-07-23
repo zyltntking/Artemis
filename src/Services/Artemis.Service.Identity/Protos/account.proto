@@ -75,7 +75,7 @@ enum SignEndType {
 message SignInRequest {
   /* 用户标识
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
   string UserSign = 1;
   /* 密码
@@ -95,7 +95,7 @@ message SignUpRequest {
   /*
    * 用户名
    * @required
-   * @length(1,128)
+   * @maxLength(128)
    */
   string UserName = 1;
   /* 密码
@@ -106,12 +106,12 @@ message SignUpRequest {
   string Password = 2;
   /* 邮箱
    * @email
-   * @length(0,128)
+   * @maxLength(128)
    */
   google.protobuf.StringValue Email = 3;
   /* 手机号码
    * @phone
-   * @length(0,128)
+   * @maxLength(128)
    */
   google.protobuf.StringValue Phone = 4;
 }

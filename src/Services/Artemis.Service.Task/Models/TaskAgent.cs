@@ -17,13 +17,6 @@ public class TaskAgent : ITaskAgent
     public Guid TaskId { get; set; }
 
     /// <summary>
-    ///     任务单元Id
-    /// </summary>
-    [Required]
-    [Comment("任务单元标识")]
-    public Guid TaskUnitId { get; set; }
-
-    /// <summary>
     ///     代理Id
     /// </summary>
     [Required]

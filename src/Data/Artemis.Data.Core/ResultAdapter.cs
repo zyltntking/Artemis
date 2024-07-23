@@ -13,11 +13,13 @@ public static class ResultAdapter
     /// <typeparam name="TResult">结果类型</typeparam>
     /// <typeparam name="TData">数据类型</typeparam>
     /// <param name="data">载荷数据</param>
-    /// <param name="usePagedResultConfig"></param>
+    /// <param name="config">映射配置</param>
     /// <returns></returns>
-    public static TResult AdaptSuccess<TResult, TData>(TData data, bool usePagedResultConfig = false)
+    public static TResult AdaptSuccess<TResult, TData>(TData data, TypeAdapterConfig? config = null)
     {
-        return DataResult.Success(data).Adapt<TResult>();
+        if (config is null) return DataResult.Success(data).Adapt<TResult>();
+
+        return DataResult.Success(data).Adapt<TResult>(config);
     }
 
     /// <summary>

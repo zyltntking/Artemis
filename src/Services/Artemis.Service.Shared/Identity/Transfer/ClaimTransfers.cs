@@ -8,7 +8,7 @@ public record ClaimInfo : ClaimPackage, IClaimInfo
     /// <summary>
     ///     存储标识
     /// </summary>
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     ///     校验戳

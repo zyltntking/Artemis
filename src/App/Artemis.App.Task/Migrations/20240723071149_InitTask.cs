@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Artemis.App.Task.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialTask : Migration
+    public partial class InitTask : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,9 +23,9 @@ namespace Artemis.App.Task.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     Partition = table.Column<int>(type: "integer", nullable: false, comment: "分区标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
                     AgentName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "代理名称"),
@@ -47,16 +47,19 @@ namespace Artemis.App.Task.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     Partition = table.Column<int>(type: "integer", nullable: false, comment: "分区标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
-                    TaskName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false, comment: "任务名称"),
-                    TaskStatus = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "任务状态"),
-                    Description = table.Column<string>(type: "text", nullable: true, comment: "任务描述"),
-                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "任务开始时间"),
-                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "任务结束时间"),
+                    TaskName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "任务名称"),
+                    NormalizedTaskName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false, comment: "任务名称"),
+                    TaskShip = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "任务归属"),
+                    TaskMode = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "任务模式"),
+                    TaskStatus = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false, comment: "任务状态"),
+                    Description = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true, comment: "任务描述"),
+                    StartTime = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "任务开始时间"),
+                    EndTime = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "任务结束时间"),
                     ParentId = table.Column<Guid>(type: "uuid", nullable: false, comment: "父任务标识")
                 },
                 constraints: table =>
@@ -73,6 +76,34 @@ namespace Artemis.App.Task.Migrations
                 comment: "任务数据集");
 
             migrationBuilder.CreateTable(
+                name: "ArtemisTaskAgent",
+                schema: "Task",
+                columns: table => new
+                {
+                    TaskId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务标识"),
+                    AgentId = table.Column<Guid>(type: "uuid", nullable: false, comment: "代理标识")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtemisTaskAgent", x => new { x.TaskId, x.AgentId });
+                    table.ForeignKey(
+                        name: "FK_ArtemisTaskAgent_ArtemisAgent",
+                        column: x => x.AgentId,
+                        principalSchema: "Task",
+                        principalTable: "ArtemisAgent",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtemisTaskAgent_ArtemisTask",
+                        column: x => x.TaskId,
+                        principalSchema: "Task",
+                        principalTable: "ArtemisTask",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                },
+                comment: "任务代理配置");
+
+            migrationBuilder.CreateTable(
                 name: "ArtemisTaskUnit",
                 schema: "Task",
                 columns: table => new
@@ -81,9 +112,9 @@ namespace Artemis.App.Task.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     Partition = table.Column<int>(type: "integer", nullable: false, comment: "分区标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
                     TaskId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务标识"),
@@ -107,42 +138,6 @@ namespace Artemis.App.Task.Migrations
                 comment: "任务单元数据集");
 
             migrationBuilder.CreateTable(
-                name: "ArtemisTaskAgent",
-                schema: "Task",
-                columns: table => new
-                {
-                    TaskUnitId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务单元标识"),
-                    AgentId = table.Column<Guid>(type: "uuid", nullable: false, comment: "代理标识"),
-                    TaskId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务标识")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArtemisTaskAgent", x => new { x.TaskUnitId, x.AgentId });
-                    table.ForeignKey(
-                        name: "FK_ArtemisTaskAgent_ArtemisAgent",
-                        column: x => x.AgentId,
-                        principalSchema: "Task",
-                        principalTable: "ArtemisAgent",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArtemisTaskAgent_ArtemisTask",
-                        column: x => x.TaskId,
-                        principalSchema: "Task",
-                        principalTable: "ArtemisTask",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArtemisTaskAgent_ArtemisTaskUnit",
-                        column: x => x.TaskUnitId,
-                        principalSchema: "Task",
-                        principalTable: "ArtemisTaskUnit",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                },
-                comment: "任务代理配置");
-
-            migrationBuilder.CreateTable(
                 name: "ArtemisTaskTarget",
                 schema: "Task",
                 columns: table => new
@@ -151,9 +146,9 @@ namespace Artemis.App.Task.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "创建时间"),
                     UpdatedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: false, comment: "更新时间"),
                     DeletedAt = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, comment: "删除时间"),
-                    CreateBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "创建者标识"),
-                    ModifyBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "更新者标识"),
-                    RemoveBy = table.Column<Guid>(type: "UUID", nullable: false, comment: "删除者标识"),
+                    CreateBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "创建者标识"),
+                    ModifyBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false, comment: "更新者标识"),
+                    RemoveBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "删除者标识"),
                     Partition = table.Column<int>(type: "integer", nullable: false, comment: "分区标识"),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true, comment: "并发锁"),
                     TaskId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务标识"),
@@ -176,6 +171,34 @@ namespace Artemis.App.Task.Migrations
                         onDelete: ReferentialAction.Cascade);
                 },
                 comment: "任务目标数据集");
+
+            migrationBuilder.CreateTable(
+                name: "ArtemisTaskUnitAgent",
+                schema: "Task",
+                columns: table => new
+                {
+                    TaskUnitId = table.Column<Guid>(type: "uuid", nullable: false, comment: "任务单元标识"),
+                    AgentId = table.Column<Guid>(type: "uuid", nullable: false, comment: "代理标识")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtemisTaskUnitAgent", x => new { x.TaskUnitId, x.AgentId });
+                    table.ForeignKey(
+                        name: "FK_ArtemisTaskUnitAgent_ArtemisAgent",
+                        column: x => x.AgentId,
+                        principalSchema: "Task",
+                        principalTable: "ArtemisAgent",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtemisTaskUnitAgent_ArtemisTaskUnit",
+                        column: x => x.TaskUnitId,
+                        principalSchema: "Task",
+                        principalTable: "ArtemisTaskUnit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                },
+                comment: "任务单元代理配置");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisAgent_CreateBy",
@@ -238,6 +261,12 @@ namespace Artemis.App.Task.Migrations
                 column: "DeletedAt");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_EndTime",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "EndTime");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTask_ModifyBy",
                 schema: "Task",
                 table: "ArtemisTask",
@@ -262,6 +291,37 @@ namespace Artemis.App.Task.Migrations
                 column: "RemoveBy");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_StartTime",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "StartTime");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_TaskMode",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "TaskMode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_TaskName",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "NormalizedTaskName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_TaskShip",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "TaskShip");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTask_TaskStatus",
+                schema: "Task",
+                table: "ArtemisTask",
+                column: "TaskStatus");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTask_UpdatedAt",
                 schema: "Task",
                 table: "ArtemisTask",
@@ -272,12 +332,6 @@ namespace Artemis.App.Task.Migrations
                 schema: "Task",
                 table: "ArtemisTaskAgent",
                 column: "AgentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ArtemisTaskAgent_TaskId",
-                schema: "Task",
-                table: "ArtemisTaskAgent",
-                column: "TaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTaskTarget_CreateBy",
@@ -374,6 +428,12 @@ namespace Artemis.App.Task.Migrations
                 schema: "Task",
                 table: "ArtemisTaskUnit",
                 column: "UpdatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtemisTaskUnitAgent_AgentId",
+                schema: "Task",
+                table: "ArtemisTaskUnitAgent",
+                column: "AgentId");
         }
 
         /// <inheritdoc />
@@ -385,6 +445,10 @@ namespace Artemis.App.Task.Migrations
 
             migrationBuilder.DropTable(
                 name: "ArtemisTaskTarget",
+                schema: "Task");
+
+            migrationBuilder.DropTable(
+                name: "ArtemisTaskUnitAgent",
                 schema: "Task");
 
             migrationBuilder.DropTable(

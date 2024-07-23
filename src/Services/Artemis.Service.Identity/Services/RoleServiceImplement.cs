@@ -11,459 +11,461 @@ using Microsoft.Extensions.Logging;
 namespace Artemis.Service.Identity.Services;
 
 /// <summary>
-///     用户服务
+///     角色服务
 /// </summary>
-public class UserServiceLogic : UserService.UserServiceBase
+public class RoleServiceImplement : RoleService.RoleServiceBase
 {
     /// <summary>
     ///     账户服务
     /// </summary>
-    /// <param name="userManager">用户管理器</param>
+    /// <param name="roleManager">角色管理器</param>
     /// <param name="logger">日志记录器</param>
-    public UserServiceLogic(
-        IIdentityUserManager userManager,
-        ILogger<AccountServiceLogic> logger)
+    public RoleServiceImplement(
+        IIdentityRoleManager roleManager,
+        ILogger<RoleServiceImplement> logger)
     {
-        UserManager = userManager;
+        RoleManager = roleManager;
         Logger = logger;
     }
 
     /// <summary>
-    ///     用户管理器
+    ///     角色管理器
     /// </summary>
-    private IIdentityUserManager UserManager { get; }
+    private IIdentityRoleManager RoleManager { get; }
 
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<AccountServiceLogic> Logger { get; }
+    private ILogger<RoleServiceImplement> Logger { get; }
 
-    #region Overrides of UserBase
+    #region Overrides of RoleServiceBase
 
     /// <summary>
-    ///     查询用户信息
+    ///     查询角色信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("查询用户信息")]
+    [Description("查询角色信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<SearchUserInfoResponse> SearchUserInfo(SearchUserInfoRequest request,
+    public override async Task<SearchRoleInfoResponse> SearchRoleInfo(SearchRoleInfoRequest request,
         ServerCallContext context)
     {
-        var userInfos = await UserManager.FetchUserAsync(
-            request.UserName,
-            request.Email,
-            request.Phone,
-            request.Page ?? 0,
-            request.Size ?? 0,
-            context.CancellationToken);
-
-        return userInfos.PagedResponse<SearchUserInfoResponse, UserInfo>();
-    }
-
-    /// <summary>
-    ///     读取用户信息
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("读取用户信息")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<ReadUserInfoResponse> ReadUserInfo(ReadUserInfoRequest request,
-        ServerCallContext context)
-    {
-        var userId = Guid.Parse(request.UserId);
-
-        var userInfo = await UserManager.GetUserAsync(userId, context.CancellationToken);
-
-        return userInfo.ReadInfoResponse<ReadUserInfoResponse, UserInfo>();
-    }
-
-    /// <summary>
-    ///     创建用户
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="context"></param>
-    /// <returns></returns>
-    [Description("创建用户")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> CreateUser(CreateUserRequest request, ServerCallContext context)
-    {
-        var sign = request.Adapt<UserSign>();
-
-        var result = await UserManager.CreateUserAsync(sign, request.Password, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     批量创建用户
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量创建用户")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateUser(BatchCreateUserRequest request,
-        ServerCallContext context)
-    {
-        var dictionary = request.Batch.ToDictionary(
-            item => item.Adapt<UserSign>(),
-            item => item.Password);
-
-        var result = await UserManager.CreateUsersAsync(dictionary, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     更新用户信息
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("更新用户信息")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> UpdateUser(UpdateUserRequest request, ServerCallContext context)
-    {
-        var userId = Guid.Parse(request.UserId);
-
-        var package = request.User.Adapt<UserPackage>();
-
-        var result = await UserManager.UpdateUserAsync(userId, package, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     批量更新用户信息
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量更新用户信息")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchUpdateUser(
-        BatchUpdateUserRequest request,
-        ServerCallContext context)
-    {
-        var dictionary = request.Batch.ToDictionary(
-            item => Guid.Parse(item.UserId),
-            item => item.Adapt<UserPackage>());
-
-        var result = await UserManager.UpdateUsersAsync(dictionary, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     删除用户
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("删除用户")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteUser(DeleteUserRequest request, ServerCallContext context)
-    {
-        var userId = Guid.Parse(request.UserId);
-
-        var result = await UserManager.DeleteUserAsync(userId, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     批量删除用户
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量删除用户")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteUser(BatchDeleteUserRequest request,
-        ServerCallContext context)
-    {
-        var ids = request.UserIds.Select(Guid.Parse);
-
-        var result = await UserManager.DeleteUsersAsync(ids, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     查询用户角色信息
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("查询用户角色信息")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<SearchUserRoleInfoResponse> SearchUserRoleInfo(SearchUserRoleInfoRequest request,
-        ServerCallContext context)
-    {
-        var userId = Guid.Parse(request.UserId);
-
-        var roleInfos = await UserManager.FetchUserRolesAsync(
-            userId,
+        var roleInfos = await RoleManager.FetchRolesAsync(
             request.RoleName,
             request.Page ?? 0,
             request.Size ?? 0,
             context.CancellationToken);
 
-        return roleInfos.PagedResponse<SearchUserRoleInfoResponse, RoleInfo>();
+        return roleInfos.PagedResponse<SearchRoleInfoResponse, RoleInfo>();
     }
 
     /// <summary>
-    ///     获取用户角色信息
+    ///     读取角色信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("获取用户角色信息")]
+    [Description("读取角色信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<ReadUserRoleInfoResponse> ReadUserRoleInfo(ReadUserRoleInfoRequest request,
+    public override async Task<ReadRoleInfoResponse> ReadRoleInfo(ReadRoleInfoRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
 
-        var roleInfo = await UserManager.GetUserRoleAsync(userId, roleId, context.CancellationToken);
+        var roleInfo = await RoleManager.GetRoleAsync(roleId, context.CancellationToken);
 
-        return roleInfo.ReadInfoResponse<ReadUserRoleInfoResponse, RoleInfo>();
+        return roleInfo.ReadInfoResponse<ReadRoleInfoResponse, RoleInfo>();
     }
 
     /// <summary>
-    ///     添加用户角色
+    ///     创建角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("添加用户角色")]
+    [Description("创建角色")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> AddUserRole(AddUserRoleRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateRole(CreateRoleRequest request, ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
-        var roleId = Guid.Parse(request.Role.RoleId);
+        var package = request.Adapt<RolePackage>();
 
-        var result = await UserManager.AddUserRoleAsync(userId, roleId, context.CancellationToken);
+        var result = await RoleManager.CreateRoleAsync(package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     批量添加用户角色
+    ///     批量创建角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量添加用户角色")]
+    [Description("批量创建角色")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchAddUserRole(BatchAddUserRoleRequest request,
+    public override async Task<AffectedResponse> BatchCreateRole(BatchCreateRoleRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var packages = request.Batch.Adapt<IEnumerable<RolePackage>>();
 
-        var roleIds = request.RoleIds.Select(Guid.Parse);
-
-        var result = await UserManager.AddUserRolesAsync(userId, roleIds, context.CancellationToken);
+        var result = await RoleManager.CreateRolesAsync(packages, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     移除用户角色
+    ///     更新角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("移除用户角色")]
+    [Description("更新角色")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> RemoveUserRole(RemoveUserRoleRequest request,
-        ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateRole(UpdateRoleRequest request, ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
         var roleId = Guid.Parse(request.RoleId);
 
-        var result = await UserManager.RemoveUserRoleAsync(userId, roleId, context.CancellationToken);
+        var rolePackage = request.Role.Adapt<RolePackage>();
+
+        var result = await RoleManager.UpdateRoleAsync(roleId, rolePackage, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     批量移除用户角色
+    ///     批量更新角色
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量移除用户角色")]
+    [Description("批量更新角色")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchRemoveUserRole(BatchRemoveUserRoleRequest request,
+    public override async Task<AffectedResponse> BatchUpdateRole(BatchUpdateRoleRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var package = request.Batch.ToDictionary(
+            item => Guid.Parse(item.RoleId),
+            item => item.Role.Adapt<RolePackage>());
+
+        var result = await RoleManager.UpdateRolesAsync(package, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     删除角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除角色")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> DeleteRole(DeleteRoleRequest request, ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var result = await RoleManager.DeleteRoleAsync(roleId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     批量删除角色
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除角色")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchDeleteRole(BatchDeleteRoleRequest request,
+        ServerCallContext context)
+    {
         var roleIds = request.RoleIds.Select(Guid.Parse);
 
-        var result = await UserManager.RemoveUserRolesAsync(userId, roleIds, context.CancellationToken);
+        var result = await RoleManager.DeleteRolesAsync(roleIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     查询用户凭据信息
+    ///     查询角色用户信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("查询用户凭据信息")]
+    [Description("查询角色用户信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<SearchUserClaimInfoResponse> SearchUserClaimInfo(SearchUserClaimInfoRequest request,
+    public override async Task<SearchRoleUserInfoResponse> SearchRoleUserInfo(SearchRoleUserInfoRequest request,
         ServerCallContext context)
     {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var userInfos = await RoleManager.FetchRoleUsersAsync(
+            roleId,
+            request.UserName,
+            request.Email,
+            request.PhoneNumber,
+            request.Page ?? 0,
+            request.Size ?? 0,
+            context.CancellationToken);
+
+        return userInfos.PagedResponse<SearchRoleUserInfoResponse, UserInfo>();
+    }
+
+    /// <summary>
+    ///     读取用户角色信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("读取用户角色信息")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<ReadRoleUserInfoResponse> ReadRoleUserInfo(ReadRoleUserInfoRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
         var userId = Guid.Parse(request.UserId);
 
-        var userClaimInfos = await UserManager.FetchUserClaimsAsync(
-            userId,
+        var userInfo = await RoleManager.GetRoleUserAsync(roleId, userId, context.CancellationToken);
+
+        return userInfo.ReadInfoResponse<ReadRoleUserInfoResponse, UserInfo>();
+    }
+
+    /// <summary>
+    ///     添加角色用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("添加角色用户")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> AddRoleUser(AddRoleUserRequest request, ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+        var userId = Guid.Parse(request.User.UserId);
+
+        var result = await RoleManager.AddRoleUserAsync(roleId, userId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     批量添加角色用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量添加角色用户")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchAddRoleUser(BatchAddRoleUserRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var userIds = request.UserIds.Select(Guid.Parse);
+
+        var result = await RoleManager.AddRoleUsersAsync(roleId, userIds, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     移除角色用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("移除角色用户")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> RemoveRoleUser(RemoveRoleUserRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await RoleManager.RemoveRoleUserAsync(roleId, userId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     批量移除角色用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量移除角色用户")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchRemoveRoleUser(BatchRemoveRoleUserRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var userIds = request.UserIds.Select(Guid.Parse);
+
+        var result = await RoleManager.RemoveRoleUsersAsync(roleId, userIds, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///     查询角色凭据信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询角色凭据信息")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<SearchRoleClaimInfoResponse> SearchRoleClaimInfo(SearchRoleClaimInfoRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var roleClaimInfos = await RoleManager.FetchRoleClaimsAsync(
+            roleId,
             request.ClaimType,
             request.ClaimValue,
             request.Page ?? 0,
             request.Size ?? 0,
             context.CancellationToken);
 
-        return userClaimInfos.PagedResponse<SearchUserClaimInfoResponse, UserClaimInfo>();
+        return roleClaimInfos.PagedResponse<SearchRoleClaimInfoResponse, RoleClaimInfo>();
     }
 
     /// <summary>
-    ///     获取用户凭据信息
+    ///     读取角色凭据信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("获取用户凭据信息")]
+    [Description("读取角色凭据信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<ReadUserClaimInfoResponse> ReadUserClaimInfo(ReadUserClaimInfoRequest request,
+    public override async Task<ReadRoleClaimInfoResponse> ReadRoleClaimInfo(ReadRoleClaimInfoRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
-        var userClaimInfo = await UserManager.GetUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
+        var roleClaimInfo = await RoleManager.GetRoleClaimAsync(roleId, request.ClaimId, context.CancellationToken);
 
-        return userClaimInfo.ReadInfoResponse<ReadUserClaimInfoResponse, UserClaimInfo>();
+        return roleClaimInfo.ReadInfoResponse<ReadRoleClaimInfoResponse, RoleClaimInfo>();
     }
 
     /// <summary>
-    ///     添加用户凭据
+    ///     添加角色凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("添加用户凭据")]
+    [Description("添加角色凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> AddUserClaim(AddUserClaimRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AddRoleClaim(AddRoleClaimRequest request, ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
-        var package = request.UserClaim.Adapt<UserClaimPackage>();
+        var package = request.RoleClaim.Adapt<RoleClaimPackage>();
 
-        var result = await UserManager.AddUserClaimAsync(userId, package, context.CancellationToken);
+        var result = await RoleManager.AddRoleClaimAsync(roleId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     批量添加用户凭据
+    ///     批量添加角色凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量添加用户凭据")]
+    [Description("批量添加角色凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchAddUserClaim(BatchAddUserClaimRequest request,
+    public override async Task<AffectedResponse> BatchAddRoleClaim(BatchAddRoleClaimRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
-        var packages = request.Batch.Adapt<IEnumerable<UserClaimPackage>>();
+        var packages = request.Batch.Adapt<IEnumerable<RoleClaimPackage>>();
 
-        var result = await UserManager.AddUserClaimsAsync(userId, packages, context.CancellationToken);
+        var result = await RoleManager.AddRoleClaimsAsync(roleId, packages, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     更新用户凭据
+    ///     更新角色凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("更新用户凭据")]
+    [Description("更新角色凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> UpdateUserClaim(UpdateUserClaimRequest request,
+    public override async Task<AffectedResponse> UpdateRoleClaim(UpdateRoleClaimRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
-        var package = request.UserClaim.Adapt<UserClaimPackage>();
+        var package = request.RoleClaim.Adapt<RoleClaimPackage>();
 
         var result =
-            await UserManager.UpdateUserClaimAsync(userId, request.ClaimId, package, context.CancellationToken);
+            await RoleManager.UpdateRoleClaimAsync(roleId, request.ClaimId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     批量更新用户凭据
+    ///     批量更新角色凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override async Task<AffectedResponse> BatchUpdateUserClaim(BatchUpdateUserClaimRequest request,
+    [Description("批量更新角色凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> BatchUpdateRoleClaim(BatchUpdateRoleClaimRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
         var dictionary = request.Batch.ToDictionary(
             item => item.ClaimId,
-            item => item.Claim.Adapt<UserClaimPackage>());
+            item => item.Claim.Adapt<RoleClaimPackage>());
 
-        var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
+        var result = await RoleManager.UpdateRoleClaimsAsync(roleId, dictionary, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+
+    /// <summary>
+    ///     删除角色凭据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除角色凭据")]
+    [Authorize(AuthorizePolicy.Admin)]
+    public override async Task<AffectedResponse> DeleteRoleClaim(DeleteRoleClaimRequest request,
+        ServerCallContext context)
+    {
+        var roleId = Guid.Parse(request.RoleId);
+
+        var result = await RoleManager.RemoveRoleClaimAsync(roleId, request.ClaimId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    ///     删除用户凭据
+    ///     批量删除角色凭据
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("删除用户凭据")]
+    [Description("批量删除角色凭据")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteUserClaim(DeleteUserClaimRequest request,
+    public override async Task<AffectedResponse> BatchDeleteRoleClaim(BatchDeleteRoleClaimRequest request,
         ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var roleId = Guid.Parse(request.RoleId);
 
-        var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
-
-        return result.AffectedResponse();
-    }
-
-    /// <summary>
-    ///     批量删除用户凭据
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("批量删除用户凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteUserClaim(BatchDeleteUserClaimRequest request,
-        ServerCallContext context)
-    {
-        var userId = Guid.Parse(request.UserId);
-
-        var result = await UserManager.RemoveUserClaimsAsync(userId, request.ClaimIds, context.CancellationToken);
+        var result = await RoleManager.RemoveRoleClaimsAsync(roleId, request.ClaimIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }

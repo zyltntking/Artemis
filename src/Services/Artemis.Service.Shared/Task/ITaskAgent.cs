@@ -11,11 +11,6 @@ public interface ITaskAgent
     Guid TaskId { get; set; }
 
     /// <summary>
-    ///     任务单元Id
-    /// </summary>
-    Guid TaskUnitId { get; set; }
-
-    /// <summary>
     ///     代理Id
     /// </summary>
     Guid AgentId { get; set; }

@@ -28,19 +28,24 @@ public class TaskContext : DbContext
     public virtual DbSet<ArtemisAgent> Agents { get; set; }
 
     /// <summary>
+    ///     任务代理数据集
+    /// </summary>
+    public virtual DbSet<ArtemisTaskAgent> TaskAgents { get; set; }
+
+    /// <summary>
     ///     任务单元数据集
     /// </summary>
     public virtual DbSet<ArtemisTaskUnit> TaskUnits { get; set; }
 
     /// <summary>
+    ///     任务单元代理数据集
+    /// </summary>
+    public virtual DbSet<ArtemisTaskUnitAgent> TaskUnitAgents { get; set; }
+
+    /// <summary>
     ///     任务目标数据集
     /// </summary>
     public virtual DbSet<ArtemisTaskTarget> TaskTargets { get; set; }
-
-    /// <summary>
-    ///     任务代理数据集
-    /// </summary>
-    public virtual DbSet<ArtemisTaskAgent> TaskAgents { get; set; }
 
     /// <summary>
     ///     配置数据模型
@@ -54,29 +59,29 @@ public class TaskContext : DbContext
         modelBuilder.Entity<ArtemisTaskUnit>()
             .HasMany(taskUnit => taskUnit.Agents) //left side
             .WithMany(agent => agent.TaskUnits) //right side
-            .UsingEntity<ArtemisTaskAgent>(
+            .UsingEntity<ArtemisTaskUnitAgent>(
                 left => left
-                    .HasOne(taskAgent => taskAgent.Agent)
-                    .WithMany(agent => agent.TaskAgents)
+                    .HasOne(taskUnitAgent => taskUnitAgent.Agent)
+                    .WithMany(agent => agent.TaskUnitAgents)
                     .HasForeignKey(taskAgent => taskAgent.AgentId)
-                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                    .HasConstraintName(nameof(ArtemisTaskUnitAgent).TableName()
                         .ForeignKeyName(nameof(ArtemisAgent).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(agent => agent.Id),
                 right => right
-                    .HasOne(taskAgent => taskAgent.TaskUnit)
-                    .WithMany(unit => unit.TaskAgents)
+                    .HasOne(taskUnitAgent => taskUnitAgent.TaskUnit)
+                    .WithMany(taskUnit => taskUnit.TaskUnitAgents)
                     .HasForeignKey(taskAgent => taskAgent.TaskUnitId)
-                    .HasConstraintName(nameof(ArtemisTaskAgent).TableName()
+                    .HasConstraintName(nameof(ArtemisTaskUnitAgent).TableName()
                         .ForeignKeyName(nameof(ArtemisTaskUnit).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasPrincipalKey(unit => unit.Id),
-                taskAgentJoin =>
+                taskUnitAgentJoin =>
                 {
-                    taskAgentJoin.HasKey(taskAgent => new { taskAgent.TaskUnitId, taskAgent.AgentId })
-                        .HasName(nameof(ArtemisTaskAgent).TableName().KeyName());
+                    taskUnitAgentJoin.HasKey(taskUnitAgent => new { taskUnitAgent.TaskUnitId, taskUnitAgent.AgentId })
+                        .HasName(nameof(ArtemisTaskUnitAgent).TableName().KeyName());
                 });
 
         // Task Agent Map
@@ -101,6 +106,11 @@ public class TaskContext : DbContext
                         .ForeignKeyName(nameof(ArtemisTask).TableName()))
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasPrincipalKey(unit => unit.Id));
+                    .HasPrincipalKey(unit => unit.Id),
+                taskAgentJoin =>
+                {
+                    taskAgentJoin.HasKey(taskAgent => new { taskAgent.TaskId, taskAgent.AgentId })
+                        .HasName(nameof(ArtemisTaskAgent).TableName().KeyName());
+                });
     }
 }

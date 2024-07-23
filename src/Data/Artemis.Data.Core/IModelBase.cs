@@ -57,6 +57,23 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot, IHandlerSlot wher
 #region KeySlot
 
 /// <summary>
+///     父标识组件接口
+/// </summary>
+public interface IParentKeySlot : IParentKeySlot<Guid>;
+
+/// <summary>
+///     父标识组件接口
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public interface IParentKeySlot<TKey>
+{
+    /// <summary>
+    ///     父标识
+    /// </summary>
+    TKey ParentId { get; set; }
+}
+
+/// <summary>
 ///     标识组件接口
 /// </summary>
 public interface IKeySlot : IKeySlot<Guid>;

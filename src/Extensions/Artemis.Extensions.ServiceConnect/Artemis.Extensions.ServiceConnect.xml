@@ -1081,6 +1081,11 @@
 				xml文档
 			</summary>
 		</member>
+		<member name="T:Artemis.Extensions.ServiceConnect.Validators.NumberValidator">
+			<summary>
+				数字验证器
+			</summary>
+		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.Validators.StringValidator">
 			<summary>
 				字符串验证器
@@ -1198,6 +1203,27 @@
 			<param name="ruleBuilder"></param>
 			<param name="format"></param>
 			<param name="caseMode"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldShorterThan``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32)">
+			<summary>
+				应当短于指定长度
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="max"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.ServiceConnect.Validators.StringValidator.ShouldAtRange``1(FluentValidation.IRuleBuilder{``0,System.String},System.Int32,System.Int32)">
+			<summary>
+				不能为空,空字符串或纯空格字符
+			</summary>
+			<typeparam name="T"></typeparam>
+			<param name="ruleBuilder"></param>
+			<param name="min">最小值</param>
+			<param name="max">最大值</param>
 			<returns></returns>
 		</member>
 		<member name="T:Artemis.Extensions.ServiceConnect.Validators.ValidatorExtensions">

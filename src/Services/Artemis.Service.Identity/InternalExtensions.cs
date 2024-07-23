@@ -11,29 +11,29 @@ namespace Artemis.Service.Identity;
 internal static class InternalExtensions
 {
     /// <summary>
-    ///     分页结果映射配置
+    ///     设置只读项目映射配置
     /// </summary>
-    private static TypeAdapterConfig? _pagedResultConfig;
+    private static TypeAdapterConfig? _readOnlyCollectionSetConfig;
 
     /// <summary>
-    ///     分页结果映射配置访问器
+    ///     设置只读项目映射配置访问器
     /// </summary>
-    private static TypeAdapterConfig PagedResultConfig
+    private static TypeAdapterConfig ReadOnlyCollectionSetConfig
     {
         get
         {
-            if (_pagedResultConfig == null)
+            if (_readOnlyCollectionSetConfig == null)
             {
-                _pagedResultConfig = new TypeAdapterConfig();
+                _readOnlyCollectionSetConfig = new TypeAdapterConfig();
 
-                _pagedResultConfig
+                _readOnlyCollectionSetConfig
                     .Default
                     .UseDestinationValue(member =>
                         member is { SetterModifier: AccessModifier.None, Type.IsGenericType: true } &&
                         member.Type.GetGenericTypeDefinition() == typeof(ICollection<>));
             }
 
-            return _pagedResultConfig;
+            return _readOnlyCollectionSetConfig;
         }
     }
 
@@ -63,7 +63,7 @@ internal static class InternalExtensions
     /// <returns></returns>
     internal static TResponse PagedResponse<TResponse, TData>(this PageResult<TData> result)
     {
-        return DataResult.Success(result).Adapt<TResponse>(PagedResultConfig);
+        return DataResult.Success(result).Adapt<TResponse>(ReadOnlyCollectionSetConfig);
     }
 
     /// <summary>
@@ -77,6 +77,6 @@ internal static class InternalExtensions
     {
         return data is null
             ? ResultAdapter.AdaptEmptyFail<TResponse>()
-            : ResultAdapter.AdaptSuccess<TResponse, TData>(data);
+            : ResultAdapter.AdaptSuccess<TResponse, TData>(data, ReadOnlyCollectionSetConfig);
     }
 }

@@ -4907,6 +4907,80 @@
 			<param name="id">枚举Id</param>
 			<param name="name">枚举名称</param>
 		</member>
+		<member name="T:Artemis.Data.Core.Fundamental.Types.TaskMode">
+			<summary>
+				任务模式
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Normal">
+			<summary>
+				常规任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Synchronous">
+			<summary>
+				同步任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Asynchronous">
+			<summary>
+				异步任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Parallel">
+			<summary>
+				并行任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Sequential">
+			<summary>
+				顺序任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Recursive">
+			<summary>
+				递归任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskMode.Conditional">
+			<summary>
+				条件任务
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.Fundamental.Types.TaskMode.#ctor(System.Int32,System.String)">
+			<summary>
+				构造函数
+			</summary>
+			<param name="id">枚举Id</param>
+			<param name="name">枚举名称</param>
+		</member>
+		<member name="T:Artemis.Data.Core.Fundamental.Types.TaskShip">
+			<summary>
+				任务归属
+			</summary>
+		</member>
+		<member name="M:Artemis.Data.Core.Fundamental.Types.TaskShip.#ctor(System.Int32,System.String)">
+			<summary>
+				构造函数
+			</summary>
+			<param name="id">枚举Id</param>
+			<param name="name">枚举名称</param>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskShip.Root">
+			<summary>
+				根任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskShip.Normal">
+			<summary>
+				常规任务
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskShip.Child">
+			<summary>
+				子任务
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Core.Fundamental.Types.TaskState">
 			<summary>
 				任务状态
@@ -4947,6 +5021,11 @@
 		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Canceled">
 			<summary>
 				已取消
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Close">
+			<summary>
+				已关闭
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Core.Fundamental.Types.TownshipType">
@@ -5250,6 +5329,22 @@
 			</summary>
 			<typeparam name="TKey"></typeparam>
 		</member>
+		<member name="T:Artemis.Data.Core.IParentKeySlot">
+			<summary>
+				父标识组件接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.IParentKeySlot`1">
+			<summary>
+				父标识组件接口
+			</summary>
+			<typeparam name="TKey"></typeparam>
+		</member>
+		<member name="P:Artemis.Data.Core.IParentKeySlot`1.ParentId">
+			<summary>
+				父标识
+			</summary>
+		</member>
 		<member name="T:Artemis.Data.Core.IKeySlot">
 			<summary>
 				标识组件接口
@@ -5344,6 +5439,31 @@
 		<member name="P:Artemis.Data.Core.IPartitionSlot.Partition">
 			<summary>
 				分区标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ITreeBase`1">
+			<summary>
+				树基础接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Data.Core.ITreeBase`2">
+			<summary>
+				树基础接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ITreeBase`2.Id">
+			<summary>
+				节点标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ITreeBase`2.ParentId">
+			<summary>
+				父节点标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Data.Core.ITreeBase`2.Children">
+			<summary>
+				子节点
 			</summary>
 		</member>
 		<member name="T:Artemis.Data.Core.ConcurrencyPartition">

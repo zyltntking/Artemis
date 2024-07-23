@@ -52,4 +52,10 @@ public sealed class TaskState : Enumeration
     /// </summary>
     [Description("已取消")]
     public static TaskState Canceled { get; } = new(5, nameof(Canceled));
+
+    /// <summary>
+    ///     已关闭
+    /// </summary>
+    [Description("已关闭")]
+    public static TaskState Close { get; } = new(6, nameof(Close));
 }

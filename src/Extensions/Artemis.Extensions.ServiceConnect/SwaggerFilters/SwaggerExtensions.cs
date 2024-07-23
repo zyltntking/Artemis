@@ -21,7 +21,10 @@ internal static class SwaggerExtensions
         this IHostApplicationBuilder builder,
         string path = "swagger.Setting.json")
     {
-        builder.Configuration.AddJsonFile(path, true, true);
+        var swaggerConfiguration = builder.Configuration.GetSection("Swagger");
+
+        if (Path.Exists(path) && !swaggerConfiguration.Exists())
+            builder.Configuration.AddJsonFile(path, true, true);
 
         var config = builder.Configuration.GetSection("Swagger").Get<SwaggerConfig>();
 

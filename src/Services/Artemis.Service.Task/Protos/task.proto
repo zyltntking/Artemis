@@ -1,0 +1,240 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Task.Protos";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "Protos/common.proto";
+
+package Artemis.Service.Task.Protos;
+
+// 资源服务协议
+service TaskService {
+	// 查询任务信息
+	rpc SearchTaskInfo(SearchTaskInfoRequest) returns (SearchTaskInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Tasks"
+		};
+	}
+
+	// 读取任务信息
+	rpc ReadTaskInfo(ReadTaskInfoRequest) returns (ReadTaskInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Tasks/{TaskId}"
+		};
+	}
+}
+
+// 查询任务信息请求
+message SearchTaskInfoRequest{
+	/*
+	 * 任务名称
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskName = 1;
+	/*
+	 * 任务归属
+	 * @maxLength(32)
+	 */
+	google.protobuf.StringValue TaskShip = 2;
+	/*
+	 * 任务模式
+	 * @maxLength(32)
+	 */
+	google.protobuf.StringValue TaskMode = 3;
+	/*
+	 * 任务状态
+	 * @maxLength(32)
+	 */
+	google.protobuf.StringValue TaskStatus = 4;
+	/* 页码
+     * @min(0)
+     */
+	google.protobuf.Int32Value Page = 5;
+	/* 条目数
+     * @min(0)
+     */
+	google.protobuf.Int32Value Size = 6;
+}
+
+// 任务信息数据包
+message TaskInfoPacket {
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string Id = 1;
+	/* 父任务标识
+	 * @required
+	 * @guid
+	 */
+	string ParentId = 2;
+	/* 任务名称
+	 * @required
+	 * @maxLength(128)
+	 */
+	string TaskName = 3;
+	/* 任务归属
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskShip = 4;
+	/* 任务模式
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskMode = 5;
+	/* 任务状态
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskStatus = 6;
+	/* 任务描述
+	 * @maxLength(256)
+	 */
+	google.protobuf.StringValue Description = 7;
+	/* 任务开始时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp StartTime = 8;
+	/* 任务结束时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp EndTime = 9;
+}
+
+// 分页任务信息数据包
+message PageTaskInfoPacket {
+	/* 页码
+     * @min(0)
+     */
+	int32 Page = 1;
+	/* 条目数
+     * @min(0)
+     */
+	int32 Size = 2;
+	/* 数据总数
+     * @min(0)
+     */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+     * @min(0)
+     */
+	int64 Count = 4;
+	/* 任务信息数据
+     * @required
+     */
+	repeated TaskInfoPacket Items = 5;
+}
+
+// 查询任务信息响应
+message SearchTaskInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    /* 响应时间
+     * @datetime
+     */
+	string DateTime = 5;
+	/* 响应时间戳
+     * @timestamp
+     */
+	int64 Timestamp = 6;
+	/* 任务信息数据
+	 * @required
+	 */
+	PageTaskInfoPacket Data = 7;
+}
+
+// 读取任务信息请求
+message ReadTaskInfoRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+}
+
+// 任务信息树数据包
+message TaskInfoTreePacket{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string Id = 1;
+	/* 父任务标识
+	 * @required
+	 * @guid
+	 */
+	string ParentId = 2;
+	/* 任务名称
+	 * @required
+	 * @maxLength(128)
+	 */
+	string TaskName = 3;
+	/* 任务归属
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskShip = 4;
+	/* 任务模式
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskMode = 5;
+	/* 任务状态
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskStatus = 6;
+	/* 任务描述
+	 * @maxLength(256)
+	 */
+	google.protobuf.StringValue Description = 7;
+	/* 任务开始时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp StartTime = 8;
+	/* 任务结束时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp EndTime = 9;
+	/* 子任务
+	 */
+	repeated TaskInfoTreePacket Children = 10;
+}
+
+// 读取任务信息响应
+message ReadTaskInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 任务信息数据
+	 * @required
+	 */
+	TaskInfoTreePacket Data = 7;
+}

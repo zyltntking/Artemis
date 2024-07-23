@@ -8,7 +8,7 @@ public sealed record RoleInfo : RolePackage, IRoleInfo
     /// <summary>
     ///     角色标识
     /// </summary>
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
 }
 
 /// <summary>

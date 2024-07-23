@@ -16,6 +16,11 @@ public sealed class ArtemisAgent : Agent
     public ICollection<ArtemisTask>? Tasks { get; set; }
 
     /// <summary>
+    ///     任务代理
+    /// </summary>
+    public ICollection<ArtemisTaskAgent>? TaskAgents { get; set; }
+
+    /// <summary>
     ///     任务单元
     /// </summary>
     public ICollection<ArtemisTaskUnit>? TaskUnits { get; set; }
@@ -23,5 +28,5 @@ public sealed class ArtemisAgent : Agent
     /// <summary>
     ///     任务代理
     /// </summary>
-    public ICollection<ArtemisTaskAgent>? TaskAgents { get; set; }
+    public ICollection<ArtemisTaskUnitAgent>? TaskUnitAgents { get; set; }
 }

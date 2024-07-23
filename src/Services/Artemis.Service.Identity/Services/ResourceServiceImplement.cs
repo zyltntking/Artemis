@@ -13,16 +13,16 @@ namespace Artemis.Service.Identity.Services;
 /// <summary>
 ///     资源服务
 /// </summary>
-public class ResourceServiceLogic : ResourceService.ResourceServiceBase
+public class ResourceServiceImplement : ResourceService.ResourceServiceBase
 {
     /// <summary>
     ///     资源服务
     /// </summary>
     /// <param name="resourceManager">认证资源管理器依赖</param>
     /// <param name="logger">日志依赖</param>
-    public ResourceServiceLogic(
+    public ResourceServiceImplement(
         IIdentityResourceManager resourceManager,
-        ILogger<ResourceServiceLogic> logger)
+        ILogger<ResourceServiceImplement> logger)
     {
         ResourceManager = resourceManager;
         Logger = logger;
@@ -36,7 +36,7 @@ public class ResourceServiceLogic : ResourceService.ResourceServiceBase
     /// <summary>
     ///     日志依赖
     /// </summary>
-    private ILogger<ResourceServiceLogic> Logger { get; }
+    private ILogger<ResourceServiceImplement> Logger { get; }
 
     #region Overrides of ResourceBase
 

@@ -23,7 +23,7 @@ public sealed class ArtemisTaskUnit : TaskUnit
     /// <summary>
     ///     任务代理
     /// </summary>
-    public ICollection<ArtemisTaskAgent>? TaskAgents { get; set; }
+    public ICollection<ArtemisTaskUnitAgent>? TaskUnitAgents { get; set; }
 
     /// <summary>
     ///     代理

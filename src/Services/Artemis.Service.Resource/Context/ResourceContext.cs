@@ -58,11 +58,13 @@ public class ResourceContext : DbContext
             Enumeration.ToRecordDictionary<ArtemisClaimTypes>(),
             Enumeration.ToRecordDictionary<IdentityPolicy>(),
             Enumeration.ToRecordDictionary<ChineseNation>(),
-            Enumeration.ToRecordDictionary<ChineseNationEn>(false),
+            //Enumeration.ToRecordDictionary<ChineseNationEn>(false),
             Enumeration.ToRecordDictionary<DictionaryType>(),
             Enumeration.ToRecordDictionary<EndType>(),
             Enumeration.ToRecordDictionary<Gender>(),
-            Enumeration.ToRecordDictionary<RegionLevel>()
+            Enumeration.ToRecordDictionary<RegionLevel>(),
+            Enumeration.ToRecordDictionary<TaskMode>(),
+            Enumeration.ToRecordDictionary<TaskShip>()
         };
 
         foreach (var dictionary in dictionaries)
