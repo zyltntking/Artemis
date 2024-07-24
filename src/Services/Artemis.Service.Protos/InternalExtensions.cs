@@ -1,14 +1,12 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Data.Store;
-using Artemis.Service.Identity.Protos;
 using Mapster;
 
-namespace Artemis.Service.Identity;
+namespace Artemis.Service.Protos;
 
 /// <summary>
 ///     内部扩展
 /// </summary>
-internal static class InternalExtensions
+public static class InternalExtensions
 {
     /// <summary>
     ///     设置只读项目映射配置
@@ -42,7 +40,7 @@ internal static class InternalExtensions
     /// </summary>
     /// <param name="result"></param>
     /// <returns></returns>
-    internal static AffectedResponse AffectedResponse(this StoreResult result)
+    public static AffectedResponse AffectedResponse(this IStoreResult result)
     {
         if (result.Succeeded)
         {
@@ -61,7 +59,7 @@ internal static class InternalExtensions
     /// <typeparam name="TData"></typeparam>
     /// <param name="result"></param>
     /// <returns></returns>
-    internal static TResponse PagedResponse<TResponse, TData>(this PageResult<TData> result)
+    public static TResponse PagedResponse<TResponse, TData>(this PageResult<TData> result)
     {
         return DataResult.Success(result).Adapt<TResponse>(ReadOnlyCollectionSetConfig);
     }
@@ -73,7 +71,7 @@ internal static class InternalExtensions
     /// <typeparam name="TData"></typeparam>
     /// <param name="data"></param>
     /// <returns></returns>
-    internal static TResponse ReadInfoResponse<TResponse, TData>(this TData? data)
+    public static TResponse ReadInfoResponse<TResponse, TData>(this TData? data)
     {
         return data is null
             ? ResultAdapter.AdaptEmptyFail<TResponse>()

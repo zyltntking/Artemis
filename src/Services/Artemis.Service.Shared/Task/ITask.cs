@@ -31,7 +31,7 @@ public interface ITaskInfo : ITaskPackage, IKeySlot, IParentKeySlot
     /// <summary>
     ///     任务状态
     /// </summary>
-    string TaskStatus { get; set; }
+    string TaskState { get; set; }
 }
 
 /// <summary>

@@ -198,7 +198,7 @@ namespace Artemis.App.Task.Migrations
                         .HasColumnType("character varying(32)")
                         .HasComment("任务归属");
 
-                    b.Property<string>("TaskStatus")
+                    b.Property<string>("TaskState")
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)")
@@ -247,7 +247,7 @@ namespace Artemis.App.Task.Migrations
                     b.HasIndex("TaskShip")
                         .HasDatabaseName("IX_ArtemisTask_TaskShip");
 
-                    b.HasIndex("TaskStatus")
+                    b.HasIndex("TaskState")
                         .HasDatabaseName("IX_ArtemisTask_TaskStatus");
 
                     b.HasIndex("UpdatedAt")
@@ -341,7 +341,7 @@ namespace Artemis.App.Task.Migrations
                         .HasColumnType("uuid")
                         .HasComment("任务标识");
 
-                    b.Property<string>("TaskStatus")
+                    b.Property<string>("TaskState")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
@@ -444,7 +444,7 @@ namespace Artemis.App.Task.Migrations
                         .HasColumnType("uuid")
                         .HasComment("任务标识");
 
-                    b.Property<string>("TaskStatus")
+                    b.Property<string>("TaskState")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")

@@ -319,7 +319,7 @@ namespace Artemis.App.Task.Migrations
                 name: "IX_ArtemisTask_TaskStatus",
                 schema: "Task",
                 table: "ArtemisTask",
-                column: "TaskStatus");
+                column: "TaskState");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTask_UpdatedAt",

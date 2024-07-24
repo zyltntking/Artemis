@@ -35,36 +35,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="google\api\annotations.proto" />
-      <None Remove="google\api\http.proto" />
-      <None Remove="Protos\common.proto" />
-      <None Remove="Protos\task.proto" />
-    </ItemGroup>
-
-    <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.27.2" />
-		<PackageReference Include="Grpc" Version="2.46.6" />
-		<PackageReference Include="Grpc.Tools" Version="2.65.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
         <ProjectReference Include="..\..\Extensions\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj" />
+        <ProjectReference Include="..\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
         <ProjectReference Include="..\Artemis.Service.Shared\Artemis.Service.Shared.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Protobuf Include="google\api\annotations.proto" />
-      <Protobuf Include="google\api\http.proto" />
-      <Protobuf Include="Protos\common.proto" />
-      <Protobuf Include="Protos\task.proto" />
     </ItemGroup>
 
 </Project>

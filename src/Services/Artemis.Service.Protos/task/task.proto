@@ -1,12 +1,12 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Service.Task.Protos";
+option csharp_namespace = "Artemis.Service.Protos.Task";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "Protos/common.proto";
+import "common.proto";
 
-package Artemis.Service.Task.Protos;
+package Artemis.Service.Protos.Task;
 
 // 资源服务协议
 service TaskService {
@@ -21,6 +21,38 @@ service TaskService {
 	rpc ReadTaskInfo(ReadTaskInfoRequest) returns (ReadTaskInfoResponse) {
 		option (google.api.http) = {
 			get: "/api/Tasks/{TaskId}"
+		};
+	}
+
+	// 创建任务
+	rpc CreateTask(CreateTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks"
+			body: "*"
+		};
+	}
+
+	// 批量创建任务
+	rpc BatchCreateTask(BatchCreateTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新任务
+	rpc UpdateTask(UpdateTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Tasks/{TaskId}"
+			body: "Task"
+		};
+	}
+
+	// 批量更新任务
+	rpc BatchUpdateTask(BatchUpdateTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			put: "/api/Tasks/BatchUpdate"
+			body: "Batch"
 		};
 	}
 }
@@ -46,7 +78,7 @@ message SearchTaskInfoRequest{
 	 * 任务状态
 	 * @maxLength(32)
 	 */
-	google.protobuf.StringValue TaskStatus = 4;
+	google.protobuf.StringValue TaskState = 4;
 	/* 页码
      * @min(0)
      */
@@ -88,7 +120,7 @@ message TaskInfoPacket {
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskStatus = 6;
+	string TaskState = 6;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
@@ -194,7 +226,7 @@ message TaskInfoTreePacket{
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskStatus = 6;
+	string TaskState = 6;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
@@ -237,4 +269,75 @@ message ReadTaskInfoResponse{
 	 * @required
 	 */
 	TaskInfoTreePacket Data = 7;
+}
+
+// 创建任务请求
+message CreateTaskRequest{
+	/* 任务名称
+	 * @required
+	 * @maxLength(128)
+	 */
+	string TaskName = 1;
+	/* 任务描述
+	 * @maxLength(256)
+	 */
+	google.protobuf.StringValue Description = 2;
+	/* 任务开始时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp StartTime = 3;
+	/* 任务结束时间
+	 * @datetime
+	 */
+	google.protobuf.Timestamp EndTime = 4;
+}
+
+// 批量创建任务请求
+message BatchCreateTaskRequest{
+	/* 任务数据
+	 * @required
+	 */
+	repeated CreateTaskRequest Batch = 1;
+}
+
+// 更新任务数据包
+message UpdateTaskPacket{
+	/* 任务名称
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskName = 1;
+	/* 任务描述
+	 * @maxLength(256)
+	 */
+	google.protobuf.StringValue Description = 2;
+	/* 任务开始时间
+	 * @datetime
+	 */
+	google.protobuf.Timestamp StartTime = 3;
+	/* 任务结束时间
+	 * @datetime
+	 */
+	google.protobuf.Timestamp EndTime = 4;
+}
+
+// 更新任务请求
+message UpdateTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 任务
+	 * @required
+	 */
+	UpdateTaskPacket Task = 2;
+}
+
+// 批量更新任务请求
+message BatchUpdateTaskRequest{
+	/* 任务数据
+	 * @required
+	 */
+	repeated UpdateTaskRequest Batch = 1;
 }

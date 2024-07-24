@@ -1,9 +1,9 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Service.Identity.Protos";
+option csharp_namespace = "Artemis.Service.Protos";
 import "google/protobuf/wrappers.proto";
 
-package Artemis.Service.Identity.Protos;
+package Artemis.Service.Protos;
 
 // 空响应
 message EmptyResponse {

@@ -1,11 +1,11 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Artemis.Service.Identity.Protos";
+option csharp_namespace = "Artemis.Service.Protos.Identity";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
-import "Protos/common.proto";
+import "common.proto";
 
-package Artemis.Service.Identity.Protos;
+package Artemis.Service.Protos.Identity;
 
 // 角色服务协议
 service RoleService {

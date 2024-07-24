@@ -30,8 +30,7 @@ internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfi
     {
         // Task Index
         builder.HasIndex(task => task.NormalizedTaskName)
-            .HasDatabaseName(IndexName("TaskName"))
-            .IsUnique();
+            .HasDatabaseName(IndexName("TaskName"));
 
         builder.HasIndex(task => task.TaskShip)
             .HasDatabaseName(IndexName("TaskShip"));
@@ -39,8 +38,8 @@ internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfi
         builder.HasIndex(task => task.TaskMode)
             .HasDatabaseName(IndexName("TaskMode"));
 
-        builder.HasIndex(task => task.TaskStatus)
-            .HasDatabaseName(IndexName("TaskStatus"));
+        builder.HasIndex(task => task.TaskState)
+            .HasDatabaseName(IndexName("TaskState"));
 
         builder.HasIndex(task => task.StartTime)
             .HasDatabaseName(IndexName("StartTime"));

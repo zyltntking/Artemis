@@ -41,7 +41,7 @@ public record TaskInfo : TaskPackage, ITaskInfo
     /// <summary>
     ///     任务状态
     /// </summary>
-    public required string TaskStatus { get; set; }
+    public required string TaskState { get; set; }
 }
 
 /// <summary>

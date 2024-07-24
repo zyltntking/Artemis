@@ -48,7 +48,7 @@ public class Task : ConcurrencyPartition, ITask
     [Required]
     [MaxLength(32)]
     [Comment("任务状态")]
-    public required string TaskStatus { get; set; }
+    public required string TaskState { get; set; }
 
     /// <summary>
     ///     任务描述

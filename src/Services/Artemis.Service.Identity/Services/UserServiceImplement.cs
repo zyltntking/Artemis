@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
-using Artemis.Service.Identity.Protos;
+using Artemis.Service.Protos;
+using Artemis.Service.Protos.Identity;
 using Artemis.Service.Shared.Identity.Transfer;
 using Grpc.Core;
 using Mapster;

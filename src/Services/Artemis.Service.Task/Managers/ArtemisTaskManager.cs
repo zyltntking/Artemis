@@ -1,6 +1,7 @@
 ﻿using System.Linq.Dynamic.Core;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
+using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Shared.Task.Transfer;
@@ -82,7 +83,7 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
     /// <param name="taskNameSearch">任务名搜索值</param>
     /// <param name="taskShip">任务归属搜索值</param>
     /// <param name="taskMode">任务模式搜索值</param>
-    /// <param name="taskStatus">任务状态搜索值</param>
+    /// <param name="taskState">任务状态搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -91,7 +92,7 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
         string? taskNameSearch,
         string? taskShip,
         string? taskMode,
-        string? taskStatus,
+        string? taskState,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
@@ -104,7 +105,7 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
 
         taskMode ??= string.Empty;
 
-        taskStatus ??= string.Empty;
+        taskState ??= string.Empty;
 
         var query = TaskStore.EntityQuery;
 
@@ -120,7 +121,7 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
 
         query = query.WhereIf(taskMode != string.Empty, task => task.TaskMode == taskMode);
 
-        query = query.WhereIf(taskStatus != string.Empty, task => task.TaskStatus == taskStatus);
+        query = query.WhereIf(taskState != string.Empty, task => task.TaskState == taskState);
 
         var count = await query.LongCountAsync(cancellationToken);
 
@@ -160,6 +161,126 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
             .SingleOrDefaultAsync(cancellationToken);
 
         return task ?? throw new EntityNotFoundException(nameof(ArtemisTask), id.IdToString()!);
+    }
+
+    /// <summary>
+    /// 创建任务
+    /// </summary>
+    /// <param name="package"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<Data.Store.StoreResult> CreateTaskAsync(
+        TaskPackage package, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var normalizedName = package.TaskName.StringNormalize();
+
+        var exists = await TaskStore.EntityQuery
+            .AnyAsync(task => task.NormalizedTaskName == normalizedName, cancellationToken);
+
+        if (exists)
+            return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.ArtemisTask), package.TaskName);
+
+        var task = Instance.CreateInstance<ArtemisTask, TaskPackage>(package);
+
+        task.NormalizedTaskName = normalizedName;
+        task.TaskMode = TaskMode.Normal.Name;
+        task.TaskState = TaskState.Created.Name;
+        task.TaskShip = TaskShip.Normal.Name;
+
+        return await TaskStore.CreateAsync(task, cancellationToken);
+    }
+
+    /// <summary>
+    /// 创建任务
+    /// </summary>
+    /// <param name="packages">任务信息</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<Data.Store.StoreResult> CreateTasksAsync(IEnumerable<TaskPackage> packages, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var tasks = packages.Select(package =>
+        {
+            var task = Instance.CreateInstance<ArtemisTask, TaskPackage>(package);
+
+            task.NormalizedTaskName = package.TaskName.StringNormalize();
+            task.TaskMode = TaskMode.Normal.Name;
+            task.TaskState = TaskState.Created.Name;
+            task.TaskShip = TaskShip.Normal.Name;
+
+            return task;
+        });
+
+        return TaskStore.CreateAsync(tasks, cancellationToken);
+    }
+
+    /// <summary>
+    /// 更新任务
+    /// </summary>
+    /// <param name="id">任务表示</param>
+    /// <param name="package">任务信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>更新结果</returns>
+    public async Task<Data.Store.StoreResult> UpdateTaskAsync(
+        Guid id, 
+        TaskPackage package, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var task = await TaskStore.FindEntityAsync(id, cancellationToken);
+
+        if (task is not null)
+        {
+            package.Adapt(task);
+            task.NormalizedTaskName = package.TaskName.StringNormalize();
+
+            return await TaskStore.UpdateAsync(task, cancellationToken);
+        }
+
+        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.ArtemisTask), id.IdToString()!);
+    }
+
+    /// <summary>
+    /// 更新任务
+    /// </summary>
+    /// <param name="dictionary"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<Data.Store.StoreResult> UpdateTasksAsync(
+        IDictionary<Guid, TaskPackage> dictionary, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var ids = dictionary.Keys;
+
+        var tasks = await TaskStore.FindEntitiesAsync(ids, cancellationToken);
+
+        var taskList = tasks.ToList();
+
+        if (taskList.Any())
+        {
+            tasks = taskList.Select(task =>
+            {
+                var package = dictionary[task.Id];
+
+                package.Adapt(task);
+                task.NormalizedTaskName = package.TaskName.StringNormalize();
+
+                return task;
+            });
+
+            return await TaskStore.UpdateAsync(tasks, cancellationToken);
+        }
+
+        var flag = string.Join(',', ids.Select(id => id.IdToString()));
+
+        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.ArtemisTask), flag);
     }
 
     #endregion

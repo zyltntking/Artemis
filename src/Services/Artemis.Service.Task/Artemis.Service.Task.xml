@@ -1,2031 +1,2400 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Service.Task</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Service.Task.Context.ArtemisAgent">
-			<summary>
-				代理实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.Tasks">
-			<summary>
-				任务
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskAgents">
-			<summary>
-				任务代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnits">
-			<summary>
-				任务单元
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnitAgents">
-			<summary>
-				任务代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.ArtemisTask">
-			<summary>
-				任务实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Parent">
-			<summary>
-				父任务
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Children">
-			<summary>
-				子任务
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskUnits">
-			<summary>
-				任务单元
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskAgents">
-			<summary>
-				任务代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTask.Agents">
-			<summary>
-				代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.ArtemisTaskAgent">
-			<summary>
-				任务代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Task">
-			<summary>
-				任务
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Agent">
-			<summary>
-				代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.ArtemisTaskTarget">
-			<summary>
-				任务目标实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskTarget.TaskUnit">
-			<summary>
-				任务单元
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.ArtemisTaskUnit">
-			<summary>
-				任务单元实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Task">
-			<summary>
-				任务
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskTargets">
-			<summary>
-				任务目标
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskUnitAgents">
-			<summary>
-				任务代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Agents">
-			<summary>
-				代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.ArtemisTaskUnitAgent">
-			<summary>
-				任务单元代理
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnitAgent.TaskUnit">
-			<summary>
-				任务单元
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.ArtemisTaskUnitAgent.Agent">
-			<summary>
-				代理
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration">
-			<summary>
-				代理数据集配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration">
-			<summary>
-				任务代理配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration">
-			<summary>
-				任务配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
-			<summary>
-				实体字段配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration">
-			<summary>
-				任务目标配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration">
-			<summary>
-				任务单元代理配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration">
-			<summary>
-				任务单元配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Context.TaskContext">
-			<summary>
-				任务业务上下文
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
-			<summary>
-				构造函数
-			</summary>
-			<param name="options">配置</param>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.Tasks">
-			<summary>
-				任务数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.Agents">
-			<summary>
-				代理数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskAgents">
-			<summary>
-				任务代理数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnits">
-			<summary>
-				任务单元数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnitAgents">
-			<summary>
-				任务单元代理数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Context.TaskContext.TaskTargets">
-			<summary>
-				任务目标数据集
-			</summary>
-		</member>
-		<member name="M:Artemis.Service.Task.Context.TaskContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<summary>
-				配置数据模型
-			</summary>
-			<param name="modelBuilder"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.InternalExtensions">
-			<summary>
-				内部扩展
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.InternalExtensions._pagedResultConfig">
-			<summary>
-				分页结果映射配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.InternalExtensions.PagedResultConfig">
-			<summary>
-				分页结果映射配置访问器
-			</summary>
-		</member>
-		<member name="M:Artemis.Service.Task.InternalExtensions.AffectedResponse(Artemis.Data.Store.StoreResult)">
-			<summary>
-				存储结果转换为影响行数响应
-			</summary>
-			<param name="result"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Service.Task.InternalExtensions.PagedResponse``2(Artemis.Data.Core.PageResult{``1})">
-			<summary>
-				分页结果转换为分页响应
-			</summary>
-			<typeparam name="TResponse"></typeparam>
-			<typeparam name="TData"></typeparam>
-			<param name="result"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Service.Task.InternalExtensions.ReadInfoResponse``2(``1)">
-			<summary>
-				实体结果转换为读取实体响应
-			</summary>
-			<typeparam name="TResponse"></typeparam>
-			<typeparam name="TData"></typeparam>
-			<param name="data"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Task.Managers.ArtemisTaskManager">
-			<summary>
-				任务管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-			<summary>
-				创建新的管理器实例
-			</summary>
-			<param name="taskStore">存储访问器依赖</param>
-			<param name="taskAgentStores"></param>
-			<param name="options">配置依赖</param>
-			<param name="logger">日志依赖</param>
-			<param name="agentStore"></param>
-			<param name="taskUnitStore"></param>
-			<param name="taskTargetStore"></param>
-			<exception cref="T:System.ArgumentNullException"></exception>
-		</member>
-		<member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.StoreDispose">
-			<summary>
-				释放托管的Store
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据任务信息搜索任务
-			</summary>
-			<param name="taskNameSearch">任务名搜索值</param>
-			<param name="taskShip">任务归属搜索值</param>
-			<param name="taskMode">任务模式搜索值</param>
-			<param name="taskStatus">任务状态搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
-			<summary>
-				根据任务凭据获取任务信息
-			</summary>
-			<param name="id"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Task.Managers.IArtemisTaskManager">
-			<summary>
-				任务管理接口
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据任务信息搜索任务
-			</summary>
-			<param name="taskNameSearch">任务名搜索值</param>
-			<param name="taskShip">任务归属搜索值</param>
-			<param name="taskMode">任务模式搜索值</param>
-			<param name="taskStatus">任务状态搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
-			<summary>
-				根据任务凭据获取任务信息
-			</summary>
-			<param name="id"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.Agent">
-			<summary>
-				代理模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Agent.AgentName">
-			<summary>
-				代理名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Agent.AgentType">
-			<summary>
-				代理类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Agent.AgentCode">
-			<summary>
-				代理编码
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.Task">
-			<summary>
-				任务模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.TaskName">
-			<summary>
-				任务名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.NormalizedTaskName">
-			<summary>
-				标准化任务名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.TaskShip">
-			<summary>
-				任务归属
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.TaskMode">
-			<summary>
-				任务模式
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.TaskStatus">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.Task.ParentId">
-			<summary>
-				父任务标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.TaskAgent">
-			<summary>
-				任务代理模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskAgent.TaskId">
-			<summary>
-				任务Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskAgent.AgentId">
-			<summary>
-				代理Id
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.TaskTarget">
-			<summary>
-				任务目标模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskId">
-			<summary>
-				任务Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskUnitId">
-			<summary>
-				任务单元Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.TargetId">
-			<summary>
-				目标Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.TaskStatus">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskTarget.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.TaskUnit">
-			<summary>
-				任务单元模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.TaskId">
-			<summary>
-				任务标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.UnitName">
-			<summary>
-				任务单元名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.TaskStatus">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnit.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Models.TaskUnitAgent">
-			<summary>
-				任务代理模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnitAgent.TaskUnitId">
-			<summary>
-				任务单元Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Models.TaskUnitAgent.AgentId">
-			<summary>
-				代理Id
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.ServiceExtensions">
-			<summary>
-				服务扩展
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-			<summary>
-				添加学校服务
-			</summary>
-			<param name="services"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-			<summary>
-				添加学校服务
-			</summary>
-			<param name="services"></param>
-			<param name="enableProxy"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
-			<summary>
-				添加认证服务
-			</summary>
-			<param name="services"></param>
-			<param name="enableHandlerProxy"></param>
-			<param name="enableCacheProxy"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Services.TaskServiceImplement">
-			<summary>
-				任务服务
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Services.TaskServiceImplement.#ctor(Artemis.Service.Task.Managers.IArtemisTaskManager,Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Identity.ArtemisIdentityOptions},Microsoft.Extensions.Logging.ILogger{Artemis.Service.Task.Services.TaskServiceImplement})">
-			<summary>
-				任务服务
-			</summary>
-			<param name="taskManager">任务管理器</param>
-			<param name="cache"></param>
-			<param name="options"></param>
-			<param name="logger">日志记录器</param>
-		</member>
-		<member name="P:Artemis.Service.Task.Services.TaskServiceImplement.TaskManager">
-			<summary>
-				任务管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Services.TaskServiceImplement.Cache">
-			<summary>
-				分布式缓存依赖
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Services.TaskServiceImplement.Options">
-			<summary>
-				授权配置项
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Services.TaskServiceImplement.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Services.TaskServiceImplement.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisAgentStore">
-			<summary>
-				代理存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisAgentStore">
-			<summary>
-				代理存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskAgentStores">
-			<summary>
-				任务代理存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskAgentStores">
-			<summary>
-				任务代理存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="P:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.EntityKey">
-			<summary>
-				实体键生成委托
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskStore">
-			<summary>
-				任务存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskStore">
-			<summary>
-				任务存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskTargetStore">
-			<summary>
-				任务目标存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskTargetStore">
-			<summary>
-				任务目标存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitAgentStores">
-			<summary>
-				任务代理存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores">
-			<summary>
-				任务代理存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="P:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores.EntityKey">
-			<summary>
-				实体键生成委托
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitStore">
-			<summary>
-				任务单元存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitStore">
-			<summary>
-				任务单元存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.CommonReflection">
-			<summary>Holder for reflection information generated from Protos/common.proto</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.CommonReflection.Descriptor">
-			<summary>File descriptor for Protos/common.proto</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.EmptyResponse">
-			<summary>
-				空响应
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.CodeFieldNumber">
-			<summary>Field number for the "Code" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.Code">
-			<summary>
-				状态码
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.SucceededFieldNumber">
-			<summary>Field number for the "Succeeded" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.Succeeded">
-			<summary>
-				是否成功
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.MessageFieldNumber">
-			<summary>Field number for the "Message" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.Message">
-			<summary>
-				响应消息
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.ErrorFieldNumber">
-			<summary>Field number for the "Error" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.Error">
-			<summary>
-				错误
-				@exception
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.DateTimeFieldNumber">
-			<summary>Field number for the "DateTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.DateTime">
-			<summary>
-
-				响应时间
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.EmptyResponse.TimestampFieldNumber">
-			<summary>Field number for the "Timestamp" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.EmptyResponse.Timestamp">
-			<summary>
-
-				响应时间戳
-				@timestamp
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.AffectedResponse">
-			<summary>
-				受影响响应
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.CodeFieldNumber">
-			<summary>Field number for the "Code" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Code">
-			<summary>
-				状态码
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.SucceededFieldNumber">
-			<summary>Field number for the "Succeeded" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Succeeded">
-			<summary>
-				是否成功
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.MessageFieldNumber">
-			<summary>Field number for the "Message" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Message">
-			<summary>
-				响应消息
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.ErrorFieldNumber">
-			<summary>Field number for the "Error" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Error">
-			<summary>
-				错误
-				@exception
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.DateTimeFieldNumber">
-			<summary>Field number for the "DateTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.DateTime">
-			<summary>
-
-				响应时间
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.TimestampFieldNumber">
-			<summary>Field number for the "Timestamp" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Timestamp">
-			<summary>
-
-				响应时间戳
-				@timestamp
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.AffectedResponse.DataFieldNumber">
-			<summary>Field number for the "Data" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.AffectedResponse.Data">
-			<summary>
-				受影响行数
-				@min(0)
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.Pagination">
-			<summary>
-				分页插件
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.Pagination.PageFieldNumber">
-			<summary>Field number for the "Page" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.Pagination.Page">
-			<summary>
-				页码
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.Pagination.SizeFieldNumber">
-			<summary>Field number for the "Size" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.Pagination.Size">
-			<summary>
-				条目数
-				@min(0)
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskReflection">
-			<summary>Holder for reflection information generated from Protos/task.proto</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskReflection.Descriptor">
-			<summary>File descriptor for Protos/task.proto</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.SearchTaskInfoRequest">
-			<summary>
-				查询任务信息请求
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskNameFieldNumber">
-			<summary>Field number for the "TaskName" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskName">
-			<summary>
-
-				任务名称
-				@maxLength(128)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskShipFieldNumber">
-			<summary>Field number for the "TaskShip" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskShip">
-			<summary>
-
-				任务归属
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskModeFieldNumber">
-			<summary>Field number for the "TaskMode" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskMode">
-			<summary>
-
-				任务模式
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskStatusFieldNumber">
-			<summary>Field number for the "TaskStatus" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskStatus">
-			<summary>
-
-				任务状态
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.PageFieldNumber">
-			<summary>Field number for the "Page" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.Page">
-			<summary>
-				页码
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.SizeFieldNumber">
-			<summary>Field number for the "Size" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.Size">
-			<summary>
-				条目数
-				@min(0)
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskInfoPacket">
-			<summary>
-				任务信息数据包
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.IdFieldNumber">
-			<summary>Field number for the "Id" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.Id">
-			<summary>
-				任务标识
-				@required
-				@guid
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.ParentIdFieldNumber">
-			<summary>Field number for the "ParentId" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.ParentId">
-			<summary>
-				父任务标识
-				@required
-				@guid
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskNameFieldNumber">
-			<summary>Field number for the "TaskName" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskName">
-			<summary>
-				任务名称
-				@required
-				@maxLength(128)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskShipFieldNumber">
-			<summary>Field number for the "TaskShip" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskShip">
-			<summary>
-				任务归属
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskModeFieldNumber">
-			<summary>Field number for the "TaskMode" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskMode">
-			<summary>
-				任务模式
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskStatusFieldNumber">
-			<summary>Field number for the "TaskStatus" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskStatus">
-			<summary>
-				任务状态
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.DescriptionFieldNumber">
-			<summary>Field number for the "Description" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.Description">
-			<summary>
-				任务描述
-				@maxLength(256)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.StartTimeFieldNumber">
-			<summary>Field number for the "StartTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.StartTime">
-			<summary>
-				任务开始时间
-				@required
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.EndTimeFieldNumber">
-			<summary>Field number for the "EndTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.EndTime">
-			<summary>
-				任务结束时间
-				@required
-				@datetime
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.PageTaskInfoPacket">
-			<summary>
-				分页任务信息数据包
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.PageFieldNumber">
-			<summary>Field number for the "Page" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Page">
-			<summary>
-				页码
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.SizeFieldNumber">
-			<summary>Field number for the "Size" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Size">
-			<summary>
-				条目数
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.TotalFieldNumber">
-			<summary>Field number for the "Total" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Total">
-			<summary>
-				数据总数
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.CountFieldNumber">
-			<summary>Field number for the "Count" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Count">
-			<summary>
-				条件过滤后的数据量
-				@min(0)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.ItemsFieldNumber">
-			<summary>Field number for the "Items" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Items">
-			<summary>
-				任务信息数据
-				@required
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.SearchTaskInfoResponse">
-			<summary>
-				查询任务信息响应
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.CodeFieldNumber">
-			<summary>Field number for the "Code" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Code">
-			<summary>
-				状态码
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.SucceededFieldNumber">
-			<summary>Field number for the "Succeeded" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Succeeded">
-			<summary>
-				是否成功
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.MessageFieldNumber">
-			<summary>Field number for the "Message" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Message">
-			<summary>
-				消息
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.ErrorFieldNumber">
-			<summary>Field number for the "Error" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Error">
-			<summary>
-				错误
-				@exception
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DateTimeFieldNumber">
-			<summary>Field number for the "DateTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DateTime">
-			<summary>
-				响应时间
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.TimestampFieldNumber">
-			<summary>Field number for the "Timestamp" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Timestamp">
-			<summary>
-				响应时间戳
-				@timestamp
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DataFieldNumber">
-			<summary>Field number for the "Data" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Data">
-			<summary>
-				任务信息数据
-				@required
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.ReadTaskInfoRequest">
-			<summary>
-				读取任务信息请求
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoRequest.TaskIdFieldNumber">
-			<summary>Field number for the "TaskId" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoRequest.TaskId">
-			<summary>
-				任务标识
-				@required
-				@guid
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskInfoTreePacket">
-			<summary>
-				任务信息树数据包
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.IdFieldNumber">
-			<summary>Field number for the "Id" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Id">
-			<summary>
-				任务标识
-				@required
-				@guid
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.ParentIdFieldNumber">
-			<summary>Field number for the "ParentId" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.ParentId">
-			<summary>
-				父任务标识
-				@required
-				@guid
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskNameFieldNumber">
-			<summary>Field number for the "TaskName" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskName">
-			<summary>
-				任务名称
-				@required
-				@maxLength(128)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskShipFieldNumber">
-			<summary>Field number for the "TaskShip" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskShip">
-			<summary>
-				任务归属
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskModeFieldNumber">
-			<summary>Field number for the "TaskMode" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskMode">
-			<summary>
-				任务模式
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskStatusFieldNumber">
-			<summary>Field number for the "TaskStatus" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskStatus">
-			<summary>
-				任务状态
-				@required
-				@maxLength(32)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.DescriptionFieldNumber">
-			<summary>Field number for the "Description" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Description">
-			<summary>
-				任务描述
-				@maxLength(256)
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.StartTimeFieldNumber">
-			<summary>Field number for the "StartTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.StartTime">
-			<summary>
-				任务开始时间
-				@required
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.EndTimeFieldNumber">
-			<summary>Field number for the "EndTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.EndTime">
-			<summary>
-				任务结束时间
-				@required
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.ChildrenFieldNumber">
-			<summary>Field number for the "Children" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Children">
-			<summary>
-				子任务
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.ReadTaskInfoResponse">
-			<summary>
-				读取任务信息响应
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.CodeFieldNumber">
-			<summary>Field number for the "Code" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Code">
-			<summary>
-				状态码
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.SucceededFieldNumber">
-			<summary>Field number for the "Succeeded" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Succeeded">
-			<summary>
-				是否成功
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.MessageFieldNumber">
-			<summary>Field number for the "Message" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Message">
-			<summary>
-				消息
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.ErrorFieldNumber">
-			<summary>Field number for the "Error" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Error">
-			<summary>
-				错误
-				@exception
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DateTimeFieldNumber">
-			<summary>Field number for the "DateTime" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DateTime">
-			<summary>
-				响应时间
-				@datetime
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.TimestampFieldNumber">
-			<summary>Field number for the "Timestamp" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Timestamp">
-			<summary>
-				响应时间戳
-				@timestamp
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DataFieldNumber">
-			<summary>Field number for the "Data" field.</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Data">
-			<summary>
-				任务信息数据
-				@required
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskService">
-			<summary>
-				资源服务协议
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Task.Protos.TaskService.Descriptor">
-			<summary>Service descriptor</summary>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskService.TaskServiceBase">
-			<summary>Base class for server-side implementations of TaskService</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取任务信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Task.Protos.TaskService.TaskServiceClient">
-			<summary>Client for TaskService</summary>
-		</member>
-		<member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.ChannelBase)">
-			<summary>Creates a new client for TaskService</summary>
-			<param name="channel">The channel to use to make remote calls.</param>
-		</member>
-		<member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.CallInvoker)">
-			<summary>Creates a new client for TaskService that uses a custom <c>CallInvoker</c>.</summary>
-			<param name="callInvoker">The callInvoker to use to make remote calls.</param>
-		</member>
-		<member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor">
-			<summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
-			<summary>Protected constructor to allow creation of configured clients.</summary>
-			<param name="configuration">The client configuration.</param>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-			<param name="cancellationToken">An optional token for canceling the call.</param>
-			<returns>The response received from the server.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.CallOptions)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="options">The options for the call.</param>
-			<returns>The response received from the server.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfoAsync(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-			<param name="cancellationToken">An optional token for canceling the call.</param>
-			<returns>The call object.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfoAsync(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.CallOptions)">
-			<summary>
-				查询任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="options">The options for the call.</param>
-			<returns>The call object.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-			<summary>
-				读取任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-			<param name="cancellationToken">An optional token for canceling the call.</param>
-			<returns>The response received from the server.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.CallOptions)">
-			<summary>
-				读取任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="options">The options for the call.</param>
-			<returns>The response received from the server.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfoAsync(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-			<summary>
-				读取任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-			<param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-			<param name="cancellationToken">An optional token for canceling the call.</param>
-			<returns>The call object.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfoAsync(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.CallOptions)">
-			<summary>
-				读取任务信息
-			</summary>
-			<param name="request">The request to send to the server.</param>
-			<param name="options">The options for the call.</param>
-			<returns>The call object.</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
-			<summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.BindService(Artemis.Service.Task.Protos.TaskService.TaskServiceBase)">
-			<summary>Creates service definition that can be registered with a server</summary>
-			<param name="serviceImpl">An object implementing the server-side handling logic.</param>
-		</member>
-		<member
-			name="M:Artemis.Service.Task.Protos.TaskService.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Task.Protos.TaskService.TaskServiceBase)">
-			<summary>
-				Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
-				Note: this method is part of an experimental API that can change or be removed without any prior notice.
-			</summary>
-			<param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
-			<param name="serviceImpl">An object implementing the server-side handling logic.</param>
-		</member>
-		<member name="T:Google.Api.AnnotationsReflection">
-			<summary>Holder for reflection information generated from google/api/annotations.proto</summary>
-		</member>
-		<member name="P:Google.Api.AnnotationsReflection.Descriptor">
-			<summary>File descriptor for google/api/annotations.proto</summary>
-		</member>
-		<member name="T:Google.Api.AnnotationsExtensions">
-			<summary>Holder for extension identifiers generated from the top level of google/api/annotations.proto</summary>
-		</member>
-		<member name="F:Google.Api.AnnotationsExtensions.Http">
-			<summary>
-				See `HttpRule`.
-			</summary>
-		</member>
-		<member name="T:Google.Api.HttpReflection">
-			<summary>Holder for reflection information generated from google/api/http.proto</summary>
-		</member>
-		<member name="P:Google.Api.HttpReflection.Descriptor">
-			<summary>File descriptor for google/api/http.proto</summary>
-		</member>
-		<member name="T:Google.Api.Http">
-			<summary>
-				Defines the HTTP configuration for an API service. It contains a list of
-				[HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
-				to one or more HTTP REST API methods.
-			</summary>
-		</member>
-		<member name="F:Google.Api.Http.RulesFieldNumber">
-			<summary>Field number for the "rules" field.</summary>
-		</member>
-		<member name="P:Google.Api.Http.Rules">
-			<summary>
-				A list of HTTP configuration rules that apply to individual API methods.
-
-				**NOTE:** All service configuration rules follow "last one wins" order.
-			</summary>
-		</member>
-		<member name="F:Google.Api.Http.FullyDecodeReservedExpansionFieldNumber">
-			<summary>Field number for the "fully_decode_reserved_expansion" field.</summary>
-		</member>
-		<member name="P:Google.Api.Http.FullyDecodeReservedExpansion">
-			<summary>
-				When set to true, URL path parameters will be fully URI-decoded except in
-				cases of single segment matches in reserved expansion, where "%2F" will be
-				left encoded.
-
-				The default behavior is to not decode RFC 6570 reserved characters in multi
-				segment matches.
-			</summary>
-		</member>
-		<member name="T:Google.Api.HttpRule">
-			<summary>
-				# gRPC Transcoding
-
-				gRPC Transcoding is a feature for mapping between a gRPC method and one or
-				more HTTP REST endpoints. It allows developers to build a single API service
-				that supports both gRPC APIs and REST APIs. Many systems, including [Google
-				APIs](https://github.com/googleapis/googleapis),
-				[Cloud Endpoints](https://cloud.google.com/endpoints), [gRPC
-				Gateway](https://github.com/grpc-ecosystem/grpc-gateway),
-				and [Envoy](https://github.com/envoyproxy/envoy) proxy support this feature
-				and use it for large scale production services.
-
-				`HttpRule` defines the schema of the gRPC/REST mapping. The mapping specifies
-				how different portions of the gRPC request message are mapped to the URL
-				path, URL query parameters, and HTTP request body. It also controls how the
-				gRPC response message is mapped to the HTTP response body. `HttpRule` is
-				typically specified as an `google.api.http` annotation on the gRPC method.
-
-				Each mapping specifies a URL path template and an HTTP method. The path
-				template may refer to one or more fields in the gRPC request message, as long
-				as each field is a non-repeated field with a primitive (non-message) type.
-				The path template controls how fields of the request message are mapped to
-				the URL path.
-
-				Example:
-
-				service Messaging {
-				rpc GetMessage(GetMessageRequest) returns (Message) {
-				option (google.api.http) = {
-				get: "/v1/{name=messages/*}"
-				};
-				}
-				}
-				message GetMessageRequest {
-				string name = 1; // Mapped to URL path.
-				}
-				message Message {
-				string text = 1; // The resource content.
-				}
-
-				This enables an HTTP REST to gRPC mapping as below:
-
-				HTTP | gRPC
-				-----|-----
-				`GET /v1/messages/123456`  | `GetMessage(name: "messages/123456")`
-
-				Any fields in the request message which are not bound by the path template
-				automatically become HTTP query parameters if there is no HTTP request body.
-				For example:
-
-				service Messaging {
-				rpc GetMessage(GetMessageRequest) returns (Message) {
-				option (google.api.http) = {
-				get:"/v1/messages/{message_id}"
-				};
-				}
-				}
-				message GetMessageRequest {
-				message SubMessage {
-				string subfield = 1;
-				}
-				string message_id = 1; // Mapped to URL path.
-				int64 revision = 2;    // Mapped to URL query parameter `revision`.
-				SubMessage sub = 3;    // Mapped to URL query parameter `sub.subfield`.
-				}
-
-				This enables a HTTP JSON to RPC mapping as below:
-
-				HTTP | gRPC
-				-----|-----
-				`GET /v1/messages/123456?revision=2&amp;sub.subfield=foo` |
-				`GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:
-				"foo"))`
-
-				Note that fields which are mapped to URL query parameters must have a
-				primitive type or a repeated primitive type or a non-repeated message type.
-				In the case of a repeated type, the parameter can be repeated in the URL
-				as `...?param=A&amp;param=B`. In the case of a message type, each field of the
-				message is mapped to a separate parameter, such as
-				`...?foo.a=A&amp;foo.b=B&amp;foo.c=C`.
-
-				For HTTP methods that allow a request body, the `body` field
-				specifies the mapping. Consider a REST update method on the
-				message resource collection:
-
-				service Messaging {
-				rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
-				option (google.api.http) = {
-				patch: "/v1/messages/{message_id}"
-				body: "message"
-				};
-				}
-				}
-				message UpdateMessageRequest {
-				string message_id = 1; // mapped to the URL
-				Message message = 2;   // mapped to the body
-				}
-
-				The following HTTP JSON to RPC mapping is enabled, where the
-				representation of the JSON in the request body is determined by
-				protos JSON encoding:
-
-				HTTP | gRPC
-				-----|-----
-				`PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
-				"123456" message { text: "Hi!" })`
-
-				The special name `*` can be used in the body mapping to define that
-				every field not bound by the path template should be mapped to the
-				request body.  This enables the following alternative definition of
-				the update method:
-
-				service Messaging {
-				rpc UpdateMessage(Message) returns (Message) {
-				option (google.api.http) = {
-				patch: "/v1/messages/{message_id}"
-				body: "*"
-				};
-				}
-				}
-				message Message {
-				string message_id = 1;
-				string text = 2;
-				}
-
-				The following HTTP JSON to RPC mapping is enabled:
-
-				HTTP | gRPC
-				-----|-----
-				`PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
-				"123456" text: "Hi!")`
-
-				Note that when using `*` in the body mapping, it is not possible to
-				have HTTP parameters, as all fields not bound by the path end in
-				the body. This makes this option more rarely used in practice when
-				defining REST APIs. The common usage of `*` is in custom methods
-				which don't use the URL at all for transferring data.
-
-				It is possible to define multiple HTTP methods for one RPC by using
-				the `additional_bindings` option. Example:
-
-				service Messaging {
-				rpc GetMessage(GetMessageRequest) returns (Message) {
-				option (google.api.http) = {
-				get: "/v1/messages/{message_id}"
-				additional_bindings {
-				get: "/v1/users/{user_id}/messages/{message_id}"
-				}
-				};
-				}
-				}
-				message GetMessageRequest {
-				string message_id = 1;
-				string user_id = 2;
-				}
-
-				This enables the following two alternative HTTP JSON to RPC mappings:
-
-				HTTP | gRPC
-				-----|-----
-				`GET /v1/messages/123456` | `GetMessage(message_id: "123456")`
-				`GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id:
-				"123456")`
-
-				## Rules for HTTP mapping
-
-				1. Leaf request fields (recursive expansion nested messages in the request
-				message) are classified into three categories:
-				- Fields referred by the path template. They are passed via the URL path.
-				- Fields referred by the [HttpRule.body][google.api.HttpRule.body]. They
-				are passed via the HTTP
-				request body.
-				- All other fields are passed via the URL query parameters, and the
-				parameter name is the field path in the request message. A repeated
-				field can be represented as multiple query parameters under the same
-				name.
-				2. If [HttpRule.body][google.api.HttpRule.body] is "*", there is no URL
-				query parameter, all fields
-				are passed via URL path and HTTP request body.
-				3. If [HttpRule.body][google.api.HttpRule.body] is omitted, there is no HTTP
-				request body, all
-				fields are passed via URL path and URL query parameters.
-
-				### Path template syntax
-
-				Template = "/" Segments [ Verb ] ;
-				Segments = Segment { "/" Segment } ;
-				Segment  = "*" | "**" | LITERAL | Variable ;
-				Variable = "{" FieldPath [ "=" Segments ] "}" ;
-				FieldPath = IDENT { "." IDENT } ;
-				Verb     = ":" LITERAL ;
-
-				The syntax `*` matches a single URL path segment. The syntax `**` matches
-				zero or more URL path segments, which must be the last part of the URL path
-				except the `Verb`.
-
-				The syntax `Variable` matches part of the URL path as specified by its
-				template. A variable template must not contain other variables. If a variable
-				matches a single path segment, its template may be omitted, e.g. `{var}`
-				is equivalent to `{var=*}`.
-
-				The syntax `LITERAL` matches literal text in the URL path. If the `LITERAL`
-				contains any reserved character, such characters should be percent-encoded
-				before the matching.
-
-				If a variable contains exactly one path segment, such as `"{var}"` or
-				`"{var=*}"`, when such a variable is expanded into a URL path on the client
-				side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
-				server side does the reverse decoding. Such variables show up in the
-				[Discovery
-				Document](https://developers.google.com/discovery/v1/reference/apis) as
-				`{var}`.
-
-				If a variable contains multiple path segments, such as `"{var=foo/*}"`
-				or `"{var=**}"`, when such a variable is expanded into a URL path on the
-				client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
-				The server side does the reverse decoding, except "%2F" and "%2f" are left
-				unchanged. Such variables show up in the
-				[Discovery
-				Document](https://developers.google.com/discovery/v1/reference/apis) as
-				`{+var}`.
-
-				## Using gRPC API Service Configuration
-
-				gRPC API Service Configuration (service config) is a configuration language
-				for configuring a gRPC service to become a user-facing product. The
-				service config is simply the YAML representation of the `google.api.Service`
-				proto message.
-
-				As an alternative to annotating your proto file, you can configure gRPC
-				transcoding in your service config YAML files. You do this by specifying a
-				`HttpRule` that maps the gRPC method to a REST endpoint, achieving the same
-				effect as the proto annotation. This can be particularly useful if you
-				have a proto that is reused in multiple services. Note that any transcoding
-				specified in the service config will override any matching transcoding
-				configuration in the proto.
-
-				Example:
-
-				http:
-				rules:
-				# Selects a gRPC method and applies HttpRule to it.
-				- selector: example.v1.Messaging.GetMessage
-				get: /v1/messages/{message_id}/{sub.subfield}
-
-				## Special notes
-
-				When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the
-				proto to JSON conversion must follow the [proto3
-				specification](https://developers.google.com/protocol-buffers/docs/proto3#json).
-
-				While the single segment variable follows the semantics of
-				[RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String
-				Expansion, the multi segment variable **does not** follow RFC 6570 Section
-				3.2.3 Reserved Expansion. The reason is that the Reserved Expansion
-				does not expand special characters like `?` and `#`, which would lead
-				to invalid URLs. As the result, gRPC Transcoding uses a custom encoding
-				for multi segment variables.
-
-				The path variables **must not** refer to any repeated or mapped field,
-				because client libraries are not capable of handling such variable expansion.
-
-				The path variables **must not** capture the leading "/" character. The reason
-				is that the most common use case "{var}" does not capture the leading "/"
-				character. For consistency, all path variables must share the same behavior.
-
-				Repeated message fields must not be mapped to URL query parameters, because
-				no client library can support such complicated mapping.
-
-				If an API needs to use a JSON array for request or response body, it can map
-				the request or response body to a repeated field. However, some gRPC
-				Transcoding implementations may not support this feature.
-			</summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.SelectorFieldNumber">
-			<summary>Field number for the "selector" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Selector">
-			<summary>
-				Selects a method to which this rule applies.
-
-				Refer to [selector][google.api.DocumentationRule.selector] for syntax
-				details.
-			</summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.GetFieldNumber">
-			<summary>Field number for the "get" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Get">
-			<summary>
-				Maps to HTTP GET. Used for listing and getting information about
-				resources.
-			</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.HasGet">
-			<summary>Gets whether the "get" field is set</summary>
-		</member>
-		<member name="M:Google.Api.HttpRule.ClearGet">
-			<summary> Clears the value of the oneof if it's currently set to "get" </summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.PutFieldNumber">
-			<summary>Field number for the "put" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Put">
-			<summary>
-				Maps to HTTP PUT. Used for replacing a resource.
-			</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.HasPut">
-			<summary>Gets whether the "put" field is set</summary>
-		</member>
-		<member name="M:Google.Api.HttpRule.ClearPut">
-			<summary> Clears the value of the oneof if it's currently set to "put" </summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.PostFieldNumber">
-			<summary>Field number for the "post" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Post">
-			<summary>
-				Maps to HTTP POST. Used for creating a resource or performing an action.
-			</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.HasPost">
-			<summary>Gets whether the "post" field is set</summary>
-		</member>
-		<member name="M:Google.Api.HttpRule.ClearPost">
-			<summary> Clears the value of the oneof if it's currently set to "post" </summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.DeleteFieldNumber">
-			<summary>Field number for the "delete" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Delete">
-			<summary>
-				Maps to HTTP DELETE. Used for deleting a resource.
-			</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.HasDelete">
-			<summary>Gets whether the "delete" field is set</summary>
-		</member>
-		<member name="M:Google.Api.HttpRule.ClearDelete">
-			<summary> Clears the value of the oneof if it's currently set to "delete" </summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.PatchFieldNumber">
-			<summary>Field number for the "patch" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Patch">
-			<summary>
-				Maps to HTTP PATCH. Used for updating a resource.
-			</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.HasPatch">
-			<summary>Gets whether the "patch" field is set</summary>
-		</member>
-		<member name="M:Google.Api.HttpRule.ClearPatch">
-			<summary> Clears the value of the oneof if it's currently set to "patch" </summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.CustomFieldNumber">
-			<summary>Field number for the "custom" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Custom">
-			<summary>
-				The custom pattern is used for specifying an HTTP method that is not
-				included in the `pattern` field, such as HEAD, or "*" to leave the
-				HTTP method unspecified for this rule. The wild-card rule is useful
-				for services that provide content to Web (HTML) clients.
-			</summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.BodyFieldNumber">
-			<summary>Field number for the "body" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.Body">
-			<summary>
-				The name of the request field whose value is mapped to the HTTP request
-				body, or `*` for mapping all request fields not captured by the path
-				pattern to the HTTP body, or omitted for not having any HTTP request body.
-
-				NOTE: the referred field must be present at the top-level of the request
-				message type.
-			</summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.ResponseBodyFieldNumber">
-			<summary>Field number for the "response_body" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.ResponseBody">
-			<summary>
-				Optional. The name of the response field whose value is mapped to the HTTP
-				response body. When omitted, the entire response message will be used
-				as the HTTP response body.
-
-				NOTE: The referred field must be present at the top-level of the response
-				message type.
-			</summary>
-		</member>
-		<member name="F:Google.Api.HttpRule.AdditionalBindingsFieldNumber">
-			<summary>Field number for the "additional_bindings" field.</summary>
-		</member>
-		<member name="P:Google.Api.HttpRule.AdditionalBindings">
-			<summary>
-				Additional HTTP bindings for the selector. Nested bindings must
-				not contain an `additional_bindings` field themselves (that is,
-				the nesting may only be one level deep).
-			</summary>
-		</member>
-		<member name="T:Google.Api.HttpRule.PatternOneofCase">
-			<summary>Enum of possible cases for the "pattern" oneof.</summary>
-		</member>
-		<member name="T:Google.Api.CustomHttpPattern">
-			<summary>
-				A custom pattern is used for defining custom HTTP verb.
-			</summary>
-		</member>
-		<member name="F:Google.Api.CustomHttpPattern.KindFieldNumber">
-			<summary>Field number for the "kind" field.</summary>
-		</member>
-		<member name="P:Google.Api.CustomHttpPattern.Kind">
-			<summary>
-				The name of this custom HTTP verb.
-			</summary>
-		</member>
-		<member name="F:Google.Api.CustomHttpPattern.PathFieldNumber">
-			<summary>Field number for the "path" field.</summary>
-		</member>
-		<member name="P:Google.Api.CustomHttpPattern.Path">
-			<summary>
-				The path matched by this custom verb.
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Service.Task</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Service.Task.Context.ArtemisAgent">
+            <summary>
+                代理实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.Tasks">
+            <summary>
+                任务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskAgents">
+            <summary>
+                任务代理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnits">
+            <summary>
+                任务单元
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisAgent.TaskUnitAgents">
+            <summary>
+                任务代理
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.ArtemisTask">
+            <summary>
+                任务实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Parent">
+            <summary>
+                父任务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Children">
+            <summary>
+                子任务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskUnits">
+            <summary>
+                任务单元
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTask.TaskAgents">
+            <summary>
+                任务代理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTask.Agents">
+            <summary>
+                代理
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.ArtemisTaskAgent">
+            <summary>
+                任务代理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Task">
+            <summary>
+                任务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskAgent.Agent">
+            <summary>
+                代理
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.ArtemisTaskTarget">
+            <summary>
+                任务目标实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskTarget.TaskUnit">
+            <summary>
+                任务单元
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.ArtemisTaskUnit">
+            <summary>
+                任务单元实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Task">
+            <summary>
+                任务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskTargets">
+            <summary>
+                任务目标
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.TaskUnitAgents">
+            <summary>
+                任务代理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnit.Agents">
+            <summary>
+                代理
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.ArtemisTaskUnitAgent">
+            <summary>
+                任务单元代理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnitAgent.TaskUnit">
+            <summary>
+                任务单元
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.ArtemisTaskUnitAgent.Agent">
+            <summary>
+                代理
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration">
+            <summary>
+                代理数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisAgentConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration">
+            <summary>
+                任务代理配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskAgentConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration">
+            <summary>
+                任务配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTask})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration">
+            <summary>
+                任务目标配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskTargetConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration">
+            <summary>
+                任务单元代理配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitAgentConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration">
+            <summary>
+                任务单元配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnit})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Context.TaskContext">
+            <summary>
+                任务业务上下文
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Context.TaskContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Task.Context.TaskContext})">
+            <summary>
+                构造函数
+            </summary>
+            <param name="options">配置</param>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.Tasks">
+            <summary>
+                任务数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.Agents">
+            <summary>
+                代理数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskAgents">
+            <summary>
+                任务代理数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnits">
+            <summary>
+                任务单元数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskUnitAgents">
+            <summary>
+                任务单元代理数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Context.TaskContext.TaskTargets">
+            <summary>
+                任务目标数据集
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Context.TaskContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                配置数据模型
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.InternalExtensions">
+            <summary>
+                内部扩展
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.InternalExtensions._readOnlyCollectionSetConfig">
+            <summary>
+                设置只读项目映射配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.InternalExtensions.ReadOnlyCollectionSetConfig">
+            <summary>
+                设置只读项目映射配置访问器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.InternalExtensions.AffectedResponse(Artemis.Data.Store.StoreResult)">
+            <summary>
+                存储结果转换为影响行数响应
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.InternalExtensions.PagedResponse``2(Artemis.Data.Core.PageResult{``1})">
+            <summary>
+                分页结果转换为分页响应
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.InternalExtensions.ReadInfoResponse``2(``1)">
+            <summary>
+                实体结果转换为读取实体响应
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TData"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Task.Managers.ArtemisTaskManager">
+            <summary>
+                任务管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                创建新的管理器实例
+            </summary>
+            <param name="taskStore">存储访问器依赖</param>
+            <param name="taskAgentStores"></param>
+            <param name="options">配置依赖</param>
+            <param name="logger">日志依赖</param>
+            <param name="agentStore"></param>
+            <param name="taskUnitStore"></param>
+            <param name="taskTargetStore"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据任务信息搜索任务
+            </summary>
+            <param name="taskNameSearch">任务名搜索值</param>
+            <param name="taskShip">任务归属搜索值</param>
+            <param name="taskMode">任务模式搜索值</param>
+            <param name="taskState">任务状态搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+                根据任务凭据获取任务信息
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateTaskAsync(Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateTasksAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="packages">任务信息</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.UpdateTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="id">任务表示</param>
+            <param name="package">任务信息</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>更新结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.UpdateTasksAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Task.Managers.IArtemisTaskManager">
+            <summary>
+                任务管理接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据任务信息搜索任务
+            </summary>
+            <param name="taskNameSearch">任务名搜索值</param>
+            <param name="taskShip">任务归属搜索值</param>
+            <param name="taskMode">任务模式搜索值</param>
+            <param name="taskState">任务状态搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+                根据任务凭据获取任务信息
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateTaskAsync(Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateTasksAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="packages">任务信息</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.UpdateTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="id">任务表示</param>
+            <param name="package">任务信息</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>更新结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.UpdateTasksAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.Agent">
+            <summary>
+                代理模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Agent.AgentName">
+            <summary>
+                代理名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Agent.AgentType">
+            <summary>
+                代理类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Agent.AgentCode">
+            <summary>
+                代理编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.Task">
+            <summary>
+                任务模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.TaskName">
+            <summary>
+                任务名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.NormalizedTaskName">
+            <summary>
+                标准化任务名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.TaskShip">
+            <summary>
+                任务归属
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.TaskMode">
+            <summary>
+                任务模式
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.TaskState">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.Task.ParentId">
+            <summary>
+                父任务标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.TaskAgent">
+            <summary>
+                任务代理模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskAgent.TaskId">
+            <summary>
+                任务Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskAgent.AgentId">
+            <summary>
+                代理Id
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.TaskTarget">
+            <summary>
+                任务目标模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskId">
+            <summary>
+                任务Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskUnitId">
+            <summary>
+                任务单元Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.TargetId">
+            <summary>
+                目标Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.TaskStatus">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskTarget.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.TaskUnit">
+            <summary>
+                任务单元模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.TaskId">
+            <summary>
+                任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.UnitName">
+            <summary>
+                任务单元名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.TaskStatus">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnit.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Models.TaskUnitAgent">
+            <summary>
+                任务代理模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnitAgent.TaskUnitId">
+            <summary>
+                任务单元Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Models.TaskUnitAgent.AgentId">
+            <summary>
+                代理Id
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.ServiceExtensions">
+            <summary>
+                服务扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                添加学校服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+            <summary>
+                添加学校服务
+            </summary>
+            <param name="services"></param>
+            <param name="enableProxy"></param>
+        </member>
+        <member name="M:Artemis.Service.Task.ServiceExtensions.AddTaskServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
+            <summary>
+                添加认证服务
+            </summary>
+            <param name="services"></param>
+            <param name="enableHandlerProxy"></param>
+            <param name="enableCacheProxy"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Services.TaskServiceImplement">
+            <summary>
+                任务服务
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.#ctor(Artemis.Service.Task.Managers.IArtemisTaskManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Task.Services.TaskServiceImplement})">
+            <summary>
+                任务服务
+            </summary>
+            <param name="taskManager">任务管理器</param>
+            <param name="logger">日志记录器</param>
+        </member>
+        <member name="P:Artemis.Service.Task.Services.TaskServiceImplement.TaskManager">
+            <summary>
+                任务管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Services.TaskServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询任务信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取任务信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.CreateTask(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.BatchCreateTask(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.UpdateTask(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.BatchUpdateTask(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisAgentStore">
+            <summary>
+                代理存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisAgentStore">
+            <summary>
+                代理存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisAgentStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskAgentStores">
+            <summary>
+                任务代理存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskAgentStores">
+            <summary>
+                任务代理存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="P:Artemis.Service.Task.Stores.ArtemisTaskAgentStores.EntityKey">
+            <summary>
+                实体键生成委托
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskStore">
+            <summary>
+                任务存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskStore">
+            <summary>
+                任务存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskTargetStore">
+            <summary>
+                任务目标存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskTargetStore">
+            <summary>
+                任务目标存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitAgentStores">
+            <summary>
+                任务代理存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores">
+            <summary>
+                任务代理存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="P:Artemis.Service.Task.Stores.ArtemisTaskUnitAgentStores.EntityKey">
+            <summary>
+                实体键生成委托
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitStore">
+            <summary>
+                任务单元存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitStore">
+            <summary>
+                任务单元存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.CommonReflection">
+            <summary>Holder for reflection information generated from Protos/common.proto</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.CommonReflection.Descriptor">
+            <summary>File descriptor for Protos/common.proto</summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.EmptyResponse">
+            <summary>
+            空响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.Message">
+            <summary>
+            响应消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.DateTime">
+             <summary>
+            
+             响应时间
+             @datetime
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.EmptyResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.EmptyResponse.Timestamp">
+             <summary>
+            
+             响应时间戳
+             @timestamp
+             </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.AffectedResponse">
+            <summary>
+            受影响响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Message">
+            <summary>
+            响应消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.DateTime">
+             <summary>
+            
+             响应时间
+             @datetime
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Timestamp">
+             <summary>
+            
+             响应时间戳
+             @timestamp
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.AffectedResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.AffectedResponse.Data">
+            <summary>
+            受影响行数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.Pagination">
+            <summary>
+            分页插件
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.Pagination.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.Pagination.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.Pagination.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.Pagination.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskReflection">
+            <summary>Holder for reflection information generated from Protos/task.proto</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskReflection.Descriptor">
+            <summary>File descriptor for Protos/task.proto</summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.SearchTaskInfoRequest">
+            <summary>
+            查询任务信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskName">
+             <summary>
+            
+             任务名称
+             @maxLength(128)
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskShipFieldNumber">
+            <summary>Field number for the "TaskShip" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskShip">
+             <summary>
+            
+             任务归属
+             @maxLength(32)
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskModeFieldNumber">
+            <summary>Field number for the "TaskMode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskMode">
+             <summary>
+            
+             任务模式
+             @maxLength(32)
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskStateFieldNumber">
+            <summary>Field number for the "TaskState" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.TaskState">
+             <summary>
+            
+             任务状态
+             @maxLength(32)
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskInfoPacket">
+            <summary>
+            任务信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.Id">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.ParentIdFieldNumber">
+            <summary>Field number for the "ParentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.ParentId">
+            <summary>
+            父任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskName">
+            <summary>
+            任务名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskShipFieldNumber">
+            <summary>Field number for the "TaskShip" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskShip">
+            <summary>
+            任务归属
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskModeFieldNumber">
+            <summary>Field number for the "TaskMode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskMode">
+            <summary>
+            任务模式
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.TaskStateFieldNumber">
+            <summary>Field number for the "TaskState" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.TaskState">
+            <summary>
+            任务状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.Description">
+            <summary>
+            任务描述
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.StartTimeFieldNumber">
+            <summary>Field number for the "StartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.StartTime">
+            <summary>
+            任务开始时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoPacket.EndTimeFieldNumber">
+            <summary>Field number for the "EndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoPacket.EndTime">
+            <summary>
+            任务结束时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.PageTaskInfoPacket">
+            <summary>
+            分页任务信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.PageTaskInfoPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.PageTaskInfoPacket.Items">
+            <summary>
+            任务信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.SearchTaskInfoResponse">
+            <summary>
+            查询任务信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.SearchTaskInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.SearchTaskInfoResponse.Data">
+            <summary>
+            任务信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.ReadTaskInfoRequest">
+            <summary>
+            读取任务信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskInfoTreePacket">
+            <summary>
+            任务信息树数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Id">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.ParentIdFieldNumber">
+            <summary>Field number for the "ParentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.ParentId">
+            <summary>
+            父任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskName">
+            <summary>
+            任务名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskShipFieldNumber">
+            <summary>Field number for the "TaskShip" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskShip">
+            <summary>
+            任务归属
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskModeFieldNumber">
+            <summary>Field number for the "TaskMode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskMode">
+            <summary>
+            任务模式
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskStateFieldNumber">
+            <summary>Field number for the "TaskState" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.TaskState">
+            <summary>
+            任务状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Description">
+            <summary>
+            任务描述
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.StartTimeFieldNumber">
+            <summary>Field number for the "StartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.StartTime">
+            <summary>
+            任务开始时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.EndTimeFieldNumber">
+            <summary>Field number for the "EndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.EndTime">
+            <summary>
+            任务结束时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.TaskInfoTreePacket.ChildrenFieldNumber">
+            <summary>Field number for the "Children" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskInfoTreePacket.Children">
+            <summary>
+            子任务
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.ReadTaskInfoResponse">
+            <summary>
+            读取任务信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.ReadTaskInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.ReadTaskInfoResponse.Data">
+            <summary>
+            任务信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.CreateTaskRequest">
+            <summary>
+            创建任务请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.CreateTaskRequest.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.CreateTaskRequest.TaskName">
+            <summary>
+            任务名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.CreateTaskRequest.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.CreateTaskRequest.Description">
+            <summary>
+            任务描述
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.CreateTaskRequest.StartTimeFieldNumber">
+            <summary>Field number for the "StartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.CreateTaskRequest.StartTime">
+            <summary>
+            任务开始时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.CreateTaskRequest.EndTimeFieldNumber">
+            <summary>Field number for the "EndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.CreateTaskRequest.EndTime">
+            <summary>
+            任务结束时间
+            @datetime
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.BatchCreateTaskRequest">
+            <summary>
+            批量创建任务请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.BatchCreateTaskRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.BatchCreateTaskRequest.Batch">
+            <summary>
+            任务数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.UpdateTaskPacket">
+            <summary>
+            更新任务数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskPacket.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskPacket.TaskName">
+            <summary>
+            任务名称
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskPacket.Description">
+            <summary>
+            任务描述
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskPacket.StartTimeFieldNumber">
+            <summary>Field number for the "StartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskPacket.StartTime">
+            <summary>
+            任务开始时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskPacket.EndTimeFieldNumber">
+            <summary>Field number for the "EndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskPacket.EndTime">
+            <summary>
+            任务结束时间
+            @datetime
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.UpdateTaskRequest">
+            <summary>
+            更新任务请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.UpdateTaskRequest.TaskFieldNumber">
+            <summary>Field number for the "Task" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.UpdateTaskRequest.Task">
+            <summary>
+            任务
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.BatchUpdateTaskRequest">
+            <summary>
+            批量更新任务请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Task.Protos.BatchUpdateTaskRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.BatchUpdateTaskRequest.Batch">
+            <summary>
+            任务数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskService">
+            <summary>
+            资源服务协议
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Task.Protos.TaskService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskService.TaskServiceBase">
+            <summary>Base class for server-side implementations of TaskService</summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询任务信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取任务信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.CreateTask(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.BatchCreateTask(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.UpdateTask(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceBase.BatchUpdateTask(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Task.Protos.TaskService.TaskServiceClient">
+            <summary>Client for TaskService</summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for TaskService</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for TaskService that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfo(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfoAsync(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.SearchTaskInfoAsync(Artemis.Service.Task.Protos.SearchTaskInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfo(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfoAsync(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.ReadTaskInfoAsync(Artemis.Service.Task.Protos.ReadTaskInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取任务信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.CreateTask(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.CreateTask(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.CreateTaskAsync(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.CreateTaskAsync(Artemis.Service.Task.Protos.CreateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchCreateTask(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchCreateTask(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchCreateTaskAsync(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchCreateTaskAsync(Artemis.Service.Task.Protos.BatchCreateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.UpdateTask(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.UpdateTask(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.UpdateTaskAsync(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.UpdateTaskAsync(Artemis.Service.Task.Protos.UpdateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchUpdateTask(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchUpdateTask(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchUpdateTaskAsync(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.BatchUpdateTaskAsync(Artemis.Service.Task.Protos.BatchUpdateTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.TaskServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.BindService(Artemis.Service.Task.Protos.TaskService.TaskServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Artemis.Service.Task.Protos.TaskService.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Task.Protos.TaskService.TaskServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="T:Google.Api.AnnotationsReflection">
+            <summary>Holder for reflection information generated from google/api/annotations.proto</summary>
+        </member>
+        <member name="P:Google.Api.AnnotationsReflection.Descriptor">
+            <summary>File descriptor for google/api/annotations.proto</summary>
+        </member>
+        <member name="T:Google.Api.AnnotationsExtensions">
+            <summary>Holder for extension identifiers generated from the top level of google/api/annotations.proto</summary>
+        </member>
+        <member name="F:Google.Api.AnnotationsExtensions.Http">
+            <summary>
+            See `HttpRule`.
+            </summary>
+        </member>
+        <member name="T:Google.Api.HttpReflection">
+            <summary>Holder for reflection information generated from google/api/http.proto</summary>
+        </member>
+        <member name="P:Google.Api.HttpReflection.Descriptor">
+            <summary>File descriptor for google/api/http.proto</summary>
+        </member>
+        <member name="T:Google.Api.Http">
+            <summary>
+            Defines the HTTP configuration for an API service. It contains a list of
+            [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
+            to one or more HTTP REST API methods.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Http.RulesFieldNumber">
+            <summary>Field number for the "rules" field.</summary>
+        </member>
+        <member name="P:Google.Api.Http.Rules">
+             <summary>
+             A list of HTTP configuration rules that apply to individual API methods.
+            
+             **NOTE:** All service configuration rules follow "last one wins" order.
+             </summary>
+        </member>
+        <member name="F:Google.Api.Http.FullyDecodeReservedExpansionFieldNumber">
+            <summary>Field number for the "fully_decode_reserved_expansion" field.</summary>
+        </member>
+        <member name="P:Google.Api.Http.FullyDecodeReservedExpansion">
+             <summary>
+             When set to true, URL path parameters will be fully URI-decoded except in
+             cases of single segment matches in reserved expansion, where "%2F" will be
+             left encoded.
+            
+             The default behavior is to not decode RFC 6570 reserved characters in multi
+             segment matches.
+             </summary>
+        </member>
+        <member name="T:Google.Api.HttpRule">
+             <summary>
+             # gRPC Transcoding
+            
+             gRPC Transcoding is a feature for mapping between a gRPC method and one or
+             more HTTP REST endpoints. It allows developers to build a single API service
+             that supports both gRPC APIs and REST APIs. Many systems, including [Google
+             APIs](https://github.com/googleapis/googleapis),
+             [Cloud Endpoints](https://cloud.google.com/endpoints), [gRPC
+             Gateway](https://github.com/grpc-ecosystem/grpc-gateway),
+             and [Envoy](https://github.com/envoyproxy/envoy) proxy support this feature
+             and use it for large scale production services.
+            
+             `HttpRule` defines the schema of the gRPC/REST mapping. The mapping specifies
+             how different portions of the gRPC request message are mapped to the URL
+             path, URL query parameters, and HTTP request body. It also controls how the
+             gRPC response message is mapped to the HTTP response body. `HttpRule` is
+             typically specified as an `google.api.http` annotation on the gRPC method.
+            
+             Each mapping specifies a URL path template and an HTTP method. The path
+             template may refer to one or more fields in the gRPC request message, as long
+             as each field is a non-repeated field with a primitive (non-message) type.
+             The path template controls how fields of the request message are mapped to
+             the URL path.
+            
+             Example:
+            
+                 service Messaging {
+                   rpc GetMessage(GetMessageRequest) returns (Message) {
+                     option (google.api.http) = {
+                         get: "/v1/{name=messages/*}"
+                     };
+                   }
+                 }
+                 message GetMessageRequest {
+                   string name = 1; // Mapped to URL path.
+                 }
+                 message Message {
+                   string text = 1; // The resource content.
+                 }
+            
+             This enables an HTTP REST to gRPC mapping as below:
+            
+             HTTP | gRPC
+             -----|-----
+             `GET /v1/messages/123456`  | `GetMessage(name: "messages/123456")`
+            
+             Any fields in the request message which are not bound by the path template
+             automatically become HTTP query parameters if there is no HTTP request body.
+             For example:
+            
+                 service Messaging {
+                   rpc GetMessage(GetMessageRequest) returns (Message) {
+                     option (google.api.http) = {
+                         get:"/v1/messages/{message_id}"
+                     };
+                   }
+                 }
+                 message GetMessageRequest {
+                   message SubMessage {
+                     string subfield = 1;
+                   }
+                   string message_id = 1; // Mapped to URL path.
+                   int64 revision = 2;    // Mapped to URL query parameter `revision`.
+                   SubMessage sub = 3;    // Mapped to URL query parameter `sub.subfield`.
+                 }
+            
+             This enables a HTTP JSON to RPC mapping as below:
+            
+             HTTP | gRPC
+             -----|-----
+             `GET /v1/messages/123456?revision=2&amp;sub.subfield=foo` |
+             `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:
+             "foo"))`
+            
+             Note that fields which are mapped to URL query parameters must have a
+             primitive type or a repeated primitive type or a non-repeated message type.
+             In the case of a repeated type, the parameter can be repeated in the URL
+             as `...?param=A&amp;param=B`. In the case of a message type, each field of the
+             message is mapped to a separate parameter, such as
+             `...?foo.a=A&amp;foo.b=B&amp;foo.c=C`.
+            
+             For HTTP methods that allow a request body, the `body` field
+             specifies the mapping. Consider a REST update method on the
+             message resource collection:
+            
+                 service Messaging {
+                   rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
+                     option (google.api.http) = {
+                       patch: "/v1/messages/{message_id}"
+                       body: "message"
+                     };
+                   }
+                 }
+                 message UpdateMessageRequest {
+                   string message_id = 1; // mapped to the URL
+                   Message message = 2;   // mapped to the body
+                 }
+            
+             The following HTTP JSON to RPC mapping is enabled, where the
+             representation of the JSON in the request body is determined by
+             protos JSON encoding:
+            
+             HTTP | gRPC
+             -----|-----
+             `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+             "123456" message { text: "Hi!" })`
+            
+             The special name `*` can be used in the body mapping to define that
+             every field not bound by the path template should be mapped to the
+             request body.  This enables the following alternative definition of
+             the update method:
+            
+                 service Messaging {
+                   rpc UpdateMessage(Message) returns (Message) {
+                     option (google.api.http) = {
+                       patch: "/v1/messages/{message_id}"
+                       body: "*"
+                     };
+                   }
+                 }
+                 message Message {
+                   string message_id = 1;
+                   string text = 2;
+                 }
+            
+             The following HTTP JSON to RPC mapping is enabled:
+            
+             HTTP | gRPC
+             -----|-----
+             `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:
+             "123456" text: "Hi!")`
+            
+             Note that when using `*` in the body mapping, it is not possible to
+             have HTTP parameters, as all fields not bound by the path end in
+             the body. This makes this option more rarely used in practice when
+             defining REST APIs. The common usage of `*` is in custom methods
+             which don't use the URL at all for transferring data.
+            
+             It is possible to define multiple HTTP methods for one RPC by using
+             the `additional_bindings` option. Example:
+            
+                 service Messaging {
+                   rpc GetMessage(GetMessageRequest) returns (Message) {
+                     option (google.api.http) = {
+                       get: "/v1/messages/{message_id}"
+                       additional_bindings {
+                         get: "/v1/users/{user_id}/messages/{message_id}"
+                       }
+                     };
+                   }
+                 }
+                 message GetMessageRequest {
+                   string message_id = 1;
+                   string user_id = 2;
+                 }
+            
+             This enables the following two alternative HTTP JSON to RPC mappings:
+            
+             HTTP | gRPC
+             -----|-----
+             `GET /v1/messages/123456` | `GetMessage(message_id: "123456")`
+             `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id:
+             "123456")`
+            
+             ## Rules for HTTP mapping
+            
+             1. Leaf request fields (recursive expansion nested messages in the request
+                message) are classified into three categories:
+                - Fields referred by the path template. They are passed via the URL path.
+                - Fields referred by the [HttpRule.body][google.api.HttpRule.body]. They
+                are passed via the HTTP
+                  request body.
+                - All other fields are passed via the URL query parameters, and the
+                  parameter name is the field path in the request message. A repeated
+                  field can be represented as multiple query parameters under the same
+                  name.
+              2. If [HttpRule.body][google.api.HttpRule.body] is "*", there is no URL
+              query parameter, all fields
+                 are passed via URL path and HTTP request body.
+              3. If [HttpRule.body][google.api.HttpRule.body] is omitted, there is no HTTP
+              request body, all
+                 fields are passed via URL path and URL query parameters.
+            
+             ### Path template syntax
+            
+                 Template = "/" Segments [ Verb ] ;
+                 Segments = Segment { "/" Segment } ;
+                 Segment  = "*" | "**" | LITERAL | Variable ;
+                 Variable = "{" FieldPath [ "=" Segments ] "}" ;
+                 FieldPath = IDENT { "." IDENT } ;
+                 Verb     = ":" LITERAL ;
+            
+             The syntax `*` matches a single URL path segment. The syntax `**` matches
+             zero or more URL path segments, which must be the last part of the URL path
+             except the `Verb`.
+            
+             The syntax `Variable` matches part of the URL path as specified by its
+             template. A variable template must not contain other variables. If a variable
+             matches a single path segment, its template may be omitted, e.g. `{var}`
+             is equivalent to `{var=*}`.
+            
+             The syntax `LITERAL` matches literal text in the URL path. If the `LITERAL`
+             contains any reserved character, such characters should be percent-encoded
+             before the matching.
+            
+             If a variable contains exactly one path segment, such as `"{var}"` or
+             `"{var=*}"`, when such a variable is expanded into a URL path on the client
+             side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
+             server side does the reverse decoding. Such variables show up in the
+             [Discovery
+             Document](https://developers.google.com/discovery/v1/reference/apis) as
+             `{var}`.
+            
+             If a variable contains multiple path segments, such as `"{var=foo/*}"`
+             or `"{var=**}"`, when such a variable is expanded into a URL path on the
+             client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
+             The server side does the reverse decoding, except "%2F" and "%2f" are left
+             unchanged. Such variables show up in the
+             [Discovery
+             Document](https://developers.google.com/discovery/v1/reference/apis) as
+             `{+var}`.
+            
+             ## Using gRPC API Service Configuration
+            
+             gRPC API Service Configuration (service config) is a configuration language
+             for configuring a gRPC service to become a user-facing product. The
+             service config is simply the YAML representation of the `google.api.Service`
+             proto message.
+            
+             As an alternative to annotating your proto file, you can configure gRPC
+             transcoding in your service config YAML files. You do this by specifying a
+             `HttpRule` that maps the gRPC method to a REST endpoint, achieving the same
+             effect as the proto annotation. This can be particularly useful if you
+             have a proto that is reused in multiple services. Note that any transcoding
+             specified in the service config will override any matching transcoding
+             configuration in the proto.
+            
+             Example:
+            
+                 http:
+                   rules:
+                     # Selects a gRPC method and applies HttpRule to it.
+                     - selector: example.v1.Messaging.GetMessage
+                       get: /v1/messages/{message_id}/{sub.subfield}
+            
+             ## Special notes
+            
+             When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the
+             proto to JSON conversion must follow the [proto3
+             specification](https://developers.google.com/protocol-buffers/docs/proto3#json).
+            
+             While the single segment variable follows the semantics of
+             [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String
+             Expansion, the multi segment variable **does not** follow RFC 6570 Section
+             3.2.3 Reserved Expansion. The reason is that the Reserved Expansion
+             does not expand special characters like `?` and `#`, which would lead
+             to invalid URLs. As the result, gRPC Transcoding uses a custom encoding
+             for multi segment variables.
+            
+             The path variables **must not** refer to any repeated or mapped field,
+             because client libraries are not capable of handling such variable expansion.
+            
+             The path variables **must not** capture the leading "/" character. The reason
+             is that the most common use case "{var}" does not capture the leading "/"
+             character. For consistency, all path variables must share the same behavior.
+            
+             Repeated message fields must not be mapped to URL query parameters, because
+             no client library can support such complicated mapping.
+            
+             If an API needs to use a JSON array for request or response body, it can map
+             the request or response body to a repeated field. However, some gRPC
+             Transcoding implementations may not support this feature.
+             </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.SelectorFieldNumber">
+            <summary>Field number for the "selector" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Selector">
+             <summary>
+             Selects a method to which this rule applies.
+            
+             Refer to [selector][google.api.DocumentationRule.selector] for syntax
+             details.
+             </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.GetFieldNumber">
+            <summary>Field number for the "get" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Get">
+            <summary>
+            Maps to HTTP GET. Used for listing and getting information about
+            resources.
+            </summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.HasGet">
+            <summary>Gets whether the "get" field is set</summary>
+        </member>
+        <member name="M:Google.Api.HttpRule.ClearGet">
+            <summary> Clears the value of the oneof if it's currently set to "get" </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.PutFieldNumber">
+            <summary>Field number for the "put" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Put">
+            <summary>
+            Maps to HTTP PUT. Used for replacing a resource.
+            </summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.HasPut">
+            <summary>Gets whether the "put" field is set</summary>
+        </member>
+        <member name="M:Google.Api.HttpRule.ClearPut">
+            <summary> Clears the value of the oneof if it's currently set to "put" </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.PostFieldNumber">
+            <summary>Field number for the "post" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Post">
+            <summary>
+            Maps to HTTP POST. Used for creating a resource or performing an action.
+            </summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.HasPost">
+            <summary>Gets whether the "post" field is set</summary>
+        </member>
+        <member name="M:Google.Api.HttpRule.ClearPost">
+            <summary> Clears the value of the oneof if it's currently set to "post" </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.DeleteFieldNumber">
+            <summary>Field number for the "delete" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Delete">
+            <summary>
+            Maps to HTTP DELETE. Used for deleting a resource.
+            </summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.HasDelete">
+            <summary>Gets whether the "delete" field is set</summary>
+        </member>
+        <member name="M:Google.Api.HttpRule.ClearDelete">
+            <summary> Clears the value of the oneof if it's currently set to "delete" </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.PatchFieldNumber">
+            <summary>Field number for the "patch" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Patch">
+            <summary>
+            Maps to HTTP PATCH. Used for updating a resource.
+            </summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.HasPatch">
+            <summary>Gets whether the "patch" field is set</summary>
+        </member>
+        <member name="M:Google.Api.HttpRule.ClearPatch">
+            <summary> Clears the value of the oneof if it's currently set to "patch" </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.CustomFieldNumber">
+            <summary>Field number for the "custom" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Custom">
+            <summary>
+            The custom pattern is used for specifying an HTTP method that is not
+            included in the `pattern` field, such as HEAD, or "*" to leave the
+            HTTP method unspecified for this rule. The wild-card rule is useful
+            for services that provide content to Web (HTML) clients.
+            </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.BodyFieldNumber">
+            <summary>Field number for the "body" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.Body">
+             <summary>
+             The name of the request field whose value is mapped to the HTTP request
+             body, or `*` for mapping all request fields not captured by the path
+             pattern to the HTTP body, or omitted for not having any HTTP request body.
+            
+             NOTE: the referred field must be present at the top-level of the request
+             message type.
+             </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.ResponseBodyFieldNumber">
+            <summary>Field number for the "response_body" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.ResponseBody">
+             <summary>
+             Optional. The name of the response field whose value is mapped to the HTTP
+             response body. When omitted, the entire response message will be used
+             as the HTTP response body.
+            
+             NOTE: The referred field must be present at the top-level of the response
+             message type.
+             </summary>
+        </member>
+        <member name="F:Google.Api.HttpRule.AdditionalBindingsFieldNumber">
+            <summary>Field number for the "additional_bindings" field.</summary>
+        </member>
+        <member name="P:Google.Api.HttpRule.AdditionalBindings">
+            <summary>
+            Additional HTTP bindings for the selector. Nested bindings must
+            not contain an `additional_bindings` field themselves (that is,
+            the nesting may only be one level deep).
+            </summary>
+        </member>
+        <member name="T:Google.Api.HttpRule.PatternOneofCase">
+            <summary>Enum of possible cases for the "pattern" oneof.</summary>
+        </member>
+        <member name="T:Google.Api.CustomHttpPattern">
+            <summary>
+            A custom pattern is used for defining custom HTTP verb.
+            </summary>
+        </member>
+        <member name="F:Google.Api.CustomHttpPattern.KindFieldNumber">
+            <summary>Field number for the "kind" field.</summary>
+        </member>
+        <member name="P:Google.Api.CustomHttpPattern.Kind">
+            <summary>
+            The name of this custom HTTP verb.
+            </summary>
+        </member>
+        <member name="F:Google.Api.CustomHttpPattern.PathFieldNumber">
+            <summary>Field number for the "path" field.</summary>
+        </member>
+        <member name="P:Google.Api.CustomHttpPattern.Path">
+            <summary>
+            The path matched by this custom verb.
+            </summary>
+        </member>
+    </members>
 </doc>

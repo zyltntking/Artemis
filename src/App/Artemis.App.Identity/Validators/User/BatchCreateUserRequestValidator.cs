@@ -1,4 +1,4 @@
-﻿using Artemis.Service.Identity.Protos;
+﻿using Artemis.Service.Protos.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;

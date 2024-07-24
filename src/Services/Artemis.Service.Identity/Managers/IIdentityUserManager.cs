@@ -45,7 +45,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="password">用户密码</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果和创建成功的用户实例</returns>
-    Task<StoreResult> CreateUserAsync(
+    Task<Data.Store.StoreResult> CreateUserAsync(
         UserSign userSign,
         string password,
         CancellationToken cancellationToken = default);
@@ -56,7 +56,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="dictionary">批量创建用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    Task<StoreResult> CreateUsersAsync(
+    Task<Data.Store.StoreResult> CreateUsersAsync(
         IDictionary<UserSign, string> dictionary,
         CancellationToken cancellationToken = default);
 
@@ -67,7 +67,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="package">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新后的实体</returns>
-    Task<StoreResult> UpdateUserAsync(
+    Task<Data.Store.StoreResult> UpdateUserAsync(
         Guid id,
         UserPackage package,
         CancellationToken cancellationToken = default);
@@ -78,7 +78,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="dictionary">用户信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<StoreResult> UpdateUsersAsync(
+    Task<Data.Store.StoreResult> UpdateUsersAsync(
         IDictionary<Guid, UserPackage> dictionary,
         CancellationToken cancellationToken = default);
 
@@ -88,7 +88,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="id">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> DeleteUserAsync(
+    Task<Data.Store.StoreResult> DeleteUserAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
@@ -98,7 +98,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="ids">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> DeleteUsersAsync(
+    Task<Data.Store.StoreResult> DeleteUsersAsync(
         IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default);
 
@@ -138,7 +138,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="roleId">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserRoleAsync(
+    Task<Data.Store.StoreResult> AddUserRoleAsync(
         Guid id,
         Guid roleId,
         CancellationToken cancellationToken = default);
@@ -150,7 +150,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="roleIds">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserRolesAsync(
+    Task<Data.Store.StoreResult> AddUserRolesAsync(
         Guid id,
         IEnumerable<Guid> roleIds,
         CancellationToken cancellationToken = default);
@@ -162,7 +162,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="roleId">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserRoleAsync(
+    Task<Data.Store.StoreResult> RemoveUserRoleAsync(
         Guid id,
         Guid roleId,
         CancellationToken cancellationToken = default);
@@ -174,7 +174,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="roleIds">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserRolesAsync(
+    Task<Data.Store.StoreResult> RemoveUserRolesAsync(
         Guid id,
         IEnumerable<Guid> roleIds,
         CancellationToken cancellationToken = default);
@@ -217,7 +217,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserClaimAsync(
+    Task<Data.Store.StoreResult> AddUserClaimAsync(
         Guid id,
         UserClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -229,7 +229,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<StoreResult> AddUserClaimsAsync(
+    Task<Data.Store.StoreResult> AddUserClaimsAsync(
         Guid id,
         IEnumerable<UserClaimPackage> packages,
         CancellationToken cancellationToken = default);
@@ -242,7 +242,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> UpdateUserClaimAsync(
+    Task<Data.Store.StoreResult> UpdateUserClaimAsync(
         Guid id,
         int claimId,
         UserClaimPackage package,
@@ -255,7 +255,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="dictionary">凭据更新字典</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<StoreResult> UpdateUserClaimsAsync(
+    Task<Data.Store.StoreResult> UpdateUserClaimsAsync(
         Guid id,
         IDictionary<int, UserClaimPackage> dictionary,
         CancellationToken cancellationToken = default);
@@ -267,7 +267,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserClaimAsync(
+    Task<Data.Store.StoreResult> RemoveUserClaimAsync(
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default);
@@ -279,7 +279,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserClaimsAsync(
+    Task<Data.Store.StoreResult> RemoveUserClaimsAsync(
         Guid id,
         IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default);
@@ -322,7 +322,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="package">登录信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加或更新结果</returns>
-    Task<StoreResult> AddOrUpdateUserLoginAsync(
+    Task<Data.Store.StoreResult> AddOrUpdateUserLoginAsync(
         Guid id,
         UserLoginPackage package,
         CancellationToken cancellationToken = default);
@@ -335,7 +335,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="providerKey">登录信息标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserLoginAsync(
+    Task<Data.Store.StoreResult> RemoveUserLoginAsync(
         Guid id,
         string provider,
         string providerKey,
@@ -348,7 +348,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="providerAndKeys">登录信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserLoginsAsync(
+    Task<Data.Store.StoreResult> RemoveUserLoginsAsync(
         Guid id,
         IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default);
@@ -393,7 +393,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="package">令牌信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加或更新结果</returns>
-    Task<StoreResult> AddOrUpdateUserTokenAsync(
+    Task<Data.Store.StoreResult> AddOrUpdateUserTokenAsync(
         Guid id,
         UserTokenPackage package,
         CancellationToken cancellationToken = default);
@@ -406,7 +406,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="name">令牌名</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserTokenAsync(
+    Task<Data.Store.StoreResult> RemoveUserTokenAsync(
         Guid id,
         string loginProvider,
         string name,
@@ -419,7 +419,7 @@ public interface IIdentityUserManager : IManager
     /// <param name="providerAndKeys">令牌标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<StoreResult> RemoveUserTokensAsync(
+    Task<Data.Store.StoreResult> RemoveUserTokensAsync(
         Guid id,
         IEnumerable<KeyValuePair<string, string>> providerAndKeys,
         CancellationToken cancellationToken = default);

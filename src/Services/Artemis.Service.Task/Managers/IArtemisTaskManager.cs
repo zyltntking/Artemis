@@ -15,7 +15,7 @@ public interface IArtemisTaskManager : IManager
     /// <param name="taskNameSearch">任务名搜索值</param>
     /// <param name="taskShip">任务归属搜索值</param>
     /// <param name="taskMode">任务模式搜索值</param>
-    /// <param name="taskStatus">任务状态搜索值</param>
+    /// <param name="taskState">任务状态搜索值</param>
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
@@ -24,7 +24,7 @@ public interface IArtemisTaskManager : IManager
         string? taskNameSearch,
         string? taskShip,
         string? taskMode,
-        string? taskStatus,
+        string? taskState,
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);
@@ -37,5 +37,47 @@ public interface IArtemisTaskManager : IManager
     /// <returns></returns>
     Task<TaskInfoTree> GetTaskAsync(
         Guid id,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 创建任务
+    /// </summary>
+    /// <param name="package"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Data.Store.StoreResult> CreateTaskAsync(
+        TaskPackage package,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 创建任务
+    /// </summary>
+    /// <param name="packages">任务信息</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Data.Store.StoreResult> CreateTasksAsync(
+        IEnumerable<TaskPackage> packages, 
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 更新任务
+    /// </summary>
+    /// <param name="id">任务表示</param>
+    /// <param name="package">任务信息</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns>更新结果</returns>
+    Task<Data.Store.StoreResult> UpdateTaskAsync(
+        Guid id,
+        TaskPackage package,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 更新任务
+    /// </summary>
+    /// <param name="dictionary"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Data.Store.StoreResult> UpdateTasksAsync(
+        IDictionary<Guid, TaskPackage> dictionary,
         CancellationToken cancellationToken = default);
 }
