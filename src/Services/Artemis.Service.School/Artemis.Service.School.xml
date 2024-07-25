@@ -1,1204 +1,1230 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Service.School</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Service.School.Context.ArtemisClass">
-            <summary>
-                班级实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.School">
-            <summary>
-                班级所属的学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.HeadTeacher">
-            <summary>
-                班主任
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.ClassStudents">
-            <summary>
-                班级学生对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.Students">
-            <summary>
-                班级管理的学生
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentStudents">
-            <summary>
-                学生当前所属关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.ClassTeachers">
-            <summary>
-                班级老师对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.Teachers">
-            <summary>
-                班级所属的教师
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentTeachers">
-            <summary>
-                教师当前所属关系
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisClassStudent">
-            <summary>
-                班级学生关系对应实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClassStudent.Class">
-            <summary>
-                关联班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClassStudent.Student">
-            <summary>
-                关联学生
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisClassTeacher">
-            <summary>
-                班级教师关系对应实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClassTeacher.Class">
-            <summary>
-                关联班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClassTeacher.Teacher">
-            <summary>
-                关联教师
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisSchool">
-            <summary>
-                学校实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.Classes">
-            <summary>
-                学校管理的班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.SchoolStudents">
-            <summary>
-                学校学生对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.Students">
-            <summary>
-                学校管理的学生
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.SchoolTeachers">
-            <summary>
-                学校老师对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.Teachers">
-            <summary>
-                学校管理的教师
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentTeachers">
-            <summary>
-                教师当前所属关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentStudents">
-            <summary>
-                学生当前所属关系
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisSchoolStudent">
-            <summary>
-                学校学生关系对应实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchoolStudent.School">
-            <summary>
-                对应学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchoolStudent.Student">
-            <summary>
-                对应学生
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisSchoolTeacher">
-            <summary>
-                学校教师关系对应实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchoolTeacher.School">
-            <summary>
-                对应学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchoolTeacher.Teacher">
-            <summary>
-                对应教师
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisStudent">
-            <summary>
-                学生实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.ClassStudents">
-            <summary>
-                班级学生对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.Classes">
-            <summary>
-                学生所在的班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.SchoolStudents">
-            <summary>
-                学校学生对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.Schools">
-            <summary>
-                学生所在的学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.CurrentAffiliation">
-            <summary>
-                学生所属关系
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation">
-            <summary>
-                学生当前所属关系实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.School">
-            <summary>
-                学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Class">
-            <summary>
-                班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Student">
-            <summary>
-                学生
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisTeacher">
-            <summary>
-                教师实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.SchoolTeachers">
-            <summary>
-                学校教师对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.Schools">
-            <summary>
-                教师所过的学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.CurrentAffiliations">
-            <summary>
-                教师当前所属关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.ClassTeachers">
-            <summary>
-                班级老师对应关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.Classes">
-            <summary>
-                教师教过的班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.HeadTeacherClass">
-            <summary>
-                班主任班级
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation">
-            <summary>
-                教师当前所属关系实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Teacher">
-            <summary>
-                教师
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.School">
-            <summary>
-                学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Class">
-            <summary>
-                班级
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration">
-            <summary>
-                班级配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration">
-            <summary>
-                班级学生映射实体配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassStudent})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration">
-            <summary>
-                班级教师关系对应实体配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassTeacher})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration">
-            <summary>
-                学校配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchool})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration">
-            <summary>
-                学校学生关系对应实体配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolStudent})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration">
-            <summary>
-                学校教师关系对应实体配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolTeacher})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration">
-            <summary>
-                学生配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration">
-            <summary>
-                学生当前所属关系配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration">
-            <summary>
-                教师配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration">
-            <summary>
-                教师当前所属关系配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Context.SchoolContext">
-            <summary>
-                学校业务上下文
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.SchoolContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.School.Context.SchoolContext})">
-            <summary>
-                构造函数
-            </summary>
-            <param name="options">配置</param>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.Schools">
-            <summary>
-                学校数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.Classes">
-            <summary>
-                班级数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.Students">
-            <summary>
-                学生数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.Teachers">
-            <summary>
-                教师数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.ClassStudents">
-            <summary>
-                班级学生数对应据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.ClassTeachers">
-            <summary>
-                班级教师数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.SchoolTeachers">
-            <summary>
-                学校教师数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.SchoolStudents">
-            <summary>
-                学校学生数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.TeacherCurrentAffiliations">
-            <summary>
-                教师当前所属关系数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.StudentCurrentAffiliations">
-            <summary>
-                学生当前所属关系数据集
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-                配置数据模型
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Managers.ArtemisSchoolManager">
-            <summary>
-                学校管理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore,Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="schoolStore">存储访问器依赖</param>
-            <param name="teacherCurrentAffiliationStore"></param>
-            <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="classStore"></param>
-            <param name="teacherStore"></param>
-            <param name="studentStore"></param>
-            <param name="schoolTeacherStore"></param>
-            <param name="schoolStudentStore"></param>
-            <param name="classTeacherStore"></param>
-            <param name="classStudentStore"></param>
-            <param name="studentCurrentAffiliationStore"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.StoreDispose">
-            <summary>
-                释放托管的Store
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolStore">
-            <summary>
-                学校存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassStore">
-            <summary>
-                班级存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.TeacherStore">
-            <summary>
-                教师存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.StudentStore">
-            <summary>
-                学生存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolTeacherStore">
-            <summary>
-                学校教师关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolStudentStore">
-            <summary>
-                学校学生关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassTeacherStore">
-            <summary>
-                班级教师关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassStudentStore">
-            <summary>
-                班级学生关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.StudentCurrentAffiliationStore">
-            <summary>
-                学生当前关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.TeacherCurrentAffiliationStore">
-            <summary>
-                教师当前关系存储访问器
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Managers.IArtemisSchoolManager">
-            <summary>
-                学校管理接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.Class">
-            <summary>
-                班级模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.SchoolId">
-            <summary>
-                学校标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.HeadTeacherId">
-            <summary>
-                班主任标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.Name">
-            <summary>
-                班级名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.Type">
-            <summary>
-                班级类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.Major">
-            <summary>
-                所学专业
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.Code">
-            <summary>
-                班级编码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.StudyPhase">
-            <summary>
-                学段
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.SchoolLength">
-            <summary>
-                学制
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.Length">
-            <summary>
-                学制长度
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.SerialNumber">
-            <summary>
-                班级序号
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Class.EstablishTime">
-            <summary>
-                班级创建时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.ClassStudent">
-            <summary>
-                班级学生关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassStudent.MoveIn">
-            <summary>
-                转入时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassStudent.MoveOut">
-            <summary>
-                转出时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassStudent.ClassId">
-            <summary>
-                班级标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassStudent.StudentId">
-            <summary>
-                学生标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.ClassTeacher">
-            <summary>
-                班级教师关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassTeacher.MoveIn">
-            <summary>
-                转入时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassTeacher.MoveOut">
-            <summary>
-                转出时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassTeacher.ClassId">
-            <summary>
-                班级标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.ClassTeacher.TeacherId">
-            <summary>
-                教师标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.School">
-            <summary>
-                学校模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.Name">
-            <summary>
-                学校名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.Code">
-            <summary>
-                学校编码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.Type">
-            <summary>
-                学校类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.OrganizationCode">
-            <summary>
-                组织机构代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.DivisionCode">
-            <summary>
-                学校所在地行政区划代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.Address">
-            <summary>
-                学校地址
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.Email">
-            <summary>
-                学校邮箱
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.WebSite">
-            <summary>
-                学校网站
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.ContactNumber">
-            <summary>
-                学校联系电话
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.School.EstablishTime">
-            <summary>
-                学校建立时间
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.SchoolStudent">
-            <summary>
-                学校学生关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolStudent.MoveIn">
-            <summary>
-                转入时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolStudent.MoveOut">
-            <summary>
-                转出时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolStudent.SchoolId">
-            <summary>
-                学校标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolStudent.StudentId">
-            <summary>
-                学生标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.SchoolTeacher">
-            <summary>
-                学校老师关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolTeacher.MoveIn">
-            <summary>
-                转入时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolTeacher.MoveOut">
-            <summary>
-                转出时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolTeacher.SchoolId">
-            <summary>
-                班级标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.SchoolTeacher.TeacherId">
-            <summary>
-                教师标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.Student">
-            <summary>
-                学生模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Name">
-            <summary>
-                学生名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Gender">
-            <summary>
-                学生性别
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Major">
-            <summary>
-                专业
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Birthday">
-            <summary>
-                学生生日
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Nation">
-            <summary>
-                民族
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Code">
-            <summary>
-                学生编码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.StudentNumber">
-            <summary>
-                学籍号
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Cert">
-            <summary>
-                证件号码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.EnrollmentDate">
-            <summary>
-                入学时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.DivisionCode">
-            <summary>
-                住址区划代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Student.Address">
-            <summary>
-                住址
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.StudentCurrentAffiliation">
-            <summary>
-                学生当前所属关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.SchoolId">
-            <summary>
-                学校标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.ClassId">
-            <summary>
-                班级标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.StudentId">
-            <summary>
-                学生标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.Teacher">
-            <summary>
-                教师模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Teacher.TeacherName">
-            <summary>
-                教师名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.Teacher.TeacherCode">
-            <summary>
-                教师编码
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Models.TeacherCurrentAffiliation">
-            <summary>
-                教师当前所属关系模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.SchoolId">
-            <summary>
-                学校标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.ClassId">
-            <summary>
-                班级标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.TeacherId">
-            <summary>
-                教师标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.ServiceExtensions">
-            <summary>
-                服务扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-                添加学校服务
-            </summary>
-            <param name="services"></param>
-        </member>
-        <member name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-            <summary>
-                添加学校服务
-            </summary>
-            <param name="services"></param>
-            <param name="enableProxy"></param>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisClassStore">
-            <summary>
-                班级存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisClassStore">
-            <summary>
-                班级存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisClassStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisClassStudentStore">
-            <summary>
-                班级学生关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisClassStudentStore">
-            <summary>
-                班级学生关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisClassStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisClassStudentStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisClassTeacherStore">
-            <summary>
-                班级教师关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisClassTeacherStore">
-            <summary>
-                班级教师关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisClassTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisClassTeacherStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisSchoolStore">
-            <summary>
-                学校存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisSchoolStore">
-            <summary>
-                学校存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisSchoolStudentStore">
-            <summary>
-                学校学生关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisSchoolStudentStore">
-            <summary>
-                学校学生关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisSchoolTeacherStore">
-            <summary>
-                学校教师关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore">
-            <summary>
-                学校教师关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore">
-            <summary>
-                学生当前所属关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore">
-            <summary>
-                学生当前所属关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisStudentStore">
-            <summary>
-                学生存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisStudentStore">
-            <summary>
-                学生存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore">
-            <summary>
-                教师当前所属关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore">
-            <summary>
-                教师当前所属关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisTeacherStore">
-            <summary>
-                教师存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisTeacherStore">
-            <summary>
-                教师存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Service.School</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Service.School.Context.ArtemisClass">
+			<summary>
+				班级实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.School">
+			<summary>
+				班级所属的学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.HeadTeacher">
+			<summary>
+				班主任
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.ClassStudents">
+			<summary>
+				班级学生对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.Students">
+			<summary>
+				班级管理的学生
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentStudents">
+			<summary>
+				学生当前所属关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.ClassTeachers">
+			<summary>
+				班级老师对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.Teachers">
+			<summary>
+				班级所属的教师
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentTeachers">
+			<summary>
+				教师当前所属关系
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisClassStudent">
+			<summary>
+				班级学生关系对应实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClassStudent.Class">
+			<summary>
+				关联班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClassStudent.Student">
+			<summary>
+				关联学生
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisClassTeacher">
+			<summary>
+				班级教师关系对应实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClassTeacher.Class">
+			<summary>
+				关联班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisClassTeacher.Teacher">
+			<summary>
+				关联教师
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisSchool">
+			<summary>
+				学校实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.Classes">
+			<summary>
+				学校管理的班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.SchoolStudents">
+			<summary>
+				学校学生对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.Students">
+			<summary>
+				学校管理的学生
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.SchoolTeachers">
+			<summary>
+				学校老师对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.Teachers">
+			<summary>
+				学校管理的教师
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentTeachers">
+			<summary>
+				教师当前所属关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentStudents">
+			<summary>
+				学生当前所属关系
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisSchoolStudent">
+			<summary>
+				学校学生关系对应实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchoolStudent.School">
+			<summary>
+				对应学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchoolStudent.Student">
+			<summary>
+				对应学生
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisSchoolTeacher">
+			<summary>
+				学校教师关系对应实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchoolTeacher.School">
+			<summary>
+				对应学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisSchoolTeacher.Teacher">
+			<summary>
+				对应教师
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisStudent">
+			<summary>
+				学生实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudent.ClassStudents">
+			<summary>
+				班级学生对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudent.Classes">
+			<summary>
+				学生所在的班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudent.SchoolStudents">
+			<summary>
+				学校学生对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudent.Schools">
+			<summary>
+				学生所在的学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudent.CurrentAffiliation">
+			<summary>
+				学生所属关系
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation">
+			<summary>
+				学生当前所属关系实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.School">
+			<summary>
+				学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Class">
+			<summary>
+				班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Student">
+			<summary>
+				学生
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisTeacher">
+			<summary>
+				教师实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.SchoolTeachers">
+			<summary>
+				学校教师对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.Schools">
+			<summary>
+				教师所过的学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.CurrentAffiliations">
+			<summary>
+				教师当前所属关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.ClassTeachers">
+			<summary>
+				班级老师对应关系
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.Classes">
+			<summary>
+				教师教过的班级
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacher.HeadTeacherClass">
+			<summary>
+				班主任班级
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation">
+			<summary>
+				教师当前所属关系实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Teacher">
+			<summary>
+				教师
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.School">
+			<summary>
+				学校
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Class">
+			<summary>
+				班级
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration">
+			<summary>
+				班级配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration">
+			<summary>
+				班级学生映射实体配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisClassStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassStudent})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration">
+			<summary>
+				班级教师关系对应实体配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisClassTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClassTeacher})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration">
+			<summary>
+				学校配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchool})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration">
+			<summary>
+				学校学生关系对应实体配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolStudent})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration">
+			<summary>
+				学校教师关系对应实体配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisSchoolTeacherConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisSchoolTeacher})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration">
+			<summary>
+				学生配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration">
+			<summary>
+				学生当前所属关系配置
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration">
+			<summary>
+				教师配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration">
+			<summary>
+				教师当前所属关系配置
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Context.SchoolContext">
+			<summary>
+				学校业务上下文
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.SchoolContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.School.Context.SchoolContext})">
+			<summary>
+				构造函数
+			</summary>
+			<param name="options">配置</param>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.Schools">
+			<summary>
+				学校数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.Classes">
+			<summary>
+				班级数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.Students">
+			<summary>
+				学生数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.Teachers">
+			<summary>
+				教师数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.ClassStudents">
+			<summary>
+				班级学生数对应据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.ClassTeachers">
+			<summary>
+				班级教师数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.SchoolTeachers">
+			<summary>
+				学校教师数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.SchoolStudents">
+			<summary>
+				学校学生数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.TeacherCurrentAffiliations">
+			<summary>
+				教师当前所属关系数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Context.SchoolContext.StudentCurrentAffiliations">
+			<summary>
+				学生当前所属关系数据集
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<summary>
+				配置数据模型
+			</summary>
+			<param name="modelBuilder"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Managers.ArtemisSchoolManager">
+			<summary>
+				学校管理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore,Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="schoolStore">存储访问器依赖</param>
+			<param name="teacherCurrentAffiliationStore"></param>
+			<param name="options">配置依赖</param>
+			<param name="logger">日志依赖</param>
+			<param name="classStore"></param>
+			<param name="teacherStore"></param>
+			<param name="studentStore"></param>
+			<param name="schoolTeacherStore"></param>
+			<param name="schoolStudentStore"></param>
+			<param name="classTeacherStore"></param>
+			<param name="classStudentStore"></param>
+			<param name="studentCurrentAffiliationStore"></param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolStore">
+			<summary>
+				学校存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassStore">
+			<summary>
+				班级存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.TeacherStore">
+			<summary>
+				教师存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.StudentStore">
+			<summary>
+				学生存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolTeacherStore">
+			<summary>
+				学校教师关系存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.SchoolStudentStore">
+			<summary>
+				学校学生关系存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassTeacherStore">
+			<summary>
+				班级教师关系存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.ClassStudentStore">
+			<summary>
+				班级学生关系存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.StudentCurrentAffiliationStore">
+			<summary>
+				学生当前关系存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.TeacherCurrentAffiliationStore">
+			<summary>
+				教师当前关系存储访问器
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Managers.IArtemisSchoolManager">
+			<summary>
+				学校管理接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.Class">
+			<summary>
+				班级模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.HeadTeacherId">
+			<summary>
+				班主任标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.Name">
+			<summary>
+				班级名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.Type">
+			<summary>
+				班级类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.Major">
+			<summary>
+				所学专业
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.Code">
+			<summary>
+				班级编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.StudyPhase">
+			<summary>
+				学段
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.SchoolLength">
+			<summary>
+				学制
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.Length">
+			<summary>
+				学制长度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.SerialNumber">
+			<summary>
+				班级序号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Class.EstablishTime">
+			<summary>
+				班级创建时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.ClassStudent">
+			<summary>
+				班级学生关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassStudent.MoveIn">
+			<summary>
+				转入时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassStudent.MoveOut">
+			<summary>
+				转出时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassStudent.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassStudent.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.ClassTeacher">
+			<summary>
+				班级教师关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassTeacher.MoveIn">
+			<summary>
+				转入时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassTeacher.MoveOut">
+			<summary>
+				转出时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassTeacher.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.ClassTeacher.TeacherId">
+			<summary>
+				教师标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.School">
+			<summary>
+				学校模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.Name">
+			<summary>
+				学校名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.Code">
+			<summary>
+				学校编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.Type">
+			<summary>
+				学校类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.OrganizationCode">
+			<summary>
+				组织机构代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.DivisionCode">
+			<summary>
+				学校所在地行政区划代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.Address">
+			<summary>
+				学校地址
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.Email">
+			<summary>
+				学校邮箱
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.WebSite">
+			<summary>
+				学校网站
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.ContactNumber">
+			<summary>
+				学校联系电话
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.School.EstablishTime">
+			<summary>
+				学校建立时间
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.SchoolStudent">
+			<summary>
+				学校学生关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolStudent.MoveIn">
+			<summary>
+				转入时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolStudent.MoveOut">
+			<summary>
+				转出时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolStudent.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolStudent.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.SchoolTeacher">
+			<summary>
+				学校老师关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolTeacher.MoveIn">
+			<summary>
+				转入时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolTeacher.MoveOut">
+			<summary>
+				转出时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolTeacher.SchoolId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.SchoolTeacher.TeacherId">
+			<summary>
+				教师标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.Student">
+			<summary>
+				学生模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Name">
+			<summary>
+				学生名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Gender">
+			<summary>
+				学生性别
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Major">
+			<summary>
+				专业
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Birthday">
+			<summary>
+				学生生日
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Nation">
+			<summary>
+				民族
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Code">
+			<summary>
+				学生编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.StudentNumber">
+			<summary>
+				学籍号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Cert">
+			<summary>
+				证件号码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.EnrollmentDate">
+			<summary>
+				入学时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.DivisionCode">
+			<summary>
+				住址区划代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Student.Address">
+			<summary>
+				住址
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.StudentCurrentAffiliation">
+			<summary>
+				学生当前所属关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.StudentCurrentAffiliation.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.Teacher">
+			<summary>
+				教师模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Teacher.TeacherName">
+			<summary>
+				教师名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.Teacher.TeacherCode">
+			<summary>
+				教师编码
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Models.TeacherCurrentAffiliation">
+			<summary>
+				教师当前所属关系模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.School.Models.TeacherCurrentAffiliation.TeacherId">
+			<summary>
+				教师标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.ServiceExtensions">
+			<summary>
+				服务扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+			<summary>
+				添加学校服务
+			</summary>
+			<param name="services"></param>
+		</member>
+		<member
+			name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+			<summary>
+				添加学校服务
+			</summary>
+			<param name="services"></param>
+			<param name="enableProxy"></param>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisClassStore">
+			<summary>
+				班级存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisClassStore">
+			<summary>
+				班级存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisClassStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisClassStudentStore">
+			<summary>
+				班级学生关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisClassStudentStore">
+			<summary>
+				班级学生关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisClassStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisClassStudentStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisClassTeacherStore">
+			<summary>
+				班级教师关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisClassTeacherStore">
+			<summary>
+				班级教师关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisClassTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisClassTeacherStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisSchoolStore">
+			<summary>
+				学校存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisSchoolStore">
+			<summary>
+				学校存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisSchoolStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisSchoolStudentStore">
+			<summary>
+				学校学生关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisSchoolStudentStore">
+			<summary>
+				学校学生关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisSchoolStudentStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisSchoolTeacherStore">
+			<summary>
+				学校教师关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore">
+			<summary>
+				学校教师关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisSchoolTeacherStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore">
+			<summary>
+				学生当前所属关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore">
+			<summary>
+				学生当前所属关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisStudentStore">
+			<summary>
+				学生存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisStudentStore">
+			<summary>
+				学生存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore">
+			<summary>
+				教师当前所属关系存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore">
+			<summary>
+				教师当前所属关系存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				无键模型基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+		<member name="P:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.EntityKey">
+			<summary>
+				键生成委托
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.IArtemisTeacherStore">
+			<summary>
+				教师存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.School.Stores.ArtemisTeacherStore">
+			<summary>
+				教师存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.School.Stores.ArtemisTeacherStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+			<exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+		</member>
+	</members>
 </doc>

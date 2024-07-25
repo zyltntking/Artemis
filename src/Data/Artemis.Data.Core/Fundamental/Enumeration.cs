@@ -80,7 +80,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
             return false;
 
         var typeMatches = GetType() == other.GetType();
-        var valueMatches = Id.Equals(other.Id);
+        var valueMatches = Id.Equals(other);
 
         return typeMatches && valueMatches;
     }
@@ -119,7 +119,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <returns>差值</returns>
     public static int AbsoluteDifference(Enumeration lhs, Enumeration rhs)
     {
-        var absoluteDifference = Math.Abs(lhs.Id - rhs.Id);
+        var absoluteDifference = Math.Abs(lhs - rhs);
         return absoluteDifference;
     }
 
@@ -231,8 +231,8 @@ public abstract class Enumeration : IEnumeration<Enumeration>
 
                 if (enumeration is not null)
                 {
-                    item.ItemKey = enumeration.Name;
-                    item.ItemValue = enumeration.Name;
+                    item.ItemKey = enumeration;
+                    item.ItemValue = enumeration;
                     item.Description = info.GetCustomAttribute<DescriptionAttribute>()?.Description;
                 }
 
@@ -243,6 +243,28 @@ public abstract class Enumeration : IEnumeration<Enumeration>
 
         return record;
     }
+
+    #region Operator
+
+    /// <summary>
+    ///     Enumeration转String
+    /// </summary>
+    /// <param name="enumeration"></param>
+    public static implicit operator string(Enumeration enumeration)
+    {
+        return enumeration.Name;
+    }
+
+    /// <summary>
+    ///     Enumeration转Int32
+    /// </summary>
+    /// <param name="enumeration"></param>
+    public static implicit operator int(Enumeration enumeration)
+    {
+        return enumeration.Id;
+    }
+
+    #endregion
 
     #region Overrides of Object
 
@@ -265,7 +287,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
         if (obj is not Enumeration otherValue) return false;
 
         var typeMatches = GetType() == obj.GetType();
-        var valueMatches = Id.Equals(otherValue.Id);
+        var valueMatches = Id.Equals(otherValue);
 
         return typeMatches && valueMatches;
     }

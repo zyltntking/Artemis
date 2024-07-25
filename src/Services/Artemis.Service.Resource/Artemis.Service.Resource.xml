@@ -1,627 +1,645 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Service.Resource</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionary">
-            <summary>
-                数据字典实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionary.Items">
-            <summary>
-                数据字典项
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem">
-            <summary>
-                数据字典项实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem.DataDictionary">
-            <summary>
-                数据字典
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.ArtemisDevice">
-            <summary>
-                设备实体配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.ArtemisDivision">
-            <summary>
-                行政区划实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Parent">
-            <summary>
-                上级行政区划
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Children">
-            <summary>
-                下级行政区划
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.ArtemisOrganization">
-            <summary>
-                组织机构实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Parent">
-            <summary>
-                上级机构
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Children">
-            <summary>
-                下级机构
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration">
-            <summary>
-                数据字典配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration">
-            <summary>
-                数据字典项目配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration">
-            <summary>
-                设备实体配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.TableName">
-            <summary>
-                表明
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
-            <summary>
-                实体字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration">
-            <summary>
-                行政区划配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration">
-            <summary>
-                组织机构配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
-            <summary>
-                实体字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Context.ResourceContext">
-            <summary>
-                资源上下文
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
-            <summary>
-                初始化资源上下文
-            </summary>
-            <param name="options">数据库上下文选项</param>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Organizations">
-            <summary>
-                组织机构数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Divisions">
-            <summary>
-                行政区划数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Devices">
-            <summary>
-                设备数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaries">
-            <summary>
-                数据字典数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaryItems">
-            <summary>
-                数据字典项数据集
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <summary>
-                配置数据模型
-            </summary>
-            <param name="modelBuilder"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Managers.ArtemisResourceManager">
-            <summary>
-                资源管理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDeviceStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="deviceStore">存储访问器依赖</param>
-            <param name="organizationStore"></param>
-            <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="dataDictionaryStore"></param>
-            <param name="dataDictionaryItemStore"></param>
-            <param name="divisionStore"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.StoreDispose">
-            <summary>
-                释放托管的Store
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DeviceStore">
-            <summary>
-                设备存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryStore">
-            <summary>
-                数据字典存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryItemStore">
-            <summary>
-                数据字典项存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DivisionStore">
-            <summary>
-                行政区划存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.OrganizationStore">
-            <summary>
-                组织机构存储访问器
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Managers.IArtemisResourceManager">
-            <summary>
-                资源管理器
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Models.DataDictionary">
-            <summary>
-                数据字典模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Name">
-            <summary>
-                字典名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Code">
-            <summary>
-                字典代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Description">
-            <summary>
-                字典描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Type">
-            <summary>
-                字典类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Valid">
-            <summary>
-                字典是否有效
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Models.DataDictionaryItem">
-            <summary>
-                数据字典项目模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.DataDictionaryId">
-            <summary>
-                数据字典标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Key">
-            <summary>
-                数据项目键
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Value">
-            <summary>
-                数据项目值
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Description">
-            <summary>
-                数据项目描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Valid">
-            <summary>
-                数据项目是否有效
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Models.Device">
-            <summary>
-                设备模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Name">
-            <summary>
-                设备名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Type">
-            <summary>
-                设备类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Code">
-            <summary>
-                设备代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Model">
-            <summary>
-                设备型号
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.SerialNumber">
-            <summary>
-                设备序列号
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Status">
-            <summary>
-                设备状态
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.PurchaseDate">
-            <summary>
-                购买日期
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.InstallDate">
-            <summary>
-                安装日期
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.WarrantyDate">
-            <summary>
-                保修日期
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.MaintenanceDate">
-            <summary>
-                维护日期
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Device.Description">
-            <summary>
-                设备描述
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Models.Division">
-            <summary>
-                行政区划模型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Name">
-            <summary>
-                行政区划名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Code">
-            <summary>
-                行政区划代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Level">
-            <summary>
-                行政区划级别
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Type">
-            <summary>
-                行政区划类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.FullName">
-            <summary>
-                行政区划全名
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Pinyin">
-            <summary>
-                行政区划拼音
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.Remark">
-            <summary>
-                行政区划备注
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Division.ParentId">
-            <summary>
-                上级行政区划标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Models.Organization">
-            <summary>
-                组织机构
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Name">
-            <summary>
-                机构名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Code">
-            <summary>
-                机构编码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Type">
-            <summary>
-                机构类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.EstablishTime">
-            <summary>
-                机构成立时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Email">
-            <summary>
-                机构邮箱
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.WebSite">
-            <summary>
-                机构网站
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.ContactNumber">
-            <summary>
-                机构联系电话
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.PostCode">
-            <summary>
-                机构邮编
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Status">
-            <summary>
-                机构状态
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.DivisionCode">
-            <summary>
-                机构所在地行政区划代码
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Address">
-            <summary>
-                机构地址
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.Description">
-            <summary>
-                机构描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Models.Organization.ParentId">
-            <summary>
-                父级机构标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.ServiceExtensions">
-            <summary>
-                服务扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-                添加资源服务
-            </summary>
-            <param name="services"></param>
-        </member>
-        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-            <summary>
-                添加资源服务
-            </summary>
-            <param name="services"></param>
-            <param name="enableProxy"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
-            <summary>
-                数据字典项目存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore">
-            <summary>
-                数据字典项目存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore">
-            <summary>
-                数据字典存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore">
-            <summary>
-                数据字典存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.IArtemisDeviceStore">
-            <summary>
-                设备存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.ArtemisDeviceStore">
-            <summary>
-                设备存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.IArtemisDivisionStore">
-            <summary>
-                行政区划存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.ArtemisDivisionStore">
-            <summary>
-                行政区划存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.IArtemisOrganizationStore">
-            <summary>
-                组织机构存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Stores.ArtemisOrganizationStore">
-            <summary>
-                组织机构存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Service.Resource</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionary">
+			<summary>
+				数据字典实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionary.Items">
+			<summary>
+				数据字典项
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem">
+			<summary>
+				数据字典项实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem.DataDictionary">
+			<summary>
+				数据字典
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.ArtemisDevice">
+			<summary>
+				设备实体配置
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.ArtemisDivision">
+			<summary>
+				行政区划实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Parent">
+			<summary>
+				上级行政区划
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Children">
+			<summary>
+				下级行政区划
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.ArtemisOrganization">
+			<summary>
+				组织机构实体
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Parent">
+			<summary>
+				上级机构
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Children">
+			<summary>
+				下级机构
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration">
+			<summary>
+				数据字典配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration">
+			<summary>
+				数据字典项目配置
+			</summary>
+		</member>
+		<member
+			name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration">
+			<summary>
+				设备实体配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.TableName">
+			<summary>
+				表明
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
+			<summary>
+				实体字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration">
+			<summary>
+				行政区划配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration">
+			<summary>
+				组织机构配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.DataSetDescription">
+			<summary>
+				数据集描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.TableName">
+			<summary>
+				表名
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+			<summary>
+				实体字段配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+			<summary>
+				实体关系配置
+			</summary>
+			<param name="builder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Context.ResourceContext">
+			<summary>
+				资源上下文
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
+			<summary>
+				初始化资源上下文
+			</summary>
+			<param name="options">数据库上下文选项</param>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Organizations">
+			<summary>
+				组织机构数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Divisions">
+			<summary>
+				行政区划数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Devices">
+			<summary>
+				设备数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaries">
+			<summary>
+				数据字典数据集
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaryItems">
+			<summary>
+				数据字典项数据集
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<summary>
+				配置数据模型
+			</summary>
+			<param name="modelBuilder"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Managers.ArtemisResourceManager">
+			<summary>
+				资源管理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDeviceStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+			<summary>
+				创建新的管理器实例
+			</summary>
+			<param name="deviceStore">存储访问器依赖</param>
+			<param name="organizationStore"></param>
+			<param name="options">配置依赖</param>
+			<param name="logger">日志依赖</param>
+			<param name="dataDictionaryStore"></param>
+			<param name="dataDictionaryItemStore"></param>
+			<param name="divisionStore"></param>
+			<exception cref="T:System.ArgumentNullException"></exception>
+		</member>
+		<member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.StoreDispose">
+			<summary>
+				释放托管的Store
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DeviceStore">
+			<summary>
+				设备存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryStore">
+			<summary>
+				数据字典存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryItemStore">
+			<summary>
+				数据字典项存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DivisionStore">
+			<summary>
+				行政区划存储访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.OrganizationStore">
+			<summary>
+				组织机构存储访问器
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Managers.IArtemisResourceManager">
+			<summary>
+				资源管理器
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Models.DataDictionary">
+			<summary>
+				数据字典模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Name">
+			<summary>
+				字典名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Code">
+			<summary>
+				字典代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Description">
+			<summary>
+				字典描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Type">
+			<summary>
+				字典类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Valid">
+			<summary>
+				字典是否有效
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Models.DataDictionaryItem">
+			<summary>
+				数据字典项目模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.DataDictionaryId">
+			<summary>
+				数据字典标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Key">
+			<summary>
+				数据项目键
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Value">
+			<summary>
+				数据项目值
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Description">
+			<summary>
+				数据项目描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Valid">
+			<summary>
+				数据项目是否有效
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Models.Device">
+			<summary>
+				设备模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Name">
+			<summary>
+				设备名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Type">
+			<summary>
+				设备类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Code">
+			<summary>
+				设备代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Model">
+			<summary>
+				设备型号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.SerialNumber">
+			<summary>
+				设备序列号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Status">
+			<summary>
+				设备状态
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.PurchaseDate">
+			<summary>
+				购买日期
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.InstallDate">
+			<summary>
+				安装日期
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.WarrantyDate">
+			<summary>
+				保修日期
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.MaintenanceDate">
+			<summary>
+				维护日期
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Device.Description">
+			<summary>
+				设备描述
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Models.Division">
+			<summary>
+				行政区划模型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Name">
+			<summary>
+				行政区划名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Code">
+			<summary>
+				行政区划代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Level">
+			<summary>
+				行政区划级别
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Type">
+			<summary>
+				行政区划类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.FullName">
+			<summary>
+				行政区划全名
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Pinyin">
+			<summary>
+				行政区划拼音
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.Remark">
+			<summary>
+				行政区划备注
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Division.ParentId">
+			<summary>
+				上级行政区划标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Models.Organization">
+			<summary>
+				组织机构
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Name">
+			<summary>
+				机构名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Code">
+			<summary>
+				机构编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Type">
+			<summary>
+				机构类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.EstablishTime">
+			<summary>
+				机构成立时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Email">
+			<summary>
+				机构邮箱
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.WebSite">
+			<summary>
+				机构网站
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.ContactNumber">
+			<summary>
+				机构联系电话
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.PostCode">
+			<summary>
+				机构邮编
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Status">
+			<summary>
+				机构状态
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.DivisionCode">
+			<summary>
+				机构所在地行政区划代码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Address">
+			<summary>
+				机构地址
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.Description">
+			<summary>
+				机构描述
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Resource.Models.Organization.ParentId">
+			<summary>
+				父级机构标识
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.ServiceExtensions">
+			<summary>
+				服务扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+			<summary>
+				添加资源服务
+			</summary>
+			<param name="services"></param>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+			<summary>
+				添加资源服务
+			</summary>
+			<param name="services"></param>
+			<param name="enableProxy"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
+			<summary>
+				数据字典项目存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore">
+			<summary>
+				数据字典项目存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore">
+			<summary>
+				数据字典存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore">
+			<summary>
+				数据字典存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.IArtemisDeviceStore">
+			<summary>
+				设备存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.ArtemisDeviceStore">
+			<summary>
+				设备存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.IArtemisDivisionStore">
+			<summary>
+				行政区划存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.ArtemisDivisionStore">
+			<summary>
+				行政区划存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.IArtemisOrganizationStore">
+			<summary>
+				组织机构存储接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Service.Resource.Stores.ArtemisOrganizationStore">
+			<summary>
+				组织机构存储
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+			<summary>
+				基本存储实例构造
+			</summary>
+			<param name="context"></param>
+			<param name="storeOptions"></param>
+			<param name="handlerProxy"></param>
+			<param name="cacheProxy"></param>
+			<param name="logger"></param>
+			<param name="describer"></param>
+		</member>
+	</members>
 </doc>

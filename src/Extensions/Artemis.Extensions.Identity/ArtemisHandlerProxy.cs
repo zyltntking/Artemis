@@ -48,7 +48,7 @@ public sealed class ArtemisHandlerProxy : AbstractHandlerProxy
             {
                 var userId = httpContext.User
                     .Claims
-                    .Where(claim => claim.Type == ArtemisClaimTypes.UserId.Name)
+                    .Where(claim => claim.Type == ArtemisClaimTypes.UserId)
                     .Select(claim => claim.Value)
                     .FirstOrDefault();
 

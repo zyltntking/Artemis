@@ -44,7 +44,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <param name="package">凭据</param>
     /// <returns>创建结果</returns>
-    Task<Data.Store.StoreResult> CreateClaimAsync(
+    Task<StoreResult> CreateClaimAsync(
         ClaimPackage package,
         CancellationToken cancellationToken = default);
 
@@ -54,7 +54,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    Task<Data.Store.StoreResult> CreateClaimsAsync(
+    Task<StoreResult> CreateClaimsAsync(
         IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default);
 
@@ -65,7 +65,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
-    Task<Data.Store.StoreResult> UpdateClaimAsync(
+    Task<StoreResult> UpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -76,7 +76,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<Data.Store.StoreResult> UpdateClaimsAsync(
+    Task<StoreResult> UpdateClaimsAsync(
         IDictionary<Guid, ClaimPackage> packages,
         CancellationToken cancellationToken = default);
 
@@ -87,7 +87,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    Task<Data.Store.StoreResult> CreateOrUpdateClaimAsync(
+    Task<StoreResult> CreateOrUpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -98,7 +98,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="id">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> DeleteClaimAsync(
+    Task<StoreResult> DeleteClaimAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
@@ -108,7 +108,7 @@ public interface IIdentityResourceManager : IManager
     /// <param name="ids">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> DeleteClaimsAsync(
+    Task<StoreResult> DeleteClaimsAsync(
         IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default);
 

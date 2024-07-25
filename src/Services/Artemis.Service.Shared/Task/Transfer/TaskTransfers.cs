@@ -55,6 +55,16 @@ public record TaskPackage : ITaskPackage
     public required string TaskName { get; set; }
 
     /// <summary>
+    ///     任务编码
+    /// </summary>
+    public string? TaskCode { get; set; }
+
+    /// <summary>
+    ///     设计编码
+    /// </summary>
+    public string? DesignCode { get; set; }
+
+    /// <summary>
     ///     任务描述
     /// </summary>
     public string? Description { get; set; }

@@ -63,7 +63,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                     if (requirement is RolesRequirement rolesRequirement)
                     {
                         var roles = user.Claims
-                            .Where(claim => claim.Type == ArtemisClaimTypes.Role.Name)
+                            .Where(claim => claim.Type == ArtemisClaimTypes.Role)
                             .Select(claim => claim.Value.StringNormalize())
                             .ToList();
 
@@ -110,13 +110,13 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                     {
                         var requireActionName = user
                             .Claims
-                            .Where(claim => claim.Type == ArtemisClaimTypes.MateActionName.Name)
+                            .Where(claim => claim.Type == ArtemisClaimTypes.MateActionName)
                             .Select(claim => claim.Value)
                             .FirstOrDefault();
 
                         var claimActionName = user
                             .Claims
-                            .Where(claim => claim.Type == ArtemisClaimTypes.MateActionName.Name)
+                            .Where(claim => claim.Type == ArtemisClaimTypes.MateActionName)
                             .Select(claim => claim.Value)
                             .FirstOrDefault();
 
@@ -134,13 +134,13 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
                     {
                         var requireRoutePath = user
                             .Claims
-                            .Where(claim => claim.Type == ArtemisClaimTypes.MateRoutePath.Name)
+                            .Where(claim => claim.Type == ArtemisClaimTypes.MateRoutePath)
                             .Select(claim => claim.Value)
                             .FirstOrDefault();
 
                         var claimRoutePath = user
                             .Claims
-                            .Where(claim => claim.Type == ArtemisClaimTypes.MateRoutePath.Name)
+                            .Where(claim => claim.Type == ArtemisClaimTypes.MateRoutePath)
                             .Select(claim => claim.Value)
                             .FirstOrDefault();
 

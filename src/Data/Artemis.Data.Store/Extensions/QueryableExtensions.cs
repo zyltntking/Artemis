@@ -68,7 +68,7 @@ public static class QueryableExtensions
         {
             var sortDefinitions = definition.SortDefinitions
                 .OrderBy(sort => sort.Index)
-                .Select(sort => $"{sort.Field} {sort.Order.Name}");
+                .Select(sort => $"{sort.Field} {sort.Order}");
 
             var sortPredicate = string.Join(",", sortDefinitions);
 

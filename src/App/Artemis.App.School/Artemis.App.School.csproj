@@ -17,22 +17,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="logs\**"/>
-        <Content Remove="logs\**"/>
-        <EmbeddedResource Remove="logs\**"/>
-        <None Remove="logs\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="aspire.Component.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="serilog.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="swagger.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+        <Compile Remove="logs\**" />
+        <Content Remove="logs\**" />
+        <EmbeddedResource Remove="logs\**" />
+        <None Remove="logs\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,12 +28,12 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj"/>
-        <ProjectReference Include="..\..\Services\Artemis.Service.School\Artemis.Service.School.csproj"/>
+        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
+        <ProjectReference Include="..\..\Services\Artemis.Service.School\Artemis.Service.School.csproj" />
     </ItemGroup>
 
     <ItemGroup>

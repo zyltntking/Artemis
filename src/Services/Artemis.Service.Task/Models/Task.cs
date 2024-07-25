@@ -19,6 +19,20 @@ public class Task : ConcurrencyPartition, ITask
     public required string TaskName { get; set; }
 
     /// <summary>
+    ///     任务编码
+    /// </summary>
+    [MaxLength(128)]
+    [Comment("任务编码")]
+    public string? TaskCode { get; set; }
+
+    /// <summary>
+    ///     设计编码
+    /// </summary>
+    [MaxLength(128)]
+    [Comment("设计编码")]
+    public string? DesignCode { get; set; }
+
+    /// <summary>
     ///     标准化任务名
     /// </summary>
     [Required]
@@ -32,7 +46,7 @@ public class Task : ConcurrencyPartition, ITask
     [Required]
     [MaxLength(32)]
     [Comment("任务归属")]
-    public required string TaskShip { get; set; }
+    public required string TaskShip { get; set; } = Data.Core.Fundamental.Types.TaskShip.Normal;
 
     /// <summary>
     ///     任务模式
@@ -40,7 +54,7 @@ public class Task : ConcurrencyPartition, ITask
     [Required]
     [MaxLength(32)]
     [Comment("任务模式")]
-    public required string TaskMode { get; set; }
+    public required string TaskMode { get; set; } = Data.Core.Fundamental.Types.TaskMode.Normal;
 
     /// <summary>
     ///     任务状态
@@ -48,7 +62,7 @@ public class Task : ConcurrencyPartition, ITask
     [Required]
     [MaxLength(32)]
     [Comment("任务状态")]
-    public required string TaskState { get; set; }
+    public required string TaskState { get; set; } = Data.Core.Fundamental.Types.TaskState.Initial;
 
     /// <summary>
     ///     任务描述

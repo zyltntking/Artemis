@@ -11,25 +11,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
         <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
+        <UserSecretsId>33630b90-e80c-4f11-a21a-392b252c0a37</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..\..</DockerfileContext>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="logs\**"/>
-        <Content Remove="logs\**"/>
-        <EmbeddedResource Remove="logs\**"/>
-        <None Remove="logs\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="aspire.Component.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="serilog.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="swagger.Setting.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+        <Compile Remove="logs\**" />
+        <Content Remove="logs\**" />
+        <EmbeddedResource Remove="logs\**" />
+        <None Remove="logs\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,12 +28,25 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj"/>
-        <ProjectReference Include="..\..\Services\Artemis.Service.Resource\Artemis.Service.Resource.csproj"/>
+        <ProjectReference Include="..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
+        <ProjectReference Include="..\..\Services\Artemis.Service.Resource\Artemis.Service.Resource.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

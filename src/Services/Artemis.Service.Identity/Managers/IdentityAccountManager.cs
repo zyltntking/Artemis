@@ -84,7 +84,7 @@ public sealed class IdentityAccountManager : Manager, IIdentityAccountManager
         {
             UserId = authentication.Id,
             UserName = authentication.UserName,
-            EndType = EndType.SignInitial.Name,
+            EndType = EndType.SignInitial,
             Expire = 0,
             UserClaims = userClaims,
             Roles = userRoles,

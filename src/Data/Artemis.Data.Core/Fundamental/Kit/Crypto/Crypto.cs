@@ -155,11 +155,11 @@ public static class Crypto
 
         var key = new byte[keyLength];
 
-        var keyBlock = keyLength + symmetricType.Id;
+        var keyBlock = keyLength + symmetricType;
 
         var iv = new byte[ivLength];
 
-        var ivBlock = ivLength + symmetricType.Id;
+        var ivBlock = ivLength + symmetricType;
 
         for (var i = 0; i < keyLength; i++)
         {

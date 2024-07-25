@@ -28,9 +28,6 @@ public class Program
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
-            builder.AddAspireConfiguration();
-
-            builder.ConfigureSerilog();
 
             builder.AddServiceCommons();
 

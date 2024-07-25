@@ -153,7 +153,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果</returns>
-    public async Task<Data.Store.StoreResult> CreateRoleAsync(
+    public async Task<StoreResult> CreateRoleAsync(
         RolePackage package,
         CancellationToken cancellationToken = default)
     {
@@ -165,7 +165,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             .AnyAsync(role => role.NormalizedName == normalizedName, cancellationToken);
 
         if (exists)
-            return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRole), package.Name);
+            return StoreResult.EntityFoundFailed(nameof(IdentityRole), package.Name);
 
         var role = Instance.CreateInstance<IdentityRole, RolePackage>(package);
 
@@ -180,7 +180,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="packages">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<Data.Store.StoreResult> CreateRolesAsync(
+    public async Task<StoreResult> CreateRolesAsync(
         IEnumerable<RolePackage> packages,
         CancellationToken cancellationToken = default)
     {
@@ -215,7 +215,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
         var flag = string.Join(',', packageRoleNames);
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRole), flag);
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), flag);
     }
 
     /// <summary>
@@ -225,7 +225,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public async Task<Data.Store.StoreResult> UpdateRoleAsync(
+    public async Task<StoreResult> UpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default)
@@ -243,7 +243,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             return await RoleStore.UpdateAsync(role, cancellationToken);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -252,7 +252,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="dictionary">更新角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public async Task<Data.Store.StoreResult> UpdateRolesAsync(
+    public async Task<StoreResult> UpdateRolesAsync(
         IDictionary<Guid, RolePackage> dictionary,
         CancellationToken cancellationToken = default)
     {
@@ -282,7 +282,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
         var flag = string.Join(',', ids.Select(item => item.IdToString()));
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRole), flag);
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), flag);
     }
 
     /// <summary>
@@ -292,7 +292,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<Data.Store.StoreResult> CreateOrUpdateRoleAsync(
+    public async Task<StoreResult> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default)
@@ -313,7 +313,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="id">角色id</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> DeleteRoleAsync(
+    public async Task<StoreResult> DeleteRoleAsync(
         Guid id,
         CancellationToken cancellationToken = default)
     {
@@ -324,7 +324,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
         if (role is not null)
             return await RoleStore.DeleteAsync(role, cancellationToken);
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -333,7 +333,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="ids">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> DeleteRolesAsync(
+    public async Task<StoreResult> DeleteRolesAsync(
         IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default)
     {
@@ -350,7 +350,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
         var flag = string.Join(',', idList.Select(id => id.IdToString()));
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), flag);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), flag);
     }
 
     /// <summary>
@@ -468,7 +468,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="userId">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<Data.Store.StoreResult> AddRoleUserAsync(
+    public async Task<StoreResult> AddRoleUserAsync(
         Guid id,
         Guid userId,
         CancellationToken cancellationToken = default)
@@ -489,7 +489,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
                     .AnyAsync(cancellationToken);
 
                 if (userRoleExists)
-                    return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityUserRole), $"userId:{userId},roleId:{id}");
+                    return StoreResult.EntityFoundFailed(nameof(IdentityUserRole), $"userId:{userId},roleId:{id}");
 
                 var userRole = Instance.CreateInstance<IdentityUserRole>();
 
@@ -499,10 +499,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
                 return await UserRoleStore.CreateAsync(userRole, cancellationToken);
             }
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityUser), userId.IdToString()!);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.IdToString()!);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -512,7 +512,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<Data.Store.StoreResult> AddRoleUsersAsync(
+    public async Task<StoreResult> AddRoleUsersAsync(
         Guid id,
         IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default)
@@ -558,15 +558,15 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
                 flag = string.Join(',', notSetUserIds.Select(userId => userId.IdToString()));
 
-                return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityUserRole), flag);
+                return StoreResult.EntityFoundFailed(nameof(IdentityUserRole), flag);
             }
 
             flag = string.Join(',', userIds.Select(item => item.IdToString()));
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityUser), flag);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), flag);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -576,7 +576,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="userId">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> RemoveRoleUserAsync(
+    public async Task<StoreResult> RemoveRoleUserAsync(
         Guid id,
         Guid userId,
         CancellationToken cancellationToken = default)
@@ -600,13 +600,13 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
                 var flag = $"userId:{userId},roleId:{id}";
 
-                return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityUserRole), flag);
+                return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
             }
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityUser), userId.IdToString()!);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), userId.IdToString()!);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -616,7 +616,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> RemoveRoleUsersAsync(
+    public async Task<StoreResult> RemoveRoleUsersAsync(
         Guid id,
         IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default)
@@ -636,10 +636,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             var flag = string.Join(',', userIds.Select(item => item.IdToString()));
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityUserRole), flag);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityUserRole), flag);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -738,7 +738,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<Data.Store.StoreResult> AddRoleClaimAsync(
+    public async Task<StoreResult> AddRoleClaimAsync(
         Guid id,
         RoleClaimPackage package,
         CancellationToken cancellationToken = default)
@@ -761,7 +761,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             {
                 var flag = $"roleId:{id},claim：{summary}";
 
-                return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRoleClaim), flag);
+                return StoreResult.EntityFoundFailed(nameof(IdentityRoleClaim), flag);
             }
 
             var roleClaim = Instance.CreateInstance<IdentityRoleClaim, ClaimPackage>(package);
@@ -772,7 +772,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             return await RoleClaimStore.CreateAsync(roleClaim, cancellationToken);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -782,7 +782,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="packages">凭据</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    public async Task<Data.Store.StoreResult> AddRoleClaimsAsync(
+    public async Task<StoreResult> AddRoleClaimsAsync(
         Guid id,
         IEnumerable<RoleClaimPackage> packages,
         CancellationToken cancellationToken = default)
@@ -829,10 +829,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
             var flag =
                 $"roleId:{id},claims:{string.Join(',', packageList.Select(item => Normalize.KeyValuePairSummary(item.ClaimType, item.ClaimValue)))}";
 
-            return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRoleClaim), flag);
+            return StoreResult.EntityFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -843,7 +843,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<Data.Store.StoreResult> UpdateRoleClaimAsync(Guid id, int claimId, RoleClaimPackage package,
+    public async Task<StoreResult> UpdateRoleClaimAsync(Guid id, int claimId, RoleClaimPackage package,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -869,10 +869,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             var flag = $"roleId:{id},claim：{summary}";
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRoleClaim), flag);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -882,7 +882,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="dictionary">凭据更新字典</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    public async Task<Data.Store.StoreResult> UpdateRoleClaimsAsync(Guid id, IDictionary<int, RoleClaimPackage> dictionary,
+    public async Task<StoreResult> UpdateRoleClaimsAsync(Guid id, IDictionary<int, RoleClaimPackage> dictionary,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -914,10 +914,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             var flag = $"roleId:{id},claims:{string.Join(',', ids)}";
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRoleClaim), flag);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -927,7 +927,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> RemoveRoleClaimAsync(
+    public async Task<StoreResult> RemoveRoleClaimAsync(
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default)
@@ -944,10 +944,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             if (roleClaim is not null) return await RoleClaimStore.DeleteAsync(roleClaim, cancellationToken);
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRoleClaim), claimId.IdToString()!);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), claimId.IdToString()!);
         }
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     /// <summary>
@@ -957,7 +957,7 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> RemoveRoleClaimsAsync(
+    public async Task<StoreResult> RemoveRoleClaimsAsync(
         Guid id,
         IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default)
@@ -978,10 +978,10 @@ public sealed class IdentityRoleManager : Manager, IIdentityRoleManager
 
             var flag = string.Join(',', claimIdList.Select(item => item.IdToString()));
 
-            return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityRoleClaim), flag);
+            return StoreResult.EntityNotFoundFailed(nameof(IdentityRoleClaim), flag);
         }
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityRole), id.IdToString()!);
+        return StoreResult.EntityFoundFailed(nameof(IdentityRole), id.IdToString()!);
     }
 
     #endregion

@@ -21,7 +21,7 @@ public interface IStoreResult
     IEnumerable<StoreError> Errors { get; }
 
     /// <summary>
-    ///    描述存储错误
+    ///     描述存储错误
     /// </summary>
     string DescribeError { get; }
 }

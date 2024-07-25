@@ -28,9 +28,6 @@ public class Program
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
-            builder.AddAspireConfiguration();
-
-            builder.ConfigureSerilog();
 
             builder.AddServiceCommons();
 
@@ -43,7 +40,14 @@ public class Program
             {
                 optionsBuilder.MigrationsHistoryTable("RawDataDbHistory", Project.Schemas.RawData);
                 optionsBuilder.MigrationsAssembly("Artemis.App.RawData");
-            }, Log.Debug).AddRawDataServices<ArtemisHandlerProxy>();
+            }, Log.Debug).AddRawDataServices();
+
+            //≈‰÷√»œ÷§
+            builder.Services.AddAuthentication()
+                .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
+
+            //≈‰÷√ ⁄»®
+            builder.ConfigureAuthorization();
 
             var isMigration = false;
 

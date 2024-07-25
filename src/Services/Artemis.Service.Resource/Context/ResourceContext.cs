@@ -75,7 +75,7 @@ public class ResourceContext : DbContext
             dataDictionary.Name = dictionary.TypeName;
             dataDictionary.Code = dictionary.TypeName;
             dataDictionary.Valid = dictionary.Valid;
-            dataDictionary.Type = DictionaryType.Public.Name;
+            dataDictionary.Type = DictionaryType.Public;
             dataDictionary.Description = dictionary.Description;
 
             modelBuilder.Entity<ArtemisDataDictionary>().HasData(dataDictionary);

@@ -134,7 +134,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="cancellationToken">操作取消信号</param>
     /// <param name="package">凭据</param>
     /// <returns>创建结果</returns>
-    public async Task<Data.Store.StoreResult> CreateClaimAsync(
+    public async Task<StoreResult> CreateClaimAsync(
         ClaimPackage package,
         CancellationToken cancellationToken = default)
     {
@@ -148,7 +148,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
 
         var summary = Normalize.KeyValuePairSummary(package.ClaimType, package.ClaimType);
 
-        if (exists) return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityClaim), summary);
+        if (exists) return StoreResult.EntityFoundFailed(nameof(IdentityClaim), summary);
 
         var claim = Instance.CreateInstance<IdentityClaim, ClaimPackage>(package);
 
@@ -163,7 +163,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    public async Task<Data.Store.StoreResult> CreateClaimsAsync(
+    public async Task<StoreResult> CreateClaimsAsync(
         IEnumerable<ClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
@@ -202,7 +202,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
         var flag = $"{string.Join(',', claimPackages
             .Select(item => Normalize.KeyValuePairSummary(item.ClaimType, item.ClaimValue)))}";
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityClaim), flag);
+        return StoreResult.EntityFoundFailed(nameof(IdentityClaim), flag);
     }
 
     /// <summary>
@@ -212,7 +212,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果和更新成功的凭据信息</returns>
-    public async Task<Data.Store.StoreResult> UpdateClaimAsync(
+    public async Task<StoreResult> UpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default)
@@ -229,7 +229,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
             return await ClaimStore.UpdateAsync(claim, cancellationToken);
         }
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityClaim), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.IdToString()!);
     }
 
     /// <summary>
@@ -238,7 +238,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="packages">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    public async Task<Data.Store.StoreResult> UpdateClaimsAsync(
+    public async Task<StoreResult> UpdateClaimsAsync(
         IDictionary<Guid, ClaimPackage> packages,
         CancellationToken cancellationToken = default)
     {
@@ -270,7 +270,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
 
         var flag = string.Join(',', ids.Select(item => item.IdToString()));
 
-        return Data.Store.StoreResult.EntityFoundFailed(nameof(Context.IdentityClaim), flag);
+        return StoreResult.EntityFoundFailed(nameof(IdentityClaim), flag);
     }
 
     /// <summary>
@@ -280,7 +280,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    public async Task<Data.Store.StoreResult> CreateOrUpdateClaimAsync(
+    public async Task<StoreResult> CreateOrUpdateClaimAsync(
         Guid id,
         ClaimPackage package,
         CancellationToken cancellationToken = default)
@@ -301,7 +301,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="id">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> DeleteClaimAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteClaimAsync(Guid id, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -310,7 +310,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
         if (claim is not null)
             return await ClaimStore.DeleteAsync(claim, cancellationToken);
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityClaim), id.IdToString()!);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), id.IdToString()!);
     }
 
     /// <summary>
@@ -319,7 +319,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="ids">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    public async Task<Data.Store.StoreResult> DeleteClaimsAsync(IEnumerable<Guid> ids,
+    public async Task<StoreResult> DeleteClaimsAsync(IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -335,7 +335,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
 
         var flag = string.Join(',', idList.Select(id => id.IdToString()));
 
-        return Data.Store.StoreResult.EntityNotFoundFailed(nameof(Context.IdentityClaim), flag);
+        return StoreResult.EntityNotFoundFailed(nameof(IdentityClaim), flag);
     }
 
     #endregion

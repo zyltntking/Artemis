@@ -65,7 +65,7 @@ public static class MapEndPointsExtensions
 
                             return new RouteInfo
                             {
-                                RouteType = routeType.Name,
+                                RouteType = routeType,
                                 Path = path,
                                 Description = routeEndpoint.FetchDescription()
                             };

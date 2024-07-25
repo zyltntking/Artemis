@@ -32,6 +32,12 @@ internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfi
         builder.HasIndex(task => task.NormalizedTaskName)
             .HasDatabaseName(IndexName("TaskName"));
 
+        builder.HasIndex(task => task.TaskCode)
+            .HasDatabaseName(IndexName("TaskCode"));
+
+        builder.HasIndex(task => task.DesignCode)
+            .HasDatabaseName(IndexName("DesignCode"));
+
         builder.HasIndex(task => task.TaskShip)
             .HasDatabaseName(IndexName("TaskShip"));
 

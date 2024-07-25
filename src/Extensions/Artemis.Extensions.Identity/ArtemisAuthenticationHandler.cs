@@ -96,10 +96,10 @@ public class ArtemisAuthenticationHandler : AuthenticationHandler<ArtemisAuthent
 
             var user = new List<Claim>
             {
-                new(ArtemisClaimTypes.Authorization.Name, token),
-                new(ArtemisClaimTypes.UserId.Name, document.UserId.GuidToString()),
-                new(ArtemisClaimTypes.UserName.Name, document.UserName),
-                new(ArtemisClaimTypes.EndType.Name, document.EndType)
+                new(ArtemisClaimTypes.Authorization, token),
+                new(ArtemisClaimTypes.UserId, document.UserId.GuidToString()),
+                new(ArtemisClaimTypes.UserName, document.UserName),
+                new(ArtemisClaimTypes.EndType, document.EndType)
             };
 
             var roles = document.Roles
@@ -127,9 +127,9 @@ public class ArtemisAuthenticationHandler : AuthenticationHandler<ArtemisAuthent
                 routePath = routeEndpoint.FetchRoutePath() ?? string.Empty;
             }
 
-            user.Add(new Claim(ArtemisClaimTypes.MateActionName.Name, actionName));
+            user.Add(new Claim(ArtemisClaimTypes.MateActionName, actionName));
 
-            user.Add(new Claim(ArtemisClaimTypes.MateRoutePath.Name, routePath));
+            user.Add(new Claim(ArtemisClaimTypes.MateRoutePath, routePath));
 
 
             var principal = new ClaimsPrincipal(new ClaimsIdentity(user, "Artemis"));

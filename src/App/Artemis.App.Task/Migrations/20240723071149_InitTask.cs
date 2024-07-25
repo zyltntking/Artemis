@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Artemis.App.Task.Migrations
 {
@@ -300,7 +299,7 @@ namespace Artemis.App.Task.Migrations
                 name: "IX_ArtemisTask_TaskMode",
                 schema: "Task",
                 table: "ArtemisTask",
-                column: "TaskMode");
+                column: "TaskUnitMode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTask_TaskName",
@@ -319,7 +318,7 @@ namespace Artemis.App.Task.Migrations
                 name: "IX_ArtemisTask_TaskStatus",
                 schema: "Task",
                 table: "ArtemisTask",
-                column: "TaskState");
+                column: "TaskUnitState");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ArtemisTask_UpdatedAt",

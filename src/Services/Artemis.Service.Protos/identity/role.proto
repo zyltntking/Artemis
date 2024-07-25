@@ -543,7 +543,6 @@ message BatchAddRoleUserRequest {
 	string RoleId = 1;
 	/* 用户标识
 	 * @required
-	 * @guid
 	 */
 	repeated string UserIds = 2;
 }

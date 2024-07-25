@@ -1,31 +1,35 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.App.School</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.App.School.Migrations.InitialSchool">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:Artemis.App.School.Program">
-            <summary>
-                应用程序入口
-            </summary>
-        </member>
-        <member name="M:Artemis.App.School.Program.Main(System.String[])">
-            <summary>
-                主函数
-            </summary>
-            <param name="args"></param>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.App.School</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.App.School.Migrations.InitialSchool">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.School.Migrations.InitialSchool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.School.Migrations.InitialSchool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<inheritdoc />
+		</member>
+		<member name="T:Artemis.App.School.Program">
+			<summary>
+				应用程序入口
+			</summary>
+		</member>
+		<member name="M:Artemis.App.School.Program.Main(System.String[])">
+			<summary>
+				主函数
+			</summary>
+			<param name="args"></param>
+		</member>
+	</members>
 </doc>

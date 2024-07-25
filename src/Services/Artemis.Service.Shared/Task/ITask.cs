@@ -45,6 +45,16 @@ public interface ITaskPackage
     string TaskName { get; set; }
 
     /// <summary>
+    ///     任务编码
+    /// </summary>
+    string? TaskCode { get; set; }
+
+    /// <summary>
+    ///     设计编码
+    /// </summary>
+    string? DesignCode { get; set; }
+
+    /// <summary>
     ///     任务描述
     /// </summary>
     string? Description { get; set; }

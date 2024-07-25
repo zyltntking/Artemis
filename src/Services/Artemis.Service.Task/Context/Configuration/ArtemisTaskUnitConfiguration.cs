@@ -28,6 +28,28 @@ internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityC
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisTaskUnit> builder)
     {
+        // Task Index
+        builder.HasIndex(task => task.NormalizedUnitName)
+            .HasDatabaseName(IndexName("UnitName"));
+
+        builder.HasIndex(task => task.UnitCode)
+            .HasDatabaseName(IndexName("UnitCode"));
+
+        builder.HasIndex(task => task.DesignCode)
+            .HasDatabaseName(IndexName("DesignCode"));
+
+        builder.HasIndex(task => task.TaskUnitMode)
+            .HasDatabaseName(IndexName("TaskUnitMode"));
+
+        builder.HasIndex(task => task.TaskUnitState)
+            .HasDatabaseName(IndexName("TaskUnitState"));
+
+        builder.HasIndex(task => task.StartTime)
+            .HasDatabaseName(IndexName("StartTime"));
+
+        builder.HasIndex(task => task.EndTime)
+            .HasDatabaseName(IndexName("EndTime"));
+
         // Each Task Unit can have many Task Targets
         builder.HasMany(taskUnit => taskUnit.TaskTargets)
             .WithOne(taskTarget => taskTarget.TaskUnit)
@@ -35,6 +57,19 @@ internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityC
             .HasConstraintName(ForeignKeyName(nameof(ArtemisTaskTarget), nameof(ArtemisTaskUnit)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+    }
+
+    /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisTaskUnit> builder)
+    {
+        builder.Property(taskUnit => taskUnit.StartTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(taskUnit => taskUnit.EndTime)
+            .HasColumnType(DataTypeSet.DateTime);
     }
 
     #endregion

@@ -24,6 +24,13 @@ service TaskService {
 		};
 	}
 
+	// 读取任务树信息
+	rpc ReadTaskInfoTree(ReadTaskInfoRequest) returns (ReadTaskInfoTreeResponse) {
+		option (google.api.http) = {
+			get: "/api/Tasks/{TaskId}/Tree"
+		};
+	}
+
 	// 创建任务
 	rpc CreateTask(CreateTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
@@ -55,6 +62,92 @@ service TaskService {
 			body: "Batch"
 		};
 	}
+
+	// 删除任务
+	rpc DeleteTask(DeleteTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Tasks/{TaskId}"
+		};
+	}
+
+	// 批量删除任务
+	rpc BatchDeleteTask(BatchDeleteTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/BatchDelete"
+			body: "TaskIds"
+		};
+	}
+
+	// 创建子任务
+	rpc CreateChildTask(CreateChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children"
+			body: "Task"
+		};
+	}
+
+	// 批量创建子任务
+	rpc BatchCreateChildTask(BatchCreateChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 添加子任务
+	rpc AddChildTask(AddChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/Add"
+			body: "ChildTask"
+		};
+	}
+
+	// 批量添加子任务
+	rpc BatchAddChildTask(BatchAddChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/BatchAdd"
+			body: "ChildTaskIds"
+		};
+	}
+
+	// 删除子任务
+	rpc DeleteChildTask(DeleteChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Tasks/{TaskId}/Children/{ChildTaskId}"
+		};
+	}
+
+	// 批量删除子任务
+	rpc BatchDeleteChildTask(BatchDeleteChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/BatchDelete"
+			body: "ChildTaskIds"
+		};
+	}
+
+	// 移除子任务
+	rpc RemoveChildTask(RemoveChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/Remove"
+			body: "ChildTask"
+		};
+	}
+
+	// 批量移除子任务
+	rpc BatchRemoveChildTask(BatchRemoveChildTaskRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Tasks/{TaskId}/Children/BatchRemove"
+			body: "ChildTaskIds"
+		};
+	}
+
+	// 查询任务单元信息
+	rpc SearchTaskUnitInfo(SearchTaskUnitInfoRequest) returns (SearchTaskUnitInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/Tasks/{TaskId}/Units"
+		};
+	}
+
 }
 
 // 查询任务信息请求
@@ -65,28 +158,38 @@ message SearchTaskInfoRequest{
 	 */
 	google.protobuf.StringValue TaskName = 1;
 	/*
+	 * 任务代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskCode = 2;
+	/*
+	 * 设计代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 3;
+	/*
 	 * 任务归属
 	 * @maxLength(32)
 	 */
-	google.protobuf.StringValue TaskShip = 2;
+	google.protobuf.StringValue TaskShip = 4;
 	/*
 	 * 任务模式
 	 * @maxLength(32)
 	 */
-	google.protobuf.StringValue TaskMode = 3;
+	google.protobuf.StringValue TaskMode = 5;
 	/*
 	 * 任务状态
 	 * @maxLength(32)
 	 */
-	google.protobuf.StringValue TaskState = 4;
+	google.protobuf.StringValue TaskState = 6;
 	/* 页码
      * @min(0)
      */
-	google.protobuf.Int32Value Page = 5;
+	google.protobuf.Int32Value Page = 7;
 	/* 条目数
      * @min(0)
      */
-	google.protobuf.Int32Value Size = 6;
+	google.protobuf.Int32Value Size = 8;
 }
 
 // 任务信息数据包
@@ -106,35 +209,45 @@ message TaskInfoPacket {
 	 * @maxLength(128)
 	 */
 	string TaskName = 3;
+	/* 任务代码
+	 * @required
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskCode = 4;
+	/* 设计代码
+	 * @required
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 5;
 	/* 任务归属
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskShip = 4;
+	string TaskShip = 6;
 	/* 任务模式
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskMode = 5;
+	string TaskMode = 7;
 	/* 任务状态
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskState = 6;
+	string TaskState = 8;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
-	google.protobuf.StringValue Description = 7;
+	google.protobuf.StringValue Description = 9;
 	/* 任务开始时间
 	 * @required
 	 * @datetime
 	 */
-	google.protobuf.Timestamp StartTime = 8;
+	google.protobuf.Timestamp StartTime = 10;
 	/* 任务结束时间
 	 * @required
 	 * @datetime
 	 */
-	google.protobuf.Timestamp EndTime = 9;
+	google.protobuf.Timestamp EndTime = 11;
 }
 
 // 分页任务信息数据包
@@ -195,6 +308,31 @@ message ReadTaskInfoRequest{
 	string TaskId = 1;
 }
 
+// 读取任务信息响应
+message ReadTaskInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 任务信息数据
+	 * @required
+	 */
+	TaskInfoPacket Data = 7;
+}
+
 // 任务信息树数据包
 message TaskInfoTreePacket{
 	/* 任务标识
@@ -212,42 +350,52 @@ message TaskInfoTreePacket{
 	 * @maxLength(128)
 	 */
 	string TaskName = 3;
+	/* 任务代码
+	 * @required
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskCode = 4;
+	/* 设计代码
+	 * @required
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 5;
 	/* 任务归属
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskShip = 4;
+	string TaskShip = 6;
 	/* 任务模式
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskMode = 5;
+	string TaskMode = 7;
 	/* 任务状态
 	 * @required
 	 * @maxLength(32)
 	 */
-	string TaskState = 6;
+	string TaskState = 8;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
-	google.protobuf.StringValue Description = 7;
+	google.protobuf.StringValue Description = 9;
 	/* 任务开始时间
 	 * @required
 	 * @datetime
 	 */
-	google.protobuf.Timestamp StartTime = 8;
+	google.protobuf.Timestamp StartTime = 10;
 	/* 任务结束时间
 	 * @required
 	 * @datetime
 	 */
-	google.protobuf.Timestamp EndTime = 9;
+	google.protobuf.Timestamp EndTime = 11;
 	/* 子任务
 	 */
-	repeated TaskInfoTreePacket Children = 10;
+	repeated TaskInfoTreePacket Children = 12;
 }
 
-// 读取任务信息响应
-message ReadTaskInfoResponse{
+// 读取任务信息树响应
+message ReadTaskInfoTreeResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -278,19 +426,27 @@ message CreateTaskRequest{
 	 * @maxLength(128)
 	 */
 	string TaskName = 1;
+	/* 任务代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskCode = 2;
+	/* 设计代码
+	 * @maxLength(128)
+	 */
+	 google.protobuf.StringValue DesignCode = 3;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
-	google.protobuf.StringValue Description = 2;
+	google.protobuf.StringValue Description = 4;
 	/* 任务开始时间
 	 * @required
 	 * @datetime
 	 */
-	google.protobuf.Timestamp StartTime = 3;
+	google.protobuf.Timestamp StartTime = 5;
 	/* 任务结束时间
 	 * @datetime
 	 */
-	google.protobuf.Timestamp EndTime = 4;
+	google.protobuf.Timestamp EndTime = 6;
 }
 
 // 批量创建任务请求
@@ -307,18 +463,26 @@ message UpdateTaskPacket{
 	 * @maxLength(128)
 	 */
 	google.protobuf.StringValue TaskName = 1;
+	/* 任务代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue TaskCode = 2;
+	/* 设计代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 3;
 	/* 任务描述
 	 * @maxLength(256)
 	 */
-	google.protobuf.StringValue Description = 2;
+	google.protobuf.StringValue Description = 4;
 	/* 任务开始时间
 	 * @datetime
 	 */
-	google.protobuf.Timestamp StartTime = 3;
+	google.protobuf.Timestamp StartTime = 5;
 	/* 任务结束时间
 	 * @datetime
 	 */
-	google.protobuf.Timestamp EndTime = 4;
+	google.protobuf.Timestamp EndTime = 6;
 }
 
 // 更新任务请求
@@ -340,4 +504,279 @@ message BatchUpdateTaskRequest{
 	 * @required
 	 */
 	repeated UpdateTaskRequest Batch = 1;
+}
+
+// 删除任务请求
+message DeleteTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+}
+
+// 批量删除任务请求
+message BatchDeleteTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	repeated string TaskIds = 1;
+}
+
+// 创建子任务请求
+message CreateChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 任务
+	 * @required
+	 */
+	CreateTaskRequest Task = 2;
+}
+
+// 批量创建子任务请求
+message BatchCreateChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 任务数据
+	 * @required
+	 */
+	repeated CreateTaskRequest Batch = 2;
+}
+
+// 子任务标识数据包
+message ChildTaskIdPacket{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string ChildTaskId = 1;
+}
+
+// 添加子任务请求
+message AddChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务
+	 * @required
+	 */
+	ChildTaskIdPacket ChildTask = 2;
+}
+
+// 批量添加子任务请求
+message BatchAddChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务数据
+	 * @required
+	 */
+	repeated string ChildTaskIds = 2;
+}
+
+// 删除子任务请求
+message DeleteChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务标识
+	 * @required
+	 * @guid
+	 */
+	string ChildTaskId = 2;
+}
+
+// 批量删除子任务请求
+message BatchDeleteChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务标识
+	 * @required
+	 * @guid
+	 */
+	repeated string ChildTaskIds = 2;
+}
+
+// 移除子任务请求
+message RemoveChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务标识
+	 * @required
+	 */
+	ChildTaskIdPacket ChildTask = 2;
+}
+
+// 批量移除子任务请求
+message BatchRemoveChildTaskRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/* 子任务标识
+	 * @required
+	 */
+	repeated string ChildTaskIds = 2;
+}
+
+// 查询任务单元信息请求
+message SearchTaskUnitInfoRequest{
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 1;
+	/*
+	 * 任务单元名称
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue UnitName = 2;
+	/*
+	 * 任务单元代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue UnitCode = 3;
+	/*
+	 * 设计代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 4;
+	/*
+	 * 任务单元模式
+	 * @maxLength(32)
+	 */
+	google.protobuf.StringValue TaskUnitMode = 5;
+	/*
+	 * 任务单元状态
+	 * @maxLength(32)
+	 */
+	google.protobuf.StringValue TaskUnitState = 6;
+	/* 页码
+	 * @min(0)
+	 */
+	google.protobuf.Int32Value Page = 7;
+	/* 条目数
+	 * @min(0)
+	 */
+	google.protobuf.Int32Value Size = 8;
+}
+
+// 任务单元信息数据包
+message TaskUnitInfoPacket {
+	/* 任务单元标识
+	 * @required
+	 * @guid
+	 */
+	string Id = 1;
+	/* 任务标识
+	 * @required
+	 * @guid
+	 */
+	string TaskId = 2;
+	/* 任务单元名称
+	 * @required
+	 * @maxLength(128)
+	 */
+	string UnitName = 3;
+	/* 任务单元代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue UnitCode = 4;
+	/* 设计代码
+	 * @maxLength(128)
+	 */
+	google.protobuf.StringValue DesignCode = 5;
+	/* 任务单元模式
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskUnitMode = 6;
+	/* 任务单元状态
+	 * @required
+	 * @maxLength(32)
+	 */
+	string TaskUnitState = 7;
+	/* 任务单元描述
+	 * @maxLength(256)
+	 */
+	google.protobuf.StringValue Description = 8;
+	/* 任务单元开始时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp StartTime = 9;
+	/* 任务单元结束时间
+	 * @required
+	 * @datetime
+	 */
+	google.protobuf.Timestamp EndTime = 10;
+}
+
+// 分页任务单元信息数据包
+message PageTaskUnitInfoPacket {
+	/* 页码
+	 * @min(0)
+	 */
+	int32 Page = 1;
+	/* 条目数
+	 * @min(0)
+	 */
+	int32 Size = 2;
+	/* 数据总数
+	 * @min(0)
+	 */
+	int64 Total = 3;
+	/* 条件过滤后的数据量
+	 * @min(0)
+	 */
+	int64 Count = 4;
+	/* 任务单元信息数据
+	 * @required
+	 */
+	repeated TaskUnitInfoPacket Items = 5;
+}
+
+// 查询任务单元信息响应
+message SearchTaskUnitInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	/* 响应时间
+	 * @datetime
+	 */
+	string DateTime = 5;
+	/* 响应时间戳
+	 * @timestamp
+	 */
+	int64 Timestamp = 6;
+	/* 任务单元信息数据
+	 * @required
+	 */
+	PageTaskUnitInfoPacket Data = 7;
 }

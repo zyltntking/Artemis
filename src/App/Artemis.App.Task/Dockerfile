@@ -11,11 +11,12 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/App/Artemis.App.Task/Artemis.App.Task.csproj", "src/App/Artemis.App.Task/"]
 COPY ["src/Extensions/Artemis.Extensions.ServiceConnect/Artemis.Extensions.ServiceConnect.csproj", "src/Extensions/Artemis.Extensions.ServiceConnect/"]
+COPY ["src/Extensions/Artemis.Extensions.Identity/Artemis.Extensions.Identity.csproj", "src/Extensions/Artemis.Extensions.Identity/"]
 COPY ["src/Data/Artemis.Data.Core/Artemis.Data.Core.csproj", "src/Data/Artemis.Data.Core/"]
-COPY ["src/Data/Artemis.Data.Shared/Artemis.Data.Shared.csproj", "src/Data/Artemis.Data.Shared/"]
 COPY ["src/Services/Artemis.Service.Task/Artemis.Service.Task.csproj", "src/Services/Artemis.Service.Task/"]
 COPY ["src/Data/Artemis.Data.Store/Artemis.Data.Store.csproj", "src/Data/Artemis.Data.Store/"]
 COPY ["src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj", "src/Services/Artemis.Service.Protos/"]
+COPY ["src/Services/Artemis.Service.Shared/Artemis.Service.Shared.csproj", "src/Services/Artemis.Service.Shared/"]
 RUN dotnet restore "./src/App/Artemis.App.Task/Artemis.App.Task.csproj"
 COPY . .
 WORKDIR "/src/src/App/Artemis.App.Task"

@@ -41,7 +41,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>存储结果</returns>
-    Task<Data.Store.StoreResult> CreateRoleAsync(
+    Task<StoreResult> CreateRoleAsync(
         RolePackage package,
         CancellationToken cancellationToken = default);
 
@@ -51,7 +51,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="packages">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建结果</returns>
-    Task<Data.Store.StoreResult> CreateRolesAsync(
+    Task<StoreResult> CreateRolesAsync(
         IEnumerable<RolePackage> packages,
         CancellationToken cancellationToken = default);
 
@@ -62,7 +62,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<Data.Store.StoreResult> UpdateRoleAsync(
+    Task<StoreResult> UpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default);
@@ -73,7 +73,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="dictionary">更新角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>更新结果</returns>
-    Task<Data.Store.StoreResult> UpdateRolesAsync(
+    Task<StoreResult> UpdateRolesAsync(
         IDictionary<Guid, RolePackage> dictionary,
         CancellationToken cancellationToken = default);
 
@@ -84,7 +84,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">角色信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>创建或更新结果</returns>
-    Task<Data.Store.StoreResult> CreateOrUpdateRoleAsync(
+    Task<StoreResult> CreateOrUpdateRoleAsync(
         Guid id,
         RolePackage package,
         CancellationToken cancellationToken = default);
@@ -95,7 +95,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="id">角色id</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> DeleteRoleAsync(
+    Task<StoreResult> DeleteRoleAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
@@ -105,7 +105,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="ids">角色标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> DeleteRolesAsync(
+    Task<StoreResult> DeleteRolesAsync(
         IEnumerable<Guid> ids,
         CancellationToken cancellationToken = default);
 
@@ -149,7 +149,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="userId">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<Data.Store.StoreResult> AddRoleUserAsync(
+    Task<StoreResult> AddRoleUserAsync(
         Guid id,
         Guid userId,
         CancellationToken cancellationToken = default);
@@ -161,7 +161,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<Data.Store.StoreResult> AddRoleUsersAsync(
+    Task<StoreResult> AddRoleUsersAsync(
         Guid id,
         IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default);
@@ -173,7 +173,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="userId">用户标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> RemoveRoleUserAsync(
+    Task<StoreResult> RemoveRoleUserAsync(
         Guid id,
         Guid userId,
         CancellationToken cancellationToken = default);
@@ -185,7 +185,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="userIds">用户标识列表</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> RemoveRoleUsersAsync(
+    Task<StoreResult> RemoveRoleUsersAsync(
         Guid id,
         IEnumerable<Guid> userIds,
         CancellationToken cancellationToken = default);
@@ -228,7 +228,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<Data.Store.StoreResult> AddRoleClaimAsync(
+    Task<StoreResult> AddRoleClaimAsync(
         Guid id,
         RoleClaimPackage package,
         CancellationToken cancellationToken = default);
@@ -240,7 +240,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="packages">凭据</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>添加结果</returns>
-    Task<Data.Store.StoreResult> AddRoleClaimsAsync(
+    Task<StoreResult> AddRoleClaimsAsync(
         Guid id,
         IEnumerable<RoleClaimPackage> packages,
         CancellationToken cancellationToken = default);
@@ -253,7 +253,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="package">凭据信息</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<Data.Store.StoreResult> UpdateRoleClaimAsync(
+    Task<StoreResult> UpdateRoleClaimAsync(
         Guid id,
         int claimId,
         RoleClaimPackage package,
@@ -266,7 +266,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="dictionary">凭据更新字典</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
-    Task<Data.Store.StoreResult> UpdateRoleClaimsAsync(
+    Task<StoreResult> UpdateRoleClaimsAsync(
         Guid id,
         IDictionary<int, RoleClaimPackage> dictionary,
         CancellationToken cancellationToken = default);
@@ -278,7 +278,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="claimId">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> RemoveRoleClaimAsync(
+    Task<StoreResult> RemoveRoleClaimAsync(
         Guid id,
         int claimId,
         CancellationToken cancellationToken = default);
@@ -290,7 +290,7 @@ public interface IIdentityRoleManager : IManager
     /// <param name="claimIds">凭据标识</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>删除结果</returns>
-    Task<Data.Store.StoreResult> RemoveRoleClaimsAsync(
+    Task<StoreResult> RemoveRoleClaimsAsync(
         Guid id,
         IEnumerable<int> claimIds,
         CancellationToken cancellationToken = default);

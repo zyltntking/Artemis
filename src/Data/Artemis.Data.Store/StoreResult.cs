@@ -4,7 +4,6 @@ using Artemis.Data.Core;
 
 namespace Artemis.Data.Store;
 
-
 /// <summary>
 ///     存储操作结果
 /// </summary>
@@ -30,6 +29,11 @@ public record StoreResult : IStoreResult
     public IEnumerable<StoreError> Errors => _errors;
 
     /// <summary>
+    ///     描述错误
+    /// </summary>
+    public string DescribeError => string.Join(",", Errors.Select(error => error.Description).ToList());
+
+    /// <summary>
     ///     描述器
     /// </summary>
     private static StoreErrorDescriber Describer => new();
@@ -39,11 +43,6 @@ public record StoreResult : IStoreResult
     /// </summary>
     /// <returns></returns>
     private string DescribeCode => string.Join(",", Errors.Select(error => error.Code).ToList());
-
-    /// <summary>
-    ///     描述错误
-    /// </summary>
-    public string DescribeError => string.Join(",", Errors.Select(error => error.Description).ToList());
 
     /// <summary>
     ///     操作成功时返回结果

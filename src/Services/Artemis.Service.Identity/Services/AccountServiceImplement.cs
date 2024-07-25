@@ -127,7 +127,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
 
         if (result.Succeeded && token is not null)
         {
-            token.EndType = EndType.SignUpEnd.Name;
+            token.EndType = EndType.SignUpEnd;
 
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
@@ -157,7 +157,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
         var authorizationToken = context
             .GetHttpContext()
             .User.Claims
-            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization.Name)
+            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization)
             .Select(claim => claim.Value)
             .FirstOrDefault();
 
@@ -184,7 +184,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
         var userIdString = context
             .GetHttpContext()
             .User.Claims
-            .Where(claim => claim.Type == ArtemisClaimTypes.UserId.Name)
+            .Where(claim => claim.Type == ArtemisClaimTypes.UserId)
             .Select(claim => claim.Value)
             .FirstOrDefault();
 
