@@ -10,6 +10,7 @@ package Artemis.Service.Protos.Task;
 
 // 资源服务协议
 service TaskService {
+
 	// 查询任务信息
 	rpc SearchTaskInfo(SearchTaskInfoRequest) returns (SearchTaskInfoResponse) {
 		option (google.api.http) = {

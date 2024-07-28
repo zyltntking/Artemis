@@ -180,60 +180,48 @@ service RoleService {
 
 // 查询角色信息请求
 message SearchRoleInfoRequest {
-  /* 角色名
-   * @maxLength(128)
-   */
+    // 角色名
+    // @maxLength(32)
 	google.protobuf.StringValue RoleName = 1;
-  /* 页码
-   * @min(0)
-   */
+	// 页码
+	// @min(0)
 	google.protobuf.Int32Value Page = 2;
-  /* 条目数
-   * @min(0)
-   */
+	// 条目数
+	// @min(0)
 	google.protobuf.Int32Value Size = 3;
 }
 
 // 角色信息数据包
 message RoleInfoPacket {
-  /* 角色标识
-   * @required
-   * @guid
-   */
+	// 角色标识
+	// @required
+	// @guid
 	string Id = 1;
-  /*
-   * 角色名
-   * @required
-   * @maxLength(128)
-   */
+	// 角色名
+	// @required
+	// @maxLength(32)
 	string RoleName = 2;
-  /* 角色描述
-   * @maxLength(256)
-   */
+	// 角色描述
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 3;
 }
 
 // 分页角色信息数据包
 message PagedRoleInfoPacket {
-	/* 页码
-   * @min(0)
-   */
+	// 页码
+	// @min(0)
 	int32 Page = 1;
-	/* 条目数
-   * @min(0)
-   */
+	// 条目数
+	// @min(0)
 	int32 Size = 2;
-	/* 数据总数
-   * @min(0)
-   */
+	// 数据总数
+	// @min(0)
 	int64 Total = 3;
-	/* 条件过滤后的数据量
-   * @min(0)
-   */
+	// 条件过滤后的数据量
+	// @min(0)
 	int64 Count = 4;
-	/* 角色信息数据
-   * @required
-   */
+	// 角色信息数据
+	// @required
 	repeated RoleInfoPacket Items = 5;
 }
 
@@ -248,25 +236,21 @@ message SearchRoleInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-  /* 响应时间
-   * @datetime
-   */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-   * @timestamp
-   */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 用户信息数据
-   */
+	// 用户信息数据
 	PagedRoleInfoPacket Data = 7;
 }
 
 // 读取角色信息请求
 message ReadRoleInfoRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
 }
 
@@ -281,172 +265,142 @@ message ReadRoleInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-	/* 响应时间
-   * @datetime
-   */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-   * @timestamp
-   */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 用户信息数据
-   */
+	// 用户信息数据
 	RoleInfoPacket Data = 7;
 }
 
 // 创建角色请求
 message CreateRoleRequest {
-	/* 角色名
-	 * @required
-	 * @maxLength(128)
-	 */
+	// 角色名
+	// @required
+	// @maxLength(32)
 	string RoleName = 1;
-	/* 角色描述
-   * @maxLength(256)
-   */
+	// 角色描述
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 2;
 }
 
 // 批量创建角色请求
 message BatchCreateRoleRequest {
-	/* 角色数据
-	 * @required
-	 */
+	// 角色数据
+	// @required
 	repeated CreateRoleRequest Batch = 1;
 }
 
 // 更新角色数据包
 message UpdateRolePacket {
-	/* 角色名
-	 * @maxLength(128)
-	 */
+	// 角色名
+	// @maxLength(32)
 	google.protobuf.StringValue RoleName = 1;
-	/* 角色描述
-   * @maxLength(256)
-   */
+	// 角色描述
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 2;
 }
 
 // 更新用户请求
 message UpdateRoleRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 角色
-	 * @required
-	 */
+	// 角色
+	// @required
 	UpdateRolePacket Role = 2;
 }
 
 // 批量更新角色请求
 message BatchUpdateRoleRequest {
-	/* 角色数据
-	 * @required
-	 */
+	// 角色数据
+	// @required
 	repeated UpdateRoleRequest Batch = 1;
 }
 
 // 删除角色请求
 message DeleteRoleRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
 }
 
 // 批量删除用户请求
 message BatchDeleteRoleRequest {
-	/* 角色标识
-	 * @required
-	 */
+	// 角色标识
+	// @required
 	repeated string RoleIds = 1;
 }
 
 // 查询角色用户信息请求
 message SearchRoleUserInfoRequest {
-	/* 角色标识
-   * @required
-   * @guid
-   */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 用户名
-   * @maxLength(128)
-   */
+	// 用户名
+	// @maxLength(32)
 	google.protobuf.StringValue UserName = 2;
-	/* 邮箱
-   * @email
-   * @maxLength(128)
-   */
+	// 邮箱
+	// @email
+	// @maxLength(128)
 	google.protobuf.StringValue Email = 3;
-	/* 手机号码
-   * @phone
-   * @maxLength(128)
-   */
+	// 手机号码
+	// @phone
+	// @maxLength(32)
 	google.protobuf.StringValue PhoneNumber = 4;
-	/* 页码
-   * @min(0)
-   */
+	// 页码
+	// @min(0)
 	google.protobuf.Int32Value Page = 5;
-	/* 条目数
-   * @min(0)
-   */
+	// 条目数
+	// @min(0)
 	google.protobuf.Int32Value Size = 6;
 }
 
 // 角色用户信息数据包
 message RoleUserInfoPacket {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string UserId = 2;
-	/*
-   * 用户名
-   * @required
-   * @maxLength(128)
-   */
+	// 用户名
+	// @required
+	// @maxLength(32)
 	string UserName = 3;
-	/* 邮箱
-   * @email
-   * @maxLength(128)
-   */
+	// 邮箱
+	// @email
+	// @maxLength(128)
 	google.protobuf.StringValue Email = 4;
-	/* 手机号码
-   * @phone
-   * @maxLength(128)
-   */
+	// 手机号码
+	// @phone
+	// @maxLength(32)
 	google.protobuf.StringValue PhoneNumber = 5;
 }
 
 // 分页角色用户信息数据包
 message PagedRoleUserInfoPacket {
-	/* 页码
-	 * @min(0)
-	 */
+	// 页码
+	// @min(0)
 	int32 Page = 1;
-	/* 条目数
-	 * @min(0)
-	 */
+	// 条目数
+	// @min(0)
 	int32 Size = 2;
-	/* 数据总数
-	 * @min(0)
-	 */
+	// 数据总数
+	// @min(0)
 	int64 Total = 3;
-	/* 条件过滤后的数据量
-	 * @min(0)
-	 */
+	// 条件过滤后的数据量
+	// @min(0)
 	int64 Count = 4;
-	/* 角色用户信息数据
-	 * @required
-	 */
+	// 角色用户信息数据
+	// @required
 	repeated RoleUserInfoPacket Items = 5;
 }
 
@@ -461,30 +415,25 @@ message SearchRoleUserInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-	/* 响应时间
-	 * @datetime
-	 */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-	 * @timestamp
-	 */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 角色用户信息数据
-	 */
+	// 角色用户信息数据
 	PagedRoleUserInfoPacket Data = 7;
 }
 
 // 读取用户角色信息请求
 message ReadRoleUserInfoRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string UserId = 2;
 }
 
@@ -499,132 +448,110 @@ message ReadRoleUserInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-	/* 响应时间
-	 * @datetime
-	 */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-	 * @timestamp
-	 */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 角色用户信息数据
-	 */
+	// 角色用户信息数据
 	RoleUserInfoPacket Data = 7;
 }
 
 // 用户标识数据包
 message UserIdPacket {
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string UserId = 1;
 }
 
 // 添加角色用户请求
 message AddRoleUserRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 用户标识
-	 * @required
-	 */
+	// 用户标识
+	// @required
 	UserIdPacket User = 2;
 }
 
 // 批量添加用户角色请求
 message BatchAddRoleUserRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 用户标识
-	 * @required
-	 */
+	// 用户标识
+	// @required
 	repeated string UserIds = 2;
 }
 
 // 移除角色用户请求
 message RemoveRoleUserRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string UserId = 2;
 }
 
 // 批量移除用户角色请求
 message BatchRemoveRoleUserRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	repeated string UserIds = 2;
 }
 
 // 查询角色凭据信息请求
 message SearchRoleClaimInfoRequest {
-	/* 用户标识
-   * @required
-   * @guid
-   */
+	// 用户标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 类型
-   * @maxLength(128)
-   */
+	// 类型
+	// @maxLength(32)
 	google.protobuf.StringValue ClaimType = 2;
-	/* 值
-   * @maxLength(512)
-   */
+	// 值
+	// @maxLength(128)
 	google.protobuf.StringValue ClaimValue = 3;
-	/* 页码
-  * @min(0)
-  */
+	// 页码
+	// @min(0)
 	google.protobuf.Int32Value Page = 4;
-	/* 条目数
-   * @min(0)
-   */
+	// 条目数
+	// @min(0)
 	google.protobuf.Int32Value Size = 5;
 }
 
 // 角色凭据信息数据包
 message RoleClaimInfoPacket {
-	/* 凭据标识
-   * @required
-   */
+	// 凭据标识
+	// @required
 	int32 Id = 1;
-	/* 角色标识
-   * @required
-   * @guid
-   */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 2;
-	/* 凭据类型
-   * @required
-   * @maxLength(128)
-   */
+	// 凭据类型
+	// @required
+	// @maxLength(32)
 	string ClaimType = 3;
-	/* 凭据值
-   * @required
-   * @maxLength(512)
-   */
+	// 凭据值
+	// @required
+	// @maxLength(128)
 	string ClaimValue = 4;
-	/* 校验戳
-   * @required
-   * @md5
-   */
+	// 校验戳
+	// @required
+	// @md5
 	string CheckStamp = 5;
 	// 描述
 	google.protobuf.StringValue Description = 6;
@@ -632,25 +559,20 @@ message RoleClaimInfoPacket {
 
 // 分页角色凭据信息数据包
 message PagedRoleClaimInfoPacket {
-	/* 页码
-	 * @min(0)
-	 */
+	// 页码
+	// @min(0)
 	int32 Page = 1;
-	/* 条目数
-	 * @min(0)
-	 */
+	// 条目数
+	// @min(0)
 	int32 Size = 2;
-	/* 数据总数
-	 * @min(0)
-	 */
+	// 数据总数
+	// @min(0)
 	int64 Total = 3;
-	/* 条件过滤后的数据量
-	 * @min(0)
-	 */
+	// 条件过滤后的数据量
+	// @min(0)
 	int64 Count = 4;
-	/* 角色凭据信息数据
-	 * @required
-	 */
+	// 角色凭据信息数据
+	// @required
 	repeated RoleClaimInfoPacket Items = 5;
 }
 
@@ -665,29 +587,24 @@ message SearchRoleClaimInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-	/* 响应时间
-	 * @datetime
-	 */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-	 * @timestamp
-	 */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 角色凭据信息数据
-	 */
+	// 角色凭据信息数据
 	PagedRoleClaimInfoPacket Data = 7;
 }
 
 // 读取角色凭据信息请求
 message ReadRoleClaimInfoRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据标识
-	 * @required
-	 */
+	// 凭据标识
+	// @required
 	int32 ClaimId = 2;
 }
 
@@ -702,143 +619,120 @@ message ReadRoleClaimInfoResponse {
 	// 错误
 	// @exception
 	google.protobuf.StringValue Error = 4;
-	/* 响应时间
-	 * @datetime
-	 */
+	// 响应时间
+	// @datetime
 	string DateTime = 5;
-	/* 响应时间戳
-	 * @timestamp
-	 */
+	// 响应时间戳
+	// @timestamp
 	int64 Timestamp = 6;
-	/* 角色凭据信息数据
-	 */
+	// 角色凭据信息数据
 	RoleClaimInfoPacket Data = 7;
 }
 
 // 创建凭据数据包
 message AddRoleClaimPacket {
-	/* 凭据类型
-	 * @required
-	 * @maxLength(128)
-	 */
+	// 凭据类型
+	// @required
+	// @maxLength(32)
 	string ClaimType = 1;
-	/* 凭据值
-	 * @required
-	 * @maxLength(512)
-	 */
+	// 凭据值
+	// @required
+	// @maxLength(128)
 	string ClaimValue = 2;
-	/* 描述
-	 * @maxLength(256)
-	 */
+	// 描述
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 3;
 }
 
 // 添加角色凭据请求
 message AddRoleClaimRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据
-	 * @required
-	 */
+	// 凭据
+	// @required
 	AddRoleClaimPacket RoleClaim = 2;
 }
 
 // 批量添加角色凭据请求
 message BatchAddRoleClaimRequest {
-	/* 角色标识
-	 * @required
-	 * @guid
-	 */
+	// 角色标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据数据
-	 * @required
-	 */
+	// 凭据数据
+	// @required
 	repeated AddRoleClaimPacket Batch = 2;
 }
 
 // 更新角色凭据数据包
 message UpdateRoleClaimPacket {
-	/* 凭据类型
-	 * @maxLength(128)
-	 */
+	// 凭据类型
+	// @maxLength(32)
 	google.protobuf.StringValue ClaimType = 1;
-	/* 凭据值
-	 * @maxLength(512)
-	 */
+	// 凭据值
+	// @maxLength(128)
 	google.protobuf.StringValue ClaimValue = 2;
-	/* 描述
-	 * @maxLength(256)
-	 */
+	// 描述
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 3;
 }
 
 // 更新角色凭据请求
 message UpdateRoleClaimRequest {
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据标识
-	 * @required
-	 */
+	// 凭据标识
+	// @required
 	int32 ClaimId = 2;
-	/* 凭据
-	 * @required
-	 */
+	// 凭据
+	// @required
 	UpdateRoleClaimPacket RoleClaim = 3;
 }
 
 // 批量更新角色凭据数据包
 message BatchUpdateRoleClaimPacket {
-	/* 用户标识
-	 * @required
-	 */
+	// 用户标识
+	// @required
 	int32 ClaimId = 1;
-	/* 凭据数据
-	 * @required
-	 */
+	// 凭据数据
+	// @required
 	UpdateRoleClaimPacket Claim = 2;
 }
 
 // 批量更新角色凭据请求
 message BatchUpdateRoleClaimRequest {
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据数据
-	 * @required
-	 */
+	// 凭据数据
+	// @required
 	repeated BatchUpdateRoleClaimPacket Batch = 2;
 }
 
 // 删除角色凭据请求
 message DeleteRoleClaimRequest {
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据标识
-	 * @required
-	 */
+	// 凭据标识
+	// @required
+	//
 	int32 ClaimId = 2;
 }
 
 // 批量删除角色凭据请求
 message BatchDeleteRoleClaimRequest {
-	/* 用户标识
-	 * @required
-	 * @guid
-	 */
+	// 用户标识
+	// @required
+	// @guid
 	string RoleId = 1;
-	/* 凭据标识
-	 * @required
-	 */
+	// 凭据标识
+	// @required
 	repeated int32 ClaimIds = 2;
 }

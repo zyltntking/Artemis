@@ -21,7 +21,7 @@ public class RoleClaim : KeySlot<int>, IRoleClaim
     ///     凭据类型
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("凭据类型")]
     public required string ClaimType { get; set; }
 
@@ -29,7 +29,7 @@ public class RoleClaim : KeySlot<int>, IRoleClaim
     ///     凭据值
     /// </summary>
     [Required]
-    [MaxLength(512)]
+    [MaxLength(128)]
     [Comment("凭据值")]
     public required string ClaimValue { get; set; }
 

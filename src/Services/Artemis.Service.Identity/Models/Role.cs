@@ -14,7 +14,7 @@ public class Role : ConcurrencyModel, IRole
     ///     角色名
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("角色名")]
     public required string Name { get; set; }
 
@@ -22,14 +22,14 @@ public class Role : ConcurrencyModel, IRole
     ///     标准化角色名
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("标准化角色名")]
     public required string NormalizedName { get; set; }
 
     /// <summary>
     ///     角色描述
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("角色描述")]
     public virtual string? Description { get; set; }
 }

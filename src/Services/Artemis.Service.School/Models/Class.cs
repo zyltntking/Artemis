@@ -29,9 +29,15 @@ public class Class : ConcurrencyPartition, IClass
     /// <summary>
     ///     班级名称
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("班级名称")]
     public string? Name { get; set; }
+
+    /// <summary>
+    /// 年级名称
+    /// </summary>
+    [MaxLength(16)]
+    public string? GradeName { get; set; }
 
     /// <summary>
     ///     班级类型

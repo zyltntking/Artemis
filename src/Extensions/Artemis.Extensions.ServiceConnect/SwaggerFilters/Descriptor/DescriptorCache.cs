@@ -1,5 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental;
+using Artemis.Data.Core.Fundamental.Types;
 
 namespace Artemis.Extensions.ServiceConnect.SwaggerFilters.Descriptor;
 
@@ -34,6 +35,7 @@ internal static class DescriptorCache
     private static void FormatDateTime(SchemaInfo schema)
     {
         schema.Format ??= "date-time";
+        schema.Example ??= DateTime.Now.ToString("s");
     }
 
     /// <summary>
@@ -43,6 +45,7 @@ internal static class DescriptorCache
     private static void FormatDate(SchemaInfo schema)
     {
         schema.Format ??= "date";
+        schema.Pattern ??= DateOnly.FromDateTime(DateTime.Today).ToString("O");
     }
 
     /// <summary>
@@ -53,6 +56,7 @@ internal static class DescriptorCache
     {
         schema.Format ??= "time";
         schema.Pattern ??= Matcher.TimePattern();
+        schema.Example ??= TimeOnly.FromDateTime(DateTime.Now).ToString("T");
     }
 
     /// <summary>
@@ -64,7 +68,6 @@ internal static class DescriptorCache
         schema.Format ??= "timestamp";
         schema.Minimum ??= 0;
         schema.Example ??= DateTime.Now.ToUnixTimeStamp().ToString("D");
-        // todo more pattern
     }
 
     /// <summary>
@@ -74,6 +77,8 @@ internal static class DescriptorCache
     private static void FormatEmail(SchemaInfo schema)
     {
         schema.Format ??= "email";
+        schema.Pattern ??= Matcher.EmailPattern;
+        schema.Example ??= "example@example.com";
     }
 
     /// <summary>
@@ -86,6 +91,7 @@ internal static class DescriptorCache
         schema.MinLength ??= 11;
         schema.MaxLength ??= 16;
         schema.Pattern ??= Matcher.PhonePattern(PhonePatternMode.Lax);
+        schema.Example ??= "18618661866";
     }
 
     /// <summary>
@@ -122,7 +128,7 @@ internal static class DescriptorCache
     private static void FormatUri(SchemaInfo schema)
     {
         schema.Format ??= "uri";
-        // todo custom pattern and example
+        schema.Example = "http://example.com";
     }
 
     /// <summary>
@@ -135,6 +141,7 @@ internal static class DescriptorCache
         schema.MinLength ??= 32;
         schema.MaxLength ??= 32;
         schema.Pattern ??= Matcher.Md5Pattern();
+        schema.Example ??= Hash.HashData("", HashType.Md5);
     }
 
     /// <summary>
@@ -147,6 +154,7 @@ internal static class DescriptorCache
         schema.MinLength ??= 32;
         schema.MaxLength ??= 38;
         schema.Pattern ??= Matcher.GuidPattern();
+        schema.Example ??= Guid.NewGuid().ToString("D");
     }
 
     /// <summary>
@@ -156,8 +164,8 @@ internal static class DescriptorCache
     private static void FormatCar(SchemaInfo schema)
     {
         schema.Format ??= "car";
-        //schema.Example ??= "粤A12345";
-        //schema.Pattern ??= Matcher.CarPattern();
+        schema.Example ??= "京A12345";
+        schema.Pattern ??= Matcher.CarPattern();
     }
 
     /// <summary>
@@ -221,7 +229,6 @@ internal static class DescriptorCache
     private static void FormatException(SchemaInfo schema)
     {
         schema.Format ??= "exception";
-        // todo more pattern
     }
 
     #endregion

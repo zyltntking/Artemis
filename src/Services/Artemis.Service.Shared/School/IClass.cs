@@ -21,6 +21,11 @@ public interface IClass
     string? Name { get; set; }
 
     /// <summary>
+    /// 年级名称
+    /// </summary>
+    string? GradeName { get; set; }
+
+    /// <summary>
     ///     班级类型
     /// </summary>
     string? Type { get; set; }

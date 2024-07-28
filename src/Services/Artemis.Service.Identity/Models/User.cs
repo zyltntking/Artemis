@@ -14,7 +14,7 @@ public class User : ConcurrencyModel, IUser
     ///     用户名
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("用户名")]
     public required string UserName { get; set; }
 
@@ -22,7 +22,7 @@ public class User : ConcurrencyModel, IUser
     ///     标准化用户名
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("标准化用户名")]
     public required string NormalizedUserName { get; set; }
 
@@ -30,14 +30,14 @@ public class User : ConcurrencyModel, IUser
     ///     电子邮件
     /// </summary>
     [EmailAddress]
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("电子邮件")]
     public string? Email { get; set; }
 
     /// <summary>
     ///     标准化电子邮件
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("标准化电子邮件")]
     public string? NormalizedEmail { get; set; }
 

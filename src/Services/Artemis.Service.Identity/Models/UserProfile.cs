@@ -20,14 +20,14 @@ public class UserProfile : IUserProfile
     ///     数据键
     /// </summary>
     [Required]
-    [MaxLength(64)]
+    [MaxLength(32)]
     [Comment("用户档案数据键")]
     public required string Key { get; set; }
 
     /// <summary>
     ///     数据值
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("用户档案数据值")]
     public string? Value { get; set; }
 }

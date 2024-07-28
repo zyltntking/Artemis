@@ -94,6 +94,10 @@ namespace Artemis.App.Resource.Migrations
                     b.HasKey("Id")
                         .HasName("PK_ArtemisDataDictionary");
 
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisDataDictionary_Code");
+
                     b.HasIndex("CreateBy")
                         .HasDatabaseName("IX_ArtemisDataDictionary_CreateBy");
 
@@ -105,6 +109,9 @@ namespace Artemis.App.Resource.Migrations
 
                     b.HasIndex("ModifyBy")
                         .HasDatabaseName("IX_ArtemisDataDictionary_ModifyBy");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("IX_ArtemisDataDictionary_Name");
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisDataDictionary_RemoveBy");
@@ -120,114 +127,128 @@ namespace Artemis.App.Resource.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            Id = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Code = "ClaimTypes",
-                            ConcurrencyStamp = "42e588ee-b574-401c-a895-53bcf70a6590",
+                            ConcurrencyStamp = "f09bd2ea-5841-4920-a229-ee7637308cc7",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4775),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9707),
                             Description = "凭据类型",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "ClaimTypes",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4790),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9718),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            Id = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Code = "IdentityPolicy",
-                            ConcurrencyStamp = "77aa2226-1d82-4f22-ab72-56c25e349550",
+                            ConcurrencyStamp = "9aa12cd6-6d41-4d67-a5a8-8b9a00cb1a5f",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5074),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(18),
                             Description = "认证策略",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "IdentityPolicy",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5075),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(18),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            Id = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Code = "ChineseNation",
-                            ConcurrencyStamp = "48c04824-fb40-408d-b91d-579f500a07d1",
+                            ConcurrencyStamp = "d78169b7-5c20-4589-bc07-5c795a5ffc7a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5128),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(66),
                             Description = "民族类型",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "ChineseNation",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5128),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(66),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Code = "ChineseNationEn",
-                            ConcurrencyStamp = "df9c2fdd-ce94-43c3-9646-45dfa40b798c",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5537),
-                            Description = "民族类型(英文标识)",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            Name = "ChineseNationEn",
-                            Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5537),
-                            Valid = false
-                        },
-                        new
-                        {
-                            Id = new Guid("16f15e66-0725-4049-a64f-c0d2d50457fe"),
+                            Id = new Guid("27e279dd-f075-44b9-83d9-e8333b8f2a2e"),
                             Code = "DictionaryType",
-                            ConcurrencyStamp = "5e2b3a46-9ed3-4b42-ad14-32144ca172e4",
+                            ConcurrencyStamp = "182a807e-667a-4e69-b624-9bfbdaa35e01",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5940),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(444),
                             Description = "字典类型",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "DictionaryType",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5941),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(444),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            Id = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Code = "EndType",
-                            ConcurrencyStamp = "a29293fa-a5ee-4ac6-a89b-aee0b4a48020",
+                            ConcurrencyStamp = "78be663a-8c4d-47cb-88fe-e1fa90bbef24",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6018),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(481),
                             Description = "端类型",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "EndType",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6019),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(481),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("36def1d1-c875-426c-af43-26fb47e64709"),
+                            Id = new Guid("c90ae04a-d987-48ba-b5b3-be14daad39c2"),
                             Code = "Gender",
-                            ConcurrencyStamp = "0b2c49af-3f58-44f0-87d0-1dda26707c45",
+                            ConcurrencyStamp = "4ed6f681-668d-481b-8c63-49396d1ac33a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6080),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(534),
                             Description = "性别类型",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "Gender",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6081),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(535),
                             Valid = true
                         },
                         new
                         {
-                            Id = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            Id = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Code = "RegionLevel",
-                            ConcurrencyStamp = "8dbafe57-4128-4e53-bbdb-984bf57506ff",
+                            ConcurrencyStamp = "e62e2f93-1c2b-4cf4-ad35-e5f1a73f5300",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6119),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(602),
                             Description = "行政区划等级",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "RegionLevel",
                             Type = "Public",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6119),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(602),
+                            Valid = true
+                        },
+                        new
+                        {
+                            Id = new Guid("aa0010a7-032c-4c35-9d11-970d09a0e8b6"),
+                            Code = "TaskMode",
+                            ConcurrencyStamp = "ef40cf5b-720c-41cd-80d7-f7252eb641ac",
+                            CreateBy = "00000000-0000-0000-0000-000000000000",
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(654),
+                            Description = "任务模式",
+                            ModifyBy = "00000000-0000-0000-0000-000000000000",
+                            Name = "TaskMode",
+                            Type = "Public",
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(654),
+                            Valid = true
+                        },
+                        new
+                        {
+                            Id = new Guid("807e3219-e94e-48c1-816c-48b5e794fecf"),
+                            Code = "TaskShip",
+                            ConcurrencyStamp = "932af59c-ff41-4c77-be0e-59473ab5056a",
+                            CreateBy = "00000000-0000-0000-0000-000000000000",
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(676),
+                            Description = "任务归属",
+                            ModifyBy = "00000000-0000-0000-0000-000000000000",
+                            Name = "TaskShip",
+                            Type = "Public",
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(677),
                             Valid = true
                         });
                 });
@@ -307,8 +328,6 @@ namespace Artemis.App.Resource.Migrations
                     b.HasIndex("CreatedAt")
                         .HasDatabaseName("IX_ArtemisDataDictionaryItem_CreatedAt");
 
-                    b.HasIndex("DataDictionaryId");
-
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("IX_ArtemisDataDictionaryItem_DeletedAt");
 
@@ -324,6 +343,10 @@ namespace Artemis.App.Resource.Migrations
                     b.HasIndex("UpdatedAt")
                         .HasDatabaseName("IX_ArtemisDataDictionaryItem_UpdatedAt");
 
+                    b.HasIndex("DataDictionaryId", "Key")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ArtemisDataDictionaryItem_DataDictionaryId_Key");
+
                     b.ToTable("ArtemisDataDictionaryItem", "Resource", t =>
                         {
                             t.HasComment("数据字典项目数据集");
@@ -332,2257 +355,1473 @@ namespace Artemis.App.Resource.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("06a62b0b-52b4-4235-9f43-22a3a5367766"),
-                            ConcurrencyStamp = "31f7462b-fb1d-4510-add4-1b93cd30565c",
+                            Id = new Guid("5c371f0f-587c-4d62-ba2c-f0d09494c518"),
+                            ConcurrencyStamp = "4625e706-459e-465c-ac07-6953988d5490",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4900),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9843),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "用户标识凭据",
                             Key = "UserId",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4901),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9843),
                             Valid = true,
                             Value = "UserId"
                         },
                         new
                         {
-                            Id = new Guid("2265f42b-4ff0-4d6a-89c5-6ec590f21367"),
-                            ConcurrencyStamp = "27f16aa0-4dba-4aac-84e1-af06a138b22d",
+                            Id = new Guid("bb0419c9-bb39-48f4-964e-9a72e82df472"),
+                            ConcurrencyStamp = "57998e93-8f06-46f1-942f-3ff0011362b7",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4911),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9866),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "用户名凭据",
                             Key = "UserName",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4912),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9866),
                             Valid = true,
                             Value = "UserName"
                         },
                         new
                         {
-                            Id = new Guid("c2e64383-0cb9-48b8-9761-609b1e204a1e"),
-                            ConcurrencyStamp = "f5ff86a1-c390-4713-938f-5318770c6be6",
+                            Id = new Guid("2b3c29ef-41c4-4853-be9d-194770afac25"),
+                            ConcurrencyStamp = "6fdbd544-332e-47eb-8741-b2a37a6f10e8",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4940),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9870),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "端类型凭据",
                             Key = "EndType",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4940),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9871),
                             Valid = true,
                             Value = "EndType"
                         },
                         new
                         {
-                            Id = new Guid("2db68cd4-733c-4c76-b971-62c417bc2c2b"),
-                            ConcurrencyStamp = "882b9164-e92c-4f52-abd5-c0e503f663bc",
+                            Id = new Guid("edd0df11-e968-4d24-8628-b5768943753a"),
+                            ConcurrencyStamp = "d99b4375-e8c2-4008-af62-b933a3cdf6e7",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4946),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9892),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "角色标识凭据",
                             Key = "Role",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4946),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9892),
                             Valid = true,
                             Value = "Role"
                         },
                         new
                         {
-                            Id = new Guid("89478d3d-475c-433d-a731-3314131f830b"),
-                            ConcurrencyStamp = "3972b925-b311-44be-bdc9-80956dcd10d4",
+                            Id = new Guid("9e86e6d4-fab5-49c7-889f-8c640b76b7fb"),
+                            ConcurrencyStamp = "ec7d9e68-a6ff-4ea3-9b57-37bdbc1bbdea",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4950),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9899),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "认证令牌凭据",
                             Key = "Authorization",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4950),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9899),
                             Valid = true,
                             Value = "Authorization"
                         },
                         new
                         {
-                            Id = new Guid("765bf9d1-5d58-44ef-a30e-4f708187e5ae"),
-                            ConcurrencyStamp = "0fc13788-8d23-4712-8b83-a7ff2b707a5f",
+                            Id = new Guid("2367aba4-e64d-4f14-979b-01bf25e6fe15"),
+                            ConcurrencyStamp = "6a281ba3-1d1b-4507-8bcc-27032263f46e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4957),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9904),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "路由凭据",
                             Key = "RoutePath",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4958),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9905),
                             Valid = true,
                             Value = "RoutePath"
                         },
                         new
                         {
-                            Id = new Guid("d424bca3-cd8d-4751-a552-13faf3a105e9"),
-                            ConcurrencyStamp = "f35ca66b-dd74-4569-ac21-e6a5faf57761",
+                            Id = new Guid("fdd96cdc-963e-4707-9b76-2329b5cd2061"),
+                            ConcurrencyStamp = "11591181-74a0-4591-bc23-aa5c8d75f8de",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4962),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9909),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "元路由凭据",
                             Key = "MateRoutePath",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4962),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9910),
                             Valid = true,
                             Value = "MateRoutePath"
                         },
                         new
                         {
-                            Id = new Guid("81b31c87-527c-40f3-b4de-ce47278bf81a"),
-                            ConcurrencyStamp = "8acfd8fa-af9a-4029-acbf-ea495cd97fcb",
+                            Id = new Guid("e8242f29-eb38-4b85-a358-511537803f27"),
+                            ConcurrencyStamp = "5d222721-ca9c-4cc7-8808-fe6bf634491a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4968),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9913),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "操作名凭据",
                             Key = "ActionName",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4968),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9914),
                             Valid = true,
                             Value = "ActionName"
                         },
                         new
                         {
-                            Id = new Guid("252d6910-8db3-4b90-a8fd-f808e0ef975c"),
-                            ConcurrencyStamp = "6923e822-0c00-4489-b16b-4b6b134bb2b9",
+                            Id = new Guid("eaf155db-cec5-4f36-95da-87e662394014"),
+                            ConcurrencyStamp = "02f4b4b0-2776-4678-867b-220ddc198678",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4973),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9917),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "元操作名凭据",
                             Key = "MateActionName",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4973),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9917),
                             Valid = true,
                             Value = "MateActionName"
                         },
                         new
                         {
-                            Id = new Guid("35f639a7-282c-42ab-bf47-d4be91d06cc0"),
-                            ConcurrencyStamp = "8cdcd565-5128-411c-8e7d-6921e6d05b11",
+                            Id = new Guid("34aa47b4-49ee-417a-b1fc-b740762fee18"),
+                            ConcurrencyStamp = "bca21714-2e74-48d9-b7b7-02c9432db18f",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4978),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9922),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "签名凭据",
                             Key = "Signature",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4978),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9923),
                             Valid = true,
                             Value = "Signature"
                         },
                         new
                         {
-                            Id = new Guid("6ed74a52-ed68-40cb-b6af-06586d950bae"),
-                            ConcurrencyStamp = "5d50d609-1df5-4ffd-94da-f4c88052a05b",
+                            Id = new Guid("4b412243-473c-495d-8d8e-b30c9ea456c7"),
+                            ConcurrencyStamp = "37f12987-2f64-4380-a0c5-fde28f6cc15d",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4984),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9926),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "Ip地址凭据",
                             Key = "IpAddress",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4984),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9926),
                             Valid = true,
                             Value = "IpAddress"
                         },
                         new
                         {
-                            Id = new Guid("ca385168-1d59-4af5-bf39-3da967c0a7bb"),
-                            ConcurrencyStamp = "869e75cd-4c2f-401d-80cb-9f331cf7b223",
+                            Id = new Guid("d47d94ae-9707-477e-9311-4aef4f1ff5e4"),
+                            ConcurrencyStamp = "d1214176-4cdc-4dbf-82fd-6ba7ec65a287",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4989),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9930),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "Dns凭据",
                             Key = "Dns",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4989),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9931),
                             Valid = true,
                             Value = "Dns"
                         },
                         new
                         {
-                            Id = new Guid("dc54a530-31c5-42ce-a02d-b6d83676f964"),
-                            ConcurrencyStamp = "9b370bb2-8257-4bb0-8819-b20fa3a93661",
+                            Id = new Guid("81643f37-347f-46ae-9172-e40da421d32e"),
+                            ConcurrencyStamp = "21e22a2d-8b6d-49bc-96a5-58fd9999552d",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4993),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9935),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "Mac地址凭据",
                             Key = "MacAddress",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4993),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9936),
                             Valid = true,
                             Value = "MacAddress"
                         },
                         new
                         {
-                            Id = new Guid("0ae9eb1a-3e36-4dd0-849f-2fb3de58103c"),
-                            ConcurrencyStamp = "cea309e1-3728-4025-9f88-d774f4a81377",
+                            Id = new Guid("c622338a-9efe-4407-b0ee-fc22e4324958"),
+                            ConcurrencyStamp = "b0b8fe38-790a-4ae9-8478-e02a712c6707",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4999),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9939),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "设备标识凭据",
                             Key = "DeviceId",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(4999),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9940),
                             Valid = true,
                             Value = "DeviceId"
                         },
                         new
                         {
-                            Id = new Guid("1fe3b62f-a482-4778-8981-bb1931ed582a"),
-                            ConcurrencyStamp = "e7af263d-12dc-4034-aac2-d5ac7e5cfcea",
+                            Id = new Guid("f97eec4e-3d78-4c94-8325-4bda25a7909c"),
+                            ConcurrencyStamp = "d1b17567-c905-407e-8518-24588a74260e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5003),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9944),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "设备名称凭据",
                             Key = "DeviceName",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5003),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9945),
                             Valid = true,
                             Value = "DeviceName"
                         },
                         new
                         {
-                            Id = new Guid("6e040a17-e437-4891-8310-705940c66d4d"),
-                            ConcurrencyStamp = "a5a6edad-2a22-42b4-a7a3-4bdcbf5b912e",
+                            Id = new Guid("eab58dd7-9736-4fab-84f2-b7fa9ced6030"),
+                            ConcurrencyStamp = "3c7f3573-5c5a-4b39-b6bf-9614a35d2b0a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5008),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9948),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "设备类型凭据",
                             Key = "DeviceType",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5009),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9949),
                             Valid = true,
                             Value = "DeviceType"
                         },
                         new
                         {
-                            Id = new Guid("31b06be0-7a30-43d7-9cd8-fbd7c9458517"),
-                            ConcurrencyStamp = "e29ab987-7584-4db0-9cdb-ae374d19c35c",
+                            Id = new Guid("e23af56d-dcc9-47bc-a141-b4022c68b615"),
+                            ConcurrencyStamp = "f22cf987-4091-44ff-8767-ac0dcb07fff1",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5013),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9952),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "邮箱凭据",
                             Key = "Email",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5013),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9953),
                             Valid = true,
                             Value = "Email"
                         },
                         new
                         {
-                            Id = new Guid("6bc60718-a5eb-423c-b25d-1b6e0748aaa8"),
-                            ConcurrencyStamp = "a47fe112-5554-47e0-8ac0-2f5719dd6142",
+                            Id = new Guid("398cd6bc-ba9f-4fa2-a57f-ebb2001dcf21"),
+                            ConcurrencyStamp = "f6f91816-1659-40b9-beef-d5535c9990c9",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5018),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9958),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "移动电话凭据",
                             Key = "Phone",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5018),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9959),
                             Valid = true,
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = new Guid("5a2320c7-403c-44e8-8ebc-2ca5beae0ae0"),
-                            ConcurrencyStamp = "082a6ca2-9f3b-4ea1-b15f-b9687912ee24",
+                            Id = new Guid("1cba3312-ffb3-4a48-999a-6e5ffd0c2dfd"),
+                            ConcurrencyStamp = "69977ea4-cb57-42c6-afc5-a339bf88a143",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5023),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9962),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "地址凭据",
                             Key = "Address",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5024),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9963),
                             Valid = true,
                             Value = "Address"
                         },
                         new
                         {
-                            Id = new Guid("73c3a79d-2449-4d18-ae9e-96efa0514756"),
-                            ConcurrencyStamp = "b1d6f29d-2b7b-464b-be9a-bd11e8424ee7",
+                            Id = new Guid("c0193d04-7efc-41f4-a116-e2ab0ac40a48"),
+                            ConcurrencyStamp = "1da0a6fc-a4da-43f2-86be-7134c8b0db40",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5047),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9994),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "性别凭据",
                             Key = "Gender",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5047),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 381, DateTimeKind.Local).AddTicks(9994),
                             Valid = true,
                             Value = "Gender"
                         },
                         new
                         {
-                            Id = new Guid("9dde7f7a-1c91-413a-8aa2-d763f2494afa"),
-                            ConcurrencyStamp = "c1b6886b-67bb-4d51-8a6e-364f980b5213",
+                            Id = new Guid("5c9ddb95-f901-450a-b491-74aaef724732"),
+                            ConcurrencyStamp = "33718b10-6ccc-47d9-9137-37b37ff1611a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5052),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "生日凭据",
                             Key = "Birthday",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5053),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(1),
                             Valid = true,
                             Value = "Birthday"
                         },
                         new
                         {
-                            Id = new Guid("c547dbcc-89e5-42b0-9269-0074331ba2c2"),
-                            ConcurrencyStamp = "cb666011-9ed4-4c67-9871-c770d4e93b1a",
+                            Id = new Guid("9a5d3bbc-b769-40a7-97e5-6c0a99682d79"),
+                            ConcurrencyStamp = "5977a450-ead9-43a6-a931-4f9fe9f3db47",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5058),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(4),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "过期时间凭据",
                             Key = "Expired",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5058),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(4),
                             Valid = true,
                             Value = "Expired"
                         },
                         new
                         {
-                            Id = new Guid("30450604-cc20-4c68-a488-9989029f1191"),
-                            ConcurrencyStamp = "045a0caa-7464-4b5d-b4e5-9b9eacae3c01",
+                            Id = new Guid("37fc747e-5bfd-4c40-b2c1-d22d24724836"),
+                            ConcurrencyStamp = "8e400155-497d-4df9-8c98-b9edabf678b5",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5063),
-                            DataDictionaryId = new Guid("33b126b4-ffb8-4c8c-a900-1671bc9903c0"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(9),
+                            DataDictionaryId = new Guid("4e9155b2-5253-4565-b5f3-48ad3cd73fab"),
                             Description = "截止日期凭据",
                             Key = "Expiration",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5063),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(10),
                             Valid = true,
                             Value = "Expiration"
                         },
                         new
                         {
-                            Id = new Guid("7b101c8a-f9c7-44a1-8d4c-fd5c5fd4f6da"),
-                            ConcurrencyStamp = "70616c3e-ec61-48ae-9290-ff0e688a79e2",
+                            Id = new Guid("dd3407fa-f487-4aba-918e-e5f40f3c50d0"),
+                            ConcurrencyStamp = "eeb47c1b-bcdd-48e8-84e7-a17db7d3b47e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5101),
-                            DataDictionaryId = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(42),
+                            DataDictionaryId = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Description = "匿名策略",
                             Key = "Anonymous",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5101),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(42),
                             Valid = true,
                             Value = "Anonymous"
                         },
                         new
                         {
-                            Id = new Guid("fc2edfca-95e6-4c65-b842-238158294210"),
-                            ConcurrencyStamp = "1156e977-e4a7-4967-9b1e-cdf7c3b11de7",
+                            Id = new Guid("5041b726-4363-4600-be78-b1422bb69911"),
+                            ConcurrencyStamp = "23441229-48ce-435a-a51f-de56e8839442",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5106),
-                            DataDictionaryId = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(47),
+                            DataDictionaryId = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Description = "令牌策略",
                             Key = "Token",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5106),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(48),
                             Valid = true,
                             Value = "Token"
                         },
                         new
                         {
-                            Id = new Guid("05675136-d673-460c-aafc-2b7575b308a1"),
-                            ConcurrencyStamp = "a0d7ccbd-1c31-4c41-9a5c-08e3d0537d14",
+                            Id = new Guid("34c4a99b-4642-4340-bd22-5530d9a41b01"),
+                            ConcurrencyStamp = "123fa0a5-63cd-4d98-b64e-768e37710336",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5112),
-                            DataDictionaryId = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(51),
+                            DataDictionaryId = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Description = "管理员策略",
                             Key = "Admin",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5112),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(52),
                             Valid = true,
                             Value = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("5ee8caf8-b39c-4d72-aff9-25e1a120f271"),
-                            ConcurrencyStamp = "0ed7e182-8ae1-4aa7-a233-80ea8f3a1c1e",
+                            Id = new Guid("ea76b472-1fdd-4a03-9f84-854582f56499"),
+                            ConcurrencyStamp = "b33e7c90-6eeb-40f2-9a05-d4ec4afc8cb6",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5117),
-                            DataDictionaryId = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(55),
+                            DataDictionaryId = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Description = "操作名策略",
                             Key = "ActionName",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5117),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(55),
                             Valid = true,
                             Value = "ActionName"
                         },
                         new
                         {
-                            Id = new Guid("e6bbbe65-1fa5-4146-9f2a-f188538a9f77"),
-                            ConcurrencyStamp = "8dcb9b54-b176-4707-804e-a8e13a7f35e7",
+                            Id = new Guid("3486c696-2c79-4d91-874f-537e10b9a1e0"),
+                            ConcurrencyStamp = "b35196ac-13e2-4b4d-b5a2-99a33e775bd3",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5121),
-                            DataDictionaryId = new Guid("8ea46004-df76-4ef5-abca-2c2a3d533756"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(60),
+                            DataDictionaryId = new Guid("54d206dd-0989-47d4-ab39-7a543889e4c0"),
                             Description = "路由路径策略",
                             Key = "RoutePath",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5122),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(61),
                             Valid = true,
                             Value = "RoutePath"
                         },
                         new
                         {
-                            Id = new Guid("2bbb914b-7fcf-42c3-b2ec-b592e039c593"),
-                            ConcurrencyStamp = "e4d22f92-69d6-4e3c-867d-e632ff3f3727",
+                            Id = new Guid("5e4100c8-d842-4c31-b477-27cec0a7cc1f"),
+                            ConcurrencyStamp = "738b1a31-1b70-46a2-b12f-0e359af4ec18",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5151),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(88),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "未知",
                             Key = "未知",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5151),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(89),
                             Valid = true,
                             Value = "未知"
                         },
                         new
                         {
-                            Id = new Guid("aac5e553-37f3-4a9a-9b95-3793b3038cca"),
-                            ConcurrencyStamp = "91adf265-5e49-4af6-b915-3a9e0d7970d6",
+                            Id = new Guid("4ee9819e-ec04-4640-8a12-f7389008c238"),
+                            ConcurrencyStamp = "a920f22a-6d36-421b-835e-36b86abbb1f7",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5157),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(93),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "阿昌族",
                             Key = "阿昌族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5157),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(93),
                             Valid = true,
                             Value = "阿昌族"
                         },
                         new
                         {
-                            Id = new Guid("96dbb1d3-d3ae-4928-b61e-7d162f1b29f3"),
-                            ConcurrencyStamp = "21cf474e-16dd-4e57-9da6-818a1caf25ff",
+                            Id = new Guid("0f001002-b7b2-4419-9208-9735b7d2bb26"),
+                            ConcurrencyStamp = "b46cdc0f-66e6-4876-87cf-f0066380fc48",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5161),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(97),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "白族",
                             Key = "白族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5162),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(97),
                             Valid = true,
                             Value = "白族"
                         },
                         new
                         {
-                            Id = new Guid("bc33b96c-e7e1-470e-9e77-61cca0022a51"),
-                            ConcurrencyStamp = "a66dd6c6-526b-4762-95d4-bb013d02312b",
+                            Id = new Guid("db2d6263-abfe-46d2-b111-6b10be4bee41"),
+                            ConcurrencyStamp = "07ab0a4c-5209-4ccd-bf29-7391cf7aeeec",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5166),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(102),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "保安族",
                             Key = "保安族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5166),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(102),
                             Valid = true,
                             Value = "保安族"
                         },
                         new
                         {
-                            Id = new Guid("6be426d6-460c-47c4-99a6-f15412adbf26"),
-                            ConcurrencyStamp = "39965ebd-3021-487e-821c-363cd6152efd",
+                            Id = new Guid("16243662-f085-4de2-8032-01f7890d3774"),
+                            ConcurrencyStamp = "76d1d0c1-8d14-448d-87dc-66b3d6d2b292",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5172),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(106),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "布朗族",
                             Key = "布朗族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5172),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(106),
                             Valid = true,
                             Value = "布朗族"
                         },
                         new
                         {
-                            Id = new Guid("ac9a8869-7de1-4d00-9a75-0e084c4d52fa"),
-                            ConcurrencyStamp = "54d33de6-6d05-4f13-b9fc-be8df6140e9b",
+                            Id = new Guid("62dab184-6beb-46de-b25d-02b9de132efb"),
+                            ConcurrencyStamp = "eb27f303-c8e9-4c44-b56b-0fc13fd4cff6",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5199),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(147),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "布依族",
                             Key = "布依族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5199),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(147),
                             Valid = true,
                             Value = "布依族"
                         },
                         new
                         {
-                            Id = new Guid("0c26bc23-c2d1-43b1-8e72-ff6f1d71f7dd"),
-                            ConcurrencyStamp = "f4bd4e9e-e4d8-4450-848a-a981827bc971",
+                            Id = new Guid("1d5b94ff-1f16-43dc-a4bc-6b4c2ecedb06"),
+                            ConcurrencyStamp = "d7b661ec-b9a4-479b-b031-e11d86752723",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5203),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(152),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "朝鲜族",
                             Key = "朝鲜族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5204),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(153),
                             Valid = true,
                             Value = "朝鲜族"
                         },
                         new
                         {
-                            Id = new Guid("527b8d87-3db5-4658-9fa7-97c26ef92b4b"),
-                            ConcurrencyStamp = "09358ad6-6085-4dc9-a181-b010c86bc794",
+                            Id = new Guid("8f62c004-2e83-4684-8766-d43ce90c4abb"),
+                            ConcurrencyStamp = "a9d0ea2b-0dfd-4ac7-8520-4fb0097a3dc9",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5209),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(156),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "达斡尔族",
                             Key = "达斡尔族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5210),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(157),
                             Valid = true,
                             Value = "达斡尔族"
                         },
                         new
                         {
-                            Id = new Guid("ded4ec3b-69d5-4f59-8a38-d81983c2ecdc"),
-                            ConcurrencyStamp = "699405c5-b08d-438d-a8b1-3724319ac6b6",
+                            Id = new Guid("26790e61-cdd9-4167-bbbc-8f5c5d931aae"),
+                            ConcurrencyStamp = "c855434b-90dd-44c2-8baf-d50ae4830867",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5213),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(161),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "傣族",
                             Key = "傣族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5214),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(162),
                             Valid = true,
                             Value = "傣族"
                         },
                         new
                         {
-                            Id = new Guid("f397acf8-c432-4367-8918-b3f7b3d9e160"),
-                            ConcurrencyStamp = "160e1d44-cfd5-4090-bf55-a7363caafa17",
+                            Id = new Guid("4a627cc2-a145-4179-969e-43aa465a1e77"),
+                            ConcurrencyStamp = "791cfa7e-d10e-4ac0-9d84-be16ab091c68",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5219),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(165),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "德昂族",
                             Key = "德昂族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5219),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(166),
                             Valid = true,
                             Value = "德昂族"
                         },
                         new
                         {
-                            Id = new Guid("46beb292-9794-4e48-95fd-8b97ef7da4a4"),
-                            ConcurrencyStamp = "5537c244-dd0b-4742-8dee-4354b265855e",
+                            Id = new Guid("908ac5de-e0cd-4c56-b15f-1e5802f69433"),
+                            ConcurrencyStamp = "21787037-6540-4bee-9db2-29caab60a687",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5224),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(169),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "东乡族",
                             Key = "东乡族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5224),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(170),
                             Valid = true,
                             Value = "东乡族"
                         },
                         new
                         {
-                            Id = new Guid("d8835c2d-6ef5-4934-8bda-1f05440b70f7"),
-                            ConcurrencyStamp = "58aa24e4-245b-49fe-a151-7657e860ffa6",
+                            Id = new Guid("7367351b-cf7f-44df-85c7-7efd82675fc1"),
+                            ConcurrencyStamp = "7c98028f-c13f-46ba-884e-8055f8aabd37",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5228),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(174),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "侗族",
                             Key = "侗族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5228),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(175),
                             Valid = true,
                             Value = "侗族"
                         },
                         new
                         {
-                            Id = new Guid("d0235aa8-8b8e-4967-8d96-01f41c3554f9"),
-                            ConcurrencyStamp = "dd02d0be-e219-4ed8-88db-78d47712428d",
+                            Id = new Guid("366a13cd-2b3f-4ff0-930a-96a6d3beab8c"),
+                            ConcurrencyStamp = "e996a203-5884-477b-9d17-3fbc18c6943a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5234),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(179),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "独龙族",
                             Key = "独龙族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5234),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(179),
                             Valid = true,
                             Value = "独龙族"
                         },
                         new
                         {
-                            Id = new Guid("636f9587-ea4f-4304-88d6-4d68698135e7"),
-                            ConcurrencyStamp = "b769706c-936b-4d44-bfc7-a84841cd0e42",
+                            Id = new Guid("e8f5a1b9-8e8e-4243-85e9-e5a38bcb24a1"),
+                            ConcurrencyStamp = "004bf220-a2b2-449c-9d25-e5eb4d288763",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5239),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(182),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "鄂伦春族",
                             Key = "鄂伦春族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5239),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(183),
                             Valid = true,
                             Value = "鄂伦春族"
                         },
                         new
                         {
-                            Id = new Guid("010ce571-90da-44f9-ba64-09a90c52c788"),
-                            ConcurrencyStamp = "78796bd3-08d4-42ad-b313-94634ee67b1f",
+                            Id = new Guid("45cdb1ff-c5d4-4f5e-9b69-3b274bb3d875"),
+                            ConcurrencyStamp = "0fbfdeec-05a1-4bda-a2c0-6cc7119098f5",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5243),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(187),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "俄罗斯族",
                             Key = "俄罗斯族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5243),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(188),
                             Valid = true,
                             Value = "俄罗斯族"
                         },
                         new
                         {
-                            Id = new Guid("6c791c55-b378-4ed6-ad0b-3406fc50c707"),
-                            ConcurrencyStamp = "38af6e9d-ac38-4bfc-88e6-4991742c7a19",
+                            Id = new Guid("902749d6-6c50-4a2b-b9e5-96e236374e36"),
+                            ConcurrencyStamp = "d62431f7-4007-432a-95ab-c5321906b6a2",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5249),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(191),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "鄂温克族",
                             Key = "鄂温克族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5249),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(191),
                             Valid = true,
                             Value = "鄂温克族"
                         },
                         new
                         {
-                            Id = new Guid("361c591d-c234-4bb6-b0f6-2659160501f3"),
-                            ConcurrencyStamp = "7218caa3-54e6-44ed-b073-d89c23e6f65d",
+                            Id = new Guid("16939956-a211-4c5e-b599-288d06953190"),
+                            ConcurrencyStamp = "5e33dfb5-93ef-43c1-9010-c57258da3ce9",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5253),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(196),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "高山族",
                             Key = "高山族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5253),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(197),
                             Valid = true,
                             Value = "高山族"
                         },
                         new
                         {
-                            Id = new Guid("292bd809-5c1a-4b29-a5b8-0be34588c913"),
-                            ConcurrencyStamp = "de07902c-2879-4a0b-9a0f-fe85e677f283",
+                            Id = new Guid("29b4a12c-d009-45c8-bc42-87ae4ce36c1a"),
+                            ConcurrencyStamp = "a4fafdeb-9c11-4104-b188-2167d402105e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5259),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(200),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "仡佬族",
                             Key = "仡佬族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5259),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(200),
                             Valid = true,
                             Value = "仡佬族"
                         },
                         new
                         {
-                            Id = new Guid("b59a1b7f-3293-48e2-9409-d04dd6c5e440"),
-                            ConcurrencyStamp = "58a47711-36c0-46b4-a0d1-1183f15dc3f7",
+                            Id = new Guid("43a526e2-84e7-4019-9a3e-dea80a932694"),
+                            ConcurrencyStamp = "2878fe81-9749-4f0b-a55b-c898b80fcc24",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5263),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(204),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "汉族",
                             Key = "汉族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5264),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(204),
                             Valid = true,
                             Value = "汉族"
                         },
                         new
                         {
-                            Id = new Guid("bf7d23cf-4e3e-489b-87c2-6e53f69e5f14"),
-                            ConcurrencyStamp = "77c02818-c613-414a-964b-0498471e293d",
+                            Id = new Guid("4079b3ae-d202-46eb-b9b5-dd7623ab7762"),
+                            ConcurrencyStamp = "760a3cd1-7e1b-4f0b-a0dc-f753ab79fa67",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5268),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(209),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "哈尼族",
                             Key = "哈尼族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5268),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(209),
                             Valid = true,
                             Value = "哈尼族"
                         },
                         new
                         {
-                            Id = new Guid("48c35e3e-4dd7-4325-8ab9-135afda15c97"),
-                            ConcurrencyStamp = "2f1cb059-86da-4f24-b56f-d540d0ba3769",
+                            Id = new Guid("9da2e73f-e8a9-4d5f-9045-87a450be95ba"),
+                            ConcurrencyStamp = "81ab350f-1dcd-42d0-a154-8331258d36a6",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5273),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(213),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "哈萨克族",
                             Key = "哈萨克族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5274),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(214),
                             Valid = true,
                             Value = "哈萨克族"
                         },
                         new
                         {
-                            Id = new Guid("b0fbe026-585f-496e-9413-662fcf8bbe86"),
-                            ConcurrencyStamp = "2c457976-b1a1-4dc0-b6e1-219325f3d3df",
+                            Id = new Guid("bd9cb8a4-1d0a-42d1-b2ef-cede11e7bbe8"),
+                            ConcurrencyStamp = "ddc4a4ba-8206-4c6a-95ce-3b03923a6fe2",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5278),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(245),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "赫哲族",
                             Key = "赫哲族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5278),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(246),
                             Valid = true,
                             Value = "赫哲族"
                         },
                         new
                         {
-                            Id = new Guid("c83f3ae4-b49d-45dd-9452-e7ad420c0676"),
-                            ConcurrencyStamp = "7d2c3b7e-fe61-439a-bcbc-40dca55e9fea",
+                            Id = new Guid("78f11bb8-1cc7-4d90-a52f-36e5f930f33c"),
+                            ConcurrencyStamp = "f7a59026-3893-47fe-9ca2-4adc8bc34d8f",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5299),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(251),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "回族",
                             Key = "回族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5299),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(251),
                             Valid = true,
                             Value = "回族"
                         },
                         new
                         {
-                            Id = new Guid("904b33d3-3d84-4717-922e-4ccf6c30bf5b"),
-                            ConcurrencyStamp = "7dcbfd61-182a-4730-8d3d-c5b84cddc3e6",
+                            Id = new Guid("e1b12e5f-9d04-442c-9775-a2973a7bbfe7"),
+                            ConcurrencyStamp = "0df66322-b64e-4b27-b06a-a04d165703b9",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5305),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(255),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "基诺族",
                             Key = "基诺族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5306),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(255),
                             Valid = true,
                             Value = "基诺族"
                         },
                         new
                         {
-                            Id = new Guid("f91134da-0db2-4f70-a8b9-9d037eee39a7"),
-                            ConcurrencyStamp = "456518c0-1ca2-40d8-863f-d5286c586abf",
+                            Id = new Guid("89ff7b0c-0e87-490f-9d0e-8e6a8fef75b2"),
+                            ConcurrencyStamp = "fbb2f07e-52e9-4628-ae98-86f8d5871243",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5310),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(259),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "景颇族",
                             Key = "景颇族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5310),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(260),
                             Valid = true,
                             Value = "景颇族"
                         },
                         new
                         {
-                            Id = new Guid("b0273e61-97af-459c-b45b-4f49ff5872dc"),
-                            ConcurrencyStamp = "765226d4-d7de-49f2-abbe-9ad0bf784c55",
+                            Id = new Guid("b81ecc08-5ab9-45ae-9c69-ba5380545818"),
+                            ConcurrencyStamp = "d3fc0dc8-005d-49d3-805d-bc83afc0e44a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5316),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(263),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "京族",
                             Key = "京族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5316),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(264),
                             Valid = true,
                             Value = "京族"
                         },
                         new
                         {
-                            Id = new Guid("8049b793-97d6-4c90-8b5a-5ee0464595b9"),
-                            ConcurrencyStamp = "6fe0a56a-41cc-4904-85eb-27d5ac3576b0",
+                            Id = new Guid("eaca7c10-d833-40b9-ab52-2e6ef5ba0f1f"),
+                            ConcurrencyStamp = "fcd05f76-9cd1-4cbb-8e98-b80219bfd197",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5320),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(267),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "柯尔克孜族",
                             Key = "柯尔克孜族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5321),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(268),
                             Valid = true,
                             Value = "柯尔克孜族"
                         },
                         new
                         {
-                            Id = new Guid("7d93f737-3c56-4917-bcc5-29a30d66765c"),
-                            ConcurrencyStamp = "cce5d480-40b7-4d1e-b917-4c98883d138f",
+                            Id = new Guid("f760b91b-6b39-4d69-834e-809777cf0497"),
+                            ConcurrencyStamp = "51dc2fea-96f2-4d3d-9fc5-e47c65e75955",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5325),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(272),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "拉祜族",
                             Key = "拉祜族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5325),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(272),
                             Valid = true,
                             Value = "拉祜族"
                         },
                         new
                         {
-                            Id = new Guid("fa3902d3-63fa-4b27-8268-3878a06e2770"),
-                            ConcurrencyStamp = "cfa2ba78-2e4a-42f1-a2ef-6bd68aa8776a",
+                            Id = new Guid("69892a01-c902-4c98-8f39-ea3e3cc4aaf8"),
+                            ConcurrencyStamp = "0bda2fc1-3aa6-4b8e-94ce-d423771169ce",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5331),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(276),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "珞巴族",
                             Key = "珞巴族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5331),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(276),
                             Valid = true,
                             Value = "珞巴族"
                         },
                         new
                         {
-                            Id = new Guid("038af7ac-cc0e-4997-98be-3be5c9b7973e"),
-                            ConcurrencyStamp = "93b7d5c4-a4d3-4eeb-84c3-20f6bb86271f",
+                            Id = new Guid("878bc14c-8cff-41a6-88f6-87360c754e63"),
+                            ConcurrencyStamp = "d4766885-912f-48d9-85ee-aa21e03e3399",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5335),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(280),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "僳僳族",
                             Key = "僳僳族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5336),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(280),
                             Valid = true,
                             Value = "僳僳族"
                         },
                         new
                         {
-                            Id = new Guid("c134308c-ca8d-4817-a1c8-9269548e8a74"),
-                            ConcurrencyStamp = "2f8492ff-acad-466a-9b11-7f0a126f30cd",
+                            Id = new Guid("0984b1ac-2d95-4086-b72a-fe7c9774b91d"),
+                            ConcurrencyStamp = "b00ac42f-d7db-48d8-96ba-d78c0e8f5255",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5339),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(285),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "黎族",
                             Key = "黎族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5340),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(285),
                             Valid = true,
                             Value = "黎族"
                         },
                         new
                         {
-                            Id = new Guid("0d05e4af-730e-47cd-baac-11d52fb8ee1c"),
-                            ConcurrencyStamp = "9c125988-9d72-491d-9e63-2d70c6007e9c",
+                            Id = new Guid("3e145938-fbbe-401a-9054-8bbd800cab1c"),
+                            ConcurrencyStamp = "4de21a8b-5f7b-4a7c-a518-007d390e325c",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5346),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(289),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "满族",
                             Key = "满族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5347),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(289),
                             Valid = true,
                             Value = "满族"
                         },
                         new
                         {
-                            Id = new Guid("e6282902-caa1-4fce-89ec-9372db1fb705"),
-                            ConcurrencyStamp = "5ba49009-e704-45aa-a8a7-4c6a6e1c9d8d",
+                            Id = new Guid("32560027-b9bb-4c66-b4a8-b17f574a42cd"),
+                            ConcurrencyStamp = "17900813-74ac-491d-b1b0-e7c69de4dcb1",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5351),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(294),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "毛南族",
                             Key = "毛南族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5351),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(294),
                             Valid = true,
                             Value = "毛南族"
                         },
                         new
                         {
-                            Id = new Guid("46cd41b6-b4a7-4683-988a-86b6dace6aa9"),
-                            ConcurrencyStamp = "d077bffc-5dac-49c8-9ebe-88ef54f134b8",
+                            Id = new Guid("f56dc779-e86c-46e5-9e76-94cee6ab4add"),
+                            ConcurrencyStamp = "c67d0378-8008-4c09-bcda-29450f10790f",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5357),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(297),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "门巴族",
                             Key = "门巴族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5357),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(298),
                             Valid = true,
                             Value = "门巴族"
                         },
                         new
                         {
-                            Id = new Guid("96e002e8-313c-49b8-a6dd-41858c2c4ec7"),
-                            ConcurrencyStamp = "a8506b5c-5903-46d6-b6d9-0fdbe8287e54",
+                            Id = new Guid("7946a7e0-578b-42d0-865c-e331474b4021"),
+                            ConcurrencyStamp = "ab623cc9-5162-4380-85a2-c02226ab0731",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5361),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(301),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "蒙古族",
                             Key = "蒙古族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5361),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(302),
                             Valid = true,
                             Value = "蒙古族"
                         },
                         new
                         {
-                            Id = new Guid("c84ce07b-62a6-4856-8843-c099cb631deb"),
-                            ConcurrencyStamp = "00636c32-1465-4b2d-ba74-e32e14b071fe",
+                            Id = new Guid("bada0eb7-e170-4353-bd57-9e7c7c765725"),
+                            ConcurrencyStamp = "bc2997a4-1ae7-4f59-a2be-9868099f62c4",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5365),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(306),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "苗族",
                             Key = "苗族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5366),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(306),
                             Valid = true,
                             Value = "苗族"
                         },
                         new
                         {
-                            Id = new Guid("a6b5a2b1-688e-42d8-9037-c21be201a535"),
-                            ConcurrencyStamp = "aeb23da3-0d74-41ef-b2f6-3d990581ddfb",
+                            Id = new Guid("3d593898-f274-4708-a5d0-70ea626d7ae8"),
+                            ConcurrencyStamp = "e72d86f0-63b5-4896-af0d-fc378739fd3e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5371),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(310),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "仫佬族",
                             Key = "仫佬族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5372),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(310),
                             Valid = true,
                             Value = "仫佬族"
                         },
                         new
                         {
-                            Id = new Guid("aecdd2b7-b036-40cc-b702-c36eb8afab18"),
-                            ConcurrencyStamp = "08e9ce57-dbef-41b9-a3de-ccd7eed7b683",
+                            Id = new Guid("5e477a89-a070-4a6f-bc70-ed188c4d7d1f"),
+                            ConcurrencyStamp = "8cf8b990-464d-486e-b86c-fbf8a43097bf",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5403),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(332),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "纳西族",
                             Key = "纳西族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5404),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(332),
                             Valid = true,
                             Value = "纳西族"
                         },
                         new
                         {
-                            Id = new Guid("6e38b552-48f8-45cc-8bde-c7adf7c95051"),
-                            ConcurrencyStamp = "d8e2e514-309f-4d18-97d8-dc417a580dda",
+                            Id = new Guid("509ef7ca-60f3-4ded-b3b5-60f09a2eb12e"),
+                            ConcurrencyStamp = "c96e5b02-3fb7-4dfe-83ed-02ba5ce697d0",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5408),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(338),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "怒族",
                             Key = "怒族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5409),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(338),
                             Valid = true,
                             Value = "怒族"
                         },
                         new
                         {
-                            Id = new Guid("c40cf68d-332c-433d-b16a-e55f587d9bac"),
-                            ConcurrencyStamp = "7be593c9-ffe3-4198-8b08-c620cc298d14",
+                            Id = new Guid("ea925fd3-f892-4ee9-8df2-6db1b3ef93ed"),
+                            ConcurrencyStamp = "e935f77f-6c3b-402a-9a23-649c782cd206",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5414),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(342),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "普米族",
                             Key = "普米族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5414),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(342),
                             Valid = true,
                             Value = "普米族"
                         },
                         new
                         {
-                            Id = new Guid("da07ad55-5f95-4ba4-a9e8-28e4f3be66fb"),
-                            ConcurrencyStamp = "c30e9352-5a08-477c-abe0-e9b486f740d7",
+                            Id = new Guid("dbb10719-ea72-43d2-838b-ee4e4f7febea"),
+                            ConcurrencyStamp = "cfd781b3-a554-4753-af90-d6e366cefc39",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5418),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(347),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "羌族",
                             Key = "羌族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5419),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(347),
                             Valid = true,
                             Value = "羌族"
                         },
                         new
                         {
-                            Id = new Guid("43d74db5-07d3-4e5d-aa53-642d23ffc051"),
-                            ConcurrencyStamp = "48b211e3-770e-422a-8873-ffd6a4b7eeb5",
+                            Id = new Guid("d4b7c23d-e10a-45f7-8603-fc1bf791bca0"),
+                            ConcurrencyStamp = "7715d056-acc1-414f-82b4-5d5edae4f8ec",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5424),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(350),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "撒拉族",
                             Key = "撒拉族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5424),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(351),
                             Valid = true,
                             Value = "撒拉族"
                         },
                         new
                         {
-                            Id = new Guid("1f2a5dc9-500c-4144-836a-cfb7c6f3dc5d"),
-                            ConcurrencyStamp = "d21b67d3-f3cd-4634-892e-8346bc7b8d8b",
+                            Id = new Guid("8c1f5501-6ff4-473a-bbb6-07af9610ebd7"),
+                            ConcurrencyStamp = "f10288c7-0655-443e-8b7c-8d1dde4b2b22",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5429),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(354),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "畲族",
                             Key = "畲族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5429),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(355),
                             Valid = true,
                             Value = "畲族"
                         },
                         new
                         {
-                            Id = new Guid("a6faa750-c8be-43c6-bda9-e7541241bced"),
-                            ConcurrencyStamp = "22ce6a0b-fa36-47f6-93a7-7b68939b348a",
+                            Id = new Guid("eea0ac89-556e-4092-afa1-62877ed49089"),
+                            ConcurrencyStamp = "fb8dda88-bdc8-4310-bd55-f32b32a4c0d6",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5433),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(359),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "水族",
                             Key = "水族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5434),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(359),
                             Valid = true,
                             Value = "水族"
                         },
                         new
                         {
-                            Id = new Guid("8c134407-237f-40a3-a0da-192395e338a9"),
-                            ConcurrencyStamp = "184c6604-792c-43f1-897b-0db81e3ee100",
+                            Id = new Guid("3c7c1f97-aef8-42a2-86f4-462736d9c051"),
+                            ConcurrencyStamp = "f90a47ca-aad1-45c5-b79f-0620ef99c35a",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5439),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(363),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "塔吉克族",
                             Key = "塔吉克族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5439),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(363),
                             Valid = true,
                             Value = "塔吉克族"
                         },
                         new
                         {
-                            Id = new Guid("91ef3db0-bd54-4808-b13f-f2daa02fc53e"),
-                            ConcurrencyStamp = "2aa7bcaa-b112-486a-a07e-3b1ee1706ada",
+                            Id = new Guid("19815146-eb27-44d4-bc3e-8f8eebddfe8b"),
+                            ConcurrencyStamp = "11ee081d-682f-4ff3-a368-1a27b254ca7d",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5443),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(367),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "塔塔尔族",
                             Key = "塔塔尔族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5444),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(367),
                             Valid = true,
                             Value = "塔塔尔族"
                         },
                         new
                         {
-                            Id = new Guid("e77290f1-0f4c-4d42-90b9-eaf33de581fb"),
-                            ConcurrencyStamp = "f1534615-6ed4-4dba-ba1d-e97de2074536",
+                            Id = new Guid("2f18152d-2c71-4598-9246-3a9b10779239"),
+                            ConcurrencyStamp = "f06f2525-dfe9-496c-adeb-ef2a384dc81f",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5448),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(371),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "土家族",
                             Key = "土家族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5448),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(372),
                             Valid = true,
                             Value = "土家族"
                         },
                         new
                         {
-                            Id = new Guid("138029e6-dae1-415c-81a0-ada0dcc27a43"),
-                            ConcurrencyStamp = "5d9323f2-ce66-454b-b802-3088244acae2",
+                            Id = new Guid("08105ed6-d73f-4fcc-8664-5e60ff151d74"),
+                            ConcurrencyStamp = "d57dbb2f-1177-4077-af16-31b1565e8476",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5454),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(375),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "土族",
                             Key = "土族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5454),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(376),
                             Valid = true,
                             Value = "土族"
                         },
                         new
                         {
-                            Id = new Guid("845ee62f-7b4b-40c9-90cf-4803a25dde62"),
-                            ConcurrencyStamp = "9dd598b9-68c0-428f-9b72-f80d0845a5d6",
+                            Id = new Guid("57c9930c-a0bd-4611-8e71-2b2ab1899c96"),
+                            ConcurrencyStamp = "0af79bb5-3c3a-42f6-a807-e00ede8266b4",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5458),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(380),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "佤族",
                             Key = "佤族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5459),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(381),
                             Valid = true,
                             Value = "佤族"
                         },
                         new
                         {
-                            Id = new Guid("95270922-aa15-40ad-bba8-a3378bc68f92"),
-                            ConcurrencyStamp = "b90fadf7-d40a-4f86-b266-c240b4924c89",
+                            Id = new Guid("58712146-e48c-4520-9074-9824057d0095"),
+                            ConcurrencyStamp = "41d6f763-ba4d-4edc-85e8-945d3f4f4f86",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5464),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(384),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "维吾尔族",
                             Key = "维吾尔族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5464),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(385),
                             Valid = true,
                             Value = "维吾尔族"
                         },
                         new
                         {
-                            Id = new Guid("c59b8514-eace-42bd-93c2-7a5c547c54cb"),
-                            ConcurrencyStamp = "412317d2-0275-4cf6-b6f8-ac9de94e1219",
+                            Id = new Guid("1e7b81da-858a-4e2c-a7e1-f6a985785b4f"),
+                            ConcurrencyStamp = "113c011d-7cf2-4aee-ac94-d4ede50621f5",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5469),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(388),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "乌孜别克族",
                             Key = "乌孜别克族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5469),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(388),
                             Valid = true,
                             Value = "乌孜别克族"
                         },
                         new
                         {
-                            Id = new Guid("1a1e4e92-7eed-403e-99d4-0c5a76ff7260"),
-                            ConcurrencyStamp = "c11b8d05-ef43-497f-9662-31de1af5be7e",
+                            Id = new Guid("dcb31b1a-e27b-43b8-8c25-6a66d8119723"),
+                            ConcurrencyStamp = "ee33530c-9c4c-4c42-976c-685e9aa9facb",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5473),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(393),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "锡伯族",
                             Key = "锡伯族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5473),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(393),
                             Valid = true,
                             Value = "锡伯族"
                         },
                         new
                         {
-                            Id = new Guid("c1ebdb82-b4fa-4976-a324-502fc0b1160d"),
-                            ConcurrencyStamp = "5247fea1-c0ef-4491-ae90-d76ff7b6e71b",
+                            Id = new Guid("6c793c15-3f56-41fb-8d38-06c633d48807"),
+                            ConcurrencyStamp = "ea6292f8-4b5f-4cc0-8f5b-938adbfcc791",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5479),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(397),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "瑶族",
                             Key = "瑶族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5479),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(397),
                             Valid = true,
                             Value = "瑶族"
                         },
                         new
                         {
-                            Id = new Guid("d132b8d1-0c37-4a75-9479-da6df7ae449c"),
-                            ConcurrencyStamp = "a23a7d5c-7eed-4bcc-ac66-485fd8b718b4",
+                            Id = new Guid("2d999a3e-fc11-49c7-9d7f-bf8c8f866d49"),
+                            ConcurrencyStamp = "1c777ae8-96f0-40a7-b629-dd22b1ecc61e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5484),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(400),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "彝族",
                             Key = "彝族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5484),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(401),
                             Valid = true,
                             Value = "彝族"
                         },
                         new
                         {
-                            Id = new Guid("8483f3ee-cfa1-47bb-a5df-2fef0d26b65b"),
-                            ConcurrencyStamp = "25545798-3414-4b61-b8ae-e0459e43d976",
+                            Id = new Guid("63b4e827-7085-46c1-a482-f976abe58cee"),
+                            ConcurrencyStamp = "bc816445-7c8b-4403-9f01-369b019b5c48",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5488),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(428),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "裕固族",
                             Key = "裕固族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5488),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(428),
                             Valid = true,
                             Value = "裕固族"
                         },
                         new
                         {
-                            Id = new Guid("34d569c1-cb3b-4930-aaea-50f3b73a4912"),
-                            ConcurrencyStamp = "8c991c62-941d-43ca-b420-d6b4767ecbab",
+                            Id = new Guid("21e97763-d729-42b8-bb37-b42f56837d59"),
+                            ConcurrencyStamp = "04c27762-9804-41ba-bbd3-dacab00b718e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5525),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(433),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "藏族",
                             Key = "藏族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5525),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(433),
                             Valid = true,
                             Value = "藏族"
                         },
                         new
                         {
-                            Id = new Guid("9ee0678d-6780-4a46-95b5-3228f59d7930"),
-                            ConcurrencyStamp = "bf3c6837-b394-495a-9b76-8deb8b742d1b",
+                            Id = new Guid("751ba4c6-10f5-489c-96c8-3407b4143267"),
+                            ConcurrencyStamp = "fa775080-8f78-493f-a2ad-81c8be336c89",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5530),
-                            DataDictionaryId = new Guid("e7ef82bc-7497-449a-9047-93ba3abd4ecc"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(438),
+                            DataDictionaryId = new Guid("9f72fe9c-ca7e-4507-9205-c1d6f48ba355"),
                             Description = "壮族",
                             Key = "壮族",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5530),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(439),
                             Valid = true,
                             Value = "壮族"
                         },
                         new
                         {
-                            Id = new Guid("a61345b2-b99b-4eba-b4cf-9a175f6bb7b0"),
-                            ConcurrencyStamp = "6a4270d2-f698-4a63-886c-5d16b73b0922",
+                            Id = new Guid("d2291475-293c-4534-b5e1-e421ff6a2493"),
+                            ConcurrencyStamp = "90241c48-bc62-4d2e-b68e-874358e88d74",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5560),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "未知",
-                            Key = "Unknown",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5560),
-                            Valid = true,
-                            Value = "Unknown"
-                        },
-                        new
-                        {
-                            Id = new Guid("f6f1f8ca-0283-4d42-b5b2-9deefe18a38e"),
-                            ConcurrencyStamp = "9b4286e5-b0f1-47b0-af1e-194f2fa5e934",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5564),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "阿昌族",
-                            Key = "Achangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5564),
-                            Valid = true,
-                            Value = "Achangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("5e65302e-7f99-4421-a1d5-9e98d0435b0a"),
-                            ConcurrencyStamp = "61082d71-b79e-4131-ae3e-080b237ae800",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5570),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "白族",
-                            Key = "Baizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5571),
-                            Valid = true,
-                            Value = "Baizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("35feafcf-b6ca-4f61-bb32-2ec0c7c00859"),
-                            ConcurrencyStamp = "bd228c3e-c854-422e-8885-4a2e31557659",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5575),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "保安族",
-                            Key = "Baoanzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5575),
-                            Valid = true,
-                            Value = "Baoanzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("37c9acf3-5406-403a-94d0-189bbf36de56"),
-                            ConcurrencyStamp = "72e36a38-02d8-426d-8a82-8d1264df284c",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5579),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "布朗族",
-                            Key = "Bulangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5580),
-                            Valid = true,
-                            Value = "Bulangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("85b29d03-58cf-4990-8267-0402025dd2cf"),
-                            ConcurrencyStamp = "eb258bfa-2e1d-41e4-8be5-ad6d947023f1",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5585),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "布依族",
-                            Key = "Buyizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5585),
-                            Valid = true,
-                            Value = "Buyizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("393dd64a-d37a-4a65-972e-209de331dde1"),
-                            ConcurrencyStamp = "a7f8df7b-de90-46ad-83a8-4faea9f97e31",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5589),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "朝鲜族",
-                            Key = "Chaoxianzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5590),
-                            Valid = true,
-                            Value = "Chaoxianzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("9a76fecd-1e85-47ae-b1d6-1d4f8eee65de"),
-                            ConcurrencyStamp = "c59d7a16-c2bb-4a99-b7e6-fad31b548f83",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5595),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "达斡尔族",
-                            Key = "Dawoerzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5595),
-                            Valid = true,
-                            Value = "Dawoerzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("77a745df-f52b-4942-910e-fa5f5831cf5a"),
-                            ConcurrencyStamp = "702e69d3-4e1f-4214-a604-4121e9965e77",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5600),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "傣族",
-                            Key = "Daizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5600),
-                            Valid = true,
-                            Value = "Daizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("1cbcaf55-1daf-46bf-8877-8c705b12362a"),
-                            ConcurrencyStamp = "5f1e41d0-c385-4710-86f4-63b12f770cc7",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5604),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "德昂族",
-                            Key = "Deangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5604),
-                            Valid = true,
-                            Value = "Deangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("640fd394-f1ac-48d6-bbf6-847ba112c192"),
-                            ConcurrencyStamp = "54bee601-6ed3-4143-b94e-c41860890b5a",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5610),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "东乡族",
-                            Key = "Dongxiangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5610),
-                            Valid = true,
-                            Value = "Dongxiangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("72c08260-def6-4cbe-8547-0615af945ddd"),
-                            ConcurrencyStamp = "643a8a44-b44c-4db8-a15c-eef239de0413",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5614),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "侗族",
-                            Key = "Dongzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5614),
-                            Valid = true,
-                            Value = "Dongzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("47ade2c6-53b1-4b3c-b144-da0ae67ff217"),
-                            ConcurrencyStamp = "719cde85-8343-4c63-9745-cfbc163bea18",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5618),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "独龙族",
-                            Key = "Dulongzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5619),
-                            Valid = true,
-                            Value = "Dulongzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("334934ed-031c-4a50-809d-9819b62a4b49"),
-                            ConcurrencyStamp = "7d0b7d13-0729-42a1-905f-d53033f4173d",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5643),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "鄂伦春族",
-                            Key = "Elunchunzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5643),
-                            Valid = true,
-                            Value = "Elunchunzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("0796bf9e-cfd9-49d1-9898-fa3e0e107eeb"),
-                            ConcurrencyStamp = "16bfbf06-5dcf-4e84-a4f7-27b30ed0537b",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5648),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "俄罗斯族",
-                            Key = "Eluosizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5648),
-                            Valid = true,
-                            Value = "Eluosizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("048f697c-b41f-42af-ac8f-b48e375b5587"),
-                            ConcurrencyStamp = "3699cebe-76d3-468b-a9c0-bc654f8745b2",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5654),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "鄂温克族",
-                            Key = "Ewenkezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5654),
-                            Valid = true,
-                            Value = "Ewenkezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("723ad20d-1472-4069-8522-0f9693d80092"),
-                            ConcurrencyStamp = "9a3e9a90-40b2-4194-b58d-c78637bb723c",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5659),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "高山族",
-                            Key = "Gaoshanzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5659),
-                            Valid = true,
-                            Value = "Gaoshanzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("0c71d23f-f647-4e16-ba27-970e08149c3b"),
-                            ConcurrencyStamp = "7c8cb47d-2048-4aff-9a11-995024680faf",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5663),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "仡佬族",
-                            Key = "Gelaozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5663),
-                            Valid = true,
-                            Value = "Gelaozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("660ee2b6-1598-401d-a946-761555ff8665"),
-                            ConcurrencyStamp = "5947b6fb-8dfe-44de-a00f-4d382a2f3c63",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5669),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "汉族",
-                            Key = "Hanzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5669),
-                            Valid = true,
-                            Value = "Hanzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("ff873b23-2cef-4805-a340-6c42c31e5178"),
-                            ConcurrencyStamp = "4247b40e-5b2a-45d5-b89e-ed71e3b83bc3",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5673),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "哈尼族",
-                            Key = "Hanizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5674),
-                            Valid = true,
-                            Value = "Hanizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("884f1b47-d8fb-48a0-819e-cb45f29f914e"),
-                            ConcurrencyStamp = "a9409e54-47d2-4898-8c62-83e4e38055e5",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5677),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "哈萨克族",
-                            Key = "Hasakezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5678),
-                            Valid = true,
-                            Value = "Hasakezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("08c71749-0862-46c8-a261-badeaac3d78f"),
-                            ConcurrencyStamp = "c18c1d21-95e4-428b-8d00-8090fc791472",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5683),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "赫哲族",
-                            Key = "Hezhezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5684),
-                            Valid = true,
-                            Value = "Hezhezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("23c66508-e85b-46a3-bcf5-adb944335a2b"),
-                            ConcurrencyStamp = "36280daa-9b5f-4cf9-8d64-37c6d80b096e",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5687),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "回族",
-                            Key = "Huizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5688),
-                            Valid = true,
-                            Value = "Huizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("88108a6a-968f-420e-81b9-a2ab70984c01"),
-                            ConcurrencyStamp = "dd2bcdab-0408-45a7-a6d3-5d83c96f9a80",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5693),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "基诺族",
-                            Key = "Jinuozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5694),
-                            Valid = true,
-                            Value = "Jinuozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("f1e9f961-f122-4822-9a23-250ee942ea34"),
-                            ConcurrencyStamp = "9f8efc76-627a-4541-8a54-e76ca87a2a82",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5698),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "景颇族",
-                            Key = "Jingpozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5698),
-                            Valid = true,
-                            Value = "Jingpozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("e53b66b5-d3ab-4d7b-9859-61ab4565c242"),
-                            ConcurrencyStamp = "94f87f71-7443-4c47-ac20-11356b23a21d",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5702),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "京族",
-                            Key = "Jingzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5702),
-                            Valid = true,
-                            Value = "Jingzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("67647e1e-9e9c-4874-adeb-e0128c9971ad"),
-                            ConcurrencyStamp = "d4372a14-6096-4dd4-9887-c1187a74afbc",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5708),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "柯尔克孜族",
-                            Key = "Keerkezizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5708),
-                            Valid = true,
-                            Value = "Keerkezizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("65ad772b-044b-4647-b54d-889be478d445"),
-                            ConcurrencyStamp = "429d5bee-edc1-40cb-8523-feb32730b6a1",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5712),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "拉祜族",
-                            Key = "Lahuzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5713),
-                            Valid = true,
-                            Value = "Lahuzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("c084deeb-fe7f-4198-ac1f-99bf2ec95a31"),
-                            ConcurrencyStamp = "72c98c37-3447-4206-80c0-2a9352a38a31",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5716),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "珞巴族",
-                            Key = "Luobazu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5717),
-                            Valid = true,
-                            Value = "Luobazu"
-                        },
-                        new
-                        {
-                            Id = new Guid("5c1a11f8-a112-4836-a3f8-a21a2c1732ee"),
-                            ConcurrencyStamp = "2a9a3f9d-d309-459f-b89c-bbd64dcd0638",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5722),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "僳僳族",
-                            Key = "Lisuzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5723),
-                            Valid = true,
-                            Value = "Lisuzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("ef349ff2-e967-4c73-8d67-b55341f216be"),
-                            ConcurrencyStamp = "49ecbffd-67c8-4252-9fb4-920b84ed24f9",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5727),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "黎族",
-                            Key = "Lizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5727),
-                            Valid = true,
-                            Value = "Lizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("0d3bd4b7-1d15-46e1-9a35-f68e960d7aa1"),
-                            ConcurrencyStamp = "3fa67c41-dcf7-49ad-8fd1-2c3551c99078",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5752),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "满族",
-                            Key = "Manzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5752),
-                            Valid = true,
-                            Value = "Manzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("335b9fca-4e6c-4221-b4bc-43ebc02eb8b4"),
-                            ConcurrencyStamp = "b3addda1-6089-49f9-8258-1f91eedfcf77",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5757),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "毛南族",
-                            Key = "Maonanzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5757),
-                            Valid = true,
-                            Value = "Maonanzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("de5b23db-1516-495e-8bfc-c5ad5f3ae902"),
-                            ConcurrencyStamp = "9065b53c-9437-44a9-803d-dff46925f2e5",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5761),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "门巴族",
-                            Key = "Menbazu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5761),
-                            Valid = true,
-                            Value = "Menbazu"
-                        },
-                        new
-                        {
-                            Id = new Guid("be19d149-85b8-4b40-bfaf-3852c4d2e15c"),
-                            ConcurrencyStamp = "dc4e714a-0ebe-4a0d-b459-aad9a7d0ccc7",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5767),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "蒙古族",
-                            Key = "Mengguzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5768),
-                            Valid = true,
-                            Value = "Mengguzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("db56bc7e-0343-409c-8403-1fd43a19bec0"),
-                            ConcurrencyStamp = "df86d0bf-ade3-4eb3-bd17-1f20db8fdd6e",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5772),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "苗族",
-                            Key = "Miaozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5772),
-                            Valid = true,
-                            Value = "Miaozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("30492967-62f2-4d77-9a88-44f2ac649f6d"),
-                            ConcurrencyStamp = "1803ba4b-e046-4fdb-8496-d9b52c792d94",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5776),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "仫佬族",
-                            Key = "Mulaozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5776),
-                            Valid = true,
-                            Value = "Mulaozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("dd9b8965-8bf8-4723-8828-237b44c44559"),
-                            ConcurrencyStamp = "87842abc-5ff5-4e94-9525-cda951535b33",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5782),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "纳西族",
-                            Key = "Naxizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5782),
-                            Valid = true,
-                            Value = "Naxizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("5316d811-676c-4648-b8f0-7a3b0bf5ee5c"),
-                            ConcurrencyStamp = "b793dc92-6849-4d32-ab92-4f1a32bf7623",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5786),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "怒族",
-                            Key = "Nuzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5786),
-                            Valid = true,
-                            Value = "Nuzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("04a74174-a7bb-4e36-a91d-cf2f449f63a6"),
-                            ConcurrencyStamp = "31f99da5-9886-44d6-b04b-185d81823a34",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5792),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "普米族",
-                            Key = "Pumizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5792),
-                            Valid = true,
-                            Value = "Pumizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("025cba27-3c10-49f8-adc5-1bcafcd4a2a3"),
-                            ConcurrencyStamp = "3fb716cd-e1ed-46f7-8eaa-c16312061452",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5796),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "羌族",
-                            Key = "Qiangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5797),
-                            Valid = true,
-                            Value = "Qiangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("62cc4576-3a42-43a9-bb66-6dd182e7af2b"),
-                            ConcurrencyStamp = "703384bc-1139-482e-917f-19441aa990f0",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5801),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "撒拉族",
-                            Key = "Salazu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5801),
-                            Valid = true,
-                            Value = "Salazu"
-                        },
-                        new
-                        {
-                            Id = new Guid("de31ed04-1d51-44d5-a59a-686700b3225e"),
-                            ConcurrencyStamp = "6584b561-04cd-4e7f-a390-f0dae6ec57f5",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5806),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "畲族",
-                            Key = "Shezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5807),
-                            Valid = true,
-                            Value = "Shezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("ab26169a-a0dc-42f0-8e4b-0b37e8bbe1b4"),
-                            ConcurrencyStamp = "6f12483b-b077-46a6-8109-dfd050093dab",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5811),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "水族",
-                            Key = "Shuizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5811),
-                            Valid = true,
-                            Value = "Shuizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("476f2d6b-e913-426e-8024-32f7c128839d"),
-                            ConcurrencyStamp = "fa8d3fa2-cc5e-4351-8a84-6a212c51ed16",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5816),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "塔吉克族",
-                            Key = "Tajikezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5817),
-                            Valid = true,
-                            Value = "Tajikezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("b34516be-3974-4fcd-a77f-ac8c54f969c5"),
-                            ConcurrencyStamp = "6133af28-8204-4612-945a-37ec72bee1c3",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5850),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "塔塔尔族",
-                            Key = "Tataerzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5850),
-                            Valid = true,
-                            Value = "Tataerzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("3fbafa9f-4e0f-4c0c-942b-90e208bc8c85"),
-                            ConcurrencyStamp = "958d1586-d166-4c80-ad1f-2b09646681eb",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5857),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "土家族",
-                            Key = "Tujiazu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5857),
-                            Valid = true,
-                            Value = "Tujiazu"
-                        },
-                        new
-                        {
-                            Id = new Guid("b26137d1-b5e3-4d71-b09f-324543fd9d64"),
-                            ConcurrencyStamp = "1d1472a0-17f7-4f59-b089-06166f921772",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5866),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "土族",
-                            Key = "Tuzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5866),
-                            Valid = true,
-                            Value = "Tuzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("533a302c-0497-44c1-bbe6-c13ce1dcffcc"),
-                            ConcurrencyStamp = "bbd69659-1a29-4dd0-ada7-b465119fa6e9",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5872),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "佤族",
-                            Key = "Wazu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5872),
-                            Valid = true,
-                            Value = "Wazu"
-                        },
-                        new
-                        {
-                            Id = new Guid("d0d94995-0e18-4f0a-b4cd-f08b7eb25eea"),
-                            ConcurrencyStamp = "9327cdbe-1ae4-4a69-a56d-3494c07909d3",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5879),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "维吾尔族",
-                            Key = "Weiwuerzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5879),
-                            Valid = true,
-                            Value = "Weiwuerzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("a91b9d7e-28f8-4692-aee8-7398e8e4010e"),
-                            ConcurrencyStamp = "6f07ba84-0e74-4a29-9cca-c6d63a4c73e2",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5887),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "乌孜别克族",
-                            Key = "Wuzibiekezu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5887),
-                            Valid = true,
-                            Value = "Wuzibiekezu"
-                        },
-                        new
-                        {
-                            Id = new Guid("08418d74-5cb4-480b-9c79-cb162d9804fa"),
-                            ConcurrencyStamp = "3044572c-9bfb-4b6b-b44d-507eafd1a833",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5895),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "锡伯族",
-                            Key = "Xibozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5895),
-                            Valid = true,
-                            Value = "Xibozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("a57049eb-acea-4fdb-9fdf-e05e7819c545"),
-                            ConcurrencyStamp = "d15654d9-9705-4c39-a185-f08ffa9f328a",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5902),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "瑶族",
-                            Key = "Yaozu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5902),
-                            Valid = true,
-                            Value = "Yaozu"
-                        },
-                        new
-                        {
-                            Id = new Guid("c26f13a8-815d-48a5-988c-b9e1c8603d5e"),
-                            ConcurrencyStamp = "e85e1356-cc3c-4170-ba51-ddff0a2b372d",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5910),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "彝族",
-                            Key = "Yizu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5911),
-                            Valid = true,
-                            Value = "Yizu"
-                        },
-                        new
-                        {
-                            Id = new Guid("fd884b91-e33e-49a3-b819-840b7b1fd7d5"),
-                            ConcurrencyStamp = "d1898eb2-4cc9-4904-8b7f-bf366184362f",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5917),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "裕固族",
-                            Key = "Yuguzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5917),
-                            Valid = true,
-                            Value = "Yuguzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("b9ff8f71-58c4-4ccf-a046-4a8874e4a274"),
-                            ConcurrencyStamp = "0ea570c3-52d3-47f2-bcb1-2ea6471ffcdf",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5926),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "藏族",
-                            Key = "Zangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5926),
-                            Valid = true,
-                            Value = "Zangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("c129af25-8440-45db-85e1-ef9adc02dd2f"),
-                            ConcurrencyStamp = "5d690f27-7bae-41eb-acd3-0eb01d1a1f0c",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5932),
-                            DataDictionaryId = new Guid("e9076eec-2fee-49d2-95ad-10d20243b6df"),
-                            Description = "壮族",
-                            Key = "Zhuangzu",
-                            ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5933),
-                            Valid = true,
-                            Value = "Zhuangzu"
-                        },
-                        new
-                        {
-                            Id = new Guid("f58991c0-5fb8-4131-8b34-f60c9cb0d288"),
-                            ConcurrencyStamp = "7a3b27a0-04cc-48de-ac98-6463a02bb98b",
-                            CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5976),
-                            DataDictionaryId = new Guid("16f15e66-0725-4049-a64f-c0d2d50457fe"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(466),
+                            DataDictionaryId = new Guid("27e279dd-f075-44b9-83d9-e8333b8f2a2e"),
                             Description = "未知类型",
                             Key = "Unknown",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5977),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(467),
                             Valid = true,
                             Value = "Unknown"
                         },
                         new
                         {
-                            Id = new Guid("51a0eeea-04cb-444d-abf9-dc9fcbbb9cca"),
-                            ConcurrencyStamp = "95b928a2-52f4-422d-b2c9-a4978ab979c7",
+                            Id = new Guid("020e046b-d5cb-4601-9a41-09c1b1d8b271"),
+                            ConcurrencyStamp = "cc18a499-e361-4366-bc3b-d04b5fe65040",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5981),
-                            DataDictionaryId = new Guid("16f15e66-0725-4049-a64f-c0d2d50457fe"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(472),
+                            DataDictionaryId = new Guid("27e279dd-f075-44b9-83d9-e8333b8f2a2e"),
                             Description = "内部字典",
                             Key = "Internal",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5982),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(472),
                             Valid = true,
                             Value = "Internal"
                         },
                         new
                         {
-                            Id = new Guid("fbd9ac96-17da-4cb0-ab4a-ba4766f71495"),
-                            ConcurrencyStamp = "5b262f37-99c3-42e3-a8f4-fe53de0a6753",
+                            Id = new Guid("0c1884bd-139b-42a9-9d42-f82ddc1b95da"),
+                            ConcurrencyStamp = "c6f2f53c-b7b8-44f9-b61a-6de6702fd8cc",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5986),
-                            DataDictionaryId = new Guid("16f15e66-0725-4049-a64f-c0d2d50457fe"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(476),
+                            DataDictionaryId = new Guid("27e279dd-f075-44b9-83d9-e8333b8f2a2e"),
                             Description = "外部字典",
                             Key = "Public",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(5986),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(476),
                             Valid = true,
                             Value = "Public"
                         },
                         new
                         {
-                            Id = new Guid("e5ea9692-55fe-4042-bfe5-1efe64bf6659"),
-                            ConcurrencyStamp = "d2ee4540-110f-4ec3-9e13-af8e28930666",
+                            Id = new Guid("d79d15ac-09a4-462e-a78e-d79cac238135"),
+                            ConcurrencyStamp = "c72bc62c-25d0-4d11-8a4d-47b7d8f38e82",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6044),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(504),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "签名初始化",
                             Key = "SignInitial",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6044),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(504),
                             Valid = true,
                             Value = "SignInitial"
                         },
                         new
                         {
-                            Id = new Guid("9401b1ed-26ad-4d4c-90ac-29ecaa87853e"),
-                            ConcurrencyStamp = "7036379b-d5e7-4f60-93d7-7e0a6eccc012",
+                            Id = new Guid("072c40c6-2d60-45d5-bcd7-31e19117c78a"),
+                            ConcurrencyStamp = "e410a9c7-b442-42b4-a288-c81ee76e24cf",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6050),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(507),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "签入端",
                             Key = "SignUpEnd",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6050),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(508),
                             Valid = true,
                             Value = "SignUpEnd"
                         },
                         new
                         {
-                            Id = new Guid("af8d9e29-cd6f-4040-a0f9-027efc24d818"),
-                            ConcurrencyStamp = "8bab8f2f-fa42-4bb9-8f91-8b5afc0ef01a",
+                            Id = new Guid("0b1f4f90-f8fb-4bd0-8795-11d0892a74ef"),
+                            ConcurrencyStamp = "b8c3060f-adba-498d-b01c-49a3d8e34dc6",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6054),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(513),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "Web端",
                             Key = "Web",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6055),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(513),
                             Valid = true,
                             Value = "Web"
                         },
                         new
                         {
-                            Id = new Guid("2b3e36db-a542-425e-96e7-36eb565cc8ea"),
-                            ConcurrencyStamp = "90c9d7f5-803f-42fc-8a5a-835c91083ec8",
+                            Id = new Guid("6fe897aa-8c33-4acc-872c-373c9f640c96"),
+                            ConcurrencyStamp = "fb5a59ad-43ba-47f1-bf87-5f8adbde9f53",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6059),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(517),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "IOS端",
                             Key = "IOS",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6059),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(518),
                             Valid = true,
                             Value = "IOS"
                         },
                         new
                         {
-                            Id = new Guid("041be48d-7b18-4d28-a287-831eff499da9"),
-                            ConcurrencyStamp = "2e2bb5b9-9701-49db-b7d9-5e774b20a284",
+                            Id = new Guid("05222ec9-5805-4d87-af5e-476d953d6d91"),
+                            ConcurrencyStamp = "0ee0b32a-17e8-4063-9d16-868c01a4d1cc",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6065),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(521),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "Android端",
                             Key = "Android",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6065),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(521),
                             Valid = true,
                             Value = "Android"
                         },
                         new
                         {
-                            Id = new Guid("01adf7aa-e43a-49f7-a457-63c00f825516"),
-                            ConcurrencyStamp = "dba5f95f-c9db-4877-a87c-d5f215184b64",
+                            Id = new Guid("585883b7-a0a4-4557-af73-2f34ea23fb22"),
+                            ConcurrencyStamp = "1fe4e62d-70b0-43f3-a20f-97ec50b3e772",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6069),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(526),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "微信端",
                             Key = "WeChat",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6070),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(526),
                             Valid = true,
                             Value = "WeChat"
                         },
                         new
                         {
-                            Id = new Guid("8d8274af-bb53-48fc-bf2a-3376cb12e7c7"),
-                            ConcurrencyStamp = "83da70a1-fc65-4bc6-83b1-956fdd4230e8",
+                            Id = new Guid("80842f83-7140-4b8a-9179-bc72ac363d8d"),
+                            ConcurrencyStamp = "090987eb-ee12-4fff-bf3d-70777e19b92e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6073),
-                            DataDictionaryId = new Guid("2c259847-ea07-463a-8c27-be0a5281e782"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(530),
+                            DataDictionaryId = new Guid("e0102897-437c-4ea0-bc1c-8af64c47d06c"),
                             Description = "微信小程序端",
                             Key = "WxApp",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6074),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(530),
                             Valid = true,
                             Value = "WxApp"
                         },
                         new
                         {
-                            Id = new Guid("b957da81-d611-4ede-bde7-7b7e96b3bbae"),
-                            ConcurrencyStamp = "6188872b-819a-4a6c-ae7d-c0e66fe75af4",
+                            Id = new Guid("5f0f1d9d-c436-43c2-bbd1-7f41c158dde8"),
+                            ConcurrencyStamp = "d4318eca-3eb1-47a0-8772-24178f62a214",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6103),
-                            DataDictionaryId = new Guid("36def1d1-c875-426c-af43-26fb47e64709"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(587),
+                            DataDictionaryId = new Guid("c90ae04a-d987-48ba-b5b3-be14daad39c2"),
                             Description = "未知性别",
                             Key = "Unknown",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6103),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(587),
                             Valid = true,
                             Value = "Unknown"
                         },
                         new
                         {
-                            Id = new Guid("9827c10c-52cf-44fb-a36c-1ebe208833a4"),
-                            ConcurrencyStamp = "a25a7ae4-7788-45e8-bb3e-e8d7eeea0c43",
+                            Id = new Guid("73822339-d0d5-4986-8c18-5e0a3b7410c4"),
+                            ConcurrencyStamp = "4a09fde2-4023-4c56-8635-bd64e1f13ae1",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6109),
-                            DataDictionaryId = new Guid("36def1d1-c875-426c-af43-26fb47e64709"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(591),
+                            DataDictionaryId = new Guid("c90ae04a-d987-48ba-b5b3-be14daad39c2"),
                             Description = "男性",
                             Key = "Male",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6109),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(592),
                             Valid = true,
                             Value = "Male"
                         },
                         new
                         {
-                            Id = new Guid("3a05aea6-d4f8-4868-a893-ae2e2d808ae1"),
-                            ConcurrencyStamp = "ac0f2606-1175-4f1c-8864-e83bf526712d",
+                            Id = new Guid("5d9cd383-7bde-48a6-91d9-7bde88ae9b57"),
+                            ConcurrencyStamp = "76ffcb2c-6989-4e6f-b055-9cbb882c5ee9",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6114),
-                            DataDictionaryId = new Guid("36def1d1-c875-426c-af43-26fb47e64709"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(597),
+                            DataDictionaryId = new Guid("c90ae04a-d987-48ba-b5b3-be14daad39c2"),
                             Description = "女性",
                             Key = "Female",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6114),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(597),
                             Valid = true,
                             Value = "Female"
                         },
                         new
                         {
-                            Id = new Guid("02ba04e8-fd2c-4ad4-bced-c670a5cca758"),
-                            ConcurrencyStamp = "e997708b-dfa9-432a-b8cf-a743d79da601",
+                            Id = new Guid("6c645ec2-ba2f-4134-9d53-522ec6fc5cc8"),
+                            ConcurrencyStamp = "b2c31dd5-8b56-4db9-ad28-30825d8f09d7",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6144),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(622),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "未知等级",
                             Key = "Unknown",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6144),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(623),
                             Valid = true,
                             Value = "Unknown"
                         },
                         new
                         {
-                            Id = new Guid("b2e50156-3f84-4eaa-bdeb-c6db04ef6113"),
-                            ConcurrencyStamp = "de4f50bb-009f-44dd-8dea-22e5e5a48646",
+                            Id = new Guid("86f6073f-638e-4418-8125-c1ef8da8a7c4"),
+                            ConcurrencyStamp = "73e6965d-d969-449f-ab31-64289a857fa1",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6148),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(627),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "国家级",
                             Key = "State",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6149),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(628),
                             Valid = true,
                             Value = "State"
                         },
                         new
                         {
-                            Id = new Guid("2176d574-1a1e-4914-9ad6-85c04ad4c183"),
-                            ConcurrencyStamp = "c842adf6-2b4a-47b2-b9ca-ddaa4a5275d5",
+                            Id = new Guid("fd27b8fd-a284-4566-babe-6f7a3dd28085"),
+                            ConcurrencyStamp = "33942ea6-c1d8-4a34-869a-963a0d059e54",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6175),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(631),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "省级",
                             Key = "Province",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6175),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(632),
                             Valid = true,
                             Value = "Province"
                         },
                         new
                         {
-                            Id = new Guid("cc737ddb-8a92-41b4-a406-6750e334f0d1"),
-                            ConcurrencyStamp = "f262a4f9-5bdc-4e44-89e3-b5d2f8b89a35",
+                            Id = new Guid("8d9a4478-1dcc-439d-9580-f033e5e586fb"),
+                            ConcurrencyStamp = "7dc1ccd2-c315-4b52-a575-ac3c41e0276e",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6181),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(635),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "市级",
                             Key = "Prefecture",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6181),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(636),
                             Valid = true,
                             Value = "Prefecture"
                         },
                         new
                         {
-                            Id = new Guid("5870cb21-bd4a-4e6b-b480-5e1a0503a2b2"),
-                            ConcurrencyStamp = "9098730b-3adf-4c40-a52f-34ce2d31934f",
+                            Id = new Guid("88a68fe7-022a-4e2f-85be-19f792227f50"),
+                            ConcurrencyStamp = "85b331d5-99af-499b-9643-c99d3abb524d",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6185),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(640),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "县级",
                             Key = "County",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6186),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(641),
                             Valid = true,
                             Value = "County"
                         },
                         new
                         {
-                            Id = new Guid("95808677-3895-4a63-8815-b61563662c7c"),
-                            ConcurrencyStamp = "e6e9ef88-c08a-4fc3-aa25-a0581af578a6",
+                            Id = new Guid("a0a13a9a-d5bd-40b6-b24e-a6fe3a985664"),
+                            ConcurrencyStamp = "1bc56abe-ec63-4288-99d0-574ea3e7b96c",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6191),
-                            DataDictionaryId = new Guid("39d7b6e1-4bd1-455f-bd27-6291d98d875f"),
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(644),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
                             Description = "乡级",
                             Key = "Township",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
-                            UpdatedAt = new DateTime(2024, 7, 15, 16, 36, 2, 350, DateTimeKind.Local).AddTicks(6191),
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(645),
                             Valid = true,
                             Value = "Township"
+                        },
+                        new
+                        {
+                            Id = new Guid("203a5d92-3b7d-43d6-b619-e3f202722626"),
+                            ConcurrencyStamp = "3d4a921e-e327-4837-b5f4-2b9319e8ab71",
+                            CreateBy = "00000000-0000-0000-0000-000000000000",
+                            CreatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(649),
+                            DataDictionaryId = new Guid("fcdf50c5-0bcc-4505-889c-e25392bafbcb"),
+                            Description = "街道级",
+                            Key = "Street",
+                            ModifyBy = "00000000-0000-0000-0000-000000000000",
+                            UpdatedAt = new DateTime(2024, 7, 25, 16, 56, 57, 382, DateTimeKind.Local).AddTicks(650),
+                            Valid = true,
+                            Value = "Street"
                         });
                 });
 
@@ -2729,6 +1968,13 @@ namespace Artemis.App.Resource.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("并发锁");
 
+                    b.Property<string>("CountyCode")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)")
+                        .HasComputedColumnSql("substring(\"Code\", 1, 6)", true)
+                        .HasComment("县级行政区划编码");
+
                     b.Property<string>("CreateBy")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -2764,7 +2010,7 @@ namespace Artemis.App.Resource.Migrations
                         .HasColumnType("character varying(128)")
                         .HasComment("行政区划名称");
 
-                    b.Property<Guid>("ParentId")
+                    b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid")
                         .HasComment("上级行政区划标识");
 
@@ -2772,6 +2018,20 @@ namespace Artemis.App.Resource.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("行政区划拼音");
+
+                    b.Property<string>("PrefectureCode")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
+                        .HasComputedColumnSql("substring(\"Code\", 1, 4)", true)
+                        .HasComment("地级行政区划编码");
+
+                    b.Property<string>("ProvinceCode")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)")
+                        .HasComputedColumnSql("substring(\"Code\", 1, 2)", true)
+                        .HasComment("省级行政区划编码");
 
                     b.Property<string>("Remark")
                         .HasMaxLength(512)
@@ -2782,6 +2042,13 @@ namespace Artemis.App.Resource.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
                         .HasComment("删除者标识");
+
+                    b.Property<string>("TownshipCode")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)")
+                        .HasComputedColumnSql("substring(\"Code\", 1, 9)", true)
+                        .HasComment("乡级行政区划编码");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -2795,6 +2062,9 @@ namespace Artemis.App.Resource.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisDivision");
+
+                    b.HasIndex("CountyCode")
+                        .HasDatabaseName("IX_ArtemisDivision_CountyCode");
 
                     b.HasIndex("CreateBy")
                         .HasDatabaseName("IX_ArtemisDivision_CreateBy");
@@ -2810,8 +2080,17 @@ namespace Artemis.App.Resource.Migrations
 
                     b.HasIndex("ParentId");
 
+                    b.HasIndex("PrefectureCode")
+                        .HasDatabaseName("IX_ArtemisDivision_PrefectureCode");
+
+                    b.HasIndex("ProvinceCode")
+                        .HasDatabaseName("IX_ArtemisDivision_ProvinceCode");
+
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisDivision_RemoveBy");
+
+                    b.HasIndex("TownshipCode")
+                        .HasDatabaseName("IX_ArtemisDivision_TownshipCode");
 
                     b.HasIndex("UpdatedAt")
                         .HasDatabaseName("IX_ArtemisDivision_UpdatedAt");
