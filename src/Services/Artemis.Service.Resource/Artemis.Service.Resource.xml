@@ -524,6 +524,26 @@
             <param name="services"></param>
             <param name="enableProxy"></param>
         </member>
+        <member name="T:Artemis.Service.Resource.Services.DictionaryServiceImplement">
+            <summary>
+            字典服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.DivisionServiceImplement">
+            <summary>
+            行政区划服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.OrganizationServiceImplement">
+            <summary>
+            组织服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.StandardServiceImplement">
+            <summary>
+            标准服务实现
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
             <summary>
                 数据字典项目存储接口

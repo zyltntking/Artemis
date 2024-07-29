@@ -1,0 +1,281 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Resource";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Resource;
+
+// 标准服务
+service StandardService{
+
+	// 查询标准目录信息
+	rpc SearchStandardCatalogInfo(SearchStandardCatalogInfoRequest) returns (SearchStandardCatalogInfoResponse){
+		option (google.api.http) = {
+			get: "/api/StandardCatalogs"
+		};
+	}
+
+	// 读取标准目录信息
+	rpc ReadStandardCatalogInfo(ReadStandardCatalogInfoRequest) returns (ReadStandardCatalogInfoResponse){
+		option (google.api.http) = {
+			get: "/api/StandardCatalogs/{StandardCatalogId}"
+		};
+	}
+
+	// 创建标准目录
+	rpc CreateStandardCatalog(CreateStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/StandardCatalogs"
+			body: "*"
+		};
+	}
+
+	// 批量创建标准目录
+	rpc BatchCreateStandardCatalog(BatchCreateStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/StandardCatalogs/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新标准目录
+	rpc UpdateStandardCatalog(UpdateStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/StandardCatalogs/{StandardCatalogId}"
+			body: "StandardCatalog"
+		};
+	}
+
+	// 批量更新标准目录
+	rpc BatchUpdateStandardCatalog(BatchUpdateStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/StandardCatalogs/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除标准目录
+	rpc DeleteStandardCatalog(DeleteStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/StandardCatalogs/{StandardCatalogId}"
+		};
+	}
+
+	// 批量删除标准目录
+	rpc BatchDeleteStandardCatalog(BatchDeleteStandardCatalogRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/StandardCatalogs/BatchDelete"
+			body: "StandardCatalogIds"
+		};
+	}
+}
+
+// 查询标准目录信息请求
+message SearchStandardCatalogInfoRequest{
+	// 标准目录名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 标准目录编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 标准目录类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 3;
+	// 标准目录状态
+	// @maxLength(32)
+	google.protobuf.StringValue State = 4;
+	// 标准目录是否生效
+	google.protobuf.BoolValue Valid = 5;
+}
+
+// 标准目录信息数据包
+message StandardCatalogInfo{
+	// 标准目录ID
+	// @required
+	// @guid
+	string Id = 1;
+	// 标准目录名称
+	// @required
+	// @maxLength(128)
+	string Name = 2;
+	// 标准目录编码
+	// @required
+	// @maxLength(32)
+	string Code = 3;
+	// 标准目录类型
+	// @required
+	// @maxLength(32)
+	string Type = 4;
+	// 标准目录状态
+	// @required
+	// @maxLength(32)
+	string State = 5;
+	// 标准目录是否生效
+	// @required
+	bool Valid = 6;
+	// 标准目录描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 7;
+}
+
+// 分页标准目录信息数据包
+message PagedStandardCatalogInfo{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 字典信息数据
+	// @required
+	repeated StandardCatalogInfo Items = 5;
+}
+
+// 查询标准目录信息响应
+message SearchStandardCatalogInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 标准目录数据
+	// @required
+	PagedStandardCatalogInfo Data = 7;
+}
+
+// 读取标准目录信息请求
+message ReadStandardCatalogInfoRequest{
+	// 标准目录ID
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+}
+
+// 读取标准目录信息响应
+message ReadStandardCatalogInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 标准目录数据
+	// @required
+	StandardCatalogInfo Data = 7;
+}
+
+// 创建标准目录请求
+message CreateStandardCatalogRequest{
+	// 标准目录名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 标准目录编码
+	// @required
+	// @maxLength(32)
+	string Code = 2;
+	// 标准目录类型
+	// @required
+	// @maxLength(32)
+	string Type = 3;
+	// 标准目录状态
+	// @required
+	// @maxLength(32)
+	string State = 4;
+	// 标准目录是否生效
+	// @required
+	bool Valid = 5;
+	// 标准目录描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 6;
+}
+
+// 批量创建标准目录请求
+message BatchCreateStandardCatalogRequest{
+	// 标准目录数据
+	// @required
+	repeated CreateStandardCatalogRequest Batch = 1;
+}
+
+// 更新标准目录数据包
+message UpdateStandardCatalogPacket{
+	// 标准目录名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 2;
+	// 标准目录编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 3;
+	// 标准目录类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 4;
+	// 标准目录状态
+	// @maxLength(32)
+	google.protobuf.StringValue State = 5;
+	// 标准目录是否生效
+	google.protobuf.BoolValue Valid = 6;
+	// 标准目录描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 7;
+}
+
+// 更新标准目录请求
+message UpdateStandardCatalogRequest{
+	// 标准目录ID
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准目录数据
+	// @required
+	UpdateStandardCatalogPacket StandardCatalog = 2;
+}
+
+// 批量更新标准目录请求
+message BatchUpdateStandardCatalogRequest{
+	// 标准目录数据
+	// @required
+	repeated UpdateStandardCatalogRequest Batch = 1;
+}
+
+// 删除标准目录请求
+message DeleteStandardCatalogRequest{
+	// 标准目录ID
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+}
+
+// 批量删除标准目录请求
+message BatchDeleteStandardCatalogRequest{
+	// 标准目录ID
+	// @required
+	// @guid
+	repeated string StandardCatalogIds = 1;
+}

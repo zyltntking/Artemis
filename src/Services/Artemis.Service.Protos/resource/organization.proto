@@ -1,0 +1,588 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Resource";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Resource;
+
+// 组织机构服务
+service OrganizationService{
+
+	// 查找组织机构信息
+	rpc SearchOrganizationInfo(SearchOrganizationRequest) returns (SearchOrganizationInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Organizations"
+		};
+	}
+
+	// 读取组织机构信息
+	rpc ReadOrganization(ReadOrganizationRequest) returns (ReadOrganizationResponse){
+		option (google.api.http) = {
+			get: "/api/Organizations/{OrganizationId}"
+		};
+	}
+
+	// 读取组织机构信息树
+	rpc ReadOrganizationTree(ReadOrganizationRequest) returns (ReadOrganizationTreeResponse){
+		option (google.api.http) = {
+			get: "/api/Organizations/{OrganizationId}/Tree"
+		};
+	}
+
+	// 创建组织机构信息
+	rpc CreateOrganization(CreateOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations"
+			body: "*"
+		};
+	}
+
+	// 批量创建组织机构信息
+	rpc BatchCreateOrganization(BatchCreateOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/BatchCreat"
+			body: "Batch"
+		};
+	}
+
+	// 更新组织机构信息
+	rpc UpdateOrganization(UpdateOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Organizations/{OrganizationId}"
+			body: "Organization"
+		};
+	}
+
+	// 批量更新组织机构信息
+	rpc BatchUpdateOrganization(BatchUpdateOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Organizations/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除组织机构
+	rpc DeleteOrganization(DeleteOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Organizations/{OrganizationId}"
+		};
+	}
+
+	// 批量删除组织机构
+	rpc BatchDeleteOrganization(BatchDeleteOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/BatchDelete"
+			body: "OrganizationIds"
+		};
+	}
+
+	// 创建子组织机构
+	rpc CreateChildOrganization(CreateChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children"
+			body: "Organization"
+		};
+	}
+
+	// 批量创建子组织机构
+	rpc BatchCreateChildOrganization(BatchCreateChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 添加子组织机构
+	rpc AddChildOrganization(AddChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/Add"
+			body: "ChildOrganization"
+		};
+	}
+
+	// 批量添加子组织机构
+	rpc BatchAddChildOrganization(BatchAddChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/BatchAdd"
+			body: "ChildOrganizationIds"
+		};
+	}
+
+	// 删除子组织机构
+	rpc DeleteChildOrganization(DeleteChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Organizations/{OrganizationId}/Children/{ChildOrganizationId}"
+		};
+	}
+
+	// 批量删除子组织机构
+	rpc BatchDeleteChildOrganization(BatchDeleteChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/BatchDelete"
+			body: "ChildOrganizationIds"
+		};
+	}
+
+	// 移除子组织机构
+	rpc RemoveChildOrganization(RemoveChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/Remove"
+			body: "ChildOrganization"
+		};
+	}
+
+	// 批量移除子组织机构
+	rpc BatchRemoveChildOrganization(BatchRemoveChildOrganizationRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Organizations/{OrganizationId}/Children/BatchRemove"
+			body: "ChildOrganizationIds"
+		};
+	}
+}
+
+// 查找组织机构信息请求
+message SearchOrganizationRequest{
+	// 组织机构名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 组织机构名称
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 组织机构类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 3;
+	// 组织机构状态
+	// @maxLength(32)
+	google.protobuf.StringValue Status = 4;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 5;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 6;
+}
+
+// 组织机构信息数据包
+message OrganizationInfoPacket{
+	// 组织机构标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 父机构标识
+	// @required
+	// @guid
+	string ParentId = 2;
+	// 组织机构名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 组织机构编码
+	// @required
+	// @maxLength(32)
+	string Code = 4;
+	// 组织机构类型
+	// @required
+	// @maxLength(32)
+	string Type = 5;
+	// 组织机构成立时间
+	google.protobuf.Timestamp EstablishTime = 6;
+	// 组织机构邮箱
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 7;
+	// 组织机构网站
+	// @maxLength(128)
+	google.protobuf.StringValue Website = 8;
+	// 组织机构联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 9;
+	// 组织机构邮编
+	// @maxLength(32)
+	google.protobuf.StringValue Postcode = 10;
+	// 组织机构状态
+	// @required
+	// @maxLength(32)
+	string Status = 11;
+	// 组织机构所在地行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue DivisionCode = 12;
+	// 组织机构地址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 13;
+	// 组织机构描述
+	// @maxLength(256)
+	google.protobuf.StringValue Description = 14;
+}
+
+// 分页组织机构数据包
+message PagedOrganizationInfoPacket {
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 组织igou信息数据
+	// @required
+	repeated OrganizationInfoPacket Items = 5;
+}
+
+// 查询组织机构信息响应
+message SearchOrganizationInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 组织机构信息数据
+	// @required
+	PagedOrganizationInfoPacket Data = 7;
+}
+
+// 读取组织机构信息请求
+message ReadOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+}
+
+// 读取组织机构信息响应
+message ReadOrganizationResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 组织机构信息数据
+	// @required
+	OrganizationInfoPacket Data = 7;
+}
+
+// 组织机构信息树数据包
+message OrganizationInfoTreePacket{
+	// 组织机构标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 父机构标识
+	// @required
+	// @guid
+	string ParentId = 2;
+	// 组织机构名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 组织机构编码
+	// @required
+	// @maxLength(32)
+	string Code = 4;
+	// 组织机构类型
+	// @required
+	// @maxLength(32)
+	string Type = 5;
+	// 组织机构成立时间
+	google.protobuf.Timestamp EstablishTime = 6;
+	// 组织机构邮箱
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 7;
+	// 组织机构网站
+	// @maxLength(128)
+	google.protobuf.StringValue Website = 8;
+	// 组织机构联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 9;
+	// 组织机构邮编
+	// @maxLength(32)
+	google.protobuf.StringValue Postcode = 10;
+	// 组织机构状态
+	// @required
+	// @maxLength(32)
+	string Status = 11;
+	// 组织机构所在地行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue DivisionCode = 12;
+	// 组织机构地址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 13;
+	// 组织机构描述
+	// @maxLength(256)
+	google.protobuf.StringValue Description = 14;
+	// 子机构
+	repeated OrganizationInfoTreePacket Children = 15;
+}
+
+// 读取组织机构信息树响应
+message ReadOrganizationTreeResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 组织机构信息数据
+	// @required
+	OrganizationInfoTreePacket Data = 7;
+}
+
+// 创建组织机构请求
+message CreateOrganizationRequest{
+	// 组织机构名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 组织机构编码
+	// @required
+	// @maxLength(32)
+	string Code = 2;
+	// 组织机构类型
+	// @required
+	// @maxLength(32)
+	string Type = 3;
+	// 组织机构成立时间
+	google.protobuf.Timestamp EstablishTime = 4;
+	// 组织机构邮箱
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 5;
+	// 组织机构网站
+	// @maxLength(128)
+	google.protobuf.StringValue Website = 6;
+	// 组织机构联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 7;
+	// 组织机构邮编
+	// @maxLength(32)
+	google.protobuf.StringValue Postcode = 8;
+	// 组织机构状态
+	// @required
+	// @maxLength(32)
+	string Status = 9;
+	// 组织机构所在地行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue DivisionCode = 10;
+	// 组织机构地址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 11;
+	// 组织机构描述
+	// @maxLength(256)
+	google.protobuf.StringValue Description = 12;
+}
+
+// 批量创建组织机构请求
+message BatchCreateOrganizationRequest{
+	// 组织机构信息数据
+	// @required
+	repeated CreateOrganizationRequest Batch = 1;
+}
+
+// 更新组织机构数据包
+message UpdateOrganizationInfoPacket{
+	// 组织机构名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 组织机构编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 组织机构类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 3;
+	// 组织机构成立时间
+	google.protobuf.Timestamp EstablishTime = 4;
+	// 组织机构邮箱
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 5;
+	// 组织机构网站
+	// @maxLength(128)
+	google.protobuf.StringValue Website = 6;
+	// 组织机构联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 7;
+	// 组织机构邮编
+	// @maxLength(32)
+	google.protobuf.StringValue Postcode = 8;
+	// 组织机构状态
+	// @maxLength(32)
+	google.protobuf.StringValue Status = 9;
+	// 组织机构所在地行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue DivisionCode = 10;
+	// 组织机构地址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 11;
+	// 组织机构描述
+	// @maxLength(256)
+	google.protobuf.StringValue Description = 12;
+}
+
+// 更新组织机构请求
+message UpdateOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 组织机构信息
+	// @required
+	UpdateOrganizationInfoPacket Organization = 2;
+}
+
+// 批量更新组织机构请求
+message BatchUpdateOrganizationRequest{
+	// 组织机构信息数据
+	// @required
+	repeated UpdateOrganizationRequest Batch = 1;
+}
+
+// 删除组织机构请求
+message DeleteOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+}
+
+// 批量删除组织机构请求
+message BatchDeleteOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	repeated string OrganizationIds = 1;
+}
+
+// 创建子组织机构请求
+message CreateChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 组织机构
+	// @required
+	CreateOrganizationRequest Organization = 2;
+}
+
+// 批量创建子组织机构请求
+message BatchCreateChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 组织机构信息数据
+	// @required
+	repeated CreateOrganizationRequest Batch = 2;
+}
+
+// 子组织机构标识数据包
+message ChildOrganizationIdPacket{
+	// 子组织机构标识
+	// @required
+	// @guid
+	string ChildOrganizationId = 1;
+}
+
+// 添加子组织机构请求
+message AddChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构
+	// @required
+	// @guid
+	ChildOrganizationIdPacket ChildOrganization = 2;
+}
+
+// 批量添加子组织机构请求
+message BatchAddChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构标识数据
+	// @required
+	// @guid
+	repeated string ChildOrganizationIds = 2;
+}
+
+// 删除子组织机构请求
+message DeleteChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构标识
+	// @required
+	// @guid
+	string ChildOrganizationId = 2;
+}
+
+// 批量删除子组织机构请求
+message BatchDeleteChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构标识
+	// @required
+	// @guid
+	repeated string ChildOrganizationIds = 2;
+}
+
+// 移除子组织机构请求
+message RemoveChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构
+	// @required
+	// @guid
+	ChildOrganizationIdPacket ChildOrganization = 2;
+}
+
+// 批量移除子组织机构请求
+message BatchRemoveChildOrganizationRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 子组织机构标识数据
+	// @required
+	// @guid
+	repeated string ChildOrganizationIds = 2;
+}

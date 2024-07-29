@@ -1,0 +1,532 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Resource";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Resource;
+
+// 行政区划服务
+service DivisionService{
+
+	// 查询行政区划信息
+	rpc SearchDivisionInfo(SearchDivisionInfoRequest) returns (SearchDivisionInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Division"
+		};
+	}
+
+	// 读取行政区划信息
+	rpc ReadDivisionInfo(ReadDivisionInfoRequest) returns (ReadDivisionInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Division/{DivisionId}"
+		};
+	}
+
+	// 读取行政区划信息树
+	rpc ReadDivisionInfoTree(ReadDivisionInfoRequest) returns (ReadDivisionInfoTreeResponse){
+		option (google.api.http) = {
+			get: "/api/Division/{DivisionId}/Tree"
+		};
+	}
+
+	// 创建行政区划
+	rpc CreateDivision(CreateDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division"
+			body: "*"
+		};
+	}
+
+	// 批量创建行政区划
+	rpc BatchCreateDivision(BatchCreateDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新行政区划
+	rpc UpdateDivision(UpdateDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Division/{DivisionId}"
+			body: "Division"
+		};
+	}
+
+	// 批量更新行政区划
+	rpc BatchUpdateDivision(BatchUpdateDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Division/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除行政区划
+	rpc DeleteDivision(DeleteDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Division/{DivisionId}"
+		};
+	}
+
+	// 批量删除行政区划
+	rpc BatchDeleteDivision(BatchDeleteDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Division/BatchDelete"
+			body: "DivisionIds"
+		};
+	}
+
+	// 创建下级行政区划
+	rpc CreateChildDivision(CreateChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children"
+			body: "Batch"
+		};
+	}
+
+	// 批量创建下级行政区划
+	rpc BatchCreateChildDivision(BatchCreateChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 添加下级行政区划
+	rpc AddChildDivision(AddChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/Add"
+			body: "ChildDivision"
+		};
+	}
+
+	// 批量添加下级行政区划
+	rpc BatchAddChildDivision(BatchAddChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/BatchAdd"
+			body: "Batch"
+		};
+	}
+
+	// 删除下级行政区划
+	rpc DeleteChildDivision(DeleteChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Division/{DivisionId}/Children/{ChildDivisionId}"
+		};
+	}
+
+	// 批量删除下级行政区划
+	rpc BatchDeleteChildDivision(BatchDeleteChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/BatchDelete"
+			body: "ChildDivisionIds"
+		};
+	}
+
+	// 移除下级行政区划
+	rpc RemoveChildDivision(RemoveChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/Remove"
+			body: "ChildDivision"
+		};
+	}
+
+	// 批量移除下级行政区划
+	rpc BatchRemoveChildDivision(BatchRemoveChildDivisionRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Division/{DivisionId}/Children/BatchRemove"
+			body: "ChildDivisionIds"
+		};
+	}
+
+}
+
+// 查询行政区划信息请求
+message SearchDivisionInfoRequest{
+	// 行政区划名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 行政区划级别
+	// @min(0)
+	google.protobuf.Int32Value Level = 3;
+	// 行政区划类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 4;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 5;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 6;
+}
+
+// 行政区划信息数据包
+message DivisionInfoPacket{
+	// 行政区划标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string ParentId = 2;
+	// 行政区划名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 行政区划编码
+	// @required
+	// @maxLength(32)
+	string Code = 4;
+	// 行政区划级别
+	// @required
+	// @min(0)
+	int32 Level = 5;
+	// 行政区划类型
+	// @required
+	// @maxLength(32)
+	string Type = 6;
+	// 行政区划全名
+	// @maxLength(128)
+	google.protobuf.StringValue FullName = 7;
+	// 行政区划拼音
+	// @maxLength(128)
+	google.protobuf.StringValue Pinyin = 8;
+	// 行政区划备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 9;
+}
+
+// 分页行政区划信息数据包
+message PagedDivisionInfoPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 组织igou信息数据
+	// @required
+	repeated DivisionInfoPacket Items = 5;
+}
+
+// 查询行政区划信息响应
+message SearchDivisionInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 组织机构信息数据
+	// @required
+	PagedDivisionInfoPacket Data = 7;
+}
+
+// 读取行政区划信息请求
+message ReadDivisionInfoRequest{
+	// 行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+}
+
+// 读取行政区划信息响应
+message ReadDivisionInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 组织机构信息数据
+	// @required
+	DivisionInfoPacket Data = 7;
+}
+
+// 行政区划信息树数据包
+message DivisionInfoTreePacket{
+	// 行政区划标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string ParentId = 2;
+	// 行政区划名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 行政区划编码
+	// @required
+	// @maxLength(32)
+	string Code = 4;
+	// 行政区划级别
+	// @required
+	// @min(0)
+	int32 Level = 5;
+	// 行政区划类型
+	// @required
+	// @maxLength(32)
+	string Type = 6;
+	// 行政区划全名
+	// @maxLength(128)
+	google.protobuf.StringValue FullName = 7;
+	// 行政区划拼音
+	// @maxLength(128)
+	google.protobuf.StringValue Pinyin = 8;
+	// 行政区划备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 9;
+	// 子行政区划
+	// @required
+	repeated DivisionInfoTreePacket Children = 10;
+}
+
+// 读取行政区划信息树响应
+message ReadDivisionInfoTreeResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 行政区划树数据
+	// @required
+	DivisionInfoTreePacket Data = 7;
+}
+
+// 创建行政区划请求
+message CreateDivisionRequest{
+	// 行政区划名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 行政区划编码
+	// @required
+	// @maxLength(32)
+	string Code = 2;
+	// 行政区划级别
+	// @required
+	// @min(0)
+	int32 Level = 3;
+	// 行政区划类型
+	// @required
+	// @maxLength(32)
+	string Type = 4;
+	// 行政区划全名
+	// @maxLength(128)
+	google.protobuf.StringValue FullName = 5;
+	// 行政区划拼音
+	// @maxLength(128)
+	google.protobuf.StringValue Pinyin = 6;
+	// 行政区划备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 7;
+}
+
+// 批量创建行政区划请求
+message BatchCreateDivisionRequest{
+	// 行政区划信息
+	// @required
+	repeated CreateDivisionRequest Batch = 1;
+}
+
+// 更新行政区划数据包
+message UpdateDivisionInfoPacket{
+	// 行政区划名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 行政区划编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 行政区划级别
+	// @min(0)
+	google.protobuf.Int32Value Level = 3;
+	// 行政区划类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 4;
+	// 行政区划全名
+	// @maxLength(128)
+	google.protobuf.StringValue FullName = 5;
+	// 行政区划拼音
+	// @maxLength(128)
+	google.protobuf.StringValue Pinyin = 6;
+	// 行政区划备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 7;
+}
+
+// 更新行政区划请求
+message UpdateDivisionRequest{
+	// 行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 行政区划信息
+	// @required
+	UpdateDivisionInfoPacket Division = 2;
+}
+
+// 批量更新行政区划请求
+message BatchUpdateDivisionRequest{
+	// 行政区划信息
+	// @required
+	repeated UpdateDivisionRequest Batch = 1;
+}
+
+// 删除行政区划请求
+message DeleteDivisionRequest{
+	// 行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+}
+
+// 批量删除行政区划请求
+message BatchDeleteDivisionRequest{
+	// 行政区划标识
+	// @required
+	// @guid
+	repeated string DivisionIds = 1;
+}
+
+// 创建下级行政区划请求
+message CreateChildDivisionRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 行政区划信息
+	// @required
+	repeated CreateDivisionRequest Batch = 2;
+}
+
+// 批量创建下级行政区划请求
+message BatchCreateChildDivisionRequest{
+	// 组织机构标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 行政区划信息
+	// @required
+	repeated CreateDivisionRequest Batch = 2;
+}
+
+// 下级行政区划标识数据包
+message ChildDivisionIdPacket{
+	// 下级行政区划标识
+	// @required
+	// @guid
+	string ChildDivisionId = 1;
+}
+
+// 添加下级行政区划请求
+message AddChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	// @guid
+	ChildDivisionIdPacket ChildDivision = 2;
+}
+
+// 批量添加下级行政区划请求
+message BatchAddChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	repeated ChildDivisionIdPacket Batch = 2;
+}
+
+// 删除下级行政区划请求
+message DeleteChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	// @guid
+	string ChildDivisionId = 2;
+}
+
+// 批量删除下级行政区划请求
+message BatchDeleteChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	// @guid
+	repeated string ChildDivisionIds = 2;
+}
+
+// 移除下级行政区划请求
+message RemoveChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	ChildDivisionIdPacket ChildDivision = 2;
+}
+
+// 批量移除下级行政区划请求
+message BatchRemoveChildDivisionRequest{
+	// 上级行政区划标识
+	// @required
+	// @guid
+	string DivisionId = 1;
+	// 下级行政区划标识
+	// @required
+	// @guid
+	repeated string ChildDivisionIds = 2;
+}

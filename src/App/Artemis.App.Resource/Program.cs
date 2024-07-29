@@ -2,6 +2,7 @@ using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Resource;
 using Artemis.Service.Resource.Context;
+using Artemis.Service.Resource.Services;
 using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -72,10 +73,10 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            //app.MapGrpcService<SampleService>();
-            //app.MapGrpcService<AccountService>();
-            //app.MapGrpcService<UserService>();
-            //app.MapGrpcService<RoleService>();
+            app.MapGrpcService<DictionaryServiceImplement>();
+            app.MapGrpcService<OrganizationServiceImplement>();
+            app.MapGrpcService<DivisionServiceImplement>();
+            app.MapGrpcService<StandardServiceImplement>();
 
             // map common endpoints
             app.MapCommonEndpoints<ResourceContext>();
