@@ -35,10 +35,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="task\task.proto" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
@@ -64,6 +60,9 @@
 	  <Protobuf Include="identity\role.proto" />
 	  <Protobuf Include="identity\user.proto" />
 	  <Protobuf Include="task\task.proto" />
+	  <Protobuf Include="school\school.proto" />
+	  <Protobuf Include="school\student.proto" />
+	  <Protobuf Include="school\teacher.proto" />
 	</ItemGroup>
 
 </Project>

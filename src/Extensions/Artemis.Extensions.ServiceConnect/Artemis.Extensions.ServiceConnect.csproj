@@ -55,8 +55,8 @@
         <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.1.0" />
         <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="8.1.0" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-        <PackageReference Include="Grpc.AspNetCore" Version="2.64.0" />
-        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.64.0" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.65.0" />
         <PackageReference Include="Mapster" Version="7.4.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7" />
         <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.7" />

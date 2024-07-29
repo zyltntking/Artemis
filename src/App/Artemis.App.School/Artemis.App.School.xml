@@ -4,18 +4,6 @@
         <name>Artemis.App.School</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.School.Migrations.InitialSchool">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:Artemis.App.School.Program">
             <summary>
                 应用程序入口

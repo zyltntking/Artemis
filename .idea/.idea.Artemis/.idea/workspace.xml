@@ -18,47 +18,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9bfc34f-3e61-4a6d-a221-14382329899b" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Artemis/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Artemis/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Identity/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Identity/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Identity/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Identity/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/20240723071149_InitTask.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/20240723071149_InitTask.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/20240723071149_InitTask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/20240723071149_InitTask.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/TaskContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Task/Migrations/TaskContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Task/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Task/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Artemis.App.Task/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Artemis.App.Task/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Artemis.Data.Core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Artemis.Data.Core.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Fundamental/Enumeration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Fundamental/Enumeration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Fundamental/Kit/Crypto/Crypto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Core/Fundamental/Kit/Crypto/Crypto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Artemis.Data.Store.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Artemis.Data.Store.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Extensions/QueryableExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Extensions/QueryableExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Artemis.Data.Store/Resources.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisAuthenticationHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisAuthenticationHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisAuthorizationHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisAuthorizationHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisHandlerProxy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.Identity/ArtemisHandlerProxy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.ServiceConnect/MapEndPoints/MapEndPointsExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Extensions/Artemis.Extensions.ServiceConnect/MapEndPoints/MapEndPointsExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityResourceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityResourceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityRoleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityRoleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityUserManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IIdentityUserManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityAccountManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityAccountManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityResourceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityResourceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityRoleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityRoleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityUserManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Managers/IdentityUserManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Services/AccountServiceImplement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Identity/Services/AccountServiceImplement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/identity/role.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/identity/role.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/task/task.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/task/task.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Resource/Context/ResourceContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Resource/Context/ResourceContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/ITask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/ITask.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/ITaskUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/ITaskUnit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/Transfer/TaskTransfers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Shared/Task/Transfer/TaskTransfers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Artemis.Service.Task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Artemis.Service.Task.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Context/Configuration/ArtemisTaskConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Context/Configuration/ArtemisTaskConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Context/Configuration/ArtemisTaskUnitConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Context/Configuration/ArtemisTaskUnitConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Managers/ArtemisTaskManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Managers/ArtemisTaskManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Managers/IArtemisTaskManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Managers/IArtemisTaskManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Models/Task.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Models/Task.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Models/TaskUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Models/TaskUnit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Services/TaskServiceImplement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Task/Services/TaskServiceImplement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,6 +240,7 @@
       <workItem from="1721792801677" duration="6585000" />
       <workItem from="1721826183046" duration="1498000" />
       <workItem from="1721832596213" duration="1954000" />
+      <workItem from="1722196039038" duration="21000" />
     </task>
     <servers />
   </component>

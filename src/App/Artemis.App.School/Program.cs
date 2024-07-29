@@ -2,6 +2,7 @@ using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.School;
 using Artemis.Service.School.Context;
+using Artemis.Service.School.Services;
 using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -66,8 +67,8 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            //app.MapGrpcService<SampleService>();
-            //app.MapGrpcService<AccountService>();
+            app.MapGrpcService<SchoolServiceImplement>();
+            app.MapGrpcService<StudentServiceImplement>();
             //app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();
 

@@ -28,11 +28,13 @@ var artemisDb = postgres.AddDatabase("ArtemisDb", "Artemis");
 
 builder.AddProject<Artemis_App_Identity>("IdentityService")
     .WithReference(redis)
-    //.WithReference(mongodb)
-    //.WithReference(rabbitMq)
     .WithReference(artemisDb);
 
 builder.AddProject<Artemis_App_School>("SchoolService")
+    .WithReference(redis)
+    .WithReference(artemisDb);
+
+builder.AddProject<Artemis_App_Task>("TaskService")
     .WithReference(redis)
     .WithReference(artemisDb);
 

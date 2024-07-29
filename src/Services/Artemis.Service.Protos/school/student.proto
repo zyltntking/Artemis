@@ -1,0 +1,340 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.School";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.School;
+
+// 学生服务
+service StudentService{
+
+	// 查询学生信息
+	rpc SearchStudentInfo(SearchStudentInfoReqeust) returns (SearchStudentInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Students"
+		};
+	}
+
+	// 获取学生信息
+	rpc GetStudentInfo(GetStudentInfoRequest) returns (GetStudentInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Students/{StudentId}"
+		};
+	}
+
+	// 创建学生
+	rpc CreateStudent(CreateStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Students"
+			body: "*"
+		};
+	}
+
+	// 批量创建学生
+	rpc BatchCreateStudent(BatchCreateStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Students/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新学生
+	rpc UpdateStudent(UpdateStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Students/{StudentId}"
+			body: "Student"
+		};
+	}
+
+	// 批量更新学生
+	rpc BatchUpdateStudent(BatchUpdateStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Students/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除学生
+	rpc DeleteStudent(DeleteStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Students/{StudentId}"
+		};
+	}
+
+	// 批量删除学生
+	rpc BatchDeleteStudent(BatchDeleteStudentRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Students/BatchDelete"
+			body: "StudentIds"
+		};
+	}
+
+}
+
+// 查询学生信息请求
+message SearchStudentInfoReqeust{
+	// 学生名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 学生代码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 学生性别
+	// @maxLength(32)
+	google.protobuf.StringValue Gender = 3;
+	// 学生状态
+	// @maxLength(32)
+	google.protobuf.StringValue State = 4;
+	// 学生类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 5;
+	// 生日
+	// @datetime
+	google.protobuf.Timestamp Birthday = 6;
+	// 民族
+	// @maxLength(32)
+	google.protobuf.StringValue Nation = 7;
+	// 籍贯
+	// @maxLength(32)
+	google.protobuf.StringValue NativePlace = 8;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 9;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 10;
+}
+
+// 学生信息数据包
+message StudentInfoPacket {
+	// 学生标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 学生名称
+	// @required
+	// @maxLength(128)
+	string Name = 2;
+	// 学生代码
+	// @required
+	// @maxLength(32)
+	string Code = 3;
+	// 学生性别
+	// @required
+	// @maxLength
+	string Gender = 4;
+	// 学生状态
+	// @required
+	// @maxLength(32)
+	string State = 5;
+	// 学生类型
+	// @required
+	// @maxLength(32)
+	string Type = 6;
+	// 生日
+	// @required
+	// @datetime
+	google.protobuf.Timestamp Birthday = 7;
+	// 民族
+	// @required
+	// @maxLength(32)
+	string Nation = 8;
+	// 籍贯
+	// @required
+	// @maxLength(32)
+	string NativePlace = 9;
+}
+
+// 分页学生信息数据包
+message PagedStudentInfoPacket {
+	// 学生信息数据包
+	// @required
+	StudentInfoPacket StudentInfo = 1;
+	// 页码
+	// @required
+	// @min(0)
+	int32 Page = 2;
+	// 条目数
+	// @required
+	// @min(0)
+	int32 Size = 3;
+	// 总条目数
+	// @required
+	// @min(0)
+	int32 Total = 4;
+	// 总页数
+	// @required
+	// @min(0)
+	int32 TotalPage = 5;
+	// 学生信息数据包
+	// @required
+	repeated StudentInfoPacket StudentInfos = 6;
+}
+
+// 查询学生信息响应
+message SearchStudentInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 学生信息数据
+	// @required
+	PagedStudentInfoPacket Data = 7;
+}
+
+// 获取学生信息请求
+message GetStudentInfoRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+}
+
+// 获取学生信息响应
+message GetStudentInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 学生信息数据
+	// @required
+	StudentInfoPacket Data = 7;
+}
+
+// 创建学生请求
+message CreateStudentRequest {
+	// 学生名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 学生代码
+	// @required
+	// @maxLength(32)
+	string Code = 2;
+	// 学生性别
+	// @required
+	// @maxLength
+	string Gender = 3;
+	// 学生状态
+	// @required
+	// @maxLength(32)
+	string State = 4;
+	// 学生类型
+	// @required
+	// @maxLength(32)
+	string Type = 5;
+	// 生日
+	// @required
+	// @datetime
+	google.protobuf.Timestamp Birthday = 6;
+	// 民族
+	// @required
+	// @maxLength(32)
+	string Nation = 7;
+	// 籍贯
+	// @required
+	// @maxLength(32)
+	string NativePlace = 8;
+}
+
+// 批量创建学生
+message BatchCreateStudentRequest {
+	// 学生信息
+	// @required
+	repeated CreateStudentRequest Batch = 1;
+}
+
+// 更新学生数据包
+message UpdateStudentPacket {
+	// 学生名称
+	// @required
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 学生代码
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 学生性别
+	// @required
+	// @maxLength
+	google.protobuf.StringValue Gender = 3;
+	// 学生状态
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue State = 4;
+	// 学生类型
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 5;
+	// 生日
+	// @required
+	// @datetime
+	google.protobuf.Timestamp Birthday = 6;
+	// 民族
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Nation = 7;
+	// 籍贯
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue NativePlace = 8;
+}
+
+// 更新学生请求
+message UpdateStudentRequest {
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 学生信息
+	// @required
+	UpdateStudentPacket Student = 2;
+}
+
+// 批量更新学生请求
+message BatchUpdateStudentRequest {
+	// 学生信息
+	// @required
+	repeated UpdateStudentRequest Batch = 1;
+}
+
+// 删除学生请求
+message DeleteStudentRequest {
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+}
+
+// 批量删除学生请求
+message BatchDeleteStudentRequest {
+	// 学生标识
+	// @required
+	// @guid
+	repeated string StudentIds = 1;
+}

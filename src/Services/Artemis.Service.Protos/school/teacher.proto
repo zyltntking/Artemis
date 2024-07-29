@@ -1,0 +1,363 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.School";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.School;
+
+// 教师服务
+service TeacherService{
+	
+    // 查询教师信息
+	rpc SearchTeacherInfo(SearchTeacherInfoRequest) returns (SearchTeacherInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Teachers"
+		};
+	}
+
+	// 获取教师信息
+	rpc GetTeacherInfo(GetTeacherInfoRequest) returns (GetTeacherInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Teachers/{TeacherId}"
+		};
+	}
+
+	// 创建教师
+	rpc CreateTeacher(CreateTeacherRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Teachers"
+			body: "*"
+		};
+	}
+
+	// 批量创建教师
+	rpc CreateTeachers(CreateTeachersRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Teachers/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新教师
+	rpc UpdateTeacher(UpdateTeacherRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Teachers/{TeacherId}"
+			body: "Teacher"
+		};
+	}
+
+	// 批量更新教师
+	rpc UpdateTeachers(BatchUpdateTeacherRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/Teachers/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除教师
+	rpc DeleteTeacher(DeleteTeacherRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/Teachers/{TeacherId}"
+		};
+	}
+
+	// 批量删除教师
+	rpc DeleteTeachers(BatchDeleteTeacherRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/Teachers/BatchDelete"
+			body: "TeacherIds"
+		};
+	}
+}
+
+// 查询教师信息请求
+message SearchTeacherInfoRequest{
+	// 教师姓名
+	// @maxLength(32)
+	google.protobuf.StringValue Name = 1;
+	// 教师编号
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 教师状态
+	// @maxLength(32)
+	google.protobuf.StringValue Status = 3;
+	// 教师类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 4;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 5;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 6;
+}
+
+// 教师信息数据包
+message TeacherInfoPacket{
+	// 教师标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 教师姓名
+	// @maxLength(32)
+	string Name = 2;
+	// 教师编号
+	// @required
+	// @maxLength(32)
+	string Code = 3;
+	// 教师性别
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Gender = 4;
+	// 教师职称
+	// @maxLength(32)
+	google.protobuf.StringValue Title = 5;
+	// 教师学历
+	// @maxLength(32)
+	google.protobuf.StringValue Education = 6;
+	// 教师状态
+	// @maxLength(32)
+	string Status = 7;
+	// 教师入职时间
+	// @maxLength(32)
+	google.protobuf.Timestamp EntryTime = 8;
+	// 教师类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 9;
+	// 教师籍贯
+	// @maxLength(32)
+	google.protobuf.StringValue NativePlace = 10;
+	// 教师政治面貌
+	// @maxLength(32)
+	google.protobuf.StringValue PoliticalStatus = 11;
+	// 教师身份证号
+	// @maxLength(32)
+	google.protobuf.StringValue IdCard = 12;
+	// 教师联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 13;
+	// 教师邮箱
+	// @maxLength(32)
+	google.protobuf.StringValue Email = 14;
+	// 教师地址
+	// @maxLength(32)
+	google.protobuf.StringValue Address = 15;
+	// 教师生日
+	// @maxLength(32)
+	google.protobuf.Timestamp Birthday = 16;
+}
+
+// 分页教师信息数据包
+message PagedSchoolInfoPacket {
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 教师信息数据
+	// @required
+	repeated TeacherInfoPacket Items = 5;
+}
+
+// 查询教师信息响应
+message SearchTeacherInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 教师信息数据
+	// @required
+	PagedSchoolInfoPacket Data = 7;
+}
+
+// 获取教师信息请求
+message GetTeacherInfoRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+}
+
+// 获取教师信息响应
+message GetTeacherInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 教师信息数据
+	// @required
+	TeacherInfoPacket Data = 7;
+}
+
+// 创建教师请求
+message CreateTeacherRequest{
+	// 教师姓名
+	// @maxLength(32)
+	string Name = 1;
+	// 教师编号
+	// @required
+	// @maxLength(32)
+	string Code = 2;
+	// 教师性别
+	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Gender = 3;
+	// 教师职称
+	// @maxLength(32)
+	google.protobuf.StringValue Title = 4;
+	// 教师学历
+	// @maxLength(32)
+	google.protobuf.StringValue Education = 5;
+	// 教师状态
+	// @maxLength(32)
+	string Status = 6;
+	// 教师入职时间
+	// @maxLength(32)
+	google.protobuf.Timestamp EntryTime = 7;
+	// 教师类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 8;
+	// 教师籍贯
+	// @maxLength(32)
+	google.protobuf.StringValue NativePlace = 9;
+	// 教师政治面貌
+	// @maxLength(32)
+	google.protobuf.StringValue PoliticalStatus = 10;
+	// 教师身份证号
+	// @maxLength(32)
+	google.protobuf.StringValue IdCard = 11;
+	// 教师联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 12;
+	// 教师邮箱
+	// @maxLength(32)
+	google.protobuf.StringValue Email = 13;
+	// 教师地址
+	// @maxLength(32)
+	google.protobuf.StringValue Address = 14;
+	// 教师生日
+	// @maxLength(32)
+	google.protobuf.Timestamp Birthday = 15;
+}
+
+// 批量创建教师请求
+message CreateTeachersRequest{
+	// 教师信息数据
+	// @required
+	repeated CreateTeacherRequest Batch = 1;
+}
+
+// 更新教师数据包
+message CreateTeacherPacket{
+	// 教师姓名
+	// @maxLength(32)
+	google.protobuf.StringValue Name = 1;
+	// 教师编号
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 教师性别
+	// @maxLength(32)
+	google.protobuf.StringValue Gender = 3;
+	// 教师职称
+	// @maxLength(32)
+	google.protobuf.StringValue Title = 4;
+	// 教师学历
+	// @maxLength(32)
+	google.protobuf.StringValue Education = 5;
+	// 教师状态
+	// @maxLength(32)
+	google.protobuf.StringValue Status = 6;
+	// 教师入职时间
+	// @maxLength(32)
+	google.protobuf.Timestamp EntryTime = 7;
+	// 教师类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 8;
+	// 教师籍贯
+	// @maxLength(32)
+	google.protobuf.StringValue NativePlace = 9;
+	// 教师政治面貌
+	// @maxLength(32)
+	google.protobuf.StringValue PoliticalStatus = 10;
+	// 教师身份证号
+	// @maxLength(32)
+	google.protobuf.StringValue IdCard = 11;
+	// 教师联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue Phone = 12;
+	// 教师邮箱
+	// @maxLength(32)
+	google.protobuf.StringValue Email = 13;
+	// 教师地址
+	// @maxLength(32)
+	google.protobuf.StringValue Address = 14;
+	// 教师生日
+	// @maxLength(32)
+	google.protobuf.Timestamp Birthday = 15;
+}
+
+// 更新教师请求
+message UpdateTeacherRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+	// 教师信息数据
+	// @required
+	CreateTeacherPacket Teacher = 2;
+}
+
+// 批量更新教师请求
+message BatchUpdateTeacherRequest{
+	// 教师信息数据
+	// @required
+	repeated UpdateTeacherRequest Batch = 1;
+}
+
+// 删除教师请求
+message DeleteTeacherRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+}
+
+// 批量删除教师请求
+message BatchDeleteTeacherRequest{
+	// 教师标识
+	// @required
+	// @guid
+	repeated string TeacherIds = 1;
+}

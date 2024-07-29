@@ -969,6 +969,21 @@
             <param name="services"></param>
             <param name="enableProxy"></param>
         </member>
+        <member name="T:Artemis.Service.School.Services.SchoolServiceImplement">
+            <summary>
+            学校服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Services.StudentServiceImplement">
+            <summary>
+            学生服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Services.TeacherServiceImplement">
+            <summary>
+            教师服务实现
+            </summary>
+        </member>
         <member name="T:Artemis.Service.School.Stores.IArtemisClassStore">
             <summary>
                 班级存储接口

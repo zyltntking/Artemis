@@ -4,18 +4,6 @@
         <name>Artemis.App.Task</name>
     </assembly>
     <members>
-        <member name="T:Artemis.App.Task.Migrations.InitTask">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Task.Migrations.InitTask.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Task.Migrations.InitTask.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Task.Migrations.InitTask.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:Artemis.App.Task.Program">
             <summary>
                 应用程序入口
