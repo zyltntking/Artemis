@@ -69,7 +69,7 @@ public class Program
             // Configure the HTTP request pipeline.
             app.MapGrpcService<SchoolServiceImplement>();
             app.MapGrpcService<StudentServiceImplement>();
-            //app.MapGrpcService<UserService>();
+            app.MapGrpcService<TeacherServiceImplement>();
             //app.MapGrpcService<RoleService>();
 
             // map common endpoints

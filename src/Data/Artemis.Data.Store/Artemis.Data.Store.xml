@@ -1436,6 +1436,160 @@
               Looks up a localized string similar to 必要参数&apos;{0}&apos;的值为空。.
             </summary>
         </member>
+        <member name="T:Artemis.Data.Store.ISeparateManager`4">
+            <summary>
+            独立模型接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.ReadEntityInfoAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            读取实体信息
+            </summary>
+            <param name="key">键</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.CreateEntityAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            创建实体
+            </summary>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.CreateEntitiesAsync(System.Collections.Generic.IEnumerable{`3},System.Threading.CancellationToken)">
+            <summary>
+            批量创建实体
+            </summary>
+            <param name="packages"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.UpdateEntityAsync(`1,`3,System.Threading.CancellationToken)">
+            <summary>
+            更新实体
+            </summary>
+            <param name="key"></param>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.UpdateEntitiesAsync(System.Collections.Generic.IDictionary{`1,`3},System.Threading.CancellationToken)">
+            <summary>
+            批量更新实体
+            </summary>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.ISeparateManager`4.DeleteEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+            <summary>
+            批量删除实体
+            </summary>
+            <param name="keys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Store.SeparateManager`4">
+            <summary>
+            单独模型
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.#ctor(Artemis.Data.Store.IStore{`0,`1})">
+            <summary>
+            独立模型管理器构造
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.SeparateManager`4.SeparateEntityStore">
+            <summary>
+            单独实体存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.ReadEntityInfoAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            读取实体信息
+            </summary>
+            <param name="key">键</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.CreateEntityAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            创建实体
+            </summary>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.CreateEntitiesAsync(System.Collections.Generic.IEnumerable{`3},System.Threading.CancellationToken)">
+            <summary>
+            批量创建实体
+            </summary>
+            <param name="packages"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.UpdateEntityAsync(`1,`3,System.Threading.CancellationToken)">
+            <summary>
+            更新实体
+            </summary>
+            <param name="key"></param>
+            <param name="package"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.UpdateEntitiesAsync(System.Collections.Generic.IDictionary{`1,`3},System.Threading.CancellationToken)">
+            <summary>
+            批量更新实体
+            </summary>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.DeleteEntityAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.DeleteEntitiesAsync(System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+            <summary>
+            批量删除实体
+            </summary>
+            <param name="keys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.MapNewEntity(`3)">
+            <summary>
+            映射到新实体
+            </summary>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.SeparateManager`4.MapOverEntity(`0,`3)">
+            <summary>
+            覆盖实体
+            </summary>
+            <param name="entity"></param>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Data.Store.Store`1">
             <summary>
                 存储实现
