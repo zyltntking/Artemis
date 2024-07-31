@@ -1,0 +1,500 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "business/visionscreening/visionscreening.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Business.VisionScreen;
+
+// 小程序教师终端服务
+service WxTeacherTerminalService{
+
+	// 获取任务信息概览
+	rpc FetchTaskInfoOverview(EmptyRequest) returns (FetchTaskInfoOverviewResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchTaskInfoOverview"
+		};
+	};
+
+	// 获取个人中心消息信息
+	rpc FetchUserMessageInfo(EmptyRequest) returns (FetchTeacherUserMessageInfoResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchUserMessageInfo"
+		};
+	};
+
+	// 获取指定任务下所在学校的班级信息
+	rpc FetchTaskClassList(FetchTaskClassListRequest) returns (FetchTaskClassListResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchTaskClassList"
+		};
+	};
+
+	// 获取任务信息
+	rpc FetchTaskInfo(EmptyRequest) returns (FetchTaskListInfoResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchTaskInfo"
+		};
+	};
+
+	// 获取指定任务指定班级的学生视力概览
+	rpc FetchTaskClassStudentVisionOverview(FetchTaskClassStudentVisionOverviewRequest) returns (FetchTaskClassVisionStatisticsResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchTaskClassStudentVisionOverview"
+		};
+	};
+
+	// 获取我的班级列表
+	rpc FetchMyClassList(EmptyRequest) returns (FetchTaskClassListResponse){
+		option (google.api.http) = {
+			get: "/api/TeacherTerminal/FetchMyClassList"
+		};
+	};
+
+}
+
+// 已班级为单元的筛查进度概览
+message ClassScreeningOverview{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 任务单元标识
+	// @required
+	// @guid
+	string TaskUnitId = 2;
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 3;
+	// 学校名称
+	// @required
+	// @maxLength(128)
+	string SchoolName = 4;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 5;
+	// 年级名称
+	// @required
+	// @maxLength(128)
+	string GradeName = 6;
+	// 班级序号
+	// @required
+	int32 Serial = 7;
+	// 筛查开始时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp StartTime = 8;
+	// 预计完成时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp EndTime = 9;
+	// 当前班级筛查总人数
+	// @required
+	int32 Total = 10;
+	// 当前班级预定筛查人数
+	// @required
+	int32 Scheduled = 11;
+	// 当前班级已筛查人数
+	// @required
+	int32 Completed = 12;
+}
+
+// 任务信息概览
+message TaskInfoOverview{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 任务名称
+	// @required
+	// @maxLength(128)
+	string TaskName = 2;
+	// 任务开始时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp StartTime = 3;
+	// 任务结束时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp EndTime = 4;
+	// 任务单元标识
+	// @required
+	// @guid
+	string TaskUnitId = 5;
+	// 任务单元目标总数
+	// @required
+	int32 TargetTotal = 6;
+	// 任务单元目标完成总数
+	// @required
+	int32 TargetCompletedTotal = 7;
+	// 以班级为单元的任务信息概览
+	// @required
+	repeated ClassScreeningOverview ClassScreeningOverviews = 8;
+}
+
+// 获取任务信息概览响应
+message FetchTaskInfoOverviewResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 任务信息概览
+	// @required
+	TaskInfoOverview Data = 7;
+}
+
+
+// 教师个人中心消息信息
+message TeacherUserMessageInfo{
+	// 通知消息数据
+	// @required
+	repeated NotificationPacket Notifications = 1;
+}
+
+// 获取教师端个人中心消息信息响应
+message FetchTeacherUserMessageInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 个人中心消息信息
+	// @required
+	TeacherUserMessageInfo Data = 7;
+}
+
+// 任务列表项目信息数据包
+message TaskListItemInfoPacket{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 任务名称
+	// @required
+	// @maxLength(128)
+	string TaskName = 2;
+	// 任务开始时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp StartTime = 3;
+	// 任务结束时间
+	// @required
+	// @datetime
+	google.protobuf.Timestamp EndTime = 4;
+}
+
+// 获取任务信息响应
+message FetchTaskListInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 任务信息数据包
+	// @required
+	repeated TaskListItemInfoPacket Data = 7;
+}
+
+// 任务目标项目数据包
+message TaskTargetSummaryInfoPacket{
+	// 任务单元标识
+	// @required
+	// @guid
+	string TaskUnitId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 3;
+	// 学生姓名
+	// @required
+	// @maxLength(128)
+	string StudentName = 4;
+	// 学籍号
+	// @required
+	// @maxLength(128)
+	string StudentNumber = 5;
+	// 筛查状态
+	// @required
+	// maxLength(32)
+	string ScreeningStatus = 6;
+}
+
+// 查询指定任务下所在学校班级列表
+message FetchTaskClassListRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+}
+
+
+// 班级信息数据包
+message ClassItemInfoPacket{
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 1;
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 2;
+	// 班级名称
+	// @required
+	// @maxLength(128)
+	string ClassName = 3;
+	// 学校名称
+	// @required
+	// @maxLength(128)
+	string SchoolName = 4;
+	// 年级名称
+	// @required
+	// @maxLength(128)
+	string GradeName = 5;
+	// 班级序号
+	// @required
+	int32 Serial = 6;
+}
+
+// 获取班级信息响应
+message FetchTaskClassListResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 班级信息数据包
+	// @required
+	repeated ClassItemInfoPacket Data = 7;
+}
+
+// 获取指定任务指定班级的学生视力概览请求
+message FetchTaskClassStudentVisionOverviewRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+}
+
+// 学生视力概览数据包
+message StudentVisionOverviewPacket{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 3;
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 4;
+	// 学生姓名
+	// @required
+	// @maxLength(128)
+	string StudentName = 5;
+	// 学籍号
+	// @required
+	// @maxLength(128)
+	string StudentNumber = 6;
+	// 左眼视力
+	// @required
+	double LeftEyeVision = 7;
+	// 右眼视力
+	// @required
+	double RightEyeVision = 8;
+}
+
+// 获取指定任务指定班级的学生视力概览响应
+message FetchTaskClassStudentVisionOverviewResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 学生视力概览数据包
+	// @required
+	repeated StudentVisionOverviewPacket Data = 7;
+}
+
+// 查询指定任务指定班级的视力情况统计请求
+message FetchTaskClassVisionStatisticsRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+}
+
+// 视力情况分析数据项
+message VisionAnalysisItem{
+	// 视力等级
+	// @required
+	// @maxLength(32)
+	string Name = 1;
+	// 人数
+	// @required
+	int32 Count = 2;
+}
+
+// 基于性别的视力情况分析数据项
+message GenderBasedVisionAnalysisItem{
+	// 性别
+	// @required
+	// @maxLength(32)
+	string Name = 1;
+	// 人数
+	// @required
+	int32 Count = 2;
+}
+
+// 当次筛查情况
+message ScreeningSituation{
+	// 总人数
+	// @required
+	int32 Total = 1;
+	// 已筛查人数
+	// @required
+	int32 Completed = 2;
+}
+
+// 一年内该班级近视趋势
+message MyopiaTrendInOneYearItem{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 月份
+	// @required
+	string Month = 3;
+	// 左眼视力
+	// @required
+	double LeftEyeVision = 4;
+	// 右眼视力
+	// @required
+	double RightEyeVision = 5;
+}
+
+// 指定任务指定班级的视力情况统计数据包
+message TaskClassVisionStatisticsPacket{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 总人数
+	// @required
+	int32 Total = 3;
+	// 视力情况分析数据
+	// @required
+	repeated VisionAnalysisItem VisionAnalysisItems = 4;
+	// 基于性别的视力情况分析数据
+	// @required
+	repeated GenderBasedVisionAnalysisItem GenderBasedVisionAnalysisItems = 5;
+	// 当次筛查情况
+	// @required
+	ScreeningSituation ScreeningSituation = 6;
+	// 一年内该班级近视趋势
+	// @required
+	repeated MyopiaTrendInOneYearItem MyopiaTrendInOneYearItems = 7;
+}
+
+// 查询指定任务指定班级的视力情况统计响应
+message FetchTaskClassVisionStatisticsResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 视力情况统计数据包
+	// @required
+	TaskClassVisionStatisticsPacket Data = 7;
+}

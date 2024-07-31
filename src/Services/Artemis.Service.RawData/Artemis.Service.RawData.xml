@@ -116,6 +116,16 @@
                 视力表数据模型
             </summary>
         </member>
+        <member name="T:Artemis.Service.RawData.Services.OptometerServiceImplement">
+            <summary>
+            验光仪服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.RawData.Services.VisualChartServiceImplement">
+            <summary>
+            电子视力表数据服务实现
+            </summary>
+        </member>
         <member name="T:Artemis.Service.RawData.Stores.IArtemisOptometerStore">
             <summary>
                 验光仪存储接口

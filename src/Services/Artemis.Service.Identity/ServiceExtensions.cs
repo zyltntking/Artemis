@@ -31,7 +31,7 @@ public static class ServiceExtensions
         services.TryAddScoped<IIdentityUserManager, IdentityUserManager>();
         services.TryAddScoped<IIdentityRoleManager, IdentityRoleManager>();
         services.TryAddScoped<IIdentityAccountManager, IdentityAccountManager>();
-        services.TryAddScoped<IIdentityResourceManager, IdentityResourceManager>();
+        services.TryAddScoped<IIdentityClaimManager, IdentityClaimManager>();
 
         return services;
     }

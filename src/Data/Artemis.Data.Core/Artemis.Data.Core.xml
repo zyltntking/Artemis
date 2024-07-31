@@ -1993,6 +1993,26 @@
                 密钥长度表
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Kit.SnowFlakeId">
+            <summary>
+            雪花Id生成器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.SnowFlakeId.#ctor(System.Int64,System.Int64)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="datacenterId">数据中心标识</param>
+            <param name="machineId">机器标识</param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Kit.SnowFlakeId.NextId">
+            <summary>
+            获取下一个id
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Matcher">
             <summary>
                 匹配器
@@ -5441,6 +5461,44 @@
                 存储标识
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.ITreeSlot`1">
+            <summary>
+            树插件
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:Artemis.Data.Core.ITreeSlot`3">
+            <summary>
+            树插件
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TParentKey"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.ITreeSlot`3.Parent">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.ITreeInfoSlot`1">
+            <summary>
+            树插件
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:Artemis.Data.Core.ITreeInfoSlot`3">
+            <summary>
+            树插件
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TParentKey"></typeparam>
+        </member>
+        <member name="P:Artemis.Data.Core.ITreeInfoSlot`3.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.IMateSlot">
             <summary>
                 元数据组件接口
@@ -5519,31 +5577,6 @@
         <member name="P:Artemis.Data.Core.IPartitionSlot.Partition">
             <summary>
                 分区标识
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.ITreeBase`1">
-            <summary>
-                树基础接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Data.Core.ITreeBase`2">
-            <summary>
-                树基础接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ITreeBase`2.Id">
-            <summary>
-                节点标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ITreeBase`2.ParentId">
-            <summary>
-                父节点标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Data.Core.ITreeBase`2.Children">
-            <summary>
-                子节点
             </summary>
         </member>
         <member name="T:Artemis.Data.Core.ConcurrencyPartition">

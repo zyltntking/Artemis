@@ -5,6 +5,9 @@ import "google/protobuf/wrappers.proto";
 
 package Artemis.Service.Protos;
 
+// 空请求
+message EmptyRequest{}
+
 // 空响应
 message EmptyResponse {
 	// 状态码

@@ -5,12 +5,17 @@ namespace Artemis.Service.Shared.Task.Transfer;
 /// <summary>
 ///     任务信息树
 /// </summary>
-public record TaskInfoTree : TaskInfo, ITreeBase<TaskInfoTree>
+public record TaskInfoTree : TaskInfo, ITreeInfoSlot<TaskInfoTree>
 {
+
+    #region Implementation of ITreeInfoSlot<TaskInfoTree,Guid>
+
     /// <summary>
-    ///     子任务
+    ///     子节点
     /// </summary>
     public ICollection<TaskInfoTree>? Children { get; set; }
+
+    #endregion
 }
 
 /// <summary>
@@ -26,7 +31,7 @@ public record TaskInfo : TaskPackage, ITaskInfo
     /// <summary>
     ///     父标识
     /// </summary>
-    public Guid ParentId { get; set; }
+    public Guid? ParentId { get; set; }
 
     /// <summary>
     ///     任务归属

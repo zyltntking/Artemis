@@ -757,7 +757,7 @@ public sealed class ArtemisTaskManager : Manager, IArtemisTaskManager
 
             query = query.WhereIf(
                 unitNameSearch != string.Empty,
-                task => EF.Functions.Like(task.NormalizedUnitName, $"%{unitNameSearch}%"));
+                task => EF.Functions.Like(task.NormalizedUnitName, $"%{normalizedUnitNameSearch}%"));
 
             query = query.WhereIf(
                 unitCodeSearch != string.Empty,

@@ -59,7 +59,7 @@ public interface IModelBase<TKey> : IKeySlot<TKey>, IMateSlot, IHandlerSlot wher
 /// <summary>
 ///     父标识组件接口
 /// </summary>
-public interface IParentKeySlot : IParentKeySlot<Guid>;
+public interface IParentKeySlot : IParentKeySlot<Guid?>;
 
 /// <summary>
 ///     父标识组件接口
@@ -91,6 +91,52 @@ public interface IKeySlot<TKey> where TKey : IEquatable<TKey>
 }
 
 #endregion
+
+/// <summary>
+/// 树插件
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface ITreeSlot<TEntity> : ITreeSlot<TEntity, Guid, Guid?>
+    where TEntity : IKeySlot, IParentKeySlot, ITreeSlot<TEntity>;
+
+/// <summary>
+/// 树插件
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TParentKey"></typeparam>
+public interface ITreeSlot<TEntity, TKey, TParentKey> : ITreeInfoSlot<TEntity, TKey, TParentKey>
+    where TEntity : IKeySlot<TKey>, IParentKeySlot<TParentKey>, ITreeSlot<TEntity, TKey, TParentKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    /// 父节点
+    /// </summary>
+    TEntity? Parent { get; set; }
+}
+
+/// <summary>
+/// 树插件
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+public interface ITreeInfoSlot<TEntity> : ITreeInfoSlot<TEntity, Guid, Guid?>
+    where TEntity : IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntity>;
+
+/// <summary>
+/// 树插件
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TParentKey"></typeparam>
+public interface ITreeInfoSlot<TEntity, TKey, TParentKey> : IKeySlot<TKey>, IParentKeySlot<TParentKey>
+    where TEntity : IKeySlot<TKey>, IParentKeySlot<TParentKey>, ITreeInfoSlot<TEntity, TKey, TParentKey>
+    where TKey : IEquatable<TKey>
+{
+    /// <summary>
+    ///     子节点
+    /// </summary>
+    ICollection<TEntity>? Children { get; set; }
+}
 
 /// <summary>
 ///     元数据组件接口

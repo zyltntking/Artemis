@@ -35,12 +35,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj"/>
-        <ProjectReference Include="..\Artemis.Service.Shared\Artemis.Service.Shared.csproj"/>
+        <ProjectReference Include="..\..\Data\Artemis.Data.Store\Artemis.Data.Store.csproj" />
+        <ProjectReference Include="..\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
+        <ProjectReference Include="..\Artemis.Service.Shared\Artemis.Service.Shared.csproj" />
     </ItemGroup>
 
 </Project>

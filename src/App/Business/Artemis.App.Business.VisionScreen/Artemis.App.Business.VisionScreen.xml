@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Artemis.App.Business.VisionScreen</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Business.VisionScreen.Program">
+            <summary>
+                应用程序入口
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Program.Main(System.String[])">
+            <summary>
+                主函数
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement">
+            <summary>
+            微信家长终端服务实现
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Services.WxTeacherTerminalServiceImplement">
+            <summary>
+            小程序教师终端服务实现
+            </summary>
+        </member>
+    </members>
+</doc>

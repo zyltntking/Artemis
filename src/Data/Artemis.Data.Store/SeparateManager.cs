@@ -7,8 +7,20 @@ namespace Artemis.Data.Store;
 #region Interface
 
 /// <summary>
-///     独立模型接口
+/// 独立模型管理接口
 /// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TEntityInfo"></typeparam>
+/// <typeparam name="TEntityPackage"></typeparam>
+public interface ISeparateManager<TEntity, TEntityInfo, TEntityPackage> : ISeparateManager<TEntity, Guid, TEntityInfo,
+    TEntityPackage>
+    where TEntity : class, IKeySlot<Guid>
+    where TEntityInfo : class, IKeySlot<Guid>
+    where TEntityPackage : class;
+
+/// <summary>
+    ///     独立模型接口
+    /// </summary>
 public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : IManager
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
@@ -79,6 +91,28 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
 #endregion
 
 /// <summary>
+/// 单独模型管理器
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TEntityInfo"></typeparam>
+/// <typeparam name="TEntityPackage"></typeparam>
+public abstract class SeparateManager<TEntity, TEntityInfo, TEntityPackage> : 
+    SeparateManager<TEntity, Guid, TEntityInfo,
+    TEntityPackage>, ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
+    where TEntity : class, IKeySlot<Guid>
+    where TEntityInfo : class, IKeySlot<Guid>
+    where TEntityPackage : class
+{
+    /// <summary>
+    /// 独立模型管理器构造
+    /// </summary>
+    /// <param name="entityStore"></param>
+    protected SeparateManager(IStore<TEntity, Guid> entityStore) : base(entityStore)
+    {
+    }
+}
+
+/// <summary>
 ///     单独模型
 /// </summary>
 public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : Manager,
@@ -93,7 +127,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// </summary>
     protected SeparateManager(IStore<TEntity, TKey> entityStore)
     {
-        SeparateEntityStore = entityStore;
+        EntityStore = entityStore;
     }
 
     #region StoreAccess
@@ -101,7 +135,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <summary>
     ///     单独实体存储
     /// </summary>
-    protected virtual IStore<TEntity, TKey> SeparateEntityStore { get; }
+    protected virtual IStore<TEntity, TKey> EntityStore { get; }
 
     #endregion
 
@@ -112,7 +146,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// </summary>
     protected override void StoreDispose()
     {
-        SeparateEntityStore.Dispose();
+        EntityStore.Dispose();
     }
 
     #endregion
@@ -129,7 +163,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        return SeparateEntityStore.FindMapEntityAsync<TEntityInfo>(key, cancellationToken);
+        return EntityStore.FindMapEntityAsync<TEntityInfo>(key, cancellationToken);
     }
 
     /// <summary>
@@ -144,7 +178,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
         var entity = MapNewEntity(package);
 
-        return SeparateEntityStore.CreateAsync(entity, cancellationToken);
+        return EntityStore.CreateAsync(entity, cancellationToken);
     }
 
     /// <summary>
@@ -160,7 +194,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
         var entities = packages.Select(MapNewEntity);
 
-        return SeparateEntityStore.CreateAsync(entities, cancellationToken);
+        return EntityStore.CreateAsync(entities, cancellationToken);
     }
 
     /// <summary>
@@ -175,10 +209,10 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var entity = await SeparateEntityStore.FindEntityAsync(key, cancellationToken);
+        var entity = await EntityStore.FindEntityAsync(key, cancellationToken);
 
         if (entity is not null)
-            return await SeparateEntityStore.UpdateAsync(MapOverEntity(entity, package), cancellationToken);
+            return await EntityStore.UpdateAsync(MapOverEntity(entity, package), cancellationToken);
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
@@ -196,7 +230,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
         var ids = dictionary.Keys;
 
-        var entities = await SeparateEntityStore.FindEntitiesAsync(ids, cancellationToken);
+        var entities = await EntityStore.FindEntitiesAsync(ids, cancellationToken);
 
         var entityList = entities.ToList();
 
@@ -209,7 +243,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
                 return MapOverEntity(entity, package);
             }).ToList();
 
-            return await SeparateEntityStore.UpdateAsync(entities, cancellationToken);
+            return await EntityStore.UpdateAsync(entities, cancellationToken);
         }
 
         var flag = string.Join(',', ids.Select(item => item.IdToString()));
@@ -227,10 +261,10 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var entity = await SeparateEntityStore.FindEntityAsync(key, cancellationToken);
+        var entity = await EntityStore.FindEntityAsync(key, cancellationToken);
 
         if (entity is not null)
-            return await SeparateEntityStore.DeleteAsync(entity, cancellationToken);
+            return await EntityStore.DeleteAsync(entity, cancellationToken);
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
@@ -248,12 +282,12 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
         var keyList = keys.ToList();
 
-        var entities = await SeparateEntityStore.FindEntitiesAsync(keyList, cancellationToken);
+        var entities = await EntityStore.FindEntitiesAsync(keyList, cancellationToken);
 
         var entityList = entities.ToList();
 
         if (entityList.Any())
-            return await SeparateEntityStore.DeleteAsync(entityList, cancellationToken);
+            return await EntityStore.DeleteAsync(entityList, cancellationToken);
 
         var flag = string.Join(',', keyList.Select(id => id.IdToString()));
 

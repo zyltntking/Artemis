@@ -88,5 +88,5 @@ public class Task : ConcurrencyPartition, ITask
     ///     父任务标识
     /// </summary>
     [Comment("父任务标识")]
-    public Guid ParentId { get; set; } = Guid.Empty;
+    public Guid? ParentId { get; set; } = Guid.Empty;
 }

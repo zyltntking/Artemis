@@ -463,12 +463,12 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>批量重置结果</returns>
         </member>
-        <member name="T:Artemis.Service.Identity.Managers.IdentityResourceManager">
+        <member name="T:Artemis.Service.Identity.Managers.IdentityClaimManager">
             <summary>
                 认证资源管理器
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.#ctor(Artemis.Service.Identity.Stores.IIdentityClaimStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.#ctor(Artemis.Service.Identity.Stores.IIdentityClaimStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
@@ -477,17 +477,17 @@
             <param name="logger">日志依赖</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="P:Artemis.Service.Identity.Managers.IdentityResourceManager.ClaimStore">
+        <member name="P:Artemis.Service.Identity.Managers.IdentityClaimManager.ClaimStore">
             <summary>
                 认证凭据存储访问器
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.StoreDispose">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.StoreDispose">
             <summary>
                 释放托管的Store
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.FetchClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.FetchClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据凭据信息搜索凭据
             </summary>
@@ -499,7 +499,7 @@
             <returns>分页搜索结果</returns>
             <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 根据凭据标识获取凭据
             </summary>
@@ -507,7 +507,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -515,7 +515,7 @@
             <param name="package">凭据</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -523,7 +523,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -532,7 +532,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新成功的凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -540,7 +540,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新凭据
             </summary>
@@ -549,7 +549,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建或更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.DeleteClaimAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.DeleteClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 删除凭据
             </summary>
@@ -557,7 +557,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IdentityResourceManager.DeleteClaimsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IdentityClaimManager.DeleteClaimsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
             <summary>
                 删除凭据
             </summary>
@@ -1236,12 +1236,12 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>批量重置结果</returns>
         </member>
-        <member name="T:Artemis.Service.Identity.Managers.IIdentityResourceManager">
+        <member name="T:Artemis.Service.Identity.Managers.IIdentityClaimManager">
             <summary>
                 认证资源管理接口
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.FetchClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.FetchClaimsAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据凭据信息搜索凭据
             </summary>
@@ -1253,7 +1253,7 @@
             <returns>分页搜索结果</returns>
             <remarks>当查询不到角色实例时分页结果中数据集为空列表</remarks>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.GetClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 根据凭据标识获取凭据
             </summary>
@@ -1261,7 +1261,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.CreateClaimAsync(Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -1269,7 +1269,7 @@
             <param name="package">凭据</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.CreateClaimsAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 创建凭据
             </summary>
@@ -1277,7 +1277,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.UpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -1286,7 +1286,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果和更新成功的凭据信息</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.UpdateClaimsAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage},System.Threading.CancellationToken)">
             <summary>
                 更新凭据
             </summary>
@@ -1294,7 +1294,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.CreateOrUpdateClaimAsync(System.Guid,Artemis.Service.Shared.Identity.Transfer.ClaimPackage,System.Threading.CancellationToken)">
             <summary>
                 创建或更新凭据
             </summary>
@@ -1303,7 +1303,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>创建或更新结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.DeleteClaimAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.DeleteClaimAsync(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 删除凭据
             </summary>
@@ -1311,7 +1311,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Managers.IIdentityResourceManager.DeleteClaimsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityClaimManager.DeleteClaimsAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
             <summary>
                 删除凭据
             </summary>
@@ -2193,7 +2193,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.SignOut(Google.Protobuf.WellKnownTypes.Empty,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.SignOut(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 签出
             </summary>
@@ -2225,14 +2225,6 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.Ping(Google.Protobuf.WellKnownTypes.Empty,Grpc.Core.ServerCallContext)">
-            <summary>
-            Ping
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
         <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.RecordTokenDocument(Artemis.Extensions.Identity.TokenRecord,System.Threading.CancellationToken)">
             <summary>
                 记录TokenDocument
@@ -2254,14 +2246,14 @@
                 资源服务
             </summary>
         </member>
-        <member name="M:Artemis.Service.Identity.Services.ResourceServiceImplement.#ctor(Artemis.Service.Identity.Managers.IIdentityResourceManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Identity.Services.ResourceServiceImplement})">
+        <member name="M:Artemis.Service.Identity.Services.ResourceServiceImplement.#ctor(Artemis.Service.Identity.Managers.IIdentityClaimManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Identity.Services.ResourceServiceImplement})">
             <summary>
                 资源服务
             </summary>
-            <param name="resourceManager">认证资源管理器依赖</param>
+            <param name="claimManager">认证资源管理器依赖</param>
             <param name="logger">日志依赖</param>
         </member>
-        <member name="P:Artemis.Service.Identity.Services.ResourceServiceImplement.ResourceManager">
+        <member name="P:Artemis.Service.Identity.Services.ResourceServiceImplement.ClaimManager">
             <summary>
                 资源管理器
             </summary>

@@ -19,20 +19,20 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <summary>
     ///     资源服务
     /// </summary>
-    /// <param name="resourceManager">认证资源管理器依赖</param>
+    /// <param name="claimManager">认证资源管理器依赖</param>
     /// <param name="logger">日志依赖</param>
     public ResourceServiceImplement(
-        IIdentityResourceManager resourceManager,
+        IIdentityClaimManager claimManager,
         ILogger<ResourceServiceImplement> logger)
     {
-        ResourceManager = resourceManager;
+        ClaimManager = claimManager;
         Logger = logger;
     }
 
     /// <summary>
     ///     资源管理器
     /// </summary>
-    private IIdentityResourceManager ResourceManager { get; }
+    private IIdentityClaimManager ClaimManager { get; }
 
     /// <summary>
     ///     日志依赖
@@ -52,7 +52,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     public override async Task<SearchClaimInfoResponse> SearchClaimInfo(SearchClaimInfoRequest request,
         ServerCallContext context)
     {
-        var claimInfos = await ResourceManager.FetchClaimsAsync(
+        var claimInfos = await ClaimManager.FetchClaimsAsync(
             request.ClaimType,
             request.ClaimValue,
             request.Page ?? 0,
@@ -75,7 +75,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     {
         var claimId = Guid.Parse(request.ClaimId);
 
-        var claimInfo = await ResourceManager.GetClaimAsync(claimId, context.CancellationToken);
+        var claimInfo = await ClaimManager.GetClaimAsync(claimId, context.CancellationToken);
 
         return claimInfo.ReadInfoResponse<ReadClaimInfoResponse, ClaimInfo>();
     }
@@ -92,7 +92,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     {
         var package = request.Adapt<ClaimPackage>();
 
-        var result = await ResourceManager.CreateClaimAsync(package, context.CancellationToken);
+        var result = await ClaimManager.CreateClaimAsync(package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -110,7 +110,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     {
         var claims = request.Batch.Adapt<IEnumerable<ClaimPackage>>();
 
-        var result = await ResourceManager.CreateClaimsAsync(claims, context.CancellationToken);
+        var result = await ClaimManager.CreateClaimsAsync(claims, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -129,7 +129,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
 
         var claimPackage = request.Claim.Adapt<ClaimPackage>();
 
-        var result = await ResourceManager.UpdateClaimAsync(claimId, claimPackage, context.CancellationToken);
+        var result = await ClaimManager.UpdateClaimAsync(claimId, claimPackage, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -149,7 +149,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
             item => Guid.Parse(item.ClaimId),
             item => item.Claim.Adapt<ClaimPackage>());
 
-        var result = await ResourceManager.UpdateClaimsAsync(packages, context.CancellationToken);
+        var result = await ClaimManager.UpdateClaimsAsync(packages, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -166,7 +166,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     {
         var claimId = Guid.Parse(request.ClaimId);
 
-        var result = await ResourceManager.DeleteClaimAsync(claimId, context.CancellationToken);
+        var result = await ClaimManager.DeleteClaimAsync(claimId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -184,7 +184,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     {
         var claimIds = request.ClaimIds.Select(Guid.Parse);
 
-        var result = await ResourceManager.DeleteClaimsAsync(claimIds, context.CancellationToken);
+        var result = await ClaimManager.DeleteClaimsAsync(claimIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }

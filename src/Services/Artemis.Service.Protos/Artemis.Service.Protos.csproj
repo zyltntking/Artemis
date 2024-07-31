@@ -55,19 +55,41 @@
 	  <Protobuf Include="common.proto" />
 	  <Protobuf Include="google\api\annotations.proto" />
 	  <Protobuf Include="google\api\http.proto" />
-	  <Protobuf Include="identity\account.proto" />
-	  <Protobuf Include="identity\resource.proto" />
-	  <Protobuf Include="identity\role.proto" />
-	  <Protobuf Include="identity\user.proto" />
-	  <Protobuf Include="resource\dictionary.proto" />
-	  <Protobuf Include="resource\organization.proto" />
-	  <Protobuf Include="resource\division.proto" />
-	  <Protobuf Include="resource\standard.proto" />
-	  <Protobuf Include="school\school.proto" />
-	  <Protobuf Include="school\student.proto" />
-	  <Protobuf Include="school\teacher.proto" />
-	  <Protobuf Include="task\task.proto" />
-	  <Protobuf Include="business\visionscreening\screening.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="identity\account.proto" />
+		<Protobuf Include="identity\resource.proto" />
+		<Protobuf Include="identity\role.proto" />
+		<Protobuf Include="identity\user.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="resource\dictionary.proto" />
+		<Protobuf Include="resource\organization.proto" />
+		<Protobuf Include="resource\division.proto" />
+		<Protobuf Include="resource\standard.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="school\school.proto" />
+		<Protobuf Include="school\student.proto" />
+		<Protobuf Include="school\teacher.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="task\task.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="rawdata\visualchart.proto" />
+		<Protobuf Include="rawdata\optometer.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="business\visionscreening\visionscreening.proto" />
+		<Protobuf Include="business\visionscreening\wxparentterminal.proto" />
+		<Protobuf Include="business\visionscreening\wxteacherterminal.proto" />
 	</ItemGroup>
 
 </Project>

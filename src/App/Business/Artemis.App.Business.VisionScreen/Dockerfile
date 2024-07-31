@@ -10,6 +10,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/App/Business/Artemis.App.Business.VisionScreen/Artemis.App.Business.VisionScreen.csproj", "src/App/Business/Artemis.App.Business.VisionScreen/"]
+COPY ["src/Extensions/Artemis.Extensions.Identity/Artemis.Extensions.Identity.csproj", "src/Extensions/Artemis.Extensions.Identity/"]
+COPY ["src/Data/Artemis.Data.Core/Artemis.Data.Core.csproj", "src/Data/Artemis.Data.Core/"]
+COPY ["src/Extensions/Artemis.Extensions.ServiceConnect/Artemis.Extensions.ServiceConnect.csproj", "src/Extensions/Artemis.Extensions.ServiceConnect/"]
+COPY ["src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj", "src/Services/Artemis.Service.Protos/"]
 RUN dotnet restore "./src/App/Business/Artemis.App.Business.VisionScreen/Artemis.App.Business.VisionScreen.csproj"
 COPY . .
 WORKDIR "/src/src/App/Business/Artemis.App.Business.VisionScreen"

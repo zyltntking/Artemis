@@ -1,9 +1,21 @@
-﻿namespace Artemis.Service.Shared.Resource;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Resource;
 
 /// <summary>
 ///     行政区划接口
 /// </summary>
-public interface IDivision
+public interface IDivision : IDivisionInfo;
+
+/// <summary>
+/// 行政区划信息
+/// </summary>
+public interface IDivisionInfo : IDivisionPackage, IKeySlot, IParentKeySlot;
+
+/// <summary>
+/// 行政区划数据包
+/// </summary>
+public interface IDivisionPackage
 {
     /// <summary>
     ///     行政区划名称

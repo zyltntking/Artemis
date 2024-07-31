@@ -1,0 +1,226 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.RawData";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.RawData;
+
+// 电子视力表服务
+service VisualChartService {
+
+	// 查询电子视力表信息
+	rpc SearchVisualChartInfo (SearchVisualChartInfoRequest) returns (SearchVisualChartInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/VisualChart"
+		};
+	}
+
+	// 读取电子视力表信息
+	rpc ReadVisualChartInfo (ReadVisualChartInfoRequest) returns (ReadVisualChartInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/VisualChart/{VisualChartId}"
+		};
+	}
+
+	// 创建电子视力表数据
+	rpc CreateVisualChartData (CreateVisualChartRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/VisualChart"
+			body: "*"
+		};
+	}
+
+	// 批量创建电子视力表数据
+	rpc BatchCreateVisualChartData (BatchCreateVisualChartRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/VisualChart/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 删除电子视力表数据
+	rpc DeleteVisualChartData (DeleteVisualChartRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/VisualChart/{VisualChartId}"
+		};
+	}
+
+	// 批量删除电子视力表数据
+	rpc BatchDeleteVisualChartData (BatchDeleteVisualChartRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/VisualChart/BatchDelete"
+			body: "Batch"
+		};
+	}
+}
+
+// 查询电子视力表信息请求
+message SearchVisualChartInfoRequest{
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 1;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 2;
+}
+
+// 电子视力表信息数据包
+message VisualChartInfoPackage {
+	// 视力表数据标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 左眼裸眼距离
+	google.protobuf.DoubleValue NeckedLeftDistance = 2;
+	// 右眼裸眼距离
+	google.protobuf.DoubleValue NeckedRightDistance = 3;
+	// 左眼矫正距离
+	google.protobuf.DoubleValue CorrectedLeftDistance = 4;
+	// 右眼矫正距离
+	google.protobuf.DoubleValue CorrectedRightDistance = 5;
+	// 左眼裸眼视力
+	google.protobuf.DoubleValue NeckedLeftVisualAcuity = 6;
+	// 右眼裸眼视力
+	google.protobuf.DoubleValue NeckedRightVisualAcuity = 7;
+	// 左眼矫正视力
+	google.protobuf.DoubleValue CorrectedLeftVisualAcuity = 8;
+	// 右眼矫正视力
+	google.protobuf.DoubleValue CorrectedRightVisualAcuity = 9;
+	// 视力表序列号
+	// @maxLength(64)
+	google.protobuf.StringValue SerialNumber = 10;
+	// 电子视力表类型
+	// @maxLength(32)
+	google.protobuf.StringValue ChartType = 11;
+	// 检查时间
+	google.protobuf.Timestamp CheckTime = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
+}
+
+// 分页电子视力表信息数据包
+message PagedVisualChartInfoPacket {
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 电子视力表信息数据
+	// @required
+	repeated VisualChartInfoPackage Items = 5;
+}
+
+// 查询电子视力表信息响应
+message SearchVisualChartInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 电子视力表信息数据
+	PagedVisualChartInfoPacket Data = 7;
+}
+
+// 读取电子视力表信息请求
+message ReadVisualChartInfoRequest {
+	// 视力表数据标识
+	// @required
+	// @guid
+	string VisualChartId = 1;
+}
+
+// 读取电子视力表信息响应
+message ReadVisualChartInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 电子视力表信息数据
+	VisualChartInfoPackage Data = 7;
+}
+
+
+// 创建电子视力表数据请求
+message CreateVisualChartRequest {
+	// 左眼裸眼距离
+	google.protobuf.DoubleValue NeckedLeftDistance = 1;
+	// 右眼裸眼距离
+	google.protobuf.DoubleValue NeckedRightDistance = 2;
+	// 左眼矫正距离
+	google.protobuf.DoubleValue CorrectedLeftDistance = 3;
+	// 右眼矫正距离
+	google.protobuf.DoubleValue CorrectedRightDistance = 4;
+	// 左眼裸眼视力
+	google.protobuf.DoubleValue NeckedLeftVisualAcuity = 5;
+	// 右眼裸眼视力
+	google.protobuf.DoubleValue NeckedRightVisualAcuity = 6;
+	// 左眼矫正视力
+	google.protobuf.DoubleValue CorrectedLeftVisualAcuity = 7;
+	// 右眼矫正视力
+	google.protobuf.DoubleValue CorrectedRightVisualAcuity = 8;
+	// 视力表序列号
+	// @maxLength(64)
+	google.protobuf.StringValue SerialNumber = 9;
+	// 电子视力表类型
+	// @maxLength(32)
+	google.protobuf.StringValue ChartType = 10;
+	// 检查时间
+	google.protobuf.Timestamp CheckTime = 11;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 12;
+}
+
+// 批量创建电子视力表数据请求
+message BatchCreateVisualChartRequest {
+	// 电子视力表数据
+	repeated CreateVisualChartRequest Batch = 1;
+}
+
+// 删除电子视力表数据请求
+message DeleteVisualChartRequest {
+	// 视力表数据标识
+	// @required
+	// @guid
+	string VisualChartId = 1;
+}
+
+// 批量删除电子视力表数据请求
+message BatchDeleteVisualChartRequest {
+	// 视力表数据标识
+	// @required
+	// @guid
+	repeated string Batch = 1;
+}

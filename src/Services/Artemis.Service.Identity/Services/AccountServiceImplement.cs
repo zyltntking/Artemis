@@ -152,7 +152,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("签出")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<EmptyResponse> SignOut(Empty request, ServerCallContext context)
+    public override async Task<EmptyResponse> SignOut(EmptyRequest request, ServerCallContext context)
     {
         var authorizationToken = context
             .GetHttpContext()

@@ -1,0 +1,417 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "business/visionscreening/visionscreening.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Business.VisionScreen;
+
+// 小程序家长终端服务
+service WxParentTerminalService{
+
+	// 获取个人中心孩子信息
+	rpc FetchChildrenInfo(EmptyRequest) returns (FetchChildInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/ParentTerminal/FetchChildrenInfo"
+		};
+	}
+
+	// 获取个人中心消息信息
+	rpc FetchUserMessageInfo(EmptyRequest) returns (FetchParentUserMessageInfoResponse) {
+		option (google.api.http) = {
+			get: "/api/ParentTerminal/FetchUserMessageInfo"
+		};
+	}
+
+	// 反馈筛查记录后续处理
+	rpc FeedbackRecord(FeedbackRecordRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/ParentTerminal/FeedbackRecord"
+			body: "*"
+		};
+	}
+
+	// 查询孩子信息
+	rpc QueryChild(QueryChildRequest) returns (QueryChildResponse) {
+		option (google.api.http) = {
+			get: "/api/ParentTerminal/QueryChild"
+		};
+	}
+
+	// 绑定孩子关系
+	rpc BindChildRelation(BindChildRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/ParentTerminal/BindChildRelation"
+			body: "*"
+		};
+	}
+
+	// 上传孩子眼部照片
+	rpc UploadChildEyePhoto(UploadChildEyePhotoRequest) returns (EmptyResponse) {
+		option (google.api.http) = {
+			post: "/api/ParentTerminal/UploadChildEyePhoto"
+			body: "*"
+		};
+	}
+
+	// 读取筛查结果
+	rpc ReadScreenRecord(ReadScreenRecordRequest) returns (ReadScreenRecordResponse) {
+		option (google.api.http) = {
+			get: "/api/ParentTerminal/ReadScreenRecord"
+		};
+	}
+}
+
+// 孩子信息数据包
+message ChildInfoPacket {
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 学生姓名
+	// @required
+	// @maxLength(128)
+	string Name = 2;
+	// 学生性别
+	// @required
+	// @maxLength(32)
+	string Gender = 3;
+	// 学生生日
+	// @datetime
+	google.protobuf.Timestamp Birthday = 4;
+	// 学生民族
+	// @required
+	// @maxLength(32)
+	string Nation = 5;
+	// 学籍号
+	// @required
+	// @maxLength(32)
+	string StudentNumber = 6;
+	// 学校名称
+	// @required
+	// @maxLength(128)
+	string SchoolName = 7;
+	// 班级名称
+	// @required
+	// @maxLength(128)
+	string ClassName = 8;
+	// 亲属关系
+	// @required
+	// @maxLength(32)
+	string Relation = 9;
+	// 左眼照片
+	google.protobuf.StringValue LeftEyePhoto = 10;
+	// 右眼照片
+	google.protobuf.StringValue RightEyePhoto = 11;
+	// 双眼照片
+	google.protobuf.StringValue BothEyePhoto = 12;
+}
+
+// 孩子信息
+message ChildInfo {
+	// 孩子信息数据
+	// @required
+	ChildInfoPacket Child = 1;
+	// 历史筛查记录数
+	// @required
+	int32 HistoryRecords = 2;
+}
+
+// 获取孩子信息响应
+message FetchChildInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 验光仪数据
+	// @required
+	repeated ChildInfo Data = 7;
+}
+
+// 未反馈记录数据包
+message NotFeedbackRecordPacket{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+	// 记录时间
+	// @datetime
+	google.protobuf.Timestamp DateTime = 3;
+}
+
+// 家长个人中心消息信息
+message ParentUserMessageInfo{
+	// 通知消息数据
+	// @required
+	repeated NotificationPacket Notifications = 1;
+	// 未反馈记录数据
+	// @required
+	repeated NotFeedbackRecordPacket NotFeedbackRecords = 2;
+}
+
+// 获取家长端个人中心消息信息响应
+message FetchParentUserMessageInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 个人中心消息信息
+	// @required
+	ParentUserMessageInfo Data = 7;
+}
+
+// 反馈筛查记录后续处理请求
+message FeedbackRecordRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 处理结果
+	// @required
+	// @maxLength(128)
+	string Result = 2;
+}
+
+// 查询孩子信息请求
+message QueryChildRequest{
+	// 学籍号
+	// @required
+	// @maxLength(32)
+	string StudentNumber = 1;
+}
+
+// 查询孩子信息响应
+message QueryChildResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 孩子信息数据
+	// @required
+	ChildInfoPacket Data = 7;
+}
+
+// 绑定孩子请求
+message BindChildRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 亲属
+	// @required
+	// @maxLength(32)
+	string Relation = 2;
+}
+
+// 上传学生眼部照片请求
+message UploadChildEyePhotoRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 眼部照片
+	// @required
+	// @base64
+	string EyePhoto = 2;
+	// 眼部照片类型
+	// @required
+	// @maxLength(32)
+	string EyePhotoType = 3;
+}
+
+// 读取筛查结果
+message ReadScreenRecordRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+}
+
+// 筛查结果数据包
+message ScreenRecordPacket{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+	// 左眼裸眼视力
+	// @required
+	double LeftNakedEyeVision = 3;
+	// 右眼裸眼视力
+	// @required
+	double RightNakedEyeVision = 4;
+	// 左眼矫正视力
+	// @required
+	double LeftCorrectedVision = 5;
+	// 右眼矫正视力
+	// @required
+	double RightCorrectedVision = 6;
+	// 左眼散光度数
+	// @required
+	double LeftAstigmatism = 7;
+	// 右眼散光度数
+	// @required
+	double RightAstigmatism = 8;
+	// 瞳距
+	// @required
+	double PupilDistance = 9;
+	// 左眼球镜
+	// @required
+	double LeftSpherical = 10;
+	// 右眼球镜
+	// @required
+	double RightSpherical = 11;
+	// 左眼柱镜
+	// @required
+	double LeftCylinder = 12;
+	// 右眼柱镜
+	// @required
+	double RightCylinder = 13;
+	// 左眼轴位
+	// @required
+	double LeftAxis = 14;
+	// 右眼轴位
+	// @required
+	double RightAxis = 15;
+	// 左眼等效球镜
+	// @required
+	double LeftEquivalentSpherical = 16;
+	// 右眼等效球镜
+	// @required
+	double RightEquivalentSpherical = 17;
+	// 左眼是否佩戴角膜塑形镜
+	// @required
+	bool LeftCornealShapingLens = 18;
+	// 右眼是否佩戴角膜塑形镜
+	// @required
+	bool RightCornealShapingLens = 19;
+	// 左眼角膜曲率r1(mm)
+	// @required
+	double LeftCornealCurvatureR1 = 20;
+	// 右眼角膜曲率r1(mm)
+	// @required
+	double RightCornealCurvatureR1 = 21;
+	// 左眼角膜曲率r1(d)
+	// @required
+	double LeftCornealCurvatureD1 = 22;
+	// 右眼角膜曲率r1(d)
+	// @required
+	double RightCornealCurvatureD1 = 23;
+	// 左眼角膜曲率r1角度
+	// @required
+	double LeftCornealCurvatureAngle1 = 24;
+	// 右眼角膜曲率r1角度
+	// @required
+	double RightCornealCurvatureAngle1 = 25;
+	// 左眼角膜曲率r2(mm)
+	// @required
+	double LeftCornealCurvatureR2 = 26;
+	// 右眼角膜曲率r2(mm)
+	// @required
+	double RightCornealCurvatureR2 = 27;
+	// 左眼角膜曲率r2(d)
+	// @required
+	double LeftCornealCurvatureD2 = 28;
+	// 右眼角膜曲率r2(d)
+	// @required
+	double RightCornealCurvatureD2 = 29;
+	// 左眼角膜曲率r2角度
+	// @required
+	double LeftCornealCurvatureAngle2 = 30;
+	// 右眼角膜曲率r2角度
+	// @required
+	double RightCornealCurvatureAngle2 = 31;
+	// 左眼角膜曲率平均值(mm)
+	// @required
+	double LeftCornealCurvatureAverage = 32;
+	// 右眼角膜曲率平均值(mm)
+	// @required
+	double RightCornealCurvatureAverage = 33;
+	// 左眼角膜曲率平均值(d)
+	// @required
+	double LeftCornealCurvatureAverageD = 34;
+	// 右眼角膜曲率平均值(d)
+	// @required
+	double RightCornealCurvatureAverageD = 35;
+	// 左眼角膜曲率散光度
+	// @required
+	double LeftCornealCurvatureAstigmatism = 36;
+	// 右眼角膜曲率散光度
+	// @required
+	double RightCornealCurvatureAstigmatism = 37;
+	// 筛查时间
+	// @datetime
+	google.protobuf.Timestamp DateTime = 38;
+	// 筛查结果
+	// @required
+	google.protobuf.StringValue Result = 39;
+}
+
+// 读取筛查结果响应
+message ReadScreenRecordResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 筛查结果数据
+	// @required
+	ScreenRecordPacket Data = 7;
+}

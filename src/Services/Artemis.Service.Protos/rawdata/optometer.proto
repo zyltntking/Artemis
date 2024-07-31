@@ -1,0 +1,112 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.RawData";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.RawData;
+
+// 验光仪数据服务
+service OptometerService{
+	// 查询验光仪数据信息
+	rpc SearchOptometerInfo(SearchOptometerInfoRequest) returns (SearchOptometerInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Optometer"
+		};
+	}
+}
+
+// 查询验光仪数据信息请求
+message SearchOptometerInfoRequest{
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 1;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 2;
+}
+
+// 验光仪数据信息数据包
+message OptometerInfoPacket{
+	// 视力表数据标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 近眼距
+	// @min(0)
+	google.protobuf.DoubleValue NearPupilDistance = 2;
+	// 右眼球镜度数
+	google.protobuf.DoubleValue RightEyeSph = 3;
+	// 右眼柱镜度数
+	google.protobuf.DoubleValue RightEyeCyl = 4;
+	// 右眼轴位
+	google.protobuf.DoubleValue RightEyeAxis = 5;
+	// 右眼平均近视度数
+	google.protobuf.DoubleValue RightEyeAvgMyopia = 6;
+	// 右眼等效球镜
+	google.protobuf.DoubleValue RightEyeSe = 7;
+	// 左眼球镜度数
+	google.protobuf.DoubleValue LeftEyeSph = 8;
+	// 左眼柱镜度数
+	google.protobuf.DoubleValue LeftEyeCyl = 9;
+	// 左眼轴位
+	google.protobuf.DoubleValue LeftEyeAxis = 10;
+	// 左眼平均近视度数
+	google.protobuf.DoubleValue LeftEyeAvgMyopia = 11;
+	// 左眼等效球镜
+	google.protobuf.DoubleValue LeftEyeSe = 12;
+	// 序列号
+	// @maxLength(64)
+	google.protobuf.StringValue SerialNumber = 13;
+	// 验光仪类型
+	// @maxLength(32)
+	google.protobuf.StringValue ChartType = 14;
+	// 检查时间
+	google.protobuf.Timestamp CheckTime = 15;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 16;
+}
+
+// 分页验光仪数据信息数据包
+message PagedDictionaryInfoPacket {
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 验光仪数据
+	// @required
+	repeated OptometerInfoPacket Items = 5;
+}
+
+// 查询验光仪数据信息响应
+message SearchOptometerInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 验光仪数据
+	// @required
+	PagedDictionaryInfoPacket Data = 7;
+}

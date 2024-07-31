@@ -29,7 +29,7 @@ service AccountService {
     }
     
     // 签出
-    rpc SignOut (google.protobuf.Empty) returns (EmptyResponse){
+    rpc SignOut (EmptyRequest) returns (EmptyResponse){
         option (google.api.http) = {
             post: "/api/Account/SignOut"
         };

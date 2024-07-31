@@ -14,7 +14,7 @@ namespace Artemis.Service.Identity.Managers;
 /// <summary>
 ///     认证资源管理器
 /// </summary>
-public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
+public sealed class IdentityClaimManager : Manager, IIdentityClaimManager
 {
     /// <summary>
     ///     创建新的管理器实例
@@ -23,7 +23,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
     /// <param name="options">配置依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public IdentityResourceManager(
+    public IdentityClaimManager(
         IIdentityClaimStore claimStore,
         IManagerOptions? options = null,
         ILogger? logger = null) : base(options, logger)
@@ -52,7 +52,7 @@ public sealed class IdentityResourceManager : Manager, IIdentityResourceManager
 
     #endregion
 
-    #region Implementation of IIdentityResourceManager
+    #region Implementation of IIdentityClaimManager
 
     /// <summary>
     ///     根据凭据信息搜索凭据

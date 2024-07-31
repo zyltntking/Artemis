@@ -706,37 +706,47 @@
                 行政区划接口
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Name">
+        <member name="T:Artemis.Service.Shared.Resource.IDivisionInfo">
+            <summary>
+            行政区划信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDivisionPackage">
+            <summary>
+            行政区划数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Name">
             <summary>
                 行政区划名称
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Code">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Code">
             <summary>
                 行政区划代码
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Level">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Level">
             <summary>
                 行政区划级别
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Type">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Type">
             <summary>
                 行政区划类型
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.FullName">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.FullName">
             <summary>
                 行政区划全名
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Pinyin">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Pinyin">
             <summary>
                 行政区划拼音
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDivision.Remark">
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Remark">
             <summary>
                 行政区划备注
             </summary>
@@ -1348,7 +1358,7 @@
         </member>
         <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfoTree.Children">
             <summary>
-                子任务
+                子节点
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Task.Transfer.TaskInfo">

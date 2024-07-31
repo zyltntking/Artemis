@@ -28,25 +28,25 @@ internal sealed class ArtemisDivisionConfiguration : ConcurrencyModelEntityConfi
     /// <param name="builder"></param>
     protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisDivision> builder)
     {
-        builder.Property<string>("ProvinceCode")
-            .HasComputedColumnSql(@"substring(""Code"", 1, 2)", true)
-            .HasMaxLength(4)
-            .HasComment("省级行政区划编码");
+        //builder.Property<string>("ProvinceCode")
+        //    .HasComputedColumnSql(@"substring(""Code"", 1, 2)", true)
+        //    .HasMaxLength(4)
+        //    .HasComment("省级行政区划编码");
 
-        builder.Property<string>("PrefectureCode")
-            .HasComputedColumnSql(@"substring(""Code"", 1, 4)", true)
-            .HasMaxLength(6)
-            .HasComment("地级行政区划编码");
+        //builder.Property<string>("PrefectureCode")
+        //    .HasComputedColumnSql(@"substring(""Code"", 1, 4)", true)
+        //    .HasMaxLength(6)
+        //    .HasComment("地级行政区划编码");
 
-        builder.Property<string>("CountyCode")
-            .HasComputedColumnSql(@"substring(""Code"", 1, 6)", true)
-            .HasMaxLength(8)
-            .HasComment("县级行政区划编码");
+        //builder.Property<string>("CountyCode")
+        //    .HasComputedColumnSql(@"substring(""Code"", 1, 6)", true)
+        //    .HasMaxLength(8)
+        //    .HasComment("县级行政区划编码");
 
-        builder.Property<string>("TownshipCode")
-            .HasComputedColumnSql(@"substring(""Code"", 1, 9)", true)
-            .HasMaxLength(11)
-            .HasComment("乡级行政区划编码");
+        //builder.Property<string>("TownshipCode")
+        //    .HasComputedColumnSql(@"substring(""Code"", 1, 9)", true)
+        //    .HasMaxLength(11)
+        //    .HasComment("乡级行政区划编码");
     }
 
     /// <summary>
@@ -56,17 +56,17 @@ internal sealed class ArtemisDivisionConfiguration : ConcurrencyModelEntityConfi
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDivision> builder)
     {
         // Shadow Properties
-        builder.HasIndex("ProvinceCode")
-            .HasDatabaseName(IndexName("ProvinceCode"));
+        //builder.HasIndex("ProvinceCode")
+        //    .HasDatabaseName(IndexName("ProvinceCode"));
 
-        builder.HasIndex("PrefectureCode")
-            .HasDatabaseName(IndexName("PrefectureCode"));
+        //builder.HasIndex("PrefectureCode")
+        //    .HasDatabaseName(IndexName("PrefectureCode"));
 
-        builder.HasIndex("CountyCode")
-            .HasDatabaseName(IndexName("CountyCode"));
+        //builder.HasIndex("CountyCode")
+        //    .HasDatabaseName(IndexName("CountyCode"));
 
-        builder.HasIndex("TownshipCode")
-            .HasDatabaseName(IndexName("TownshipCode"));
+        //builder.HasIndex("TownshipCode")
+        //    .HasDatabaseName(IndexName("TownshipCode"));
 
         // Each Division can have many Children Division
         builder.HasMany(division => division.Children)

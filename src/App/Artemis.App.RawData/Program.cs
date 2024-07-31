@@ -1,6 +1,7 @@
 using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.RawData.Context;
+using Artemis.Service.RawData.Services;
 using Artemis.Service.School;
 using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -72,8 +73,8 @@ public class Program
             app.UseGrpcSwagger();
 
             // Configure the HTTP request pipeline.
-            //app.MapGrpcService<SampleService>();
-            //app.MapGrpcService<AccountService>();
+            app.MapGrpcService<VisualChartServiceImplement>();
+            app.MapGrpcService<OptometerServiceImplement>();
             //app.MapGrpcService<UserService>();
             //app.MapGrpcService<RoleService>();
 
