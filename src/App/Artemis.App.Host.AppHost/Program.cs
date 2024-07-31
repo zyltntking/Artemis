@@ -26,7 +26,13 @@ var postgres = builder.AddPostgres("PostgresInstance", password: password, port:
 
 var artemisDb = postgres.AddDatabase("ArtemisDb", "Artemis");
 
+builder.AddProject<Artemis_App_Gateway>("ApiGateway");
+
 builder.AddProject<Artemis_App_Identity>("IdentityService")
+    .WithReference(redis)
+    .WithReference(artemisDb);
+
+builder.AddProject<Artemis_App_Resource>("ResourceService")
     .WithReference(redis)
     .WithReference(artemisDb);
 
@@ -35,6 +41,10 @@ builder.AddProject<Artemis_App_School>("SchoolService")
     .WithReference(artemisDb);
 
 builder.AddProject<Artemis_App_Task>("TaskService")
+    .WithReference(redis)
+    .WithReference(artemisDb);
+
+builder.AddProject<Artemis_App_RawData>("RawDataService")
     .WithReference(redis)
     .WithReference(artemisDb);
 

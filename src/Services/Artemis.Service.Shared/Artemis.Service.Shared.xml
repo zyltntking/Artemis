@@ -828,7 +828,7 @@
         </member>
         <member name="P:Artemis.Service.Shared.School.IClass.GradeName">
             <summary>
-            年级名称
+                年级名称
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.School.IClass.Type">

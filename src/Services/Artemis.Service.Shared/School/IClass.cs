@@ -21,7 +21,7 @@ public interface IClass
     string? Name { get; set; }
 
     /// <summary>
-    /// 年级名称
+    ///     年级名称
     /// </summary>
     string? GradeName { get; set; }
 

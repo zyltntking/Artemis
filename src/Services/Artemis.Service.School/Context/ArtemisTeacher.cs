@@ -16,14 +16,9 @@ public sealed class ArtemisTeacher : Teacher
     public ICollection<ArtemisSchoolTeacher>? SchoolTeachers { get; set; }
 
     /// <summary>
-    ///     教师所过的学校
+    ///     教师所在的学校
     /// </summary>
     public ICollection<ArtemisSchool>? Schools { get; set; }
-
-    /// <summary>
-    ///     教师当前所属关系
-    /// </summary>
-    public ICollection<ArtemisTeacherCurrentAffiliation>? CurrentAffiliations { get; set; }
 
     /// <summary>
     ///     班级老师对应关系
@@ -31,7 +26,7 @@ public sealed class ArtemisTeacher : Teacher
     public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }
 
     /// <summary>
-    ///     教师教过的班级
+    ///     教师所在的班级
     /// </summary>
     public ICollection<ArtemisClass>? Classes { get; set; }
 

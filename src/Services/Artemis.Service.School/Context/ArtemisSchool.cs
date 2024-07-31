@@ -33,14 +33,4 @@ public sealed class ArtemisSchool : Models.School
     ///     学校管理的教师
     /// </summary>
     public ICollection<ArtemisTeacher>? Teachers { get; set; }
-
-    /// <summary>
-    ///     教师当前所属关系
-    /// </summary>
-    public ICollection<ArtemisTeacherCurrentAffiliation>? CurrentTeachers { get; set; }
-
-    /// <summary>
-    ///     学生当前所属关系
-    /// </summary>
-    public ICollection<ArtemisStudentCurrentAffiliation>? CurrentStudents { get; set; }
 }

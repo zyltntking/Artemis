@@ -31,11 +31,6 @@ public sealed class ArtemisClass : Class
     public ICollection<ArtemisStudent>? Students { get; set; }
 
     /// <summary>
-    ///     学生当前所属关系
-    /// </summary>
-    public ICollection<ArtemisStudentCurrentAffiliation>? CurrentStudents { get; set; }
-
-    /// <summary>
     ///     班级老师对应关系
     /// </summary>
     public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }
@@ -44,9 +39,4 @@ public sealed class ArtemisClass : Class
     ///     班级所属的教师
     /// </summary>
     public ICollection<ArtemisTeacher>? Teachers { get; set; }
-
-    /// <summary>
-    ///     教师当前所属关系
-    /// </summary>
-    public ICollection<ArtemisTeacherCurrentAffiliation>? CurrentTeachers { get; set; }
 }

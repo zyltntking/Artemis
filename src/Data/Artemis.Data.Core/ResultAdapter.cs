@@ -27,9 +27,9 @@ public static class ResultAdapter
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
     /// <returns></returns>
-    public static TResult AdaptEmptySuccess<TResult>()
+    public static TResult AdaptEmptySuccess<TResult>(string message = "成功")
     {
-        return DataResult.NullSuccess().Adapt<TResult>();
+        return DataResult.NullSuccess(message).Adapt<TResult>();
     }
 
     /// <summary>

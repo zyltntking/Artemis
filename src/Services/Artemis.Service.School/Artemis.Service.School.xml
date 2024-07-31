@@ -29,11 +29,6 @@
                 班级管理的学生
             </summary>
         </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentStudents">
-            <summary>
-                学生当前所属关系
-            </summary>
-        </member>
         <member name="P:Artemis.Service.School.Context.ArtemisClass.ClassTeachers">
             <summary>
                 班级老师对应关系
@@ -42,11 +37,6 @@
         <member name="P:Artemis.Service.School.Context.ArtemisClass.Teachers">
             <summary>
                 班级所属的教师
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisClass.CurrentTeachers">
-            <summary>
-                教师当前所属关系
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Context.ArtemisClassStudent">
@@ -109,16 +99,6 @@
                 学校管理的教师
             </summary>
         </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentTeachers">
-            <summary>
-                教师当前所属关系
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisSchool.CurrentStudents">
-            <summary>
-                学生当前所属关系
-            </summary>
-        </member>
         <member name="T:Artemis.Service.School.Context.ArtemisSchoolStudent">
             <summary>
                 学校学生关系对应实体
@@ -174,31 +154,6 @@
                 学生所在的学校
             </summary>
         </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudent.CurrentAffiliation">
-            <summary>
-                学生所属关系
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation">
-            <summary>
-                学生当前所属关系实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.School">
-            <summary>
-                学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Class">
-            <summary>
-                班级
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation.Student">
-            <summary>
-                学生
-            </summary>
-        </member>
         <member name="T:Artemis.Service.School.Context.ArtemisTeacher">
             <summary>
                 教师实体
@@ -211,12 +166,7 @@
         </member>
         <member name="P:Artemis.Service.School.Context.ArtemisTeacher.Schools">
             <summary>
-                教师所过的学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.CurrentAffiliations">
-            <summary>
-                教师当前所属关系
+                教师所在的学校
             </summary>
         </member>
         <member name="P:Artemis.Service.School.Context.ArtemisTeacher.ClassTeachers">
@@ -226,32 +176,12 @@
         </member>
         <member name="P:Artemis.Service.School.Context.ArtemisTeacher.Classes">
             <summary>
-                教师教过的班级
+                教师所在的班级
             </summary>
         </member>
         <member name="P:Artemis.Service.School.Context.ArtemisTeacher.HeadTeacherClass">
             <summary>
                 班主任班级
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation">
-            <summary>
-                教师当前所属关系实体
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Teacher">
-            <summary>
-                教师
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.School">
-            <summary>
-                学校
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation.Class">
-            <summary>
-                班级
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration">
@@ -271,7 +201,7 @@
         </member>
         <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.CountGradeName(System.DateTime)">
             <summary>
-            计算年级名称
+                计算年级名称
             </summary>
             <param name="establishTime"></param>
             <returns></returns>
@@ -409,27 +339,6 @@
                 表名
             </summary>
         </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration">
-            <summary>
-                学生当前所属关系配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentCurrentAffiliation})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
-        </member>
         <member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherConfiguration">
             <summary>
                 教师配置
@@ -444,27 +353,6 @@
             <summary>
                 表名
             </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration">
-            <summary>
-                教师当前所属关系配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.DataSetDescription">
-            <summary>
-                数据集描述
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.TableName">
-            <summary>
-                表名
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherCurrentAffiliationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherCurrentAffiliation})">
-            <summary>
-                实体关系配置
-            </summary>
-            <param name="builder"></param>
         </member>
         <member name="T:Artemis.Service.School.Context.SchoolContext">
             <summary>
@@ -517,16 +405,6 @@
                 学校学生数据集
             </summary>
         </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.TeacherCurrentAffiliations">
-            <summary>
-                教师当前所属关系数据集
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Context.SchoolContext.StudentCurrentAffiliations">
-            <summary>
-                学生当前所属关系数据集
-            </summary>
-        </member>
         <member name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
@@ -538,12 +416,11 @@
                 学校管理器
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore,Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisSchoolTeacherStore,Artemis.Service.School.Stores.IArtemisSchoolStudentStore,Artemis.Service.School.Stores.IArtemisClassTeacherStore,Artemis.Service.School.Stores.IArtemisClassStudentStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 创建新的管理器实例
             </summary>
             <param name="schoolStore">存储访问器依赖</param>
-            <param name="teacherCurrentAffiliationStore"></param>
             <param name="options">配置依赖</param>
             <param name="logger">日志依赖</param>
             <param name="classStore"></param>
@@ -553,7 +430,6 @@
             <param name="schoolStudentStore"></param>
             <param name="classTeacherStore"></param>
             <param name="classStudentStore"></param>
-            <param name="studentCurrentAffiliationStore"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Artemis.Service.School.Managers.ArtemisSchoolManager.StoreDispose">
@@ -601,16 +477,6 @@
                 班级学生关系存储访问器
             </summary>
         </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.StudentCurrentAffiliationStore">
-            <summary>
-                学生当前关系存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.School.Managers.ArtemisSchoolManager.TeacherCurrentAffiliationStore">
-            <summary>
-                教师当前关系存储访问器
-            </summary>
-        </member>
         <member name="T:Artemis.Service.School.Managers.IArtemisSchoolManager">
             <summary>
                 学校管理接口
@@ -638,7 +504,7 @@
         </member>
         <member name="P:Artemis.Service.School.Models.Class.GradeName">
             <summary>
-            年级名称
+                年级名称
             </summary>
         </member>
         <member name="P:Artemis.Service.School.Models.Class.Type">
@@ -971,17 +837,17 @@
         </member>
         <member name="T:Artemis.Service.School.Services.SchoolServiceImplement">
             <summary>
-            学校服务实现
+                学校服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Services.StudentServiceImplement">
             <summary>
-            学生服务实现
+                学生服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Services.TeacherServiceImplement">
             <summary>
-            教师服务实现
+                教师服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Stores.IArtemisClassStore">
@@ -1136,33 +1002,6 @@
                 键生成委托
             </summary>
         </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisStudentCurrentAffiliationStore">
-            <summary>
-                学生当前所属关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore">
-            <summary>
-                学生当前所属关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisStudentCurrentAffiliationStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
-        </member>
         <member name="T:Artemis.Service.School.Stores.IArtemisStudentStore">
             <summary>
                 学生存储接口
@@ -1184,33 +1023,6 @@
             <param name="logger"></param>
             <param name="describer"></param>
             <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.IArtemisTeacherCurrentAffiliationStore">
-            <summary>
-                教师当前所属关系存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore">
-            <summary>
-                教师当前所属关系存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                无键模型基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
-        </member>
-        <member name="P:Artemis.Service.School.Stores.ArtemisTeacherCurrentAffiliationStore.EntityKey">
-            <summary>
-                键生成委托
-            </summary>
         </member>
         <member name="T:Artemis.Service.School.Stores.IArtemisTeacherStore">
             <summary>

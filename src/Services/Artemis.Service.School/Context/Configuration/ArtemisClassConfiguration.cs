@@ -23,13 +23,15 @@ internal sealed class ArtemisClassConfiguration : ConcurrencyPartitionEntityConf
     protected override string TableName => nameof(ArtemisClass).TableName();
 
     /// <summary>
-    /// 计算年级名称
+    ///     计算年级名称
     /// </summary>
     /// <param name="establishTime"></param>
     /// <returns></returns>
     /// <exception cref="NotSupportedException"></exception>
     public double CountGradeName(DateTime establishTime)
-        => throw new NotSupportedException();
+    {
+        throw new NotSupportedException();
+    }
 
     /// <summary>
     ///     实体关系配置

@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Resource", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.RawData", "src\App\Artemis.App.RawData\Artemis.App.RawData.csproj", "{BF99351B-C91E-4C06-9252-AE76F0A15A94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.App.Gateway", "src\App\Artemis.App.Gateway\Artemis.App.Gateway.csproj", "{67B73611-0C06-4C50-9497-D2E4FCD5B94B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{BF99351B-C91E-4C06-9252-AE76F0A15A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF99351B-C91E-4C06-9252-AE76F0A15A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF99351B-C91E-4C06-9252-AE76F0A15A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B73611-0C06-4C50-9497-D2E4FCD5B94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B73611-0C06-4C50-9497-D2E4FCD5B94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B73611-0C06-4C50-9497-D2E4FCD5B94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B73611-0C06-4C50-9497-D2E4FCD5B94B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{6BB5FF5A-FD19-45B2-B810-5408DD074C43} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{E6B397A4-0436-4FE1-BE8C-28F6A1767C59} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 		{BF99351B-C91E-4C06-9252-AE76F0A15A94} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
+		{67B73611-0C06-4C50-9497-D2E4FCD5B94B} = {F6FF38FF-F36A-419B-B60F-CF78F1BC5D42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27DFC0B9-DA17-4B79-84FD-646092D92FF4}

@@ -39,10 +39,9 @@ public sealed class RegionLevel : Enumeration
     [Description("乡级")] public static RegionLevel Township = new(4, nameof(Township));
 
     /// <summary>
-    /// 街道级
+    ///     街道级
     /// </summary>
-    [Description("街道级")]
-    public static RegionLevel Street = new(5, nameof(Street));
+    [Description("街道级")] public static RegionLevel Street = new(5, nameof(Street));
 
 
     /// <summary>

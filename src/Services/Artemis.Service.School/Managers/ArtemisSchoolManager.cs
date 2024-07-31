@@ -13,7 +13,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
     ///     创建新的管理器实例
     /// </summary>
     /// <param name="schoolStore">存储访问器依赖</param>
-    /// <param name="teacherCurrentAffiliationStore"></param>
     /// <param name="options">配置依赖</param>
     /// <param name="logger">日志依赖</param>
     /// <param name="classStore"></param>
@@ -23,7 +22,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
     /// <param name="schoolStudentStore"></param>
     /// <param name="classTeacherStore"></param>
     /// <param name="classStudentStore"></param>
-    /// <param name="studentCurrentAffiliationStore"></param>
     /// <exception cref="ArgumentNullException"></exception>
     public ArtemisSchoolManager(
         IArtemisSchoolStore schoolStore,
@@ -34,8 +32,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
         IArtemisSchoolStudentStore schoolStudentStore,
         IArtemisClassTeacherStore classTeacherStore,
         IArtemisClassStudentStore classStudentStore,
-        IArtemisStudentCurrentAffiliationStore studentCurrentAffiliationStore,
-        IArtemisTeacherCurrentAffiliationStore teacherCurrentAffiliationStore,
         IManagerOptions? options = null,
         ILogger? logger = null) : base(options, logger)
     {
@@ -47,10 +43,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
         SchoolStudentStore = schoolStudentStore ?? throw new ArgumentNullException(nameof(schoolStudentStore));
         ClassTeacherStore = classTeacherStore ?? throw new ArgumentNullException(nameof(classTeacherStore));
         ClassStudentStore = classStudentStore ?? throw new ArgumentNullException(nameof(classStudentStore));
-        StudentCurrentAffiliationStore = studentCurrentAffiliationStore ??
-                                         throw new ArgumentNullException(nameof(studentCurrentAffiliationStore));
-        TeacherCurrentAffiliationStore = teacherCurrentAffiliationStore ??
-                                         throw new ArgumentNullException(nameof(teacherCurrentAffiliationStore));
     }
 
     #region Overrides of KeyLessManager<ArtemisSchool,Guid>
@@ -68,8 +60,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
         SchoolStudentStore.Dispose();
         ClassTeacherStore.Dispose();
         ClassStudentStore.Dispose();
-        StudentCurrentAffiliationStore.Dispose();
-        TeacherCurrentAffiliationStore.Dispose();
     }
 
     #endregion
@@ -115,16 +105,6 @@ public sealed class ArtemisSchoolManager : Manager, IArtemisSchoolManager
     ///     班级学生关系存储访问器
     /// </summary>
     private IArtemisClassStudentStore ClassStudentStore { get; }
-
-    /// <summary>
-    ///     学生当前关系存储访问器
-    /// </summary>
-    private IArtemisStudentCurrentAffiliationStore StudentCurrentAffiliationStore { get; }
-
-    /// <summary>
-    ///     教师当前关系存储访问器
-    /// </summary>
-    private IArtemisTeacherCurrentAffiliationStore TeacherCurrentAffiliationStore { get; }
 
     #endregion
 }

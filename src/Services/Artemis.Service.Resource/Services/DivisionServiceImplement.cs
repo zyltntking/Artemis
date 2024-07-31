@@ -3,9 +3,8 @@
 namespace Artemis.Service.Resource.Services;
 
 /// <summary>
-/// 行政区划服务实现
+///     行政区划服务实现
 /// </summary>
 public class DivisionServiceImplement : DivisionService.DivisionServiceBase
 {
-    
 }

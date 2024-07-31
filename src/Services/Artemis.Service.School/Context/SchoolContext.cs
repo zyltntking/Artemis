@@ -57,16 +57,6 @@ public class SchoolContext : DbContext
     /// </summary>
     public virtual DbSet<ArtemisSchoolStudent> SchoolStudents { get; set; } = default!;
 
-    /// <summary>
-    ///     教师当前所属关系数据集
-    /// </summary>
-    public virtual DbSet<ArtemisTeacherCurrentAffiliation> TeacherCurrentAffiliations { get; set; } = default!;
-
-    /// <summary>
-    ///     学生当前所属关系数据集
-    /// </summary>
-    public virtual DbSet<ArtemisStudentCurrentAffiliation> StudentCurrentAffiliations { get; set; } = default!;
-
     #region Overrides of DbContext
 
     /// <summary>

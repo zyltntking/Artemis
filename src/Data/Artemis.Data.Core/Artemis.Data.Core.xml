@@ -4862,7 +4862,7 @@
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.RegionLevel.Street">
             <summary>
-            街道级
+                街道级
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.RegionLevel.#ctor(System.Int32,System.String)">
@@ -4896,52 +4896,52 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.SchoolLength">
             <summary>
-            学制
+                学制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.OneYear">
             <summary>
-            一年制
+                一年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.TwoYears">
             <summary>
-            二年制
+                二年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.ThreeYears">
             <summary>
-            三年制
+                三年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.FourYears">
             <summary>
-            四年制
+                四年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.FiveYears">
             <summary>
-            五年制
+                五年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.SixYears">
             <summary>
-            六年制
+                六年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.SevenYears">
             <summary>
-            七年制
+                七年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.EightYears">
             <summary>
-            八年制
+                八年制
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.SchoolLength.NineYears">
             <summary>
-            九年制
+                九年制
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.SchoolLength.#ctor(System.Int32,System.String)">
@@ -4953,32 +4953,32 @@
         </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.StudyPhase">
             <summary>
-            学段
+                学段
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.PreSchool">
             <summary>
-            学前阶段(幼儿园)
+                学前阶段(幼儿园)
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.Primary">
             <summary>
-            小学阶段
+                小学阶段
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.Junior">
             <summary>
-            初中阶段
+                初中阶段
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.Senior">
             <summary>
-            高中阶段
+                高中阶段
             </summary>
         </member>
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.University">
             <summary>
-            大学阶段
+                大学阶段
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.StudyPhase.#ctor(System.Int32,System.String)">
@@ -6118,7 +6118,7 @@
             <param name="config">映射配置</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptEmptySuccess``1">
+        <member name="M:Artemis.Data.Core.ResultAdapter.AdaptEmptySuccess``1(System.String)">
             <summary>
                 成功结果
             </summary>

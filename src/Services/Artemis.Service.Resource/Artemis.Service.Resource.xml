@@ -526,22 +526,22 @@
         </member>
         <member name="T:Artemis.Service.Resource.Services.DictionaryServiceImplement">
             <summary>
-            字典服务实现
+                字典服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.Services.DivisionServiceImplement">
             <summary>
-            行政区划服务实现
+                行政区划服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.Services.OrganizationServiceImplement">
             <summary>
-            组织服务实现
+                组织服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.Services.StandardServiceImplement">
             <summary>
-            标准服务实现
+                标准服务实现
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">

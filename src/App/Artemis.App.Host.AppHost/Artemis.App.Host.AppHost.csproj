@@ -18,7 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Artemis.App.Gateway\Artemis.App.Gateway.csproj" />
         <ProjectReference Include="..\Artemis.App.Identity\Artemis.App.Identity.csproj" />
+        <ProjectReference Include="..\Artemis.App.RawData\Artemis.App.RawData.csproj" />
+        <ProjectReference Include="..\Artemis.App.Resource\Artemis.App.Resource.csproj" />
         <ProjectReference Include="..\Artemis.App.School\Artemis.App.School.csproj" />
         <ProjectReference Include="..\Artemis.App.Task\Artemis.App.Task.csproj" />
     </ItemGroup>

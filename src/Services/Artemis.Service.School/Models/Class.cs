@@ -34,7 +34,7 @@ public class Class : ConcurrencyPartition, IClass
     public string? Name { get; set; }
 
     /// <summary>
-    /// 年级名称
+    ///     年级名称
     /// </summary>
     [MaxLength(16)]
     public string? GradeName { get; set; }

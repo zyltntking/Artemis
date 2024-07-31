@@ -7,7 +7,7 @@ namespace Artemis.Data.Store;
 #region Interface
 
 /// <summary>
-/// 独立模型接口
+///     独立模型接口
 /// </summary>
 public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : IManager
     where TEntity : class, IKeySlot<TKey>
@@ -16,7 +16,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 读取实体信息
+    ///     读取实体信息
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken"></param>
@@ -24,7 +24,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     Task<TEntityInfo?> ReadEntityInfoAsync(TKey key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 创建实体
+    ///     创建实体
     /// </summary>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
@@ -32,32 +32,35 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     Task<StoreResult> CreateEntityAsync(TEntityPackage package, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量创建实体
+    ///     批量创建实体
     /// </summary>
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages, CancellationToken cancellationToken = default);
+    Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 更新实体
+    ///     更新实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> UpdateEntityAsync(TKey key, TEntityPackage package, CancellationToken cancellationToken = default);
+    Task<StoreResult> UpdateEntityAsync(TKey key, TEntityPackage package,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量更新实体
+    ///     批量更新实体
     /// </summary>
     /// <param name="dictionary"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary, CancellationToken cancellationToken = default);
+    Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除实体
+    ///     删除实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
@@ -65,7 +68,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     Task<StoreResult> DeleteEntityAsync(TKey key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量删除实体
+    ///     批量删除实体
     /// </summary>
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
@@ -76,16 +79,17 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
 #endregion
 
 /// <summary>
-/// 单独模型
+///     单独模型
 /// </summary>
-public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : Manager, ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
+public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : Manager,
+    ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 独立模型管理器构造
+    ///     独立模型管理器构造
     /// </summary>
     protected SeparateManager(IStore<TEntity, TKey> entityStore)
     {
@@ -95,7 +99,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     #region StoreAccess
 
     /// <summary>
-    /// 单独实体存储
+    ///     单独实体存储
     /// </summary>
     protected virtual IStore<TEntity, TKey> SeparateEntityStore { get; }
 
@@ -116,7 +120,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     #region Implementation of ISeparateManager<TEntity,TKey,TEntityInfo,TEntityPackage>
 
     /// <summary>
-    /// 读取实体信息
+    ///     读取实体信息
     /// </summary>
     /// <param name="key">键</param>
     /// <param name="cancellationToken"></param>
@@ -129,7 +133,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 创建实体
+    ///     创建实体
     /// </summary>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
@@ -144,12 +148,13 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 批量创建实体
+    ///     批量创建实体
     /// </summary>
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages, CancellationToken cancellationToken = default)
+    public Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -159,33 +164,33 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 更新实体
+    ///     更新实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateEntityAsync(TKey key, TEntityPackage package, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> UpdateEntityAsync(TKey key, TEntityPackage package,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var entity = await SeparateEntityStore.FindEntityAsync(key, cancellationToken);
 
         if (entity is not null)
-        {
             return await SeparateEntityStore.UpdateAsync(MapOverEntity(entity, package), cancellationToken);
-        }
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
 
     /// <summary>
-    /// 批量更新实体
+    ///     批量更新实体
     /// </summary>
     /// <param name="dictionary"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -213,7 +218,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 删除实体
+    ///     删除实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
@@ -231,12 +236,13 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 批量删除实体
+    ///     批量删除实体
     /// </summary>
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteEntitiesAsync(IEnumerable<TKey> keys, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteEntitiesAsync(IEnumerable<TKey> keys,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -259,7 +265,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     #region EntityMap
 
     /// <summary>
-    /// 映射到新实体
+    ///     映射到新实体
     /// </summary>
     /// <param name="package"></param>
     /// <returns></returns>
@@ -269,7 +275,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     }
 
     /// <summary>
-    /// 覆盖实体
+    ///     覆盖实体
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="package"></param>
