@@ -256,18 +256,6 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
             : ResultAdapter.AdaptEmptyFail<EmptyResponse>(result.Message);
     }
 
-    /// <summary>
-    /// Ping
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("Ping")]
-    public override Task<EmptyResponse> Ping(Empty request, ServerCallContext context)
-    {
-        return Task.FromResult(ResultAdapter.AdaptEmptySuccess<EmptyResponse>("成功:Identity:Account"));
-    }
-
     #endregion
 
     #region InternalLogic

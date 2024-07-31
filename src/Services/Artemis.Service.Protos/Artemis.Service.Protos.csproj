@@ -67,6 +67,7 @@
 	  <Protobuf Include="school\student.proto" />
 	  <Protobuf Include="school\teacher.proto" />
 	  <Protobuf Include="task\task.proto" />
+	  <Protobuf Include="business\visionscreening\screening.proto" />
 	</ItemGroup>
 
 </Project>
