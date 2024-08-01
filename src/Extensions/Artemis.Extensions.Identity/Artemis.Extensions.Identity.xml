@@ -50,15 +50,21 @@
                 Artemis凭据处理器
             </summary>
         </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Identity.ArtemisAuthorizationHandler})">
+        <member name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Identity.ArtemisAuthorizationHandler},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
                 构造
             </summary>
             <param name="logger">日志依赖</param>
+            <param name="httpContextAccessor"></param>
         </member>
         <member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.Logger">
             <summary>
                 日志访问器
+            </summary>
+        </member>
+        <member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HttpContextAccessor">
+            <summary>
+            Http上下文访问器
             </summary>
         </member>
         <member name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.Identity.IArtemisAuthorizationRequirement)">

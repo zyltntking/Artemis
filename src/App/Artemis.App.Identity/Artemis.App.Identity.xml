@@ -4,6 +4,18 @@
         <name>Artemis.App.Identity</name>
     </assembly>
     <members>
+        <member name="T:Artemis.App.Identity.Migrations.InitialIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Identity.Program">
             <summary>
                 应用程序入口

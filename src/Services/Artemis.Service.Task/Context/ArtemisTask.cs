@@ -1,4 +1,5 @@
-﻿using Artemis.Service.Task.Context.Configuration;
+﻿using Artemis.Data.Core;
+using Artemis.Service.Task.Context.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Task.Context;
@@ -7,7 +8,7 @@ namespace Artemis.Service.Task.Context;
 ///     任务实体
 /// </summary>
 [EntityTypeConfiguration(typeof(ArtemisTaskConfiguration))]
-public sealed class ArtemisTask : Models.Task
+public sealed class ArtemisTask : Models.Task, ITreeSlot<ArtemisTask>
 {
     /// <summary>
     ///     父任务

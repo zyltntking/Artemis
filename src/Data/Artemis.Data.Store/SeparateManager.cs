@@ -49,7 +49,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages,
+    Task<StoreResult> BatchCreateEntityAsync(IEnumerable<TEntityPackage> packages,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -68,7 +68,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     /// <param name="dictionary"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary,
+    Task<StoreResult> BatchUpdateEntityAsync(IDictionary<TKey, TEntityPackage> dictionary,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -85,7 +85,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> DeleteEntitiesAsync(IEnumerable<TKey> keys, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchDeleteEntityAsync(IEnumerable<TKey> keys, CancellationToken cancellationToken = default);
 }
 
 #endregion
@@ -187,7 +187,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<StoreResult> CreateEntitiesAsync(IEnumerable<TEntityPackage> packages,
+    public Task<StoreResult> BatchCreateEntityAsync(IEnumerable<TEntityPackage> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -223,7 +223,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <param name="dictionary"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateEntitiesAsync(IDictionary<TKey, TEntityPackage> dictionary,
+    public async Task<StoreResult> BatchUpdateEntityAsync(IDictionary<TKey, TEntityPackage> dictionary,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -275,7 +275,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteEntitiesAsync(IEnumerable<TKey> keys,
+    public async Task<StoreResult> BatchDeleteEntityAsync(IEnumerable<TKey> keys,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);

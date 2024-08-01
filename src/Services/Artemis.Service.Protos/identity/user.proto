@@ -90,6 +90,37 @@ service UserService {
 			get: "/api/Users/{UserId}/Profiles"
 		};
 	}
+	
+	// 添加用户角色
+	rpc AddUserRole (AddUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles"
+			body: "Role"
+		};
+	}
+	
+	// 批量添加用户角色
+	rpc BatchAddUserRole (BatchAddUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles/BatchAdd"
+			body: "RoleIds"
+		};
+	}
+
+	// 移除用户角色
+	rpc RemoveUserRole (RemoveUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			delete: "/api/Users/{UserId}/Roles/{RoleId}"
+		};
+	}
+	
+	// 批量移除用户角色
+	rpc BatchRemoveUserRole (BatchRemoveUserRoleRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/Users/{UserId}/Roles/BatchRemove"
+			body: "RoleIds"
+		};
+	}
 
 	// 获取用户属性
 	rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse) {
@@ -142,37 +173,6 @@ service UserService {
 		option (google.api.http) = {
 			post: "/api/Users/{UserId}/Profiles/BatchDelete"
 			body: "Ids"
-		};
-	}
-	
-	// 添加用户角色
-	rpc AddUserRole (AddUserRoleRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles"
-			body: "Role"
-		};
-	}
-	
-	// 批量添加用户角色
-	rpc BatchAddUserRole (BatchAddUserRoleRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles/BatchAdd"
-			body: "RoleIds"
-		};
-	}
-
-	// 移除用户角色
-	rpc RemoveUserRole (RemoveUserRoleRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			delete: "/api/Users/{UserId}/Roles/{RoleId}"
-		};
-	}
-	
-	// 批量移除用户角色
-	rpc BatchRemoveUserRole (BatchRemoveUserRoleRequest) returns (AffectedResponse) {
-		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles/BatchRemove"
-			body: "RoleIds"
 		};
 	}
 
@@ -236,6 +236,8 @@ service UserService {
 			body: "ClaimIds"
 		};
 	}
+
+	// 
 }
 
 // 查询用户信息请求

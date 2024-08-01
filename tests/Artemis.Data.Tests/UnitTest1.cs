@@ -18,6 +18,7 @@ public class UnitTest1
 
         var stamp = Base32.GenerateBase32();
 
+
         //var bbc = Generator.IsInherit<IdentityUser>(typeof(IHandlerSlot<>));
 
         var rsa = RSA.Create();

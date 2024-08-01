@@ -25,7 +25,7 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisTaskAgentStores, ArtemisTaskAgentStores>();
         services.TryAddScoped<IArtemisTaskUnitAgentStores, ArtemisTaskUnitAgentStores>();
 
-        services.TryAddScoped<IArtemisTaskManager, ArtemisTaskManager>();
+        services.TryAddScoped<ITaskTreeManager, TaskTreeManager>();
 
         return services;
     }

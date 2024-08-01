@@ -1,6 +1,7 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Types;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Artemis.Extensions.Identity;
@@ -14,16 +15,25 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
     ///     构造
     /// </summary>
     /// <param name="logger">日志依赖</param>
+    /// <param name="httpContextAccessor"></param>
     public ArtemisAuthorizationHandler(
-        ILogger<ArtemisAuthorizationHandler> logger)
+        ILogger<ArtemisAuthorizationHandler> logger,
+        IHttpContextAccessor httpContextAccessor)
     {
         Logger = logger;
+
+        HttpContextAccessor = httpContextAccessor;
     }
 
     /// <summary>
     ///     日志访问器
     /// </summary>
     private ILogger Logger { get; }
+
+    /// <summary>
+    /// Http上下文访问器
+    /// </summary>
+    private IHttpContextAccessor HttpContextAccessor { get; }
 
     #region Overrides of AuthorizationHandler<IdentityRequirement>
 
@@ -162,6 +172,8 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
         }
 
         Logger.LogWarning(message);
+
+        HttpContextAccessor.HttpContext?.Items.Add(IdentityShared.AuthorizationMessage, message);
 
         context.Fail(new AuthorizationFailureReason(this, message));
 

@@ -207,6 +207,16 @@
             微信小程序
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Identity.SignEndType.Wxappparent">
+            <summary>
+            微信小程序家长端
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.SignEndType.WxappTeacher">
+            <summary>
+            微信小程序教师端
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Identity.SignInRequest">
             <summary>
             签入请求
@@ -5942,6 +5952,38 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            移除用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.GetUserProfile(Artemis.Service.Protos.Identity.GetUserProfileRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取用户属性
@@ -5993,38 +6035,6 @@
         <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.BatchDeleteUserProfile(Artemis.Service.Protos.Identity.BatchDeleteUserProfileRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除用户属性
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            添加用户角色
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            批量添加用户角色
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            移除用户角色
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceBase.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            批量移除用户角色
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -6508,6 +6518,150 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除用户角色
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.GetUserProfile(Artemis.Service.Protos.Identity.GetUserProfileRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             获取用户属性
@@ -6755,150 +6909,6 @@
         <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchDeleteUserProfileAsync(Artemis.Service.Protos.Identity.BatchDeleteUserProfileRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除用户属性
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRole(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.AddUserRoleAsync(Artemis.Service.Protos.Identity.AddUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            批量添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRole(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            批量添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            批量添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchAddUserRoleAsync(Artemis.Service.Protos.Identity.BatchAddUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            批量添加用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRole(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.RemoveUserRoleAsync(Artemis.Service.Protos.Identity.RemoveUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            批量移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            批量移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            批量移除用户角色
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Identity.UserService.UserServiceClient.BatchRemoveUserRoleAsync(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.CallOptions)">
-            <summary>
-            批量移除用户角色
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -20564,7 +20574,6 @@
         <member name="P:Artemis.Service.Protos.Task.TaskInfoPacket.ParentId">
             <summary>
             父任务标识
-            @required
             @guid
             </summary>
         </member>

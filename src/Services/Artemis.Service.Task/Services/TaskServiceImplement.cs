@@ -19,20 +19,20 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <summary>
     ///     任务服务
     /// </summary>
-    /// <param name="taskManager">任务管理器</param>
+    /// <param name="taskTreeManager"></param>
     /// <param name="logger">日志记录器</param>
     public TaskServiceImplement(
-        IArtemisTaskManager taskManager,
+        ITaskTreeManager taskTreeManager,
         ILogger<TaskServiceImplement> logger)
     {
-        TaskManager = taskManager;
+        TaskTreeManager = taskTreeManager;
         Logger = logger;
     }
 
     /// <summary>
-    ///     任务管理器
+    /// 任务树管理器
     /// </summary>
-    private IArtemisTaskManager TaskManager { get; }
+    private ITaskTreeManager TaskTreeManager { get; }
 
     /// <summary>
     ///     日志依赖
@@ -53,7 +53,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
         SearchTaskInfoRequest request,
         ServerCallContext context)
     {
-        var taskInfos = await TaskManager.FetchTasksAsync(
+        var taskInfos = await TaskTreeManager.FetchTasksAsync(
             request.TaskName,
             request.TaskCode,
             request.DesignCode,
@@ -64,7 +64,13 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        return taskInfos.PagedResponse<SearchTaskInfoResponse, TaskInfo>();
+        var response = taskInfos.PagedResponse<SearchTaskInfoResponse, TaskInfo>();
+
+        var taskReplies = taskInfos.Items!.Select(item => item.Adapt<TaskInfoPacket>());
+
+        response.Data.Items.Add(taskReplies);
+
+        return response;
     }
 
     /// <summary>
@@ -80,7 +86,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var taskId = Guid.Parse(request.TaskId);
 
-        var taskInfo = await TaskManager.GetTaskAsync(taskId, context.CancellationToken);
+        var taskInfo = await TaskTreeManager.ReadEntityInfoAsync(taskId, context.CancellationToken);
 
         return taskInfo.ReadInfoResponse<ReadTaskInfoResponse, TaskInfo>();
     }
@@ -91,12 +97,14 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("读取任务树信息")]
+    [Authorize(AuthorizePolicy.Admin)]
     public override async Task<ReadTaskInfoTreeResponse> ReadTaskInfoTree(ReadTaskInfoRequest request,
         ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
 
-        var taskInfoTree = await TaskManager.GetTaskTreeAsync(taskId, context.CancellationToken);
+        var taskInfoTree = await TaskTreeManager.GetEntityInfoTreeAsync(taskId, context.CancellationToken);
 
         return taskInfoTree.ReadInfoResponse<ReadTaskInfoTreeResponse, TaskInfoTree>();
     }
@@ -113,7 +121,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var package = request.Adapt<TaskPackage>();
 
-        var result = await TaskManager.CreateTaskAsync(package, context.CancellationToken);
+        var result = await TaskTreeManager.CreateEntityAsync(package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -131,7 +139,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var tasks = request.Batch.Adapt<IEnumerable<TaskPackage>>();
 
-        var result = await TaskManager.CreateTasksAsync(tasks, context.CancellationToken);
+        var result = await TaskTreeManager.BatchCreateEntityAsync(tasks, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -150,7 +158,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var package = request.Adapt<TaskPackage>();
 
-        var result = await TaskManager.UpdateTaskAsync(taskId, package, context.CancellationToken);
+        var result = await TaskTreeManager.UpdateEntityAsync(taskId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -170,7 +178,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
             item => Guid.Parse(item.TaskId),
             item => item.Adapt<TaskPackage>());
 
-        var result = await TaskManager.UpdateTasksAsync(dictionary, context.CancellationToken);
+        var result = await TaskTreeManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -187,7 +195,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var taskId = Guid.Parse(request.TaskId);
 
-        var result = await TaskManager.DeleteTaskAsync(taskId, context.CancellationToken);
+        var result = await TaskTreeManager.DeleteEntityAsync(taskId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -205,7 +213,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var taskIds = request.TaskIds.Select(Guid.Parse);
 
-        var result = await TaskManager.DeleteTasksAsync(taskIds, context.CancellationToken);
+        var result = await TaskTreeManager.BatchDeleteEntityAsync(taskIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -225,7 +233,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var package = request.Adapt<TaskPackage>();
 
-        var result = await TaskManager.CreateChildTaskAsync(taskId, package, context.CancellationToken);
+        var result = await TaskTreeManager.CreateChildEntityAsync(taskId, package, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -245,7 +253,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var packages = request.Batch.Adapt<IEnumerable<TaskPackage>>();
 
-        var result = await TaskManager.CreateChildTasksAsync(taskId, packages, context.CancellationToken);
+        var result = await TaskTreeManager.BatchCreateChildEntityAsync(taskId, packages, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -264,7 +272,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childId = Guid.Parse(request.ChildTask.ChildTaskId);
 
-        var result = await TaskManager.AddChildTaskAsync(taskId, childId, context.CancellationToken);
+        var result = await TaskTreeManager.AddChildEntityAsync(taskId, childId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -284,7 +292,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childIds = request.ChildTaskIds.Select(Guid.Parse);
 
-        var result = await TaskManager.AddChildTasksAsync(taskId, childIds, context.CancellationToken);
+        var result = await TaskTreeManager.BatchAddChildEntityAsync(taskId, childIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -304,7 +312,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childTaskId = Guid.Parse(request.ChildTaskId);
 
-        var result = await TaskManager.DeleteChildTaskAsync(taskId, childTaskId, context.CancellationToken);
+        var result = await TaskTreeManager.DeleteChildEntityAsync(taskId, childTaskId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -324,7 +332,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childTaskIds = request.ChildTaskIds.Select(Guid.Parse);
 
-        var result = await TaskManager.BatchDeleteChildTaskAsync(taskId, childTaskIds, context.CancellationToken);
+        var result = await TaskTreeManager.BatchDeleteChildEntityAsync(taskId, childTaskIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -344,7 +352,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childTaskId = Guid.Parse(request.ChildTask.ChildTaskId);
 
-        var result = await TaskManager.RemoveChildTaskAsync(taskId, childTaskId, context.CancellationToken);
+        var result = await TaskTreeManager.RemoveChildEntityAsync(taskId, childTaskId, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -364,7 +372,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
 
         var childTaskIds = request.ChildTaskIds.Select(Guid.Parse);
 
-        var result = await TaskManager.BatchRemoveChildTaskAsync(taskId, childTaskIds, context.CancellationToken);
+        var result = await TaskTreeManager.BatchRemoveChildEntityAsync(taskId, childTaskIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }

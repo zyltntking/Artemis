@@ -285,29 +285,12 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
-        <member name="T:Artemis.Service.Task.Managers.ArtemisTaskManager">
+        <member name="T:Artemis.Service.Task.Managers.ITaskTreeManager">
             <summary>
-                任务管理器
+            任务树管理器
             </summary>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisAgentStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskAgentStores,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="taskStore">存储访问器依赖</param>
-            <param name="taskAgentStores"></param>
-            <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="agentStore"></param>
-            <param name="taskUnitStore"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.StoreDispose">
-            <summary>
-                释放托管的Store
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.ITaskTreeManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据任务信息搜索任务
             </summary>
@@ -322,187 +305,18 @@
             <param name="taskCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="T:Artemis.Service.Task.Managers.TaskTreeManager">
             <summary>
-                根据任务凭据获取任务信息
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.GetTaskTreeAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                根据任务凭据获取任务信息
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateTaskAsync(Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                创建任务
-            </summary>
-            <param name="package"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateTasksAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
-            <summary>
-                创建任务
-            </summary>
-            <param name="packages">任务信息</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.UpdateTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                更新任务
-            </summary>
-            <param name="id">任务表示</param>
-            <param name="package">任务信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns>更新结果</returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.UpdateTasksAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
-            <summary>
-                更新任务
-            </summary>
-            <param name="dictionary"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.DeleteTaskAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除任务
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.DeleteTasksAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                删除任务
-            </summary>
-            <param name="ids"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateChildTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                创建子任务
-            </summary>
-            <param name="id"></param>
-            <param name="package"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.CreateChildTasksAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
-            <summary>
-                批量创建子任务
-            </summary>
-            <param name="id"></param>
-            <param name="packages"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.AddChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                添加子任务
-            </summary>
-            <param name="id"></param>
-            <param name="childId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.AddChildTasksAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                批量添加子任务
-            </summary>
-            <param name="id"></param>
-            <param name="childIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.DeleteChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.BatchDeleteChildTaskAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                批量删除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.RemoveChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                移除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.BatchRemoveChildTaskAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                批量移除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.FetchTaskUnitsAsync(System.Guid,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据任务单元信息搜索任务单元
-            </summary>
-            <param name="taskId"></param>
-            <param name="unitNameSearch"></param>
-            <param name="unitCodeSearch"></param>
-            <param name="designCodeSearch"></param>
-            <param name="taskUnitMode"></param>
-            <param name="taskUnitState"></param>
-            <param name="page"></param>
-            <param name="size"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.ArtemisTaskManager.GetTaskUnitAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                获取任务单元信息
-            </summary>
-            <param name="taskId"></param>
-            <param name="unitId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Service.Task.Managers.IArtemisTaskManager">
-            <summary>
-                任务管理接口
+            任务树管理器实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore)">
             <summary>
-                根据任务信息搜索任务
+            独立模型管理器构造
             </summary>
-            <param name="taskNameSearch">任务名搜索值</param>
-            <param name="taskShip">任务归属搜索值</param>
-            <param name="taskMode">任务模式搜索值</param>
-            <param name="taskState">任务状态搜索值</param>
-            <param name="page">页码</param>
-            <param name="size">条目数</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <param name="taskCodeSearch"></param>
-            <returns>分页搜索结果</returns>
+            <param name="taskStore"></param>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据任务信息搜索任务
             </summary>
@@ -517,166 +331,40 @@
             <param name="taskCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.GetTaskAsync(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.MapNewEntity(Artemis.Service.Shared.Task.Transfer.TaskPackage)">
             <summary>
-                根据任务凭据获取任务信息
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.GetTaskTreeAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                根据任务凭据获取任务树信息
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateTaskAsync(Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                创建任务
+                映射到新实体
             </summary>
             <param name="package"></param>
-            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateTasksAsync(System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.MapOverEntity(Artemis.Service.Task.Context.ArtemisTask,Artemis.Service.Shared.Task.Transfer.TaskPackage)">
             <summary>
-                创建任务
+                覆盖实体
             </summary>
-            <param name="packages">任务信息</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.UpdateTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                更新任务
-            </summary>
-            <param name="id">任务表示</param>
-            <param name="package">任务信息</param>
-            <param name="cancellationToken">操作取消信号</param>
-            <returns>更新结果</returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.UpdateTasksAsync(System.Collections.Generic.IDictionary{System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
-            <summary>
-                更新任务
-            </summary>
-            <param name="dictionary"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.DeleteTaskAsync(System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除任务
-            </summary>
-            <param name="id"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.DeleteTasksAsync(System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                删除任务
-            </summary>
-            <param name="ids"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateChildTaskAsync(System.Guid,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Threading.CancellationToken)">
-            <summary>
-                创建子任务
-            </summary>
-            <param name="id"></param>
+            <param name="entity"></param>
             <param name="package"></param>
-            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.CreateChildTasksAsync(System.Guid,System.Collections.Generic.IEnumerable{Artemis.Service.Shared.Task.Transfer.TaskPackage},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.AfterAddChildNode(Artemis.Service.Task.Context.ArtemisTask,System.Threading.CancellationToken)">
             <summary>
-                批量创建子任务
+            在添加子节点之后
             </summary>
-            <param name="id"></param>
-            <param name="packages"></param>
+            <param name="entity"></param>
             <param name="cancellationToken"></param>
-            <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.AddChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.AfterRemoveChildNode(Artemis.Service.Task.Context.ArtemisTask,System.Threading.CancellationToken)">
             <summary>
-                添加子任务
+            在移除子节点之后
             </summary>
-            <param name="id"></param>
-            <param name="childId"></param>
+            <param name="entity"></param>
             <param name="cancellationToken"></param>
-            <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.AddChildTasksAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.BeforeRemoveChildNode(Artemis.Service.Task.Context.ArtemisTask)">
             <summary>
-                批量添加子任务
+            在移除子节点之前
             </summary>
-            <param name="id"></param>
-            <param name="childIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.DeleteChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                删除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.BatchDeleteChildTaskAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                批量删除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.RemoveChildTaskAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                移除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.BatchRemoveChildTaskAsync(System.Guid,System.Collections.Generic.IEnumerable{System.Guid},System.Threading.CancellationToken)">
-            <summary>
-                批量移除子任务
-            </summary>
-            <param name="taskId"></param>
-            <param name="childTaskIds"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.FetchTaskUnitsAsync(System.Guid,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                根据任务单元信息搜索任务单元
-            </summary>
-            <param name="taskId"></param>
-            <param name="unitNameSearch"></param>
-            <param name="unitCodeSearch"></param>
-            <param name="designCodeSearch"></param>
-            <param name="taskUnitMode"></param>
-            <param name="taskUnitState"></param>
-            <param name="page"></param>
-            <param name="size"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Service.Task.Managers.IArtemisTaskManager.GetTaskUnitAsync(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>
-                获取任务单元信息
-            </summary>
-            <param name="taskId"></param>
-            <param name="unitId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
+            <param name="entity"></param>
         </member>
         <member name="T:Artemis.Service.Task.Models.Agent">
             <summary>
@@ -914,16 +602,16 @@
                 任务服务
             </summary>
         </member>
-        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.#ctor(Artemis.Service.Task.Managers.IArtemisTaskManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Task.Services.TaskServiceImplement})">
+        <member name="M:Artemis.Service.Task.Services.TaskServiceImplement.#ctor(Artemis.Service.Task.Managers.ITaskTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Task.Services.TaskServiceImplement})">
             <summary>
                 任务服务
             </summary>
-            <param name="taskManager">任务管理器</param>
+            <param name="taskTreeManager"></param>
             <param name="logger">日志记录器</param>
         </member>
-        <member name="P:Artemis.Service.Task.Services.TaskServiceImplement.TaskManager">
+        <member name="P:Artemis.Service.Task.Services.TaskServiceImplement.TaskTreeManager">
             <summary>
-                任务管理器
+            任务树管理器
             </summary>
         </member>
         <member name="P:Artemis.Service.Task.Services.TaskServiceImplement.Logger">

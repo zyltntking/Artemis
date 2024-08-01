@@ -70,6 +70,10 @@ enum SignEndType {
     WECHAT = 2;
     // 微信小程序
     WXAPP = 3;
+    // 微信小程序家长端
+    WXAPPPARENT = 4;
+    // 微信小程序教师端
+    WXAppTEACHER = 5;
 }
 
 // 签入请求

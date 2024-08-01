@@ -301,9 +301,8 @@ message TaskInfoPacket {
 	// @guid
 	string Id = 1;
 	// 父任务标识
-	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 任务名称
 	// @required
 	// @maxLength(128)
@@ -334,11 +333,11 @@ message TaskInfoPacket {
 	// 任务开始时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp StartTime = 10;
+	string StartTime = 10;
 	// 任务结束时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp EndTime = 11;
+	string EndTime = 11;
 }
 
 // 分页任务信息数据包
@@ -421,7 +420,7 @@ message TaskInfoTreePacket{
 	// 父任务标识
 	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 任务名称
 	// @required
 	// @maxLength(128)
@@ -452,11 +451,11 @@ message TaskInfoTreePacket{
 	// 任务开始时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp StartTime = 10;
+	string StartTime = 10;
 	// 任务结束时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp EndTime = 11;
+	string EndTime = 11;
 	// 子任务
 	repeated TaskInfoTreePacket Children = 12;
 }
@@ -501,10 +500,10 @@ message CreateTaskRequest{
 	// 任务开始时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp StartTime = 5;
+	string StartTime = 5;
 	// 任务结束时间
 	// @datetime
-	google.protobuf.Timestamp EndTime = 6;
+	string EndTime = 6;
 }
 
 // 批量创建任务请求
@@ -530,10 +529,10 @@ message UpdateTaskPacket{
 	google.protobuf.StringValue Description = 4;
 	// 任务开始时间
 	// @datetime
-	google.protobuf.Timestamp StartTime = 5;
+	string StartTime = 5;
 	// 任务结束时间
 	// @datetime
-	google.protobuf.Timestamp EndTime = 6;
+	string EndTime = 6;
 }
 
 // 更新任务请求
@@ -732,11 +731,11 @@ message TaskUnitInfoPacket {
 	// 任务单元开始时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp StartTime = 9;
+	string StartTime = 9;
 	// 任务单元结束时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp EndTime = 10;
+	string EndTime = 10;
 }
 
 // 分页任务单元信息数据包
@@ -832,11 +831,11 @@ message CreateTaskUnitPacket{
 	// 任务单元开始时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp StartTime = 5;
+	string StartTime = 5;
 	// 任务单元结束时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp EndTime = 6;
+	string EndTime = 6;
 }
 
 // 创建任务单元请求
@@ -877,10 +876,10 @@ message UpdateTaskUnitPacket{
 	google.protobuf.StringValue Description = 4;
 	// 任务单元开始时间
 	// @datetime
-	google.protobuf.Timestamp StartTime = 5;
+	string StartTime = 5;
 	// 任务单元结束时间
 	// @datetime
-	google.protobuf.Timestamp EndTime = 6;
+	string EndTime = 6;
 }
 
 // 更新任务单元请求
@@ -1022,7 +1021,7 @@ message TaskUnitTargetPacket {
 	// 任务目标执行时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp ExecuteTime = 10;
+	string ExecuteTime = 10;
 }
 
 // 分页任务单元信息数据包
@@ -1132,7 +1131,7 @@ message CreateTaskUnitTargetPacket{
 	// 任务目标执行时间
 	// @required
 	// @datetime
-	google.protobuf.Timestamp ExecuteTime = 8;
+	string ExecuteTime = 8;
 }
 
 // 创建任务单元目标请求
@@ -1182,7 +1181,7 @@ message UpdateTaskUnitTargetPacket{
 	google.protobuf.StringValue Description = 7;
 	// 任务目标执行时间
 	// @datetime
-	google.protobuf.Timestamp ExecuteTime = 8;
+	string ExecuteTime = 8;
 }
 
 // 更新任务单元目标请求
@@ -1229,7 +1228,7 @@ message BatchUpdateTaskUnitTargetPacket{
 	google.protobuf.StringValue Description = 8;
 	// 任务目标执行时间
 	// @datetime
-	google.protobuf.Timestamp ExecuteTime = 9;
+	string ExecuteTime = 9;
 }
 
 // 批量更新任务单元目标请求
