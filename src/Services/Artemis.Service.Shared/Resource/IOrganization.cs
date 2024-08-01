@@ -1,9 +1,21 @@
-﻿namespace Artemis.Service.Shared.Resource;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Resource;
 
 /// <summary>
 ///     组织机构接口
 /// </summary>
-public interface IOrganization
+public interface IOrganization : IOrganizationInfo;
+
+/// <summary>
+/// 组织机构信息接口
+/// </summary>
+public interface IOrganizationInfo : IOrganizationPackage, IKeySlot, IParentKeySlot;
+
+/// <summary>
+/// 组织机构数据包接口
+/// </summary>
+public interface IOrganizationPackage
 {
     /// <summary>
     ///     机构名称

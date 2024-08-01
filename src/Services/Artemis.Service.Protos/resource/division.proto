@@ -107,7 +107,7 @@ service DivisionService{
 	rpc BatchAddChildDivision(BatchAddChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
 			post: "/api/Division/{DivisionId}/Children/BatchAdd"
-			body: "Batch"
+			body: "ChildDivisionIds"
 		};
 	}
 
@@ -481,7 +481,8 @@ message BatchAddChildDivisionRequest{
 	string DivisionId = 1;
 	// 下级行政区划标识
 	// @required
-	repeated ChildDivisionIdPacket Batch = 2;
+	// @guid
+	repeated string ChildDivisionIds = 2;
 }
 
 // 删除下级行政区划请求

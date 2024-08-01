@@ -1385,6 +1385,225 @@
                 是否启用Debug日志
             </summary>
         </member>
+        <member name="T:Artemis.Data.Store.IOtmManager`6">
+            <summary>
+            一对多模型管理器
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TEntityInfo"></typeparam>
+            <typeparam name="TEntityPackage"></typeparam>
+            <typeparam name="TSubEntity"></typeparam>
+            <typeparam name="TSubEntityInfo"></typeparam>
+            <typeparam name="TSubEntityPackage"></typeparam>
+        </member>
+        <member name="T:Artemis.Data.Store.IOtmManager`8">
+            <summary>
+            一对多模型管理器
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TEntityInfo"></typeparam>
+            <typeparam name="TEntityPackage"></typeparam>
+            <typeparam name="TSubEntity"></typeparam>
+            <typeparam name="TSubKey"></typeparam>
+            <typeparam name="TSubEntityInfo"></typeparam>
+            <typeparam name="TSubEntityPackage"></typeparam>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
+            <summary>
+               读取子模型信息
+            </summary>
+            <param name="key">主模型键</param>
+            <param name="subKey">子模型键</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
+            <summary>
+              添加子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subEntityPackage"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
+            <summary>
+            批量添加子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subEntityPackages"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
+            <summary>
+            更新子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKey"></param>
+            <param name="subEntityPackage"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
+            <summary>
+            批量更新子模型
+            </summary>
+            <param name="key"></param>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
+            <summary>
+            删除子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKey"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
+            <summary>
+            批量删除子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKeys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Data.Store.OtmManager`6">
+            <summary>
+            一对多模型管理器
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TEntityInfo"></typeparam>
+            <typeparam name="TEntityPackage"></typeparam>
+            <typeparam name="TSubEntity"></typeparam>
+            <typeparam name="TSubEntityInfo"></typeparam>
+            <typeparam name="TSubEntityPackage"></typeparam>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`6.#ctor(Artemis.Data.Store.IStore{`0},Artemis.Data.Store.IStore{`3})">
+            <summary>
+                模型管理器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Store.OtmManager`8">
+            <summary>
+            一对多模型管理器
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TEntityInfo"></typeparam>
+            <typeparam name="TEntityPackage"></typeparam>
+            <typeparam name="TSubEntity"></typeparam>
+            <typeparam name="TSubKey"></typeparam>
+            <typeparam name="TSubEntityInfo"></typeparam>
+            <typeparam name="TSubEntityPackage"></typeparam>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.#ctor(Artemis.Data.Store.IStore{`0,`1},Artemis.Data.Store.IStore{`4,`5})">
+            <summary>
+                模型管理器构造
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Store.OtmManager`8.SubEntityStore">
+            <summary>
+               子模型存储访问器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
+            <summary>
+               读取子模型信息
+            </summary>
+            <param name="key">主模型键</param>
+            <param name="subKey">子模型键</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
+            <summary>
+              添加子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subEntityPackage"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
+            <summary>
+            批量添加子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subEntityPackages"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
+            <summary>
+            更新子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKey"></param>
+            <param name="subEntityPackage"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
+            <summary>
+            批量更新子模型
+            </summary>
+            <param name="key"></param>
+            <param name="dictionary"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
+            <summary>
+            删除子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKey"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
+            <summary>
+            批量删除子模型
+            </summary>
+            <param name="key"></param>
+            <param name="subKeys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.SubEntityKeyMatcher(`1)">
+            <summary>
+            子模型使用主模型的键匹配器
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.MapNewSubEntity(`7,`1)">
+            <summary>
+                映射到新的附属实体
+            </summary>
+            <param name="package"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.OtmManager`8.MapOverSubEntity(`4,`7)">
+            <summary>
+                覆盖附属实体
+            </summary>
+            <param name="entity"></param>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Data.Store.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1514,7 +1733,7 @@
             <typeparam name="TEntityInfo"></typeparam>
             <typeparam name="TEntityPackage"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.SeparateManager`3.#ctor(Artemis.Data.Store.IStore{`0,System.Guid})">
+        <member name="M:Artemis.Data.Store.SeparateManager`3.#ctor(Artemis.Data.Store.IStore{`0})">
             <summary>
             独立模型管理器构造
             </summary>

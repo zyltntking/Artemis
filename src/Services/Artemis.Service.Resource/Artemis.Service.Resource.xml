@@ -137,12 +137,6 @@
                 表名
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
-            <summary>
-                实体字段配置
-            </summary>
-            <param name="builder"></param>
-        </member>
         <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
             <summary>
                 实体关系配置
@@ -218,57 +212,19 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
-        <member name="T:Artemis.Service.Resource.Managers.ArtemisResourceManager">
+        <member name="T:Artemis.Service.Resource.Managers.IDivisionTreeManager">
             <summary>
-                资源管理器
+            行政区划树管理器
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDeviceStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Data.Store.IManagerOptions,Microsoft.Extensions.Logging.ILogger)">
+        <member name="T:Artemis.Service.Resource.Managers.DivisionTreeManager">
             <summary>
-                创建新的管理器实例
-            </summary>
-            <param name="deviceStore">存储访问器依赖</param>
-            <param name="organizationStore"></param>
-            <param name="options">配置依赖</param>
-            <param name="logger">日志依赖</param>
-            <param name="dataDictionaryStore"></param>
-            <param name="dataDictionaryItemStore"></param>
-            <param name="divisionStore"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Artemis.Service.Resource.Managers.ArtemisResourceManager.StoreDispose">
-            <summary>
-                释放托管的Store
+            行政区划树管理器实现
             </summary>
         </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DeviceStore">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDivisionStore)">
             <summary>
-                设备存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryStore">
-            <summary>
-                数据字典存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DataDictionaryItemStore">
-            <summary>
-                数据字典项存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.DivisionStore">
-            <summary>
-                行政区划存储访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Resource.Managers.ArtemisResourceManager.OrganizationStore">
-            <summary>
-                组织机构存储访问器
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Resource.Managers.IArtemisResourceManager">
-            <summary>
-                资源管理器
+                树模型管理器构造
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.Models.DataDictionary">
@@ -533,6 +489,151 @@
             <summary>
                 行政区划服务实现
             </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDivisionTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DivisionServiceImplement})">
+            <summary>
+            行政区划服务实现
+            </summary>
+            <param name="divisionTreeManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.DivisionTreeManager">
+            <summary>
+            任务树管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfo(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取行政区划信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfoTree(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取行政区划信息树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateDivision(Artemis.Service.Protos.Resource.CreateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateDivision(Artemis.Service.Protos.Resource.BatchCreateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.UpdateDivision(Artemis.Service.Protos.Resource.UpdateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchUpdateDivision(Artemis.Service.Protos.Resource.BatchUpdateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteDivision(Artemis.Service.Protos.Resource.DeleteDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteDivision(Artemis.Service.Protos.Resource.BatchDeleteDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateChildDivision(Artemis.Service.Protos.Resource.CreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateChildDivision(Artemis.Service.Protos.Resource.BatchCreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.AddChildDivision(Artemis.Service.Protos.Resource.AddChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchAddChildDivision(Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteChildDivision(Artemis.Service.Protos.Resource.DeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteChildDivision(Artemis.Service.Protos.Resource.BatchDeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.RemoveChildDivision(Artemis.Service.Protos.Resource.RemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            移除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchRemoveChildDivision(Artemis.Service.Protos.Resource.BatchRemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
         <member name="T:Artemis.Service.Resource.Services.OrganizationServiceImplement">
             <summary>

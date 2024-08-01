@@ -42,4 +42,8 @@
         <ProjectReference Include="..\..\Data\Artemis.Data.Core\Artemis.Data.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Resource\Transfer\" />
+    </ItemGroup>
+
 </Project>

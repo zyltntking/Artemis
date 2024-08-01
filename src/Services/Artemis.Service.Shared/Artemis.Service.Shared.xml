@@ -816,6 +816,71 @@
                 机构描述
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree">
+            <summary>
+            行政区划树
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfo">
+            <summary>
+            行政区划信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.ParentId">
+            <summary>
+                父标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionPackage">
+            <summary>
+            行政区划数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Name">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Code">
+            <summary>
+                行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Level">
+            <summary>
+                行政区划级别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Type">
+            <summary>
+                行政区划类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.FullName">
+            <summary>
+                行政区划全名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Pinyin">
+            <summary>
+                行政区划拼音
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Remark">
+            <summary>
+                行政区划备注
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.School.IClass">
             <summary>
                 班级接口
@@ -1236,24 +1301,39 @@
                 任务目标接口
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TaskId">
-            <summary>
-                任务Id
-            </summary>
-        </member>
         <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TaskUnitId">
             <summary>
                 任务单元Id
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetId">
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetName">
             <summary>
-                目标Id
+            任务目标名称
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TaskStatus">
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetCode">
             <summary>
-                任务状态
+            任务目标编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.DesignCode">
+            <summary>
+            设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetType">
+            <summary>
+            任务目标类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetId">
+            <summary>
+            任务目标外部标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetState">
+            <summary>
+                任务目标状态
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Task.ITaskTarget.Description">
@@ -1261,14 +1341,9 @@
                 任务描述
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.StartTime">
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.ExecuteTime">
             <summary>
-                任务开始时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.EndTime">
-            <summary>
-                任务结束时间
+                任务目标执行
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Task.ITaskUnit">

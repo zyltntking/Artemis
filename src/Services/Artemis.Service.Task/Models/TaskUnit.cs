@@ -37,14 +37,14 @@ public class TaskUnit : ConcurrencyPartition, ITaskUnit
     /// <summary>
     ///     单元编码
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("单元编码")]
     public string? UnitCode { get; set; }
 
     /// <summary>
     ///     设计编码
     /// </summary>
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("设计编码")]
     public string? DesignCode { get; set; }
 
@@ -52,7 +52,7 @@ public class TaskUnit : ConcurrencyPartition, ITaskUnit
     ///     任务状态
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("任务状态")]
     public required string TaskUnitState { get; set; } = TaskState.Initial;
 
@@ -68,6 +68,7 @@ public class TaskUnit : ConcurrencyPartition, ITaskUnit
     ///     任务描述
     /// </summary>
     [Comment("任务描述")]
+    [MaxLength(256)]
     public string? Description { get; set; }
 
     /// <summary>

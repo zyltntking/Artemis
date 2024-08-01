@@ -9158,6 +9158,7 @@
         <member name="P:Artemis.Service.Protos.Resource.OrganizationInfoPacket.EstablishTime">
             <summary>
             组织机构成立时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Resource.OrganizationInfoPacket.EmailFieldNumber">
@@ -9489,6 +9490,7 @@
         <member name="P:Artemis.Service.Protos.Resource.OrganizationInfoTreePacket.EstablishTime">
             <summary>
             组织机构成立时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Resource.OrganizationInfoTreePacket.EmailFieldNumber">
@@ -9678,6 +9680,7 @@
         <member name="P:Artemis.Service.Protos.Resource.CreateOrganizationRequest.EstablishTime">
             <summary>
             组织机构成立时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Resource.CreateOrganizationRequest.EmailFieldNumber">
@@ -9805,6 +9808,7 @@
         <member name="P:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.EstablishTime">
             <summary>
             组织机构成立时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.EmailFieldNumber">
@@ -11793,13 +11797,14 @@
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest.BatchFieldNumber">
-            <summary>Field number for the "Batch" field.</summary>
+        <member name="F:Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest.ChildDivisionIdsFieldNumber">
+            <summary>Field number for the "ChildDivisionIds" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest.Batch">
+        <member name="P:Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest.ChildDivisionIds">
             <summary>
             下级行政区划标识
             @required
+            @guid
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Resource.DeleteChildDivisionRequest">
@@ -22330,7 +22335,7 @@
         <member name="P:Artemis.Service.Protos.Task.TaskUnitTargetPacket.Description">
             <summary>
             任务目标描述
-            @maxLength(256)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Task.TaskUnitTargetPacket.ExecuteTimeFieldNumber">
@@ -22619,7 +22624,7 @@
         <member name="P:Artemis.Service.Protos.Task.CreateTaskUnitTargetPacket.Description">
             <summary>
             任务目标描述
-            @maxLength(256)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Task.CreateTaskUnitTargetPacket.ExecuteTimeFieldNumber">

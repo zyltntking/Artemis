@@ -14,7 +14,9 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> : ITreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>
+public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> : 
+    ITreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>,
+    ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
     where TEntityInfo : class, IKeySlot, IParentKeySlot
     where TEntityInfoTree : class, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>

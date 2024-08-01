@@ -188,7 +188,8 @@ message OrganizationInfoPacket{
 	// @maxLength(32)
 	string Type = 5;
 	// 组织机构成立时间
-	google.protobuf.Timestamp EstablishTime = 6;
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 6;
 	// 组织机构邮箱
 	// @maxLength(128)
 	google.protobuf.StringValue Email = 7;
@@ -310,7 +311,8 @@ message OrganizationInfoTreePacket{
 	// @maxLength(32)
 	string Type = 5;
 	// 组织机构成立时间
-	google.protobuf.Timestamp EstablishTime = 6;
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 6;
 	// 组织机构邮箱
 	// @maxLength(128)
 	google.protobuf.StringValue Email = 7;
@@ -377,7 +379,8 @@ message CreateOrganizationRequest{
 	// @maxLength(32)
 	string Type = 3;
 	// 组织机构成立时间
-	google.protobuf.Timestamp EstablishTime = 4;
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 4;
 	// 组织机构邮箱
 	// @maxLength(128)
 	google.protobuf.StringValue Email = 5;
@@ -424,7 +427,8 @@ message UpdateOrganizationInfoPacket{
 	// @maxLength(32)
 	google.protobuf.StringValue Type = 3;
 	// 组织机构成立时间
-	google.protobuf.Timestamp EstablishTime = 4;
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 4;
 	// 组织机构邮箱
 	// @maxLength(128)
 	google.protobuf.StringValue Email = 5;

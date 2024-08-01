@@ -6,24 +6,39 @@
 public interface ITaskTarget
 {
     /// <summary>
-    ///     任务Id
-    /// </summary>
-    Guid TaskId { get; set; }
-
-    /// <summary>
     ///     任务单元Id
     /// </summary>
     Guid TaskUnitId { get; set; }
 
     /// <summary>
-    ///     目标Id
+    /// 任务目标名称
     /// </summary>
-    Guid TargetId { get; set; }
+    string TargetName { get; set; }
 
     /// <summary>
-    ///     任务状态
+    /// 任务目标编码
     /// </summary>
-    string TaskStatus { get; set; }
+    string? TargetCode { get; set; }
+
+    /// <summary>
+    /// 设计编码
+    /// </summary>
+    string? DesignCode { get; set; }
+
+    /// <summary>
+    /// 任务目标类型
+    /// </summary>
+    string TargetType { get; set; }
+
+    /// <summary>
+    /// 任务目标外部标识
+    /// </summary>
+    string? TargetId { get; set; }
+
+    /// <summary>
+    ///     任务目标状态
+    /// </summary>
+    string TargetState { get; set; }
 
     /// <summary>
     ///     任务描述
@@ -31,12 +46,7 @@ public interface ITaskTarget
     string? Description { get; set; }
 
     /// <summary>
-    ///     任务开始时间
+    ///     任务目标执行
     /// </summary>
-    DateTime StartTime { get; set; }
-
-    /// <summary>
-    ///     任务结束时间
-    /// </summary>
-    DateTime? EndTime { get; set; }
+    DateTime? ExecuteTime { get; set; }
 }

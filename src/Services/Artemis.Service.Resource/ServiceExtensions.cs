@@ -23,7 +23,9 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisDivisionStore, ArtemisDivisionStore>();
         services.TryAddScoped<IArtemisOrganizationStore, ArtemisOrganizationStore>();
 
-        services.TryAddScoped<IArtemisResourceManager, ArtemisResourceManager>();
+        services.TryAddScoped<IDivisionTreeManager, DivisionTreeManager>();
+        services.TryAddScoped<IOrganizationTreeManager, OrganizationTreeManager>();
+
 
         return services;
     }

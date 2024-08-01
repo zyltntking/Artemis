@@ -1016,7 +1016,7 @@ message TaskUnitTargetPacket {
 	// @maxLength(32)
 	string TargetState = 8;
 	// 任务目标描述
-	// @maxLength(256)
+	// @maxLength(128)
 	string Description = 9;
 	// 任务目标执行时间
 	// @required
@@ -1126,7 +1126,7 @@ message CreateTaskUnitTargetPacket{
 	// @maxLength(32)
 	string TargetState = 6;
 	// 任务目标描述
-	// @maxLength(256)
+	// @maxLength(128)
 	string Description = 7;
 	// 任务目标执行时间
 	// @required

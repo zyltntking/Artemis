@@ -1,4 +1,5 @@
-﻿using Artemis.Service.Resource.Context.Configuration;
+﻿using Artemis.Data.Core;
+using Artemis.Service.Resource.Context.Configuration;
 using Artemis.Service.Resource.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace Artemis.Service.Resource.Context;
 ///     行政区划实体
 /// </summary>
 [EntityTypeConfiguration(typeof(ArtemisDivisionConfiguration))]
-public sealed class ArtemisDivision : Division
+public sealed class ArtemisDivision : Division, ITreeSlot<ArtemisDivision>
 {
     /// <summary>
     ///     上级行政区划
