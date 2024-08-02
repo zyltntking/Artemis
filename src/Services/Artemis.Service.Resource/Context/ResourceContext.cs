@@ -1,6 +1,7 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental;
 using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Data.Store.Extensions;
 using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -94,6 +95,9 @@ public class ResourceContext : DbContext
             });
 
             modelBuilder.Entity<ArtemisDataDictionaryItem>().HasData(dictionaryItems);
+
+            var org1 = Instance.CreateInstance<ArtemisOrganization>();
+            org1.Id = Guid.NewGuid();
         }
     }
 }

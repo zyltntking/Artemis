@@ -43,6 +43,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Business\VisionScreen\Transfer\" />
       <Folder Include="Resource\Transfer\" />
     </ItemGroup>
 

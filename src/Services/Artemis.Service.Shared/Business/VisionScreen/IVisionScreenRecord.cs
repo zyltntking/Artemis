@@ -1,9 +1,25 @@
-﻿namespace Artemis.Service.Shared.Business.VisionScreen;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Business.VisionScreen;
 
 /// <summary>
-///     视力筛查记录接口
+/// 视力筛查记录接口
 /// </summary>
-public interface IVisionScreenRecord
+public interface IVisionScreenRecord : IVisionScreenRecordInfo
+{
+}
+
+/// <summary>
+/// 视力筛查记录信息接口
+/// </summary>
+public interface IVisionScreenRecordInfo : IVisionScreenRecordPackage, IKeySlot
+{
+}
+
+/// <summary>
+///     视力筛查记录数据包接口
+/// </summary>
+public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPackage
 {
     /// <summary>
     ///     任务标识
@@ -64,16 +80,6 @@ public interface IVisionScreenRecord
     ///     任务代理类型
     /// </summary>
     string? TaskAgentType { get; set; }
-
-    /// <summary>
-    ///     筛查工作人员姓名
-    /// </summary>
-    string? ScreeningStuffName { get; set; }
-
-    /// <summary>
-    ///     操作时间
-    /// </summary>
-    DateTime? OperationTime { get; set; }
 
     /// <summary>
     ///     医师姓名
@@ -211,61 +217,6 @@ public interface IVisionScreenRecord
     int? Age { get; set; }
 
     /// <summary>
-    ///     左眼与视力表的距离
-    /// </summary>
-    double? LeftChartDistance { get; set; }
-
-    /// <summary>
-    ///     右眼与视力表的距离
-    /// </summary>
-    double? RightChartDistance { get; set; }
-
-    /// <summary>
-    ///     左眼裸眼视力
-    /// </summary>
-    double? LeftNakedEyeVision { get; set; }
-
-    /// <summary>
-    ///     右眼裸眼视力
-    /// </summary>
-    double? RightNakedEyeVision { get; set; }
-
-    /// <summary>
-    ///     是否佩戴眼镜
-    /// </summary>
-    bool IsWareGlasses { get; set; }
-
-    /// <summary>
-    ///     左眼矫正视力
-    /// </summary>
-    double? LeftCorrectedVision { get; set; }
-
-    /// <summary>
-    ///     右眼矫正视力
-    /// </summary>
-    double? RightCorrectedVision { get; set; }
-
-    /// <summary>
-    ///     左眼远视类型
-    /// </summary>
-    double? LeftEyeHyperopiaType { get; set; }
-
-    /// <summary>
-    ///     右眼远视类型
-    /// </summary>
-    double? RightEyeHyperopiaType { get; set; }
-
-    /// <summary>
-    ///     左眼是否佩戴角膜塑形镜
-    /// </summary>
-    bool? IsWareLeftOkLenses { get; set; }
-
-    /// <summary>
-    ///     右眼是否佩戴角膜塑形镜
-    /// </summary>
-    bool? IsWareRightOkLenses { get; set; }
-
-    /// <summary>
     ///     是否已经过电子视力表筛查
     /// </summary>
     bool IsChartChecked { get; set; }
@@ -274,151 +225,6 @@ public interface IVisionScreenRecord
     ///     电子视力表筛查次数
     /// </summary>
     int ChartCheckedTimes { get; set; }
-
-    /// <summary>
-    ///     瞳距
-    /// </summary>
-    double? PupilDistance { get; set; }
-
-    /// <summary>
-    ///     左眼球镜
-    /// </summary>
-    double? LeftSphere { get; set; }
-
-    /// <summary>
-    ///     左眼等效球镜度数
-    /// </summary>
-    int? LeftEquivalentSphere { get; set; }
-
-    /// <summary>
-    ///     右眼球镜
-    /// </summary>
-    double? RightSphere { get; set; }
-
-    /// <summary>
-    ///     右眼等效球径度数
-    /// </summary>
-    int? RightEquivalentSphere { get; set; }
-
-    /// <summary>
-    ///     左眼柱镜
-    /// </summary>
-    double? LeftCylinder { get; set; }
-
-    /// <summary>
-    ///     右眼柱镜
-    /// </summary>
-    double? RightCylinder { get; set; }
-
-    /// <summary>
-    ///     左眼轴位
-    /// </summary>
-    double? LeftAxis { get; set; }
-
-    /// <summary>
-    ///     右眼轴位
-    /// </summary>
-    double? RightAxis { get; set; }
-
-    /// <summary>
-    ///     左眼散光度数
-    /// </summary>
-    double? LeftAstigmatism { get; set; }
-
-    /// <summary>
-    ///     右眼散光度数
-    /// </summary>
-    double? RightAstigmatism { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r1(mm)
-    /// </summary>
-    double? LeftCornealCurvatureR1 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r1(mm)
-    /// </summary>
-    double? RightCornealCurvatureR1 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r1(d)
-    /// </summary>
-    double? LeftCornealCurvatureD1 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r1(d)
-    /// </summary>
-    double? RightCornealCurvatureD1 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r1角度
-    /// </summary>
-    double? LeftCornealCurvatureAngle1 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r1角度
-    /// </summary>
-    double? RightCornealCurvatureAngle1 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r2(mm)
-    /// </summary>
-    double? LeftCornealCurvatureR2 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r2(mm)
-    /// </summary>
-    double? RightCornealCurvatureR2 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r2(d)
-    /// </summary>
-    double? LeftCornealCurvatureD2 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r2(d)
-    /// </summary>
-    double? RightCornealCurvatureD2 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率r2角度
-    /// </summary>
-    double? LeftCornealCurvatureAngle2 { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率r2角度
-    /// </summary>
-    double? RightCornealCurvatureAngle2 { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率平均值(mm)
-    /// </summary>
-    double? LeftCornealCurvatureAverage { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率平均值(mm)
-    /// </summary>
-    double? RightCornealCurvatureAverage { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率平均值(d)
-    /// </summary>
-    double? LeftCornealCurvatureAverageD { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率平均值(d)
-    /// </summary>
-    double? RightCornealCurvatureAverageD { get; set; }
-
-    /// <summary>
-    ///     左眼角膜曲率散光度
-    /// </summary>
-    double? LeftCornealCurvatureAstigmatism { get; set; }
-
-    /// <summary>
-    ///     右眼角膜曲率散光度
-    /// </summary>
-    double? RightCornealCurvatureAstigmatism { get; set; }
 
     /// <summary>
     ///     是否已经过验光仪筛查

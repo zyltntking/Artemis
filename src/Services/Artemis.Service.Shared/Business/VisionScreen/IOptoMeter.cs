@@ -1,15 +1,31 @@
-﻿namespace Artemis.Service.Shared.Business.VisionScreen;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Business.VisionScreen;
 
 /// <summary>
-///     验光仪数据接口
+/// 验光仪接口
 /// </summary>
-public interface IOptometer
+public interface IOptometer : IOptometerInfo
+{
+}
+
+/// <summary>
+/// 验光仪数据信息接口
+/// </summary>
+public interface IOptometerInfo : IOptometerPackage, IKeySlot
 {
     /// <summary>
     ///     档案标识
     /// </summary>
     public Guid RecordId { get; set; }
+}
 
+
+/// <summary>
+///     验光仪数据包接口
+/// </summary>
+public interface IOptometerPackage
+{
     /// <summary>
     ///     瞳距
     /// </summary>
@@ -154,4 +170,14 @@ public interface IOptometer
     ///     右眼角膜曲率散光度
     /// </summary>
     double? RightCornealCurvatureAstigmatism { get; set; }
+
+    /// <summary>
+    ///     筛查工作人员姓名
+    /// </summary>
+    string? OptometerScreeningStuffName { get; set; }
+
+    /// <summary>
+    ///     操作时间
+    /// </summary>
+    DateTime? OptometerOperationTime { get; set; }
 }

@@ -28,14 +28,14 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     /// <summary>
     ///     任务目标编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("任务目标编码")]
     public string? TargetCode { get; set; }
 
     /// <summary>
     ///     设计编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("设计编码")]
     public string? DesignCode { get; set; }
 

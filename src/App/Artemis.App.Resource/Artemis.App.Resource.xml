@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.Resource</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.Resource.Program">
-			<summary>
-				应用程序入口
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Resource.Program.Main(System.String[])">
-			<summary>
-				主函数
-			</summary>
-			<param name="args"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.Resource</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Resource.Program">
+            <summary>
+                应用程序入口
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Resource.Program.Main(System.String[])">
+            <summary>
+                主函数
+            </summary>
+            <param name="args"></param>
+        </member>
+    </members>
 </doc>

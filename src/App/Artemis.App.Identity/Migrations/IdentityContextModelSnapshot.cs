@@ -206,15 +206,15 @@ namespace Artemis.App.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("03399c14-8973-4895-8133-97388f2161c5"),
-                            ConcurrencyStamp = "b33d1df6-6494-45e5-b451-54ead4e7afd8",
+                            Id = new Guid("bccaf55b-1f90-4283-a2cf-386d7e60ae8a"),
+                            ConcurrencyStamp = "c161e1e1-5f6e-44b6-b588-8e9355484a74",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 8, 1, 11, 11, 30, 785, DateTimeKind.Local).AddTicks(1395),
+                            CreatedAt = new DateTime(2024, 8, 2, 18, 14, 33, 348, DateTimeKind.Local).AddTicks(6164),
                             Description = "默认管理员",
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "Admin",
-                            UpdatedAt = new DateTime(2024, 8, 1, 11, 11, 30, 785, DateTimeKind.Local).AddTicks(1409)
+                            UpdatedAt = new DateTime(2024, 8, 2, 18, 14, 33, 348, DateTimeKind.Local).AddTicks(6176)
                         });
                 });
 
@@ -412,20 +412,20 @@ namespace Artemis.App.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f4b4c3e6-3a3f-4735-a71d-acc363357348"),
+                            Id = new Guid("bc16ddcf-83e1-4e54-a084-659258284eb1"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e10ca47b-0782-4232-b7c6-7d2a981942bd",
+                            ConcurrencyStamp = "93e7cc97-465c-417b-98ce-32516e49534c",
                             CreateBy = "00000000-0000-0000-0000-000000000000",
-                            CreatedAt = new DateTime(2024, 8, 1, 11, 11, 30, 785, DateTimeKind.Local).AddTicks(1719),
+                            CreatedAt = new DateTime(2024, 8, 2, 18, 14, 33, 348, DateTimeKind.Local).AddTicks(6409),
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             ModifyBy = "00000000-0000-0000-0000-000000000000",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAQAAyd7AAAAHsfCdEzBXHjbu9S3ou4suRwq9cLyDcSeMwEsawzu1EX3yMji4L3y3zEZXIRa0O3jbUt8KOuRvyy5kDxBYJ6FivYMYiGAmkvW3Jb3jKwfrg==",
+                            PasswordHash = "AQAAAAQAAjGkAAAAET4ERK+sR6ROxHWu8CgAAJm7IkHRGvxWGrIVMqDI4YRzN/I6hI/auXTjGNce+Ss9yj+t6aff0SNPWOoWzckoh68=",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "BVBBGBUNSC5P22P2DGZIDT4IJTEYS64N",
+                            SecurityStamp = "DBA627KVYVE5AYOK7TAKVWZUOWDZX52I",
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2024, 8, 1, 11, 11, 30, 785, DateTimeKind.Local).AddTicks(1719),
+                            UpdatedAt = new DateTime(2024, 8, 2, 18, 14, 33, 348, DateTimeKind.Local).AddTicks(6409),
                             UserName = "admin"
                         });
                 });
@@ -562,8 +562,8 @@ namespace Artemis.App.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("f4b4c3e6-3a3f-4735-a71d-acc363357348"),
-                            RoleId = new Guid("03399c14-8973-4895-8133-97388f2161c5")
+                            UserId = new Guid("bc16ddcf-83e1-4e54-a084-659258284eb1"),
+                            RoleId = new Guid("bccaf55b-1f90-4283-a2cf-386d7e60ae8a")
                         });
                 });
 

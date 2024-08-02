@@ -22,7 +22,7 @@ public class Organization : ConcurrencyModel, IOrganization
     ///     机构编码
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("机构编码")]
     public string? Code { get; set; }
 
@@ -30,7 +30,7 @@ public class Organization : ConcurrencyModel, IOrganization
     ///     设计编码
     /// </summary>
     [Required]
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("设计编码")]
     public required string DesignCode { get; set; }
 

@@ -37,14 +37,14 @@ public class TaskUnit : ConcurrencyPartition, ITaskUnit
     /// <summary>
     ///     单元编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("单元编码")]
     public string? UnitCode { get; set; }
 
     /// <summary>
     ///     设计编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("设计编码")]
     public string? DesignCode { get; set; }
 

@@ -8,8 +8,6 @@ namespace Artemis.Service.Business.VisionScreen.Models;
 /// </summary>
 public class Optometer : ConcurrencyPartition, IOptometer
 {
-    #region Implementation of IOptometer
-
     /// <summary>
     ///     档案标识
     /// </summary>
@@ -160,5 +158,13 @@ public class Optometer : ConcurrencyPartition, IOptometer
     /// </summary>
     public double? RightCornealCurvatureAstigmatism { get; set; }
 
-    #endregion
+    /// <summary>
+    ///     筛查工作人员姓名
+    /// </summary>
+    public string? OptometerScreeningStuffName { get; set; }
+
+    /// <summary>
+    ///     操作时间
+    /// </summary>
+    public DateTime? OptometerOperationTime { get; set; }
 }

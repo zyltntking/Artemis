@@ -13,7 +13,8 @@ public static class StringExtensions
     /// <returns></returns>
     public static string TrimStart(this string input, string trim)
     {
-        if (input.StartsWith(trim)) input = input[trim.Length..];
+        if (input.StartsWith(trim)) 
+            input = input[trim.Length..];
 
         return input;
     }

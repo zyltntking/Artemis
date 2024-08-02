@@ -1,15 +1,30 @@
-﻿namespace Artemis.Service.Shared.Business.VisionScreen;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Business.VisionScreen;
 
 /// <summary>
 ///     视力表数据接口
 /// </summary>
-public interface IVisualChart
+public interface IVisualChart : IVisualChartInfo
+{
+}
+
+/// <summary>
+/// 电子视力表信息
+/// </summary>
+public interface IVisualChartInfo : IVisualChartPackage, IKeySlot
 {
     /// <summary>
     ///     档案标识
     /// </summary>
     public Guid RecordId { get; set; }
+}
 
+/// <summary>
+/// 电子视力表数据包
+/// </summary>
+public interface IVisualChartPackage
+{
     /// <summary>
     ///     左眼与视力表的距离
     /// </summary>
@@ -66,7 +81,12 @@ public interface IVisualChart
     bool? IsWareRightOkLenses { get; set; }
 
     /// <summary>
-    ///     是否已经过电子视力表筛查
+    ///     筛查工作人员姓名
     /// </summary>
-    bool IsChartChecked { get; set; }
+    string? ChartScreeningStuffName { get; set; }
+
+    /// <summary>
+    ///     操作时间
+    /// </summary>
+    DateTime? ChartOperationTime { get; set; }
 }

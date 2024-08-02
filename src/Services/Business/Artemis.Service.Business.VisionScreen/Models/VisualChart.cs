@@ -8,8 +8,6 @@ namespace Artemis.Service.Business.VisionScreen.Models;
 /// </summary>
 public class VisualChart : ConcurrencyPartition, IVisualChart
 {
-    #region Implementation of IVisualChart
-
     /// <summary>
     ///     档案标识
     /// </summary>
@@ -71,9 +69,17 @@ public class VisualChart : ConcurrencyPartition, IVisualChart
     public bool? IsWareRightOkLenses { get; set; }
 
     /// <summary>
+    ///     筛查工作人员姓名
+    /// </summary>
+    public string? ChartScreeningStuffName { get; set; }
+
+    /// <summary>
+    ///     操作时间
+    /// </summary>
+    public DateTime? ChartOperationTime { get; set; }
+
+    /// <summary>
     ///     是否已经过电子视力表筛查
     /// </summary>
     public bool IsChartChecked { get; set; }
-
-    #endregion
 }

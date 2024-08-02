@@ -21,14 +21,14 @@ public class Task : ConcurrencyPartition, ITask
     /// <summary>
     ///     任务编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("任务编码")]
     public string? TaskCode { get; set; }
 
     /// <summary>
     ///     设计编码
     /// </summary>
-    [MaxLength(32)]
+    [MaxLength(64)]
     [Comment("设计编码")]
     public string? DesignCode { get; set; }
 

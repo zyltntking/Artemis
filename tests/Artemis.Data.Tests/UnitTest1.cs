@@ -1,9 +1,12 @@
 using System.Security.Cryptography;
 using System.Text;
 using Artemis.Data.Core.Fundamental;
+using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Kit;
 using Artemis.Data.Core.Fundamental.Protocol;
 using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Data.Store.Extensions;
+using Artemis.Service.Resource.Context;
 
 namespace Artemis.Data.Tests;
 
@@ -15,6 +18,24 @@ public class UnitTest1
         var record = Enumeration.ToRecordDictionary<DictionaryType>();
 
         var stamp = Base32.GenerateBase32();
+
+        var code1 = DesignCode.Organization("5325",  1); //红河州ORG5325001
+
+        var code2 = DesignCode.Organization("5325",  1, "ORG5325001"); //绿春县ORG5325001001
+
+        var code3 = DesignCode.Organization("5325",  1, "ORG5325001001"); //大兴村ORG5325001001001
+
+
+        var code4 = DesignCode.Task("ORG5325001", 1); 
+
+        var code5 = DesignCode.Task("ORG5325001", 1, "TA240802152000ORG5325001SK001"); 
+
+        var code6 = DesignCode.Task("ORG5325001", 2, "TA240802152000ORG5325001SK001"); 
+
+        var code7 = DesignCode.Task("ORG5325001", 3, "TA240802152000ORG5325001SK001002");
+
+        var org1 = Instance.CreateInstance<ArtemisOrganization>();
+        org1.Name = "红河州教体局";
 
 
         //var bbc = Generator.IsInherit<IdentityUser>(typeof(IHandlerSlot<>));
