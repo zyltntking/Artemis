@@ -28,7 +28,6 @@ internal sealed class ArtemisDivisionConfiguration : ConcurrencyModelEntityConfi
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDivision> builder)
     {
-
         // Each Division can have many Children Division
         builder.HasMany(division => division.Children)
             .WithOne(child => child.Parent)

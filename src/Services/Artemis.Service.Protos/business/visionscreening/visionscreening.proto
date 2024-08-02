@@ -1,10 +1,6 @@
 ﻿syntax = "proto3";
 
 option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
-import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
-import "common.proto";
 
 package Artemis.Service.Protos.Business.VisionScreen;
 
@@ -27,7 +23,7 @@ message NotificationPacket{
 	string Content = 4;
 	// 通知消息时间
 	// @datetime
-	google.protobuf.Timestamp DateTime = 5;
+	string DateTime = 5;
 	// 记录标识
 	// @required
 	// @guid

@@ -2,23 +2,22 @@ using Artemis.Extensions.ServiceConnect;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
-namespace Artemis.App.Gateway
+namespace Artemis.App.Gateway;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(args);
 
-            builder.AddServiceDefaults();
+        builder.AddServiceDefaults();
 
-            builder.Services.AddOcelot();
+        builder.Services.AddOcelot();
 
-            var app = builder.Build();
+        var app = builder.Build();
 
-            app.UseOcelot();
+        app.UseOcelot();
 
-            app.Run();
-        }
+        app.Run();
     }
 }

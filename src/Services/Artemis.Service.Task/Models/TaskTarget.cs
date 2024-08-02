@@ -18,7 +18,7 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     public Guid TaskUnitId { get; set; }
 
     /// <summary>
-    /// 任务目标名称
+    ///     任务目标名称
     /// </summary>
     [Required]
     [MaxLength(128)]
@@ -26,21 +26,21 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     public required string TargetName { get; set; }
 
     /// <summary>
-    /// 任务目标编码
+    ///     任务目标编码
     /// </summary>
     [MaxLength(32)]
     [Comment("任务目标编码")]
     public string? TargetCode { get; set; }
 
     /// <summary>
-    /// 设计编码
+    ///     设计编码
     /// </summary>
     [MaxLength(32)]
     [Comment("设计编码")]
     public string? DesignCode { get; set; }
 
     /// <summary>
-    /// 任务目标类型
+    ///     任务目标类型
     /// </summary>
     [Required]
     [MaxLength(32)]
@@ -48,7 +48,7 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     public required string TargetType { get; set; }
 
     /// <summary>
-    /// 任务目标外部标识
+    ///     任务目标外部标识
     /// </summary>
     [MaxLength(128)]
     [Comment("任务目标外部标识")]
@@ -62,14 +62,6 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     public required string TargetState { get; set; }
 
     /// <summary>
-    ///     任务状态
-    /// </summary>
-    [Required]
-    [MaxLength(128)]
-    [Comment("任务状态")]
-    public required string TaskStatus { get; set; }
-
-    /// <summary>
     ///     任务描述
     /// </summary>
     [Comment("任务描述")]
@@ -81,4 +73,11 @@ public class TaskTarget : ConcurrencyPartition, ITaskTarget
     /// </summary>
     public DateTime? ExecuteTime { get; set; }
 
+    /// <summary>
+    ///     任务状态
+    /// </summary>
+    [Required]
+    [MaxLength(128)]
+    [Comment("任务状态")]
+    public required string TaskStatus { get; set; }
 }

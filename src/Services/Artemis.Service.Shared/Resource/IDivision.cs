@@ -8,12 +8,12 @@ namespace Artemis.Service.Shared.Resource;
 public interface IDivision : IDivisionInfo;
 
 /// <summary>
-/// 行政区划信息
+///     行政区划信息
 /// </summary>
 public interface IDivisionInfo : IDivisionPackage, IKeySlot, IParentKeySlot;
 
 /// <summary>
-/// 行政区划数据包
+///     行政区划数据包
 /// </summary>
 public interface IDivisionPackage
 {

@@ -11,27 +11,27 @@ public interface ITaskTarget
     Guid TaskUnitId { get; set; }
 
     /// <summary>
-    /// 任务目标名称
+    ///     任务目标名称
     /// </summary>
     string TargetName { get; set; }
 
     /// <summary>
-    /// 任务目标编码
+    ///     任务目标编码
     /// </summary>
     string? TargetCode { get; set; }
 
     /// <summary>
-    /// 设计编码
+    ///     设计编码
     /// </summary>
     string? DesignCode { get; set; }
 
     /// <summary>
-    /// 任务目标类型
+    ///     任务目标类型
     /// </summary>
     string TargetType { get; set; }
 
     /// <summary>
-    /// 任务目标外部标识
+    ///     任务目标外部标识
     /// </summary>
     string? TargetId { get; set; }
 

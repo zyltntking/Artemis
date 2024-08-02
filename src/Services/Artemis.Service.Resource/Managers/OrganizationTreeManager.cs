@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.Linq.Dynamic.Core;
+using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Resource.Context;
@@ -6,18 +7,17 @@ using Artemis.Service.Resource.Stores;
 using Artemis.Service.Shared.Resource.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
 
 namespace Artemis.Service.Resource.Managers;
 
 /// <summary>
-/// 组织机构树管理器
+///     组织机构树管理器
 /// </summary>
 public interface IOrganizationTreeManager : ITreeManager<ArtemisOrganization, OrganizationInfo, OrganizationInfoTree,
     OrganizationPackage>
 {
     /// <summary>
-    ///  根据组织机构信息查搜索组织机构
+    ///     根据组织机构信息查搜索组织机构
     /// </summary>
     /// <param name="organizationNameSearch"></param>
     /// <param name="organizationCodeSearch"></param>
@@ -38,9 +38,11 @@ public interface IOrganizationTreeManager : ITreeManager<ArtemisOrganization, Or
 }
 
 /// <summary>
-/// 组织机构树管理器实现
+///     组织机构树管理器实现
 /// </summary>
-public class OrganizationTreeManager : TreeManager<ArtemisOrganization, OrganizationInfo, OrganizationInfoTree, OrganizationPackage>, IOrganizationTreeManager
+public class OrganizationTreeManager :
+    TreeManager<ArtemisOrganization, OrganizationInfo, OrganizationInfoTree, OrganizationPackage>,
+    IOrganizationTreeManager
 {
     /// <summary>
     ///     树模型管理器构造
@@ -52,7 +54,7 @@ public class OrganizationTreeManager : TreeManager<ArtemisOrganization, Organiza
     #region Implementation of IOrganizationTreeManager
 
     /// <summary>
-    ///  根据组织机构信息查搜索组织机构
+    ///     根据组织机构信息查搜索组织机构
     /// </summary>
     /// <param name="organizationNameSearch"></param>
     /// <param name="organizationCodeSearch"></param>
@@ -63,12 +65,12 @@ public class OrganizationTreeManager : TreeManager<ArtemisOrganization, Organiza
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task<PageResult<OrganizationInfo>> FetchOrganizationsAsync(
-        string? organizationNameSearch, 
-        string? organizationCodeSearch, 
+        string? organizationNameSearch,
+        string? organizationCodeSearch,
         string? organizationType,
-        string? organizationStatus, 
-        int page = 1, 
-        int size = 20, 
+        string? organizationStatus,
+        int page = 1,
+        int size = 20,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -92,7 +94,8 @@ public class OrganizationTreeManager : TreeManager<ArtemisOrganization, Organiza
 
         query = query.WhereIf(organizationType != string.Empty, organization => organization.Type == organizationType);
 
-        query = query.WhereIf(organizationStatus != string.Empty, organization => organization.Status == organizationStatus);
+        query = query.WhereIf(organizationStatus != string.Empty,
+            organization => organization.Status == organizationStatus);
 
         var count = await query.LongCountAsync(cancellationToken);
 

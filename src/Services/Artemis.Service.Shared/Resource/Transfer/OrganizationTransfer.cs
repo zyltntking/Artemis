@@ -3,7 +3,7 @@
 namespace Artemis.Service.Shared.Resource.Transfer;
 
 /// <summary>
-/// 组织机构树
+///     组织机构树
 /// </summary>
 public record OrganizationInfoTree : OrganizationInfo, ITreeInfoSlot<OrganizationInfoTree>
 {
@@ -14,7 +14,7 @@ public record OrganizationInfoTree : OrganizationInfo, ITreeInfoSlot<Organizatio
 }
 
 /// <summary>
-/// 组织机构信息
+///     组织机构信息
 /// </summary>
 public record OrganizationInfo : OrganizationPackage, IOrganizationInfo
 {
@@ -30,7 +30,7 @@ public record OrganizationInfo : OrganizationPackage, IOrganizationInfo
 }
 
 /// <summary>
-/// 组织机构数据包
+///     组织机构数据包
 /// </summary>
 public record OrganizationPackage : IOrganizationPackage
 {
@@ -42,7 +42,12 @@ public record OrganizationPackage : IOrganizationPackage
     /// <summary>
     ///     机构编码
     /// </summary>
-    public required string Code { get; set; }
+    public string? Code { get; set; }
+
+    /// <summary>
+    ///     机构设计编码
+    /// </summary>
+    public required string DesignCode { get; set; }
 
     /// <summary>
     ///     机构类型

@@ -8,12 +8,12 @@ namespace Artemis.Service.Shared.Resource;
 public interface IOrganization : IOrganizationInfo;
 
 /// <summary>
-/// 组织机构信息接口
+///     组织机构信息接口
 /// </summary>
 public interface IOrganizationInfo : IOrganizationPackage, IKeySlot, IParentKeySlot;
 
 /// <summary>
-/// 组织机构数据包接口
+///     组织机构数据包接口
 /// </summary>
 public interface IOrganizationPackage
 {
@@ -25,7 +25,12 @@ public interface IOrganizationPackage
     /// <summary>
     ///     机构编码
     /// </summary>
-    string Code { get; set; }
+    string? Code { get; set; }
+
+    /// <summary>
+    ///     机构设计编码
+    /// </summary>
+    string DesignCode { get; set; }
 
     /// <summary>
     ///     机构类型

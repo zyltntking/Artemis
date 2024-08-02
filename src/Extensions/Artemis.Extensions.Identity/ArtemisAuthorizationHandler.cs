@@ -31,7 +31,7 @@ internal class ArtemisAuthorizationHandler : AuthorizationHandler<IArtemisAuthor
     private ILogger Logger { get; }
 
     /// <summary>
-    /// Http上下文访问器
+    ///     Http上下文访问器
     /// </summary>
     private IHttpContextAccessor HttpContextAccessor { get; }
 

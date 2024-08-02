@@ -7,7 +7,6 @@ namespace Artemis.Service.Shared.Task.Transfer;
 /// </summary>
 public record TaskInfoTree : TaskInfo, ITreeInfoSlot<TaskInfoTree>
 {
-
     #region Implementation of ITreeInfoSlot<TaskInfoTree,Guid>
 
     /// <summary>

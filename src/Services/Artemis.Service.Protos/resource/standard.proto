@@ -2,7 +2,6 @@
 
 option csharp_namespace = "Artemis.Service.Protos.Resource";
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "common.proto";
 

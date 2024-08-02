@@ -3,7 +3,6 @@
 option csharp_namespace = "Artemis.Service.Protos.Identity";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/empty.proto";
 import "common.proto";
 
 package Artemis.Service.Protos.Identity;

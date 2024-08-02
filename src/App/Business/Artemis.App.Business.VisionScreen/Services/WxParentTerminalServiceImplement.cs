@@ -5,14 +5,14 @@ using Grpc.Core;
 namespace Artemis.App.Business.VisionScreen.Services;
 
 /// <summary>
-/// 微信家长终端服务实现
+///     微信家长终端服务实现
 /// </summary>
 public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParentTerminalServiceBase
 {
     #region Overrides of WxParentTerminalServiceBase
 
     /// <summary>
-    /// 绑定孩子关系
+    ///     绑定孩子关系
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -23,7 +23,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 反馈筛查记录后续处理
+    ///     反馈筛查记录后续处理
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -34,7 +34,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 获取个人中心孩子信息
+    ///     获取个人中心孩子信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -51,12 +51,13 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 获取个人中心消息信息
+    ///     获取个人中心消息信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override Task<FetchParentUserMessageInfoResponse> FetchUserMessageInfo(EmptyRequest request, ServerCallContext context)
+    public override Task<FetchParentUserMessageInfoResponse> FetchUserMessageInfo(EmptyRequest request,
+        ServerCallContext context)
     {
         var response = new FetchParentUserMessageInfoResponse();
 
@@ -74,7 +75,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 查询孩子信息
+    ///     查询孩子信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -89,12 +90,13 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 读取筛查结果
+    ///     读取筛查结果
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override Task<ReadScreenRecordResponse> ReadScreenRecord(ReadScreenRecordRequest request, ServerCallContext context)
+    public override Task<ReadScreenRecordResponse> ReadScreenRecord(ReadScreenRecordRequest request,
+        ServerCallContext context)
     {
         var response = new ReadScreenRecordResponse();
         response.Data = new ScreenRecordPacket();
@@ -103,16 +105,16 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 上传孩子眼部照片
+    ///     上传孩子眼部照片
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override Task<EmptyResponse> UploadChildEyePhoto(UploadChildEyePhotoRequest request, ServerCallContext context)
+    public override Task<EmptyResponse> UploadChildEyePhoto(UploadChildEyePhotoRequest request,
+        ServerCallContext context)
     {
         return Task.FromResult(new EmptyResponse());
     }
-
 
     #endregion
 }

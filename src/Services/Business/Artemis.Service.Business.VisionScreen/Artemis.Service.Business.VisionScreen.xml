@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+
+<doc>
+	<assembly>
+		<name>Artemis.Service.Business.VisionScreen</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord">
+			<summary>
+				视力筛查记录接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskId">
+			<summary>
+				任务标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskName">
+			<summary>
+				任务名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskCode">
+			<summary>
+				任务编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskUnitId">
+			<summary>
+				任务单元标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskUnitName">
+			<summary>
+				任务单元名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskUnitCode">
+			<summary>
+				任务单元编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskUnitTargetId">
+			<summary>
+				任务目标标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskUnitTargetCode">
+			<summary>
+				任务目标编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskAgentId">
+			<summary>
+				任务代理标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskAgentName">
+			<summary>
+				任务代理名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskAgentCode">
+			<summary>
+				任务代理编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.TaskAgentType">
+			<summary>
+				任务代理类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ScreeningStuffName">
+			<summary>
+				筛查工作人员姓名
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OperationTime">
+			<summary>
+				操作时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.DoctorName">
+			<summary>
+				医师姓名
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.VisualStandardId">
+			<summary>
+				应用的视力标准标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.DoctorAdvice">
+			<summary>
+				医嘱
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.PrescribedTime">
+			<summary>
+				医嘱时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.SchoolId">
+			<summary>
+				学校标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.SchoolName">
+			<summary>
+				学校名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.SchoolCode">
+			<summary>
+				学校编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.SchoolType">
+			<summary>
+				学校类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.DivisionId">
+			<summary>
+				行政区划标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.DivisionName">
+			<summary>
+				行政区划名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.DivisionCode">
+			<summary>
+				行政区划编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OrganizationId">
+			<summary>
+				组织机构标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OrganizationName">
+			<summary>
+				组织机构名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OrganizationCode">
+			<summary>
+				组织机构编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OrganizationDesignCode">
+			<summary>
+				组织机构设计编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ClassId">
+			<summary>
+				班级标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ClassName">
+			<summary>
+				班级名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ClassCode">
+			<summary>
+				班级编码
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.GradeName">
+			<summary>
+				年级名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ClassSerialNumber">
+			<summary>
+				班级序列号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.StudyPhase">
+			<summary>
+				学段
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.SchoolLength">
+			<summary>
+				学制
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.StudentId">
+			<summary>
+				学生标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.StudentName">
+			<summary>
+				学生名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.StudentCode">
+			<summary>
+				学生编号
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.Birthday">
+			<summary>
+				生日
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.Age">
+			<summary>
+				年龄
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftChartDistance">
+			<summary>
+				左眼与视力表的距离
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightChartDistance">
+			<summary>
+				右眼与视力表的距离
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftNakedEyeVision">
+			<summary>
+				左眼裸眼视力
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightNakedEyeVision">
+			<summary>
+				右眼裸眼视力
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.IsWareGlasses">
+			<summary>
+				是否佩戴眼镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCorrectedVision">
+			<summary>
+				左眼矫正视力
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCorrectedVision">
+			<summary>
+				右眼矫正视力
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftEyeHyperopiaType">
+			<summary>
+				左眼远视类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightEyeHyperopiaType">
+			<summary>
+				右眼远视类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.IsWareLeftOkLenses">
+			<summary>
+				左眼是否佩戴角膜塑形镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.IsWareRightOkLenses">
+			<summary>
+				右眼是否佩戴角膜塑形镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.IsChartChecked">
+			<summary>
+				是否已经过电子视力表筛查
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ChartCheckedTimes">
+			<summary>
+				电子视力表筛查次数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.PupilDistance">
+			<summary>
+				瞳距
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftSphere">
+			<summary>
+				左眼球镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftEquivalentSphere">
+			<summary>
+				左眼等效球镜度数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightSphere">
+			<summary>
+				右眼球镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightEquivalentSphere">
+			<summary>
+				右眼等效球径度数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCylinder">
+			<summary>
+				左眼柱镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCylinder">
+			<summary>
+				右眼柱镜
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftAxis">
+			<summary>
+				左眼轴位
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightAxis">
+			<summary>
+				右眼轴位
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftAstigmatism">
+			<summary>
+				左眼散光度数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightAstigmatism">
+			<summary>
+				右眼散光度数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureR1">
+			<summary>
+				左眼角膜曲率r1(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureR1">
+			<summary>
+				右眼角膜曲率r1(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureD1">
+			<summary>
+				左眼角膜曲率r1(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureD1">
+			<summary>
+				右眼角膜曲率r1(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureAngle1">
+			<summary>
+				左眼角膜曲率r1角度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureAngle1">
+			<summary>
+				右眼角膜曲率r1角度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureR2">
+			<summary>
+				左眼角膜曲率r2(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureR2">
+			<summary>
+				右眼角膜曲率r2(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureD2">
+			<summary>
+				左眼角膜曲率r2(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureD2">
+			<summary>
+				右眼角膜曲率r2(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureAngle2">
+			<summary>
+				左眼角膜曲率r2角度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureAngle2">
+			<summary>
+				右眼角膜曲率r2角度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureAverage">
+			<summary>
+				左眼角膜曲率平均值(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureAverage">
+			<summary>
+				右眼角膜曲率平均值(mm)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureAverageD">
+			<summary>
+				左眼角膜曲率平均值(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureAverageD">
+			<summary>
+				右眼角膜曲率平均值(d)
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.LeftCornealCurvatureAstigmatism">
+			<summary>
+				左眼角膜曲率散光度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.RightCornealCurvatureAstigmatism">
+			<summary>
+				右眼角膜曲率散光度
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.IsOptometerChecked">
+			<summary>
+				是否已经过验光仪筛查
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.OptometerCheckedTimes">
+			<summary>
+				验光仪筛查次数
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.CheckTime">
+			<summary>
+				筛查时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ExceptionReason">
+			<summary>
+				筛查结果
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ReportSender">
+			<summary>
+				报告发送人
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ReportSendTime">
+			<summary>
+				报告发送时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ReportReceiver">
+			<summary>
+				报告签收人
+			</summary>
+		</member>
+		<member name="P:Artemis.Service.Business.VisionScreen.Interface.IVisionScreenRecord.ReportReceiveTime">
+			<summary>
+				报告签收时间
+			</summary>
+		</member>
+	</members>
+</doc>

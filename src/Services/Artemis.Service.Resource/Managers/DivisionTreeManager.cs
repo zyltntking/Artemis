@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.Linq.Dynamic.Core;
+using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Resource.Context;
@@ -6,12 +7,11 @@ using Artemis.Service.Resource.Stores;
 using Artemis.Service.Shared.Resource.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
 
 namespace Artemis.Service.Resource.Managers;
 
 /// <summary>
-/// 行政区划树管理器
+///     行政区划树管理器
 /// </summary>
 public interface IDivisionTreeManager : ITreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>
 {
@@ -37,9 +37,10 @@ public interface IDivisionTreeManager : ITreeManager<ArtemisDivision, DivisionIn
 }
 
 /// <summary>
-/// 行政区划树管理器实现
+///     行政区划树管理器实现
 /// </summary>
-public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>, IDivisionTreeManager
+public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>,
+    IDivisionTreeManager
 {
     /// <summary>
     ///     树模型管理器构造
@@ -62,12 +63,12 @@ public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, Di
     /// <param name="divisionCodeSearch"></param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<DivisionInfo>> FetchDivisionsAsync(
-        string? divisionNameSearch, 
-        string? divisionCodeSearch, 
-        int? divisionLevel, 
+        string? divisionNameSearch,
+        string? divisionCodeSearch,
+        int? divisionLevel,
         string? divisionType,
-        int page = 1, 
-        int size = 20, 
+        int page = 1,
+        int size = 20,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -81,11 +82,11 @@ public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, Di
         var total = await query.LongCountAsync(cancellationToken);
 
         query = query.WhereIf(
-            divisionNameSearch != string.Empty, 
+            divisionNameSearch != string.Empty,
             division => EF.Functions.Like(division.Name, $"%{divisionNameSearch}%"));
 
         query = query.WhereIf(
-            divisionCodeSearch != string.Empty, 
+            divisionCodeSearch != string.Empty,
             division => EF.Functions.Like(division.Code, $"%{divisionCodeSearch}%"));
 
         query = query.WhereIf(divisionLevel != null, division => division.Level == divisionLevel);

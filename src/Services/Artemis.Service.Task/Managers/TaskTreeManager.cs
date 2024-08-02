@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Task.Managers;
 
 /// <summary>
-/// 任务树管理器
+///     任务树管理器
 /// </summary>
 public interface ITaskTreeManager : ITreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>
 {
@@ -42,12 +42,12 @@ public interface ITaskTreeManager : ITreeManager<ArtemisTask, TaskInfo, TaskInfo
 }
 
 /// <summary>
-/// 任务树管理器实现
+///     任务树管理器实现
 /// </summary>
 public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>, ITaskTreeManager
 {
     /// <summary>
-    /// 独立模型管理器构造
+    ///     独立模型管理器构造
     /// </summary>
     /// <param name="taskStore"></param>
     public TaskTreeManager(IArtemisTaskStore taskStore) : base(taskStore)
@@ -156,7 +156,7 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
         task.TaskState = TaskState.Created;
         task.TaskShip = TaskShip.Normal;
 
-       return task;
+        return task;
     }
 
     /// <summary>
@@ -175,11 +175,12 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
     }
 
     /// <summary>
-    /// 在添加子节点之后
+    ///     在添加子节点之后
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
-    protected override System.Threading.Tasks.Task AfterAddChildNode(ArtemisTask entity, CancellationToken cancellationToken)
+    protected override System.Threading.Tasks.Task AfterAddChildNode(ArtemisTask entity,
+        CancellationToken cancellationToken)
     {
         if (entity.ParentId == Guid.Empty && entity.TaskShip != TaskShip.Root)
         {
@@ -192,13 +193,13 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
     }
 
     /// <summary>
-    /// 在移除子节点之后
+    ///     在移除子节点之后
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
-    protected override async System.Threading.Tasks.Task AfterRemoveChildNode(ArtemisTask entity, CancellationToken cancellationToken)
+    protected override async System.Threading.Tasks.Task AfterRemoveChildNode(ArtemisTask entity,
+        CancellationToken cancellationToken)
     {
-
         if (entity.TaskShip != TaskShip.Child)
         {
             var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == entity.Id, cancellationToken);
@@ -210,7 +211,7 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
     }
 
     /// <summary>
-    /// 在移除子节点之前
+    ///     在移除子节点之前
     /// </summary>
     /// <param name="entity"></param>
     protected override void BeforeRemoveChildNode(ArtemisTask entity)

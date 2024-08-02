@@ -8,13 +8,13 @@ namespace Artemis.Data.Store;
 #region Interface
 
 /// <summary>
-/// 树管理器
+///     树管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> : 
+public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> :
     ITreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>,
     ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
@@ -23,7 +23,7 @@ public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPack
     where TEntityPackage : class;
 
 /// <summary>
-/// 树管理器
+///     树管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -31,16 +31,17 @@ public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPack
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
 /// <typeparam name="TParentKey"></typeparam>
-public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> : 
+public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> :
     ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
-    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
+    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,
+    ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 获取实体信息树
+    ///     获取实体信息树
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
@@ -48,25 +49,27 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
     Task<TEntityInfoTree?> GetEntityInfoTreeAsync(TKey key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 创建子实体
+    ///     创建子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> CreateChildEntityAsync(TKey key, TEntityPackage package, CancellationToken cancellationToken = default);
+    Task<StoreResult> CreateChildEntityAsync(TKey key, TEntityPackage package,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量创建子实体
+    ///     批量创建子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> BatchCreateChildEntityAsync(TKey key, IEnumerable<TEntityPackage> packages, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchCreateChildEntityAsync(TKey key, IEnumerable<TEntityPackage> packages,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加子实体
+    ///     添加子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
@@ -75,16 +78,17 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
     Task<StoreResult> AddChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量添加子实体
+    ///     批量添加子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> BatchAddChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchAddChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除子实体
+    ///     删除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
@@ -93,16 +97,17 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
     Task<StoreResult> DeleteChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量删除子实体
+    ///     批量删除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> BatchDeleteChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchDeleteChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 移除子实体
+    ///     移除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
@@ -111,19 +116,20 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
     Task<StoreResult> RemoveChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量移除子实体
+    ///     批量移除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> BatchRemoveChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default);
+    Task<StoreResult> BatchRemoveChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default);
 }
 
 #endregion
 
 /// <summary>
-/// 树管理器
+///     树管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
@@ -147,7 +153,7 @@ public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntity
     #region Overrides of TreeManager<TEntity,Guid,Guid?,TEntityInfo,TEntityInfoTree,TEntityPackage>
 
     /// <summary>
-    /// 映射到父级键
+    ///     映射到父级键
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
@@ -155,20 +161,20 @@ public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntity
     {
         return key;
     }
-    #endregion
 
+    #endregion
 }
 
-
 /// <summary>
-/// 树管理器
+///     树管理器
 /// </summary>
-public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> : 
-    SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>, 
+public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> :
+    SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>,
     ITreeManager<TEntity, TKey, TParentKey?, TEntityInfo, TEntityInfoTree, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
-    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
+    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,
+    ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
 {
@@ -180,10 +186,45 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     {
     }
 
+    /// <summary>
+    ///     映射到父级键
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    protected abstract TParentKey MapToParentKey(TKey key);
+
+    /// <summary>
+    ///     在添加子节点之后
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cancellationToken"></param>
+    protected virtual Task AfterAddChildNode(TEntity entity, CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    ///     在移除子节点之前
+    /// </summary>
+    /// <param name="entity"></param>
+    protected virtual void BeforeRemoveChildNode(TEntity entity)
+    {
+    }
+
+    /// <summary>
+    ///     在移除子节点之后
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cancellationToken"></param>
+    protected virtual Task AfterRemoveChildNode(TEntity entity, CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
     #region Implementation of ITreeManager<TEntity,TKey,TEntityInfo,TEntityInfoTree,TEntityPackage>
 
     /// <summary>
-    /// 获取实体信息树
+    ///     获取实体信息树
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
@@ -201,13 +242,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 创建子实体
+    ///     创建子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> CreateChildEntityAsync(TKey key, TEntityPackage package, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateChildEntityAsync(TKey key, TEntityPackage package,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -221,10 +263,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
 
             var result = await EntityStore.CreateAsync(child, cancellationToken);
 
-            if (result.Succeeded)
-            {
-                await AfterAddChildNode(entity, cancellationToken);
-            }
+            if (result.Succeeded) await AfterAddChildNode(entity, cancellationToken);
 
             return result;
         }
@@ -233,13 +272,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 批量创建子实体
+    ///     批量创建子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchCreateChildEntityAsync(TKey key, IEnumerable<TEntityPackage> packages, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> BatchCreateChildEntityAsync(TKey key, IEnumerable<TEntityPackage> packages,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -258,10 +298,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
 
             var result = await EntityStore.CreateAsync(children, cancellationToken);
 
-            if (result.Succeeded)
-            {
-                await AfterAddChildNode(entity, cancellationToken);
-            }
+            if (result.Succeeded) await AfterAddChildNode(entity, cancellationToken);
 
             return result;
         }
@@ -270,13 +307,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 添加子实体
+    ///     添加子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> AddChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> AddChildEntityAsync(TKey key, TKey childKey,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -292,10 +330,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
 
                 var result = await EntityStore.UpdateAsync(child, cancellationToken);
 
-                if (result.Succeeded)
-                {
-                    await AfterAddChildNode(entity, cancellationToken);
-                }
+                if (result.Succeeded) await AfterAddChildNode(entity, cancellationToken);
 
                 return result;
             }
@@ -307,13 +342,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 批量添加子实体
+    ///     批量添加子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchAddChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> BatchAddChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -329,35 +365,31 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
 
             if (childrenList.Any())
             {
-                foreach (var child in childrenList)
-                {
-                    child.ParentId = MapToParentKey(key);
-                }
+                foreach (var child in childrenList) child.ParentId = MapToParentKey(key);
 
                 var result = await EntityStore.UpdateAsync(childrenList, cancellationToken);
 
-                if (result.Succeeded)
-                {
-                    await AfterAddChildNode(entity, cancellationToken);
-                }
+                if (result.Succeeded) await AfterAddChildNode(entity, cancellationToken);
 
                 return result;
             }
 
-            return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, string.Join(",", keyList.Select(item => item.IdToString())));
+            return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name,
+                string.Join(",", keyList.Select(item => item.IdToString())));
         }
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
 
     /// <summary>
-    /// 删除子实体
+    ///     删除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> DeleteChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> DeleteChildEntityAsync(TKey key, TKey childKey,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -371,10 +403,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
             {
                 var result = await EntityStore.DeleteAsync(childKey, cancellationToken);
 
-                if (result.Succeeded)
-                {
-                    await AfterRemoveChildNode(entity, cancellationToken);
-                }
+                if (result.Succeeded) await AfterRemoveChildNode(entity, cancellationToken);
 
                 return result;
             }
@@ -386,13 +415,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 批量删除子实体
+    ///     批量删除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchDeleteChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> BatchDeleteChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -410,28 +440,27 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
             {
                 var result = await EntityStore.DeleteAsync(keyList, cancellationToken);
 
-                if (result.Succeeded)
-                {
-                    await AfterRemoveChildNode(entity, cancellationToken);
-                }
+                if (result.Succeeded) await AfterRemoveChildNode(entity, cancellationToken);
 
                 return result;
             }
 
-            return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, string.Join(",", keyList.Select(item => item.IdToString())));
+            return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name,
+                string.Join(",", keyList.Select(item => item.IdToString())));
         }
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
 
     /// <summary>
-    /// 移除子实体
+    ///     移除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childKey"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> RemoveChildEntityAsync(TKey key, TKey childKey, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> RemoveChildEntityAsync(TKey key, TKey childKey,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -458,13 +487,14 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     }
 
     /// <summary>
-    /// 批量移除子实体
+    ///     批量移除子实体
     /// </summary>
     /// <param name="key"></param>
     /// <param name="childrenKeys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> BatchRemoveChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> BatchRemoveChildEntityAsync(TKey key, IEnumerable<TKey> childrenKeys,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -498,43 +528,9 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
             return result;
         }
 
-        return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, string.Join(",", keyList.Select(item => item.IdToString())));
+        return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name,
+            string.Join(",", keyList.Select(item => item.IdToString())));
     }
 
     #endregion
-
-    /// <summary>
-    /// 映射到父级键
-    /// </summary>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    protected abstract TParentKey MapToParentKey(TKey key);
-
-    /// <summary>
-    /// 在添加子节点之后
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    protected virtual Task AfterAddChildNode(TEntity entity, CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    /// <summary>
-    /// 在移除子节点之前
-    /// </summary>
-    /// <param name="entity"></param>
-    protected virtual void BeforeRemoveChildNode(TEntity entity)
-    {
-    }
-
-    /// <summary>
-    /// 在移除子节点之后
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    protected virtual Task AfterRemoveChildNode(TEntity entity, CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
 }

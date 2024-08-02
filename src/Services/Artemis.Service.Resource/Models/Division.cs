@@ -67,5 +67,4 @@ public class Division : ConcurrencyModel, IDivision
     /// </summary>
     [Comment("上级行政区划标识")]
     public Guid? ParentId { get; set; }
-
 }

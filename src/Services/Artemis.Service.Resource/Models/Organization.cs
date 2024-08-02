@@ -24,7 +24,15 @@ public class Organization : ConcurrencyModel, IOrganization
     [Required]
     [MaxLength(32)]
     [Comment("机构编码")]
-    public required string Code { get; set; }
+    public string? Code { get; set; }
+
+    /// <summary>
+    ///     设计编码
+    /// </summary>
+    [Required]
+    [MaxLength(32)]
+    [Comment("设计编码")]
+    public required string DesignCode { get; set; }
 
     /// <summary>
     ///     机构类型

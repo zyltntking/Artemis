@@ -17,7 +17,7 @@ namespace Artemis.Service.Resource.Services;
 public class OrganizationServiceImplement : OrganizationService.OrganizationServiceBase
 {
     /// <summary>
-    /// 组织机构树服务实现
+    ///     组织机构树服务实现
     /// </summary>
     /// <param name="organizationTreeManager"></param>
     /// <param name="logger"></param>
@@ -30,7 +30,7 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 任务树管理器
+    ///     任务树管理器
     /// </summary>
     private IOrganizationTreeManager OrganizationTreeManager { get; }
 
@@ -42,16 +42,17 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     #region Overrides of OrganizationServiceBase
 
     /// <summary>
-    /// 查找组织机构信息
+    ///     查找组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查找组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(SearchOrganizationRequest request, ServerCallContext context)
+    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(SearchOrganizationRequest request,
+        ServerCallContext context)
     {
-        var info  = await OrganizationTreeManager.FetchOrganizationsAsync(
+        var info = await OrganizationTreeManager.FetchOrganizationsAsync(
             request.Name,
             request.Code,
             request.Type,
@@ -70,14 +71,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 读取组织机构信息
+    ///     读取组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<ReadOrganizationResponse> ReadOrganization(ReadOrganizationRequest request, ServerCallContext context)
+    public override async Task<ReadOrganizationResponse> ReadOrganization(ReadOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -87,14 +89,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 读取组织机构信息树
+    ///     读取组织机构信息树
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取组织机构信息树")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<ReadOrganizationTreeResponse> ReadOrganizationTree(ReadOrganizationRequest request, ServerCallContext context)
+    public override async Task<ReadOrganizationTreeResponse> ReadOrganizationTree(ReadOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -104,14 +107,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 创建组织机构信息
+    ///     创建组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> CreateOrganization(CreateOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateOrganization(CreateOrganizationRequest request,
+        ServerCallContext context)
     {
         var package = request.Adapt<OrganizationPackage>();
 
@@ -121,14 +125,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量创建组织机构信息
+    ///     批量创建组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateOrganization(BatchCreateOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateOrganization(BatchCreateOrganizationRequest request,
+        ServerCallContext context)
     {
         var packages = request.Batch.Adapt<IEnumerable<OrganizationPackage>>();
 
@@ -138,14 +143,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 更新组织机构信息
+    ///     更新组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> UpdateOrganization(UpdateOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateOrganization(UpdateOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -157,17 +163,18 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量更新组织机构信息
+    ///     批量更新组织机构信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新组织机构信息")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchUpdateOrganization(BatchUpdateOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchUpdateOrganization(BatchUpdateOrganizationRequest request,
+        ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
-            item => Guid.Parse(item.OrganizationId), 
+            item => Guid.Parse(item.OrganizationId),
             item => item.Adapt<OrganizationPackage>());
 
         var result = await OrganizationTreeManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
@@ -176,14 +183,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 删除组织机构
+    ///     删除组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteOrganization(DeleteOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteOrganization(DeleteOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -193,14 +201,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量删除组织机构
+    ///     批量删除组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteOrganization(BatchDeleteOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteOrganization(BatchDeleteOrganizationRequest request,
+        ServerCallContext context)
     {
         var ids = request.OrganizationIds.Select(Guid.Parse);
 
@@ -210,14 +219,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 创建子组织机构
+    ///     创建子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> CreateChildOrganization(CreateChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateChildOrganization(CreateChildOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -229,14 +239,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量创建子组织机构
+    ///     批量创建子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateChildOrganization(BatchCreateChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateChildOrganization(
+        BatchCreateChildOrganizationRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -248,14 +259,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 添加子组织机构
+    ///     添加子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> AddChildOrganization(AddChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AddChildOrganization(AddChildOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -267,14 +279,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量添加子组织机构
+    ///     批量添加子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchAddChildOrganization(BatchAddChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchAddChildOrganization(BatchAddChildOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -286,14 +299,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 删除子组织机构
+    ///     删除子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteChildOrganization(DeleteChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteChildOrganization(DeleteChildOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -305,14 +319,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量删除子组织机构
+    ///     批量删除子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteChildOrganization(BatchDeleteChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteChildOrganization(
+        BatchDeleteChildOrganizationRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -324,14 +339,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 移除子组织机构
+    ///     移除子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> RemoveChildOrganization(RemoveChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> RemoveChildOrganization(RemoveChildOrganizationRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
@@ -343,14 +359,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     }
 
     /// <summary>
-    /// 批量移除子组织机构
+    ///     批量移除子组织机构
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除子组织机构")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchRemoveChildOrganization(BatchRemoveChildOrganizationRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchRemoveChildOrganization(
+        BatchRemoveChildOrganizationRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 

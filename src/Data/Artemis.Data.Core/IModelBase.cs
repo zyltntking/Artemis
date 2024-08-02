@@ -93,14 +93,14 @@ public interface IKeySlot<TKey> where TKey : IEquatable<TKey>
 #endregion
 
 /// <summary>
-/// 树插件
+///     树插件
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public interface ITreeSlot<TEntity> : ITreeSlot<TEntity, Guid, Guid?>
     where TEntity : IKeySlot, IParentKeySlot, ITreeSlot<TEntity>;
 
 /// <summary>
-/// 树插件
+///     树插件
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -110,20 +110,20 @@ public interface ITreeSlot<TEntity, TKey, TParentKey> : ITreeInfoSlot<TEntity, T
     where TKey : IEquatable<TKey>
 {
     /// <summary>
-    /// 父节点
+    ///     父节点
     /// </summary>
     TEntity? Parent { get; set; }
 }
 
 /// <summary>
-/// 树插件
+///     树插件
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public interface ITreeInfoSlot<TEntity> : ITreeInfoSlot<TEntity, Guid, Guid?>
     where TEntity : IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntity>;
 
 /// <summary>
-/// 树插件
+///     树插件
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>

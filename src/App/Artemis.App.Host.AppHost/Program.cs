@@ -44,8 +44,4 @@ builder.AddProject<Artemis_App_Task>("TaskService")
     .WithReference(redis)
     .WithReference(artemisDb);
 
-builder.AddProject<Artemis_App_RawData>("RawDataService")
-    .WithReference(redis)
-    .WithReference(artemisDb);
-
 builder.Build().Run();

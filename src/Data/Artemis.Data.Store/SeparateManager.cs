@@ -7,7 +7,7 @@ namespace Artemis.Data.Store;
 #region Interface
 
 /// <summary>
-/// 独立模型管理接口
+///     独立模型管理接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
@@ -19,8 +19,8 @@ public interface ISeparateManager<TEntity, TEntityInfo, TEntityPackage> : ISepar
     where TEntityPackage : class;
 
 /// <summary>
-    ///     独立模型接口
-    /// </summary>
+///     独立模型接口
+/// </summary>
 public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : IManager
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
@@ -91,20 +91,20 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
 #endregion
 
 /// <summary>
-/// 单独模型管理器
+///     单独模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public abstract class SeparateManager<TEntity, TEntityInfo, TEntityPackage> : 
+public abstract class SeparateManager<TEntity, TEntityInfo, TEntityPackage> :
     SeparateManager<TEntity, Guid, TEntityInfo,
-    TEntityPackage>, ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
+        TEntityPackage>, ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot
     where TEntityInfo : class, IKeySlot
     where TEntityPackage : class
 {
     /// <summary>
-    /// 独立模型管理器构造
+    ///     独立模型管理器构造
     /// </summary>
     /// <param name="entityStore"></param>
     protected SeparateManager(IStore<TEntity> entityStore) : base(entityStore)

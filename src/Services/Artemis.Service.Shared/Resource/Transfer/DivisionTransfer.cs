@@ -3,7 +3,7 @@
 namespace Artemis.Service.Shared.Resource.Transfer;
 
 /// <summary>
-/// 行政区划树
+///     行政区划树
 /// </summary>
 public record DivisionInfoTree : DivisionInfo, ITreeInfoSlot<DivisionInfoTree>
 {
@@ -14,7 +14,7 @@ public record DivisionInfoTree : DivisionInfo, ITreeInfoSlot<DivisionInfoTree>
 }
 
 /// <summary>
-/// 行政区划信息
+///     行政区划信息
 /// </summary>
 public record DivisionInfo : DivisionPackage, IDivisionInfo
 {
@@ -28,11 +28,10 @@ public record DivisionInfo : DivisionPackage, IDivisionInfo
     ///     父标识
     /// </summary>
     public Guid? ParentId { get; set; }
-
 }
 
 /// <summary>
-/// 行政区划数据包
+///     行政区划数据包
 /// </summary>
 public record DivisionPackage : IDivisionPackage
 {

@@ -6,7 +6,6 @@ using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Identity;
 using Artemis.Service.Shared.Identity.Transfer;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Distributed;
@@ -324,7 +323,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns></returns>
     private async Task EraseTokenDocument(
-        string identityToken, 
+        string identityToken,
         CancellationToken cancellationToken = default)
     {
         var cacheTokenKey = TokenKeyGenerator.CacheTokenKey(Options.CacheTokenPrefix, identityToken);
