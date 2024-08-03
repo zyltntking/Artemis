@@ -17,8 +17,6 @@ public class DataDictionaryItem : ConcurrencyModel, IDataDictionaryItem
     [Comment("数据字典标识")]
     public required Guid DataDictionaryId { get; set; }
 
-    #region Implementation of IDataDictionaryItem
-
     /// <summary>
     ///     数据项目键
     /// </summary>
@@ -38,7 +36,7 @@ public class DataDictionaryItem : ConcurrencyModel, IDataDictionaryItem
     /// <summary>
     ///     数据项目描述
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("数据项目描述")]
     public string? Description { get; set; }
 
@@ -48,6 +46,4 @@ public class DataDictionaryItem : ConcurrencyModel, IDataDictionaryItem
     [Required]
     [Comment("数据项目是否有效")]
     public required bool Valid { get; set; } = true;
-
-    #endregion
 }

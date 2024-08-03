@@ -10,8 +10,6 @@ namespace Artemis.Service.Resource.Models;
 /// </summary>
 public class DataDictionary : ConcurrencyModel, IDataDictionary
 {
-    #region Implementation of IDataDictionary
-
     /// <summary>
     ///     字典名称
     /// </summary>
@@ -31,7 +29,7 @@ public class DataDictionary : ConcurrencyModel, IDataDictionary
     /// <summary>
     ///     字典描述
     /// </summary>
-    [MaxLength(256)]
+    [MaxLength(128)]
     [Comment("字典描述")]
     public string? Description { get; set; }
 
@@ -39,7 +37,7 @@ public class DataDictionary : ConcurrencyModel, IDataDictionary
     ///     字典类型
     /// </summary>
     [Required]
-    [MaxLength(128)]
+    [MaxLength(32)]
     [Comment("字典类型")]
     public required string Type { get; set; }
 
@@ -49,6 +47,4 @@ public class DataDictionary : ConcurrencyModel, IDataDictionary
     [Required]
     [Comment("字典是否有效")]
     public bool Valid { get; set; } = true;
-
-    #endregion
 }

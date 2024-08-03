@@ -103,7 +103,7 @@ public abstract class PartitionBaseEntityConfiguration<TEntity, TKey> :
     {
         if (UsePartitionConfiguration)
             builder.HasIndex(entity => entity.Partition)
-                .HasDatabaseName(IndexName("Partition"));
+                .HasDatabaseName(IndexName(nameof(IPartitionSlot.Partition)));
     }
 
     #endregion
@@ -238,11 +238,11 @@ public abstract class BaseModelEntityConfiguration<TEntity, TKey> : KeySlotEntit
         if (UseMateIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IMateSlot)))
         {
             builder.HasIndex(entity => entity.CreatedAt)
-                .HasDatabaseName(IndexName("CreatedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.CreatedAt)));
             builder.HasIndex(entity => entity.UpdatedAt)
-                .HasDatabaseName(IndexName("UpdatedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.UpdatedAt)));
             builder.HasIndex(entity => entity.DeletedAt)
-                .HasDatabaseName(IndexName("DeletedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.DeletedAt)));
         }
     }
 
@@ -280,11 +280,11 @@ public abstract class BaseModelEntityConfiguration<TEntity, TKey> : KeySlotEntit
         if (UseHandlerIndexConfiguration)
         {
             builder.HasIndex(entity => entity.CreateBy)
-                .HasDatabaseName(IndexName("CreateBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.CreateBy)));
             builder.HasIndex(entity => entity.ModifyBy)
-                .HasDatabaseName(IndexName("ModifyBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.ModifyBy)));
             builder.HasIndex(entity => entity.RemoveBy)
-                .HasDatabaseName(IndexName("RemoveBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.RemoveBy)));
         }
     }
 
@@ -629,7 +629,7 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
     {
         if (UseCheckStampConfiguration && Generator.IsInherit<TEntity>(typeof(ICheckStamp)))
             builder.HasIndex(entity => ((ICheckStamp)entity).CheckStamp)
-                .HasDatabaseName(IndexName("CheckStamp"));
+                .HasDatabaseName(IndexName(nameof(ICheckStamp.CheckStamp)));
     }
 
     #endregion
@@ -699,7 +699,7 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
     {
         if (UsePartitionConfiguration && Generator.IsInherit<TEntity>(typeof(IPartitionSlot)))
             builder.HasIndex(entity => ((IPartitionSlot)entity).Partition)
-                .HasDatabaseName(IndexName("Partition"));
+                .HasDatabaseName(IndexName(nameof(IPartitionSlot.Partition)));
     }
 
     #endregion
@@ -739,11 +739,11 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
         if (UseMateIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IMateSlot)))
         {
             builder.HasIndex(entity => ((IMateSlot)entity).CreatedAt)
-                .HasDatabaseName(IndexName("CreatedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.CreatedAt)));
             builder.HasIndex(entity => ((IMateSlot)entity).UpdatedAt)
-                .HasDatabaseName(IndexName("UpdatedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.UpdatedAt)));
             builder.HasIndex(entity => ((IMateSlot)entity).DeletedAt)
-                .HasDatabaseName(IndexName("DeletedAt"));
+                .HasDatabaseName(IndexName(nameof(IMateSlot.DeletedAt)));
         }
     }
 
@@ -781,11 +781,11 @@ public abstract class BaseEntityConfiguration<TEntity, TKey> : IEntityTypeConfig
         if (UseHandlerIndexConfiguration && Generator.IsInherit<TEntity>(typeof(IHandlerSlot)))
         {
             builder.HasIndex(entity => ((IHandlerSlot)entity).CreateBy)
-                .HasDatabaseName(IndexName("CreateBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.CreateBy)));
             builder.HasIndex(entity => ((IHandlerSlot)entity).ModifyBy)
-                .HasDatabaseName(IndexName("ModifyBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.ModifyBy)));
             builder.HasIndex(entity => ((IHandlerSlot)entity).RemoveBy)
-                .HasDatabaseName(IndexName("RemoveBy"));
+                .HasDatabaseName(IndexName(nameof(IHandlerSlot.RemoveBy)));
         }
     }
 

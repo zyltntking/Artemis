@@ -323,7 +323,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     ///     忽略空值配置
     /// </summary>
     /// <returns></returns>
-    private TypeAdapterConfig IgnoreNullConfig
+    protected TypeAdapterConfig IgnoreNullConfig
     {
         get
         {

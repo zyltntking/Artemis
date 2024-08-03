@@ -30,10 +30,12 @@ internal sealed class
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDataDictionaryItem> builder)
     {
         builder.HasIndex(entity => entity.Key)
-            .HasDatabaseName(IndexName("Key"));
+            .HasDatabaseName(IndexName(nameof(ArtemisDataDictionaryItem.Key)));
 
         builder.HasIndex(entity => new { entity.DataDictionaryId, entity.Key })
-            .HasDatabaseName(IndexName("DataDictionaryId", "Key"))
+            .HasDatabaseName(IndexName(
+                nameof(ArtemisDataDictionaryItem.DataDictionaryId), 
+                nameof(ArtemisDataDictionaryItem.Key)))
             .IsUnique();
     }
 

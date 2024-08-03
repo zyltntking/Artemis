@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Exceptions;
+using Artemis.Data.Store.Extensions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
@@ -229,20 +230,46 @@ public abstract class OtmManager<
     protected abstract Expression<Func<TSubEntity, bool>> SubEntityKeyMatcher(TKey key);
 
     /// <summary>
+    /// 设置子模型的关联键
+    /// </summary>
+    /// <param name="subEntity"></param>
+    /// <param name="key"></param>
+    protected abstract void SetSubEntityRelationalKey(TSubEntity subEntity, TKey key);
+
+    /// <summary>
     ///     映射到新的附属实体
     /// </summary>
     /// <param name="package"></param>
     /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected abstract TSubEntity MapNewSubEntity(TSubEntityPackage package, TKey key);
+    protected virtual Task<TSubEntity> MapNewSubEntity(
+        TSubEntityPackage package, 
+        TKey key, 
+        CancellationToken cancellationToken = default)
+    {
+        var entity = Instance.CreateInstance<TSubEntity, TSubEntityPackage>(package);
+
+        SetSubEntityRelationalKey(entity, key);
+
+        return Task.FromResult(entity);
+    }
 
     /// <summary>
     ///     覆盖附属实体
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="package"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected abstract TSubEntity MapOverSubEntity(TSubEntity entity, TSubEntityPackage package);
+    protected virtual Task<TSubEntity> MapOverSubEntity(
+        TSubEntity entity, 
+        TSubEntityPackage package, 
+        CancellationToken cancellationToken = default)
+    {
+        entity = package.Adapt(entity, IgnoreNullConfig);
+        return Task.FromResult(entity);
+    }
 
     #region Implementation
 
@@ -288,7 +315,7 @@ public abstract class OtmManager<
 
         if (entityExists)
         {
-            var subEntity = MapNewSubEntity(subEntityPackage, key);
+            var subEntity = await MapNewSubEntity(subEntityPackage, key, cancellationToken);
 
             return await SubEntityStore.CreateAsync(subEntity, cancellationToken);
         }
@@ -312,9 +339,15 @@ public abstract class OtmManager<
 
         if (entityExists)
         {
-            var subEntities = subEntityPackages.Select(package => MapNewSubEntity(package, key));
+            var subEntityList = new List<TSubEntity>();
 
-            return await SubEntityStore.CreateAsync(subEntities, cancellationToken);
+            foreach (var subEntityPackage in subEntityPackages)
+            {
+                var subEntity = await MapNewSubEntity(subEntityPackage, key, cancellationToken);
+                subEntityList.Add(subEntity);
+            }
+
+            return await SubEntityStore.CreateAsync(subEntityList, cancellationToken);
         }
 
         throw new EntityNotFoundException(typeof(TEntity).Name, key.IdToString()!);
@@ -344,7 +377,7 @@ public abstract class OtmManager<
 
             if (subEntity is not null)
             {
-                subEntity = MapOverSubEntity(subEntity, subEntityPackage);
+                subEntity = await MapOverSubEntity(subEntity, subEntityPackage, cancellationToken);
 
                 return await SubEntityStore.UpdateAsync(subEntity, cancellationToken);
             }
@@ -380,14 +413,18 @@ public abstract class OtmManager<
 
             if (subEntities.Any())
             {
-                subEntities = subEntities.Select(subEntity =>
+                var updateSubEntities = new List<TSubEntity>();
+
+                foreach (var subEntity in subEntities)
                 {
                     var subPackage = dictionary[subEntity.Id];
 
-                    return MapOverSubEntity(subEntity, subPackage);
-                }).ToList();
+                    var updateSubEntity = await MapOverSubEntity(subEntity, subPackage, cancellationToken);
 
-                return await SubEntityStore.UpdateAsync(subEntities, cancellationToken);
+                    updateSubEntities.Add(updateSubEntity);
+                }
+
+                return await SubEntityStore.UpdateAsync(updateSubEntities, cancellationToken);
             }
 
             var flag = string.Join(",", subKeyList.Select(item => item.IdToString()));

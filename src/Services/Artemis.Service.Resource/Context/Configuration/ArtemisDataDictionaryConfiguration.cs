@@ -29,10 +29,10 @@ internal sealed class ArtemisDataDictionaryConfiguration : ConcurrencyModelEntit
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDataDictionary> builder)
     {
         builder.HasIndex(entity => entity.Name)
-            .HasDatabaseName(IndexName("Name"));
+            .HasDatabaseName(IndexName(nameof(ArtemisDataDictionary.Name)));
 
         builder.HasIndex(entity => entity.Code)
-            .HasDatabaseName(IndexName("Code"))
+            .HasDatabaseName(IndexName(nameof(ArtemisDataDictionary.Code)))
             .IsUnique();
 
         // Each DataDictionary can have many DataDictionaryItems

@@ -11,84 +11,84 @@ package Artemis.Service.Protos.Resource;
 service DictionaryService{
 
 	// 查询字典信息
-	rpc SearchDictionaryInfo(SearchDictionaryRequest) returns (SearchDictionaryInfoResponse){
+	rpc SearchDictionaryInfo(SearchDictionaryInfoRequest) returns (SearchDictionaryInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Dictionary"
+			get: "/api/ResourceService/Dictionary"
 		};
 	}
 
 	// 获取数据字典
-	rpc ReadDataDictionary(ReadDataDictionaryRequest) returns (ReadDataDictionaryResponse){
+	rpc ReadDictionaryInfo(ReadDictionaryInfoRequest) returns (ReadDictionaryInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Dictionary/{DictionaryId}"
+			get: "/api/ResourceService/Dictionary/{DictionaryId}"
 		};
 	}
 
 	// 创建数据字典
-	rpc CreateDataDictionary(CreateDataDictionaryRequest) returns (AffectedResponse){
+	rpc CreateDictionary(CreateDictionaryRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary"
+			post: "/api/ResourceService/Dictionary"
 			body: "*"
 		};
 	}
 
 	// 批量创建数据字典
-	rpc BatchCreateDataDictionary(BatchCreateDictionariyRequest) returns (AffectedResponse){
+	rpc BatchCreateDictionary(BatchCreateDictionariyRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary/BatchCreate"
+			post: "/api/ResourceService/Dictionary/BatchCreate"
 			body: "Batch"
 		};
 	}
 
 	// 更新数据字典
-	rpc UpdateDataDictionary(UpdateDictionaryRequest) returns (AffectedResponse){
+	rpc UpdateDictionary(UpdateDictionaryRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Dictionary/{DictionaryId}"
+			put: "/api/ResourceService/Dictionary/{DictionaryId}"
 			body: "Dictionary"
 		};
 	}
 
 	// 批量更新数据字典
-	rpc BatchUpdateDataDictionary(BatchUpdateDictionaryRequest) returns (AffectedResponse){
+	rpc BatchUpdateDictionary(BatchUpdateDictionaryRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Dictionary/BatchUpdate"
+			put: "/api/ResourceService/Dictionary/BatchUpdate"
 			body: "Batch"
 		};
 	}
 
 	// 删除字典
-	rpc DeleteDataDictionary(DeleteDictionaryRequest) returns (AffectedResponse){
+	rpc DeleteDictionary(DeleteDictionaryRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Dictionary/{DictionaryId}"
+			delete: "/api/ResourceService/Dictionary/{DictionaryId}"
 		};
 	}
 
 	// 批量删除字典
-	rpc BatchDeleteDataDictionary(BatchDeleteDictionaryRequest) returns (AffectedResponse){
+	rpc BatchDeleteDictionary(BatchDeleteDictionaryRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary/BatchDelete"
+			post: "/api/ResourceService/Dictionary/BatchDelete"
 			body: "DictionaryIds"
 		};
 	}
 
 	// 查询字典项目
-	rpc SearchDictionaryItem(SearchDictionaryItemRequest) returns (SearchDictionaryItemResponse){
+	rpc SearchDictionaryItemInfo(SearchDictionaryItemInfoRequest) returns (SearchDictionaryItemInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Dictionary/{DictionaryId}/Items"
+			get: "/api/ResourceService/Dictionary/{DictionaryId}/Items"
 		};
 	}
 
 	// 读取字典项目
-	rpc ReadDictionaryItem(ReadDictionaryItemRequest) returns (ReadDictionaryItemResponse){
+	rpc ReadDictionaryItemInfo(ReadDictionaryItemInfoRequest) returns (ReadDictionaryItemInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
+			get: "/api/ResourceService/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
 		};
 	}
 
 	// 创建字典项目
 	rpc CreateDictionaryItem(CreateDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary/{DictionaryId}/Items"
+			post: "/api/ResourceService/Dictionary/{DictionaryId}/Items"
 			body: "DictionaryItem"
 		};
 	}
@@ -96,7 +96,7 @@ service DictionaryService{
 	// 批量创建字典项目
 	rpc BatchCreateDictionaryItem(BatchCreateDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary/{DictionaryId}/Items/BatchCreate"
+			post: "/api/ResourceService/Dictionary/{DictionaryId}/Items/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -104,7 +104,7 @@ service DictionaryService{
 	// 更新字典项目
 	rpc UpdateDictionaryItem(UpdateDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
+			put: "/api/ResourceService/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
 			body: "DictionaryItem"
 		};
 	}
@@ -112,7 +112,7 @@ service DictionaryService{
 	// 批量更新字典项目
 	rpc BatchUpdateDictionaryItem(BatchUpdateDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Dictionary/{DictionaryId}/Items/BatchUpdate"
+			put: "/api/ResourceService/Dictionary/{DictionaryId}/Items/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -120,21 +120,21 @@ service DictionaryService{
 	// 删除字典项目
 	rpc DeleteDictionaryItem(DeleteDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
+			delete: "/api/ResourceService/Dictionary/{DictionaryId}/Items/{DictionaryItemId}"
 		};
 	}
 
 	// 批量删除字典项目
 	rpc BatchDeleteDictionaryItem(BatchDeleteDictionaryItemRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Dictionary/{DictionaryId}/Items/BatchDelete"
+			post: "/api/ResourceService/Dictionary/{DictionaryId}/Items/BatchDelete"
 			body: "DictionaryItemIds"
 		};
 	}
 }
 
 // 查询字典信息请求
-message SearchDictionaryRequest{
+message SearchDictionaryInfoRequest{
 	// 字典名称
 	// @maxLength(64)
 	google.protobuf.StringValue Name = 1;
@@ -218,7 +218,7 @@ message SearchDictionaryInfoResponse{
 }
 
 // 获取数据字典请求
-message ReadDataDictionaryRequest{
+message ReadDictionaryInfoRequest{
 	// 字典类型
 	// @required
 	// @guid
@@ -226,7 +226,7 @@ message ReadDataDictionaryRequest{
 }
 
 // 获取数据字典响应
-message ReadDataDictionaryResponse{
+message ReadDictionaryInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -248,7 +248,7 @@ message ReadDataDictionaryResponse{
 }
 
 // 创建数据字典请求
-message CreateDataDictionaryRequest{
+message CreateDictionaryRequest{
 	// 字典名称
 	// @required
 	// @maxLength(64)
@@ -273,25 +273,25 @@ message CreateDataDictionaryRequest{
 message BatchCreateDictionariyRequest{
 	// 字典数据
 	// @required
-	repeated CreateDataDictionaryRequest Batch = 1;
+	repeated CreateDictionaryRequest Batch = 1;
 }
 
 // 更新字典数据包
 message UpdateDictionaryInfoPacket{
 	// 字典名称
 	// @maxLength(64)
-	google.protobuf.StringValue Name = 2;
+	google.protobuf.StringValue Name = 1;
 	// 字典编码
 	// @maxLength(32)
-	google.protobuf.StringValue Code = 3;
+	google.protobuf.StringValue Code = 2;
 	// 字典类型
 	// @maxLength(32)
-	google.protobuf.StringValue Type = 4;
+	google.protobuf.StringValue Type = 3;
 	// 字典描述
 	// @maxLength(128)
-	google.protobuf.StringValue Description = 5;
+	google.protobuf.StringValue Description = 4;
 	// 字典是否有效
-	google.protobuf.BoolValue Valid = 6;
+	google.protobuf.BoolValue Valid = 5;
 }
 
 // 更新字典请求
@@ -329,7 +329,7 @@ message BatchDeleteDictionaryRequest{
 }
 
 // 查找数据字典项目请求
-message SearchDictionaryItemRequest{
+message SearchDictionaryItemInfoRequest{
 	// 字典标识
 	// @required
 	// @guid
@@ -349,7 +349,7 @@ message SearchDictionaryItemRequest{
 }
 
 // 字典项目数据包
-message DictionaryItemPacket{
+message DictionaryItemInfoPacket{
 	// 字典项目标识
 	// @required
 	// @guid
@@ -375,7 +375,7 @@ message DictionaryItemPacket{
 }
 
 // 分页字典项目数据包
-message PagedDictionaryItemPacket{
+message PagedDictionaryItemInfoPacket{
 	// 页码
 	// @min(0)
 	int32 Page = 1;
@@ -390,11 +390,11 @@ message PagedDictionaryItemPacket{
 	int64 Count = 4;
 	// 字典项目数据
 	// @required
-	repeated DictionaryItemPacket Items = 5;
+	repeated DictionaryItemInfoPacket Items = 5;
 }
 
 // 查找字典项目响应
-message SearchDictionaryItemResponse{
+message SearchDictionaryItemInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -412,11 +412,11 @@ message SearchDictionaryItemResponse{
 	int64 Timestamp = 6;
 	// 字典项目数据
 	// @required
-	PagedDictionaryItemPacket Data = 7;
+	PagedDictionaryItemInfoPacket Data = 7;
 }
 
 // 读取字典项目请求
-message ReadDictionaryItemRequest{
+message ReadDictionaryItemInfoRequest{
 	// 字典标识
 	// @required
 	// @guid
@@ -428,7 +428,7 @@ message ReadDictionaryItemRequest{
 }
 
 // 读取字典项目响应
-message ReadDictionaryItemResponse{
+message ReadDictionaryItemInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -446,7 +446,7 @@ message ReadDictionaryItemResponse{
 	int64 Timestamp = 6;
 	// 字典项目数据
 	// @required
-	DictionaryItemPacket Data = 7;
+	DictionaryItemInfoPacket Data = 7;
 }
 
 // 创建字典项目数据包

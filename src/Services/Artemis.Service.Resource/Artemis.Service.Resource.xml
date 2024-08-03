@@ -218,6 +218,81 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="T:Artemis.Service.Resource.Managers.IDataDictionaryManager">
+            <summary>
+            数据字典管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典信息查搜字典
+            </summary>
+            <param name="dictionaryNameSearch">字典名搜索值</param>
+            <param name="dictionaryType">字典类型</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典项目信息查搜字典项目
+            </summary>
+            <param name="id">字典标识</param>
+            <param name="dictionaryItemKeySearch">字典项目键搜索值</param>
+            <param name="dictionaryItemValueSearch">字典项目值搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.DataDictionaryManager">
+            <summary>
+            数据字典管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore)">
+            <summary>
+                模型管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SubEntityKeyMatcher(System.Guid)">
+            <summary>
+                子模型使用主模型的键匹配器
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SetSubEntityRelationalKey(Artemis.Service.Resource.Context.ArtemisDataDictionaryItem,System.Guid)">
+            <summary>
+            设置子模型的关联键
+            </summary>
+            <param name="subEntity"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典信息查搜字典
+            </summary>
+            <param name="dictionaryNameSearch">字典名搜索值</param>
+            <param name="dictionaryType">字典类型</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典项目信息查搜字典项目
+            </summary>
+            <param name="id">字典标识</param>
+            <param name="dictionaryItemKeySearch">字典项目键搜索值</param>
+            <param name="dictionaryItemValueSearch">字典项目值搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
         <member name="T:Artemis.Service.Resource.Managers.IDivisionTreeManager">
             <summary>
                 行政区划树管理器
@@ -688,6 +763,95 @@
                 字典服务实现
             </summary>
         </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDataDictionaryManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DictionaryServiceImplement})">
+            <summary>
+            服务实现
+            </summary>
+            <param name="dataDictionaryManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.DataDictionaryManager">
+            <summary>
+                数据字典管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询字典信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.Service.Resource.Services.DivisionServiceImplement">
             <summary>
                 行政区划服务实现
@@ -868,7 +1032,7 @@
                 日志依赖
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 查找组织机构信息
             </summary>
@@ -876,7 +1040,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganization(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 读取组织机构信息
             </summary>
@@ -884,7 +1048,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationTree(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 读取组织机构信息树
             </summary>

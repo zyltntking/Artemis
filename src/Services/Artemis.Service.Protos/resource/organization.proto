@@ -11,21 +11,21 @@ package Artemis.Service.Protos.Resource;
 service OrganizationService{
 
 	// 查找组织机构信息
-	rpc SearchOrganizationInfo(SearchOrganizationRequest) returns (SearchOrganizationInfoResponse){
+	rpc SearchOrganizationInfo(SearchOrganizationInfoRequest) returns (SearchOrganizationInfoResponse){
 		option (google.api.http) = {
 			get: "/api/ResourceService/Organizations"
 		};
 	}
 
 	// 读取组织机构信息
-	rpc ReadOrganization(ReadOrganizationRequest) returns (ReadOrganizationResponse){
+	rpc ReadOrganizationInfo(ReadOrganizationInfoRequest) returns (ReadOrganizationInfoResponse){
 		option (google.api.http) = {
 			get: "/api/ResourceService/Organizations/{OrganizationId}"
 		};
 	}
 
 	// 读取组织机构信息树
-	rpc ReadOrganizationTree(ReadOrganizationRequest) returns (ReadOrganizationTreeResponse){
+	rpc ReadOrganizationInfoTree(ReadOrganizationInfoRequest) returns (ReadOrganizationInfoTreeResponse){
 		option (google.api.http) = {
 			get: "/api/ResourceService/Organizations/{OrganizationId}/Tree"
 		};
@@ -143,7 +143,7 @@ service OrganizationService{
 }
 
 // 查找组织机构信息请求
-message SearchOrganizationRequest{
+message SearchOrganizationInfoRequest{
 	// 组织机构名称
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
@@ -256,7 +256,7 @@ message SearchOrganizationInfoResponse{
 }
 
 // 读取组织机构信息请求
-message ReadOrganizationRequest{
+message ReadOrganizationInfoRequest{
 	// 组织机构标识
 	// @required
 	// @guid
@@ -264,7 +264,7 @@ message ReadOrganizationRequest{
 }
 
 // 读取组织机构信息响应
-message ReadOrganizationResponse{
+message ReadOrganizationInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -338,7 +338,7 @@ message OrganizationInfoTreePacket{
 }
 
 // 读取组织机构信息树响应
-message ReadOrganizationTreeResponse{
+message ReadOrganizationInfoTreeResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功

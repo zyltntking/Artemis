@@ -7221,42 +7221,42 @@
         <member name="P:Artemis.Service.Protos.Resource.DictionaryReflection.Descriptor">
             <summary>File descriptor for resource/dictionary.proto</summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryRequest">
+        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest">
             <summary>
             查询字典信息请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryRequest.NameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.NameFieldNumber">
             <summary>Field number for the "Name" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryRequest.Name">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.Name">
             <summary>
             字典名称
             @maxLength(64)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryRequest.TypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.TypeFieldNumber">
             <summary>Field number for the "Type" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryRequest.Type">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.Type">
             <summary>
             字典类型
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryRequest.PageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryRequest.Page">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.Page">
             <summary>
             页码
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryRequest.SizeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.SizeFieldNumber">
             <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryRequest.Size">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest.Size">
             <summary>
             条目数
             @min(0)
@@ -7440,134 +7440,134 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadDataDictionaryRequest">
+        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest">
             <summary>
             获取数据字典请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryRequest.DictionaryIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest.DictionaryIdFieldNumber">
             <summary>Field number for the "DictionaryId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryRequest.DictionaryId">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest.DictionaryId">
             <summary>
             字典类型
             @required
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse">
+        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse">
             <summary>
             获取数据字典响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDataDictionaryResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryInfoResponse.Data">
             <summary>
             字典数据
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest">
+        <member name="T:Artemis.Service.Protos.Resource.CreateDictionaryRequest">
             <summary>
             创建数据字典请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.NameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.CreateDictionaryRequest.NameFieldNumber">
             <summary>Field number for the "Name" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.Name">
+        <member name="P:Artemis.Service.Protos.Resource.CreateDictionaryRequest.Name">
             <summary>
             字典名称
             @required
             @maxLength(64)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.CreateDictionaryRequest.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.Code">
+        <member name="P:Artemis.Service.Protos.Resource.CreateDictionaryRequest.Code">
             <summary>
             字典编码
             @required
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.TypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.CreateDictionaryRequest.TypeFieldNumber">
             <summary>Field number for the "Type" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.Type">
+        <member name="P:Artemis.Service.Protos.Resource.CreateDictionaryRequest.Type">
             <summary>
             字典类型
             @required
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.CreateDictionaryRequest.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.Description">
+        <member name="P:Artemis.Service.Protos.Resource.CreateDictionaryRequest.Description">
             <summary>
             字典描述
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.ValidFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.CreateDictionaryRequest.ValidFieldNumber">
             <summary>Field number for the "Valid" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDataDictionaryRequest.Valid">
+        <member name="P:Artemis.Service.Protos.Resource.CreateDictionaryRequest.Valid">
             <summary>
             字典是否有效
             @required
@@ -7704,320 +7704,320 @@
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest">
+        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest">
             <summary>
             查找数据字典项目请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.DictionaryIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.DictionaryIdFieldNumber">
             <summary>Field number for the "DictionaryId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.DictionaryId">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.DictionaryId">
             <summary>
             字典标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.KeyFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.KeyFieldNumber">
             <summary>Field number for the "Key" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.Key">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.Key">
             <summary>
             字典项目键
             @maxLength(64)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.ValueFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.ValueFieldNumber">
             <summary>Field number for the "Value" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.Value">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.Value">
             <summary>
             字典项目值
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.PageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.Page">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.Page">
             <summary>
             页码
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.SizeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.SizeFieldNumber">
             <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemRequest.Size">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest.Size">
             <summary>
             条目数
             @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.DictionaryItemPacket">
+        <member name="T:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket">
             <summary>
             字典项目数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.IdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.IdFieldNumber">
             <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.Id">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.Id">
             <summary>
             字典项目标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.DictionaryIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.DictionaryIdFieldNumber">
             <summary>Field number for the "DictionaryId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.DictionaryId">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.DictionaryId">
             <summary>
             字典标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.KeyFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.KeyFieldNumber">
             <summary>Field number for the "Key" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.Key">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.Key">
             <summary>
             字典项目键
             @required
             @maxLength(64)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.ValueFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.ValueFieldNumber">
             <summary>Field number for the "Value" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.Value">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.Value">
             <summary>
             字典项目值
             @required
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.Description">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.Description">
             <summary>
             字典项目描述
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemPacket.ValidFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.ValidFieldNumber">
             <summary>Field number for the "Valid" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemPacket.Valid">
+        <member name="P:Artemis.Service.Protos.Resource.DictionaryItemInfoPacket.Valid">
             <summary>
             字典项目是否有效
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket">
+        <member name="T:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket">
             <summary>
             分页字典项目数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.PageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.Page">
+        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.Page">
             <summary>
             页码
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.SizeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.SizeFieldNumber">
             <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.Size">
+        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.Size">
             <summary>
             条目数
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.TotalFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.TotalFieldNumber">
             <summary>Field number for the "Total" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.Total">
+        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.Total">
             <summary>
             数据总数
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.CountFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.CountFieldNumber">
             <summary>Field number for the "Count" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.Count">
+        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.Count">
             <summary>
             条件过滤后的数据量
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.ItemsFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.ItemsFieldNumber">
             <summary>Field number for the "Items" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemPacket.Items">
+        <member name="P:Artemis.Service.Protos.Resource.PagedDictionaryItemInfoPacket.Items">
             <summary>
             字典项目数据
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse">
+        <member name="T:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse">
             <summary>
             查找字典项目响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.SearchDictionaryItemInfoResponse.Data">
             <summary>
             字典项目数据
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryItemRequest">
+        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest">
             <summary>
             读取字典项目请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemRequest.DictionaryIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest.DictionaryIdFieldNumber">
             <summary>Field number for the "DictionaryId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemRequest.DictionaryId">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest.DictionaryId">
             <summary>
             字典标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemRequest.DictionaryItemIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest.DictionaryItemIdFieldNumber">
             <summary>Field number for the "DictionaryItemId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemRequest.DictionaryItemId">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest.DictionaryItemId">
             <summary>
             字典项目标识
             @required
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse">
+        <member name="T:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse">
             <summary>
             读取字典项目响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.ReadDictionaryItemInfoResponse.Data">
             <summary>
             字典项目数据
             @required
@@ -8297,7 +8297,7 @@
         <member name="T:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase">
             <summary>Base class for server-side implementations of DictionaryService</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             查询字典信息
             </summary>
@@ -8305,7 +8305,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.ReadDataDictionary(Artemis.Service.Protos.Resource.ReadDataDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取数据字典
             </summary>
@@ -8313,7 +8313,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.CreateDataDictionary(Artemis.Service.Protos.Resource.CreateDataDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建数据字典
             </summary>
@@ -8321,7 +8321,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchCreateDataDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量创建数据字典
             </summary>
@@ -8329,7 +8329,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.UpdateDataDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
             <summary>
             更新数据字典
             </summary>
@@ -8337,7 +8337,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchUpdateDataDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量更新数据字典
             </summary>
@@ -8345,7 +8345,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.DeleteDataDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
             <summary>
             删除字典
             </summary>
@@ -8353,7 +8353,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchDeleteDataDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除字典
             </summary>
@@ -8361,7 +8361,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.SearchDictionaryItem(Artemis.Service.Protos.Resource.SearchDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             查询字典项目
             </summary>
@@ -8369,7 +8369,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.ReadDictionaryItem(Artemis.Service.Protos.Resource.ReadDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.ReadDictionaryItemInfo(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取字典项目
             </summary>
@@ -8443,7 +8443,7 @@
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询字典信息
             </summary>
@@ -8453,7 +8453,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询字典信息
             </summary>
@@ -8461,7 +8461,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询字典信息
             </summary>
@@ -8471,7 +8471,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询字典信息
             </summary>
@@ -8479,7 +8479,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDataDictionary(Artemis.Service.Protos.Resource.ReadDataDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             获取数据字典
             </summary>
@@ -8489,7 +8489,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDataDictionary(Artemis.Service.Protos.Resource.ReadDataDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             获取数据字典
             </summary>
@@ -8497,7 +8497,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDataDictionaryAsync(Artemis.Service.Protos.Resource.ReadDataDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             获取数据字典
             </summary>
@@ -8507,7 +8507,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDataDictionaryAsync(Artemis.Service.Protos.Resource.ReadDataDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             获取数据字典
             </summary>
@@ -8515,7 +8515,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDataDictionary(Artemis.Service.Protos.Resource.CreateDataDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             创建数据字典
             </summary>
@@ -8525,7 +8525,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDataDictionary(Artemis.Service.Protos.Resource.CreateDataDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             创建数据字典
             </summary>
@@ -8533,7 +8533,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDataDictionaryAsync(Artemis.Service.Protos.Resource.CreateDataDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDictionaryAsync(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             创建数据字典
             </summary>
@@ -8543,7 +8543,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDataDictionaryAsync(Artemis.Service.Protos.Resource.CreateDataDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.CreateDictionaryAsync(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             创建数据字典
             </summary>
@@ -8551,7 +8551,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDataDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量创建数据字典
             </summary>
@@ -8561,7 +8561,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDataDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.CallOptions)">
             <summary>
             批量创建数据字典
             </summary>
@@ -8569,7 +8569,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDictionaryAsync(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量创建数据字典
             </summary>
@@ -8579,7 +8579,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchCreateDictionaryAsync(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.CallOptions)">
             <summary>
             批量创建数据字典
             </summary>
@@ -8587,7 +8587,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDataDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新数据字典
             </summary>
@@ -8597,7 +8597,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDataDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             更新数据字典
             </summary>
@@ -8605,7 +8605,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDataDictionaryAsync(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDictionaryAsync(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             更新数据字典
             </summary>
@@ -8615,7 +8615,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDataDictionaryAsync(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.UpdateDictionaryAsync(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             更新数据字典
             </summary>
@@ -8623,7 +8623,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDataDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新数据字典
             </summary>
@@ -8633,7 +8633,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDataDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新数据字典
             </summary>
@@ -8641,7 +8641,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDictionaryAsync(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新数据字典
             </summary>
@@ -8651,7 +8651,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchUpdateDictionaryAsync(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新数据字典
             </summary>
@@ -8659,7 +8659,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDataDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除字典
             </summary>
@@ -8669,7 +8669,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDataDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             删除字典
             </summary>
@@ -8677,7 +8677,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDataDictionaryAsync(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDictionaryAsync(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             删除字典
             </summary>
@@ -8687,7 +8687,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDataDictionaryAsync(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.DeleteDictionaryAsync(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             删除字典
             </summary>
@@ -8695,7 +8695,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDataDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除字典
             </summary>
@@ -8705,7 +8705,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDataDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除字典
             </summary>
@@ -8713,7 +8713,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDictionaryAsync(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量删除字典
             </summary>
@@ -8723,7 +8723,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDataDictionaryAsync(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.BatchDeleteDictionaryAsync(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除字典
             </summary>
@@ -8731,7 +8731,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItem(Artemis.Service.Protos.Resource.SearchDictionaryItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询字典项目
             </summary>
@@ -8741,7 +8741,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItem(Artemis.Service.Protos.Resource.SearchDictionaryItemRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询字典项目
             </summary>
@@ -8749,7 +8749,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemAsync(Artemis.Service.Protos.Resource.SearchDictionaryItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查询字典项目
             </summary>
@@ -8759,7 +8759,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemAsync(Artemis.Service.Protos.Resource.SearchDictionaryItemRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.SearchDictionaryItemInfoAsync(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查询字典项目
             </summary>
@@ -8767,7 +8767,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItem(Artemis.Service.Protos.Resource.ReadDictionaryItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemInfo(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取字典项目
             </summary>
@@ -8777,7 +8777,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItem(Artemis.Service.Protos.Resource.ReadDictionaryItemRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemInfo(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取字典项目
             </summary>
@@ -8785,7 +8785,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemAsync(Artemis.Service.Protos.Resource.ReadDictionaryItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取字典项目
             </summary>
@@ -8795,7 +8795,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemAsync(Artemis.Service.Protos.Resource.ReadDictionaryItemRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryItemInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取字典项目
             </summary>
@@ -9038,60 +9038,60 @@
         <member name="P:Artemis.Service.Protos.Resource.OrganizationReflection.Descriptor">
             <summary>File descriptor for resource/organization.proto</summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.SearchOrganizationRequest">
+        <member name="T:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest">
             <summary>
             查找组织机构信息请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.NameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.NameFieldNumber">
             <summary>Field number for the "Name" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Name">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Name">
             <summary>
             组织机构名称
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Code">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Code">
             <summary>
             组织机构编码
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.TypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.TypeFieldNumber">
             <summary>Field number for the "Type" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Type">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Type">
             <summary>
             组织机构类型
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.StatusFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.StatusFieldNumber">
             <summary>Field number for the "Status" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Status">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Status">
             <summary>
             组织机构状态
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.PageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Page">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Page">
             <summary>
             页码
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationRequest.SizeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.SizeFieldNumber">
             <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationRequest.Size">
+        <member name="P:Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest.Size">
             <summary>
             条目数
             @min(0)
@@ -9347,81 +9347,81 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationRequest">
+        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest">
             <summary>
             读取组织机构信息请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationRequest.OrganizationIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest.OrganizationIdFieldNumber">
             <summary>Field number for the "OrganizationId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationRequest.OrganizationId">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest.OrganizationId">
             <summary>
             组织机构标识
             @required
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationResponse">
+        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse">
             <summary>
             读取组织机构信息响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoResponse.Data">
             <summary>
             组织机构信息数据
             @required
@@ -9570,66 +9570,66 @@
             子机构
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse">
+        <member name="T:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse">
             <summary>
             读取组织机构信息树响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationTreeResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.ReadOrganizationInfoTreeResponse.Data">
             <summary>
             组织机构信息数据
             @required
@@ -9647,15 +9647,6 @@
             <summary>
             组织机构名称
             @required
-            @maxLength(128)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateOrganizationRequest.CodeFieldNumber">
-            <summary>Field number for the "Code" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateOrganizationRequest.Code">
-            <summary>
-            组织机构编码
             @maxLength(128)
             </summary>
         </member>
@@ -9767,15 +9758,6 @@
         <member name="P:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.Name">
             <summary>
             组织机构名称
-            @maxLength(128)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.CodeFieldNumber">
-            <summary>Field number for the "Code" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.Code">
-            <summary>
-            组织机构编码
             @maxLength(128)
             </summary>
         </member>
@@ -10161,7 +10143,7 @@
         <member name="T:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase">
             <summary>Base class for server-side implementations of OrganizationService</summary>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             查找组织机构信息
             </summary>
@@ -10169,7 +10151,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.ReadOrganization(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取组织机构信息
             </summary>
@@ -10177,7 +10159,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.ReadOrganizationTree(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceBase.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取组织机构信息树
             </summary>
@@ -10315,7 +10297,7 @@
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查找组织机构信息
             </summary>
@@ -10325,7 +10307,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查找组织机构信息
             </summary>
@@ -10333,7 +10315,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfoAsync(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfoAsync(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             查找组织机构信息
             </summary>
@@ -10343,7 +10325,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfoAsync(Artemis.Service.Protos.Resource.SearchOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.SearchOrganizationInfoAsync(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             查找组织机构信息
             </summary>
@@ -10351,7 +10333,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganization(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取组织机构信息
             </summary>
@@ -10361,7 +10343,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganization(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取组织机构信息
             </summary>
@@ -10369,7 +10351,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationAsync(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoAsync(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取组织机构信息
             </summary>
@@ -10379,7 +10361,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationAsync(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoAsync(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取组织机构信息
             </summary>
@@ -10387,7 +10369,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationTree(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取组织机构信息树
             </summary>
@@ -10397,7 +10379,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationTree(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取组织机构信息树
             </summary>
@@ -10405,7 +10387,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationTreeAsync(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoTreeAsync(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             读取组织机构信息树
             </summary>
@@ -10415,7 +10397,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationTreeAsync(Artemis.Service.Protos.Resource.ReadOrganizationRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Resource.OrganizationService.OrganizationServiceClient.ReadOrganizationInfoTreeAsync(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             读取组织机构信息树
             </summary>

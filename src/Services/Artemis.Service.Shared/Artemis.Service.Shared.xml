@@ -1098,55 +1098,80 @@
         </member>
         <member name="T:Artemis.Service.Shared.Resource.IDataDictionary">
             <summary>
-                数据字典接口
+            数据字典接口
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Name">
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryInfo">
+            <summary>
+            数据字典信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryPackage">
+            <summary>
+                数据字典数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryPackage.Name">
             <summary>
                 字典名称
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Code">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryPackage.Code">
             <summary>
                 字典代码
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Description">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryPackage.Description">
             <summary>
                 字典描述
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Type">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryPackage.Type">
             <summary>
                 字典类型
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Valid">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryPackage.Valid">
             <summary>
                 字典是否有效
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryItem">
             <summary>
-                数据项目接口
+            数据项目接口
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Key">
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryItemInfo">
+            <summary>
+            数据项目信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItemInfo.DataDictionaryId">
+            <summary>
+            数据字典标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryItemPackage">
+            <summary>
+                数据项目数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItemPackage.Key">
             <summary>
                 数据项目键
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Value">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItemPackage.Value">
             <summary>
                 数据项目值
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Description">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItemPackage.Description">
             <summary>
                 数据项目描述
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Valid">
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItemPackage.Valid">
             <summary>
                 数据项目是否有效
             </summary>
@@ -1339,6 +1364,86 @@
         <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Description">
             <summary>
                 机构描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemInfo">
+            <summary>
+            数据字典项目信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemInfo.DataDictionaryId">
+            <summary>
+            数据字典标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemPackage">
+            <summary>
+            数据字典项目数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemPackage.Key">
+            <summary>
+                数据项目键
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemPackage.Value">
+            <summary>
+                数据项目值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemPackage.Description">
+            <summary>
+                数据项目描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemPackage.Valid">
+            <summary>
+                数据项目是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryInfo">
+            <summary>
+            数据字典信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage">
+            <summary>
+            数据字典数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage.Name">
+            <summary>
+                字典名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage.Code">
+            <summary>
+                字典代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage.Description">
+            <summary>
+                字典描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage.Type">
+            <summary>
+                字典类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DataDictionaryPackage.Valid">
+            <summary>
+                字典是否有效
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree">

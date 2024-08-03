@@ -16,8 +16,12 @@ namespace Artemis.Service.Resource.Managers;
 /// <summary>
 ///     组织机构树管理器
 /// </summary>
-public interface IOrganizationTreeManager : ITreeManager<ArtemisOrganization, OrganizationInfo, OrganizationInfoTree,
-    OrganizationPackage>
+public interface IOrganizationTreeManager : 
+    ITreeManager<
+        ArtemisOrganization, 
+        OrganizationInfo, 
+        OrganizationInfoTree,
+        OrganizationPackage>
 {
     /// <summary>
     ///     根据组织机构信息查搜索组织机构
@@ -44,7 +48,11 @@ public interface IOrganizationTreeManager : ITreeManager<ArtemisOrganization, Or
 ///     组织机构树管理器实现
 /// </summary>
 public class OrganizationTreeManager :
-    TreeManager<ArtemisOrganization, OrganizationInfo, OrganizationInfoTree, OrganizationPackage>,
+    TreeManager<
+        ArtemisOrganization, 
+        OrganizationInfo, 
+        OrganizationInfoTree, 
+        OrganizationPackage>,
     IOrganizationTreeManager
 {
     /// <summary>

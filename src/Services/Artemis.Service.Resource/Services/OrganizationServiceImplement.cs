@@ -49,7 +49,7 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查找组织机构信息")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(SearchOrganizationRequest request,
+    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(SearchOrganizationInfoRequest request,
         ServerCallContext context)
     {
         var info = await OrganizationTreeManager.FetchOrganizationsAsync(
@@ -72,14 +72,14 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取组织机构信息")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<ReadOrganizationResponse> ReadOrganization(ReadOrganizationRequest request,
+    public override async Task<ReadOrganizationInfoResponse> ReadOrganizationInfo(ReadOrganizationInfoRequest request,
         ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
         var info = await OrganizationTreeManager.ReadEntityInfoAsync(id, context.CancellationToken);
 
-        return info.ReadInfoResponse<ReadOrganizationResponse, OrganizationInfo>();
+        return info.ReadInfoResponse<ReadOrganizationInfoResponse, OrganizationInfo>();
     }
 
     /// <summary>
@@ -90,14 +90,15 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取组织机构信息树")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<ReadOrganizationTreeResponse> ReadOrganizationTree(ReadOrganizationRequest request,
+    public override async Task<ReadOrganizationInfoTreeResponse> ReadOrganizationInfoTree(
+        ReadOrganizationInfoRequest request,
         ServerCallContext context)
     {
         var id = Guid.Parse(request.OrganizationId);
 
         var info = await OrganizationTreeManager.GetEntityInfoTreeAsync(id, context.CancellationToken);
 
-        return info.ReadInfoResponse<ReadOrganizationTreeResponse, OrganizationInfoTree>();
+        return info.ReadInfoResponse<ReadOrganizationInfoTreeResponse, OrganizationInfoTree>();
     }
 
     /// <summary>
