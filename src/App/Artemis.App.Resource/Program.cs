@@ -38,10 +38,13 @@ public class Program
             //builder.AddRabbitMqComponent("RabbitMqInstance");
 
             builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb", optionsBuilder =>
-            {
-                optionsBuilder.MigrationsHistoryTable("ResourceDbHistory", Project.Schemas.Resource);
-                optionsBuilder.MigrationsAssembly("Artemis.App.Resource");
-            }, Log.Debug).AddResourceServices();
+                {
+                    optionsBuilder.MigrationsHistoryTable("ResourceDbHistory", Project.Schemas.Resource);
+                    optionsBuilder.MigrationsAssembly("Artemis.App.Resource");
+                }, Log.Debug)
+                .AddResourceServices();
+
+            builder.ConfigureResourceService();
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()

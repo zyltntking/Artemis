@@ -70,7 +70,7 @@ public interface IOrganizationPackage
     /// <summary>
     ///     机构所在地行政区划代码
     /// </summary>
-    string? DivisionCode { get; set; }
+    string DivisionCode { get; set; }
 
     /// <summary>
     ///     机构地址

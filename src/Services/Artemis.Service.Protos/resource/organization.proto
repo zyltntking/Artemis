@@ -13,28 +13,28 @@ service OrganizationService{
 	// 查找组织机构信息
 	rpc SearchOrganizationInfo(SearchOrganizationRequest) returns (SearchOrganizationInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Organizations"
+			get: "/api/ResourceService/Organizations"
 		};
 	}
 
 	// 读取组织机构信息
 	rpc ReadOrganization(ReadOrganizationRequest) returns (ReadOrganizationResponse){
 		option (google.api.http) = {
-			get: "/api/Organizations/{OrganizationId}"
+			get: "/api/ResourceService/Organizations/{OrganizationId}"
 		};
 	}
 
 	// 读取组织机构信息树
 	rpc ReadOrganizationTree(ReadOrganizationRequest) returns (ReadOrganizationTreeResponse){
 		option (google.api.http) = {
-			get: "/api/Organizations/{OrganizationId}/Tree"
+			get: "/api/ResourceService/Organizations/{OrganizationId}/Tree"
 		};
 	}
 
 	// 创建组织机构信息
 	rpc CreateOrganization(CreateOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations"
+			post: "/api/ResourceService/Organizations"
 			body: "*"
 		};
 	}
@@ -42,7 +42,7 @@ service OrganizationService{
 	// 批量创建组织机构信息
 	rpc BatchCreateOrganization(BatchCreateOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/BatchCreat"
+			post: "/api/ResourceService/Organizations/BatchCreat"
 			body: "Batch"
 		};
 	}
@@ -50,7 +50,7 @@ service OrganizationService{
 	// 更新组织机构信息
 	rpc UpdateOrganization(UpdateOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Organizations/{OrganizationId}"
+			put: "/api/ResourceService/Organizations/{OrganizationId}"
 			body: "Organization"
 		};
 	}
@@ -58,7 +58,7 @@ service OrganizationService{
 	// 批量更新组织机构信息
 	rpc BatchUpdateOrganization(BatchUpdateOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Organizations/BatchUpdate"
+			put: "/api/ResourceService/Organizations/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -66,14 +66,14 @@ service OrganizationService{
 	// 删除组织机构
 	rpc DeleteOrganization(DeleteOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Organizations/{OrganizationId}"
+			delete: "/api/ResourceService/Organizations/{OrganizationId}"
 		};
 	}
 
 	// 批量删除组织机构
 	rpc BatchDeleteOrganization(BatchDeleteOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/BatchDelete"
+			post: "/api/ResourceService/Organizations/BatchDelete"
 			body: "OrganizationIds"
 		};
 	}
@@ -81,7 +81,7 @@ service OrganizationService{
 	// 创建子组织机构
 	rpc CreateChildOrganization(CreateChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children"
 			body: "Organization"
 		};
 	}
@@ -89,7 +89,7 @@ service OrganizationService{
 	// 批量创建子组织机构
 	rpc BatchCreateChildOrganization(BatchCreateChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/BatchCreate"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -97,7 +97,7 @@ service OrganizationService{
 	// 添加子组织机构
 	rpc AddChildOrganization(AddChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/Add"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/Add"
 			body: "ChildOrganization"
 		};
 	}
@@ -105,7 +105,7 @@ service OrganizationService{
 	// 批量添加子组织机构
 	rpc BatchAddChildOrganization(BatchAddChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/BatchAdd"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/BatchAdd"
 			body: "ChildOrganizationIds"
 		};
 	}
@@ -113,14 +113,14 @@ service OrganizationService{
 	// 删除子组织机构
 	rpc DeleteChildOrganization(DeleteChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Organizations/{OrganizationId}/Children/{ChildOrganizationId}"
+			delete: "/api/ResourceService/Organizations/{OrganizationId}/Children/{ChildOrganizationId}"
 		};
 	}
 
 	// 批量删除子组织机构
 	rpc BatchDeleteChildOrganization(BatchDeleteChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/BatchDelete"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/BatchDelete"
 			body: "ChildOrganizationIds"
 		};
 	}
@@ -128,7 +128,7 @@ service OrganizationService{
 	// 移除子组织机构
 	rpc RemoveChildOrganization(RemoveChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/Remove"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/Remove"
 			body: "ChildOrganization"
 		};
 	}
@@ -136,7 +136,7 @@ service OrganizationService{
 	// 批量移除子组织机构
 	rpc BatchRemoveChildOrganization(BatchRemoveChildOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Organizations/{OrganizationId}/Children/BatchRemove"
+			post: "/api/ResourceService/Organizations/{OrganizationId}/Children/BatchRemove"
 			body: "ChildOrganizationIds"
 		};
 	}
@@ -147,8 +147,8 @@ message SearchOrganizationRequest{
 	// 组织机构名称
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
-	// 组织机构名称
-	// @maxLength(32)
+	// 组织机构编码
+	// @maxLength(128)
 	google.protobuf.StringValue Code = 2;
 	// 组织机构类型
 	// @maxLength(32)
@@ -171,17 +171,15 @@ message OrganizationInfoPacket{
 	// @guid
 	string Id = 1;
 	// 父机构标识
-	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 组织机构名称
 	// @required
 	// @maxLength(128)
 	string Name = 3;
 	// 组织机构编码
-	// @required
-	// @maxLength(32)
-	string Code = 4;
+	// @maxLength(128)
+	google.protobuf.StringValue Code = 4;
 	// 组织机构类型
 	// @required
 	// @maxLength(32)
@@ -294,17 +292,15 @@ message OrganizationInfoTreePacket{
 	// @guid
 	string Id = 1;
 	// 父机构标识
-	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 组织机构名称
 	// @required
 	// @maxLength(128)
 	string Name = 3;
 	// 组织机构编码
-	// @required
-	// @maxLength(32)
-	string Code = 4;
+	// @maxLength(128)
+	google.protobuf.StringValue Code = 4;
 	// 组织机构类型
 	// @required
 	// @maxLength(32)
@@ -370,9 +366,8 @@ message CreateOrganizationRequest{
 	// @maxLength(128)
 	string Name = 1;
 	// 组织机构编码
-	// @required
-	// @maxLength(32)
-	string Code = 2;
+	// @maxLength(128)
+	google.protobuf.StringValue Code = 2;
 	// 组织机构类型
 	// @required
 	// @maxLength(32)
@@ -392,19 +387,16 @@ message CreateOrganizationRequest{
 	// 组织机构邮编
 	// @maxLength(32)
 	google.protobuf.StringValue Postcode = 8;
-	// 组织机构状态
+	// 组织机构所在地行政区划编码
 	// @required
 	// @maxLength(32)
-	string Status = 9;
-	// 组织机构所在地行政区划编码
-	// @maxLength(32)
-	google.protobuf.StringValue DivisionCode = 10;
+	string DivisionCode = 9;
 	// 组织机构地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 11;
+	google.protobuf.StringValue Address = 10;
 	// 组织机构描述
 	// @maxLength(256)
-	google.protobuf.StringValue Description = 12;
+	google.protobuf.StringValue Description = 11;
 }
 
 // 批量创建组织机构请求
@@ -420,7 +412,7 @@ message UpdateOrganizationInfoPacket{
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
 	// 组织机构编码
-	// @maxLength(32)
+	// @maxLength(128)
 	google.protobuf.StringValue Code = 2;
 	// 组织机构类型
 	// @maxLength(32)

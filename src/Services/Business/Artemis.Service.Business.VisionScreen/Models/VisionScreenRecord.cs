@@ -4,7 +4,7 @@ using Artemis.Service.Shared.Business.VisionScreen;
 namespace Artemis.Service.Business.VisionScreen.Models;
 
 /// <summary>
-/// 视力筛查记录
+///     视力筛查记录
 /// </summary>
 public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
 {

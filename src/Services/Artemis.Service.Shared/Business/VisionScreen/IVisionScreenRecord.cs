@@ -3,14 +3,14 @@
 namespace Artemis.Service.Shared.Business.VisionScreen;
 
 /// <summary>
-/// 视力筛查记录接口
+///     视力筛查记录接口
 /// </summary>
 public interface IVisionScreenRecord : IVisionScreenRecordInfo
 {
 }
 
 /// <summary>
-/// 视力筛查记录信息接口
+///     视力筛查记录信息接口
 /// </summary>
 public interface IVisionScreenRecordInfo : IVisionScreenRecordPackage, IKeySlot
 {

@@ -87,7 +87,7 @@ public record OrganizationPackage : IOrganizationPackage
     /// <summary>
     ///     机构所在地行政区划代码
     /// </summary>
-    public string? DivisionCode { get; set; }
+    public required string DivisionCode { get; set; }
 
     /// <summary>
     ///     机构地址

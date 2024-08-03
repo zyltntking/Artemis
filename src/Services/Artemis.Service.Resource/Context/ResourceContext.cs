@@ -54,6 +54,15 @@ public class ResourceContext : DbContext
     {
         modelBuilder.HasDefaultSchema(Project.Schemas.Resource);
 
+        //SeedData(modelBuilder);
+    }
+
+    /// <summary>
+    ///     种子数据，在初始化时调用
+    /// </summary>
+    /// <param name="modelBuilder"></param>
+    private void SeedData(ModelBuilder modelBuilder)
+    {
         // seed dictionary
         var dictionaries = new List<EnumerationRecord>
         {
@@ -71,7 +80,7 @@ public class ResourceContext : DbContext
             Enumeration.ToRecordDictionary<TaskShip>(),
             Enumeration.ToRecordDictionary<TaskState>(),
             Enumeration.ToRecordDictionary<OrganizationType>(),
-            Enumeration.ToRecordDictionary<OrganizationStatus>(),
+            Enumeration.ToRecordDictionary<OrganizationStatus>()
         };
 
         foreach (var dictionary in dictionaries)

@@ -89,7 +89,7 @@ public class Organization : ConcurrencyModel, IOrganization
     /// </summary>
     [Required]
     [MaxLength(32)]
-    public string? DivisionCode { get; set; }
+    public required string DivisionCode { get; set; }
 
     /// <summary>
     ///     机构地址

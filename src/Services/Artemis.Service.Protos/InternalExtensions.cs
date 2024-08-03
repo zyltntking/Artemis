@@ -27,8 +27,9 @@ public static class InternalExtensions
 
                 _readOnlyCollectionSetConfig
                     .Default
-                    .UseDestinationValue(member => member is { SetterModifier: AccessModifier.None, Type.IsGenericType: true } &&
-                                                   member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>));
+                    .UseDestinationValue(member =>
+                        member is { SetterModifier: AccessModifier.None, Type.IsGenericType: true } &&
+                        member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>));
             }
 
             return _readOnlyCollectionSetConfig;

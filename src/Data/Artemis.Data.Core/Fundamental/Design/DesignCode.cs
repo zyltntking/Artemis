@@ -1,18 +1,18 @@
 ﻿namespace Artemis.Data.Core.Fundamental.Design;
 
 /// <summary>
-/// 组织机构设计代码
+///     组织机构设计代码
 /// </summary>
 public class DesignCode
 {
     /// <summary>
-    /// 生成组织机构设计编码
+    ///     生成组织机构设计编码
     /// </summary>
     /// <param name="region"></param>
     /// <param name="serial"></param>
     /// <param name="parentDesignCode"></param>
     /// <returns></returns>
-    public static string Organization(string region,int serial, string? parentDesignCode = null)
+    public static string Organization(string region, int serial, string? parentDesignCode = null)
     {
         var prefix = "ORG";
 
@@ -27,7 +27,7 @@ public class DesignCode
     }
 
     /// <summary>
-    /// 生成任务设计编码
+    ///     生成任务设计编码
     /// </summary>
     /// <param name="organizationDesignCode"></param>
     /// <param name="serial"></param>
@@ -50,5 +50,4 @@ public class DesignCode
 
         return $"{prefix}{date}{organizationDesignCode}{segment}{parentDesignCode}{serial:D3}";
     }
-
 }

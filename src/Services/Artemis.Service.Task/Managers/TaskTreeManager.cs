@@ -1,6 +1,5 @@
 ﻿using System.Linq.Dynamic.Core;
 using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Shared.Task.Transfer;
@@ -140,43 +139,50 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
 
     #endregion
 
-    #region Overrides of SeparateManager<ArtemisTask,Guid,TaskInfo,TaskPackage>
+    //#region Overrides of SeparateManager<ArtemisTask,Guid,TaskInfo,TaskPackage>
+
+    ///// <summary>
+    /////     映射到新实体
+    ///// </summary>
+    ///// <param name="package"></param>
+    ///// <param name="loopIndex"></param>
+    ///// <param name="cancellationToken"></param>
+    ///// <returns></returns>
+    //protected override Task<ArtemisTask> MapNewEntity(
+    //    TaskPackage package, 
+    //    int loopIndex, 
+    //    CancellationToken cancellationToken = default)
+    //{
+    //    var task = Instance.CreateInstance<ArtemisTask, TaskPackage>(package);
+    //    task.ParentId = null;
+    //    task.NormalizedTaskName = package.TaskName.StringNormalize();
+    //    task.TaskMode = TaskMode.Normal;
+    //    task.TaskState = TaskState.Created;
+    //    task.TaskShip = TaskShip.Normal;
+
+    //    return System.Threading.Tasks.Task.FromResult(task);
+    //}
+
+    ///// <summary>
+    /////     覆盖实体
+    ///// </summary>
+    ///// <param name="entity"></param>
+    ///// <param name="package"></param>
+    ///// <param name="loopIndex"></param>
+    ///// <param name="cancellationToken"></param>
+    ///// <returns></returns>
+    //protected override Task<ArtemisTask> MapOverEntity(ArtemisTask entity, TaskPackage package, int loopIndex, CancellationToken cancellationToken = default)
+    //{
+    //    var task = package.Adapt(entity);
+
+    //    task.NormalizedTaskName = package.TaskName.StringNormalize();
+
+    //    return System.Threading.Tasks.Task.FromResult(task);
+    //}
+
 
     /// <summary>
-    ///     映射到新实体
-    /// </summary>
-    /// <param name="package"></param>
-    /// <returns></returns>
-    protected override ArtemisTask MapNewEntity(TaskPackage package)
-    {
-        var task = Instance.CreateInstance<ArtemisTask, TaskPackage>(package);
-        task.ParentId = null;
-        task.NormalizedTaskName = package.TaskName.StringNormalize();
-        task.TaskMode = TaskMode.Normal;
-        task.TaskState = TaskState.Created;
-        task.TaskShip = TaskShip.Normal;
-
-        return task;
-    }
-
-    /// <summary>
-    ///     覆盖实体
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="package"></param>
-    /// <returns></returns>
-    protected override ArtemisTask MapOverEntity(ArtemisTask entity, TaskPackage package)
-    {
-        var task = package.Adapt(entity);
-
-        task.NormalizedTaskName = package.TaskName.StringNormalize();
-
-        return task;
-    }
-
-
-    /// <summary>
-    /// 获取非根节点的树节点列表
+    ///     获取非根节点的树节点列表
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
@@ -186,54 +192,53 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
         throw new NotImplementedException();
     }
 
-    /// <summary>
-    ///     在添加子节点之后
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    protected override System.Threading.Tasks.Task AfterAddChildNode(ArtemisTask entity,
-        CancellationToken cancellationToken)
-    {
-        if (entity.ParentId == Guid.Empty && entity.TaskShip != TaskShip.Root)
-        {
-            entity.TaskShip = TaskShip.Root;
+    ///// <summary>
+    /////     在添加子节点之后
+    ///// </summary>
+    ///// <param name="entity"></param>
+    ///// <param name="cancellationToken"></param>
+    //protected override System.Threading.Tasks.Task AfterAddChildNode(ArtemisTask parent, ArtemisTask child, int loopIndex, CancellationToken cancellationToken)
+    //{
+    //    if (parent.ParentId == Guid.Empty && parent.TaskShip != TaskShip.Root)
+    //    {
+    //        parent.TaskShip = TaskShip.Root;
 
-            return EntityStore.UpdateAsync(entity, cancellationToken);
-        }
+    //        return EntityStore.UpdateAsync(parent, cancellationToken);
+    //    }
 
-        return System.Threading.Tasks.Task.CompletedTask;
-    }
+    //    return System.Threading.Tasks.Task.CompletedTask;
+    //}
 
-    /// <summary>
-    ///     在移除子节点之后
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cancellationToken"></param>
-    protected override async System.Threading.Tasks.Task AfterRemoveChildNode(ArtemisTask entity,
-        CancellationToken cancellationToken)
-    {
-        if (entity.TaskShip != TaskShip.Child)
-        {
-            var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == entity.Id, cancellationToken);
+    ///// <summary>
+    /////     在移除子节点之后
+    ///// </summary>
+    ///// <param name="entity"></param>
+    ///// <param name="cancellationToken"></param>
+    //protected override async System.Threading.Tasks.Task AfterRemoveChildNode(ArtemisTask entity,
+    //    CancellationToken cancellationToken)
+    //{
+    //    if (entity.TaskShip != TaskShip.Child)
+    //    {
+    //        var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == entity.Id, cancellationToken);
 
-            entity.TaskShip = TaskShip.Normal;
+    //        entity.TaskShip = TaskShip.Normal;
 
-            await EntityStore.UpdateAsync(entity, cancellationToken);
-        }
-    }
+    //        await EntityStore.UpdateAsync(entity, cancellationToken);
+    //    }
+    //}
 
-    /// <summary>
-    ///     在移除子节点之前
-    /// </summary>
-    /// <param name="entity"></param>
-    protected override void BeforeRemoveChildNode(ArtemisTask entity)
-    {
-        var exists = EntityStore.EntityQuery.Any(task => task.ParentId == entity.Id);
+    ///// <summary>
+    /////     在移除子节点之前
+    ///// </summary>
+    ///// <param name="entity"></param>
+    //protected override void BeforeRemoveChildNode(ArtemisTask entity)
+    //{
+    //    var exists = EntityStore.EntityQuery.Any(task => task.ParentId == entity.Id);
 
-        entity.TaskShip = exists ? TaskShip.Root : TaskShip.Normal;
+    //    entity.TaskShip = exists ? TaskShip.Root : TaskShip.Normal;
 
-        EntityStore.Update(entity);
-    }
+    //    EntityStore.Update(entity);
+    //}
 
-    #endregion
+    //#endregion
 }

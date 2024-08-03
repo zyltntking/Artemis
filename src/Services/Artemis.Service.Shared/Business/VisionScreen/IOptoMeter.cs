@@ -3,14 +3,14 @@
 namespace Artemis.Service.Shared.Business.VisionScreen;
 
 /// <summary>
-/// 验光仪接口
+///     验光仪接口
 /// </summary>
 public interface IOptometer : IOptometerInfo
 {
 }
 
 /// <summary>
-/// 验光仪数据信息接口
+///     验光仪数据信息接口
 /// </summary>
 public interface IOptometerInfo : IOptometerPackage, IKeySlot
 {
@@ -19,7 +19,6 @@ public interface IOptometerInfo : IOptometerPackage, IKeySlot
     /// </summary>
     public Guid RecordId { get; set; }
 }
-
 
 /// <summary>
 ///     验光仪数据包接口

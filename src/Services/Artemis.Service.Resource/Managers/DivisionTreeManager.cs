@@ -115,46 +115,69 @@ public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, Di
 
     #endregion
 
-    #region Overrides of TreeManager<ArtemisDivision,Guid,Guid?,DivisionInfo,DivisionInfoTree,DivisionPackage>
+    #region Overrides
 
     /// <summary>
     ///     映射到新实体
     /// </summary>
     /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected override ArtemisDivision MapNewEntity(DivisionPackage package)
+    protected override async Task<ArtemisDivision> MapNewEntity(
+        DivisionPackage package,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
     {
-        var entity = base.MapNewEntity(package);
+        var entity = await base.MapNewEntity(package, loopIndex, cancellationToken);
         entity.Level = 1;
         return entity;
     }
 
     /// <summary>
-    /// 在添加子节点之前
+    ///     在添加子节点之前
     /// </summary>
     /// <param name="parent">父节点</param>
     /// <param name="child">子节点</param>
-    protected override void BeforeAddChildNode(ArtemisDivision parent, ArtemisDivision child)
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    protected override Task BeforeAddChildNode(
+        ArtemisDivision parent,
+        ArtemisDivision child,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
     {
         child.Level = parent.Level + 1;
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
     ///     在移除子节点之前
     /// </summary>
+    /// <param name="parent"></param>
     /// <param name="child">子节点</param>
-    protected override void BeforeRemoveChildNode(ArtemisDivision child)
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    protected override Task BeforeRemoveChildNode(
+        ArtemisDivision parent,
+        ArtemisDivision child,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
     {
         child.Level = 1;
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
-    /// 获取非根节点的树节点列表
+    ///     获取非根节点的树节点列表
     /// </summary>
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected override async Task<List<DivisionInfo>> FetchNonRootTreeNodeList(Guid key, CancellationToken cancellationToken)
+    protected override async Task<List<DivisionInfo>> FetchNonRootTreeNodeList(Guid key,
+        CancellationToken cancellationToken)
     {
         var divisionCode = await EntityStore
             .KeyMatchQuery(key)

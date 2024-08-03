@@ -10,7 +10,7 @@ public interface IVisualChart : IVisualChartInfo
 }
 
 /// <summary>
-/// 电子视力表信息
+///     电子视力表信息
 /// </summary>
 public interface IVisualChartInfo : IVisualChartPackage, IKeySlot
 {
@@ -21,7 +21,7 @@ public interface IVisualChartInfo : IVisualChartPackage, IKeySlot
 }
 
 /// <summary>
-/// 电子视力表数据包
+///     电子视力表数据包
 /// </summary>
 public interface IVisualChartPackage
 {

@@ -28,6 +28,20 @@ internal sealed class ArtemisDivisionConfiguration : ConcurrencyModelEntityConfi
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisDivision> builder)
     {
+        // Index
+        builder.HasIndex(division => division.Name)
+            .HasDatabaseName(IndexName(nameof(ArtemisDivision.Name)));
+
+        builder.HasIndex(division => division.Code)
+            .IsUnique()
+            .HasDatabaseName(IndexName(nameof(ArtemisDivision.Code)));
+
+        builder.HasIndex(division => division.Level)
+            .HasDatabaseName(IndexName(nameof(ArtemisDivision.Level)));
+
+        builder.HasIndex(division => division.Type)
+            .HasDatabaseName(IndexName(nameof(ArtemisDivision.Type)));
+
         // Each Division can have many Children Division
         builder.HasMany(division => division.Children)
             .WithOne(child => child.Parent)

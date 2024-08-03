@@ -13,28 +13,28 @@ service DivisionService{
 	// 查询行政区划信息
 	rpc SearchDivisionInfo(SearchDivisionInfoRequest) returns (SearchDivisionInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Division"
+			get: "/api/ResourceService/Divisions"
 		};
 	}
 
 	// 读取行政区划信息
 	rpc ReadDivisionInfo(ReadDivisionInfoRequest) returns (ReadDivisionInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Division/{DivisionId}"
+			get: "/api/ResourceService/Divisions/{DivisionId}"
 		};
 	}
 
 	// 读取行政区划信息树
 	rpc ReadDivisionInfoTree(ReadDivisionInfoRequest) returns (ReadDivisionInfoTreeResponse){
 		option (google.api.http) = {
-			get: "/api/Division/{DivisionId}/Tree"
+			get: "/api/ResourceService/Divisions/{DivisionId}/Tree"
 		};
 	}
 
 	// 创建行政区划
 	rpc CreateDivision(CreateDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division"
+			post: "/api/ResourceService/Divisions"
 			body: "*"
 		};
 	}
@@ -42,7 +42,7 @@ service DivisionService{
 	// 批量创建行政区划
 	rpc BatchCreateDivision(BatchCreateDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/BatchCreate"
+			post: "/api/ResourceService/Divisions/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -50,7 +50,7 @@ service DivisionService{
 	// 更新行政区划
 	rpc UpdateDivision(UpdateDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Division/{DivisionId}"
+			put: "/api/ResourceService/Divisions/{DivisionId}"
 			body: "Division"
 		};
 	}
@@ -58,7 +58,7 @@ service DivisionService{
 	// 批量更新行政区划
 	rpc BatchUpdateDivision(BatchUpdateDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Division/BatchUpdate"
+			put: "/api/ResourceService/Divisions/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -66,14 +66,14 @@ service DivisionService{
 	// 删除行政区划
 	rpc DeleteDivision(DeleteDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Division/{DivisionId}"
+			delete: "/api/ResourceService/Divisions/{DivisionId}"
 		};
 	}
 
 	// 批量删除行政区划
 	rpc BatchDeleteDivision(BatchDeleteDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Division/BatchDelete"
+			delete: "/api/ResourceService/Divisions/BatchDelete"
 			body: "DivisionIds"
 		};
 	}
@@ -81,7 +81,7 @@ service DivisionService{
 	// 创建下级行政区划
 	rpc CreateChildDivision(CreateChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children"
 			body: "Batch"
 		};
 	}
@@ -89,7 +89,7 @@ service DivisionService{
 	// 批量创建下级行政区划
 	rpc BatchCreateChildDivision(BatchCreateChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/BatchCreate"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -97,7 +97,7 @@ service DivisionService{
 	// 添加下级行政区划
 	rpc AddChildDivision(AddChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/Add"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/Add"
 			body: "ChildDivision"
 		};
 	}
@@ -105,7 +105,7 @@ service DivisionService{
 	// 批量添加下级行政区划
 	rpc BatchAddChildDivision(BatchAddChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/BatchAdd"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/BatchAdd"
 			body: "ChildDivisionIds"
 		};
 	}
@@ -113,14 +113,14 @@ service DivisionService{
 	// 删除下级行政区划
 	rpc DeleteChildDivision(DeleteChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Division/{DivisionId}/Children/{ChildDivisionId}"
+			delete: "/api/ResourceService/Divisions/{DivisionId}/Children/{ChildDivisionId}"
 		};
 	}
 
 	// 批量删除下级行政区划
 	rpc BatchDeleteChildDivision(BatchDeleteChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/BatchDelete"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/BatchDelete"
 			body: "ChildDivisionIds"
 		};
 	}
@@ -128,7 +128,7 @@ service DivisionService{
 	// 移除下级行政区划
 	rpc RemoveChildDivision(RemoveChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/Remove"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/Remove"
 			body: "ChildDivision"
 		};
 	}
@@ -136,7 +136,7 @@ service DivisionService{
 	// 批量移除下级行政区划
 	rpc BatchRemoveChildDivision(BatchRemoveChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Division/{DivisionId}/Children/BatchRemove"
+			post: "/api/ResourceService/Divisions/{DivisionId}/Children/BatchRemove"
 			body: "ChildDivisionIds"
 		};
 	}
@@ -346,16 +346,16 @@ message CreateDivisionRequest{
 	// 行政区划类型
 	// @required
 	// @maxLength(32)
-	string Type = 4;
+	string Type = 3;
 	// 行政区划全名
 	// @maxLength(128)
-	google.protobuf.StringValue FullName = 5;
+	google.protobuf.StringValue FullName = 4;
 	// 行政区划拼音
 	// @maxLength(128)
-	google.protobuf.StringValue Pinyin = 6;
+	google.protobuf.StringValue Pinyin = 5;
 	// 行政区划备注
 	// @maxLength(256)
-	google.protobuf.StringValue Remark = 7;
+	google.protobuf.StringValue Remark = 6;
 }
 
 // 批量创建行政区划请求
@@ -375,16 +375,16 @@ message UpdateDivisionInfoPacket{
 	google.protobuf.StringValue Code = 2;
 	// 行政区划类型
 	// @maxLength(32)
-	google.protobuf.StringValue Type = 4;
+	google.protobuf.StringValue Type = 3;
 	// 行政区划全名
 	// @maxLength(128)
-	google.protobuf.StringValue FullName = 5;
+	google.protobuf.StringValue FullName = 4;
 	// 行政区划拼音
 	// @maxLength(128)
-	google.protobuf.StringValue Pinyin = 6;
+	google.protobuf.StringValue Pinyin = 5;
 	// 行政区划备注
 	// @maxLength(256)
-	google.protobuf.StringValue Remark = 7;
+	google.protobuf.StringValue Remark = 6;
 }
 
 // 更新行政区划请求

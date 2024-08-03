@@ -1,819 +1,850 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.Extensions.Identity</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.Extensions.Identity.ArtemisAuthenticationHandler">
-            <summary>
-                认证处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Artemis.Extensions.Identity.ArtemisAuthenticationOptions},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Identity.ArtemisIdentityOptions},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder)">
-            <summary>
-                Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1" />.
-            </summary>
-            <param name="options">The monitor for the options instance.</param>
-            <param name="authorizationOptions"></param>
-            <param name="cache"></param>
-            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
-            <param name="encoder">The <see cref="T:System.Text.Encodings.Web.UrlEncoder" />.</param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.Cache">
-            <summary>
-                缓存访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.IdentityOptions">
-            <summary>
-                授权选项
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.HandleAuthenticateAsync">
-            <summary>Allows derived types to handle authentication.</summary>
-            <returns>The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.</returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.ValidateToken(System.String)">
-            <summary>
-                认证Token
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ArtemisAuthenticationOptions">
-            <summary>
-                认证选项
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ArtemisAuthorizationHandler">
-            <summary>
-                Artemis凭据处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Identity.ArtemisAuthorizationHandler},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
-            <summary>
-                构造
-            </summary>
-            <param name="logger">日志依赖</param>
-            <param name="httpContextAccessor"></param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.Logger">
-            <summary>
-                日志访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HttpContextAccessor">
-            <summary>
-                Http上下文访问器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.Identity.IArtemisAuthorizationRequirement)">
-            <summary>
-                Makes a decision if authorization is allowed based on a specific requirement.
-            </summary>
-            <param name="context">The authorization context.</param>
-            <param name="requirement">The requirement to evaluate.</param>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.IArtemisAuthorizationRequirement">
-            <summary>
-                Artemis认证策略接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ArtemisAuthorizationRequirement">
-            <summary>
-                Artemis认证策略实现
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.AnonymousRequirement">
-            <summary>
-                匿名许可要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.AnonymousRequirement.#ctor">
-            <summary>
-                匿名认证策略构造
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenRequirement">
-            <summary>
-                令牌认证策略
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenOnlyRequirement">
-            <summary>
-                仅Token认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.RolesRequirement">
-            <summary>
-                角色认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.RolesRequirement.#ctor(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="roles">角色</param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.RolesRequirement.#ctor(System.String[])">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="roles"></param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.RolesRequirement.Roles">
-            <summary>
-                角色
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.RoleRequirement">
-            <summary>
-                角色认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.RoleRequirement.#ctor(System.String)">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="role"></param>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ClaimsRequirement">
-            <summary>
-                凭据认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ClaimsRequirement.#ctor(System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claims">凭据</param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ClaimsRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claims"></param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ClaimsRequirement.Claims">
-            <summary>
-                凭据键值对集合
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ClaimRequirement">
-            <summary>
-                凭据认证要求
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ClaimRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String})">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claim">凭据</param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ClaimRequirement.#ctor(System.String,System.String)">
-            <summary>
-                认证策略构造
-            </summary>
-            <param name="claimKey"></param>
-            <param name="claimValue"></param>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ActionNameClaimRequirement">
-            <summary>
-                操作名凭据认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.RoutePathClaimRequirement">
-            <summary>
-                路由路径凭据认证要求
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ArtemisHandlerProxy">
-            <summary>
-                Artemis操作员代理实现
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Identity.ArtemisIdentityOptions})">
-            <summary>
-                代理实现
-            </summary>
-            <param name="httpContextAccessor"></param>
-            <param name="identityOptions"></param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.HttpContextAccessor">
-            <summary>
-                http上下文访问器
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.Options">
-            <summary>
-                Artemis认证配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.Handler">
-            <summary>
-                操作员
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.IArtemisIdentityOptions">
-            <summary>
-                Artemis认证选项接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.ContextItemTokenKey">
-            <summary>
-                上下文项目Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RequestHeaderTokenSchema">
-            <summary>
-                请求头认证Token架构
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RequestHeaderTokenKey">
-            <summary>
-                请求头认证Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheTokenPrefix">
-            <summary>
-                缓存认证Token前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheUserMapTokenPrefix">
-            <summary>
-                用户对Token映射缓存键前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheTokenExpire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.EnableMultiEnd">
-            <summary>
-                是否启用多终端
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.IPolicyOptions">
-            <summary>
-                策略选项接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ArtemisIdentityOptions">
-            <summary>
-                传递认证选项
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.ContextItemTokenKey">
-            <summary>
-                上下文项目Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RequestHeaderTokenSchema">
-            <summary>
-                请求头认证Token架构
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RequestHeaderTokenKey">
-            <summary>
-                请求头Token键
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheTokenPrefix">
-            <summary>
-                缓存Token前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheUserMapTokenPrefix">
-            <summary>
-                用户对Token映射缓存键前缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheTokenExpire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.EnableMultiEnd">
-            <summary>
-                是否启用同终端类型多终端登录
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.IdentityServiceProvider">
-            <summary>
-                认证服务对提供者名称
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.IdentityServiceTokenNameSuffix">
-            <summary>
-                认证服务令牌名称后缀
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.Policies">
-            <summary>
-                支持的策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.EnableAdvancedPolicy">
-            <summary>
-                是否启用高级策略
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.PolicyOptions">
-            <summary>
-                策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.PolicyOptions.Name">
-            <summary>
-                策略名称
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.RolesBasedPolicyOptions">
-            <summary>
-                基于角色的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.RolesBasedPolicyOptions.Roles">
-            <summary>
-                策略支持的角色列表
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ClaimsBasedPolicyOptions">
-            <summary>
-                基于凭据的策略配置
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ClaimsBasedPolicyOptions.Claims">
-            <summary>
-                策略支持的凭据字典
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.AuthorizationExtensions">
-            <summary>
-                授权扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.Identity.ArtemisIdentityOptions)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.Identity.ArtemisIdentityOptions)">
-            <summary>
-                配置授权服务
-            </summary>
-            <param name="builder"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler">
-            <summary>
-                授权中间件结果处理器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
-            <summary>
-                Evaluates the authorization requirement and processes the authorization result.
-            </summary>
-            <param name="next">
-                The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
-                succeed.
-            </param>
-            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
-            <param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
-            <param name="authorizeResult">The result of authorization.</param>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.AuthorizationMessage">
-            <summary>
-                认证消息
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-                失败处理器
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.EndpointDescriptor">
-            <summary>
-                端描述器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询操作名称
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchRoutePath(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询路由路径
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                查询端描述
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
-            <summary>
-                判断元数据中是否包含指定类型
-            </summary>
-            <typeparam name="TMetadata"></typeparam>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
-            <summary>
-                查询指定类型的元数据
-            </summary>
-            <typeparam name="TMetadata"></typeparam>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.ApiActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                Api控制器操作名
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.EndpointDescriptor.RoutePatternActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
-            <summary>
-                路由匹配模式操作名
-            </summary>
-            <param name="endpoint"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.IdentityShared">
-            <summary>
-                共享键
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.AuthorizationMessage">
-            <summary>
-                授权消息
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.Schema">
-            <summary>
-                Token架构
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.Token">
-            <summary>
-                令牌
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.CacheSpace">
-            <summary>
-                缓存名空间
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.UserMapToken">
-            <summary>
-                用户对Token的映射
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.IdentityShared.DefaultServiceProvider">
-            <summary>
-                默认服务提供者
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.AuthorizePolicy">
-            <summary>
-                预定义的Artemis授权策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Anonymous">
-            <summary>
-                匿名策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Token">
-            <summary>
-                令牌策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Admin">
-            <summary>
-                管理员策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.ActionName">
-            <summary>
-                操作名策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.RoutePath">
-            <summary>
-                路由路径策略
-            </summary>
-        </member>
-        <member name="F:Artemis.Extensions.Identity.AuthorizePolicy.TokenPolicies">
-            <summary>
-                需求Token策略
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenHandlerExtensions">
-            <summary>
-                令牌处理器扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchRequestTokenSymbol(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.String)">
-            <summary>
-                从请求头中获取Token串
-            </summary>
-            <param name="request"></param>
-            <param name="key"></param>
-            <param name="schema"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheTokenRecord(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,Artemis.Extensions.Identity.TokenRecord)">
-            <summary>
-                缓存Token记录
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="record"></param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheTokenRecordAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,Artemis.Extensions.Identity.TokenRecord,System.Threading.CancellationToken)">
-            <summary>
-                异步缓存Token记录
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="record"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchTokenRecord(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
-            <summary>
-                从缓存获取Token记录
-            </summary>
-            <param name="cache">缓存依赖</param>
-            <param name="cacheTokenKey">缓存键</param>
-            <param name="refreshToken">是否刷新缓存</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchTokenRecordAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-                从缓存中获取Token记录
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheTokenKey"></param>
-            <param name="refreshToken"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
-            <summary>
-                缓存用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="tokenSymbol"></param>
-            <param name="expire"></param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                缓存用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="tokenSymbol"></param>
-            <param name="expire"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
-            <summary>
-                从缓存获取用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="refreshToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-                从缓存获取用户对Token的映射
-            </summary>
-            <param name="cache"></param>
-            <param name="cacheKey"></param>
-            <param name="refreshToken"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
-            <summary>
-                缓存字符串
-            </summary>
-            <param name="cache"></param>
-            <param name="key"></param>
-            <param name="value"></param>
-            <param name="expire"></param>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-                异步缓存字符串
-            </summary>
-            <param name="cache"></param>
-            <param name="key"></param>
-            <param name="value"></param>
-            <param name="expire"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenKeyGenerator">
-            <summary>
-                TokenKey生成器
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.CacheTokenKey(System.String,System.String)">
-            <summary>
-                缓存Token键
-            </summary>
-            <param name="prefix">前缀</param>
-            <param name="symbol">Token符号</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.CacheUserMapTokenKey(System.String,System.String,System.Guid)">
-            <summary>
-                缓存用户映射Token键
-            </summary>
-            <param name="prefix"></param>
-            <param name="end"></param>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.LoginProviderKey(System.Guid,System.String)">
-            <summary>
-                登录提供键
-            </summary>
-            <param name="id">用户标识</param>
-            <param name="end">端类型</param>
-            <returns></returns>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.ProviderTokenName(System.String,System.String)">
-            <summary>
-                令牌名称
-            </summary>
-            <param name="end"></param>
-            <param name="suffix"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenRecord">
-            <summary>
-                令牌记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.UserId">
-            <summary>
-                用户标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.UserName">
-            <summary>
-                用户名
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.EndType">
-            <summary>
-                端类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.Expire">
-            <summary>
-                过期时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.UserClaims">
-            <summary>
-                用户凭据
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.Roles">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.TokenRecord.RoleClaims">
-            <summary>
-                角色凭据
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.TokenRecordExtensions">
-            <summary>
-                令牌记录扩展
-            </summary>
-        </member>
-        <member name="M:Artemis.Extensions.Identity.TokenRecordExtensions.TokenSymbol(Artemis.Extensions.Identity.TokenRecord)">
-            <summary>
-                生成Token符号
-            </summary>
-            <param name="record">token记录</param>
-            <returns></returns>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.SignResult">
-            <summary>
-                签名结果
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.SignResult.Succeeded">
-            <summary>
-                是否签名成功
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.SignResult.Message">
-            <summary>
-                认证消息
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.ClaimRecord">
-            <summary>
-                凭据记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ClaimRecord.ClaimType">
-            <summary>
-                凭据类型
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ClaimRecord.ClaimValue">
-            <summary>
-                凭据值
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.ClaimRecord.CheckStamp">
-            <summary>
-                校验戳
-            </summary>
-        </member>
-        <member name="T:Artemis.Extensions.Identity.RoleRecord">
-            <summary>
-                角色记录
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.RoleRecord.Id">
-            <summary>
-                角色标识
-            </summary>
-        </member>
-        <member name="P:Artemis.Extensions.Identity.RoleRecord.Name">
-            <summary>
-                角色名
-            </summary>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.Extensions.Identity</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.Extensions.Identity.ArtemisAuthenticationHandler">
+			<summary>
+				认证处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{Artemis.Extensions.Identity.ArtemisAuthenticationOptions},Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Identity.ArtemisIdentityOptions},Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder)">
+			<summary>
+				Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1" />.
+			</summary>
+			<param name="options">The monitor for the options instance.</param>
+			<param name="authorizationOptions"></param>
+			<param name="cache"></param>
+			<param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
+			<param name="encoder">The <see cref="T:System.Text.Encodings.Web.UrlEncoder" />.</param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.Cache">
+			<summary>
+				缓存访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.IdentityOptions">
+			<summary>
+				授权选项
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.HandleAuthenticateAsync">
+			<summary>Allows derived types to handle authentication.</summary>
+			<returns>The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.</returns>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.ArtemisAuthenticationHandler.ValidateToken(System.String)">
+			<summary>
+				认证Token
+			</summary>
+			<param name="token"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ArtemisAuthenticationOptions">
+			<summary>
+				认证选项
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ArtemisAuthorizationHandler">
+			<summary>
+				Artemis凭据处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.#ctor(Microsoft.Extensions.Logging.ILogger{Artemis.Extensions.Identity.ArtemisAuthorizationHandler},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+			<summary>
+				构造
+			</summary>
+			<param name="logger">日志依赖</param>
+			<param name="httpContextAccessor"></param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.Logger">
+			<summary>
+				日志访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HttpContextAccessor">
+			<summary>
+				Http上下文访问器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ArtemisAuthorizationHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Artemis.Extensions.Identity.IArtemisAuthorizationRequirement)">
+			<summary>
+				Makes a decision if authorization is allowed based on a specific requirement.
+			</summary>
+			<param name="context">The authorization context.</param>
+			<param name="requirement">The requirement to evaluate.</param>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.IArtemisAuthorizationRequirement">
+			<summary>
+				Artemis认证策略接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ArtemisAuthorizationRequirement">
+			<summary>
+				Artemis认证策略实现
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.AnonymousRequirement">
+			<summary>
+				匿名许可要求
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.AnonymousRequirement.#ctor">
+			<summary>
+				匿名认证策略构造
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenRequirement">
+			<summary>
+				令牌认证策略
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenOnlyRequirement">
+			<summary>
+				仅Token认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.RolesRequirement">
+			<summary>
+				角色认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.RolesRequirement.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="roles">角色</param>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.RolesRequirement.#ctor(System.String[])">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="roles"></param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.RolesRequirement.Roles">
+			<summary>
+				角色
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.RoleRequirement">
+			<summary>
+				角色认证要求
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.RoleRequirement.#ctor(System.String)">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="role"></param>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ClaimsRequirement">
+			<summary>
+				凭据认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ClaimsRequirement.#ctor(System.Collections.Generic.IDictionary{System.String,System.String})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claims">凭据</param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ClaimsRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claims"></param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ClaimsRequirement.Claims">
+			<summary>
+				凭据键值对集合
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ClaimRequirement">
+			<summary>
+				凭据认证要求
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ClaimRequirement.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claim">凭据</param>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.ClaimRequirement.#ctor(System.String,System.String)">
+			<summary>
+				认证策略构造
+			</summary>
+			<param name="claimKey"></param>
+			<param name="claimValue"></param>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ActionNameClaimRequirement">
+			<summary>
+				操作名凭据认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.RoutePathClaimRequirement">
+			<summary>
+				路由路径凭据认证要求
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ArtemisHandlerProxy">
+			<summary>
+				Artemis操作员代理实现
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.ArtemisHandlerProxy.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.Extensions.Options.IOptions{Artemis.Extensions.Identity.ArtemisIdentityOptions})">
+			<summary>
+				代理实现
+			</summary>
+			<param name="httpContextAccessor"></param>
+			<param name="identityOptions"></param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.HttpContextAccessor">
+			<summary>
+				http上下文访问器
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.Options">
+			<summary>
+				Artemis认证配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisHandlerProxy.Handler">
+			<summary>
+				操作员
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.IArtemisIdentityOptions">
+			<summary>
+				Artemis认证选项接口
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.ContextItemTokenKey">
+			<summary>
+				上下文项目Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RequestHeaderTokenSchema">
+			<summary>
+				请求头认证Token架构
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RequestHeaderTokenKey">
+			<summary>
+				请求头认证Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheTokenPrefix">
+			<summary>
+				缓存认证Token前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheUserMapTokenPrefix">
+			<summary>
+				用户对Token映射缓存键前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.CacheTokenExpire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.EnableMultiEnd">
+			<summary>
+				是否启用多终端
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.IdentityServiceProvider">
+			<summary>
+				认证服务对提供者名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.Policies">
+			<summary>
+				支持的策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.EnableAdvancedPolicy">
+			<summary>
+				是否启用高级策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.IArtemisIdentityOptions.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.IPolicyOptions">
+			<summary>
+				策略选项接口
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ArtemisIdentityOptions">
+			<summary>
+				传递认证选项
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.ContextItemTokenKey">
+			<summary>
+				上下文项目Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RequestHeaderTokenSchema">
+			<summary>
+				请求头认证Token架构
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RequestHeaderTokenKey">
+			<summary>
+				请求头Token键
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheTokenPrefix">
+			<summary>
+				缓存Token前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheUserMapTokenPrefix">
+			<summary>
+				用户对Token映射缓存键前缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.CacheTokenExpire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.EnableMultiEnd">
+			<summary>
+				是否启用同终端类型多终端登录
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.IdentityServiceProvider">
+			<summary>
+				认证服务对提供者名称
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.IdentityServiceTokenNameSuffix">
+			<summary>
+				认证服务令牌名称后缀
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.Policies">
+			<summary>
+				支持的策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.EnableAdvancedPolicy">
+			<summary>
+				是否启用高级策略
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ArtemisIdentityOptions.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.PolicyOptions">
+			<summary>
+				策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.PolicyOptions.Name">
+			<summary>
+				策略名称
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.RolesBasedPolicyOptions">
+			<summary>
+				基于角色的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.RolesBasedPolicyOptions.Roles">
+			<summary>
+				策略支持的角色列表
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ClaimsBasedPolicyOptions">
+			<summary>
+				基于凭据的策略配置
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ClaimsBasedPolicyOptions.Claims">
+			<summary>
+				策略支持的凭据字典
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.AuthorizationExtensions">
+			<summary>
+				授权扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.AuthorizationExtensions.ConfigureAuthorization(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.Identity.ArtemisIdentityOptions)">
+			<summary>
+				配置授权服务
+			</summary>
+			<param name="builder"></param>
+			<param name="config"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.AuthorizationExtensions.ConfigureAuthorization``1(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Artemis.Extensions.Identity.ArtemisIdentityOptions)">
+			<summary>
+				配置授权服务
+			</summary>
+			<param name="builder"></param>
+			<param name="config"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler">
+			<summary>
+				授权中间件结果处理器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.HandleAsync(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Authorization.AuthorizationPolicy,Microsoft.AspNetCore.Authorization.Policy.PolicyAuthorizationResult)">
+			<summary>
+				Evaluates the authorization requirement and processes the authorization result.
+			</summary>
+			<param name="next">
+				The next middleware in the application pipeline. Implementations may not invoke this if the authorization did not
+				succeed.
+			</param>
+			<param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.</param>
+			<param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> for the resource.</param>
+			<param name="authorizeResult">The result of authorization.</param>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.AuthorizationMessage">
+			<summary>
+				认证消息
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.AuthorizationMiddlewareResultHandler.FailHandler(Microsoft.AspNetCore.Http.HttpContext)">
+			<summary>
+				失败处理器
+			</summary>
+			<param name="context"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.EndpointDescriptor">
+			<summary>
+				端描述器
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询操作名称
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchRoutePath(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询路由路径
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchDescription(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				查询端描述
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.EndpointDescriptor.HasMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
+			<summary>
+				判断元数据中是否包含指定类型
+			</summary>
+			<typeparam name="TMetadata"></typeparam>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.EndpointDescriptor.FetchMetadata``1(Microsoft.AspNetCore.Http.Endpoint)">
+			<summary>
+				查询指定类型的元数据
+			</summary>
+			<typeparam name="TMetadata"></typeparam>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.EndpointDescriptor.ApiActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				Api控制器操作名
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.EndpointDescriptor.RoutePatternActionName(Microsoft.AspNetCore.Routing.RouteEndpoint)">
+			<summary>
+				路由匹配模式操作名
+			</summary>
+			<param name="endpoint"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.IdentityShared">
+			<summary>
+				共享键
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.AuthorizationMessage">
+			<summary>
+				授权消息
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.Schema">
+			<summary>
+				Token架构
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.Token">
+			<summary>
+				令牌
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.CacheSpace">
+			<summary>
+				缓存名空间
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.UserMapToken">
+			<summary>
+				用户对Token的映射
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.IdentityShared.DefaultServiceProvider">
+			<summary>
+				默认服务提供者
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.AuthorizePolicy">
+			<summary>
+				预定义的Artemis授权策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Anonymous">
+			<summary>
+				匿名策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Token">
+			<summary>
+				令牌策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.Admin">
+			<summary>
+				管理员策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.ActionName">
+			<summary>
+				操作名策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.RoutePath">
+			<summary>
+				路由路径策略
+			</summary>
+		</member>
+		<member name="F:Artemis.Extensions.Identity.AuthorizePolicy.TokenPolicies">
+			<summary>
+				需求Token策略
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenHandlerExtensions">
+			<summary>
+				令牌处理器扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchRequestTokenSymbol(Microsoft.AspNetCore.Http.HttpRequest,System.String,System.String)">
+			<summary>
+				从请求头中获取Token串
+			</summary>
+			<param name="request"></param>
+			<param name="key"></param>
+			<param name="schema"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheTokenRecord(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,Artemis.Extensions.Identity.TokenRecord)">
+			<summary>
+				缓存Token记录
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="record"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheTokenRecordAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,Artemis.Extensions.Identity.TokenRecord,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存Token记录
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="record"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchTokenRecord(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+			<summary>
+				从缓存获取Token记录
+			</summary>
+			<param name="cache">缓存依赖</param>
+			<param name="cacheTokenKey">缓存键</param>
+			<param name="refreshToken">是否刷新缓存</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchTokenRecordAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存中获取Token记录
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheTokenKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				缓存用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="tokenSymbol"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchUserMapTokenSymbol(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean)">
+			<summary>
+				从缓存获取用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="refreshToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.FetchUserMapTokenSymbolAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Boolean,System.Threading.CancellationToken)">
+			<summary>
+				从缓存获取用户对Token的映射
+			</summary>
+			<param name="cache"></param>
+			<param name="cacheKey"></param>
+			<param name="refreshToken"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheString(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32)">
+			<summary>
+				缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenHandlerExtensions.CacheStringAsync(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+			<summary>
+				异步缓存字符串
+			</summary>
+			<param name="cache"></param>
+			<param name="key"></param>
+			<param name="value"></param>
+			<param name="expire"></param>
+			<param name="cancellationToken"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenKeyGenerator">
+			<summary>
+				TokenKey生成器
+			</summary>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.CacheTokenKey(System.String,System.String)">
+			<summary>
+				缓存Token键
+			</summary>
+			<param name="prefix">前缀</param>
+			<param name="symbol">Token符号</param>
+			<returns></returns>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenKeyGenerator.CacheUserMapTokenKey(System.String,System.String,System.Guid)">
+			<summary>
+				缓存用户映射Token键
+			</summary>
+			<param name="prefix"></param>
+			<param name="end"></param>
+			<param name="id"></param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.LoginProviderKey(System.Guid,System.String)">
+			<summary>
+				登录提供键
+			</summary>
+			<param name="id">用户标识</param>
+			<param name="end">端类型</param>
+			<returns></returns>
+		</member>
+		<member name="M:Artemis.Extensions.Identity.TokenKeyGenerator.ProviderTokenName(System.String,System.String)">
+			<summary>
+				令牌名称
+			</summary>
+			<param name="end"></param>
+			<param name="suffix"></param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenRecord">
+			<summary>
+				令牌记录
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.UserId">
+			<summary>
+				用户标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.UserName">
+			<summary>
+				用户名
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.EndType">
+			<summary>
+				端类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.Expire">
+			<summary>
+				过期时间
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.UserClaims">
+			<summary>
+				用户凭据
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.Roles">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.TokenRecord.RoleClaims">
+			<summary>
+				角色凭据
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.TokenRecordExtensions">
+			<summary>
+				令牌记录扩展
+			</summary>
+		</member>
+		<member
+			name="M:Artemis.Extensions.Identity.TokenRecordExtensions.TokenSymbol(Artemis.Extensions.Identity.TokenRecord)">
+			<summary>
+				生成Token符号
+			</summary>
+			<param name="record">token记录</param>
+			<returns></returns>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.SignResult">
+			<summary>
+				签名结果
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.SignResult.Succeeded">
+			<summary>
+				是否签名成功
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.SignResult.Message">
+			<summary>
+				认证消息
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.ClaimRecord">
+			<summary>
+				凭据记录
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ClaimRecord.ClaimType">
+			<summary>
+				凭据类型
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ClaimRecord.ClaimValue">
+			<summary>
+				凭据值
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.ClaimRecord.CheckStamp">
+			<summary>
+				校验戳
+			</summary>
+		</member>
+		<member name="T:Artemis.Extensions.Identity.RoleRecord">
+			<summary>
+				角色记录
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.RoleRecord.Id">
+			<summary>
+				角色标识
+			</summary>
+		</member>
+		<member name="P:Artemis.Extensions.Identity.RoleRecord.Name">
+			<summary>
+				角色名
+			</summary>
+		</member>
+	</members>
 </doc>

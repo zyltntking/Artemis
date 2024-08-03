@@ -9,20 +9,17 @@ namespace Artemis.Data.Store;
 /// <summary>
 ///     独立模型管理接口
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public interface ISeparateManager<TEntity, TEntityInfo, TEntityPackage> : ISeparateManager<TEntity, Guid, TEntityInfo,
+public interface ISeparateManager<TEntityInfo, TEntityPackage> : ISeparateManager<Guid, TEntityInfo,
     TEntityPackage>
-    where TEntity : class, IKeySlot
     where TEntityInfo : class, IKeySlot
     where TEntityPackage : class;
 
 /// <summary>
 ///     独立模型接口
 /// </summary>
-public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : IManager
-    where TEntity : class, IKeySlot<TKey>
+public interface ISeparateManager<TKey, TEntityInfo, TEntityPackage> : IManager
     where TEntityInfo : class, IKeySlot<TKey>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
@@ -98,7 +95,7 @@ public interface ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : 
 /// <typeparam name="TEntityPackage"></typeparam>
 public abstract class SeparateManager<TEntity, TEntityInfo, TEntityPackage> :
     SeparateManager<TEntity, Guid, TEntityInfo,
-        TEntityPackage>, ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
+        TEntityPackage>, ISeparateManager<TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot
     where TEntityInfo : class, IKeySlot
     where TEntityPackage : class
@@ -116,7 +113,7 @@ public abstract class SeparateManager<TEntity, TEntityInfo, TEntityPackage> :
 ///     单独模型
 /// </summary>
 public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage> : Manager,
-    ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
+    ISeparateManager<TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
     where TEntityPackage : class
@@ -172,13 +169,14 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <param name="package"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<StoreResult> CreateEntityAsync(TEntityPackage package, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> CreateEntityAsync(TEntityPackage package,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var entity = MapNewEntity(package);
+        var entity = await MapNewEntity(package, 1, cancellationToken);
 
-        return EntityStore.CreateAsync(entity, cancellationToken);
+        return await EntityStore.CreateAsync(entity, cancellationToken);
     }
 
     /// <summary>
@@ -187,14 +185,23 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <param name="packages"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<StoreResult> BatchCreateEntityAsync(IEnumerable<TEntityPackage> packages,
+    public async Task<StoreResult> BatchCreateEntityAsync(IEnumerable<TEntityPackage> packages,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var entities = packages.Select(MapNewEntity);
+        var entities = new List<TEntity>();
 
-        return EntityStore.CreateAsync(entities, cancellationToken);
+        var index = 1;
+
+        foreach (var package in packages)
+        {
+            var entity = await MapNewEntity(package, index, cancellationToken);
+            entities.Add(entity);
+            index++;
+        }
+
+        return await EntityStore.CreateAsync(entities, cancellationToken);
     }
 
     /// <summary>
@@ -212,7 +219,11 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
         var entity = await EntityStore.FindEntityAsync(key, cancellationToken);
 
         if (entity is not null)
-            return await EntityStore.UpdateAsync(MapOverEntity(entity, package), cancellationToken);
+        {
+            entity = await MapOverEntity(entity, package, 1, cancellationToken);
+
+            return await EntityStore.UpdateAsync(entity, cancellationToken);
+        }
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, key.IdToString()!);
     }
@@ -234,16 +245,21 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
         var entityList = entities.ToList();
 
+        var targetEntityList = new List<TEntity>();
+
         if (entityList.Count > 0)
         {
-            entities = entityList.Select(entity =>
+            var index = 1;
+
+            foreach (var entity in entityList)
             {
                 var package = dictionary[entity.Id];
+                var targetEntity = await MapOverEntity(entity, package, index, cancellationToken);
+                targetEntityList.Add(targetEntity);
+                index++;
+            }
 
-                return MapOverEntity(entity, package);
-            }).ToList();
-
-            return await EntityStore.UpdateAsync(entities, cancellationToken);
+            return await EntityStore.UpdateAsync(targetEntityList, cancellationToken);
         }
 
         var flag = string.Join(',', ids.Select(item => item.IdToString()));
@@ -299,13 +315,44 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     #region EntityMap
 
     /// <summary>
+    ///     忽略空值配置
+    /// </summary>
+    private TypeAdapterConfig? _ignoreNullConfig;
+
+    /// <summary>
+    ///     忽略空值配置
+    /// </summary>
+    /// <returns></returns>
+    private TypeAdapterConfig IgnoreNullConfig
+    {
+        get
+        {
+            if (_ignoreNullConfig != null)
+                return _ignoreNullConfig;
+            _ignoreNullConfig = new TypeAdapterConfig();
+
+            _ignoreNullConfig
+                .NewConfig<TEntity, TEntityPackage>()
+                .IgnoreNullValues(true);
+
+            return _ignoreNullConfig;
+        }
+    }
+
+    /// <summary>
     ///     映射到新实体
     /// </summary>
     /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected virtual TEntity MapNewEntity(TEntityPackage package)
+    protected virtual Task<TEntity> MapNewEntity(
+        TEntityPackage package,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
     {
-        return Instance.CreateInstance<TEntity, TEntityPackage>(package);
+        var entity = Instance.CreateInstance<TEntity, TEntityPackage>(package);
+        return Task.FromResult(entity);
     }
 
     /// <summary>
@@ -313,10 +360,17 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected virtual TEntity MapOverEntity(TEntity entity, TEntityPackage package)
+    protected virtual Task<TEntity> MapOverEntity(
+        TEntity entity,
+        TEntityPackage package,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
     {
-        return package.Adapt(entity);
+        entity = package.Adapt(entity, IgnoreNullConfig);
+        return Task.FromResult(entity);
     }
 
     #endregion
