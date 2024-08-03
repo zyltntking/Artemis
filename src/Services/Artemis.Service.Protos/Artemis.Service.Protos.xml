@@ -11040,7 +11040,6 @@
         <member name="P:Artemis.Service.Protos.Resource.DivisionInfoPacket.ParentId">
             <summary>
             上级行政区划标识
-            @required
             @guid
             </summary>
         </member>
@@ -11327,7 +11326,6 @@
         <member name="P:Artemis.Service.Protos.Resource.DivisionInfoTreePacket.ParentId">
             <summary>
             上级行政区划标识
-            @required
             @guid
             </summary>
         </member>
@@ -11497,16 +11495,6 @@
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateDivisionRequest.LevelFieldNumber">
-            <summary>Field number for the "Level" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateDivisionRequest.Level">
-            <summary>
-            行政区划级别
-            @required
-            @min(0)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.Resource.CreateDivisionRequest.TypeFieldNumber">
             <summary>Field number for the "Type" field.</summary>
         </member>
@@ -11579,15 +11567,6 @@
             <summary>
             行政区划编码
             @maxLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Resource.UpdateDivisionInfoPacket.LevelFieldNumber">
-            <summary>Field number for the "Level" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Resource.UpdateDivisionInfoPacket.Level">
-            <summary>
-            行政区划级别
-            @min(0)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Resource.UpdateDivisionInfoPacket.TypeFieldNumber">

@@ -24,7 +24,7 @@ var postgres = builder.AddPostgres("PostgresInstance", password: password, port:
     .WithImage("postgres", "16")
     .WithDataVolume("postgres-volume");
 
-var artemisDb = postgres.AddDatabase("ArtemisDb", "Artemis");
+var artemisDb = postgres.AddDatabase("ArtemisDb", "ArtemisDev");
 
 builder.AddProject<Artemis_App_Gateway>("ApiGateway");
 

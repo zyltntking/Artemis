@@ -5,6 +5,7 @@ namespace Artemis.Data.Core.Fundamental.Types;
 /// <summary>
 ///     学制
 /// </summary>
+[Description("学制")]
 public sealed class SchoolLength : Enumeration
 {
     /// <summary>

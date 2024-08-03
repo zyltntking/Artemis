@@ -1,5 +1,6 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental;
+using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Shared;
@@ -57,15 +58,20 @@ public class ResourceContext : DbContext
         var dictionaries = new List<EnumerationRecord>
         {
             Enumeration.ToRecordDictionary<ArtemisClaimTypes>(),
-            Enumeration.ToRecordDictionary<IdentityPolicy>(),
             Enumeration.ToRecordDictionary<ChineseNation>(),
             //Enumeration.ToRecordDictionary<ChineseNationEn>(false),
             Enumeration.ToRecordDictionary<DictionaryType>(),
             Enumeration.ToRecordDictionary<EndType>(),
             Enumeration.ToRecordDictionary<Gender>(),
+            Enumeration.ToRecordDictionary<IdentityPolicy>(),
             Enumeration.ToRecordDictionary<RegionLevel>(),
+            Enumeration.ToRecordDictionary<SchoolLength>(),
+            Enumeration.ToRecordDictionary<StudyPhase>(),
             Enumeration.ToRecordDictionary<TaskMode>(),
-            Enumeration.ToRecordDictionary<TaskShip>()
+            Enumeration.ToRecordDictionary<TaskShip>(),
+            Enumeration.ToRecordDictionary<TaskState>(),
+            Enumeration.ToRecordDictionary<OrganizationType>(),
+            Enumeration.ToRecordDictionary<OrganizationStatus>(),
         };
 
         foreach (var dictionary in dictionaries)
@@ -95,9 +101,49 @@ public class ResourceContext : DbContext
             });
 
             modelBuilder.Entity<ArtemisDataDictionaryItem>().HasData(dictionaryItems);
-
-            var org1 = Instance.CreateInstance<ArtemisOrganization>();
-            org1.Id = Guid.NewGuid();
         }
+
+        var orgList = new List<ArtemisOrganization>();
+
+        var org1 = Instance.CreateInstance<ArtemisOrganization>();
+        org1.Name = "红河州教体局";
+        org1.Code = DesignCode.Organization("5325", 1);
+        org1.DesignCode = DesignCode.Organization("5325", 1);
+        org1.Type = OrganizationType.Management;
+        org1.Status = OrganizationStatus.InOperation;
+        org1.DivisionCode = "5325";
+        orgList.Add(org1);
+
+        var org2 = Instance.CreateInstance<ArtemisOrganization>();
+        org2.Name = "蒙自市教体局";
+        org2.Code = DesignCode.Organization("5325", 1, org1.Code);
+        org2.DesignCode = DesignCode.Organization("5325", 1, org1.Code);
+        org2.Type = OrganizationType.Management;
+        org2.Status = OrganizationStatus.InOperation;
+        org2.DivisionCode = "532503";
+        org2.ParentId = org1.Id;
+        orgList.Add(org2);
+
+        var org3 = Instance.CreateInstance<ArtemisOrganization>();
+        org3.Name = "西南联大蒙自小学";
+        org3.Code = DesignCode.Organization("5325", 1, org2.Code);
+        org3.DesignCode = DesignCode.Organization("5325", 1, org2.Code);
+        org3.Type = OrganizationType.Functional;
+        org3.Status = OrganizationStatus.InOperation;
+        org3.DivisionCode = "53250301";
+        org3.ParentId = org2.Id;
+        orgList.Add(org3);
+
+        var org4 = Instance.CreateInstance<ArtemisOrganization>();
+        org4.Name = "蒙自市机关幼儿园";
+        org4.Code = DesignCode.Organization("5325", 2, org2.Code);
+        org4.DesignCode = DesignCode.Organization("5325", 2, org2.Code);
+        org4.Type = OrganizationType.Functional;
+        org4.Status = OrganizationStatus.InOperation;
+        org4.DivisionCode = "532503101";
+        org4.ParentId = org2.Id;
+        orgList.Add(org4);
+
+        modelBuilder.Entity<ArtemisOrganization>().HasData(orgList);
     }
 }

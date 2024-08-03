@@ -253,6 +253,34 @@
             <param name="divisionCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.DivisionPackage)">
+            <summary>
+                映射到新实体
+            </summary>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision)">
+            <summary>
+            在添加子节点之前
+            </summary>
+            <param name="parent">父节点</param>
+            <param name="child">子节点</param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisDivision)">
+            <summary>
+                在移除子节点之前
+            </summary>
+            <param name="child">子节点</param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Service.Resource.Managers.IOrganizationTreeManager">
             <summary>
                 组织机构树管理器
@@ -291,6 +319,14 @@
             <param name="organizationStatus"></param>
             <param name="page"></param>
             <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

@@ -4762,6 +4762,50 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.OrganizationStatus">
+            <summary>
+            机构状态
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.OrganizationStatus.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.OrganizationStatus.InOperation">
+            <summary>
+            运营中
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.OrganizationStatus.CeaseOperation">
+            <summary>
+            停止运营
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.OrganizationType">
+            <summary>
+            机构类型
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.OrganizationType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.OrganizationType.Management">
+            <summary>
+            管理机构
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.OrganizationType.Functional">
+            <summary>
+            职能机构
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.PatchAction">
             <summary>
                 修补操作

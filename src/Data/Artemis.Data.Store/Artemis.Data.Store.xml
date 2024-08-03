@@ -3393,24 +3393,55 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Data.Store.TreeManager`6.FetchNonRootTreeNodeList(`1,System.Threading.CancellationToken)">
+            <summary>
+            获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.TreeManager`6.FetchTreeNodeListAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            获取生成树节点列表
+            </summary>
+            <param name="key">标识</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.TreeManager`6.GenerateTree(`1,System.Collections.Generic.List{`3})">
+            <summary>
+            递归生成树
+            </summary>
+            <param name="rootKey">根标识</param>
+            <param name="nodeList">节点列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Data.Store.TreeManager`6.BeforeAddChildNode(`0,`0)">
+            <summary>
+            在添加子节点之前
+            </summary>
+            <param name="parent">父节点</param>
+            <param name="child">子节点</param>
+        </member>
         <member name="M:Artemis.Data.Store.TreeManager`6.AfterAddChildNode(`0,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之后
             </summary>
-            <param name="entity"></param>
+            <param name="parent">父节点</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Artemis.Data.Store.TreeManager`6.BeforeRemoveChildNode(`0)">
             <summary>
                 在移除子节点之前
             </summary>
-            <param name="entity"></param>
+            <param name="child">子节点</param>
         </member>
         <member name="M:Artemis.Data.Store.TreeManager`6.AfterRemoveChildNode(`0,System.Threading.CancellationToken)">
             <summary>
                 在移除子节点之后
             </summary>
-            <param name="entity"></param>
+            <param name="parent">父节点</param>
             <param name="cancellationToken"></param>
         </member>
         <member name="M:Artemis.Data.Store.TreeManager`6.GetEntityInfoTreeAsync(`1,System.Threading.CancellationToken)">

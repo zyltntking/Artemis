@@ -172,9 +172,8 @@ message DivisionInfoPacket{
 	// @guid
 	string Id = 1;
 	// 上级行政区划标识
-	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 行政区划名称
 	// @required
 	// @maxLength(128)
@@ -280,9 +279,8 @@ message DivisionInfoTreePacket{
 	// @guid
 	string Id = 1;
 	// 上级行政区划标识
-	// @required
 	// @guid
-	string ParentId = 2;
+	google.protobuf.StringValue ParentId = 2;
 	// 行政区划名称
 	// @required
 	// @maxLength(128)
@@ -345,10 +343,6 @@ message CreateDivisionRequest{
 	// @required
 	// @maxLength(32)
 	string Code = 2;
-	// 行政区划级别
-	// @required
-	// @min(0)
-	int32 Level = 3;
 	// 行政区划类型
 	// @required
 	// @maxLength(32)
@@ -379,9 +373,6 @@ message UpdateDivisionInfoPacket{
 	// 行政区划编码
 	// @maxLength(32)
 	google.protobuf.StringValue Code = 2;
-	// 行政区划级别
-	// @min(0)
-	google.protobuf.Int32Value Level = 3;
 	// 行政区划类型
 	// @maxLength(32)
 	google.protobuf.StringValue Type = 4;

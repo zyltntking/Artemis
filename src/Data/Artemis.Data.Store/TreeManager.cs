@@ -19,7 +19,7 @@ public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPack
     ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
     where TEntityInfo : class, IKeySlot, IParentKeySlot
-    where TEntityInfoTree : class, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>
+    where TEntityInfoTree : class, TEntityInfo, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>
     where TEntityPackage : class;
 
 /// <summary>
@@ -35,8 +35,7 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
     ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
-    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,
-    ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
+    where TEntityInfoTree : class, TEntityInfo, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
 {
@@ -140,7 +139,7 @@ public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntity
     ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
     where TEntityInfo : class, IKeySlot, IParentKeySlot
-    where TEntityInfoTree : class, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>
+    where TEntityInfoTree : class, TEntityInfo, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>
     where TEntityPackage : class
 {
     /// <summary>
@@ -173,7 +172,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     ITreeManager<TEntity, TKey, TParentKey?, TEntityInfo, TEntityInfoTree, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
-    where TEntityInfoTree : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,
+    where TEntityInfoTree : class, TEntityInfo, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,
     ITreeInfoSlot<TEntityInfoTree, TKey, TParentKey?>
     where TEntityPackage : class
     where TKey : IEquatable<TKey>
@@ -181,8 +180,7 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     /// <summary>
     ///     树模型管理器构造
     /// </summary>
-    protected TreeManager(
-        IStore<TEntity, TKey> entityStore) : base(entityStore)
+    protected TreeManager(IStore<TEntity, TKey> entityStore) : base(entityStore)
     {
     }
 
@@ -194,11 +192,74 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     protected abstract TParentKey MapToParentKey(TKey key);
 
     /// <summary>
+    /// 获取非根节点的树节点列表
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected abstract Task<List<TEntityInfo>> FetchNonRootTreeNodeList(TKey key, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// 获取生成树节点列表
+    /// </summary>
+    /// <param name="key">标识</param>
+    /// <param name="cancellationToken">操作取消信号</param>
+    /// <returns></returns>
+    private async Task<List<TEntityInfo>> FetchTreeNodeListAsync(TKey key, CancellationToken cancellationToken)
+    {
+        var parentKey = await EntityStore
+            .KeyMatchQuery(key)
+            .Select(entity => entity.ParentId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (parentKey == null)
+        {
+            return await EntityStore.EntityQuery.ProjectToType<TEntityInfo>().ToListAsync(cancellationToken);
+        }
+
+        return await FetchNonRootTreeNodeList(key, cancellationToken);
+    }
+
+    /// <summary>
+    /// 递归生成树
+    /// </summary>
+    /// <param name="rootKey">根标识</param>
+    /// <param name="nodeList">节点列表</param>
+    /// <returns></returns>
+    private TEntityInfoTree GenerateTree(TKey rootKey, List<TEntityInfo> nodeList)
+    {
+        var root = nodeList.FirstOrDefault(item => item.Id.Equals(rootKey));
+
+        if (root is null) 
+            return default!;
+
+        var tree = root.Adapt<TEntityInfoTree>();
+
+        var children = nodeList
+            .Where(item => item.ParentId is not null && item.ParentId.Equals(tree.Id))
+            .Select(item => GenerateTree(item.Id, nodeList))
+            .ToList();
+
+        tree.Children = children;
+
+        return tree;
+    }
+
+    /// <summary>
+    /// 在添加子节点之前
+    /// </summary>
+    /// <param name="parent">父节点</param>
+    /// <param name="child">子节点</param>
+    protected virtual void BeforeAddChildNode(TEntity parent, TEntity child)
+    {
+    }
+
+    /// <summary>
     ///     在添加子节点之后
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="parent">父节点</param>
     /// <param name="cancellationToken"></param>
-    protected virtual Task AfterAddChildNode(TEntity entity, CancellationToken cancellationToken)
+    protected virtual Task AfterAddChildNode(TEntity parent, CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }
@@ -206,17 +267,17 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     /// <summary>
     ///     在移除子节点之前
     /// </summary>
-    /// <param name="entity"></param>
-    protected virtual void BeforeRemoveChildNode(TEntity entity)
+    /// <param name="child">子节点</param>
+    protected virtual void BeforeRemoveChildNode(TEntity child)
     {
     }
 
     /// <summary>
     ///     在移除子节点之后
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="parent">父节点</param>
     /// <param name="cancellationToken"></param>
-    protected virtual Task AfterRemoveChildNode(TEntity entity, CancellationToken cancellationToken)
+    protected virtual Task AfterRemoveChildNode(TEntity parent, CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }
@@ -233,10 +294,9 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
     {
         OnAsyncActionExecuting(cancellationToken);
 
-        var tree = await EntityStore.KeyMatchQuery(key)
-            .Include(entity => entity.Children)
-            .ProjectToType<TEntityInfoTree>()
-            .SingleOrDefaultAsync(cancellationToken);
+        var infoList = await FetchTreeNodeListAsync(key, cancellationToken);
+
+        var tree = GenerateTree(key, infoList);
 
         return tree ?? throw new EntityNotFoundException(typeof(TEntity).Name, key.IdToString()!);
     }
@@ -260,6 +320,8 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
             var child = MapNewEntity(package);
 
             child.ParentId = MapToParentKey(key);
+
+            BeforeAddChildNode(entity, child);
 
             var result = await EntityStore.CreateAsync(child, cancellationToken);
 
@@ -292,6 +354,8 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
                 var child = MapNewEntity(package);
 
                 child.ParentId = MapToParentKey(key);
+
+                BeforeAddChildNode(entity, child);
 
                 return child;
             });
@@ -328,9 +392,12 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
             {
                 child.ParentId = MapToParentKey(key);
 
+                BeforeAddChildNode(entity, child);
+
                 var result = await EntityStore.UpdateAsync(child, cancellationToken);
 
-                if (result.Succeeded) await AfterAddChildNode(entity, cancellationToken);
+                if (result.Succeeded) 
+                    await AfterAddChildNode(entity, cancellationToken);
 
                 return result;
             }
@@ -365,7 +432,11 @@ public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntit
 
             if (childrenList.Any())
             {
-                foreach (var child in childrenList) child.ParentId = MapToParentKey(key);
+                foreach (var child in childrenList)
+                {
+                    child.ParentId = MapToParentKey(key);
+                    BeforeAddChildNode(entity, child);
+                }
 
                 var result = await EntityStore.UpdateAsync(childrenList, cancellationToken);
 

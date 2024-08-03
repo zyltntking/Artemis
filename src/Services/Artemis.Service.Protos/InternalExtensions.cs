@@ -1,4 +1,5 @@
 ﻿using Artemis.Data.Core;
+using Google.Protobuf.Collections;
 using Mapster;
 
 namespace Artemis.Service.Protos;
@@ -26,9 +27,8 @@ public static class InternalExtensions
 
                 _readOnlyCollectionSetConfig
                     .Default
-                    .UseDestinationValue(member =>
-                        member is { SetterModifier: AccessModifier.None, Type.IsGenericType: true } &&
-                        member.Type.GetGenericTypeDefinition() == typeof(ICollection<>));
+                    .UseDestinationValue(member => member is { SetterModifier: AccessModifier.None, Type.IsGenericType: true } &&
+                                                   member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>));
             }
 
             return _readOnlyCollectionSetConfig;

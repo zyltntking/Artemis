@@ -24,7 +24,7 @@ update tmp a
 set pid = b.id
 from tmp b
 where a.provincecode = b.code
-and a.level = 1;
+and a.level = 2;
 
 insert into "ArtemisDev"."Resource"."ArtemisDivision"
     (

@@ -346,6 +346,14 @@
             <param name="package"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.AfterAddChildNode(Artemis.Service.Task.Context.ArtemisTask,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之后

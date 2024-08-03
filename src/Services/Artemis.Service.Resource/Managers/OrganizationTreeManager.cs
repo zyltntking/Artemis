@@ -118,4 +118,19 @@ public class OrganizationTreeManager :
     }
 
     #endregion
+
+    #region Overrides of TreeManager<ArtemisOrganization,Guid,Guid?,OrganizationInfo,OrganizationInfoTree,OrganizationPackage>
+
+    /// <summary>
+    /// 获取非根节点的树节点列表
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected override Task<List<OrganizationInfo>> FetchNonRootTreeNodeList(Guid key, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

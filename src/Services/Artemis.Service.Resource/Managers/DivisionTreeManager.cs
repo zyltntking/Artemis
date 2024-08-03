@@ -114,4 +114,65 @@ public class DivisionTreeManager : TreeManager<ArtemisDivision, DivisionInfo, Di
     }
 
     #endregion
+
+    #region Overrides of TreeManager<ArtemisDivision,Guid,Guid?,DivisionInfo,DivisionInfoTree,DivisionPackage>
+
+    /// <summary>
+    ///     映射到新实体
+    /// </summary>
+    /// <param name="package"></param>
+    /// <returns></returns>
+    protected override ArtemisDivision MapNewEntity(DivisionPackage package)
+    {
+        var entity = base.MapNewEntity(package);
+        entity.Level = 1;
+        return entity;
+    }
+
+    /// <summary>
+    /// 在添加子节点之前
+    /// </summary>
+    /// <param name="parent">父节点</param>
+    /// <param name="child">子节点</param>
+    protected override void BeforeAddChildNode(ArtemisDivision parent, ArtemisDivision child)
+    {
+        child.Level = parent.Level + 1;
+    }
+
+    /// <summary>
+    ///     在移除子节点之前
+    /// </summary>
+    /// <param name="child">子节点</param>
+    protected override void BeforeRemoveChildNode(ArtemisDivision child)
+    {
+        child.Level = 1;
+    }
+
+    /// <summary>
+    /// 获取非根节点的树节点列表
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected override async Task<List<DivisionInfo>> FetchNonRootTreeNodeList(Guid key, CancellationToken cancellationToken)
+    {
+        var divisionCode = await EntityStore
+            .KeyMatchQuery(key)
+            .Select(division => division.Code)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (!string.IsNullOrWhiteSpace(divisionCode))
+        {
+            var list = await EntityStore
+                .EntityQuery
+                .Where(division => division.Code.StartsWith(divisionCode))
+                .ProjectToType<DivisionInfo>().ToListAsync(cancellationToken);
+
+            return list;
+        }
+
+        return [];
+    }
+
+    #endregion
 }

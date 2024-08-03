@@ -174,6 +174,18 @@ public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, 
         return task;
     }
 
+
+    /// <summary>
+    /// 获取非根节点的树节点列表
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected override Task<List<TaskInfo>> FetchNonRootTreeNodeList(Guid key, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     ///     在添加子节点之后
     /// </summary>
