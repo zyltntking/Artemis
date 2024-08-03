@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.App.Business.Vision
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{1E02B7A3-CB46-4E1B-9277-C8160A0C0A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artemis.Service.Business.VisionScreen", "src\Services\Business\Artemis.Service.Business.VisionScreen\Artemis.Service.Business.VisionScreen.csproj", "{610F7DD0-C4D1-4490-81F9-2B3BC258C0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Service.Business.VisionScreen", "src\Services\Business\Artemis.Service.Business.VisionScreen\Artemis.Service.Business.VisionScreen.csproj", "{610F7DD0-C4D1-4490-81F9-2B3BC258C0DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

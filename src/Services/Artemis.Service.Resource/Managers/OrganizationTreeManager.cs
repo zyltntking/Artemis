@@ -132,9 +132,20 @@ public class OrganizationTreeManager :
 
     #region Overrides
 
-    private string? _organizationDesignCodes;
+    /// <summary>
+    /// 区域编码
+    /// </summary>
+    private string? _region;
 
-    private int? _organizationSerial;
+    /// <summary>
+    /// 机构序列
+    /// </summary>
+    private int? _serial;
+
+    /// <summary>
+    /// 子机构序列
+    /// </summary>
+    private int? _childSerial;
 
     /// <summary>
     ///     映射到新实体
@@ -150,38 +161,33 @@ public class OrganizationTreeManager :
     {
         var entity = await base.MapNewEntity(package, loopIndex, cancellationToken);
 
-        _organizationDesignCodes ??= await EntityStore
-            .EntityQuery
-            .Where(organization => organization.ParentId == null)
-            .Select(organization => organization.DesignCode)
-            .MaxAsync(cancellationToken);
-
-        _organizationSerial ??= _organizationDesignCodes[^3..].Adapt<int>();
-
-        string region;
-
-        int serial;
-
-        if (string.IsNullOrWhiteSpace(_organizationDesignCodes))
+        if (string.IsNullOrEmpty(_region) || _serial is null)
         {
-            region = Options.OrganizationRegion;
-            serial = loopIndex;
-        }
-        else
-        {
-            region = _organizationDesignCodes[3..7];
-            serial = (int)(_organizationSerial + loopIndex);
+            var organizationDesignCodes = await EntityStore
+                .EntityQuery
+                .Where(organization => organization.ParentId == null)
+                .Select(organization => organization.DesignCode)
+                .MaxAsync(cancellationToken);
+
+            if (string.IsNullOrEmpty(organizationDesignCodes))
+            {
+                _region = Options.OrganizationRegion;
+                _serial = 0;
+            }
+            else
+            {
+                _region = organizationDesignCodes[3..7];
+                _serial = organizationDesignCodes[^3..].Adapt<int>();
+            }
         }
 
         entity.Status = OrganizationStatus.InOperation;
-        entity.DesignCode = DesignCode.Organization(region, serial);
+        entity.DesignCode = DesignCode.Organization(_region, (int)(_serial + loopIndex));
+
+        entity.Code = entity.DesignCode;
 
         return entity;
     }
-
-    private string? _childOrganizationDesignCodes;
-
-    private int? _childOrganizationSerial;
 
     /// <summary>
     ///     在添加子节点之前
@@ -196,19 +202,72 @@ public class OrganizationTreeManager :
         int loopIndex,
         CancellationToken cancellationToken = default)
     {
-        _childOrganizationDesignCodes ??= await EntityStore
-            .EntityQuery
-            .Where(organization => organization.ParentId == parent.Id)
-            .Select(organization => organization.DesignCode)
-            .MaxAsync(cancellationToken);
+        if (string.IsNullOrWhiteSpace(_region) || _childSerial is null)
+        {
+            var childOrganizationDesignCodes = await EntityStore
+                .EntityQuery
+                .Where(organization => organization.ParentId == parent.Id)
+                .Select(organization => organization.DesignCode)
+                .MaxAsync(cancellationToken);
 
-        _childOrganizationSerial ??= _childOrganizationDesignCodes[^3..].Adapt<int>();
+            if (string.IsNullOrEmpty(childOrganizationDesignCodes))
+            {
+                _region = Options.OrganizationRegion;
+                _childSerial = 0;
+            }
+            else
+            {
+                _region = childOrganizationDesignCodes[3..7];
+                _childSerial = childOrganizationDesignCodes[^3..].Adapt<int>();
+            }
+        }
 
-        var region = parent.DesignCode[3..7];
+        child.DesignCode = DesignCode.Organization(_region, (int)(_childSerial + loopIndex), parent.DesignCode);
 
-        var serial = (int)(_childOrganizationSerial + loopIndex);
+        child.Code = child.DesignCode;
 
-        child.DesignCode = DesignCode.Organization(region, serial, parent.DesignCode);
+        await FlushChildrenDesignCode(child.Id, child.DesignCode, cancellationToken);
+    }
+
+
+    /// <summary>
+    /// 刷新子节点的设计编码
+    /// </summary>
+    /// <param name="parentId"></param>
+    /// <param name="parentDesignCode"></param>
+    /// <param name="cancellationToken"></param>
+    private async Task FlushChildrenDesignCode(
+        Guid parentId, 
+        string parentDesignCode, 
+        CancellationToken cancellationToken = default)
+    {
+        var children = await EntityStore.EntityQuery
+            .Where(organization => organization.ParentId == parentId)
+            .ToListAsync(cancellationToken);
+
+        if (children.Any())
+        {
+            var index = 1;
+
+            foreach (var child in children)
+            {
+                if (string.IsNullOrWhiteSpace(_region))
+                {
+                    _region = string.IsNullOrWhiteSpace(child.DesignCode) ? Options.OrganizationRegion : child.DesignCode[3..7];
+                }
+
+                child.DesignCode = DesignCode.Organization(_region, index, parentDesignCode);
+
+                child.Code = child.DesignCode;
+
+                index++;
+
+                await FlushChildrenDesignCode(child.Id, child.DesignCode, cancellationToken);
+            }
+
+            await EntityStore.UpdateAsync(children, cancellationToken);
+
+        }
     }
 
     /// <summary>
@@ -224,30 +283,29 @@ public class OrganizationTreeManager :
         int loopIndex,
         CancellationToken cancellationToken = default)
     {
-        _organizationDesignCodes ??= await EntityStore
-            .EntityQuery
-            .Where(organization => organization.ParentId == null)
-            .Select(organization => organization.DesignCode)
-            .MaxAsync(cancellationToken);
-
-        _organizationSerial ??= _organizationDesignCodes[^3..].Adapt<int>();
-
-        string region;
-
-        int serial;
-
-        if (string.IsNullOrWhiteSpace(_organizationDesignCodes))
+        if (string.IsNullOrWhiteSpace(_region) || _serial is null)
         {
-            region = Options.OrganizationRegion;
-            serial = loopIndex;
-        }
-        else
-        {
-            region = _organizationDesignCodes[3..7];
-            serial = (int)(_organizationSerial + loopIndex);
+            var organizationDesignCodes = await EntityStore
+                .EntityQuery
+                .Where(organization => organization.ParentId == null)
+                .Select(organization => organization.DesignCode)
+                .MaxAsync(cancellationToken);
+
+            if (string.IsNullOrEmpty(organizationDesignCodes))
+            {
+                _region = Options.OrganizationRegion;
+                _serial = 0;
+            }
+            else
+            {
+                _region = organizationDesignCodes[3..7];
+                _serial = organizationDesignCodes[^3..].Adapt<int>();
+            }
         }
 
-        child.DesignCode = DesignCode.Organization(region, serial);
+        child.DesignCode = DesignCode.Organization(_region, (int)(_serial + loopIndex));
+
+        child.Code = child.DesignCode;
     }
 
     /// <summary>

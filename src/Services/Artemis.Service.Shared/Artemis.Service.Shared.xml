@@ -1,2186 +1,2185 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Service.Shared</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometer">
-			<summary>
-				验光仪接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometerInfo">
-			<summary>
-				验光仪数据信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerInfo.RecordId">
-			<summary>
-				档案标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage">
-			<summary>
-				验光仪数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.PupilDistance">
-			<summary>
-				瞳距
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftSphere">
-			<summary>
-				左眼球镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftEquivalentSphere">
-			<summary>
-				左眼等效球镜度数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightSphere">
-			<summary>
-				右眼球镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightEquivalentSphere">
-			<summary>
-				右眼等效球径度数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCylinder">
-			<summary>
-				左眼柱镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCylinder">
-			<summary>
-				右眼柱镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftAxis">
-			<summary>
-				左眼轴位
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightAxis">
-			<summary>
-				右眼轴位
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftAstigmatism">
-			<summary>
-				左眼散光度数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightAstigmatism">
-			<summary>
-				右眼散光度数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureR1">
-			<summary>
-				左眼角膜曲率r1(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureR1">
-			<summary>
-				右眼角膜曲率r1(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureD1">
-			<summary>
-				左眼角膜曲率r1(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureD1">
-			<summary>
-				右眼角膜曲率r1(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAngle1">
-			<summary>
-				左眼角膜曲率r1角度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAngle1">
-			<summary>
-				右眼角膜曲率r1角度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureR2">
-			<summary>
-				左眼角膜曲率r2(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureR2">
-			<summary>
-				右眼角膜曲率r2(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureD2">
-			<summary>
-				左眼角膜曲率r2(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureD2">
-			<summary>
-				右眼角膜曲率r2(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAngle2">
-			<summary>
-				左眼角膜曲率r2角度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAngle2">
-			<summary>
-				右眼角膜曲率r2角度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAverage">
-			<summary>
-				左眼角膜曲率平均值(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAverage">
-			<summary>
-				右眼角膜曲率平均值(mm)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAverageD">
-			<summary>
-				左眼角膜曲率平均值(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAverageD">
-			<summary>
-				右眼角膜曲率平均值(d)
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAstigmatism">
-			<summary>
-				左眼角膜曲率散光度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAstigmatism">
-			<summary>
-				右眼角膜曲率散光度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.OptometerScreeningStuffName">
-			<summary>
-				筛查工作人员姓名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.OptometerOperationTime">
-			<summary>
-				操作时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecord">
-			<summary>
-				视力筛查记录接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordInfo">
-			<summary>
-				视力筛查记录信息接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage">
-			<summary>
-				视力筛查记录数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskId">
-			<summary>
-				任务标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskName">
-			<summary>
-				任务名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskCode">
-			<summary>
-				任务编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitId">
-			<summary>
-				任务单元标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitName">
-			<summary>
-				任务单元名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitCode">
-			<summary>
-				任务单元编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitTargetId">
-			<summary>
-				任务目标标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitTargetCode">
-			<summary>
-				任务目标编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentId">
-			<summary>
-				任务代理标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentName">
-			<summary>
-				任务代理名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentCode">
-			<summary>
-				任务代理编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentType">
-			<summary>
-				任务代理类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DoctorName">
-			<summary>
-				医师姓名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.VisualStandardId">
-			<summary>
-				应用的视力标准标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DoctorAdvice">
-			<summary>
-				医嘱
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.PrescribedTime">
-			<summary>
-				医嘱时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolId">
-			<summary>
-				学校标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolName">
-			<summary>
-				学校名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolCode">
-			<summary>
-				学校编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolType">
-			<summary>
-				学校类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionId">
-			<summary>
-				行政区划标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionName">
-			<summary>
-				行政区划名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionCode">
-			<summary>
-				行政区划编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationId">
-			<summary>
-				组织机构标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationName">
-			<summary>
-				组织机构名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationCode">
-			<summary>
-				组织机构编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationDesignCode">
-			<summary>
-				组织机构设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassName">
-			<summary>
-				班级名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassCode">
-			<summary>
-				班级编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.GradeName">
-			<summary>
-				年级名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassSerialNumber">
-			<summary>
-				班级序列号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudyPhase">
-			<summary>
-				学段
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolLength">
-			<summary>
-				学制
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentId">
-			<summary>
-				学生标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentName">
-			<summary>
-				学生名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentCode">
-			<summary>
-				学生编号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Birthday">
-			<summary>
-				生日
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Age">
-			<summary>
-				年龄
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsChartChecked">
-			<summary>
-				是否已经过电子视力表筛查
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ChartCheckedTimes">
-			<summary>
-				电子视力表筛查次数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsOptometerChecked">
-			<summary>
-				是否已经过验光仪筛查
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OptometerCheckedTimes">
-			<summary>
-				验光仪筛查次数
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.CheckTime">
-			<summary>
-				筛查时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ExceptionReason">
-			<summary>
-				筛查结果
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportSender">
-			<summary>
-				报告发送人
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportSendTime">
-			<summary>
-				报告发送时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportReceiver">
-			<summary>
-				报告签收人
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportReceiveTime">
-			<summary>
-				报告签收时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">
-			<summary>
-				视力表数据接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChartInfo">
-			<summary>
-				电子视力表信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartInfo.RecordId">
-			<summary>
-				档案标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage">
-			<summary>
-				电子视力表数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftChartDistance">
-			<summary>
-				左眼与视力表的距离
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightChartDistance">
-			<summary>
-				右眼与视力表的距离
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftNakedEyeVision">
-			<summary>
-				左眼裸眼视力
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightNakedEyeVision">
-			<summary>
-				右眼裸眼视力
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareGlasses">
-			<summary>
-				是否佩戴眼镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftCorrectedVision">
-			<summary>
-				左眼矫正视力
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightCorrectedVision">
-			<summary>
-				右眼矫正视力
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftEyeHyperopiaType">
-			<summary>
-				左眼远视类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightEyeHyperopiaType">
-			<summary>
-				右眼远视类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareLeftOkLenses">
-			<summary>
-				左眼是否佩戴角膜塑形镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareRightOkLenses">
-			<summary>
-				右眼是否佩戴角膜塑形镜
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.ChartScreeningStuffName">
-			<summary>
-				筛查工作人员姓名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.ChartOperationTime">
-			<summary>
-				操作时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IClaim">
-			<summary>
-				凭据接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IClaimInfo">
-			<summary>
-				凭据信息
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IClaimPackage">
-			<summary>
-				凭据数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IClaimPackage.ClaimType">
-			<summary>
-				凭据类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IClaimPackage.ClaimValue">
-			<summary>
-				凭据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IClaimPackage.Description">
-			<summary>
-				描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRole">
-			<summary>
-				角色接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IRole.NormalizedName">
-			<summary>
-				标准化角色名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRoleInfo">
-			<summary>
-				角色信息接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRolePackage">
-			<summary>
-				角色数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IRolePackage.Name">
-			<summary>
-				角色名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IRolePackage.Description">
-			<summary>
-				角色描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRoleClaim">
-			<summary>
-				角色凭据接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRoleClaimInfo">
-			<summary>
-				角色凭据信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IRoleClaimInfo.RoleId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IRoleClaimPackage">
-			<summary>
-				角色凭据数据包接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUser">
-			<summary>
-				用户接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUser.NormalizedUserName">
-			<summary>
-				标准化用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUser.NormalizedEmail">
-			<summary>
-				标准化电子邮件
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserInfo">
-			<summary>
-				用户信息接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserPackage">
-			<summary>
-				用户数据包接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserAuthentication">
-			<summary>
-				用户认证数据包接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IPasswordHash">
-			<summary>
-				密码哈希接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IPasswordHash.PasswordHash">
-			<summary>
-				密码哈希
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IAccountRecord">
-			<summary>
-				账号记录数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.EmailConfirmed">
-			<summary>
-				电子邮件确认戳
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.PhoneNumberConfirmed">
-			<summary>
-				电话号码确认戳
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.TwoFactorEnabled">
-			<summary>
-				是否启用双因子认证
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.LockoutEnd">
-			<summary>
-				用户锁定到期时间标记
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.LockoutEnabled">
-			<summary>
-				是否启用锁定
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IAccountRecord.AccessFailedCount">
-			<summary>
-				失败尝试次数
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserSign">
-			<summary>
-				用户标识信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserSign.Email">
-			<summary>
-				电子邮件
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserSign.PhoneNumber">
-			<summary>
-				电话号码
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserName">
-			<summary>
-				用户名接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserName.UserName">
-			<summary>
-				用户名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserClaim">
-			<summary>
-				用户凭据接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserClaimInfo">
-			<summary>
-				用户凭据信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserClaimInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserClaimPackage">
-			<summary>
-				用户凭据数据包接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserLogin">
-			<summary>
-				用户登录接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserLoginInfo">
-			<summary>
-				用户登录信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserLoginInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserLoginPackage">
-			<summary>
-				用户登录数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.ProviderKey">
-			<summary>
-				提供程序密钥
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.ProviderDisplayName">
-			<summary>
-				提供程序显示名称
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserProfile">
-			<summary>
-				用户档案接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserProfile.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserRole">
-			<summary>
-				用户角色关系接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserRole.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserRole.RoleId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserToken">
-			<summary>
-				基本用户令牌信息接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserTokenInfo">
-			<summary>
-				用户令牌信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserTokenInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.IUserTokenPackage">
-			<summary>
-				基本用户令牌数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.Name">
-			<summary>
-				令牌名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.Value">
-			<summary>
-				令牌值
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.ClaimInfo">
-			<summary>
-				凭据信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimInfo.CheckStamp">
-			<summary>
-				校验戳
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.ClaimPackage">
-			<summary>
-				凭据数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.ClaimType">
-			<summary>
-				凭据类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
-			<summary>
-				凭据值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.Description">
-			<summary>
-				描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo">
-			<summary>
-				用户凭据信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.RoleId">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.CheckStamp">
-			<summary>
-				校验戳
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage">
-			<summary>
-				用户凭据数据包
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.RoleInfo">
-			<summary>
-				角色信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RoleInfo.Id">
-			<summary>
-				角色标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.RolePackage">
-			<summary>
-				基本角色结构
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RolePackage.Name">
-			<summary>
-				角色名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.RolePackage.Description">
-			<summary>
-				角色描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo">
-			<summary>
-				用户凭据信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.CheckStamp">
-			<summary>
-				校验戳
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserClaimPackage">
-			<summary>
-				用户凭据数据包
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserLoginInfo">
-			<summary>
-				用户登录信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage">
-			<summary>
-				用户登录数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.ProviderKey">
-			<summary>
-				提供程序密钥
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.ProviderDisplayName">
-			<summary>
-				提供程序显示名称
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserTokenInfo">
-			<summary>
-				用户令牌信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenInfo.UserId">
-			<summary>
-				用户标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage">
-			<summary>
-				用户令牌数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.LoginProvider">
-			<summary>
-				登录提供程序
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.Name">
-			<summary>
-				令牌名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.Value">
-			<summary>
-				令牌值
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserInfo">
-			<summary>
-				用户信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserPackage">
-			<summary>
-				用户数据包
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserSign">
-			<summary>
-				用户标识信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.UserName">
-			<summary>
-				用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.Email">
-			<summary>
-				电子邮件
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.PhoneNumber">
-			<summary>
-				电话号码
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Identity.Transfer.UserAuthentication">
-			<summary>
-				用户认证结构
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.UserName">
-			<summary>
-				用户名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.PasswordHash">
-			<summary>
-				密码哈希
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Project">
-			<summary>
-				项目包装器
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.DefaultPrefix">
-			<summary>
-				默认前缀
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Project.Prefix">
-			<summary>
-				项目前缀
-			</summary>
-		</member>
-		<member name="M:Artemis.Service.Shared.Project.TableName(System.String)">
-			<summary>
-				获取配置表名
-			</summary>
-			<param name="tableName"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Shared.Project.Schemas">
-			<summary>
-				模式
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.Schemas.Identity">
-			<summary>
-				认证服务模式
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.Schemas.Resource">
-			<summary>
-				资源服务模式
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.Schemas.RawData">
-			<summary>
-				原始数据服务模式
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.Schemas.School">
-			<summary>
-				学校服务模式
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Shared.Project.Schemas.Task">
-			<summary>
-				任务服务模式
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDataDictionary">
-			<summary>
-				数据字典接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Name">
-			<summary>
-				字典名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Code">
-			<summary>
-				字典代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Description">
-			<summary>
-				字典描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Type">
-			<summary>
-				字典类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Valid">
-			<summary>
-				字典是否有效
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDataDictionaryItem">
-			<summary>
-				数据项目接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Key">
-			<summary>
-				数据项目键
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Value">
-			<summary>
-				数据项目值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Description">
-			<summary>
-				数据项目描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Valid">
-			<summary>
-				数据项目是否有效
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDevice">
-			<summary>
-				设备表接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Name">
-			<summary>
-				设备名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Type">
-			<summary>
-				设备类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Code">
-			<summary>
-				设备代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Model">
-			<summary>
-				设备型号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.SerialNumber">
-			<summary>
-				设备序列号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Status">
-			<summary>
-				设备状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.PurchaseDate">
-			<summary>
-				购买日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.InstallDate">
-			<summary>
-				安装日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.WarrantyDate">
-			<summary>
-				保修日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.MaintenanceDate">
-			<summary>
-				维护日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDevice.Description">
-			<summary>
-				设备描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDivision">
-			<summary>
-				行政区划接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDivisionInfo">
-			<summary>
-				行政区划信息
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IDivisionPackage">
-			<summary>
-				行政区划数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Name">
-			<summary>
-				行政区划名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Code">
-			<summary>
-				行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Level">
-			<summary>
-				行政区划级别
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Type">
-			<summary>
-				行政区划类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.FullName">
-			<summary>
-				行政区划全名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Pinyin">
-			<summary>
-				行政区划拼音
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Remark">
-			<summary>
-				行政区划备注
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IOrganization">
-			<summary>
-				组织机构接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IOrganizationInfo">
-			<summary>
-				组织机构信息接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.IOrganizationPackage">
-			<summary>
-				组织机构数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Name">
-			<summary>
-				机构名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Code">
-			<summary>
-				机构编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.DesignCode">
-			<summary>
-				机构设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Type">
-			<summary>
-				机构类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.EstablishTime">
-			<summary>
-				机构成立时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Email">
-			<summary>
-				机构邮箱
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.WebSite">
-			<summary>
-				机构网站
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.ContactNumber">
-			<summary>
-				机构联系电话
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.PostCode">
-			<summary>
-				机构邮编
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Status">
-			<summary>
-				机构状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.DivisionCode">
-			<summary>
-				机构所在地行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Address">
-			<summary>
-				机构地址
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Description">
-			<summary>
-				机构描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree">
-			<summary>
-				行政区划树
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree.Children">
-			<summary>
-				子节点
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfo">
-			<summary>
-				行政区划信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.ParentId">
-			<summary>
-				父标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionPackage">
-			<summary>
-				行政区划数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Name">
-			<summary>
-				行政区划名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Code">
-			<summary>
-				行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Level">
-			<summary>
-				行政区划级别
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Type">
-			<summary>
-				行政区划类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.FullName">
-			<summary>
-				行政区划全名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Pinyin">
-			<summary>
-				行政区划拼音
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Remark">
-			<summary>
-				行政区划备注
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationInfoTree">
-			<summary>
-				组织机构树
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfoTree.Children">
-			<summary>
-				子节点
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo">
-			<summary>
-				组织机构信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo.ParentId">
-			<summary>
-				父标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage">
-			<summary>
-				组织机构数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Name">
-			<summary>
-				机构名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Code">
-			<summary>
-				机构编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.DesignCode">
-			<summary>
-				机构设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Type">
-			<summary>
-				机构类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.EstablishTime">
-			<summary>
-				机构成立时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Email">
-			<summary>
-				机构邮箱
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.WebSite">
-			<summary>
-				机构网站
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.ContactNumber">
-			<summary>
-				机构联系电话
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.PostCode">
-			<summary>
-				机构邮编
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Status">
-			<summary>
-				机构状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.DivisionCode">
-			<summary>
-				机构所在地行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Address">
-			<summary>
-				机构地址
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Description">
-			<summary>
-				机构描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IClass">
-			<summary>
-				班级接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.SchoolId">
-			<summary>
-				学校标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.HeadTeacherId">
-			<summary>
-				班主任标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.Name">
-			<summary>
-				班级名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.GradeName">
-			<summary>
-				年级名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.Type">
-			<summary>
-				班级类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.Major">
-			<summary>
-				所学专业
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.Code">
-			<summary>
-				班级编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.StudyPhase">
-			<summary>
-				学段
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.SchoolLength">
-			<summary>
-				学制
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.Length">
-			<summary>
-				学制长度
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.SerialNumber">
-			<summary>
-				班级序号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClass.EstablishTime">
-			<summary>
-				班级创建时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IClassRoom">
-			<summary>
-				教室接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IClassStudent">
-			<summary>
-				班级学生对应接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClassStudent.ClassId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClassStudent.StudentId">
-			<summary>
-				学生标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IClassTeacher">
-			<summary>
-				班级教师对应接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClassTeacher.ClassId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IClassTeacher.TeacherId">
-			<summary>
-				教师标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ISchool">
-			<summary>
-				学校接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.Name">
-			<summary>
-				学校名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.Code">
-			<summary>
-				学校编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.Type">
-			<summary>
-				学校类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.OrganizationCode">
-			<summary>
-				组织机构代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.DivisionCode">
-			<summary>
-				学校所在地行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.Address">
-			<summary>
-				学校地址
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.Email">
-			<summary>
-				学校邮箱
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.WebSite">
-			<summary>
-				学校网站
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.ContactNumber">
-			<summary>
-				学校联系电话
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchool.EstablishTime">
-			<summary>
-				学校建立时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ISchoolStudent">
-			<summary>
-				学校学生对应接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchoolStudent.SchoolId">
-			<summary>
-				学校标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchoolStudent.StudentId">
-			<summary>
-				学生标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ISchoolTeacher">
-			<summary>
-				学校教师对应接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchoolTeacher.SchoolId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ISchoolTeacher.TeacherId">
-			<summary>
-				教师标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IStudent">
-			<summary>
-				学生接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Name">
-			<summary>
-				学生名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Gender">
-			<summary>
-				学生性别
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Major">
-			<summary>
-				专业
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Birthday">
-			<summary>
-				学生生日
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Nation">
-			<summary>
-				民族
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Code">
-			<summary>
-				学生编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.StudentNumber">
-			<summary>
-				学籍号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Cert">
-			<summary>
-				证件号码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.EnrollmentDate">
-			<summary>
-				入学时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.DivisionCode">
-			<summary>
-				住址区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudent.Address">
-			<summary>
-				住址
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.IStudentCurrentAffiliation">
-			<summary>
-				学生当前所属关系接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.SchoolId">
-			<summary>
-				学校标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.ClassId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.StudentId">
-			<summary>
-				学生标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ITeacher">
-			<summary>
-				教师接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITeacher.TeacherName">
-			<summary>
-				教师名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITeacher.TeacherCode">
-			<summary>
-				教师编码
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ITeacherCurrentAffiliation">
-			<summary>
-				教师当前所属关系接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.SchoolId">
-			<summary>
-				学校标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.ClassId">
-			<summary>
-				班级标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.TeacherId">
-			<summary>
-				教师标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.School.ITransfer">
-			<summary>
-				流转接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITransfer.MoveIn">
-			<summary>
-				转入时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.School.ITransfer.MoveOut">
-			<summary>
-				转出时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.IAgent">
-			<summary>
-				代理接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.IAgent.AgentName">
-			<summary>
-				代理名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.IAgent.AgentType">
-			<summary>
-				代理类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.IAgent.AgentCode">
-			<summary>
-				代理编码
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITask">
-			<summary>
-				任务接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITask.NormalizedTaskName">
-			<summary>
-				标准化任务名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskInfo">
-			<summary>
-				任务信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskShip">
-			<summary>
-				任务归属
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskMode">
-			<summary>
-				任务模式
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskState">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskPackage">
-			<summary>
-				任务数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.TaskName">
-			<summary>
-				任务名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.TaskCode">
-			<summary>
-				任务编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskPackage.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskAgent">
-			<summary>
-				任务代理接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskAgent.TaskId">
-			<summary>
-				任务Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskAgent.AgentId">
-			<summary>
-				代理Id
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskTarget">
-			<summary>
-				任务目标接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TaskUnitId">
-			<summary>
-				任务单元Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetName">
-			<summary>
-				任务目标名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetCode">
-			<summary>
-				任务目标编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetType">
-			<summary>
-				任务目标类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetId">
-			<summary>
-				任务目标外部标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetState">
-			<summary>
-				任务目标状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskTarget.ExecuteTime">
-			<summary>
-				任务目标执行
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskUnit">
-			<summary>
-				任务单元接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnit.NormalizedUnitName">
-			<summary>
-				标准化单元名
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskUnitInfo">
-			<summary>
-				任务单元信息接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskId">
-			<summary>
-				任务标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskUnitState">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskUnitMode">
-			<summary>
-				任务模式
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskUnitPackage">
-			<summary>
-				任务单元数据包接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.UnitName">
-			<summary>
-				任务单元名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.UnitCode">
-			<summary>
-				单元编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.ITaskUnitAgent">
-			<summary>
-				任务单元代理接口
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitAgent.TaskUnitId">
-			<summary>
-				任务单元Id
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.ITaskUnitAgent.AgentId">
-			<summary>
-				代理Id
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.Transfer.TaskInfoTree">
-			<summary>
-				任务信息树
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfoTree.Children">
-			<summary>
-				子节点
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.Transfer.TaskInfo">
-			<summary>
-				任务信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.ParentId">
-			<summary>
-				父标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskShip">
-			<summary>
-				任务归属
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskMode">
-			<summary>
-				任务模式
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskState">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.Transfer.TaskPackage">
-			<summary>
-				任务数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.TaskName">
-			<summary>
-				任务名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.TaskCode">
-			<summary>
-				任务编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo">
-			<summary>
-				任务单元信息
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.Id">
-			<summary>
-				存储标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskId">
-			<summary>
-				任务标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskUnitState">
-			<summary>
-				任务状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskUnitMode">
-			<summary>
-				任务模式
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage">
-			<summary>
-				任务单元数据包
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.UnitName">
-			<summary>
-				任务单元名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.UnitCode">
-			<summary>
-				单元编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.Description">
-			<summary>
-				任务描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.StartTime">
-			<summary>
-				任务开始时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.EndTime">
-			<summary>
-				任务结束时间
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Service.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometer">
+            <summary>
+                验光仪接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometerInfo">
+            <summary>
+                验光仪数据信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerInfo.RecordId">
+            <summary>
+                档案标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage">
+            <summary>
+                验光仪数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.PupilDistance">
+            <summary>
+                瞳距
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftSphere">
+            <summary>
+                左眼球镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftEquivalentSphere">
+            <summary>
+                左眼等效球镜度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightSphere">
+            <summary>
+                右眼球镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightEquivalentSphere">
+            <summary>
+                右眼等效球径度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCylinder">
+            <summary>
+                左眼柱镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCylinder">
+            <summary>
+                右眼柱镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftAxis">
+            <summary>
+                左眼轴位
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightAxis">
+            <summary>
+                右眼轴位
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftAstigmatism">
+            <summary>
+                左眼散光度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightAstigmatism">
+            <summary>
+                右眼散光度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureR1">
+            <summary>
+                左眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureR1">
+            <summary>
+                右眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureD1">
+            <summary>
+                左眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureD1">
+            <summary>
+                右眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAngle1">
+            <summary>
+                左眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAngle1">
+            <summary>
+                右眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureR2">
+            <summary>
+                左眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureR2">
+            <summary>
+                右眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureD2">
+            <summary>
+                左眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureD2">
+            <summary>
+                右眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAngle2">
+            <summary>
+                左眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAngle2">
+            <summary>
+                右眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAverage">
+            <summary>
+                左眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAverage">
+            <summary>
+                右眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAverageD">
+            <summary>
+                左眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAverageD">
+            <summary>
+                右眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftCornealCurvatureAstigmatism">
+            <summary>
+                左眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightCornealCurvatureAstigmatism">
+            <summary>
+                右眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.OptometerScreeningStuffName">
+            <summary>
+                筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.OptometerOperationTime">
+            <summary>
+                操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecord">
+            <summary>
+                视力筛查记录接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordInfo">
+            <summary>
+                视力筛查记录信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage">
+            <summary>
+                视力筛查记录数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskId">
+            <summary>
+                任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskName">
+            <summary>
+                任务名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskCode">
+            <summary>
+                任务编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitId">
+            <summary>
+                任务单元标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitName">
+            <summary>
+                任务单元名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitCode">
+            <summary>
+                任务单元编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitTargetId">
+            <summary>
+                任务目标标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskUnitTargetCode">
+            <summary>
+                任务目标编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentId">
+            <summary>
+                任务代理标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentName">
+            <summary>
+                任务代理名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentCode">
+            <summary>
+                任务代理编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.TaskAgentType">
+            <summary>
+                任务代理类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DoctorName">
+            <summary>
+                医师姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.VisualStandardId">
+            <summary>
+                应用的视力标准标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DoctorAdvice">
+            <summary>
+                医嘱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.PrescribedTime">
+            <summary>
+                医嘱时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolName">
+            <summary>
+                学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolCode">
+            <summary>
+                学校编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolType">
+            <summary>
+                学校类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionId">
+            <summary>
+                行政区划标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionName">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.DivisionCode">
+            <summary>
+                行政区划编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationId">
+            <summary>
+                组织机构标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationName">
+            <summary>
+                组织机构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationCode">
+            <summary>
+                组织机构编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OrganizationDesignCode">
+            <summary>
+                组织机构设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassName">
+            <summary>
+                班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassCode">
+            <summary>
+                班级编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.GradeName">
+            <summary>
+                年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ClassSerialNumber">
+            <summary>
+                班级序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudyPhase">
+            <summary>
+                学段
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolLength">
+            <summary>
+                学制
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentId">
+            <summary>
+                学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentName">
+            <summary>
+                学生名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentCode">
+            <summary>
+                学生编号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Birthday">
+            <summary>
+                生日
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Age">
+            <summary>
+                年龄
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsChartChecked">
+            <summary>
+                是否已经过电子视力表筛查
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ChartCheckedTimes">
+            <summary>
+                电子视力表筛查次数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsOptometerChecked">
+            <summary>
+                是否已经过验光仪筛查
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.OptometerCheckedTimes">
+            <summary>
+                验光仪筛查次数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.CheckTime">
+            <summary>
+                筛查时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ExceptionReason">
+            <summary>
+                筛查结果
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportSender">
+            <summary>
+                报告发送人
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportSendTime">
+            <summary>
+                报告发送时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportReceiver">
+            <summary>
+                报告签收人
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.ReportReceiveTime">
+            <summary>
+                报告签收时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">
+            <summary>
+                视力表数据接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChartInfo">
+            <summary>
+                电子视力表信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartInfo.RecordId">
+            <summary>
+                档案标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage">
+            <summary>
+                电子视力表数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftChartDistance">
+            <summary>
+                左眼与视力表的距离
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightChartDistance">
+            <summary>
+                右眼与视力表的距离
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftNakedEyeVision">
+            <summary>
+                左眼裸眼视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightNakedEyeVision">
+            <summary>
+                右眼裸眼视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareGlasses">
+            <summary>
+                是否佩戴眼镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftCorrectedVision">
+            <summary>
+                左眼矫正视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightCorrectedVision">
+            <summary>
+                右眼矫正视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.LeftEyeHyperopiaType">
+            <summary>
+                左眼远视类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.RightEyeHyperopiaType">
+            <summary>
+                右眼远视类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareLeftOkLenses">
+            <summary>
+                左眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.IsWareRightOkLenses">
+            <summary>
+                右眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.ChartScreeningStuffName">
+            <summary>
+                筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.ChartOperationTime">
+            <summary>
+                操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IClaim">
+            <summary>
+                凭据接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IClaimInfo">
+            <summary>
+                凭据信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IClaimPackage">
+            <summary>
+                凭据数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IClaimPackage.ClaimType">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IClaimPackage.ClaimValue">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IClaimPackage.Description">
+            <summary>
+                描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRole">
+            <summary>
+                角色接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IRole.NormalizedName">
+            <summary>
+                标准化角色名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRoleInfo">
+            <summary>
+                角色信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRolePackage">
+            <summary>
+                角色数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IRolePackage.Name">
+            <summary>
+                角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IRolePackage.Description">
+            <summary>
+                角色描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRoleClaim">
+            <summary>
+                角色凭据接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRoleClaimInfo">
+            <summary>
+                角色凭据信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IRoleClaimInfo.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IRoleClaimPackage">
+            <summary>
+                角色凭据数据包接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUser">
+            <summary>
+                用户接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUser.NormalizedUserName">
+            <summary>
+                标准化用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUser.NormalizedEmail">
+            <summary>
+                标准化电子邮件
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserInfo">
+            <summary>
+                用户信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserPackage">
+            <summary>
+                用户数据包接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserAuthentication">
+            <summary>
+                用户认证数据包接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IPasswordHash">
+            <summary>
+                密码哈希接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IPasswordHash.PasswordHash">
+            <summary>
+                密码哈希
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IAccountRecord">
+            <summary>
+                账号记录数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.EmailConfirmed">
+            <summary>
+                电子邮件确认戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.PhoneNumberConfirmed">
+            <summary>
+                电话号码确认戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.TwoFactorEnabled">
+            <summary>
+                是否启用双因子认证
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.LockoutEnd">
+            <summary>
+                用户锁定到期时间标记
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.LockoutEnabled">
+            <summary>
+                是否启用锁定
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAccountRecord.AccessFailedCount">
+            <summary>
+                失败尝试次数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserSign">
+            <summary>
+                用户标识信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserSign.Email">
+            <summary>
+                电子邮件
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserSign.PhoneNumber">
+            <summary>
+                电话号码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserName">
+            <summary>
+                用户名接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserName.UserName">
+            <summary>
+                用户名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserClaim">
+            <summary>
+                用户凭据接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserClaimInfo">
+            <summary>
+                用户凭据信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserClaimInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserClaimPackage">
+            <summary>
+                用户凭据数据包接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserLogin">
+            <summary>
+                用户登录接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserLoginInfo">
+            <summary>
+                用户登录信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserLoginInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserLoginPackage">
+            <summary>
+                用户登录数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.LoginProvider">
+            <summary>
+                登录提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.ProviderKey">
+            <summary>
+                提供程序密钥
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserLoginPackage.ProviderDisplayName">
+            <summary>
+                提供程序显示名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserProfile">
+            <summary>
+                用户档案接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserProfile.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserRole">
+            <summary>
+                用户角色关系接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserRole.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserRole.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserToken">
+            <summary>
+                基本用户令牌信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserTokenInfo">
+            <summary>
+                用户令牌信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserTokenInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IUserTokenPackage">
+            <summary>
+                基本用户令牌数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.LoginProvider">
+            <summary>
+                登录提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.Name">
+            <summary>
+                令牌名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IUserTokenPackage.Value">
+            <summary>
+                令牌值
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.ClaimInfo">
+            <summary>
+                凭据信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimInfo.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.ClaimPackage">
+            <summary>
+                凭据数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.ClaimType">
+            <summary>
+                凭据类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.ClaimValue">
+            <summary>
+                凭据值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.ClaimPackage.Description">
+            <summary>
+                描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo">
+            <summary>
+                用户凭据信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.RoleId">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RoleClaimInfo.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.RoleClaimPackage">
+            <summary>
+                用户凭据数据包
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.RoleInfo">
+            <summary>
+                角色信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RoleInfo.Id">
+            <summary>
+                角色标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.RolePackage">
+            <summary>
+                基本角色结构
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RolePackage.Name">
+            <summary>
+                角色名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.RolePackage.Description">
+            <summary>
+                角色描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo">
+            <summary>
+                用户凭据信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserClaimInfo.CheckStamp">
+            <summary>
+                校验戳
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserClaimPackage">
+            <summary>
+                用户凭据数据包
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserLoginInfo">
+            <summary>
+                用户登录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage">
+            <summary>
+                用户登录数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.LoginProvider">
+            <summary>
+                登录提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.ProviderKey">
+            <summary>
+                提供程序密钥
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserLoginPackage.ProviderDisplayName">
+            <summary>
+                提供程序显示名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserTokenInfo">
+            <summary>
+                用户令牌信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenInfo.UserId">
+            <summary>
+                用户标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage">
+            <summary>
+                用户令牌数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.LoginProvider">
+            <summary>
+                登录提供程序
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.Name">
+            <summary>
+                令牌名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserTokenPackage.Value">
+            <summary>
+                令牌值
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserInfo">
+            <summary>
+                用户信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserPackage">
+            <summary>
+                用户数据包
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserSign">
+            <summary>
+                用户标识信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.UserName">
+            <summary>
+                用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.Email">
+            <summary>
+                电子邮件
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserSign.PhoneNumber">
+            <summary>
+                电话号码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.Transfer.UserAuthentication">
+            <summary>
+                用户认证结构
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.UserName">
+            <summary>
+                用户名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.Transfer.UserAuthentication.PasswordHash">
+            <summary>
+                密码哈希
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Project">
+            <summary>
+                项目包装器
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.DefaultPrefix">
+            <summary>
+                默认前缀
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Project.Prefix">
+            <summary>
+                项目前缀
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Shared.Project.TableName(System.String)">
+            <summary>
+                获取配置表名
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Shared.Project.Schemas">
+            <summary>
+                模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.Schemas.Identity">
+            <summary>
+                认证服务模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.Schemas.Resource">
+            <summary>
+                资源服务模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.Schemas.RawData">
+            <summary>
+                原始数据服务模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.Schemas.School">
+            <summary>
+                学校服务模式
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Shared.Project.Schemas.Task">
+            <summary>
+                任务服务模式
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionary">
+            <summary>
+                数据字典接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Name">
+            <summary>
+                字典名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Code">
+            <summary>
+                字典代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Description">
+            <summary>
+                字典描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Type">
+            <summary>
+                字典类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionary.Valid">
+            <summary>
+                字典是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDataDictionaryItem">
+            <summary>
+                数据项目接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Key">
+            <summary>
+                数据项目键
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Value">
+            <summary>
+                数据项目值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Description">
+            <summary>
+                数据项目描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDataDictionaryItem.Valid">
+            <summary>
+                数据项目是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDevice">
+            <summary>
+                设备表接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Name">
+            <summary>
+                设备名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Type">
+            <summary>
+                设备类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Code">
+            <summary>
+                设备代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Model">
+            <summary>
+                设备型号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.SerialNumber">
+            <summary>
+                设备序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Status">
+            <summary>
+                设备状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.PurchaseDate">
+            <summary>
+                购买日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.InstallDate">
+            <summary>
+                安装日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.WarrantyDate">
+            <summary>
+                保修日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.MaintenanceDate">
+            <summary>
+                维护日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDevice.Description">
+            <summary>
+                设备描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDivision">
+            <summary>
+                行政区划接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDivisionInfo">
+            <summary>
+                行政区划信息
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IDivisionPackage">
+            <summary>
+                行政区划数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Name">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Code">
+            <summary>
+                行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Level">
+            <summary>
+                行政区划级别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Type">
+            <summary>
+                行政区划类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.FullName">
+            <summary>
+                行政区划全名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Pinyin">
+            <summary>
+                行政区划拼音
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IDivisionPackage.Remark">
+            <summary>
+                行政区划备注
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IOrganization">
+            <summary>
+                组织机构接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IOrganizationInfo">
+            <summary>
+                组织机构信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IOrganizationPackage">
+            <summary>
+                组织机构数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Name">
+            <summary>
+                机构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Code">
+            <summary>
+                机构编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.DesignCode">
+            <summary>
+                机构设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Type">
+            <summary>
+                机构类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.EstablishTime">
+            <summary>
+                机构成立时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Email">
+            <summary>
+                机构邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.WebSite">
+            <summary>
+                机构网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.ContactNumber">
+            <summary>
+                机构联系电话
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.PostCode">
+            <summary>
+                机构邮编
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Status">
+            <summary>
+                机构状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.DivisionCode">
+            <summary>
+                机构所在地行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Address">
+            <summary>
+                机构地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.Description">
+            <summary>
+                机构描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree">
+            <summary>
+                行政区划树
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfoTree.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionInfo">
+            <summary>
+                行政区划信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionInfo.ParentId">
+            <summary>
+                父标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.DivisionPackage">
+            <summary>
+                行政区划数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Name">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Code">
+            <summary>
+                行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Level">
+            <summary>
+                行政区划级别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Type">
+            <summary>
+                行政区划类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.FullName">
+            <summary>
+                行政区划全名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Pinyin">
+            <summary>
+                行政区划拼音
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.DivisionPackage.Remark">
+            <summary>
+                行政区划备注
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationInfoTree">
+            <summary>
+                组织机构树
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfoTree.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo">
+            <summary>
+                组织机构信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationInfo.ParentId">
+            <summary>
+                父标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage">
+            <summary>
+                组织机构数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Name">
+            <summary>
+                机构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Code">
+            <summary>
+                机构编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.DesignCode">
+            <summary>
+                机构设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Type">
+            <summary>
+                机构类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.EstablishTime">
+            <summary>
+                机构成立时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Email">
+            <summary>
+                机构邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.WebSite">
+            <summary>
+                机构网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.ContactNumber">
+            <summary>
+                机构联系电话
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.PostCode">
+            <summary>
+                机构邮编
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Status">
+            <summary>
+                机构状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.DivisionCode">
+            <summary>
+                机构所在地行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Address">
+            <summary>
+                机构地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Description">
+            <summary>
+                机构描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IClass">
+            <summary>
+                班级接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.HeadTeacherId">
+            <summary>
+                班主任标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.Name">
+            <summary>
+                班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.GradeName">
+            <summary>
+                年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.Type">
+            <summary>
+                班级类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.Major">
+            <summary>
+                所学专业
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.Code">
+            <summary>
+                班级编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.StudyPhase">
+            <summary>
+                学段
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.SchoolLength">
+            <summary>
+                学制
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.Length">
+            <summary>
+                学制长度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.SerialNumber">
+            <summary>
+                班级序号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClass.EstablishTime">
+            <summary>
+                班级创建时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IClassRoom">
+            <summary>
+                教室接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IClassStudent">
+            <summary>
+                班级学生对应接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassStudent.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassStudent.StudentId">
+            <summary>
+                学生标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IClassTeacher">
+            <summary>
+                班级教师对应接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassTeacher.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassTeacher.TeacherId">
+            <summary>
+                教师标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ISchool">
+            <summary>
+                学校接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.Name">
+            <summary>
+                学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.Code">
+            <summary>
+                学校编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.Type">
+            <summary>
+                学校类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.OrganizationCode">
+            <summary>
+                组织机构代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.DivisionCode">
+            <summary>
+                学校所在地行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.Address">
+            <summary>
+                学校地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.Email">
+            <summary>
+                学校邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.WebSite">
+            <summary>
+                学校网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.ContactNumber">
+            <summary>
+                学校联系电话
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchool.EstablishTime">
+            <summary>
+                学校建立时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ISchoolStudent">
+            <summary>
+                学校学生对应接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolStudent.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolStudent.StudentId">
+            <summary>
+                学生标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ISchoolTeacher">
+            <summary>
+                学校教师对应接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolTeacher.SchoolId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolTeacher.TeacherId">
+            <summary>
+                教师标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IStudent">
+            <summary>
+                学生接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Name">
+            <summary>
+                学生名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Gender">
+            <summary>
+                学生性别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Major">
+            <summary>
+                专业
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Birthday">
+            <summary>
+                学生生日
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Nation">
+            <summary>
+                民族
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Code">
+            <summary>
+                学生编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.StudentNumber">
+            <summary>
+                学籍号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Cert">
+            <summary>
+                证件号码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.EnrollmentDate">
+            <summary>
+                入学时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.DivisionCode">
+            <summary>
+                住址区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudent.Address">
+            <summary>
+                住址
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IStudentCurrentAffiliation">
+            <summary>
+                学生当前所属关系接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentCurrentAffiliation.StudentId">
+            <summary>
+                学生标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITeacher">
+            <summary>
+                教师接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacher.TeacherName">
+            <summary>
+                教师名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacher.TeacherCode">
+            <summary>
+                教师编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITeacherCurrentAffiliation">
+            <summary>
+                教师当前所属关系接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacherCurrentAffiliation.TeacherId">
+            <summary>
+                教师标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITransfer">
+            <summary>
+                流转接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITransfer.MoveIn">
+            <summary>
+                转入时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITransfer.MoveOut">
+            <summary>
+                转出时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.IAgent">
+            <summary>
+                代理接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.IAgent.AgentName">
+            <summary>
+                代理名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.IAgent.AgentType">
+            <summary>
+                代理类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.IAgent.AgentCode">
+            <summary>
+                代理编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITask">
+            <summary>
+                任务接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITask.NormalizedTaskName">
+            <summary>
+                标准化任务名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskInfo">
+            <summary>
+                任务信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskShip">
+            <summary>
+                任务归属
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskMode">
+            <summary>
+                任务模式
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskInfo.TaskState">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskPackage">
+            <summary>
+                任务数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.TaskName">
+            <summary>
+                任务名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.TaskCode">
+            <summary>
+                任务编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskPackage.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskAgent">
+            <summary>
+                任务代理接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskAgent.TaskId">
+            <summary>
+                任务Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskAgent.AgentId">
+            <summary>
+                代理Id
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskTarget">
+            <summary>
+                任务目标接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TaskUnitId">
+            <summary>
+                任务单元Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetName">
+            <summary>
+                任务目标名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetCode">
+            <summary>
+                任务目标编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetType">
+            <summary>
+                任务目标类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetId">
+            <summary>
+                任务目标外部标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.TargetState">
+            <summary>
+                任务目标状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskTarget.ExecuteTime">
+            <summary>
+                任务目标执行
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskUnit">
+            <summary>
+                任务单元接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnit.NormalizedUnitName">
+            <summary>
+                标准化单元名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskUnitInfo">
+            <summary>
+                任务单元信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskId">
+            <summary>
+                任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskUnitState">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitInfo.TaskUnitMode">
+            <summary>
+                任务模式
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskUnitPackage">
+            <summary>
+                任务单元数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.UnitName">
+            <summary>
+                任务单元名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.UnitCode">
+            <summary>
+                单元编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitPackage.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.ITaskUnitAgent">
+            <summary>
+                任务单元代理接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitAgent.TaskUnitId">
+            <summary>
+                任务单元Id
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.ITaskUnitAgent.AgentId">
+            <summary>
+                代理Id
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.Transfer.TaskInfoTree">
+            <summary>
+                任务信息树
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfoTree.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.Transfer.TaskInfo">
+            <summary>
+                任务信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.ParentId">
+            <summary>
+                父标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskShip">
+            <summary>
+                任务归属
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskMode">
+            <summary>
+                任务模式
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskInfo.TaskState">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.Transfer.TaskPackage">
+            <summary>
+                任务数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.TaskName">
+            <summary>
+                任务名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.TaskCode">
+            <summary>
+                任务编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskPackage.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo">
+            <summary>
+                任务单元信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskId">
+            <summary>
+                任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskUnitState">
+            <summary>
+                任务状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitInfo.TaskUnitMode">
+            <summary>
+                任务模式
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage">
+            <summary>
+                任务单元数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.UnitName">
+            <summary>
+                任务单元名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.UnitCode">
+            <summary>
+                单元编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.Description">
+            <summary>
+                任务描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.StartTime">
+            <summary>
+                任务开始时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Task.Transfer.TaskUnitPackage.EndTime">
+            <summary>
+                任务结束时间
+            </summary>
+        </member>
+    </members>
 </doc>

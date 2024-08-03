@@ -36,6 +36,23 @@ internal sealed class ArtemisOrganizationConfiguration : ConcurrencyModelEntityC
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisOrganization> builder)
     {
+        // index
+        builder.HasIndex(organization => organization.DesignCode)
+            .IsUnique()
+            .HasDatabaseName(IndexName(nameof(ArtemisOrganization.DesignCode)));
+
+        builder.HasIndex(organization => organization.Code)
+            .HasDatabaseName(IndexName(nameof(ArtemisOrganization.Code)));
+
+        builder.HasIndex(organization => organization.Type)
+            .HasDatabaseName(IndexName(nameof(ArtemisOrganization.Type)));
+
+        builder.HasIndex(organization => organization.Name)
+            .HasDatabaseName(IndexName(nameof(ArtemisOrganization.Name)));
+
+        builder.HasIndex(organization => organization.Status)
+            .HasDatabaseName(IndexName(nameof(ArtemisOrganization.Status)));
+
         // Each Organization can have many Children Organization
         builder.HasMany(organization => organization.Children)
             .WithOne(child => child.Parent)

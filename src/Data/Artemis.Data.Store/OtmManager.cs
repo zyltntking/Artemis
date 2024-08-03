@@ -22,7 +22,7 @@ public interface IOtmManager<
     TSubEntity, TSubEntityInfo, TSubEntityPackage> : IOtmManager<
         TEntity, Guid, TEntityInfo, TEntityPackage,
         TSubEntity, Guid, TSubEntityInfo, TSubEntityPackage>,
-    ISeparateManager<TEntity, TEntityInfo, TEntityPackage>
+    ISeparateManager<TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot
     where TEntityInfo : class, IKeySlot
     where TEntityPackage : class
@@ -46,7 +46,7 @@ public interface IOtmManager<
 public interface IOtmManager<
     TEntity, TKey, TEntityInfo, TEntityPackage,
     TSubEntity, TSubKey, TSubEntityInfo, TSubEntityPackage> :
-    ISeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>
+    ISeparateManager<TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
     where TEntityPackage : class
@@ -244,7 +244,7 @@ public abstract class OtmManager<
     /// <returns></returns>
     protected abstract TSubEntity MapOverSubEntity(TSubEntity entity, TSubEntityPackage package);
 
-    #region Implementation of IOtmManager<TEntity,TKey,TEntityInfo,TEntityPackage,TSubEntity,TSubKey,TSubEntityInfo,TSubEntityPackage>
+    #region Implementation
 
     /// <summary>
     ///     读取子模型信息

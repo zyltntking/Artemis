@@ -42,7 +42,7 @@ service OrganizationService{
 	// 批量创建组织机构信息
 	rpc BatchCreateOrganization(BatchCreateOrganizationRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/ResourceService/Organizations/BatchCreat"
+			post: "/api/ResourceService/Organizations/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -365,38 +365,35 @@ message CreateOrganizationRequest{
 	// @required
 	// @maxLength(128)
 	string Name = 1;
-	// 组织机构编码
-	// @maxLength(128)
-	google.protobuf.StringValue Code = 2;
 	// 组织机构类型
 	// @required
 	// @maxLength(32)
-	string Type = 3;
+	string Type = 2;
 	// 组织机构成立时间
 	// @datetime
-	google.protobuf.StringValue EstablishTime = 4;
+	google.protobuf.StringValue EstablishTime = 3;
 	// 组织机构邮箱
 	// @maxLength(128)
-	google.protobuf.StringValue Email = 5;
+	google.protobuf.StringValue Email = 4;
 	// 组织机构网站
 	// @maxLength(128)
-	google.protobuf.StringValue Website = 6;
+	google.protobuf.StringValue Website = 5;
 	// 组织机构联系电话
 	// @maxLength(32)
-	google.protobuf.StringValue Phone = 7;
+	google.protobuf.StringValue Phone = 6;
 	// 组织机构邮编
 	// @maxLength(32)
-	google.protobuf.StringValue Postcode = 8;
+	google.protobuf.StringValue Postcode = 7;
 	// 组织机构所在地行政区划编码
 	// @required
 	// @maxLength(32)
-	string DivisionCode = 9;
+	string DivisionCode = 8;
 	// 组织机构地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 10;
+	google.protobuf.StringValue Address = 9;
 	// 组织机构描述
 	// @maxLength(256)
-	google.protobuf.StringValue Description = 11;
+	google.protobuf.StringValue Description = 10;
 }
 
 // 批量创建组织机构请求
@@ -411,39 +408,36 @@ message UpdateOrganizationInfoPacket{
 	// 组织机构名称
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
-	// 组织机构编码
-	// @maxLength(128)
-	google.protobuf.StringValue Code = 2;
 	// 组织机构类型
 	// @maxLength(32)
-	google.protobuf.StringValue Type = 3;
+	google.protobuf.StringValue Type = 2;
 	// 组织机构成立时间
 	// @datetime
-	google.protobuf.StringValue EstablishTime = 4;
+	google.protobuf.StringValue EstablishTime = 3;
 	// 组织机构邮箱
 	// @maxLength(128)
-	google.protobuf.StringValue Email = 5;
+	google.protobuf.StringValue Email = 4;
 	// 组织机构网站
 	// @maxLength(128)
-	google.protobuf.StringValue Website = 6;
+	google.protobuf.StringValue Website = 5;
 	// 组织机构联系电话
 	// @maxLength(32)
-	google.protobuf.StringValue Phone = 7;
+	google.protobuf.StringValue Phone = 6;
 	// 组织机构邮编
 	// @maxLength(32)
-	google.protobuf.StringValue Postcode = 8;
+	google.protobuf.StringValue Postcode = 7;
 	// 组织机构状态
 	// @maxLength(32)
-	google.protobuf.StringValue Status = 9;
+	google.protobuf.StringValue Status = 8;
 	// 组织机构所在地行政区划编码
 	// @maxLength(32)
-	google.protobuf.StringValue DivisionCode = 10;
+	google.protobuf.StringValue DivisionCode = 9;
 	// 组织机构地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 11;
+	google.protobuf.StringValue Address = 10;
 	// 组织机构描述
 	// @maxLength(256)
-	google.protobuf.StringValue Description = 12;
+	google.protobuf.StringValue Description = 11;
 }
 
 // 更新组织机构请求
