@@ -44,7 +44,7 @@ public interface IStudentPackage
     /// <summary>
     ///     学生生日
     /// </summary>
-    DateOnly? Birthday { get; set; }
+    DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     民族

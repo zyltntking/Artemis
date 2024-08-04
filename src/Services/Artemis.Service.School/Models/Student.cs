@@ -41,7 +41,7 @@ public class Student : ConcurrencyModel, IStudent
     ///     学生生日
     /// </summary>
     [Comment("学生生日")]
-    public DateOnly? Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     民族

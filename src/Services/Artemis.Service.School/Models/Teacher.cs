@@ -90,7 +90,7 @@ public class Teacher : ConcurrencyModel, ITeacher
     ///     生日
     /// </summary>
     [Comment("生日")]
-    public DateOnly? Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     联系电话

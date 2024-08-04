@@ -75,7 +75,7 @@ public interface ITeacherPackage
     /// <summary>
     ///     生日
     /// </summary>
-    DateOnly? Birthday { get; set; }
+    DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     联系电话
