@@ -305,18 +305,18 @@
             <param name="taskCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="T:Artemis.Service.Task.Managers.TaskSelfReferenceTreeManager">
+        <member name="T:Artemis.Service.Task.Managers.TaskTreeManager">
             <summary>
                 任务树管理器实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.TaskSelfReferenceTreeManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskStore)">
             <summary>
                 独立模型管理器构造
             </summary>
             <param name="taskStore"></param>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.TaskSelfReferenceTreeManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.FetchTasksAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据任务信息搜索任务
             </summary>
@@ -331,13 +331,59 @@
             <param name="taskCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.TaskSelfReferenceTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.MapNewEntity(Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                映射到新实体
+            </summary>
+            <param name="package"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.MapOverEntity(Artemis.Service.Task.Context.ArtemisTask,Artemis.Service.Shared.Task.Transfer.TaskPackage,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                覆盖实体
+            </summary>
+            <param name="entity"></param>
+            <param name="package"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 获取非根节点的树节点列表
             </summary>
             <param name="key"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.AfterAddChildNode(Artemis.Service.Task.Context.ArtemisTask,Artemis.Service.Task.Context.ArtemisTask,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在添加子节点之后
+            </summary>
+            <param name="parent"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <param name="child"></param>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.AfterRemoveChildNode(Artemis.Service.Task.Context.ArtemisTask,Artemis.Service.Task.Context.ArtemisTask,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在移除子节点之后
+            </summary>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <param name="parent"></param>
+            <param name="child"></param>
+        </member>
+        <member name="M:Artemis.Service.Task.Managers.TaskTreeManager.BeforeRemoveChildNode(Artemis.Service.Task.Context.ArtemisTask,Artemis.Service.Task.Context.ArtemisTask,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在移除子节点之前
+            </summary>
+            <param name="parent"></param>
+            <param name="child"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
         </member>
         <member name="T:Artemis.Service.Task.Models.Agent">
             <summary>

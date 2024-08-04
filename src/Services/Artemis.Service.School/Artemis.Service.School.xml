@@ -716,8 +716,18 @@
             <summary>
                 添加学校服务
             </summary>
+            <typeparam name="THandlerProxy">操作者代理</typeparam>
             <param name="services"></param>
-            <param name="enableProxy"></param>
+            <param name="enableHandlerProxy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.ServiceExtensions.AddSchoolServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
+            <summary>
+                添加学校服务
+            </summary>
+            <param name="services"></param>
+            <param name="enableHandlerProxy"></param>
+            <param name="enableCacheProxy"></param>
         </member>
         <member name="T:Artemis.Service.School.Services.SchoolServiceImplement">
             <summary>

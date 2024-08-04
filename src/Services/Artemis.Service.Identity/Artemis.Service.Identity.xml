@@ -2201,6 +2201,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.AuthorizeInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            认证信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Identity.Services.AccountServiceImplement.ChangePassword(Artemis.Service.Protos.Identity.ChangePasswordRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 修改密码

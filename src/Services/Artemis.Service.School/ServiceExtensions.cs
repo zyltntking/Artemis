@@ -32,15 +32,40 @@ public static class ServiceExtensions
     /// <summary>
     ///     添加学校服务
     /// </summary>
+    /// <typeparam name="THandlerProxy">操作者代理</typeparam>
     /// <param name="services"></param>
-    /// <param name="enableProxy"></param>
-    public static IServiceCollection AddSchoolServices<THandlerProxy>(this IServiceCollection services,
-        bool enableProxy = true)
+    /// <param name="enableHandlerProxy"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddSchoolServices<THandlerProxy>(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true)
         where THandlerProxy : class, IHandlerProxy
     {
         services.AddSchoolServices();
 
-        if (enableProxy) services.AddScoped<IHandlerProxy, THandlerProxy>();
+        if (enableHandlerProxy)
+            services.TryAddScoped<IHandlerProxy, THandlerProxy>();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     添加学校服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="enableHandlerProxy"></param>
+    /// <param name="enableCacheProxy"></param>
+    public static IServiceCollection AddSchoolServices<THandlerProxy, TCacheProxy>(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true,
+        bool enableCacheProxy = true)
+        where THandlerProxy : class, IHandlerProxy
+        where TCacheProxy : class, ICacheProxy
+    {
+        services.AddSchoolServices<THandlerProxy>(enableHandlerProxy);
+
+        if (enableCacheProxy)
+            services.TryAddScoped<ICacheProxy, TCacheProxy>();
 
         return services;
     }

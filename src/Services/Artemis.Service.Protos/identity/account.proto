@@ -33,6 +33,13 @@ service AccountService {
             post: "/api/Account/SignOut"
         };
     }
+
+    // 认证信息
+    rpc AuthorizeInfo (EmptyRequest) returns (AuthorizeInfoResponse){
+		option (google.api.http) = {
+			get: "/api/Account/AuthorizeInfo"
+		};
+	}
     
     // 修改密码
     rpc ChangePassword (ChangePasswordRequest) returns (EmptyResponse){
@@ -88,7 +95,7 @@ message SignInRequest {
     string Password = 2;
     // 端类型
     // @required
-    SignEndType EndType = 3;
+    string EndType = 3;
 }
 
 // 注册请求
@@ -175,4 +182,75 @@ message TokenResponse {
     int64 Timestamp = 6;
     // 令牌数据
     TokenReply Data = 7;
+}
+
+// 凭据记录
+message ClaimRecord{
+    // 凭据类型
+    // @required
+    string Type = 1;
+    // 凭据值
+    // @required
+    string Value = 2;
+    // 校验戳
+    // @required
+    string Checksum = 3;
+}
+
+// 角色信息
+message RoleRecord{
+    // 角色标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 角色名
+	// @required
+	string Name = 2;
+}
+
+// 认证记录
+message AuthorizeRecord {
+    // 用户标识
+    // @required
+    // @guid
+    string UserId = 1;
+    // 用户名
+    // @required
+    string UserName = 2;
+    // 端类型
+    // @required
+    string EndType = 3;
+    // 过期时间
+    // @required
+    int32 Expire = 4;
+    // 用户凭据
+    // @required
+    repeated ClaimRecord UserClaims = 5;
+    // 角色信息
+    // @required
+    repeated RoleRecord Roles = 6;
+    // 角色凭据
+    // @required
+    repeated ClaimRecord RoleClaims = 7;
+}
+
+// 认证信息响应
+message AuthorizeInfoResponse {
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 认证数据
+	AuthorizeRecord Data = 7;
 }

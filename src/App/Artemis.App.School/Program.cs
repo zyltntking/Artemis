@@ -42,7 +42,7 @@ public class Program
                     optionsBuilder.MigrationsHistoryTable("SchoolDbHistory", Project.Schemas.School);
                     optionsBuilder.MigrationsAssembly("Artemis.App.School");
                 }, Log.Debug)
-                .AddSchoolServices<ArtemisHandlerProxy>();
+                .AddSchoolServices();
 
             var isMigration = false;
 

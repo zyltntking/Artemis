@@ -47,7 +47,7 @@ public interface IOrganizationTreeManager :
 /// <summary>
 ///     组织机构树管理器实现
 /// </summary>
-public class OrganizationSelfReferenceTreeManager :
+public class OrganizationTreeManager :
     SelfReferenceTreeManager<
         ArtemisOrganization,
         OrganizationInfo,
@@ -58,7 +58,7 @@ public class OrganizationSelfReferenceTreeManager :
     /// <summary>
     ///     树模型管理器构造
     /// </summary>
-    public OrganizationSelfReferenceTreeManager(
+    public OrganizationTreeManager(
         IArtemisOrganizationStore organizationStore,
         IOptions<ResourceServiceConfig> options) : base(organizationStore)
     {

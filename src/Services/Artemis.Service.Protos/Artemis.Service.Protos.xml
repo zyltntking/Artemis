@@ -452,6 +452,195 @@
             令牌数据
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Identity.ClaimRecord">
+            <summary>
+            凭据记录
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimRecord.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ClaimRecord.Type">
+            <summary>
+            凭据类型
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimRecord.ValueFieldNumber">
+            <summary>Field number for the "Value" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ClaimRecord.Value">
+            <summary>
+            凭据值
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.ClaimRecord.ChecksumFieldNumber">
+            <summary>Field number for the "Checksum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.ClaimRecord.Checksum">
+            <summary>
+            校验戳
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.RoleRecord">
+            <summary>
+            角色信息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.RoleRecord.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.RoleRecord.Id">
+            <summary>
+            角色标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.RoleRecord.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.RoleRecord.Name">
+            <summary>
+            角色名
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.AuthorizeRecord">
+            <summary>
+            认证记录
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.UserNameFieldNumber">
+            <summary>Field number for the "UserName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.UserName">
+            <summary>
+            用户名
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.EndTypeFieldNumber">
+            <summary>Field number for the "EndType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.EndType">
+            <summary>
+            端类型
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.ExpireFieldNumber">
+            <summary>Field number for the "Expire" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.Expire">
+            <summary>
+            过期时间
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.UserClaimsFieldNumber">
+            <summary>Field number for the "UserClaims" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.UserClaims">
+            <summary>
+            用户凭据
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.RolesFieldNumber">
+            <summary>Field number for the "Roles" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.Roles">
+            <summary>
+            角色信息
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeRecord.RoleClaimsFieldNumber">
+            <summary>Field number for the "RoleClaims" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeRecord.RoleClaims">
+            <summary>
+            角色凭据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Identity.AuthorizeInfoResponse">
+            <summary>
+            认证信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Identity.AuthorizeInfoResponse.Data">
+            <summary>
+            认证数据
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Identity.AccountService">
             <summary>
             账户服务协议
@@ -482,6 +671,14 @@
         <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceBase.SignOut(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             签出
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceBase.AuthorizeInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            认证信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -632,6 +829,42 @@
         <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceClient.SignOutAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
             <summary>
             签出
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceClient.AuthorizeInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            认证信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceClient.AuthorizeInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
+            <summary>
+            认证信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceClient.AuthorizeInfoAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            认证信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Identity.AccountService.AccountServiceClient.AuthorizeInfoAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
+            <summary>
+            认证信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

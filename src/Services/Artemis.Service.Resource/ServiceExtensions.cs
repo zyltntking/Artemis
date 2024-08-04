@@ -47,8 +47,8 @@ public static class ServiceExtensions
 
         services.TryAddScoped<IDataDictionaryManager, DataDictionaryManager>();
         services.TryAddScoped<IStandardManager, StandardManager>();
-        services.TryAddScoped<IDivisionTreeManager, DivisionSelfReferenceTreeManager>();
-        services.TryAddScoped<IOrganizationTreeManager, OrganizationSelfReferenceTreeManager>();
+        services.TryAddScoped<IDivisionTreeManager, DivisionTreeManager>();
+        services.TryAddScoped<IOrganizationTreeManager, OrganizationTreeManager>();
 
         return services;
     }

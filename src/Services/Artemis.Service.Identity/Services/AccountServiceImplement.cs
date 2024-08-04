@@ -89,7 +89,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
 
         if (result.Succeeded && token is not null)
         {
-            token.EndType = request.EndType.ToString("G");
+            token.EndType = request.EndType;
 
             // 记录TokenDocument
             var identityToken = await RecordTokenDocument(token, context.CancellationToken);
@@ -153,6 +153,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> SignOut(EmptyRequest request, ServerCallContext context)
     {
+
         var authorizationToken = context
             .GetHttpContext()
             .User.Claims
@@ -168,6 +169,38 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
         }
 
         return ResultAdapter.AdaptEmptyFail<EmptyResponse>();
+    }
+
+    /// <summary>
+    /// 认证信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("认证信息")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AuthorizeInfoResponse> AuthorizeInfo(EmptyRequest request, ServerCallContext context)
+    {
+        var authorizationToken = context
+            .GetHttpContext()
+            .User.Claims
+            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization)
+            .Select(claim => claim.Value)
+            .FirstOrDefault();
+
+        if (authorizationToken is not null)
+        {
+            var catchKey = TokenKeyGenerator.CacheTokenKey(Options.CacheTokenPrefix, authorizationToken);
+
+            var tokenRecord = await Cache.FetchTokenRecordAsync(catchKey, false, context.CancellationToken);
+
+            if (tokenRecord is not null)
+            {
+                return tokenRecord.ReadInfoResponse<AuthorizeInfoResponse, TokenRecord>();
+            }
+        }
+
+        return ResultAdapter.AdaptEmptyFail<AuthorizeInfoResponse>();
     }
 
     /// <summary>

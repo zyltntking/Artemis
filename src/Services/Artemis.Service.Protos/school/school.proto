@@ -2,7 +2,6 @@
 
 option csharp_namespace = "Artemis.Service.Protos.School";
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "common.proto";
 
@@ -199,7 +198,7 @@ message SchoolInfoPacket {
 	google.protobuf.StringValue ContactNumber = 11;
 	// 创建时间
 	// @datetime
-	google.protobuf.Timestamp EstablishTime = 12;
+	google.protobuf.StringValue EstablishTime = 12;
 	// 学校简介
 	// @maxLength(512)
 	google.protobuf.StringValue Introduction = 13;
@@ -314,7 +313,7 @@ message CreateSchoolRequest {
 	google.protobuf.StringValue ContactNumber = 10;
 	// 创建时间
 	// @datetime
-	google.protobuf.Timestamp EstablishTime = 11;
+	google.protobuf.StringValue EstablishTime = 11;
 	// 学校简介
 	// @maxLength(512)
 	google.protobuf.StringValue Introduction = 12;
@@ -364,7 +363,7 @@ message UpdateSchoolPacket {
 	google.protobuf.StringValue ContactNumber = 10;
 	// 创建时间
 	// @datetime
-	google.protobuf.Timestamp EstablishTime = 11;
+	google.protobuf.StringValue EstablishTime = 11;
 	// 学校简介
 	// @maxLength(512)
 	google.protobuf.StringValue Introduction = 12;

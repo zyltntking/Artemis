@@ -168,7 +168,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
             _ignoreNullConfig = new TypeAdapterConfig();
 
             _ignoreNullConfig
-                .NewConfig<TEntity, TEntityPackage>()
+                .NewConfig<TEntityPackage, TEntity>()
                 .IgnoreNullValues(true);
 
             return _ignoreNullConfig;

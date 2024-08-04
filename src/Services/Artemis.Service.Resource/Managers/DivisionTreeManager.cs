@@ -40,14 +40,14 @@ public interface
 /// <summary>
 ///     行政区划树管理器实现
 /// </summary>
-public class DivisionSelfReferenceTreeManager :
+public class DivisionTreeManager :
     SelfReferenceTreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>,
     IDivisionTreeManager
 {
     /// <summary>
     ///     树模型管理器构造
     /// </summary>
-    public DivisionSelfReferenceTreeManager(IArtemisDivisionStore divisionStore) : base(divisionStore)
+    public DivisionTreeManager(IArtemisDivisionStore divisionStore) : base(divisionStore)
     {
     }
 

@@ -103,7 +103,7 @@ public class ArtemisAuthenticationHandler : AuthenticationHandler<ArtemisAuthent
             };
 
             var roles = document.Roles
-                .Select(item => new Claim(ClaimTypes.Role, item.Name));
+                .Select(item => new Claim(ArtemisClaimTypes.Role, item.Name));
             user.AddRange(roles);
 
             //claim document
