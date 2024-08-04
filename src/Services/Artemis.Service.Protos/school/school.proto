@@ -14,21 +14,21 @@ service SchoolService{
 	// 查询学校信息
 	rpc SearchSchoolInfo(SearchSchoolReqeust) returns (SearchSchoolInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Schools"
+			get: "/api/SchoolService/Schools"
 		};
 	}
 
-	// 获取学校信息
-	rpc GetSchoolInfo(GetSchoolInfoRequest) returns (GetSchoolInfoResponse){
+	// 读取学校信息
+	rpc ReadSchoolInfo(ReadSchoolInfoRequest) returns (ReadSchoolInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}"
+			get: "/api/SchoolService/Schools/{SchoolId}"
 		};
 	}
 
 	// 创建学校
 	rpc CreateSchool(CreateSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools"
+			post: "/api/SchoolService/Schools"
 			body: "*"
 		};
 	}
@@ -36,7 +36,7 @@ service SchoolService{
 	// 批量创建学校
 	rpc BatchCreateSchool(BatchCreateSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools/BatchCreate"
+			post: "/api/SchoolService/Schools/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -44,15 +44,15 @@ service SchoolService{
 	// 更新学校
 	rpc UpdateSchool(UpdateSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Schools/{SchoolId}"
+			put: "/api/SchoolService/Schools/{SchoolId}"
 			body: "*"
 		};
 	}
 
 	// 批量更新学校
-	rpc BatchUpdateSchool(BatchUpdateSchoolPacket) returns (AffectedResponse){
+	rpc BatchUpdateSchool(BatchUpdateSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Schools/BatchUpdate"
+			put: "/api/SchoolService/Schools/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -60,14 +60,14 @@ service SchoolService{
 	// 删除学校
 	rpc DeleteSchool(DeleteSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Schools/{SchoolId}"
+			delete: "/api/SchoolService/Schools/{SchoolId}"
 		};
 	}
 
 	// 批量删除学校
 	rpc BatchDeleteSchool(BatchDeleteSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools/BatchDelete"
+			post: "/api/SchoolService/Schools/BatchDelete"
 			body: "SchoolIds"
 		};
 	}
@@ -284,20 +284,23 @@ message SearchSchoolReqeust{
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
 	// 学校代码
-	// @maxLength(32)
+	// @maxLength(128)
 	google.protobuf.StringValue Code = 2;
 	// 学校类型
 	// @maxLength(32)
 	google.protobuf.StringValue Type = 3;
 	// 组织机构代码
-	// @maxLength(32)
+	// @maxLength(128)
 	google.protobuf.StringValue OrganizationCode = 4;
 	// 行政区划编码
 	// @maxLength(32)
 	google.protobuf.StringValue DivisionCode = 5;
-	// 学校地址
-	// @maxLength(128)
-	google.protobuf.StringValue Address = 6;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 6;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 7;
 }
 
 // 学校信息数据包
@@ -311,51 +314,41 @@ message SchoolInfoPacket {
 	// @maxLength(128)
 	string Name = 2;
 	// 学校代码
-	// @required
-	// @maxLength(32)
-	string Code = 3;
+	// @maxLength(128)
+	google.protobuf.StringValue Code = 3;
+	// 学校代码
+	// @maxLength(64)
+	google.protobuf.StringValue BindingTag = 4;
 	// 学校类型
-	// @required
-	// @maxLength(32)
-	string Type = 4;
+	// @maxLength(128)
+	google.protobuf.StringValue Type = 5;
 	// 组织机构代码
-	// @required
-	// @maxLength(32)
-	string OrganizationCode = 5;
+	// @maxLength(128)
+	google.protobuf.StringValue OrganizationCode = 6;
 	// 行政区划编码
-	// @required
 	// @maxLength(32)
-	string DivisionCode = 6;
+	google.protobuf.StringValue DivisionCode = 7;
 	// 学校地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 7;
-	// 学校联系人
-	// @maxLength(32)
-	google.protobuf.StringValue Contact = 8;
-	// 联系电话
-	// @maxLength(32)
-	google.protobuf.StringValue Phone = 9;
+	google.protobuf.StringValue Address = 8;
 	// 邮箱
-	// @maxLength(64)
-	google.protobuf.StringValue Email = 10;
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 9;
 	// 网址
 	// @maxLength(128)
-	google.protobuf.StringValue Website = 11;
+	google.protobuf.StringValue Website = 10;
+	// 学校联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue ContactNumber = 11;
+	// 创建时间
+	// @datetime
+	google.protobuf.Timestamp EstablishTime = 12;
 	// 学校简介
 	// @maxLength(512)
-	google.protobuf.StringValue Introduction = 12;
-	// 学校状态
-	// @maxLength(32)
-	google.protobuf.StringValue Status = 13;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 14;
-	// 页码
-	// @min(0)
-	google.protobuf.Int32Value Page = 15;
-	// 条目数
-	// @min(0)
-	google.protobuf.Int32Value Size = 16;
+	google.protobuf.StringValue Introduction = 13;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 14;
 }
 
 // 分页学校信息数据包
@@ -400,7 +393,7 @@ message SearchSchoolInfoResponse{
 }
 
 // 获取学校信息请求
-message GetSchoolInfoRequest{
+message ReadSchoolInfoRequest{
 	// 学校标识
 	// @required
 	// @guid
@@ -408,7 +401,7 @@ message GetSchoolInfoRequest{
 }
 
 // 获取学校信息响应
-message GetSchoolInfoResponse{
+message ReadSchoolInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -436,45 +429,41 @@ message CreateSchoolRequest {
 	// @maxLength(128)
 	string Name = 1;
 	// 学校代码
-	// @required
-	// @maxLength(32)
-	string Code = 2;
+	// @maxLength(128)
+	google.protobuf.StringValue Code = 2;
+	// 学校代码
+	// @maxLength(64)
+	google.protobuf.StringValue BindingTag = 3;
 	// 学校类型
-	// @required
-	// @maxLength(32)
-	string Type = 3;
+	// @maxLength(128)
+	google.protobuf.StringValue Type = 4;
 	// 组织机构代码
-	// @required
-	// @maxLength(32)
-	string OrganizationCode = 4;
+	// @maxLength(128)
+	google.protobuf.StringValue OrganizationCode = 5;
 	// 行政区划编码
-	// @required
 	// @maxLength(32)
-	string DivisionCode = 5;
+	google.protobuf.StringValue DivisionCode = 6;
 	// 学校地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 6;
-	// 学校联系人
-	// @maxLength(32)
-	google.protobuf.StringValue Contact = 7;
-	// 联系电话
-	// @maxLength(32)
-	google.protobuf.StringValue Phone = 8;
+	google.protobuf.StringValue Address = 7;
 	// 邮箱
-	// @maxLength(64)
-	google.protobuf.StringValue Email = 9;
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 8;
 	// 网址
 	// @maxLength(128)
-	google.protobuf.StringValue Website = 10;
+	google.protobuf.StringValue Website = 9;
+	// 学校联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue ContactNumber = 10;
+	// 创建时间
+	// @datetime
+	google.protobuf.Timestamp EstablishTime = 11;
 	// 学校简介
 	// @maxLength(512)
-	google.protobuf.StringValue Introduction = 11;
-	// 学校状态
-	// @maxLength(32)
-	google.protobuf.StringValue Status = 12;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 13;
+	google.protobuf.StringValue Introduction = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 批量创建学校请求
@@ -490,41 +479,41 @@ message UpdateSchoolPacket {
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
 	// 学校代码
-	// @maxLength(32)
+	// @maxLength(128)
 	google.protobuf.StringValue Code = 2;
+	// 学校代码
+	// @maxLength(64)
+	google.protobuf.StringValue BindingTag = 3;
 	// 学校类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 3;
+	// @maxLength(128)
+	google.protobuf.StringValue Type = 4;
 	// 组织机构代码
-	// @maxLength(32)
-	google.protobuf.StringValue OrganizationCode = 4;
+	// @maxLength(128)
+	google.protobuf.StringValue OrganizationCode = 5;
 	// 行政区划编码
 	// @maxLength(32)
-	google.protobuf.StringValue DivisionCode = 5;
+	google.protobuf.StringValue DivisionCode = 6;
 	// 学校地址
 	// @maxLength(128)
-	google.protobuf.StringValue Address = 6;
-	// 学校联系人
-	// @maxLength(32)
-	google.protobuf.StringValue Contact = 7;
-	// 联系电话
-	// @maxLength(32)
-	google.protobuf.StringValue Phone = 8;
+	google.protobuf.StringValue Address = 7;
 	// 邮箱
-	// @maxLength(64)
-	google.protobuf.StringValue Email = 9;
+	// @maxLength(128)
+	google.protobuf.StringValue Email = 8;
 	// 网址
 	// @maxLength(128)
-	google.protobuf.StringValue Website = 10;
+	google.protobuf.StringValue Website = 9;
+	// 学校联系电话
+	// @maxLength(32)
+	google.protobuf.StringValue ContactNumber = 10;
+	// 创建时间
+	// @datetime
+	google.protobuf.Timestamp EstablishTime = 11;
 	// 学校简介
 	// @maxLength(512)
-	google.protobuf.StringValue Introduction = 11;
-	// 学校状态
-	// @maxLength(32)
-	google.protobuf.StringValue Status = 12;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 13;
+	google.protobuf.StringValue Introduction = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 更新学校请求
@@ -535,14 +524,14 @@ message UpdateSchoolRequest {
 	string SchoolId = 1;
 	// 学校信息数据
 	// @required
-	UpdateSchoolPacket Data = 2;
+	UpdateSchoolPacket School = 2;
 }
 
-// 批量更新学校数据包
-message BatchUpdateSchoolPacket {
+// 批量更新学校请求
+message BatchUpdateSchoolRequest {
 	// 学校信息数据
 	// @required
-	repeated UpdateSchoolPacket Batch = 1;
+	repeated UpdateSchoolRequest Batch = 1;
 }
 
 // 删除学校请求

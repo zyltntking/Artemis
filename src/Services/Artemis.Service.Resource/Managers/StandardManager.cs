@@ -16,7 +16,7 @@ namespace Artemis.Service.Resource.Managers;
 /// <summary>
 /// 标准管理器接口
 /// </summary>
-public interface IStandardManager : IOtmManager<
+public interface IStandardManager : IRequiredOneToManyManager<
     ArtemisStandardCatalog, StandardCatalogInfo, StandardCatalogPackage,
     ArtemisStandardItem, StandardItemInfo, StandardItemPackage>
 {
@@ -62,7 +62,7 @@ public interface IStandardManager : IOtmManager<
 /// <summary>
 /// 标准管理器
 /// </summary>
-public class StandardManager : OtmManager<
+public class StandardManager : RequiredOneToManyManager<
     ArtemisStandardCatalog, StandardCatalogInfo, StandardCatalogPackage,
     ArtemisStandardItem, StandardItemInfo, StandardItemPackage>, IStandardManager
 {

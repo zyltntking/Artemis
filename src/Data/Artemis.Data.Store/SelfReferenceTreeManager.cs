@@ -14,8 +14,8 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> :
-    ITreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>,
+public interface ISelfReferenceTreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> :
+    ISelfReferenceTreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>,
     ISeparateManager<TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
     where TEntityInfo : class, IKeySlot, IParentKeySlot
@@ -31,7 +31,7 @@ public interface ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPack
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
 /// <typeparam name="TParentKey"></typeparam>
-public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> :
+public interface ISelfReferenceTreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> :
     ISeparateManager<TKey, TEntityInfo, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
@@ -135,9 +135,9 @@ public interface ITreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInf
 /// <typeparam name="TEntityInfo"></typeparam>
 /// <typeparam name="TEntityInfoTree"></typeparam>
 /// <typeparam name="TEntityPackage"></typeparam>
-public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> :
+public abstract class SelfReferenceTreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage> :
     TreeManager<TEntity, Guid, Guid?, TEntityInfo, TEntityInfoTree, TEntityPackage>,
-    ITreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage>
+    ISelfReferenceTreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntityPackage>
     where TEntity : class, IKeySlot, IParentKeySlot, ITreeSlot<TEntity>
     where TEntityInfo : class, IKeySlot, IParentKeySlot
     where TEntityInfoTree : class, TEntityInfo, IKeySlot, IParentKeySlot, ITreeInfoSlot<TEntityInfoTree>
@@ -146,11 +146,11 @@ public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntity
     /// <summary>
     ///     树模型管理器构造
     /// </summary>
-    protected TreeManager(IStore<TEntity> entityStore) : base(entityStore)
+    protected SelfReferenceTreeManager(IStore<TEntity> entityStore) : base(entityStore)
     {
     }
 
-    #region Overrides of TreeManager<TEntity,Guid,Guid?,TEntityInfo,TEntityInfoTree,TEntityPackage>
+    #region Overrides of SelfReferenceTreeManager<TEntity,Guid,Guid?,TEntityInfo,TEntityInfoTree,TEntityPackage>
 
     /// <summary>
     ///     映射到父级键
@@ -170,7 +170,7 @@ public abstract class TreeManager<TEntity, TEntityInfo, TEntityInfoTree, TEntity
 /// </summary>
 public abstract class TreeManager<TEntity, TKey, TParentKey, TEntityInfo, TEntityInfoTree, TEntityPackage> :
     SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>,
-    ITreeManager<TEntity, TKey, TParentKey?, TEntityInfo, TEntityInfoTree, TEntityPackage>
+    ISelfReferenceTreeManager<TEntity, TKey, TParentKey?, TEntityInfo, TEntityInfoTree, TEntityPackage>
     where TEntity : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>, ITreeSlot<TEntity, TKey, TParentKey?>
     where TEntityInfo : class, IKeySlot<TKey>, IParentKeySlot<TParentKey?>
     where TEntityInfoTree : class, TEntityInfo, IKeySlot<TKey>, IParentKeySlot<TParentKey?>,

@@ -1385,7 +1385,7 @@
                 是否启用Debug日志
             </summary>
         </member>
-        <member name="T:Artemis.Data.Store.IOtmManager`6">
+        <member name="T:Artemis.Data.Store.IRequiredOneToManyManager`6">
             <summary>
                 一对多模型管理器
             </summary>
@@ -1396,7 +1396,7 @@
             <typeparam name="TSubEntityInfo"></typeparam>
             <typeparam name="TSubEntityPackage"></typeparam>
         </member>
-        <member name="T:Artemis.Data.Store.IOtmManager`8">
+        <member name="T:Artemis.Data.Store.IRequiredOneToManyManager`8">
             <summary>
                 一对多模型管理器
             </summary>
@@ -1409,7 +1409,7 @@
             <typeparam name="TSubEntityInfo"></typeparam>
             <typeparam name="TSubEntityPackage"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
             <summary>
                 读取子模型信息
             </summary>
@@ -1418,7 +1418,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
             <summary>
                 添加子模型
             </summary>
@@ -1427,7 +1427,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
             <summary>
                 批量添加子模型
             </summary>
@@ -1436,7 +1436,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
             <summary>
                 更新子模型
             </summary>
@@ -1446,7 +1446,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
             <summary>
                 批量更新子模型
             </summary>
@@ -1455,7 +1455,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
             <summary>
                 删除子模型
             </summary>
@@ -1464,7 +1464,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.IOtmManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.IRequiredOneToManyManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
             <summary>
                 批量删除子模型
             </summary>
@@ -1473,7 +1473,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Store.OtmManager`6">
+        <member name="T:Artemis.Data.Store.RequiredOneToManyManager`6">
             <summary>
                 一对多模型管理器
             </summary>
@@ -1484,12 +1484,12 @@
             <typeparam name="TSubEntityInfo"></typeparam>
             <typeparam name="TSubEntityPackage"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`6.#ctor(Artemis.Data.Store.IStore{`0},Artemis.Data.Store.IStore{`3})">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`6.#ctor(Artemis.Data.Store.IStore{`0},Artemis.Data.Store.IStore{`3})">
             <summary>
                 模型管理器构造
             </summary>
         </member>
-        <member name="T:Artemis.Data.Store.OtmManager`8">
+        <member name="T:Artemis.Data.Store.RequiredOneToManyManager`8">
             <summary>
                 一对多模型管理器
             </summary>
@@ -1502,36 +1502,36 @@
             <typeparam name="TSubEntityInfo"></typeparam>
             <typeparam name="TSubEntityPackage"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.#ctor(Artemis.Data.Store.IStore{`0,`1},Artemis.Data.Store.IStore{`4,`5})">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.#ctor(Artemis.Data.Store.IStore{`0,`1},Artemis.Data.Store.IStore{`4,`5})">
             <summary>
                 模型管理器构造
             </summary>
         </member>
-        <member name="P:Artemis.Data.Store.OtmManager`8.SubEntityStore">
+        <member name="P:Artemis.Data.Store.RequiredOneToManyManager`8.SubEntityStore">
             <summary>
                 子模型存储访问器
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.StoreDispose">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.StoreDispose">
             <summary>
                 释放托管的Store
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.SubEntityKeyMatcher(`1)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.SubEntityKeyMatcher(`1)">
             <summary>
                 子模型使用主模型的键匹配器
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.SetSubEntityRelationalKey(`4,`1)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.SetSubEntityRelationalKey(`4,`1)">
             <summary>
             设置子模型的关联键
             </summary>
             <param name="subEntity"></param>
             <param name="key"></param>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.MapNewSubEntity(`7,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.MapNewSubEntity(`7,`1,System.Threading.CancellationToken)">
             <summary>
                 映射到新的附属实体
             </summary>
@@ -1540,7 +1540,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.MapOverSubEntity(`4,`7,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.MapOverSubEntity(`4,`7,System.Threading.CancellationToken)">
             <summary>
                 覆盖附属实体
             </summary>
@@ -1549,7 +1549,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.ReadSubEntityInfoAsync(`1,`5,System.Threading.CancellationToken)">
             <summary>
                 读取子模型信息
             </summary>
@@ -1558,7 +1558,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.CreateSubEntityAsync(`1,`7,System.Threading.CancellationToken)">
             <summary>
                 添加子模型
             </summary>
@@ -1567,7 +1567,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.BatchCreateSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`7},System.Threading.CancellationToken)">
             <summary>
                 批量添加子模型
             </summary>
@@ -1576,7 +1576,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.UpdateSubEntityAsync(`1,`5,`7,System.Threading.CancellationToken)">
             <summary>
                 更新子模型
             </summary>
@@ -1586,7 +1586,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.BatchUpdateSubEntityAsync(`1,System.Collections.Generic.IDictionary{`5,`7},System.Threading.CancellationToken)">
             <summary>
                 批量更新子模型
             </summary>
@@ -1595,7 +1595,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.DeleteSubEntityAsync(`1,`5,System.Threading.CancellationToken)">
             <summary>
                 删除子模型
             </summary>
@@ -1604,7 +1604,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.OtmManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.RequiredOneToManyManager`8.BatchDeleteSubEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
             <summary>
                 批量删除子模型
             </summary>
@@ -3378,7 +3378,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Store.TreeManager`4">
+        <member name="T:Artemis.Data.Store.SelfReferenceTreeManager`4">
             <summary>
                 树管理器
             </summary>
@@ -3387,36 +3387,36 @@
             <typeparam name="TEntityInfoTree"></typeparam>
             <typeparam name="TEntityPackage"></typeparam>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`4.#ctor(Artemis.Data.Store.IStore{`0})">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`4.#ctor(Artemis.Data.Store.IStore{`0})">
             <summary>
                 树模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`4.MapToParentKey(System.Guid)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`4.MapToParentKey(System.Guid)">
             <summary>
                 映射到父级键
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Data.Store.TreeManager`6">
+        <member name="T:Artemis.Data.Store.SelfReferenceTreeManager`6">
             <summary>
                 树管理器
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.#ctor(Artemis.Data.Store.IStore{`0,`1})">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.#ctor(Artemis.Data.Store.IStore{`0,`1})">
             <summary>
                 树模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.MapToParentKey(`1)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.MapToParentKey(`1)">
             <summary>
                 映射到父级键
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.FetchNonRootTreeNodeList(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.FetchNonRootTreeNodeList(`1,System.Threading.CancellationToken)">
             <summary>
                 获取非根节点的树节点列表
             </summary>
@@ -3424,7 +3424,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.FetchTreeNodeListAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.FetchTreeNodeListAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 获取生成树节点列表
             </summary>
@@ -3432,7 +3432,7 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.GenerateTree(`1,System.Collections.Generic.List{`3})">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.GenerateTree(`1,System.Collections.Generic.List{`3})">
             <summary>
                 递归生成树
             </summary>
@@ -3440,7 +3440,7 @@
             <param name="nodeList">节点列表</param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BeforeAddChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BeforeAddChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之前
             </summary>
@@ -3449,7 +3449,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.AfterAddChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.AfterAddChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之后
             </summary>
@@ -3458,7 +3458,7 @@
             <param name="cancellationToken"></param>
             <param name="child"></param>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BeforeRemoveChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BeforeRemoveChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在移除子节点之前
             </summary>
@@ -3467,7 +3467,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.AfterRemoveChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.AfterRemoveChildNode(`0,`0,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在移除子节点之后
             </summary>
@@ -3476,7 +3476,7 @@
             <param name="cancellationToken"></param>
             <param name="child"></param>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.GetEntityInfoTreeAsync(`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.GetEntityInfoTreeAsync(`1,System.Threading.CancellationToken)">
             <summary>
                 获取实体信息树
             </summary>
@@ -3484,7 +3484,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.CreateChildEntityAsync(`1,`5,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.CreateChildEntityAsync(`1,`5,System.Threading.CancellationToken)">
             <summary>
                 创建子实体
             </summary>
@@ -3493,7 +3493,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BatchCreateChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BatchCreateChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`5},System.Threading.CancellationToken)">
             <summary>
                 批量创建子实体
             </summary>
@@ -3502,7 +3502,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.AddChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.AddChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
             <summary>
                 添加子实体
             </summary>
@@ -3511,7 +3511,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BatchAddChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BatchAddChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 批量添加子实体
             </summary>
@@ -3520,7 +3520,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.DeleteChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.DeleteChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
             <summary>
                 删除子实体
             </summary>
@@ -3529,7 +3529,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BatchDeleteChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BatchDeleteChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 批量删除子实体
             </summary>
@@ -3538,7 +3538,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.RemoveChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.RemoveChildEntityAsync(`1,`1,System.Threading.CancellationToken)">
             <summary>
                 移除子实体
             </summary>
@@ -3547,7 +3547,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Data.Store.TreeManager`6.BatchRemoveChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Data.Store.SelfReferenceTreeManager`6.BatchRemoveChildEntityAsync(`1,System.Collections.Generic.IEnumerable{`1},System.Threading.CancellationToken)">
             <summary>
                 批量移除子实体
             </summary>

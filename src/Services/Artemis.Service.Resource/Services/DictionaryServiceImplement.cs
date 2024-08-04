@@ -130,7 +130,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     {
         var id = Guid.Parse(request.DictionaryId);
 
-        var package = request.Adapt<DataDictionaryPackage>();
+        var package = request.Dictionary.Adapt<DataDictionaryPackage>();
 
         var result = await DataDictionaryManager.UpdateEntityAsync(id, package, context.CancellationToken);
 
@@ -291,7 +291,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
 
         var itemId = Guid.Parse(request.DictionaryItemId);
 
-        var package = request.Adapt<DataDictionaryItemPackage>();
+        var package = request.DictionaryItem.Adapt<DataDictionaryItemPackage>();
 
         var result = await DataDictionaryManager.UpdateSubEntityAsync(id, itemId, package, context.CancellationToken);
 

@@ -14584,7 +14584,7 @@
         <member name="P:Artemis.Service.Protos.School.SearchSchoolReqeust.Code">
             <summary>
             学校代码
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SearchSchoolReqeust.TypeFieldNumber">
@@ -14602,7 +14602,7 @@
         <member name="P:Artemis.Service.Protos.School.SearchSchoolReqeust.OrganizationCode">
             <summary>
             组织机构代码
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SearchSchoolReqeust.DivisionCodeFieldNumber">
@@ -14614,13 +14614,22 @@
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.SearchSchoolReqeust.AddressFieldNumber">
-            <summary>Field number for the "Address" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.SearchSchoolReqeust.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.SearchSchoolReqeust.Address">
+        <member name="P:Artemis.Service.Protos.School.SearchSchoolReqeust.Page">
             <summary>
-            学校地址
-            @maxLength(128)
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchSchoolReqeust.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchSchoolReqeust.Size">
+            <summary>
+            条目数
+            @min(0)
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.School.SchoolInfoPacket">
@@ -14654,8 +14663,16 @@
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Code">
             <summary>
             学校代码
-            @required
-            @maxLength(32)
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.BindingTagFieldNumber">
+            <summary>Field number for the "BindingTag" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.BindingTag">
+            <summary>
+            学校代码
+            @maxLength(64)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.TypeFieldNumber">
@@ -14664,8 +14681,7 @@
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Type">
             <summary>
             学校类型
-            @required
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.OrganizationCodeFieldNumber">
@@ -14674,8 +14690,7 @@
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.OrganizationCode">
             <summary>
             组织机构代码
-            @required
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.DivisionCodeFieldNumber">
@@ -14684,7 +14699,6 @@
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.DivisionCode">
             <summary>
             行政区划编码
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -14697,31 +14711,13 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.ContactFieldNumber">
-            <summary>Field number for the "Contact" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Contact">
-            <summary>
-            学校联系人
-            @maxLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.PhoneFieldNumber">
-            <summary>Field number for the "Phone" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Phone">
-            <summary>
-            联系电话
-            @maxLength(32)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.EmailFieldNumber">
             <summary>Field number for the "Email" field.</summary>
         </member>
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Email">
             <summary>
             邮箱
-            @maxLength(64)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.WebsiteFieldNumber">
@@ -14733,21 +14729,12 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.IntroductionFieldNumber">
-            <summary>Field number for the "Introduction" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.ContactNumberFieldNumber">
+            <summary>Field number for the "ContactNumber" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Introduction">
+        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.ContactNumber">
             <summary>
-            学校简介
-            @maxLength(512)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.StatusFieldNumber">
-            <summary>Field number for the "Status" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Status">
-            <summary>
-            学校状态
+            学校联系电话
             @maxLength(32)
             </summary>
         </member>
@@ -14757,25 +14744,25 @@
         <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.EstablishTime">
             <summary>
             创建时间
-            @required
+            @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.PageFieldNumber">
-            <summary>Field number for the "Page" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.IntroductionFieldNumber">
+            <summary>Field number for the "Introduction" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Page">
+        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Introduction">
             <summary>
-            页码
-            @min(0)
+            学校简介
+            @maxLength(512)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.SizeFieldNumber">
-            <summary>Field number for the "Size" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.SchoolInfoPacket.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Size">
+        <member name="P:Artemis.Service.Protos.School.SchoolInfoPacket.Remark">
             <summary>
-            条目数
-            @min(0)
+            备注
+            @maxLength(128)
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.School.PageSchoolInfoPacket">
@@ -14893,81 +14880,81 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.School.GetSchoolInfoRequest">
+        <member name="T:Artemis.Service.Protos.School.ReadSchoolInfoRequest">
             <summary>
             获取学校信息请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoRequest.SchoolIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoRequest.SchoolIdFieldNumber">
             <summary>Field number for the "SchoolId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoRequest.SchoolId">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoRequest.SchoolId">
             <summary>
             学校标识
             @required
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.School.GetSchoolInfoResponse">
+        <member name="T:Artemis.Service.Protos.School.ReadSchoolInfoResponse">
             <summary>
             获取学校信息响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Code">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Message">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Error">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.GetSchoolInfoResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.ReadSchoolInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.GetSchoolInfoResponse.Data">
+        <member name="P:Artemis.Service.Protos.School.ReadSchoolInfoResponse.Data">
             <summary>
             学校信息数据
             @required
@@ -14994,8 +14981,16 @@
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Code">
             <summary>
             学校代码
-            @required
-            @maxLength(32)
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.BindingTagFieldNumber">
+            <summary>Field number for the "BindingTag" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.BindingTag">
+            <summary>
+            学校代码
+            @maxLength(64)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.TypeFieldNumber">
@@ -15004,8 +14999,7 @@
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Type">
             <summary>
             学校类型
-            @required
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.OrganizationCodeFieldNumber">
@@ -15014,8 +15008,7 @@
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.OrganizationCode">
             <summary>
             组织机构代码
-            @required
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.DivisionCodeFieldNumber">
@@ -15024,7 +15017,6 @@
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.DivisionCode">
             <summary>
             行政区划编码
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -15037,31 +15029,13 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.ContactFieldNumber">
-            <summary>Field number for the "Contact" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Contact">
-            <summary>
-            学校联系人
-            @maxLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.PhoneFieldNumber">
-            <summary>Field number for the "Phone" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Phone">
-            <summary>
-            联系电话
-            @maxLength(32)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.EmailFieldNumber">
             <summary>Field number for the "Email" field.</summary>
         </member>
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Email">
             <summary>
             邮箱
-            @maxLength(64)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.WebsiteFieldNumber">
@@ -15073,21 +15047,12 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.IntroductionFieldNumber">
-            <summary>Field number for the "Introduction" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.ContactNumberFieldNumber">
+            <summary>Field number for the "ContactNumber" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Introduction">
+        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.ContactNumber">
             <summary>
-            学校简介
-            @maxLength(512)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.StatusFieldNumber">
-            <summary>Field number for the "Status" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Status">
-            <summary>
-            学校状态
+            学校联系电话
             @maxLength(32)
             </summary>
         </member>
@@ -15097,7 +15062,25 @@
         <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.EstablishTime">
             <summary>
             创建时间
-            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.IntroductionFieldNumber">
+            <summary>Field number for the "Introduction" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Introduction">
+            <summary>
+            学校简介
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.CreateSchoolRequest.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.CreateSchoolRequest.Remark">
+            <summary>
+            备注
+            @maxLength(128)
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.School.BatchCreateSchoolRequest">
@@ -15134,7 +15117,16 @@
         <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Code">
             <summary>
             学校代码
-            @maxLength(32)
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.BindingTagFieldNumber">
+            <summary>Field number for the "BindingTag" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.BindingTag">
+            <summary>
+            学校代码
+            @maxLength(64)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.TypeFieldNumber">
@@ -15143,7 +15135,7 @@
         <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Type">
             <summary>
             学校类型
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.OrganizationCodeFieldNumber">
@@ -15152,7 +15144,7 @@
         <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.OrganizationCode">
             <summary>
             组织机构代码
-            @maxLength(32)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.DivisionCodeFieldNumber">
@@ -15173,31 +15165,13 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.ContactFieldNumber">
-            <summary>Field number for the "Contact" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Contact">
-            <summary>
-            学校联系人
-            @maxLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.PhoneFieldNumber">
-            <summary>Field number for the "Phone" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Phone">
-            <summary>
-            联系电话
-            @maxLength(32)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.EmailFieldNumber">
             <summary>Field number for the "Email" field.</summary>
         </member>
         <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Email">
             <summary>
             邮箱
-            @maxLength(64)
+            @maxLength(128)
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.WebsiteFieldNumber">
@@ -15209,21 +15183,12 @@
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.IntroductionFieldNumber">
-            <summary>Field number for the "Introduction" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.ContactNumberFieldNumber">
+            <summary>Field number for the "ContactNumber" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Introduction">
+        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.ContactNumber">
             <summary>
-            学校简介
-            @maxLength(512)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.StatusFieldNumber">
-            <summary>Field number for the "Status" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Status">
-            <summary>
-            学校状态
+            学校联系电话
             @maxLength(32)
             </summary>
         </member>
@@ -15233,7 +15198,25 @@
         <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.EstablishTime">
             <summary>
             创建时间
-            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.IntroductionFieldNumber">
+            <summary>Field number for the "Introduction" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Introduction">
+            <summary>
+            学校简介
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.UpdateSchoolPacket.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.UpdateSchoolPacket.Remark">
+            <summary>
+            备注
+            @maxLength(128)
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.School.UpdateSchoolRequest">
@@ -15251,24 +15234,24 @@
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.UpdateSchoolRequest.DataFieldNumber">
-            <summary>Field number for the "Data" field.</summary>
+        <member name="F:Artemis.Service.Protos.School.UpdateSchoolRequest.SchoolFieldNumber">
+            <summary>Field number for the "School" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.UpdateSchoolRequest.Data">
+        <member name="P:Artemis.Service.Protos.School.UpdateSchoolRequest.School">
             <summary>
             学校信息数据
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.School.BatchUpdateSchoolPacket">
+        <member name="T:Artemis.Service.Protos.School.BatchUpdateSchoolRequest">
             <summary>
-            批量更新学校数据包
+            批量更新学校请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.School.BatchUpdateSchoolPacket.BatchFieldNumber">
+        <member name="F:Artemis.Service.Protos.School.BatchUpdateSchoolRequest.BatchFieldNumber">
             <summary>Field number for the "Batch" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.School.BatchUpdateSchoolPacket.Batch">
+        <member name="P:Artemis.Service.Protos.School.BatchUpdateSchoolRequest.Batch">
             <summary>
             学校信息数据
             @required
@@ -17634,9 +17617,9 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceBase.GetSchoolInfo(Artemis.Service.Protos.School.GetSchoolInfoRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceBase.ReadSchoolInfo(Artemis.Service.Protos.School.ReadSchoolInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            获取学校信息
+            读取学校信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -17666,7 +17649,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceBase.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolPacket,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceBase.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量更新学校
             </summary>
@@ -17960,9 +17943,9 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.GetSchoolInfo(Artemis.Service.Protos.School.GetSchoolInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.ReadSchoolInfo(Artemis.Service.Protos.School.ReadSchoolInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            获取学校信息
+            读取学校信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -17970,17 +17953,17 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.GetSchoolInfo(Artemis.Service.Protos.School.GetSchoolInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.ReadSchoolInfo(Artemis.Service.Protos.School.ReadSchoolInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            获取学校信息
+            读取学校信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.GetSchoolInfoAsync(Artemis.Service.Protos.School.GetSchoolInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.ReadSchoolInfoAsync(Artemis.Service.Protos.School.ReadSchoolInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            获取学校信息
+            读取学校信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -17988,9 +17971,9 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.GetSchoolInfoAsync(Artemis.Service.Protos.School.GetSchoolInfoRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.ReadSchoolInfoAsync(Artemis.Service.Protos.School.ReadSchoolInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            获取学校信息
+            读取学校信息
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -18104,7 +18087,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolPacket,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新学校
             </summary>
@@ -18114,7 +18097,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolPacket,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchool(Artemis.Service.Protos.School.BatchUpdateSchoolRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新学校
             </summary>
@@ -18122,7 +18105,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchoolAsync(Artemis.Service.Protos.School.BatchUpdateSchoolPacket,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchoolAsync(Artemis.Service.Protos.School.BatchUpdateSchoolRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             批量更新学校
             </summary>
@@ -18132,7 +18115,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchoolAsync(Artemis.Service.Protos.School.BatchUpdateSchoolPacket,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.School.SchoolService.SchoolServiceClient.BatchUpdateSchoolAsync(Artemis.Service.Protos.School.BatchUpdateSchoolRequest,Grpc.Core.CallOptions)">
             <summary>
             批量更新学校
             </summary>

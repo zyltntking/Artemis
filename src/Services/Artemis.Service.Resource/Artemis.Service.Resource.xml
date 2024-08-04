@@ -383,17 +383,17 @@
             <param name="divisionCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="T:Artemis.Service.Resource.Managers.DivisionTreeManager">
+        <member name="T:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager">
             <summary>
                 行政区划树管理器实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDivisionStore)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDivisionStore)">
             <summary>
                 树模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据行政区划信息查搜索政区划
             </summary>
@@ -406,7 +406,7 @@
             <param name="divisionCodeSearch"></param>
             <returns>分页搜索结果</returns>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.DivisionPackage,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.DivisionPackage,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 映射到新实体
             </summary>
@@ -415,7 +415,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之前
             </summary>
@@ -424,7 +424,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在移除子节点之前
             </summary>
@@ -433,7 +433,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.DivisionSelfReferenceTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 获取非根节点的树节点列表
             </summary>
@@ -459,17 +459,17 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Artemis.Service.Resource.Managers.OrganizationTreeManager">
+        <member name="T:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager">
             <summary>
                 组织机构树管理器实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Microsoft.Extensions.Options.IOptions{Artemis.Service.Resource.ResourceServiceConfig})">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Microsoft.Extensions.Options.IOptions{Artemis.Service.Resource.ResourceServiceConfig})">
             <summary>
                 树模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据组织机构信息查搜索组织机构
             </summary>
@@ -482,27 +482,27 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:Artemis.Service.Resource.Managers.OrganizationTreeManager.Options">
+        <member name="P:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.Options">
             <summary>
                 资源配置
             </summary>
         </member>
-        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._region">
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager._region">
             <summary>
                 区域编码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._serial">
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager._serial">
             <summary>
                 机构序列
             </summary>
         </member>
-        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._childSerial">
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager._childSerial">
             <summary>
                 子机构序列
             </summary>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.OrganizationPackage,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.OrganizationPackage,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 映射到新实体
             </summary>
@@ -511,7 +511,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在添加子节点之前
             </summary>
@@ -520,7 +520,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FlushChildrenDesignCode(System.Guid,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.FlushChildrenDesignCode(System.Guid,System.String,System.Threading.CancellationToken)">
             <summary>
                 刷新子节点的设计编码
             </summary>
@@ -528,7 +528,7 @@
             <param name="parentDesignCode"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 在移除子节点之前
             </summary>
@@ -537,7 +537,7 @@
             <param name="loopIndex"></param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationSelfReferenceTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
             <summary>
                 获取非根节点的树节点列表
             </summary>
@@ -1155,7 +1155,7 @@
             <param name="divisionTreeManager"></param>
             <param name="logger"></param>
         </member>
-        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.DivisionTreeManager">
+        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.DivisionSelfReferenceTreeManager">
             <summary>
                 任务树管理器
             </summary>
@@ -1313,7 +1313,7 @@
             <param name="organizationTreeManager"></param>
             <param name="logger"></param>
         </member>
-        <member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.OrganizationTreeManager">
+        <member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.OrganizationSelfReferenceTreeManager">
             <summary>
                 任务树管理器
             </summary>

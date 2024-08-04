@@ -13,7 +13,7 @@ namespace Artemis.Service.Task.Managers;
 /// <summary>
 ///     任务树管理器
 /// </summary>
-public interface ITaskTreeManager : ITreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>
+public interface ITaskTreeManager : ISelfReferenceTreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>
 {
     /// <summary>
     ///     根据任务信息搜索任务
@@ -43,13 +43,13 @@ public interface ITaskTreeManager : ITreeManager<ArtemisTask, TaskInfo, TaskInfo
 /// <summary>
 ///     任务树管理器实现
 /// </summary>
-public class TaskTreeManager : TreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>, ITaskTreeManager
+public class TaskSelfReferenceTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>, ITaskTreeManager
 {
     /// <summary>
     ///     独立模型管理器构造
     /// </summary>
     /// <param name="taskStore"></param>
-    public TaskTreeManager(IArtemisTaskStore taskStore) : base(taskStore)
+    public TaskSelfReferenceTreeManager(IArtemisTaskStore taskStore) : base(taskStore)
     {
     }
 

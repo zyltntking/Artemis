@@ -126,7 +126,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     {
         var id = Guid.Parse(request.StandardCatalogId);
 
-        var package = request.Adapt<StandardCatalogPackage>();
+        var package = request.StandardCatalog.Adapt<StandardCatalogPackage>();
 
         var result = await StandardManager.UpdateEntityAsync(id, package, context.CancellationToken);
 
@@ -276,7 +276,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
         var catalogId = Guid.Parse(request.StandardCatalogId);
         var itemId = Guid.Parse(request.StandardItemId);
 
-        var package = request.Adapt<StandardItemPackage>();
+        var package = request.StandardItem.Adapt<StandardItemPackage>();
 
         var result = await StandardManager.UpdateSubEntityAsync(catalogId, itemId, package, context.CancellationToken);
 

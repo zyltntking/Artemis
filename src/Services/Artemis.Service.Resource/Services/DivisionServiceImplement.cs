@@ -149,7 +149,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     {
         var id = Guid.Parse(request.DivisionId);
 
-        var package = request.Adapt<DivisionPackage>();
+        var package = request.Division.Adapt<DivisionPackage>();
 
         var result = await DivisionTreeManager.UpdateEntityAsync(id, package, context.CancellationToken);
 

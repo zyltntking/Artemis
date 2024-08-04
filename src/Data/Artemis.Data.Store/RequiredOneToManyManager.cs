@@ -10,7 +10,7 @@ namespace Artemis.Data.Store;
 #region interface
 
 /// <summary>
-///     一对多模型管理器
+///     必须的一对多模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
@@ -18,9 +18,9 @@ namespace Artemis.Data.Store;
 /// <typeparam name="TSubEntity"></typeparam>
 /// <typeparam name="TSubEntityInfo"></typeparam>
 /// <typeparam name="TSubEntityPackage"></typeparam>
-public interface IOtmManager<
+public interface IRequiredOneToManyManager<
     TEntity, TEntityInfo, TEntityPackage,
-    TSubEntity, TSubEntityInfo, TSubEntityPackage> : IOtmManager<
+    TSubEntity, TSubEntityInfo, TSubEntityPackage> : IRequiredOneToManyManager<
         TEntity, Guid, TEntityInfo, TEntityPackage,
         TSubEntity, Guid, TSubEntityInfo, TSubEntityPackage>,
     ISeparateManager<TEntityInfo, TEntityPackage>
@@ -34,7 +34,7 @@ public interface IOtmManager<
 }
 
 /// <summary>
-///     一对多模型管理器
+///     必须的一对多模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -44,7 +44,7 @@ public interface IOtmManager<
 /// <typeparam name="TSubKey"></typeparam>
 /// <typeparam name="TSubEntityInfo"></typeparam>
 /// <typeparam name="TSubEntityPackage"></typeparam>
-public interface IOtmManager<
+public interface IRequiredOneToManyManager<
     TEntity, TKey, TEntityInfo, TEntityPackage,
     TSubEntity, TSubKey, TSubEntityInfo, TSubEntityPackage> :
     ISeparateManager<TKey, TEntityInfo, TEntityPackage>
@@ -131,7 +131,7 @@ public interface IOtmManager<
 #endregion
 
 /// <summary>
-///     一对多模型管理器
+///     必须的一对多模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TEntityInfo"></typeparam>
@@ -139,12 +139,12 @@ public interface IOtmManager<
 /// <typeparam name="TSubEntity"></typeparam>
 /// <typeparam name="TSubEntityInfo"></typeparam>
 /// <typeparam name="TSubEntityPackage"></typeparam>
-public abstract class OtmManager<
+public abstract class RequiredOneToManyManager<
     TEntity, TEntityInfo, TEntityPackage,
-    TSubEntity, TSubEntityInfo, TSubEntityPackage> : OtmManager<
+    TSubEntity, TSubEntityInfo, TSubEntityPackage> : RequiredOneToManyManager<
         TEntity, Guid, TEntityInfo, TEntityPackage,
         TSubEntity, Guid, TSubEntityInfo, TSubEntityPackage>,
-    IOtmManager<TEntity, TEntityInfo, TEntityPackage,
+    IRequiredOneToManyManager<TEntity, TEntityInfo, TEntityPackage,
         TSubEntity, TSubEntityInfo, TSubEntityPackage>
     where TEntity : class, IKeySlot
     where TEntityInfo : class, IKeySlot
@@ -156,7 +156,7 @@ public abstract class OtmManager<
     /// <summary>
     ///     模型管理器构造
     /// </summary>
-    protected OtmManager(
+    protected RequiredOneToManyManager(
         IStore<TEntity> entityStore,
         IStore<TSubEntity> subEntityStore) : base(entityStore, subEntityStore)
     {
@@ -164,7 +164,7 @@ public abstract class OtmManager<
 }
 
 /// <summary>
-///     一对多模型管理器
+///     必读的一对多模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -174,11 +174,11 @@ public abstract class OtmManager<
 /// <typeparam name="TSubKey"></typeparam>
 /// <typeparam name="TSubEntityInfo"></typeparam>
 /// <typeparam name="TSubEntityPackage"></typeparam>
-public abstract class OtmManager<
+public abstract class RequiredOneToManyManager<
     TEntity, TKey, TEntityInfo, TEntityPackage,
     TSubEntity, TSubKey, TSubEntityInfo, TSubEntityPackage> :
     SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage>,
-    IOtmManager<TEntity, TKey, TEntityInfo, TEntityPackage,
+    IRequiredOneToManyManager<TEntity, TKey, TEntityInfo, TEntityPackage,
         TSubEntity, TSubKey, TSubEntityInfo, TSubEntityPackage>
     where TEntity : class, IKeySlot<TKey>
     where TEntityInfo : class, IKeySlot<TKey>
@@ -192,7 +192,7 @@ public abstract class OtmManager<
     /// <summary>
     ///     模型管理器构造
     /// </summary>
-    protected OtmManager(
+    protected RequiredOneToManyManager(
         IStore<TEntity, TKey> entityStore,
         IStore<TSubEntity, TSubKey> subEntityStore) : base(entityStore)
     {

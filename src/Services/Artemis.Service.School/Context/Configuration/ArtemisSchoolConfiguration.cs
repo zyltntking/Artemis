@@ -8,7 +8,7 @@ namespace Artemis.Service.School.Context.Configuration;
 /// <summary>
 ///     学校配置
 /// </summary>
-internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisSchool>
+internal sealed class ArtemisSchoolConfiguration : ConcurrencyModelEntityConfiguration<ArtemisSchool>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisSchool>
 
@@ -29,25 +29,8 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
     protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisSchool> builder)
     {
         // Shadow Properties
-        builder.Property<string>("ProvinceCode")
-            .HasComputedColumnSql(@"substring(""OrganizationCode"", 1, 2)", true)
-            .HasMaxLength(4)
-            .HasComment("省级行政区划编码");
-
-        builder.Property<string>("PrefectureCode")
-            .HasComputedColumnSql(@"substring(""OrganizationCode"", 1, 4)", true)
-            .HasMaxLength(6)
-            .HasComment("地级行政区划编码");
-
-        builder.Property<string>("CountyCode")
-            .HasComputedColumnSql(@"substring(""OrganizationCode"", 1, 6)", true)
-            .HasMaxLength(8)
-            .HasComment("县级行政区划编码");
-
-        builder.Property<string>("TownshipCode")
-            .HasComputedColumnSql(@"substring(""OrganizationCode"", 1, 9)", true)
-            .HasMaxLength(11)
-            .HasComment("乡级行政区划编码");
+        builder.Property(entity => entity.EstablishTime)
+            .HasColumnType(DataTypeSet.DateTime);
     }
 
     /// <summary>
@@ -56,6 +39,25 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyPartitionEntityCon
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisSchool> builder)
     {
+        // index
+        builder.HasIndex(school => school.Code)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.Code)));
+
+        builder.HasIndex(school => school.Name)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.Name)));
+
+        builder.HasIndex(school => school.BindingTag)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.BindingTag)));
+
+        builder.HasIndex(school => school.Type)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.Type)));
+
+        builder.HasIndex(school => school.OrganizationCode)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.OrganizationCode)));
+
+        builder.HasIndex(school => school.DivisionCode)
+            .HasDatabaseName(IndexName(nameof(ArtemisSchool.DivisionCode)));
+
         // Each School can have many Classes
         builder.HasMany(school => school.Classes)
             .WithOne(iClass => iClass.School)

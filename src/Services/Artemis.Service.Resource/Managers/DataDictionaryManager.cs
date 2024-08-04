@@ -15,7 +15,7 @@ namespace Artemis.Service.Resource.Managers;
 /// <summary>
 ///     数据字典管理器接口
 /// </summary>
-public interface IDataDictionaryManager : IOtmManager<
+public interface IDataDictionaryManager : IRequiredOneToManyManager<
     ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage,
     ArtemisDataDictionaryItem, DataDictionaryItemInfo, DataDictionaryItemPackage>
 {
@@ -57,7 +57,7 @@ public interface IDataDictionaryManager : IOtmManager<
 /// <summary>
 ///     数据字典管理器
 /// </summary>
-public class DataDictionaryManager : OtmManager<
+public class DataDictionaryManager : RequiredOneToManyManager<
     ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage,
     ArtemisDataDictionaryItem, DataDictionaryItemInfo, DataDictionaryItemPackage>, IDataDictionaryManager
 {

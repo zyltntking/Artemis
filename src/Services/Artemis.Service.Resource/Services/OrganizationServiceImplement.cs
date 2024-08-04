@@ -151,7 +151,7 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     {
         var id = Guid.Parse(request.OrganizationId);
 
-        var package = request.Adapt<OrganizationPackage>();
+        var package = request.Organization.Adapt<OrganizationPackage>();
 
         var result = await OrganizationTreeManager.UpdateEntityAsync(id, package, context.CancellationToken);
 

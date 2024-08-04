@@ -8,7 +8,7 @@ namespace Artemis.Service.School.Context.Configuration;
 /// <summary>
 ///     班级配置
 /// </summary>
-internal sealed class ArtemisClassConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisClass>
+internal sealed class ArtemisClassConfiguration : ConcurrencyModelEntityConfiguration<ArtemisClass>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisClass>
 
@@ -22,16 +22,6 @@ internal sealed class ArtemisClassConfiguration : ConcurrencyPartitionEntityConf
     /// </summary>
     protected override string TableName => nameof(ArtemisClass).TableName();
 
-    /// <summary>
-    ///     计算年级名称
-    /// </summary>
-    /// <param name="establishTime"></param>
-    /// <returns></returns>
-    /// <exception cref="NotSupportedException"></exception>
-    public double CountGradeName(DateTime establishTime)
-    {
-        throw new NotSupportedException();
-    }
 
     /// <summary>
     ///     实体关系配置
@@ -39,6 +29,25 @@ internal sealed class ArtemisClassConfiguration : ConcurrencyPartitionEntityConf
     /// <param name="builder"></param>
     protected override void EntityRelationConfigure(EntityTypeBuilder<ArtemisClass> builder)
     {
+        // index
+        builder.HasIndex(iClass => iClass.Name)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.Name)));
+
+        builder.HasIndex(iClass => iClass.GradeName)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.GradeName)));
+
+        builder.HasIndex(iClass => iClass.Code)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.Code)));
+
+        builder.HasIndex(iClass => iClass.StudyPhase)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.StudyPhase)));
+
+        builder.HasIndex(iClass => iClass.Length)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.Length)));
+
+        builder.HasIndex(iClass => iClass.SerialNumber)
+            .HasDatabaseName(IndexName(nameof(ArtemisClass.SerialNumber)));
+
         // Each Class can have one HeadTeacher
         builder.HasOne(iClass => iClass.HeadTeacher)
             .WithOne(teacher => teacher.HeadTeacherClass)

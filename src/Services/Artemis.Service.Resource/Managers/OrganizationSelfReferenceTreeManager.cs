@@ -17,7 +17,7 @@ namespace Artemis.Service.Resource.Managers;
 ///     组织机构树管理器
 /// </summary>
 public interface IOrganizationTreeManager :
-    ITreeManager<
+    ISelfReferenceTreeManager<
         ArtemisOrganization,
         OrganizationInfo,
         OrganizationInfoTree,
@@ -47,8 +47,8 @@ public interface IOrganizationTreeManager :
 /// <summary>
 ///     组织机构树管理器实现
 /// </summary>
-public class OrganizationTreeManager :
-    TreeManager<
+public class OrganizationSelfReferenceTreeManager :
+    SelfReferenceTreeManager<
         ArtemisOrganization,
         OrganizationInfo,
         OrganizationInfoTree,
@@ -58,7 +58,7 @@ public class OrganizationTreeManager :
     /// <summary>
     ///     树模型管理器构造
     /// </summary>
-    public OrganizationTreeManager(
+    public OrganizationSelfReferenceTreeManager(
         IArtemisOrganizationStore organizationStore,
         IOptions<ResourceServiceConfig> options) : base(organizationStore)
     {
