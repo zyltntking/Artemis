@@ -12,21 +12,21 @@ service UserService {
 	// 查询用户信息
 	rpc SearchUserInfo (SearchUserInfoRequest) returns (SearchUserInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users"
+			get: "/api/IdentityService/Users"
 		};
 	}
 	
 	// 读取用户信息
 	rpc ReadUserInfo (ReadUserInfoRequest) returns (ReadUserInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}"
+			get: "/api/IdentityService/Users/{UserId}"
 		};
 	}
 	
 	// 创建用户
 	rpc CreateUser (CreateUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users"
+			post: "/api/IdentityService/Users"
 			body: "*"
 		};
 	}
@@ -34,7 +34,7 @@ service UserService {
 	// 批量创建用户
 	rpc BatchCreateUser (BatchCreateUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/BatchCreate"
+			post: "/api/IdentityService/Users/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -42,7 +42,7 @@ service UserService {
 	// 更新用户
 	rpc UpdateUser (UpdateUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/{UserId}"
+			put: "/api/IdentityService/Users/{UserId}"
 			body: "User"
 		};
 	}
@@ -50,7 +50,7 @@ service UserService {
 	// 批量更新用户
 	rpc BatchUpdateUser (BatchUpdateUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/BatchUpdate"
+			put: "/api/IdentityService/Users/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -58,14 +58,14 @@ service UserService {
 	// 删除用户
 	rpc DeleteUser (DeleteUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Users/{UserId}"
+			delete: "/api/IdentityService/Users/{UserId}"
 		};
 	}
 	
 	// 批量删除用户
 	rpc BatchDeleteUser (BatchDeleteUserRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/BatchDelete"
+			post: "/api/IdentityService/Users/BatchDelete"
 			body: "UserIds"
 		};
 	}
@@ -73,28 +73,28 @@ service UserService {
 	// 查询用户角色信息
 	rpc SearchUserRoleInfo (SearchUserRoleInfoRequest) returns (SearchUserRoleInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Roles"
+			get: "/api/IdentityService/Users/{UserId}/Roles"
 		};
 	}
 
 	// 读取用户角色信息
 	rpc ReadUserRoleInfo (ReadUserRoleInfoRequest) returns (ReadUserRoleInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Roles/{RoleId}"
+			get: "/api/IdentityService/Users/{UserId}/Roles/{RoleId}"
 		};
 	}
 
 	// 查询用户属性
 	rpc FetchUserProfiles (FetchUserProfilesRequest) returns (FetchUserProfilesResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Profiles"
+			get: "/api/IdentityService/Users/{UserId}/Profiles"
 		};
 	}
 	
 	// 添加用户角色
 	rpc AddUserRole (AddUserRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles"
+			post: "/api/IdentityService/Users/{UserId}/Roles"
 			body: "Role"
 		};
 	}
@@ -102,7 +102,7 @@ service UserService {
 	// 批量添加用户角色
 	rpc BatchAddUserRole (BatchAddUserRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles/BatchAdd"
+			post: "/api/IdentityService/Users/{UserId}/Roles/BatchAdd"
 			body: "RoleIds"
 		};
 	}
@@ -110,14 +110,14 @@ service UserService {
 	// 移除用户角色
 	rpc RemoveUserRole (RemoveUserRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Users/{UserId}/Roles/{RoleId}"
+			delete: "/api/IdentityService/Users/{UserId}/Roles/{RoleId}"
 		};
 	}
 	
 	// 批量移除用户角色
 	rpc BatchRemoveUserRole (BatchRemoveUserRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Roles/BatchRemove"
+			post: "/api/IdentityService/Users/{UserId}/Roles/BatchRemove"
 			body: "RoleIds"
 		};
 	}
@@ -125,14 +125,14 @@ service UserService {
 	// 获取用户属性
 	rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Profiles/{Id}"
+			get: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
 		};
 	}
 
 	// 创建用户属性
 	rpc AddUserProfile (AddUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Profiles"
+			post: "/api/IdentityService/Users/{UserId}/Profiles"
 			body: "UserProfile"
 		};
 	}
@@ -140,7 +140,7 @@ service UserService {
 	// 批量创建用户属性
 	rpc BatchAddUserProfile (BatchAddUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Profiles/BatchAdd"
+			post: "/api/IdentityService/Users/{UserId}/Profiles/BatchAdd"
 			body: "Batch"
 		};
 	}
@@ -148,7 +148,7 @@ service UserService {
 	// 更新用户属性
 	rpc UpdateUserProfile (UpdateUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/{UserId}/Profiles/{Id}"
+			put: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
 			body: "UserProfile"
 		};
 	}
@@ -156,7 +156,7 @@ service UserService {
 	// 批量更新用户属性
 	rpc BatchUpdateUserProfile (BatchUpdateUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/{UserId}/Profiles/BatchUpdate"
+			put: "/api/IdentityService/Users/{UserId}/Profiles/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -164,14 +164,14 @@ service UserService {
 	// 删除用户属性
 	rpc DeleteUserProfile (DeleteUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Users/{UserId}/Profiles/{Id}"
+			delete: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
 		};
 	}
 
 	// 批量删除用户属性
 	rpc BatchDeleteUserProfile (BatchDeleteUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Profiles/BatchDelete"
+			post: "/api/IdentityService/Users/{UserId}/Profiles/BatchDelete"
 			body: "Ids"
 		};
 	}
@@ -179,21 +179,21 @@ service UserService {
 	// 查询用户凭据信息
 	rpc SearchUserClaimInfo (SearchUserClaimInfoRequest) returns (SearchUserClaimInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Claims"
+			get: "/api/IdentityService/Users/{UserId}/Claims"
 		};
 	}
 
 	// 读取用户凭据信息
 	rpc ReadUserClaimInfo (ReadUserClaimInfoRequest) returns (ReadUserClaimInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Users/{UserId}/Claims/{ClaimId}"
+			get: "/api/IdentityService/Users/{UserId}/Claims/{ClaimId}"
 		};
 	}
 
 	// 添加用户凭据
 	rpc AddUserClaim (AddUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Claims"
+			post: "/api/IdentityService/Users/{UserId}/Claims"
 			body: "UserClaim"
 		};
 	}
@@ -201,7 +201,7 @@ service UserService {
 	// 批量添加用户凭据
 	rpc BatchAddUserClaim (BatchAddUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Claims/BatchAdd"
+			post: "/api/IdentityService/Users/{UserId}/Claims/BatchAdd"
 			body: "Batch"
 		};
 	}
@@ -209,7 +209,7 @@ service UserService {
 	// 更新用户凭据
 	rpc UpdateUserClaim (UpdateUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/{UserId}/Claims/{ClaimId}"
+			put: "/api/IdentityService/Users/{UserId}/Claims/{ClaimId}"
 			body: "UserClaim"
 		};
 	}
@@ -217,7 +217,7 @@ service UserService {
 	// 批量更新用户凭据
 	rpc BatchUpdateUserClaim (BatchUpdateUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Users/{UserId}/Claims/BatchUpdate"
+			put: "/api/IdentityService/Users/{UserId}/Claims/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -225,14 +225,14 @@ service UserService {
 	// 删除用户凭据
 	rpc DeleteUserClaim (DeleteUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Users/{UserId}/Claims/{ClaimId}"
+			delete: "/api/IdentityService/Users/{UserId}/Claims/{ClaimId}"
 		};
 	}
 	
 	// 批量删除用户凭据
 	rpc BatchDeleteUserClaim (BatchDeleteUserClaimRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Users/{UserId}/Claims/BatchDelete"
+			post: "/api/IdentityService/Users/{UserId}/Claims/BatchDelete"
 			body: "ClaimIds"
 		};
 	}

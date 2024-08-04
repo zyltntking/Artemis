@@ -12,21 +12,21 @@ service ResourceService {
     // 查询凭据信息
     rpc SearchClaimInfo(SearchClaimInfoRequest) returns (SearchClaimInfoResponse) {
         option (google.api.http) = {
-            get: "/api/Claims"
+            get: "/api/IdentityService/Claims"
         };
     }
 
     // 读取凭据信息
     rpc ReadClaimInfo(ReadClaimInfoRequest) returns (ReadClaimInfoResponse) {
         option (google.api.http) = {
-            get: "/api/Claims/{ClaimId}"
+            get: "/api/IdentityService/Claims/{ClaimId}"
         };
     }
     
     // 创建凭据
     rpc CreateClaim(CreateClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            post: "/api/Claims"
+            post: "/api/IdentityService/Claims"
             body: "*"
         };
     }
@@ -34,7 +34,7 @@ service ResourceService {
     // 批量创建凭据
     rpc BatchCreateClaim(BatchCreateClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            post: "/api/Claims/BatchCreate"
+            post: "/api/IdentityService/Claims/BatchCreate"
             body: "Batch"
         };
     }
@@ -42,7 +42,7 @@ service ResourceService {
     // 更新凭据
     rpc UpdateClaim(UpdateClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            put: "/api/Claims/{ClaimId}"
+            put: "/api/IdentityService/Claims/{ClaimId}"
             body: "Claim"
         };
     }
@@ -50,7 +50,7 @@ service ResourceService {
     // 批量更新凭据
     rpc BatchUpdateClaim(BatchUpdateClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            put: "/api/Claims/BatchUpdate"
+            put: "/api/IdentityService/Claims/BatchUpdate"
             body: "Batch"
         };
     }
@@ -58,14 +58,14 @@ service ResourceService {
     // 删除凭据
     rpc DeleteClaim(DeleteClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            delete: "/api/Claims/{ClaimId}"
+            delete: "/api/IdentityService/Claims/{ClaimId}"
         };
     }
     
     // 批量删除凭据
     rpc BatchDeleteClaim(BatchDeleteClaimRequest) returns (AffectedResponse) {
         option (google.api.http) = {
-            post: "/api/Claims/BatchDelete"
+            post: "/api/IdentityService/Claims/BatchDelete"
             body: "ClaimIds"
         };
     }
