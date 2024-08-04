@@ -2,14 +2,13 @@
 
 namespace Artemis.Service.Shared.Resource;
 
-
 /// <summary>
-/// 数据字典接口
+///     数据字典接口
 /// </summary>
 public interface IDataDictionary : IDataDictionaryInfo;
 
 /// <summary>
-/// 数据字典信息接口
+///     数据字典信息接口
 /// </summary>
 public interface IDataDictionaryInfo : IDataDictionaryPackage, IKeySlot;
 

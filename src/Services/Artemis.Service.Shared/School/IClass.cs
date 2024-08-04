@@ -3,14 +3,14 @@
 namespace Artemis.Service.Shared.School;
 
 /// <summary>
-/// 班级接口
+///     班级接口
 /// </summary>
 public interface IClass : IClassInfo
 {
 }
 
 /// <summary>
-/// 班级信息接口
+///     班级信息接口
 /// </summary>
 public interface IClassInfo : IClassPackage, IKeySlot
 {
@@ -31,7 +31,7 @@ public interface IClassPackage
     Guid? HeadTeacherId { get; set; }
 
     /// <summary>
-    /// 班主任名称
+    ///     班主任名称
     /// </summary>
     string? HeadTeacherName { get; set; }
 
@@ -84,4 +84,9 @@ public interface IClassPackage
     ///     班级创建时间
     /// </summary>
     DateTime? EstablishTime { get; set; }
+
+    /// <summary>
+    ///     备注
+    /// </summary>
+    string? Remark { get; set; }
 }

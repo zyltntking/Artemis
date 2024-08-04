@@ -9,12 +9,11 @@ using Artemis.Service.Resource.Stores;
 using Artemis.Service.Shared.Resource.Transfer;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Artemis.Service.Resource.Managers;
 
 /// <summary>
-/// 标准管理器接口
+///     标准管理器接口
 /// </summary>
 public interface IStandardManager : IRequiredOneToManyManager<
     ArtemisStandardCatalog, StandardCatalogInfo, StandardCatalogPackage,
@@ -60,7 +59,7 @@ public interface IStandardManager : IRequiredOneToManyManager<
 }
 
 /// <summary>
-/// 标准管理器
+///     标准管理器
 /// </summary>
 public class StandardManager : RequiredOneToManyManager<
     ArtemisStandardCatalog, StandardCatalogInfo, StandardCatalogPackage,
@@ -85,8 +84,8 @@ public class StandardManager : RequiredOneToManyManager<
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected override async Task<ArtemisStandardCatalog> MapNewEntity(
-        StandardCatalogPackage package, 
-        int loopIndex, 
+        StandardCatalogPackage package,
+        int loopIndex,
         CancellationToken cancellationToken = default)
     {
         var catalog = await base.MapNewEntity(package, loopIndex, cancellationToken);
@@ -106,7 +105,7 @@ public class StandardManager : RequiredOneToManyManager<
     }
 
     /// <summary>
-    /// 设置子模型的关联键
+    ///     设置子模型的关联键
     /// </summary>
     /// <param name="subEntity"></param>
     /// <param name="key"></param>
@@ -131,11 +130,11 @@ public class StandardManager : RequiredOneToManyManager<
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<StandardCatalogInfo>> FetchStandardCatalogsAsync(
-        string? catalogNameSearch, 
-        string? catalogCodeSearch, 
+        string? catalogNameSearch,
+        string? catalogCodeSearch,
         string? catalogType,
         string? catalogState,
-        int page = 1, 
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -195,15 +194,15 @@ public class StandardManager : RequiredOneToManyManager<
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<StandardItemInfo>> FetchStandardItemsAsync(
-        Guid id, 
-        string? itemNameSearch, 
-        string? itemCodeSearch, 
-        int page = 1, 
+        Guid id,
+        string? itemNameSearch,
+        string? itemCodeSearch,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
-        
+
         itemNameSearch ??= string.Empty;
         itemCodeSearch ??= string.Empty;
 

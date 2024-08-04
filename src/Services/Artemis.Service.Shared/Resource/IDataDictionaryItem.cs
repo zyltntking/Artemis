@@ -3,19 +3,19 @@
 namespace Artemis.Service.Shared.Resource;
 
 /// <summary>
-/// 数据项目接口
+///     数据项目接口
 /// </summary>
 public interface IDataDictionaryItem : IDataDictionaryItemInfo
 {
 }
 
 /// <summary>
-/// 数据项目信息接口
+///     数据项目信息接口
 /// </summary>
 public interface IDataDictionaryItemInfo : IDataDictionaryItemPackage, IKeySlot
 {
     /// <summary>
-    /// 数据字典标识
+    ///     数据字典标识
     /// </summary>
     Guid DataDictionaryId { get; set; }
 }

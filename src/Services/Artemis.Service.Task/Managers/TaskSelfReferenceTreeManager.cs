@@ -43,7 +43,8 @@ public interface ITaskTreeManager : ISelfReferenceTreeManager<ArtemisTask, TaskI
 /// <summary>
 ///     任务树管理器实现
 /// </summary>
-public class TaskSelfReferenceTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>, ITaskTreeManager
+public class TaskSelfReferenceTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, TaskInfoTree, TaskPackage>,
+    ITaskTreeManager
 {
     /// <summary>
     ///     独立模型管理器构造

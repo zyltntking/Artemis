@@ -1,55 +1,65 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Artemis.App.Resource</name>
-    </assembly>
-    <members>
-        <member name="T:Artemis.App.Resource.Migrations.InitialCreate">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:Artemis.App.Resource.Migrations.AddStandard">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandard.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandard.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandard.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:Artemis.App.Resource.Migrations.AddStandardRel">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandardRel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandardRel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Artemis.App.Resource.Migrations.AddStandardRel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:Artemis.App.Resource.Program">
-            <summary>
-                应用程序入口
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Resource.Program.Main(System.String[])">
-            <summary>
-                主函数
-            </summary>
-            <param name="args"></param>
-        </member>
-    </members>
+	<assembly>
+		<name>Artemis.App.Resource</name>
+	</assembly>
+	<members>
+		<member name="T:Artemis.App.Resource.Migrations.InitialCreate">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<inheritdoc />
+		</member>
+		<member name="T:Artemis.App.Resource.Migrations.AddStandard">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandard.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandard.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandard.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<inheritdoc />
+		</member>
+		<member name="T:Artemis.App.Resource.Migrations.AddStandardRel">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandardRel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandardRel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+			<inheritdoc />
+		</member>
+		<member
+			name="M:Artemis.App.Resource.Migrations.AddStandardRel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+			<inheritdoc />
+		</member>
+		<member name="T:Artemis.App.Resource.Program">
+			<summary>
+				应用程序入口
+			</summary>
+		</member>
+		<member name="M:Artemis.App.Resource.Program.Main(System.String[])">
+			<summary>
+				主函数
+			</summary>
+			<param name="args"></param>
+		</member>
+	</members>
 </doc>

@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Service.Shared.School.Transfer;
 
 /// <summary>
-/// 班级信息
+///     班级信息
 /// </summary>
 public record ClassInfo : ClassPackage, IClassInfo
 {
@@ -17,7 +17,7 @@ public record ClassInfo : ClassPackage, IClassInfo
 }
 
 /// <summary>
-/// 班级数据包
+///     班级数据包
 /// </summary>
 public record ClassPackage : IClassPackage
 {
@@ -29,7 +29,7 @@ public record ClassPackage : IClassPackage
     public Guid? HeadTeacherId { get; set; }
 
     /// <summary>
-    /// 班主任名称
+    ///     班主任名称
     /// </summary>
     public string? HeadTeacherName { get; set; }
 
@@ -82,6 +82,11 @@ public record ClassPackage : IClassPackage
     ///     班级创建时间
     /// </summary>
     public DateTime? EstablishTime { get; set; }
+
+    /// <summary>
+    ///     备注
+    /// </summary>
+    public string? Remark { get; set; }
 
     #endregion
 }

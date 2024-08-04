@@ -164,7 +164,7 @@ public abstract class RequiredOneToManyManager<
 }
 
 /// <summary>
-///     必读的一对多模型管理器
+///     必须的一对多模型管理器
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TKey"></typeparam>
@@ -208,7 +208,7 @@ public abstract class RequiredOneToManyManager<
 
     #endregion
 
-    #region Overrides of SeparateManager<TEntity,TKey,TEntityInfo,TEntityPackage>
+    #region Overrides
 
     /// <summary>
     ///     释放托管的Store
@@ -230,7 +230,7 @@ public abstract class RequiredOneToManyManager<
     protected abstract Expression<Func<TSubEntity, bool>> SubEntityKeyMatcher(TKey key);
 
     /// <summary>
-    /// 设置子模型的关联键
+    ///     设置子模型的关联键
     /// </summary>
     /// <param name="subEntity"></param>
     /// <param name="key"></param>
@@ -241,11 +241,13 @@ public abstract class RequiredOneToManyManager<
     /// </summary>
     /// <param name="package"></param>
     /// <param name="key"></param>
+    /// <param name="loopIndex"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected virtual Task<TSubEntity> MapNewSubEntity(
-        TSubEntityPackage package, 
-        TKey key, 
+        TSubEntityPackage package,
+        TKey key,
+        int loopIndex,
         CancellationToken cancellationToken = default)
     {
         var entity = Instance.CreateInstance<TSubEntity, TSubEntityPackage>(package);
@@ -260,11 +262,13 @@ public abstract class RequiredOneToManyManager<
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected virtual Task<TSubEntity> MapOverSubEntity(
-        TSubEntity entity, 
-        TSubEntityPackage package, 
+        TSubEntity entity,
+        TSubEntityPackage package,
+        int loopIndex,
         CancellationToken cancellationToken = default)
     {
         entity = package.Adapt(entity, IgnoreNullConfig);
@@ -315,7 +319,7 @@ public abstract class RequiredOneToManyManager<
 
         if (entityExists)
         {
-            var subEntity = await MapNewSubEntity(subEntityPackage, key, cancellationToken);
+            var subEntity = await MapNewSubEntity(subEntityPackage, key, 1, cancellationToken);
 
             return await SubEntityStore.CreateAsync(subEntity, cancellationToken);
         }
@@ -341,10 +345,13 @@ public abstract class RequiredOneToManyManager<
         {
             var subEntityList = new List<TSubEntity>();
 
+            var loopIndex = 1;
+
             foreach (var subEntityPackage in subEntityPackages)
             {
-                var subEntity = await MapNewSubEntity(subEntityPackage, key, cancellationToken);
+                var subEntity = await MapNewSubEntity(subEntityPackage, key, loopIndex, cancellationToken);
                 subEntityList.Add(subEntity);
+                loopIndex++;
             }
 
             return await SubEntityStore.CreateAsync(subEntityList, cancellationToken);
@@ -377,7 +384,7 @@ public abstract class RequiredOneToManyManager<
 
             if (subEntity is not null)
             {
-                subEntity = await MapOverSubEntity(subEntity, subEntityPackage, cancellationToken);
+                subEntity = await MapOverSubEntity(subEntity, subEntityPackage, 1, cancellationToken);
 
                 return await SubEntityStore.UpdateAsync(subEntity, cancellationToken);
             }
@@ -415,13 +422,17 @@ public abstract class RequiredOneToManyManager<
             {
                 var updateSubEntities = new List<TSubEntity>();
 
+                var loopIndex = 1;
+
                 foreach (var subEntity in subEntities)
                 {
                     var subPackage = dictionary[subEntity.Id];
 
-                    var updateSubEntity = await MapOverSubEntity(subEntity, subPackage, cancellationToken);
+                    var updateSubEntity = await MapOverSubEntity(subEntity, subPackage, loopIndex, cancellationToken);
 
                     updateSubEntities.Add(updateSubEntity);
+
+                    loopIndex++;
                 }
 
                 return await SubEntityStore.UpdateAsync(updateSubEntities, cancellationToken);

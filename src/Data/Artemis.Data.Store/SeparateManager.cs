@@ -136,7 +136,7 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
     #endregion
 
-    #region Overrides of Manager
+    #region Overrides
 
     /// <summary>
     ///     释放托管的Store
@@ -148,7 +148,70 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
 
     #endregion
 
-    #region Implementation of ISeparateManager<TEntity,TKey,TEntityInfo,TEntityPackage>
+    #region EntityMap
+
+    /// <summary>
+    ///     忽略空值配置
+    /// </summary>
+    private TypeAdapterConfig? _ignoreNullConfig;
+
+    /// <summary>
+    ///     忽略空值配置
+    /// </summary>
+    /// <returns></returns>
+    protected TypeAdapterConfig IgnoreNullConfig
+    {
+        get
+        {
+            if (_ignoreNullConfig != null)
+                return _ignoreNullConfig;
+            _ignoreNullConfig = new TypeAdapterConfig();
+
+            _ignoreNullConfig
+                .NewConfig<TEntity, TEntityPackage>()
+                .IgnoreNullValues(true);
+
+            return _ignoreNullConfig;
+        }
+    }
+
+    /// <summary>
+    ///     映射到新实体
+    /// </summary>
+    /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected virtual Task<TEntity> MapNewEntity(
+        TEntityPackage package,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
+    {
+        var entity = Instance.CreateInstance<TEntity, TEntityPackage>(package);
+        return Task.FromResult(entity);
+    }
+
+    /// <summary>
+    ///     覆盖实体
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="package"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected virtual Task<TEntity> MapOverEntity(
+        TEntity entity,
+        TEntityPackage package,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
+    {
+        entity = package.Adapt(entity, IgnoreNullConfig);
+        return Task.FromResult(entity);
+    }
+
+    #endregion
+
+    #region Implementation
 
     /// <summary>
     ///     读取实体信息
@@ -308,69 +371,6 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
         var flag = string.Join(',', keyList.Select(id => id.IdToString()));
 
         return StoreResult.EntityNotFoundFailed(typeof(TEntity).Name, flag);
-    }
-
-    #endregion
-
-    #region EntityMap
-
-    /// <summary>
-    ///     忽略空值配置
-    /// </summary>
-    private TypeAdapterConfig? _ignoreNullConfig;
-
-    /// <summary>
-    ///     忽略空值配置
-    /// </summary>
-    /// <returns></returns>
-    protected TypeAdapterConfig IgnoreNullConfig
-    {
-        get
-        {
-            if (_ignoreNullConfig != null)
-                return _ignoreNullConfig;
-            _ignoreNullConfig = new TypeAdapterConfig();
-
-            _ignoreNullConfig
-                .NewConfig<TEntity, TEntityPackage>()
-                .IgnoreNullValues(true);
-
-            return _ignoreNullConfig;
-        }
-    }
-
-    /// <summary>
-    ///     映射到新实体
-    /// </summary>
-    /// <param name="package"></param>
-    /// <param name="loopIndex"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    protected virtual Task<TEntity> MapNewEntity(
-        TEntityPackage package,
-        int loopIndex,
-        CancellationToken cancellationToken = default)
-    {
-        var entity = Instance.CreateInstance<TEntity, TEntityPackage>(package);
-        return Task.FromResult(entity);
-    }
-
-    /// <summary>
-    ///     覆盖实体
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="package"></param>
-    /// <param name="loopIndex"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    protected virtual Task<TEntity> MapOverEntity(
-        TEntity entity,
-        TEntityPackage package,
-        int loopIndex,
-        CancellationToken cancellationToken = default)
-    {
-        entity = package.Adapt(entity, IgnoreNullConfig);
-        return Task.FromResult(entity);
     }
 
     #endregion

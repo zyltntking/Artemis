@@ -1,10 +1,36 @@
-﻿namespace Artemis.Service.Shared.School;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.School;
 
 /// <summary>
 ///     学生接口
 /// </summary>
-public interface IStudent
+public interface IStudent : IStudentInfo
 {
+}
+
+/// <summary>
+///     学生信息接口
+/// </summary>
+public interface IStudentInfo : IStudentPackage, IKeySlot
+{
+}
+
+/// <summary>
+///     学生数据包接口
+/// </summary>
+public interface IStudentPackage
+{
+    /// <summary>
+    ///     学校标识
+    /// </summary>
+    Guid? SchoolId { get; set; }
+
+    /// <summary>
+    ///     班级标识
+    /// </summary>
+    Guid? ClassId { get; set; }
+
     /// <summary>
     ///     学生名称
     /// </summary>
@@ -13,17 +39,12 @@ public interface IStudent
     /// <summary>
     ///     学生性别
     /// </summary>
-    string Gender { get; set; }
-
-    /// <summary>
-    ///     专业
-    /// </summary>
-    string? Major { get; set; }
+    string? Gender { get; set; }
 
     /// <summary>
     ///     学生生日
     /// </summary>
-    DateOnly Birthday { get; set; }
+    DateOnly? Birthday { get; set; }
 
     /// <summary>
     ///     民族
@@ -33,7 +54,7 @@ public interface IStudent
     /// <summary>
     ///     学生编码
     /// </summary>
-    string Code { get; set; }
+    string? Code { get; set; }
 
     /// <summary>
     ///     学籍号
@@ -48,7 +69,7 @@ public interface IStudent
     /// <summary>
     ///     入学时间
     /// </summary>
-    DateTime EnrollmentDate { get; set; }
+    DateTime? EnrollmentDate { get; set; }
 
     /// <summary>
     ///     住址区划代码
@@ -59,4 +80,9 @@ public interface IStudent
     ///     住址
     /// </summary>
     string? Address { get; set; }
+
+    /// <summary>
+    ///     备注
+    /// </summary>
+    string? Remark { get; set; }
 }

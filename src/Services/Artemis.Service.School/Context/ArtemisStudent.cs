@@ -11,22 +11,12 @@ namespace Artemis.Service.School.Context;
 public sealed class ArtemisStudent : Student
 {
     /// <summary>
-    ///     班级学生对应关系
+    ///     学生所在的学校
     /// </summary>
-    public ICollection<ArtemisClassStudent>? ClassStudents { get; set; }
+    public ArtemisSchool? School { get; set; }
 
     /// <summary>
     ///     学生所在的班级
     /// </summary>
-    public ICollection<ArtemisClass>? Classes { get; set; }
-
-    /// <summary>
-    ///     学校学生对应关系
-    /// </summary>
-    public ICollection<ArtemisSchoolStudent>? SchoolStudents { get; set; }
-
-    /// <summary>
-    ///     学生所在的学校
-    /// </summary>
-    public ICollection<ArtemisSchool>? Schools { get; set; }
+    public ArtemisClass? Class { get; set; }
 }

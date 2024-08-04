@@ -28,7 +28,6 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyModelEntityConfigu
     /// <param name="builder"></param>
     protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisSchool> builder)
     {
-        // Shadow Properties
         builder.Property(entity => entity.EstablishTime)
             .HasColumnType(DataTypeSet.DateTime);
     }
@@ -67,6 +66,24 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyModelEntityConfigu
                 nameof(ArtemisSchool).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Each School can have many Teachers
+        builder.HasMany(school => school.Teachers)
+            .WithOne(teacher => teacher.School)
+            .HasForeignKey(teacher => teacher.SchoolId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisTeacher).TableName(),
+                nameof(ArtemisSchool).TableName()))
+            .IsRequired(false);
+
+        // Each School can have many Students
+        builder.HasMany(school => school.Students)
+            .WithOne(student => student.School)
+            .HasForeignKey(student => student.SchoolId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisStudent).TableName(),
+                nameof(ArtemisSchool).TableName()))
+            .IsRequired(false);
     }
 
     #endregion

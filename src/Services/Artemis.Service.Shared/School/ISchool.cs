@@ -3,18 +3,17 @@
 namespace Artemis.Service.Shared.School;
 
 /// <summary>
-/// 学校接口
+///     学校接口
 /// </summary>
 public interface ISchool : ISchoolInfo
 {
 }
 
 /// <summary>
-///    学校信息接口
+///     学校信息接口
 /// </summary>
 public interface ISchoolInfo : ISchoolPackage, IKeySlot
 {
-
 }
 
 /// <summary>
@@ -33,7 +32,7 @@ public interface ISchoolPackage
     string? Code { get; set; }
 
     /// <summary>
-    /// 绑定标记
+    ///     绑定标记
     /// </summary>
     string? BindingTag { get; set; }
 
@@ -78,12 +77,12 @@ public interface ISchoolPackage
     DateTime? EstablishTime { get; set; }
 
     /// <summary>
-    /// 学校简介
+    ///     学校简介
     /// </summary>
     string? Introduction { get; set; }
 
     /// <summary>
-    /// 备注
+    ///     备注
     /// </summary>
     string? Remark { get; set; }
 }

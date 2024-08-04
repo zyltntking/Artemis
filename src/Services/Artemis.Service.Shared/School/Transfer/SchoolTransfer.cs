@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Service.Shared.School.Transfer;
 
 /// <summary>
-/// 学校信息
+///     学校信息
 /// </summary>
 public record SchoolInfo : SchoolPackage, ISchoolInfo
 {
@@ -12,7 +12,7 @@ public record SchoolInfo : SchoolPackage, ISchoolInfo
 }
 
 /// <summary>
-/// 学校数据包
+///     学校数据包
 /// </summary>
 public record SchoolPackage : ISchoolPackage
 {
@@ -27,7 +27,7 @@ public record SchoolPackage : ISchoolPackage
     public string? Code { get; set; }
 
     /// <summary>
-    /// 绑定标记
+    ///     绑定标记
     /// </summary>
     public string? BindingTag { get; set; }
 
@@ -72,12 +72,12 @@ public record SchoolPackage : ISchoolPackage
     public DateTime? EstablishTime { get; set; }
 
     /// <summary>
-    /// 学校简介
+    ///     学校简介
     /// </summary>
     public string? Introduction { get; set; }
 
     /// <summary>
-    /// 备注
+    ///     备注
     /// </summary>
     public string? Remark { get; set; }
 }

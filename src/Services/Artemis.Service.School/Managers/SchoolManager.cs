@@ -1,6 +1,7 @@
 ﻿using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.School.Context;
@@ -12,10 +13,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.School.Managers;
 
 /// <summary>
-/// 学校管理器接口
+///     学校管理器接口
 /// </summary>
 public interface ISchoolManager : IRequiredOneToManyManager<
-    ArtemisSchool, SchoolInfo, SchoolPackage, 
+    ArtemisSchool, SchoolInfo, SchoolPackage,
     ArtemisClass, ClassInfo, ClassPackage>
 {
     /// <summary>
@@ -39,20 +40,46 @@ public interface ISchoolManager : IRequiredOneToManyManager<
         int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     根据班级信息查找学校中的班级
+    /// </summary>
+    /// <param name="classNameSearch"></param>
+    /// <param name="classCodeSearch"></param>
+    /// <param name="classGradeNameSearch"></param>
+    /// <param name="classSchoolLength"></param>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken"></param>
+    /// <param name="classType">学校类型</param>
+    /// <param name="classStudyPhase"></param>
+    /// <param name="id"></param>
+    /// <returns>分页搜索结果</returns>
+    Task<PageResult<ClassInfo>> FetchSchoolClassesAsync(
+        Guid id,
+        string? classNameSearch,
+        string? classCodeSearch,
+        string? classGradeNameSearch,
+        string? classType,
+        string? classStudyPhase,
+        string? classSchoolLength,
+        int page = 1,
+        int size = 20,
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>
-/// 学校管理器
+///     学校管理器
 /// </summary>
 public class SchoolManager : RequiredOneToManyManager<
-    ArtemisSchool, SchoolInfo, SchoolPackage, 
+    ArtemisSchool, SchoolInfo, SchoolPackage,
     ArtemisClass, ClassInfo, ClassPackage>, ISchoolManager
 {
     /// <summary>
     ///     模型管理器构造
     /// </summary>
     public SchoolManager(
-        IArtemisSchoolStore schoolStore, 
+        IArtemisSchoolStore schoolStore,
         IArtemisClassStore classStore) : base(schoolStore, classStore)
     {
     }
@@ -70,7 +97,7 @@ public class SchoolManager : RequiredOneToManyManager<
     }
 
     /// <summary>
-    /// 设置子模型的关联键
+    ///     设置子模型的关联键
     /// </summary>
     /// <param name="subEntity"></param>
     /// <param name="key"></param>
@@ -96,12 +123,12 @@ public class SchoolManager : RequiredOneToManyManager<
     /// <param name="organizationCodeSearch">组织机构搜索值</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<SchoolInfo>> FetchSchoolsAsync(
-        string? schoolNameSearch, 
-        string? schoolCodeSearch, 
+        string? schoolNameSearch,
+        string? schoolCodeSearch,
         string? organizationCodeSearch,
-        string? divisionCodeSearch, 
-        string? schoolType, 
-        int page = 1, 
+        string? divisionCodeSearch,
+        string? schoolType,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -157,6 +184,98 @@ public class SchoolManager : RequiredOneToManyManager<
             Total = total,
             Items = schools
         };
+    }
+
+    /// <summary>
+    ///     根据班级信息查找学校中的班级
+    /// </summary>
+    /// <param name="classNameSearch"></param>
+    /// <param name="classCodeSearch"></param>
+    /// <param name="classGradeNameSearch"></param>
+    /// <param name="classSchoolLength"></param>
+    /// <param name="page">页码</param>
+    /// <param name="size">条目数</param>
+    /// <param name="cancellationToken"></param>
+    /// <param name="classType">学校类型</param>
+    /// <param name="classStudyPhase"></param>
+    /// <param name="id"></param>
+    /// <returns>分页搜索结果</returns>
+    public async Task<PageResult<ClassInfo>> FetchSchoolClassesAsync(
+        Guid id,
+        string? classNameSearch,
+        string? classCodeSearch,
+        string? classGradeNameSearch,
+        string? classType,
+        string? classStudyPhase,
+        string? classSchoolLength,
+        int page = 1,
+        int size = 20,
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var exists = id != default && await EntityStore.ExistsAsync(id, cancellationToken);
+
+        if (exists)
+        {
+            classNameSearch ??= string.Empty;
+            classCodeSearch ??= string.Empty;
+            classGradeNameSearch ??= string.Empty;
+            classType ??= string.Empty;
+            classStudyPhase ??= string.Empty;
+            classSchoolLength ??= string.Empty;
+
+            var query = SubEntityStore.EntityQuery
+                .Where(item => item.SchoolId == id);
+
+            var total = await query.LongCountAsync(cancellationToken);
+
+            query = query.WhereIf(
+                classNameSearch != string.Empty,
+                iClass => EF.Functions.Like(
+                    iClass.Name,
+                    $"%{classNameSearch}%"));
+
+            query = query.WhereIf(
+                classCodeSearch != string.Empty,
+                iClass => EF.Functions.Like(
+                    iClass.Name,
+                    $"%{classCodeSearch}%"));
+
+            query = query.WhereIf(
+                classGradeNameSearch != string.Empty,
+                iClass => EF.Functions.Like(
+                    iClass.GradeName,
+                    $"%{classGradeNameSearch}%"));
+
+            query = query.WhereIf(classType != string.Empty, iClass => iClass.Type == classType);
+
+            query = query.WhereIf(classStudyPhase != string.Empty, iClass => iClass.StudyPhase == classStudyPhase);
+
+            query = query.WhereIf(classSchoolLength != string.Empty,
+                iClass => iClass.SchoolLength == classSchoolLength);
+
+            var count = await query.LongCountAsync(cancellationToken);
+
+            query = query.OrderBy(division => division.CreateBy);
+
+            if (page > 0 && size > 0) query = query.Page(page, size);
+
+            var classes = await query
+                .ProjectToType<ClassInfo>()
+                .ToListAsync(cancellationToken);
+
+            return new PageResult<ClassInfo>
+            {
+                Page = page,
+                Size = size,
+                Count = count,
+                Total = total,
+                Items = classes
+            };
+        }
+
+        throw new EntityNotFoundException(nameof(ArtemisSchool), id.GuidToString());
     }
 
     #endregion

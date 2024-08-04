@@ -2,7 +2,6 @@
 
 option csharp_namespace = "Artemis.Service.Protos.School";
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "common.proto";
 
@@ -14,21 +13,21 @@ service StudentService{
 	// 查询学生信息
 	rpc SearchStudentInfo(SearchStudentInfoReqeust) returns (SearchStudentInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Students"
+			get: "/api/SchoolService/Students"
 		};
 	}
 
 	// 获取学生信息
-	rpc GetStudentInfo(GetStudentInfoRequest) returns (GetStudentInfoResponse){
+	rpc ReadStudentInfo(ReadStudentInfoRequest) returns (ReadStudentInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Students/{StudentId}"
+			get: "/api/SchoolService/Students/{StudentId}"
 		};
 	}
 
 	// 创建学生
 	rpc CreateStudent(CreateStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Students"
+			post: "/api/SchoolService/Students"
 			body: "*"
 		};
 	}
@@ -36,7 +35,7 @@ service StudentService{
 	// 批量创建学生
 	rpc BatchCreateStudent(BatchCreateStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Students/BatchCreate"
+			post: "/api/SchoolService/Students/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -44,7 +43,7 @@ service StudentService{
 	// 更新学生
 	rpc UpdateStudent(UpdateStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Students/{StudentId}"
+			put: "/api/SchoolService/Students/{StudentId}"
 			body: "Student"
 		};
 	}
@@ -52,7 +51,7 @@ service StudentService{
 	// 批量更新学生
 	rpc BatchUpdateStudent(BatchUpdateStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Students/BatchUpdate"
+			put: "/api/SchoolService/Students/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -60,14 +59,14 @@ service StudentService{
 	// 删除学生
 	rpc DeleteStudent(DeleteStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Students/{StudentId}"
+			delete: "/api/SchoolService/Students/{StudentId}"
 		};
 	}
 
 	// 批量删除学生
 	rpc BatchDeleteStudent(BatchDeleteStudentRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Students/BatchDelete"
+			post: "/api/SchoolService/Students/BatchDelete"
 			body: "StudentIds"
 		};
 	}
@@ -79,33 +78,21 @@ message SearchStudentInfoReqeust{
 	// 学生名称
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
-	// 学生代码
-	// @maxLength(32)
-	google.protobuf.StringValue Code = 2;
 	// 学生性别
 	// @maxLength(32)
-	google.protobuf.StringValue Gender = 3;
-	// 学生状态
-	// @maxLength(32)
-	google.protobuf.StringValue State = 4;
-	// 学生类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 5;
-	// 生日
-	// @datetime
-	google.protobuf.Timestamp Birthday = 6;
+	google.protobuf.StringValue Gender = 2;
 	// 民族
 	// @maxLength(32)
-	google.protobuf.StringValue Nation = 7;
-	// 籍贯
+	google.protobuf.StringValue Nation = 3;
+	// 学籍号
 	// @maxLength(32)
-	google.protobuf.StringValue NativePlace = 8;
+	google.protobuf.StringValue StudentNumber = 4;
 	// 页码
 	// @min(0)
-	google.protobuf.Int32Value Page = 9;
+	google.protobuf.Int32Value Page = 5;
 	// 条目数
 	// @min(0)
-	google.protobuf.Int32Value Size = 10;
+	google.protobuf.Int32Value Size = 6;
 }
 
 // 学生信息数据包
@@ -114,64 +101,69 @@ message StudentInfoPacket {
 	// @required
 	// @guid
 	string Id = 1;
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 2;
+	// 班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 3;
 	// 学生名称
 	// @required
-	// @maxLength(128)
-	string Name = 2;
-	// 学生代码
-	// @required
 	// @maxLength(32)
-	string Code = 3;
+	string Name = 4;
 	// 学生性别
-	// @required
-	// @maxLength
-	string Gender = 4;
-	// 学生状态
-	// @required
 	// @maxLength(32)
-	string State = 5;
-	// 学生类型
-	// @required
+	google.protobuf.StringValue Gender = 5;
+	// 学生生日
+	// @date
+	google.protobuf.StringValue Birthday = 6;
+	// 学生民族
 	// @maxLength(32)
-	string Type = 6;
-	// 生日
-	// @required
+	google.protobuf.StringValue Nation = 7;
+	// 学生编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 8;
+	// 学籍号
+	// @maxLength(32)
+	google.protobuf.StringValue StudentNumber = 9;
+	// 证件号
+	// @maxLength(32)
+	google.protobuf.StringValue Cert = 10;
+	// 入学时间
 	// @datetime
-	google.protobuf.Timestamp Birthday = 7;
-	// 民族
-	// @required
+	google.protobuf.StringValue EnrollmentDate = 11;
+	// 家庭住址行政区划编码
 	// @maxLength(32)
-	string Nation = 8;
-	// 籍贯
-	// @required
-	// @maxLength(32)
-	string NativePlace = 9;
+	google.protobuf.StringValue DivisionCode = 12;
+	// 家庭住址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 13;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 14;
 }
 
 // 分页学生信息数据包
 message PagedStudentInfoPacket {
-	// 学生信息数据包
-	// @required
-	StudentInfoPacket StudentInfo = 1;
 	// 页码
 	// @required
 	// @min(0)
-	int32 Page = 2;
+	int32 Page = 1;
 	// 条目数
 	// @required
 	// @min(0)
-	int32 Size = 3;
+	int32 Size = 2;
 	// 总条目数
 	// @required
 	// @min(0)
-	int32 Total = 4;
+	int32 Total = 3;
 	// 总页数
 	// @required
 	// @min(0)
-	int32 TotalPage = 5;
+	int32 TotalPage = 4;
 	// 学生信息数据包
 	// @required
-	repeated StudentInfoPacket StudentInfos = 6;
+	repeated StudentInfoPacket Items = 5;
 }
 
 // 查询学生信息响应
@@ -197,7 +189,7 @@ message SearchStudentInfoResponse{
 }
 
 // 获取学生信息请求
-message GetStudentInfoRequest{
+message ReadStudentInfoRequest{
 	// 学生标识
 	// @required
 	// @guid
@@ -205,7 +197,7 @@ message GetStudentInfoRequest{
 }
 
 // 获取学生信息响应
-message GetStudentInfoResponse{
+message ReadStudentInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -228,38 +220,46 @@ message GetStudentInfoResponse{
 
 // 创建学生请求
 message CreateStudentRequest {
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 1;
+	// 班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 2;
 	// 学生名称
 	// @required
-	// @maxLength(128)
-	string Name = 1;
-	// 学生代码
-	// @required
 	// @maxLength(32)
-	string Code = 2;
+	string Name = 3;
 	// 学生性别
-	// @required
-	// @maxLength
-	string Gender = 3;
-	// 学生状态
-	// @required
 	// @maxLength(32)
-	string State = 4;
-	// 学生类型
-	// @required
+	google.protobuf.StringValue Gender = 4;
+	// 学生生日
+	// @date
+	google.protobuf.StringValue Birthday = 5;
+	// 学生民族
 	// @maxLength(32)
-	string Type = 5;
-	// 生日
-	// @required
+	google.protobuf.StringValue Nation = 6;
+	// 学生编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 7;
+	// 学籍号
+	// @maxLength(32)
+	google.protobuf.StringValue StudentNumber = 8;
+	// 证件号
+	// @maxLength(32)
+	google.protobuf.StringValue Cert = 9;
+	// 入学时间
 	// @datetime
-	google.protobuf.Timestamp Birthday = 6;
-	// 民族
-	// @required
+	google.protobuf.StringValue EnrollmentDate = 10;
+	// 家庭住址行政区划编码
 	// @maxLength(32)
-	string Nation = 7;
-	// 籍贯
-	// @required
-	// @maxLength(32)
-	string NativePlace = 8;
+	google.protobuf.StringValue DivisionCode = 11;
+	// 家庭住址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 批量创建学生
@@ -271,38 +271,45 @@ message BatchCreateStudentRequest {
 
 // 更新学生数据包
 message UpdateStudentPacket {
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 1;
+	// 班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 2;
 	// 学生名称
-	// @required
-	// @maxLength(128)
-	google.protobuf.StringValue Name = 1;
-	// 学生代码
-	// @required
 	// @maxLength(32)
-	google.protobuf.StringValue Code = 2;
+	google.protobuf.StringValue Name = 3;
 	// 学生性别
-	// @required
-	// @maxLength
-	google.protobuf.StringValue Gender = 3;
-	// 学生状态
-	// @required
 	// @maxLength(32)
-	google.protobuf.StringValue State = 4;
-	// 学生类型
-	// @required
+	google.protobuf.StringValue Gender = 4;
+	// 学生生日
+	// @date
+	google.protobuf.StringValue Birthday = 5;
+	// 学生民族
 	// @maxLength(32)
-	google.protobuf.StringValue Type = 5;
-	// 生日
-	// @required
+	google.protobuf.StringValue Nation = 6;
+	// 学生编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 7;
+	// 学籍号
+	// @maxLength(32)
+	google.protobuf.StringValue StudentNumber = 8;
+	// 证件号
+	// @maxLength(32)
+	google.protobuf.StringValue Cert = 9;
+	// 入学时间
 	// @datetime
-	google.protobuf.Timestamp Birthday = 6;
-	// 民族
-	// @required
+	google.protobuf.StringValue EnrollmentDate = 10;
+	// 家庭住址行政区划编码
 	// @maxLength(32)
-	google.protobuf.StringValue Nation = 7;
-	// 籍贯
-	// @required
-	// @maxLength(32)
-	google.protobuf.StringValue NativePlace = 8;
+	google.protobuf.StringValue DivisionCode = 11;
+	// 家庭住址
+	// @maxLength(128)
+	google.protobuf.StringValue Address = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 更新学生请求

@@ -3,11 +3,26 @@
 namespace Artemis.Data.Core.Fundamental.Types;
 
 /// <summary>
-/// 标准状态
+///     标准状态
 /// </summary>
 [Description("标准状态")]
 public sealed class StandardState : Enumeration
 {
+    /// <summary>
+    ///     现行标准
+    /// </summary>
+    [Description("现行标准")] public static readonly StandardState Current = new(1, nameof(Current));
+
+    /// <summary>
+    ///     标准草案
+    /// </summary>
+    [Description("标准草案")] public static readonly StandardState Draft = new(2, nameof(Draft));
+
+    /// <summary>
+    ///     过期标准
+    /// </summary>
+    [Description("过期标准")] public static readonly StandardState Obsolete = new(3, nameof(Obsolete));
+
     /// <summary>
     ///     构造函数
     /// </summary>
@@ -16,22 +31,4 @@ public sealed class StandardState : Enumeration
     private StandardState(int id, string name) : base(id, name)
     {
     }
-
-    /// <summary>
-    /// 现行标准
-    /// </summary>
-    [Description("现行标准")]
-    public static readonly StandardState Current = new(1, nameof(Current));
-
-    /// <summary>
-    /// 标准草案
-    /// </summary>
-    [Description("标准草案")]
-    public static readonly StandardState Draft = new(2, nameof(Draft));
-
-    /// <summary>
-    /// 过期标准
-    /// </summary>
-    [Description("过期标准")]
-    public static readonly StandardState Obsolete = new(3, nameof(Obsolete));
 }

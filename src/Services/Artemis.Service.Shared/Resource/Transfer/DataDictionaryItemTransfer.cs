@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Service.Shared.Resource.Transfer;
 
 /// <summary>
-/// 数据字典项目信息接口
+///     数据字典项目信息接口
 /// </summary>
 public record DataDictionaryItemInfo : DataDictionaryItemPackage, IDataDictionaryItemInfo
 {
@@ -11,13 +11,13 @@ public record DataDictionaryItemInfo : DataDictionaryItemPackage, IDataDictionar
     public Guid Id { get; set; }
 
     /// <summary>
-    /// 数据字典标识
+    ///     数据字典标识
     /// </summary>
     public Guid DataDictionaryId { get; set; }
 }
 
 /// <summary>
-/// 数据字典项目数据包接口
+///     数据字典项目数据包接口
 /// </summary>
 public record DataDictionaryItemPackage : IDataDictionaryItemPackage
 {

@@ -29,7 +29,6 @@ public static class GrpcExtensions
                 options.Interceptors.Add<MessageValidator>();
             options.Interceptors.Add<AddInsLog>();
             options.Interceptors.Add<FriendlyException>();
-
         }).AddJsonTranscoding();
 
         builder.Services.AddGrpcReflection();

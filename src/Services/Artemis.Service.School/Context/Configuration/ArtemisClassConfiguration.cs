@@ -55,8 +55,16 @@ internal sealed class ArtemisClassConfiguration : ConcurrencyModelEntityConfigur
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacher).TableName(),
                 nameof(ArtemisClass).TableName()))
-            .IsRequired()
-            .OnDelete(DeleteBehavior.SetNull);
+            .IsRequired(false);
+
+        // Each Class can have many Students
+        builder.HasMany(iClass => iClass.Students)
+            .WithOne(student => student.Class)
+            .HasForeignKey(student => student.ClassId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisClass).TableName(),
+                nameof(ArtemisStudent).TableName()))
+            .IsRequired(false);
     }
 
     #endregion

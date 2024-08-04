@@ -1,7 +1,7 @@
 ﻿namespace Artemis.Service.Shared.Resource.Transfer;
 
 /// <summary>
-/// 数据字典信息
+///     数据字典信息
 /// </summary>
 public record DataDictionaryInfo : DataDictionaryPackage, IDataDictionaryInfo
 {
@@ -12,7 +12,7 @@ public record DataDictionaryInfo : DataDictionaryPackage, IDataDictionaryInfo
 }
 
 /// <summary>
-/// 数据字典数据包
+///     数据字典数据包
 /// </summary>
 public record DataDictionaryPackage : IDataDictionaryPackage
 {

@@ -3,11 +3,16 @@
 namespace Artemis.Data.Core.Fundamental.Types;
 
 /// <summary>
-/// 标准类型
+///     标准类型
 /// </summary>
 [Description("标准类型")]
 public sealed class StandardType : Enumeration
 {
+    /// <summary>
+    ///     视力标准
+    /// </summary>
+    [Description("视力标准")] public static StandardType VisualStandard = new(1, nameof(VisualStandard));
+
     /// <summary>
     ///     构造函数
     /// </summary>
@@ -16,11 +21,4 @@ public sealed class StandardType : Enumeration
     private StandardType(int id, string name) : base(id, name)
     {
     }
-
-    /// <summary>
-    /// 视力标准
-    /// </summary>
-    [Description("视力标准")]
-    public static StandardType VisualStandard = new(1, nameof(VisualStandard));
-
 }

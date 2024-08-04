@@ -24,7 +24,7 @@ public class Class : ConcurrencyModel, IClass
     public Guid? HeadTeacherId { get; set; }
 
     /// <summary>
-    ///    班主任名称
+    ///     班主任名称
     /// </summary>
     [MaxLength(32)]
     [Comment("班主任名称")]
@@ -40,7 +40,8 @@ public class Class : ConcurrencyModel, IClass
     /// <summary>
     ///     年级名称
     /// </summary>
-    [MaxLength(16)]
+    [MaxLength(32)]
+    [Comment("年级名称")]
     public string? GradeName { get; set; }
 
     /// <summary>
@@ -90,11 +91,18 @@ public class Class : ConcurrencyModel, IClass
     /// </summary>
     [Required]
     [Comment("班级序号")]
-    public required int SerialNumber { get; set; }
+    public required int SerialNumber { get; set; } = 0;
 
     /// <summary>
     ///     班级创建时间
     /// </summary>
     [Comment("班级创建时间")]
     public DateTime? EstablishTime { get; set; }
+
+    /// <summary>
+    ///     备注
+    /// </summary>
+    [MaxLength(128)]
+    [Comment("备注")]
+    public string? Remark { get; set; }
 }

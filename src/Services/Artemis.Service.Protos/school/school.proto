@@ -45,7 +45,7 @@ service SchoolService{
 	rpc UpdateSchool(UpdateSchoolRequest) returns (AffectedResponse){
 		option (google.api.http) = {
 			put: "/api/SchoolService/Schools/{SchoolId}"
-			body: "*"
+			body: "School"
 		};
 	}
 
@@ -73,23 +73,23 @@ service SchoolService{
 	}
 
 	// 查询学校班级信息
-	rpc SearchSchoolClassInfo(SearchSchoolClassReqeust) returns (SearchSchoolClassInfoResponse){
+	rpc SearchSchoolClassInfo(SearchSchoolClassInfoReqeust) returns (SearchSchoolClassInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Classes"
+			get: "/api/SchoolService/Schools/{SchoolId}/Classes"
 		};
 	}
 
 	// 获取学校班级信息
-	rpc GetSchoolClassInfo(GetSchoolClassInfoRequest) returns (GetSchoolClassInfoResponse){
+	rpc ReadSchoolClassInfo(ReadSchoolClassInfoRequest) returns (ReadSchoolClassInfoResponse){
 		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Classes/{ClassId}"
+			get: "/api/SchoolService/Schools/{SchoolId}/Classes/{ClassId}"
 		};
 	}
 
 	// 创建学校班级
 	rpc CreateSchoolClass(CreateSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Classes"
+			post: "/api/SchoolService/Schools/{SchoolId}/Classes"
 			body: "Class"
 		};
 	}
@@ -97,7 +97,7 @@ service SchoolService{
 	// 批量创建学校班级
 	rpc BatchCreateSchoolClass(BatchCreateSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Classes/BatchCreate"
+			post: "/api/SchoolService/Schools/{SchoolId}/Classes/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -105,7 +105,7 @@ service SchoolService{
 	// 更新学校班级
 	rpc UpdateSchoolClass(UpdateSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Schools/{SchoolId}/Classes/{ClassId}"
+			put: "/api/SchoolService/Schools/{SchoolId}/Classes/{ClassId}"
 			body: "Class"
 		};
 	}
@@ -113,7 +113,7 @@ service SchoolService{
 	// 批量更新学校班级
 	rpc BatchUpdateSchoolClass(BatchUpdateSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/Schools/{SchoolId}/Classes/BatchUpdate"
+			put: "/api/SchoolService/Schools/{SchoolId}/Classes/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -121,158 +121,15 @@ service SchoolService{
 	// 删除学校班级
 	rpc DeleteSchoolClass(DeleteSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/Schools/{SchoolId}/Classes/{ClassId}"
+			delete: "/api/SchoolService/Schools/{SchoolId}/Classes/{ClassId}"
 		};
 	}
 
 	// 批量删除学校班级
 	rpc BatchDeleteSchoolClass(BatchDeleteSchoolClassRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Classes/BatchDelete"
+			post: "/api/SchoolService/Schools/{SchoolId}/Classes/BatchDelete"
 			body: "ClassIds"
-		};
-	}
-
-	// 设置学校班级班主任
-	rpc SetSchoolClassHeadTeacher(SetSchoolClassHeadTeacherRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			put: "/api/Schools/{SchoolId}/Classes/{ClassId}/HeadTeacher"
-			body: "Teacher"
-		};
-	}
-
-	// 查询学校教师信息
-	rpc SearchSchoolTeacherInfo(SearchSchoolTeacherInfoReqeust) returns (SearchSchoolTeacherInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Teachers"
-		};
-	}
-
-	// 读取学校教师信息
-	rpc GetSchoolTeacherInfo(GetSchoolTeacherInfoRequest) returns (GetSchoolTeacherInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Teachers/{TeacherId}"
-		};
-	}
-
-	// 添加学校教师
-	rpc AddSchoolTeacher(AddSchoolTeacherRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Teachers"
-			body: "Teacher"
-		};
-	}
-
-	// 批量添加学校教师
-	rpc BatchAddSchoolTeacher(BatchAddSchoolTeacherRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Teachers/BatchAdd"
-			body: "TeacherIds"
-		};
-	}
-
-	// 移除学校教师
-	rpc RemoveSchoolTeacher(RemoveSchoolTeacherRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			delete: "/api/Schools/{SchoolId}/Teachers/{TeacherId}"
-		};
-	}
-
-	// 批量移除学校教师
-	rpc BatchRemoveSchoolTeacher(BatchRemoveSchoolTeacherRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Teachers/BatchRemove"
-			body: "TeacherIds"
-		};
-	}
-
-	// 查询学校学生信息
-	rpc SearchSchoolStudentInfo(SearchSchoolStudentInfoReqeust) returns (SearchSchoolStudentInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Students"
-		};
-	}
-
-	// 获取学校学生信息
-	rpc GetSchoolStudentInfo(GetSchoolStudentInfoRequest) returns (GetSchoolStudentInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Schools/{SchoolId}/Students/{StudentId}"
-		};
-	}
-
-	// 添加学校学生
-	rpc AddSchoolStudent(AddSchoolStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Students"
-			body: "Student"
-		};
-	}
-
-	// 批量添加学校学生
-	rpc BatchAddSchoolStudent(BatchAddSchoolStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Students/BatchAdd"
-			body: "StudentIds"
-		};
-	}
-
-	// 移除学校学生
-	rpc RemoveSchoolStudent(RemoveSchoolStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			delete: "/api/Schools/{SchoolId}/Students/{StudentId}"
-		};
-	}
-
-	// 批量移除学校学生
-	rpc BatchRemoveSchoolStudent(BatchRemoveSchoolStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Schools/{SchoolId}/Students/BatchRemove"
-			body: "StudentIds"
-		};
-	}
-
-	// 查询班级学生信息
-	rpc SearchClassStudentInfo(SearchClassStudentInfoReqeust) returns (SearchClassStudentInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Classes/{ClassId}/Students"
-		};
-	}
-
-	// 获取班级学生信息
-	rpc GetClassStudentInfo(GetClassStudentInfoRequest) returns (GetClassStudentInfoResponse){
-		option (google.api.http) = {
-			get: "/api/Classes/{ClassId}/Students/{StudentId}"
-		};
-	}
-
-	// 添加班级学生
-	rpc AddClassStudent(AddClassStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Classes/{ClassId}/Students"
-			body: "Student"
-		};
-	}
-
-	// 批量添加班级学生
-	rpc BatchAddClassStudent(BatchAddClassStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Classes/{ClassId}/Students/BatchAdd"
-			body: "StudentIds"
-		};
-	}
-
-	// 移除班级学生
-	rpc RemoveClassStudent(RemoveClassStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			delete: "/api/Classes/{ClassId}/Students/{StudentId}"
-		};
-	}
-
-	// 批量移除班级学生
-	rpc BatchRemoveClassStudent(BatchRemoveClassStudentRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/Classes/{ClassId}/Students/BatchRemove"
-			body: "StudentIds"
 		};
 	}
 
@@ -551,20 +408,20 @@ message BatchDeleteSchoolRequest {
 }
 
 // 查询学校班级请求
-message SearchSchoolClassReqeust{
+message SearchSchoolClassInfoReqeust{
 	// 学校标识
 	// @required
 	// @guid
 	string SchoolId = 1;
 	// 班级名称
-	// @maxLength(128)
+	// @maxLength(32)
 	google.protobuf.StringValue Name = 2;
 	// 班级代码
 	// @maxLength(32)
 	google.protobuf.StringValue Code = 3;
 	// 年级
 	// @maxLength(32)
-	google.protobuf.StringValue Grade = 4;
+	google.protobuf.StringValue GradeName = 4;
 	// 类型
 	// @maxLength(32)
 	google.protobuf.StringValue Type = 5;
@@ -574,15 +431,12 @@ message SearchSchoolClassReqeust{
 	// 学制
 	// @maxLength(32)
 	google.protobuf.StringValue SchoolLength = 7;
-	// 班级状态
-	// @maxLength(32)
-	google.protobuf.StringValue State = 8;
 	// 页码
 	// @min(0)
-	google.protobuf.Int32Value Page = 9;
+	google.protobuf.Int32Value Page = 8;
 	// 条目数
 	// @min(0)
-	google.protobuf.Int32Value Size = 10;
+	google.protobuf.Int32Value Size = 9;
 }
 
 // 班级信息数据包
@@ -595,41 +449,47 @@ message SchoolClassInfoPacket {
 	// @required
 	// @guid
 	string SchoolId = 2;
+	// 班主任标识
+	// @guid
+	google.protobuf.StringValue HeadTeacherId = 3;
+	// 班主任姓名
+	// @maxLength(32)
+	google.protobuf.StringValue HeadTeacherName = 4;
 	// 班级名称
-	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Name = 5;
+	// 年级名称
+	// @maxLength(32)
+	google.protobuf.StringValue GradeName = 6;
+	// 班级类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 7;
+	// 所学专业
 	// @maxLength(128)
-	string Name = 3;
-	// 班级代码
-	// @required
+	google.protobuf.StringValue Major = 8;
+	// 班级编码
 	// @maxLength(32)
-	string Code = 4;
-	// 年级
-	// @required
-	// @maxLength(32)
-	string Grade = 5;
-	// 类型
-	// @required
-	// @maxLength(32)
-	string Type = 6;
+	google.protobuf.StringValue Code = 9;
 	// 学段
-	// @required
 	// @maxLength(32)
-	string StudyPhase = 7;
+	google.protobuf.StringValue StudyPhase = 10;
 	// 学制
+	// @maxLength(32)
+	google.protobuf.StringValue SchoolLength = 11;
+	// 学制长度
 	// @required
 	// @maxLength(32)
-	string SchoolLength = 8;
-	// 班级状态
-	// @required
-	// @maxLength(32)
-	string State = 9;
+	int32 Length = 12;
 	// 班级序号
 	// @required
-	// @min(0)
-	int32 SerialNumber = 10;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 11;
+	// @maxLength(32)
+	int32 SerialNumber = 13;
+	// 班级创建时间
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 14;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 15;
 }
 
 // 分页班级信息数据包
@@ -674,7 +534,7 @@ message SearchSchoolClassInfoResponse{
 }
 
 // 获取学校班级信息请求
-message GetSchoolClassInfoRequest{
+message ReadSchoolClassInfoRequest{
 	// 学校标识
 	// @required
 	// @guid
@@ -686,7 +546,7 @@ message GetSchoolClassInfoRequest{
 }
 
 // 获取学校班级信息响应
-message GetSchoolClassInfoResponse{
+message ReadSchoolClassInfoResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -709,41 +569,47 @@ message GetSchoolClassInfoResponse{
 
 // 创建学校班级数据包
 message CreateSchoolClassPacket {
+	// 班主任标识
+	// @guid
+	google.protobuf.StringValue HeadTeacherId = 1;
+	// 班主任姓名
+	// @maxLength(32)
+	google.protobuf.StringValue HeadTeacherName = 2;
 	// 班级名称
-	// @required
+	// @maxLength(32)
+	google.protobuf.StringValue Name = 3;
+	// 年级名称
+	// @maxLength(32)
+	google.protobuf.StringValue GradeName = 4;
+	// 班级类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 5;
+	// 所学专业
 	// @maxLength(128)
-	string Name = 1;
-	// 班级代码
-	// @required
+	google.protobuf.StringValue Major = 6;
+	// 班级编码
 	// @maxLength(32)
-	string Code = 2;
-	// 年级
-	// @required
-	// @maxLength(32)
-	string Grade = 3;
-	// 类型
-	// @required
-	// @maxLength(32)
-	string Type = 4;
+	google.protobuf.StringValue Code = 7;
 	// 学段
-	// @required
 	// @maxLength(32)
-	string StudyPhase = 5;
+	google.protobuf.StringValue StudyPhase = 8;
 	// 学制
+	// @maxLength(32)
+	google.protobuf.StringValue SchoolLength = 9;
+	// 学制长度
 	// @required
 	// @maxLength(32)
-	string SchoolLength = 6;
-	// 班级状态
-	// @required
-	// @maxLength(32)
-	string State = 7;
+	int32 Length = 10;
 	// 班级序号
 	// @required
-	// @min(0)
-	int32 SerialNumber = 8;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 9;
+	// @maxLength(32)
+	int32 SerialNumber = 11;
+	// 班级创建时间
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 创建学校班级请求
@@ -770,33 +636,45 @@ message BatchCreateSchoolClassRequest {
 
 // 更新学校数据包
 message UpdateSchoolClassPacket {
+	// 班主任标识
+	// @guid
+	google.protobuf.StringValue HeadTeacherId = 1;
+	// 班主任姓名
+	// @maxLength(32)
+	google.protobuf.StringValue HeadTeacherName = 2;
 	// 班级名称
+	// @maxLength(32)
+	google.protobuf.StringValue Name = 3;
+	// 年级名称
+	// @maxLength(32)
+	google.protobuf.StringValue GradeName = 4;
+	// 班级类型
+	// @maxLength(32)
+	google.protobuf.StringValue Type = 5;
+	// 所学专业
 	// @maxLength(128)
-	google.protobuf.StringValue Name = 1;
-	// 班级代码
+	google.protobuf.StringValue Major = 6;
+	// 班级编码
 	// @maxLength(32)
-	google.protobuf.StringValue Code = 2;
-	// 年级
-	// @maxLength(32)
-	google.protobuf.StringValue Grade = 3;
-	// 类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 4;
+	google.protobuf.StringValue Code = 7;
 	// 学段
 	// @maxLength(32)
-	google.protobuf.StringValue StudyPhase = 5;
+	google.protobuf.StringValue StudyPhase = 8;
 	// 学制
 	// @maxLength(32)
-	google.protobuf.StringValue SchoolLength = 6;
-	// 班级状态
+	google.protobuf.StringValue SchoolLength = 9;
+	// 学制长度
 	// @maxLength(32)
-	google.protobuf.StringValue State = 7;
+	google.protobuf.Int32Value Length = 10;
 	// 班级序号
-	// @min(0)
-	google.protobuf.Int32Value SerialNumber = 8;
-	// 创建时间
-	// @required
-	google.protobuf.Timestamp EstablishTime = 9;
+	// @maxLength(32)
+	google.protobuf.Int32Value SerialNumber = 11;
+	// 班级创建时间
+	// @datetime
+	google.protobuf.StringValue EstablishTime = 12;
+	// 备注
+	// @maxLength(128)
+	google.protobuf.StringValue Remark = 13;
 }
 
 // 更新学校班级请求
@@ -858,619 +736,4 @@ message BatchDeleteSchoolClassRequest {
 	// @required
 	// @guid
 	repeated string ClassIds = 2;
-}
-
-// 教师标识数据包
-message TeacherIdPacket {
-	// 教师标识
-	// @required
-	// @guid
-	string TeacherId = 1;
-}
-
-// 设置学校班级班主任请求
-message SetSchoolClassHeadTeacherRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 2;
-	// 班级标识
-	// @required
-	// @guid
-	TeacherIdPacket Teacher = 3;
-}
-
-// 查询学校教师信息请求
-message SearchSchoolTeacherInfoReqeust{
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师名称
-	// @maxLength(128)
-	google.protobuf.StringValue Name = 2;
-	// 教师代码
-	// @maxLength(32)
-	google.protobuf.StringValue Code = 3;
-	// 教师性别
-	// @maxLength(32)
-	google.protobuf.StringValue Gender = 4;
-	// 教师职称
-	// @maxLength(32)
-	google.protobuf.StringValue Title = 5;
-	// 教师状态
-	// @maxLength(32)
-	google.protobuf.StringValue State = 6;
-	// 教师类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 7;
-	// 页码
-	// @min(0)
-	google.protobuf.Int32Value Page = 8;
-	// 条目数
-	// @min(0)
-	google.protobuf.Int32Value Size = 9;
-}
-
-// 教师信息数据包
-message SchoolTeacherInfoPacket {
-	// 教师标识
-	// @required
-	// @guid
-	string Id = 1;
-	// 教师名称
-	// @required
-	// @maxLength(128)
-	string Name = 2;
-	// 教师代码
-	// @required
-	// @maxLength(32)
-	string Code = 3;
-	// 教师性别
-	// @required
-	// @maxLength
-	string Gender = 4;
-	// 教师职称
-	// @maxLength(32)
-	string Title = 5;
-	// 教师状态
-	// @maxLength(32)
-	string State = 6;
-	// 教师类型
-	// @maxLength(32)
-	string Type = 7;
-}
-
-// 分页教师信息数据包
-message PagedSchoolTeacherInfoPacket {
-	// 页码
-	// @min(0)
-	int32 Page = 1;
-	// 条目数
-	// @min(0)
-	int32 Size = 2;
-	// 数据总数
-	// @min(0)
-	int64 Total = 3;
-	// 条件过滤后的数据量
-	// @min(0)
-	int64 Count = 4;
-	// 教师信息数据
-	// @required
-	repeated SchoolTeacherInfoPacket Items = 5;
-}
-
-// 查询学校教师信息响应
-message SearchSchoolTeacherInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 教师信息数据
-	// @required
-	PagedSchoolTeacherInfoPacket Data = 7;
-}
-
-// 读取学校教师信息请求
-message GetSchoolTeacherInfoRequest{
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师标识
-	// @required
-	// @guid
-	string TeacherId = 2;
-}
-
-// 读取学校教师信息响应
-message GetSchoolTeacherInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 教师信息数据
-	// @required
-	SchoolTeacherInfoPacket Data = 7;
-}
-
-// 添加学校教师请求
-message AddSchoolTeacherRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师
-	// @required
-	TeacherIdPacket Teacher = 2;
-}
-
-// 批量添加学校教师请求
-message BatchAddSchoolTeacherRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师标识
-	// @required
-	// @guid
-	repeated string TeacherIds = 2;
-}
-
-// 移除学校教师请求
-message RemoveSchoolTeacherRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师标识
-	// @required
-	// @guid
-	string TeacherId = 2;
-}
-
-// 批量移除学校教师请求
-message BatchRemoveSchoolTeacherRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 教师标识
-	// @required
-	// @guid
-	repeated string TeacherIds = 2;
-}
-
-// 查询学校学生信息请求
-message SearchSchoolStudentInfoReqeust{
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生名称
-	// @maxLength(128)
-	google.protobuf.StringValue Name = 2;
-	// 学生代码
-	// @maxLength(32)
-	google.protobuf.StringValue Code = 3;
-	// 学生性别
-	// @maxLength(32)
-	google.protobuf.StringValue Gender = 4;
-	// 学生状态
-	// @maxLength(32)
-	google.protobuf.StringValue State = 5;
-	// 学生类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 6;
-	// 生日
-	// @datetime
-	google.protobuf.Timestamp Birthday = 7;
-	// 民族
-	// @maxLength(32)
-	google.protobuf.StringValue Nation = 8;
-	// 籍贯
-	// @maxLength(32)
-	google.protobuf.StringValue NativePlace = 9;
-	// 页码
-	// @min(0)
-	google.protobuf.Int32Value Page = 10;
-	// 条目数
-	// @min(0)
-	google.protobuf.Int32Value Size = 11;
-}
-
-// 学生信息数据包
-message SchoolStudentInfoPacket {
-	// 学生标识
-	// @required
-	// @guid
-	string Id = 1;
-	// 学生名称
-	// @required
-	// @maxLength(128)
-	string Name = 2;
-	// 学生代码
-	// @required
-	// @maxLength(32)
-	string Code = 3;
-	// 学生性别
-	// @required
-	// @maxLength
-	string Gender = 4;
-	// 学生状态
-	// @required
-	// @maxLength(32)
-	string State = 5;
-	// 学生类型
-	// @required
-	// @maxLength(32)
-	string Type = 6;
-	// 生日
-	// @required
-	// @datetime
-	google.protobuf.Timestamp Birthday = 7;
-	// 民族
-	// @required
-	// @maxLength(32)
-	string Nation = 8;
-	// 籍贯
-	// @required
-	// @maxLength(32)
-	string NativePlace = 9;
-}
-
-// 分页学生信息数据包
-message PagedSchoolStudentInfoPacket {
-	// 页码
-	// @min(0)
-	int32 Page = 1;
-	// 条目数
-	// @min(0)
-	int32 Size = 2;
-	// 数据总数
-	// @min(0)
-	int64 Total = 3;
-	// 条件过滤后的数据量
-	// @min(0)
-	int64 Count = 4;
-	// 学生信息数据
-	// @required
-	repeated SchoolStudentInfoPacket Items = 5;
-}
-
-// 查询学校学生信息响应
-message SearchSchoolStudentInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 学生信息数据
-	// @required
-	PagedSchoolStudentInfoPacket Data = 7;
-}
-
-// 获取学校学生信息请求
-message GetSchoolStudentInfoRequest{
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	string StudentId = 2;
-}
-
-// 获取学校学生信息响应
-message GetSchoolStudentInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 学生信息数据
-	// @required
-	SchoolStudentInfoPacket Data = 7;
-}
-
-// 学生标识数据包
-message StudentIdPacket {
-	// 学生标识
-	// @required
-	// @guid
-	string StudentId = 1;
-}
-
-// 添加学校学生请求
-message AddSchoolStudentRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生
-	// @required
-	StudentIdPacket Student = 2;
-}
-
-// 批量添加学校学生请求
-message BatchAddSchoolStudentRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	repeated string StudentIds = 2;
-}
-
-// 移除学校学生请求
-message RemoveSchoolStudentRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	string StudentId = 2;
-}
-
-// 批量移除学校学生请求
-message BatchRemoveSchoolStudentRequest {
-	// 学校标识
-	// @required
-	// @guid
-	string SchoolId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	repeated string StudentIds = 2;
-}
-
-// 查询班级学生信息请求
-message SearchClassStudentInfoReqeust{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生名称
-	// @maxLength(128)
-	google.protobuf.StringValue Name = 2;
-	// 学生代码
-	// @maxLength(32)
-	google.protobuf.StringValue Code = 3;
-	// 学生性别
-	// @maxLength(32)
-	google.protobuf.StringValue Gender = 4;
-	// 学生状态
-	// @maxLength(32)
-	google.protobuf.StringValue State = 5;
-	// 学生类型
-	// @maxLength(32)
-	google.protobuf.StringValue Type = 6;
-	// 生日
-	// @datetime
-	google.protobuf.Timestamp Birthday = 7;
-	// 民族
-	// @maxLength(32)
-	google.protobuf.StringValue Nation = 8;
-	// 籍贯
-	// @maxLength(32)
-	google.protobuf.StringValue NativePlace = 9;
-	// 页码
-	// @min(0)
-	google.protobuf.Int32Value Page = 10;
-	// 条目数
-	// @min(0)
-	google.protobuf.Int32Value Size = 11;
-}
-
-// 班级学生信息数据包
-message ClassStudentInfoPacket {
-	// 学生标识
-	// @required
-	// @guid
-	string Id = 1;
-	// 学生名称
-	// @required
-	// @maxLength(128)
-	string Name = 2;
-	// 学生代码
-	// @required
-	// @maxLength(32)
-	string Code = 3;
-	// 学生性别
-	// @required
-	// @maxLength
-	string Gender = 4;
-	// 学生状态
-	// @required
-	// @maxLength(32)
-	string State = 5;
-	// 学生类型
-	// @required
-	// @maxLength(32)
-	string Type = 6;
-	// 生日
-	// @required
-	// @datetime
-	google.protobuf.Timestamp Birthday = 7;
-	// 民族
-	// @required
-	// @maxLength(32)
-	string Nation = 8;
-	// 籍贯
-	// @required
-	// @maxLength(32)
-	string NativePlace = 9;
-}
-
-// 分页班级学生信息数据包
-message PagedClassStudentInfoPacket {
-	// 页码
-	// @min(0)
-	int32 Page = 1;
-	// 条目数
-	// @min(0)
-	int32 Size = 2;
-	// 数据总数
-	// @min(0)
-	int64 Total = 3;
-	// 条件过滤后的数据量
-	// @min(0)
-	int64 Count = 4;
-	// 学生信息数据
-	// @required
-	repeated ClassStudentInfoPacket Items = 5;
-}
-
-// 查询班级学生信息响应
-message SearchClassStudentInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 学生信息数据
-	// @required
-	PagedClassStudentInfoPacket Data = 7;
-}
-
-// 获取班级学生信息
-message GetClassStudentInfoRequest{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	string StudentId = 2;
-}
-
-// 获取班级学生信息响应
-message GetClassStudentInfoResponse{
-	// 状态码
-	int32 Code = 1;
-	// 是否成功
-	bool Succeeded = 2;
-	// 消息
-	string Message = 3;
-	// 错误
-	// @exception
-	google.protobuf.StringValue Error = 4;
-	// 响应时间
-	// @datetime
-	string DateTime = 5;
-	// 响应时间戳
-	// @timestamp
-	int64 Timestamp = 6;
-	// 学生信息数据
-	// @required
-	ClassStudentInfoPacket Data = 7;
-}
-
-// 添加班级学生
-message AddClassStudentRequest{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生
-	// @required
-	StudentIdPacket Student = 2;
-}
-
-// 批量添加班级学生
-message BatchAddClassStudentRequest{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	repeated string StudentIds = 2;
-}
-
-// 移除班级学生
-message RemoveClassStudentRequest{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	string StudentId = 2;
-}
-
-// 批量移除班级学生
-message BatchRemoveClassStudentRequest{
-	// 班级标识
-	// @required
-	// @guid
-	string ClassId = 1;
-	// 学生标识
-	// @required
-	// @guid
-	repeated string StudentIds = 2;
 }

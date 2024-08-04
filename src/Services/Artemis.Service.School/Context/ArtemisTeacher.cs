@@ -11,24 +11,9 @@ namespace Artemis.Service.School.Context;
 public sealed class ArtemisTeacher : Teacher
 {
     /// <summary>
-    ///     学校教师对应关系
-    /// </summary>
-    public ICollection<ArtemisSchoolTeacher>? SchoolTeachers { get; set; }
-
-    /// <summary>
     ///     教师所在的学校
     /// </summary>
-    public ICollection<ArtemisSchool>? Schools { get; set; }
-
-    /// <summary>
-    ///     班级老师对应关系
-    /// </summary>
-    public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }
-
-    /// <summary>
-    ///     教师所在的班级
-    /// </summary>
-    public ICollection<ArtemisClass>? Classes { get; set; }
+    public ArtemisSchool? School { get; set; }
 
     /// <summary>
     ///     班主任班级

@@ -26,7 +26,7 @@ public class School : ConcurrencyModel, ISchool
     public string? Code { get; set; }
 
     /// <summary>
-    /// 绑定标记
+    ///     绑定标记
     /// </summary>
     [MaxLength(64)]
     [Comment("绑定标记")]
@@ -88,14 +88,14 @@ public class School : ConcurrencyModel, ISchool
     public DateTime? EstablishTime { get; set; }
 
     /// <summary>
-    /// 学校简介
+    ///     学校简介
     /// </summary>
     [MaxLength(512)]
     [Comment("学校简介")]
     public string? Introduction { get; set; }
 
     /// <summary>
-    /// 备注
+    ///     备注
     /// </summary>
     [MaxLength(128)]
     [Comment("备注")]

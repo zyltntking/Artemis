@@ -13,7 +13,8 @@ namespace Artemis.Service.Resource.Managers;
 /// <summary>
 ///     行政区划树管理器
 /// </summary>
-public interface IDivisionTreeManager : ISelfReferenceTreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>
+public interface
+    IDivisionTreeManager : ISelfReferenceTreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>
 {
     /// <summary>
     ///     根据行政区划信息查搜索政区划
@@ -39,7 +40,8 @@ public interface IDivisionTreeManager : ISelfReferenceTreeManager<ArtemisDivisio
 /// <summary>
 ///     行政区划树管理器实现
 /// </summary>
-public class DivisionSelfReferenceTreeManager : SelfReferenceTreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>,
+public class DivisionSelfReferenceTreeManager :
+    SelfReferenceTreeManager<ArtemisDivision, DivisionInfo, DivisionInfoTree, DivisionPackage>,
     IDivisionTreeManager
 {
     /// <summary>

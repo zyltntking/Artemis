@@ -15,7 +15,7 @@ public interface IArtemisStandardItemStore : IStore<ArtemisStandardItem>;
 #endregion
 
 /// <summary>
-/// 标准目录存储
+///     标准目录存储
 /// </summary>
 public class ArtemisStandardItemStore : Store<ArtemisStandardItem>, IArtemisStandardItemStore
 {

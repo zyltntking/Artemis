@@ -21,22 +21,7 @@ public sealed class ArtemisClass : Class
     public required ArtemisTeacher HeadTeacher { get; set; }
 
     /// <summary>
-    ///     班级学生对应关系
-    /// </summary>
-    public ICollection<ArtemisClassStudent>? ClassStudents { get; set; }
-
-    /// <summary>
     ///     班级管理的学生
     /// </summary>
     public ICollection<ArtemisStudent>? Students { get; set; }
-
-    /// <summary>
-    ///     班级老师对应关系
-    /// </summary>
-    public ICollection<ArtemisClassTeacher>? ClassTeachers { get; set; }
-
-    /// <summary>
-    ///     班级所属的教师
-    /// </summary>
-    public ICollection<ArtemisTeacher>? Teachers { get; set; }
 }
