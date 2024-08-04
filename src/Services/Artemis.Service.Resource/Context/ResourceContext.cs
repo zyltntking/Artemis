@@ -47,6 +47,16 @@ public class ResourceContext : DbContext
     public virtual DbSet<ArtemisDataDictionaryItem> DataDictionaryItems { get; set; }
 
     /// <summary>
+    ///     标准目录数据集
+    /// </summary>
+    public virtual DbSet<ArtemisStandardCatalog> StandardCatalogs { get; set; }
+
+    /// <summary>
+    ///     标准项目数据集
+    /// </summary>
+    public virtual DbSet<ArtemisStandardItem> StandardItems { get; set; }
+
+    /// <summary>
     ///     配置数据模型
     /// </summary>
     /// <param name="modelBuilder"></param>
@@ -80,7 +90,9 @@ public class ResourceContext : DbContext
             Enumeration.ToRecordDictionary<TaskShip>(),
             Enumeration.ToRecordDictionary<TaskState>(),
             Enumeration.ToRecordDictionary<OrganizationType>(),
-            Enumeration.ToRecordDictionary<OrganizationStatus>()
+            Enumeration.ToRecordDictionary<OrganizationStatus>(),
+            Enumeration.ToRecordDictionary<StandardState>(),
+            Enumeration.ToRecordDictionary<StandardType>()
         };
 
         foreach (var dictionary in dictionaries)
@@ -153,6 +165,6 @@ public class ResourceContext : DbContext
         org4.ParentId = org2.Id;
         orgList.Add(org4);
 
-        modelBuilder.Entity<ArtemisOrganization>().HasData(orgList);
+        //modelBuilder.Entity<ArtemisOrganization>().HasData(orgList);
     }
 }

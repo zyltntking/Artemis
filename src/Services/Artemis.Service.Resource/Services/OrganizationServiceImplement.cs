@@ -49,7 +49,8 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查找组织机构信息")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(SearchOrganizationInfoRequest request,
+    public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(
+        SearchOrganizationInfoRequest request,
         ServerCallContext context)
     {
         var info = await OrganizationTreeManager.FetchOrganizationsAsync(
@@ -170,7 +171,7 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     {
         var dictionary = request.Batch.ToDictionary(
             item => Guid.Parse(item.OrganizationId),
-            item => item.Adapt<OrganizationPackage>());
+            item => item.Organization.Adapt<OrganizationPackage>());
 
         var result = await OrganizationTreeManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
 

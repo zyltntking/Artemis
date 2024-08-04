@@ -8307,7 +8307,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceBase.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            获取数据字典
+            读取数据字典
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -8481,7 +8481,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            获取数据字典
+            读取数据字典
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -8491,7 +8491,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            获取数据字典
+            读取数据字典
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -8499,7 +8499,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            获取数据字典
+            读取数据字典
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -8509,7 +8509,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Resource.DictionaryService.DictionaryServiceClient.ReadDictionaryInfoAsync(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.CallOptions)">
             <summary>
-            获取数据字典
+            读取数据字典
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -12690,132 +12690,139 @@
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.ValidFieldNumber">
-            <summary>Field number for the "Valid" field.</summary>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.Valid">
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.Page">
             <summary>
-            标准目录是否生效
+            页码
+            @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.StandardCatalogInfo">
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket">
             <summary>
             标准目录信息数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.IdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.IdFieldNumber">
             <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Id">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Id">
             <summary>
             标准目录ID
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.NameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.NameFieldNumber">
             <summary>Field number for the "Name" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Name">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Name">
             <summary>
             标准目录名称
             @required
             @maxLength(128)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Code">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Code">
             <summary>
             标准目录编码
-            @required
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.TypeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.TypeFieldNumber">
             <summary>Field number for the "Type" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Type">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Type">
             <summary>
             标准目录类型
-            @required
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.StateFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.StateFieldNumber">
             <summary>Field number for the "State" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.State">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.State">
             <summary>
             标准目录状态
-            @required
             @maxLength(32)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.ValidFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.ValidFieldNumber">
             <summary>Field number for the "Valid" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Valid">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Valid">
             <summary>
             标准目录是否生效
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfo.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfo.Description">
+        <member name="P:Artemis.Service.Protos.Resource.StandardCatalogInfoPacket.Description">
             <summary>
             标准目录描述
             @maxLength(128)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo">
+        <member name="T:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket">
             <summary>
             分页标准目录信息数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.PageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.Page">
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.Page">
             <summary>
             页码
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.SizeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.SizeFieldNumber">
             <summary>Field number for the "Size" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.Size">
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.Size">
             <summary>
             条目数
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.TotalFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.TotalFieldNumber">
             <summary>Field number for the "Total" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.Total">
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.Total">
             <summary>
             数据总数
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.CountFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.CountFieldNumber">
             <summary>Field number for the "Count" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.Count">
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.Count">
             <summary>
             条件过滤后的数据量
             @min(0)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.ItemsFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.ItemsFieldNumber">
             <summary>Field number for the "Items" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfo.Items">
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardCatalogInfoPacket.Items">
             <summary>
             字典信息数据
             @required
@@ -12987,7 +12994,6 @@
         <member name="P:Artemis.Service.Protos.Resource.CreateStandardCatalogRequest.Code">
             <summary>
             标准目录编码
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -12997,7 +13003,6 @@
         <member name="P:Artemis.Service.Protos.Resource.CreateStandardCatalogRequest.Type">
             <summary>
             标准目录类型
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -13007,7 +13012,6 @@
         <member name="P:Artemis.Service.Protos.Resource.CreateStandardCatalogRequest.State">
             <summary>
             标准目录状态
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -13169,6 +13173,645 @@
             @guid
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest">
+            <summary>
+            查找标准项目信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.Name">
+            <summary>
+            标准项目名称
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.Code">
+            <summary>
+            标准项目编码
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.StandardItemInfoPacket">
+            <summary>
+            标准项目信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Id">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Name">
+            <summary>
+            标准项目名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Code">
+            <summary>
+            标准项目编码
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.MinimumFieldNumber">
+            <summary>Field number for the "Minimum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Minimum">
+            <summary>
+            标准项目状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.MaximumFieldNumber">
+            <summary>Field number for the "Maximum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Maximum">
+            <summary>
+            标准项目状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.TemplateFieldNumber">
+            <summary>Field number for the "Template" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Template">
+            <summary>
+            标准项目状态
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.StandardItemInfoPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.StandardItemInfoPacket.Description">
+            <summary>
+            标准项目描述
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket">
+            <summary>
+            分页标准项目信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedStandardItemInfoPacket.Items">
+            <summary>
+            字典信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse">
+            <summary>
+            查找标准项目信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchStandardItemInfoResponse.Data">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest">
+            <summary>
+            读取标准项目信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest.StandardItemIdFieldNumber">
+            <summary>Field number for the "StandardItemId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest.StandardItemId">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse">
+            <summary>
+            读取标准项目信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadStandardItemInfoResponse.Data">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.CreateStandardItemPacket">
+            <summary>
+            创建标准项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Name">
+            <summary>
+            标准项目名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Code">
+            <summary>
+            标准项目编码
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.MinimumFieldNumber">
+            <summary>Field number for the "Minimum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Minimum">
+            <summary>
+            标准项目状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.MaximumFieldNumber">
+            <summary>Field number for the "Maximum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Maximum">
+            <summary>
+            标准项目状态
+            @required
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.TemplateFieldNumber">
+            <summary>Field number for the "Template" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Template">
+            <summary>
+            标准项目状态
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemPacket.Description">
+            <summary>
+            标准项目描述
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.CreateStandardItemRequest">
+            <summary>
+            创建标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateStandardItemRequest.StandardItemFieldNumber">
+            <summary>Field number for the "StandardItem" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateStandardItemRequest.StandardItem">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest">
+            <summary>
+            批量创建标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest.Batch">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.UpdateStandardItemPacket">
+            <summary>
+            更新标准项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Name">
+            <summary>
+            标准项目名称
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Code">
+            <summary>
+            标准项目编码
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.MinimumFieldNumber">
+            <summary>Field number for the "Minimum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Minimum">
+            <summary>
+            标准项目状态
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.MaximumFieldNumber">
+            <summary>Field number for the "Maximum" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Maximum">
+            <summary>
+            标准项目状态
+            @maxLength(32)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.TemplateFieldNumber">
+            <summary>Field number for the "Template" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Template">
+            <summary>
+            标准项目状态
+            @maxLength(512)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.DescriptionFieldNumber">
+            <summary>Field number for the "Description" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemPacket.Description">
+            <summary>
+            标准项目描述
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.UpdateStandardItemRequest">
+            <summary>
+            更新标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardItemIdFieldNumber">
+            <summary>Field number for the "StandardItemId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardItemId">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardItemFieldNumber">
+            <summary>Field number for the "StandardItem" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateStandardItemRequest.StandardItem">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchUpdateStandardItemPacket">
+            <summary>
+            批量更新标准项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchUpdateStandardItemPacket.StandardItemIdFieldNumber">
+            <summary>Field number for the "StandardItemId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchUpdateStandardItemPacket.StandardItemId">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchUpdateStandardItemPacket.StandardItemFieldNumber">
+            <summary>Field number for the "StandardItem" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchUpdateStandardItemPacket.StandardItem">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest">
+            <summary>
+            批量更新标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest.Batch">
+            <summary>
+            标准项目数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.DeleteStandardItemRequest">
+            <summary>
+            删除标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.DeleteStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.DeleteStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.DeleteStandardItemRequest.StandardItemIdFieldNumber">
+            <summary>Field number for the "StandardItemId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.DeleteStandardItemRequest.StandardItemId">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest">
+            <summary>
+            批量删除标准项目请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest.StandardCatalogIdFieldNumber">
+            <summary>Field number for the "StandardCatalogId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest.StandardCatalogId">
+            <summary>
+            标准目录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest.StandardItemIdsFieldNumber">
+            <summary>Field number for the "StandardItemIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest.StandardItemIds">
+            <summary>
+            标准项目标识
+            @required
+            @guid
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Resource.StandardService">
             <summary>
             标准服务
@@ -13239,6 +13882,70 @@
         <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.BatchDeleteStandardCatalog(Artemis.Service.Protos.Resource.BatchDeleteStandardCatalogRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.SearchStandardItemInfo(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询标准项目信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.ReadStandardItemInfo(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取标准项目信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.CreateStandardItem(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.BatchCreateStandardItem(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.UpdateStandardItem(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.BatchUpdateStandardItem(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.DeleteStandardItem(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceBase.BatchDeleteStandardItem(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除标准项目
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -13545,6 +14252,294 @@
         <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchDeleteStandardCatalogAsync(Artemis.Service.Protos.Resource.BatchDeleteStandardCatalogRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除标准目录
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.SearchStandardItemInfo(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.SearchStandardItemInfo(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.SearchStandardItemInfoAsync(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.SearchStandardItemInfoAsync(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.ReadStandardItemInfo(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.ReadStandardItemInfo(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.ReadStandardItemInfoAsync(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.ReadStandardItemInfoAsync(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取标准项目信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.CreateStandardItem(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.CreateStandardItem(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.CreateStandardItemAsync(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.CreateStandardItemAsync(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchCreateStandardItem(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchCreateStandardItem(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchCreateStandardItemAsync(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchCreateStandardItemAsync(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.UpdateStandardItem(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.UpdateStandardItem(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.UpdateStandardItemAsync(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.UpdateStandardItemAsync(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchUpdateStandardItem(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchUpdateStandardItem(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchUpdateStandardItemAsync(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchUpdateStandardItemAsync(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.DeleteStandardItem(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.DeleteStandardItem(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.DeleteStandardItemAsync(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.DeleteStandardItemAsync(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchDeleteStandardItem(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchDeleteStandardItem(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchDeleteStandardItemAsync(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除标准项目
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.StandardService.StandardServiceClient.BatchDeleteStandardItemAsync(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除标准项目
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

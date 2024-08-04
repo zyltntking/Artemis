@@ -169,7 +169,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     {
         var dictionary = request.Batch.ToDictionary(
             item => Guid.Parse(item.DivisionId),
-            item => item.Adapt<DivisionPackage>());
+            item => item.Division.Adapt<DivisionPackage>());
 
         var result = await DivisionTreeManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
 

@@ -3,7 +3,7 @@
 /// <summary>
 /// 数据字典项目信息接口
 /// </summary>
-public class DataDictionaryItemInfo : DataDictionaryItemPackage, IDataDictionaryItemInfo
+public record DataDictionaryItemInfo : DataDictionaryItemPackage, IDataDictionaryItemInfo
 {
     /// <summary>
     ///     存储标识
@@ -19,7 +19,7 @@ public class DataDictionaryItemInfo : DataDictionaryItemPackage, IDataDictionary
 /// <summary>
 /// 数据字典项目数据包接口
 /// </summary>
-public class DataDictionaryItemPackage : IDataDictionaryItemPackage
+public record DataDictionaryItemPackage : IDataDictionaryItemPackage
 {
     /// <summary>
     ///     数据项目键

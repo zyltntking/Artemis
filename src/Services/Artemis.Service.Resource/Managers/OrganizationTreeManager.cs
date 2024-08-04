@@ -16,10 +16,10 @@ namespace Artemis.Service.Resource.Managers;
 /// <summary>
 ///     组织机构树管理器
 /// </summary>
-public interface IOrganizationTreeManager : 
+public interface IOrganizationTreeManager :
     ITreeManager<
-        ArtemisOrganization, 
-        OrganizationInfo, 
+        ArtemisOrganization,
+        OrganizationInfo,
         OrganizationInfoTree,
         OrganizationPackage>
 {
@@ -49,9 +49,9 @@ public interface IOrganizationTreeManager :
 /// </summary>
 public class OrganizationTreeManager :
     TreeManager<
-        ArtemisOrganization, 
-        OrganizationInfo, 
-        OrganizationInfoTree, 
+        ArtemisOrganization,
+        OrganizationInfo,
+        OrganizationInfoTree,
         OrganizationPackage>,
     IOrganizationTreeManager
 {
@@ -141,17 +141,17 @@ public class OrganizationTreeManager :
     #region Overrides
 
     /// <summary>
-    /// 区域编码
+    ///     区域编码
     /// </summary>
     private string? _region;
 
     /// <summary>
-    /// 机构序列
+    ///     机构序列
     /// </summary>
     private int? _serial;
 
     /// <summary>
-    /// 子机构序列
+    ///     子机构序列
     /// </summary>
     private int? _childSerial;
 
@@ -239,14 +239,14 @@ public class OrganizationTreeManager :
 
 
     /// <summary>
-    /// 刷新子节点的设计编码
+    ///     刷新子节点的设计编码
     /// </summary>
     /// <param name="parentId"></param>
     /// <param name="parentDesignCode"></param>
     /// <param name="cancellationToken"></param>
     private async Task FlushChildrenDesignCode(
-        Guid parentId, 
-        string parentDesignCode, 
+        Guid parentId,
+        string parentDesignCode,
         CancellationToken cancellationToken = default)
     {
         var children = await EntityStore.EntityQuery
@@ -260,9 +260,9 @@ public class OrganizationTreeManager :
             foreach (var child in children)
             {
                 if (string.IsNullOrWhiteSpace(_region))
-                {
-                    _region = string.IsNullOrWhiteSpace(child.DesignCode) ? Options.OrganizationRegion : child.DesignCode[3..7];
-                }
+                    _region = string.IsNullOrWhiteSpace(child.DesignCode)
+                        ? Options.OrganizationRegion
+                        : child.DesignCode[3..7];
 
                 child.DesignCode = DesignCode.Organization(_region, index, parentDesignCode);
 
@@ -274,7 +274,6 @@ public class OrganizationTreeManager :
             }
 
             await EntityStore.UpdateAsync(children, cancellationToken);
-
         }
     }
 

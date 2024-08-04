@@ -17,7 +17,7 @@ service DictionaryService{
 		};
 	}
 
-	// 获取数据字典
+	// 读取数据字典
 	rpc ReadDictionaryInfo(ReadDictionaryInfoRequest) returns (ReadDictionaryInfoResponse){
 		option (google.api.http) = {
 			get: "/api/ResourceService/Dictionary/{DictionaryId}"
@@ -486,7 +486,7 @@ message BatchCreateDictionaryItemRequest{
 	string DictionaryId = 1;
 	// 字典项目数据
 	// @required
-	repeated CreateDictionaryItemRequest Batch = 2;
+	repeated CreateDictionaryItemPacket Batch = 2;
 }
 
 // 更新字典项目数据包

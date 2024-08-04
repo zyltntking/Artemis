@@ -39,11 +39,14 @@ public static class ServiceExtensions
     {
         services.TryAddScoped<IArtemisDataDictionaryStore, ArtemisDataDictionaryStore>();
         services.TryAddScoped<IArtemisDataDictionaryItemStore, ArtemisDataDictionaryItemStore>();
+        services.TryAddScoped<IArtemisStandardCatalogStore, ArtemisStandardCatalogStore>();
+        services.TryAddScoped<IArtemisStandardItemStore, ArtemisStandardItemStore>();
         services.TryAddScoped<IArtemisDeviceStore, ArtemisDeviceStore>();
         services.TryAddScoped<IArtemisDivisionStore, ArtemisDivisionStore>();
         services.TryAddScoped<IArtemisOrganizationStore, ArtemisOrganizationStore>();
 
         services.TryAddScoped<IDataDictionaryManager, DataDictionaryManager>();
+        services.TryAddScoped<IStandardManager, StandardManager>();
         services.TryAddScoped<IDivisionTreeManager, DivisionTreeManager>();
         services.TryAddScoped<IOrganizationTreeManager, OrganizationTreeManager>();
 

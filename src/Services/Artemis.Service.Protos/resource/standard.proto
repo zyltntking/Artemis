@@ -13,21 +13,21 @@ service StandardService{
 	// 查询标准目录信息
 	rpc SearchStandardCatalogInfo(SearchStandardCatalogInfoRequest) returns (SearchStandardCatalogInfoResponse){
 		option (google.api.http) = {
-			get: "/api/StandardCatalogs"
+			get: "/api/ResourceService/StandardCatalogs"
 		};
 	}
 
 	// 读取标准目录信息
 	rpc ReadStandardCatalogInfo(ReadStandardCatalogInfoRequest) returns (ReadStandardCatalogInfoResponse){
 		option (google.api.http) = {
-			get: "/api/StandardCatalogs/{StandardCatalogId}"
+			get: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}"
 		};
 	}
 
 	// 创建标准目录
 	rpc CreateStandardCatalog(CreateStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/StandardCatalogs"
+			post: "/api/ResourceService/StandardCatalogs"
 			body: "*"
 		};
 	}
@@ -35,7 +35,7 @@ service StandardService{
 	// 批量创建标准目录
 	rpc BatchCreateStandardCatalog(BatchCreateStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/StandardCatalogs/BatchCreate"
+			post: "/api/ResourceService/StandardCatalogs/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -43,7 +43,7 @@ service StandardService{
 	// 更新标准目录
 	rpc UpdateStandardCatalog(UpdateStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/StandardCatalogs/{StandardCatalogId}"
+			put: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}"
 			body: "StandardCatalog"
 		};
 	}
@@ -51,7 +51,7 @@ service StandardService{
 	// 批量更新标准目录
 	rpc BatchUpdateStandardCatalog(BatchUpdateStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			put: "/api/StandardCatalogs/BatchUpdate"
+			put: "/api/ResourceService/StandardCatalogs/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -59,15 +59,76 @@ service StandardService{
 	// 删除标准目录
 	rpc DeleteStandardCatalog(DeleteStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/StandardCatalogs/{StandardCatalogId}"
+			delete: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}"
 		};
 	}
 
 	// 批量删除标准目录
 	rpc BatchDeleteStandardCatalog(BatchDeleteStandardCatalogRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/StandardCatalogs/BatchDelete"
+			post: "/api/ResourceService/StandardCatalogs/BatchDelete"
 			body: "StandardCatalogIds"
+		};
+	}
+
+	// 查询标准项目信息
+	rpc SearchStandardItemInfo(SearchStandardItemInfoRequest) returns (SearchStandardItemInfoResponse){
+		option (google.api.http) = {
+			get: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems"
+		};
+	}
+
+	// 读取标准项目信息
+	rpc ReadStandardItemInfo(ReadStandardItemInfoRequest) returns (ReadStandardItemInfoResponse){
+		option (google.api.http) = {
+			get: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/{StandardItemId}"
+		};
+	}
+
+	// 创建标准项目
+	rpc CreateStandardItem(CreateStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems"
+			body: "StandardItem"
+		};
+	}
+
+	// 批量创建标准项目
+	rpc BatchCreateStandardItem(BatchCreateStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新标准项目
+	rpc UpdateStandardItem(UpdateStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/{StandardItemId}"
+			body: "StandardItem"
+		};
+	}
+
+	// 批量更新标准项目
+	rpc BatchUpdateStandardItem(BatchUpdateStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除标准项目
+	rpc DeleteStandardItem(DeleteStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/{StandardItemId}"
+		};
+	}
+
+	// 批量删除标准项目
+	rpc BatchDeleteStandardItem(BatchDeleteStandardItemRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/StandardCatalogs/{StandardCatalogId}/StandardItems/BatchDelete"
+			body: "StandardItemIds"
 		};
 	}
 }
@@ -86,12 +147,16 @@ message SearchStandardCatalogInfoRequest{
 	// 标准目录状态
 	// @maxLength(32)
 	google.protobuf.StringValue State = 4;
-	// 标准目录是否生效
-	google.protobuf.BoolValue Valid = 5;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 6;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 7;
 }
 
 // 标准目录信息数据包
-message StandardCatalogInfo{
+message StandardCatalogInfoPacket{
 	// 标准目录ID
 	// @required
 	// @guid
@@ -101,17 +166,14 @@ message StandardCatalogInfo{
 	// @maxLength(128)
 	string Name = 2;
 	// 标准目录编码
-	// @required
 	// @maxLength(32)
-	string Code = 3;
+	google.protobuf.StringValue Code = 3;
 	// 标准目录类型
-	// @required
 	// @maxLength(32)
-	string Type = 4;
+	google.protobuf.StringValue Type = 4;
 	// 标准目录状态
-	// @required
 	// @maxLength(32)
-	string State = 5;
+	google.protobuf.StringValue State = 5;
 	// 标准目录是否生效
 	// @required
 	bool Valid = 6;
@@ -121,7 +183,7 @@ message StandardCatalogInfo{
 }
 
 // 分页标准目录信息数据包
-message PagedStandardCatalogInfo{
+message PagedStandardCatalogInfoPacket{
 	// 页码
 	// @min(0)
 	int32 Page = 1;
@@ -136,7 +198,7 @@ message PagedStandardCatalogInfo{
 	int64 Count = 4;
 	// 字典信息数据
 	// @required
-	repeated StandardCatalogInfo Items = 5;
+	repeated StandardCatalogInfoPacket Items = 5;
 }
 
 // 查询标准目录信息响应
@@ -158,7 +220,7 @@ message SearchStandardCatalogInfoResponse{
 	int64 Timestamp = 6;
 	// 标准目录数据
 	// @required
-	PagedStandardCatalogInfo Data = 7;
+	PagedStandardCatalogInfoPacket Data = 7;
 }
 
 // 读取标准目录信息请求
@@ -188,7 +250,7 @@ message ReadStandardCatalogInfoResponse{
 	int64 Timestamp = 6;
 	// 标准目录数据
 	// @required
-	StandardCatalogInfo Data = 7;
+	StandardCatalogInfoPacket Data = 7;
 }
 
 // 创建标准目录请求
@@ -198,17 +260,14 @@ message CreateStandardCatalogRequest{
 	// @maxLength(128)
 	string Name = 1;
 	// 标准目录编码
-	// @required
 	// @maxLength(32)
-	string Code = 2;
+	google.protobuf.StringValue Code = 2;
 	// 标准目录类型
-	// @required
 	// @maxLength(32)
-	string Type = 3;
+	google.protobuf.StringValue Type = 3;
 	// 标准目录状态
-	// @required
 	// @maxLength(32)
-	string State = 4;
+	google.protobuf.StringValue State = 4;
 	// 标准目录是否生效
 	// @required
 	bool Valid = 5;
@@ -277,4 +336,262 @@ message BatchDeleteStandardCatalogRequest{
 	// @required
 	// @guid
 	repeated string StandardCatalogIds = 1;
+}
+
+// 查找标准项目信息请求
+message SearchStandardItemInfoRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 2;
+	// 标准项目编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 3;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 4;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 5;
+}
+
+// 标准项目信息数据包
+message StandardItemInfoPacket{
+	// 标准项目标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 2;
+	// 标准项目名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 标准项目编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 4;
+	// 标准项目状态
+	// @required
+	// @maxLength(32)
+	string Minimum = 5;
+	// 标准项目状态
+	// @required
+	// @maxLength(32)
+	string Maximum = 6;
+	// 标准项目状态
+	// @maxLength(512)
+	google.protobuf.StringValue Template = 7;
+	// 标准项目描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 8;
+}
+
+// 分页标准项目信息数据包
+message PagedStandardItemInfoPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 字典信息数据
+	// @required
+	repeated StandardItemInfoPacket Items = 5;
+}
+
+// 查找标准项目信息响应
+message SearchStandardItemInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 标准项目数据
+	// @required
+	PagedStandardItemInfoPacket Data = 7;
+}
+
+// 读取标准项目信息请求
+message ReadStandardItemInfoRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目标识
+	// @required
+	// @guid
+	string StandardItemId = 2;
+}
+
+// 读取标准项目信息响应
+message ReadStandardItemInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 标准项目数据
+	// @required
+	StandardItemInfoPacket Data = 7;
+}
+
+// 创建标准项目数据包
+message CreateStandardItemPacket{
+	// 标准项目名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 标准项目编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 标准项目状态
+	// @required
+	// @maxLength(32)
+	string Minimum = 3;
+	// 标准项目状态
+	// @required
+	// @maxLength(32)
+	string Maximum = 4;
+	// 标准项目状态
+	// @maxLength(512)
+	google.protobuf.StringValue Template = 5;
+	// 标准项目描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 6;
+}
+
+// 创建标准项目请求
+message CreateStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目数据
+	// @required
+	CreateStandardItemPacket StandardItem = 2;
+}
+
+// 批量创建标准项目请求
+message BatchCreateStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目数据
+	// @required
+	repeated CreateStandardItemPacket Batch = 2;
+}
+
+// 更新标准项目数据包
+message UpdateStandardItemPacket{
+	// 标准项目名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 标准项目编码
+	// @maxLength(32)
+	google.protobuf.StringValue Code = 2;
+	// 标准项目状态
+	// @maxLength(32)
+	google.protobuf.StringValue Minimum = 3;
+	// 标准项目状态
+	// @maxLength(32)
+	google.protobuf.StringValue Maximum = 4;
+	// 标准项目状态
+	// @maxLength(512)
+	google.protobuf.StringValue Template = 5;
+	// 标准项目描述
+	// @maxLength(128)
+	google.protobuf.StringValue Description = 6;
+}
+
+// 更新标准项目请求
+message UpdateStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目标识
+	// @required
+	// @guid
+	string StandardItemId = 2;
+	// 标准项目数据
+	// @required
+	UpdateStandardItemPacket StandardItem = 3;
+}
+
+// 批量更新标准项目数据包
+message BatchUpdateStandardItemPacket{
+	// 标准项目标识
+	// @required
+	// @guid
+	string StandardItemId = 1;
+	// 标准项目数据
+	// @required
+	UpdateStandardItemPacket StandardItem = 2;
+}
+
+// 批量更新标准项目请求
+message BatchUpdateStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目数据
+	// @required
+	repeated BatchUpdateStandardItemPacket Batch = 2;
+}
+
+// 删除标准项目请求
+message DeleteStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目标识
+	// @required
+	// @guid
+	string StandardItemId = 2;
+}
+
+// 批量删除标准项目请求
+message BatchDeleteStandardItemRequest{
+	// 标准目录标识
+	// @required
+	// @guid
+	string StandardCatalogId = 1;
+	// 标准项目标识
+	// @required
+	// @guid
+	repeated string StandardItemIds = 2;
 }

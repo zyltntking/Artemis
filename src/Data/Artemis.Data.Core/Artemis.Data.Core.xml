@@ -5043,6 +5043,50 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.StandardState">
+            <summary>
+            标准状态
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.StandardState.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.StandardState.Current">
+            <summary>
+            现行标准
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.StandardState.Draft">
+            <summary>
+            标准草案
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.StandardState.Obsolete">
+            <summary>
+            过期标准
+            </summary>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.StandardType">
+            <summary>
+            标准类型
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.StandardType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.StandardType.VisualStandard">
+            <summary>
+            视力标准
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.StudyPhase">
             <summary>
                 学段

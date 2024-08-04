@@ -3,7 +3,7 @@
 /// <summary>
 /// 数据字典信息
 /// </summary>
-public class DataDictionaryInfo : DataDictionaryPackage, IDataDictionaryInfo
+public record DataDictionaryInfo : DataDictionaryPackage, IDataDictionaryInfo
 {
     /// <summary>
     ///     存储标识
@@ -14,7 +14,7 @@ public class DataDictionaryInfo : DataDictionaryPackage, IDataDictionaryInfo
 /// <summary>
 /// 数据字典数据包
 /// </summary>
-public class DataDictionaryPackage : IDataDictionaryPackage
+public record DataDictionaryPackage : IDataDictionaryPackage
 {
     /// <summary>
     ///     字典名称

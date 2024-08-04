@@ -13,10 +13,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Artemis.Service.Resource.Managers;
 
 /// <summary>
-/// 数据字典管理器接口
+///     数据字典管理器接口
 /// </summary>
 public interface IDataDictionaryManager : IOtmManager<
-    ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage, 
+    ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage,
     ArtemisDataDictionaryItem, DataDictionaryItemInfo, DataDictionaryItemPackage>
 {
     /// <summary>
@@ -55,10 +55,10 @@ public interface IDataDictionaryManager : IOtmManager<
 }
 
 /// <summary>
-/// 数据字典管理器
+///     数据字典管理器
 /// </summary>
 public class DataDictionaryManager : OtmManager<
-    ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage, 
+    ArtemisDataDictionary, DataDictionaryInfo, DataDictionaryPackage,
     ArtemisDataDictionaryItem, DataDictionaryItemInfo, DataDictionaryItemPackage>, IDataDictionaryManager
 {
     /// <summary>
@@ -83,7 +83,7 @@ public class DataDictionaryManager : OtmManager<
     }
 
     /// <summary>
-    /// 设置子模型的关联键
+    ///     设置子模型的关联键
     /// </summary>
     /// <param name="subEntity"></param>
     /// <param name="key"></param>
@@ -106,9 +106,9 @@ public class DataDictionaryManager : OtmManager<
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<DataDictionaryInfo>> FetchDictionariesAsync(
-        string? dictionaryNameSearch, 
-        string? dictionaryType, 
-        int page = 1, 
+        string? dictionaryNameSearch,
+        string? dictionaryType,
+        int page = 1,
         int size = 20,
         CancellationToken cancellationToken = default)
     {
@@ -124,7 +124,7 @@ public class DataDictionaryManager : OtmManager<
         query = query.WhereIf(
             dictionaryNameSearch != string.Empty,
             dictionary => EF.Functions.Like(
-                dictionary.Name, 
+                dictionary.Name,
                 $"%{dictionaryNameSearch}%"));
 
         query = query.WhereIf(dictionaryType != string.Empty, dictionary => dictionary.Type == dictionaryType);
@@ -160,11 +160,11 @@ public class DataDictionaryManager : OtmManager<
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<DataDictionaryItemInfo>> FetchDictionaryItemsAsync(
-        Guid id, 
-        string? dictionaryItemKeySearch, 
+        Guid id,
+        string? dictionaryItemKeySearch,
         string? dictionaryItemValueSearch,
-        int page = 1, 
-        int size = 20, 
+        int page = 1,
+        int size = 20,
         CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
@@ -173,7 +173,6 @@ public class DataDictionaryManager : OtmManager<
 
         if (exists)
         {
-
             dictionaryItemKeySearch ??= string.Empty;
             dictionaryItemValueSearch ??= string.Empty;
 

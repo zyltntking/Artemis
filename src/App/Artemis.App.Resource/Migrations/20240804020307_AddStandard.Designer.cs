@@ -3,6 +3,7 @@ using System;
 using Artemis.Service.Resource.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Resource.Migrations
 {
     [DbContext(typeof(ResourceContext))]
-    partial class ResourceContextModelSnapshot : ModelSnapshot
+    [Migration("20240804020307_AddStandard")]
+    partial class AddStandard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -640,9 +643,7 @@ namespace Artemis.App.Resource.Migrations
                         .HasComment("标识");
 
                     b.Property<string>("Code")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准目录编码");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -665,9 +666,7 @@ namespace Artemis.App.Resource.Migrations
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("标准目录描述");
+                        .HasColumnType("text");
 
                     b.Property<string>("ModifyBy")
                         .IsRequired()
@@ -677,9 +676,7 @@ namespace Artemis.App.Resource.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("标准目录名称");
+                        .HasColumnType("text");
 
                     b.Property<string>("RemoveBy")
                         .HasMaxLength(64)
@@ -687,22 +684,17 @@ namespace Artemis.App.Resource.Migrations
                         .HasComment("删除者标识");
 
                     b.Property<string>("State")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准目录状态");
+                        .HasColumnType("text");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准目录类型");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TIMESTAMP")
                         .HasComment("更新时间");
 
                     b.Property<bool>("Valid")
-                        .HasColumnType("boolean")
-                        .HasComment("是否生效");
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisStandardCatalog");
@@ -746,10 +738,11 @@ namespace Artemis.App.Resource.Migrations
                         .HasColumnType("uuid")
                         .HasComment("标识");
 
+                    b.Property<Guid>("CatalogId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Code")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准项目编码");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -772,21 +765,15 @@ namespace Artemis.App.Resource.Migrations
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("标准项目描述");
+                        .HasColumnType("text");
 
                     b.Property<string>("Maximum")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准项目最大值");
+                        .HasColumnType("text");
 
                     b.Property<string>("Minimum")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("标准项目最小值");
+                        .HasColumnType("text");
 
                     b.Property<string>("ModifyBy")
                         .IsRequired()
@@ -796,23 +783,15 @@ namespace Artemis.App.Resource.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("标准项目名称");
+                        .HasColumnType("text");
 
                     b.Property<string>("RemoveBy")
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
                         .HasComment("删除者标识");
 
-                    b.Property<Guid>("StandardCatalogId")
-                        .HasColumnType("uuid")
-                        .HasComment("标准目录标识");
-
                     b.Property<string>("Template")
-                        .HasMaxLength(512)
-                        .HasColumnType("character varying(512)")
-                        .HasComment("标准项目模板");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TIMESTAMP")
@@ -820,6 +799,8 @@ namespace Artemis.App.Resource.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_ArtemisStandardItem");
+
+                    b.HasIndex("CatalogId");
 
                     b.HasIndex("Code")
                         .HasDatabaseName("IX_ArtemisStandardItem_Code");
@@ -841,8 +822,6 @@ namespace Artemis.App.Resource.Migrations
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisStandardItem_RemoveBy");
-
-                    b.HasIndex("StandardCatalogId");
 
                     b.HasIndex("UpdatedAt")
                         .HasDatabaseName("IX_ArtemisStandardItem_UpdatedAt");
@@ -891,7 +870,7 @@ namespace Artemis.App.Resource.Migrations
                 {
                     b.HasOne("Artemis.Service.Resource.Context.ArtemisStandardCatalog", "Catalog")
                         .WithMany("Items")
-                        .HasForeignKey("StandardCatalogId")
+                        .HasForeignKey("CatalogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ArtemisStandardItem_ArtemisStandardCatalog");

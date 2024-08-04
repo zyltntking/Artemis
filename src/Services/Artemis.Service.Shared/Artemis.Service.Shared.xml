@@ -1366,6 +1366,101 @@
                 机构描述
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardCatalog">
+            <summary>
+            标准目录接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardCatalogInfo">
+            <summary>
+            标准目录信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardCatalogPackage">
+            <summary>
+            标准目录数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.Name">
+            <summary>
+            标准目录名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.Code">
+            <summary>
+            标准目录编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.Type">
+            <summary>
+            标准目录类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.State">
+            <summary>
+            标准目录状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.Valid">
+            <summary>
+            是否生效
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardCatalogPackage.Description">
+            <summary>
+            标准目录描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardItem">
+            <summary>
+            标准项目接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardItemInfo">
+            <summary>
+            标准项目信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemInfo.StandardCatalogId">
+            <summary>
+            标准目录标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.IStandardItemPackage">
+            <summary>
+            标准项目数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Name">
+            <summary>
+            标准项目名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Code">
+            <summary>
+            标准项目编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Minimum">
+            <summary>
+            标准项目最小值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Maximum">
+            <summary>
+            标准项目最大值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Template">
+            <summary>
+            标准项目模板
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IStandardItemPackage.Description">
+            <summary>
+            标准项目描述
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemInfo">
             <summary>
             数据字典项目信息接口
@@ -1604,6 +1699,101 @@
         <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Description">
             <summary>
                 机构描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.StandardCatalogInfo">
+            <summary>
+            标准目录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogInfo.Id">
+            <summary>
+            存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage">
+            <summary>
+            标准目录数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.Name">
+            <summary>
+            标准目录名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.Code">
+            <summary>
+            标准目录编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.Type">
+            <summary>
+            标准目录类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.State">
+            <summary>
+            标准目录状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.Valid">
+            <summary>
+            是否生效
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage.Description">
+            <summary>
+            标准目录描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.StandardItemInfo">
+            <summary>
+            标准项目信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemInfo.Id">
+            <summary>
+            标准项目标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemInfo.StandardCatalogId">
+            <summary>
+            标准目录标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage">
+            <summary>
+            标准项目数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Name">
+            <summary>
+            标准项目名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Code">
+            <summary>
+            标准项目编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Minimum">
+            <summary>
+            标准项目最小值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Maximum">
+            <summary>
+            标准项目最大值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Template">
+            <summary>
+            标准项目模板
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Description">
+            <summary>
+            标准项目描述
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.School.IClass">

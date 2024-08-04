@@ -17,12 +17,12 @@ namespace Artemis.Service.Resource.Services;
 public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBase
 {
     /// <summary>
-    /// 服务实现
+    ///     服务实现
     /// </summary>
     /// <param name="dataDictionaryManager"></param>
     /// <param name="logger"></param>
     public DictionaryServiceImplement(
-        IDataDictionaryManager dataDictionaryManager, 
+        IDataDictionaryManager dataDictionaryManager,
         ILogger<DictionaryServiceImplement> logger)
     {
         DataDictionaryManager = dataDictionaryManager;
@@ -39,10 +39,10 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// </summary>
     private ILogger<DictionaryServiceImplement> Logger { get; }
 
-    #region Overrides of DictionaryServiceBase 
+    #region Overrides of DictionaryServiceBase
 
     /// <summary>
-    /// 查询字典信息
+    ///     查询字典信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -50,7 +50,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     [Description("查询字典信息")]
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchDictionaryInfoResponse> SearchDictionaryInfo(
-        SearchDictionaryInfoRequest request, 
+        SearchDictionaryInfoRequest request,
         ServerCallContext context)
     {
         var info = await DataDictionaryManager.FetchDictionariesAsync(
@@ -64,14 +64,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 获取数据字典
+    ///     读取数据字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("获取数据字典")]
+    [Description("读取数据字典")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<ReadDictionaryInfoResponse> ReadDictionaryInfo(ReadDictionaryInfoRequest request, ServerCallContext context)
+    public override async Task<ReadDictionaryInfoResponse> ReadDictionaryInfo(ReadDictionaryInfoRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -81,14 +82,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 创建数据字典
+    ///     创建数据字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建数据字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> CreateDictionary(CreateDictionaryRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateDictionary(CreateDictionaryRequest request,
+        ServerCallContext context)
     {
         var package = request.Adapt<DataDictionaryPackage>();
 
@@ -98,14 +100,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量创建数据字典
+    ///     批量创建数据字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建数据字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateDictionary(BatchCreateDictionariyRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateDictionary(BatchCreateDictionariyRequest request,
+        ServerCallContext context)
     {
         var packages = request.Batch.Adapt<IEnumerable<DataDictionaryPackage>>();
 
@@ -115,14 +118,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 更新数据字典
+    ///     更新数据字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新数据字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> UpdateDictionary(UpdateDictionaryRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateDictionary(UpdateDictionaryRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -134,18 +138,19 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量更新数据字典
+    ///     批量更新数据字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新数据字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchUpdateDictionary(BatchUpdateDictionaryRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchUpdateDictionary(BatchUpdateDictionaryRequest request,
+        ServerCallContext context)
     {
         var dictionary = request.Batch.ToDictionary(
             item => Guid.Parse(item.DictionaryId),
-            item => item.Adapt<DataDictionaryPackage>());
+            item => item.Dictionary.Adapt<DataDictionaryPackage>());
 
         var result = await DataDictionaryManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
 
@@ -153,14 +158,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 删除字典
+    ///     删除字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteDictionary(DeleteDictionaryRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteDictionary(DeleteDictionaryRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -170,14 +176,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量删除字典
+    ///     批量删除字典
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除字典")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteDictionary(BatchDeleteDictionaryRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteDictionary(BatchDeleteDictionaryRequest request,
+        ServerCallContext context)
     {
         var ids = request.DictionaryIds.Select(Guid.Parse);
 
@@ -187,39 +194,42 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 查询字典项目
+    ///     查询字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询字典项目")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<SearchDictionaryItemInfoResponse> SearchDictionaryItemInfo(SearchDictionaryItemInfoRequest request, ServerCallContext context)
+    public override async Task<SearchDictionaryItemInfoResponse> SearchDictionaryItemInfo(
+        SearchDictionaryItemInfoRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
         var info = await DataDictionaryManager
-            .FetchDictionaryItemsAsync(id, request.Key, request.Value, request.Page ?? 0, request.Size ?? 0, context.CancellationToken);
+            .FetchDictionaryItemsAsync(id, request.Key, request.Value, request.Page ?? 0, request.Size ?? 0,
+                context.CancellationToken);
 
         return info.PagedResponse<SearchDictionaryItemInfoResponse, DataDictionaryItemInfo>();
     }
 
     /// <summary>
-    /// 读取字典项目
+    ///     读取字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取字典项目")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<ReadDictionaryItemInfoResponse> ReadDictionaryItemInfo(ReadDictionaryItemInfoRequest request, ServerCallContext context)
+    public override async Task<ReadDictionaryItemInfoResponse> ReadDictionaryItemInfo(
+        ReadDictionaryItemInfoRequest request, ServerCallContext context)
     {
         var dictionaryId = Guid.Parse(request.DictionaryId);
 
         var dictionaryItemId = Guid.Parse(request.DictionaryItemId);
 
         var info = await DataDictionaryManager.ReadSubEntityInfoAsync(
-            dictionaryId, 
+            dictionaryId,
             dictionaryItemId,
             context.CancellationToken);
 
@@ -227,14 +237,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 创建字典项目
+    ///     创建字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> CreateDictionaryItem(CreateDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> CreateDictionaryItem(CreateDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -246,14 +257,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量创建字典项目
+    ///     批量创建字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchCreateDictionaryItem(BatchCreateDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchCreateDictionaryItem(BatchCreateDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -265,14 +277,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 更新字典项目
+    ///     更新字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> UpdateDictionaryItem(UpdateDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateDictionaryItem(UpdateDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -286,20 +299,21 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量更新字典项目
+    ///     批量更新字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchUpdateDictionaryItem(BatchUpdateDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchUpdateDictionaryItem(BatchUpdateDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
         var dictionary = request.Batch.ToDictionary(
             item => Guid.Parse(item.DictionaryItemId),
-            item => item.Adapt<DataDictionaryItemPackage>());
+            item => item.DictionaryItem.Adapt<DataDictionaryItemPackage>());
 
         var result = await DataDictionaryManager.BatchUpdateSubEntityAsync(id, dictionary, context.CancellationToken);
 
@@ -307,14 +321,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 删除字典项目
+    ///     删除字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> DeleteDictionaryItem(DeleteDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteDictionaryItem(DeleteDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -326,14 +341,15 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     /// <summary>
-    /// 批量删除字典项目
+    ///     批量删除字典项目
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除字典项目")]
     [Authorize(AuthorizePolicy.Admin)]
-    public override async Task<AffectedResponse> BatchDeleteDictionaryItem(BatchDeleteDictionaryItemRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteDictionaryItem(BatchDeleteDictionaryItemRequest request,
+        ServerCallContext context)
     {
         var id = Guid.Parse(request.DictionaryId);
 
@@ -345,6 +361,4 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     }
 
     #endregion
-
-    
 }

@@ -34,7 +34,7 @@ internal sealed class
 
         builder.HasIndex(entity => new { entity.DataDictionaryId, entity.Key })
             .HasDatabaseName(IndexName(
-                nameof(ArtemisDataDictionaryItem.DataDictionaryId), 
+                nameof(ArtemisDataDictionaryItem.DataDictionaryId),
                 nameof(ArtemisDataDictionaryItem.Key)))
             .IsUnique();
     }

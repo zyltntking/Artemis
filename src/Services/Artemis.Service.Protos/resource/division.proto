@@ -73,7 +73,7 @@ service DivisionService{
 	// 批量删除行政区划
 	rpc BatchDeleteDivision(BatchDeleteDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			delete: "/api/ResourceService/Divisions/BatchDelete"
+			post: "/api/ResourceService/Divisions/BatchDelete"
 			body: "DivisionIds"
 		};
 	}
