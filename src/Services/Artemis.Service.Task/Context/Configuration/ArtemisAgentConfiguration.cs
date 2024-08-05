@@ -6,7 +6,7 @@ namespace Artemis.Service.Task.Context.Configuration;
 /// <summary>
 ///     代理数据集配置
 /// </summary>
-internal sealed class ArtemisAgentConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisAgent>
+internal sealed class ArtemisAgentConfiguration : ConcurrencyModelEntityConfiguration<ArtemisAgent>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisAgent>
 

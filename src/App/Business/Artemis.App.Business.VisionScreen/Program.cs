@@ -1,6 +1,9 @@
 using Artemis.App.Business.VisionScreen.Services;
 using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
+using Artemis.Service.Business.VisionScreen;
+using Artemis.Service.Business.VisionScreen.Context;
+using Artemis.Service.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -33,6 +36,13 @@ public class Program
             builder.AddRedisComponent("RedisInstance");
             //builder.AddMongoDbComponent("MongoInstance");
             //builder.AddRabbitMqComponent("RabbitMqInstance");
+
+            builder.AddPostgreSqlComponent<BusinessContext>("ArtemisDb", optionsBuilder =>
+                {
+                    optionsBuilder.MigrationsHistoryTable("BusinessDbHistory", Project.Schemas.Business);
+                    optionsBuilder.MigrationsAssembly("Artemis.App.Business.VisionScreen");
+                }, Log.Debug)
+                .AddBusinessServices();
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()

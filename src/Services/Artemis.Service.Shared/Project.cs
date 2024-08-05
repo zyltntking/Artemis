@@ -46,7 +46,7 @@ public static class Project
         /// <summary>
         ///     原始数据服务模式
         /// </summary>
-        public const string RawData = nameof(RawData);
+        public const string Business = nameof(Business);
 
         /// <summary>
         ///     学校服务模式

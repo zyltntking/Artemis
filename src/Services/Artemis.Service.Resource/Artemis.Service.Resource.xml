@@ -1,1883 +1,1760 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.Service.Resource</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionary">
-			<summary>
-				数据字典实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionary.Items">
-			<summary>
-				数据字典项
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem">
-			<summary>
-				数据字典项实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem.DataDictionary">
-			<summary>
-				数据字典
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisDevice">
-			<summary>
-				设备实体配置
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisDivision">
-			<summary>
-				行政区划实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Parent">
-			<summary>
-				上级行政区划
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Children">
-			<summary>
-				下级行政区划
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisOrganization">
-			<summary>
-				组织机构实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Parent">
-			<summary>
-				上级机构
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Children">
-			<summary>
-				下级机构
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisStandardCatalog">
-			<summary>
-				标准目录实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisStandardCatalog.Items">
-			<summary>
-				标准目录项目
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ArtemisStandardItem">
-			<summary>
-				标准项目实体
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ArtemisStandardItem.Catalog">
-			<summary>
-				标准项目所属目录
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration">
-			<summary>
-				数据字典配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration">
-			<summary>
-				数据字典项目配置
-			</summary>
-		</member>
-		<member
-			name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration">
-			<summary>
-				设备实体配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.TableName">
-			<summary>
-				表明
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
-			<summary>
-				实体字段配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration">
-			<summary>
-				行政区划配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration">
-			<summary>
-				组织机构配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
-			<summary>
-				实体字段配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration">
-			<summary>
-				标准目录配置
-			</summary>
-		</member>
-		<member
-			name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisStandardCatalog})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration">
-			<summary>
-				标准项目配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.DataSetDescription">
-			<summary>
-				数据集描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.TableName">
-			<summary>
-				表名
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisStandardItem})">
-			<summary>
-				实体关系配置
-			</summary>
-			<param name="builder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Context.ResourceContext">
-			<summary>
-				资源上下文
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
-			<summary>
-				初始化资源上下文
-			</summary>
-			<param name="options">数据库上下文选项</param>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Organizations">
-			<summary>
-				组织机构数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Divisions">
-			<summary>
-				行政区划数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.Devices">
-			<summary>
-				设备数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaries">
-			<summary>
-				数据字典数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaryItems">
-			<summary>
-				数据字典项数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.StandardCatalogs">
-			<summary>
-				标准目录数据集
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Context.ResourceContext.StandardItems">
-			<summary>
-				标准项目数据集
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<summary>
-				配置数据模型
-			</summary>
-			<param name="modelBuilder"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Context.ResourceContext.SeedData(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<summary>
-				种子数据，在初始化时调用
-			</summary>
-			<param name="modelBuilder"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.IDataDictionaryManager">
-			<summary>
-				数据字典管理器接口
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据字典信息查搜字典
-			</summary>
-			<param name="dictionaryNameSearch">字典名搜索值</param>
-			<param name="dictionaryType">字典类型</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据字典项目信息查搜字典项目
-			</summary>
-			<param name="id">字典标识</param>
-			<param name="dictionaryItemKeySearch">字典项目键搜索值</param>
-			<param name="dictionaryItemValueSearch">字典项目值搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.DataDictionaryManager">
-			<summary>
-				数据字典管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore)">
-			<summary>
-				模型管理器构造
-			</summary>
-		</member>
-		<member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SubEntityKeyMatcher(System.Guid)">
-			<summary>
-				子模型使用主模型的键匹配器
-			</summary>
-			<param name="key"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SetSubEntityRelationalKey(Artemis.Service.Resource.Context.ArtemisDataDictionaryItem,System.Guid)">
-			<summary>
-				设置子模型的关联键
-			</summary>
-			<param name="subEntity"></param>
-			<param name="key"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据字典信息查搜字典
-			</summary>
-			<param name="dictionaryNameSearch">字典名搜索值</param>
-			<param name="dictionaryType">字典类型</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据字典项目信息查搜字典项目
-			</summary>
-			<param name="id">字典标识</param>
-			<param name="dictionaryItemKeySearch">字典项目键搜索值</param>
-			<param name="dictionaryItemValueSearch">字典项目值搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.IDivisionTreeManager">
-			<summary>
-				行政区划树管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IDivisionTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据行政区划信息查搜索政区划
-			</summary>
-			<param name="divisionNameSearch">任务名搜索值</param>
-			<param name="divisionLevel"></param>
-			<param name="divisionType">任务归属搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<param name="divisionCodeSearch"></param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.DivisionTreeManager">
-			<summary>
-				行政区划树管理器实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDivisionStore)">
-			<summary>
-				树模型管理器构造
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据行政区划信息查搜索政区划
-			</summary>
-			<param name="divisionNameSearch">任务名搜索值</param>
-			<param name="divisionLevel"></param>
-			<param name="divisionType">任务归属搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<param name="divisionCodeSearch"></param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.DivisionPackage,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				映射到新实体
-			</summary>
-			<param name="package"></param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				在添加子节点之前
-			</summary>
-			<param name="parent">父节点</param>
-			<param name="child">子节点</param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				在移除子节点之前
-			</summary>
-			<param name="parent"></param>
-			<param name="child">子节点</param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
-			<summary>
-				获取非根节点的树节点列表
-			</summary>
-			<param name="key"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.IOrganizationTreeManager">
-			<summary>
-				组织机构树管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IOrganizationTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据组织机构信息查搜索组织机构
-			</summary>
-			<param name="organizationNameSearch"></param>
-			<param name="organizationCodeSearch"></param>
-			<param name="organizationType"></param>
-			<param name="organizationStatus"></param>
-			<param name="page"></param>
-			<param name="size"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.OrganizationTreeManager">
-			<summary>
-				组织机构树管理器实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Microsoft.Extensions.Options.IOptions{Artemis.Service.Resource.ResourceServiceConfig})">
-			<summary>
-				树模型管理器构造
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据组织机构信息查搜索组织机构
-			</summary>
-			<param name="organizationNameSearch"></param>
-			<param name="organizationCodeSearch"></param>
-			<param name="organizationType"></param>
-			<param name="organizationStatus"></param>
-			<param name="page"></param>
-			<param name="size"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="P:Artemis.Service.Resource.Managers.OrganizationTreeManager.Options">
-			<summary>
-				资源配置
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._region">
-			<summary>
-				区域编码
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._serial">
-			<summary>
-				机构序列
-			</summary>
-		</member>
-		<member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._childSerial">
-			<summary>
-				子机构序列
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.OrganizationPackage,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				映射到新实体
-			</summary>
-			<param name="package"></param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				在添加子节点之前
-			</summary>
-			<param name="parent">父节点</param>
-			<param name="child">子节点</param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FlushChildrenDesignCode(System.Guid,System.String,System.Threading.CancellationToken)">
-			<summary>
-				刷新子节点的设计编码
-			</summary>
-			<param name="parentId"></param>
-			<param name="parentDesignCode"></param>
-			<param name="cancellationToken"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				在移除子节点之前
-			</summary>
-			<param name="parent"></param>
-			<param name="child">子节点</param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
-			<summary>
-				获取非根节点的树节点列表
-			</summary>
-			<param name="key"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.IStandardManager">
-			<summary>
-				标准管理器接口
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IStandardManager.FetchStandardCatalogsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据标准信息查搜标准目录
-			</summary>
-			<param name="catalogNameSearch">目录名搜索值</param>
-			<param name="catalogCodeSearch">目录编码搜索值</param>
-			<param name="catalogType">目录类型</param>
-			<param name="catalogState">目录状态</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.IStandardManager.FetchStandardItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据标准项目信息查搜标准项目
-			</summary>
-			<param name="id">标准目录标识</param>
-			<param name="itemNameSearch">项目名称搜索值</param>
-			<param name="itemCodeSearch">项目编码搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Managers.StandardManager">
-			<summary>
-				标准管理器
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.StandardManager.#ctor(Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore)">
-			<summary>
-				管理器构造
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.StandardManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				映射到新实体
-			</summary>
-			<param name="package"></param>
-			<param name="loopIndex"></param>
-			<param name="cancellationToken"></param>
-			<returns></returns>
-		</member>
-		<member name="M:Artemis.Service.Resource.Managers.StandardManager.SubEntityKeyMatcher(System.Guid)">
-			<summary>
-				子模型使用主模型的键匹配器
-			</summary>
-			<param name="key"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.StandardManager.SetSubEntityRelationalKey(Artemis.Service.Resource.Context.ArtemisStandardItem,System.Guid)">
-			<summary>
-				设置子模型的关联键
-			</summary>
-			<param name="subEntity"></param>
-			<param name="key"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.StandardManager.FetchStandardCatalogsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据标准信息查搜标准目录
-			</summary>
-			<param name="catalogNameSearch">目录名搜索值</param>
-			<param name="catalogCodeSearch">目录编码搜索值</param>
-			<param name="catalogType">目录类型</param>
-			<param name="catalogState">目录状态</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Managers.StandardManager.FetchStandardItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-			<summary>
-				根据标准项目信息查搜标准项目
-			</summary>
-			<param name="id">标准目录标识</param>
-			<param name="itemNameSearch">项目名称搜索值</param>
-			<param name="itemCodeSearch">项目编码搜索值</param>
-			<param name="page">页码</param>
-			<param name="size">条目数</param>
-			<param name="cancellationToken">操作取消信号</param>
-			<returns>分页搜索结果</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.DataDictionary">
-			<summary>
-				数据字典模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Name">
-			<summary>
-				字典名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Code">
-			<summary>
-				字典代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Description">
-			<summary>
-				字典描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Type">
-			<summary>
-				字典类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionary.Valid">
-			<summary>
-				字典是否有效
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.DataDictionaryItem">
-			<summary>
-				数据字典项目模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.DataDictionaryId">
-			<summary>
-				数据字典标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Key">
-			<summary>
-				数据项目键
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Value">
-			<summary>
-				数据项目值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Description">
-			<summary>
-				数据项目描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Valid">
-			<summary>
-				数据项目是否有效
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.Device">
-			<summary>
-				设备模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Name">
-			<summary>
-				设备名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Type">
-			<summary>
-				设备类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Code">
-			<summary>
-				设备代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Model">
-			<summary>
-				设备型号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.SerialNumber">
-			<summary>
-				设备序列号
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Status">
-			<summary>
-				设备状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.PurchaseDate">
-			<summary>
-				购买日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.InstallDate">
-			<summary>
-				安装日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.WarrantyDate">
-			<summary>
-				保修日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.MaintenanceDate">
-			<summary>
-				维护日期
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Device.Description">
-			<summary>
-				设备描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.Division">
-			<summary>
-				行政区划模型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Name">
-			<summary>
-				行政区划名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Code">
-			<summary>
-				行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Level">
-			<summary>
-				行政区划级别
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Type">
-			<summary>
-				行政区划类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.FullName">
-			<summary>
-				行政区划全名
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Pinyin">
-			<summary>
-				行政区划拼音
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.Remark">
-			<summary>
-				行政区划备注
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Division.ParentId">
-			<summary>
-				上级行政区划标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.Organization">
-			<summary>
-				组织机构
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Name">
-			<summary>
-				机构名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Code">
-			<summary>
-				机构编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.DesignCode">
-			<summary>
-				设计编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Type">
-			<summary>
-				机构类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.EstablishTime">
-			<summary>
-				机构成立时间
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Email">
-			<summary>
-				机构邮箱
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.WebSite">
-			<summary>
-				机构网站
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.ContactNumber">
-			<summary>
-				机构联系电话
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.PostCode">
-			<summary>
-				机构邮编
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Status">
-			<summary>
-				机构状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.DivisionCode">
-			<summary>
-				机构所在地行政区划代码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Address">
-			<summary>
-				机构地址
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.Description">
-			<summary>
-				机构描述
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.Organization.ParentId">
-			<summary>
-				父级机构标识
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.StandardCatalog">
-			<summary>
-				标准目录
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.Name">
-			<summary>
-				标准目录名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.Code">
-			<summary>
-				标准目录编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.Type">
-			<summary>
-				标准目录类型
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.State">
-			<summary>
-				标准目录状态
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.Valid">
-			<summary>
-				是否生效
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardCatalog.Description">
-			<summary>
-				标准目录描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Models.StandardItem">
-			<summary>
-				标准项目
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.StandardCatalogId">
-			<summary>
-				标准目录标识
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Name">
-			<summary>
-				标准项目名称
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Code">
-			<summary>
-				标准项目编码
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Minimum">
-			<summary>
-				标准项目最小值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Maximum">
-			<summary>
-				标准项目最大值
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Template">
-			<summary>
-				标准项目模板
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Models.StandardItem.Description">
-			<summary>
-				标准项目描述
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.ResourceServiceConfig">
-			<summary>
-				资源服务配置
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.ResourceServiceConfig.OrganizationRegion">
-			<summary>
-				机构区域
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.ServiceExtensions">
-			<summary>
-				服务扩展
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.ServiceExtensions.ConfigureResourceService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
-			<summary>
-				配置资源服务
-			</summary>
-			<param name="builder"></param>
-			<param name="path"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-			<summary>
-				添加资源服务
-			</summary>
-			<param name="services"></param>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
-			<summary>
-				添加资源服务
-			</summary>
-			<typeparam name="THandlerProxy">操作者代理</typeparam>
-			<param name="services"></param>
-			<param name="enableHandlerProxy"></param>
-			<returns></returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
-			<summary>
-				添加资源服务
-			</summary>
-			<param name="services"></param>
-			<param name="enableHandlerProxy"></param>
-			<param name="enableCacheProxy"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Services.DictionaryServiceImplement">
-			<summary>
-				字典服务实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDataDictionaryManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DictionaryServiceImplement})">
-			<summary>
-				服务实现
-			</summary>
-			<param name="dataDictionaryManager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.DataDictionaryManager">
-			<summary>
-				数据字典管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询字典信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取数据字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建数据字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建数据字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新数据字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新数据字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除字典
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.ReadDictionaryItemInfo(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.CreateDictionaryItem(Artemis.Service.Protos.Resource.CreateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchCreateDictionaryItem(Artemis.Service.Protos.Resource.BatchCreateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.UpdateDictionaryItem(Artemis.Service.Protos.Resource.UpdateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchUpdateDictionaryItem(Artemis.Service.Protos.Resource.BatchUpdateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.DeleteDictionaryItem(Artemis.Service.Protos.Resource.DeleteDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchDeleteDictionaryItem(Artemis.Service.Protos.Resource.BatchDeleteDictionaryItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除字典项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Services.DivisionServiceImplement">
-			<summary>
-				行政区划服务实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDivisionTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DivisionServiceImplement})">
-			<summary>
-				行政区划服务实现
-			</summary>
-			<param name="divisionTreeManager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.DivisionTreeManager">
-			<summary>
-				任务树管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.SearchDivisionInfo(Artemis.Service.Protos.Resource.SearchDivisionInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询行政区划信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfo(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取行政区划信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfoTree(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取行政区划信息树
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateDivision(Artemis.Service.Protos.Resource.CreateDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateDivision(Artemis.Service.Protos.Resource.BatchCreateDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.UpdateDivision(Artemis.Service.Protos.Resource.UpdateDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchUpdateDivision(Artemis.Service.Protos.Resource.BatchUpdateDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteDivision(Artemis.Service.Protos.Resource.DeleteDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteDivision(Artemis.Service.Protos.Resource.BatchDeleteDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateChildDivision(Artemis.Service.Protos.Resource.CreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateChildDivision(Artemis.Service.Protos.Resource.BatchCreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.AddChildDivision(Artemis.Service.Protos.Resource.AddChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				添加下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchAddChildDivision(Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量添加下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteChildDivision(Artemis.Service.Protos.Resource.DeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteChildDivision(Artemis.Service.Protos.Resource.BatchDeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.RemoveChildDivision(Artemis.Service.Protos.Resource.RemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				移除下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchRemoveChildDivision(Artemis.Service.Protos.Resource.BatchRemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量移除下级行政区划
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Services.OrganizationServiceImplement">
-			<summary>
-				组织服务实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.#ctor(Artemis.Service.Resource.Managers.IOrganizationTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DivisionServiceImplement})">
-			<summary>
-				组织机构树服务实现
-			</summary>
-			<param name="organizationTreeManager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.OrganizationTreeManager">
-			<summary>
-				任务树管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查找组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取组织机构信息树
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.CreateOrganization(Artemis.Service.Protos.Resource.CreateOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchCreateOrganization(Artemis.Service.Protos.Resource.BatchCreateOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.UpdateOrganization(Artemis.Service.Protos.Resource.UpdateOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchUpdateOrganization(Artemis.Service.Protos.Resource.BatchUpdateOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新组织机构信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.DeleteOrganization(Artemis.Service.Protos.Resource.DeleteOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchDeleteOrganization(Artemis.Service.Protos.Resource.BatchDeleteOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.CreateChildOrganization(Artemis.Service.Protos.Resource.CreateChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchCreateChildOrganization(Artemis.Service.Protos.Resource.BatchCreateChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.AddChildOrganization(Artemis.Service.Protos.Resource.AddChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				添加子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchAddChildOrganization(Artemis.Service.Protos.Resource.BatchAddChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量添加子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.DeleteChildOrganization(Artemis.Service.Protos.Resource.DeleteChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchDeleteChildOrganization(Artemis.Service.Protos.Resource.BatchDeleteChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.RemoveChildOrganization(Artemis.Service.Protos.Resource.RemoveChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				移除子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchRemoveChildOrganization(Artemis.Service.Protos.Resource.BatchRemoveChildOrganizationRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量移除子组织机构
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Services.StandardServiceImplement">
-			<summary>
-				标准服务实现
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.#ctor(Artemis.Service.Resource.Managers.IStandardManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.StandardServiceImplement})">
-			<summary>
-				服务实现
-			</summary>
-			<param name="standardManager"></param>
-			<param name="logger"></param>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.StandardServiceImplement.StandardManager">
-			<summary>
-				数据字典管理器
-			</summary>
-		</member>
-		<member name="P:Artemis.Service.Resource.Services.StandardServiceImplement.Logger">
-			<summary>
-				日志依赖
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.SearchStandardCatalogInfo(Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询标准目录信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.ReadStandardCatalogInfo(Artemis.Service.Protos.Resource.ReadStandardCatalogInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取标准目录信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.CreateStandardCatalog(Artemis.Service.Protos.Resource.CreateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchCreateStandardCatalog(Artemis.Service.Protos.Resource.BatchCreateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.UpdateStandardCatalog(Artemis.Service.Protos.Resource.UpdateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchUpdateStandardCatalog(Artemis.Service.Protos.Resource.BatchUpdateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.DeleteStandardCatalog(Artemis.Service.Protos.Resource.DeleteStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchDeleteStandardCatalog(Artemis.Service.Protos.Resource.BatchDeleteStandardCatalogRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除标准目录
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.SearchStandardItemInfo(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				查询标准项目信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.ReadStandardItemInfo(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				读取标准项目信息
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.CreateStandardItem(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				创建标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchCreateStandardItem(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量创建标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.UpdateStandardItem(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				更新标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchUpdateStandardItem(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量更新标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.DeleteStandardItem(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				删除标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchDeleteStandardItem(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
-			<summary>
-				批量删除标准项目
-			</summary>
-			<param name="request">The request received from the client.</param>
-			<param name="context">The context of the server-side call handler being invoked.</param>
-			<returns>The response to send back to the client (wrapped by a task).</returns>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
-			<summary>
-				数据字典项目存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore">
-			<summary>
-				数据字典项目存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore">
-			<summary>
-				数据字典存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore">
-			<summary>
-				数据字典存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisDeviceStore">
-			<summary>
-				设备存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisDeviceStore">
-			<summary>
-				设备存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisDivisionStore">
-			<summary>
-				行政区划存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisDivisionStore">
-			<summary>
-				行政区划存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisOrganizationStore">
-			<summary>
-				组织机构存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisOrganizationStore">
-			<summary>
-				组织机构存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore">
-			<summary>
-				标准目录存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisStandardCatalogStore">
-			<summary>
-				标准目录存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisStandardCatalogStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.IArtemisStandardItemStore">
-			<summary>
-				标准项目存储接口
-			</summary>
-		</member>
-		<member name="T:Artemis.Service.Resource.Stores.ArtemisStandardItemStore">
-			<summary>
-				标准目录存储
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.Service.Resource.Stores.ArtemisStandardItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-			<summary>
-				基本存储实例构造
-			</summary>
-			<param name="context"></param>
-			<param name="storeOptions"></param>
-			<param name="handlerProxy"></param>
-			<param name="cacheProxy"></param>
-			<param name="logger"></param>
-			<param name="describer"></param>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.Service.Resource</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionary">
+            <summary>
+                数据字典实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionary.Items">
+            <summary>
+                数据字典项
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem">
+            <summary>
+                数据字典项实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisDataDictionaryItem.DataDictionary">
+            <summary>
+                数据字典
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisDevice">
+            <summary>
+                设备实体配置
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisDivision">
+            <summary>
+                行政区划实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Parent">
+            <summary>
+                上级行政区划
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisDivision.Children">
+            <summary>
+                下级行政区划
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisOrganization">
+            <summary>
+                组织机构实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Parent">
+            <summary>
+                上级机构
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisOrganization.Children">
+            <summary>
+                下级机构
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisStandardCatalog">
+            <summary>
+                标准目录实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisStandardCatalog.Items">
+            <summary>
+                标准目录项目
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisStandardItem">
+            <summary>
+                标准项目实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisStandardItem.Catalog">
+            <summary>
+                标准项目所属目录
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration">
+            <summary>
+                数据字典配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionary})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration">
+            <summary>
+                数据字典项目配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDataDictionaryItem})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration">
+            <summary>
+                设备实体配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.TableName">
+            <summary>
+                表明
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDeviceConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDevice})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration">
+            <summary>
+                行政区划配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisDivisionConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisDivision})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration">
+            <summary>
+                组织机构配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisOrganizationConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisOrganization})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration">
+            <summary>
+                标准目录配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisStandardCatalogConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisStandardCatalog})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration">
+            <summary>
+                标准项目配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisStandardItemConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisStandardItem})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Context.ResourceContext">
+            <summary>
+                资源上下文
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.ResourceContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Resource.Context.ResourceContext})">
+            <summary>
+                初始化资源上下文
+            </summary>
+            <param name="options">数据库上下文选项</param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Organizations">
+            <summary>
+                组织机构数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Divisions">
+            <summary>
+                行政区划数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.Devices">
+            <summary>
+                设备数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaries">
+            <summary>
+                数据字典数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.DataDictionaryItems">
+            <summary>
+                数据字典项数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.StandardCatalogs">
+            <summary>
+                标准目录数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.StandardItems">
+            <summary>
+                标准项目数据集
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                配置数据模型
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.ResourceContext.SeedData(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+                种子数据，在初始化时调用
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.IDataDictionaryManager">
+            <summary>
+                数据字典管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典信息查搜字典
+            </summary>
+            <param name="dictionaryNameSearch">字典名搜索值</param>
+            <param name="dictionaryType">字典类型</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IDataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典项目信息查搜字典项目
+            </summary>
+            <param name="id">字典标识</param>
+            <param name="dictionaryItemKeySearch">字典项目键搜索值</param>
+            <param name="dictionaryItemValueSearch">字典项目值搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.DataDictionaryManager">
+            <summary>
+                数据字典管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore,Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore)">
+            <summary>
+                模型管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SubEntityKeyMatcher(System.Guid)">
+            <summary>
+                子模型使用主模型的键匹配器
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.SetSubEntityRelationalKey(Artemis.Service.Resource.Context.ArtemisDataDictionaryItem,System.Guid)">
+            <summary>
+                设置子模型的关联键
+            </summary>
+            <param name="subEntity"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionariesAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典信息查搜字典
+            </summary>
+            <param name="dictionaryNameSearch">字典名搜索值</param>
+            <param name="dictionaryType">字典类型</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DataDictionaryManager.FetchDictionaryItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据字典项目信息查搜字典项目
+            </summary>
+            <param name="id">字典标识</param>
+            <param name="dictionaryItemKeySearch">字典项目键搜索值</param>
+            <param name="dictionaryItemValueSearch">字典项目值搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.IDivisionTreeManager">
+            <summary>
+                行政区划树管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IDivisionTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据行政区划信息查搜索政区划
+            </summary>
+            <param name="divisionNameSearch">任务名搜索值</param>
+            <param name="divisionLevel"></param>
+            <param name="divisionType">任务归属搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <param name="divisionCodeSearch"></param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.DivisionTreeManager">
+            <summary>
+                行政区划树管理器实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisDivisionStore)">
+            <summary>
+                树模型管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchDivisionsAsync(System.String,System.String,System.Nullable{System.Int32},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据行政区划信息查搜索政区划
+            </summary>
+            <param name="divisionNameSearch">任务名搜索值</param>
+            <param name="divisionLevel"></param>
+            <param name="divisionType">任务归属搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <param name="divisionCodeSearch"></param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.DivisionPackage,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                映射到新实体
+            </summary>
+            <param name="package"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在添加子节点之前
+            </summary>
+            <param name="parent">父节点</param>
+            <param name="child">子节点</param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisDivision,Artemis.Service.Resource.Context.ArtemisDivision,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在移除子节点之前
+            </summary>
+            <param name="parent"></param>
+            <param name="child">子节点</param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.DivisionTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+                获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.IOrganizationTreeManager">
+            <summary>
+                组织机构树管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IOrganizationTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据组织机构信息查搜索组织机构
+            </summary>
+            <param name="organizationNameSearch"></param>
+            <param name="organizationCodeSearch"></param>
+            <param name="organizationType"></param>
+            <param name="organizationStatus"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.OrganizationTreeManager">
+            <summary>
+                组织机构树管理器实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Microsoft.Extensions.Options.IOptions{Artemis.Service.Resource.ResourceServiceConfig})">
+            <summary>
+                树模型管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchOrganizationsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据组织机构信息查搜索组织机构
+            </summary>
+            <param name="organizationNameSearch"></param>
+            <param name="organizationCodeSearch"></param>
+            <param name="organizationType"></param>
+            <param name="organizationStatus"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Artemis.Service.Resource.Managers.OrganizationTreeManager.Options">
+            <summary>
+                资源配置
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._region">
+            <summary>
+                区域编码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._serial">
+            <summary>
+                机构序列
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Resource.Managers.OrganizationTreeManager._childSerial">
+            <summary>
+                子机构序列
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.OrganizationPackage,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                映射到新实体
+            </summary>
+            <param name="package"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeAddChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在添加子节点之前
+            </summary>
+            <param name="parent">父节点</param>
+            <param name="child">子节点</param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FlushChildrenDesignCode(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+                刷新子节点的设计编码
+            </summary>
+            <param name="parentId"></param>
+            <param name="parentDesignCode"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.BeforeRemoveChildNode(Artemis.Service.Resource.Context.ArtemisOrganization,Artemis.Service.Resource.Context.ArtemisOrganization,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                在移除子节点之前
+            </summary>
+            <param name="parent"></param>
+            <param name="child">子节点</param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.OrganizationTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+                获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.IStandardManager">
+            <summary>
+                标准管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IStandardManager.FetchStandardCatalogsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据标准信息查搜标准目录
+            </summary>
+            <param name="catalogNameSearch">目录名搜索值</param>
+            <param name="catalogCodeSearch">目录编码搜索值</param>
+            <param name="catalogType">目录类型</param>
+            <param name="catalogState">目录状态</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.IStandardManager.FetchStandardItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据标准项目信息查搜标准项目
+            </summary>
+            <param name="id">标准目录标识</param>
+            <param name="itemNameSearch">项目名称搜索值</param>
+            <param name="itemCodeSearch">项目编码搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.StandardManager">
+            <summary>
+                标准管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.#ctor(Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore)">
+            <summary>
+                管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.MapNewEntity(Artemis.Service.Shared.Resource.Transfer.StandardCatalogPackage,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                映射到新实体
+            </summary>
+            <param name="package"></param>
+            <param name="loopIndex"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.SubEntityKeyMatcher(System.Guid)">
+            <summary>
+                子模型使用主模型的键匹配器
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.SetSubEntityRelationalKey(Artemis.Service.Resource.Context.ArtemisStandardItem,System.Guid)">
+            <summary>
+                设置子模型的关联键
+            </summary>
+            <param name="subEntity"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.FetchStandardCatalogsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据标准信息查搜标准目录
+            </summary>
+            <param name="catalogNameSearch">目录名搜索值</param>
+            <param name="catalogCodeSearch">目录编码搜索值</param>
+            <param name="catalogType">目录类型</param>
+            <param name="catalogState">目录状态</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.StandardManager.FetchStandardItemsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据标准项目信息查搜标准项目
+            </summary>
+            <param name="id">标准目录标识</param>
+            <param name="itemNameSearch">项目名称搜索值</param>
+            <param name="itemCodeSearch">项目编码搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.DataDictionary">
+            <summary>
+                数据字典模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Name">
+            <summary>
+                字典名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Code">
+            <summary>
+                字典代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Description">
+            <summary>
+                字典描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Type">
+            <summary>
+                字典类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionary.Valid">
+            <summary>
+                字典是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.DataDictionaryItem">
+            <summary>
+                数据字典项目模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.DataDictionaryId">
+            <summary>
+                数据字典标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Key">
+            <summary>
+                数据项目键
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Value">
+            <summary>
+                数据项目值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Description">
+            <summary>
+                数据项目描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.DataDictionaryItem.Valid">
+            <summary>
+                数据项目是否有效
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.Device">
+            <summary>
+                设备模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Name">
+            <summary>
+                设备名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Type">
+            <summary>
+                设备类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Code">
+            <summary>
+                设备代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Model">
+            <summary>
+                设备型号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.SerialNumber">
+            <summary>
+                设备序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Status">
+            <summary>
+                设备状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.PurchaseDate">
+            <summary>
+                购买日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.InstallDate">
+            <summary>
+                安装日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.WarrantyDate">
+            <summary>
+                保修日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.MaintenanceDate">
+            <summary>
+                维护日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Device.Description">
+            <summary>
+                设备描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.Division">
+            <summary>
+                行政区划模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Name">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Code">
+            <summary>
+                行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Level">
+            <summary>
+                行政区划级别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Type">
+            <summary>
+                行政区划类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.FullName">
+            <summary>
+                行政区划全名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Pinyin">
+            <summary>
+                行政区划拼音
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.Remark">
+            <summary>
+                行政区划备注
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Division.ParentId">
+            <summary>
+                上级行政区划标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.Organization">
+            <summary>
+                组织机构
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Name">
+            <summary>
+                机构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Code">
+            <summary>
+                机构编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.DesignCode">
+            <summary>
+                设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Type">
+            <summary>
+                机构类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.EstablishTime">
+            <summary>
+                机构成立时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Email">
+            <summary>
+                机构邮箱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.WebSite">
+            <summary>
+                机构网站
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.ContactNumber">
+            <summary>
+                机构联系电话
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.PostCode">
+            <summary>
+                机构邮编
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Status">
+            <summary>
+                机构状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.DivisionCode">
+            <summary>
+                机构所在地行政区划代码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Address">
+            <summary>
+                机构地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.Description">
+            <summary>
+                机构描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.ParentId">
+            <summary>
+                父级机构标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.StandardCatalog">
+            <summary>
+                标准目录
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.Name">
+            <summary>
+                标准目录名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.Code">
+            <summary>
+                标准目录编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.Type">
+            <summary>
+                标准目录类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.State">
+            <summary>
+                标准目录状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.Valid">
+            <summary>
+                是否生效
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardCatalog.Description">
+            <summary>
+                标准目录描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.StandardItem">
+            <summary>
+                标准项目
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.StandardCatalogId">
+            <summary>
+                标准目录标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Name">
+            <summary>
+                标准项目名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Code">
+            <summary>
+                标准项目编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Minimum">
+            <summary>
+                标准项目最小值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Maximum">
+            <summary>
+                标准项目最大值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Template">
+            <summary>
+                标准项目模板
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.StandardItem.Description">
+            <summary>
+                标准项目描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.ResourceServiceConfig">
+            <summary>
+                资源服务配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.ResourceServiceConfig.OrganizationRegion">
+            <summary>
+                机构区域
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.ServiceExtensions">
+            <summary>
+                服务扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.ConfigureResourceService(Microsoft.Extensions.Hosting.IHostApplicationBuilder,System.String)">
+            <summary>
+                配置资源服务
+            </summary>
+            <param name="builder"></param>
+            <param name="path"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+                添加资源服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+            <summary>
+                添加资源服务
+            </summary>
+            <typeparam name="THandlerProxy">操作者代理</typeparam>
+            <param name="services"></param>
+            <param name="enableHandlerProxy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.ServiceExtensions.AddResourceServices``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean,System.Boolean)">
+            <summary>
+                添加资源服务
+            </summary>
+            <param name="services"></param>
+            <param name="enableHandlerProxy"></param>
+            <param name="enableCacheProxy"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.DictionaryServiceImplement">
+            <summary>
+                字典服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDataDictionaryManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DictionaryServiceImplement})">
+            <summary>
+                服务实现
+            </summary>
+            <param name="dataDictionaryManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.DataDictionaryManager">
+            <summary>
+                数据字典管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DictionaryServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryInfo(Artemis.Service.Protos.Resource.SearchDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询字典信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.ReadDictionaryInfo(Artemis.Service.Protos.Resource.ReadDictionaryInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.CreateDictionary(Artemis.Service.Protos.Resource.CreateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchCreateDictionary(Artemis.Service.Protos.Resource.BatchCreateDictionariyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.UpdateDictionary(Artemis.Service.Protos.Resource.UpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchUpdateDictionary(Artemis.Service.Protos.Resource.BatchUpdateDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新数据字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.DeleteDictionary(Artemis.Service.Protos.Resource.DeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchDeleteDictionary(Artemis.Service.Protos.Resource.BatchDeleteDictionaryRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除字典
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.SearchDictionaryItemInfo(Artemis.Service.Protos.Resource.SearchDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.ReadDictionaryItemInfo(Artemis.Service.Protos.Resource.ReadDictionaryItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.CreateDictionaryItem(Artemis.Service.Protos.Resource.CreateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchCreateDictionaryItem(Artemis.Service.Protos.Resource.BatchCreateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.UpdateDictionaryItem(Artemis.Service.Protos.Resource.UpdateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchUpdateDictionaryItem(Artemis.Service.Protos.Resource.BatchUpdateDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.DeleteDictionaryItem(Artemis.Service.Protos.Resource.DeleteDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DictionaryServiceImplement.BatchDeleteDictionaryItem(Artemis.Service.Protos.Resource.BatchDeleteDictionaryItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除字典项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.DivisionServiceImplement">
+            <summary>
+                行政区划服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.#ctor(Artemis.Service.Resource.Managers.IDivisionTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DivisionServiceImplement})">
+            <summary>
+                行政区划服务实现
+            </summary>
+            <param name="divisionTreeManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.DivisionTreeManager">
+            <summary>
+                任务树管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.DivisionServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.SearchDivisionInfo(Artemis.Service.Protos.Resource.SearchDivisionInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询行政区划信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfo(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取行政区划信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.ReadDivisionInfoTree(Artemis.Service.Protos.Resource.ReadDivisionInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取行政区划信息树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateDivision(Artemis.Service.Protos.Resource.CreateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateDivision(Artemis.Service.Protos.Resource.BatchCreateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.UpdateDivision(Artemis.Service.Protos.Resource.UpdateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchUpdateDivision(Artemis.Service.Protos.Resource.BatchUpdateDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteDivision(Artemis.Service.Protos.Resource.DeleteDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteDivision(Artemis.Service.Protos.Resource.BatchDeleteDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.CreateChildDivision(Artemis.Service.Protos.Resource.CreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchCreateChildDivision(Artemis.Service.Protos.Resource.BatchCreateChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.AddChildDivision(Artemis.Service.Protos.Resource.AddChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchAddChildDivision(Artemis.Service.Protos.Resource.BatchAddChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量添加下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.DeleteChildDivision(Artemis.Service.Protos.Resource.DeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchDeleteChildDivision(Artemis.Service.Protos.Resource.BatchDeleteChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.RemoveChildDivision(Artemis.Service.Protos.Resource.RemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                移除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.DivisionServiceImplement.BatchRemoveChildDivision(Artemis.Service.Protos.Resource.BatchRemoveChildDivisionRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量移除下级行政区划
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.OrganizationServiceImplement">
+            <summary>
+                组织服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.#ctor(Artemis.Service.Resource.Managers.IOrganizationTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.DivisionServiceImplement})">
+            <summary>
+                组织机构树服务实现
+            </summary>
+            <param name="organizationTreeManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.OrganizationTreeManager">
+            <summary>
+                任务树管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.OrganizationServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.SearchOrganizationInfo(Artemis.Service.Protos.Resource.SearchOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查找组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfo(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.ReadOrganizationInfoTree(Artemis.Service.Protos.Resource.ReadOrganizationInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取组织机构信息树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.CreateOrganization(Artemis.Service.Protos.Resource.CreateOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchCreateOrganization(Artemis.Service.Protos.Resource.BatchCreateOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.UpdateOrganization(Artemis.Service.Protos.Resource.UpdateOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchUpdateOrganization(Artemis.Service.Protos.Resource.BatchUpdateOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新组织机构信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.DeleteOrganization(Artemis.Service.Protos.Resource.DeleteOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchDeleteOrganization(Artemis.Service.Protos.Resource.BatchDeleteOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.CreateChildOrganization(Artemis.Service.Protos.Resource.CreateChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchCreateChildOrganization(Artemis.Service.Protos.Resource.BatchCreateChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.AddChildOrganization(Artemis.Service.Protos.Resource.AddChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                添加子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchAddChildOrganization(Artemis.Service.Protos.Resource.BatchAddChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量添加子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.DeleteChildOrganization(Artemis.Service.Protos.Resource.DeleteChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchDeleteChildOrganization(Artemis.Service.Protos.Resource.BatchDeleteChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.RemoveChildOrganization(Artemis.Service.Protos.Resource.RemoveChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                移除子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.OrganizationServiceImplement.BatchRemoveChildOrganization(Artemis.Service.Protos.Resource.BatchRemoveChildOrganizationRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量移除子组织机构
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Services.StandardServiceImplement">
+            <summary>
+                标准服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.#ctor(Artemis.Service.Resource.Managers.IStandardManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.StandardServiceImplement})">
+            <summary>
+                服务实现
+            </summary>
+            <param name="standardManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.StandardServiceImplement.StandardManager">
+            <summary>
+                数据字典管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.StandardServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.SearchStandardCatalogInfo(Artemis.Service.Protos.Resource.SearchStandardCatalogInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询标准目录信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.ReadStandardCatalogInfo(Artemis.Service.Protos.Resource.ReadStandardCatalogInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取标准目录信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.CreateStandardCatalog(Artemis.Service.Protos.Resource.CreateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchCreateStandardCatalog(Artemis.Service.Protos.Resource.BatchCreateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.UpdateStandardCatalog(Artemis.Service.Protos.Resource.UpdateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchUpdateStandardCatalog(Artemis.Service.Protos.Resource.BatchUpdateStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.DeleteStandardCatalog(Artemis.Service.Protos.Resource.DeleteStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchDeleteStandardCatalog(Artemis.Service.Protos.Resource.BatchDeleteStandardCatalogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除标准目录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.SearchStandardItemInfo(Artemis.Service.Protos.Resource.SearchStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                查询标准项目信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.ReadStandardItemInfo(Artemis.Service.Protos.Resource.ReadStandardItemInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                读取标准项目信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.CreateStandardItem(Artemis.Service.Protos.Resource.CreateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                创建标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchCreateStandardItem(Artemis.Service.Protos.Resource.BatchCreateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量创建标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.UpdateStandardItem(Artemis.Service.Protos.Resource.UpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                更新标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchUpdateStandardItem(Artemis.Service.Protos.Resource.BatchUpdateStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量更新标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.DeleteStandardItem(Artemis.Service.Protos.Resource.DeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                删除标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.StandardServiceImplement.BatchDeleteStandardItem(Artemis.Service.Protos.Resource.BatchDeleteStandardItemRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+                批量删除标准项目
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
+            <summary>
+                数据字典项目存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore">
+            <summary>
+                数据字典项目存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryStore">
+            <summary>
+                数据字典存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore">
+            <summary>
+                数据字典存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDataDictionaryStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisDeviceStore">
+            <summary>
+                设备存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisDeviceStore">
+            <summary>
+                设备存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDeviceStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisDivisionStore">
+            <summary>
+                行政区划存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisDivisionStore">
+            <summary>
+                行政区划存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisDivisionStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisOrganizationStore">
+            <summary>
+                组织机构存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisOrganizationStore">
+            <summary>
+                组织机构存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisOrganizationStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore">
+            <summary>
+                标准目录存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisStandardCatalogStore">
+            <summary>
+                标准目录存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisStandardCatalogStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisStandardItemStore">
+            <summary>
+                标准项目存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisStandardItemStore">
+            <summary>
+                标准目录存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisStandardItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+    </members>
 </doc>

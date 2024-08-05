@@ -10,4 +10,8 @@ namespace Artemis.Service.Business.VisionScreen.Context;
 [EntityTypeConfiguration(typeof(ArtemisVisualChartConfiguration))]
 public class ArtemisVisualChart : VisualChart
 {
+    /// <summary>
+    /// 视力表数据所属的视力档案
+    /// </summary>
+    public ArtemisVisionScreenRecord VisionScreenRecord { get; set; }
 }

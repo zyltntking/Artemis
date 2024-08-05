@@ -149,7 +149,7 @@ service TaskService {
 	}
 
 	// 获取任务单元
-	rpc GetTaskUnit(GetTaskUnitRequest) returns (GetTaskUnitResponse) {
+	rpc ReadTaskUnitInfo(ReadTaskUnitRequest) returns (ReadTaskUnitResponse) {
 		option (google.api.http) = {
 			get: "/api/TaskService/Tasks/{TaskId}/Units/{TaskUnitId}"
 		};
@@ -210,7 +210,7 @@ service TaskService {
 	}
 
 	// 获取任务单元目标
-	rpc GetTaskUnitTarget(GetTaskUnitTargetRequest) returns (GetTaskUnitTargetResponse) {
+	rpc ReadTaskUnitTarget(ReadTaskUnitTargetRequest) returns (ReadTaskUnitTargetResponse) {
 		option (google.api.http) = {
 			get: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
 		};
@@ -779,7 +779,7 @@ message SearchTaskUnitInfoResponse{
 }
 
 // 获取任务单元请求
-message GetTaskUnitRequest{
+message ReadTaskUnitRequest{
 	// 任务标识
 	// @required
 	// @guid
@@ -791,7 +791,7 @@ message GetTaskUnitRequest{
 }
 
 // 获取任务单元响应
-message GetTaskUnitResponse{
+message ReadTaskUnitResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -825,7 +825,7 @@ message CreateTaskUnitPacket{
 	// @maxLength(32)
 	google.protobuf.StringValue DesignCode = 3;
 	// 任务单元描述
-	// @maxLength(256)
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 4;
 	// 任务单元开始时间
 	// @required
@@ -871,7 +871,7 @@ message UpdateTaskUnitPacket{
 	// @maxLength(32)
 	google.protobuf.StringValue DesignCode = 3;
 	// 任务单元描述
-	// @maxLength(256)
+	// @maxLength(128)
 	google.protobuf.StringValue Description = 4;
 	// 任务单元开始时间
 	// @datetime
@@ -949,35 +949,26 @@ message SearchTaskUnitTargetRequest{
 	// @guid
 	string TaskUnitId = 1;
 	// 任务目标名称
-	// @required
 	// @maxLength(128)
-	string TargetName = 2;
+	google.protobuf.StringValue TargetName = 2;
 	// 任务目标代码
-	// @required
 	// @maxLength(32)
-	string TargetCode = 3;
+	google.protobuf.StringValue TargetCode = 3;
 	// 设计代码
-	// @required
 	// @maxLength(32)
-	string DesignCode = 4;
+	google.protobuf.StringValue DesignCode = 4;
 	// 任务目标类型
-	// @required
 	// @maxLength(32)
-	string TargetType = 5;
-	// 任务目标标识
-	// @required
-	// @maxLength(64)
-	string TaregtId = 6;
+	google.protobuf.StringValue TargetType = 5;
 	// 任务目标状态
-	// @required
 	// @maxLength(32)
-	string TargetState = 7;
+	google.protobuf.StringValue TargetState = 6;
 	// 页码
 	// @min(0)
-	int32 Page = 8;
+	google.protobuf.Int32Value Page = 7;
 	// 条目数
 	// @min(0)
-	int32 Size = 9;
+	google.protobuf.Int32Value Size = 8;
 }
 
 // 任务单元目标数据包
@@ -995,32 +986,28 @@ message TaskUnitTargetPacket {
 	// @maxLength(128)
 	string TargetName = 3;
 	// 任务目标代码
-	// @required
 	// @maxLength(32)
-	string TargetCode = 4;
+	google.protobuf.StringValue TargetCode = 4;
 	// 设计代码
-	// @required
 	// @maxLength(32)
-	string DesignCode = 5;
+	google.protobuf.StringValue DesignCode = 5;
 	// 任务目标类型
 	// @required
 	// @maxLength(32)
 	string TargetType = 6;
-	// 任务目标标识
-	// @required
-	// @maxLength(64)
-	string TaregtId = 7;
+	// 绑定标记
+	// @maxLength(128)
+	google.protobuf.StringValue BindingTag = 7;
 	// 任务目标状态
 	// @required
 	// @maxLength(32)
 	string TargetState = 8;
 	// 任务目标描述
 	// @maxLength(128)
-	string Description = 9;
+	google.protobuf.StringValue Description = 9;
 	// 任务目标执行时间
-	// @required
 	// @datetime
-	string ExecuteTime = 10;
+	google.protobuf.StringValue ExecuteTime = 10;
 }
 
 // 分页任务单元信息数据包
@@ -1065,7 +1052,7 @@ message SearchTaskUnitTargetResponse{
 }
 
 // 获取任务单元目标请求
-message GetTaskUnitTargetRequest{
+message ReadTaskUnitTargetRequest{
 	// 任务单元标识
 	// @required
 	// @guid
@@ -1077,7 +1064,7 @@ message GetTaskUnitTargetRequest{
 }
 
 // 获取任务单元目标响应
-message GetTaskUnitTargetResponse{
+message ReadTaskUnitTargetResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -1105,32 +1092,28 @@ message CreateTaskUnitTargetPacket{
 	// @maxLength(128)
 	string TargetName = 1;
 	// 任务目标代码
-	// @required
 	// @maxLength(32)
-	string TargetCode = 2;
+	google.protobuf.StringValue TargetCode = 2;
 	// 设计代码
-	// @required
 	// @maxLength(32)
-	string DesignCode = 3;
+	google.protobuf.StringValue DesignCode = 3;
 	// 任务目标类型
 	// @required
 	// @maxLength(32)
 	string TargetType = 4;
 	// 任务目标标识
-	// @required
-	// @maxLength(64)
-	string TaregtId = 5;
+	// @maxLength(128)
+	google.protobuf.StringValue BindingTag = 5;
 	// 任务目标状态
 	// @required
 	// @maxLength(32)
 	string TargetState = 6;
 	// 任务目标描述
 	// @maxLength(128)
-	string Description = 7;
+	google.protobuf.StringValue Description = 7;
 	// 任务目标执行时间
-	// @required
 	// @datetime
-	string ExecuteTime = 8;
+	google.protobuf.StringValue ExecuteTime = 8;
 }
 
 // 创建任务单元目标请求
@@ -1170,8 +1153,8 @@ message UpdateTaskUnitTargetPacket{
 	// @maxLength(32)
 	google.protobuf.StringValue TargetType = 4;
 	// 任务目标标识
-	// @maxLength(64)
-	google.protobuf.StringValue TaregtId = 5;
+	// @maxLength(128)
+	google.protobuf.StringValue BindingTag = 5;
 	// 任务目标状态
 	// @maxLength(32)
 	google.protobuf.StringValue TargetState = 6;
@@ -1180,7 +1163,7 @@ message UpdateTaskUnitTargetPacket{
 	google.protobuf.StringValue Description = 7;
 	// 任务目标执行时间
 	// @datetime
-	string ExecuteTime = 8;
+	google.protobuf.StringValue ExecuteTime = 8;
 }
 
 // 更新任务单元目标请求
@@ -1204,30 +1187,9 @@ message BatchUpdateTaskUnitTargetPacket{
 	// @required
 	// @guid
 	string Id = 1;
-	// 任务目标名称
-	// @maxLength(128)
-	google.protobuf.StringValue TargetName = 2;
-	// 任务目标代码
-	// @maxLength(32)
-	google.protobuf.StringValue TargetCode = 3;
-	// 设计代码
-	// @maxLength(32)
-	google.protobuf.StringValue DesignCode = 4;
-	// 任务目标类型
-	// @maxLength(32)
-	google.protobuf.StringValue TargetType = 5;
-	// 任务目标标识
-	// @maxLength(64)
-	google.protobuf.StringValue TaregtId = 6;
-	// 任务目标状态
-	// @maxLength(32)
-	google.protobuf.StringValue TargetState = 7;
-	// 任务目标描述
-	// @maxLength(256)
-	google.protobuf.StringValue Description = 8;
-	// 任务目标执行时间
-	// @datetime
-	string ExecuteTime = 9;
+	// 任务目标
+	// @required
+	UpdateTaskUnitTargetPacket TaskUnitTarget = 2;
 }
 
 // 批量更新任务单元目标请求

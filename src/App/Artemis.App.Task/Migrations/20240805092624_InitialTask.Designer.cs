@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Task.Migrations
 {
     [DbContext(typeof(TaskContext))]
-    [Migration("20240804195852_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240805092624_InitialTask")]
+    partial class InitialTask
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,10 +76,6 @@ namespace Artemis.App.Task.Migrations
                         .HasColumnType("character varying(64)")
                         .HasComment("更新者标识");
 
-                    b.Property<int>("Partition")
-                        .HasColumnType("integer")
-                        .HasComment("分区标识");
-
                     b.Property<string>("RemoveBy")
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
@@ -103,9 +99,6 @@ namespace Artemis.App.Task.Migrations
 
                     b.HasIndex("ModifyBy")
                         .HasDatabaseName("IX_ArtemisAgent_ModifyBy");
-
-                    b.HasIndex("Partition")
-                        .HasDatabaseName("IX_ArtemisAgent_Partition");
 
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisAgent_RemoveBy");
@@ -175,10 +168,6 @@ namespace Artemis.App.Task.Migrations
                         .HasColumnType("uuid")
                         .HasComment("父任务标识");
 
-                    b.Property<int>("Partition")
-                        .HasColumnType("integer")
-                        .HasComment("分区标识");
-
                     b.Property<string>("RemoveBy")
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
@@ -247,9 +236,6 @@ namespace Artemis.App.Task.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.HasIndex("Partition")
-                        .HasDatabaseName("IX_ArtemisTask_Partition");
-
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisTask_RemoveBy");
 
@@ -298,133 +284,6 @@ namespace Artemis.App.Task.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskTarget", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasComment("标识");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("并发锁");
-
-                    b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("创建者标识");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TIMESTAMP")
-                        .HasComment("创建时间");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("TIMESTAMP")
-                        .HasComment("删除时间");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("任务描述");
-
-                    b.Property<string>("DesignCode")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("设计编码");
-
-                    b.Property<DateTime?>("ExecuteTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("ModifyBy")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("更新者标识");
-
-                    b.Property<int>("Partition")
-                        .HasColumnType("integer")
-                        .HasComment("分区标识");
-
-                    b.Property<string>("RemoveBy")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("删除者标识");
-
-                    b.Property<string>("TargetCode")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasComment("任务目标编码");
-
-                    b.Property<string>("TargetId")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("任务目标外部标识");
-
-                    b.Property<string>("TargetName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("任务目标名称");
-
-                    b.Property<string>("TargetState")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<string>("TargetType")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasComment("任务目标类型");
-
-                    b.Property<string>("TaskStatus")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasComment("任务状态");
-
-                    b.Property<Guid>("TaskUnitId")
-                        .HasColumnType("uuid")
-                        .HasComment("任务单元标识");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TIMESTAMP")
-                        .HasComment("更新时间");
-
-                    b.HasKey("Id")
-                        .HasName("PK_ArtemisTaskTarget");
-
-                    b.HasIndex("CreateBy")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_CreateBy");
-
-                    b.HasIndex("CreatedAt")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_CreatedAt");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_DeletedAt");
-
-                    b.HasIndex("ModifyBy")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_ModifyBy");
-
-                    b.HasIndex("Partition")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_Partition");
-
-                    b.HasIndex("RemoveBy")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_RemoveBy");
-
-                    b.HasIndex("TaskUnitId");
-
-                    b.HasIndex("UpdatedAt")
-                        .HasDatabaseName("IX_ArtemisTaskTarget_UpdatedAt");
-
-                    b.ToTable("ArtemisTaskTarget", "Task", t =>
-                        {
-                            t.HasComment("任务目标数据集");
-                        });
-                });
-
             modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskUnit", b =>
                 {
                     b.Property<Guid>("Id")
@@ -452,8 +311,8 @@ namespace Artemis.App.Task.Migrations
                         .HasComment("删除时间");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasComment("任务描述");
 
                     b.Property<string>("DesignCode")
@@ -476,10 +335,6 @@ namespace Artemis.App.Task.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
                         .HasComment("标准化单元名");
-
-                    b.Property<int>("Partition")
-                        .HasColumnType("integer")
-                        .HasComment("分区标识");
 
                     b.Property<string>("RemoveBy")
                         .HasMaxLength(64)
@@ -545,9 +400,6 @@ namespace Artemis.App.Task.Migrations
                     b.HasIndex("NormalizedUnitName")
                         .HasDatabaseName("IX_ArtemisTaskUnit_UnitName");
 
-                    b.HasIndex("Partition")
-                        .HasDatabaseName("IX_ArtemisTaskUnit_Partition");
-
                     b.HasIndex("RemoveBy")
                         .HasDatabaseName("IX_ArtemisTaskUnit_RemoveBy");
 
@@ -595,6 +447,120 @@ namespace Artemis.App.Task.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskUnitTarget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasComment("标识");
+
+                    b.Property<string>("BindingTag")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("绑定标记");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("并发锁");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("创建者标识");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("创建时间");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("删除时间");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("任务描述");
+
+                    b.Property<string>("DesignCode")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("设计编码");
+
+                    b.Property<DateTime?>("ExecuteTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ModifyBy")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("更新者标识");
+
+                    b.Property<string>("RemoveBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("删除者标识");
+
+                    b.Property<string>("TargetCode")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasComment("任务目标编码");
+
+                    b.Property<string>("TargetName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasComment("任务目标名称");
+
+                    b.Property<string>("TargetState")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<string>("TargetType")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasComment("任务目标类型");
+
+                    b.Property<Guid>("TaskUnitId")
+                        .HasColumnType("uuid")
+                        .HasComment("任务单元标识");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP")
+                        .HasComment("更新时间");
+
+                    b.HasKey("Id")
+                        .HasName("PK_ArtemisTaskUnitTarget");
+
+                    b.HasIndex("CreateBy")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_CreateBy");
+
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_CreatedAt");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_DeletedAt");
+
+                    b.HasIndex("ModifyBy")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_ModifyBy");
+
+                    b.HasIndex("RemoveBy")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_RemoveBy");
+
+                    b.HasIndex("TaskUnitId");
+
+                    b.HasIndex("UpdatedAt")
+                        .HasDatabaseName("IX_ArtemisTaskUnitTarget_UpdatedAt");
+
+                    b.ToTable("ArtemisTaskUnitTarget", "Task", t =>
+                        {
+                            t.HasComment("任务目标数据集");
+                        });
+                });
+
             modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTask", b =>
                 {
                     b.HasOne("Artemis.Service.Task.Context.ArtemisTask", "Parent")
@@ -627,18 +593,6 @@ namespace Artemis.App.Task.Migrations
                     b.Navigation("Task");
                 });
 
-            modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskTarget", b =>
-                {
-                    b.HasOne("Artemis.Service.Task.Context.ArtemisTaskUnit", "TaskUnit")
-                        .WithMany("TaskTargets")
-                        .HasForeignKey("TaskUnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ArtemisTaskTarget_ArtemisTaskUnit");
-
-                    b.Navigation("TaskUnit");
-                });
-
             modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskUnit", b =>
                 {
                     b.HasOne("Artemis.Service.Task.Context.ArtemisTask", "Task")
@@ -668,6 +622,18 @@ namespace Artemis.App.Task.Migrations
                         .HasConstraintName("FK_ArtemisTaskUnitAgent_ArtemisTaskUnit");
 
                     b.Navigation("Agent");
+
+                    b.Navigation("TaskUnit");
+                });
+
+            modelBuilder.Entity("Artemis.Service.Task.Context.ArtemisTaskUnitTarget", b =>
+                {
+                    b.HasOne("Artemis.Service.Task.Context.ArtemisTaskUnit", "TaskUnit")
+                        .WithMany("TaskTargets")
+                        .HasForeignKey("TaskUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ArtemisTaskUnitTarget_ArtemisTaskUnit");
 
                     b.Navigation("TaskUnit");
                 });

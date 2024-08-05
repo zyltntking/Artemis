@@ -8,7 +8,7 @@ namespace Artemis.Service.Task.Context.Configuration;
 /// <summary>
 ///     任务单元配置
 /// </summary>
-internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisTaskUnit>
+internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyModelEntityConfiguration<ArtemisTaskUnit>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisTaskUnit>
 
@@ -51,10 +51,10 @@ internal sealed class ArtemisTaskUnitConfiguration : ConcurrencyPartitionEntityC
             .HasDatabaseName(IndexName("EndTime"));
 
         // Each Task Unit can have many Task Targets
-        builder.HasMany(taskUnit => taskUnit.TaskTargets)
+        builder.HasMany(taskUnit => taskUnit.TaskUnitTargets)
             .WithOne(taskTarget => taskTarget.TaskUnit)
             .HasForeignKey(taskTarget => taskTarget.TaskUnitId)
-            .HasConstraintName(ForeignKeyName(nameof(ArtemisTaskTarget), nameof(ArtemisTaskUnit)))
+            .HasConstraintName(ForeignKeyName(nameof(ArtemisTaskUnitTarget), nameof(ArtemisTaskUnit)))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }

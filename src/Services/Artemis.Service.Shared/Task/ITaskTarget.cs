@@ -1,15 +1,30 @@
-﻿namespace Artemis.Service.Shared.Task;
+﻿using Artemis.Data.Core;
+
+namespace Artemis.Service.Shared.Task;
 
 /// <summary>
-///     任务目标接口
+/// 任务目标接口
 /// </summary>
-public interface ITaskTarget
+public interface ITaskUnitTarget : ITaskUnitTargetInfo
+{
+}
+
+/// <summary>
+/// 任务目标信息接口
+/// </summary>
+public interface ITaskUnitTargetInfo : ITaskUnitTargetPackage, IKeySlot
 {
     /// <summary>
     ///     任务单元Id
     /// </summary>
     Guid TaskUnitId { get; set; }
+}
 
+/// <summary>
+///     任务目标数据包接口
+/// </summary>
+public interface ITaskUnitTargetPackage
+{
     /// <summary>
     ///     任务目标名称
     /// </summary>
@@ -31,9 +46,9 @@ public interface ITaskTarget
     string TargetType { get; set; }
 
     /// <summary>
-    ///     任务目标外部标识
+    ///     绑定标记
     /// </summary>
-    string? TargetId { get; set; }
+    string? BindingTag { get; set; }
 
     /// <summary>
     ///     任务目标状态

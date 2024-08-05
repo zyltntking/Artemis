@@ -8,7 +8,7 @@ namespace Artemis.Service.Task.Context.Configuration;
 /// <summary>
 ///     任务配置
 /// </summary>
-internal sealed class ArtemisTaskConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisTask>
+internal sealed class ArtemisTaskConfiguration : ConcurrencyModelEntityConfiguration<ArtemisTask>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisTask>
 

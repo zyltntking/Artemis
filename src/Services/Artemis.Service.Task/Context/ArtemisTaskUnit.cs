@@ -18,7 +18,7 @@ public sealed class ArtemisTaskUnit : TaskUnit
     /// <summary>
     ///     任务目标
     /// </summary>
-    public ICollection<ArtemisTaskTarget>? TaskTargets { get; set; }
+    public ICollection<ArtemisTaskUnitTarget>? TaskUnitTargets { get; set; }
 
     /// <summary>
     ///     任务代理

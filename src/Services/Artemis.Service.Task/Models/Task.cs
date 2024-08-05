@@ -8,7 +8,7 @@ namespace Artemis.Service.Task.Models;
 /// <summary>
 ///     任务模型
 /// </summary>
-public class Task : ConcurrencyPartition, ITask
+public class Task : ConcurrencyModel, ITask
 {
     /// <summary>
     ///     任务名称

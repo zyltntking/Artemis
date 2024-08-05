@@ -45,7 +45,7 @@ public class TaskContext : DbContext
     /// <summary>
     ///     任务目标数据集
     /// </summary>
-    public virtual DbSet<ArtemisTaskTarget> TaskTargets { get; set; }
+    public virtual DbSet<ArtemisTaskUnitTarget> TaskTargets { get; set; }
 
     /// <summary>
     ///     配置数据模型

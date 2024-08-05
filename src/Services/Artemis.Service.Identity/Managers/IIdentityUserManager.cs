@@ -237,6 +237,26 @@ public interface IIdentityUserManager : IManager
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// 更新或删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<StoreResult> AddOrUpdateUserProfile(Guid id, string key, string value,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 批量更新或删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="profiles"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<StoreResult> AddOrUpdateUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default);
+
+    /// <summary>
     ///     删除用户属性
     /// </summary>
     /// <param name="id"></param>
@@ -254,6 +274,7 @@ public interface IIdentityUserManager : IManager
     /// <returns></returns>
     Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys,
         CancellationToken cancellationToken = default);
+
 
     /// <summary>
     ///     查询用户的凭据

@@ -10,4 +10,8 @@ namespace Artemis.Service.Business.VisionScreen.Context;
 [EntityTypeConfiguration(typeof(ArtemisOptometerConfiguration))]
 public sealed class ArtemisOptometer : Optometer
 {
+    /// <summary>
+    /// 验光仪数据所属的视力档案
+    /// </summary>
+    public ArtemisVisionScreenRecord VisionScreenRecord { get; set; }
 }

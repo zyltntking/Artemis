@@ -212,6 +212,24 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
     }
 
     /// <summary>
+    ///     在添加子节点之前
+    /// </summary>
+    /// <param name="parent">父节点</param>
+    /// <param name="child">子节点</param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    protected override System.Threading.Tasks.Task BeforeAddChildNode(
+        ArtemisTask parent, 
+        ArtemisTask child, 
+        int loopIndex,
+        CancellationToken cancellationToken = default)
+    {
+        child.TaskShip = TaskShip.Child;
+
+        return System.Threading.Tasks.Task.CompletedTask;
+    }
+
+    /// <summary>
     ///     在添加子节点之后
     /// </summary>
     /// <param name="parent"></param>
@@ -235,6 +253,26 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
     }
 
     /// <summary>
+    ///     在移除子节点之前
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="child"></param>
+    /// <param name="loopIndex"></param>
+    /// <param name="cancellationToken"></param>
+    protected override async System.Threading.Tasks.Task BeforeRemoveChildNode(
+        ArtemisTask parent,
+        ArtemisTask child,
+        int loopIndex,
+        CancellationToken cancellationToken = default)
+    {
+        if (child == null)
+            throw new ArgumentNullException(nameof(child));
+        var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == child.Id, cancellationToken);
+
+        child.TaskShip = exists ? TaskShip.Root : TaskShip.Normal;
+    }
+
+    /// <summary>
     ///     在移除子节点之后
     /// </summary>
     /// <param name="loopIndex"></param>
@@ -251,32 +289,13 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
         {
             var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == parent.Id, cancellationToken);
 
-            if (exists) parent.TaskShip = TaskShip.Normal;
+            if (!exists)
+            {
+                parent.TaskShip = TaskShip.Normal;
+            }
 
             await EntityStore.UpdateAsync(parent, cancellationToken);
         }
-    }
-
-    /// <summary>
-    ///     在移除子节点之前
-    /// </summary>
-    /// <param name="parent"></param>
-    /// <param name="child"></param>
-    /// <param name="loopIndex"></param>
-    /// <param name="cancellationToken"></param>
-    protected override async System.Threading.Tasks.Task BeforeRemoveChildNode(
-        ArtemisTask parent,
-        ArtemisTask child,
-        int loopIndex,
-        CancellationToken cancellationToken = default)
-    {
-        if (child == null)
-            throw new ArgumentNullException(nameof(child));
-        var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == parent.Id, cancellationToken);
-
-        parent.TaskShip = exists ? TaskShip.Root : TaskShip.Normal;
-
-        await EntityStore.UpdateAsync(parent, cancellationToken);
     }
 
     #endregion

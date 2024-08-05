@@ -8,7 +8,7 @@ namespace Artemis.Service.Task.Models;
 /// <summary>
 ///     代理模型
 /// </summary>
-public class Agent : ConcurrencyPartition, IAgent
+public class Agent : ConcurrencyModel, IAgent
 {
     /// <summary>
     ///     代理名称

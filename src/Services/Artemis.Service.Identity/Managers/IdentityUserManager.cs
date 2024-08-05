@@ -864,6 +864,83 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
+    /// 更新或删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddOrUpdateUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfile = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => profile.Key == key)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (userProfile is not null)
+        {
+            userProfile.Value = value;
+
+            var result = await UserProfileStore.UpdateAsync(userProfile, cancellationToken);
+
+            return result;
+        }
+
+        userProfile = new IdentityUserProfile
+        {
+            UserId = id,
+            Key = key,
+            Value = value
+        };
+
+        return await UserProfileStore.CreateAsync(userProfile, cancellationToken);
+    }
+
+    /// <summary>
+    /// 批量更新或删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="profiles"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddOrUpdateUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfiles = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => profiles.Keys.Contains(profile.Key))
+            .ToListAsync(cancellationToken);
+
+        var updateProfiles = userProfiles
+            .Where(profile => profiles.Keys.Contains(profile.Key))
+            .Select(profile =>
+            {
+                profile.Value = profiles[profile.Key];
+
+                return profile;
+            });
+
+        var insertKeys = profiles.Keys.Except(userProfiles.Select(profile => profile.Key)).ToList();
+
+        var insertProfiles = insertKeys.Select(key => new IdentityUserProfile
+        {
+            UserId = id,
+            Key = key,
+            Value = profiles[key]
+        });
+
+        var updateResult = await UserProfileStore.UpdateAsync(updateProfiles, cancellationToken);
+
+        var insertResult = await UserProfileStore.CreateAsync(insertProfiles, cancellationToken);
+
+        return StoreResult.Success(updateResult.AffectRows + insertResult.AffectRows);
+    }
+
+    /// <summary>
     ///     删除用户属性
     /// </summary>
     /// <param name="id"></param>
@@ -915,6 +992,8 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
 
         return StoreResult.Failed();
     }
+
+
 
 
     /// <summary>

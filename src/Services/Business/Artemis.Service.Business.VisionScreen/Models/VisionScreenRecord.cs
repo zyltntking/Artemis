@@ -96,7 +96,7 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// <summary>
     ///     学校名称
     /// </summary>
-    public string SchoolName { get; set; }
+    public required string SchoolName { get; set; }
 
     /// <summary>
     ///     学校编码
@@ -131,7 +131,7 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// <summary>
     ///     组织机构名称
     /// </summary>
-    public string OrganizationName { get; set; }
+    public required string OrganizationName { get; set; }
 
     /// <summary>
     ///     组织机构编码
@@ -141,7 +141,7 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// <summary>
     ///     组织机构设计编码
     /// </summary>
-    public string OrganizationDesignCode { get; set; }
+    public required string OrganizationDesignCode { get; set; }
 
     /// <summary>
     ///     班级标识

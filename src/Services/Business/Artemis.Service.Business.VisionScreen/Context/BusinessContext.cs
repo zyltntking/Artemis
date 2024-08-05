@@ -6,13 +6,13 @@ namespace Artemis.Service.Business.VisionScreen.Context;
 /// <summary>
 ///     原始数据上下文
 /// </summary>
-public class RawDataContext : DbContext
+public class BusinessContext : DbContext
 {
     /// <summary>
     ///     构造函数
     /// </summary>
     /// <param name="options">配置</param>
-    public RawDataContext(DbContextOptions<RawDataContext> options) : base(options)
+    public BusinessContext(DbContextOptions<BusinessContext> options) : base(options)
     {
     }
 
@@ -34,7 +34,7 @@ public class RawDataContext : DbContext
     /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema(Project.Schemas.RawData);
+        modelBuilder.HasDefaultSchema(Project.Schemas.Business);
     }
 
     #endregion

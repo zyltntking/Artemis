@@ -29,7 +29,7 @@ public class ArtemisVisualChartStore : Store<ArtemisVisualChart>, IArtemisVisual
     /// <param name="logger"></param>
     /// <param name="describer"></param>
     public ArtemisVisualChartStore(
-        RawDataContext context,
+        BusinessContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,
         ICacheProxy? cacheProxy = null,

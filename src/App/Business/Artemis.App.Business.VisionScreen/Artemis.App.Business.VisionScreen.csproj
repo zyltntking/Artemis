@@ -37,6 +37,7 @@
 	  <ProjectReference Include="..\..\..\Extensions\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj" />
 	  <ProjectReference Include="..\..\..\Extensions\Artemis.Extensions.ServiceConnect\Artemis.Extensions.ServiceConnect.csproj" />
 	  <ProjectReference Include="..\..\..\Services\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
+	  <ProjectReference Include="..\..\..\Services\Business\Artemis.Service.Business.VisionScreen\Artemis.Service.Business.VisionScreen.csproj" />
 	</ItemGroup>
 
 </Project>

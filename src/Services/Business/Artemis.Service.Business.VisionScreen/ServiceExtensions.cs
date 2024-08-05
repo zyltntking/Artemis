@@ -1,5 +1,4 @@
 ﻿using Artemis.Data.Core;
-using Artemis.Service.Business.VisionScreen.Managers;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,31 +11,55 @@ namespace Artemis.Service.Business.VisionScreen;
 public static class ServiceExtensions
 {
     /// <summary>
-    ///     添加原始数据服务
+    ///     添加业务服务
     /// </summary>
     /// <param name="services"></param>
-    public static IServiceCollection AddRawDataServices(this IServiceCollection services)
+    public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
+        services.TryAddScoped<IArtemisVisionScreenRecordStore, ArtemisVisionScreenRecordStore>();
         services.TryAddScoped<IArtemisOptometerStore, ArtemisOptometerStore>();
         services.TryAddScoped<IArtemisVisualChartStore, ArtemisVisualChartStore>();
-
-        services.TryAddScoped<IArtemisRawDataManager, ArtemisRawDataManager>();
 
         return services;
     }
 
     /// <summary>
-    ///     添加原始数据服务
+    ///     添加业务服务
     /// </summary>
+    /// <typeparam name="THandlerProxy">操作者代理</typeparam>
     /// <param name="services"></param>
-    /// <param name="enableProxy"></param>
-    public static IServiceCollection AddRawDataServices<THandlerProxy>(this IServiceCollection services,
-        bool enableProxy = true)
+    /// <param name="enableHandlerProxy"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddBusinessServices<THandlerProxy>(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true)
         where THandlerProxy : class, IHandlerProxy
     {
-        AddRawDataServices(services);
+        services.AddBusinessServices();
 
-        if (enableProxy) services.AddScoped<IHandlerProxy, THandlerProxy>();
+        if (enableHandlerProxy)
+            services.TryAddScoped<IHandlerProxy, THandlerProxy>();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     添加业务服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="enableHandlerProxy"></param>
+    /// <param name="enableCacheProxy"></param>
+    public static IServiceCollection AddBusinessServices<THandlerProxy, TCacheProxy>(
+        this IServiceCollection services,
+        bool enableHandlerProxy = true,
+        bool enableCacheProxy = true)
+        where THandlerProxy : class, IHandlerProxy
+        where TCacheProxy : class, ICacheProxy
+    {
+        services.AddBusinessServices<THandlerProxy>(enableHandlerProxy);
+
+        if (enableCacheProxy)
+            services.TryAddScoped<ICacheProxy, TCacheProxy>();
 
         return services;
     }

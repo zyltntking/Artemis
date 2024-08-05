@@ -162,6 +162,22 @@ service UserService {
 		};
 	}
 
+	// 创建或更新用户属性
+	rpc CreateOrUpdateUserProfile (AddUserProfileRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/IdentityService/Users/{UserId}/Profiles/CreateOrUpdate"
+			body: "UserProfile"
+		};
+	}
+
+	// 批量创建或更新用户属性
+	rpc BatchCreateOrUpdateUserProfile (BatchAddUserProfileRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/IdentityService/Users/{UserId}/Profiles/BatchCreateOrUpdate"
+			body: "Batch"
+		};
+	}
+
 	// 删除用户属性
 	rpc DeleteUserProfile (DeleteUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {

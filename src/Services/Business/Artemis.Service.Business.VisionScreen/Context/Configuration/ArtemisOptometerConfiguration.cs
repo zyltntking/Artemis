@@ -6,7 +6,8 @@ namespace Artemis.Service.Business.VisionScreen.Context.Configuration;
 /// <summary>
 ///     验光仪数据集配置
 /// </summary>
-internal sealed class ArtemisOptometerConfiguration : ConcurrencyPartitionEntityConfiguration<ArtemisOptometer>
+internal sealed class ArtemisOptometerConfiguration : 
+    ConcurrencyPartitionEntityConfiguration<ArtemisOptometer>
 {
     #region Overrides of ConcurrencyPartitionEntityConfiguration<ArtemisOptometer>
 

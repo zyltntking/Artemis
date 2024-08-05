@@ -12,7 +12,7 @@ namespace Artemis.Service.Task;
 public static class ServiceExtensions
 {
     /// <summary>
-    ///     添加学校服务
+    ///     添加任务服务
     /// </summary>
     /// <param name="services"></param>
     public static IServiceCollection AddTaskServices(
@@ -26,12 +26,14 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisTaskUnitAgentStores, ArtemisTaskUnitAgentStores>();
 
         services.TryAddScoped<ITaskTreeManager, TaskTreeManager>();
+        services.TryAddScoped<ITaskUnitManager, TaskUnitManager>();
+        services.TryAddScoped<ITaskUnitTargetManager, TaskUnitUnitTargetManager>();
 
         return services;
     }
 
     /// <summary>
-    ///     添加学校服务
+    ///     添加任务服务
     /// </summary>
     /// <param name="services"></param>
     /// <param name="enableProxy"></param>
@@ -49,7 +51,7 @@ public static class ServiceExtensions
     }
 
     /// <summary>
-    ///     添加认证服务
+    ///     添加任务服务
     /// </summary>
     /// <param name="services"></param>
     /// <param name="enableHandlerProxy"></param>

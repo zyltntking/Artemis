@@ -1,712 +1,701 @@
 <?xml version="1.0"?>
-
 <doc>
-	<assembly>
-		<name>Artemis.App.Identity</name>
-	</assembly>
-	<members>
-		<member name="T:Artemis.App.Identity.Migrations.InitialCreate">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-			<inheritdoc />
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-			<inheritdoc />
-		</member>
-		<member name="T:Artemis.App.Identity.Program">
-			<summary>
-				应用程序入口
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Program.Main(System.String[])">
-			<summary>
-				主函数
-			</summary>
-			<param name="args"></param>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Account.BatchResetPasswordRequestValidator">
-			<summary>
-				批量重置密码请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.Account.BatchResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Account.ChangePasswordRequestValidator">
-			<summary>
-				修改密码请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.Account.ChangePasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Account.ResetPasswordRequestValidator">
-			<summary>
-				重置密码请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.Account.ResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Account.SignInRequestValidator">
-			<summary>
-				签到请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.Account.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Account.SignUpRequestValidator">
-			<summary>
-				签入请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.Account.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.BatchCreateClaimRequestValidator">
-			<summary>
-				批量创建凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.BatchCreateClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.BatchDeleteClaimRequestValidator">
-			<summary>
-				批量删除凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.BatchDeleteClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.BatchUpdateClaimRequestValidator">
-			<summary>
-				批量更新凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.BatchUpdateClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.CreateClaimRequestValidator">
-			<summary>
-				创建凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.CreateClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.DeleteClaimRequestValidator">
-			<summary>
-				删除凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.DeleteClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.ReadClaimInfoRequestValidator">
-			<summary>
-				读取凭据信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.ReadClaimInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.SearchClaimInfoRequestValidator">
-			<summary>
-				查询凭据信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.SearchClaimInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.UpdateClaimPacketValidator">
-			<summary>
-				更新凭据数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.UpdateClaimPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Resource.UpdateClaimRequestValidator">
-			<summary>
-				更新凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Resource.UpdateClaimRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.AddRoleClaimPacketValidator">
-			<summary>
-				添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.AddRoleClaimPacketValidator.#ctor">
-			<summary>
-				添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.AddRoleClaimRequestValidator">
-			<summary>
-				添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.AddRoleClaimRequestValidator.#ctor">
-			<summary>
-				添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.AddRoleUserRequestValidator">
-			<summary>
-				添加角色用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.AddRoleUserRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchAddRoleClaimRequestValidator">
-			<summary>
-				批量添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchAddRoleClaimRequestValidator.#ctor">
-			<summary>
-				批量添加角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchAddRoleUserRequestValidator">
-			<summary>
-				批量添加角色用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchAddRoleUserRequestValidator.#ctor">
-			<summary>
-				批量添加角色用户请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchCreateRoleRequestValidator">
-			<summary>
-				批量创建角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchCreateRoleRequestValidator.#ctor">
-			<summary>
-				批量创建角色请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchDeleteRoleClaimRequestValidator">
-			<summary>
-				批量删除角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchDeleteRoleClaimRequestValidator.#ctor">
-			<summary>
-				批量删除角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchDeleteRoleRequestValidator">
-			<summary>
-				批量删除角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchDeleteRoleRequestValidator.#ctor">
-			<summary>
-				批量删除角色请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchRemoveRoleUserRequestValidator">
-			<summary>
-				批量删除角色用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchRemoveRoleUserRequestValidator.#ctor">
-			<summary>
-				批量删除角色用户请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchUpdateRoleClaimPacketValidator">
-			<summary>
-				批量更新角色声明数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchUpdateRoleClaimPacketValidator.#ctor">
-			<summary>
-				批量更新角色声明数据包验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.BatchUpdateRoleRequestValidator">
-			<summary>
-				批量更新角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.BatchUpdateRoleRequestValidator.#ctor">
-			<summary>
-				批量更新角色请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.CreateRoleRequestValidator">
-			<summary>
-				创建角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.CreateRoleRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.DeleteRoleClaimRequestValidator">
-			<summary>
-				删除角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.DeleteRoleClaimRequestValidator.#ctor">
-			<summary>
-				删除角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.DeleteRoleRequestValidator">
-			<summary>
-				删除角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.DeleteRoleRequestValidator.#ctor">
-			<summary>
-				删除角色请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.ReadRoleClaimInfoRequestValidator">
-			<summary>
-				读取角色凭据信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.ReadRoleClaimInfoRequestValidator.#ctor">
-			<summary>
-				读取角色凭据信息请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.ReadRoleInfoRequestValidator">
-			<summary>
-				读取角色信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.ReadRoleInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.ReadRoleUserInfoRequestValidator">
-			<summary>
-				读取角色用户信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.ReadRoleUserInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.RemoveRoleUserRequestValidator">
-			<summary>
-				移除角色用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.RemoveRoleUserRequestValidator.#ctor">
-			<summary>
-				移除角色用户请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.SearchRoleClaimInfoRequestValidator">
-			<summary>
-				查询角色声凭据息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.SearchRoleClaimInfoRequestValidator.#ctor">
-			<summary>
-				查询角色声凭据息请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.SearchRoleInfoRequestValidator">
-			<summary>
-				查询角色信息请求验证器
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.SearchRoleInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.SearchRoleUserInfoRequestValidator">
-			<summary>
-				查询角色用户信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.SearchRoleUserInfoRequestValidator.#ctor">
-			<summary>
-				查询角色用户信息请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleClaimPacketValidator">
-			<summary>
-				更新角色凭据数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleClaimPacketValidator.#ctor">
-			<summary>
-				更新角色凭据数据包验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleClaimRequestValidator">
-			<summary>
-				更新角色凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleClaimRequestValidator.#ctor">
-			<summary>
-				更新角色凭据请求验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.UpdateRolePacketValidator">
-			<summary>
-				更新角色数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.UpdateRolePacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleRequestValidator">
-			<summary>
-				更新角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.Role.UserIdPacketValidator">
-			<summary>
-				用户标识数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.Role.UserIdPacketValidator.#ctor">
-			<summary>
-				用户标识数据包验证
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.AddUserClaimPacketValidator">
-			<summary>
-				添加用户凭据数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.AddUserClaimPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.AddUserClaimRequestValidator">
-			<summary>
-				获取用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.AddUserClaimRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.AddUserRoleRequestValidator">
-			<summary>
-				添加用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.AddUserRoleRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchAddUserClaimRequestValidator">
-			<summary>
-				获取用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchAddUserClaimRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchCreateUserRequestValidator">
-			<summary>
-				批量删除用户请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.User.BatchCreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchDeleteUserClaimRequestValidator">
-			<summary>
-				批量删除用户凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchDeleteUserClaimRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchDeleteUserRequestValidator">
-			<summary>
-				批量删除凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchDeleteUserRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchRemoveUserRoleRequestValidator">
-			<summary>
-				批量移除用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchRemoveUserRoleRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimPacketValidator">
-			<summary>
-				批量更新用户凭据数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimRequestValidator">
-			<summary>
-				获取用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserRequestValidator">
-			<summary>
-				批量删除用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.BatchUserRoleIdRequestValidator">
-			<summary>
-				批量添加用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.BatchUserRoleIdRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.CreateUserRequestValidator">
-			<summary>
-				创建用户请求验证
-			</summary>
-		</member>
-		<member
-			name="M:Artemis.App.Identity.Validators.User.CreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.DeleteUserClaimRequestValidator">
-			<summary>
-				删除用户凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.DeleteUserClaimRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.DeleteUserRequestValidator">
-			<summary>
-				删除凭据请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.DeleteUserRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.ReadUserClaimInfoRequestValidator">
-			<summary>
-				读取用户凭据信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.ReadUserClaimInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.ReadUserInfoRequestValidator">
-			<summary>
-				读取用户信息请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.ReadUserInfoRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.ReadUserRoleInfoRequestValidator">
-			<summary>
-				读取用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.ReadUserRoleInfoRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.RemoveUserRoleRequestValidator">
-			<summary>
-				移除用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.RemoveUserRoleRequestValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.RoleIdPacketValidator">
-			<summary>
-				角色标识数据包验证器
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.RoleIdPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.SearchUserClaimInfoRequestValidator">
-			<summary>
-				查找用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.SearchUserClaimInfoRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.SearchUserInfoRequestValidator">
-			<summary>
-				查找用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.SearchUserInfoRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.SearchUserRoleInfoRequestValidator">
-			<summary>
-				查找用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.SearchUserRoleInfoRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.UpdateUserClaimPacketValidator">
-			<summary>
-				更新用户凭据数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.UpdateUserClaimPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.UserClaimIdRequestValidator">
-			<summary>
-				查找用户角色请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.UserClaimIdRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.UpdateUserPacketValidator">
-			<summary>
-				更新用户数据包验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.UpdateUserPacketValidator.#ctor">
-			<summary>
-				构造
-			</summary>
-		</member>
-		<member name="T:Artemis.App.Identity.Validators.User.UpdateUserRequestValidator">
-			<summary>
-				更新用户请求验证
-			</summary>
-		</member>
-		<member name="M:Artemis.App.Identity.Validators.User.UpdateUserRequestValidator.#ctor">
-			<summary>
-				验证器构造
-			</summary>
-		</member>
-	</members>
+    <assembly>
+        <name>Artemis.App.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Artemis.App.Identity.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Identity.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Identity.Program">
+            <summary>
+                应用程序入口
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Program.Main(System.String[])">
+            <summary>
+                主函数
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Account.BatchResetPasswordRequestValidator">
+            <summary>
+                批量重置密码请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Account.BatchResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Account.ChangePasswordRequestValidator">
+            <summary>
+                修改密码请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Account.ChangePasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Account.ResetPasswordRequestValidator">
+            <summary>
+                重置密码请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Account.ResetPasswordRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Account.SignInRequestValidator">
+            <summary>
+                签到请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Account.SignInRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Account.SignUpRequestValidator">
+            <summary>
+                签入请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Account.SignUpRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.BatchCreateClaimRequestValidator">
+            <summary>
+                批量创建凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.BatchCreateClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.BatchDeleteClaimRequestValidator">
+            <summary>
+                批量删除凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.BatchDeleteClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.BatchUpdateClaimRequestValidator">
+            <summary>
+                批量更新凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.BatchUpdateClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.CreateClaimRequestValidator">
+            <summary>
+                创建凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.CreateClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.DeleteClaimRequestValidator">
+            <summary>
+                删除凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.DeleteClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.ReadClaimInfoRequestValidator">
+            <summary>
+                读取凭据信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.ReadClaimInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.SearchClaimInfoRequestValidator">
+            <summary>
+                查询凭据信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.SearchClaimInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.UpdateClaimPacketValidator">
+            <summary>
+                更新凭据数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.UpdateClaimPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Resource.UpdateClaimRequestValidator">
+            <summary>
+                更新凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Resource.UpdateClaimRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.AddRoleClaimPacketValidator">
+            <summary>
+                添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.AddRoleClaimPacketValidator.#ctor">
+            <summary>
+                添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.AddRoleClaimRequestValidator">
+            <summary>
+                添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.AddRoleClaimRequestValidator.#ctor">
+            <summary>
+                添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.AddRoleUserRequestValidator">
+            <summary>
+                添加角色用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.AddRoleUserRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchAddRoleClaimRequestValidator">
+            <summary>
+                批量添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchAddRoleClaimRequestValidator.#ctor">
+            <summary>
+                批量添加角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchAddRoleUserRequestValidator">
+            <summary>
+                批量添加角色用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchAddRoleUserRequestValidator.#ctor">
+            <summary>
+                批量添加角色用户请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchCreateRoleRequestValidator">
+            <summary>
+                批量创建角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchCreateRoleRequestValidator.#ctor">
+            <summary>
+                批量创建角色请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchDeleteRoleClaimRequestValidator">
+            <summary>
+                批量删除角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchDeleteRoleClaimRequestValidator.#ctor">
+            <summary>
+                批量删除角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchDeleteRoleRequestValidator">
+            <summary>
+                批量删除角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchDeleteRoleRequestValidator.#ctor">
+            <summary>
+                批量删除角色请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchRemoveRoleUserRequestValidator">
+            <summary>
+                批量删除角色用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchRemoveRoleUserRequestValidator.#ctor">
+            <summary>
+                批量删除角色用户请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchUpdateRoleClaimPacketValidator">
+            <summary>
+                批量更新角色声明数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchUpdateRoleClaimPacketValidator.#ctor">
+            <summary>
+                批量更新角色声明数据包验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.BatchUpdateRoleRequestValidator">
+            <summary>
+                批量更新角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.BatchUpdateRoleRequestValidator.#ctor">
+            <summary>
+                批量更新角色请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.CreateRoleRequestValidator">
+            <summary>
+                创建角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.CreateRoleRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.DeleteRoleClaimRequestValidator">
+            <summary>
+                删除角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.DeleteRoleClaimRequestValidator.#ctor">
+            <summary>
+                删除角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.DeleteRoleRequestValidator">
+            <summary>
+                删除角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.DeleteRoleRequestValidator.#ctor">
+            <summary>
+                删除角色请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.ReadRoleClaimInfoRequestValidator">
+            <summary>
+                读取角色凭据信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.ReadRoleClaimInfoRequestValidator.#ctor">
+            <summary>
+                读取角色凭据信息请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.ReadRoleInfoRequestValidator">
+            <summary>
+                读取角色信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.ReadRoleInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.ReadRoleUserInfoRequestValidator">
+            <summary>
+                读取角色用户信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.ReadRoleUserInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.RemoveRoleUserRequestValidator">
+            <summary>
+                移除角色用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.RemoveRoleUserRequestValidator.#ctor">
+            <summary>
+                移除角色用户请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.SearchRoleClaimInfoRequestValidator">
+            <summary>
+                查询角色声凭据息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.SearchRoleClaimInfoRequestValidator.#ctor">
+            <summary>
+                查询角色声凭据息请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.SearchRoleInfoRequestValidator">
+            <summary>
+                查询角色信息请求验证器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.SearchRoleInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.SearchRoleUserInfoRequestValidator">
+            <summary>
+                查询角色用户信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.SearchRoleUserInfoRequestValidator.#ctor">
+            <summary>
+                查询角色用户信息请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleClaimPacketValidator">
+            <summary>
+                更新角色凭据数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleClaimPacketValidator.#ctor">
+            <summary>
+                更新角色凭据数据包验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleClaimRequestValidator">
+            <summary>
+                更新角色凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleClaimRequestValidator.#ctor">
+            <summary>
+                更新角色凭据请求验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.UpdateRolePacketValidator">
+            <summary>
+                更新角色数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.UpdateRolePacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.UpdateRoleRequestValidator">
+            <summary>
+                更新角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.UpdateRoleRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.Role.UserIdPacketValidator">
+            <summary>
+                用户标识数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.Role.UserIdPacketValidator.#ctor">
+            <summary>
+                用户标识数据包验证
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.AddUserClaimPacketValidator">
+            <summary>
+                添加用户凭据数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.AddUserClaimPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.AddUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.AddUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.AddUserRoleRequestValidator">
+            <summary>
+                添加用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.AddUserRoleRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchAddUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchAddUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchCreateUserRequestValidator">
+            <summary>
+                批量删除用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchCreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchDeleteUserClaimRequestValidator">
+            <summary>
+                批量删除用户凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchDeleteUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchDeleteUserRequestValidator">
+            <summary>
+                批量删除凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchDeleteUserRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchRemoveUserRoleRequestValidator">
+            <summary>
+                批量移除用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchRemoveUserRoleRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimPacketValidator">
+            <summary>
+                批量更新用户凭据数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimRequestValidator">
+            <summary>
+                获取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchUpdateUserRequestValidator">
+            <summary>
+                批量删除用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchUpdateUserRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.BatchUserRoleIdRequestValidator">
+            <summary>
+                批量添加用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.BatchUserRoleIdRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.CreateUserRequestValidator">
+            <summary>
+                创建用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.CreateUserRequestValidator.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.DeleteUserClaimRequestValidator">
+            <summary>
+                删除用户凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.DeleteUserClaimRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.DeleteUserRequestValidator">
+            <summary>
+                删除凭据请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.DeleteUserRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.ReadUserClaimInfoRequestValidator">
+            <summary>
+                读取用户凭据信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.ReadUserClaimInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.ReadUserInfoRequestValidator">
+            <summary>
+                读取用户信息请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.ReadUserInfoRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.ReadUserRoleInfoRequestValidator">
+            <summary>
+                读取用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.ReadUserRoleInfoRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.RemoveUserRoleRequestValidator">
+            <summary>
+                移除用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.RemoveUserRoleRequestValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.RoleIdPacketValidator">
+            <summary>
+                角色标识数据包验证器
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.RoleIdPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.SearchUserClaimInfoRequestValidator">
+            <summary>
+                查找用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.SearchUserClaimInfoRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.SearchUserInfoRequestValidator">
+            <summary>
+                查找用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.SearchUserInfoRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.SearchUserRoleInfoRequestValidator">
+            <summary>
+                查找用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.SearchUserRoleInfoRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.UpdateUserClaimPacketValidator">
+            <summary>
+                更新用户凭据数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.UpdateUserClaimPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.UserClaimIdRequestValidator">
+            <summary>
+                查找用户角色请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.UserClaimIdRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.UpdateUserPacketValidator">
+            <summary>
+                更新用户数据包验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.UpdateUserPacketValidator.#ctor">
+            <summary>
+                构造
+            </summary>
+        </member>
+        <member name="T:Artemis.App.Identity.Validators.User.UpdateUserRequestValidator">
+            <summary>
+                更新用户请求验证
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Identity.Validators.User.UpdateUserRequestValidator.#ctor">
+            <summary>
+                验证器构造
+            </summary>
+        </member>
+    </members>
 </doc>

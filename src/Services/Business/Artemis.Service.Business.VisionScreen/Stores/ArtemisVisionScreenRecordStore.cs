@@ -8,16 +8,16 @@ namespace Artemis.Service.Business.VisionScreen.Stores;
 #region Interface
 
 /// <summary>
-///     验光仪存储接口
+///     视力档案存储接口
 /// </summary>
-public interface IArtemisOptometerStore : IStore<ArtemisOptometer>;
+public interface IArtemisVisionScreenRecordStore : IStore<ArtemisVisionScreenRecord>;
 
 #endregion
 
 /// <summary>
-///     验光仪存储
+///     视力档案存储
 /// </summary>
-public class ArtemisOptometerStore : Store<ArtemisOptometer>, IArtemisOptometerStore
+public class ArtemisVisionScreenRecordStore : Store<ArtemisVisionScreenRecord>, IArtemisVisionScreenRecordStore
 {
     /// <summary>
     ///     基本存储实例构造
@@ -28,7 +28,7 @@ public class ArtemisOptometerStore : Store<ArtemisOptometer>, IArtemisOptometerS
     /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
-    public ArtemisOptometerStore(
+    public ArtemisVisionScreenRecordStore(
         BusinessContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,

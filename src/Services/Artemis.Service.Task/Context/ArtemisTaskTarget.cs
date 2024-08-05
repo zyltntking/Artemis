@@ -7,8 +7,8 @@ namespace Artemis.Service.Task.Context;
 /// <summary>
 ///     任务目标实体
 /// </summary>
-[EntityTypeConfiguration(typeof(ArtemisTaskTargetConfiguration))]
-public class ArtemisTaskTarget : TaskTarget
+[EntityTypeConfiguration(typeof(ArtemisTaskUnitTargetConfiguration))]
+public class ArtemisTaskUnitTarget : TaskUnitTarget
 {
     /// <summary>
     ///     任务单元

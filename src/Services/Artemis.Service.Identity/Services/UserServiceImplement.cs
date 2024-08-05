@@ -431,6 +431,45 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
+    /// 创建或更新用户属性
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("创建或更新用户属性")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> CreateOrUpdateUserProfile(AddUserProfileRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var result = await UserManager.AddOrUpdateUserProfile(userId, request.UserProfile.Key, request.UserProfile.Value, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量创建或更新用户属性
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量创建或更新用户属性")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchCreateOrUpdateUserProfile(BatchAddUserProfileRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var dictionary = request.Batch.ToDictionary(
+            item => item.Key,
+            item => item.Value);
+
+        var result = await UserManager.AddOrUpdateUserProfiles(userId, dictionary, context.CancellationToken);
+
+        return result.AffectedResponse();
+
+    }
+
+    /// <summary>
     ///     删除用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>

@@ -20,12 +20,19 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     ///     任务服务
     /// </summary>
     /// <param name="taskTreeManager"></param>
+    /// <param name="taskUnitManager"></param>
+    /// <param name="taskUnitTargetManager"></param>
     /// <param name="logger">日志记录器</param>
     public TaskServiceImplement(
         ITaskTreeManager taskTreeManager,
+        ITaskUnitManager taskUnitManager,
+        ITaskUnitTargetManager taskUnitTargetManager,
         ILogger<TaskServiceImplement> logger)
     {
         TaskTreeManager = taskTreeManager;
+        TaskUnitManager = taskUnitManager;
+        TaskUnitTargetManager = taskUnitTargetManager;
+        
         Logger = logger;
     }
 
@@ -33,6 +40,16 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     ///     任务树管理器
     /// </summary>
     private ITaskTreeManager TaskTreeManager { get; }
+
+    /// <summary>
+    /// 任务单元管理器
+    /// </summary>
+    private ITaskUnitManager TaskUnitManager { get; }
+
+    /// <summary>
+    /// 任务单元目标管理器
+    /// </summary>
+    private ITaskUnitTargetManager TaskUnitTargetManager { get; }
 
     /// <summary>
     ///     日志依赖
@@ -367,6 +384,328 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
         var childTaskIds = request.ChildTaskIds.Select(Guid.Parse);
 
         var result = await TaskTreeManager.BatchRemoveChildEntityAsync(taskId, childTaskIds, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 查询任务单元信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询任务单元信息")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<SearchTaskUnitInfoResponse> SearchTaskUnitInfo(SearchTaskUnitInfoRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var info = await TaskUnitManager.FetchTaskUnitsAsync(
+            taskId,
+            request.UnitName,
+            request.UnitCode,
+            request.DesignCode,
+            request.TaskUnitState,
+            request.TaskUnitMode,
+            request.Page ?? 0,
+            request.Size ?? 0,
+            context.CancellationToken);
+
+        return info.PagedResponse<SearchTaskUnitInfoResponse, TaskUnitInfo>();
+    }
+
+    /// <summary>
+    /// 获取任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<ReadTaskUnitResponse> ReadTaskUnitInfo(ReadTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var info = await TaskUnitManager.ReadSubEntityInfoAsync(taskId, unitId, context.CancellationToken);
+
+        return info.ReadInfoResponse<ReadTaskUnitResponse, TaskUnitInfo>();
+    }
+
+    /// <summary>
+    /// 创建任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("创建任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> CreateTaskUnit(CreateTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+        var package = request.TaskUnit.Adapt<TaskUnitPackage>();
+
+        var result = await TaskUnitManager.CreateSubEntityAsync(taskId, package, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量创建任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量创建任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchCreateTaskUnit(BatchCreateTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var packages = request.Batch.Adapt<IEnumerable<TaskUnitPackage>>();
+
+        var result = await TaskUnitManager.BatchCreateSubEntityAsync(taskId, packages, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 更新任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("更新任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> UpdateTaskUnit(UpdateTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var package = request.TaskUnit.Adapt<TaskUnitPackage>();
+
+        var result = await TaskUnitManager.UpdateSubEntityAsync(taskId, unitId, package, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量更新任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量更新任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchUpdateTaskUnit(BatchUpdateTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var dictionary = request.Batch.ToDictionary(
+            item => Guid.Parse(item.TaskUnitId),
+            item => item.TaskUnit.Adapt<TaskUnitPackage>());
+
+        var result = await TaskUnitManager.BatchUpdateSubEntityAsync(taskId, dictionary, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    ///删除任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> DeleteTaskUnit(DeleteTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var result = await TaskUnitManager.DeleteSubEntityAsync(taskId, unitId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量删除任务单元
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除任务单元")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchDeleteTaskUnit(BatchDeleteTaskUnitRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var unitIds = request.TaskUnitIds.Select(Guid.Parse);
+
+        var result = await TaskUnitManager.BatchDeleteSubEntityAsync(taskId, unitIds, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 查询任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<SearchTaskUnitTargetResponse> SearchTaskUnitTarget(SearchTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var id = Guid.Parse(request.TaskUnitId);
+
+        var info = await TaskUnitTargetManager.FetchTaskUnitTargetsAsync(
+            id,
+            request.TargetName,
+            request.TargetCode,
+            request.DesignCode,
+            request.TargetType,
+            request.TargetState,
+            request.Page ?? 0,
+            request.Size ?? 0,
+            context.CancellationToken);
+
+        return info.PagedResponse<SearchTaskUnitTargetResponse, TaskUnitTargetInfo>();
+    }
+
+    /// <summary>
+    /// 获取任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<ReadTaskUnitTargetResponse> ReadTaskUnitTarget(ReadTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+        var targetId = Guid.Parse(request.TaskUnitTargetId);
+
+        var info = await TaskUnitTargetManager.ReadSubEntityInfoAsync(unitId, targetId, context.CancellationToken);
+
+        return info.ReadInfoResponse<ReadTaskUnitTargetResponse, TaskUnitTargetInfo>();
+    }
+
+    /// <summary>
+    /// 创建任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("创建任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> CreateTaskUnitTarget(CreateTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var package = request.TaskUnitTarget.Adapt<TaskUnitTargetPackage>();
+
+        var result = await TaskUnitTargetManager.CreateSubEntityAsync(unitId, package, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量创建任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量创建任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchCreateTaskUnitTarget(BatchCreateTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var packages = request.Batch.Adapt<IEnumerable<TaskUnitTargetPackage>>();
+
+        var result = await TaskUnitTargetManager.BatchCreateSubEntityAsync(unitId, packages, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 更新任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("更新任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> UpdateTaskUnitTarget(UpdateTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var targetId = Guid.Parse(request.TaskUnitTargetId);
+
+        var package = request.TaskUnitTarget.Adapt<TaskUnitTargetPackage>();
+
+        var result = await TaskUnitTargetManager.UpdateSubEntityAsync(unitId, targetId, package, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量更新任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量更新任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchUpdateTaskUnitTarget(BatchUpdateTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var dictionary = request.Batch.ToDictionary(
+            item => Guid.Parse(item.Id),
+            item => item.TaskUnitTarget.Adapt<TaskUnitTargetPackage>());
+
+        var result = await TaskUnitTargetManager.BatchUpdateSubEntityAsync(unitId, dictionary, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 删除任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("删除任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> DeleteTaskUnitTarget(DeleteTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+        var targetId = Guid.Parse(request.TaskUnitTargetId);
+
+        var result = await TaskUnitTargetManager.DeleteSubEntityAsync(unitId, targetId, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 批量删除任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("批量删除任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BatchDeleteTaskUnitTarget(BatchDeleteTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var unitId = Guid.Parse(request.TaskUnitId);
+
+        var targetIds = request.TaskUnitTargetIds.Select(Guid.Parse);
+
+        var result = await TaskUnitTargetManager.BatchDeleteSubEntityAsync(unitId, targetIds, context.CancellationToken);
 
         return result.AffectedResponse();
     }

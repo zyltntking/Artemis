@@ -9,7 +9,7 @@ namespace Artemis.Service.Task.Models;
 /// <summary>
 ///     任务单元模型
 /// </summary>
-public class TaskUnit : ConcurrencyPartition, ITaskUnit
+public class TaskUnit : ConcurrencyModel, ITaskUnit
 {
     /// <summary>
     ///     任务标识
@@ -68,7 +68,7 @@ public class TaskUnit : ConcurrencyPartition, ITaskUnit
     ///     任务描述
     /// </summary>
     [Comment("任务描述")]
-    [MaxLength(256)]
+    [MaxLength(128)]
     public string? Description { get; set; }
 
     /// <summary>
