@@ -87,7 +87,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateTeacher(CreateTeacherRequest request, ServerCallContext context)
     {
         var package = request.Adapt<TeacherPackage>();
@@ -104,7 +104,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateTeachers(BatchCreateTeacherRequest request,
         ServerCallContext context)
     {
@@ -122,7 +122,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateTeacher(UpdateTeacherRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.TeacherId);
@@ -141,7 +141,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateTeacher(BatchUpdateTeacherRequest request,
         ServerCallContext context)
     {
@@ -161,7 +161,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteTeacher(DeleteTeacherRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.TeacherId);
@@ -178,7 +178,7 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除教师")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteTeacher(BatchDeleteTeacherRequest request,
         ServerCallContext context)
     {

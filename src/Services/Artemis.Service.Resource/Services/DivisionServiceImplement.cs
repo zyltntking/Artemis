@@ -107,7 +107,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateDivision(CreateDivisionRequest request,
         ServerCallContext context)
     {
@@ -125,7 +125,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateDivision(BatchCreateDivisionRequest request,
         ServerCallContext context)
     {
@@ -143,7 +143,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateDivision(UpdateDivisionRequest request,
         ServerCallContext context)
     {
@@ -163,7 +163,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateDivision(BatchUpdateDivisionRequest request,
         ServerCallContext context)
     {
@@ -183,7 +183,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteDivision(DeleteDivisionRequest request,
         ServerCallContext context)
     {
@@ -201,7 +201,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteDivision(BatchDeleteDivisionRequest request,
         ServerCallContext context)
     {
@@ -219,7 +219,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateChildDivision(CreateChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -239,7 +239,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateChildDivision(BatchCreateChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -259,7 +259,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddChildDivision(AddChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -279,7 +279,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchAddChildDivision(BatchAddChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -299,7 +299,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteChildDivision(DeleteChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -320,7 +320,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteChildDivision(BatchDeleteChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -340,7 +340,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> RemoveChildDivision(RemoveChildDivisionRequest request,
         ServerCallContext context)
     {
@@ -360,7 +360,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除下级行政区划")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchRemoveChildDivision(BatchRemoveChildDivisionRequest request,
         ServerCallContext context)
     {

@@ -89,7 +89,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateStudent(CreateStudentRequest request, ServerCallContext context)
     {
         var package = request.Adapt<StudentPackage>();
@@ -106,7 +106,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateStudent(BatchCreateStudentRequest request,
         ServerCallContext context)
     {
@@ -124,7 +124,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateStudent(UpdateStudentRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.StudentId);
@@ -142,7 +142,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateStudent(BatchUpdateStudentRequest request,
         ServerCallContext context)
     {
@@ -162,7 +162,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteStudent(DeleteStudentRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.StudentId);
@@ -179,7 +179,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除学生")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteStudent(BatchDeleteStudentRequest request,
         ServerCallContext context)
     {

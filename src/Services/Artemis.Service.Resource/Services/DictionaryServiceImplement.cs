@@ -88,7 +88,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建数据字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateDictionary(CreateDictionaryRequest request,
         ServerCallContext context)
     {
@@ -106,7 +106,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建数据字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateDictionary(BatchCreateDictionariyRequest request,
         ServerCallContext context)
     {
@@ -124,7 +124,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新数据字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateDictionary(UpdateDictionaryRequest request,
         ServerCallContext context)
     {
@@ -144,7 +144,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新数据字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateDictionary(BatchUpdateDictionaryRequest request,
         ServerCallContext context)
     {
@@ -164,7 +164,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteDictionary(DeleteDictionaryRequest request,
         ServerCallContext context)
     {
@@ -182,7 +182,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除字典")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteDictionary(BatchDeleteDictionaryRequest request,
         ServerCallContext context)
     {
@@ -243,7 +243,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateDictionaryItem(CreateDictionaryItemRequest request,
         ServerCallContext context)
     {
@@ -263,7 +263,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateDictionaryItem(BatchCreateDictionaryItemRequest request,
         ServerCallContext context)
     {
@@ -283,7 +283,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateDictionaryItem(UpdateDictionaryItemRequest request,
         ServerCallContext context)
     {
@@ -305,7 +305,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateDictionaryItem(BatchUpdateDictionaryItemRequest request,
         ServerCallContext context)
     {
@@ -327,7 +327,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteDictionaryItem(DeleteDictionaryItemRequest request,
         ServerCallContext context)
     {
@@ -347,7 +347,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除字典项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteDictionaryItem(BatchDeleteDictionaryItemRequest request,
         ServerCallContext context)
     {

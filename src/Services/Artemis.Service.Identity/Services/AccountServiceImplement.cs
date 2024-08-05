@@ -245,7 +245,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> ResetPassword(ResetPasswordRequest request, ServerCallContext context)
     {
         var userId = request.UserId.GuidFromString();
@@ -267,7 +267,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("重置密码")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> BatchResetPasswords(BatchResetPasswordRequest request,
         ServerCallContext context)
     {

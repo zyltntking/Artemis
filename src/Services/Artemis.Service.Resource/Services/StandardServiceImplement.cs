@@ -89,7 +89,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateStandardCatalog(CreateStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -107,7 +107,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateStandardCatalog(BatchCreateStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -125,7 +125,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateStandardCatalog(UpdateStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -145,7 +145,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateStandardCatalog(BatchUpdateStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -165,7 +165,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteStandardCatalog(DeleteStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -183,7 +183,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除标准目录")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteStandardCatalog(BatchDeleteStandardCatalogRequest request,
         ServerCallContext context)
     {
@@ -244,7 +244,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateStandardItem(CreateStandardItemRequest request,
         ServerCallContext context)
     {
@@ -263,7 +263,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateStandardItem(BatchCreateStandardItemRequest request,
         ServerCallContext context)
     {
@@ -282,7 +282,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateStandardItem(UpdateStandardItemRequest request,
         ServerCallContext context)
     {
@@ -303,7 +303,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateStandardItem(BatchUpdateStandardItemRequest request,
         ServerCallContext context)
     {
@@ -325,7 +325,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteStandardItem(DeleteStandardItemRequest request,
         ServerCallContext context)
     {
@@ -344,7 +344,7 @@ public class StandardServiceImplement : StandardService.StandardServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除标准项目")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteStandardItem(BatchDeleteStandardItemRequest request,
         ServerCallContext context)
     {

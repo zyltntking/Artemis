@@ -48,7 +48,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询任务信息")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchTaskInfoResponse> SearchTaskInfo(
         SearchTaskInfoRequest request,
         ServerCallContext context)
@@ -80,7 +80,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取任务信息")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<ReadTaskInfoResponse> ReadTaskInfo(ReadTaskInfoRequest request,
         ServerCallContext context)
     {
@@ -98,7 +98,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取任务树信息")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<ReadTaskInfoTreeResponse> ReadTaskInfoTree(ReadTaskInfoRequest request,
         ServerCallContext context)
     {
@@ -116,7 +116,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateTask(CreateTaskRequest request, ServerCallContext context)
     {
         var package = request.Adapt<TaskPackage>();
@@ -133,7 +133,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateTask(BatchCreateTaskRequest request,
         ServerCallContext context)
     {
@@ -151,7 +151,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateTask(UpdateTaskRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
@@ -170,7 +170,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateTask(BatchUpdateTaskRequest request,
         ServerCallContext context)
     {
@@ -190,7 +190,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteTask(DeleteTaskRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
@@ -207,7 +207,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteTask(BatchDeleteTaskRequest request,
         ServerCallContext context)
     {
@@ -225,7 +225,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateChildTask(CreateChildTaskRequest request,
         ServerCallContext context)
     {
@@ -245,7 +245,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateChildTask(BatchCreateChildTaskRequest request,
         ServerCallContext context)
     {
@@ -265,7 +265,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddChildTask(AddChildTaskRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
@@ -284,7 +284,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量添加子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchAddChildTask(BatchAddChildTaskRequest request,
         ServerCallContext context)
     {
@@ -304,7 +304,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteChildTask(DeleteChildTaskRequest request,
         ServerCallContext context)
     {
@@ -324,7 +324,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteChildTask(BatchDeleteChildTaskRequest request,
         ServerCallContext context)
     {
@@ -344,7 +344,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("移除子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> RemoveChildTask(RemoveChildTaskRequest request,
         ServerCallContext context)
     {
@@ -364,7 +364,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量移除子任务")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchRemoveChildTask(BatchRemoveChildTaskRequest request,
         ServerCallContext context)
     {

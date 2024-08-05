@@ -48,7 +48,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询凭据信息")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchClaimInfoResponse> SearchClaimInfo(SearchClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -69,7 +69,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("读取凭据信息")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<ReadClaimInfoResponse> ReadClaimInfo(ReadClaimInfoRequest request,
         ServerCallContext context)
     {
@@ -87,7 +87,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> CreateClaim(CreateClaimRequest request, ServerCallContext context)
     {
         var package = request.Adapt<ClaimPackage>();
@@ -104,7 +104,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchCreateClaim(BatchCreateClaimRequest request,
         ServerCallContext context)
     {
@@ -122,7 +122,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UpdateClaim(UpdateClaimRequest request, ServerCallContext context)
     {
         var claimId = Guid.Parse(request.ClaimId);
@@ -141,7 +141,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量更新凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchUpdateClaim(BatchUpdateClaimRequest request,
         ServerCallContext context)
     {
@@ -161,7 +161,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> DeleteClaim(DeleteClaimRequest request, ServerCallContext context)
     {
         var claimId = Guid.Parse(request.ClaimId);
@@ -178,7 +178,7 @@ public class ResourceServiceImplement : ResourceService.ResourceServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除凭据")]
-    [Authorize(AuthorizePolicy.Admin)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> BatchDeleteClaim(BatchDeleteClaimRequest request,
         ServerCallContext context)
     {
