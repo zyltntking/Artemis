@@ -13,5 +13,5 @@ public sealed class IdentityUserProfile : UserProfile
     /// <summary>
     ///     所属用户
     /// </summary>
-    public required IdentityUser User { get; set; }
+    public IdentityUser User { get; set; }
 }

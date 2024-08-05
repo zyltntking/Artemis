@@ -1008,6 +1008,77 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
         </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.FetchUserProfiles(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            获取用户属性
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.ReadUserProfile(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            获取用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserProfile(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            添加用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.AddUserProfiles(System.Guid,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="profiles"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserProfile(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            更新用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.UpdateUserProfiles(System.Guid,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            更新用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="profiles"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.RemoveUserProfile(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            删除用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.RemoveUserProfiles(System.Guid,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="keys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Service.Identity.Managers.IdentityUserManager.FetchUserClaimsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 查询用户的凭据
@@ -1670,6 +1741,77 @@
             <param name="roleIds">角色标识</param>
             <param name="cancellationToken">操作取消信号</param>
             <returns>删除结果</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.FetchUserProfiles(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            获取用户属性
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.ReadUserProfile(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            获取用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserProfile(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            添加用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.AddUserProfiles(System.Guid,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            批量添加用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="profiles"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserProfile(System.Guid,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            更新用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.UpdateUserProfiles(System.Guid,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            更新用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="profiles"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.RemoveUserProfile(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            删除用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.RemoveUserProfiles(System.Guid,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            批量删除用户属性
+            </summary>
+            <param name="id"></param>
+            <param name="keys"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:Artemis.Service.Identity.Managers.IIdentityUserManager.FetchUserClaimsAsync(System.Guid,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -2662,6 +2804,70 @@
         <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.BatchRemoveUserRole(Artemis.Service.Protos.Identity.BatchRemoveUserRoleRequest,Grpc.Core.ServerCallContext)">
             <summary>
                 批量移除用户角色
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.FetchUserProfiles(Artemis.Service.Protos.Identity.FetchUserProfilesRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.GetUserProfile(Artemis.Service.Protos.Identity.GetUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.AddUserProfile(Artemis.Service.Protos.Identity.AddUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.BatchAddUserProfile(Artemis.Service.Protos.Identity.BatchAddUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.UpdateUserProfile(Artemis.Service.Protos.Identity.UpdateUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.BatchUpdateUserProfile(Artemis.Service.Protos.Identity.BatchUpdateUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.DeleteUserProfile(Artemis.Service.Protos.Identity.DeleteUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除用户属性
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Identity.Services.UserServiceImplement.BatchDeleteUserProfile(Artemis.Service.Protos.Identity.BatchDeleteUserProfileRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除用户属性
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>

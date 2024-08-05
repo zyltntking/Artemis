@@ -84,13 +84,6 @@ service UserService {
 		};
 	}
 
-	// 查询用户属性
-	rpc FetchUserProfiles (FetchUserProfilesRequest) returns (FetchUserProfilesResponse) {
-		option (google.api.http) = {
-			get: "/api/IdentityService/Users/{UserId}/Profiles"
-		};
-	}
-	
 	// 添加用户角色
 	rpc AddUserRole (AddUserRoleRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
@@ -122,10 +115,18 @@ service UserService {
 		};
 	}
 
+		// 查询用户属性
+	rpc FetchUserProfiles (FetchUserProfilesRequest) returns (FetchUserProfilesResponse) {
+		option (google.api.http) = {
+			get: "/api/IdentityService/Users/{UserId}/Profiles"
+		};
+	}
+	
+
 	// 获取用户属性
 	rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse) {
 		option (google.api.http) = {
-			get: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
+			get: "/api/IdentityService/Users/{UserId}/Profiles/{Key}"
 		};
 	}
 
@@ -148,7 +149,7 @@ service UserService {
 	// 更新用户属性
 	rpc UpdateUserProfile (UpdateUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
+			put: "/api/IdentityService/Users/{UserId}/Profiles"
 			body: "UserProfile"
 		};
 	}
@@ -164,7 +165,7 @@ service UserService {
 	// 删除用户属性
 	rpc DeleteUserProfile (DeleteUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/IdentityService/Users/{UserId}/Profiles/{Id}"
+			delete: "/api/IdentityService/Users/{UserId}/Profiles/{Key}"
 		};
 	}
 
@@ -172,7 +173,7 @@ service UserService {
 	rpc BatchDeleteUserProfile (BatchDeleteUserProfileRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
 			post: "/api/IdentityService/Users/{UserId}/Profiles/BatchDelete"
-			body: "Ids"
+			body: "Keys"
 		};
 	}
 
@@ -438,18 +439,14 @@ message UserProfilePacket {
 	// @required
 	// @guid
 	string UserId = 1;
-	// 属性标识
-	// @required
-	// @min(0)
-	int32 Id = 2;
 	// 属性名称
 	// @required
 	// @maxLength(32)
-	string Key = 3;
+	string Key = 2;
 	// 属性值
 	// @required
 	// @maxLength(128)
-	string Value = 4;
+	string Value = 3;
 }
 
 // 查询用户属性响应
@@ -481,8 +478,8 @@ message GetUserProfileRequest {
 	string UserId = 1;
 	// 属性标识
 	// @required
-	// @min(0)
-	int32 Id = 2;
+	// @maxLength(32)
+	string Key = 2;
 }
 
 // 获取用户属性响应
@@ -556,27 +553,9 @@ message UpdateUserProfileRequest {
 	// @required
 	// @guid
 	string UserId = 1;
-	// 属性标识
-	// @required
-	// @min(0)
-	int32 Id = 2;
 	// 属性
 	// @required
-	UpdateUserProfilePacket UserProfile = 3;
-}
-
-// 批量更新用户属性数据包
-message BatchUpdateUserProfilePacket {
-	// 属性标识
-	// @required
-	// @min(0)
-	int32 Id = 1;
-	// 属性名称
-	// @maxLength(32)
-	google.protobuf.StringValue Key = 2;
-	// 属性值
-	// @maxLength(128)
-	google.protobuf.StringValue Value = 3;
+	UpdateUserProfilePacket UserProfile = 2;
 }
 
 // 批量更新用户属性请求
@@ -587,7 +566,7 @@ message BatchUpdateUserProfileRequest {
 	string UserId = 1;
 	// 属性数据
 	// @required
-	repeated BatchUpdateUserProfilePacket Batch = 2;
+	repeated UpdateUserProfilePacket Batch = 2;
 }
 
 // 删除用户属性请求
@@ -596,10 +575,10 @@ message DeleteUserProfileRequest {
 	// @required
 	// @guid
 	string UserId = 1;
-	// 属性标识
+	// 属性名称
 	// @required
-	// @min(0)
-	int32 Id = 2;
+	// @maxLength(32)
+	string Key = 2;
 }
 
 // 批量删除用户属性请求
@@ -608,10 +587,10 @@ message BatchDeleteUserProfileRequest {
 	// @required
 	// @guid
 	string UserId = 1;
-	// 属性标识
+	// 属性名称
 	// @required
 	// @min(0)
-	repeated int32 Ids = 2;
+	repeated string Keys = 2;
 }
 
 // 查询用户角色信息请求

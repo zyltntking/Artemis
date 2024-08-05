@@ -150,7 +150,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var taskId = Guid.Parse(request.TaskId);
 
-        var package = request.Adapt<TaskPackage>();
+        var package = request.Task.Adapt<TaskPackage>();
 
         var result = await TaskTreeManager.UpdateEntityAsync(taskId, package, context.CancellationToken);
 
@@ -170,7 +170,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var dictionary = request.Batch.ToDictionary(
             item => Guid.Parse(item.TaskId),
-            item => item.Adapt<TaskPackage>());
+            item => item.Task.Adapt<TaskPackage>());
 
         var result = await TaskTreeManager.BatchUpdateEntityAsync(dictionary, context.CancellationToken);
 
@@ -225,7 +225,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
     {
         var taskId = Guid.Parse(request.TaskId);
 
-        var package = request.Adapt<TaskPackage>();
+        var package = request.Task.Adapt<TaskPackage>();
 
         var result = await TaskTreeManager.CreateChildEntityAsync(taskId, package, context.CancellationToken);
 

@@ -4,6 +4,7 @@ using Artemis.Data.Core.Exceptions;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.Identity.Context;
+using Artemis.Service.Identity.Models;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Shared.Identity.Transfer;
 using Mapster;
@@ -675,6 +676,240 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
 
         return StoreResult.EntityNotFoundFailed(nameof(IdentityUser), id.GuidToString());
     }
+
+    /// <summary>
+    /// 获取用户属性
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IEnumerable<UserProfile>> FetchUserProfiles(Guid id, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (userExists)
+        {
+            var userProfiles = await UserProfileStore
+                .EntityQuery
+                .Where(profile => profile.UserId == id)
+                .ProjectToType<UserProfile>()
+                .ToListAsync(cancellationToken);
+
+            return userProfiles;
+        }
+
+        return new List<UserProfile>();
+    }
+
+    /// <summary>
+    /// 获取用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<UserProfile?> ReadUserProfile(Guid id, string key, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userExists = await UserStore.ExistsAsync(id, cancellationToken);
+
+        if (userExists)
+        {
+            var userProfile = await UserProfileStore
+                .EntityQuery
+                .Where(profile => profile.UserId == id)
+                .Where(profile => profile.Key == key)
+                .ProjectToType<UserProfile>()
+                .FirstOrDefaultAsync(cancellationToken);
+
+            return userProfile;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// 添加用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var exists = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .AnyAsync(profile => profile.Key == key, cancellationToken);
+
+        if (!exists)
+        {
+            var result = await UserProfileStore.CreateAsync(new IdentityUserProfile
+            {
+                UserId = id,
+                Key = key,
+                Value = value
+            }, cancellationToken);
+
+            return result;
+        }
+
+        return StoreResult.EntityFoundFailed(nameof(IdentityUserProfile), $"{id}:{key}");
+    }
+
+    /// <summary>
+    /// 批量添加用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="profiles"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> AddUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var setKeys = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Select(profile => profile.Key)
+            .ToListAsync(cancellationToken);
+
+        var insertKeys = profiles.Keys.Except(setKeys).ToList();
+
+        if (insertKeys.Any())
+        {
+            var userProfiles = insertKeys.Select(key => new IdentityUserProfile
+            {
+                UserId = id,
+                Key = key,
+                Value = profiles[key]
+            });
+
+            var result = await UserProfileStore.CreateAsync(userProfiles, cancellationToken);
+
+            return result;
+        }
+
+        return StoreResult.Failed();
+    }
+
+    /// <summary>
+    /// 更新用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfile = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => profile.Key == key)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (userProfile is not null)
+        {
+            userProfile.Value = value;
+
+            var result = await UserProfileStore.UpdateAsync(userProfile, cancellationToken);
+
+            return result;
+        }
+
+        return StoreResult.Failed();
+    }
+
+    /// <summary>
+    /// 更新用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="profiles"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> UpdateUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfiles = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => profiles.Keys.Contains(profile.Key))
+            .ToListAsync(cancellationToken);
+
+        if (userProfiles.Any())
+        {
+            userProfiles = userProfiles.Select(profile =>
+            {
+                profile.Value = profiles[profile.Key];
+
+                return profile;
+            }).ToList();
+
+            var result = await UserProfileStore.UpdateAsync(userProfiles, cancellationToken);
+
+
+            return result;
+        }
+
+        return StoreResult.Failed();
+    }
+
+    /// <summary>
+    /// 删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="key"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> RemoveUserProfile(Guid id, string key, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfile = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => profile.Key == key)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (userProfile is not null)
+        {
+            var result = await UserProfileStore.DeleteAsync(userProfile, cancellationToken);
+
+            return result;
+        }
+
+        return StoreResult.Failed();
+    }
+
+    /// <summary>
+    /// 批量删除用户属性
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="keys"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        var userProfiles = await UserProfileStore.EntityQuery
+            .Where(profile => profile.UserId == id)
+            .Where(profile => keys.Contains(profile.Key))
+            .ToListAsync(cancellationToken);
+
+        if (userProfiles.Any())
+        {
+            var result = await UserProfileStore.DeleteAsync(userProfiles, cancellationToken);
+
+            return result;
+        }
+
+        return StoreResult.Failed();
+    }
+
 
     /// <summary>
     ///     查询用户的凭据
