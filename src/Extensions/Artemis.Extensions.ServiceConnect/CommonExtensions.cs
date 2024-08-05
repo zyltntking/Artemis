@@ -29,7 +29,7 @@ public static class CommonExtensions
 
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }); 
 
         builder.Services.AddControllers();
