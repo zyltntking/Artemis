@@ -13,28 +13,28 @@ service TaskService {
 	// 查询任务信息
 	rpc SearchTaskInfo(SearchTaskInfoRequest) returns (SearchTaskInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Tasks"
+			get: "/api/TaskService/Tasks"
 		};
 	}
 
 	// 读取任务信息
 	rpc ReadTaskInfo(ReadTaskInfoRequest) returns (ReadTaskInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Tasks/{TaskId}"
+			get: "/api/TaskService/Tasks/{TaskId}"
 		};
 	}
 
 	// 读取任务树信息
 	rpc ReadTaskInfoTree(ReadTaskInfoRequest) returns (ReadTaskInfoTreeResponse) {
 		option (google.api.http) = {
-			get: "/api/Tasks/{TaskId}/Tree"
+			get: "/api/TaskService/Tasks/{TaskId}/Tree"
 		};
 	}
 
 	// 创建任务
 	rpc CreateTask(CreateTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks"
+			post: "/api/TaskService/Tasks"
 			body: "*"
 		};
 	}
@@ -42,7 +42,7 @@ service TaskService {
 	// 批量创建任务
 	rpc BatchCreateTask(BatchCreateTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/BatchCreate"
+			post: "/api/TaskService/Tasks/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -50,7 +50,7 @@ service TaskService {
 	// 更新任务
 	rpc UpdateTask(UpdateTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Tasks/{TaskId}"
+			put: "/api/TaskService/Tasks/{TaskId}"
 			body: "Task"
 		};
 	}
@@ -58,7 +58,7 @@ service TaskService {
 	// 批量更新任务
 	rpc BatchUpdateTask(BatchUpdateTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Tasks/BatchUpdate"
+			put: "/api/TaskService/Tasks/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -66,14 +66,14 @@ service TaskService {
 	// 删除任务
 	rpc DeleteTask(DeleteTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Tasks/{TaskId}"
+			delete: "/api/TaskService/Tasks/{TaskId}"
 		};
 	}
 
 	// 批量删除任务
 	rpc BatchDeleteTask(BatchDeleteTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/BatchDelete"
+			post: "/api/TaskService/Tasks/BatchDelete"
 			body: "TaskIds"
 		};
 	}
@@ -81,7 +81,7 @@ service TaskService {
 	// 创建子任务
 	rpc CreateChildTask(CreateChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children"
+			post: "/api/TaskService/Tasks/{TaskId}/Children"
 			body: "Task"
 		};
 	}
@@ -89,7 +89,7 @@ service TaskService {
 	// 批量创建子任务
 	rpc BatchCreateChildTask(BatchCreateChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/BatchCreate"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -97,7 +97,7 @@ service TaskService {
 	// 添加子任务
 	rpc AddChildTask(AddChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/Add"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/Add"
 			body: "ChildTask"
 		};
 	}
@@ -105,7 +105,7 @@ service TaskService {
 	// 批量添加子任务
 	rpc BatchAddChildTask(BatchAddChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/BatchAdd"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/BatchAdd"
 			body: "ChildTaskIds"
 		};
 	}
@@ -113,14 +113,14 @@ service TaskService {
 	// 删除子任务
 	rpc DeleteChildTask(DeleteChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Tasks/{TaskId}/Children/{ChildTaskId}"
+			delete: "/api/TaskService/Tasks/{TaskId}/Children/{ChildTaskId}"
 		};
 	}
 
 	// 批量删除子任务
 	rpc BatchDeleteChildTask(BatchDeleteChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/BatchDelete"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/BatchDelete"
 			body: "ChildTaskIds"
 		};
 	}
@@ -128,7 +128,7 @@ service TaskService {
 	// 移除子任务
 	rpc RemoveChildTask(RemoveChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/Remove"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/Remove"
 			body: "ChildTask"
 		};
 	}
@@ -136,7 +136,7 @@ service TaskService {
 	// 批量移除子任务
 	rpc BatchRemoveChildTask(BatchRemoveChildTaskRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Children/BatchRemove"
+			post: "/api/TaskService/Tasks/{TaskId}/Children/BatchRemove"
 			body: "ChildTaskIds"
 		};
 	}
@@ -144,21 +144,21 @@ service TaskService {
 	// 查询任务单元信息
 	rpc SearchTaskUnitInfo(SearchTaskUnitInfoRequest) returns (SearchTaskUnitInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/Tasks/{TaskId}/Units"
+			get: "/api/TaskService/Tasks/{TaskId}/Units"
 		};
 	}
 
 	// 获取任务单元
 	rpc GetTaskUnit(GetTaskUnitRequest) returns (GetTaskUnitResponse) {
 		option (google.api.http) = {
-			get: "/api/Tasks/{TaskId}/Units/{TaskUnitId}"
+			get: "/api/TaskService/Tasks/{TaskId}/Units/{TaskUnitId}"
 		};
 	}
 
 	// 创建任务单元
 	rpc CreateTaskUnit(CreateTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Units"
+			post: "/api/TaskService/Tasks/{TaskId}/Units"
 			body: "TaskUnit"
 		};
 	}
@@ -166,7 +166,7 @@ service TaskService {
 	// 批量创建任务单元
 	rpc BatchCreateTaskUnit(BatchCreateTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Units/BatchCreate"
+			post: "/api/TaskService/Tasks/{TaskId}/Units/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -174,7 +174,7 @@ service TaskService {
 	// 更新任务单元
 	rpc UpdateTaskUnit(UpdateTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Tasks/{TaskId}/Units/{TaskUnitId}"
+			put: "/api/TaskService/Tasks/{TaskId}/Units/{TaskUnitId}"
 			body: "TaskUnit"
 		};
 	}
@@ -182,7 +182,7 @@ service TaskService {
 	// 批量更新任务单元
 	rpc BatchUpdateTaskUnit(BatchUpdateTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/Tasks/{TaskId}/Units/BatchUpdate"
+			put: "/api/TaskService/Tasks/{TaskId}/Units/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -190,14 +190,14 @@ service TaskService {
 	//删除任务单元
 	rpc DeleteTaskUnit(DeleteTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/Tasks/{TaskId}/Units/{TaskUnitId}"
+			delete: "/api/TaskService/Tasks/{TaskId}/Units/{TaskUnitId}"
 		};
 	}
 
 	// 批量删除任务单元
 	rpc BatchDeleteTaskUnit(BatchDeleteTaskUnitRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/Tasks/{TaskId}/Units/BatchDelete"
+			post: "/api/TaskService/Tasks/{TaskId}/Units/BatchDelete"
 			body: "TaskUnitIds"
 		};
 	}
@@ -205,21 +205,21 @@ service TaskService {
 	// 查询任务单元目标
 	rpc SearchTaskUnitTarget(SearchTaskUnitTargetRequest) returns (SearchTaskUnitTargetResponse) {
 		option (google.api.http) = {
-			get: "/api/TaskUnits/{TaskUnitId}/Targets"
+			get: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets"
 		};
 	}
 
 	// 获取任务单元目标
 	rpc GetTaskUnitTarget(GetTaskUnitTargetRequest) returns (GetTaskUnitTargetResponse) {
 		option (google.api.http) = {
-			get: "/api/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
+			get: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
 		};
 	}
 
 	// 创建任务单元目标
 	rpc CreateTaskUnitTarget(CreateTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/TaskUnits/{TaskUnitId}/Targets"
+			post: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets"
 			body: "TaskUnitTarget"
 		};
 	}
@@ -227,7 +227,7 @@ service TaskService {
 	// 批量创建任务单元目标
 	rpc BatchCreateTaskUnitTarget(BatchCreateTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/TaskUnits/{TaskUnitId}/Targets/BatchCreate"
+			post: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/BatchCreate"
 			body: "Batch"
 		};
 	}
@@ -235,7 +235,7 @@ service TaskService {
 	// 更新任务单元目标
 	rpc UpdateTaskUnitTarget(UpdateTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
+			put: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
 			body: "TaskUnitTarget"
 		};
 	}
@@ -243,7 +243,7 @@ service TaskService {
 	// 批量更新任务单元目标
 	rpc BatchUpdateTaskUnitTarget(BatchUpdateTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			put: "/api/TaskUnits/{TaskUnitId}/Targets/BatchUpdate"
+			put: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/BatchUpdate"
 			body: "Batch"
 		};
 	}
@@ -251,14 +251,14 @@ service TaskService {
 	// 删除任务单元目标
 	rpc DeleteTaskUnitTarget(DeleteTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			delete: "/api/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
+			delete: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/{TaskUnitTargetId}"
 		};
 	}
 
 	// 批量删除任务单元目标
 	rpc BatchDeleteTaskUnitTarget(BatchDeleteTaskUnitTargetRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/TaskUnits/{TaskUnitId}/Targets/BatchDelete"
+			post: "/api/TaskService/TaskUnits/{TaskUnitId}/Targets/BatchDelete"
 			body: "TaskUnitTargetIds"
 		};
 	}
