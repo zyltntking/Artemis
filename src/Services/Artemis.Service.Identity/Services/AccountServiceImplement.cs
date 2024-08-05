@@ -153,7 +153,6 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> SignOut(EmptyRequest request, ServerCallContext context)
     {
-
         var authorizationToken = context
             .GetHttpContext()
             .User.Claims
@@ -172,7 +171,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     }
 
     /// <summary>
-    /// 认证信息
+    ///     认证信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -194,10 +193,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
 
             var tokenRecord = await Cache.FetchTokenRecordAsync(catchKey, false, context.CancellationToken);
 
-            if (tokenRecord is not null)
-            {
-                return tokenRecord.ReadInfoResponse<AuthorizeInfoResponse, TokenRecord>();
-            }
+            if (tokenRecord is not null) return tokenRecord.ReadInfoResponse<AuthorizeInfoResponse, TokenRecord>();
         }
 
         return ResultAdapter.AdaptEmptyFail<AuthorizeInfoResponse>();

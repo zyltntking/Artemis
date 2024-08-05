@@ -313,14 +313,15 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 查询用户属性
+    ///     查询用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查询用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<FetchUserProfilesResponse> FetchUserProfiles(FetchUserProfilesRequest request, ServerCallContext context)
+    public override async Task<FetchUserProfilesResponse> FetchUserProfiles(FetchUserProfilesRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -330,14 +331,15 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 获取用户属性
+    ///     获取用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<GetUserProfileResponse> GetUserProfile(GetUserProfileRequest request, ServerCallContext context)
+    public override async Task<GetUserProfileResponse> GetUserProfile(GetUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -347,31 +349,34 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 创建用户属性
+    ///     创建用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<AffectedResponse> AddUserProfile(AddUserProfileRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AddUserProfile(AddUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var result = await UserManager.AddUserProfile(userId, request.UserProfile.Key, request.UserProfile.Value, context.CancellationToken);
+        var result = await UserManager.AddUserProfile(userId, request.UserProfile.Key, request.UserProfile.Value,
+            context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    /// 批量创建用户属性
+    ///     批量创建用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量创建用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<AffectedResponse> BatchAddUserProfile(BatchAddUserProfileRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchAddUserProfile(BatchAddUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -385,24 +390,26 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 更新用户属性
+    ///     更新用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("更新用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<AffectedResponse> UpdateUserProfile(UpdateUserProfileRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> UpdateUserProfile(UpdateUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
-        var result = await UserManager.UpdateUserProfile(userId, request.UserProfile.Key, request.UserProfile.Value, context.CancellationToken);
+        var result = await UserManager.UpdateUserProfile(userId, request.UserProfile.Key, request.UserProfile.Value,
+            context.CancellationToken);
 
         return result.AffectedResponse();
     }
 
     /// <summary>
-    /// 批量更新用户属性
+    ///     批量更新用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
@@ -424,14 +431,15 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 删除用户属性
+    ///     删除用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("删除用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<AffectedResponse> DeleteUserProfile(DeleteUserProfileRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> DeleteUserProfile(DeleteUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 
@@ -441,14 +449,15 @@ public class UserServiceImplement : UserService.UserServiceBase
     }
 
     /// <summary>
-    /// 批量删除用户属性
+    ///     批量删除用户属性
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("批量删除用户属性")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<AffectedResponse> BatchDeleteUserProfile(BatchDeleteUserProfileRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> BatchDeleteUserProfile(BatchDeleteUserProfileRequest request,
+        ServerCallContext context)
     {
         var userId = Guid.Parse(request.UserId);
 

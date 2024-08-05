@@ -678,10 +678,11 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 获取用户属性
+    ///     获取用户属性
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<UserProfile>> FetchUserProfiles(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<UserProfile>> FetchUserProfiles(Guid id,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -702,7 +703,7 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 获取用户属性
+    ///     获取用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
@@ -730,14 +731,15 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 添加用户属性
+    ///     添加用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> AddUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> AddUserProfile(Guid id, string key, string value,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -761,13 +763,14 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 批量添加用户属性
+    ///     批量添加用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="profiles"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> AddUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> AddUserProfiles(Guid id, IDictionary<string, string> profiles,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -796,14 +799,15 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 更新用户属性
+    ///     更新用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> UpdateUserProfile(Guid id, string key, string value,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -825,13 +829,14 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 更新用户属性
+    ///     更新用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="profiles"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> UpdateUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> UpdateUserProfiles(Guid id, IDictionary<string, string> profiles,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
@@ -859,7 +864,7 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 删除用户属性
+    ///     删除用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
@@ -885,13 +890,14 @@ public sealed class IdentityUserManager : Manager, IIdentityUserManager
     }
 
     /// <summary>
-    /// 批量删除用户属性
+    ///     批量删除用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys,
+        CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 

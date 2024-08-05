@@ -3,7 +3,6 @@ using Artemis.Extensions.Identity;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.School;
 using Artemis.Service.School.Managers;
-using Artemis.Service.Shared;
 using Artemis.Service.Shared.School.Transfer;
 using Grpc.Core;
 using Mapster;

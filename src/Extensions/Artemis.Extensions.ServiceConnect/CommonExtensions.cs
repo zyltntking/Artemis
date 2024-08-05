@@ -27,6 +27,11 @@ public static class CommonExtensions
 
         builder.AddServiceDefaults();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+        }); 
+
         builder.Services.AddControllers();
 
         builder.Services.AddRazorPages();
@@ -92,6 +97,8 @@ public static class CommonExtensions
         app.UseStaticFiles();
 
         app.UseRouting();
+
+        app.UseCors("AllowAll");
 
         app.UseAuthentication();
         app.UseAuthorization();

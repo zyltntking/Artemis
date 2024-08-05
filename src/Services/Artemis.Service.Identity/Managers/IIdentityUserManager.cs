@@ -181,13 +181,13 @@ public interface IIdentityUserManager : IManager
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取用户属性
+    ///     获取用户属性
     /// </summary>
     /// <returns></returns>
     Task<IEnumerable<UserProfile>> FetchUserProfiles(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 获取用户属性
+    ///     获取用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
@@ -196,7 +196,7 @@ public interface IIdentityUserManager : IManager
     Task<UserProfile?> ReadUserProfile(Guid id, string key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 添加用户属性
+    ///     添加用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
@@ -206,7 +206,7 @@ public interface IIdentityUserManager : IManager
     Task<StoreResult> AddUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量添加用户属性
+    ///     批量添加用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="profiles"></param>
@@ -216,26 +216,28 @@ public interface IIdentityUserManager : IManager
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 更新用户属性
+    ///     更新用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> UpdateUserProfile(Guid id, string key, string value, CancellationToken cancellationToken = default);
+    Task<StoreResult> UpdateUserProfile(Guid id, string key, string value,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 更新用户属性
+    ///     更新用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="profiles"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> UpdateUserProfiles(Guid id, IDictionary<string, string> profiles, CancellationToken cancellationToken = default);
+    Task<StoreResult> UpdateUserProfiles(Guid id, IDictionary<string, string> profiles,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 删除用户属性
+    ///     删除用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="key"></param>
@@ -244,13 +246,14 @@ public interface IIdentityUserManager : IManager
     Task<StoreResult> RemoveUserProfile(Guid id, string key, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 批量删除用户属性
+    ///     批量删除用户属性
     /// </summary>
     /// <param name="id"></param>
     /// <param name="keys"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys, CancellationToken cancellationToken = default);
+    Task<StoreResult> RemoveUserProfiles(Guid id, IEnumerable<string> keys,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     查询用户的凭据

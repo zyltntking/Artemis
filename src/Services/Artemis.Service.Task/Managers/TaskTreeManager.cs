@@ -1,10 +1,8 @@
 ﻿using System.Linq.Dynamic.Core;
 using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
-using Artemis.Service.Shared.Resource.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
 using Artemis.Service.Task.Context;
 using Artemis.Service.Task.Stores;
@@ -175,7 +173,8 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
     /// <param name="loopIndex"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected override Task<ArtemisTask> MapOverEntity(ArtemisTask entity, TaskPackage package, int loopIndex, CancellationToken cancellationToken = default)
+    protected override Task<ArtemisTask> MapOverEntity(ArtemisTask entity, TaskPackage package, int loopIndex,
+        CancellationToken cancellationToken = default)
     {
         var task = package.Adapt(entity);
 
@@ -191,11 +190,12 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
     /// <param name="key"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected override async Task<List<TaskInfo>> FetchNonRootTreeNodeList(Guid key, CancellationToken cancellationToken)
+    protected override async Task<List<TaskInfo>> FetchNonRootTreeNodeList(Guid key,
+        CancellationToken cancellationToken)
     {
         var taskCode = await EntityStore
             .KeyMatchQuery(key)
-        .Select(task => task.TaskCode)
+            .Select(task => task.TaskCode)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (!string.IsNullOrWhiteSpace(taskCode))
@@ -219,9 +219,9 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
     /// <param name="cancellationToken"></param>
     /// <param name="child"></param>
     protected override System.Threading.Tasks.Task AfterAddChildNode(
-        ArtemisTask parent, 
-        ArtemisTask? child, 
-        int loopIndex, 
+        ArtemisTask parent,
+        ArtemisTask? child,
+        int loopIndex,
         CancellationToken cancellationToken = default)
     {
         if (parent.ParentId == null && parent.TaskShip != TaskShip.Root)
@@ -251,10 +251,7 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
         {
             var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == parent.Id, cancellationToken);
 
-            if (exists)
-            {
-                parent.TaskShip = TaskShip.Normal;
-            }
+            if (exists) parent.TaskShip = TaskShip.Normal;
 
             await EntityStore.UpdateAsync(parent, cancellationToken);
         }
@@ -273,7 +270,7 @@ public class TaskTreeManager : SelfReferenceTreeManager<ArtemisTask, TaskInfo, T
         int loopIndex,
         CancellationToken cancellationToken = default)
     {
-        if (child == null) 
+        if (child == null)
             throw new ArgumentNullException(nameof(child));
         var exists = await EntityStore.EntityQuery.AnyAsync(task => task.ParentId == parent.Id, cancellationToken);
 
