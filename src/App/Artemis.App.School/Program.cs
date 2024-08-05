@@ -44,6 +44,13 @@ public class Program
                 }, Log.Debug)
                 .AddSchoolServices();
 
+            //≈‰÷√»œ÷§
+            builder.Services.AddAuthentication()
+                .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
+
+            //≈‰÷√ ⁄»®
+            builder.ConfigureAuthorization();
+
             var isMigration = false;
 
             try

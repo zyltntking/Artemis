@@ -64,13 +64,7 @@ public class TaskServiceImplement : TaskService.TaskServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        var response = taskInfos.PagedResponse<SearchTaskInfoResponse, TaskInfo>();
-
-        var taskReplies = taskInfos.Items!.Select(item => item.Adapt<TaskInfoPacket>());
-
-        response.Data.Items.Add(taskReplies);
-
-        return response;
+        return taskInfos.PagedResponse<SearchTaskInfoResponse, TaskInfo>();
     }
 
     /// <summary>
