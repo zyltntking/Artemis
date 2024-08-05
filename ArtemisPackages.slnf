@@ -9,7 +9,6 @@
       "src\\Extensions\\Artemis.Extensions.ServiceConnect\\Artemis.Extensions.ServiceConnect.csproj",
       "src\\Services\\Artemis.Service.Identity\\Artemis.Service.Identity.csproj",
       "src\\Services\\Artemis.Service.Protos\\Artemis.Service.Protos.csproj",
-      "src\\Services\\Artemis.Service.RawData\\Artemis.Service.RawData.csproj",
       "src\\Services\\Artemis.Service.Resource\\Artemis.Service.Resource.csproj",
       "src\\Services\\Artemis.Service.School\\Artemis.Service.School.csproj",
       "src\\Services\\Artemis.Service.Shared\\Artemis.Service.Shared.csproj",
