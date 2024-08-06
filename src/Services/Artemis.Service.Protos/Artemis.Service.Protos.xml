@@ -7719,66 +7719,66 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse">
+        <member name="T:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse">
             <summary>
             查询系统模块信息响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Code">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Message">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Error">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Data">
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoResponse.Data">
             <summary>
             系统模块信息数据
             @required
@@ -8377,6 +8377,216 @@
             @guid
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest">
+            <summary>
+            创建下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest.ChildSubSystemModuleFieldNumber">
+            <summary>Field number for the "ChildSubSystemModule" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest.ChildSubSystemModule">
+            <summary>
+            模块名称
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest">
+            <summary>
+            批量创建下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest.Batch">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ChildSystemModuleIdPacket">
+            <summary>
+            下级系统模块标识数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ChildSystemModuleIdPacket.ChildSystemModuleIdFieldNumber">
+            <summary>Field number for the "ChildSystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ChildSystemModuleIdPacket.ChildSystemModuleId">
+            <summary>
+            下级系统模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.AddChildSystemModuleRequest">
+            <summary>
+            添加下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.AddChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.AddChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.AddChildSystemModuleRequest.ChildSystemModuleFieldNumber">
+            <summary>Field number for the "ChildSystemModule" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.AddChildSystemModuleRequest.ChildSystemModule">
+            <summary>
+            下级系统模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest">
+            <summary>
+            批量添加下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest.ChildSystemModuleIdsFieldNumber">
+            <summary>Field number for the "ChildSystemModuleIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest.ChildSystemModuleIds">
+            <summary>
+            下级系统模块标识
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest">
+            <summary>
+            删除下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest.ChildSystemModuleIdFieldNumber">
+            <summary>Field number for the "ChildSystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest.ChildSystemModuleId">
+            <summary>
+            下级系统模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest">
+            <summary>
+            批量删除下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest.ChildSystemModuleIdsFieldNumber">
+            <summary>Field number for the "ChildSystemModuleIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest.ChildSystemModuleIds">
+            <summary>
+            下级系统模块标识
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest">
+            <summary>
+            移除下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest.ChildSystemModuleFieldNumber">
+            <summary>Field number for the "ChildSystemModule" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest.ChildSystemModule">
+            <summary>
+            下级系统模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest">
+            <summary>
+            批量移除下级系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest.ChildSystemModuleIdsFieldNumber">
+            <summary>Field number for the "ChildSystemModuleIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest.ChildSystemModuleIds">
+            <summary>
+            下级系统模块标识
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Resource.SystemModuleService">
             <summary>
             系统模块服务
@@ -8455,6 +8665,70 @@
         <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchDeleteSystemModule(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.ServerCallContext)">
             <summary>
             批量删除系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.CreateChildSystemModule(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchCreateChildSystemModule(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.AddChildSystemModule(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchAddChildSystemModule(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.DeleteChildSystemModule(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchDeleteChildSystemModule(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.RemoveChildSystemModule(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchRemoveChildSystemModule(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除下级系统模块
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -8797,6 +9071,294 @@
         <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteSystemModuleAsync(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.CallOptions)">
             <summary>
             批量删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateChildSystemModule(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateChildSystemModule(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateChildSystemModuleAsync(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateChildSystemModuleAsync(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateChildSystemModule(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateChildSystemModule(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.AddChildSystemModule(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.AddChildSystemModule(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.AddChildSystemModuleAsync(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.AddChildSystemModuleAsync(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchAddChildSystemModule(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchAddChildSystemModule(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchAddChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchAddChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteChildSystemModule(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteChildSystemModule(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteChildSystemModuleAsync(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteChildSystemModuleAsync(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteChildSystemModule(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteChildSystemModule(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.RemoveChildSystemModule(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.RemoveChildSystemModule(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.RemoveChildSystemModuleAsync(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.RemoveChildSystemModuleAsync(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchRemoveChildSystemModule(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchRemoveChildSystemModule(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchRemoveChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量移除下级系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchRemoveChildSystemModuleAsync(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量移除下级系统模块
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

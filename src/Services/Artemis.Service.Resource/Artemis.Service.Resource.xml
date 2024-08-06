@@ -79,6 +79,21 @@
                 标准项目所属目录
             </summary>
         </member>
+        <member name="T:Artemis.Service.Resource.Context.ArtemisSystemModule">
+            <summary>
+            系统模块实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisSystemModule.Children">
+            <summary>
+                下级模块
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ArtemisSystemModule.Parent">
+            <summary>
+                上级模块
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisDataDictionaryConfiguration">
             <summary>
                 数据字典配置
@@ -232,6 +247,33 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="T:Artemis.Service.Resource.Context.Configuration.ArtemisSystemModuleConfiguration">
+            <summary>
+            系统模块配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisSystemModuleConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.Configuration.ArtemisSystemModuleConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisSystemModuleConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisSystemModule})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Artemis.Service.Resource.Context.Configuration.ArtemisSystemModuleConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Resource.Context.ArtemisSystemModule})">
+            <summary>
+                实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Artemis.Service.Resource.Context.ResourceContext">
             <summary>
                 资源上下文
@@ -276,6 +318,11 @@
         <member name="P:Artemis.Service.Resource.Context.ResourceContext.StandardItems">
             <summary>
                 标准项目数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Context.ResourceContext.SystemModules">
+            <summary>
+            系统模块数据集
             </summary>
         </member>
         <member name="M:Artemis.Service.Resource.Context.ResourceContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -633,6 +680,49 @@
             <param name="cancellationToken">操作取消信号</param>
             <returns>分页搜索结果</returns>
         </member>
+        <member name="T:Artemis.Service.Resource.Managers.ISystemModuleTreeManager">
+            <summary>
+                系统模块树管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.ISystemModuleTreeManager.FetchSystemModulesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据系统模块信息查搜索系统模块
+            </summary>
+            <param name="moduleNameSearch">任务名搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
+        <member name="T:Artemis.Service.Resource.Managers.SystemModuleTreeManager">
+            <summary>
+            系统模块树管理器实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.SystemModuleTreeManager.#ctor(Artemis.Service.Resource.Stores.IArtemisSystemModuleStore)">
+            <summary>
+                树模型管理器构造
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.SystemModuleTreeManager.FetchNonRootTreeNodeList(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+                获取非根节点的树节点列表
+            </summary>
+            <param name="key"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Managers.SystemModuleTreeManager.FetchSystemModulesAsync(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                根据系统模块信息查搜索系统模块
+            </summary>
+            <param name="moduleNameSearch">任务名搜索值</param>
+            <param name="page">页码</param>
+            <param name="size">条目数</param>
+            <param name="cancellationToken">操作取消信号</param>
+            <returns>分页搜索结果</returns>
+        </member>
         <member name="T:Artemis.Service.Resource.Models.DataDictionary">
             <summary>
                 数据字典模型
@@ -946,6 +1036,76 @@
         <member name="P:Artemis.Service.Resource.Models.StandardItem.Description">
             <summary>
                 标准项目描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Models.SystemModule">
+            <summary>
+            系统模块
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Name">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Type">
+            <summary>
+            模块类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Order">
+            <summary>
+            模块序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Path">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Parameters">
+            <summary>
+            路由参数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Component">
+            <summary>
+            组件路径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Icon">
+            <summary>
+            模块图标
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.IsFrame">
+            <summary>
+            是否外链
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Status">
+            <summary>
+            模块状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.ClaimStamp">
+            <summary>
+            凭据戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Models.SystemModule.ParentId">
+            <summary>
+                上级模块标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Resource.ResourceServiceConfig">
@@ -1609,6 +1769,164 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="T:Artemis.Service.Resource.Services.SystemModuleServiceImplement">
+            <summary>
+            系统模块服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.#ctor(Artemis.Service.Resource.Managers.ISystemModuleTreeManager,Microsoft.Extensions.Logging.ILogger{Artemis.Service.Resource.Services.SystemModuleServiceImplement})">
+            <summary>
+                服务实现
+            </summary>
+            <param name="systemModuleTerrManager"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.SystemModuleServiceImplement.SystemModuleTreeManager">
+            <summary>
+                数据字典管理器
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Resource.Services.SystemModuleServiceImplement.Logger">
+            <summary>
+                日志依赖
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.SearchSystemModuleInfo(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.ReadSystemModuleInfo(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.ReadSystemModuleInfoTree(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.CreateSystemModule(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchCreateSystemModule(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.UpdateSystemModule(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchUpdateSystemModule(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.DeleteSystemModule(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchDeleteSystemModule(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.CreateChildSystemModule(Artemis.Service.Protos.Resource.CreateChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchCreateChildSystemModule(Artemis.Service.Protos.Resource.BatchCreateChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.AddChildSystemModule(Artemis.Service.Protos.Resource.AddChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchAddChildSystemModule(Artemis.Service.Protos.Resource.BatchAddChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量添加下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.DeleteChildSystemModule(Artemis.Service.Protos.Resource.DeleteChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchDeleteChildSystemModule(Artemis.Service.Protos.Resource.BatchDeleteChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.RemoveChildSystemModule(Artemis.Service.Protos.Resource.RemoveChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            移除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Resource.Services.SystemModuleServiceImplement.BatchRemoveChildSystemModule(Artemis.Service.Protos.Resource.BatchRemoveChildSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量移除下级系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.Service.Resource.Stores.IArtemisDataDictionaryItemStore">
             <summary>
                 数据字典项目存储接口
@@ -1746,6 +2064,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Resource.Stores.ArtemisStandardItemStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.IArtemisSystemModuleStore">
+            <summary>
+                系统模块存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Resource.Stores.ArtemisSystemModuleStore">
+            <summary>
+                系统模块存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Resource.Stores.ArtemisSystemModuleStore.#ctor(Artemis.Service.Resource.Context.ResourceContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

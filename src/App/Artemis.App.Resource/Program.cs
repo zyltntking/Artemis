@@ -80,6 +80,7 @@ public class Program
             app.MapGrpcService<OrganizationServiceImplement>();
             app.MapGrpcService<DivisionServiceImplement>();
             app.MapGrpcService<StandardServiceImplement>();
+            app.MapGrpcService<SystemModuleServiceImplement>();
 
             // map common endpoints
             app.MapCommonEndpoints<ResourceContext>();

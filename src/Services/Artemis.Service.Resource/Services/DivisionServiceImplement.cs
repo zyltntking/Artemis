@@ -225,7 +225,7 @@ public class DivisionServiceImplement : DivisionService.DivisionServiceBase
     {
         var id = Guid.Parse(request.DivisionId);
 
-        var package = request.Adapt<DivisionPackage>();
+        var package = request.ChildDivision.Adapt<DivisionPackage>();
 
         var result = await DivisionTreeManager.CreateChildEntityAsync(id, package, context.CancellationToken);
 

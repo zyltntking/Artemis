@@ -24,7 +24,7 @@ public interface ISystemModuleTreeManager : ISelfReferenceTreeManager<
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
-    Task<PageResult<SystemModuleInfo>> FetchDivisionsAsync(
+    Task<PageResult<SystemModuleInfo>> FetchSystemModulesAsync(
         string? moduleNameSearch,
         int page = 1,
         int size = 20,
@@ -69,7 +69,7 @@ public class SystemModuleTreeManager : SelfReferenceTreeManager<
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
-    public async Task<PageResult<SystemModuleInfo>> FetchDivisionsAsync(
+    public async Task<PageResult<SystemModuleInfo>> FetchSystemModulesAsync(
         string? moduleNameSearch, 
         int page = 1, 
         int size = 20,
