@@ -35,6 +35,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="resource\systemmodule.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
@@ -62,6 +66,7 @@
 		<Protobuf Include="identity\resource.proto" />
 		<Protobuf Include="identity\role.proto" />
 		<Protobuf Include="identity\user.proto" />
+		<Protobuf Include="resource\systemmodule.proto" />
 	</ItemGroup>
 
 	<ItemGroup>

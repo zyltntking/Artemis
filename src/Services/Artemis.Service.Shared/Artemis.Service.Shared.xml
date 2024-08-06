@@ -1461,6 +1461,81 @@
                 标准项目描述
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Resource.ISystemModule">
+            <summary>
+            系统模块
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.ISystemModuleInfo">
+            <summary>
+            系统模块信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.ISystemModulePackage">
+            <summary>
+            系统模块数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Name">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Type">
+            <summary>
+            模块类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Order">
+            <summary>
+            模块序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Path">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Parameters">
+            <summary>
+            路由参数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Component">
+            <summary>
+            组件路径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Icon">
+            <summary>
+            模块图标
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.IsFrame">
+            <summary>
+            是否外链
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Status">
+            <summary>
+            模块状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.ClaimStamp">
+            <summary>
+            凭据戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.ISystemModulePackage.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Resource.Transfer.DataDictionaryItemInfo">
             <summary>
                 数据字典项目信息接口
@@ -1794,6 +1869,96 @@
         <member name="P:Artemis.Service.Shared.Resource.Transfer.StandardItemPackage.Description">
             <summary>
                 标准项目描述
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.SystemModuleInfoTree">
+            <summary>
+            系统模块树
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModuleInfoTree.Children">
+            <summary>
+                子节点
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.SystemModuleInfo">
+            <summary>
+            系统模块信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModuleInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModuleInfo.ParentId">
+            <summary>
+                父标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage">
+            <summary>
+            系统模块数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Name">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Type">
+            <summary>
+            模块类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Order">
+            <summary>
+            模块序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Path">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Parameters">
+            <summary>
+            路由参数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Component">
+            <summary>
+            组件路径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Icon">
+            <summary>
+            模块图标
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.IsFrame">
+            <summary>
+            是否外链
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Status">
+            <summary>
+            模块状态
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.ClaimStamp">
+            <summary>
+            凭据戳
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.SystemModulePackage.Remark">
+            <summary>
+            备注
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.School.IClass">

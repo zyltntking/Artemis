@@ -1,0 +1,413 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Resource";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.Resource;
+
+// 系统模块服务
+service SystemModuleService{
+
+	// 查询系统模块信息
+	rpc SearchSystemModuleInfo(SearchSystemModuleInfoRequest) returns (SearchSearchSystemModuleInfoResponse){
+		option (google.api.http) = {
+			get: "/api/ResourceService/SystemModules"
+		};
+	}
+
+	// 读取系统模块信息
+	rpc ReadSystemModuleInfo(ReadSystemModuleInfoRequest) returns (ReadSystemModuleInfoResponse){
+		option (google.api.http) = {
+			get: "/api/ResourceService/SystemModules/{SystemModuleId}"
+		};
+	}
+
+	// 读取系统模块信息树
+	rpc ReadSystemModuleInfoTree(ReadSystemModuleInfoRequest) returns (ReadSystemModuleInfoTreeResponse){
+		option (google.api.http) = {
+			get: "/api/ResourceService/SystemModules/{SystemModuleId}/Tree"
+		};
+	}
+
+	// 创建系统模块
+	rpc CreateSystemModule(CreateSystemModuleRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/SystemModules"
+			body: "*"
+		};
+	}
+
+	// 批量创建系统模块
+	rpc BatchCreateSystemModule(BatchCreateSystemModuleRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/SystemModules/BatchCreate"
+			body: "Batch"
+		};
+	}
+
+	// 更新系统模块
+	rpc UpdateSystemModule(UpdateSystemModulRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/ResourceService/SystemModules/{SystemModuleId}"
+			body: "*"
+		};
+	}
+
+	// 批量更新系统模块
+	rpc BatchUpdateSystemModule(BatchUpdateSystemModuleRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			put: "/api/ResourceService/SystemModules/BatchUpdate"
+			body: "Batch"
+		};
+	}
+
+	// 删除系统模块
+	rpc DeleteSystemModule(DeleteSystemModuleRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			delete: "/api/ResourceService/SystemModules/{SystemModuleId}"
+		};
+	}
+
+	// 批量删除系统模块
+	rpc BatchDeleteSystemModule(BatchDeleteSystemModuleRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/ResourceService/SystemModules/BatchDelete"
+			body: "SystemModuleIds"
+		};
+	}
+}
+
+enum SystemModuleType{
+	// 系统模块
+	Module = 0;
+	// 系统界面
+	Interface = 1;
+	// 系统操作
+	Action = 2;
+}
+
+// 查询系统模块请求
+message SearchSystemModuleInfoRequest{
+	// 模块名称
+	google.protobuf.StringValue Name = 1;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 2;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 3;
+}
+
+// 系统模块信息数据包
+message SystemModuleInfoPacket{
+	// 模块标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级模块标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 模块名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 模块类型
+	// @required
+	SystemModuleType Type = 4;
+	// 模块序列
+	// @required
+	// @min(0)
+	int32 Order = 5;
+	// 路由地址
+	// @maxLength(128)
+	google.protobuf.StringValue Path = 6;
+	// 路由参数
+	// @maxLength(256)
+	google.protobuf.StringValue Parameters = 7;
+	// 组件路径
+	// @maxLength(128)
+	google.protobuf.StringValue Component = 8;
+	// 模块图标
+	// @maxLength(64)
+	google.protobuf.StringValue Icon = 9;
+	// 是否外链
+	// @required
+	bool IsFrame = 10;
+	// 是否显示
+	// @required
+	bool Visible = 11;
+	// 模块状态
+	// @required
+	bool Status = 12;
+	// 凭据戳
+	// @maxLength(64)
+	google.protobuf.StringValue ClaimStamp = 13;
+	// 备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 14;
+}
+
+// 分页系统模块数据包
+message PagedSystemModuleInfoPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 系统模块信息数据
+	// @required
+	repeated SystemModuleInfoPacket Items = 5;
+}
+
+// 查询系统模块信息响应
+message SearchSearchSystemModuleInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+    // 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 系统模块信息数据
+	// @required
+	PagedSystemModuleInfoPacket Data = 7;
+}
+
+// 读取系统模块信息请求
+message ReadSystemModuleInfoRequest{
+	// 模块标识
+	// @required
+	// @guid
+	string SystemModuleId = 1;
+}
+
+// 读取系统模块信息响应
+message ReadSystemModuleInfoResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 系统模块信息数据
+	// @required
+	SystemModuleInfoPacket Data = 7;
+}
+
+// 系统模块信息树数据包
+message SystemModuleInfoTreePacket{
+	// 模块标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级模块标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 模块名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 模块类型
+	// @required
+	SystemModuleType Type = 4;
+	// 模块序列
+	// @required
+	// @min(0)
+	int32 Order = 5;
+	// 路由地址
+	// @maxLength(128)
+	google.protobuf.StringValue Path = 6;
+	// 路由参数
+	// @maxLength(256)
+	google.protobuf.StringValue Parameters = 7;
+	// 组件路径
+	// @maxLength(128)
+	google.protobuf.StringValue Component = 8;
+	// 模块图标
+	// @maxLength(64)
+	google.protobuf.StringValue Icon = 9;
+	// 是否外链
+	// @required
+	bool IsFrame = 10;
+	// 是否显示
+	// @required
+	bool Visible = 11;
+	// 模块状态
+	// @required
+	bool Status = 12;
+	// 凭据戳
+	// @maxLength(64)
+	google.protobuf.StringValue ClaimStamp = 13;
+	// 备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 14;
+	// 子模块
+	repeated SystemModuleInfoTreePacket Children = 15;
+}
+
+// 读取系统模块信息树响应
+message ReadSystemModuleInfoTreeResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 系统模块信息数据
+	// @required
+	SystemModuleInfoTreePacket Data = 7;
+}
+
+// 创建系统模块请求
+message CreateSystemModuleRequest{
+	// 模块名称
+	// @required
+	// @maxLength(128)
+	string Name = 1;
+	// 模块类型
+	// @required
+	SystemModuleType Type = 2;
+	// 模块序列
+	// @required
+	// @min(0)
+	int32 Order = 3;
+	// 路由地址
+	// @maxLength(128)
+	google.protobuf.StringValue Path = 4;
+	// 路由参数
+	// @maxLength(256)
+	google.protobuf.StringValue Parameters = 5;
+	// 组件路径
+	// @maxLength(128)
+	google.protobuf.StringValue Component = 6;
+	// 模块图标
+	// @maxLength(64)
+	google.protobuf.StringValue Icon = 7;
+	// 是否外链
+	// @required
+	bool IsFrame = 8;
+	// 是否显示
+	// @required
+	bool Visible = 9;
+	// 模块状态
+	// @required
+	bool Status = 10;
+	// 凭据戳
+	// @maxLength(64)
+	google.protobuf.StringValue ClaimStamp = 11;
+	// 备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 12;
+}
+
+// 批量创建系统模块请求
+message BatchCreateSystemModuleRequest{
+	// 系统模块信息数据
+	// @required
+	repeated CreateSystemModuleRequest Batch = 1;
+}
+
+// 更新系统模块数据包
+message UpdateSystemModulPacket{
+	// 模块名称
+	// @maxLength(128)
+	google.protobuf.StringValue Name = 1;
+	// 模块类型
+	SystemModuleType Type = 2;
+	// 模块序列
+	// @min(0)
+	google.protobuf.Int32Value Order = 3;
+	// 路由地址
+	// @maxLength(128)
+	google.protobuf.StringValue Path = 4;
+	// 路由参数
+	// @maxLength(256)
+	google.protobuf.StringValue Parameters = 5;
+	// 组件路径
+	// @maxLength(128)
+	google.protobuf.StringValue Component = 6;
+	// 模块图标
+	// @maxLength(64)
+	google.protobuf.StringValue Icon = 7;
+	// 是否外链
+	google.protobuf.BoolValue IsFrame = 8;
+	// 是否显示
+	google.protobuf.BoolValue Visible = 9;
+	// 模块状态
+	google.protobuf.BoolValue Status = 10;
+	// 凭据戳
+	// @maxLength(64)
+	google.protobuf.StringValue ClaimStamp = 11;
+	// 备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 12;
+}
+
+// 更新系统模块请求
+message UpdateSystemModulRequest{
+	// 模块标识
+	// @required
+	// @guid
+	string SystemModuleId = 1;
+	// 系统模块信息数据
+	// @required
+	UpdateSystemModulPacket SystemModule = 2;
+}
+
+// 批量更新系统模块请求
+message BatchUpdateSystemModuleRequest{
+	// 系统模块信息数据
+	// @required
+	repeated UpdateSystemModulRequest Batch = 1;
+}
+
+// 删除系统模块请求
+message DeleteSystemModuleRequest{
+	// 模块标识
+	// @required
+	// @guid
+	string SystemModuleId = 1;
+}
+
+// 批量删除系统模块请求
+message BatchDeleteSystemModuleRequest{
+	// 模块标识
+	// @required
+	// @guid
+	repeated string SystemModuleIds = 1;
+}

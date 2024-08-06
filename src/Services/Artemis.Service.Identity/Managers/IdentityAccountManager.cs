@@ -140,8 +140,7 @@ public sealed class IdentityAccountManager : Manager, IIdentityAccountManager
         var phoneNumberQuery = UserStore.EntityQuery
             .Where(item => item.PhoneNumber == normalizeSign);
 
-        var userAuthentication = await UserStore.EntityQuery
-            .Union(userNameQuery)
+        var userAuthentication = await userNameQuery
             .Union(emailQuery)
             .Union(phoneNumberQuery)
             .ProjectToType<UserAuthentication>()

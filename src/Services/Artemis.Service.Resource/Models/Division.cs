@@ -29,9 +29,8 @@ public class Division : ConcurrencyModel, IDivision
     /// <summary>
     ///     行政区划级别
     /// </summary>
-    [Required]
     [Comment("行政区划级别")]
-    public required int Level { get; set; }
+    public int Level { get; set; }
 
     /// <summary>
     ///     行政区划类型

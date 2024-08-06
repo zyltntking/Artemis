@@ -7483,6 +7483,1338 @@
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemmoduleReflection">
+            <summary>Holder for reflection information generated from resource/systemmodule.proto</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemmoduleReflection.Descriptor">
+            <summary>File descriptor for resource/systemmodule.proto</summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleType.Module">
+            <summary>
+            系统模块
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleType.Interface">
+            <summary>
+            系统界面
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleType.Action">
+            <summary>
+            系统操作
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest">
+            <summary>
+            查询系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.Name">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemModuleInfoPacket">
+            <summary>
+            系统模块信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Id">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ParentIdFieldNumber">
+            <summary>Field number for the "ParentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ParentId">
+            <summary>
+            上级模块标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Name">
+            <summary>
+            模块名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Type">
+            <summary>
+            模块类型
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.OrderFieldNumber">
+            <summary>Field number for the "Order" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Order">
+            <summary>
+            模块序列
+            @required
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.PathFieldNumber">
+            <summary>Field number for the "Path" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Path">
+            <summary>
+            路由地址
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ParametersFieldNumber">
+            <summary>Field number for the "Parameters" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Parameters">
+            <summary>
+            路由参数
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ComponentFieldNumber">
+            <summary>Field number for the "Component" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Component">
+            <summary>
+            组件路径
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.IconFieldNumber">
+            <summary>Field number for the "Icon" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Icon">
+            <summary>
+            模块图标
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.IsFrameFieldNumber">
+            <summary>Field number for the "IsFrame" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.IsFrame">
+            <summary>
+            是否外链
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.VisibleFieldNumber">
+            <summary>Field number for the "Visible" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Visible">
+            <summary>
+            是否显示
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.StatusFieldNumber">
+            <summary>Field number for the "Status" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Status">
+            <summary>
+            模块状态
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ClaimStampFieldNumber">
+            <summary>Field number for the "ClaimStamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.ClaimStamp">
+            <summary>
+            凭据戳
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoPacket.Remark">
+            <summary>
+            备注
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket">
+            <summary>
+            分页系统模块数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.PagedSystemModuleInfoPacket.Items">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse">
+            <summary>
+            查询系统模块信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SearchSearchSystemModuleInfoResponse.Data">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest">
+            <summary>
+            读取系统模块信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse">
+            <summary>
+            读取系统模块信息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoResponse.Data">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket">
+            <summary>
+            系统模块信息树数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Id">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ParentIdFieldNumber">
+            <summary>Field number for the "ParentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ParentId">
+            <summary>
+            上级模块标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Name">
+            <summary>
+            模块名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Type">
+            <summary>
+            模块类型
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.OrderFieldNumber">
+            <summary>Field number for the "Order" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Order">
+            <summary>
+            模块序列
+            @required
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.PathFieldNumber">
+            <summary>Field number for the "Path" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Path">
+            <summary>
+            路由地址
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ParametersFieldNumber">
+            <summary>Field number for the "Parameters" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Parameters">
+            <summary>
+            路由参数
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ComponentFieldNumber">
+            <summary>Field number for the "Component" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Component">
+            <summary>
+            组件路径
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.IconFieldNumber">
+            <summary>Field number for the "Icon" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Icon">
+            <summary>
+            模块图标
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.IsFrameFieldNumber">
+            <summary>Field number for the "IsFrame" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.IsFrame">
+            <summary>
+            是否外链
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.VisibleFieldNumber">
+            <summary>Field number for the "Visible" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Visible">
+            <summary>
+            是否显示
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.StatusFieldNumber">
+            <summary>Field number for the "Status" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Status">
+            <summary>
+            模块状态
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ClaimStampFieldNumber">
+            <summary>Field number for the "ClaimStamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ClaimStamp">
+            <summary>
+            凭据戳
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Remark">
+            <summary>
+            备注
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.ChildrenFieldNumber">
+            <summary>Field number for the "Children" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleInfoTreePacket.Children">
+            <summary>
+            子模块
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse">
+            <summary>
+            读取系统模块信息树响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.ReadSystemModuleInfoTreeResponse.Data">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.CreateSystemModuleRequest">
+            <summary>
+            创建系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Name">
+            <summary>
+            模块名称
+            @required
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Type">
+            <summary>
+            模块类型
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.OrderFieldNumber">
+            <summary>Field number for the "Order" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Order">
+            <summary>
+            模块序列
+            @required
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.PathFieldNumber">
+            <summary>Field number for the "Path" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Path">
+            <summary>
+            路由地址
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.ParametersFieldNumber">
+            <summary>Field number for the "Parameters" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Parameters">
+            <summary>
+            路由参数
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.ComponentFieldNumber">
+            <summary>Field number for the "Component" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Component">
+            <summary>
+            组件路径
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.IconFieldNumber">
+            <summary>Field number for the "Icon" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Icon">
+            <summary>
+            模块图标
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.IsFrameFieldNumber">
+            <summary>Field number for the "IsFrame" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.IsFrame">
+            <summary>
+            是否外链
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.VisibleFieldNumber">
+            <summary>Field number for the "Visible" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Visible">
+            <summary>
+            是否显示
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.StatusFieldNumber">
+            <summary>Field number for the "Status" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Status">
+            <summary>
+            模块状态
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.ClaimStampFieldNumber">
+            <summary>Field number for the "ClaimStamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.ClaimStamp">
+            <summary>
+            凭据戳
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateSystemModuleRequest.Remark">
+            <summary>
+            备注
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest">
+            <summary>
+            批量创建系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest.Batch">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.UpdateSystemModulPacket">
+            <summary>
+            更新系统模块数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.NameFieldNumber">
+            <summary>Field number for the "Name" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Name">
+            <summary>
+            模块名称
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.TypeFieldNumber">
+            <summary>Field number for the "Type" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Type">
+            <summary>
+            模块类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.OrderFieldNumber">
+            <summary>Field number for the "Order" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Order">
+            <summary>
+            模块序列
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.PathFieldNumber">
+            <summary>Field number for the "Path" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Path">
+            <summary>
+            路由地址
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.ParametersFieldNumber">
+            <summary>Field number for the "Parameters" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Parameters">
+            <summary>
+            路由参数
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.ComponentFieldNumber">
+            <summary>Field number for the "Component" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Component">
+            <summary>
+            组件路径
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.IconFieldNumber">
+            <summary>Field number for the "Icon" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Icon">
+            <summary>
+            模块图标
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.IsFrameFieldNumber">
+            <summary>Field number for the "IsFrame" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.IsFrame">
+            <summary>
+            是否外链
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.VisibleFieldNumber">
+            <summary>Field number for the "Visible" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.StatusFieldNumber">
+            <summary>Field number for the "Status" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Status">
+            <summary>
+            模块状态
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.ClaimStampFieldNumber">
+            <summary>Field number for the "ClaimStamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.ClaimStamp">
+            <summary>
+            凭据戳
+            @maxLength(64)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.RemarkFieldNumber">
+            <summary>Field number for the "Remark" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulPacket.Remark">
+            <summary>
+            备注
+            @maxLength(256)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.UpdateSystemModulRequest">
+            <summary>
+            更新系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateSystemModulRequest.SystemModuleFieldNumber">
+            <summary>Field number for the "SystemModule" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateSystemModulRequest.SystemModule">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest">
+            <summary>
+            批量更新系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest.BatchFieldNumber">
+            <summary>Field number for the "Batch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest.Batch">
+            <summary>
+            系统模块信息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.DeleteSystemModuleRequest">
+            <summary>
+            删除系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.DeleteSystemModuleRequest.SystemModuleIdFieldNumber">
+            <summary>Field number for the "SystemModuleId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.DeleteSystemModuleRequest.SystemModuleId">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest">
+            <summary>
+            批量删除系统模块请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest.SystemModuleIdsFieldNumber">
+            <summary>Field number for the "SystemModuleIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest.SystemModuleIds">
+            <summary>
+            模块标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemModuleService">
+            <summary>
+            系统模块服务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.SystemModuleService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase">
+            <summary>Base class for server-side implementations of SystemModuleService</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.SearchSystemModuleInfo(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.ReadSystemModuleInfo(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.ReadSystemModuleInfoTree(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.CreateSystemModule(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchCreateSystemModule(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.UpdateSystemModule(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchUpdateSystemModule(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.DeleteSystemModule(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase.BatchDeleteSystemModule(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient">
+            <summary>Client for SystemModuleService</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for SystemModuleService</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for SystemModuleService that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.SearchSystemModuleInfo(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.SearchSystemModuleInfo(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.SearchSystemModuleInfoAsync(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.SearchSystemModuleInfoAsync(Artemis.Service.Protos.Resource.SearchSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfo(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfo(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoAsync(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoAsync(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取系统模块信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoTree(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoTree(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoTreeAsync(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.ReadSystemModuleInfoTreeAsync(Artemis.Service.Protos.Resource.ReadSystemModuleInfoRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取系统模块信息树
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateSystemModule(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateSystemModule(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateSystemModuleAsync(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.CreateSystemModuleAsync(Artemis.Service.Protos.Resource.CreateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateSystemModule(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateSystemModule(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateSystemModuleAsync(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchCreateSystemModuleAsync(Artemis.Service.Protos.Resource.BatchCreateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量创建系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.UpdateSystemModule(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.UpdateSystemModule(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.UpdateSystemModuleAsync(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.UpdateSystemModuleAsync(Artemis.Service.Protos.Resource.UpdateSystemModulRequest,Grpc.Core.CallOptions)">
+            <summary>
+            更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchUpdateSystemModule(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchUpdateSystemModule(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchUpdateSystemModuleAsync(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchUpdateSystemModuleAsync(Artemis.Service.Protos.Resource.BatchUpdateSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量更新系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteSystemModule(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteSystemModule(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteSystemModuleAsync(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.DeleteSystemModuleAsync(Artemis.Service.Protos.Resource.DeleteSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteSystemModule(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteSystemModule(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteSystemModuleAsync(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.BatchDeleteSystemModuleAsync(Artemis.Service.Protos.Resource.BatchDeleteSystemModuleRequest,Grpc.Core.CallOptions)">
+            <summary>
+            批量删除系统模块
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.BindService(Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Resource.SystemModuleService.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Protos.Resource.SystemModuleService.SystemModuleServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
         <member name="T:Artemis.Service.Protos.Resource.DictionaryReflection">
             <summary>Holder for reflection information generated from resource/dictionary.proto</summary>
         </member>
@@ -11392,7 +12724,7 @@
         </member>
         <member name="P:Artemis.Service.Protos.Resource.PagedDivisionInfoPacket.Items">
             <summary>
-            组织igou信息数据
+            组织机构信息数据
             @required
             </summary>
         </member>
@@ -11924,10 +13256,10 @@
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Resource.CreateChildDivisionRequest.BatchFieldNumber">
-            <summary>Field number for the "Batch" field.</summary>
+        <member name="F:Artemis.Service.Protos.Resource.CreateChildDivisionRequest.ChildDivisionFieldNumber">
+            <summary>Field number for the "ChildDivision" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Resource.CreateChildDivisionRequest.Batch">
+        <member name="P:Artemis.Service.Protos.Resource.CreateChildDivisionRequest.ChildDivision">
             <summary>
             行政区划信息
             @required

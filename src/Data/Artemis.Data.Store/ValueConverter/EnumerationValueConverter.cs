@@ -14,7 +14,7 @@ public class EnumerationValueConverter<T> : ValueConverter<T, string> where T : 
     /// </summary>
     public EnumerationValueConverter()
         : base(
-            toValue => toValue.ToString(),
+            toValue => toValue,
             fromValue => Enumeration.FromName<T>(fromValue))
     {
     }

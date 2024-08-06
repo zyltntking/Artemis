@@ -82,7 +82,7 @@ service DivisionService{
 	rpc CreateChildDivision(CreateChildDivisionRequest) returns (AffectedResponse){
 		option (google.api.http) = {
 			post: "/api/ResourceService/Divisions/{DivisionId}/Children"
-			body: "Batch"
+			body: "ChildDivision"
 		};
 	}
 
@@ -215,7 +215,7 @@ message PagedDivisionInfoPacket{
 	// 条件过滤后的数据量
 	// @min(0)
 	int64 Count = 4;
-	// 组织igou信息数据
+	// 组织机构信息数据
 	// @required
 	repeated DivisionInfoPacket Items = 5;
 }
@@ -429,7 +429,7 @@ message CreateChildDivisionRequest{
 	string DivisionId = 1;
 	// 行政区划信息
 	// @required
-	repeated CreateDivisionRequest Batch = 2;
+	CreateDivisionRequest ChildDivision = 2;
 }
 
 // 批量创建下级行政区划请求

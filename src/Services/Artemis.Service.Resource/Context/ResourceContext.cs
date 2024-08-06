@@ -57,6 +57,11 @@ public class ResourceContext : DbContext
     public virtual DbSet<ArtemisStandardItem> StandardItems { get; set; }
 
     /// <summary>
+    /// 系统模块数据集
+    /// </summary>
+    public virtual DbSet<ArtemisSystemModule> SystemModules { get; set; }
+
+    /// <summary>
     ///     配置数据模型
     /// </summary>
     /// <param name="modelBuilder"></param>
@@ -92,7 +97,8 @@ public class ResourceContext : DbContext
             Enumeration.ToRecordDictionary<OrganizationType>(),
             Enumeration.ToRecordDictionary<OrganizationStatus>(),
             Enumeration.ToRecordDictionary<StandardState>(),
-            Enumeration.ToRecordDictionary<StandardType>()
+            Enumeration.ToRecordDictionary<StandardType>(),
+            Enumeration.ToRecordDictionary<SystemModuleType>(),
         };
 
         foreach (var dictionary in dictionaries)

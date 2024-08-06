@@ -5124,6 +5124,33 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.SystemModuleType">
+            <summary>
+            系统模块类型
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.SystemModuleType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SystemModuleType.Module">
+            <summary>
+            模组
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SystemModuleType.Interface">
+            <summary>
+            界面
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.SystemModuleType.Action">
+            <summary>
+            操作
+            </summary>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.TaskMode">
             <summary>
                 任务模式
