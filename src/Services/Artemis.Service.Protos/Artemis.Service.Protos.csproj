@@ -35,6 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="business\visionscreening\businesscore.proto" />
 	  <None Remove="resource\systemmodule.proto" />
 	</ItemGroup>
 
@@ -56,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Protobuf Include="business\visionscreening\businesscore.proto" />
 	  <Protobuf Include="common.proto" />
 	  <Protobuf Include="google\api\annotations.proto" />
 	  <Protobuf Include="google\api\http.proto" />

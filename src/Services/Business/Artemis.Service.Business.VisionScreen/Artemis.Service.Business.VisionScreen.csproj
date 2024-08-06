@@ -43,6 +43,7 @@
 		<ProjectReference Include="..\..\..\Extensions\Artemis.Extensions.Identity\Artemis.Extensions.Identity.csproj" />
 		<ProjectReference Include="..\..\Artemis.Service.Protos\Artemis.Service.Protos.csproj" />
 		<ProjectReference Include="..\..\Artemis.Service.Shared\Artemis.Service.Shared.csproj" />
+		<ProjectReference Include="..\..\Artemis.Service.Task\Artemis.Service.Task.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

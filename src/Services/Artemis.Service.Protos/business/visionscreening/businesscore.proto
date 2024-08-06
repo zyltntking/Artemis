@@ -1,0 +1,71 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
+
+package Artemis.Service.Protos.Business.VisionScreen;
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+service VisionScreeningCoreService{
+	// 生成任务
+	rpc GeneratorTask(GeneratorTaskRequest) returns (EmptyResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/GeneratorTask"
+			body: "*"
+		};
+	}
+}
+
+// 任务绑定机构树
+message TaskBindOrgnizationTreePacket{
+	// 机构标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级机构标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 机构名称
+	// @required
+	// @minLength(128)
+	string Name = 3;
+	// 机构编码
+	// @required
+	// @minLength(128)
+	string Code = 4;
+	// 机构类型
+	// @required
+	// @minLength(32)
+	string Type = 5;
+	// 机构状态
+	// @required
+	// @minLength(32)
+	string Status = 6;
+	// 机构行政区划编码
+	// @required
+	// @minLength(32)
+	string DivisionCode = 7;
+	// 下级机构
+	// @required
+	repeated TaskBindOrgnizationTreePacket Children = 8;
+}
+
+// 生成任务请求
+message GeneratorTaskRequest{
+	// 任务名称
+	// @required
+	// @minLength(128)
+	string TaskName = 1;
+	// 本次任务相关的机构信息
+	// @required
+	TaskBindOrgnizationTreePacket OrgnizationTree = 2;
+	// 任务开始时间
+	// @required
+	// @datetime
+	string StartTime = 3;
+	// 任务结束时间
+	// @required
+	// @datetime
+	string EndTime = 4;
+}

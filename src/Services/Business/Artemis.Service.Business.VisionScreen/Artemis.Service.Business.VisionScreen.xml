@@ -865,6 +865,11 @@
                 验光仪服务实现
             </summary>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement">
+            <summary>
+            视力筛查核心服务实现
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Services.VisualChartServiceImplement">
             <summary>
                 电子视力表数据服务实现

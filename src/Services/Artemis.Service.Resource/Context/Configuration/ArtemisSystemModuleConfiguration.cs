@@ -23,17 +23,6 @@ internal sealed class ArtemisSystemModuleConfiguration : ConcurrencyModelEntityC
     protected override string TableName => nameof(ArtemisSystemModule).TableName();
 
     /// <summary>
-    ///     实体字段配置
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisSystemModule> builder)
-    {
-        builder.Property(module => module.Type)
-            .HasConversion<EnumerationValueConverter<SystemModuleType>>()
-            .HasMaxLength(64);
-    }
-
-    /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>

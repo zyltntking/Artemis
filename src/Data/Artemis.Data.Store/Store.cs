@@ -140,7 +140,7 @@ public abstract class Store<TEntity, TKey> : KeyLessStore<TEntity>, IStore<TEnti
     {
         var keyList = keys.ToList();
 
-        var query = EntityQuery;
+        var query = EntityQuery.Where(entity => entity.Id.Equals(keyList.First()));
 
         foreach (var key in keyList)
         {

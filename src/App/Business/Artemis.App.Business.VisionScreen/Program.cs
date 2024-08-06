@@ -3,7 +3,10 @@ using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Business.VisionScreen;
 using Artemis.Service.Business.VisionScreen.Context;
+using Artemis.Service.Business.VisionScreen.Services;
 using Artemis.Service.Shared;
+using Artemis.Service.Task;
+using Artemis.Service.Task.Context;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -44,6 +47,9 @@ public class Program
                 }, Log.Debug)
                 .AddBusinessServices();
 
+            builder.AddPostgreSqlComponent<TaskContext>("ArtemisDb")
+                .AddTaskServices();
+
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()
                 .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
@@ -76,6 +82,7 @@ public class Program
             // Configure the HTTP request pipeline.
             app.MapGrpcService<WxParentTerminalServiceImplement>();
             app.MapGrpcService<WxTeacherTerminalServiceImplement>();
+            app.MapGrpcService<VisionScreeningCoreServiceImplement>();
 
             app.Run();
         }

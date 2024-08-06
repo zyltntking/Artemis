@@ -45,7 +45,7 @@ public record SystemModulePackage : ISystemModulePackage
     /// <summary>
     /// 模块类型
     /// </summary>
-    public required SystemModuleType Type { get; set; }
+    public required string Type { get; set; }
 
     /// <summary>
     /// 模块序列

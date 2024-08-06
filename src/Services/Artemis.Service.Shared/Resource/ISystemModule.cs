@@ -26,7 +26,7 @@ public interface ISystemModulePackage
     /// <summary>
     /// 模块类型
     /// </summary>
-    SystemModuleType Type { get; set; }
+    string Type { get; set; }
 
     /// <summary>
     /// 模块序列

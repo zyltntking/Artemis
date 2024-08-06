@@ -264,6 +264,24 @@ public abstract class Enumeration : IEnumeration<Enumeration>
         return enumeration.Id;
     }
 
+    /// <summary>
+    ///    Int32转Enumeration
+    /// </summary>
+    /// <param name="id"></param>
+    public static explicit operator Enumeration(int id)
+    {
+        return FromValue<Enumeration>(id);
+    }
+
+    /// <summary>
+    ///   String转Enumeration
+    /// </summary>
+    /// <param name="name"></param>
+    public static explicit operator Enumeration(string name)
+    {
+        return FromName<Enumeration>(name);
+    }
+
     #endregion
 
     #region Overrides of Object

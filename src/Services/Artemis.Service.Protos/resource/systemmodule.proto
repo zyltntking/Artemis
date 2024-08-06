@@ -142,15 +142,6 @@ service SystemModuleService{
 	}
 }
 
-enum SystemModuleType{
-	// 系统模块
-	Module = 0;
-	// 系统界面
-	Interface = 1;
-	// 系统操作
-	Action = 2;
-}
-
 // 查询系统模块请求
 message SearchSystemModuleInfoRequest{
 	// 模块名称
@@ -178,7 +169,7 @@ message SystemModuleInfoPacket{
 	string Name = 3;
 	// 模块类型
 	// @required
-	SystemModuleType Type = 4;
+	string Type = 4;
 	// 模块序列
 	// @required
 	// @min(0)
@@ -298,7 +289,7 @@ message SystemModuleInfoTreePacket{
 	string Name = 3;
 	// 模块类型
 	// @required
-	SystemModuleType Type = 4;
+	string Type = 4;
 	// 模块序列
 	// @required
 	// @min(0)
@@ -364,7 +355,7 @@ message CreateSystemModuleRequest{
 	string Name = 1;
 	// 模块类型
 	// @required
-	SystemModuleType Type = 2;
+	string Type = 2;
 	// 模块序列
 	// @required
 	// @min(0)
@@ -411,7 +402,7 @@ message UpdateSystemModulPacket{
 	// @maxLength(128)
 	google.protobuf.StringValue Name = 1;
 	// 模块类型
-	SystemModuleType Type = 2;
+	google.protobuf.StringValue Type = 2;
 	// 模块序列
 	// @min(0)
 	google.protobuf.Int32Value Order = 3;

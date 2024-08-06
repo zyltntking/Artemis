@@ -106,7 +106,7 @@ public class ResourceContext : DbContext
             var dataDictionary = Generator.CreateInstance<ArtemisDataDictionary>();
 
             dataDictionary.Id = Guid.NewGuid();
-            dataDictionary.Name = dictionary.TypeName;
+            dataDictionary.Name = dictionary.Description ?? string.Empty;
             dataDictionary.Code = dictionary.TypeName;
             dataDictionary.Valid = dictionary.Valid;
             dataDictionary.Type = DictionaryType.Public;

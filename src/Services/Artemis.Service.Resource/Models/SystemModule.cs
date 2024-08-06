@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Service.Shared.Resource;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +21,9 @@ public class SystemModule : ConcurrencyModel, ISystemModule
     /// 模块类型
     /// </summary>
     [Required]
+    [MaxLength(32)]
     [Comment("模块类型")]
-    public required SystemModuleType Type { get; set; }
+    public required string Type { get; set; }
 
     /// <summary>
     /// 模块序列
