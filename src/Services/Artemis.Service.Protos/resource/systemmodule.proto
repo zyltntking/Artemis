@@ -128,7 +128,7 @@ service SystemModuleService{
 	// 移除下级系统模块
 	rpc RemoveChildSystemModule(RemoveChildSystemModuleRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/ResourceService/SystemModules/{SystemModuleId}/Children/{ChildSystemModuleId}/Remove"
+			post: "/api/ResourceService/SystemModules/{SystemModuleId}/Children/Remove"
 			body: "ChildSystemModule"
 		};
 	}
