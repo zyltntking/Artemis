@@ -81,4 +81,9 @@ public interface IOrganizationPackage
     ///     机构描述
     /// </summary>
     string? Description { get; set; }
+
+    /// <summary>
+    /// 是否接入
+    /// </summary>
+    bool IsJoin { get; set; }
 }

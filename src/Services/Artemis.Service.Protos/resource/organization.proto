@@ -212,6 +212,8 @@ message OrganizationInfoPacket{
 	// 组织机构描述
 	// @maxLength(256)
 	google.protobuf.StringValue Description = 14;
+	// 是否接入
+	bool IsJoin = 15;
 }
 
 // 分页组织机构数据包
@@ -333,8 +335,10 @@ message OrganizationInfoTreePacket{
 	// 组织机构描述
 	// @maxLength(256)
 	google.protobuf.StringValue Description = 14;
+	// 是否接入
+	bool IsJoin = 15;
 	// 子机构
-	repeated OrganizationInfoTreePacket Children = 15;
+	repeated OrganizationInfoTreePacket Children = 16;
 }
 
 // 读取组织机构信息树响应
@@ -394,6 +398,8 @@ message CreateOrganizationRequest{
 	// 组织机构描述
 	// @maxLength(256)
 	google.protobuf.StringValue Description = 10;
+	// 是否接入
+	bool IsJoin = 11;
 }
 
 // 批量创建组织机构请求
@@ -438,6 +444,8 @@ message UpdateOrganizationInfoPacket{
 	// 组织机构描述
 	// @maxLength(256)
 	google.protobuf.StringValue Description = 11;
+	// 是否接入
+	google.protobuf.BoolValue IsJoin = 12;
 }
 
 // 更新组织机构请求

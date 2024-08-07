@@ -15023,6 +15023,14 @@
             @maxLength(256)
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Resource.OrganizationInfoPacket.IsJoinFieldNumber">
+            <summary>Field number for the "IsJoin" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.OrganizationInfoPacket.IsJoin">
+            <summary>
+            是否接入
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Resource.PagedOrganizationInfoPacket">
             <summary>
             分页组织机构数据包
@@ -15353,6 +15361,14 @@
             @maxLength(256)
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Resource.OrganizationInfoTreePacket.IsJoinFieldNumber">
+            <summary>Field number for the "IsJoin" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.OrganizationInfoTreePacket.IsJoin">
+            <summary>
+            是否接入
+            </summary>
+        </member>
         <member name="F:Artemis.Service.Protos.Resource.OrganizationInfoTreePacket.ChildrenFieldNumber">
             <summary>Field number for the "Children" field.</summary>
         </member>
@@ -15524,6 +15540,14 @@
             @maxLength(256)
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Resource.CreateOrganizationRequest.IsJoinFieldNumber">
+            <summary>Field number for the "IsJoin" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.CreateOrganizationRequest.IsJoin">
+            <summary>
+            是否接入
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Resource.BatchCreateOrganizationRequest">
             <summary>
             批量创建组织机构请求
@@ -15640,6 +15664,14 @@
             <summary>
             组织机构描述
             @maxLength(256)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.IsJoinFieldNumber">
+            <summary>Field number for the "IsJoin" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Resource.UpdateOrganizationInfoPacket.IsJoin">
+            <summary>
+            是否接入
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Resource.UpdateOrganizationRequest">

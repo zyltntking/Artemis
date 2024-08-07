@@ -98,4 +98,9 @@ public record OrganizationPackage : IOrganizationPackage
     ///     机构描述
     /// </summary>
     public string? Description { get; set; }
+
+    /// <summary>
+    /// 是否接入
+    /// </summary>
+    public bool IsJoin { get; set; }
 }

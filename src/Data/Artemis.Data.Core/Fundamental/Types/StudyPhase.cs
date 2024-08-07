@@ -34,6 +34,11 @@ public sealed class StudyPhase : Enumeration
     [Description("大学阶段")] public static readonly StudyPhase University = new(4, nameof(University));
 
     /// <summary>
+    /// 职业高中
+    /// </summary>
+    [Description("职业高中")] public static readonly StudyPhase VocationalHigh = new(5, nameof(VocationalHigh));
+
+    /// <summary>
     ///     构造函数
     /// </summary>
     /// <param name="id">枚举Id</param>

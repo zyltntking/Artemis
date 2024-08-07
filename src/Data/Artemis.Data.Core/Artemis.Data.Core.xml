@@ -4308,6 +4308,58 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.DomesticRelation">
+            <summary>
+            亲属关系
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.Father">
+            <summary>
+            父亲
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.Mother">
+            <summary>
+            母亲
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.Grandfather">
+            <summary>
+            爷爷
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.Grandmother">
+            <summary>
+            奶奶
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.MaternalGrandfather">
+            <summary>
+            外公
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.MaternalGrandmother">
+            <summary>
+            外婆
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.ElderBrother">
+            <summary>
+            哥哥
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.DomesticRelation.ElderSister">
+            <summary>
+            姐姐
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.DomesticRelation.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.EndType">
             <summary>
                 端类型
@@ -5127,6 +5179,11 @@
         <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.University">
             <summary>
                 大学阶段
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.StudyPhase.VocationalHigh">
+            <summary>
+            职业高中
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.StudyPhase.#ctor(System.Int32,System.String)">

@@ -106,6 +106,12 @@ public class Organization : ConcurrencyModel, IOrganization
     public string? Description { get; set; }
 
     /// <summary>
+    /// 是否接入
+    /// </summary>
+    [Comment("是否接入")]
+    public bool IsJoin { get; set; } = false;
+
+    /// <summary>
     ///     父级机构标识
     /// </summary>
     [Comment("父级机构标识")]
