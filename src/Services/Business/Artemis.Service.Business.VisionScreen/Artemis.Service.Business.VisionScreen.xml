@@ -14,6 +14,11 @@
             验光仪数据所属的视力档案
             </summary>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisStudentRelationBinding">
+            <summary>
+            学生用户亲属关系绑定模型
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisVisionScreenRecord">
             <summary>
             视力档案记录
@@ -41,7 +46,7 @@
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.BusinessContext">
             <summary>
-                原始数据上下文
+                业务数据上下文
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Context.BusinessContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Artemis.Service.Business.VisionScreen.Context.BusinessContext})">
@@ -49,6 +54,11 @@
                 构造函数
             </summary>
             <param name="options">配置</param>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.VisionScreenRecords">
+            <summary>
+            视力档案数据
+            </summary>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.Optometers">
             <summary>
@@ -58,6 +68,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.VisualCharts">
             <summary>
                 视力表数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.StudentRelationBindings">
+            <summary>
+               学生亲属关系绑定数据
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Context.BusinessContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
@@ -86,6 +101,21 @@
                 实体字段配置
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentRelationBindingConfiguration">
+            <summary>
+                验光仪数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentRelationBindingConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentRelationBindingConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisVisionScreenRecordConfiguration">
             <summary>
@@ -298,6 +328,26 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.OptometerOperationTime">
             <summary>
                 操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Models.StudentRelationBinding">
+            <summary>
+            学生用户亲属关系绑定模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentRelationBinding.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentRelationBinding.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentRelationBinding.Relation">
+            <summary>
+            关系
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord">
@@ -865,11 +915,6 @@
                 操作时间
             </summary>
         </member>
-        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisualChart.IsChartChecked">
-            <summary>
-                是否已经过电子视力表筛查
-            </summary>
-        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.ServiceExtensions">
             <summary>
                 服务扩展
@@ -976,6 +1021,19 @@
             <param name="endTime"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement">
+            <summary>
+            家长端服务实现
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.BindChildRelation(Artemis.Service.Protos.Business.VisionScreen.BindChildRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            绑定孩子关系
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore">
             <summary>
                 验光仪存储接口
@@ -987,6 +1045,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore">
+            <summary>
+                用户学生亲属关系绑定存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.ArtemisStudentRelationBindingStore">
+            <summary>
+               用户学生亲属关系绑定存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisStudentRelationBindingStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

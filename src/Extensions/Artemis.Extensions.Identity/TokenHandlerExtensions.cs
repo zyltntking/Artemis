@@ -1,4 +1,5 @@
-﻿using Artemis.Data.Core;
+﻿using System.Security.Claims;
+using Artemis.Data.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -9,53 +10,6 @@ namespace Artemis.Extensions.Identity;
 /// </summary>
 public static class TokenHandlerExtensions
 {
-    //#region HttpContext
-
-    ///// <summary>
-    /////     从上下文中获取Token文档
-    ///// </summary>
-    ///// <param name="context"></param>
-    ///// <param name="key"></param>
-    ///// <returns></returns>
-    //public static TTokenDocument? FetchTokenDocument<TTokenDocument>(
-    //    this HttpContext context,
-    //    string key) where TTokenDocument : class
-    //{
-    //    if (context.Items.TryGetValue(key, out var document))
-    //        if (document is TTokenDocument tokenDocument)
-    //            return tokenDocument;
-
-    //    return null;
-    //}
-
-    ///// <summary>
-    /////     缓存token到上下文
-    ///// </summary>
-    ///// <param name="context"></param>
-    ///// <param name="key"></param>
-    ///// <param name="document"></param>
-    //public static void CacheTokenDocument<TTokenDocument>(
-    //    this HttpContext context,
-    //    string key,
-    //    TTokenDocument document) where TTokenDocument : class
-    //{
-    //    if (context.Items.ContainsKey(key))
-    //        context.Items[key] = document;
-
-    //    context.Items.Add(key, document);
-    //}
-
-    ///// <summary>
-    /////     移除上下文中的Token
-    ///// </summary>
-    ///// <param name="context"></param>
-    ///// <param name="key"></param>
-    //public static void RemoveTokenDocument(this HttpContext context, string key)
-    //{
-    //    if (context.Items.ContainsKey(key))
-    //        context.Items.Remove(key);
-    //}
-
     /// <summary>
     ///     从请求头中获取Token串
     /// </summary>
@@ -299,8 +253,6 @@ public static class TokenHandlerExtensions
     #endregion
 
     #endregion
-
-    //#endregion
 }
 
 /// <summary>

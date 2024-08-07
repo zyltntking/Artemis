@@ -36,17 +36,15 @@ public class StandardItem : ConcurrencyModel, IStandardItem
     ///     标准项目最小值
     /// </summary>
     [Required]
-    [MaxLength(32)]
     [Comment("标准项目最小值")]
-    public required string Minimum { get; set; }
+    public int Minimum { get; set; }
 
     /// <summary>
     ///     标准项目最大值
     /// </summary>
     [Required]
-    [MaxLength(32)]
     [Comment("标准项目最大值")]
-    public required string Maximum { get; set; }
+    public int Maximum { get; set; }
 
     /// <summary>
     ///     标准项目模板

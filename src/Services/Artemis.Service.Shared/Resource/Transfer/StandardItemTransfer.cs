@@ -34,12 +34,11 @@ public record StandardItemPackage : IStandardItemPackage
     /// <summary>
     ///     标准项目最小值
     /// </summary>
-    public required string Minimum { get; set; }
-
+    public int Minimum { get; set; }
     /// <summary>
     ///     标准项目最大值
     /// </summary>
-    public required string Maximum { get; set; }
+    public int Maximum { get; set; }
 
     /// <summary>
     ///     标准项目模板

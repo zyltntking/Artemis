@@ -439,6 +439,42 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="T:Artemis.Extensions.Identity.ClaimExtensions">
+            <summary>
+            凭据扩展
+            </summary>
+        </member>
+        <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetClaims(Artemis.Extensions.Identity.TokenRecord,System.String,System.String,System.String)">
+            <summary>
+            获取凭据列表
+            </summary>
+            <param name="record"></param>
+            <param name="token"></param>
+            <param name="actionName"></param>
+            <param name="routePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetClaims(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取凭据列表
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetToken(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取令牌值
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetUserId(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取用户标识
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.Extensions.Identity.EndpointDescriptor">
             <summary>
                 端描述器

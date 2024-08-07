@@ -1,7 +1,5 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
-using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Types;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -91,30 +89,9 @@ public class ArtemisAuthenticationHandler : AuthenticationHandler<ArtemisAuthent
 
                 var userMapToken = await Cache.FetchUserMapTokenSymbolAsync(userMapTokenKey);
 
-                if (userMapToken != token) return AuthenticateResult.Fail("不允许多终端登录");
+                if (userMapToken != token) 
+                    return AuthenticateResult.Fail("不允许多终端登录");
             }
-
-            var user = new List<Claim>
-            {
-                new(ArtemisClaimTypes.Authorization, token),
-                new(ArtemisClaimTypes.UserId, document.UserId.GuidToString()),
-                new(ArtemisClaimTypes.UserName, document.UserName),
-                new(ArtemisClaimTypes.EndType, document.EndType)
-            };
-
-            var roles = document.Roles
-                .Select(item => new Claim(ArtemisClaimTypes.Role, item.Name));
-            user.AddRange(roles);
-
-            //claim document
-            var userClaims = document.UserClaims;
-            var roleClaims = document.RoleClaims;
-            var claims = userClaims.Concat(roleClaims)
-                .Select(item => new Claim(item.ClaimType, item.ClaimValue));
-
-            user.AddRange(claims);
-
-            //mate data
 
             var actionName = string.Empty;
 
@@ -127,10 +104,7 @@ public class ArtemisAuthenticationHandler : AuthenticationHandler<ArtemisAuthent
                 routePath = routeEndpoint.FetchRoutePath() ?? string.Empty;
             }
 
-            user.Add(new Claim(ArtemisClaimTypes.MateActionName, actionName));
-
-            user.Add(new Claim(ArtemisClaimTypes.MateRoutePath, routePath));
-
+            var user = document.GetClaims(token, actionName, routePath);
 
             var principal = new ClaimsPrincipal(new ClaimsIdentity(user, "Artemis"));
             var ticket = new AuthenticationTicket(principal, Scheme.Name);

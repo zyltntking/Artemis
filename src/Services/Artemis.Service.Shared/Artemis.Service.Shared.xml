@@ -179,6 +179,36 @@
                 操作时间
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBinding">
+            <summary>
+            学生用户亲属关系绑定接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBindingInfo">
+            <summary>
+            学生用户亲属关系绑定信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBindingPackage">
+            <summary>
+            学生用户亲属关系绑定数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBindingPackage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBindingPackage.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBindingPackage.Relation">
+            <summary>
+            关系
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecord">
             <summary>
                 视力筛查记录接口
@@ -1386,6 +1416,11 @@
                 机构描述
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Resource.IOrganizationPackage.IsJoin">
+            <summary>
+            是否接入
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Resource.IStandardCatalog">
             <summary>
                 标准目录接口
@@ -1794,6 +1829,11 @@
         <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.Description">
             <summary>
                 机构描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.Transfer.OrganizationPackage.IsJoin">
+            <summary>
+            是否接入
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Resource.Transfer.StandardCatalogInfo">

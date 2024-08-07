@@ -42,9 +42,9 @@ service WxParentTerminalService{
 	}
 
 	// 绑定孩子关系
-	rpc BindChildRelation(BindChildRequest) returns (EmptyResponse) {
+	rpc BindChildRelation(BindChildRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/ParentTerminal/BindChildRelation"
+			post: "/api/BusinessService/ParentTerminal/BindChildRelation"
 			body: "*"
 		};
 	}

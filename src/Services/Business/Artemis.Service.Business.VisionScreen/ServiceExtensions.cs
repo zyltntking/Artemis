@@ -19,6 +19,7 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisVisionScreenRecordStore, ArtemisVisionScreenRecordStore>();
         services.TryAddScoped<IArtemisOptometerStore, ArtemisOptometerStore>();
         services.TryAddScoped<IArtemisVisualChartStore, ArtemisVisualChartStore>();
+        services.TryAddScoped<IArtemisStudentRelationBindingStore, ArtemisStudentRelationBindingStore>();
 
         return services;
     }

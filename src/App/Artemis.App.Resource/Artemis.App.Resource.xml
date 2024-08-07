@@ -52,6 +52,18 @@
         <member name="M:Artemis.App.Resource.Migrations.AddSystemModule.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Resource.Migrations.addisjoin">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.addisjoin.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.addisjoin.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Resource.Migrations.addisjoin.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Resource.Program">
             <summary>
                 应用程序入口

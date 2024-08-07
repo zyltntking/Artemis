@@ -1,4 +1,3 @@
-using Artemis.App.Business.VisionScreen.Services;
 using Artemis.Extensions.Identity;
 using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Business.VisionScreen;

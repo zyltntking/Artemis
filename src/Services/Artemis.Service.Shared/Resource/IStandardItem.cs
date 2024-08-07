@@ -38,12 +38,12 @@ public interface IStandardItemPackage
     /// <summary>
     ///     标准项目最小值
     /// </summary>
-    string Minimum { get; set; }
+    int Minimum { get; set; }
 
     /// <summary>
     ///     标准项目最大值
     /// </summary>
-    string Maximum { get; set; }
+    int Maximum { get; set; }
 
     /// <summary>
     ///     标准项目模板

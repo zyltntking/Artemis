@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
+using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Protos;
@@ -15,6 +17,7 @@ using Artemis.Service.Task.Context;
 using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -110,6 +113,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成任务")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> GeneratorTask(GeneratorTaskRequest request, ServerCallContext context)
     {
         var organization = request.OrgnizationTree;
@@ -134,7 +138,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             return result.AffectedResponse();
         }
 
-        return new AffectedResponse();
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("生成任务失败");
     }
 
     /// <summary>
@@ -144,13 +148,12 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成任务目标")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> GenerateTaskTarget(GenerateTaskTargetRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
 
         var task = await TaskStore.FindMapEntityAsync<TaskInfo>(taskId, context.CancellationToken);
-
-        var response = new AffectedResponse();
 
         if (task is not null && !string.IsNullOrWhiteSpace(task.TaskCode))
         {
@@ -159,8 +162,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
             if (targetExists)
             {
-                response.Message = "任务目标已存在, 请清理后再执行生成操作";
-                return response;
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务目标已存在, 请清理后再执行生成操作");
             }
 
             //var taskFeature = task.TaskCode[..26];
@@ -229,9 +231,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             return result.AffectedResponse();
         }
 
-        response.Message = "任务不存在";
-
-        return response;
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务不存在");
     }
 
     /// <summary>
@@ -241,13 +241,12 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成筛查记录")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> GenerateRecord(GenerateRecordRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
 
         var task = await TaskStore.FindMapEntityAsync<TaskInfo>(taskId, context.CancellationToken);
-
-        var response = new AffectedResponse();
 
         if (task is not null && !string.IsNullOrWhiteSpace(task.TaskCode))
         {
@@ -256,8 +255,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
             if (!targetExists)
             {
-                response.Message = "任务目标不存在, 请先生成任务目标";
-                return response;
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务目标不存在, 请先生成任务目标");
             }
 
             var recordExists = await VisionScreenRecordStore.EntityQuery
@@ -265,8 +263,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
             if (recordExists)
             {
-                response.Message = "筛查记录已存在, 请先清理后再生成筛查记录";
-                return response;
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查记录已存在, 请清理后再执行生成操作");
             }
 
             var taskUnits = await TaskUnitStore.EntityQuery
@@ -412,9 +409,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             return result.AffectedResponse();
         }
 
-        response.Message = "任务不存在";
-
-        return response;
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务不存在");
     }
 
     /// <summary>
@@ -424,6 +419,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("添加验光仪数据")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddOptometerPacket(AddOptometerRequest request, ServerCallContext context)
     {
         var recordId = Guid.Parse(request.RecordId);
@@ -454,8 +450,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         }
 
-        response.Message = "筛查记录不存在";
-        return response;
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查记录不存在");
     }
 
     /// <summary>
@@ -464,6 +459,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("添加电子视力表数据")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AddVisualChartPacket(AddVisualChartRequest request, ServerCallContext context)
     {
         var recordId = Guid.Parse(request.RecordId);
@@ -494,8 +491,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         }
 
-        response.Message = "筛查记录不存在";
-        return response;
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查记录不存在");
     }
 
 

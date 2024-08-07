@@ -952,6 +952,11 @@
                 机构描述
             </summary>
         </member>
+        <member name="P:Artemis.Service.Resource.Models.Organization.IsJoin">
+            <summary>
+            是否接入
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Resource.Models.Organization.ParentId">
             <summary>
                 父级机构标识

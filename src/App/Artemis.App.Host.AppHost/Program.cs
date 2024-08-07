@@ -28,7 +28,7 @@ var artemisDb = postgres.AddDatabase("ArtemisDb", "ArtemisDev");
 
 builder.AddProject<Artemis_App_Gateway>("ApiGateway");
 
-builder.AddProject<Artemis_App_Identity>("IdentityService")
+var identity = builder.AddProject<Artemis_App_Identity>("IdentityService")
     .WithReference(redis)
     .WithReference(artemisDb);
 

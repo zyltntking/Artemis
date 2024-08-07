@@ -40,6 +40,18 @@
         <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.AddStudentUserRelationShip">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddStudentUserRelationShip.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddStudentUserRelationShip.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddStudentUserRelationShip.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Program">
             <summary>
                 应用程序入口
@@ -50,72 +62,6 @@
                 主函数
             </summary>
             <param name="args"></param>
-        </member>
-        <member name="T:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement">
-            <summary>
-                微信家长终端服务实现
-            </summary>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.BindChildRelation(Artemis.Service.Protos.Business.VisionScreen.BindChildRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                绑定孩子关系
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FeedbackRecord(Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                反馈筛查记录后续处理
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                获取个人中心孩子信息
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchUserMessageInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                获取个人中心消息信息
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.QueryChild(Artemis.Service.Protos.Business.VisionScreen.QueryChildRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                查询孩子信息
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                读取筛查结果
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.App.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UploadChildEyePhoto(Artemis.Service.Protos.Business.VisionScreen.UploadChildEyePhotoRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-                上传孩子眼部照片
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="T:Artemis.App.Business.VisionScreen.Services.WxTeacherTerminalServiceImplement">
-            <summary>
-                小程序教师终端服务实现
-            </summary>
         </member>
     </members>
 </doc>

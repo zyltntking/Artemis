@@ -153,12 +153,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> SignOut(EmptyRequest request, ServerCallContext context)
     {
-        var authorizationToken = context
-            .GetHttpContext()
-            .User.Claims
-            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization)
-            .Select(claim => claim.Value)
-            .FirstOrDefault();
+        var authorizationToken = context.GetHttpContext().GetToken();
 
         if (authorizationToken is not null)
         {
@@ -180,12 +175,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<AuthorizeInfoResponse> AuthorizeInfo(EmptyRequest request, ServerCallContext context)
     {
-        var authorizationToken = context
-            .GetHttpContext()
-            .User.Claims
-            .Where(claim => claim.Type == ArtemisClaimTypes.Authorization)
-            .Select(claim => claim.Value)
-            .FirstOrDefault();
+        var authorizationToken = context.GetHttpContext().GetToken();
 
         if (authorizationToken is not null)
         {
@@ -209,14 +199,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> ChangePassword(ChangePasswordRequest request, ServerCallContext context)
     {
-        var userIdString = context
-            .GetHttpContext()
-            .User.Claims
-            .Where(claim => claim.Type == ArtemisClaimTypes.UserId)
-            .Select(claim => claim.Value)
-            .FirstOrDefault();
-
-        var valid = Guid.TryParse(userIdString, out var userId);
+        var (valid, userId) = context.GetHttpContext().GetUserId();
 
         if (valid)
         {
@@ -244,7 +227,7 @@ public class AccountServiceImplement : AccountService.AccountServiceBase
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<EmptyResponse> ResetPassword(ResetPasswordRequest request, ServerCallContext context)
     {
-        var userId = request.UserId.GuidFromString();
+        var userId = Guid.Parse(request.UserId);
 
         var result = await AccountManager.ResetPasswordAsync(
             userId,
