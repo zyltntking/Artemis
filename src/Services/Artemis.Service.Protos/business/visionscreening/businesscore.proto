@@ -7,14 +7,49 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "common.proto";
 
+// 视力筛查核心业务服务
 service VisionScreeningCoreService{
+
 	// 生成任务
-	rpc GeneratorTask(GeneratorTaskRequest) returns (EmptyResponse){
+	rpc GeneratorTask(GeneratorTaskRequest) returns (AffectedResponse){
 		option (google.api.http) = {
 			post: "/api/BusinessService/VisionScreeningCore/GeneratorTask"
 			body: "*"
 		};
 	}
+
+	// 生成任务目标
+	rpc GenerateTaskTarget(GenerateTaskTargetRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/GenerateTaskTarget"
+			body: "*"
+		};
+	}
+
+	// 生成筛查记录
+	rpc GenerateRecord(GenerateRecordRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/GenerateRecord"
+			body: "*"
+		};
+	}
+
+	// 添加验光仪数据
+	rpc AddOptometerPacket(AddOptometerRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/AddOptometer"
+			body: "*"
+		};
+	}
+
+	// 添加电子视力表数据
+	rpc AddVisualChartPacket(AddVisualChartRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/AddVisualChart"
+			body: "*"
+		};
+	}
+
 }
 
 // 任务绑定机构树
@@ -68,4 +103,138 @@ message GeneratorTaskRequest{
 	// @required
 	// @datetime
 	string EndTime = 4;
+}
+
+// 生成任务目标请求
+message GenerateTaskTargetRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+}
+
+// 生成任务记录请求
+message GenerateRecordRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+}
+
+// 验光仪数据包
+message OptometerPacket{
+	// 瞳距
+	google.protobuf.DoubleValue PupilDistance = 1;
+	// 左眼球镜
+	google.protobuf.DoubleValue LeftSphere = 2;
+	// 左眼等效球镜
+	google.protobuf.DoubleValue LeftEquivalentSphere = 3;
+	// 右眼球镜
+	google.protobuf.DoubleValue RightSphere = 4;
+	// 右眼等效球镜
+	google.protobuf.DoubleValue RightEquivalentSphere = 5;
+	// 左眼柱镜
+	google.protobuf.DoubleValue LeftCylinder = 6;
+	// 右眼柱镜
+	google.protobuf.DoubleValue RightCylinder = 7;
+	// 左眼轴位
+	google.protobuf.DoubleValue LeftAxis = 8;
+	// 右眼轴位
+	google.protobuf.DoubleValue RightAxis = 9;
+	// 左眼散光度数
+	google.protobuf.DoubleValue LeftAstigmatism = 10;
+	// 右眼散光度数
+	google.protobuf.DoubleValue RightAstigmatism = 11;
+	// 左眼角膜曲率r1(mm)
+	google.protobuf.DoubleValue LeftCornealCurvatureR1 = 12;
+	// 右眼角膜曲率r1(mm)
+	google.protobuf.DoubleValue RightCornealCurvatureR1 = 13;
+	// 左眼角膜曲率r1(d)
+	google.protobuf.DoubleValue LeftCornealCurvatureD1 = 14;
+	// 右眼角膜曲率r1(d)
+	google.protobuf.DoubleValue RightCornealCurvatureD1 = 15;
+	// 左眼角膜曲率r1角度
+	google.protobuf.DoubleValue LeftCornealCurvatureAngle1 = 16;
+	// 右眼角膜曲率r1角度
+	google.protobuf.DoubleValue RightCornealCurvatureAngle1 = 17;
+	// 左眼角膜曲率r2(mm)
+	google.protobuf.DoubleValue LeftCornealCurvatureR2 = 18;
+	// 右眼角膜曲率r2(mm)
+	google.protobuf.DoubleValue RightCornealCurvatureR2 = 19;
+	// 左眼角膜曲率r2(d)
+	google.protobuf.DoubleValue LeftCornealCurvatureD2 = 20;
+	// 右眼角膜曲率r2(d)
+	google.protobuf.DoubleValue RightCornealCurvatureD2 = 21;
+	// 左眼角膜曲率r2角度
+	google.protobuf.DoubleValue LeftCornealCurvatureAngle2 = 22;
+	// 右眼角膜曲率r2角度
+	google.protobuf.DoubleValue RightCornealCurvatureAngle2 = 23;
+	// 左眼角膜曲率平均值(mm)
+	google.protobuf.DoubleValue LeftCornealCurvatureAverage = 24;
+	// 右眼角膜曲率平均值(mm)
+	google.protobuf.DoubleValue RightCornealCurvatureAverage = 25;
+	// 左眼角膜曲率平均值(d)
+	google.protobuf.DoubleValue LeftCornealCurvatureAverageD = 26;
+	// 右眼角膜曲率平均值(d)
+	google.protobuf.DoubleValue RightCornealCurvatureAverageD = 27;
+	// 左眼角膜曲率散光度
+	google.protobuf.DoubleValue LeftCornealCurvatureAstigmatism = 28;
+	// 右眼角膜曲率散光度
+	google.protobuf.DoubleValue RightCornealCurvatureAstigmatism = 29;
+	// 筛查工作人员姓名
+	google.protobuf.StringValue OptometerScreeningStuffName = 30;
+	// 操作时间
+	google.protobuf.StringValue OptometerOperationTime = 31;
+}
+
+// 添加验光仪数据请求
+message AddOptometerRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 验光仪数据包
+	// @required
+	OptometerPacket OptometerPacket = 2;
+}
+
+// 电子视力表数据包
+message VisualChartPacket{
+	// 左眼与视力表距离
+	google.protobuf.DoubleValue LeftChartDistance = 1;
+	// 右眼与视力表距离
+	google.protobuf.DoubleValue RightChartDistance = 2;
+	// 左眼裸眼视力
+	google.protobuf.DoubleValue LeftNakedEyeVision = 3;
+	// 右眼裸眼视力
+	google.protobuf.DoubleValue RightNakedEyeVision = 4;
+	// 是否佩戴眼镜
+	bool IsWearGlasses = 5;
+	// 左眼矫正视力
+	google.protobuf.DoubleValue LeftCorrectedVision = 6;
+	// 右眼矫正视力
+	google.protobuf.DoubleValue RightCorrectedVision = 7;
+	// 左眼远视力类型
+	google.protobuf.StringValue LeftEyeHyperopiaType = 8;
+	// 右眼远视力类型
+	google.protobuf.StringValue RightEyeHyperopiaType = 9;
+	// 左眼是否佩戴角膜塑形镜
+	google.protobuf.BoolValue IsWareLeftOkLenses = 10;
+	// 右眼是否佩戴角膜塑形镜
+	google.protobuf.BoolValue IsWareRightOkLenses = 11;
+	// 筛查工作人员姓名
+	google.protobuf.StringValue ChartScreeningStuffName = 12;
+	// 操作时间
+	google.protobuf.StringValue ChartOperationTime = 13;
+}
+
+// 添加电子视力表数据请求
+message AddVisualChartRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 电子视力表数据包
+	// @required
+	VisualChartPacket VisualChartPacket = 2;
 }

@@ -4,6 +4,10 @@ using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Business.VisionScreen;
 using Artemis.Service.Business.VisionScreen.Context;
 using Artemis.Service.Business.VisionScreen.Services;
+using Artemis.Service.Resource;
+using Artemis.Service.Resource.Context;
+using Artemis.Service.School;
+using Artemis.Service.School.Context;
 using Artemis.Service.Shared;
 using Artemis.Service.Task;
 using Artemis.Service.Task.Context;
@@ -49,6 +53,12 @@ public class Program
 
             builder.AddPostgreSqlComponent<TaskContext>("ArtemisDb")
                 .AddTaskServices();
+
+            builder.AddPostgreSqlComponent<SchoolContext>("ArtemisDb")
+                .AddSchoolServices();
+
+            builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb")
+                .AddResourceServices();
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()

@@ -179,6 +179,21 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     public string? SchoolLength { get; set; }
 
     /// <summary>
+    /// 学制值
+    /// </summary>
+    public int? SchoolLengthValue { get; set; }
+
+    /// <summary>
+    ///    班主任标识
+    /// </summary>
+    public Guid? HeadTeacherId { get; set; }
+
+    /// <summary>
+    /// 班主任名称
+    /// </summary>
+    public string? HeadTeacherName { get; set; }
+
+    /// <summary>
     ///     学生标识
     /// </summary>
     public Guid StudentId { get; set; }
@@ -196,12 +211,17 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// <summary>
     ///     生日
     /// </summary>
-    public DateOnly? Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     年龄
     /// </summary>
     public int? Age { get; set; }
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    public string? Gender { get; set; }
 
     /// <summary>
     ///     左眼与视力表的距离
@@ -241,12 +261,12 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// <summary>
     ///     左眼远视类型
     /// </summary>
-    public double? LeftEyeHyperopiaType { get; set; }
+    public string? LeftEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     右眼远视类型
     /// </summary>
-    public double? RightEyeHyperopiaType { get; set; }
+    public string? RightEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     左眼是否佩戴角膜塑形镜

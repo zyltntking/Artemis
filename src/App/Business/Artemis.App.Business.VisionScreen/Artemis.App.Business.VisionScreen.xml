@@ -16,6 +16,30 @@
         <member name="M:Artemis.App.Business.VisionScreen.Migrations.InitialBusiness.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes2">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.ChangeDataTypes2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Program">
             <summary>
                 应用程序入口

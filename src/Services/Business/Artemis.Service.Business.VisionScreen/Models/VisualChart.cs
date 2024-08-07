@@ -51,12 +51,12 @@ public class VisualChart : ConcurrencyPartition, IVisualChart
     /// <summary>
     ///     左眼远视类型
     /// </summary>
-    public double? LeftEyeHyperopiaType { get; set; }
+    public string? LeftEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     右眼远视类型
     /// </summary>
-    public double? RightEyeHyperopiaType { get; set; }
+    public string? RightEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     左眼是否佩戴角膜塑形镜

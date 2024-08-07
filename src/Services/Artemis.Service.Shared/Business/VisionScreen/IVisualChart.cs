@@ -63,12 +63,12 @@ public interface IVisualChartPackage
     /// <summary>
     ///     左眼远视类型
     /// </summary>
-    double? LeftEyeHyperopiaType { get; set; }
+    string? LeftEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     右眼远视类型
     /// </summary>
-    double? RightEyeHyperopiaType { get; set; }
+    string? RightEyeHyperopiaType { get; set; }
 
     /// <summary>
     ///     左眼是否佩戴角膜塑形镜

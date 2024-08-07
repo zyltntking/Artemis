@@ -13,10 +13,10 @@ public class ArtemisVisionScreenRecord : VisionScreenRecord
     /// <summary>
     /// 该档案的验光仪数据历史记录
     /// </summary>
-    public ICollection<ArtemisOptometer> Optometers { get; set; }
+    public ICollection<ArtemisOptometer>? Optometers { get; set; }
 
     /// <summary>
     /// 该档案的视力表数据历史记录
     /// </summary>
-    public ICollection<ArtemisVisualChart> VisualCharts { get; set; }
+    public ICollection<ArtemisVisualChart>? VisualCharts { get; set; }
 }

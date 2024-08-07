@@ -16,6 +16,18 @@
         <member name="M:Artemis.App.School.Migrations.InitialSchool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.School.Migrations.ChangeDatetimeType">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeDatetimeType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeDatetimeType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeDatetimeType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.School.Program">
             <summary>
                 应用程序入口

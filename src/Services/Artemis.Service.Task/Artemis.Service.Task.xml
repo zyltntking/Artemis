@@ -478,7 +478,7 @@
             任务目标管理器实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Task.Managers.TaskUnitUnitTargetManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskTargetStore)">
+        <member name="M:Artemis.Service.Task.Managers.TaskUnitUnitTargetManager.#ctor(Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore)">
             <summary>
                 模型管理器构造
             </summary>
@@ -1119,27 +1119,6 @@
             <param name="logger"></param>
             <param name="describer"></param>
         </member>
-        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskTargetStore">
-            <summary>
-                任务目标存储接口
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskTargetStore">
-            <summary>
-                任务目标存储
-            </summary>
-        </member>
-        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
-            <summary>
-                基本存储实例构造
-            </summary>
-            <param name="context"></param>
-            <param name="storeOptions"></param>
-            <param name="handlerProxy"></param>
-            <param name="cacheProxy"></param>
-            <param name="logger"></param>
-            <param name="describer"></param>
-        </member>
         <member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitAgentStores">
             <summary>
                 任务代理存储接口
@@ -1177,6 +1156,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore">
+            <summary>
+                任务目标存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Task.Stores.ArtemisTaskUnitUnitTargetStore">
+            <summary>
+                任务目标存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Task.Stores.ArtemisTaskUnitUnitTargetStore.#ctor(Artemis.Service.Task.Context.TaskContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

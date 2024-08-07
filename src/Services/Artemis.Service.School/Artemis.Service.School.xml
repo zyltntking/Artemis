@@ -89,6 +89,12 @@
                 表名
             </summary>
         </member>
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="M:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisClass})">
             <summary>
                 实体关系配置

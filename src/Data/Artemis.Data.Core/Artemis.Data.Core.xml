@@ -5259,9 +5259,19 @@
                 已创建
             </summary>
         </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.ReadyToWaiting">
+            <summary>
+            已完成创建，具备待执行条件
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Waiting">
             <summary>
                 待执行
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.ReadyToRunning">
+            <summary>
+            已转入待执行状态，具备执行条件
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Running">
@@ -5269,9 +5279,19 @@
                 执行中
             </summary>
         </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.ReadyToCompleted">
+            <summary>
+               执行中，具备完成条件
+            </summary>
+        </member>
         <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Completed">
             <summary>
                 已完成
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Stopped">
+            <summary>
+            已停止
             </summary>
         </member>
         <member name="P:Artemis.Data.Core.Fundamental.Types.TaskState.Canceled">

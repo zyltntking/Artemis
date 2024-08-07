@@ -57,7 +57,7 @@ public class TaskUnitUnitTargetManager : RequiredOneToManyManager<
     /// </summary>
     public TaskUnitUnitTargetManager(
         IArtemisTaskUnitStore taskUnitStore,
-        IArtemisTaskTargetStore taskTargetStore) : base(taskUnitStore, taskTargetStore)
+        IArtemisTaskUnitTargetStore taskUnitTargetStore) : base(taskUnitStore, taskUnitTargetStore)
     {
     }
 

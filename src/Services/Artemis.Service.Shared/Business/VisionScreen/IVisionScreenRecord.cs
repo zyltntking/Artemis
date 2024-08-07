@@ -192,6 +192,21 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     string? SchoolLength { get; set; }
 
     /// <summary>
+    ///    学制值
+    /// </summary>
+    int? SchoolLengthValue { get; set; }
+
+    /// <summary>
+    ///    班主任标识
+    /// </summary>
+    Guid? HeadTeacherId { get; set; }
+
+    /// <summary>
+    /// 班主任名称
+    /// </summary>
+    string? HeadTeacherName { get; set; }
+
+    /// <summary>
     ///     学生标识
     /// </summary>
     Guid StudentId { get; set; }
@@ -209,12 +224,17 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     /// <summary>
     ///     生日
     /// </summary>
-    DateOnly? Birthday { get; set; }
+    DateTime? Birthday { get; set; }
 
     /// <summary>
     ///     年龄
     /// </summary>
     int? Age { get; set; }
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    string? Gender { get; set; }
 
     /// <summary>
     ///     是否已经过电子视力表筛查

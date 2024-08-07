@@ -364,6 +364,21 @@
                 学制
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.SchoolLengthValue">
+            <summary>
+               学制值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.HeadTeacherId">
+            <summary>
+               班主任标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.HeadTeacherName">
+            <summary>
+            班主任名称
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentId">
             <summary>
                 学生标识
@@ -387,6 +402,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Age">
             <summary>
                 年龄
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Gender">
+            <summary>
+            性别
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsChartChecked">

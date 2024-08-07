@@ -23,6 +23,34 @@ internal sealed class ArtemisVisionScreenRecordConfiguration : ConcurrencyPartit
     protected override string TableName => nameof(ArtemisVisionScreenRecord).TableName();
 
     /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisVisionScreenRecord> builder)
+    {
+        builder.Property(record => record.PrescribedTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.Birthday)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.ChartOperationTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.OptometerOperationTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.CheckTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.ReportSendTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.ReportReceiveTime)
+            .HasColumnType(DataTypeSet.DateTime);
+    }
+
+    /// <summary>
     ///     实体关系配置
     /// </summary>
     /// <param name="builder"></param>

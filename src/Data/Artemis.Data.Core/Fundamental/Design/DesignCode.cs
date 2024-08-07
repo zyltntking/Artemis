@@ -35,19 +35,17 @@ public class DesignCode
     /// <returns></returns>
     public static string Task(string organizationDesignCode, int serial, string? parentDesignCode = null)
     {
-        var prefix = "TA";
-
-        var date = DateTime.Now.ToString("yyMMddHHmmss");
-
-        var segment = "SK";
-
-        if (!string.IsNullOrWhiteSpace(parentDesignCode))
+        if (parentDesignCode == null)
         {
-            var length = prefix.Length + date.Length + organizationDesignCode.Length + segment.Length;
+            var prefix = "TA";
 
-            parentDesignCode = parentDesignCode[length..];
+            var date = DateTime.Now.ToString("yyMMddHHmmss");
+
+            var segment = "SK";
+
+            return $"{prefix}{date}{organizationDesignCode}{segment}{serial:D3}";
         }
 
-        return $"{prefix}{date}{organizationDesignCode}{segment}{parentDesignCode}{serial:D3}";
+        return $"{parentDesignCode}{serial:D3}";
     }
 }

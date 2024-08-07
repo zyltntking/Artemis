@@ -177,6 +177,451 @@
             @datetime
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest">
+            <summary>
+            生成任务目标请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest">
+            <summary>
+            生成任务记录请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket">
+            <summary>
+            验光仪数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.PupilDistanceFieldNumber">
+            <summary>Field number for the "PupilDistance" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.PupilDistance">
+            <summary>
+            瞳距
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftSphereFieldNumber">
+            <summary>Field number for the "LeftSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftSphere">
+            <summary>
+            左眼球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftEquivalentSphereFieldNumber">
+            <summary>Field number for the "LeftEquivalentSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftEquivalentSphere">
+            <summary>
+            左眼等效球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightSphereFieldNumber">
+            <summary>Field number for the "RightSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightSphere">
+            <summary>
+            右眼球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightEquivalentSphereFieldNumber">
+            <summary>Field number for the "RightEquivalentSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightEquivalentSphere">
+            <summary>
+            右眼等效球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCylinderFieldNumber">
+            <summary>Field number for the "LeftCylinder" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCylinder">
+            <summary>
+            左眼柱镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCylinderFieldNumber">
+            <summary>Field number for the "RightCylinder" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCylinder">
+            <summary>
+            右眼柱镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftAxisFieldNumber">
+            <summary>Field number for the "LeftAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftAxis">
+            <summary>
+            左眼轴位
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightAxisFieldNumber">
+            <summary>Field number for the "RightAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightAxis">
+            <summary>
+            右眼轴位
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftAstigmatismFieldNumber">
+            <summary>Field number for the "LeftAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftAstigmatism">
+            <summary>
+            左眼散光度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightAstigmatismFieldNumber">
+            <summary>Field number for the "RightAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightAstigmatism">
+            <summary>
+            右眼散光度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureR1FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureR1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureR1">
+            <summary>
+            左眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureR1FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureR1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureR1">
+            <summary>
+            右眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureD1FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureD1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureD1">
+            <summary>
+            左眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureD1FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureD1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureD1">
+            <summary>
+            右眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAngle1FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureAngle1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAngle1">
+            <summary>
+            左眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAngle1FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureAngle1" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAngle1">
+            <summary>
+            右眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureR2FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureR2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureR2">
+            <summary>
+            左眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureR2FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureR2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureR2">
+            <summary>
+            右眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureD2FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureD2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureD2">
+            <summary>
+            左眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureD2FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureD2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureD2">
+            <summary>
+            右眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAngle2FieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureAngle2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAngle2">
+            <summary>
+            左眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAngle2FieldNumber">
+            <summary>Field number for the "RightCornealCurvatureAngle2" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAngle2">
+            <summary>
+            右眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAverageFieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureAverage" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAverage">
+            <summary>
+            左眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAverageFieldNumber">
+            <summary>Field number for the "RightCornealCurvatureAverage" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAverage">
+            <summary>
+            右眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAverageDFieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureAverageD" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAverageD">
+            <summary>
+            左眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAverageDFieldNumber">
+            <summary>Field number for the "RightCornealCurvatureAverageD" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAverageD">
+            <summary>
+            右眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAstigmatismFieldNumber">
+            <summary>Field number for the "LeftCornealCurvatureAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftCornealCurvatureAstigmatism">
+            <summary>
+            左眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAstigmatismFieldNumber">
+            <summary>Field number for the "RightCornealCurvatureAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightCornealCurvatureAstigmatism">
+            <summary>
+            右眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.OptometerScreeningStuffNameFieldNumber">
+            <summary>Field number for the "OptometerScreeningStuffName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.OptometerScreeningStuffName">
+            <summary>
+            筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.OptometerOperationTimeFieldNumber">
+            <summary>Field number for the "OptometerOperationTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.OptometerOperationTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest">
+            <summary>
+            添加验光仪数据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest.RecordIdFieldNumber">
+            <summary>Field number for the "RecordId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest.RecordId">
+            <summary>
+            记录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest.OptometerPacketFieldNumber">
+            <summary>Field number for the "OptometerPacket" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest.OptometerPacket">
+            <summary>
+            验光仪数据包
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket">
+            <summary>
+            电子视力表数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftChartDistanceFieldNumber">
+            <summary>Field number for the "LeftChartDistance" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftChartDistance">
+            <summary>
+            左眼与视力表距离
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightChartDistanceFieldNumber">
+            <summary>Field number for the "RightChartDistance" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightChartDistance">
+            <summary>
+            右眼与视力表距离
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftNakedEyeVisionFieldNumber">
+            <summary>Field number for the "LeftNakedEyeVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftNakedEyeVision">
+            <summary>
+            左眼裸眼视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightNakedEyeVisionFieldNumber">
+            <summary>Field number for the "RightNakedEyeVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightNakedEyeVision">
+            <summary>
+            右眼裸眼视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWearGlassesFieldNumber">
+            <summary>Field number for the "IsWearGlasses" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWearGlasses">
+            <summary>
+            是否佩戴眼镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftCorrectedVisionFieldNumber">
+            <summary>Field number for the "LeftCorrectedVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftCorrectedVision">
+            <summary>
+            左眼矫正视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightCorrectedVisionFieldNumber">
+            <summary>Field number for the "RightCorrectedVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightCorrectedVision">
+            <summary>
+            右眼矫正视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftEyeHyperopiaTypeFieldNumber">
+            <summary>Field number for the "LeftEyeHyperopiaType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.LeftEyeHyperopiaType">
+            <summary>
+            左眼远视力类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightEyeHyperopiaTypeFieldNumber">
+            <summary>Field number for the "RightEyeHyperopiaType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.RightEyeHyperopiaType">
+            <summary>
+            右眼远视力类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWareLeftOkLensesFieldNumber">
+            <summary>Field number for the "IsWareLeftOkLenses" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWareLeftOkLenses">
+            <summary>
+            左眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWareRightOkLensesFieldNumber">
+            <summary>Field number for the "IsWareRightOkLenses" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.IsWareRightOkLenses">
+            <summary>
+            右眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.ChartScreeningStuffNameFieldNumber">
+            <summary>Field number for the "ChartScreeningStuffName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.ChartScreeningStuffName">
+            <summary>
+            筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.ChartOperationTimeFieldNumber">
+            <summary>Field number for the "ChartOperationTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualChartPacket.ChartOperationTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest">
+            <summary>
+            添加电子视力表数据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest.RecordIdFieldNumber">
+            <summary>Field number for the "RecordId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest.RecordId">
+            <summary>
+            记录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest.VisualChartPacketFieldNumber">
+            <summary>Field number for the "VisualChartPacket" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest.VisualChartPacket">
+            <summary>
+            电子视力表数据包
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService">
+            <summary>
+            视力筛查核心业务服务
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.Descriptor">
             <summary>Service descriptor</summary>
         </member>
@@ -186,6 +631,38 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.ServerCallContext)">
             <summary>
             生成任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            生成任务目标
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            生成筛查记录
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AddOptometerPacket(Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加验光仪数据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AddVisualChartPacket(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            添加电子视力表数据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -240,6 +717,150 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTaskAsync(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.CallOptions)">
             <summary>
             生成任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            生成任务目标
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.CallOptions)">
+            <summary>
+            生成任务目标
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTargetAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            生成任务目标
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTargetAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.CallOptions)">
+            <summary>
+            生成任务目标
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            生成筛查记录
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            生成筛查记录
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            生成筛查记录
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            生成筛查记录
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddOptometerPacket(Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加验光仪数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddOptometerPacket(Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加验光仪数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddOptometerPacketAsync(Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加验光仪数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddOptometerPacketAsync(Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加验光仪数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddVisualChartPacket(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加电子视力表数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddVisualChartPacket(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加电子视力表数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddVisualChartPacketAsync(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            添加电子视力表数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddVisualChartPacketAsync(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.CallOptions)">
+            <summary>
+            添加电子视力表数据
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

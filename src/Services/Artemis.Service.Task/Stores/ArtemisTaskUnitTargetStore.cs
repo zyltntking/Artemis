@@ -10,14 +10,14 @@ namespace Artemis.Service.Task.Stores;
 /// <summary>
 ///     任务目标存储接口
 /// </summary>
-public interface IArtemisTaskTargetStore : IStore<ArtemisTaskUnitTarget>;
+public interface IArtemisTaskUnitTargetStore : IStore<ArtemisTaskUnitTarget>;
 
 #endregion
 
 /// <summary>
 ///     任务目标存储
 /// </summary>
-public sealed class ArtemisTaskTargetStore : Store<ArtemisTaskUnitTarget>, IArtemisTaskTargetStore
+public sealed class ArtemisTaskUnitUnitTargetStore : Store<ArtemisTaskUnitTarget>, IArtemisTaskUnitTargetStore
 {
     /// <summary>
     ///     基本存储实例构造
@@ -28,7 +28,7 @@ public sealed class ArtemisTaskTargetStore : Store<ArtemisTaskUnitTarget>, IArte
     /// <param name="cacheProxy"></param>
     /// <param name="logger"></param>
     /// <param name="describer"></param>
-    public ArtemisTaskTargetStore(
+    public ArtemisTaskUnitUnitTargetStore(
         TaskContext context,
         IStoreOptions? storeOptions = null,
         IHandlerProxy? handlerProxy = null,

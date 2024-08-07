@@ -3,6 +3,7 @@ using System;
 using Artemis.Service.Business.VisionScreen.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Business.VisionScreen.Migrations
 {
     [DbContext(typeof(BusinessContext))]
-    partial class BusinessContextModelSnapshot : ModelSnapshot
+    [Migration("20240807024629_ChangeDataTypes")]
+    partial class ChangeDataTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace Artemis.App.Business.VisionScreen.Migrations
                         .HasComment("更新者标识");
 
                     b.Property<DateTime?>("OptometerOperationTime")
-                        .HasColumnType("TIMESTAMP");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("OptometerScreeningStuffName")
                         .HasColumnType("text");
@@ -572,7 +575,7 @@ namespace Artemis.App.Business.VisionScreen.Migrations
                         .HasComment("标识");
 
                     b.Property<DateTime?>("ChartOperationTime")
-                        .HasColumnType("TIMESTAMP");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ChartScreeningStuffName")
                         .HasColumnType("text");
