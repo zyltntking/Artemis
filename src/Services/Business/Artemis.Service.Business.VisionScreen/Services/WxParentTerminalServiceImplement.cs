@@ -4,7 +4,6 @@ using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
-using Artemis.Service.Business.VisionScreen.Models;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
@@ -211,6 +210,31 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
+    /// 查询孩子历史筛查记录列表
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询孩子历史筛查记录列表")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchChildHistoryRecordInfoListResponse> FetchChildHistoryRecordInfoList(FetchChildHistoryRecordInfoListRequest request, ServerCallContext context)
+    {
+        var studentId = Guid.Parse(request.StudentId);
+
+        var record = await VisionScreenRecordStore.EntityQuery
+            .Where(record => record.StudentId == studentId)
+            .ProjectToType<ChildHistoryRecordPacket>()
+            .ToListAsync();
+
+        var response = ResultAdapter.AdaptEmptySuccess<FetchChildHistoryRecordInfoListResponse>();
+
+        response.Data.Add(record);
+
+        return response;
+    }
+
+
+    /// <summary>
     /// 获取个人中心消息信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
@@ -295,6 +319,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             {
                 RecordId = record.Id.ToString(),
                 StudentId = record.StudentId.ToString(),
+                StudentName = record. StudentName,
                 CheckTime = record.CheckTime.ToString(),
                 IsFeedback = record.IsFeedBack,
                 FeedbackContent = feedbackContent
@@ -383,20 +408,6 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<QueryChildResponse> QueryChild(QueryChildRequest request, ServerCallContext context)
     {
-        var (valid, userId) = context.GetHttpContext().GetUserId();
-
-        if (!valid)
-        {
-            return ResultAdapter.AdaptEmptyFail<QueryChildResponse>("解析凭据中的用户标识失败");
-        }
-
-        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
-
-        if (!userExists)
-        {
-            return ResultAdapter.AdaptEmptyFail<QueryChildResponse>("用户不存在");
-        }
-
         var student = await StudentStore
             .EntityQuery
             .Where(item => item.StudentNumber == request.StudentNumber)
@@ -575,6 +586,45 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         var result = await StudentEyePhotoStore.UpdateAsync(studentEysPhoto, context.CancellationToken);
 
         return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 读取筛查结果
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("读取筛查结果")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<ReadScreenRecordResponse> ReadScreenRecord(ReadScreenRecordRequest request, ServerCallContext context)
+    {
+        var recordIdExists = string.IsNullOrWhiteSpace(request.RecordId);
+
+        Guid recordId;
+
+        if (recordIdExists)
+        {
+            recordId = Guid.Parse(request.RecordId);
+        }else
+        {
+            var studentId = Guid.Parse(request.StudentId);
+
+            recordId = await VisionScreenRecordStore
+                .EntityQuery
+                .Where(record => record.StudentId == studentId)
+                .OrderByDescending(record => record.CreatedAt)
+                .Select(record => record.Id)
+                .FirstOrDefaultAsync(context.CancellationToken);
+        }
+
+        var recordInfo = await VisionScreenRecordStore.FindMapEntityAsync<VisionScreenRecordInfo>(recordId, context.CancellationToken);
+
+        if (recordInfo == null)
+        {
+            return ResultAdapter.AdaptEmptyFail<ReadScreenRecordResponse>("记录不存在");
+        }
+
+        return recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
     }
 
     #endregion

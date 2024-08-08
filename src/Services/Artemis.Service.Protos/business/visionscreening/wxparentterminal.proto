@@ -19,6 +19,13 @@ service WxParentTerminalService{
 		};
 	}
 
+	// 查询孩子历史筛查记录列表
+	rpc FetchChildHistoryRecordInfoList(FetchChildHistoryRecordInfoListRequest) returns (FetchChildHistoryRecordInfoListResponse) {
+		option (google.api.http) = {
+			get: "/api/BusinessService/ParentTerminal/FetchChildHistoryRecordInfoList"
+		};
+	}
+
 	// 获取个人中心消息信息
 	rpc FetchUserMessageInfo(EmptyRequest) returns (FetchParentUserMessageInfoResponse) {
 		option (google.api.http) = {
@@ -60,7 +67,7 @@ service WxParentTerminalService{
 	// 读取筛查结果
 	rpc ReadScreenRecord(ReadScreenRecordRequest) returns (ReadScreenRecordResponse) {
 		option (google.api.http) = {
-			get: "/api/ParentTerminal/ReadScreenRecord"
+			get: "/api/BusinessService/ParentTerminal/ReadScreenRecord"
 		};
 	}
 }
@@ -136,6 +143,53 @@ message FetchChildInfoResponse{
 	repeated ChildInfo Data = 7;
 }
 
+// 查询孩子历史筛查记录列表请求
+message FetchChildHistoryRecordInfoListRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+}
+
+// 孩子历史筛查记录数据包
+message ChildHistoryRecordPacket{
+	// 记录标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 学生标识
+	// @guid
+	google.protobuf.StringValue StudentId = 2;
+	// 检查时间
+	// @datetime
+	google.protobuf.StringValue CheckTime = 3;
+	// 是否已反馈
+	// @required
+	bool IsFeedback = 4;
+}
+
+// 查询孩子历史筛查记录列表响应
+message FetchChildHistoryRecordInfoListResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 孩子历史筛查记录数据
+	// @required
+	repeated ChildHistoryRecordPacket Data = 7;
+}
+
 // 档案反馈数据包
 message FeedbackContentPacket{
 	// 是否已处理
@@ -159,14 +213,16 @@ message FeedbackRecordPacket{
 	// @required
 	// @guid
 	string StudentId = 2;
+	// 学生姓名
+	google.protobuf.StringValue StudentName = 3;
 	// 检查时间
 	// @datetime
-	google.protobuf.StringValue CheckTime = 3;
+	google.protobuf.StringValue CheckTime = 4;
 	// 是否已反馈
 	// @required
-	bool IsFeedback = 4;
+	bool IsFeedback = 5;
 	// 反馈内容
-	FeedbackContentPacket FeedbackContent = 5;
+	FeedbackContentPacket FeedbackContent = 6;
 }
 
 // 家长个人中心消息信息
@@ -279,16 +335,17 @@ message UploadChildEyePhotoRequest{
 	string EyePhotoType = 3;
 }
 
+
+
 // 读取筛查结果
 message ReadScreenRecordRequest{
-	// 记录标识
-	// @required
-	// @guid
-	string RecordId = 1;
 	// 学生标识
 	// @required
 	// @guid
-	string StudentId = 2;
+	string StudentId = 1;
+	// 记录标识
+	// @guid
+	google.protobuf.StringValue RecordId = 2;
 }
 
 // 筛查结果数据包
@@ -296,121 +353,84 @@ message ScreenRecordPacket{
 	// 记录标识
 	// @required
 	// @guid
-	string RecordId = 1;
+	string Id = 1;
 	// 学生标识
 	// @required
 	// @guid
 	string StudentId = 2;
 	// 左眼裸眼视力
-	// @required
-	double LeftNakedEyeVision = 3;
+	google.protobuf.DoubleValue LeftNakedEyeVision = 3;
 	// 右眼裸眼视力
-	// @required
-	double RightNakedEyeVision = 4;
+	google.protobuf.DoubleValue RightNakedEyeVision = 4;
 	// 左眼矫正视力
-	// @required
-	double LeftCorrectedVision = 5;
+	google.protobuf.DoubleValue LeftCorrectedVision = 5;
 	// 右眼矫正视力
-	// @required
-	double RightCorrectedVision = 6;
+	google.protobuf.DoubleValue RightCorrectedVision = 6;
 	// 左眼散光度数
-	// @required
-	double LeftAstigmatism = 7;
+	google.protobuf.DoubleValue LeftAstigmatism = 7;
 	// 右眼散光度数
-	// @required
-	double RightAstigmatism = 8;
+	google.protobuf.DoubleValue RightAstigmatism = 8;
 	// 瞳距
-	// @required
-	double PupilDistance = 9;
+	google.protobuf.DoubleValue PupilDistance = 9;
 	// 左眼球镜
-	// @required
-	double LeftSpherical = 10;
+	google.protobuf.DoubleValue LeftSphere = 10;
 	// 右眼球镜
-	// @required
-	double RightSpherical = 11;
+	google.protobuf.DoubleValue RightSphere = 11;
 	// 左眼柱镜
-	// @required
-	double LeftCylinder = 12;
+	google.protobuf.DoubleValue LeftCylinder = 12;
 	// 右眼柱镜
-	// @required
-	double RightCylinder = 13;
+	google.protobuf.DoubleValue RightCylinder = 13;
 	// 左眼轴位
-	// @required
-	double LeftAxis = 14;
+	google.protobuf.DoubleValue LeftAxis = 14;
 	// 右眼轴位
-	// @required
-	double RightAxis = 15;
+	google.protobuf.DoubleValue RightAxis = 15;
 	// 左眼等效球镜
-	// @required
-	double LeftEquivalentSpherical = 16;
+	google.protobuf.DoubleValue LeftEquivalentSphere = 16;
 	// 右眼等效球镜
-	// @required
-	double RightEquivalentSpherical = 17;
+	google.protobuf.DoubleValue RightEquivalentSphere = 17;
 	// 左眼是否佩戴角膜塑形镜
-	// @required
-	bool LeftCornealShapingLens = 18;
+	google.protobuf.BoolValue IsWareLeftOkLenses = 18;
 	// 右眼是否佩戴角膜塑形镜
-	// @required
-	bool RightCornealShapingLens = 19;
+	google.protobuf.BoolValue IsWareRightOkLenses = 19;
 	// 左眼角膜曲率r1(mm)
-	// @required
-	double LeftCornealCurvatureR1 = 20;
+	google.protobuf.DoubleValue LeftCornealCurvatureR1 = 20;
 	// 右眼角膜曲率r1(mm)
-	// @required
-	double RightCornealCurvatureR1 = 21;
+	google.protobuf.DoubleValue RightCornealCurvatureR1 = 21;
 	// 左眼角膜曲率r1(d)
-	// @required
-	double LeftCornealCurvatureD1 = 22;
+	google.protobuf.DoubleValue LeftCornealCurvatureD1 = 22;
 	// 右眼角膜曲率r1(d)
-	// @required
-	double RightCornealCurvatureD1 = 23;
+	google.protobuf.DoubleValue RightCornealCurvatureD1 = 23;
 	// 左眼角膜曲率r1角度
-	// @required
-	double LeftCornealCurvatureAngle1 = 24;
+	google.protobuf.DoubleValue LeftCornealCurvatureAngle1 = 24;
 	// 右眼角膜曲率r1角度
-	// @required
-	double RightCornealCurvatureAngle1 = 25;
+	google.protobuf.DoubleValue RightCornealCurvatureAngle1 = 25;
 	// 左眼角膜曲率r2(mm)
-	// @required
-	double LeftCornealCurvatureR2 = 26;
+	google.protobuf.DoubleValue LeftCornealCurvatureR2 = 26;
 	// 右眼角膜曲率r2(mm)
-	// @required
-	double RightCornealCurvatureR2 = 27;
+	google.protobuf.DoubleValue RightCornealCurvatureR2 = 27;
 	// 左眼角膜曲率r2(d)
-	// @required
-	double LeftCornealCurvatureD2 = 28;
+	google.protobuf.DoubleValue LeftCornealCurvatureD2 = 28;
 	// 右眼角膜曲率r2(d)
-	// @required
-	double RightCornealCurvatureD2 = 29;
+	google.protobuf.DoubleValue RightCornealCurvatureD2 = 29;
 	// 左眼角膜曲率r2角度
-	// @required
-	double LeftCornealCurvatureAngle2 = 30;
+	google.protobuf.DoubleValue LeftCornealCurvatureAngle2 = 30;
 	// 右眼角膜曲率r2角度
-	// @required
-	double RightCornealCurvatureAngle2 = 31;
+	google.protobuf.DoubleValue RightCornealCurvatureAngle2 = 31;
 	// 左眼角膜曲率平均值(mm)
-	// @required
-	double LeftCornealCurvatureAverage = 32;
+	google.protobuf.DoubleValue LeftCornealCurvatureAverage = 32;
 	// 右眼角膜曲率平均值(mm)
-	// @required
-	double RightCornealCurvatureAverage = 33;
+	google.protobuf.DoubleValue RightCornealCurvatureAverage = 33;
 	// 左眼角膜曲率平均值(d)
-	// @required
-	double LeftCornealCurvatureAverageD = 34;
+	google.protobuf.DoubleValue LeftCornealCurvatureAverageD = 34;
 	// 右眼角膜曲率平均值(d)
-	// @required
-	double RightCornealCurvatureAverageD = 35;
+	google.protobuf.DoubleValue RightCornealCurvatureAverageD = 35;
 	// 左眼角膜曲率散光度
-	// @required
-	double LeftCornealCurvatureAstigmatism = 36;
+	google.protobuf.DoubleValue LeftCornealCurvatureAstigmatism = 36;
 	// 右眼角膜曲率散光度
-	// @required
-	double RightCornealCurvatureAstigmatism = 37;
+	google.protobuf.DoubleValue RightCornealCurvatureAstigmatism = 37;
 	// 筛查时间
-	// @datetime
-	google.protobuf.Timestamp DateTime = 38;
+	google.protobuf.StringValue CheckTime = 38;
 	// 筛查结果
-	// @required
 	google.protobuf.StringValue Result = 39;
 }
 

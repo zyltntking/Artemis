@@ -437,11 +437,17 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             record.OptometerCheckedTimes += 1;
             record.IsOptometerChecked = true;
             record.CheckTime = DateTime.Now;
+            // 计算等效球镜
+            record.LeftEquivalentSphere = (int?)(record.LeftSphere * -100);
+            record.RightEquivalentSphere = (int?)(record.RightSphere * -100);
             var recordResult = await VisionScreenRecordStore.UpdateAsync(record, context.CancellationToken);
 
             var optometer = Instance.CreateInstance<ArtemisOptometer>();
             request.OptometerPacket.Adapt(optometer);
             optometer.RecordId = recordId;
+            // 计算等效球镜
+            optometer.LeftEquivalentSphere = (int?)(optometer.LeftSphere * -100);
+            optometer.RightEquivalentSphere = (int?)(optometer.RightSphere * -100);
 
             var optometerResult = await OptometerStore.CreateAsync(optometer, context.CancellationToken);
 

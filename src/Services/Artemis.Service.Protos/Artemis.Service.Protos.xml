@@ -1167,6 +1167,128 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest">
+            <summary>
+            查询孩子历史筛查记录列表请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket">
+            <summary>
+            孩子历史筛查记录数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.Id">
+            <summary>
+            记录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.StudentId">
+            <summary>
+            学生标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.CheckTimeFieldNumber">
+            <summary>Field number for the "CheckTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.CheckTime">
+            <summary>
+            检查时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.IsFeedbackFieldNumber">
+            <summary>Field number for the "IsFeedback" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.IsFeedback">
+            <summary>
+            是否已反馈
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse">
+            <summary>
+            查询孩子历史筛查记录列表响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse.Data">
+            <summary>
+            孩子历史筛查记录数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FeedbackContentPacket">
             <summary>
             档案反馈数据包
@@ -1228,6 +1350,14 @@
             学生标识
             @required
             @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.StudentNameFieldNumber">
+            <summary>Field number for the "StudentName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.StudentName">
+            <summary>
+            学生姓名
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.CheckTimeFieldNumber">
@@ -1531,16 +1661,6 @@
             读取筛查结果
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordIdFieldNumber">
-            <summary>Field number for the "RecordId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordId">
-            <summary>
-            记录标识
-            @required
-            @guid
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.StudentIdFieldNumber">
             <summary>Field number for the "StudentId" field.</summary>
         </member>
@@ -1551,15 +1671,24 @@
             @guid
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordIdFieldNumber">
+            <summary>Field number for the "RecordId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordId">
+            <summary>
+            记录标识
+            @guid
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket">
             <summary>
             筛查结果数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RecordIdFieldNumber">
-            <summary>Field number for the "RecordId" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RecordId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.Id">
             <summary>
             记录标识
             @required
@@ -1582,7 +1711,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftNakedEyeVision">
             <summary>
             左眼裸眼视力
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightNakedEyeVisionFieldNumber">
@@ -1591,7 +1719,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightNakedEyeVision">
             <summary>
             右眼裸眼视力
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCorrectedVisionFieldNumber">
@@ -1600,7 +1727,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCorrectedVision">
             <summary>
             左眼矫正视力
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCorrectedVisionFieldNumber">
@@ -1609,7 +1735,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCorrectedVision">
             <summary>
             右眼矫正视力
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftAstigmatismFieldNumber">
@@ -1618,7 +1743,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftAstigmatism">
             <summary>
             左眼散光度数
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightAstigmatismFieldNumber">
@@ -1627,7 +1751,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightAstigmatism">
             <summary>
             右眼散光度数
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.PupilDistanceFieldNumber">
@@ -1636,25 +1759,22 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.PupilDistance">
             <summary>
             瞳距
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftSphericalFieldNumber">
-            <summary>Field number for the "LeftSpherical" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftSphereFieldNumber">
+            <summary>Field number for the "LeftSphere" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftSpherical">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftSphere">
             <summary>
             左眼球镜
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightSphericalFieldNumber">
-            <summary>Field number for the "RightSpherical" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightSphereFieldNumber">
+            <summary>Field number for the "RightSphere" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightSpherical">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightSphere">
             <summary>
             右眼球镜
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCylinderFieldNumber">
@@ -1663,7 +1783,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCylinder">
             <summary>
             左眼柱镜
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCylinderFieldNumber">
@@ -1672,7 +1791,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCylinder">
             <summary>
             右眼柱镜
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftAxisFieldNumber">
@@ -1681,7 +1799,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftAxis">
             <summary>
             左眼轴位
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightAxisFieldNumber">
@@ -1690,43 +1807,38 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightAxis">
             <summary>
             右眼轴位
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftEquivalentSphericalFieldNumber">
-            <summary>Field number for the "LeftEquivalentSpherical" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftEquivalentSphereFieldNumber">
+            <summary>Field number for the "LeftEquivalentSphere" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftEquivalentSpherical">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftEquivalentSphere">
             <summary>
             左眼等效球镜
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightEquivalentSphericalFieldNumber">
-            <summary>Field number for the "RightEquivalentSpherical" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightEquivalentSphereFieldNumber">
+            <summary>Field number for the "RightEquivalentSphere" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightEquivalentSpherical">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightEquivalentSphere">
             <summary>
             右眼等效球镜
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealShapingLensFieldNumber">
-            <summary>Field number for the "LeftCornealShapingLens" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsWareLeftOkLensesFieldNumber">
+            <summary>Field number for the "IsWareLeftOkLenses" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealShapingLens">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsWareLeftOkLenses">
             <summary>
             左眼是否佩戴角膜塑形镜
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealShapingLensFieldNumber">
-            <summary>Field number for the "RightCornealShapingLens" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsWareRightOkLensesFieldNumber">
+            <summary>Field number for the "IsWareRightOkLenses" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealShapingLens">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsWareRightOkLenses">
             <summary>
             右眼是否佩戴角膜塑形镜
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureR1FieldNumber">
@@ -1735,7 +1847,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureR1">
             <summary>
             左眼角膜曲率r1(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureR1FieldNumber">
@@ -1744,7 +1855,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureR1">
             <summary>
             右眼角膜曲率r1(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureD1FieldNumber">
@@ -1753,7 +1863,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureD1">
             <summary>
             左眼角膜曲率r1(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureD1FieldNumber">
@@ -1762,7 +1871,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureD1">
             <summary>
             右眼角膜曲率r1(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAngle1FieldNumber">
@@ -1771,7 +1879,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAngle1">
             <summary>
             左眼角膜曲率r1角度
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAngle1FieldNumber">
@@ -1780,7 +1887,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAngle1">
             <summary>
             右眼角膜曲率r1角度
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureR2FieldNumber">
@@ -1789,7 +1895,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureR2">
             <summary>
             左眼角膜曲率r2(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureR2FieldNumber">
@@ -1798,7 +1903,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureR2">
             <summary>
             右眼角膜曲率r2(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureD2FieldNumber">
@@ -1807,7 +1911,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureD2">
             <summary>
             左眼角膜曲率r2(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureD2FieldNumber">
@@ -1816,7 +1919,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureD2">
             <summary>
             右眼角膜曲率r2(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAngle2FieldNumber">
@@ -1825,7 +1927,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAngle2">
             <summary>
             左眼角膜曲率r2角度
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAngle2FieldNumber">
@@ -1834,7 +1935,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAngle2">
             <summary>
             右眼角膜曲率r2角度
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAverageFieldNumber">
@@ -1843,7 +1943,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAverage">
             <summary>
             左眼角膜曲率平均值(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAverageFieldNumber">
@@ -1852,7 +1951,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAverage">
             <summary>
             右眼角膜曲率平均值(mm)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAverageDFieldNumber">
@@ -1861,7 +1959,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAverageD">
             <summary>
             左眼角膜曲率平均值(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAverageDFieldNumber">
@@ -1870,7 +1967,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAverageD">
             <summary>
             右眼角膜曲率平均值(d)
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAstigmatismFieldNumber">
@@ -1879,7 +1975,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.LeftCornealCurvatureAstigmatism">
             <summary>
             左眼角膜曲率散光度
-            @required
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAstigmatismFieldNumber">
@@ -1888,16 +1983,14 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.RightCornealCurvatureAstigmatism">
             <summary>
             右眼角膜曲率散光度
-            @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.DateTimeFieldNumber">
-            <summary>Field number for the "DateTime" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.CheckTimeFieldNumber">
+            <summary>Field number for the "CheckTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.DateTime">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.CheckTime">
             <summary>
             筛查时间
-            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.ResultFieldNumber">
@@ -1906,7 +1999,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.Result">
             <summary>
             筛查结果
-            @required
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordResponse">
@@ -1988,6 +2080,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取个人中心孩子信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.FetchChildHistoryRecordInfoList(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询孩子历史筛查记录列表
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2090,6 +2190,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchChildrenInfoAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
             <summary>
             获取个人中心孩子信息
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchChildHistoryRecordInfoList(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询孩子历史筛查记录列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchChildHistoryRecordInfoList(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询孩子历史筛查记录列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchChildHistoryRecordInfoListAsync(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询孩子历史筛查记录列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchChildHistoryRecordInfoListAsync(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询孩子历史筛查记录列表
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
