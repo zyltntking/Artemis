@@ -621,4 +621,11 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// </summary>
     [Comment("报告签收时间")]
     public DateTime? ReportReceiveTime { get; set; }
+
+    /// <summary>
+    /// 筛查报告反馈
+    /// </summary>
+    [Comment("筛查报告反馈")]
+    [MaxLength(256)]
+    public string? RecordFeedBack { get; set; }
 }

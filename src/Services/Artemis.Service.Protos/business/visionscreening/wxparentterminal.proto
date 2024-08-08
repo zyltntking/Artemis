@@ -15,14 +15,14 @@ service WxParentTerminalService{
 	// 获取个人中心孩子信息
 	rpc FetchChildrenInfo(EmptyRequest) returns (FetchChildInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/ParentTerminal/FetchChildrenInfo"
+			get: "/api/BusinessService/ParentTerminal/FetchChildrenInfo"
 		};
 	}
 
 	// 获取个人中心消息信息
 	rpc FetchUserMessageInfo(EmptyRequest) returns (FetchParentUserMessageInfoResponse) {
 		option (google.api.http) = {
-			get: "/api/ParentTerminal/FetchUserMessageInfo"
+			get: "/api/BusinessService/ParentTerminal/FetchUserMessageInfo"
 		};
 	}
 
@@ -37,7 +37,7 @@ service WxParentTerminalService{
 	// 查询孩子信息
 	rpc QueryChild(QueryChildRequest) returns (QueryChildResponse) {
 		option (google.api.http) = {
-			get: "/api/ParentTerminal/QueryChild"
+			get: "/api/BusinessService/ParentTerminal/QueryChild"
 		};
 	}
 
@@ -50,9 +50,9 @@ service WxParentTerminalService{
 	}
 
 	// 上传孩子眼部照片
-	rpc UploadChildEyePhoto(UploadChildEyePhotoRequest) returns (EmptyResponse) {
+	rpc UploadChildEyePhoto(UploadChildEyePhotoRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/ParentTerminal/UploadChildEyePhoto"
+			post: "/api/BusinessService/ParentTerminal/UploadChildEyePhoto"
 			body: "*"
 		};
 	}
@@ -76,32 +76,26 @@ message ChildInfoPacket {
 	// @maxLength(128)
 	string Name = 2;
 	// 学生性别
-	// @required
 	// @maxLength(32)
-	string Gender = 3;
+	google.protobuf.StringValue Gender = 3;
 	// 学生生日
 	// @datetime
-	google.protobuf.Timestamp Birthday = 4;
+	google.protobuf.StringValue Birthday = 4;
 	// 学生民族
-	// @required
 	// @maxLength(32)
-	string Nation = 5;
+	google.protobuf.StringValue Nation = 5;
 	// 学籍号
-	// @required
 	// @maxLength(32)
-	string StudentNumber = 6;
+	google.protobuf.StringValue StudentNumber = 6;
 	// 学校名称
-	// @required
 	// @maxLength(128)
-	string SchoolName = 7;
+	google.protobuf.StringValue SchoolName = 7;
 	// 班级名称
-	// @required
 	// @maxLength(128)
-	string ClassName = 8;
+	google.protobuf.StringValue ClassName = 8;
 	// 亲属关系
-	// @required
 	// @maxLength(32)
-	string Relation = 9;
+	google.protobuf.StringValue Relation = 9;
 	// 左眼照片
 	google.protobuf.StringValue LeftEyePhoto = 10;
 	// 右眼照片

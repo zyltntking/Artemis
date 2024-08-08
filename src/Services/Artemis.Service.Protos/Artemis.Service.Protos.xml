@@ -994,7 +994,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.Gender">
             <summary>
             学生性别
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -1013,7 +1012,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.Nation">
             <summary>
             学生民族
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -1023,7 +1021,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.StudentNumber">
             <summary>
             学籍号
-            @required
             @maxLength(32)
             </summary>
         </member>
@@ -1033,7 +1030,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.SchoolName">
             <summary>
             学校名称
-            @required
             @maxLength(128)
             </summary>
         </member>
@@ -1043,7 +1039,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.ClassName">
             <summary>
             班级名称
-            @required
             @maxLength(128)
             </summary>
         </member>
@@ -1053,7 +1048,6 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildInfoPacket.Relation">
             <summary>
             亲属关系
-            @required
             @maxLength(32)
             </summary>
         </member>

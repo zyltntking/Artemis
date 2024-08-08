@@ -285,4 +285,9 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     ///     报告签收时间
     /// </summary>
     DateTime? ReportReceiveTime { get; set; }
+
+    /// <summary>
+    /// 筛查报告反馈
+    /// </summary>
+    string? RecordFeedBack { get; set; }
 }

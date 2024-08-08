@@ -179,6 +179,41 @@
                 操作时间
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhoto">
+            <summary>
+            学生眼部照片接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoInfo">
+            <summary>
+            学生眼部照片信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoInfo.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoPackage">
+            <summary>
+            学生眼部照片数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoPackage.LeftEyePhoto">
+            <summary>
+            左眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoPackage.RightEyePhoto">
+            <summary>
+            右眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhotoPackage.BothEyePhoto">
+            <summary>
+            双眼照片
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentRelationBinding">
             <summary>
             学生用户亲属关系绑定接口
@@ -489,6 +524,11 @@
                 报告签收时间
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.RecordFeedBack">
+            <summary>
+            筛查报告反馈
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">
             <summary>
                 视力表数据接口
@@ -572,6 +612,71 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisualChartPackage.ChartOperationTime">
             <summary>
                 操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoInfo">
+            <summary>
+            学生眼部照片信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoInfo.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoPackage">
+            <summary>
+            学生眼部照片数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoPackage.LeftEyePhoto">
+            <summary>
+            左眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoPackage.RightEyePhoto">
+            <summary>
+            右眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoPackage.BothEyePhoto">
+            <summary>
+            双眼照片
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingInfo">
+            <summary>
+            学生关系绑定信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingPackage">
+            <summary>
+            学生关系绑定数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingPackage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingPackage.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingPackage.Relation">
+            <summary>
+            关系
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Identity.IClaim">

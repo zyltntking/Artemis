@@ -14,6 +14,11 @@
             验光仪数据所属的视力档案
             </summary>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisStudentEyePhoto">
+            <summary>
+            学生眼部照片模型
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisStudentRelationBinding">
             <summary>
             学生用户亲属关系绑定模型
@@ -75,11 +80,31 @@
                学生亲属关系绑定数据
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.StudentEyePhotos">
+            <summary>
+            学生眼部照片数据
+            </summary>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Context.BusinessContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
             </summary>
             <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentEyePhotoConfiguration">
+            <summary>
+                学生眼部照片配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentEyePhotoConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentEyePhotoConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisOptometerConfiguration">
             <summary>
@@ -328,6 +353,31 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.OptometerOperationTime">
             <summary>
                 操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto">
+            <summary>
+            学生眼部照片模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto.LeftEyePhoto">
+            <summary>
+            左眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto.RightEyePhoto">
+            <summary>
+            右眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto.BothEyePhoto">
+            <summary>
+            双眼照片
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto.StudentId">
+            <summary>
+            学生标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.StudentRelationBinding">
@@ -840,6 +890,11 @@
                 报告签收时间
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RecordFeedBack">
+            <summary>
+            筛查报告反馈
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.VisualChart">
             <summary>
                 视力表数据模型
@@ -1026,9 +1081,74 @@
             家长端服务实现
             </summary>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="userStore"></param>
+            <param name="schoolStore"></param>
+            <param name="studentStore"></param>
+            <param name="studentEyePhotoStore"></param>
+            <param name="studentRelationBindingStore"></param>
+            <param name="visionScreenRecordStore"></param>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UserStore">
+            <summary>
+            用户存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.SchoolStore">
+            <summary>
+            学校存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.StudentStore">
+            <summary>
+            学生存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.StudentEyePhotoStore">
+            <summary>
+            学生眼部照片存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.StudentRelationBindingStore">
+            <summary>
+            用户学生亲属关系绑定存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.VisionScreenRecordStore">
+            <summary>
+            视力筛查档案存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取个人中心孩子信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.QueryChild(Artemis.Service.Protos.Business.VisionScreen.QueryChildRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询孩子信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.BindChildRelation(Artemis.Service.Protos.Business.VisionScreen.BindChildRequest,Grpc.Core.ServerCallContext)">
             <summary>
             绑定孩子关系
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UploadChildEyePhoto(Artemis.Service.Protos.Business.VisionScreen.UploadChildEyePhotoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            上传孩子眼部照片
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1045,6 +1165,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisOptometerStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore">
+            <summary>
+                学生眼部照片存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.ArtemisStudentEyePhotoStore">
+            <summary>
+                学生眼部照片存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisStudentEyePhotoStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>

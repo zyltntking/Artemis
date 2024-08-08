@@ -36,6 +36,11 @@ public class BusinessContext : DbContext
     /// </summary>
     public virtual DbSet<ArtemisStudentRelationBinding> StudentRelationBindings { get; set; } = default!;
 
+    /// <summary>
+    /// 学生眼部照片数据
+    /// </summary>
+    public virtual DbSet<ArtemisStudentEyePhoto> StudentEyePhotos { get; set; } = default!;
+
     #region Overrides of DbContext
 
     /// <summary>

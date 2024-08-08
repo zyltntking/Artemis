@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Artemis.Data.Core.Exceptions;
 
 namespace Artemis.Data.Core.Fundamental;
 
@@ -39,7 +38,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <param name="name">枚举名称</param>
     protected Enumeration(int id, string name)
     {
-        (Id, Name) = (id, name.Normalize());
+        (Id, Name) = (id, name);
     }
 
     /// <summary>
@@ -93,7 +92,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="id">值</param>
     /// <returns>枚举成员</returns>
-    public static T FromValue<T>(int id) where T : Enumeration
+    public static T? FromValue<T>(int id) where T : Enumeration
     {
         var matchingItem = Parse<T, int>(id, "id", item => item.Id == id);
         return matchingItem;
@@ -261,24 +260,6 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     public static implicit operator int(Enumeration enumeration)
     {
         return enumeration.Id;
-    }
-
-    /// <summary>
-    ///    Int32转Enumeration
-    /// </summary>
-    /// <param name="id"></param>
-    public static explicit operator Enumeration(int id)
-    {
-        return FromValue<Enumeration>(id);
-    }
-
-    /// <summary>
-    ///   String转Enumeration
-    /// </summary>
-    /// <param name="name"></param>
-    public static explicit operator Enumeration(string name)
-    {
-        return FromName<Enumeration>(name);
     }
 
     #endregion

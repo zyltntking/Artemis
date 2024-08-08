@@ -1400,18 +1400,6 @@
             </summary>
             <param name="enumeration"></param>
         </member>
-        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.op_Explicit(System.Int32)~Artemis.Data.Core.Fundamental.Enumeration">
-            <summary>
-               Int32转Enumeration
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.op_Explicit(System.String)~Artemis.Data.Core.Fundamental.Enumeration">
-            <summary>
-              String转Enumeration
-            </summary>
-            <param name="name"></param>
-        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.ToString">
             <summary>
                 转为字符串
@@ -4401,6 +4389,33 @@
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.EndType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.EyePhotoType">
+            <summary>
+            眼部照片类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.EyePhotoType.LeftEye">
+            <summary>
+             左眼
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.EyePhotoType.RightEye">
+            <summary>
+            右眼
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.EyePhotoType.BothEye">
+            <summary>
+            双眼
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.EyePhotoType.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数
             </summary>

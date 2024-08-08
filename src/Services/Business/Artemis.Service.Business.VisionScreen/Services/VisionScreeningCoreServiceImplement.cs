@@ -5,6 +5,7 @@ using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
+using Artemis.Service.Business.VisionScreen.Models;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
@@ -444,6 +445,15 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
             var optometerResult = await OptometerStore.CreateAsync(optometer, context.CancellationToken);
 
+            var taskTarget = await TaskUnitTargetStore.FindEntityAsync(record.TaskUnitTargetId, context.CancellationToken);
+            if (taskTarget != null)
+            {
+                taskTarget.TargetState = TaskState.Completed;
+                taskTarget.ExecuteTime = optometer.OptometerOperationTime;
+
+                await TaskUnitTargetStore.UpdateAsync(taskTarget, context.CancellationToken);
+            }
+
             response.Data = recordResult.AffectRows + optometerResult.AffectRows;
 
             return response;
@@ -484,6 +494,15 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             visualChart.RecordId = recordId;
 
             var visualChartResult = await VisualChartStore.CreateAsync(visualChart, context.CancellationToken);
+
+            var taskTarget = await TaskUnitTargetStore.FindEntityAsync(record.TaskUnitTargetId, context.CancellationToken);
+            if (taskTarget != null)
+            {
+                taskTarget.TargetState = TaskState.Completed;
+                taskTarget.ExecuteTime = visualChart.ChartOperationTime;
+
+                await TaskUnitTargetStore.UpdateAsync(taskTarget, context.CancellationToken);
+            }
 
             response.Data = recordResult.AffectRows + visualChartResult.AffectRows;
 
