@@ -352,7 +352,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             Nation = student?.Nation,
             StudentNumber = student?.StudentNumber,
             SchoolName = school?.Name,
-            ClassName = @class?.GradeName
+            ClassName = "四年级1班"
         };
 
         var response = ResultAdapter.AdaptEmptySuccess<QueryChildResponse>();
