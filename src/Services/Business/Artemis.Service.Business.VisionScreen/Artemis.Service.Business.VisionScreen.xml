@@ -14,6 +14,16 @@
             验光仪数据所属的视力档案
             </summary>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisRecordFeedback">
+            <summary>
+            视力档案记录反馈
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.ArtemisRecordFeedback.VisionScreenRecord">
+            <summary>
+            反馈所属的视力档案
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisStudentEyePhoto">
             <summary>
             学生眼部照片模型
@@ -37,6 +47,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Context.ArtemisVisionScreenRecord.VisualCharts">
             <summary>
             该档案的视力表数据历史记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.ArtemisVisionScreenRecord.RecordFeedbacks">
+            <summary>
+            该档案的反馈历史记录
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisVisualChart">
@@ -73,6 +88,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.VisualCharts">
             <summary>
                 视力表数据
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.RecordFeedbacks">
+            <summary>
+            视力档案反馈记录
             </summary>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.StudentRelationBindings">
@@ -122,6 +142,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisOptometerConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Business.VisionScreen.Context.ArtemisOptometer})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisRecordFeedbackConfiguration">
+            <summary>
+                记录反馈数据集配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisRecordFeedbackConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisRecordFeedbackConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisRecordFeedbackConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Business.VisionScreen.Context.ArtemisRecordFeedback})">
             <summary>
                 实体字段配置
             </summary>
@@ -353,6 +394,41 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.OptometerOperationTime">
             <summary>
                 操作时间
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Models.RecordFeedback">
+            <summary>
+            记录反馈数据模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.UserId">
+            <summary>
+            反馈用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.IsCheck">
+            <summary>
+            是否已处理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.CheckDate">
+            <summary>
+            处理日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.Content">
+            <summary>
+            反馈内容
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.FeedBackTime">
+            <summary>
+            反馈时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.RecordFeedback.RecordId">
+            <summary>
+            记录标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.StudentEyePhoto">
@@ -890,9 +966,9 @@
                 报告签收时间
             </summary>
         </member>
-        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RecordFeedBack">
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.IsFeedBack">
             <summary>
-            筛查报告反馈
+            是否反馈
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.VisualChart">
@@ -1125,6 +1201,14 @@
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取个人中心孩子信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchUserMessageInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取个人中心消息信息
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>

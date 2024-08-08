@@ -19,4 +19,9 @@ public class ArtemisVisionScreenRecord : VisionScreenRecord
     /// 该档案的视力表数据历史记录
     /// </summary>
     public ICollection<ArtemisVisualChart>? VisualCharts { get; set; }
+
+    /// <summary>
+    /// 该档案的反馈历史记录
+    /// </summary>
+    public ICollection<ArtemisRecordFeedback>? RecordFeedbacks { get; set; }
 }

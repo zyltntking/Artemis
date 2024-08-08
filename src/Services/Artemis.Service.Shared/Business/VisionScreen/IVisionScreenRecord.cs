@@ -287,7 +287,7 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     DateTime? ReportReceiveTime { get; set; }
 
     /// <summary>
-    /// 筛查报告反馈
+    /// 是否反馈
     /// </summary>
-    string? RecordFeedBack { get; set; }
+    bool IsFeedBack { get; set; }
 }

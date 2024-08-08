@@ -179,6 +179,51 @@
                 操作时间
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedback">
+            <summary>
+            记录反馈接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackInfo">
+            <summary>
+            记录反馈信息接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackInfo.RecordId">
+            <summary>
+            记录标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage">
+            <summary>
+            记录反馈数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage.UserId">
+            <summary>
+            反馈用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage.IsCheck">
+            <summary>
+            是否已处理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage.CheckDate">
+            <summary>
+            处理日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage.Content">
+            <summary>
+            反馈内容
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedbackPackage.FeedBackTime">
+            <summary>
+            反馈时间
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IStudentEyePhoto">
             <summary>
             学生眼部照片接口
@@ -524,9 +569,9 @@
                 报告签收时间
             </summary>
         </member>
-        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.RecordFeedBack">
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsFeedBack">
             <summary>
-            筛查报告反馈
+            是否反馈
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">

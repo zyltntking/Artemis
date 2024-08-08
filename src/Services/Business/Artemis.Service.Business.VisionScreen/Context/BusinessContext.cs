@@ -32,6 +32,11 @@ public class BusinessContext : DbContext
     public virtual DbSet<ArtemisVisualChart> VisualCharts { get; set; } = default!;
 
     /// <summary>
+    /// 视力档案反馈记录
+    /// </summary>
+    public virtual DbSet<ArtemisRecordFeedback> RecordFeedbacks { get; set; } = default!;
+
+    /// <summary>
     ///    学生亲属关系绑定数据
     /// </summary>
     public virtual DbSet<ArtemisStudentRelationBinding> StudentRelationBindings { get; set; } = default!;

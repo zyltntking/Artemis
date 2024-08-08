@@ -75,6 +75,16 @@ internal sealed class ArtemisVisionScreenRecordConfiguration : ConcurrencyPartit
                 nameof(ArtemisVisionScreenRecord).TableName()))
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        // each VisionScreenRecord has many RecordFeedback
+        builder.HasMany(record => record.RecordFeedbacks)
+            .WithOne(feedback => feedback.VisionScreenRecord)
+            .HasForeignKey(feedback => feedback.RecordId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisRecordFeedback).TableName(),
+                nameof(ArtemisVisionScreenRecord).TableName()))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
      
     }
 

@@ -64,6 +64,18 @@
         <member name="M:Artemis.App.Business.VisionScreen.Migrations.Fix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.AddFeedback">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddFeedback.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddFeedback.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddFeedback.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Program">
             <summary>
                 应用程序入口

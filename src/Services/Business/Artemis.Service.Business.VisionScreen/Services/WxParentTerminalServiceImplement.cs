@@ -195,11 +195,43 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
+    /// 获取个人中心消息信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取个人中心消息信息")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchParentUserMessageInfoResponse> FetchUserMessageInfo(EmptyRequest request, ServerCallContext context)
+    {
+        var (valid, userId) = context.GetHttpContext().GetUserId();
+
+        if (!valid)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("解析凭据中的用户标识失败");
+        }
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("用户不存在");
+        }
+
+
+
+
+        return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("用户不存在");
+    }
+
+    /// <summary>
     /// 查询孩子信息
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询孩子信息")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<QueryChildResponse> QueryChild(QueryChildRequest request, ServerCallContext context)
     {
         var (valid, userId) = context.GetHttpContext().GetUserId();
@@ -222,17 +254,27 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             .ProjectToType<StudentInfo>()
             .FirstOrDefaultAsync(context.CancellationToken);
 
-        var school = await SchoolStore
-            .EntityQuery
-            .Where(item => item.Id == student.SchoolId)
-            .ProjectToType<SchoolInfo>()
-            .FirstOrDefaultAsync(context.CancellationToken);
+        var school = Instance.CreateInstance<SchoolInfo>();
 
-        var @class = await SchoolStore
-            .EntityQuery
-            .Where(item => item.Id == student.ClassId)
-            .ProjectToType<ClassInfo>()
-            .FirstOrDefaultAsync(context.CancellationToken);
+        if (student?.SchoolId != null)
+        {
+            school = await SchoolStore
+                .EntityQuery
+                .Where(item => item.Id == student.SchoolId)
+                .ProjectToType<SchoolInfo>()
+                .FirstOrDefaultAsync(context.CancellationToken);
+        }
+
+        var @class = Instance.CreateInstance<ClassInfo>();
+
+        if (student?.ClassId != null)
+        {
+            @class = await SchoolStore
+                .EntityQuery
+                .Where(item => item.Id == student.ClassId)
+                .ProjectToType<ClassInfo>()
+                .FirstOrDefaultAsync(context.CancellationToken);
+        }
 
         var childInfo = new ChildInfoPacket
         {
@@ -321,7 +363,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("绑定孩子关系")]
+    [Description("上传孩子眼部照片")]
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UploadChildEyePhoto(UploadChildEyePhotoRequest request, ServerCallContext context)
     {
