@@ -3,6 +3,8 @@ using Artemis.Extensions.ServiceConnect;
 using Artemis.Service.Business.VisionScreen;
 using Artemis.Service.Business.VisionScreen.Context;
 using Artemis.Service.Business.VisionScreen.Services;
+using Artemis.Service.Identity;
+using Artemis.Service.Identity.Context;
 using Artemis.Service.Resource;
 using Artemis.Service.Resource.Context;
 using Artemis.Service.School;
@@ -58,6 +60,9 @@ public class Program
 
             builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb")
                 .AddResourceServices();
+
+            builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb")
+                .AddIdentityServices();
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()

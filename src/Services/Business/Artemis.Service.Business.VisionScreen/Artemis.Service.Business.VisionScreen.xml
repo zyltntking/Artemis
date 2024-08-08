@@ -1157,7 +1157,7 @@
             家长端服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore)">
             <summary>
             构造函数
             </summary>
@@ -1167,6 +1167,7 @@
             <param name="studentEyePhotoStore"></param>
             <param name="studentRelationBindingStore"></param>
             <param name="visionScreenRecordStore"></param>
+            <param name="recordFeedbackStore"></param>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UserStore">
             <summary>
@@ -1198,6 +1199,11 @@
             视力筛查档案存储
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.RecordFeedbackStore">
+            <summary>
+            档案反馈存储
+            </summary>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取个人中心孩子信息
@@ -1209,6 +1215,14 @@
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchUserMessageInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取个人中心消息信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FeedbackRecord(Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            反馈筛查记录后续处理
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1333,6 +1347,27 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisVisualChartStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore">
+            <summary>
+                视力档案反馈存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.ArtemisRecordFeedbackStore">
+            <summary>
+                视力档案反馈存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisRecordFeedbackStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
