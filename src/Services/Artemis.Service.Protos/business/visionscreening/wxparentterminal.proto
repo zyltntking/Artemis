@@ -2,7 +2,6 @@
 
 option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "business/visionscreening/visionscreening.proto";
 import "common.proto";
@@ -76,6 +75,14 @@ service WxParentTerminalService{
 	rpc ReadScreenRecord(ReadScreenRecordRequest) returns (ReadScreenRecordResponse) {
 		option (google.api.http) = {
 			get: "/api/BusinessService/ParentTerminal/ReadScreenRecord"
+		};
+	}
+
+	// 档案签名
+	rpc SignRecord(SignRecordRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/BusinessService/ParentTerminal/SignRecord"
+			body: "*"
 		};
 	}
 }
@@ -446,8 +453,14 @@ message ScreenRecordPacket{
 	google.protobuf.DoubleValue RightCornealCurvatureAstigmatism = 37;
 	// 筛查时间
 	google.protobuf.StringValue CheckTime = 38;
-	// 筛查结果
-	google.protobuf.StringValue Result = 39;
+	// 筛查报告
+	google.protobuf.StringValue Report = 39;
+	// 是否签名
+	bool IsSign = 40;
+	// 用户签名
+	google.protobuf.StringValue UserSign = 41;
+	// 签名时间
+	google.protobuf.StringValue UserSignTime = 42;
 }
 
 // 读取筛查结果响应
@@ -470,4 +483,16 @@ message ReadScreenRecordResponse{
 	// 筛查结果数据
 	// @required
 	ScreenRecordPacket Data = 7;
+}
+
+// 档案签名请求
+message SignRecordRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 用户签名
+	// @required
+	// @maxLength(256)
+	string UserSign = 2;
 }

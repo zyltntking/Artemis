@@ -3,6 +3,7 @@ using System;
 using Artemis.Service.Business.VisionScreen.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Artemis.App.Business.VisionScreen.Migrations
 {
     [DbContext(typeof(BusinessContext))]
-    partial class BusinessContextModelSnapshot : ModelSnapshot
+    [Migration("20240808101538_AddSignFields")]
+    partial class AddSignFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1095,10 +1098,6 @@ namespace Artemis.App.Business.VisionScreen.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasComment("用户签名");
-
-                    b.Property<DateTime?>("UserSignTime")
-                        .HasColumnType("TIMESTAMP")
-                        .HasComment("用户签名时间");
 
                     b.Property<Guid>("VisualStandardId")
                         .HasColumnType("uuid")

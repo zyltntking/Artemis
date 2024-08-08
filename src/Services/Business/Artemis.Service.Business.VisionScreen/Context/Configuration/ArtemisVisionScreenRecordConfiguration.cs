@@ -48,6 +48,9 @@ internal sealed class ArtemisVisionScreenRecordConfiguration : ConcurrencyPartit
 
         builder.Property(record => record.ReportReceiveTime)
             .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(record => record.UserSignTime)
+            .HasColumnType(DataTypeSet.DateTime);
     }
 
     /// <summary>

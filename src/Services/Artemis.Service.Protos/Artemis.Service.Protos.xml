@@ -2008,12 +2008,36 @@
             筛查时间
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.ResultFieldNumber">
-            <summary>Field number for the "Result" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.ReportFieldNumber">
+            <summary>Field number for the "Report" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.Result">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.Report">
             <summary>
-            筛查结果
+            筛查报告
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsSignFieldNumber">
+            <summary>Field number for the "IsSign" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.IsSign">
+            <summary>
+            是否签名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.UserSignFieldNumber">
+            <summary>Field number for the "UserSign" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.UserSign">
+            <summary>
+            用户签名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.UserSignTimeFieldNumber">
+            <summary>Field number for the "UserSignTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ScreenRecordPacket.UserSignTime">
+            <summary>
+            签名时间
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordResponse">
@@ -2079,6 +2103,31 @@
             <summary>
             筛查结果数据
             @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest">
+            <summary>
+            档案签名请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest.RecordIdFieldNumber">
+            <summary>Field number for the "RecordId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest.RecordId">
+            <summary>
+            记录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest.UserSignFieldNumber">
+            <summary>Field number for the "UserSign" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest.UserSign">
+            <summary>
+            用户签名
+            @required
+            @maxLength(256)
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService">
@@ -2159,6 +2208,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.ServerCallContext)">
             <summary>
             读取筛查结果
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            档案签名
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2501,6 +2558,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.CallOptions)">
             <summary>
             读取筛查结果
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            档案签名
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            档案签名
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.SignRecordAsync(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            档案签名
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.SignRecordAsync(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            档案签名
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

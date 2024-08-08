@@ -338,7 +338,7 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     /// <summary>
     ///     学校名称
     /// </summary>
-    public string SchoolName { get; set; }
+    public required string SchoolName { get; set; }
 
     /// <summary>
     ///     学校编码
@@ -373,7 +373,7 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     /// <summary>
     ///     组织机构名称
     /// </summary>
-    public string OrganizationName { get; set; }
+    public required string OrganizationName { get; set; }
 
     /// <summary>
     ///     组织机构编码
@@ -383,7 +383,7 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     /// <summary>
     ///     组织机构设计编码
     /// </summary>
-    public string OrganizationDesignCode { get; set; }
+    public required string OrganizationDesignCode { get; set; }
 
     /// <summary>
     ///     班级标识
@@ -519,6 +519,21 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     /// 是否反馈
     /// </summary>
     public bool IsFeedBack { get; set; }
+
+    /// <summary>
+    /// 是否签名
+    /// </summary>
+    public bool IsSign { get; set; }
+
+    /// <summary>
+    /// 用户签名
+    /// </summary>
+    public string? UserSign { get; set; }
+
+    /// <summary>
+    /// 用户签名时间
+    /// </summary>
+    public DateTime? UserSignTime { get; set; }
 
     #endregion
 }

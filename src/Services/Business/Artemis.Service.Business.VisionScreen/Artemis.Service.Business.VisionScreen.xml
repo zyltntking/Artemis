@@ -1041,6 +1041,21 @@
             是否反馈
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.IsSign">
+            <summary>
+            是否签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.UserSign">
+            <summary>
+            用户签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.UserSignTime">
+            <summary>
+            用户签名时间
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.VisualChart">
             <summary>
                 视力表数据模型
@@ -1288,6 +1303,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildHistoryRecordInfoList(Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询孩子历史筛查记录列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchUserMessageInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取个人中心消息信息
@@ -1320,9 +1343,33 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UnbindChildRelation(Artemis.Service.Protos.Business.VisionScreen.UnbindChildRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            解绑孩子关系
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UploadChildEyePhoto(Artemis.Service.Protos.Business.VisionScreen.UploadChildEyePhotoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             上传孩子眼部照片
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取筛查结果
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            档案签名
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>

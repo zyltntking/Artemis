@@ -668,5 +668,58 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         return recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
     }
 
+    /// <summary>
+    /// 档案签名
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("档案签名")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> SignRecord(SignRecordRequest request, ServerCallContext context)
+    {
+        var (valid, userId) = context.GetHttpContext().GetUserId();
+
+        if (!valid)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("解析凭据中的用户标识失败");
+        }
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+        }
+
+        var studentIds = await StudentRelationBindingStore
+            .EntityQuery
+            .Where(binding => binding.UserId == userId)
+            .Select(binding => binding.StudentId)
+            .ToListAsync(context.CancellationToken);
+
+        var recordId = Guid.Parse(request.RecordId);
+
+        var record = await VisionScreenRecordStore.FindEntityAsync(recordId, context.CancellationToken);
+
+        if (record is null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查档案不存在");
+        }
+
+        if (!studentIds.Contains(record.StudentId))
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("该档案不属于您的孩子");
+        }
+
+        record.IsSign = true;
+        record.UserSign = request.UserSign;
+        record.UserSignTime = DateTime.Now;
+
+        var result = await VisionScreenRecordStore.UpdateAsync(record, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
     #endregion
 }

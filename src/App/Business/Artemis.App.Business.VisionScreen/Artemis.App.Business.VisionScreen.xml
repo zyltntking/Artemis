@@ -88,6 +88,30 @@
         <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddMessage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.AddSignFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.AddSignTime">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignTime.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignTime.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddSignTime.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Program">
             <summary>
                 应用程序入口

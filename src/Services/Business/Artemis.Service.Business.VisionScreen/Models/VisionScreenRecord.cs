@@ -627,4 +627,23 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     /// </summary>
     [Comment("是否反馈")]
     public bool IsFeedBack { get; set; }
+
+    /// <summary>
+    /// 是否签名
+    /// </summary>
+    [Comment("是否签名")]
+    public bool IsSign { get; set; }
+
+    /// <summary>
+    /// 用户签名
+    /// </summary>
+    [Comment("用户签名")]
+    [MaxLength(256)]
+    public string? UserSign { get; set; }
+
+    /// <summary>
+    /// 用户签名时间
+    /// </summary>
+    [Comment("用户签名时间")]
+    public DateTime? UserSignTime { get; set; }
 }

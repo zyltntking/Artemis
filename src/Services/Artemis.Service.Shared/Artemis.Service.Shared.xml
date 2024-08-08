@@ -629,6 +629,21 @@
             是否反馈
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsSign">
+            <summary>
+            是否签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.UserSign">
+            <summary>
+            用户签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.UserSignTime">
+            <summary>
+            用户签名时间
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">
             <summary>
                 视力表数据接口
@@ -1382,6 +1397,21 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsFeedBack">
             <summary>
             是否反馈
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsSign">
+            <summary>
+            是否签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.UserSign">
+            <summary>
+            用户签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.UserSignTime">
+            <summary>
+            用户签名时间
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Identity.IClaim">

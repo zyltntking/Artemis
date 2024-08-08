@@ -290,4 +290,19 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     /// 是否反馈
     /// </summary>
     bool IsFeedBack { get; set; }
+
+    /// <summary>
+    /// 是否签名
+    /// </summary>
+    bool IsSign { get; set; }
+
+    /// <summary>
+    /// 用户签名
+    /// </summary>
+    string? UserSign { get; set; }
+
+    /// <summary>
+    /// 用户签名时间
+    /// </summary>
+    DateTime? UserSignTime { get; set; }
 }
