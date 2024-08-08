@@ -249,7 +249,7 @@ public class DictionaryServiceImplement : DictionaryService.DictionaryServiceBas
     {
         var id = Guid.Parse(request.DictionaryId);
 
-        var package = request.Adapt<DataDictionaryItemPackage>();
+        var package = request.DictionaryItem.Adapt<DataDictionaryItemPackage>();
 
         var result = await DataDictionaryManager.CreateSubEntityAsync(id, package, context.CancellationToken);
 

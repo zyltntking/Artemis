@@ -231,6 +231,51 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Models.NotificationMessage">
+            <summary>
+            通知消息模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.TaskId">
+            <summary>
+            任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.EndType">
+            <summary>
+            端类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.IsRead">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.ReadTime">
+            <summary>
+            消息读取时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.Title">
+            <summary>
+            通知标题
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.Content">
+            <summary>
+            通知内容
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.NotificationMessage.BindingTag">
+            <summary>
+            绑定标记
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.Optometer">
             <summary>
                 筛查仪数据

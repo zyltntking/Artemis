@@ -4,7 +4,6 @@ using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
-using Artemis.Service.Business.VisionScreen.Models;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
