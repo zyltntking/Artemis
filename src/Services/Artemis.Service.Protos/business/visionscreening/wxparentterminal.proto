@@ -27,9 +27,9 @@ service WxParentTerminalService{
 	}
 
 	// 反馈筛查记录后续处理
-	rpc FeedbackRecord(FeedbackRecordRequest) returns (EmptyResponse) {
+	rpc FeedbackRecord(FeedbackRecordRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
-			post: "/api/ParentTerminal/FeedbackRecord"
+			post: "/api/BusinessService/ParentTerminal/FeedbackRecord"
 			body: "*"
 		};
 	}
@@ -189,10 +189,18 @@ message FeedbackRecordRequest{
 	// @required
 	// @guid
 	string RecordId = 1;
-	// 处理结果
+
+	// 是否进一步检查
 	// @required
-	// @maxLength(128)
-	string Result = 2;
+	bool IsChedk = 2;
+
+	// 检查时间
+	// @datetime
+	google.protobuf.StringValue CheckTime = 3;
+
+	// 反馈内容
+	// @required
+	repeated string Content = 4;
 }
 
 // 查询孩子信息请求

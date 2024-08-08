@@ -1300,14 +1300,31 @@
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.ResultFieldNumber">
-            <summary>Field number for the "Result" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.IsChedkFieldNumber">
+            <summary>Field number for the "IsChedk" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.Result">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.IsChedk">
             <summary>
-            处理结果
+            是否进一步检查
             @required
-            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.CheckTimeFieldNumber">
+            <summary>Field number for the "CheckTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.CheckTime">
+            <summary>
+            检查时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.ContentFieldNumber">
+            <summary>Field number for the "Content" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest.Content">
+            <summary>
+            反馈内容
+            @required
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryChildRequest">

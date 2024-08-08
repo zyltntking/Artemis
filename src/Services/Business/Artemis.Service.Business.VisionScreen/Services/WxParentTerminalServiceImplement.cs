@@ -33,13 +33,15 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// <param name="studentEyePhotoStore"></param>
     /// <param name="studentRelationBindingStore"></param>
     /// <param name="visionScreenRecordStore"></param>
+    /// <param name="recordFeedbackStore"></param>
     public WxParentTerminalServiceImplement(
         IIdentityUserStore userStore, 
         IArtemisSchoolStore schoolStore,
         IArtemisStudentStore studentStore,
         IArtemisStudentEyePhotoStore studentEyePhotoStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
-        IArtemisVisionScreenRecordStore visionScreenRecordStore)
+        IArtemisVisionScreenRecordStore visionScreenRecordStore,
+        IArtemisRecordFeedbackStore recordFeedbackStore)
     {
         UserStore = userStore;
         SchoolStore = schoolStore;
@@ -47,6 +49,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         StudentEyePhotoStore = studentEyePhotoStore;
         StudentRelationBindingStore = studentRelationBindingStore;
         VisionScreenRecordStore = visionScreenRecordStore;
+        RecordFeedbackStore = recordFeedbackStore;
     }
 
     /// <summary>
@@ -78,6 +81,11 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// 视力筛查档案存储
     /// </summary>
     private IArtemisVisionScreenRecordStore VisionScreenRecordStore { get; }
+
+    /// <summary>
+    /// 档案反馈存储
+    /// </summary>
+    private IArtemisRecordFeedbackStore RecordFeedbackStore { get; }
 
     #region Overrides of WxParentTerminalServiceBase
 
@@ -219,9 +227,68 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         }
 
 
-
+        // todo: 未实现
 
         return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("用户不存在");
+    }
+
+    /// <summary>
+    /// 反馈筛查记录后续处理
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("反馈筛查记录后续处理")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> FeedbackRecord(FeedbackRecordRequest request, ServerCallContext context)
+    {
+        var (valid, userId) = context.GetHttpContext().GetUserId();
+
+        if (!valid)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("解析凭据中的用户标识失败");
+        }
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+        }
+
+        var recordId = Guid.Parse(request.RecordId);
+
+        var record = await VisionScreenRecordStore.FindEntityAsync(recordId, context.CancellationToken);
+
+        if (record is null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查档案不存在");
+        }
+
+        var feedBackList = new List<ArtemisRecordFeedback>();
+
+        foreach (var feedBackContent in request.Content)
+        {
+            var recordFeedBack = Instance.CreateInstance<ArtemisRecordFeedback>();
+            recordFeedBack.RecordId = recordId;
+            recordFeedBack.FeedBackTime = DateTime.Now;
+            recordFeedBack.IsCheck = request.IsChedk;
+            recordFeedBack.CheckDate = request.CheckTime.Adapt<DateTime>();
+            recordFeedBack.Content = feedBackContent;
+            recordFeedBack.UserId = userId;
+            feedBackList.Add(recordFeedBack);
+        }
+
+        var result = await RecordFeedbackStore.CreateAsync(feedBackList, context.CancellationToken);
+
+        if (result.Succeeded)
+        {
+            record.IsFeedBack = true;
+
+            await VisionScreenRecordStore.UpdateAsync(record, context.CancellationToken);
+        }
+
+        return result.AffectedResponse();
     }
 
     /// <summary>
