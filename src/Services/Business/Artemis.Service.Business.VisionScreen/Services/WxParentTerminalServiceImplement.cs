@@ -518,6 +518,47 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
+    /// 解绑孩子关系
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("解绑孩子关系")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> UnbindChildRelation(UnbindChildRequest request, ServerCallContext context)
+    {
+        var (valid, userId) = context.GetHttpContext().GetUserId();
+
+        if (!valid)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("解析凭据中的用户标识失败");
+        }
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+        }
+
+        var studentId = Guid.Parse(request.StudentId);
+
+        var binding = await StudentRelationBindingStore
+            .EntityQuery
+            .Where(item => item.UserId == userId && item.StudentId == studentId)
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (binding is null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户与该学生的绑定关系不存在");
+        }
+
+        var result = await StudentRelationBindingStore.DeleteAsync(binding, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
     /// 上传孩子眼部照片
     /// </summary>
     /// <param name="request">The request received from the client.</param>

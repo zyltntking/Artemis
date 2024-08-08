@@ -56,6 +56,14 @@ service WxParentTerminalService{
 		};
 	}
 
+	// 解绑孩子关系
+	rpc UnbindChildRelation(UnbindChildRequest) returns (AffectedResponse) {
+		option (google.api.http) = {
+			post: "/api/BusinessService/ParentTerminal/UnbindChildRelation"
+			body: "*"
+		};
+	}
+
 	// 上传孩子眼部照片
 	rpc UploadChildEyePhoto(UploadChildEyePhotoRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
@@ -317,6 +325,14 @@ message BindChildRequest{
 	// @required
 	// @maxLength(32)
 	string Relation = 2;
+}
+
+// 解绑孩子请求
+message UnbindChildRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
 }
 
 // 上传学生眼部照片请求
