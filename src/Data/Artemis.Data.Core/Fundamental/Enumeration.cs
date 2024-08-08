@@ -92,7 +92,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="id">值</param>
     /// <returns>枚举成员</returns>
-    public static T? FromValue<T>(int id) where T : Enumeration
+    public static T FromValue<T>(int id) where T : Enumeration
     {
         var matchingItem = Parse<T, int>(id, "id", item => item.Id == id);
         return matchingItem;
@@ -104,7 +104,7 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <typeparam name="T">枚举类型</typeparam>
     /// <param name="name">枚举成员名称</param>
     /// <returns>枚举成员</returns>
-    public static T? FromName<T>(string name) where T : Enumeration
+    public static T FromName<T>(string name) where T : Enumeration
     {
         var matchingItem = Parse<T, string>(name, "name", item => item.Name == name.Normalize());
         return matchingItem;
@@ -191,11 +191,11 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     /// <param name="predicate">匹配表达式</param>
     /// <returns>枚举成员</returns>
     /// <exception cref="InvalidOperationException">无效操作异常</exception>
-    private static T? Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
+    private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-        return matchingItem;
+        return matchingItem ?? throw new Exception("转换失败");
     }
 
     /// <summary>

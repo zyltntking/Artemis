@@ -74,6 +74,20 @@ public static class ClaimExtensions
     }
 
     /// <summary>
+    /// 获取端类型值
+    /// </summary>
+    /// <param name="httpContext"></param>
+    /// <returns></returns>
+    public static string? GetEndType(this HttpContext httpContext)
+    {
+        return httpContext
+            .GetClaims()
+            .Where(claim => claim.Type == ArtemisClaimTypes.EndType)
+            .Select(claim => claim.Value)
+            .FirstOrDefault();
+    }
+
+    /// <summary>
     /// 获取用户标识
     /// </summary>
     /// <param name="httpContext"></param>

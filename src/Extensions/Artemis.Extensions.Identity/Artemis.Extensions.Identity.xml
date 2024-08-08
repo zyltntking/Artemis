@@ -468,6 +468,13 @@
             <param name="httpContext"></param>
             <returns></returns>
         </member>
+        <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetEndType(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取端类型值
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Extensions.Identity.ClaimExtensions.GetUserId(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             获取用户标识

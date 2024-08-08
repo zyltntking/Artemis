@@ -714,6 +714,106 @@
                 操作时间
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessageInfo">
+            <summary>
+            通知消息信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessageInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage">
+            <summary>
+            通知消息数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.TaskId">
+            <summary>
+            任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.EndType">
+            <summary>
+            端类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.IsRead">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.ReadTime">
+            <summary>
+            消息读取时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.Title">
+            <summary>
+            通知标题
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.Content">
+            <summary>
+            通知内容
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.NotificationMessagePackage.BindingTag">
+            <summary>
+            绑定标记
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackInfo">
+            <summary>
+            档案反馈信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackInfo.RecordId">
+            <summary>
+            记录标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage">
+            <summary>
+            档案反馈数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage.UserId">
+            <summary>
+            反馈用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage.IsCheck">
+            <summary>
+            是否已处理
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage.CheckDate">
+            <summary>
+            处理日期
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage.Content">
+            <summary>
+            反馈内容
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.RecordFeedbackPackage.FeedBackTime">
+            <summary>
+            反馈时间
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentEyePhotoInfo">
             <summary>
             学生眼部照片信息
@@ -777,6 +877,511 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.StudentRelationBindingPackage.Relation">
             <summary>
             关系
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordInfo">
+            <summary>
+            视力筛查记录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage">
+            <summary>
+            视力筛查记录数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftChartDistance">
+            <summary>
+                左眼与视力表的距离
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightChartDistance">
+            <summary>
+                右眼与视力表的距离
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftNakedEyeVision">
+            <summary>
+                左眼裸眼视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightNakedEyeVision">
+            <summary>
+                右眼裸眼视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsWareGlasses">
+            <summary>
+                是否佩戴眼镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCorrectedVision">
+            <summary>
+                左眼矫正视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCorrectedVision">
+            <summary>
+                右眼矫正视力
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftEyeHyperopiaType">
+            <summary>
+                左眼远视类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightEyeHyperopiaType">
+            <summary>
+                右眼远视类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsWareLeftOkLenses">
+            <summary>
+                左眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsWareRightOkLenses">
+            <summary>
+                右眼是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ChartScreeningStuffName">
+            <summary>
+                筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ChartOperationTime">
+            <summary>
+                操作时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.PupilDistance">
+            <summary>
+                瞳距
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftSphere">
+            <summary>
+                左眼球镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftEquivalentSphere">
+            <summary>
+                左眼等效球镜度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightSphere">
+            <summary>
+                右眼球镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightEquivalentSphere">
+            <summary>
+                右眼等效球径度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCylinder">
+            <summary>
+                左眼柱镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCylinder">
+            <summary>
+                右眼柱镜
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftAxis">
+            <summary>
+                左眼轴位
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightAxis">
+            <summary>
+                右眼轴位
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftAstigmatism">
+            <summary>
+                左眼散光度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightAstigmatism">
+            <summary>
+                右眼散光度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureR1">
+            <summary>
+                左眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureR1">
+            <summary>
+                右眼角膜曲率r1(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureD1">
+            <summary>
+                左眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureD1">
+            <summary>
+                右眼角膜曲率r1(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureAngle1">
+            <summary>
+                左眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureAngle1">
+            <summary>
+                右眼角膜曲率r1角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureR2">
+            <summary>
+                左眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureR2">
+            <summary>
+                右眼角膜曲率r2(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureD2">
+            <summary>
+                左眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureD2">
+            <summary>
+                右眼角膜曲率r2(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureAngle2">
+            <summary>
+                左眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureAngle2">
+            <summary>
+                右眼角膜曲率r2角度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureAverage">
+            <summary>
+                左眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureAverage">
+            <summary>
+                右眼角膜曲率平均值(mm)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureAverageD">
+            <summary>
+                左眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureAverageD">
+            <summary>
+                右眼角膜曲率平均值(d)
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftCornealCurvatureAstigmatism">
+            <summary>
+                左眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightCornealCurvatureAstigmatism">
+            <summary>
+                右眼角膜曲率散光度
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OptometerScreeningStuffName">
+            <summary>
+                筛查工作人员姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OptometerOperationTime">
+            <summary>
+                操作时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskId">
+            <summary>
+                任务标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskName">
+            <summary>
+                任务名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskCode">
+            <summary>
+                任务编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskUnitId">
+            <summary>
+                任务单元标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskUnitName">
+            <summary>
+                任务单元名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskUnitCode">
+            <summary>
+                任务单元编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskUnitTargetId">
+            <summary>
+                任务目标标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskUnitTargetCode">
+            <summary>
+                任务目标编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskAgentId">
+            <summary>
+                任务代理标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskAgentName">
+            <summary>
+                任务代理名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskAgentCode">
+            <summary>
+                任务代理编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.TaskAgentType">
+            <summary>
+                任务代理类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.DoctorName">
+            <summary>
+                医师姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.VisualStandardId">
+            <summary>
+                应用的视力标准标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.DoctorAdvice">
+            <summary>
+                医嘱
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.PrescribedTime">
+            <summary>
+                医嘱时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolId">
+            <summary>
+                学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolName">
+            <summary>
+                学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolCode">
+            <summary>
+                学校编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolType">
+            <summary>
+                学校类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.DivisionId">
+            <summary>
+                行政区划标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.DivisionName">
+            <summary>
+                行政区划名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.DivisionCode">
+            <summary>
+                行政区划编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OrganizationId">
+            <summary>
+                组织机构标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OrganizationName">
+            <summary>
+                组织机构名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OrganizationCode">
+            <summary>
+                组织机构编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OrganizationDesignCode">
+            <summary>
+                组织机构设计编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ClassId">
+            <summary>
+                班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ClassName">
+            <summary>
+                班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ClassCode">
+            <summary>
+                班级编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.GradeName">
+            <summary>
+                年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ClassSerialNumber">
+            <summary>
+                班级序列号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudyPhase">
+            <summary>
+                学段
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolLength">
+            <summary>
+                学制
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.SchoolLengthValue">
+            <summary>
+               学制值
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.HeadTeacherId">
+            <summary>
+               班主任标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.HeadTeacherName">
+            <summary>
+            班主任名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentId">
+            <summary>
+                学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentName">
+            <summary>
+                学生名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentCode">
+            <summary>
+                学生编号
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.Birthday">
+            <summary>
+                生日
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.Age">
+            <summary>
+                年龄
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsChartChecked">
+            <summary>
+                是否已经过电子视力表筛查
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ChartCheckedTimes">
+            <summary>
+                电子视力表筛查次数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsOptometerChecked">
+            <summary>
+                是否已经过验光仪筛查
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.OptometerCheckedTimes">
+            <summary>
+                验光仪筛查次数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.CheckTime">
+            <summary>
+                筛查时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ExceptionReason">
+            <summary>
+                筛查结果
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ReportSender">
+            <summary>
+                报告发送人
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ReportSendTime">
+            <summary>
+                报告发送时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ReportReceiver">
+            <summary>
+                报告签收人
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.ReportReceiveTime">
+            <summary>
+                报告签收时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsFeedBack">
+            <summary>
+            是否反馈
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Identity.IClaim">

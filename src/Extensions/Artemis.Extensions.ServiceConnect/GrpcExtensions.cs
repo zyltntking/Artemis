@@ -1,8 +1,11 @@
-﻿using Artemis.Extensions.ServiceConnect.Interceptors;
+﻿using System.IO.Compression;
+using Artemis.Extensions.ServiceConnect.Interceptors;
 using Artemis.Extensions.ServiceConnect.SwaggerFilters;
 using Artemis.Extensions.ServiceConnect.Validators;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace Artemis.Extensions.ServiceConnect;
@@ -27,9 +30,13 @@ public static class GrpcExtensions
             options.EnableDetailedErrors = true;
             if (enableValidator)
                 options.Interceptors.Add<MessageValidator>();
-            options.Interceptors.Add<AddInsLog>();
+            //options.Interceptors.Add<AddInsLog>();
+            //options.Interceptors.Add<KeepUnsetField>();
             options.Interceptors.Add<FriendlyException>();
-        }).AddJsonTranscoding();
+        }).AddJsonTranscoding(option =>
+        {
+            option.JsonSettings.WriteIndented = true;
+        });
 
         builder.Services.AddGrpcReflection();
 

@@ -4,6 +4,7 @@ using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
+using Artemis.Service.Business.VisionScreen.Models;
 using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
@@ -33,6 +34,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// <param name="studentRelationBindingStore"></param>
     /// <param name="visionScreenRecordStore"></param>
     /// <param name="recordFeedbackStore"></param>
+    /// <param name="notificationMessageStore"></param>
     public WxParentTerminalServiceImplement(
         IIdentityUserStore userStore, 
         IArtemisSchoolStore schoolStore,
@@ -40,7 +42,8 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         IArtemisStudentEyePhotoStore studentEyePhotoStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
         IArtemisVisionScreenRecordStore visionScreenRecordStore,
-        IArtemisRecordFeedbackStore recordFeedbackStore)
+        IArtemisRecordFeedbackStore recordFeedbackStore,
+        IArtemisNotificationMessageStore notificationMessageStore)
     {
         UserStore = userStore;
         SchoolStore = schoolStore;
@@ -49,6 +52,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         StudentRelationBindingStore = studentRelationBindingStore;
         VisionScreenRecordStore = visionScreenRecordStore;
         RecordFeedbackStore = recordFeedbackStore;
+        NotificationMessageStore = notificationMessageStore;
     }
 
     /// <summary>
@@ -85,6 +89,11 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// 档案反馈存储
     /// </summary>
     private IArtemisRecordFeedbackStore RecordFeedbackStore { get; }
+
+    /// <summary>
+    /// 通知消息存储
+    /// </summary>
+    private IArtemisNotificationMessageStore NotificationMessageStore { get; }
 
     #region Overrides of WxParentTerminalServiceBase
 
@@ -225,10 +234,84 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("用户不存在");
         }
 
+        var endType = context.GetHttpContext().GetEndType();
 
-        // todo: 未实现
+        var messageInfos = await NotificationMessageStore
+            .EntityQuery
+            .Where(item => item.UserId == userId && item.EndType == endType)
+            .ProjectToType<NotificationMessageInfo>()
+            .ToListAsync(context.CancellationToken);
 
-        return ResultAdapter.AdaptEmptyFail<FetchParentUserMessageInfoResponse>("用户不存在");
+        var bindings = await StudentRelationBindingStore
+            .EntityQuery
+            .Where(item => item.UserId == userId)
+            .ProjectToType<StudentRelationBindingInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        var studentIds = bindings.Select(binding => binding.StudentId).Distinct().ToList();
+
+        var records = await VisionScreenRecordStore
+            .EntityQuery
+            .Where(item => studentIds.Contains(item.StudentId))
+            .ProjectToType<VisionScreenRecordInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        var recordIs = records.Select(record => record.Id).Distinct().ToList();
+
+        var feedBacks = await RecordFeedbackStore
+            .EntityQuery
+            .Where(item => recordIs.Contains(item.RecordId))
+            .ProjectToType<RecordFeedbackInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        var messageInfoPackets = messageInfos.Adapt<List<NotificationMessagePacket>>();
+
+        var feedbackRecordPackets = new List<FeedbackRecordPacket>();
+
+        foreach (var record in records)
+        {
+            var feedbacks = feedBacks
+                .Where(item => item.RecordId == record.Id)
+                .ToList();
+
+            var feedbackInfo = feedbacks.FirstOrDefault();
+
+            var feedbackContent = new FeedbackContentPacket();
+
+            if (feedbackInfo != null)
+            {
+                feedbackContent.IsCheck = feedbackInfo.IsCheck;
+                feedbackContent.CheckDate = feedbackInfo.CheckDate.ToString();
+                feedbackContent.FeedbackTime = feedbackInfo.FeedBackTime.ToString();
+                var contents = string.Join(",", feedbacks.Select(item => item.Content));
+                feedbackContent.Content.Add(contents);
+            }
+            else
+            {
+                feedbackContent = null;
+            }
+
+            var feedbackRecordPacket = new FeedbackRecordPacket
+            {
+                RecordId = record.Id.ToString(),
+                StudentId = record.StudentId.ToString(),
+                CheckTime = record.CheckTime.ToString(),
+                IsFeedback = record.IsFeedBack,
+                FeedbackContent = feedbackContent
+            };
+
+            feedbackRecordPackets.Add(feedbackRecordPacket);
+        }
+
+        var parentUserMessageInfo = new ParentUserMessageInfo();
+        parentUserMessageInfo.NotificationMessages.Add(messageInfoPackets);
+        parentUserMessageInfo.FeedbackRecords.Add(feedbackRecordPackets);
+
+        var response = ResultAdapter.AdaptEmptySuccess<FetchParentUserMessageInfoResponse>();
+
+        response.Data = parentUserMessageInfo;
+
+        return response;
     }
 
     /// <summary>
@@ -351,7 +434,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             Nation = student?.Nation,
             StudentNumber = student?.StudentNumber,
             SchoolName = school?.Name,
-            ClassName = "四年级1班"
+            ClassName = @class?.GradeName ?? "四年级1班"
         };
 
         var response = ResultAdapter.AdaptEmptySuccess<QueryChildResponse>();

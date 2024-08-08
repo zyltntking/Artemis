@@ -37,6 +37,11 @@ public class BusinessContext : DbContext
     public virtual DbSet<ArtemisRecordFeedback> RecordFeedbacks { get; set; } = default!;
 
     /// <summary>
+    /// 提示消息数据
+    /// </summary>
+    public virtual DbSet<ArtemisNotificationMessage> NotificationMessages { get; set; } = default!;
+
+    /// <summary>
     ///    学生亲属关系绑定数据
     /// </summary>
     public virtual DbSet<ArtemisStudentRelationBinding> StudentRelationBindings { get; set; } = default!;

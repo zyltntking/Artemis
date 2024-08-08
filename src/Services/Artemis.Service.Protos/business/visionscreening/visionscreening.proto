@@ -3,32 +3,31 @@
 option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
 
 package Artemis.Service.Protos.Business.VisionScreen;
+import "google/protobuf/wrappers.proto";
 
 // 通知消息数据包
-message NotificationPacket{
+message NotificationMessagePacket{
 	// 通知消息标识
 	// @required
 	// @guid
-	string MessageId = 1;
-	// 通知消息类型
-	// @required
-	// @maxLength(32)
-	string MessageType = 2;
-	// 通知消息标题
-	// @required
-	// @maxLength(128)
-	string Title = 3;
-	// 通知消息内容
-	// @required
-	string Content = 4;
-	// 通知消息时间
-	// @datetime
-	string DateTime = 5;
-	// 记录标识
+	string Id = 1;
+	// 任务标识
 	// @required
 	// @guid
-	string RecordId = 6;
+	string TaskId = 2;
+	// 端类型
+	// @maxLength(32)
+	google.protobuf.StringValue EndType = 3;
 	// 是否已读
 	// @required
-	bool IsRead = 7;
+	bool IsRead = 4;
+	// 通知消息时间
+	// @datetime
+	google.protobuf.StringValue ReadTime = 5;
+	// 通知消息标题
+	google.protobuf.StringValue Title = 6;
+	// 通知消息内容
+	google.protobuf.StringValue Content = 7;
+	// 绑定标记
+	google.protobuf.StringValue BindingTag = 8;
 }

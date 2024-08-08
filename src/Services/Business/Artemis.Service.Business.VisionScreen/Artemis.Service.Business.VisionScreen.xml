@@ -4,6 +4,11 @@
         <name>Artemis.Service.Business.VisionScreen</name>
     </assembly>
     <members>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisNotificationMessage">
+            <summary>
+            通知消息实体
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Context.ArtemisOptometer">
             <summary>
                 验光仪数据
@@ -95,6 +100,11 @@
             视力档案反馈记录
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.NotificationMessages">
+            <summary>
+            提示消息数据
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Context.BusinessContext.StudentRelationBindings">
             <summary>
                学生亲属关系绑定数据
@@ -122,6 +132,21 @@
             </summary>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisStudentEyePhotoConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisNotificationMessageConfiguration">
+            <summary>
+                通知消息配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisNotificationMessageConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Context.Configuration.ArtemisNotificationMessageConfiguration.TableName">
             <summary>
                 表名
             </summary>
@@ -1202,7 +1227,7 @@
             家长端服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore)">
             <summary>
             构造函数
             </summary>
@@ -1213,6 +1238,7 @@
             <param name="studentRelationBindingStore"></param>
             <param name="visionScreenRecordStore"></param>
             <param name="recordFeedbackStore"></param>
+            <param name="notificationMessageStore"></param>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UserStore">
             <summary>
@@ -1247,6 +1273,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.RecordFeedbackStore">
             <summary>
             档案反馈存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.NotificationMessageStore">
+            <summary>
+            通知消息存储
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
@@ -1296,6 +1327,27 @@
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore">
+            <summary>
+                通知消息存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Stores.ArtemisNotificationMessageStore">
+            <summary>
+                通知消息存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Stores.ArtemisNotificationMessageStore.#ctor(Artemis.Service.Business.VisionScreen.Context.BusinessContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                通知消息存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore">
             <summary>

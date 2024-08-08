@@ -22,6 +22,7 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisStudentRelationBindingStore, ArtemisStudentRelationBindingStore>();
         services.TryAddScoped<IArtemisStudentEyePhotoStore, ArtemisStudentEyePhotoStore>();
         services.TryAddScoped<IArtemisRecordFeedbackStore, ArtemisRecordFeedbackStore>();
+        services.TryAddScoped<IArtemisNotificationMessageStore, ArtemisNotificationMessageStore>();
 
         return services;
     }

@@ -136,8 +136,21 @@ message FetchChildInfoResponse{
 	repeated ChildInfo Data = 7;
 }
 
-// 未反馈记录数据包
-message NotFeedbackRecordPacket{
+// 档案反馈数据包
+message FeedbackContentPacket{
+	// 是否已处理
+	bool IsCheck = 1;
+	// 处理日期
+	// @datetime
+	google.protobuf.StringValue CheckDate = 2;
+	// @datetime
+	google.protobuf.StringValue FeedbackTime = 3;
+	// 反馈内容
+	repeated string Content = 4;
+}
+
+// 反馈记录数据包
+message FeedbackRecordPacket{
 	// 记录标识
 	// @required
 	// @guid
@@ -146,19 +159,24 @@ message NotFeedbackRecordPacket{
 	// @required
 	// @guid
 	string StudentId = 2;
-	// 记录时间
+	// 检查时间
 	// @datetime
-	google.protobuf.Timestamp DateTime = 3;
+	google.protobuf.StringValue CheckTime = 3;
+	// 是否已反馈
+	// @required
+	bool IsFeedback = 4;
+	// 反馈内容
+	FeedbackContentPacket FeedbackContent = 5;
 }
 
 // 家长个人中心消息信息
 message ParentUserMessageInfo{
 	// 通知消息数据
 	// @required
-	repeated NotificationPacket Notifications = 1;
-	// 未反馈记录数据
+	repeated NotificationMessagePacket NotificationMessages = 1;
+	// 反馈记录数据
 	// @required
-	repeated NotFeedbackRecordPacket NotFeedbackRecords = 2;
+	repeated FeedbackRecordPacket FeedbackRecords = 2;
 }
 
 // 获取家长端个人中心消息信息响应

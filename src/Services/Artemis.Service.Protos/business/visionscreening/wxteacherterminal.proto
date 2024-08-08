@@ -164,7 +164,7 @@ message FetchTaskInfoOverviewResponse{
 message TeacherUserMessageInfo{
 	// 通知消息数据
 	// @required
-	repeated NotificationPacket Notifications = 1;
+	repeated NotificationMessagePacket NotificationMessages = 1;
 }
 
 // 获取教师端个人中心消息信息响应
