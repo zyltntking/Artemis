@@ -11,6 +11,7 @@ using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
 using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
+using Artemis.Service.Shared.Business.VisionScreen.Transfer;
 using Artemis.Service.Shared.Resource.Transfer;
 using Artemis.Service.Shared.School.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
@@ -45,6 +46,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="visionScreenRecordStore"></param>
     /// <param name="optometerStore"></param>
     /// <param name="visualChartStore"></param>
+    /// <param name="studentRelationBindingStore"></param>
     public VisionScreeningCoreServiceImplement(
         IArtemisTaskStore taskStore,
         IArtemisTaskUnitStore taskUnitStore,
@@ -59,7 +61,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         IArtemisOrganizationStore organizationStore,
         IArtemisVisionScreenRecordStore visionScreenRecordStore,
         IArtemisOptometerStore optometerStore,
-        IArtemisVisualChartStore visualChartStore)
+        IArtemisVisualChartStore visualChartStore,
+        IArtemisStudentRelationBindingStore studentRelationBindingStore)
     {
         TaskStore = taskStore;
         TaskUnitStore = taskUnitStore;
@@ -75,6 +78,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         VisionScreenRecordStore = visionScreenRecordStore;
         OptometerStore = optometerStore;
         VisualChartStore = visualChartStore;
+        StudentRelationBindingStore = studentRelationBindingStore;
     }
 
     private IArtemisTaskStore TaskStore { get; }
@@ -104,6 +108,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     private IArtemisOptometerStore OptometerStore { get; }
 
     private IArtemisVisualChartStore VisualChartStore { get; }
+
+    private IArtemisStudentRelationBindingStore StudentRelationBindingStore { get; }
 
     #region Overrides of VisionScreeningCoreServiceBase
 
@@ -517,6 +523,47 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查记录不存在");
+    }
+
+    /// <summary>
+    /// 获取大屏学生视力档案
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取大屏学生视力档案")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<GetLargeScreenRecordResponse> GetLargeScreenRecord(GetLargeScreenRecordRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+        var studentId = Guid.Parse(request.StudentId);
+
+        var record = await VisionScreenRecordStore
+            .EntityQuery
+            .Where(item => item.TaskId == taskId && item.StudentId == studentId)
+            .Where(item => item.CheckTime != null)
+            .OrderByDescending(item => item.CheckTime)
+            .ProjectToType<LargeScreenRecordPacket>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (record is not null)
+        {
+            var studentBinding = await StudentRelationBindingStore
+                .EntityQuery
+                .Where(binding => binding.StudentId == studentId)
+                .ProjectToType<StudentRelationBindingInfo>()
+                .FirstOrDefaultAsync(context.CancellationToken);
+
+            record.ParentRelation = studentBinding?.Relation;
+            record.Address = "";
+            record.ParentMobile = "";
+            record.DoctorAdvice = "";
+
+            return ResultAdapter.AdaptSuccess<GetLargeScreenRecordResponse, LargeScreenRecordPacket>(record);
+        }
+
+        return ResultAdapter.AdaptEmptyFail<GetLargeScreenRecordResponse>("未找到视力档案");
+        
     }
 
 

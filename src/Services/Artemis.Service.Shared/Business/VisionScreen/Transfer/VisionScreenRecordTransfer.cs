@@ -506,6 +506,11 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     public string? Gender { get; set; }
 
     /// <summary>
+    ///    民族
+    /// </summary>
+    public string? Nation { get; set; }
+
+    /// <summary>
     ///     是否已经过电子视力表筛查
     /// </summary>
     public bool IsChartChecked { get; set; }

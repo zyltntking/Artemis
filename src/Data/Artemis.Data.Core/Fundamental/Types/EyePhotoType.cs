@@ -12,19 +12,19 @@ public sealed class EyePhotoType : Enumeration
     ///  左眼
     /// </summary>
     [Description("左眼")]
-    public static readonly EyePhotoType LeftEye = new EyePhotoType(1, nameof(LeftEye));
+    public static readonly EyePhotoType LeftEye = new(1, nameof(LeftEye));
 
     /// <summary>
     /// 右眼
     /// </summary>
     [Description("右眼")]
-    public static readonly EyePhotoType RightEye = new EyePhotoType(2, nameof(RightEye));
+    public static readonly EyePhotoType RightEye = new(2, nameof(RightEye));
 
     /// <summary>
     /// 双眼
     /// </summary>
     [Description("双眼")]
-    public static readonly EyePhotoType BothEye = new EyePhotoType(3, nameof(BothEye));
+    public static readonly EyePhotoType BothEye = new(3, nameof(BothEye));
 
     /// <summary>
     ///     构造函数

@@ -237,6 +237,11 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     string? Gender { get; set; }
 
     /// <summary>
+    ///    民族
+    /// </summary>
+    string? Nation { get; set; }
+
+    /// <summary>
     ///     是否已经过电子视力表筛查
     /// </summary>
     bool IsChartChecked { get; set; }

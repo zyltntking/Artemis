@@ -296,6 +296,13 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     public string? Gender { get; set; }
 
     /// <summary>
+    ///    民族
+    /// </summary>
+    [Comment("民族")]
+    [MaxLength(32)]
+    public string? Nation { get; set; }
+
+    /// <summary>
     ///     左眼与视力表的距离
     /// </summary>
     [Comment("左眼与视力表的距离")]

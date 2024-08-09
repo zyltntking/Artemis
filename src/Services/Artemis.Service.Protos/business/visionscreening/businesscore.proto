@@ -50,6 +50,14 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 获取大屏学生视力档案
+	rpc GetLargeScreenRecord(GetLargeScreenRecordRequest) returns (GetLargeScreenRecordResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/GetLargeScreenRecord"
+			body: "*"
+		};
+	}
+
 }
 
 // 任务绑定机构树
@@ -253,4 +261,104 @@ message AddVisualChartRequest{
 	// 电子视力表数据包
 	// @required
 	VisualChartPacket VisualChartPacket = 2;
+}
+
+// 获取大屏学生视力档案请求
+message GetLargeScreenRecordRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+}
+
+// 大屏学生视力档案数据包
+message LargeScreenRecordPacket {
+	// 档案标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+	// 学生姓名
+	google.protobuf.StringValue StudentName = 3;
+	// 学生性别
+	google.protobuf.StringValue Gender = 4;
+	// 学生年龄
+	google.protobuf.Int32Value Age = 5;
+	// 学生班级
+	google.protobuf.StringValue ClassName = 6;
+	// 学生学校
+	google.protobuf.StringValue SchoolName = 7;
+	// 学生民族
+	google.protobuf.StringValue Nation = 8;
+	//学生年级
+	google.protobuf.StringValue GradeName = 9;
+	// 学生生日
+	// @datetime
+	google.protobuf.StringValue Birthday = 10;
+	// 左眼球镜
+	google.protobuf.DoubleValue LeftSphere = 11;
+	// 右眼球镜
+	google.protobuf.DoubleValue RightSphere = 12;
+	// 左眼柱镜
+	google.protobuf.DoubleValue LeftCylinder = 13;
+	// 右眼柱镜
+	google.protobuf.DoubleValue RightCylinder = 14;
+	// 左眼等效球镜
+	google.protobuf.DoubleValue LeftEquivalentSphere = 15;
+	// 右眼等效球镜
+	google.protobuf.DoubleValue RightEquivalentSphere = 16;
+	// 左眼散光度数
+	google.protobuf.DoubleValue LeftAstigmatism = 17;
+	// 右眼散光度数
+	google.protobuf.DoubleValue RightAstigmatism = 18;
+	// 左眼裸眼视力
+	google.protobuf.DoubleValue LeftNakedEyeVision = 19;
+	// 右眼裸眼视力
+	google.protobuf.DoubleValue RightNakedEyeVision = 20;
+	// 左眼矫正视力
+	google.protobuf.DoubleValue LeftCorrectedVision = 21;
+	// 右眼矫正视力
+	google.protobuf.DoubleValue RightCorrectedVision = 22;
+	// 瞳距
+	google.protobuf.DoubleValue PupilDistance = 23;
+	// 检查时间
+	// @datetime
+	google.protobuf.StringValue CheckTime = 24;
+	// 家长关系
+	google.protobuf.StringValue ParentRelation = 25;
+	// 联系地址
+	google.protobuf.StringValue Address = 26;
+	// 家长手机号
+	google.protobuf.StringValue ParentMobile = 27;
+	// 医生建议
+	google.protobuf.StringValue DoctorAdvice = 28;
+}
+
+// 获取大屏学生视力档案响应
+message GetLargeScreenRecordResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 大屏学生视力档案数据包
+	// @required
+	LargeScreenRecordPacket Data = 7;
 }

@@ -681,6 +681,331 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest">
+            <summary>
+            获取大屏学生视力档案请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket">
+            <summary>
+            大屏学生视力档案数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Id">
+            <summary>
+            档案标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.StudentNameFieldNumber">
+            <summary>Field number for the "StudentName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.GenderFieldNumber">
+            <summary>Field number for the "Gender" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Gender">
+            <summary>
+            学生性别
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.AgeFieldNumber">
+            <summary>Field number for the "Age" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Age">
+            <summary>
+            学生年龄
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ClassName">
+            <summary>
+            学生班级
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.SchoolName">
+            <summary>
+            学生学校
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.NationFieldNumber">
+            <summary>Field number for the "Nation" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Nation">
+            <summary>
+            学生民族
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.GradeNameFieldNumber">
+            <summary>Field number for the "GradeName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.GradeName">
+             <summary>
+            学生年级
+             </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.BirthdayFieldNumber">
+            <summary>Field number for the "Birthday" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Birthday">
+            <summary>
+            学生生日
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftSphereFieldNumber">
+            <summary>Field number for the "LeftSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftSphere">
+            <summary>
+            左眼球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightSphereFieldNumber">
+            <summary>Field number for the "RightSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightSphere">
+            <summary>
+            右眼球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftCylinderFieldNumber">
+            <summary>Field number for the "LeftCylinder" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftCylinder">
+            <summary>
+            左眼柱镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightCylinderFieldNumber">
+            <summary>Field number for the "RightCylinder" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightCylinder">
+            <summary>
+            右眼柱镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftEquivalentSphereFieldNumber">
+            <summary>Field number for the "LeftEquivalentSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftEquivalentSphere">
+            <summary>
+            左眼等效球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightEquivalentSphereFieldNumber">
+            <summary>Field number for the "RightEquivalentSphere" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightEquivalentSphere">
+            <summary>
+            右眼等效球镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftAstigmatismFieldNumber">
+            <summary>Field number for the "LeftAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftAstigmatism">
+            <summary>
+            左眼散光度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightAstigmatismFieldNumber">
+            <summary>Field number for the "RightAstigmatism" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightAstigmatism">
+            <summary>
+            右眼散光度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftNakedEyeVisionFieldNumber">
+            <summary>Field number for the "LeftNakedEyeVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftNakedEyeVision">
+            <summary>
+            左眼裸眼视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightNakedEyeVisionFieldNumber">
+            <summary>Field number for the "RightNakedEyeVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightNakedEyeVision">
+            <summary>
+            右眼裸眼视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftCorrectedVisionFieldNumber">
+            <summary>Field number for the "LeftCorrectedVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.LeftCorrectedVision">
+            <summary>
+            左眼矫正视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightCorrectedVisionFieldNumber">
+            <summary>Field number for the "RightCorrectedVision" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.RightCorrectedVision">
+            <summary>
+            右眼矫正视力
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.PupilDistanceFieldNumber">
+            <summary>Field number for the "PupilDistance" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.PupilDistance">
+            <summary>
+            瞳距
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.CheckTimeFieldNumber">
+            <summary>Field number for the "CheckTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.CheckTime">
+            <summary>
+            检查时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ParentRelationFieldNumber">
+            <summary>Field number for the "ParentRelation" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ParentRelation">
+            <summary>
+            家长关系
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.AddressFieldNumber">
+            <summary>Field number for the "Address" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.Address">
+            <summary>
+            联系地址
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ParentMobileFieldNumber">
+            <summary>Field number for the "ParentMobile" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.ParentMobile">
+            <summary>
+            家长手机号
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.DoctorAdviceFieldNumber">
+            <summary>Field number for the "DoctorAdvice" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.LargeScreenRecordPacket.DoctorAdvice">
+            <summary>
+            医生建议
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse">
+            <summary>
+            获取大屏学生视力档案响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordResponse.Data">
+            <summary>
+            大屏学生视力档案数据包
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService">
             <summary>
             视力筛查核心业务服务
@@ -727,6 +1052,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AddVisualChartPacket(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.ServerCallContext)">
             <summary>
             添加电子视力表数据
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GetLargeScreenRecord(Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取大屏学生视力档案
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -925,6 +1258,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AddVisualChartPacketAsync(Artemis.Service.Protos.Business.VisionScreen.AddVisualChartRequest,Grpc.Core.CallOptions)">
             <summary>
             添加电子视力表数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GetLargeScreenRecord(Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取大屏学生视力档案
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GetLargeScreenRecord(Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取大屏学生视力档案
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GetLargeScreenRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取大屏学生视力档案
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GetLargeScreenRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GetLargeScreenRecordRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取大屏学生视力档案
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -2277,7 +2646,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            通过学生读取筛查结果
+            通过学生标识读取最近一次筛查结果
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2607,7 +2976,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            通过学生读取筛查结果
+            通过学生标识读取最近一次筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2617,7 +2986,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.CallOptions)">
             <summary>
-            通过学生读取筛查结果
+            通过学生标识读取最近一次筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -2625,7 +2994,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            通过学生读取筛查结果
+            通过学生标识读取最近一次筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2635,7 +3004,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.CallOptions)">
             <summary>
-            通过学生读取筛查结果
+            通过学生标识读取最近一次筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
