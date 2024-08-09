@@ -460,6 +460,70 @@
             操作时间
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftPupilRadiusFieldNumber">
+            <summary>Field number for the "LeftPupilRadius" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftPupilRadius">
+            <summary>
+            左眼瞳孔半径
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightPupilRadiusFieldNumber">
+            <summary>Field number for the "RightPupilRadius" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightPupilRadius">
+            <summary>
+            右眼瞳孔半径
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftVerticalAxisFieldNumber">
+            <summary>Field number for the "LeftVerticalAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftVerticalAxis">
+            <summary>
+            左眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightVerticalAxisFieldNumber">
+            <summary>Field number for the "RightVerticalAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightVerticalAxis">
+            <summary>
+            右眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftHorizontalAxisFieldNumber">
+            <summary>Field number for the "LeftHorizontalAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftHorizontalAxis">
+            <summary>
+            左眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightHorizontalAxisFieldNumber">
+            <summary>Field number for the "RightHorizontalAxis" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightHorizontalAxis">
+            <summary>
+            右眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftRedReflectFieldNumber">
+            <summary>Field number for the "LeftRedReflect" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.LeftRedReflect">
+            <summary>
+            左眼红光反射
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightRedReflectFieldNumber">
+            <summary>Field number for the "RightRedReflect" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.OptometerPacket.RightRedReflect">
+            <summary>
+            右眼红光反射
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.AddOptometerRequest">
             <summary>
             添加验光仪数据请求

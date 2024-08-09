@@ -31,6 +31,46 @@ public interface IOptometerPackage
     double? PupilDistance { get; set; }
 
     /// <summary>
+    /// 左眼瞳孔半径
+    /// </summary>
+    double? LeftPupilRadius { get; set; }
+
+    /// <summary>
+    /// 右眼瞳孔半径
+    /// </summary>
+    double? RightPupilRadius { get; set; }
+
+    /// <summary>
+    /// 左眼垂直方向斜视度数
+    /// </summary>
+    double? LeftVerticalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼垂直方向斜视度数
+    /// </summary>
+    double? RightVerticalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼水平方向斜视度数
+    /// </summary>
+    double? LeftHorizontalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼水平方向斜视度数
+    /// </summary>
+    double? RightHorizontalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼红光反射
+    /// </summary>
+    double? LeftRedReflect { get; set; }
+
+    /// <summary>
+    /// 右眼红光反射
+    /// </summary>
+    double? RightRedReflect { get; set; }
+
+    /// <summary>
     ///     左眼球镜
     /// </summary>
     double? LeftSphere { get; set; }

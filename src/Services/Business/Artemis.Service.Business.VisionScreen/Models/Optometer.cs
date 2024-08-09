@@ -22,6 +22,54 @@ public class Optometer : ConcurrencyPartition, IOptometer
     public double? PupilDistance { get; set; }
 
     /// <summary>
+    /// 左眼瞳孔半径
+    /// </summary>
+    [Comment("左眼瞳孔半径")]
+    public double? LeftPupilRadius { get; set; }
+
+    /// <summary>
+    /// 右眼瞳孔半径
+    /// </summary>
+    [Comment("右眼瞳孔半径")]
+    public double? RightPupilRadius { get; set; }
+
+    /// <summary>
+    /// 左眼垂直方向斜视度数
+    /// </summary>
+    [Comment("左眼垂直方向斜视度数")]
+    public double? LeftVerticalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼垂直方向斜视度数
+    /// </summary>
+    [Comment("右眼垂直方向斜视度数")]
+    public double? RightVerticalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼水平方向斜视度数
+    /// </summary>
+    [Comment("左眼水平方向斜视度数")]
+    public double? LeftHorizontalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼水平方向斜视度数
+    /// </summary>
+    [Comment("右眼水平方向斜视度数")]
+    public double? RightHorizontalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼红光反射
+    /// </summary>
+    [Comment("左眼红光反射")]
+    public double? LeftRedReflect { get; set; }
+
+    /// <summary>
+    /// 右眼红光反射
+    /// </summary>
+    [Comment("右眼红光反射")]
+    public double? RightRedReflect { get; set; }
+
+    /// <summary>
     ///     左眼球镜
     /// </summary>
     [Comment("左眼球镜")]

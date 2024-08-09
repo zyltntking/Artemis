@@ -84,6 +84,46 @@
                 瞳距
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftPupilRadius">
+            <summary>
+            左眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightPupilRadius">
+            <summary>
+            右眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftVerticalAxis">
+            <summary>
+            左眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightVerticalAxis">
+            <summary>
+            右眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftHorizontalAxis">
+            <summary>
+             左眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightHorizontalAxis">
+            <summary>
+            右眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftRedReflect">
+            <summary>
+             左眼红光反射
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.RightRedReflect">
+            <summary>
+            右眼红光反射
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOptometerPackage.LeftSphere">
             <summary>
                 左眼球镜
@@ -644,6 +684,11 @@
             用户签名时间
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.CancelFlag">
+            <summary>
+            取消筛查标识
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisualChart">
             <summary>
                 视力表数据接口
@@ -977,6 +1022,46 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.PupilDistance">
             <summary>
                 瞳距
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftPupilRadius">
+            <summary>
+            左眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightPupilRadius">
+            <summary>
+            右眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftVerticalAxis">
+            <summary>
+            左眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightVerticalAxis">
+            <summary>
+            右眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftHorizontalAxis">
+            <summary>
+             左眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightHorizontalAxis">
+            <summary>
+            右眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftRedReflect">
+            <summary>
+             左眼红光反射
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.RightRedReflect">
+            <summary>
+            右眼红光反射
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.LeftSphere">
@@ -1412,6 +1497,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.UserSignTime">
             <summary>
             用户签名时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.CancelFlag">
+            <summary>
+            取消筛查标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.Identity.IClaim">

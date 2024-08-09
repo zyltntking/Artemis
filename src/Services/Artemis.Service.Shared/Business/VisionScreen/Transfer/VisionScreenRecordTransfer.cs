@@ -97,6 +97,46 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     public double? PupilDistance { get; set; }
 
     /// <summary>
+    /// 左眼瞳孔半径
+    /// </summary>
+    public double? LeftPupilRadius { get; set; }
+
+    /// <summary>
+    /// 右眼瞳孔半径
+    /// </summary>
+    public double? RightPupilRadius { get; set; }
+
+    /// <summary>
+    /// 左眼垂直方向斜视度数
+    /// </summary>
+    public double? LeftVerticalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼垂直方向斜视度数
+    /// </summary>
+    public double? RightVerticalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼水平方向斜视度数
+    /// </summary>
+    public double? LeftHorizontalAxis { get; set; }
+
+    /// <summary>
+    /// 右眼水平方向斜视度数
+    /// </summary>
+    public double? RightHorizontalAxis { get; set; }
+
+    /// <summary>
+    ///  左眼红光反射
+    /// </summary>
+    public double? LeftRedReflect { get; set; }
+
+    /// <summary>
+    /// 右眼红光反射
+    /// </summary>
+    public double? RightRedReflect { get; set; }
+
+    /// <summary>
     ///     左眼球镜
     /// </summary>
     public double? LeftSphere { get; set; }
@@ -534,6 +574,11 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     /// 用户签名时间
     /// </summary>
     public DateTime? UserSignTime { get; set; }
+
+    /// <summary>
+    /// 取消筛查标识
+    /// </summary>
+    public string? CancelFlag { get; set; }
 
     #endregion
 }

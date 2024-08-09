@@ -185,6 +185,22 @@ message OptometerPacket{
 	google.protobuf.StringValue OptometerScreeningStuffName = 30;
 	// 操作时间
 	google.protobuf.StringValue OptometerOperationTime = 31;
+	// 左眼瞳孔半径
+	google.protobuf.DoubleValue LeftPupilRadius = 32;
+	// 右眼瞳孔半径
+	google.protobuf.DoubleValue RightPupilRadius = 33;
+	// 左眼垂直方向斜视度数
+	google.protobuf.DoubleValue LeftVerticalAxis = 34;
+	// 右眼垂直方向斜视度数
+	google.protobuf.DoubleValue RightVerticalAxis = 35;
+	// 左眼水平方向斜视度数
+	google.protobuf.DoubleValue LeftHorizontalAxis = 36;
+	// 右眼水平方向斜视度数
+	google.protobuf.DoubleValue RightHorizontalAxis = 37;
+	// 左眼红光反射
+	google.protobuf.StringValue LeftRedReflect = 38;
+	// 右眼红光反射
+	google.protobuf.StringValue RightRedReflect = 39;
 }
 
 // 添加验光仪数据请求

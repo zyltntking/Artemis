@@ -316,6 +316,46 @@
                 瞳距
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.LeftPupilRadius">
+            <summary>
+            左眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.RightPupilRadius">
+            <summary>
+            右眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.LeftVerticalAxis">
+            <summary>
+            左眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.RightVerticalAxis">
+            <summary>
+            右眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.LeftHorizontalAxis">
+            <summary>
+             左眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.RightHorizontalAxis">
+            <summary>
+            右眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.LeftRedReflect">
+            <summary>
+             左眼红光反射
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.RightRedReflect">
+            <summary>
+            右眼红光反射
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Models.Optometer.LeftSphere">
             <summary>
                 左眼球镜
@@ -846,6 +886,46 @@
                 瞳距
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.LeftPupilRadius">
+            <summary>
+            左眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RightPupilRadius">
+            <summary>
+            右眼瞳孔半径
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.LeftVerticalAxis">
+            <summary>
+            左眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RightVerticalAxis">
+            <summary>
+            右眼垂直方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.LeftHorizontalAxis">
+            <summary>
+             左眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RightHorizontalAxis">
+            <summary>
+            右眼水平方向斜视度数
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.LeftRedReflect">
+            <summary>
+             左眼红光反射
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.RightRedReflect">
+            <summary>
+            右眼红光反射
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.LeftSphere">
             <summary>
                 左眼球镜
@@ -1054,6 +1134,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.UserSignTime">
             <summary>
             用户签名时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.CancelFlag">
+            <summary>
+            取消筛查标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Models.VisualChart">
