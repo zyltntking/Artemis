@@ -4,6 +4,37 @@
         <name>Artemis.App.Business.VisionScreen</name>
     </assembly>
     <members>
+        <member name="T:Artemis.App.Business.VisionScreen.Controllers.FileController">
+            <summary>
+            文件控制器
+            </summary>
+        </member>
+        <member name="F:Artemis.App.Business.VisionScreen.Controllers.FileController._allowedExtensions">
+            <summary>
+            允许的扩展名
+            </summary>
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Controllers.FileController.#ctor(MongoDB.Driver.IMongoClient,Microsoft.Extensions.Logging.ILogger{Artemis.App.Business.VisionScreen.Controllers.FileController})">
+            <summary>
+            文件控制器
+            </summary>
+            <param name="mongoClient"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Controllers.FileController.UploadPicture(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传图片
+            </summary>
+            <remarks>允许.jpg/.jpeg/.png</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Controllers.FileController.ReadPicture(System.String)">
+            <summary>
+            读取图片
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Migrations.InitialBusiness">
             <inheritdoc />
         </member>

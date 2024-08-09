@@ -1375,6 +1375,11 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="T:Artemis.Service.Business.VisionScreen.Services.WxTeacherTerminalServiceImplement">
+            <summary>
+            微信教师端服务实现
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore">
             <summary>
                 通知消息存储接口

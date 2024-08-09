@@ -35,7 +35,7 @@ public abstract class Program
 
             // Add services to the container.
             builder.AddRedisComponent("RedisInstance");
-            //builder.AddMongoDbComponent("MongoInstance");
+            builder.AddMongoDbComponent("MongoInstance");
             //builder.AddRabbitMqComponent("RabbitMqInstance");
 
             builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb", optionsBuilder =>
