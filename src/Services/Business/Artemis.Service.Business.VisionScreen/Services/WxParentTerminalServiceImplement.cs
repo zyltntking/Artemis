@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental.Protocol;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
@@ -159,6 +160,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         var recordCounts = await VisionScreenRecordStore
             .EntityQuery
             .Where(item => studentIds.Contains(item.StudentId))
+            .Where(item => item.CheckTime != null)
             .GroupBy(item => item.StudentId)
             .Select(group => new { StudentId = group.Key, Count = group.Count() })
             .ToListAsync(context.CancellationToken);
@@ -223,6 +225,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
 
         var record = await VisionScreenRecordStore.EntityQuery
             .Where(record => record.StudentId == studentId)
+            .Where(record => record.CheckTime != null)
             .ProjectToType<ChildHistoryRecordPacket>()
             .ToListAsync();
 
@@ -630,33 +633,46 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
-    /// 读取筛查结果
+    /// 通过学生标识读取最近一次筛查结果
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("读取筛查结果")]
+    [Description("通过学生标识读取最近一次筛查结果")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<ReadScreenRecordResponse> ReadScreenRecord(ReadScreenRecordRequest request, ServerCallContext context)
+    public override async Task<ReadScreenRecordResponse> ReadScreenRecordViaStudentId(ReadScreenRecordViaStudentIdRequest request, ServerCallContext context)
     {
-        var recordIdExists = string.IsNullOrWhiteSpace(request.RecordId);
+        var studentId = Guid.Parse(request.StudentId);
 
-        Guid recordId;
+        var recordId = await VisionScreenRecordStore
+            .EntityQuery
+            .Where(record => record.StudentId == studentId)
+            .Where(record => record.CheckTime != null)
+            .OrderByDescending(record => record.CreatedAt)
+            .Select(record => record.Id)
+            .FirstOrDefaultAsync(context.CancellationToken);
 
-        if (recordIdExists)
+        var recordInfo = await VisionScreenRecordStore.FindMapEntityAsync<VisionScreenRecordInfo>(recordId, context.CancellationToken);
+
+        if (recordInfo == null)
         {
-            recordId = Guid.Parse(request.RecordId);
-        }else
-        {
-            var studentId = Guid.Parse(request.StudentId);
-
-            recordId = await VisionScreenRecordStore
-                .EntityQuery
-                .Where(record => record.StudentId == studentId)
-                .OrderByDescending(record => record.CreatedAt)
-                .Select(record => record.Id)
-                .FirstOrDefaultAsync(context.CancellationToken);
+            return ResultAdapter.AdaptEmptyFail<ReadScreenRecordResponse>("记录不存在");
         }
+
+        return recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
+    }
+
+    /// <summary>
+    /// 通过记录标识读取筛查结果
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("通过记录标识读取筛查结果")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<ReadScreenRecordResponse> ReadScreenRecordViaRecordId(ReadScreenRecordViaRecordIdRequest request, ServerCallContext context)
+    {
+        var recordId = Guid.Parse(request.RecordId);
 
         var recordInfo = await VisionScreenRecordStore.FindMapEntityAsync<VisionScreenRecordInfo>(recordId, context.CancellationToken);
 

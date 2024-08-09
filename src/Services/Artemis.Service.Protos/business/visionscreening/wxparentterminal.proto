@@ -71,10 +71,17 @@ service WxParentTerminalService{
 		};
 	}
 
-	// 读取筛查结果
-	rpc ReadScreenRecord(ReadScreenRecordRequest) returns (ReadScreenRecordResponse) {
+	// 通过学生标识读取最近一次筛查结果
+	rpc ReadScreenRecordViaStudentId(ReadScreenRecordViaStudentIdRequest) returns (ReadScreenRecordResponse) {
 		option (google.api.http) = {
-			get: "/api/BusinessService/ParentTerminal/ReadScreenRecord"
+			get: "/api/BusinessService/ParentTerminal/ReadScreenRecordViaStudentId"
+		};
+	}
+
+	// 通过记录标识读取筛查结果
+	rpc ReadScreenRecordViaRecordId(ReadScreenRecordViaRecordIdRequest) returns (ReadScreenRecordResponse) {
+		option (google.api.http) = {
+			get: "/api/BusinessService/ParentTerminal/ReadScreenRecordViaRecordId"
 		};
 	}
 
@@ -360,15 +367,20 @@ message UploadChildEyePhotoRequest{
 
 
 
-// 读取筛查结果
-message ReadScreenRecordRequest{
+// 通过学生标识读取筛查结果(最近一条)
+message ReadScreenRecordViaStudentIdRequest{
 	// 学生标识
 	// @required
 	// @guid
 	string StudentId = 1;
+}
+
+// 通过记录标识读取筛查结果
+message ReadScreenRecordViaRecordIdRequest{
 	// 记录标识
+	// @required
 	// @guid
-	google.protobuf.StringValue RecordId = 2;
+	string RecordId = 1;
 }
 
 // 筛查结果数据包

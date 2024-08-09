@@ -1735,27 +1735,33 @@
             @maxLength(32)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest">
             <summary>
-            读取筛查结果
+            通过学生标识读取筛查结果(最近一条)
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.StudentIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest.StudentIdFieldNumber">
             <summary>Field number for the "StudentId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.StudentId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest.StudentId">
             <summary>
             学生标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordIdFieldNumber">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest">
+            <summary>
+            通过记录标识读取筛查结果
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest.RecordIdFieldNumber">
             <summary>Field number for the "RecordId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest.RecordId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest.RecordId">
             <summary>
             记录标识
+            @required
             @guid
             </summary>
         </member>
@@ -2269,9 +2275,17 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            读取筛查结果
+            通过学生读取筛查结果
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.ReadScreenRecordViaRecordId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            通过记录标识读取筛查结果
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2591,9 +2605,9 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            读取筛查结果
+            通过学生读取筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2601,17 +2615,17 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecord(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.CallOptions)">
             <summary>
-            读取筛查结果
+            通过学生读取筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            读取筛查结果
+            通过学生读取筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2619,9 +2633,45 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaStudentIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaStudentIdRequest,Grpc.Core.CallOptions)">
             <summary>
-            读取筛查结果
+            通过学生读取筛查结果
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaRecordId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            通过记录标识读取筛查结果
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaRecordId(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            通过记录标识读取筛查结果
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaRecordIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            通过记录标识读取筛查结果
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.ReadScreenRecordViaRecordIdAsync(Artemis.Service.Protos.Business.VisionScreen.ReadScreenRecordViaRecordIdRequest,Grpc.Core.CallOptions)">
+            <summary>
+            通过记录标识读取筛查结果
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
