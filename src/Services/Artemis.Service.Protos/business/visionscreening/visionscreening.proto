@@ -30,4 +30,7 @@ message NotificationMessagePacket{
 	google.protobuf.StringValue Content = 7;
 	// 绑定标记
 	google.protobuf.StringValue BindingTag = 8;
+	// 消息创建时间
+	// @datetime
+	google.protobuf.StringValue CreatedAt = 9;
 }

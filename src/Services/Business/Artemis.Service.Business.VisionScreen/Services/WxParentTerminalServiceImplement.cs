@@ -265,7 +265,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         var messageInfos = await NotificationMessageStore
             .EntityQuery
             .Where(item => item.UserId == userId && item.EndType == endType)
-            .ProjectToType<NotificationMessageInfo>()
+            .ProjectToType<NotificationMessagePacket>()
             .ToListAsync(context.CancellationToken);
 
         var bindings = await StudentRelationBindingStore
@@ -289,8 +289,6 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             .Where(item => recordIs.Contains(item.RecordId))
             .ProjectToType<RecordFeedbackInfo>()
             .ToListAsync(context.CancellationToken);
-
-        var messageInfoPackets = messageInfos.Adapt<List<NotificationMessagePacket>>();
 
         var feedbackRecordPackets = new List<FeedbackRecordPacket>();
 
@@ -333,7 +331,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         }
 
         var parentUserMessageInfo = new ParentUserMessageInfo();
-        parentUserMessageInfo.NotificationMessages.Add(messageInfoPackets);
+        parentUserMessageInfo.NotificationMessages.Add(messageInfos);
         parentUserMessageInfo.FeedbackRecords.Add(feedbackRecordPackets);
 
         var response = ResultAdapter.AdaptEmptySuccess<FetchParentUserMessageInfoResponse>();

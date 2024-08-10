@@ -1046,6 +1046,27 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessagePacket">
+            <summary>
+            获取通知消息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessagePacket.NotReadCountFieldNumber">
+            <summary>Field number for the "NotReadCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessagePacket.NotReadCount">
+            <summary>
+            未读数量
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessagePacket.MessagesFieldNumber">
+            <summary>Field number for the "Messages" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessagePacket.Messages">
+            <summary>
+            消息列表
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessageResponse">
             <summary>
             获取用户通知消息(多端通用)
@@ -1106,6 +1127,84 @@
             <summary>Field number for the "Data" field.</summary>
         </member>
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchUserMessageResponse.Data">
+            <summary>
+            通知消息数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest">
+            <summary>
+            读取通知消息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest.MessageIdFieldNumber">
+            <summary>Field number for the "MessageId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest.MessageId">
+            <summary>
+            消息标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse">
+            <summary>
+            读取通知消息响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageResponse.Data">
             <summary>
             通知消息数据
             @required
@@ -1189,6 +1288,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchUserMessage(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取通知消息(多端通用)
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.ReadUserMessage(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取通知消息(多端通用)
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1536,6 +1643,42 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.ReadUserMessage(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取通知消息(多端通用)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.ReadUserMessage(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取通知消息(多端通用)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.ReadUserMessageAsync(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            读取通知消息(多端通用)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.ReadUserMessageAsync(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.CallOptions)">
+            <summary>
+            读取通知消息(多端通用)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
             <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
         </member>
@@ -1629,6 +1772,15 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.NotificationMessagePacket.BindingTag">
             <summary>
             绑定标记
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.NotificationMessagePacket.CreatedAtFieldNumber">
+            <summary>Field number for the "CreatedAt" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.NotificationMessagePacket.CreatedAt">
+            <summary>
+            消息创建时间
+            @datetime
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.WxparentterminalReflection">

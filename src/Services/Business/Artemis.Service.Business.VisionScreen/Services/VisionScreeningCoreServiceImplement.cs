@@ -693,10 +693,50 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         var messageInfos = await NotificationMessageStore
             .EntityQuery
             .Where(item => item.UserId == userId && item.EndType == endType)
-            .ProjectToType<NotificationMessageInfo>()
+            .ProjectToType<NotificationMessagePacket>()
             .ToListAsync(context.CancellationToken);
 
-        return messageInfos.ReadInfoResponse<FetchUserMessageResponse, IEnumerable<NotificationMessageInfo>>();
+        var notRead = messageInfos.Count(item => item.IsRead == false);
+
+        var result = new FetchUserMessagePacket
+        {
+            NotReadCount = notRead
+        };
+        result.Messages.Add(messageInfos);
+
+        return result.ReadInfoResponse<FetchUserMessageResponse, FetchUserMessagePacket>();
+    }
+
+    /// <summary>
+    /// 读取通知消息(多端通用)
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("读取通知消息(多端通用)")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<ReadUserMessageResponse> ReadUserMessage(ReadUserMessageRequest request, ServerCallContext context)
+    {
+        var messageId = Guid.Parse(request.MessageId);
+
+        var message = await NotificationMessageStore
+            .KeyMatchQuery(messageId)
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (message != null)
+        {
+            message.IsRead = true;
+            message.ReadTime = DateTime.Now;
+
+            await NotificationMessageStore.UpdateAsync(message, context.CancellationToken);
+
+            var packet = message.Adapt<NotificationMessagePacket>();
+
+            return packet.ReadInfoResponse<ReadUserMessageResponse, NotificationMessagePacket>();
+
+        }
+
+        return ResultAdapter.AdaptEmptyFail<ReadUserMessageResponse>("消息不存在");
     }
 
 
