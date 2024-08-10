@@ -398,7 +398,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             return ResultAdapter.AdaptSuccess<FetchFeedbackRecordResponse, FeedbackRecordPacket>(feedbackRecordPacket);
         }
 
-        return ResultAdapter.AdaptEmptyFail<FetchFeedbackRecordResponse>("记录不存在"); ;
+        return ResultAdapter.AdaptEmptyFail<FetchFeedbackRecordResponse>("记录不存在"); 
     }
 
     /// <summary>
