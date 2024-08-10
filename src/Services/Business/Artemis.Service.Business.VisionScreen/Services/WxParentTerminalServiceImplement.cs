@@ -344,6 +344,66 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     }
 
     /// <summary>
+    /// 获取记录反馈信息
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取记录反馈信息")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchFeedbackRecordResponse> FetchFeedbackRecord(FetchFeedbackRecordRequest request, ServerCallContext context)
+    {
+        var recordId = Guid.Parse(request.RecordId);
+
+        var record = await VisionScreenRecordStore
+            .KeyMatchQuery(recordId)
+            .ProjectToType<VisionScreenRecordInfo>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (record != null)
+        {
+            var feedBacks = await RecordFeedbackStore
+                .EntityQuery
+                .Where(item => item.RecordId == record.Id)
+                .ProjectToType<RecordFeedbackInfo>()
+                .ToListAsync(context.CancellationToken);
+
+            var feedbackInfo = feedBacks.FirstOrDefault();
+
+            var feedbackContent = new FeedbackContentPacket();
+
+            if (feedbackInfo != null)
+            {
+                feedbackContent.IsCheck = feedbackInfo.IsCheck;
+                feedbackContent.CheckDate = feedbackInfo.CheckDate.ToString();
+                feedbackContent.FeedbackTime = feedbackInfo.FeedBackTime.ToString();
+                var contents = string.Join(",", feedBacks.Select(item => item.Content));
+                feedbackContent.Content.Add(contents);
+            }
+            else
+            {
+                feedbackContent = null;
+            }
+
+            var feedbackRecordPacket = new FeedbackRecordPacket
+            {
+                RecordId = record.Id.ToString(),
+                StudentId = record.StudentId.ToString(),
+                StudentName = record.StudentName,
+                StudentNumber = record.StudentNumber,
+                CheckTime = record.CheckTime.ToString(),
+                IsFeedback = record.IsFeedBack,
+                FeedbackContent = feedbackContent,
+                IsSign = record.IsSign
+            };
+
+            return ResultAdapter.AdaptSuccess<FetchFeedbackRecordResponse, FeedbackRecordPacket>(feedbackRecordPacket);
+        }
+
+        return ResultAdapter.AdaptEmptyFail<FetchFeedbackRecordResponse>("记录不存在"); ;
+    }
+
+    /// <summary>
     /// 反馈筛查记录后续处理
     /// </summary>
     /// <param name="request">The request received from the client.</param>

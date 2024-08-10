@@ -5,6 +5,7 @@ option csharp_namespace = "Artemis.Service.Protos.Business.VisionScreen";
 package Artemis.Service.Protos.Business.VisionScreen;
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+import "business/visionscreening/visionscreening.proto";
 import "common.proto";
 
 // 视力筛查核心业务服务
@@ -74,6 +75,13 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 获取通知消息(多端通用)
+	rpc FetchUserMessage(EmptyRequest) returns (FetchUserMessageResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchUserMessage"
+			body: "*"
+		};
+	}
 }
 
 // 教师绑定用户请求
@@ -397,4 +405,26 @@ message GetLargeScreenRecordResponse{
 	// 大屏学生视力档案数据包
 	// @required
 	LargeScreenRecordPacket Data = 7;
+}
+
+// 获取用户通知消息(多端通用)
+message FetchUserMessageResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 通知消息数据
+	// @required
+	repeated NotificationMessagePacket Data = 7;
 }

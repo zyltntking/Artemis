@@ -50,6 +50,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="visualChartStore"></param>
     /// <param name="studentRelationBindingStore"></param>
     /// <param name="teacherUserBindingStore"></param>
+    /// <param name="notificationMessageStore"></param>
     public VisionScreeningCoreServiceImplement(
         IIdentityUserStore userStore,
         IArtemisTaskStore taskStore,
@@ -67,7 +68,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         IArtemisOptometerStore optometerStore,
         IArtemisVisualChartStore visualChartStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
-        IArtemisTeacherUserBindingStore teacherUserBindingStore)
+        IArtemisTeacherUserBindingStore teacherUserBindingStore,
+        IArtemisNotificationMessageStore notificationMessageStore)
     {
         UserStore = userStore;
         TaskStore = taskStore;
@@ -86,6 +88,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         VisualChartStore = visualChartStore;
         StudentRelationBindingStore = studentRelationBindingStore;
         TeacherUserBindingStore = teacherUserBindingStore;
+        NotificationMessageStore = notificationMessageStore;
     }
 
     private IIdentityUserStore UserStore { get; set; }
@@ -121,6 +124,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     private IArtemisStudentRelationBindingStore StudentRelationBindingStore { get; }
 
     private IArtemisTeacherUserBindingStore TeacherUserBindingStore { get; }
+
+    private IArtemisNotificationMessageStore NotificationMessageStore { get; }
 
     #region Overrides of VisionScreeningCoreServiceBase
 
@@ -171,6 +176,34 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             binding.TeacherId = teacherId;
             result = await TeacherUserBindingStore.UpdateAsync(binding, context.CancellationToken);
         }
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 解绑教师用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("解绑教师用户")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> UnBindTeacherUser(UnBindTeacherUserRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+        }
+
+        var bindings = await TeacherUserBindingStore.EntityQuery
+            .Where(bind => bind.UserId == userId)
+            .ToListAsync(context.CancellationToken);
+
+        var result = await TeacherUserBindingStore.DeleteAsync(bindings, context.CancellationToken);
 
         return result.AffectedResponse();
     }
@@ -628,6 +661,42 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         return ResultAdapter.AdaptEmptyFail<GetLargeScreenRecordResponse>("未找到视力档案");
         
+    }
+
+
+    /// <summary>
+    /// 获取通知消息(多端通用)
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取通知消息(多端通用)")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchUserMessageResponse> FetchUserMessage(EmptyRequest request, ServerCallContext context)
+    {
+        var (valid, userId) = context.GetHttpContext().GetUserId();
+
+        if (!valid)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchUserMessageResponse>("解析凭据中的用户标识失败");
+        }
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchUserMessageResponse>("用户不存在");
+        }
+
+        var endType = context.GetHttpContext().GetEndType();
+
+        var messageInfos = await NotificationMessageStore
+            .EntityQuery
+            .Where(item => item.UserId == userId && item.EndType == endType)
+            .ProjectToType<NotificationMessageInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        return messageInfos.ReadInfoResponse<FetchUserMessageResponse, IEnumerable<NotificationMessageInfo>>();
     }
 
 

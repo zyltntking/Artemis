@@ -32,6 +32,14 @@ service WxParentTerminalService{
 		};
 	}
 
+	// 获取记录反馈信息
+	rpc FetchFeedbackRecord(FetchFeedbackRecordRequest) returns (FetchFeedbackRecordResponse) {
+		option (google.api.http) = {
+			post: "/api/BusinessService/ParentTerminal/FetchFeedbackRecord"
+			body: "*"
+		};
+	}
+
 	// 反馈筛查记录后续处理
 	rpc FeedbackRecord(FeedbackRecordRequest) returns (AffectedResponse) {
 		option (google.api.http) = {
@@ -286,6 +294,36 @@ message FetchParentUserMessageInfoResponse{
 	ParentUserMessageInfo Data = 7;
 }
 
+// 获取反馈记录请求
+message FetchFeedbackRecordRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+}
+
+// 获取反馈记录响应
+message FetchFeedbackRecordResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 个人中心消息信息
+	// @required
+	FeedbackRecordPacket Data = 7;
+}
+
 // 反馈筛查记录后续处理请求
 message FeedbackRecordRequest{
 	// 记录标识
@@ -371,8 +409,6 @@ message UploadChildEyePhotoRequest{
 	// @maxLength(32)
 	string EyePhotoType = 3;
 }
-
-
 
 // 通过学生标识读取筛查结果(最近一条)
 message ReadScreenRecordViaStudentIdRequest{
