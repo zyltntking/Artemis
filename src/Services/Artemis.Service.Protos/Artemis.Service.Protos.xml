@@ -1785,6 +1785,15 @@
             @required
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.IsSignFieldNumber">
+            <summary>Field number for the "IsSign" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ChildHistoryRecordPacket.IsSign">
+            <summary>
+            是否签名
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchChildHistoryRecordInfoListResponse">
             <summary>
             查询孩子历史筛查记录列表响应

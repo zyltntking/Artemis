@@ -325,7 +325,8 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
                 StudentNumber = record.StudentNumber,
                 CheckTime = record.CheckTime.ToString(),
                 IsFeedback = record.IsFeedBack,
-                FeedbackContent = feedbackContent
+                FeedbackContent = feedbackContent,
+                IsSign = record.IsSign
             };
 
             feedbackRecordPackets.Add(feedbackRecordPacket);

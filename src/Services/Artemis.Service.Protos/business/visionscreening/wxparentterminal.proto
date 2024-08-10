@@ -188,6 +188,9 @@ message ChildHistoryRecordPacket{
 	// 是否已反馈
 	// @required
 	bool IsFeedback = 4;
+	// 是否签名
+	// @required
+	bool IsSign = 5;
 }
 
 // 查询孩子历史筛查记录列表响应
