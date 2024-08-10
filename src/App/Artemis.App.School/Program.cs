@@ -77,6 +77,7 @@ public class Program
             app.MapGrpcService<SchoolServiceImplement>();
             app.MapGrpcService<StudentServiceImplement>();
             app.MapGrpcService<TeacherServiceImplement>();
+            app.MapGrpcService<ChangeServiceImplement>();
             //app.MapGrpcService<RoleService>();
 
             // map common endpoints
