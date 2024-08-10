@@ -17,11 +17,11 @@ COPY ["src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj", "src/
 RUN dotnet restore "./src/App/Business/Artemis.App.Business.VisionScreen/Artemis.App.Business.VisionScreen.csproj"
 COPY . .
 WORKDIR "/src/src/App/Business/Artemis.App.Business.VisionScreen"
-RUN dotnet build "./Artemis.App.Business.VisionScreen.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Artemis.App.Business.VisionScreen.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Artemis.App.Business.VisionScreen.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Artemis.App.Business.VisionScreen.csproj" --no-restore --no-build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

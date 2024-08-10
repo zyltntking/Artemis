@@ -13,12 +13,12 @@ public sealed class ArtemisStudentChangeLog : StudentChangeLog
     /// <summary>
     /// 变更关联的学生
     /// </summary>
-    public ArtemisStudent Student { get; set; }
+    public ArtemisStudent? Student { get; set; }
 
     /// <summary>
     /// 变更关联的学校
     /// </summary>
-    public ArtemisSchool School { get; set; }
+    public ArtemisSchool? School { get; set; }
 
     /// <summary>
     /// 变更关联的班级

@@ -13,10 +13,10 @@ public class ArtemisTeacherChangeLog : TeacherChangeLog
     /// <summary>
     /// 变更关联的学生
     /// </summary>
-    public ArtemisTeacher Teacher { get; set; }
+    public ArtemisTeacher? Teacher { get; set; }
 
     /// <summary>
     /// 变更关联的学校
     /// </summary>
-    public ArtemisSchool School { get; set; }
+    public ArtemisSchool? School { get; set; }
 }

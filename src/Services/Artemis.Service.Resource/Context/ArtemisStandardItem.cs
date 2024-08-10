@@ -13,5 +13,5 @@ public class ArtemisStandardItem : StandardItem
     /// <summary>
     ///     标准项目所属目录
     /// </summary>
-    public required ArtemisStandardCatalog Catalog { get; set; }
+    public ArtemisStandardCatalog? Catalog { get; set; }
 }

@@ -13,5 +13,5 @@ public sealed class ArtemisDataDictionaryItem : DataDictionaryItem
     /// <summary>
     ///     数据字典
     /// </summary>
-    public required ArtemisDataDictionary DataDictionary { get; set; }
+    public ArtemisDataDictionary? DataDictionary { get; set; }
 }

@@ -13,7 +13,7 @@ public sealed class ArtemisTaskUnit : TaskUnit
     /// <summary>
     ///     任务
     /// </summary>
-    public required ArtemisTask Task { get; set; }
+    public ArtemisTask? Task { get; set; }
 
     /// <summary>
     ///     任务目标

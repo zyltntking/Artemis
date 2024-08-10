@@ -24,7 +24,7 @@ RUN dotnet build "./Artemis.App.Identity.csproj" --no-restore -c $BUILD_CONFIGUR
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Artemis.App.Identity.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Artemis.App.Identity.csproj" --no-restore --no-build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

@@ -13,5 +13,5 @@ public sealed class IdentityUserClaim : UserClaim
     /// <summary>
     ///     所属用户
     /// </summary>
-    public required IdentityUser User { get; set; }
+    public IdentityUser? User { get; set; }
 }

@@ -20,11 +20,11 @@ COPY ["src/Services/Artemis.Service.Shared/Artemis.Service.Shared.csproj", "src/
 RUN dotnet restore "./src/App/Artemis.App.Task/Artemis.App.Task.csproj"
 COPY . .
 WORKDIR "/src/src/App/Artemis.App.Task"
-RUN dotnet build "./Artemis.App.Task.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Artemis.App.Task.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Artemis.App.Task.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Artemis.App.Task.csproj" --no-restore --no-build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

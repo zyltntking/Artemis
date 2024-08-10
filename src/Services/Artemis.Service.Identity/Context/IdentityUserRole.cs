@@ -13,10 +13,10 @@ public sealed class IdentityUserRole : UserRole
     /// <summary>
     ///     所属用户
     /// </summary>
-    public required IdentityUser User { get; set; }
+    public IdentityUser? User { get; set; }
 
     /// <summary>
     ///     所属角色
     /// </summary>
-    public required IdentityRole Role { get; set; }
+    public IdentityRole? Role { get; set; }
 }

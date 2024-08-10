@@ -13,5 +13,5 @@ public sealed class IdentityRoleClaim : RoleClaim
     /// <summary>
     ///     凭据所属角色
     /// </summary>
-    public required IdentityRole Role { get; set; }
+    public IdentityRole? Role { get; set; }
 }

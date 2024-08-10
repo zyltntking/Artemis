@@ -13,5 +13,5 @@ public class ArtemisTaskUnitTarget : TaskUnitTarget
     /// <summary>
     ///     任务单元
     /// </summary>
-    public required ArtemisTaskUnit TaskUnit { get; set; }
+    public ArtemisTaskUnit? TaskUnit { get; set; }
 }

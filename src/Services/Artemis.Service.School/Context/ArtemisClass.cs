@@ -13,12 +13,12 @@ public sealed class ArtemisClass : Class
     /// <summary>
     ///     班级所属的学校
     /// </summary>
-    public required ArtemisSchool School { get; set; }
+    public ArtemisSchool? School { get; set; }
 
     /// <summary>
     ///     班主任
     /// </summary>
-    public required ArtemisTeacher HeadTeacher { get; set; }
+    public ArtemisTeacher? HeadTeacher { get; set; }
 
     /// <summary>
     ///     班级管理的学生

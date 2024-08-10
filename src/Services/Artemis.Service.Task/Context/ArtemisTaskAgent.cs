@@ -13,11 +13,11 @@ public sealed class ArtemisTaskAgent : TaskAgent
     /// <summary>
     ///     任务
     /// </summary>
-    public required ArtemisTask Task { get; set; }
+    public ArtemisTask? Task { get; set; }
 
 
     /// <summary>
     ///     代理
     /// </summary>
-    public required ArtemisAgent Agent { get; set; }
+    public ArtemisAgent? Agent { get; set; }
 }
