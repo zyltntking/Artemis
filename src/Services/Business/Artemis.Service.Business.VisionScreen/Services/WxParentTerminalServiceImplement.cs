@@ -798,5 +798,57 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         return result.AffectedResponse();
     }
 
+    /// <summary>
+    /// 获取视力趋势数据
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取视力趋势数据")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchVisualTendencyResponse> FetchVisualTendency(FetchVisualTendencyRequest request, ServerCallContext context)
+    {
+        var studentId = Guid.Parse(request.StudentId);
+
+        var records = await VisionScreenRecordStore.EntityQuery
+            .Where(item => item.StudentId == studentId)
+            .Where(item => item.CheckTime != null)
+            .OrderBy(item => item.CheckTime)
+            .Select(item => new
+            {
+                item.CheckTime,
+                item.LeftNakedEyeVision,
+                item.RightNakedEyeVision,
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var checkTimeList = new List<string>
+        {
+            ""
+        };
+        checkTimeList.AddRange(records.Select(item => $"{item.CheckTime:yyyy-MM}月"));
+
+        var leftEyeList = new List<double>
+        {
+            0
+        };
+        leftEyeList.AddRange(records.Select(item => item.LeftNakedEyeVision!.Value));
+
+        var rightEyeList = new List<double>
+        {
+            0
+        };
+
+        rightEyeList.AddRange(records.Select(item => item.RightNakedEyeVision!.Value));
+
+        var packet = new VisualTendencyPacket();
+
+        packet.Records.Add(checkTimeList);
+        packet.LeftEye.Add(leftEyeList);
+        packet.RightEye.Add(rightEyeList);
+
+        return packet.ReadInfoResponse<FetchVisualTendencyResponse, VisualTendencyPacket>();
+    }
+
     #endregion
 }

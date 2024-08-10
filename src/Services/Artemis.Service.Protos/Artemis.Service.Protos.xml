@@ -2911,6 +2911,115 @@
             @maxLength(256)
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest">
+            <summary>
+            获取视力趋势数据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket">
+            <summary>
+            视力趋势数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.RecordsFieldNumber">
+            <summary>Field number for the "Records" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.Records">
+            <summary>
+            记录
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.LeftEyeFieldNumber">
+            <summary>Field number for the "LeftEye" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.LeftEye">
+            <summary>
+            左眼数据
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.RightEyeFieldNumber">
+            <summary>Field number for the "RightEye" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.VisualTendencyPacket.RightEye">
+            <summary>
+            右眼数据
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse">
+            <summary>
+            获取视力趋势数据响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyResponse.Data">
+            <summary>
+            筛查结果数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService">
             <summary>
             小程序家长终端服务
@@ -3013,6 +3122,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.ServerCallContext)">
             <summary>
             档案签名
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceBase.FetchVisualTendency(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取视力趋势数据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -3463,6 +3580,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.SignRecordAsync(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.CallOptions)">
             <summary>
             档案签名
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchVisualTendency(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取视力趋势数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchVisualTendency(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取视力趋势数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchVisualTendencyAsync(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取视力趋势数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.WxParentTerminalService.WxParentTerminalServiceClient.FetchVisualTendencyAsync(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取视力趋势数据
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
