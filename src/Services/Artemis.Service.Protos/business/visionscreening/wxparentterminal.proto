@@ -237,14 +237,18 @@ message FeedbackRecordPacket{
 	string StudentId = 2;
 	// 学生姓名
 	google.protobuf.StringValue StudentName = 3;
+	// 学生学籍号
+	google.protobuf.StringValue StudentNumber = 4;
+	// 记录是否已签名
+	bool IsSign = 5;
 	// 检查时间
 	// @datetime
-	google.protobuf.StringValue CheckTime = 4;
+	google.protobuf.StringValue CheckTime = 6;
 	// 是否已反馈
 	// @required
-	bool IsFeedback = 5;
+	bool IsFeedback = 7;
 	// 反馈内容
-	FeedbackContentPacket FeedbackContent = 6;
+	FeedbackContentPacket FeedbackContent = 8;
 }
 
 // 家长个人中心消息信息

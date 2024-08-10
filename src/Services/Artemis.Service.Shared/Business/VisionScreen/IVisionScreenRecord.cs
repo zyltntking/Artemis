@@ -217,6 +217,11 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     string? StudentName { get; set; }
 
     /// <summary>
+    /// 学籍号
+    /// </summary>
+    string? StudentNumber { get; set; }
+
+    /// <summary>
     ///     学生编号
     /// </summary>
     string? StudentCode { get; set; }

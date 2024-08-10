@@ -826,6 +826,11 @@
                 学生名称
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.StudentNumber">
+            <summary>
+            学籍号
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.StudentCode">
             <summary>
                 学生编号

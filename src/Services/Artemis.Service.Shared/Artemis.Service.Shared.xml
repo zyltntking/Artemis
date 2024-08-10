@@ -619,6 +619,11 @@
                 学生名称
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentNumber">
+            <summary>
+            学籍号
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.StudentCode">
             <summary>
                 学生编号
@@ -1437,6 +1442,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentName">
             <summary>
                 学生名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentNumber">
+            <summary>
+            学籍号
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.StudentCode">

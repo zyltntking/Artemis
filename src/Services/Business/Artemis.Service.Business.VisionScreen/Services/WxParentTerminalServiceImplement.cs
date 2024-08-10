@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using Artemis.Data.Core;
-using Artemis.Data.Core.Fundamental.Protocol;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
@@ -323,6 +322,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
                 RecordId = record.Id.ToString(),
                 StudentId = record.StudentId.ToString(),
                 StudentName = record. StudentName,
+                StudentNumber = record.StudentNumber,
                 CheckTime = record.CheckTime.ToString(),
                 IsFeedback = record.IsFeedBack,
                 FeedbackContent = feedbackContent

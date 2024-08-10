@@ -486,6 +486,11 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     public string? StudentName { get; set; }
 
     /// <summary>
+    /// 学籍号
+    /// </summary>
+    public string? StudentNumber { get; set; }
+
+    /// <summary>
     ///     学生编号
     /// </summary>
     public string? StudentCode { get; set; }

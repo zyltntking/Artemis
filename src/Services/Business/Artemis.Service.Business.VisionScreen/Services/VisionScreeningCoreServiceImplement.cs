@@ -404,7 +404,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
                     var taskUnit = taskUnits.First(unit => unit.Id == target.TaskUnitId);
                     // taskUnitInfo
-                    record.TaskUnitId = target.TaskUnitId;
+                    record.TaskUnitId = taskUnit.Id;
                     record.TaskUnitName = taskUnit.UnitName;
                     record.TaskUnitCode = taskUnit.UnitCode;
 
@@ -454,6 +454,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
                     // student
                     record.StudentId = student.Id;
                     record.StudentName = student.Name;
+                    record.StudentNumber = student.StudentNumber;
+                    record.Nation = student.Nation;
                     record.StudentCode = student.Code;
                     record.Birthday = student.Birthday;
                     if (student.Birthday != null)

@@ -1921,6 +1921,22 @@
             学生姓名
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.StudentNumberFieldNumber">
+            <summary>Field number for the "StudentNumber" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.StudentNumber">
+            <summary>
+            学生学籍号
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.IsSignFieldNumber">
+            <summary>Field number for the "IsSign" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.IsSign">
+            <summary>
+            记录是否已签名
+            </summary>
+        </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordPacket.CheckTimeFieldNumber">
             <summary>Field number for the "CheckTime" field.</summary>
         </member>

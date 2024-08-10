@@ -270,6 +270,13 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     public string? StudentName { get; set; }
 
     /// <summary>
+    /// 学籍号
+    /// </summary>
+    [Comment("学籍号")]
+    [MaxLength(32)]
+    public string? StudentNumber { get; set; }
+
+    /// <summary>
     ///     学生编号
     /// </summary>
     [Comment("学生编号")]
