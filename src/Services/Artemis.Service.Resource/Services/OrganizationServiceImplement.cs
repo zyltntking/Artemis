@@ -48,7 +48,7 @@ public class OrganizationServiceImplement : OrganizationService.OrganizationServ
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("查找组织机构信息")]
-    [Authorize(AuthorizePolicy.Token)]
+    //[Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchOrganizationInfoResponse> SearchOrganizationInfo(
         SearchOrganizationInfoRequest request,
         ServerCallContext context)

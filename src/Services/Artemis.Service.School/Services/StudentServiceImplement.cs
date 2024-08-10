@@ -52,7 +52,12 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     public override async Task<SearchStudentInfoResponse> SearchStudentInfo(SearchStudentInfoReqeust request,
         ServerCallContext context)
     {
+        Guid? schoolId = string.IsNullOrWhiteSpace(request.SchoolId) ? null : Guid.Parse(request.SchoolId);
+        Guid? classId = string.IsNullOrWhiteSpace(request.ClassId) ? null : Guid.Parse(request.ClassId);
+
         var info = await SchoolStudentManager.FetchStudentsAsync(
+            schoolId,
+            classId,
             request.Name,
             request.StudentNumber,
             request.Gender,

@@ -10,6 +10,22 @@ import "common.proto";
 // 视力筛查核心业务服务
 service VisionScreeningCoreService{
 
+    // 教师绑定用户
+	rpc BindTeacherUser(BindTeacherUserRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/BindTeacherUser"
+			body: "*"
+		};
+	}
+
+	// 解绑教师用户
+	rpc UnBindTeacherUser(UnBindTeacherUserRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/UnBindTeacherUser"
+			body: "*"
+		};
+	}
+
 	// 生成任务
 	rpc GeneratorTask(GeneratorTaskRequest) returns (AffectedResponse){
 		option (google.api.http) = {
@@ -58,6 +74,26 @@ service VisionScreeningCoreService{
 		};
 	}
 
+}
+
+// 教师绑定用户请求
+message BindTeacherUserRequest{
+	// 用户标识
+	// @required
+	// @guid
+	string UserId = 1;
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 2;
+}
+
+// 教师用户解绑请求
+message UnBindTeacherUserRequest{
+	// 用户标识
+	// @required
+	// @guid
+	string UserId = 1;
 }
 
 // 任务绑定机构树

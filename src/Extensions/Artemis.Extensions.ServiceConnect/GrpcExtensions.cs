@@ -2,6 +2,7 @@
 using Artemis.Extensions.ServiceConnect.Interceptors;
 using Artemis.Extensions.ServiceConnect.SwaggerFilters;
 using Artemis.Extensions.ServiceConnect.Validators;
+using Google.Protobuf.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ public static class GrpcExtensions
             options.Interceptors.Add<FriendlyException>();
         }).AddJsonTranscoding(option =>
         {
+            option.JsonSettings.IgnoreDefaultValues = false;
             option.JsonSettings.WriteIndented = true;
         });
 

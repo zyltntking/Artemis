@@ -75,24 +75,30 @@ service StudentService{
 
 // 查询学生信息请求
 message SearchStudentInfoReqeust{
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 1;
+	// 班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 2;
 	// 学生名称
 	// @maxLength(128)
-	google.protobuf.StringValue Name = 1;
+	google.protobuf.StringValue Name = 3;
 	// 学生性别
 	// @maxLength(32)
-	google.protobuf.StringValue Gender = 2;
+	google.protobuf.StringValue Gender = 4;
 	// 民族
 	// @maxLength(32)
-	google.protobuf.StringValue Nation = 3;
+	google.protobuf.StringValue Nation = 5;
 	// 学籍号
 	// @maxLength(32)
-	google.protobuf.StringValue StudentNumber = 4;
+	google.protobuf.StringValue StudentNumber = 6;
 	// 页码
 	// @min(0)
-	google.protobuf.Int32Value Page = 5;
+	google.protobuf.Int32Value Page = 7;
 	// 条目数
 	// @min(0)
-	google.protobuf.Int32Value Size = 6;
+	google.protobuf.Int32Value Size = 8;
 }
 
 // 学生信息数据包

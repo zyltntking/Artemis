@@ -9,7 +9,7 @@ package Artemis.Service.Protos.School;
 
 // 教师服务
 service TeacherService{
-	
+
     // 查询教师信息
 	rpc SearchTeacherInfo(SearchTeacherInfoRequest) returns (SearchTeacherInfoResponse){
 		option (google.api.http) = {
@@ -74,18 +74,21 @@ service TeacherService{
 
 // 查询教师信息请求
 message SearchTeacherInfoRequest{
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 1;
 	// 教师姓名
 	// @maxLength(32)
-	google.protobuf.StringValue Name = 1;
+	google.protobuf.StringValue Name = 2;
 	// 教师编号
 	// @maxLength(32)
-	google.protobuf.StringValue Code = 2;
+	google.protobuf.StringValue Code = 3;
 	// 页码
 	// @min(0)
-	google.protobuf.Int32Value Page = 3;
+	google.protobuf.Int32Value Page = 4;
 	// 条目数
 	// @min(0)
-	google.protobuf.Int32Value Size = 4;
+	google.protobuf.Int32Value Size = 5;
 }
 
 // 教师信息数据包

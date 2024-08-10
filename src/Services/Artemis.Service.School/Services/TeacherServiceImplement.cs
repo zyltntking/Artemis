@@ -52,7 +52,10 @@ public class TeacherServiceImplement : TeacherService.TeacherServiceBase
     public override async Task<SearchTeacherInfoResponse> SearchTeacherInfo(SearchTeacherInfoRequest request,
         ServerCallContext context)
     {
+        Guid? schoolId = string.IsNullOrWhiteSpace(request.SchoolId) ? null : Guid.Parse(request.SchoolId);
+
         var info = await SchoolTeacherManager.FetchTeachersAsync(
+            schoolId,
             request.Name,
             request.Code,
             request.Page ?? 0,

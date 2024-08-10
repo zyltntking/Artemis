@@ -49,8 +49,4 @@
 		<ProjectReference Include="..\..\Artemis.Service.Task\Artemis.Service.Task.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Managers\" />
-	</ItemGroup>
-
 </Project>

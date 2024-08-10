@@ -50,6 +50,46 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.BusinesscoreReflection.Descriptor">
             <summary>File descriptor for business/visionscreening/businesscore.proto</summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest">
+            <summary>
+            教师绑定用户请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.TeacherIdFieldNumber">
+            <summary>Field number for the "TeacherId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.TeacherId">
+            <summary>
+            教师标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest">
+            <summary>
+            教师用户解绑请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket">
             <summary>
             任务绑定机构树
@@ -1017,6 +1057,22 @@
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase">
             <summary>Base class for server-side implementations of VisionScreeningCoreService</summary>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.BindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            教师绑定用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.UnBindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            解绑教师用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.ServerCallContext)">
             <summary>
             生成任务
@@ -1082,6 +1138,78 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师绑定用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师绑定用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindTeacherUserAsync(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师绑定用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindTeacherUserAsync(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师绑定用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            解绑教师用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            解绑教师用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindTeacherUserAsync(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            解绑教师用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindTeacherUserAsync(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.CallOptions)">
+            <summary>
+            解绑教师用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
@@ -23570,6 +23698,24 @@
             查询学生信息请求
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentInfoReqeust.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentInfoReqeust.SchoolId">
+            <summary>
+            学校标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentInfoReqeust.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentInfoReqeust.ClassId">
+            <summary>
+            班级标识
+            @guid
+            </summary>
+        </member>
         <member name="F:Artemis.Service.Protos.School.SearchStudentInfoReqeust.NameFieldNumber">
             <summary>Field number for the "Name" field.</summary>
         </member>
@@ -24686,6 +24832,15 @@
         <member name="T:Artemis.Service.Protos.School.SearchTeacherInfoRequest">
             <summary>
             查询教师信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherInfoRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherInfoRequest.SchoolId">
+            <summary>
+            学校标识
+            @guid
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.School.SearchTeacherInfoRequest.NameFieldNumber">

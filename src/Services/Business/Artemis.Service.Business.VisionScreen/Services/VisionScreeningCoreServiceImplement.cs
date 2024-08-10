@@ -2,11 +2,12 @@
 using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
+using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Business.VisionScreen.Context;
-using Artemis.Service.Business.VisionScreen.Models;
 using Artemis.Service.Business.VisionScreen.Stores;
+using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
 using Artemis.Service.Resource.Stores;
@@ -32,6 +33,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <summary>
     /// 视力筛查核心服务实现
     /// </summary>
+    /// <param name="userStore"></param>
     /// <param name="taskStore"></param>
     /// <param name="taskUnitStore"></param>
     /// <param name="unitTargetStore"></param>
@@ -47,7 +49,9 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="optometerStore"></param>
     /// <param name="visualChartStore"></param>
     /// <param name="studentRelationBindingStore"></param>
+    /// <param name="teacherUserBindingStore"></param>
     public VisionScreeningCoreServiceImplement(
+        IIdentityUserStore userStore,
         IArtemisTaskStore taskStore,
         IArtemisTaskUnitStore taskUnitStore,
         IArtemisTaskUnitTargetStore unitTargetStore,
@@ -62,8 +66,10 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         IArtemisVisionScreenRecordStore visionScreenRecordStore,
         IArtemisOptometerStore optometerStore,
         IArtemisVisualChartStore visualChartStore,
-        IArtemisStudentRelationBindingStore studentRelationBindingStore)
+        IArtemisStudentRelationBindingStore studentRelationBindingStore,
+        IArtemisTeacherUserBindingStore teacherUserBindingStore)
     {
+        UserStore = userStore;
         TaskStore = taskStore;
         TaskUnitStore = taskUnitStore;
         TaskUnitTargetStore = unitTargetStore;
@@ -79,7 +85,10 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         OptometerStore = optometerStore;
         VisualChartStore = visualChartStore;
         StudentRelationBindingStore = studentRelationBindingStore;
+        TeacherUserBindingStore = teacherUserBindingStore;
     }
+
+    private IIdentityUserStore UserStore { get; set; }
 
     private IArtemisTaskStore TaskStore { get; }
 
@@ -111,7 +120,60 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
     private IArtemisStudentRelationBindingStore StudentRelationBindingStore { get; }
 
+    private IArtemisTeacherUserBindingStore TeacherUserBindingStore { get; }
+
     #region Overrides of VisionScreeningCoreServiceBase
+
+    /// <summary>
+    /// 教师绑定用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("教师绑定用户")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BindTeacherUser(BindTeacherUserRequest request, ServerCallContext context)
+    {
+        var userId = Guid.Parse(request.UserId);
+
+        var teacherId = Guid.Parse(request.TeacherId);
+
+        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+
+        if (!userExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+        }
+
+        var teacherExists = await TeacherStore.ExistsAsync(teacherId, context.CancellationToken);
+
+        if (!teacherExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("教师不存在");
+        }
+
+        var binding = await TeacherUserBindingStore.EntityQuery
+            .Where(bind => bind.UserId == userId)
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        StoreResult result;
+
+        if (binding == null)
+        {
+            binding = Instance.CreateInstance<ArtemisTeacherUserBinding>();
+            binding.TeacherId = teacherId;
+            binding.UserId = userId;
+            result = await TeacherUserBindingStore.CreateAsync(binding, context.CancellationToken);
+        }
+        else
+        {
+            binding.UserId = userId;
+            binding.TeacherId = teacherId;
+            result = await TeacherUserBindingStore.UpdateAsync(binding, context.CancellationToken);
+        }
+
+        return result.AffectedResponse();
+    }
 
     /// <summary>
     /// 生成任务

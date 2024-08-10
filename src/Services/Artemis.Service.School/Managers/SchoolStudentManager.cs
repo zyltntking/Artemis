@@ -3,6 +3,7 @@ using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.School.Context;
+using Artemis.Service.School.Models;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.School.Transfer;
 using Mapster;
@@ -19,6 +20,7 @@ public interface ISchoolStudentManager :
     /// <summary>
     ///     根据学生信息查找学生
     /// </summary>
+    /// <param name="classId"></param>
     /// <param name="studentNameSearch">学生姓名搜索值</param>
     /// <param name="studentNumberSearch">学生学籍号搜索值</param>
     /// <param name="gender">学生性别</param>
@@ -26,8 +28,11 @@ public interface ISchoolStudentManager :
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
+    /// <param name="schoolId"></param>
     /// <returns>分页搜索结果</returns>
     Task<PageResult<StudentInfo>> FetchStudentsAsync(
+        Guid? schoolId,
+        Guid? classId,
         string? studentNameSearch,
         string? studentNumberSearch,
         string? gender,
@@ -58,6 +63,7 @@ public class SchoolStudentManager :
     /// <summary>
     ///     根据学生信息查找学生
     /// </summary>
+    /// <param name="classId"></param>
     /// <param name="studentNameSearch">学生姓名搜索值</param>
     /// <param name="studentNumberSearch">学生学籍号搜索值</param>
     /// <param name="gender">学生性别</param>
@@ -65,8 +71,11 @@ public class SchoolStudentManager :
     /// <param name="page">页码</param>
     /// <param name="size">条目数</param>
     /// <param name="cancellationToken">操作取消信号</param>
+    /// <param name="schoolId"></param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<StudentInfo>> FetchStudentsAsync(
+        Guid? schoolId,
+        Guid? classId,
         string? studentNameSearch,
         string? studentNumberSearch,
         string? gender,
@@ -83,6 +92,10 @@ public class SchoolStudentManager :
         nation ??= string.Empty;
 
         var query = EntityStore.EntityQuery;
+
+        query = query.WhereIf(schoolId != null, student => student.SchoolId == schoolId);
+
+        query = query.WhereIf(schoolId != null, student => student.ClassId == classId);
 
         var total = await query.LongCountAsync(cancellationToken);
 

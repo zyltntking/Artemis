@@ -384,6 +384,31 @@
             关系
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.ITeacherUserBinding">
+            <summary>
+            教师用户绑定接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.ITeacherUserBindingInfo">
+            <summary>
+            教师用户绑定信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.ITeacherUserBindingPackage">
+            <summary>
+            教师用户绑定数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.ITeacherUserBindingPackage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.ITeacherUserBindingPackage.TeacherId">
+            <summary>
+            教师标识
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecord">
             <summary>
                 视力筛查记录接口
@@ -612,6 +637,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Gender">
             <summary>
             性别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.Nation">
+            <summary>
+               民族
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsChartChecked">
@@ -1427,6 +1457,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.Gender">
             <summary>
             性别
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.Nation">
+            <summary>
+               民族
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsChartChecked">

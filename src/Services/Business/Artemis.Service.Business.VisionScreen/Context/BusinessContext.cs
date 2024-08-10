@@ -47,6 +47,11 @@ public class BusinessContext : DbContext
     public virtual DbSet<ArtemisStudentRelationBinding> StudentRelationBindings { get; set; } = default!;
 
     /// <summary>
+    /// 教师用户绑定数据
+    /// </summary>
+    public virtual DbSet<ArtemisTeacherUserBinding> TeacherUserBindings { get; set; } = default!;
+
+    /// <summary>
     /// 学生眼部照片数据
     /// </summary>
     public virtual DbSet<ArtemisStudentEyePhoto> StudentEyePhotos { get; set; } = default!;

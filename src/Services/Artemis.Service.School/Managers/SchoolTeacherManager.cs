@@ -19,6 +19,7 @@ public interface ISchoolTeacherManager :
     /// <summary>
     ///     根据教师信息查找教师
     /// </summary>
+    /// <param name="schoolId"></param>
     /// <param name="teacherNameSearch">教师名称搜索值</param>
     /// <param name="teacherCodeSearch">教师编号搜索值</param>
     /// <param name="page">页码</param>
@@ -26,6 +27,7 @@ public interface ISchoolTeacherManager :
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     Task<PageResult<TeacherInfo>> FetchTeachersAsync(
+        Guid? schoolId,
         string? teacherNameSearch,
         string? teacherCodeSearch,
         int page = 1,
@@ -54,6 +56,7 @@ public class SchoolTeacherManager :
     /// <summary>
     ///     根据教师信息查找教师
     /// </summary>
+    /// <param name="schoolId"></param>
     /// <param name="teacherNameSearch">教师名称搜索值</param>
     /// <param name="teacherCodeSearch">教师编号搜索值</param>
     /// <param name="page">页码</param>
@@ -61,6 +64,7 @@ public class SchoolTeacherManager :
     /// <param name="cancellationToken">操作取消信号</param>
     /// <returns>分页搜索结果</returns>
     public async Task<PageResult<TeacherInfo>> FetchTeachersAsync(
+        Guid? schoolId,
         string? teacherNameSearch,
         string? teacherCodeSearch,
         int page = 1,
@@ -73,6 +77,8 @@ public class SchoolTeacherManager :
         teacherCodeSearch ??= string.Empty;
 
         var query = EntityStore.EntityQuery;
+
+        query = query.WhereIf(schoolId != null, teacher => teacher.SchoolId == schoolId);
 
         var total = await query.LongCountAsync(cancellationToken);
 
