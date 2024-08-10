@@ -10,6 +10,7 @@ using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
+using Artemis.Service.Protos.Resource;
 using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.Business.VisionScreen.Transfer;
@@ -51,6 +52,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="studentRelationBindingStore"></param>
     /// <param name="teacherUserBindingStore"></param>
     /// <param name="notificationMessageStore"></param>
+    /// <param name="systemModuleStore"></param>
     public VisionScreeningCoreServiceImplement(
         IIdentityUserStore userStore,
         IArtemisTaskStore taskStore,
@@ -69,7 +71,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         IArtemisVisualChartStore visualChartStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
         IArtemisTeacherUserBindingStore teacherUserBindingStore,
-        IArtemisNotificationMessageStore notificationMessageStore)
+        IArtemisNotificationMessageStore notificationMessageStore,
+        IArtemisSystemModuleStore systemModuleStore)
     {
         UserStore = userStore;
         TaskStore = taskStore;
@@ -89,6 +92,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         StudentRelationBindingStore = studentRelationBindingStore;
         TeacherUserBindingStore = teacherUserBindingStore;
         NotificationMessageStore = notificationMessageStore;
+        SystemModuleStore = systemModuleStore;
     }
 
     private IIdentityUserStore UserStore { get; set; }
@@ -126,6 +130,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     private IArtemisTeacherUserBindingStore TeacherUserBindingStore { get; }
 
     private IArtemisNotificationMessageStore NotificationMessageStore { get; }
+
+    private IArtemisSystemModuleStore SystemModuleStore { get; }
 
     #region Overrides of VisionScreeningCoreServiceBase
 
@@ -739,6 +745,50 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         return ResultAdapter.AdaptEmptyFail<ReadUserMessageResponse>("消息不存在");
     }
 
+    /// <summary>
+    /// 获取系统模块树
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取系统模块树")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchSystemModuleTreeResponse> FetchSystemModuleTree(EmptyRequest request, ServerCallContext context)
+    {
+        var systemModuleInfos = await SystemModuleStore
+            .EntityQuery
+            .ProjectToType<SystemModuleTreePacket>()
+            .ToListAsync(context.CancellationToken);
+
+        var tree = GenerateTree(null, systemModuleInfos);
+
+        return tree.ReadInfoResponse<FetchSystemModuleTreeResponse, SystemModuleTreePacket>();
+    }
+
+    /// <summary>
+    /// 获取系统模块树(经凭据过滤)
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取系统模块树")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchSystemModuleTreeResponse> FetchCliamedSystemModuleTree(EmptyRequest request, ServerCallContext context)
+    {
+        var systemModuleInfos = await SystemModuleStore
+            .EntityQuery
+            .ProjectToType<SystemModuleTreePacket>()
+            .ToListAsync(context.CancellationToken);
+
+        var claims = context.GetHttpContext().GetClaims();
+
+        // todo claimed
+
+        var tree = GenerateTree(null, systemModuleInfos);
+
+        return tree.ReadInfoResponse<FetchSystemModuleTreeResponse, SystemModuleTreePacket>();
+    }
+
 
     /// <summary>
     /// 构建任务树
@@ -821,6 +871,29 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         return null;
 
+    }
+
+    /// <summary>
+    ///     递归生成树
+    /// </summary>
+    /// <param name="key">根标识</param>
+    /// <param name="nodeList">节点列表</param>
+    /// <returns></returns>
+    private SystemModuleTreePacket? GenerateTree(string? key, List<SystemModuleTreePacket> nodeList)
+    {
+        var tree = nodeList.FirstOrDefault(item => item.Id == null);
+
+        if (tree is null)
+            return null;
+
+        var children = nodeList
+            .Where(item => item.ParentId != null && item.ParentId == tree.Id)
+            .Select(item => GenerateTree(tree.Id, nodeList))
+            .ToList();
+
+        tree.Children.Add(children);
+
+        return tree;
     }
 
     #endregion

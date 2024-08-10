@@ -441,7 +441,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             var recordFeedBack = Instance.CreateInstance<ArtemisRecordFeedback>();
             recordFeedBack.RecordId = recordId;
             recordFeedBack.FeedBackTime = DateTime.Now;
-            recordFeedBack.IsCheck = request.IsChedk;
+            recordFeedBack.IsCheck = request.IsCheck;
             recordFeedBack.CheckDate = request.CheckTime.Adapt<DateTime>();
             recordFeedBack.Content = feedBackContent;
             recordFeedBack.UserId = userId;

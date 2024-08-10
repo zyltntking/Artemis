@@ -90,6 +90,22 @@ service VisionScreeningCoreService{
 			body: "*"
 		};
 	}
+
+	// 获取系统模块树
+	rpc FetchSystemModuleTree(EmptyRequest) returns (FetchSystemModuleTreeResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchSystemModuleTree"
+			body: "*"
+		};
+	}
+
+	// 获取系统模块树(经凭据过滤)
+	rpc FetchCliamedSystemModuleTree(EmptyRequest) returns (FetchSystemModuleTreeResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchCliamedSystemModuleTree"
+			body: "*"
+		};
+	}
 }
 
 // 教师绑定用户请求
@@ -472,4 +488,77 @@ message ReadUserMessageResponse{
 	// 通知消息数据
 	// @required
 	NotificationMessagePacket Data = 7;
+}
+
+// 系统模块信息树数据包
+message SystemModuleTreePacket{
+	// 模块标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 上级模块标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 模块名称
+	// @required
+	// @maxLength(128)
+	string Name = 3;
+	// 模块类型
+	// @required
+	string Type = 4;
+	// 模块序列
+	// @required
+	// @min(0)
+	int32 Order = 5;
+	// 路由地址
+	// @maxLength(128)
+	google.protobuf.StringValue Path = 6;
+	// 路由参数
+	// @maxLength(256)
+	google.protobuf.StringValue Parameters = 7;
+	// 组件路径
+	// @maxLength(128)
+	google.protobuf.StringValue Component = 8;
+	// 模块图标
+	// @maxLength(64)
+	google.protobuf.StringValue Icon = 9;
+	// 是否外链
+	// @required
+	bool IsFrame = 10;
+	// 是否显示
+	// @required
+	bool Visible = 11;
+	// 模块状态
+	// @required
+	bool Status = 12;
+	// 凭据戳
+	// @maxLength(64)
+	google.protobuf.StringValue ClaimStamp = 13;
+	// 备注
+	// @maxLength(256)
+	google.protobuf.StringValue Remark = 14;
+	// 子模块
+	repeated SystemModuleTreePacket Children = 15;
+}
+
+// 读取系统模块信息树响应
+message FetchSystemModuleTreeResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 系统模块信息数据
+	// @required
+	SystemModuleTreePacket Data = 7;
 }

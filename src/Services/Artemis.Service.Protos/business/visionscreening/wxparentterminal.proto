@@ -341,7 +341,7 @@ message FeedbackRecordRequest{
 
 	// 是否进一步检查
 	// @required
-	bool IsChedk = 2;
+	bool IsCheck = 2;
 
 	// 检查时间
 	// @datetime
