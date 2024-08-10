@@ -7,7 +7,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+#ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/App/Artemis.App.Identity/Artemis.App.Identity.csproj", "src/App/Artemis.App.Identity/"]
 COPY ["src/Extensions/Artemis.Extensions.ServiceConnect/Artemis.Extensions.ServiceConnect.csproj", "src/Extensions/Artemis.Extensions.ServiceConnect/"]
@@ -18,13 +18,13 @@ COPY ["src/Data/Artemis.Data.Store/Artemis.Data.Store.csproj", "src/Data/Artemis
 COPY ["src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj", "src/Services/Artemis.Service.Protos/"]
 COPY ["src/Services/Artemis.Service.Shared/Artemis.Service.Shared.csproj", "src/Services/Artemis.Service.Shared/"]
 RUN dotnet restore "./src/App/Artemis.App.Identity/Artemis.App.Identity.csproj"
-COPY . .
-WORKDIR "/src/src/App/Artemis.App.Identity"
-RUN dotnet build "./Artemis.App.Identity.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build
+#COPY . .
+#WORKDIR "/src/src/App/Artemis.App.Identity"
+#RUN dotnet build "./Artemis.App.Identity.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Artemis.App.Identity.csproj" --no-restore --no-build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Artemis.App.Identity.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
