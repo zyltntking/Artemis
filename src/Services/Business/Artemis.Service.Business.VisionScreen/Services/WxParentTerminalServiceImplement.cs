@@ -375,7 +375,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
                 feedbackContent.IsCheck = feedbackInfo.IsCheck;
                 feedbackContent.CheckDate = feedbackInfo.CheckDate.ToString();
                 feedbackContent.FeedbackTime = feedbackInfo.FeedBackTime.ToString();
-                var contents = string.Join(",", feedBacks.Select(item => item.Content));
+                var contents = feedBacks.Select(item => item.Content);
                 feedbackContent.Content.Add(contents);
             }
             else
@@ -395,7 +395,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
                 IsSign = record.IsSign
             };
 
-            return ResultAdapter.AdaptSuccess<FetchFeedbackRecordResponse, FeedbackRecordPacket>(feedbackRecordPacket);
+            return feedbackRecordPacket.ReadInfoResponse<FetchFeedbackRecordResponse, FeedbackRecordPacket>();
         }
 
         return ResultAdapter.AdaptEmptyFail<FetchFeedbackRecordResponse>("记录不存在"); 

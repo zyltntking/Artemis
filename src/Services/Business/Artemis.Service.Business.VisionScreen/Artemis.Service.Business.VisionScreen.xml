@@ -1299,7 +1299,7 @@
             视力筛查核心服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisualChartStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisTeacherUserBindingStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisualChartStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisTeacherUserBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore,Artemis.Service.Resource.Stores.IArtemisSystemModuleStore)">
             <summary>
             视力筛查核心服务实现
             </summary>
@@ -1320,10 +1320,20 @@
             <param name="visualChartStore"></param>
             <param name="studentRelationBindingStore"></param>
             <param name="teacherUserBindingStore"></param>
+            <param name="notificationMessageStore"></param>
+            <param name="systemModuleStore"></param>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.BindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
             教师绑定用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.UnBindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            解绑教师用户
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1377,6 +1387,38 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.FetchUserMessage(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取通知消息(多端通用)
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.ReadUserMessage(Artemis.Service.Protos.Business.VisionScreen.ReadUserMessageRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            读取通知消息(多端通用)
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.FetchSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取系统模块树
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.FetchCliamedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取系统模块树(经凭据过滤)
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.BuildTaskTree(System.String,System.String,System.String,System.Int32,Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket,Artemis.Service.Task.Context.ArtemisTask,System.DateTime,System.DateTime)">
             <summary>
             构建任务树
@@ -1389,6 +1431,14 @@
             <param name="taskNode"></param>
             <param name="startTime"></param>
             <param name="endTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.GenerateTree(System.String,System.Collections.Generic.List{Artemis.Service.Protos.Business.VisionScreen.SystemModuleTreePacket})">
+            <summary>
+                递归生成树
+            </summary>
+            <param name="key">根标识</param>
+            <param name="nodeList">节点列表</param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement">
@@ -1473,6 +1523,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchFeedbackRecord(Artemis.Service.Protos.Business.VisionScreen.FetchFeedbackRecordRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取记录反馈信息
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FeedbackRecord(Artemis.Service.Protos.Business.VisionScreen.FeedbackRecordRequest,Grpc.Core.ServerCallContext)">
             <summary>
             反馈筛查记录后续处理
@@ -1532,6 +1590,14 @@
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.SignRecord(Artemis.Service.Protos.Business.VisionScreen.SignRecordRequest,Grpc.Core.ServerCallContext)">
             <summary>
             档案签名
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchVisualTendency(Artemis.Service.Protos.Business.VisionScreen.FetchVisualTendencyRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取视力趋势数据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
