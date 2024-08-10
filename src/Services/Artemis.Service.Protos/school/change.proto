@@ -1,0 +1,120 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Artemis.Service.Protos.School";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+package Artemis.Service.Protos.School;
+
+// 变更服务
+service ChangeService{
+
+	// 教师转出学校
+	rpc SchoolTeacherMoveOut(SchoolTeacherMoveOutRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SchoolTeacherMoveOut"
+			body: "*"
+		};
+	}
+
+	// 教师转入学校
+	rpc SchoolTeacherMoveIn(SchoolTeacherMoveInRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SchoolTeacherMoveIn"
+			body: "*"
+		};
+	}
+
+	// 学生转出学校
+	rpc SchoolStudentMoveOut(SchoolStudentMoveOutRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SchoolStudentMoveOut"
+			body: "*"
+		};
+	}
+
+	// 学生转入学校
+	rpc SchoolStudentMoveIn(SchoolStudentMoveInRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SchoolStudentMoveIn"
+			body: "*"
+		};
+	}
+
+	// 学生变更班级
+	rpc StudentChangeClass(StudentChangeClassRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/StudentChangeClass"
+			body: "*"
+		};
+	}
+
+}
+
+// 教师转出学校请求
+message SchoolTeacherMoveOutRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+	// 转出原因
+	// @maxLength(128)
+	google.protobuf.StringValue Reason = 2;
+}
+
+// 教师转入学校请求
+message SchoolTeacherMoveInRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 2;
+	// 转入原因
+	// @maxLength(128)
+	google.protobuf.StringValue Reason = 3;
+}
+
+// 学生转出学校请求
+message SchoolStudentMoveOutRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 转出原因
+	// @maxLength(128)
+	google.protobuf.StringValue Reason = 2;
+}
+
+// 学生转入学校请求
+message SchoolStudentMoveInRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 2;
+	// 转入原因
+	// @maxLength(128)
+	google.protobuf.StringValue Reason = 3;
+}
+
+// 学生变更班级请求
+message StudentChangeClassRequest{
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 变更原因
+	// @maxLength(128)
+	google.protobuf.StringValue Reason = 3;
+}

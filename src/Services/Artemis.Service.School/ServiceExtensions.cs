@@ -21,10 +21,13 @@ public static class ServiceExtensions
         services.TryAddScoped<IArtemisClassStore, ArtemisClassStore>();
         services.TryAddScoped<IArtemisTeacherStore, ArtemisTeacherStore>();
         services.TryAddScoped<IArtemisStudentStore, ArtemisStudentStore>();
+        services.TryAddScoped<IArtemisTeacherChangeLogStore, ArtemisTeacherChangeLogStore>();
+        services.TryAddScoped<IArtemisStudentChangeLogStore, ArtemisStudentChangeLogStore>();
 
         services.TryAddScoped<ISchoolManager, SchoolManager>();
         services.TryAddScoped<ISchoolTeacherManager, SchoolTeacherManager>();
         services.TryAddScoped<ISchoolStudentManager, SchoolStudentManager>();
+        services.TryAddScoped<IChangeManager, ChangeManager>();
 
         return services;
     }

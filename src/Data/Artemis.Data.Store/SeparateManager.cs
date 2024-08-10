@@ -1,6 +1,7 @@
 ﻿using Artemis.Data.Core;
 using Artemis.Data.Store.Extensions;
 using Mapster;
+using Microsoft.Extensions.Logging;
 
 namespace Artemis.Data.Store;
 
@@ -122,7 +123,9 @@ public abstract class SeparateManager<TEntity, TKey, TEntityInfo, TEntityPackage
     /// <summary>
     ///     独立模型管理器构造
     /// </summary>
-    protected SeparateManager(IStore<TEntity, TKey> entityStore)
+    protected SeparateManager(
+        IStore<TEntity, TKey> entityStore,
+        ILogger? logger = null) : base(null, logger)
     {
         EntityStore = entityStore;
     }

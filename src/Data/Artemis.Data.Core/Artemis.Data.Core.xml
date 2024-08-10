@@ -3676,6 +3676,38 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.ChangeType">
+            <summary>
+            变更记录类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.ChangeType.MoveInSchool">
+            <summary>
+            转入
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.ChangeType.MoveOutSchool">
+            <summary>
+            转出
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.ChangeType.MoveInClass">
+            <summary>
+            转入
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Types.ChangeType.MoveOutClass">
+            <summary>
+            转出
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.ChangeType.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.ChineseNation">
             <summary>
                 中华民族

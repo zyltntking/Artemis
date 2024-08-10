@@ -133,7 +133,7 @@ public class StudentServiceImplement : StudentService.StudentServiceBase
     public override async Task<AffectedResponse> UpdateStudent(UpdateStudentRequest request, ServerCallContext context)
     {
         var id = Guid.Parse(request.StudentId);
-        var package = request.Adapt<StudentPackage>();
+        var package = request.Student.Adapt<StudentPackage>();
 
         var result = await SchoolStudentManager.UpdateEntityAsync(id, package, context.CancellationToken);
 

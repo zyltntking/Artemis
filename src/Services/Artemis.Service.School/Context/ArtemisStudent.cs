@@ -19,4 +19,9 @@ public sealed class ArtemisStudent : Student
     ///     学生所在的班级
     /// </summary>
     public ArtemisClass? Class { get; set; }
+
+    /// <summary>
+    /// 学生变动记录
+    /// </summary>
+    public ICollection<ArtemisStudentChangeLog>? StudentChangeLogs { get; set; }
 }

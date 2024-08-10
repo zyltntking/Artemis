@@ -28,6 +28,18 @@
         <member name="M:Artemis.App.School.Migrations.ChangeDatetimeType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.School.Migrations.ChangeLog">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeLog.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeLog.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.ChangeLog.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.School.Program">
             <summary>
                 应用程序入口

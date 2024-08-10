@@ -2241,7 +2241,7 @@
                 单独模型
             </summary>
         </member>
-        <member name="M:Artemis.Data.Store.SeparateManager`4.#ctor(Artemis.Data.Store.IStore{`0,`1})">
+        <member name="M:Artemis.Data.Store.SeparateManager`4.#ctor(Artemis.Data.Store.IStore{`0,`1},Microsoft.Extensions.Logging.ILogger)">
             <summary>
                 独立模型管理器构造
             </summary>

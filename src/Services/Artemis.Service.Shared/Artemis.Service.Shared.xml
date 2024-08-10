@@ -2986,6 +2986,106 @@
             备注
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.School.IStudentChangeLog">
+            <summary>
+            学生变动记录接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IStudentChangeLogInfo">
+            <summary>
+            学生变动记录信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IStudentChangeLogPackage">
+            <summary>
+            学生变动记录数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentChangeLogPackage.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentChangeLogPackage.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITeacherChangeLog">
+            <summary>
+            教师变动记录接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITeacherChangeLogInfo">
+            <summary>
+            教师变动记录信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ITeacherChangeLogPackage">
+            <summary>
+            教师变动记录数据包
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacherChangeLogPackage.TeacherId">
+            <summary>
+            教师标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ITeacherChangeLogPackage.TeacherName">
+            <summary>
+            教师姓名
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IClassChangeLogBase">
+            <summary>
+            班级变更记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassChangeLogBase.ClassId">
+            <summary>
+            班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassChangeLogBase.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.ISchoolChangeLogBase">
+            <summary>
+            基础学校变动记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolChangeLogBase.SchoolId">
+            <summary>
+            变动学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolChangeLogBase.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.IChangeLogBase">
+            <summary>
+                基础变动记录接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IChangeLogBase.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IChangeLogBase.ChangeTime">
+            <summary>
+                变动时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IChangeLogBase.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.School.IClass">
             <summary>
                 班级接口
@@ -3319,21 +3419,6 @@
         <member name="P:Artemis.Service.Shared.School.ITeacherPackage.Remark">
             <summary>
                 备注
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Shared.School.ITransfer">
-            <summary>
-                流转接口
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Shared.School.ITransfer.MoveIn">
-            <summary>
-                转入时间
-            </summary>
-        </member>
-        <member name="P:Artemis.Service.Shared.School.ITransfer.MoveOut">
-            <summary>
-                转出时间
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.School.Transfer.ClassInfo">

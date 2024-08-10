@@ -36,6 +36,16 @@ public class SchoolContext : DbContext
     /// </summary>
     public virtual DbSet<ArtemisTeacher> Teachers { get; set; } = default!;
 
+    /// <summary>
+    /// 教师变更记录数据集
+    /// </summary>
+    public virtual DbSet<ArtemisTeacherChangeLog> TeacherChangeLogs { get; set; } = default!;
+
+    /// <summary>
+    /// 学生变更记录数据集
+    /// </summary>
+    public virtual DbSet<ArtemisStudentChangeLog> StudentChangeLogs { get; set; } = default!;
+
     #region Overrides of DbContext
 
     /// <summary>

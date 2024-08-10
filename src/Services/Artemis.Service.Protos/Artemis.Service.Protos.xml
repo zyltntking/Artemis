@@ -25980,6 +25980,424 @@
             <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
             <param name="serviceImpl">An object implementing the server-side handling logic.</param>
         </member>
+        <member name="T:Artemis.Service.Protos.School.ChangeReflection">
+            <summary>Holder for reflection information generated from school/change.proto</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.ChangeReflection.Descriptor">
+            <summary>File descriptor for school/change.proto</summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest">
+            <summary>
+            教师转出学校请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest.TeacherIdFieldNumber">
+            <summary>Field number for the "TeacherId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest.TeacherId">
+            <summary>
+            教师标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest.Reason">
+            <summary>
+            转出原因
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest">
+            <summary>
+            教师转入学校请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.TeacherIdFieldNumber">
+            <summary>Field number for the "TeacherId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.TeacherId">
+            <summary>
+            教师标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolTeacherMoveInRequest.Reason">
+            <summary>
+            转入原因
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SchoolStudentMoveOutRequest">
+            <summary>
+            学生转出学校请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolStudentMoveOutRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolStudentMoveOutRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolStudentMoveOutRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolStudentMoveOutRequest.Reason">
+            <summary>
+            转出原因
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SchoolStudentMoveInRequest">
+            <summary>
+            学生转入学校请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SchoolStudentMoveInRequest.Reason">
+            <summary>
+            转入原因
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.StudentChangeClassRequest">
+            <summary>
+            学生变更班级请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeClassRequest.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeClassRequest.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeClassRequest.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeClassRequest.ClassId">
+            <summary>
+            班级标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeClassRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeClassRequest.Reason">
+            <summary>
+            变更原因
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.ChangeService">
+            <summary>
+            变更服务
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.ChangeService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase">
+            <summary>Base class for server-side implementations of ChangeService</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SchoolTeacherMoveIn(Artemis.Service.Protos.School.SchoolTeacherMoveInRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SchoolStudentMoveOut(Artemis.Service.Protos.School.SchoolStudentMoveOutRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            学生转出学校
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SchoolStudentMoveIn(Artemis.Service.Protos.School.SchoolStudentMoveInRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            学生转入学校
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.StudentChangeClass(Artemis.Service.Protos.School.StudentChangeClassRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient">
+            <summary>Client for ChangeService</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for ChangeService</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for ChangeService that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveOutAsync(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveOutAsync(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveIn(Artemis.Service.Protos.School.SchoolTeacherMoveInRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveIn(Artemis.Service.Protos.School.SchoolTeacherMoveInRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveInAsync(Artemis.Service.Protos.School.SchoolTeacherMoveInRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveInAsync(Artemis.Service.Protos.School.SchoolTeacherMoveInRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveOut(Artemis.Service.Protos.School.SchoolStudentMoveOutRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveOut(Artemis.Service.Protos.School.SchoolStudentMoveOutRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveOutAsync(Artemis.Service.Protos.School.SchoolStudentMoveOutRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveOutAsync(Artemis.Service.Protos.School.SchoolStudentMoveOutRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生转出学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveIn(Artemis.Service.Protos.School.SchoolStudentMoveInRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveIn(Artemis.Service.Protos.School.SchoolStudentMoveInRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveInAsync(Artemis.Service.Protos.School.SchoolStudentMoveInRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolStudentMoveInAsync(Artemis.Service.Protos.School.SchoolStudentMoveInRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生转入学校
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.StudentChangeClass(Artemis.Service.Protos.School.StudentChangeClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.StudentChangeClass(Artemis.Service.Protos.School.StudentChangeClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.StudentChangeClassAsync(Artemis.Service.Protos.School.StudentChangeClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.StudentChangeClassAsync(Artemis.Service.Protos.School.StudentChangeClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.BindService(Artemis.Service.Protos.School.ChangeService.ChangeServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.BindService(Grpc.Core.ServiceBinderBase,Artemis.Service.Protos.School.ChangeService.ChangeServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
         <member name="T:Artemis.Service.Protos.Task.TaskReflection">
             <summary>Holder for reflection information generated from task/task.proto</summary>
         </member>

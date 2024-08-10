@@ -3,7 +3,6 @@ using Artemis.Data.Core;
 using Artemis.Data.Store;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.School.Context;
-using Artemis.Service.School.Models;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.School.Transfer;
 using Mapster;

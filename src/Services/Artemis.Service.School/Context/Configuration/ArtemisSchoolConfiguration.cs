@@ -74,7 +74,8 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyModelEntityConfigu
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisTeacher).TableName(),
                 nameof(ArtemisSchool).TableName()))
-            .IsRequired(false);
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);
 
         // Each School can have many Students
         builder.HasMany(school => school.Students)
@@ -83,7 +84,28 @@ internal sealed class ArtemisSchoolConfiguration : ConcurrencyModelEntityConfigu
             .HasConstraintName(ForeignKeyName(
                 nameof(ArtemisStudent).TableName(),
                 nameof(ArtemisSchool).TableName()))
-            .IsRequired(false);
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        // each School has many teacher changelogs
+        builder.HasMany(school => school.TeacherChangeLogs)
+            .WithOne(log => log.School)
+            .HasForeignKey(log => log.SchoolId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisTeacherChangeLog).TableName(),
+                nameof(ArtemisSchool).TableName()))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // each School has many student changelogs
+        builder.HasMany(school => school.StudentChangeLogs)
+            .WithOne(log => log.School)
+            .HasForeignKey(log => log.SchoolId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisStudentChangeLog).TableName(),
+                nameof(ArtemisSchool).TableName()))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

@@ -24,4 +24,9 @@ public sealed class ArtemisClass : Class
     ///     班级管理的学生
     /// </summary>
     public ICollection<ArtemisStudent>? Students { get; set; }
+
+    /// <summary>
+    /// 学生转入转出记录
+    /// </summary>
+    public ICollection<ArtemisStudentChangeLog>? StudentChangeLogs { get; set; }
 }

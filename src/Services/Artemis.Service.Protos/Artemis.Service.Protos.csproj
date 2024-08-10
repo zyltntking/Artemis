@@ -82,6 +82,7 @@
 		<Protobuf Include="school\school.proto" />
 		<Protobuf Include="school\student.proto" />
 		<Protobuf Include="school\teacher.proto" />
+		<Protobuf Include="school\change.proto" />
 	</ItemGroup>
 
 	<ItemGroup>

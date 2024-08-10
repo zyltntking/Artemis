@@ -47,6 +47,16 @@ internal sealed class ArtemisTeacherConfiguration : ConcurrencyModelEntityConfig
 
         builder.HasIndex(teacher => teacher.Name)
             .HasDatabaseName(IndexName(nameof(ArtemisTeacher.Name)));
+
+        // each teacher has many changelogs
+        builder.HasMany(teacher => teacher.TeacherChangeLogs)
+            .WithOne(log => log.Teacher)
+            .HasForeignKey(log => log.TeacherId)
+            .HasConstraintName(ForeignKeyName(
+                nameof(ArtemisTeacherChangeLog).TableName(),
+                nameof(ArtemisTeacher).TableName()))
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #endregion

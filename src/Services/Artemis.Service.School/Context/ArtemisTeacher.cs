@@ -19,4 +19,9 @@ public sealed class ArtemisTeacher : Teacher
     ///     班主任班级
     /// </summary>
     public ArtemisClass? HeadTeacherClass { get; set; }
+
+    /// <summary>
+    /// 老师变动记录
+    /// </summary>
+    public ICollection<ArtemisTeacherChangeLog>? TeacherChangeLogs { get; set; }
 }

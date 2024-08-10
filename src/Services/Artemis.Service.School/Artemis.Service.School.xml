@@ -24,6 +24,11 @@
                 班级管理的学生
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisClass.StudentChangeLogs">
+            <summary>
+            学生转入转出记录
+            </summary>
+        </member>
         <member name="T:Artemis.Service.School.Context.ArtemisSchool">
             <summary>
                 学校实体
@@ -44,6 +49,16 @@
                 学校管理的学生
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisSchool.TeacherChangeLogs">
+            <summary>
+            教师变动记录
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisSchool.StudentChangeLogs">
+            <summary>
+            学生变动记录
+            </summary>
+        </member>
         <member name="T:Artemis.Service.School.Context.ArtemisStudent">
             <summary>
                 学生实体
@@ -59,6 +74,31 @@
                 学生所在的班级
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisStudent.StudentChangeLogs">
+            <summary>
+            学生变动记录
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Context.ArtemisStudentChangeLog">
+            <summary>
+            学生变更记录实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisStudentChangeLog.Student">
+            <summary>
+            变更关联的学生
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisStudentChangeLog.School">
+            <summary>
+            变更关联的学校
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisStudentChangeLog.Class">
+            <summary>
+            变更关联的班级
+            </summary>
+        </member>
         <member name="T:Artemis.Service.School.Context.ArtemisTeacher">
             <summary>
                 教师实体
@@ -72,6 +112,26 @@
         <member name="P:Artemis.Service.School.Context.ArtemisTeacher.HeadTeacherClass">
             <summary>
                 班主任班级
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisTeacher.TeacherChangeLogs">
+            <summary>
+            老师变动记录
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Context.ArtemisTeacherChangeLog">
+            <summary>
+            教师变更记录实体
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisTeacherChangeLog.Teacher">
+            <summary>
+            变更关联的学生
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.ArtemisTeacherChangeLog.School">
+            <summary>
+            变更关联的学校
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Context.Configuration.ArtemisClassConfiguration">
@@ -128,6 +188,27 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentChangeLogConfiguration">
+            <summary>
+            学生变动记录配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentChangeLogConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisStudentChangeLogConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentChangeLogConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudentChangeLog})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration">
             <summary>
                 学生配置
@@ -152,6 +233,27 @@
         <member name="M:Artemis.Service.School.Context.Configuration.ArtemisStudentConfiguration.EntityRelationConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisStudent})">
             <summary>
                 实体关系配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Artemis.Service.School.Context.Configuration.ArtemisTeacherChangeLogConfiguration">
+            <summary>
+            教师变动记录配置
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherChangeLogConfiguration.DataSetDescription">
+            <summary>
+                数据集描述
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.Configuration.ArtemisTeacherChangeLogConfiguration.TableName">
+            <summary>
+                表名
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Context.Configuration.ArtemisTeacherChangeLogConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.School.Context.ArtemisTeacherChangeLog})">
+            <summary>
+                实体字段配置
             </summary>
             <param name="builder"></param>
         </member>
@@ -213,11 +315,144 @@
                 教师数据集
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Context.SchoolContext.TeacherChangeLogs">
+            <summary>
+            教师变更记录数据集
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Context.SchoolContext.StudentChangeLogs">
+            <summary>
+            学生变更记录数据集
+            </summary>
+        </member>
         <member name="M:Artemis.Service.School.Context.SchoolContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
                 配置数据模型
             </summary>
             <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Artemis.Service.School.Managers.IChangeManager">
+            <summary>
+            变更管理器接口
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SchoolTeacherMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="teacherId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SchoolTeacherMoveInAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="teacherId"></param>
+            <param name="schoolId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SchoolStudentMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="studentId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SchoolStudentMoveInAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="studentId"></param>
+            <param name="schoolId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.StudentChangeClassAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="studentId"></param>
+            <param name="classId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Artemis.Service.School.Managers.ChangeManager">
+            <summary>
+            变更管理器
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.#ctor(Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisTeacherChangeLogStore,Artemis.Service.School.Stores.IArtemisStudentChangeLogStore,Microsoft.Extensions.Logging.ILogger{Artemis.Service.School.Managers.ChangeManager})">
+            <summary>
+            变更管理器实现
+            </summary>
+            <param name="schoolStore"></param>
+            <param name="classStore"></param>
+            <param name="teacherStore"></param>
+            <param name="studentStore"></param>
+            <param name="teacherChangeLogStore"></param>
+            <param name="studentChangeLogStore"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.StoreDispose">
+            <summary>
+                释放托管的Store
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SchoolTeacherMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="teacherId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SchoolTeacherMoveInAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="teacherId"></param>
+            <param name="schoolId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SchoolStudentMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转出学校
+            </summary>
+            <param name="studentId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SchoolStudentMoveInAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            教师转入学校
+            </summary>
+            <param name="studentId"></param>
+            <param name="schoolId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.StudentChangeClassAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>
+            学生变更班级
+            </summary>
+            <param name="studentId"></param>
+            <param name="classId"></param>
+            <param name="reason"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="T:Artemis.Service.School.Managers.ISchoolManager">
             <summary>
@@ -313,10 +548,11 @@
                 学校学生管理器接口
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ISchoolStudentManager.FetchStudentsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.ISchoolStudentManager.FetchStudentsAsync(System.Nullable{System.Guid},System.Nullable{System.Guid},System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据学生信息查找学生
             </summary>
+            <param name="classId"></param>
             <param name="studentNameSearch">学生姓名搜索值</param>
             <param name="studentNumberSearch">学生学籍号搜索值</param>
             <param name="gender">学生性别</param>
@@ -324,6 +560,7 @@
             <param name="page">页码</param>
             <param name="size">条目数</param>
             <param name="cancellationToken">操作取消信号</param>
+            <param name="schoolId"></param>
             <returns>分页搜索结果</returns>
         </member>
         <member name="T:Artemis.Service.School.Managers.SchoolStudentManager">
@@ -336,10 +573,11 @@
                 可选的一对多模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.SchoolStudentManager.FetchStudentsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.SchoolStudentManager.FetchStudentsAsync(System.Nullable{System.Guid},System.Nullable{System.Guid},System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据学生信息查找学生
             </summary>
+            <param name="classId"></param>
             <param name="studentNameSearch">学生姓名搜索值</param>
             <param name="studentNumberSearch">学生学籍号搜索值</param>
             <param name="gender">学生性别</param>
@@ -347,6 +585,7 @@
             <param name="page">页码</param>
             <param name="size">条目数</param>
             <param name="cancellationToken">操作取消信号</param>
+            <param name="schoolId"></param>
             <returns>分页搜索结果</returns>
         </member>
         <member name="M:Artemis.Service.School.Managers.SchoolStudentManager.SetSubEntityRelationalKey(Artemis.Service.School.Context.ArtemisStudent,System.Guid)">
@@ -367,10 +606,11 @@
                 学校教师管理器接口
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ISchoolTeacherManager.FetchTeachersAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.ISchoolTeacherManager.FetchTeachersAsync(System.Nullable{System.Guid},System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据教师信息查找教师
             </summary>
+            <param name="schoolId"></param>
             <param name="teacherNameSearch">教师名称搜索值</param>
             <param name="teacherCodeSearch">教师编号搜索值</param>
             <param name="page">页码</param>
@@ -388,10 +628,11 @@
                 可选的一对多模型管理器构造
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.SchoolTeacherManager.FetchTeachersAsync(System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.SchoolTeacherManager.FetchTeachersAsync(System.Nullable{System.Guid},System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 根据教师信息查找教师
             </summary>
+            <param name="schoolId"></param>
             <param name="teacherNameSearch">教师名称搜索值</param>
             <param name="teacherCodeSearch">教师编号搜索值</param>
             <param name="page">页码</param>
@@ -627,6 +868,56 @@
                 备注
             </summary>
         </member>
+        <member name="T:Artemis.Service.School.Models.StudentChangeLog">
+            <summary>
+            学生变更记录模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.ChangeTime">
+            <summary>
+                变动时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.SchoolId">
+            <summary>
+            变动学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.ClassId">
+            <summary>
+            班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
         <member name="T:Artemis.Service.School.Models.Teacher">
             <summary>
                 教师模型
@@ -705,6 +996,46 @@
         <member name="P:Artemis.Service.School.Models.Teacher.Remark">
             <summary>
                 备注
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Models.TeacherChangeLog">
+            <summary>
+            教师变动记录模型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.ChangeTime">
+            <summary>
+                变动时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.SchoolId">
+            <summary>
+            变动学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.TeacherId">
+            <summary>
+            教师标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.TeacherName">
+            <summary>
+            教师姓名
             </summary>
         </member>
         <member name="T:Artemis.Service.School.ServiceExtensions">
@@ -1101,6 +1432,28 @@
             <param name="describer"></param>
             <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
         </member>
+        <member name="T:Artemis.Service.School.Stores.IArtemisStudentChangeLogStore">
+            <summary>
+                班级存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Stores.ArtemisStudentChangeLogStore">
+            <summary>
+                班级存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Stores.ArtemisStudentChangeLogStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+        </member>
         <member name="T:Artemis.Service.School.Stores.IArtemisStudentStore">
             <summary>
                 学生存储接口
@@ -1112,6 +1465,28 @@
             </summary>
         </member>
         <member name="M:Artemis.Service.School.Stores.ArtemisStudentStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
+            <summary>
+                基本存储实例构造
+            </summary>
+            <param name="context"></param>
+            <param name="storeOptions"></param>
+            <param name="handlerProxy"></param>
+            <param name="cacheProxy"></param>
+            <param name="logger"></param>
+            <param name="describer"></param>
+            <exception cref="T:Artemis.Data.Core.Exceptions.StoreParameterNullException"></exception>
+        </member>
+        <member name="T:Artemis.Service.School.Stores.IArtemisTeacherChangeLogStore">
+            <summary>
+                班级存储接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.School.Stores.ArtemisTeacherChangeLogStore">
+            <summary>
+                班级存储
+            </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Stores.ArtemisTeacherChangeLogStore.#ctor(Artemis.Service.School.Context.SchoolContext,Artemis.Data.Store.IStoreOptions,Artemis.Data.Core.IHandlerProxy,Artemis.Data.Core.ICacheProxy,Microsoft.Extensions.Logging.ILogger,Artemis.Data.Store.StoreErrorDescriber)">
             <summary>
                 基本存储实例构造
             </summary>
