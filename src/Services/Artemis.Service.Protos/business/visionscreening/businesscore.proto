@@ -100,9 +100,9 @@ service VisionScreeningCoreService{
 	}
 
 	// 获取系统模块树(经凭据过滤)
-	rpc FetchCliamedSystemModuleTree(EmptyRequest) returns (FetchSystemModuleTreeResponse){
+	rpc FetchClaimedSystemModuleTree(EmptyRequest) returns (FetchSystemModuleTreeResponse){
 		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/FetchCliamedSystemModuleTree"
+			post: "/api/BusinessService/VisionScreeningCore/FetchClaimedSystemModuleTree"
 			body: "*"
 		};
 	}
@@ -560,5 +560,5 @@ message FetchSystemModuleTreeResponse{
 	int64 Timestamp = 6;
 	// 系统模块信息数据
 	// @required
-	SystemModuleTreePacket Data = 7;
+	repeated SystemModuleTreePacket Data = 7;
 }

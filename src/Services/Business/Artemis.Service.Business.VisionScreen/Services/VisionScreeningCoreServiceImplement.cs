@@ -22,6 +22,7 @@ using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -760,9 +761,18 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             .ProjectToType<SystemModuleTreePacket>()
             .ToListAsync(context.CancellationToken);
 
-        var tree = GenerateTree(null, systemModuleInfos);
+        var roots = systemModuleInfos.Where(item => item.ParentId == null).ToList();
 
-        return tree.ReadInfoResponse<FetchSystemModuleTreeResponse, SystemModuleTreePacket>();
+        var trees = new List<SystemModuleTreePacket>();
+
+        foreach (var root in roots)
+        {
+            var tree = GenerateTree(root.Id, systemModuleInfos);
+
+            trees.Add(tree);
+        }
+
+        return trees.ReadInfoResponse<FetchSystemModuleTreeResponse, List<SystemModuleTreePacket>>();
     }
 
     /// <summary>
@@ -773,7 +783,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取系统模块树")]
     [Authorize(AuthorizePolicy.Token)]
-    public override async Task<FetchSystemModuleTreeResponse> FetchCliamedSystemModuleTree(EmptyRequest request, ServerCallContext context)
+    public override async Task<FetchSystemModuleTreeResponse> FetchClaimedSystemModuleTree(EmptyRequest request, ServerCallContext context)
     {
         var systemModuleInfos = await SystemModuleStore
             .EntityQuery
@@ -784,9 +794,18 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         // todo claimed
 
-        var tree = GenerateTree(null, systemModuleInfos);
+        var roots = systemModuleInfos.Where(item => item.ParentId == null).ToList();
 
-        return tree.ReadInfoResponse<FetchSystemModuleTreeResponse, SystemModuleTreePacket>();
+        var trees = new List<SystemModuleTreePacket>();
+
+        foreach (var root in roots)
+        {
+            var tree = GenerateTree(root.Id, systemModuleInfos);
+
+            trees.Add(tree);
+        }
+
+        return trees.ReadInfoResponse<FetchSystemModuleTreeResponse, List<SystemModuleTreePacket>>();
     }
 
 
@@ -879,16 +898,13 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="key">根标识</param>
     /// <param name="nodeList">节点列表</param>
     /// <returns></returns>
-    private SystemModuleTreePacket? GenerateTree(string? key, List<SystemModuleTreePacket> nodeList)
+    private SystemModuleTreePacket GenerateTree(string key, List<SystemModuleTreePacket> nodeList)
     {
-        var tree = nodeList.FirstOrDefault(item => item.Id == null);
-
-        if (tree is null)
-            return null;
+        var tree = nodeList.First(item => item.Id == key); 
 
         var children = nodeList
             .Where(item => item.ParentId != null && item.ParentId == tree.Id)
-            .Select(item => GenerateTree(tree.Id, nodeList))
+            .Select(item => GenerateTree(item.Id, nodeList))
             .ToList();
 
         tree.Children.Add(children);

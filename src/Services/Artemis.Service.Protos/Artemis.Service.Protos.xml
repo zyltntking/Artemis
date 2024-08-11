@@ -1516,7 +1516,7 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchCliamedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchClaimedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取系统模块树(经凭据过滤)
             </summary>
@@ -1938,7 +1938,7 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchCliamedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchClaimedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             获取系统模块树(经凭据过滤)
             </summary>
@@ -1948,7 +1948,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchCliamedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchClaimedSystemModuleTree(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
             <summary>
             获取系统模块树(经凭据过滤)
             </summary>
@@ -1956,7 +1956,7 @@
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchCliamedSystemModuleTreeAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchClaimedSystemModuleTreeAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             获取系统模块树(经凭据过滤)
             </summary>
@@ -1966,7 +1966,7 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchCliamedSystemModuleTreeAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchClaimedSystemModuleTreeAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
             <summary>
             获取系统模块树(经凭据过滤)
             </summary>
