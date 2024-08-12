@@ -14,7 +14,7 @@ public class CreateRoleRequestValidator : AbstractValidator<CreateRoleRequest>
     /// </summary>
     public CreateRoleRequestValidator()
     {
-        RuleFor(request => request.RoleName)
+        RuleFor(request => request.Name)
             .ShouldShorterThan(128)
             .ShouldNotBeEmptyOrWhiteSpace();
 

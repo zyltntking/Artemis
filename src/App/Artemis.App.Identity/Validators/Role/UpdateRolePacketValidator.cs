@@ -14,9 +14,9 @@ public class UpdateRolePacketValidator : AbstractValidator<UpdateRolePacket>
     /// </summary>
     public UpdateRolePacketValidator()
     {
-        RuleFor(request => request.RoleName)
+        RuleFor(request => request.Name)
             .ShouldShorterThan(128)
-            .When(request => !string.IsNullOrWhiteSpace(request.RoleName));
+            .When(request => !string.IsNullOrWhiteSpace(request.Name));
 
         RuleFor(request => request.Description)
             .ShouldShorterThan(256)

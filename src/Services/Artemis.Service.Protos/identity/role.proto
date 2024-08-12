@@ -200,7 +200,7 @@ message RoleInfoPacket {
 	// 角色名
 	// @required
 	// @maxLength(32)
-	string RoleName = 2;
+	string Name = 2;
 	// 角色描述
 	// @maxLength(128)
 	google.protobuf.StringValue Description = 3;
@@ -280,7 +280,7 @@ message CreateRoleRequest {
 	// 角色名
 	// @required
 	// @maxLength(32)
-	string RoleName = 1;
+	string Name = 1;
 	// 角色描述
 	// @maxLength(128)
 	google.protobuf.StringValue Description = 2;
@@ -297,7 +297,7 @@ message BatchCreateRoleRequest {
 message UpdateRolePacket {
 	// 角色名
 	// @maxLength(32)
-	google.protobuf.StringValue RoleName = 1;
+	google.protobuf.StringValue Name = 1;
 	// 角色描述
 	// @maxLength(128)
 	google.protobuf.StringValue Description = 2;

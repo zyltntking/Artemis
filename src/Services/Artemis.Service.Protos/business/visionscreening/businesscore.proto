@@ -51,6 +51,38 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 查询根任务
+	rpc FetchRootTask(FetchRootTaskRequest) returns (FetchRootTaskResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchRootTask"
+			body: "*"
+		};
+	}
+
+	// 查询任务树
+	rpc FetchTaskTree(FetchTaskTreeRequest) returns (FetchTaskTreeResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchTaskTree"
+			body: "*"
+		};
+	}
+
+	// 查询任务树
+	rpc FetchTaskUnitTarget(FetchTaskUnitTargetRequest) returns (FetchTaskUnitTargetResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchTaskUnitTarget"
+			body: "*"
+		};
+	}
+
+	// 任务状态变更
+	rpc TaskStateChange(TaskStateChangeRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/TaskStateChange"
+			body: "*"
+		};
+	}
+
 	// 添加验光仪数据
 	rpc AddOptometerPacket(AddOptometerRequest) returns (AffectedResponse){
 		option (google.api.http) = {
@@ -189,12 +221,248 @@ message GenerateTaskTargetRequest{
 	string TaskId = 1;
 }
 
-// 生成任务记录请求
+// 生成筛查记录请求
 message GenerateRecordRequest{
 	// 任务标识
 	// @required
 	// @guid
 	string TaskId = 1;
+}
+
+// 查询根任务请求
+message FetchRootTaskRequest{
+	// 任务名称搜索值
+	google.protobuf.StringValue TaskNameSearch = 1;
+	// 任务计划开始时间
+	google.protobuf.StringValue StartTime =2;
+	// 任务计划开始时间
+	google.protobuf.StringValue EndTime =3;
+	// 任务状态
+	google.protobuf.StringValue TaskState = 4;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 5;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 6;
+}
+
+// 根任务信息
+message RootTaskPacket{
+	// 任务标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 父任务标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 任务名称
+	google.protobuf.StringValue TaskName = 3;
+	// 任务编码
+	// @required
+	string TaskCode = 4;
+	// 关联机构编码
+	// @required
+	string DesignCode = 5;
+	// 任务归属
+	// @required
+	string TaskShip = 6;
+	// 任务状态
+	// @required
+	string TaskState = 7;
+	// 任务描述
+	google.protobuf.StringValue Description = 8;
+	// 计划开始时间
+	// @datetime
+	google.protobuf.StringValue StartTime = 9;
+	// 计划结束时间
+	// @datetime
+	google.protobuf.StringValue EndTime = 10;
+}
+
+// 查询根任务响应
+message FetchRootTaskResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 根任务信息
+	// @required
+	repeated RootTaskPacket Data = 7;
+}
+
+// 查询任务树请求
+message FetchTaskTreeRequest{
+	// 任务标识
+	// @required
+	// @guid
+	string Id = 1;
+}
+
+// 任务单元数据包
+message TaskUnitPacket{
+	// 任务单元标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 2;
+	// 任务单元名称
+	google.protobuf.StringValue UnitName = 3;
+	// 任务单元编码
+	// @required
+	string UnitCode = 4;
+	// 关联机构编码
+	// @required
+	string DesignCode = 5;
+	// 任务单元状态
+	// @required
+	string TaskUnitState = 7;
+	// 任务单元描述
+	google.protobuf.StringValue Description = 8;
+}
+
+// 任务树数据包
+message TaskTreePacket{
+	// 任务标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 父任务标识
+	// @guid
+	google.protobuf.StringValue ParentId = 2;
+	// 任务名称
+	google.protobuf.StringValue TaskName = 3;
+	// 任务编码
+	// @required
+	string TaskCode = 4;
+	// 关联机构编码
+	// @required
+	string DesignCode = 5;
+	// 任务归属
+	// @required
+	string TaskShip = 6;
+	// 任务状态
+	// @required
+	string TaskState = 7;
+	// 任务描述
+	google.protobuf.StringValue Description = 8;
+	// 计划开始时间
+	// @datetime
+	google.protobuf.StringValue StartTime = 9;
+	// 计划结束时间
+	// @datetime
+	google.protobuf.StringValue EndTime = 10;
+	// 子任务
+	repeated TaskTreePacket Children = 11;
+	// 任务单元
+	repeated TaskUnitPacket TaskUnits = 12;
+}
+
+// 查询任务树响应
+message FetchTaskTreeResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 任务树信息
+	// @required
+	TaskTreePacket Data = 7;
+}
+
+// 查询任务单元目标请求
+message FetchTaskUnitTargetRequest{
+	// 任务单元
+	// @required
+	// @guid
+	string Id = 1;
+}
+
+// 任务目标数据包
+message TaskUnitTargetPacket{
+	// 任务单元目标标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 任务单元标识
+	// @required
+	// @guid
+	string TaskUnitId = 2;
+	// 任务单元名称
+	google.protobuf.StringValue TargetName = 3;
+	// 任务单元编号
+	google.protobuf.StringValue TargetCode = 4;
+	// 关联学生标识
+	google.protobuf.StringValue BindingTag = 5;
+	// 目标状态
+	// @required
+	string TaskState = 6;
+	// 任务目标描述
+	google.protobuf.StringValue Description = 7;
+	// 任务目标执行时间
+	google.protobuf.StringValue ExecuteTime = 8;
+}
+
+// 查询任务单元目标响应
+message FetchTaskUnitTargetResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 任务目标数据
+	// @required
+	repeated TaskUnitTargetPacket Data = 7;
+}
+
+
+// 任务状态变更请求
+message TaskStateChangeRequest{
+	// 任务标识
+	// @guid
+	google.protobuf.StringValue TaskId = 1;
+	// 任务标识
+	// @guid
+	google.protobuf.StringValue TaskUnitId = 2;
+	// 任务标识
+	// @guid
+	google.protobuf.StringValue TaskUnitTargetId = 3;
+	// 需要修改到的目标状态
+	google.protobuf.StringValue State = 4;
 }
 
 // 验光仪数据包
