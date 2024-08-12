@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using Artemis.Data.Core;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Identity;
+using Artemis.Service.Shared.Identity;
 using Artemis.Service.Shared.Identity.Transfer;
 using Grpc.Core;
 using Mapster;
@@ -208,9 +210,24 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
             request.PhoneNumber,
             request.Page ?? 0,
             request.Size ?? 0,
-            context.CancellationToken);
+        context.CancellationToken);
 
-        return userInfos.PagedResponse<SearchRoleUserInfoResponse, UserInfo>();
+        var pagedRoleUserInfoPacket = userInfos.Adapt<PagedRoleUserInfoPacket>();
+
+        if (userInfos.Items != null)
+        {
+            var items = userInfos.Items.Select(item =>
+            {
+                var result = item.Adapt<RoleUserInfoPacket>();
+                result.RoleId = request.RoleId;
+                result.UserId = item.Id.GuidToString();
+                return result;
+            });
+
+            pagedRoleUserInfoPacket.Items.Add(items);
+        }
+
+        return pagedRoleUserInfoPacket.ReadInfoResponse<SearchRoleUserInfoResponse, PagedRoleUserInfoPacket>();
     }
 
     /// <summary>
@@ -368,7 +385,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
 
         var result = await RoleManager.AddRoleClaimAsync(roleId, package, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -388,7 +405,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
 
         var result = await RoleManager.AddRoleClaimsAsync(roleId, packages, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -409,7 +426,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
         var result =
             await RoleManager.UpdateRoleClaimAsync(roleId, request.ClaimId, package, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -431,7 +448,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
 
         var result = await RoleManager.UpdateRoleClaimsAsync(roleId, dictionary, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
 
@@ -450,7 +467,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
 
         var result = await RoleManager.RemoveRoleClaimAsync(roleId, request.ClaimId, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -468,7 +485,7 @@ public class RoleServiceImplement : RoleService.RoleServiceBase
 
         var result = await RoleManager.RemoveRoleClaimsAsync(roleId, request.ClaimIds, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     #endregion

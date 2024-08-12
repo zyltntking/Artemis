@@ -1549,6 +1549,46 @@
             取消筛查标识
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Identity.IAuthCode">
+            <summary>
+            验证码接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IAuthCodeInfo">
+            <summary>
+            验证码信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Identity.IAuthCodePackage">
+            <summary>
+            验证码数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAuthCodePackage.Sign">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAuthCodePackage.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAuthCodePackage.SendTime">
+            <summary>
+            发送时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAuthCodePackage.ExpireTime">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Identity.IAuthCodePackage.Used">
+            <summary>
+            是否使用
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Identity.IClaim">
             <summary>
                 凭据接口

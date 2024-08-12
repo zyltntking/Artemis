@@ -234,8 +234,10 @@ message FetchRootTaskRequest{
 	// 任务名称搜索值
 	google.protobuf.StringValue TaskNameSearch = 1;
 	// 任务计划开始时间
+	// @datetime
 	google.protobuf.StringValue StartTime =2;
-	// 任务计划开始时间
+	// 任务计划结束时间
+	// @datetime
 	google.protobuf.StringValue EndTime =3;
 	// 任务状态
 	google.protobuf.StringValue TaskState = 4;
@@ -280,6 +282,25 @@ message RootTaskPacket{
 	google.protobuf.StringValue EndTime = 10;
 }
 
+// 分页根任务信息数据包
+message PagedRootTaskPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 角色用户信息数据
+	// @required
+	repeated RootTaskPacket Items = 5;
+}
+
 // 查询根任务响应
 message FetchRootTaskResponse{
 	// 状态码
@@ -297,9 +318,9 @@ message FetchRootTaskResponse{
 	// 响应时间戳
 	// @timestamp
 	int64 Timestamp = 6;
-	// 根任务信息
+	// 分页根任务信息
 	// @required
-	repeated RootTaskPacket Data = 7;
+	PagedRootTaskPacket Data = 7;
 }
 
 // 查询任务树请求

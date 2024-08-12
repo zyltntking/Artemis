@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
+using System.Linq.Dynamic.Core;
+using System.Threading;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
@@ -10,7 +13,6 @@ using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
-using Artemis.Service.Protos.Resource;
 using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.Business.VisionScreen.Transfer;
@@ -22,7 +24,7 @@ using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -521,6 +523,59 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务不存在");
+    }
+
+    /// <summary>
+    /// 查询根任务
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override async Task<FetchRootTaskResponse> FetchRootTask(FetchRootTaskRequest request, ServerCallContext context)
+    {
+        var taskNameSearch = request.TaskNameSearch ?? string.Empty;
+        var startSet = DateTime.TryParse(request.StartTime, out var startTime);
+        var endSet = DateTime.TryParse(request.EndTime, out var endTime);
+        var taskState = request.TaskState ?? string.Empty;
+        var page = request.Page ?? 0;
+        var size = request.Size ?? 0;
+
+        var query = TaskStore.EntityQuery.Where(task => task.ParentId == null);
+
+        var total = await query.LongCountAsync(context.CancellationToken);
+
+        var normalizedTaskName = taskNameSearch.StringNormalize();
+
+        query = query.WhereIf(
+            normalizedTaskName != string.Empty,
+            task => EF.Functions.Like(task.NormalizedTaskName, $"%{normalizedTaskName}%"));
+
+        query = query.WhereIf(taskState != string.Empty, task => task.TaskState == taskState);
+
+        query = query.WhereIf(startSet, task => task.CreatedAt >= startTime);
+
+        query = query.WhereIf(endSet, task => task.CreatedAt <= startTime);
+
+        var count = await query.LongCountAsync(context.CancellationToken);
+
+        query = query.OrderByDescending(task => task.CreatedAt);
+
+        if (page > 0 && size > 0) query = query.Page(page, size);
+        
+        var tasks = await query.ProjectToType<RootTaskPacket>().ToListAsync(context.CancellationToken);
+
+        var pagedTasks = new PagedRootTaskPacket
+        {
+            Total = total,
+            Count = count,
+            Page = page,
+            Size = size,
+        };
+
+        pagedTasks.Items.Add(tasks);
+
+
+        return new FetchRootTaskResponse();
     }
 
     /// <summary>

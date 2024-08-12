@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Artemis.Data.Core;
 using Artemis.Extensions.Identity;
 using Artemis.Service.Identity.Managers;
 using Artemis.Service.Identity.Models;
@@ -214,7 +215,22 @@ public class UserServiceImplement : UserService.UserServiceBase
             request.Size ?? 0,
             context.CancellationToken);
 
-        return roleInfos.PagedResponse<SearchUserRoleInfoResponse, RoleInfo>();
+        var pagedUserRoleInfoPacket = roleInfos.Adapt<PagedUserRoleInfoPacket>();
+
+        if (roleInfos.Items != null)
+        {
+            var items = roleInfos.Items.Select(item =>
+            {
+                var result = item.Adapt<UserRoleInfoPacket>();
+                result.RoleId = item.Id.GuidToString();
+                result.UserId = request.UserId;
+                return result;
+            });
+
+            pagedUserRoleInfoPacket.Items.Add(items);
+        }
+
+        return pagedUserRoleInfoPacket.ReadInfoResponse<SearchUserRoleInfoResponse, PagedUserRoleInfoPacket>();
     }
 
     /// <summary>
@@ -563,7 +579,7 @@ public class UserServiceImplement : UserService.UserServiceBase
 
         var result = await UserManager.AddUserClaimAsync(userId, package, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -583,7 +599,7 @@ public class UserServiceImplement : UserService.UserServiceBase
 
         var result = await UserManager.AddUserClaimsAsync(userId, packages, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -604,7 +620,7 @@ public class UserServiceImplement : UserService.UserServiceBase
         var result =
             await UserManager.UpdateUserClaimAsync(userId, request.ClaimId, package, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -624,7 +640,7 @@ public class UserServiceImplement : UserService.UserServiceBase
 
         var result = await UserManager.UpdateUserClaimsAsync(userId, dictionary, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -642,7 +658,7 @@ public class UserServiceImplement : UserService.UserServiceBase
 
         var result = await UserManager.RemoveUserClaimAsync(userId, request.ClaimId, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     /// <summary>
@@ -660,7 +676,7 @@ public class UserServiceImplement : UserService.UserServiceBase
 
         var result = await UserManager.RemoveUserClaimsAsync(userId, request.ClaimIds, context.CancellationToken);
 
-        return result.AffectedResponse();
+        return ResultAdapter.AdaptSuccess<AffectedResponse, int>(result.AffectRows);
     }
 
     #endregion

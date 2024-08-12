@@ -266,6 +266,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskRequest.StartTime">
             <summary>
             任务计划开始时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskRequest.EndTimeFieldNumber">
@@ -273,7 +274,8 @@
         </member>
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskRequest.EndTime">
             <summary>
-            任务计划开始时间
+            任务计划结束时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskRequest.TaskStateFieldNumber">
@@ -396,6 +398,56 @@
             @datetime
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket">
+            <summary>
+            分页根任务信息数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.PagedRootTaskPacket.Items">
+            <summary>
+            角色用户信息数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskResponse">
             <summary>
             查询根任务响应
@@ -457,7 +509,7 @@
         </member>
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskResponse.Data">
             <summary>
-            根任务信息
+            分页根任务信息
             @required
             </summary>
         </member>

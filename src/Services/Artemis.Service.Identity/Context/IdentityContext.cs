@@ -63,6 +63,11 @@ public class IdentityContext : DbContext
     /// </summary>
     public virtual DbSet<IdentityRoleClaim> RoleClaims { get; set; } = default!;
 
+    /// <summary>
+    /// 认证验证码数据集
+    /// </summary>
+    public virtual DbSet<IdentityAuthCode> IdentityAuthCodes { get; set; } = default!;
+
     #region Overrides of DbContext
 
     /// <summary>
