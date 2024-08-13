@@ -304,95 +304,95 @@
             @min(0)
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskPacket">
             <summary>
             根任务信息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.IdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.IdFieldNumber">
             <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.Id">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.Id">
             <summary>
             任务标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.ParentIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.ParentIdFieldNumber">
             <summary>Field number for the "ParentId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.ParentId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.ParentId">
             <summary>
             父任务标识
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskNameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskNameFieldNumber">
             <summary>Field number for the "TaskName" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskName">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskName">
             <summary>
             任务名称
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskCodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskCodeFieldNumber">
             <summary>Field number for the "TaskCode" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskCode">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskCode">
             <summary>
             任务编码
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.DesignCodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.DesignCodeFieldNumber">
             <summary>Field number for the "DesignCode" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.DesignCode">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.DesignCode">
             <summary>
             关联机构编码
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskShipFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskShipFieldNumber">
             <summary>Field number for the "TaskShip" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskShip">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskShip">
             <summary>
             任务归属
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskStateFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskStateFieldNumber">
             <summary>Field number for the "TaskState" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.TaskState">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.TaskState">
             <summary>
             任务状态
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.Description">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.Description">
             <summary>
             任务描述
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.StartTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.StartTimeFieldNumber">
             <summary>Field number for the "StartTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.StartTime">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.StartTime">
             <summary>
             计划开始时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.EndTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.EndTimeFieldNumber">
             <summary>Field number for the "EndTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RootTaskPacket.EndTime">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskPacket.EndTime">
             <summary>
             计划结束时间
             @datetime
@@ -513,15 +513,15 @@
             @required
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest">
             <summary>
-            查询任务树请求
+            查询下级任务请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest.IdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest.IdFieldNumber">
             <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest.Id">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest.Id">
             <summary>
             任务标识
             @required
@@ -596,176 +596,87 @@
             任务单元描述
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskSubNodePacket">
             <summary>
-            任务树数据包
+            下级任务数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.IdFieldNumber">
-            <summary>Field number for the "Id" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.Id">
-            <summary>
-            任务标识
-            @required
-            @guid
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.ParentIdFieldNumber">
-            <summary>Field number for the "ParentId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.ParentId">
-            <summary>
-            父任务标识
-            @guid
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskNameFieldNumber">
-            <summary>Field number for the "TaskName" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskName">
-            <summary>
-            任务名称
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskCodeFieldNumber">
-            <summary>Field number for the "TaskCode" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskCode">
-            <summary>
-            任务编码
-            @required
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.DesignCodeFieldNumber">
-            <summary>Field number for the "DesignCode" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.DesignCode">
-            <summary>
-            关联机构编码
-            @required
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskShipFieldNumber">
-            <summary>Field number for the "TaskShip" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskShip">
-            <summary>
-            任务归属
-            @required
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskStateFieldNumber">
-            <summary>Field number for the "TaskState" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskState">
-            <summary>
-            任务状态
-            @required
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.DescriptionFieldNumber">
-            <summary>Field number for the "Description" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.Description">
-            <summary>
-            任务描述
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.StartTimeFieldNumber">
-            <summary>Field number for the "StartTime" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.StartTime">
-            <summary>
-            计划开始时间
-            @datetime
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.EndTimeFieldNumber">
-            <summary>Field number for the "EndTime" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.EndTime">
-            <summary>
-            计划结束时间
-            @datetime
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.ChildrenFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSubNodePacket.ChildrenFieldNumber">
             <summary>Field number for the "Children" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.Children">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSubNodePacket.Children">
             <summary>
             子任务
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskUnitsFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSubNodePacket.TaskUnitsFieldNumber">
             <summary>Field number for the "TaskUnits" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskTreePacket.TaskUnits">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSubNodePacket.TaskUnits">
             <summary>
             任务单元
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse">
             <summary>
-            查询任务树响应
+            查询下级任务响应
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.CodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.CodeFieldNumber">
             <summary>Field number for the "Code" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Code">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.SucceededFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.SucceededFieldNumber">
             <summary>Field number for the "Succeeded" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Succeeded">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Succeeded">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.MessageFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.MessageFieldNumber">
             <summary>Field number for the "Message" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Message">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.ErrorFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.ErrorFieldNumber">
             <summary>Field number for the "Error" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Error">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Error">
             <summary>
             错误
             @exception
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.DateTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.DateTimeFieldNumber">
             <summary>Field number for the "DateTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.DateTime">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.DateTime">
             <summary>
             响应时间
             @datetime
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.TimestampFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.TimestampFieldNumber">
             <summary>Field number for the "Timestamp" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Timestamp">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Timestamp">
             <summary>
             响应时间戳
             @timestamp
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.DataFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.DataFieldNumber">
             <summary>Field number for the "Data" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeResponse.Data">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeResponse.Data">
             <summary>
             任务树信息
             @required
@@ -2309,9 +2220,9 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskTree(Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskSubNode(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            查询任务树
+            查询任务下级节点
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2632,9 +2543,9 @@
             <param name="options">The options for the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskTree(Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSubNode(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            查询任务树
+            查询任务下级节点
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2642,17 +2553,17 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskTree(Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSubNode(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest,Grpc.Core.CallOptions)">
             <summary>
-            查询任务树
+            查询任务下级节点
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
             <returns>The response received from the server.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskTreeAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSubNodeAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            查询任务树
+            查询任务下级节点
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2660,9 +2571,9 @@
             <param name="cancellationToken">An optional token for canceling the call.</param>
             <returns>The call object.</returns>
         </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskTreeAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskTreeRequest,Grpc.Core.CallOptions)">
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSubNodeAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSubNodeRequest,Grpc.Core.CallOptions)">
             <summary>
-            查询任务树
+            查询任务下级节点
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

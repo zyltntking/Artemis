@@ -59,10 +59,10 @@ service VisionScreeningCoreService{
 		};
 	}
 
-	// 查询任务树
-	rpc FetchTaskTree(FetchTaskTreeRequest) returns (FetchTaskTreeResponse){
+	// 查询任务下级节点
+	rpc FetchTaskSubNode(FetchTaskSubNodeRequest) returns (FetchTaskSubNodeResponse){
 		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/FetchTaskTree"
+			post: "/api/BusinessService/VisionScreeningCore/FetchTaskSubNode"
 			body: "*"
 		};
 	}
@@ -258,7 +258,7 @@ message FetchRootTaskRequest{
 }
 
 // 根任务信息
-message RootTaskPacket{
+message TaskPacket{
 	// 任务标识
 	// @required
 	// @guid
@@ -306,7 +306,7 @@ message PagedRootTaskPacket{
 	int64 Count = 4;
 	// 角色用户信息数据
 	// @required
-	repeated RootTaskPacket Items = 5;
+	repeated TaskPacket Items = 5;
 }
 
 // 查询根任务响应
@@ -331,8 +331,8 @@ message FetchRootTaskResponse{
 	PagedRootTaskPacket Data = 7;
 }
 
-// 查询任务树请求
-message FetchTaskTreeRequest{
+// 查询下级任务请求
+message FetchTaskSubNodeRequest{
 	// 任务标识
 	// @required
 	// @guid
@@ -364,45 +364,16 @@ message TaskUnitPacket{
 	google.protobuf.StringValue Description = 8;
 }
 
-// 任务树数据包
-message TaskTreePacket{
-	// 任务标识
-	// @required
-	// @guid
-	string Id = 1;
-	// 父任务标识
-	// @guid
-	google.protobuf.StringValue ParentId = 2;
-	// 任务名称
-	google.protobuf.StringValue TaskName = 3;
-	// 任务编码
-	// @required
-	string TaskCode = 4;
-	// 关联机构编码
-	// @required
-	string DesignCode = 5;
-	// 任务归属
-	// @required
-	string TaskShip = 6;
-	// 任务状态
-	// @required
-	string TaskState = 7;
-	// 任务描述
-	google.protobuf.StringValue Description = 8;
-	// 计划开始时间
-	// @datetime
-	google.protobuf.StringValue StartTime = 9;
-	// 计划结束时间
-	// @datetime
-	google.protobuf.StringValue EndTime = 10;
+// 下级任务数据包
+message TaskSubNodePacket{
 	// 子任务
-	repeated TaskTreePacket Children = 11;
+	repeated TaskPacket Children = 1;
 	// 任务单元
-	repeated TaskUnitPacket TaskUnits = 12;
+	repeated TaskUnitPacket TaskUnits = 2;
 }
 
-// 查询任务树响应
-message FetchTaskTreeResponse{
+// 查询下级任务响应
+message FetchTaskSubNodeResponse{
 	// 状态码
 	int32 Code = 1;
 	// 是否成功
@@ -420,7 +391,7 @@ message FetchTaskTreeResponse{
 	int64 Timestamp = 6;
 	// 任务树信息
 	// @required
-	TaskTreePacket Data = 7;
+	TaskSubNodePacket Data = 7;
 }
 
 // 查询任务单元目标请求

@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Linq.Dynamic.Core;
-using System.Threading;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
@@ -20,11 +18,11 @@ using Artemis.Service.Shared.Resource.Transfer;
 using Artemis.Service.Shared.School.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
 using Artemis.Service.Task.Context;
+using Artemis.Service.Task.Managers;
 using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -579,14 +577,39 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     }
 
     /// <summary>
-    /// 查询任务树
+    /// 查询任务下级节点
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    public override Task<FetchTaskTreeResponse> FetchTaskTree(FetchTaskTreeRequest request, ServerCallContext context)
+    [Description("查询根任务")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchTaskSubNodeResponse> FetchTaskSubNode(FetchTaskSubNodeRequest request, ServerCallContext context)
     {
-        return base.FetchTaskTree(request, context);
+        var taskId = Guid.Parse(request.Id);
+
+        var taskExists = await TaskStore.ExistsAsync(taskId, context.CancellationToken);
+
+        if (taskExists)
+        {
+            var subTaskInfos = await TaskStore.EntityQuery
+                .Where(item => item.ParentId == taskId)
+                .ProjectToType<TaskInfo>()
+                .ToListAsync(context.CancellationToken);
+
+            var taskUnitInfos = await TaskUnitStore.EntityQuery
+                .Where(item => item.TaskId == taskId)
+                .ProjectToType<TaskUnitInfo>()
+                .ToListAsync(context.CancellationToken);
+
+            var taskSubNodePacket = new TaskSubNodePacket();
+            taskSubNodePacket.Children.Add(subTaskInfos.Adapt<IEnumerable<TaskPacket>>());
+            taskSubNodePacket.TaskUnits.Add(taskUnitInfos.Adapt<IEnumerable<TaskUnitPacket>>());
+
+            return taskSubNodePacket.ReadInfoResponse<FetchTaskSubNodeResponse, TaskSubNodePacket>();
+        }
+
+        return ResultAdapter.AdaptEmptyFail<FetchTaskSubNodeResponse>("任务不存在");
     }
 
     /// <summary>

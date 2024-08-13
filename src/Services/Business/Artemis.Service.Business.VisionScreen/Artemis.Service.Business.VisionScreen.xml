@@ -1299,7 +1299,7 @@
             视力筛查核心服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisualChartStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisTeacherUserBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore,Artemis.Service.Resource.Stores.IArtemisSystemModuleStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.Task.Stores.IArtemisTaskStore,Artemis.Service.Task.Stores.IArtemisTaskUnitStore,Artemis.Service.Task.Stores.IArtemisTaskUnitTargetStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.School.Stores.IArtemisTeacherStore,Artemis.Service.Resource.Stores.IArtemisStandardCatalogStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore,Artemis.Service.Resource.Stores.IArtemisDivisionStore,Artemis.Service.Resource.Stores.IArtemisOrganizationStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisOptometerStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisualChartStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisTeacherUserBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore,Artemis.Service.Resource.Stores.IArtemisSystemModuleStore,Artemis.Service.Task.Managers.ITaskTreeManager)">
             <summary>
             视力筛查核心服务实现
             </summary>
@@ -1322,6 +1322,7 @@
             <param name="teacherUserBindingStore"></param>
             <param name="notificationMessageStore"></param>
             <param name="systemModuleStore"></param>
+            <param name="taskTreeManager"></param>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.BindTeacherUser(Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest,Grpc.Core.ServerCallContext)">
             <summary>
