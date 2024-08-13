@@ -50,6 +50,13 @@ public class TeacherChangeLog : ConcurrencyModel, ITeacherChangeLog
     [MaxLength(128)]
     public string? SchoolName { get; set; }
 
+    /// <summary>
+    /// 学校所在行政区划编码
+    /// </summary>
+    [Comment("学校所在行政区划编码")]
+    [MaxLength(32)]
+    public string? DivisionCode { get; set; }
+
     #endregion
 
     #region Implementation of ITeacherChangeLogPackage

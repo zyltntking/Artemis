@@ -28,7 +28,10 @@ internal sealed class ArtemisStudentChangeLogConfiguration : ConcurrencyModelEnt
     /// <param name="builder"></param>
     protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisStudentChangeLog> builder)
     {
-        builder.Property(teacher => teacher.ChangeTime)
+        builder.Property(student => student.ChangeTime)
+            .HasColumnType(DataTypeSet.DateTime);
+
+        builder.Property(student => student.Birthday)
             .HasColumnType(DataTypeSet.DateTime);
     }
 

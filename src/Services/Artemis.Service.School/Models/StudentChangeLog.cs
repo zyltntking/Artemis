@@ -50,6 +50,13 @@ public class StudentChangeLog : ConcurrencyModel, IStudentChangeLog
     [MaxLength(128)]
     public string? SchoolName { get; set; }
 
+    /// <summary>
+    /// 学校所在行政区划编码
+    /// </summary>
+    [Comment("学校所在行政区划编码")]
+    [MaxLength(32)]
+    public string? DivisionCode { get; set; }
+
     #endregion
 
     #region Implementation of IClassChangeLogBase
@@ -66,6 +73,19 @@ public class StudentChangeLog : ConcurrencyModel, IStudentChangeLog
     [Comment("变动班级名称")]
     [MaxLength(128)]
     public string? ClassName { get; set; }
+
+    /// <summary>
+    /// 年级名称
+    /// </summary>
+    [Comment("年级名称")]
+    [MaxLength(128)]
+    public string? GradeName { get; set; }
+
+    /// <summary>
+    /// 班级序列
+    /// </summary>
+    [Comment("班级序列")]
+    public int? SerialNumber { get; set; }
 
     #endregion
 
@@ -84,6 +104,12 @@ public class StudentChangeLog : ConcurrencyModel, IStudentChangeLog
     [Comment("学生姓名")]
     [MaxLength(128)]
     public string? StudentName { get; set; }
+
+    /// <summary>
+    /// 学生生日
+    /// </summary>
+    [Comment("学生生日")]
+    public DateTime? Birthday { get; set; }
 
     #endregion
 }

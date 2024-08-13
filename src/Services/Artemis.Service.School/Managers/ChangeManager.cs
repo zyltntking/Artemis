@@ -5,6 +5,11 @@ using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store.Extensions;
 using Artemis.Service.School.Context;
+using Artemis.Service.Shared.School;
+using Artemis.Service.Shared.School.Transfer;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+using Mapster;
 
 namespace Artemis.Service.School.Managers;
 
@@ -13,6 +18,30 @@ namespace Artemis.Service.School.Managers;
 /// </summary>
 public interface IChangeManager : IManager
 {
+    /// <summary>
+    /// 根据学校和学生信息搜索学生异动信息
+    /// </summary>
+    /// <param name="studentNameSearch"></param>
+    /// <param name="schoolNameSearch"></param>
+    /// <param name="changType"></param>
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<PageResult<StudentChangeLogInfo>> SearchStudentChangeLogInfoAsync(string? studentNameSearch, string? schoolNameSearch, string? changType, int page, int size, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 根据学校和老师信息搜索老师异动信息
+    /// </summary>
+    /// <param name="teacherNameSearch"></param>
+    /// <param name="schoolNameSearch"></param>
+    /// <param name="changeType"></param>
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<PageResult<TeacherChangeLogInfo>> SearchTeacherChangeLogInfoAsync(string? teacherNameSearch, string? schoolNameSearch, string? changeType, int page, int size, CancellationToken cancellationToken = default);
+
     /// <summary>
     /// 教师转出学校
     /// </summary>
@@ -129,6 +158,122 @@ public class ChangeManager : Manager, IChangeManager
     #region Implementation of IChangeManager
 
     /// <summary>
+    /// 根据学校和学生信息搜索学生异动信息
+    /// </summary>
+    /// <param name="studentNameSearch"></param>
+    /// <param name="schoolNameSearch"></param>
+    /// <param name="changType"></param>
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<PageResult<StudentChangeLogInfo>> SearchStudentChangeLogInfoAsync(
+        string? studentNameSearch, 
+        string? schoolNameSearch, 
+        string? changType, 
+        int page, 
+        int size, 
+        CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        studentNameSearch ??= string.Empty;
+        schoolNameSearch ??= string.Empty;
+        changType ??= string.Empty;
+
+        var query = StudentChangeLogStore.EntityQuery;
+
+        var total = await query.LongCountAsync(cancellationToken);
+
+        query = query.WhereIf(
+            studentNameSearch != string.Empty,
+            student => EF.Functions.Like(
+                student.StudentName, $"%{studentNameSearch}%"));
+
+        query = query.WhereIf(
+            schoolNameSearch != string.Empty,
+            student => EF.Functions.Like(
+                student.SchoolName, $"%{schoolNameSearch}%"));
+
+        query = query.WhereIf(changType != string.Empty, student => student.ChangeType == changType);
+
+        var count = await query.LongCountAsync(cancellationToken);
+
+        query = query.OrderByDescending(student => student.ChangeTime);
+
+        if (page > 0 && size > 0) query = query.Page(page, size);
+
+        var studentChangeLogs = await query
+            .ProjectToType<StudentChangeLogInfo>()
+            .ToListAsync(cancellationToken);
+
+        return new PageResult<StudentChangeLogInfo>
+        {
+            Page = page,
+            Size = size,
+            Count = count,
+            Total = total,
+            Items = studentChangeLogs
+        };
+    }
+
+    /// <summary>
+    /// 根据学校和老师信息搜索老师异动信息
+    /// </summary>
+    /// <param name="teacherNameSearch"></param>
+    /// <param name="schoolNameSearch"></param>
+    /// <param name="changType"></param>
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<PageResult<TeacherChangeLogInfo>> SearchTeacherChangeLogInfoAsync(string? teacherNameSearch, string? schoolNameSearch, string? changType, int page, int size, CancellationToken cancellationToken = default)
+    {
+        OnAsyncActionExecuting(cancellationToken);
+
+        OnAsyncActionExecuting(cancellationToken);
+
+        teacherNameSearch ??= string.Empty;
+        schoolNameSearch ??= string.Empty;
+        changType ??= string.Empty;
+
+        var query = TeacherChangeLogStore.EntityQuery;
+
+        var total = await query.LongCountAsync(cancellationToken);
+
+        query = query.WhereIf(
+            teacherNameSearch != string.Empty,
+            teacher => EF.Functions.Like(
+                teacher.TeacherName, $"%{teacherNameSearch}%"));
+
+        query = query.WhereIf(
+            schoolNameSearch != string.Empty,
+            teacher => EF.Functions.Like(
+                teacher.SchoolName, $"%{schoolNameSearch}%"));
+
+        query = query.WhereIf(changType != string.Empty, student => student.ChangeType == changType);
+
+        var count = await query.LongCountAsync(cancellationToken);
+
+        query = query.OrderByDescending(student => student.ChangeTime);
+
+        if (page > 0 && size > 0) query = query.Page(page, size);
+
+        var teacherChangeLogs = await query
+            .ProjectToType<TeacherChangeLogInfo>()
+            .ToListAsync(cancellationToken);
+
+        return new PageResult<TeacherChangeLogInfo>
+        {
+            Page = page,
+            Size = size,
+            Count = count,
+            Total = total,
+            Items = teacherChangeLogs
+        };
+    }
+
+    /// <summary>
     /// 教师转出学校
     /// </summary>
     /// <param name="teacherId"></param>
@@ -151,15 +296,7 @@ public class ChangeManager : Manager, IChangeManager
 
                 if (moveOutSchool is not null)
                 {
-                    var moveOutChangeLog = Instance.CreateInstance<ArtemisTeacherChangeLog>();
-
-                    moveOutChangeLog.SchoolId = moveOutSchool.Id;
-                    moveOutChangeLog.SchoolName = moveOutSchool.Name;
-                    moveOutChangeLog.TeacherId = teacher.Id;
-                    moveOutChangeLog.TeacherName = teacher.Name;
-                    moveOutChangeLog.ChangeType = ChangeType.MoveOutSchool;
-                    moveOutChangeLog.ChangeTime = DateTime.Now;
-                    moveOutChangeLog.ChangeReason = reason;
+                    var moveOutChangeLog = InitialTeacherChangeLog(teacher, moveOutSchool, ChangeType.MoveOutSchool, reason);
 
                     var moveOutResult = await TeacherChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
 
@@ -214,15 +351,7 @@ public class ChangeManager : Manager, IChangeManager
 
                 if (moveOutSchool is not null)
                 {
-                    var moveOutChangeLog = Instance.CreateInstance<ArtemisTeacherChangeLog>();
-
-                    moveOutChangeLog.SchoolId = moveOutSchool.Id;
-                    moveOutChangeLog.SchoolName = moveOutSchool.Name;
-                    moveOutChangeLog.TeacherId = teacher.Id;
-                    moveOutChangeLog.TeacherName = teacher.Name;
-                    moveOutChangeLog.ChangeType = ChangeType.MoveOutSchool;
-                    moveOutChangeLog.ChangeTime = DateTime.Now;
-                    moveOutChangeLog.ChangeReason = reason;
+                    var moveOutChangeLog = InitialTeacherChangeLog(teacher, moveOutSchool, ChangeType.MoveOutSchool, reason);
 
                     moveOutResult = await TeacherChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
                 }
@@ -232,15 +361,7 @@ public class ChangeManager : Manager, IChangeManager
 
             if (moveInSchool is not null)
             {
-                var moveInChangeLog = Instance.CreateInstance<ArtemisTeacherChangeLog>();
-
-                moveInChangeLog.SchoolId = moveInSchool.Id;
-                moveInChangeLog.SchoolName = moveInSchool.Name;
-                moveInChangeLog.TeacherId = teacher.Id;
-                moveInChangeLog.TeacherName = teacher.Name;
-                moveInChangeLog.ChangeType = ChangeType.MoveInSchool;
-                moveInChangeLog.ChangeTime = DateTime.Now;
-                moveInChangeLog.ChangeReason = reason;
+                var moveInChangeLog = InitialTeacherChangeLog(teacher, moveInSchool, ChangeType.MoveInSchool, reason);
 
                 var moveInResult = await TeacherChangeLogStore.CreateAsync(moveInChangeLog, cancellationToken);
 
@@ -286,15 +407,7 @@ public class ChangeManager : Manager, IChangeManager
 
                 if (moveOutSchool is not null)
                 {
-                    var moveOutChangeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
-
-                    moveOutChangeLog.SchoolId = moveOutSchool.Id;
-                    moveOutChangeLog.SchoolName = moveOutSchool.Name;
-                    moveOutChangeLog.StudentId = student.Id;
-                    moveOutChangeLog.StudentName = student.Name;
-                    moveOutChangeLog.ChangeType = ChangeType.MoveOutSchool;
-                    moveOutChangeLog.ChangeTime = DateTime.Now;
-                    moveOutChangeLog.ChangeReason = reason;
+                    var moveOutChangeLog = InitialStudentChangeLog(student, moveOutSchool, null, ChangeType.MoveInSchool, reason);
 
                     var moveOutResult = await StudentChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
 
@@ -350,15 +463,7 @@ public class ChangeManager : Manager, IChangeManager
 
                 if (moveOutSchool is not null)
                 {
-                    var moveOutChangeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
-
-                    moveOutChangeLog.SchoolId = moveOutSchool.Id;
-                    moveOutChangeLog.SchoolName = moveOutSchool.Name;
-                    moveOutChangeLog.StudentId = student.Id;
-                    moveOutChangeLog.StudentName = student.Name;
-                    moveOutChangeLog.ChangeType = ChangeType.MoveOutSchool;
-                    moveOutChangeLog.ChangeTime = DateTime.Now;
-                    moveOutChangeLog.ChangeReason = reason;
+                    var moveOutChangeLog = InitialStudentChangeLog(student, moveOutSchool, null, ChangeType.MoveInSchool, reason);
 
                     moveOutResult = await StudentChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
                 }
@@ -368,15 +473,7 @@ public class ChangeManager : Manager, IChangeManager
 
             if (moveInSchool is not null)
             {
-                var moveInChangeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
-
-                moveInChangeLog.SchoolId = moveInSchool.Id;
-                moveInChangeLog.SchoolName = moveInSchool.Name;
-                moveInChangeLog.StudentId = student.Id;
-                moveInChangeLog.SchoolName = student.Name;
-                moveInChangeLog.ChangeType = ChangeType.MoveInSchool;
-                moveInChangeLog.ChangeTime = DateTime.Now;
-                moveInChangeLog.ChangeReason = reason;
+                var moveInChangeLog = InitialStudentChangeLog(student, moveInSchool, null, ChangeType.MoveInSchool, reason);
 
                 var moveInResult = await StudentChangeLogStore.CreateAsync(moveInChangeLog, cancellationToken);
 
@@ -446,7 +543,7 @@ public class ChangeManager : Manager, IChangeManager
                     });
                 }
 
-                StoreResult moveOutResult = StoreResult.Failed();
+                var moveOutResult = StoreResult.Failed();
 
                 if (student.ClassId != null)
                 {
@@ -454,31 +551,13 @@ public class ChangeManager : Manager, IChangeManager
 
                     if (moveOutClass is not null)
                     {
-                        var moveOutChangeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
-                        moveOutChangeLog.SchoolId = school.Id;
-                        moveOutChangeLog.SchoolName = school.Name;
-                        moveOutChangeLog.ClassId = moveOutClass.Id;
-                        moveOutChangeLog.ClassName = moveOutClass.Name;
-                        moveOutChangeLog.StudentId = student.Id;
-                        moveOutChangeLog.StudentName = student.Name;
-                        moveOutChangeLog.ChangeType = ChangeType.MoveOutClass;
-                        moveOutChangeLog.ChangeTime = DateTime.Now;
-                        moveOutChangeLog.ChangeReason = reason;
+                        var moveOutChangeLog = InitialStudentChangeLog(student, school, moveOutClass, ChangeType.MoveOutClass, reason);
 
                         moveOutResult = await StudentChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
                     }
                 }
 
-                var moveInChangeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
-                moveInChangeLog.SchoolId = school.Id;
-                moveInChangeLog.SchoolName = school.Name;
-                moveInChangeLog.ClassId = moveInClass.Id;
-                moveInChangeLog.ClassName = moveInClass.Name;
-                moveInChangeLog.StudentId = student.Id;
-                moveInChangeLog.SchoolName = student.Name;
-                moveInChangeLog.ChangeType = ChangeType.MoveInSchool;
-                moveInChangeLog.ChangeTime = DateTime.Now;
-                moveInChangeLog.ChangeReason = reason;
+                var moveInChangeLog = InitialStudentChangeLog(student, school, moveInClass, ChangeType.MoveInClass, reason);
 
                 var moveInResult = await StudentChangeLogStore.CreateAsync(moveInChangeLog, cancellationToken);
 
@@ -504,4 +583,62 @@ public class ChangeManager : Manager, IChangeManager
     }
 
     #endregion
+
+    /// <summary>
+    /// 初始化学生变动记录
+    /// </summary>
+    /// <param name="studentInfo"></param>
+    /// <param name="schoolInfo"></param>
+    /// <param name="classInfo"></param>
+    /// <param name="type"></param>
+    /// <param name="reason"></param>
+    /// <returns></returns>
+    private ArtemisStudentChangeLog InitialStudentChangeLog(
+        IStudent studentInfo, 
+        ISchool schoolInfo, 
+        IClass? classInfo, 
+        ChangeType type, 
+        string? reason)
+    {
+        var changeLog = Instance.CreateInstance<ArtemisStudentChangeLog>();
+        changeLog.SchoolId = schoolInfo.Id;
+        changeLog.SchoolName = schoolInfo.Name;
+        changeLog.DivisionCode = schoolInfo.DivisionCode;
+        changeLog.ClassId = classInfo?.Id;
+        changeLog.ClassName = classInfo?.Name;
+        changeLog.GradeName = classInfo?.GradeName;
+        changeLog.SerialNumber = classInfo?.SerialNumber;
+        changeLog.StudentId = studentInfo.Id;
+        changeLog.SchoolName = studentInfo.Name;
+        changeLog.Birthday = studentInfo.Birthday;
+        changeLog.ChangeType = type;
+        changeLog.ChangeTime = DateTime.Now;
+        changeLog.ChangeReason = reason;
+
+        return changeLog;
+    }
+
+    /// <summary>
+    /// 初始化教师变动记录
+    /// </summary>
+    /// <param name="teacherInfo"></param>
+    /// <param name="schoolInfo"></param>
+    /// <param name="type"></param>
+    /// <param name="reason"></param>
+    /// <returns></returns>
+    private ArtemisTeacherChangeLog InitialTeacherChangeLog(ITeacher teacherInfo, ISchool schoolInfo, ChangeType type, string? reason)
+    {
+        var changeLog = Instance.CreateInstance<ArtemisTeacherChangeLog>();
+
+        changeLog.SchoolId = schoolInfo.Id;
+        changeLog.SchoolName = schoolInfo.Name;
+        changeLog.DivisionCode = schoolInfo.DivisionCode;
+        changeLog.TeacherId = teacherInfo.Id;
+        changeLog.TeacherName = teacherInfo.Name;
+        changeLog.ChangeType = type;
+        changeLog.ChangeTime = DateTime.Now;
+        changeLog.ChangeReason = reason;
+
+        return changeLog;
+    }
 }

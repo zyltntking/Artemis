@@ -10,6 +10,22 @@ package Artemis.Service.Protos.School;
 // 变更服务
 service ChangeService{
 
+	// 学生异动查询
+	rpc SearchStudentChangeLog(SearchStudentChangeLogRequest) returns (SearchStudentChangeLogResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SearchStudentChangeLog"
+			body: "*"
+		};
+	}
+
+	// 教师异动查询
+	rpc SearchTeacherChangeLog(SearchTeacherChangeLogRequest) returns (SearchTeacherChangeLogResponse){
+		option (google.api.http) = {
+			post: "/api/SchoolService/Change/SearchTeacherChangeLog"
+			body: "*"
+		};
+	}
+
 	// 教师转出学校
 	rpc SchoolTeacherMoveOut(SchoolTeacherMoveOutRequest) returns (AffectedResponse){
 		option (google.api.http) = {
@@ -50,6 +66,192 @@ service ChangeService{
 		};
 	}
 
+}
+
+// 学生异动查询请求
+message SearchStudentChangeLogRequest{
+	// 学生姓名搜索值
+	// @maxLength(128)
+	google.protobuf.StringValue StudentNameSearch = 1;
+	// 学校名搜索值
+	// @maxLength(128)
+	google.protobuf.StringValue SchoolNameSearch = 2;
+	// 变动类型
+	google.protobuf.StringValue ChangeType = 3;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 4;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 5;
+}
+
+// 学生异动记录数据包
+message StudentChangeLogPacket{
+	// 异动标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 学生标识
+	// @required
+	// @guid
+	string StudentId = 2;
+	// 学生姓名
+	google.protobuf.StringValue StudentName = 3;
+	// 生日
+	// @date
+	google.protobuf.StringValue Birthday = 4;
+	// 变动类型
+	google.protobuf.StringValue ChangeType = 5;
+	// 变动学校行政区划编码
+	google.protobuf.StringValue DivisionCode = 6;
+	// 变动学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 7;
+	// 变动学校名称
+	google.protobuf.StringValue SchoolName = 8;
+	// 变动班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 9;
+	// 变动班级名称
+	google.protobuf.StringValue ClassName = 10;
+	// 变动年级名称
+	google.protobuf.StringValue GradeName = 11;
+	// 班级序列
+	google.protobuf.Int32Value SerialNumber = 12;
+	// 变动时间
+	// @datetime
+	google.protobuf.StringValue ChangeTime = 13;
+	// 变动原因
+	google.protobuf.StringValue ChangeReason = 14;
+}
+
+// 分页学生异动记录数据包
+message PagedStudentChangeLogPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 学生异动记录数据
+	// @required
+	repeated StudentChangeLogPacket Items = 5;
+}
+
+//  学生异动查询响应
+message SearchStudentChangeLogResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 分页学生异动记录
+	// @required
+	PagedStudentChangeLogPacket Data = 7;
+}
+
+// 教师异动查询请求
+message SearchTeacherChangeLogRequest{
+	// 教师姓名搜索值
+	// @maxLength(128)
+	google.protobuf.StringValue TeacherNameSearch = 1;
+	// 学校名搜索值
+	// @maxLength(128)
+	google.protobuf.StringValue SchoolNameSearch = 2;
+	// 变动类型
+	google.protobuf.StringValue ChangeType = 3;
+	// 页码
+	// @min(0)
+	google.protobuf.Int32Value Page = 4;
+	// 条目数
+	// @min(0)
+	google.protobuf.Int32Value Size = 5;
+}
+
+// 教师异动记录数据包
+message TeacherChangeLogPacket{
+	// 异动标识
+	// @required
+	// @guid
+	string Id = 1;
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 2;
+	// 教师姓名
+	google.protobuf.StringValue TeacherName = 3;
+	// 变动类型
+	google.protobuf.StringValue ChangeType = 4;
+	// 变动学校行政区划编码
+	google.protobuf.StringValue DivisionCode = 5;
+	// 变动学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 6;
+	// 变动学校名称
+	google.protobuf.StringValue SchoolName = 7;
+	// 变动时间
+	// @datetime
+	google.protobuf.StringValue ChangeTime = 13;
+	// 变动原因
+	google.protobuf.StringValue ChangeReason = 14;
+}
+
+// 分页教师异动记录数据包
+message PagedTeacherChangeLogPacket{
+	// 页码
+	// @min(0)
+	int32 Page = 1;
+	// 条目数
+	// @min(0)
+	int32 Size = 2;
+	// 数据总数
+	// @min(0)
+	int64 Total = 3;
+	// 条件过滤后的数据量
+	// @min(0)
+	int64 Count = 4;
+	// 教师异动记录数据
+	// @required
+	repeated TeacherChangeLogPacket Items = 5;
+}
+
+//  教师异动查询响应
+message SearchTeacherChangeLogResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 分页教师异动记录
+	// @required
+	PagedTeacherChangeLogPacket Data = 7;
 }
 
 // 教师转出学校请求

@@ -32,6 +32,11 @@ public interface IStudentChangeLogPackage : IClassChangeLogBase
     /// 学生姓名
     /// </summary>
     string? StudentName { get; set; }
+
+    /// <summary>
+    /// 学生生日
+    /// </summary>
+    DateTime? Birthday { get; set; }
 }
 
 /// <summary>
@@ -80,6 +85,16 @@ public interface IClassChangeLogBase : ISchoolChangeLogBase
     /// 班级名称
     /// </summary>
     string? ClassName { get; set; }
+
+    /// <summary>
+    /// 年级名称
+    /// </summary>
+    string? GradeName { get; set; }
+
+    /// <summary>
+    /// 班级序列
+    /// </summary>
+    int? SerialNumber { get; set; }
 }
 
 /// <summary>
@@ -96,6 +111,11 @@ public interface ISchoolChangeLogBase : IChangeLogBase
     /// 变动学校名称
     /// </summary>
     string? SchoolName { get; set; }
+
+    /// <summary>
+    /// 学校所在行政区划编码
+    /// </summary>
+    string? DivisionCode { get; set; }
 }
 
 /// <summary>

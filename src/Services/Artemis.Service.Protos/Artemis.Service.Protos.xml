@@ -27738,6 +27738,542 @@
         <member name="P:Artemis.Service.Protos.School.ChangeReflection.Descriptor">
             <summary>File descriptor for school/change.proto</summary>
         </member>
+        <member name="T:Artemis.Service.Protos.School.SearchStudentChangeLogRequest">
+            <summary>
+            学生异动查询请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.StudentNameSearchFieldNumber">
+            <summary>Field number for the "StudentNameSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.StudentNameSearch">
+            <summary>
+            学生姓名搜索值
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.SchoolNameSearchFieldNumber">
+            <summary>Field number for the "SchoolNameSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.SchoolNameSearch">
+            <summary>
+            学校名搜索值
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.ChangeTypeFieldNumber">
+            <summary>Field number for the "ChangeType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.StudentChangeLogPacket">
+            <summary>
+            学生异动记录数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.Id">
+            <summary>
+            异动标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.StudentIdFieldNumber">
+            <summary>Field number for the "StudentId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.StudentId">
+            <summary>
+            学生标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.StudentNameFieldNumber">
+            <summary>Field number for the "StudentName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.BirthdayFieldNumber">
+            <summary>Field number for the "Birthday" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.Birthday">
+            <summary>
+            生日
+            @date
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeTypeFieldNumber">
+            <summary>Field number for the "ChangeType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.DivisionCodeFieldNumber">
+            <summary>Field number for the "DivisionCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.DivisionCode">
+            <summary>
+            变动学校行政区划编码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.SchoolId">
+            <summary>
+            变动学校标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.ClassId">
+            <summary>
+            变动班级标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.ClassName">
+            <summary>
+            变动班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.GradeNameFieldNumber">
+            <summary>Field number for the "GradeName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.GradeName">
+            <summary>
+            变动年级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.SerialNumberFieldNumber">
+            <summary>Field number for the "SerialNumber" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.SerialNumber">
+            <summary>
+            班级序列
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeTimeFieldNumber">
+            <summary>Field number for the "ChangeTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeTime">
+            <summary>
+            变动时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeReasonFieldNumber">
+            <summary>Field number for the "ChangeReason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.StudentChangeLogPacket.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.PagedStudentChangeLogPacket">
+            <summary>
+            分页学生异动记录数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedStudentChangeLogPacket.Items">
+            <summary>
+            学生异动记录数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SearchStudentChangeLogResponse">
+            <summary>
+             学生异动查询响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchStudentChangeLogResponse.Data">
+            <summary>
+            分页学生异动记录
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest">
+            <summary>
+            教师异动查询请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.TeacherNameSearchFieldNumber">
+            <summary>Field number for the "TeacherNameSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.TeacherNameSearch">
+            <summary>
+            教师姓名搜索值
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.SchoolNameSearchFieldNumber">
+            <summary>Field number for the "SchoolNameSearch" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.SchoolNameSearch">
+            <summary>
+            学校名搜索值
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.ChangeTypeFieldNumber">
+            <summary>Field number for the "ChangeType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogRequest.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.TeacherChangeLogPacket">
+            <summary>
+            教师异动记录数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.Id">
+            <summary>
+            异动标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.TeacherIdFieldNumber">
+            <summary>Field number for the "TeacherId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.TeacherId">
+            <summary>
+            教师标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.TeacherNameFieldNumber">
+            <summary>Field number for the "TeacherName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.TeacherName">
+            <summary>
+            教师姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeTypeFieldNumber">
+            <summary>Field number for the "ChangeType" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.DivisionCodeFieldNumber">
+            <summary>Field number for the "DivisionCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.DivisionCode">
+            <summary>
+            变动学校行政区划编码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.SchoolId">
+            <summary>
+            变动学校标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeTimeFieldNumber">
+            <summary>Field number for the "ChangeTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeTime">
+            <summary>
+            变动时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeReasonFieldNumber">
+            <summary>Field number for the "ChangeReason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.TeacherChangeLogPacket.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket">
+            <summary>
+            分页教师异动记录数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.PageFieldNumber">
+            <summary>Field number for the "Page" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.Page">
+            <summary>
+            页码
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.SizeFieldNumber">
+            <summary>Field number for the "Size" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.Size">
+            <summary>
+            条目数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.Total">
+            <summary>
+            数据总数
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.Count">
+            <summary>
+            条件过滤后的数据量
+            @min(0)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.PagedTeacherChangeLogPacket.Items">
+            <summary>
+            教师异动记录数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse">
+            <summary>
+             教师异动查询响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.School.SearchTeacherChangeLogResponse.Data">
+            <summary>
+            分页教师异动记录
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest">
             <summary>
             教师转出学校请求
@@ -27899,6 +28435,22 @@
         <member name="T:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase">
             <summary>Base class for server-side implementations of ChangeService</summary>
         </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SearchStudentChangeLog(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SearchTeacherChangeLog(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceBase.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.ServerCallContext)">
             <summary>
             教师转出学校
@@ -27956,6 +28508,78 @@
         <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
             <summary>Protected constructor to allow creation of configured clients.</summary>
             <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchStudentChangeLog(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchStudentChangeLog(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchStudentChangeLogAsync(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchStudentChangeLogAsync(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.CallOptions)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchTeacherChangeLog(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchTeacherChangeLog(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchTeacherChangeLogAsync(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SearchTeacherChangeLogAsync(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.CallOptions)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
         </member>
         <member name="M:Artemis.Service.Protos.School.ChangeService.ChangeServiceClient.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>

@@ -3,6 +3,7 @@ using Artemis.Extensions.Identity;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.School;
 using Artemis.Service.School.Managers;
+using Artemis.Service.Shared.School.Transfer;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,48 @@ public class ChangeServiceImplement : ChangeService.ChangeServiceBase
 
 
     #region Overrides of ChangeServiceBase
+
+    /// <summary>
+    /// 学生异动查询
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("学生异动查询")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<SearchStudentChangeLogResponse> SearchStudentChangeLog(SearchStudentChangeLogRequest request, ServerCallContext context)
+    {
+        var info = await ChangeManager.SearchStudentChangeLogInfoAsync(
+            request.StudentNameSearch,
+            request.SchoolNameSearch, 
+            request.ChangeType, 
+            request.Page ?? 0, 
+            request.Size ?? 0,
+            context.CancellationToken);
+
+        return info.PagedResponse<SearchStudentChangeLogResponse, StudentChangeLogInfo>();
+    }
+
+    /// <summary>
+    /// 教师异动查询
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("教师异动查询")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<SearchTeacherChangeLogResponse> SearchTeacherChangeLog(SearchTeacherChangeLogRequest request, ServerCallContext context)
+    {
+        var info = await ChangeManager.SearchTeacherChangeLogInfoAsync(
+            request.TeacherNameSearch,
+            request.SchoolNameSearch,
+            request.ChangeType,
+            request.Page ?? 0,
+            request.Size ?? 0,
+            context.CancellationToken);
+
+        return info.PagedResponse<SearchTeacherChangeLogResponse, TeacherChangeLogInfo>();
+    }
 
     /// <summary>
     /// 教师转出学校

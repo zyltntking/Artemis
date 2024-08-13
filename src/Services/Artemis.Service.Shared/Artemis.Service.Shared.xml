@@ -3061,6 +3061,11 @@
             学生姓名
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.School.IStudentChangeLogPackage.Birthday">
+            <summary>
+            学生生日
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.School.ITeacherChangeLog">
             <summary>
             教师变动记录接口
@@ -3101,6 +3106,16 @@
             班级名称
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.School.IClassChangeLogBase.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.IClassChangeLogBase.SerialNumber">
+            <summary>
+            班级序列
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.School.ISchoolChangeLogBase">
             <summary>
             基础学校变动记录接口
@@ -3114,6 +3129,11 @@
         <member name="P:Artemis.Service.Shared.School.ISchoolChangeLogBase.SchoolName">
             <summary>
             变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.ISchoolChangeLogBase.DivisionCode">
+            <summary>
+            学校所在行政区划编码
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.School.IChangeLogBase">
@@ -3469,6 +3489,131 @@
         <member name="P:Artemis.Service.Shared.School.ITeacherPackage.Remark">
             <summary>
                 备注
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo">
+            <summary>
+            教师变动记录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.ChangeTime">
+            <summary>
+                变动时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.SchoolId">
+            <summary>
+            变动学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.DivisionCode">
+            <summary>
+            学校所在行政区划编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.TeacherId">
+            <summary>
+            教师标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.TeacherName">
+            <summary>
+            教师姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.TeacherChangeLogInfo.Id">
+            <summary>
+                存储标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo">
+            <summary>
+            学生变动记录信息
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.ChangeType">
+            <summary>
+            变动类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.ChangeTime">
+            <summary>
+                变动时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.ChangeReason">
+            <summary>
+            变动原因
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.SchoolId">
+            <summary>
+            变动学校标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.SchoolName">
+            <summary>
+            变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.DivisionCode">
+            <summary>
+            学校所在行政区划编码
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.ClassId">
+            <summary>
+            班级标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.SerialNumber">
+            <summary>
+            班级序列
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.StudentId">
+            <summary>
+            学生标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.Birthday">
+            <summary>
+            学生生日
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.School.Transfer.StudentChangeLogInfo.Id">
+            <summary>
+                存储标识
             </summary>
         </member>
         <member name="T:Artemis.Service.Shared.School.Transfer.ClassInfo">

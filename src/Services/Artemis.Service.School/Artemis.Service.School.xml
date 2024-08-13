@@ -336,6 +336,28 @@
             变更管理器接口
             </summary>
         </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            根据学校和学生信息搜索学生异动信息
+            </summary>
+            <param name="studentNameSearch"></param>
+            <param name="schoolNameSearch"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            根据学校和老师信息搜索老师异动信息
+            </summary>
+            <param name="teacherNameSearch"></param>
+            <param name="schoolNameSearch"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Service.School.Managers.IChangeManager.SchoolTeacherMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
             <summary>
             教师转出学校
@@ -406,6 +428,28 @@
                 释放托管的Store
             </summary>
         </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            根据学校和学生信息搜索学生异动信息
+            </summary>
+            <param name="studentNameSearch"></param>
+            <param name="schoolNameSearch"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            根据学校和老师信息搜索老师异动信息
+            </summary>
+            <param name="teacherNameSearch"></param>
+            <param name="schoolNameSearch"></param>
+            <param name="page"></param>
+            <param name="size"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Service.School.Managers.ChangeManager.SchoolTeacherMoveOutAsync(System.Guid,System.String,System.Threading.CancellationToken)">
             <summary>
             教师转出学校
@@ -452,6 +496,29 @@
             <param name="classId"></param>
             <param name="reason"></param>
             <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.InitialStudentChangeLog(Artemis.Service.Shared.School.IStudent,Artemis.Service.Shared.School.ISchool,Artemis.Service.Shared.School.IClass,Artemis.Data.Core.Fundamental.Types.ChangeType,System.String)">
+            <summary>
+            初始化学生变动记录
+            </summary>
+            <param name="studentInfo"></param>
+            <param name="schoolInfo"></param>
+            <param name="classInfo"></param>
+            <param name="county"></param>
+            <param name="type"></param>
+            <param name="reason"></param>
+            <param name="prefecture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.InitialTeacherChangeLog(Artemis.Service.Shared.School.ITeacher,Artemis.Service.Shared.School.ISchool,Artemis.Data.Core.Fundamental.Types.ChangeType,System.String)">
+            <summary>
+            初始化教师变动记录
+            </summary>
+            <param name="teacherInfo"></param>
+            <param name="schoolInfo"></param>
+            <param name="type"></param>
+            <param name="reason"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Service.School.Managers.ISchoolManager">
@@ -898,6 +965,11 @@
             变动学校名称
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.DivisionCode">
+            <summary>
+            学校所在行政区划编码
+            </summary>
+        </member>
         <member name="P:Artemis.Service.School.Models.StudentChangeLog.ClassId">
             <summary>
             班级标识
@@ -908,6 +980,16 @@
             班级名称
             </summary>
         </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.SerialNumber">
+            <summary>
+            班级序列
+            </summary>
+        </member>
         <member name="P:Artemis.Service.School.Models.StudentChangeLog.StudentId">
             <summary>
             学生标识
@@ -916,6 +998,11 @@
         <member name="P:Artemis.Service.School.Models.StudentChangeLog.StudentName">
             <summary>
             学生姓名
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.StudentChangeLog.Birthday">
+            <summary>
+            学生生日
             </summary>
         </member>
         <member name="T:Artemis.Service.School.Models.Teacher">
@@ -1026,6 +1113,11 @@
         <member name="P:Artemis.Service.School.Models.TeacherChangeLog.SchoolName">
             <summary>
             变动学校名称
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.School.Models.TeacherChangeLog.DivisionCode">
+            <summary>
+            学校所在行政区划编码
             </summary>
         </member>
         <member name="P:Artemis.Service.School.Models.TeacherChangeLog.TeacherId">
