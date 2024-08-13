@@ -67,7 +67,7 @@ service VisionScreeningCoreService{
 		};
 	}
 
-	// 查询任务树
+	// 查询任务单元目标
 	rpc FetchTaskUnitTarget(FetchTaskUnitTargetRequest) returns (FetchTaskUnitTargetResponse){
 		option (google.api.http) = {
 			post: "/api/BusinessService/VisionScreeningCore/FetchTaskUnitTarget"

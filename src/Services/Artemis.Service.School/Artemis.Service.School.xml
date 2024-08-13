@@ -336,23 +336,25 @@
             变更管理器接口
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             根据学校和学生信息搜索学生异动信息
             </summary>
             <param name="studentNameSearch"></param>
             <param name="schoolNameSearch"></param>
+            <param name="changType"></param>
             <param name="page"></param>
             <param name="size"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             根据学校和老师信息搜索老师异动信息
             </summary>
             <param name="teacherNameSearch"></param>
             <param name="schoolNameSearch"></param>
+            <param name="changeType"></param>
             <param name="page"></param>
             <param name="size"></param>
             <param name="cancellationToken"></param>
@@ -428,23 +430,25 @@
                 释放托管的Store
             </summary>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchStudentChangeLogInfoAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             根据学校和学生信息搜索学生异动信息
             </summary>
             <param name="studentNameSearch"></param>
             <param name="schoolNameSearch"></param>
+            <param name="changType"></param>
             <param name="page"></param>
             <param name="size"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.SearchTeacherChangeLogInfoAsync(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             根据学校和老师信息搜索老师异动信息
             </summary>
             <param name="teacherNameSearch"></param>
             <param name="schoolNameSearch"></param>
+            <param name="changType"></param>
             <param name="page"></param>
             <param name="size"></param>
             <param name="cancellationToken"></param>
@@ -505,10 +509,8 @@
             <param name="studentInfo"></param>
             <param name="schoolInfo"></param>
             <param name="classInfo"></param>
-            <param name="county"></param>
             <param name="type"></param>
             <param name="reason"></param>
-            <param name="prefecture"></param>
             <returns></returns>
         </member>
         <member name="M:Artemis.Service.School.Managers.ChangeManager.InitialTeacherChangeLog(Artemis.Service.Shared.School.ITeacher,Artemis.Service.Shared.School.ISchool,Artemis.Data.Core.Fundamental.Types.ChangeType,System.String)">
@@ -1179,6 +1181,22 @@
             <summary>
                 日志依赖
             </summary>
+        </member>
+        <member name="M:Artemis.Service.School.Services.ChangeServiceImplement.SearchStudentChangeLog(Artemis.Service.Protos.School.SearchStudentChangeLogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            学生异动查询
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.School.Services.ChangeServiceImplement.SearchTeacherChangeLog(Artemis.Service.Protos.School.SearchTeacherChangeLogRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            教师异动查询
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
         <member name="M:Artemis.Service.School.Services.ChangeServiceImplement.SchoolTeacherMoveOut(Artemis.Service.Protos.School.SchoolTeacherMoveOutRequest,Grpc.Core.ServerCallContext)">
             <summary>

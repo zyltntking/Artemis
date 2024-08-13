@@ -40,6 +40,18 @@
         <member name="M:Artemis.App.School.Migrations.ChangeLog.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.School.Migrations.Changelogs">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.Changelogs.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.Changelogs.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.School.Migrations.Changelogs.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.School.Program">
             <summary>
                 应用程序入口
