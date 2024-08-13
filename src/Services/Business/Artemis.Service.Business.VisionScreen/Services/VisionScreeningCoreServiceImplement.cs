@@ -874,6 +874,40 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         return trees.ReadInfoResponse<FetchSystemModuleTreeResponse, List<SystemModuleTreePacket>>();
     }
 
+    /// <summary>
+    /// 请求批量PDF导出示例
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="responseStream">Used for sending responses back to the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>A task indicating completion of the handler.</returns>
+    public override async System.Threading.Tasks.Task MultiplePdfExportExample(ExportRequest request, IServerStreamWriter<ExportResponse> responseStream, ServerCallContext context)
+    {
+
+        var total = request.ExportCount;
+
+        for (var index = 1; index <= total; index++)
+        {
+            var complete = total - index == 0;
+
+            string? url = complete ? "下载地址" : null;
+
+            var packet = new ExportPacket
+            {
+                Total = total,
+                Count = index,
+                Completet = complete,
+                Url = url
+            };
+
+            var response = packet.ReadInfoResponse<ExportResponse, ExportPacket>();
+
+            await responseStream.WriteAsync(response);
+            await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
+        }
+
+    }
+
 
     /// <summary>
     /// 构建任务树

@@ -3034,6 +3034,18 @@
                 混合
             </summary>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.PostStatus">
+            <summary>
+            文章状态
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.PostStatus.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Protocol.BytesConverter">
             <summary>
                 字节码转换器
@@ -4948,6 +4960,23 @@
             </summary>
         </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.PatchAction.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.PostCategory">
+            <summary>
+            文章分类
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.PostCategory.News">
+            <summary>
+            新闻
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.PostCategory.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数
             </summary>

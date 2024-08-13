@@ -138,6 +138,14 @@ service VisionScreeningCoreService{
 			body: "*"
 		};
 	}
+
+	// 请求批量PDF导出示例
+    rpc MultiplePdfExportExample (ExportRequest) returns (stream ExportResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/MultiplePdfExportExample"
+			body: "*"
+		};
+	}
 }
 
 // 教师绑定用户请求
@@ -850,4 +858,44 @@ message FetchSystemModuleTreeResponse{
 	// 系统模块信息数据
 	// @required
 	repeated SystemModuleTreePacket Data = 7;
+}
+
+// 批量导出PDF示例请求
+message ExportRequest{
+	// 导出数量
+	int32 ExportCount = 1;
+}
+
+// 批量导出PDF示例数据包
+message ExportPacket{
+	// 总数
+	int32 Total = 1;
+	// 当前数
+	int32 Count = 2;
+	// 是否结束
+	bool Completet = 3;
+	// 下载地址
+	google.protobuf.StringValue Url = 4;
+}
+
+// 批量导出PDF示例响应
+message ExportResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 批量导出PDF示例数据
+	// @required
+	ExportPacket Data = 7;
 }

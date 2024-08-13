@@ -2436,6 +2436,31 @@
             是否接入
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Resource.IPostPackage">
+            <summary>
+            文章数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IPostPackage.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IPostPackage.Category">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IPostPackage.EndType">
+            <summary>
+            显示的端类型
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Resource.IPostPackage.Summary">
+            <summary>
+            文章摘要
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Resource.IStandardCatalog">
             <summary>
                 标准目录接口

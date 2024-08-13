@@ -2135,6 +2135,121 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ExportRequest">
+            <summary>
+            批量导出PDF示例请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportRequest.ExportCountFieldNumber">
+            <summary>Field number for the "ExportCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportRequest.ExportCount">
+            <summary>
+            导出数量
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ExportPacket">
+            <summary>
+            批量导出PDF示例数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.Total">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.Count">
+            <summary>
+            当前数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.CompletetFieldNumber">
+            <summary>Field number for the "Completet" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.Completet">
+            <summary>
+            是否结束
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.UrlFieldNumber">
+            <summary>Field number for the "Url" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportPacket.Url">
+            <summary>
+            下载地址
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.ExportResponse">
+            <summary>
+            批量导出PDF示例响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.ExportResponse.Data">
+            <summary>
+            批量导出PDF示例数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService">
             <summary>
             视力筛查核心业务服务
@@ -2273,6 +2388,15 @@
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.MultiplePdfExportExample(Artemis.Service.Protos.Business.VisionScreen.ExportRequest,Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.Business.VisionScreen.ExportResponse},Grpc.Core.ServerCallContext)">
+            <summary>
+            请求批量PDF导出示例
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="responseStream">Used for sending responses back to the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>A task indicating completion of the handler.</returns>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient">
             <summary>Client for VisionScreeningCoreService</summary>
@@ -2863,6 +2987,24 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchClaimedSystemModuleTreeAsync(Artemis.Service.Protos.EmptyRequest,Grpc.Core.CallOptions)">
             <summary>
             获取系统模块树(经凭据过滤)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.MultiplePdfExportExample(Artemis.Service.Protos.Business.VisionScreen.ExportRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            请求批量PDF导出示例
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.MultiplePdfExportExample(Artemis.Service.Protos.Business.VisionScreen.ExportRequest,Grpc.Core.CallOptions)">
+            <summary>
+            请求批量PDF导出示例
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
