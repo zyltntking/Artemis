@@ -531,6 +531,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询根任务")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<FetchRootTaskResponse> FetchRootTask(FetchRootTaskRequest request, ServerCallContext context)
     {
         var taskNameSearch = request.TaskNameSearch ?? string.Empty;
@@ -554,7 +556,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         query = query.WhereIf(startSet, task => task.CreatedAt >= startTime);
 
-        query = query.WhereIf(endSet, task => task.CreatedAt <= startTime);
+        query = query.WhereIf(endSet, task => task.CreatedAt <= endTime);
 
         var count = await query.LongCountAsync(context.CancellationToken);
 
@@ -562,20 +564,29 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         if (page > 0 && size > 0) query = query.Page(page, size);
         
-        var tasks = await query.ProjectToType<RootTaskPacket>().ToListAsync(context.CancellationToken);
+        var tasks = await query.ProjectToType<TaskInfo>().ToListAsync(context.CancellationToken);
 
-        var pagedTasks = new PagedRootTaskPacket
+        var infos = new PageResult<TaskInfo>
         {
             Total = total,
             Count = count,
             Page = page,
             Size = size,
+            Items = tasks
         };
 
-        pagedTasks.Items.Add(tasks);
+        return infos.PagedResponse<FetchRootTaskResponse, TaskInfo>();
+    }
 
-
-        return new FetchRootTaskResponse();
+    /// <summary>
+    /// 查询任务树
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override Task<FetchTaskTreeResponse> FetchTaskTree(FetchTaskTreeRequest request, ServerCallContext context)
+    {
+        return base.FetchTaskTree(request, context);
     }
 
     /// <summary>

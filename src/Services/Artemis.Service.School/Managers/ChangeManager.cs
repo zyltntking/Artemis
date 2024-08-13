@@ -525,7 +525,7 @@ public class ChangeManager : Manager, IChangeManager
                     });
                 }
 
-                if (moveInClass.Id == classId)
+                if (moveInClass.Id == student.ClassId)
                 {
                     return StoreResult.Failed(new StoreError
                     {
