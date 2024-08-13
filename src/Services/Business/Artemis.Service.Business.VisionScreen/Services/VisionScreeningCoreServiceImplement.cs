@@ -582,7 +582,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("查询根任务")]
+    [Description("查询任务下级节点")]
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<FetchTaskSubNodeResponse> FetchTaskSubNode(FetchTaskSubNodeRequest request, ServerCallContext context)
     {
@@ -610,6 +610,33 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         return ResultAdapter.AdaptEmptyFail<FetchTaskSubNodeResponse>("任务不存在");
+    }
+
+    /// <summary>
+    /// 查询任务单元目标
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询任务单元目标")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchTaskUnitTargetResponse> FetchTaskUnitTarget(FetchTaskUnitTargetRequest request, ServerCallContext context)
+    {
+        var taskUnitId = Guid.Parse(request.Id);
+
+        var taskUnitExists = await TaskUnitStore.ExistsAsync(taskUnitId, context.CancellationToken);
+
+        if (taskUnitExists)
+        {
+            var taskTargets = await TaskUnitTargetStore.EntityQuery
+                .Where(item => item.TaskUnitId == taskUnitId)
+                .ProjectToType<TaskUnitTargetInfo>()
+                .ToListAsync(context.CancellationToken);
+
+            return taskTargets.ReadInfoResponse<FetchTaskUnitTargetResponse, List<TaskUnitTargetInfo>>();
+        }
+
+        return ResultAdapter.AdaptEmptyFail<FetchTaskUnitTargetResponse>("任务单元不存在");
     }
 
     /// <summary>
