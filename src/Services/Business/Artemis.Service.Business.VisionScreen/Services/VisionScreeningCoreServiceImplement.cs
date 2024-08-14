@@ -98,7 +98,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         SystemModuleStore = systemModuleStore;
     }
 
-    private IIdentityUserStore UserStore { get; set; }
+    private IIdentityUserStore UserStore { get; }
 
     private IArtemisTaskStore TaskStore { get; }
 
@@ -500,314 +500,209 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     }
 
     /// <summary>
-    /// 生成任务
+    /// 创建任务目标和筛查记录
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("生成任务")]
-    [Authorize(AuthorizePolicy.Token)]
-    [Obsolete]
-    public override async Task<AffectedResponse> GeneratorTask(GeneratorTaskRequest request, ServerCallContext context)
+    public override async Task<AffectedResponse> AcceptTaskUnit(AcceptTaskUnitRequest request, ServerCallContext context)
     {
-        var organization = request.OrgnizationTree;
+        var taskUnitId = Guid.Parse(request.TaskUnitId);
 
-        var startTime = request.StartTime.Adapt<DateTime>();
-        var endTime = request.StartTime.Adapt<DateTime>();
+        var taskUnitInfo = await TaskUnitStore.FindMapEntityAsync<TaskUnitInfo>(taskUnitId, context.CancellationToken);
 
-        var task = BuildTaskTree(
-            request.TaskName, 
-            organization.Code, 
-            null, 
-            1,  
-            organization, 
-            null, 
-            startTime, 
-            endTime);
-
-        if (task is not null)
+        if (taskUnitInfo == null)
         {
-            var result = await TaskStore.CreateAsync(task);
-
-            return result.AffectedResponse();
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的任务单元信息");
         }
 
-        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("生成任务失败");
-    }
+        var taskCodePrefix = taskUnitInfo.UnitCode![..26];
 
-    /// <summary>
-    /// 生成任务目标
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("生成任务目标")]
-    [Authorize(AuthorizePolicy.Token)]
-    [Obsolete]
-    public override async Task<AffectedResponse> GenerateTaskTarget(GenerateTaskTargetRequest request, ServerCallContext context)
-    {
-        var taskId = Guid.Parse(request.TaskId);
+        var taskInfo = await TaskStore.EntityQuery
+            .Where(item => item.TaskCode!.StartsWith(taskCodePrefix))
+            .FirstOrDefaultAsync(context.CancellationToken);
 
-        var task = await TaskStore.FindMapEntityAsync<TaskInfo>(taskId, context.CancellationToken);
-
-        if (task is not null && !string.IsNullOrWhiteSpace(task.TaskCode))
+        if (taskInfo == null)
         {
-            var targetExists = await TaskUnitTargetStore.EntityQuery
-                .AnyAsync(target => target.TargetCode!.StartsWith(task.TaskCode), context.CancellationToken);
-
-            if (targetExists)
-            {
-                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务目标已存在, 请清理后再执行生成操作");
-            }
-
-            //var taskFeature = task.TaskCode[..26];
-
-            //var rootTask = await TaskStore.EntityQuery
-            //    .Where(iTask => iTask.TaskCode!.StartsWith(taskFeature) && iTask.ParentId == null)
-            //    .ProjectToType<TaskInfo>()
-            //    .FirstOrDefaultAsync(context.CancellationToken);
-
-            var taskUnits = await TaskUnitStore.EntityQuery
-                .Where(unit => !string.IsNullOrWhiteSpace(unit.UnitCode) &&
-                               unit.UnitCode.StartsWith(task.TaskCode))
-                .ProjectToType<TaskUnitInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var schoolOrganizationCodes = taskUnits.Select(unit => unit.DesignCode).ToList();
-
-            var schools = await SchoolStore.EntityQuery
-                .Where(school => schoolOrganizationCodes.Contains(school.OrganizationCode))
-                .ProjectToType<SchoolInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var schoolIds = schools.Select(school => school.Id).ToList();
-
-            var students = await StudentStore.EntityQuery
-                .Where(student => student.SchoolId != null && 
-                                  schoolIds.Contains((Guid)student.SchoolId))
-                .Where(student => student.ClassId != null)
-                .ProjectToType<StudentInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var classIds = students.Select(student => student.ClassId).ToList();
-
-            var classes = await ClassStore.EntityQuery
-                .Where(iClass => classIds.Contains(iClass.Id))
-                .ProjectToType<ClassInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var targets = new List<ArtemisTaskUnitTarget>();
-
-            var index = 1;
-
-            foreach (var student in students)
-            {
-                var target = Instance.CreateInstance<ArtemisTaskUnitTarget>();
-                var studentSchoolId = student.SchoolId;
-                var studentSchool = schools.First(school => school.Id == studentSchoolId);
-                var studentTaskUnit = taskUnits.First(unit => unit.DesignCode == studentSchool.OrganizationCode);
-                var studentClass = classes.First(iClass => iClass.Id == student.ClassId);
-
-                target.TaskUnitId = studentTaskUnit.Id;
-                target.TargetName = student.Name;
-                target.DesignCode =
-                    DesignCode.Task(studentSchool.OrganizationCode!, index, studentTaskUnit.UnitCode);
-                target.TargetCode = target.DesignCode;
-                target.TargetType = "VisionScreening";
-                target.BindingTag = student.Id.ToString();
-                target.TargetState = TaskState.Created;
-                targets.Add(target);
-                target.Description = $"{studentSchool.Name}{studentClass.Name}{student.Name}";
-                index++;
-            }
-
-            var result = await TaskUnitTargetStore.CreateAsync(targets);
-
-            return result.AffectedResponse();
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的任务信息");
         }
 
-        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务不存在");
-    }
+        var schoolId = Guid.Parse(request.SchoolId);
 
-    /// <summary>
-    /// 生成筛查记录
-    /// </summary>
-    /// <param name="request">The request received from the client.</param>
-    /// <param name="context">The context of the server-side call handler being invoked.</param>
-    /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("生成筛查记录")]
-    [Authorize(AuthorizePolicy.Token)]
-    [Obsolete]
-    public override async Task<AffectedResponse> GenerateRecord(GenerateRecordRequest request, ServerCallContext context)
-    {
-        var taskId = Guid.Parse(request.TaskId);
+        var schoolInfo = await SchoolStore.FindMapEntityAsync<SchoolInfo>(schoolId, context.CancellationToken);
 
-        var task = await TaskStore.FindMapEntityAsync<TaskInfo>(taskId, context.CancellationToken);
-
-        if (task is not null && !string.IsNullOrWhiteSpace(task.TaskCode))
+        if (schoolInfo == null)
         {
-            var targetExists = await TaskUnitTargetStore.EntityQuery
-                .AnyAsync(target => target.TargetCode!.StartsWith(task.TaskCode), context.CancellationToken);
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的学校信息");
+        }
 
-            if (!targetExists)
+        var divisionInfo = await DivisionStore.EntityQuery
+            .Where(division => division.Code == schoolInfo.DivisionCode)
+            .ProjectToType<DivisionInfo>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (divisionInfo == null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的行政区划信息");
+        }
+
+        var organizationCode = schoolInfo.OrganizationCode;
+
+        var organizationInfo = await OrganizationStore.EntityQuery
+            .Where(item => item.Code == organizationCode)
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        if (organizationInfo == null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的机构信息");
+        }
+
+        var classIds = request.ClassIds.Select(Guid.Parse);
+
+        var classInfos = await ClassStore
+            .KeyMatchQuery(classIds)
+            .Where(item => item.GradeName != GradeName.FinishSchool)
+            .ToListAsync(context.CancellationToken);
+
+        if (!classInfos.Any())
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配的班级信息");
+        }
+
+        var classInfoIds = classInfos.Select(item => item.Id).ToList();
+
+        var studentInfos = await StudentStore.EntityQuery
+            .Where(student => student.SchoolId == schoolId)
+            .Where(student => student.ClassId != null && classInfoIds.Contains(student.ClassId.Value))
+            .ProjectToType<StudentInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        if (!studentInfos.Any())
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到匹配学生信息");
+        }
+
+        var index = 1;
+
+        var targets = new List<ArtemisTaskUnitTarget>();
+
+        foreach (var studentInfo in studentInfos)
+        {
+            var target = Instance.CreateInstance<ArtemisTaskUnitTarget>();
+
+            var studentClass = classInfos.First(iClass => iClass.Id == studentInfo.ClassId);
+
+            target.TaskUnitId = taskUnitId;
+            target.TargetName = studentInfo.Name;
+            target.DesignCode = DesignCode.Task(schoolInfo.OrganizationCode!, index, taskUnitInfo.UnitCode);
+            target.TargetCode = target.DesignCode;
+            target.TargetType = "VisionScreening";
+            target.BindingTag = studentInfo.Id.GuidToString();
+            target.TargetState = TaskState.Created;
+            target.Description = $"{schoolInfo.Name}{studentClass.Name}{studentInfo.Name}";
+
+            targets.Add(target);
+
+            index++;
+        }
+
+        var targetResult = await TaskUnitTargetStore.CreateAsync(targets, context.CancellationToken);
+
+        var standard = await StandardCatalogStore.EntityQuery
+            .ProjectToType<StandardCatalogInfo>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        var records = new List<ArtemisVisionScreenRecord>();
+
+        foreach (var target in targets)
+        {
+            var record = Instance.CreateInstance<ArtemisVisionScreenRecord>();
+
+            if (target.BindingTag != null)
             {
-                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务目标不存在, 请先生成任务目标");
-            }
+                var targetStudentId = Guid.Parse(target.BindingTag);
+                var studentInfo = studentInfos.First(item => item.Id == targetStudentId);
 
-            var recordExists = await VisionScreenRecordStore.EntityQuery
-                .AnyAsync(record => record.TaskId == taskId, context.CancellationToken);
+                // taskInfo
+                record.TaskId = taskInfo.Id;
+                record.TaskName = taskInfo.TaskName;
+                record.TaskCode = taskInfo.TaskCode;
 
-            if (recordExists)
-            {
-                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("筛查记录已存在, 请清理后再执行生成操作");
-            }
+                // taskUnitInfo
+                record.TaskUnitId = taskUnitInfo.Id;
+                record.TaskUnitName = taskUnitInfo.UnitName;
+                record.TaskUnitCode = taskUnitInfo.UnitCode;
 
-            var taskUnits = await TaskUnitStore.EntityQuery
-                .Where(unit => !string.IsNullOrWhiteSpace(unit.UnitCode) &&
-                               unit.UnitCode.StartsWith(task.TaskCode))
-                .ProjectToType<TaskUnitInfo>()
-                .ToListAsync(context.CancellationToken);
+                // standard
+                record.VisualStandardId = standard?.Id ?? Guid.Empty;
 
-            var schoolOrganizationCodes = taskUnits.Select(unit => unit.DesignCode).Distinct().ToList();
+                // school
+                record.SchoolId = schoolInfo.Id;
+                record.SchoolName = schoolInfo.Name;
+                record.SchoolCode = schoolInfo.Code;
+                record.SchoolType = schoolInfo.Type;
 
-            var schools = await SchoolStore.EntityQuery
-                .Where(school => schoolOrganizationCodes.Contains(school.OrganizationCode))
-                .ProjectToType<SchoolInfo>()
-                .ToListAsync(context.CancellationToken);
+                // division
+                record.DivisionId = divisionInfo.Id;
+                record.DivisionName = divisionInfo.Name;
+                record.DivisionCode = divisionInfo.Code;
 
-            var schoolIds = schools.Select(school => school.Id).ToList();
+                // organization
+                record.OrganizationId = organizationInfo.Id;
+                record.OrganizationName = organizationInfo.Name;
+                record.OrganizationCode = organizationInfo.Code;
+                record.OrganizationDesignCode = organizationInfo.DesignCode;
 
-            var students = await StudentStore.EntityQuery
-                .Where(student => student.SchoolId != null &&
-                                  schoolIds.Contains((Guid)student.SchoolId))
-                .Where(student => student.ClassId != null)
-                .ProjectToType<StudentInfo>()
-                .ToListAsync(context.CancellationToken);
 
-            var classIds = students.Select(student => student.ClassId).Distinct().ToList();
+                var classInfo = classInfos.First(item => item.Id == studentInfo.ClassId);
+                // class
+                record.ClassId = classInfo.Id;
+                record.ClassName = classInfo.Name;
+                record.ClassCode = classInfo.Code;
+                record.GradeName = classInfo.GradeName;
+                record.ClassSerialNumber = classInfo.SerialNumber;
+                record.StudyPhase = classInfo.StudyPhase;
+                record.SchoolLength = classInfo.SchoolLength;
+                record.SchoolLengthValue = classInfo.Length;
+                record.HeadTeacherId = classInfo.HeadTeacherId;
+                record.HeadTeacherName = classInfo.HeadTeacherName;
 
-            var classes = await ClassStore.EntityQuery
-                .Where(iClass => classIds.Contains(iClass.Id))
-                .ProjectToType<ClassInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var targets = await TaskUnitTargetStore.EntityQuery
-                .Where(target => !string.IsNullOrWhiteSpace(target.TargetCode) &&
-                                 target.TargetCode.StartsWith(task.TaskCode))
-                .ProjectToType<TaskUnitTargetInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var standard = await StandardCatalogStore.EntityQuery
-                .ProjectToType<StandardCatalogInfo>()
-                .FirstOrDefaultAsync(context.CancellationToken);
-
-            var divisionCodes = schools.Select(school => school.DivisionCode).Distinct().ToList();
-
-            var divisions = await DivisionStore.EntityQuery
-                .Where(division => divisionCodes.Contains(division.Code))
-                .ProjectToType<DivisionInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var organizations = await OrganizationStore.EntityQuery
-                .Where(organization => schoolOrganizationCodes.Contains(organization.Code))
-                .ProjectToType<OrganizationInfo>()
-                .ToListAsync(context.CancellationToken);
-
-            var records = new List<ArtemisVisionScreenRecord>();
-
-            foreach (var target in targets)
-            {
-                var record = Instance.CreateInstance<ArtemisVisionScreenRecord>();
-
-                if (target.BindingTag != null)
+                // student
+                record.StudentId = studentInfo.Id;
+                record.StudentName = studentInfo.Name;
+                record.StudentNumber = studentInfo.StudentNumber;
+                record.Nation = studentInfo.Nation;
+                record.StudentCode = studentInfo.Code;
+                record.Birthday = studentInfo.Birthday;
+                if (studentInfo.Birthday != null)
                 {
-                    var studentId = Guid.Parse(target.BindingTag);
-                    var student = students.First(student => student.Id == studentId);
-
-                    // taskInfo
-                    record.TaskId = taskId;
-                    record.TaskName = task.TaskName;
-                    record.TaskCode = task.TaskCode;
-
-                    var taskUnit = taskUnits.First(unit => unit.Id == target.TaskUnitId);
-                    // taskUnitInfo
-                    record.TaskUnitId = taskUnit.Id;
-                    record.TaskUnitName = taskUnit.UnitName;
-                    record.TaskUnitCode = taskUnit.UnitCode;
-
-                    // taskUnitTargetInfo
-                    record.TaskUnitTargetId = target.Id;
-                    record.TaskUnitTargetCode = target.TargetCode;
-
-                    // todo task agent
-                    record.TaskAgentId = null;
-
-                    // standard
-                    record.VisualStandardId = standard?.Id ?? Guid.Empty;
-
-                    var school = schools.First(school => school.Id == student.SchoolId);
-                    // school
-                    record.SchoolId = school.Id;
-                    record.SchoolName = school.Name;
-                    record.SchoolCode = school.Code;
-                    record.SchoolType = school.Type;
-
-                    var division = divisions.First(division => division.Code == school.DivisionCode);
-                    // division
-                    record.DivisionId = division.Id;
-                    record.DivisionName = division.Name;
-                    record.DivisionCode = division.Code;
-                    
-                    var organization = organizations.First(organization => organization.Code == school.OrganizationCode);
-                    // organization
-                    record.OrganizationId = organization.Id;
-                    record.OrganizationName = organization.Name;
-                    record.OrganizationCode = organization.Code;
-                    record.OrganizationDesignCode = organization.DesignCode;
-
-                    var iClass = classes.First(iClass => iClass.Id == student.ClassId);
-                    // class
-                    record.ClassId = iClass.Id;
-                    record.ClassName = iClass.Name;
-                    record.ClassCode = iClass.Code;
-                    record.GradeName = iClass.GradeName;
-                    record.ClassSerialNumber = iClass.SerialNumber;
-                    record.StudyPhase = iClass.StudyPhase;
-                    record.SchoolLength = iClass.SchoolLength;
-                    record.SchoolLengthValue = iClass.Length;
-                    record.HeadTeacherId = iClass.HeadTeacherId;
-                    record.HeadTeacherName = iClass.HeadTeacherName;
-
-                    // student
-                    record.StudentId = student.Id;
-                    record.StudentName = student.Name;
-                    record.StudentNumber = student.StudentNumber;
-                    record.Nation = student.Nation;
-                    record.StudentCode = student.Code;
-                    record.Birthday = student.Birthday;
-                    if (student.Birthday != null)
+                    var age = DateTime.Today.Year - studentInfo.Birthday.Value.Year;
+                    if (DateTime.Today.Month < studentInfo.Birthday.Value.Month || (DateTime.Today.Month == studentInfo.Birthday.Value.Month && DateTime.Today.Day < studentInfo.Birthday.Value.Day))
                     {
-                        var age = DateTime.Today.Year - student.Birthday.Value.Year;
-                        if (DateTime.Today.Month < student.Birthday.Value.Month || (DateTime.Today.Month == student.Birthday.Value.Month && DateTime.Today.Day < student.Birthday.Value.Day))
-                        {
-                            age--;
-                        }
-
-                        record.Age = age;
+                        age--;
                     }
-                    record.Gender = student.Gender;
 
-                    // finish
-                    records.Add(record);
+                    record.Age = age;
                 }
+                record.Gender = studentInfo.Gender;
+
+                // finish
+                records.Add(record);
             }
-
-            var result = await VisionScreenRecordStore.CreateAsync(records);
-
-            return result.AffectedResponse();
         }
 
-        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("任务不存在");
+        var recordResult = await VisionScreenRecordStore.CreateAsync(records);
+
+        var affectRows = targetResult.AffectRows + recordResult.AffectRows;
+
+        var result = StoreResult.Failed();
+
+        if (affectRows > 0)
+        {
+            result = StoreResult.Success(affectRows);
+        }
+
+        return result.AffectedResponse();
     }
 
     /// <summary>
@@ -1242,90 +1137,6 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
             await responseStream.WriteAsync(response);
             await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1));
         }
-
-    }
-
-
-    /// <summary>
-    /// 构建任务树
-    /// </summary>
-    /// <param name="taskName"></param>
-    /// <param name="organizationCode"></param>
-    /// <param name="parentTaskCode"></param>
-    /// <param name="serial"></param>
-    /// <param name="organization"></param>
-    /// <param name="taskNode"></param>
-    /// <param name="startTime"></param>
-    /// <param name="endTime"></param>
-    /// <returns></returns>
-    private ArtemisTask? BuildTaskTree(
-        string taskName, 
-        string organizationCode, 
-        string? parentTaskCode, 
-        int serial, 
-        TaskBindOrgnizationTreePacket organization, 
-        ArtemisTask? taskNode, 
-        DateTime startTime, 
-        DateTime endTime)
-    {
-        if (organization.Type == OrganizationType.Management)
-        {
-            var task = Instance.CreateInstance<ArtemisTask>();
-            task.TaskName = taskName;
-            task.ParentId = taskNode?.Id;
-            task.NormalizedTaskName = taskName.Normalize();
-            task.TaskCode = DesignCode.Task(organizationCode, serial, parentTaskCode);
-            task.DesignCode = organization.Code;
-            task.TaskShip = string.IsNullOrWhiteSpace(parentTaskCode) ? TaskShip.Root : TaskShip.Child;
-            task.TaskMode = TaskMode.Normal;
-            task.TaskState = TaskState.Created;
-            task.Description = organization.Name;
-            task.StartTime = startTime;
-            task.EndTime = endTime;
-            task.Children ??= new List<ArtemisTask>();
-            var index = 1;
-            foreach (var childOrganization in organization.Children)
-            {
-                var childTask = BuildTaskTree(
-                    taskName, 
-                    organizationCode, 
-                    task.TaskCode, 
-                    index, 
-                    childOrganization, 
-                    task, 
-                    startTime, 
-                    endTime);
-
-                if (childTask != null)
-                {
-                    task.Children.Add(childTask);
-                }
-
-                index++;
-            }
-
-            return task;
-        }
-
-        if (taskNode != null)
-        {
-            taskNode.TaskUnits ??= new List<ArtemisTaskUnit>();
-
-            var taskUnit = Instance.CreateInstance<ArtemisTaskUnit>();
-            taskUnit.TaskId = taskNode.Id;
-            taskUnit.UnitName = taskName;
-            taskUnit.NormalizedUnitName = taskName.Normalize();
-            taskUnit.UnitCode = DesignCode.Task(organizationCode, serial, parentTaskCode);
-            taskUnit.DesignCode = organization.Code;
-            taskUnit.TaskUnitMode = TaskMode.Normal;
-            taskUnit.TaskUnitState = TaskState.Created;
-            taskUnit.Description = organization.Name;
-            taskUnit.StartTime = startTime;
-            taskUnit.EndTime = endTime;
-            taskNode.TaskUnits.Add(taskUnit);
-        }
-
-        return null;
 
     }
 

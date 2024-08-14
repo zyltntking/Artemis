@@ -51,26 +51,10 @@ service VisionScreeningCoreService{
 		};
 	}
 
-	// 生成任务
-	rpc GeneratorTask(GeneratorTaskRequest) returns (AffectedResponse){
+	// 创建任务目标和筛查记录
+	rpc AcceptTaskUnit(AcceptTaskUnitRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/GeneratorTask"
-			body: "*"
-		};
-	}
-
-	// 生成任务目标
-	rpc GenerateTaskTarget(GenerateTaskTargetRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/GenerateTaskTarget"
-			body: "*"
-		};
-	}
-
-	// 生成筛查记录
-	rpc GenerateRecord(GenerateRecordRequest) returns (AffectedResponse){
-		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/GenerateRecord"
+			post: "/api/BusinessService/VisionScreeningCore/AcceptTaskUnit"
 			body: "*"
 		};
 	}
@@ -247,73 +231,20 @@ message CreateOrAcceptTaskRequest{
 	repeated string SubFunctionalOrganizationIds = 7;
 }
 
-// 任务绑定机构树
-message TaskBindOrgnizationTreePacket{
-	// 机构标识
+// 创建任务目标和筛查记录请求
+message AcceptTaskUnitRequest{
+	// 任务单元标识
 	// @required
 	// @guid
-	string Id = 1;
-	// 上级机构标识
-	// @guid
-	google.protobuf.StringValue ParentId = 2;
-	// 机构名称
-	// @required
-	// @minLength(128)
-	string Name = 3;
-	// 机构编码
-	// @required
-	// @minLength(128)
-	string Code = 4;
-	// 机构类型
-	// @required
-	// @minLength(32)
-	string Type = 5;
-	// 机构状态
-	// @required
-	// @minLength(32)
-	string Status = 6;
-	// 机构行政区划编码
-	// @required
-	// @minLength(32)
-	string DivisionCode = 7;
-	// 下级机构
-	// @required
-	repeated TaskBindOrgnizationTreePacket Children = 8;
-}
-
-// 生成任务请求
-message GeneratorTaskRequest{
-	// 任务名称
-	// @required
-	// @minLength(128)
-	string TaskName = 1;
-	// 本次任务相关的机构信息
-	// @required
-	TaskBindOrgnizationTreePacket OrgnizationTree = 2;
-	// 任务开始时间
-	// @required
-	// @datetime
-	string StartTime = 3;
-	// 任务结束时间
-	// @required
-	// @datetime
-	string EndTime = 4;
-}
-
-// 生成任务目标请求
-message GenerateTaskTargetRequest{
-	// 任务标识
+	string TaskUnitId = 1;
+	// 学校标识
 	// @required
 	// @guid
-	string TaskId = 1;
-}
-
-// 生成筛查记录请求
-message GenerateRecordRequest{
-	// 任务标识
+	string SchoolId = 2;
+	// 班级标识
 	// @required
 	// @guid
-	string TaskId = 1;
+	repeated string ClassIds = 3;
 }
 
 // 查询根任务请求
