@@ -55,16 +55,6 @@
             教师绑定用户请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserIdFieldNumber">
-            <summary>Field number for the "UserId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserId">
-            <summary>
-            用户标识
-            @required
-            @guid
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.TeacherIdFieldNumber">
             <summary>Field number for the "TeacherId" field.</summary>
         </member>
@@ -75,17 +65,151 @@
             @guid
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserIdFieldNumber">
+            <summary>Field number for the "UserId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindTeacherUserRequest.UserId">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest">
             <summary>
             教师用户解绑请求
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.UserIdFieldNumber">
-            <summary>Field number for the "UserId" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.TeacherIdFieldNumber">
+            <summary>Field number for the "TeacherId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.UserId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest.TeacherId">
+            <summary>
+            教师标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest">
+            <summary>
+            机构添加用户请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest.OrganizationIdFieldNumber">
+            <summary>Field number for the "OrganizationId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest.OrganizationId">
+            <summary>
+            机构标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest.UserIdsFieldNumber">
+            <summary>Field number for the "UserIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest.UserIds">
             <summary>
             用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest">
+            <summary>
+            机构移除用户请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest.OrganizationIdFieldNumber">
+            <summary>Field number for the "OrganizationId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest.OrganizationId">
+            <summary>
+            机构标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest.UserIdsFieldNumber">
+            <summary>Field number for the "UserIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest.UserIds">
+            <summary>
+            用户标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest">
+            <summary>
+            创建(子)任务请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.TaskId">
+            <summary>
+            上级任务标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.TaskName">
+            <summary>
+            任务名称
+            @required
+            @minLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.OrganizationIdFieldNumber">
+            <summary>Field number for the "OrganizationId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.OrganizationId">
+            <summary>
+            本次任务(接收)创建的组织机构标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.StartTimeFieldNumber">
+            <summary>Field number for the "StartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.StartTime">
+            <summary>
+            任务开始时间
+            @required
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.EndTimeFieldNumber">
+            <summary>Field number for the "EndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.EndTime">
+            <summary>
+            任务结束时间
+            @required
+            @DateTime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.SubManagementOrganizationIdsFieldNumber">
+            <summary>Field number for the "SubManagementOrganizationIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.SubManagementOrganizationIds">
+            <summary>
+            下级管理机构的组织机构标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.SubFunctionalOrganizationIdsFieldNumber">
+            <summary>Field number for the "SubFunctionalOrganizationIds" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest.SubFunctionalOrganizationIds">
+            <summary>
+            下级职能机构的组织机构标识
             @required
             @guid
             </summary>
@@ -2188,6 +2312,30 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.BindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            机构添加用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.UnBindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            机构移除用户
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.CreateOrAcceptTask(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            创建(子)任务
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.ServerCallContext)">
             <summary>
             生成任务
@@ -2394,6 +2542,114 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindTeacherUserAsync(Artemis.Service.Protos.Business.VisionScreen.UnBindTeacherUserRequest,Grpc.Core.CallOptions)">
             <summary>
             解绑教师用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            机构添加用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest,Grpc.Core.CallOptions)">
+            <summary>
+            机构添加用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindOrganizationUsersAsync(Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            机构添加用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.BindOrganizationUsersAsync(Artemis.Service.Protos.Business.VisionScreen.BindOrganizationUsersRequest,Grpc.Core.CallOptions)">
+            <summary>
+            机构添加用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            机构移除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindOrganizationUsers(Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest,Grpc.Core.CallOptions)">
+            <summary>
+            机构移除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindOrganizationUsersAsync(Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            机构移除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.UnBindOrganizationUsersAsync(Artemis.Service.Protos.Business.VisionScreen.UnBindOrganizationUsersRequest,Grpc.Core.CallOptions)">
+            <summary>
+            机构移除用户
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.CreateOrAcceptTask(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建(子)任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.CreateOrAcceptTask(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建(子)任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.CreateOrAcceptTaskAsync(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            创建(子)任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.CreateOrAcceptTaskAsync(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.CallOptions)">
+            <summary>
+            创建(子)任务
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

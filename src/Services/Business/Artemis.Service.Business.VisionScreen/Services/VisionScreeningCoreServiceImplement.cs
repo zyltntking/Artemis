@@ -18,7 +18,6 @@ using Artemis.Service.Shared.Resource.Transfer;
 using Artemis.Service.Shared.School.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
 using Artemis.Service.Task.Context;
-using Artemis.Service.Task.Managers;
 using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
@@ -52,6 +51,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="visualChartStore"></param>
     /// <param name="studentRelationBindingStore"></param>
     /// <param name="teacherUserBindingStore"></param>
+    /// <param name="organizationUsersBindingStore"></param>
     /// <param name="notificationMessageStore"></param>
     /// <param name="systemModuleStore"></param>
     public VisionScreeningCoreServiceImplement(
@@ -72,6 +72,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         IArtemisVisualChartStore visualChartStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
         IArtemisTeacherUserBindingStore teacherUserBindingStore,
+        IArtemisOrganizationUsersBindingStore organizationUsersBindingStore,
         IArtemisNotificationMessageStore notificationMessageStore,
         IArtemisSystemModuleStore systemModuleStore)
     {
@@ -92,6 +93,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         VisualChartStore = visualChartStore;
         StudentRelationBindingStore = studentRelationBindingStore;
         TeacherUserBindingStore = teacherUserBindingStore;
+        OrganizationUsersBindingStore = organizationUsersBindingStore;
         NotificationMessageStore = notificationMessageStore;
         SystemModuleStore = systemModuleStore;
     }
@@ -130,6 +132,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
     private IArtemisTeacherUserBindingStore TeacherUserBindingStore { get; }
 
+    private IArtemisOrganizationUsersBindingStore OrganizationUsersBindingStore { get; }
+
     private IArtemisNotificationMessageStore NotificationMessageStore { get; }
 
     private IArtemisSystemModuleStore SystemModuleStore { get; }
@@ -165,13 +169,22 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         var binding = await TeacherUserBindingStore.EntityQuery
-            .Where(bind => bind.UserId == userId)
+            .Where(bind => bind.TeacherId == teacherId)
             .FirstOrDefaultAsync(context.CancellationToken);
+
+        var userBindExists = await TeacherUserBindingStore.EntityQuery
+            .Where(bind => bind.UserId == userId)
+            .AnyAsync(context.CancellationToken);
 
         StoreResult result;
 
         if (binding == null)
         {
+            if (userBindExists)
+            {
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户已经绑定了其他教师");
+            }
+
             binding = Instance.CreateInstance<ArtemisTeacherUserBinding>();
             binding.TeacherId = teacherId;
             binding.UserId = userId;
@@ -179,6 +192,16 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
         else
         {
+            if (binding.UserId == userId)
+            {
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("教师已经绑定了该用户");
+            }
+
+            if (userBindExists)
+            {
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户已经绑定了其他教师");
+            }
+
             binding.UserId = userId;
             binding.TeacherId = teacherId;
             result = await TeacherUserBindingStore.UpdateAsync(binding, context.CancellationToken);
@@ -197,20 +220,281 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> UnBindTeacherUser(UnBindTeacherUserRequest request, ServerCallContext context)
     {
-        var userId = Guid.Parse(request.UserId);
+        var teacherId = Guid.Parse(request.TeacherId);
 
-        var userExists = await UserStore.ExistsAsync(userId, context.CancellationToken);
+        var teacherExists = await TeacherStore.ExistsAsync(teacherId, context.CancellationToken);
 
-        if (!userExists)
+        if (!teacherExists)
         {
-            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("教师不存在");
         }
 
         var bindings = await TeacherUserBindingStore.EntityQuery
-            .Where(bind => bind.UserId == userId)
+            .Where(bind => bind.TeacherId == teacherId)
             .ToListAsync(context.CancellationToken);
 
         var result = await TeacherUserBindingStore.DeleteAsync(bindings, context.CancellationToken);
+
+        return result.AffectedResponse();
+    }
+
+    /// <summary>
+    /// 机构添加用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("机构添加用户")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> BindOrganizationUsers(BindOrganizationUsersRequest request, ServerCallContext context)
+    {
+        var organizationId = Guid.Parse(request.OrganizationId);
+        var userIds = request.UserIds.Select(Guid.Parse);
+
+        var organizationExists = await OrganizationStore.ExistsAsync(organizationId, context.CancellationToken);
+
+        if (!organizationExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("机构不存在");
+        }
+
+        var storedUserIds = await UserStore.EntityQuery
+            .Where(item => userIds.Contains(item.Id))
+            .Select(item => item.Id)
+            .ToListAsync(context.CancellationToken);
+
+        if (storedUserIds.Any())
+        {
+            var beenBindUserIds = await OrganizationUsersBindingStore.EntityQuery
+                .Where(item => item.OrganizationId == organizationId)
+                .Select(item => item.UserId)
+                .ToListAsync(context.CancellationToken);
+
+            var notBindUserIds = storedUserIds.Except(beenBindUserIds).ToList();
+
+            if (notBindUserIds.Any())
+            {
+                var binds = notBindUserIds.Select(item =>
+                {
+                    var bind = Instance.CreateInstance<ArtemisOrganizationUsersBinding>();
+                    bind.OrganizationId = organizationId;
+                    bind.UserId = item;
+
+                    return bind;
+                });
+
+                var result = await OrganizationUsersBindingStore.CreateAsync(binds);
+
+                return result.AffectedResponse();
+            }
+
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户均已是该机构所属");
+
+        }
+
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("用户不存在");
+    }
+
+    /// <summary>
+    /// 机构移除用户
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("机构移除用户")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> UnBindOrganizationUsers(UnBindOrganizationUsersRequest request, ServerCallContext context)
+    {
+        var organizationId = Guid.Parse(request.OrganizationId);
+        var userIds = request.UserIds.Select(Guid.Parse);
+
+        var organizationExists = await OrganizationStore.ExistsAsync(organizationId, context.CancellationToken);
+
+        if (!organizationExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("机构不存在");
+        }
+
+        var binds = await OrganizationUsersBindingStore.EntityQuery
+            .Where(item => item.OrganizationId == organizationId)
+            .Where(item => userIds.Contains(item.UserId))
+            .ToListAsync(context.CancellationToken);
+
+        if (binds.Any())
+        {
+            var result = await OrganizationUsersBindingStore.DeleteAsync(binds, context.CancellationToken);
+
+            return result.AffectedResponse();
+        }
+
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("没有找到这些用户与该机构的关联信息");
+    }
+
+    /// <summary>
+    /// 创建(子)任务
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("创建(子)任务")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<AffectedResponse> CreateOrAcceptTask(CreateOrAcceptTaskRequest request, ServerCallContext context)
+    {
+        var organizationId = Guid.Parse(request.OrganizationId);
+
+        var organization = await OrganizationStore.FindMapEntityAsync<OrganizationInfo>(organizationId, context.CancellationToken);
+
+        if (organization == null)
+        {
+            return ResultAdapter.AdaptEmptyFail<AffectedResponse>("本次任务关联的组织机构不存在");
+        }
+
+        Guid? taskId;
+
+        string? taskCode;
+
+        var startTime = DateTime.Parse(request.StartTime);
+
+        var endTime = DateTime.Parse(request.EndTime);
+
+        StoreResult taskResult;
+
+        if (request.TaskId != null)
+        {
+            taskId = Guid.Parse(request.TaskId);
+
+            var task = await TaskStore.FindEntityAsync(taskId.Value, context.CancellationToken);
+
+            if (task == null)
+            {
+                return ResultAdapter.AdaptEmptyFail<AffectedResponse>("本次任务关联的上级任务不存在");
+            }
+
+            task.TaskState = TaskState.Waiting;
+            task.TaskName = request.TaskName;
+            task.TaskShip = TaskShip.Child;
+            task.StartTime = startTime;
+            task.EndTime = endTime;
+            task.Description = organization.Name;
+
+            taskResult = await TaskStore.UpdateAsync(task, context.CancellationToken);
+
+            taskCode = task.TaskCode;
+        }
+        else
+        {
+            var task = Instance.CreateInstance<ArtemisTask>();
+            task.TaskName = request.TaskName;
+            task.ParentId = null;
+            task.NormalizedTaskName = request.TaskName.Normalize();
+            task.TaskCode = DesignCode.Task(organization.Code!, 1);
+            task.DesignCode = organization.Code;
+            task.TaskShip = TaskShip.Root;
+            task.TaskMode = TaskMode.Normal;
+            task.TaskState = TaskState.Waiting;
+            task.StartTime = startTime;
+            task.EndTime = endTime;
+            task.Description = organization.Name;
+
+            taskResult = await TaskStore.CreateAsync(task, context.CancellationToken);
+
+            taskId = task.Id;
+            taskCode = task.TaskCode;
+        }
+
+        var managementOrganizationIds = request.SubManagementOrganizationIds.Select(Guid.Parse).ToList();
+
+        var functionalOrganizationIds = request.SubFunctionalOrganizationIds.Select(Guid.Parse).ToList();
+
+        var organizationIds = managementOrganizationIds.Concat(functionalOrganizationIds);
+
+        var organizations = await OrganizationStore.FindMapEntitiesAsync<OrganizationInfo>(organizationIds);
+
+        var organizationList = organizations.ToList();
+
+        var subTaskResult = StoreResult.Failed();
+
+        var index = 1;
+
+        if (managementOrganizationIds.Any())
+        {
+            var subTasks = new List<ArtemisTask>();
+
+            foreach (var managementOrganizationId in managementOrganizationIds)
+            {
+                var managementOrganization = organizationList.FirstOrDefault(item => item.Id == managementOrganizationId);
+
+                if (managementOrganization != null)
+                {
+                    var subTask = Instance.CreateInstance<ArtemisTask>();
+
+                    subTask.TaskName = request.TaskName;
+                    subTask.ParentId = taskId.Value;
+                    subTask.NormalizedTaskName = subTask.TaskName.Normalize();
+                    subTask.TaskCode = DesignCode.Task(organization.Code!, index, taskCode);
+                    subTask.DesignCode = managementOrganization.Code;
+                    subTask.TaskShip = TaskShip.Child;
+                    subTask.TaskMode = TaskMode.Normal;
+                    subTask.TaskState = TaskState.Created;
+                    subTask.Description = managementOrganization.Name;
+                    subTask.StartTime = startTime;
+                    subTask.EndTime = endTime;
+
+                    subTasks.Add(subTask);
+                    index++;
+                }
+            }
+
+            if (subTasks.Any())
+            {
+                subTaskResult = await TaskStore.CreateAsync(subTasks, context.CancellationToken);
+            }
+        }
+
+        var taskUnitsResult = StoreResult.Failed();
+
+        if (functionalOrganizationIds.Any())
+        {
+            var taskUnits = new List<ArtemisTaskUnit>();
+
+            foreach (var functionalOrganizationId in functionalOrganizationIds)
+            {
+                var functionalOrganization = organizationList.FirstOrDefault(item => item.Id == functionalOrganizationId);
+
+                if (functionalOrganization != null)
+                {
+                    var taskUnit = Instance.CreateInstance<ArtemisTaskUnit>();
+
+                    taskUnit.TaskId = taskId.Value;
+                    taskUnit.UnitName = request.TaskName;
+                    taskUnit.NormalizedUnitName = taskUnit.UnitName.Normalize();
+                    taskUnit.UnitCode = DesignCode.Task(organization.Code!, index, taskCode);
+                    taskUnit.DesignCode = functionalOrganization.Code;
+                    taskUnit.TaskUnitMode = TaskMode.Normal;
+                    taskUnit.TaskUnitState = TaskState.Created;
+                    taskUnit.Description = organization.Name;
+                    taskUnit.StartTime = startTime;
+                    taskUnit.EndTime = endTime;
+
+                    taskUnits.Add(taskUnit);
+                    index++;
+                }
+            }
+
+            if (taskUnits.Any())
+            {
+                taskUnitsResult = await TaskUnitStore.CreateAsync(taskUnits, context.CancellationToken);
+            }
+        }
+
+        var affectRows = taskResult.AffectRows + subTaskResult.AffectRows + taskUnitsResult.AffectRows;
+
+        var result = StoreResult.Failed();
+
+        if (affectRows > 0)
+        {
+            result = StoreResult.Success(affectRows);
+        }
 
         return result.AffectedResponse();
     }
@@ -223,6 +507,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成任务")]
     [Authorize(AuthorizePolicy.Token)]
+    [Obsolete]
     public override async Task<AffectedResponse> GeneratorTask(GeneratorTaskRequest request, ServerCallContext context)
     {
         var organization = request.OrgnizationTree;
@@ -258,6 +543,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成任务目标")]
     [Authorize(AuthorizePolicy.Token)]
+    [Obsolete]
     public override async Task<AffectedResponse> GenerateTaskTarget(GenerateTaskTargetRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);
@@ -351,6 +637,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("生成筛查记录")]
     [Authorize(AuthorizePolicy.Token)]
+    [Obsolete]
     public override async Task<AffectedResponse> GenerateRecord(GenerateRecordRequest request, ServerCallContext context)
     {
         var taskId = Guid.Parse(request.TaskId);

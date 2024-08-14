@@ -4922,6 +4922,11 @@
                 职能机构
             </summary>
         </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.OrganizationType.ManagementAndFunctional">
+            <summary>
+            管理和职能机构
+            </summary>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Types.OrganizationType.#ctor(System.Int32,System.String)">
             <summary>
                 构造函数

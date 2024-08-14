@@ -27,6 +27,30 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 机构添加用户
+	rpc BindOrganizationUsers(BindOrganizationUsersRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/BindOrganizationUsers"
+			body: "*"
+		};
+	}
+
+	// 机构移除用户
+	rpc UnBindOrganizationUsers(UnBindOrganizationUsersRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/UnBindOrganizationUsers"
+			body: "*"
+		};
+	}
+
+	// 创建(子)任务
+	rpc CreateOrAcceptTask(CreateOrAcceptTaskRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/CreateOrAcceptTask"
+			body: "*"
+		};
+	}
+
 	// 生成任务
 	rpc GeneratorTask(GeneratorTaskRequest) returns (AffectedResponse){
 		option (google.api.http) = {
@@ -150,22 +174,77 @@ service VisionScreeningCoreService{
 
 // 教师绑定用户请求
 message BindTeacherUserRequest{
-	// 用户标识
-	// @required
-	// @guid
-	string UserId = 1;
 	// 教师标识
 	// @required
 	// @guid
-	string TeacherId = 2;
+	string TeacherId = 1;
+	// 用户标识
+	// @required
+	// @guid
+	string UserId = 2;
 }
 
 // 教师用户解绑请求
 message UnBindTeacherUserRequest{
+	// 教师标识
+	// @required
+	// @guid
+	string TeacherId = 1;
+}
+
+// 机构添加用户请求
+message BindOrganizationUsersRequest{
+	// 机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
 	// 用户标识
 	// @required
 	// @guid
-	string UserId = 1;
+	repeated string UserIds = 2;
+}
+
+// 机构移除用户请求
+message UnBindOrganizationUsersRequest{
+	// 机构标识
+	// @required
+	// @guid
+	string OrganizationId = 1;
+	// 用户标识
+	// @required
+	// @guid
+	repeated string UserIds = 2;
+}
+
+// 创建(子)任务请求
+message CreateOrAcceptTaskRequest{
+	// 上级任务标识
+	// @guid
+	google.protobuf.StringValue TaskId = 1;
+	// 任务名称
+	// @required
+	// @minLength(128)
+	string TaskName = 2;
+	// 本次任务(接收)创建的组织机构标识
+	// @required
+	// @guid
+	string OrganizationId = 3;
+	// 任务开始时间
+	// @required
+	// @datetime
+	string StartTime = 4;
+	// 任务结束时间
+	// @required
+	// @DateTime
+	string EndTime = 5;
+	// 下级管理机构的组织机构标识
+	// @required
+	// @guid
+	repeated string SubManagementOrganizationIds = 6;
+	// 下级职能机构的组织机构标识
+	// @required
+	// @guid
+	repeated string SubFunctionalOrganizationIds = 7;
 }
 
 // 任务绑定机构树

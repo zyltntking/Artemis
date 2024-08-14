@@ -19,6 +19,11 @@ public sealed class OrganizationType : Enumeration
     [Description("职能机构")] public static OrganizationType Functional = new(2, nameof(Functional));
 
     /// <summary>
+    /// 管理和职能机构
+    /// </summary>
+    [Description("管理和职能机构")] public static OrganizationType ManagementAndFunctional = new (3, nameof(ManagementAndFunctional));
+
+    /// <summary>
     ///     构造函数
     /// </summary>
     /// <param name="id">枚举Id</param>

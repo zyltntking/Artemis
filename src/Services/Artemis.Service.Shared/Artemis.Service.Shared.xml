@@ -274,6 +274,31 @@
                 操作时间
             </summary>
         </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOrganizationUsersBinding">
+            <summary>
+            机构用户绑定接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOrganizationUsersBindingInfo">
+            <summary>
+            机构用户绑定信息接口
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Shared.Business.VisionScreen.IOrganizationUsersBindingPackage">
+            <summary>
+            机构用户绑定数据包接口
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOrganizationUsersBindingPackage.OrganizationId">
+            <summary>
+            机构标识
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IOrganizationUsersBindingPackage.UserId">
+            <summary>
+            用户标识
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Shared.Business.VisionScreen.IRecordFeedback">
             <summary>
             记录反馈接口
