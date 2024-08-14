@@ -51,6 +51,14 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 获取当前未毕业班级的列表
+	rpc FetchSchoolNotGraduatedClass(FetchSchoolNotGraduatedClassRequest) returns (FetchSchoolNotGraduatedClassResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/FetchSchoolNotGraduatedClass"
+			body: "*"
+		};
+	}
+
 	// 创建任务目标和筛查记录
 	rpc AcceptTaskUnit(AcceptTaskUnitRequest) returns (AffectedResponse){
 		option (google.api.http) = {
@@ -229,6 +237,52 @@ message CreateOrAcceptTaskRequest{
 	// @required
 	// @guid
 	repeated string SubFunctionalOrganizationIds = 7;
+}
+
+// 获取当前未毕业班级的列表请求
+message FetchSchoolNotGraduatedClassRequest{
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 1;
+}
+
+// 当前未毕业班级数据包
+message SchoolNotGraduatedClassPacket{
+	// 学校标识
+	// @required
+	// @guid
+	string SchoolId = 1;
+	// 班级标识
+	// @required
+	// @guid
+	string ClassId = 2;
+	// 班级名称
+	google.protobuf.StringValue ClassName = 3;
+	// 班级人数
+	int32 Count = 4;
+}
+
+// 获取当前未毕业班级的列表响应
+message FetchSchoolNotGraduatedClassResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 当前未毕业班级信息
+	// @required
+	repeated SchoolNotGraduatedClassPacket Data = 7;
 }
 
 // 创建任务目标和筛查记录请求

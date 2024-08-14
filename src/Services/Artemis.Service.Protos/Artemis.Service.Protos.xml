@@ -214,6 +214,127 @@
             @guid
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest">
+            <summary>
+            获取当前未毕业班级的列表请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket">
+            <summary>
+            当前未毕业班级数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.ClassId">
+            <summary>
+            班级标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SchoolNotGraduatedClassPacket.Count">
+            <summary>
+            班级人数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse">
+            <summary>
+            获取当前未毕业班级的列表响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassResponse.Data">
+            <summary>
+            当前未毕业班级信息
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest">
             <summary>
             创建任务目标和筛查记录请求
@@ -2214,6 +2335,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchSchoolNotGraduatedClass(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建任务目标和筛查记录
@@ -2512,6 +2641,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.CreateOrAcceptTaskAsync(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.CallOptions)">
             <summary>
             创建(子)任务
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClass(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClass(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前未毕业班级的列表
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

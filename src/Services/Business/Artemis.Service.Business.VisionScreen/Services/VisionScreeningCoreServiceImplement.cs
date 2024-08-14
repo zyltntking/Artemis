@@ -500,11 +500,77 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     }
 
     /// <summary>
+    /// 获取当前未毕业班级的列表
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取当前未毕业班级的列表")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchSchoolNotGraduatedClassResponse> FetchSchoolNotGraduatedClass(FetchSchoolNotGraduatedClassRequest request, ServerCallContext context)
+    {
+        var schoolId = Guid.Parse(request.SchoolId);
+
+        var schoolExists = await SchoolStore.ExistsAsync(schoolId, context.CancellationToken);
+
+        if (!schoolExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchSchoolNotGraduatedClassResponse>("学校不存在");
+        }
+
+        var classInfos = await ClassStore.EntityQuery
+            .Where(item => item.SchoolId == schoolId)
+            .Where(item => item.GradeName != GradeName.FinishSchool)
+            .ProjectToType<ClassInfo>()
+            .ToListAsync(context.CancellationToken);
+
+        if (!classInfos.Any())
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchSchoolNotGraduatedClassResponse>("当前学校没有可用的未毕业班级");
+        }
+
+        var classIds = classInfos.Select(item => item.Id).ToList();
+
+        var classCountGroup = await StudentStore.EntityQuery
+            .Where(item => item.SchoolId == schoolId)
+            .Where(item => item.ClassId != null)
+            .Where(item => classIds.Contains(item.ClassId!.Value))
+            .GroupBy(item => item.ClassId)
+            .Select(group => new
+            {
+                ClassId = group.Key,
+                Count = group.Count()
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var packets = new List<SchoolNotGraduatedClassPacket>();
+
+        foreach (var classInfo in classInfos)
+        {
+            var packet = Instance.CreateInstance<SchoolNotGraduatedClassPacket>();
+
+            var classCount = classCountGroup
+                .FirstOrDefault(item => item.ClassId == classInfo.Id);
+
+            packet.SchoolId = classInfo.SchoolId.GuidToString();
+            packet.ClassId = classInfo.Id.GuidToString();
+            packet.ClassName = classInfo.Name;
+            packet.Count = classCount?.Count ?? 0;
+
+            packets.Add(packet);
+        }
+
+        return packets.ReadInfoResponse<FetchSchoolNotGraduatedClassResponse, List<SchoolNotGraduatedClassPacket>>();
+    }
+
+    /// <summary>
     /// 创建任务目标和筛查记录
     /// </summary>
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("创建任务目标和筛查记录")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AcceptTaskUnit(AcceptTaskUnitRequest request, ServerCallContext context)
     {
         var taskUnitId = Guid.Parse(request.TaskUnitId);
