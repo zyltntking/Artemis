@@ -249,163 +249,6 @@
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket">
-            <summary>
-            任务绑定机构树
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.IdFieldNumber">
-            <summary>Field number for the "Id" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Id">
-            <summary>
-            机构标识
-            @required
-            @guid
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.ParentIdFieldNumber">
-            <summary>Field number for the "ParentId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.ParentId">
-            <summary>
-            上级机构标识
-            @guid
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.NameFieldNumber">
-            <summary>Field number for the "Name" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Name">
-            <summary>
-            机构名称
-            @required
-            @minLength(128)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.CodeFieldNumber">
-            <summary>Field number for the "Code" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Code">
-            <summary>
-            机构编码
-            @required
-            @minLength(128)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.TypeFieldNumber">
-            <summary>Field number for the "Type" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Type">
-            <summary>
-            机构类型
-            @required
-            @minLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.StatusFieldNumber">
-            <summary>Field number for the "Status" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Status">
-            <summary>
-            机构状态
-            @required
-            @minLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.DivisionCodeFieldNumber">
-            <summary>Field number for the "DivisionCode" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.DivisionCode">
-            <summary>
-            机构行政区划编码
-            @required
-            @minLength(32)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.ChildrenFieldNumber">
-            <summary>Field number for the "Children" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket.Children">
-            <summary>
-            下级机构
-            @required
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest">
-            <summary>
-            生成任务请求
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.TaskNameFieldNumber">
-            <summary>Field number for the "TaskName" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.TaskName">
-            <summary>
-            任务名称
-            @required
-            @minLength(128)
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.OrgnizationTreeFieldNumber">
-            <summary>Field number for the "OrgnizationTree" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.OrgnizationTree">
-            <summary>
-            本次任务相关的机构信息
-            @required
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.StartTimeFieldNumber">
-            <summary>Field number for the "StartTime" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.StartTime">
-            <summary>
-            任务开始时间
-            @required
-            @datetime
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.EndTimeFieldNumber">
-            <summary>Field number for the "EndTime" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest.EndTime">
-            <summary>
-            任务结束时间
-            @required
-            @datetime
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest">
-            <summary>
-            生成任务目标请求
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest.TaskIdFieldNumber">
-            <summary>Field number for the "TaskId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest.TaskId">
-            <summary>
-            任务标识
-            @required
-            @guid
-            </summary>
-        </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest">
-            <summary>
-            生成筛查记录请求
-            </summary>
-        </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest.TaskIdFieldNumber">
-            <summary>Field number for the "TaskId" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest.TaskId">
-            <summary>
-            任务标识
-            @required
-            @guid
-            </summary>
-        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchRootTaskRequest">
             <summary>
             查询根任务请求
@@ -2373,31 +2216,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            创建(子)任务
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            生成任务
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            生成筛查记录
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -2700,7 +2519,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            创建(子)任务
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2710,7 +2529,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.CallOptions)">
             <summary>
-            创建(子)任务
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -2718,7 +2537,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AcceptTaskUnitAsync(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
-            创建(子)任务
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2728,115 +2547,7 @@
         </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.AcceptTaskUnitAsync(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.CallOptions)">
             <summary>
-            创建(子)任务
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成任务
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成任务
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTaskAsync(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成任务
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GeneratorTaskAsync(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成任务
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTargetAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateTaskTargetAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成筛查记录
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成筛查记录
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="options">The options for the call.</param>
-            <returns>The response received from the server.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
-            <summary>
-            生成筛查记录
-            </summary>
-            <param name="request">The request to send to the server.</param>
-            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-            <param name="cancellationToken">An optional token for canceling the call.</param>
-            <returns>The call object.</returns>
-        </member>
-        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.GenerateRecordAsync(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.CallOptions)">
-            <summary>
-            生成筛查记录
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
@@ -28799,7 +28510,6 @@
         <member name="P:Artemis.Service.Protos.School.StudentChangeClassRequest.ClassId">
             <summary>
             班级标识
-            @required
             @guid
             </summary>
         </member>

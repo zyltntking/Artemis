@@ -313,9 +313,8 @@ message StudentChangeClassRequest{
 	// @guid
 	string StudentId = 1;
 	// 班级标识
-	// @required
 	// @guid
-	string ClassId = 2;
+	google.protobuf.StringValue ClassId = 2;
 	// 变更原因
 	// @maxLength(128)
 	google.protobuf.StringValue Reason = 3;

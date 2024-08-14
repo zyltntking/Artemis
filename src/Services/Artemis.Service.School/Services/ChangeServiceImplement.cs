@@ -168,7 +168,7 @@ public class ChangeServiceImplement : ChangeService.ChangeServiceBase
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("学生变更班级")]
-    //[Authorize(AuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> StudentChangeClass(StudentChangeClassRequest request, ServerCallContext context)
     {
         var studentId = Guid.Parse(request.StudentId);

@@ -1414,25 +1414,17 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.GeneratorTask(Artemis.Service.Protos.Business.VisionScreen.GeneratorTaskRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.CreateOrAcceptTask(Artemis.Service.Protos.Business.VisionScreen.CreateOrAcceptTaskRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            生成任务
+            创建(子)任务
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.GenerateTaskTarget(Artemis.Service.Protos.Business.VisionScreen.GenerateTaskTargetRequest,Grpc.Core.ServerCallContext)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.ServerCallContext)">
             <summary>
-            生成任务目标
-            </summary>
-            <param name="request">The request received from the client.</param>
-            <param name="context">The context of the server-side call handler being invoked.</param>
-            <returns>The response to send back to the client (wrapped by a task).</returns>
-        </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.GenerateRecord(Artemis.Service.Protos.Business.VisionScreen.GenerateRecordRequest,Grpc.Core.ServerCallContext)">
-            <summary>
-            生成筛查记录
+            创建任务目标和筛查记录
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -1526,20 +1518,6 @@
             <param name="responseStream">Used for sending responses back to the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>A task indicating completion of the handler.</returns>
-        </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.BuildTaskTree(System.String,System.String,System.String,System.Int32,Artemis.Service.Protos.Business.VisionScreen.TaskBindOrgnizationTreePacket,Artemis.Service.Task.Context.ArtemisTask,System.DateTime,System.DateTime)">
-            <summary>
-            构建任务树
-            </summary>
-            <param name="taskName"></param>
-            <param name="organizationCode"></param>
-            <param name="parentTaskCode"></param>
-            <param name="serial"></param>
-            <param name="organization"></param>
-            <param name="taskNode"></param>
-            <param name="startTime"></param>
-            <param name="endTime"></param>
-            <returns></returns>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.GenerateTree(System.String,System.Collections.Generic.List{Artemis.Service.Protos.Business.VisionScreen.SystemModuleTreePacket})">
             <summary>

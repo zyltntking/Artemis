@@ -4540,6 +4540,68 @@
             <param name="id">枚举Id</param>
             <param name="name">枚举名称</param>
         </member>
+        <member name="T:Artemis.Data.Core.Fundamental.Types.GradeName">
+            <summary>
+            年级名
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.FinishSchool">
+            <summary>
+            已毕业
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.FirstGrade">
+            <summary>
+            一年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.SecondGrade">
+            <summary>
+            二年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.ThirdGrade">
+            <summary>
+            三年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.ForthGrade">
+            <summary>
+            四年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.FifthGrade">
+            <summary>
+            五年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.SixthGrade">
+            <summary>
+            六年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.SeventhGrade">
+            <summary>
+            七年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.EighthGrade">
+            <summary>
+            八年级
+            </summary>
+        </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Types.GradeName.NinthGrade">
+            <summary>
+            九年级
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Types.GradeName.#ctor(System.Int32,System.String)">
+            <summary>
+                构造函数
+            </summary>
+            <param name="id">枚举Id</param>
+            <param name="name">枚举名称</param>
+        </member>
         <member name="T:Artemis.Data.Core.Fundamental.Types.HashType">
             <summary>
                 Hash类型

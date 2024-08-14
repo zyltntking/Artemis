@@ -88,7 +88,7 @@ public interface IChangeManager : IManager
     /// <param name="reason"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<StoreResult> StudentChangeClassAsync(Guid studentId, Guid classId, string? reason, CancellationToken cancellationToken = default);
+    Task<StoreResult> StudentChangeClassAsync(Guid studentId, Guid? classId, string? reason, CancellationToken cancellationToken = default);
 
 }
 
@@ -505,15 +505,49 @@ public class ChangeManager : Manager, IChangeManager
     /// <param name="reason"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<StoreResult> StudentChangeClassAsync(Guid studentId, Guid classId, string? reason, CancellationToken cancellationToken = default)
+    public async Task<StoreResult> StudentChangeClassAsync(Guid studentId, Guid? classId, string? reason, CancellationToken cancellationToken = default)
     {
         OnAsyncActionExecuting(cancellationToken);
 
         var student = await StudentStore.FindEntityAsync(studentId, cancellationToken);
 
-        if (student is not null)
+        if (student == null)
         {
-            var moveInClass = await ClassStore.FindEntityAsync(classId, cancellationToken);
+            return StoreResult.Failed(new StoreError
+            {
+                Description = "学生不存在，无法转出"
+            });
+        }
+
+        var school = await SchoolStore.FindEntityAsync(student.SchoolId!.Value, cancellationToken);
+
+        if (school == null)
+        {
+            return StoreResult.Failed(new StoreError
+            {
+                Description = "学生所属的学校不存在，无法转入"
+            });
+        }
+
+        var moveOutResult = StoreResult.Failed();
+
+        if (student.ClassId != null)
+        {
+            var moveOutClass = await ClassStore.FindEntityAsync(student.ClassId.Value, cancellationToken);
+
+            if (moveOutClass is not null)
+            {
+                var moveOutChangeLog = InitialStudentChangeLog(student, school, moveOutClass, ChangeType.MoveOutClass, reason);
+
+                moveOutResult = await StudentChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
+            }
+        }
+
+        var moveInResult = StoreResult.Failed();
+
+        if (classId != null)
+        {
+            var moveInClass = await ClassStore.FindEntityAsync(classId.Value, cancellationToken);
 
             if (moveInClass is not null)
             {
@@ -533,53 +567,26 @@ public class ChangeManager : Manager, IChangeManager
                     });
                 }
 
-                var school = await SchoolStore.FindEntityAsync(moveInClass.SchoolId, cancellationToken);
-
-                if (school == null)
-                {
-                    return StoreResult.Failed(new StoreError
-                    {
-                        Description = "要转入的班级所属的学校不存在，无法转入"
-                    });
-                }
-
-                var moveOutResult = StoreResult.Failed();
-
-                if (student.ClassId != null)
-                {
-                    var moveOutClass = await ClassStore.FindEntityAsync(student.ClassId.Value, cancellationToken);
-
-                    if (moveOutClass is not null)
-                    {
-                        var moveOutChangeLog = InitialStudentChangeLog(student, school, moveOutClass, ChangeType.MoveOutClass, reason);
-
-                        moveOutResult = await StudentChangeLogStore.CreateAsync(moveOutChangeLog, cancellationToken);
-                    }
-                }
-
                 var moveInChangeLog = InitialStudentChangeLog(student, school, moveInClass, ChangeType.MoveInClass, reason);
 
-                var moveInResult = await StudentChangeLogStore.CreateAsync(moveInChangeLog, cancellationToken);
-
-                student.SchoolId = school.Id;
-                student.ClassId = moveInClass.Id;
-
-                var studentResult = await StudentStore.UpdateAsync(student, cancellationToken);
-
-                return StoreResult.Success(moveOutResult.AffectRows + moveInResult.AffectRows + studentResult.AffectRows);
+                moveInResult = await StudentChangeLogStore.CreateAsync(moveInChangeLog, cancellationToken);
 
             }
-
-            return StoreResult.Failed(new StoreError
+            else
             {
-                Description = "要变更的班级不存在，无法变更"
-            });
+                return StoreResult.Failed(new StoreError
+                {
+                    Description = "要变更的班级不存在，无法变更"
+                });
+            }
         }
 
-        return StoreResult.Failed(new StoreError
-        {
-            Description = "学生不存在，无法转出"
-        });
+        student.SchoolId = school.Id;
+        student.ClassId = classId;
+
+        var studentResult = await StudentStore.UpdateAsync(student, cancellationToken);
+
+        return StoreResult.Success(moveOutResult.AffectRows + moveInResult.AffectRows + studentResult.AffectRows);
     }
 
     #endregion
