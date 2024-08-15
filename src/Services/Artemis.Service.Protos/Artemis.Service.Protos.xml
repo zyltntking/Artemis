@@ -1219,76 +1219,76 @@
             @guid
             </summary>
         </member>
-        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket">
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket">
             <summary>
             任务目标数据包
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.IdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.IdFieldNumber">
             <summary>Field number for the "Id" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.Id">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.Id">
             <summary>
             任务单元目标标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TaskUnitIdFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TaskUnitIdFieldNumber">
             <summary>Field number for the "TaskUnitId" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TaskUnitId">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TaskUnitId">
             <summary>
             任务单元标识
             @required
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetNameFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetNameFieldNumber">
             <summary>Field number for the "TargetName" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetName">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetName">
             <summary>
             任务单元名称
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetCodeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetCodeFieldNumber">
             <summary>Field number for the "TargetCode" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetCode">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetCode">
             <summary>
             任务单元编号
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.BindingTagFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.BindingTagFieldNumber">
             <summary>Field number for the "BindingTag" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.BindingTag">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.BindingTag">
             <summary>
             关联学生标识
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetStateFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetStateFieldNumber">
             <summary>Field number for the "TargetState" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetState">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.TargetState">
             <summary>
             目标状态
             @required
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.DescriptionFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.DescriptionFieldNumber">
             <summary>Field number for the "Description" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.Description">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.Description">
             <summary>
             任务目标描述
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.ExecuteTimeFieldNumber">
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.ExecuteTimeFieldNumber">
             <summary>Field number for the "ExecuteTime" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.ExecuteTime">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetInfoPacket.ExecuteTime">
             <summary>
             任务目标执行时间
             </summary>

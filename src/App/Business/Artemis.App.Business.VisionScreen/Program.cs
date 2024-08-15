@@ -5,14 +5,19 @@ using Artemis.Service.Business.VisionScreen.Context;
 using Artemis.Service.Business.VisionScreen.Services;
 using Artemis.Service.Identity;
 using Artemis.Service.Identity.Context;
+using Artemis.Service.Identity.Services;
 using Artemis.Service.Resource;
 using Artemis.Service.Resource.Context;
+using Artemis.Service.Resource.Services;
 using Artemis.Service.School;
 using Artemis.Service.School.Context;
+using Artemis.Service.School.Services;
 using Artemis.Service.Shared;
 using Artemis.Service.Task;
 using Artemis.Service.Task.Context;
+using Artemis.Service.Task.Services;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -66,9 +71,11 @@ public class Program
 
             builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb")
                 .AddResourceServices();
+            builder.ConfigureResourceService();
 
             builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb")
-                .AddIdentityServices();
+                .AddIdentityServices()
+                .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()
@@ -105,7 +112,29 @@ public class Program
             // Use Grpc Swagger Document
             app.UseGrpcSwagger();
 
-            // Configure the HTTP request pipeline.
+            // Identity
+            app.MapGrpcService<ResourceServiceImplement>();
+            app.MapGrpcService<AccountServiceImplement>();
+            app.MapGrpcService<UserServiceImplement>();
+            app.MapGrpcService<RoleServiceImplement>();
+
+            // Resource
+            app.MapGrpcService<DictionaryServiceImplement>();
+            app.MapGrpcService<OrganizationServiceImplement>();
+            app.MapGrpcService<DivisionServiceImplement>();
+            app.MapGrpcService<StandardServiceImplement>();
+            app.MapGrpcService<SystemModuleServiceImplement>();
+
+            // School
+            app.MapGrpcService<SchoolServiceImplement>();
+            app.MapGrpcService<StudentServiceImplement>();
+            app.MapGrpcService<TeacherServiceImplement>();
+            app.MapGrpcService<ChangeServiceImplement>();
+
+            // Task
+            app.MapGrpcService<TaskServiceImplement>();
+
+            // Business
             app.MapGrpcService<WxParentTerminalServiceImplement>();
             app.MapGrpcService<WxTeacherTerminalServiceImplement>();
             app.MapGrpcService<VisionScreeningCoreServiceImplement>();

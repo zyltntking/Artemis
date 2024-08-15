@@ -649,7 +649,7 @@ message FetchTaskUnitTargetRequest{
 }
 
 // 任务目标数据包
-message TaskUnitTargetPacket{
+message TaskUnitTargetInfoPacket{
 	// 任务单元目标标识
 	// @required
 	// @guid
@@ -692,7 +692,7 @@ message FetchTaskUnitTargetResponse{
 	int64 Timestamp = 6;
 	// 任务目标数据
 	// @required
-	repeated TaskUnitTargetPacket Data = 7;
+	repeated TaskUnitTargetInfoPacket Data = 7;
 }
 
 
