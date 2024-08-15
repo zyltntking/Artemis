@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Linq.Dynamic.Core;
+using System.Threading;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
@@ -23,6 +25,7 @@ using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -729,7 +732,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建任务目标和筛查记录")]
-    //[Authorize(AuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AcceptTaskUnit(AcceptTaskUnitRequest request, ServerCallContext context)
     {
         var taskUnitId = Guid.Parse(request.TaskUnitId);
@@ -1334,6 +1337,60 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         return trees.ReadInfoResponse<FetchSystemModuleTreeResponse, List<SystemModuleTreePacket>>();
+    }
+
+    /// <summary>
+    /// 搜索视力档案
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override async Task<SearchRecordInfoResponse> SearchRecordInfo(SearchRecordInfoRequest request, ServerCallContext context)
+    {
+        Guid? taskId = string.IsNullOrWhiteSpace(request.TaskId) ? null : Guid.Parse(request.TaskId);
+
+        Guid? schoolId = string.IsNullOrWhiteSpace(request.SchoolId) ? null : Guid.Parse(request.SchoolId);
+
+        Guid? classId = string.IsNullOrWhiteSpace(request.ClassId) ? null : Guid.Parse(request.ClassId);
+
+        var page = request.Page ?? 0;
+
+        var size = request.Size ?? 0;
+
+        var studentName = request.StudentName ?? string.Empty;
+
+        var query = VisionScreenRecordStore.EntityQuery;
+
+        var total = await query.LongCountAsync(context.CancellationToken);
+
+        query = query.WhereIf(taskId != null, record => record.TaskId == taskId);
+
+        query = query.WhereIf(schoolId != null, record => record.SchoolId == schoolId);
+
+        query = query.WhereIf(classId != null, record => record.ClassId == classId);
+
+        query = query.WhereIf(!string.IsNullOrEmpty(studentName),
+            record => EF.Functions.Like(record.StudentName, $"%{studentName}%"));
+
+        var count = await query.LongCountAsync(context.CancellationToken);
+
+        query = query.OrderBy(task => task.TaskUnitTargetCode);
+
+        if (page > 0 && size > 0) query = query.Page(page, size);
+        var tasks = await query
+        .ProjectToType<RecordInfoPacket>()
+        .ToListAsync(context.CancellationToken);
+
+        var result = new PageResult<RecordInfoPacket>
+        {
+            Page = page,
+            Size = size,
+            Count = count,
+            Total = total,
+            Items = tasks
+        };
+
+        return result.PagedResponse<SearchRecordInfoResponse, RecordInfoPacket>();
     }
 
     /// <summary>

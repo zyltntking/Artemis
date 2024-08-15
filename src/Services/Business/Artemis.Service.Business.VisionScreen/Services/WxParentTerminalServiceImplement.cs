@@ -195,7 +195,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
                 Nation = student.Nation,
                 StudentNumber = student.StudentNumber,
                 SchoolName = school?.Name,
-                ClassName = @class?.GradeName,
+                ClassName = @class?.Name,
                 Relation = binding?.Relation,
                 LeftEyePhoto = studentEyePhoto?.LeftEyePhoto,
                 RightEyePhoto = studentEyePhoto?.RightEyePhoto,
