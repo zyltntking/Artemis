@@ -12,6 +12,7 @@ using Artemis.Service.School.Context;
 using Artemis.Service.Shared;
 using Artemis.Service.Task;
 using Artemis.Service.Task.Context;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -37,6 +38,11 @@ public class Program
             Log.Information("Starting web application");
 
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.Limits.MaxRequestBodySize = 268435456;
+            });
 
             builder.AddServiceCommons();
 
@@ -67,6 +73,12 @@ public class Program
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()
                 .AddScheme<ArtemisAuthenticationOptions, ArtemisAuthenticationHandler>("Artemis", _ => { });
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                // Set the limit to 256 MB
+                options.MultipartBodyLengthLimit = 268435456;
+            });
 
             //≈‰÷√ ⁄»®
             builder.ConfigureAuthorization();

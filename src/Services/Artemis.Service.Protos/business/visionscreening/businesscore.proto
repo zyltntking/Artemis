@@ -179,6 +179,14 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 搜索视力档案
+    rpc SearchRecordInfo (SearchRecordInfoRequest) returns (SearchRecordInfoResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/SearchRecordInfo"
+			body: "*"
+		};
+	}
+
 	// 请求批量PDF导出示例
     rpc MultiplePdfExportExample (ExportRequest) returns (stream ExportResponse){
 		option (google.api.http) = {
@@ -1107,4 +1115,172 @@ message ExportResponse{
 	// 批量导出PDF示例数据
 	// @required
 	ExportPacket Data = 7;
+}
+
+// 搜索视力档案请求
+message SearchRecordInfoRequest{
+	// 任务标识
+    // @guid
+    google.protobuf.StringValue TaskId = 1;
+    // 学生名称搜索值
+    // @maxLength(128)
+    google.protobuf.StringValue StudentName = 2;
+	// 学校标识
+    // @guid
+    google.protobuf.StringValue SchoolId = 3;
+	// 班级标识
+    // @guid
+    google.protobuf.StringValue classId = 4;
+    // 页码
+    // @min(0)
+    google.protobuf.Int32Value Page = 5;
+    // 条目数
+    // @min(0)
+    google.protobuf.Int32Value Size = 6;
+}
+
+// 视力档案信息数据包
+message RecordInfoPacket{
+	// 记录标识
+	// @guid
+	string Id = 1;
+	// 生日
+	google.protobuf.StringValue Birthday = 2;
+	// 性别
+	google.protobuf.StringValue Gender = 3;
+	// 行政区划编码
+	google.protobuf.StringValue DivisionCode = 4;
+	// 所属地区(地级行政区划名)
+	google.protobuf.StringValue PrefectureName = 5;
+	// 所属县市(县级行政区划名)
+	google.protobuf.StringValue CountyName = 6;
+	// 任务名称
+	google.protobuf.StringValue TaskName = 7;
+	// 学校名称
+	google.protobuf.StringValue SchoolName = 8;
+	// 年级名称
+	google.protobuf.StringValue GradeName = 9;
+	// 班级名称
+	google.protobuf.StringValue ClassName = 10;
+	// 建档时间
+	google.protobuf.StringValue CreatedAt = 11;
+	// 筛查时间
+	google.protobuf.StringValue CheckTime = 12;
+	// 瞳距
+	google.protobuf.StringValue PupilDistance = 13;
+	// 左眼球镜
+	google.protobuf.DoubleValue LeftSphere = 14;
+	// 右眼球镜
+	google.protobuf.DoubleValue RightSphere = 15;
+	// 左眼柱镜
+	google.protobuf.DoubleValue LeftCylinder = 16;
+	// 右眼柱镜
+	google.protobuf.DoubleValue RightCylinder = 17;
+	// 左眼等效球镜
+	google.protobuf.DoubleValue LeftEquivalentSphere = 18;
+	// 右眼等效球镜
+	google.protobuf.DoubleValue RightEquivalentSphere = 19;
+	// 左眼散光度数
+	google.protobuf.DoubleValue LeftAstigmatism = 20;
+	// 右眼散光度数
+	google.protobuf.DoubleValue RightAstigmatism = 21;
+	// 左眼裸眼视力
+	google.protobuf.DoubleValue LeftNakedEyeVision = 22;
+	// 右眼裸眼视力
+	google.protobuf.DoubleValue RightNakedEyeVision = 23;
+	// 左眼矫正视力
+	google.protobuf.DoubleValue LeftCorrectedVision = 24;
+	// 右眼矫正视力
+	google.protobuf.DoubleValue RightCorrectedVision = 25;
+	// 左眼是否佩戴角膜塑形镜
+	google.protobuf.BoolValue IsWareLeftOkLenses = 26;
+	// 右眼是否佩戴角膜塑形镜
+	google.protobuf.BoolValue IsWareRightOkLenses = 27;
+	// 左眼轴位
+	google.protobuf.DoubleValue LeftAxis = 28;
+	// 右眼轴位
+	google.protobuf.DoubleValue RightAxis = 29;
+	// 左眼瞳孔半径
+	google.protobuf.DoubleValue LeftPupilRadius = 30;
+	// 右眼瞳孔半径
+	google.protobuf.DoubleValue RightPupilRadius = 31;
+	// 左眼垂直方向斜视度数
+	google.protobuf.DoubleValue LeftVerticalAxis = 32;
+	// 右眼垂直方向斜视度数
+	google.protobuf.DoubleValue RightVerticalAxis = 33;
+	// 左眼水平方向斜视度数
+	google.protobuf.DoubleValue LeftHorizontalAxis = 34;
+	// 右眼水平方向斜视度数
+	google.protobuf.DoubleValue RightHorizontalAxis = 35;
+	// 左眼红光反射
+	google.protobuf.StringValue LeftRedReflect = 36;
+	// 右眼红光反射
+	google.protobuf.StringValue RightRedReflect = 37;
+	// 筛查单位
+	google.protobuf.StringValue TaskAgentName = 38;
+	// 筛查工作人员姓名
+	google.protobuf.StringValue OptometerScreeningStuffName = 39;
+	// 医嘱
+	google.protobuf.StringValue DoctorAdvice = 40;
+	// 医师
+	google.protobuf.StringValue DoctorName = 41;
+	// 医嘱时间
+	google.protobuf.StringValue PrescribedTime = 42;
+	// 绑定微信号
+	google.protobuf.StringValue WxNumber = 43;
+	// 报告发送人
+	google.protobuf.StringValue ReportSender = 44;
+	// 报告发送时间
+	google.protobuf.StringValue ReportSendTime = 45;
+	// 报告签收人
+	google.protobuf.StringValue ReportReceiver = 46;
+	// 报告签收时间
+	google.protobuf.StringValue ReportReceiveTime = 47;
+	// 左眼图片
+	google.protobuf.StringValue LeftEyePhoto = 48;
+	// 右眼图片
+	google.protobuf.StringValue RightEyePhoto = 49;
+	// 双眼图片
+	google.protobuf.StringValue BothEyePhoto = 50;
+}
+
+// 分页视力档案信息数据包
+message PagedRecordInfoPacket {
+    // 页码
+    // @min(0)
+    int32 Page = 1;
+    // 条目数
+    // @min(0)
+    int32 Size = 2;
+    // 数据总数
+    // @min(0)
+    int64 Total = 3;
+    // 条件过滤后的数据量
+    // @min(0)
+    int64 Count = 4;
+    // 视力档案信息数据包
+    // @required
+    repeated RecordInfoPacket Items = 5;
+}
+
+// 查询凭据信息响应
+message SearchRecordInfoResponse {
+    // 状态码
+    int32 Code = 1;
+    // 是否成功
+    bool Succeeded = 2;
+    // 响应消息
+    string Message = 3;
+    // 错误
+    // @exception
+    google.protobuf.StringValue Error = 4;
+    // 响应时间
+    // @datetime
+    string DateTime = 5;
+    // 响应时间戳
+    // @timestamp
+    int64 Timestamp = 6;
+    // 分页视力档案信息数据包
+    // @required
+    PagedRecordInfoPacket Data = 7;
 }

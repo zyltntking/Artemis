@@ -1564,12 +1564,13 @@
             家长端服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore)">
             <summary>
             构造函数
             </summary>
             <param name="userStore"></param>
             <param name="schoolStore"></param>
+            <param name="classStore"></param>
             <param name="studentStore"></param>
             <param name="studentEyePhotoStore"></param>
             <param name="studentRelationBindingStore"></param>
@@ -1585,6 +1586,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.SchoolStore">
             <summary>
             学校存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.ClassStore">
+            <summary>
+            班级存储
             </summary>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.StudentStore">

@@ -44,6 +44,7 @@ namespace Artemis.App.Business.VisionScreen.Controllers
         /// <remarks>允许.jpg/.jpeg/.png</remarks>
         /// <returns></returns>
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 268435456)]
         public async Task<DataResult<string>> UploadPicture(IFormFile file)
         {
             var db = _mongoClient.GetDatabase("FileStorage");
