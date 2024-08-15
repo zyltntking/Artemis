@@ -69,7 +69,8 @@ public class TaskUnitTarget : ConcurrencyModel, ITaskUnitTarget
     public string? Description { get; set; }
 
     /// <summary>
-    ///     任务目标执行
+    ///     任务目标执行时间
     /// </summary>
+    [Comment("任务目标执行时间")]
     public DateTime? ExecuteTime { get; set; }
 }
