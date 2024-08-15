@@ -398,7 +398,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.School.Managers.IChangeManager.StudentChangeClassAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.IChangeManager.StudentChangeClassAsync(System.Guid,System.Nullable{System.Guid},System.String,System.Threading.CancellationToken)">
             <summary>
             学生变更班级
             </summary>
@@ -492,7 +492,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Artemis.Service.School.Managers.ChangeManager.StudentChangeClassAsync(System.Guid,System.Guid,System.String,System.Threading.CancellationToken)">
+        <member name="M:Artemis.Service.School.Managers.ChangeManager.StudentChangeClassAsync(System.Guid,System.Nullable{System.Guid},System.String,System.Threading.CancellationToken)">
             <summary>
             学生变更班级
             </summary>

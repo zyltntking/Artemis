@@ -570,7 +570,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("创建任务目标和筛查记录")]
-    [Authorize(AuthorizePolicy.Token)]
+    //[Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> AcceptTaskUnit(AcceptTaskUnitRequest request, ServerCallContext context)
     {
         var taskUnitId = Guid.Parse(request.TaskUnitId);
@@ -586,6 +586,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         var taskInfo = await TaskStore.EntityQuery
             .Where(item => item.TaskCode!.StartsWith(taskCodePrefix))
+            .Where(item => item.ParentId == null)
             .FirstOrDefaultAsync(context.CancellationToken);
 
         if (taskInfo == null)
@@ -698,6 +699,10 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
                 record.TaskUnitId = taskUnitInfo.Id;
                 record.TaskUnitName = taskUnitInfo.UnitName;
                 record.TaskUnitCode = taskUnitInfo.UnitCode;
+
+                // taskUnitTarget
+                record.TaskUnitTargetId = target.Id;
+                record.TaskUnitTargetCode = target.TargetCode;
 
                 // standard
                 record.VisualStandardId = standard?.Id ?? Guid.Empty;

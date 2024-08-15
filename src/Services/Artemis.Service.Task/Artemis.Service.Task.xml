@@ -238,6 +238,12 @@
                 表名
             </summary>
         </member>
+        <member name="M:Artemis.Service.Task.Context.Configuration.ArtemisTaskUnitTargetConfiguration.EntityFieldConfigure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Artemis.Service.Task.Context.ArtemisTaskUnitTarget})">
+            <summary>
+                实体字段配置
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Artemis.Service.Task.Context.TaskContext">
             <summary>
                 任务业务上下文

@@ -16,6 +16,18 @@
         <member name="M:Artemis.App.Task.Migrations.InitialTask.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Task.Migrations.TaskExe">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Task.Migrations.TaskExe.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Task.Migrations.TaskExe.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Task.Migrations.TaskExe.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Task.Program">
             <summary>
                 应用程序入口

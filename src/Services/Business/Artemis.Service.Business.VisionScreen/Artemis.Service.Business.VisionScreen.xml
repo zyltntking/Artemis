@@ -1422,6 +1422,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.FetchSchoolNotGraduatedClass(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建任务目标和筛查记录

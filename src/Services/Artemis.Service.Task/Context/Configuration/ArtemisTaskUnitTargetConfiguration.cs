@@ -1,5 +1,7 @@
 ﻿using Artemis.Data.Store.Configuration;
 using Artemis.Service.Shared;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artemis.Service.Task.Context.Configuration;
 
@@ -19,6 +21,16 @@ internal sealed class ArtemisTaskUnitTargetConfiguration : ConcurrencyModelEntit
     ///     表名
     /// </summary>
     protected override string TableName => nameof(ArtemisTaskUnitTarget).TableName();
+
+    /// <summary>
+    ///     实体字段配置
+    /// </summary>
+    /// <param name="builder"></param>
+    protected override void EntityFieldConfigure(EntityTypeBuilder<ArtemisTaskUnitTarget> builder)
+    {
+        builder.Property(taskUnit => taskUnit.ExecuteTime)
+            .HasColumnType(DataTypeSet.DateTime);
+    }
 
     #endregion
 }
