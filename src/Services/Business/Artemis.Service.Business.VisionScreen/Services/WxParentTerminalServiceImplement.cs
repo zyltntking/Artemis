@@ -28,6 +28,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// </summary>
     /// <param name="userStore"></param>
     /// <param name="schoolStore"></param>
+    /// <param name="classStore"></param>
     /// <param name="studentStore"></param>
     /// <param name="studentEyePhotoStore"></param>
     /// <param name="studentRelationBindingStore"></param>
@@ -37,6 +38,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     public WxParentTerminalServiceImplement(
         IIdentityUserStore userStore, 
         IArtemisSchoolStore schoolStore,
+        IArtemisClassStore classStore,
         IArtemisStudentStore studentStore,
         IArtemisStudentEyePhotoStore studentEyePhotoStore,
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
@@ -46,6 +48,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     {
         UserStore = userStore;
         SchoolStore = schoolStore;
+        ClassStore = classStore;
         StudentStore = studentStore;
         StudentEyePhotoStore = studentEyePhotoStore;
         StudentRelationBindingStore = studentRelationBindingStore;
@@ -63,6 +66,11 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// 学校存储
     /// </summary>
     private IArtemisSchoolStore SchoolStore { get; }
+
+    /// <summary>
+    /// 班级存储
+    /// </summary>
+    private IArtemisClassStore ClassStore { get; }
 
     /// <summary>
     /// 学生存储
@@ -142,7 +150,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
 
         var classIds = students.Select(student => student.ClassId).Distinct().ToList();
 
-        var classes = await SchoolStore
+        var classes = await ClassStore
             .EntityQuery
             .Where(item => classIds.Contains(item.Id))
             .ProjectToType<ClassInfo>()
