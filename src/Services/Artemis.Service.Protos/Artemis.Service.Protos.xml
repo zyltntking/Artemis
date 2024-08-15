@@ -335,6 +335,405 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest">
+            <summary>
+            获取当前任务的学校列表请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket">
+            <summary>
+            当前任务的学校数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.SchoolName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolPacket.Count">
+            <summary>
+            班级人数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse">
+            <summary>
+            获取当前任务的学校列表响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolResponse.Data">
+            <summary>
+            当前任务的学校数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest">
+            <summary>
+            获取当前任务的班级列表请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket">
+            <summary>
+            当前任务的班级数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.ClassId">
+            <summary>
+            班级标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.SchoolName">
+            <summary>
+            学校名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskClassPacket.Count">
+            <summary>
+            班级人数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse">
+            <summary>
+            获取当前任务的班级列表响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassResponse.Data">
+            <summary>
+            当前任务的学校数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest">
+            <summary>
+            获取当前任务的特定学校的班级列表请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket">
+            <summary>
+            当前任务的特定学校的班级数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.SchoolId">
+            <summary>
+            学校标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.SchoolName">
+            <summary>
+            学校名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.ClassId">
+            <summary>
+            班级标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.CountFieldNumber">
+            <summary>Field number for the "Count" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskSchoolClassPacket.Count">
+            <summary>
+            班级人数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse">
+            <summary>
+            获取当前任务的特定学校的班级列表响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassResponse.Data">
+            <summary>
+            当前任务的特定学校的班级数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest">
             <summary>
             创建任务目标和筛查记录请求
@@ -2343,6 +2742,30 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskSchool(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取当前任务的学校列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取当前任务的班级列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskSchoolClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            获取当前任务的学校班级列表
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.AcceptTaskUnit(Artemis.Service.Protos.Business.VisionScreen.AcceptTaskUnitRequest,Grpc.Core.ServerCallContext)">
             <summary>
             创建任务目标和筛查记录
@@ -2677,6 +3100,114 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.CallOptions)">
             <summary>
             获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchool(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的学校列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchool(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的学校列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的学校列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的学校列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的学校班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolClass(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的学校班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            获取当前任务的学校班级列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchTaskSchoolClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolClassRequest,Grpc.Core.CallOptions)">
+            <summary>
+            获取当前任务的学校班级列表
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

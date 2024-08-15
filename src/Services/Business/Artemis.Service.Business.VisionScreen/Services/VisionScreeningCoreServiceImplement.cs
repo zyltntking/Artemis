@@ -15,6 +15,7 @@ using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.Business.VisionScreen.Transfer;
 using Artemis.Service.Shared.Resource.Transfer;
+using Artemis.Service.Shared.School;
 using Artemis.Service.Shared.School.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
 using Artemis.Service.Task.Context;
@@ -531,7 +532,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         var classIds = classInfos.Select(item => item.Id).ToList();
 
-        var classCountGroup = await StudentStore.EntityQuery
+        var classCountGroupInfos = await StudentStore.EntityQuery
             .Where(item => item.SchoolId == schoolId)
             .Where(item => item.ClassId != null)
             .Where(item => classIds.Contains(item.ClassId!.Value))
@@ -549,7 +550,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         {
             var packet = Instance.CreateInstance<SchoolNotGraduatedClassPacket>();
 
-            var classCount = classCountGroup
+            var classCount = classCountGroupInfos
                 .FirstOrDefault(item => item.ClassId == classInfo.Id);
 
             packet.SchoolId = classInfo.SchoolId.GuidToString();
@@ -561,6 +562,164 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         return packets.ReadInfoResponse<FetchSchoolNotGraduatedClassResponse, List<SchoolNotGraduatedClassPacket>>();
+    }
+
+    /// <summary>
+    /// 获取当前任务的学校列表
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取当前任务的学校列表")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchTaskSchoolResponse> FetchTaskSchool(FetchTaskSchoolRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var taskExists = await TaskStore.ExistsAsync(taskId, context.CancellationToken);
+
+        if (!taskExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchTaskSchoolResponse>("任务不存在");
+        }
+
+        var schoolGroupInfos = await VisionScreenRecordStore.EntityQuery
+            .Where(item => item.TaskId == taskId)
+            .GroupBy(item => item.SchoolId)
+            .Select(group => new
+            {
+                SchoolId = group.Key,
+                group.FirstOrDefault()!.SchoolName,
+                Count = group.Count()
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var packets = new List<TaskSchoolPacket>();
+
+        foreach (var schoolInfo in schoolGroupInfos)
+        {
+            var packet = Instance.CreateInstance<TaskSchoolPacket>();
+
+            packet.TaskId = request.TaskId;
+            packet.SchoolId = schoolInfo.SchoolId.GuidToString();
+            packet.SchoolName = schoolInfo.SchoolName;
+            packet.Count = schoolInfo.Count;
+
+            packets.Add(packet);
+        }
+
+        return packets.ReadInfoResponse<FetchTaskSchoolResponse, List<TaskSchoolPacket>>();
+    }
+
+    /// <summary>
+    /// 获取当前任务的班级列表
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取当前任务的班级列表")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchTaskClassResponse> FetchTaskClass(FetchTaskClassRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var taskExists = await TaskStore.ExistsAsync(taskId, context.CancellationToken);
+
+        if (!taskExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchTaskClassResponse>("任务不存在");
+        }
+
+        var schoolGroupInfos = await VisionScreenRecordStore.EntityQuery
+            .Where(item => item.TaskId == taskId)
+            .Where(item => item.ClassId !=  null)
+            .GroupBy(item => item.ClassId)
+            .Select(group => new
+            {
+                ClassId = group.Key,
+                group.FirstOrDefault()!.SchoolName,
+                group.FirstOrDefault()!.ClassName,
+                Count = group.Count()
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var packets = new List<TaskClassPacket>();
+
+        foreach (var schoolInfo in schoolGroupInfos)
+        {
+            var packet = Instance.CreateInstance<TaskClassPacket>();
+
+            packet.TaskId = request.TaskId;
+            packet.ClassId = schoolInfo.ClassId!.Value.GuidToString();
+            packet.SchoolName = schoolInfo.SchoolName;
+            packet.ClassName = schoolInfo.ClassName;
+            packet.Count = schoolInfo.Count;
+
+            packets.Add(packet);
+        }
+
+        return packets.ReadInfoResponse<FetchTaskClassResponse, List<TaskClassPacket>>();
+    }
+
+    /// <summary>
+    /// 获取当前任务的学校班级列表
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取当前任务的学校班级列表")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<FetchTaskSchoolClassResponse> FetchTaskSchoolClass(FetchTaskSchoolClassRequest request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var taskExists = await TaskStore.ExistsAsync(taskId, context.CancellationToken);
+
+        if (!taskExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchTaskSchoolClassResponse>("任务不存在");
+        }
+
+        var schoolId = Guid.Parse(request.SchoolId);
+
+        var schoolExists = await SchoolStore.ExistsAsync(schoolId, context.CancellationToken);
+
+        if (!schoolExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<FetchTaskSchoolClassResponse>("学校不存在");
+        }
+
+        var schoolClassGroupInfos = await VisionScreenRecordStore.EntityQuery
+            .Where(item => item.TaskId == taskId)
+            .Where(item => item.SchoolId == schoolId)
+            .Where(item => item.ClassId != null)
+            .GroupBy(item => item.ClassId)
+            .Select(group => new
+            {
+                ClassId = group.Key,
+                group.FirstOrDefault()!.SchoolName,
+                group.FirstOrDefault()!.ClassName,
+                Count = group.Count()
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var packets = new List<TaskSchoolClassPacket>();
+
+        foreach (var schoolClassInfo in schoolClassGroupInfos)
+        {
+            var packet = Instance.CreateInstance<TaskSchoolClassPacket>();
+
+            packet.TaskId = request.TaskId;
+            packet.SchoolId = request.SchoolId;
+            packet.ClassId = schoolClassInfo.ClassId!.Value.GuidToString();
+            packet.SchoolName = schoolClassInfo.SchoolName;
+            packet.ClassName = schoolClassInfo.ClassName;
+            packet.Count = schoolClassInfo.Count;
+
+            packets.Add(packet);
+        }
+
+        return packets.ReadInfoResponse<FetchTaskSchoolClassResponse, List<TaskSchoolClassPacket>>();
     }
 
     /// <summary>
