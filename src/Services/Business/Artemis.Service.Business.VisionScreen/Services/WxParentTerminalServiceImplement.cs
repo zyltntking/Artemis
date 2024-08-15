@@ -8,8 +8,10 @@ using Artemis.Service.Business.VisionScreen.Stores;
 using Artemis.Service.Identity.Stores;
 using Artemis.Service.Protos;
 using Artemis.Service.Protos.Business.VisionScreen;
+using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.Business.VisionScreen.Transfer;
+using Artemis.Service.Shared.Resource.Transfer;
 using Artemis.Service.Shared.School.Transfer;
 using Grpc.Core;
 using Mapster;
@@ -35,6 +37,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// <param name="visionScreenRecordStore"></param>
     /// <param name="recordFeedbackStore"></param>
     /// <param name="notificationMessageStore"></param>
+    /// <param name="standardItemStore"></param>
     public WxParentTerminalServiceImplement(
         IIdentityUserStore userStore, 
         IArtemisSchoolStore schoolStore,
@@ -44,7 +47,8 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         IArtemisStudentRelationBindingStore studentRelationBindingStore,
         IArtemisVisionScreenRecordStore visionScreenRecordStore,
         IArtemisRecordFeedbackStore recordFeedbackStore,
-        IArtemisNotificationMessageStore notificationMessageStore)
+        IArtemisNotificationMessageStore notificationMessageStore,
+        IArtemisStandardItemStore standardItemStore)
     {
         UserStore = userStore;
         SchoolStore = schoolStore;
@@ -55,6 +59,7 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
         VisionScreenRecordStore = visionScreenRecordStore;
         RecordFeedbackStore = recordFeedbackStore;
         NotificationMessageStore = notificationMessageStore;
+        StandardItemStore = standardItemStore;
     }
 
     /// <summary>
@@ -101,6 +106,11 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
     /// 通知消息存储
     /// </summary>
     private IArtemisNotificationMessageStore NotificationMessageStore { get; }
+
+    /// <summary>
+    /// 标准项目存储
+    /// </summary>
+    private IArtemisStandardItemStore StandardItemStore { get; }
 
     #region Overrides of WxParentTerminalServiceBase
 
@@ -726,7 +736,26 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             return ResultAdapter.AdaptEmptyFail<ReadScreenRecordResponse>("记录不存在");
         }
 
-        return recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
+        var standardId = recordInfo.VisualStandardId;
+
+        var left = recordInfo.LeftEquivalentSphere ?? 0;
+
+        var right = recordInfo.RightEquivalentSphere ?? 0;
+
+        var flag = Math.Max(left, right);
+
+        var standardItemInfo = await StandardItemStore.EntityQuery
+            .Where(item => item.StandardCatalogId == standardId)
+            .Where(item => item.Minimum <= flag)
+            .Where(item => item.Maximum > flag)
+            .ProjectToType<StandardItemInfo>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        var response = recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
+
+        response.Data.Report = standardItemInfo?.Template;
+
+        return response;
     }
 
     /// <summary>
@@ -748,7 +777,26 @@ public class WxParentTerminalServiceImplement : WxParentTerminalService.WxParent
             return ResultAdapter.AdaptEmptyFail<ReadScreenRecordResponse>("记录不存在");
         }
 
-        return recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
+        var standardId = recordInfo.VisualStandardId;
+
+        var left = recordInfo.LeftEquivalentSphere ?? 0;
+
+        var right = recordInfo.RightEquivalentSphere ?? 0;
+
+        var flag = Math.Max(left, right);
+
+        var standardItemInfo = await StandardItemStore.EntityQuery
+            .Where(item => item.StandardCatalogId == standardId)
+            .Where(item => item.Minimum <= flag)
+            .Where(item => item.Maximum > flag)
+            .ProjectToType<StandardItemInfo>()
+            .FirstOrDefaultAsync(context.CancellationToken);
+
+        var response = recordInfo.ReadInfoResponse<ReadScreenRecordResponse, VisionScreenRecordInfo>();
+
+        response.Data.Report = standardItemInfo?.Template;
+
+        return response;
     }
 
     /// <summary>

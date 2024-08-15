@@ -1542,6 +1542,14 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.SearchRecordInfo(Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            搜索视力档案
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.MultiplePdfExportExample(Artemis.Service.Protos.Business.VisionScreen.ExportRequest,Grpc.Core.IServerStreamWriter{Artemis.Service.Protos.Business.VisionScreen.ExportResponse},Grpc.Core.ServerCallContext)">
             <summary>
             请求批量PDF导出示例
@@ -1564,7 +1572,7 @@
             家长端服务实现
             </summary>
         </member>
-        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore)">
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.#ctor(Artemis.Service.Identity.Stores.IIdentityUserStore,Artemis.Service.School.Stores.IArtemisSchoolStore,Artemis.Service.School.Stores.IArtemisClassStore,Artemis.Service.School.Stores.IArtemisStudentStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentEyePhotoStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisStudentRelationBindingStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisVisionScreenRecordStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisRecordFeedbackStore,Artemis.Service.Business.VisionScreen.Stores.IArtemisNotificationMessageStore,Artemis.Service.Resource.Stores.IArtemisStandardItemStore)">
             <summary>
             构造函数
             </summary>
@@ -1577,6 +1585,7 @@
             <param name="visionScreenRecordStore"></param>
             <param name="recordFeedbackStore"></param>
             <param name="notificationMessageStore"></param>
+            <param name="standardItemStore"></param>
         </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.UserStore">
             <summary>
@@ -1621,6 +1630,11 @@
         <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.NotificationMessageStore">
             <summary>
             通知消息存储
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.StandardItemStore">
+            <summary>
+            标准项目存储
             </summary>
         </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement.FetchChildrenInfo(Artemis.Service.Protos.EmptyRequest,Grpc.Core.ServerCallContext)">
