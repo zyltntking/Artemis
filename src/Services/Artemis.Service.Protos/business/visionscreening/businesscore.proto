@@ -666,7 +666,7 @@ message TaskUnitTargetPacket{
 	google.protobuf.StringValue BindingTag = 5;
 	// 目标状态
 	// @required
-	string TaskState = 6;
+	string TargetState = 6;
 	// 任务目标描述
 	google.protobuf.StringValue Description = 7;
 	// 任务目标执行时间
