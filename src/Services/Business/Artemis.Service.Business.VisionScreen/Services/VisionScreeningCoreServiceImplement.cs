@@ -1345,6 +1345,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("获取系统模块树")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchRecordInfoResponse> SearchRecordInfo(SearchRecordInfoRequest request, ServerCallContext context)
     {
         Guid? taskId = string.IsNullOrWhiteSpace(request.TaskId) ? null : Guid.Parse(request.TaskId);
