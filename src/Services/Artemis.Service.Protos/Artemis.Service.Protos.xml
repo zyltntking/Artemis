@@ -1268,10 +1268,10 @@
             关联学生标识
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TaskStateFieldNumber">
-            <summary>Field number for the "TaskState" field.</summary>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetStateFieldNumber">
+            <summary>Field number for the "TargetState" field.</summary>
         </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TaskState">
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.TaskUnitTargetPacket.TargetState">
             <summary>
             目标状态
             @required

@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Linq.Dynamic.Core;
-using System.Threading;
 using Artemis.Data.Core;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
@@ -17,7 +15,6 @@ using Artemis.Service.Resource.Stores;
 using Artemis.Service.School.Stores;
 using Artemis.Service.Shared.Business.VisionScreen.Transfer;
 using Artemis.Service.Shared.Resource.Transfer;
-using Artemis.Service.Shared.School;
 using Artemis.Service.Shared.School.Transfer;
 using Artemis.Service.Shared.Task.Transfer;
 using Artemis.Service.Task.Context;
@@ -25,7 +22,6 @@ using Artemis.Service.Task.Stores;
 using Grpc.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artemis.Service.Business.VisionScreen.Services;
@@ -737,7 +733,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     {
         var taskUnitId = Guid.Parse(request.TaskUnitId);
 
-        var taskUnitInfo = await TaskUnitStore.FindMapEntityAsync<TaskUnitInfo>(taskUnitId, context.CancellationToken);
+        var taskUnitInfo = await TaskUnitStore.FindEntityAsync(taskUnitId, context.CancellationToken);
 
         if (taskUnitInfo == null)
         {
@@ -925,6 +921,13 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         }
 
         var recordResult = await VisionScreenRecordStore.CreateAsync(records);
+
+        if (recordResult.Succeeded)
+        {
+            taskUnitInfo.TaskUnitState = TaskState.Waiting;
+
+            await TaskUnitStore.UpdateAsync(taskUnitInfo, context.CancellationToken);
+        }
 
         var affectRows = targetResult.AffectRows + recordResult.AffectRows;
 

@@ -660,7 +660,7 @@
         </member>
         <member name="P:Artemis.Service.Task.Models.TaskUnitTarget.ExecuteTime">
             <summary>
-                任务目标执行
+                任务目标执行时间
             </summary>
         </member>
         <member name="T:Artemis.Service.Task.Models.TaskUnit">
