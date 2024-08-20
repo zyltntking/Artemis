@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq.Dynamic.Core;
 using Artemis.Data.Core;
+using Artemis.Data.Core.Fundamental;
 using Artemis.Data.Core.Fundamental.Design;
 using Artemis.Data.Core.Fundamental.Types;
 using Artemis.Data.Store;
@@ -1396,6 +1397,255 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         };
 
         return result.PagedResponse<SearchRecordInfoResponse, RecordInfoPacket>();
+    }
+
+    /// <summary>
+    /// 查询仪表盘人数分布
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询仪表盘人数分布")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<DashboardDataResponse> DashboardData(DashboardDataRequerst request, ServerCallContext context)
+    {
+        var taskId = Guid.Parse(request.TaskId);
+
+        var taskExists = await TaskStore.ExistsAsync(taskId, context.CancellationToken);
+
+        if (!taskExists)
+        {
+            return ResultAdapter.AdaptEmptyFail<DashboardDataResponse>("任务不存在");
+        }
+
+        Guid? schoolId = string.IsNullOrWhiteSpace(request.SchoolId) ? null : Guid.Parse(request.SchoolId);
+
+        Guid? standardId = string.IsNullOrWhiteSpace(request.StandardId) ? null : Guid.Parse(request.StandardId);
+
+        if (standardId == null)
+        {
+            standardId = await StandardCatalogStore.EntityQuery
+                .Where(item => item.Code == "ST001")
+                .Select(item => item.Id)
+                .FirstOrDefaultAsync(context.CancellationToken);
+        }
+
+        var standardItems = await StandardItemStore.EntityQuery
+            .Where(item => item.StandardCatalogId == standardId)
+            .Select(item => new
+            {
+                item.Name,
+                item.Code,
+                item.Minimum,
+                item.Maximum
+            })
+            .ToListAsync(context.CancellationToken);
+
+        if (!standardItems.Any())
+        {
+            return ResultAdapter.AdaptEmptyFail<DashboardDataResponse>("标准不存在");
+        }
+
+        var gradeName = request.GradeName ?? string.Empty;
+
+        var baseQuery = VisionScreenRecordStore.EntityQuery
+            .Where(record => record.TaskId == taskId)
+            .WhereIf(schoolId != null, record => record.SchoolId == schoolId)
+            .WhereIf(!string.IsNullOrWhiteSpace(gradeName), record => record.GradeName == gradeName);
+
+        var total = await baseQuery.CountAsync(context.CancellationToken);
+
+        // 筛查分布：筛查，只过验光仪，只过视力表，都没过
+
+        var checkedCount = await baseQuery
+            .Where(record => record.IsOptometerChecked && record.IsChartChecked)
+            .CountAsync(context.CancellationToken);
+
+        var onlyOptoimeterCheckedCount = await baseQuery
+            .Where(record => record.IsOptometerChecked && !record.IsChartChecked)
+            .CountAsync(context.CancellationToken);
+
+        var onlyChartCheckedCount = await baseQuery
+            .Where(record => !record.IsOptometerChecked && record.IsChartChecked)
+            .CountAsync(context.CancellationToken);
+
+        var notCheckedCount = await baseQuery
+            .Where(record => !record.IsOptometerChecked && !record.IsChartChecked)
+            .CountAsync(context.CancellationToken);
+
+        var dashboardPopulationDistributionPacket = new DashboardPopulationDistributionPacket
+        {
+            Total = total,
+            Checked = checkedCount,
+            OnlyOptoimeterChecked = onlyOptoimeterCheckedCount,
+            OnlyChartChecked = onlyChartCheckedCount,
+            NotChecked = notCheckedCount
+        };
+
+        // 增长统计
+        // todo
+        var dashboardIncreasedStatisticsPacket = new DashboardIncreasedStatisticsPacket();
+
+        // 标准分布
+        var dashboardStandardDistributionPacket = new DashboardStandardDistributionPacket();
+
+        var standardDistributionQuery = baseQuery
+            .Where(record => record.IsOptometerChecked)
+            .Select(record => Math.Max(record.LeftEquivalentSphere ?? 0, record.RightEquivalentSphere ?? 0));
+
+        foreach (var standardItem in standardItems)
+        {
+            var standardCount = await standardDistributionQuery
+                .Where(item => item >= standardItem.Minimum)
+                .Where(item => item < standardItem.Maximum)
+                .CountAsync(context.CancellationToken);
+
+            var item = new DashboardStandardDistributionItemPacket
+            {
+                ItemName = standardItem.Name,
+                ItemCount = standardCount,
+                ItemRate = Math.Round(Convert.ToDouble(standardCount) / Convert.ToDouble(total), 3)
+            };
+            dashboardStandardDistributionPacket.Items.Add(item);
+        }
+
+        dashboardStandardDistributionPacket.Items.Add(new DashboardStandardDistributionItemPacket
+        {
+            ItemName = "验光仪数据缺失",
+            ItemCount = onlyChartCheckedCount,
+            ItemRate = Math.Round(Convert.ToDouble(onlyChartCheckedCount) / Convert.ToDouble(total), 3)
+        });
+
+        dashboardStandardDistributionPacket.Items.Add(new DashboardStandardDistributionItemPacket
+        {
+            ItemName = "未筛查",
+            ItemCount = notCheckedCount,
+            ItemRate = Math.Round(Convert.ToDouble(notCheckedCount) / Convert.ToDouble(total), 3)
+        });
+
+        // 未筛查原因分布
+        var exceptionReasonQuery = baseQuery
+            .Where(record => record.IsOptometerChecked || record.IsChartChecked)
+            .Select(record => string.IsNullOrWhiteSpace(record.ExceptionReason) ? "原因不明" : record.ExceptionReason);
+
+        var exceptionReasonItems = await exceptionReasonQuery
+            .GroupBy(item => item)
+            .Select(group => new DashBoardExceptionReasonItemPacket
+            {
+                ItemName = group.Key,
+                ItemCount = group.Count()
+            })
+            .ToListAsync(context.CancellationToken);
+
+        var dashBoardExceptionReasonDistributionPacket = new DashBoardExceptionReasonDistributionPacket();
+
+        dashBoardExceptionReasonDistributionPacket.Items.Add(exceptionReasonItems);
+
+        //班级年级分布
+        var flag = standardItems.First(item => item.Code == "Normal").Maximum;
+
+        var gradeOrClassTotalDistributionQuery = baseQuery.Select(record => new
+        {
+            record.SchoolName,
+            record.GradeName,
+            record.ClassName,
+            Flag = Math.Max(record.LeftEquivalentSphere ?? 0, record.RightEquivalentSphere ?? 0)
+        });
+
+        var gradeOrClassCountDistributionQuery = gradeOrClassTotalDistributionQuery
+            .Where(item => item.Flag >= flag);
+
+        var dashboardGradeOrClassDistributionPacket = new DashboardGradeOrClassDistributionPacket();
+
+        if (string.IsNullOrWhiteSpace(request.GradeName))
+        {
+            // 按年级
+            var totalGradeGroup = await gradeOrClassTotalDistributionQuery
+                .GroupBy(item => new { item.SchoolName, item.GradeName })
+                .Select(group => new
+                {
+                    group.Key.SchoolName,
+                    GradeName = Enumeration.FromName<GradeName>(group.Key.GradeName!),
+                    Total = group.Count()
+                }).ToListAsync(context.CancellationToken);
+
+            var totalList = totalGradeGroup.Select(item => new
+            {
+                Name = $"{item.SchoolName}{Enumeration.TryGetDescription<GradeName>(item.GradeName)}",
+                item.Total
+            });
+
+            var countGradeGroup = await gradeOrClassCountDistributionQuery
+                .GroupBy(item => new { item.SchoolName, item.GradeName })
+                .Select(group => new
+                {
+                    group.Key.SchoolName,
+                    GradeName = Enumeration.FromName<GradeName>(group.Key.GradeName!),
+                    Count = group.Count()
+                }).ToListAsync(context.CancellationToken);
+
+            var countList = countGradeGroup.Select(item => new
+            {
+                Name = $"{item.SchoolName}{Enumeration.TryGetDescription<GradeName>(item.GradeName)}",
+                item.Count
+            });
+
+            var list = totalList.Join(countList, t => t.Name, c => c.Name,
+                (t, c) => new DashboardGradeOrClassDistributionItemPacket
+                {
+                    ItemName = t.Name,
+                    ItemTotal = t.Total,
+                    ItemCount = c.Count
+                }).ToList();
+
+            dashboardGradeOrClassDistributionPacket.Items.Add(list);
+        }
+        else
+        {
+            // 按班级
+            var classTotalDistributionQuery = gradeOrClassCountDistributionQuery
+                    .Where(item => item.GradeName == request.GradeName);
+
+            var classCountDistributionQuery = gradeOrClassCountDistributionQuery
+                .Where(item => item.GradeName == request.GradeName);
+
+            var totalClassGroup = await classTotalDistributionQuery
+                .GroupBy(item => item.ClassName)
+                .Select(group => new
+                {
+                    group.Key,
+                    Total = group.Count()
+                }).ToListAsync(context.CancellationToken);
+
+            var countClassGroup = await classCountDistributionQuery
+                .GroupBy(item => item.ClassName)
+                .Select(group => new
+                {
+                    group.Key,
+                    Count = group.Count()
+                }).ToListAsync(context.CancellationToken);
+
+            var list = totalClassGroup.Join(countClassGroup, t => t.Key, c => c.Key,
+                (t, c) => new DashboardGradeOrClassDistributionItemPacket
+                {
+                    ItemName = t.Key,
+                    ItemTotal = t.Total,
+                    ItemCount = c.Count
+                }).ToList();
+
+            dashboardGradeOrClassDistributionPacket.Items.Add(list);
+        }
+
+        var packet = new DashboardDataPacket
+        {
+            PopulationDistribution = dashboardPopulationDistributionPacket,
+            IncreasedStatistic = dashboardIncreasedStatisticsPacket,
+            StandardDistribution = dashboardStandardDistributionPacket,
+            ExceptionReasonDistribution = dashBoardExceptionReasonDistributionPacket,
+            GradeOrClassDistribution = dashboardGradeOrClassDistributionPacket
+        };
+
+        return packet.ReadInfoResponse<DashboardDataResponse, DashboardDataPacket>();
     }
 
     /// <summary>

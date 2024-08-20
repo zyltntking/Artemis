@@ -3263,6 +3263,348 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst">
+            <summary>
+            仪表盘数据请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.TaskId">
+            <summary>
+            任务标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.SchoolId">
+            <summary>
+            学校标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.GradeNameFieldNumber">
+            <summary>Field number for the "GradeName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.StandardIdFieldNumber">
+            <summary>Field number for the "StandardId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst.StandardId">
+            <summary>
+            标准标识
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket">
+            <summary>
+            仪表盘人数分布
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.TotalFieldNumber">
+            <summary>Field number for the "Total" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.Total">
+            <summary>
+            总人数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.CheckedFieldNumber">
+            <summary>Field number for the "Checked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.Checked">
+            <summary>
+            已筛查人数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.OnlyOptoimeterCheckedFieldNumber">
+            <summary>Field number for the "OnlyOptoimeterChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.OnlyOptoimeterChecked">
+            <summary>
+            仅验光仪
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.OnlyChartCheckedFieldNumber">
+            <summary>Field number for the "OnlyChartChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.OnlyChartChecked">
+            <summary>
+            仅视力表
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.NotCheckedFieldNumber">
+            <summary>Field number for the "NotChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardPopulationDistributionPacket.NotChecked">
+            <summary>
+            未筛查人数
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket">
+            <summary>
+            仪表盘新增统计
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.IncreasedCountFieldNumber">
+            <summary>Field number for the "IncreasedCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.IncreasedCount">
+            <summary>
+            新增数量
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.YearOnYearIncreasedFieldNumber">
+            <summary>Field number for the "YearOnYearIncreased" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.YearOnYearIncreased">
+            <summary>
+            同比增长率
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.TimeOnTimeIncreasedFieldNumber">
+            <summary>Field number for the "TimeOnTimeIncreased" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardIncreasedStatisticsPacket.TimeOnTimeIncreased">
+            <summary>
+            环比增长率
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket">
+            <summary>
+            仪表盘标准分布项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemNameFieldNumber">
+            <summary>Field number for the "ItemName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemName">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemCountFieldNumber">
+            <summary>Field number for the "ItemCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemCount">
+            <summary>
+            项目数量
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemRateFieldNumber">
+            <summary>Field number for the "ItemRate" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionItemPacket.ItemRate">
+            <summary>
+            项目占比
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionPacket">
+            <summary>
+            仪表盘标准分布数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardStandardDistributionPacket.Items">
+            <summary>
+            标准分布数据项目列表
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonItemPacket">
+            <summary>
+            未筛查原因分布项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonItemPacket.ItemNameFieldNumber">
+            <summary>Field number for the "ItemName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonItemPacket.ItemName">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonItemPacket.ItemCountFieldNumber">
+            <summary>Field number for the "ItemCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonItemPacket.ItemCount">
+            <summary>
+            项目数量
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonDistributionPacket">
+            <summary>
+            未筛查原因分布数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonDistributionPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashBoardExceptionReasonDistributionPacket.Items">
+            <summary>
+            标准分布数据项目列表
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket">
+            <summary>
+            年级班级分布项目数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemNameFieldNumber">
+            <summary>Field number for the "ItemName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemName">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemTotalFieldNumber">
+            <summary>Field number for the "ItemTotal" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemTotal">
+            <summary>
+            项目总数
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemCountFieldNumber">
+            <summary>Field number for the "ItemCount" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionItemPacket.ItemCount">
+            <summary>
+            项目数量
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionPacket">
+            <summary>
+            年级班级分布数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionPacket.ItemsFieldNumber">
+            <summary>Field number for the "Items" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardGradeOrClassDistributionPacket.Items">
+            <summary>
+            年级班级分布列表
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket">
+            <summary>
+            仪表盘数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.PopulationDistributionFieldNumber">
+            <summary>Field number for the "PopulationDistribution" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.PopulationDistribution">
+            <summary>
+            仪表盘人数分布
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.IncreasedStatisticFieldNumber">
+            <summary>Field number for the "IncreasedStatistic" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.IncreasedStatistic">
+            <summary>
+            仪表盘新增统计
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.StandardDistributionFieldNumber">
+            <summary>Field number for the "StandardDistribution" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.StandardDistribution">
+            <summary>
+            仪表盘标准分布
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.ExceptionReasonDistributionFieldNumber">
+            <summary>Field number for the "ExceptionReasonDistribution" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.ExceptionReasonDistribution">
+            <summary>
+            仪表盘未筛查原因分布
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.GradeOrClassDistributionFieldNumber">
+            <summary>Field number for the "GradeOrClassDistribution" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataPacket.GradeOrClassDistribution">
+            <summary>
+            年级班级数据分布
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse">
+            <summary>
+            查询仪表盘人数分布响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Message">
+            <summary>
+            响应消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.DashboardDataResponse.Data">
+            <summary>
+            仪表盘数据包
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService">
             <summary>
             视力筛查核心业务服务
@@ -3445,6 +3787,14 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.SearchRecordInfo(Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             搜索视力档案
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.DashboardData(Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询仪表盘数据
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -4264,6 +4614,42 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SearchRecordInfoAsync(Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             搜索视力档案
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.DashboardData(Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询仪表盘数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.DashboardData(Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst,Grpc.Core.CallOptions)">
+            <summary>
+            查询仪表盘数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.DashboardDataAsync(Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询仪表盘数据
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.DashboardDataAsync(Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst,Grpc.Core.CallOptions)">
+            <summary>
+            查询仪表盘数据
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

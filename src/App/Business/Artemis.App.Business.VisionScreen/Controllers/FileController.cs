@@ -16,10 +16,10 @@ namespace Artemis.App.Business.VisionScreen.Controllers
         /// <summary>
         /// 允许的扩展名
         /// </summary>
-        private readonly string[] _allowedExtensions = new[]
-        {
+        private readonly string[] _allowedExtensions =
+        [
             ".jpg", ".jpeg", ".png"
-        };
+        ];
 
         private readonly ILogger<FileController> _logger;
 

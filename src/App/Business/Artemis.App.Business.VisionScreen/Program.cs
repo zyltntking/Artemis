@@ -112,27 +112,27 @@ public class Program
             // Use Grpc Swagger Document
             app.UseGrpcSwagger();
 
-            // Identity
-            app.MapGrpcService<ResourceServiceImplement>();
-            app.MapGrpcService<AccountServiceImplement>();
-            app.MapGrpcService<UserServiceImplement>();
-            app.MapGrpcService<RoleServiceImplement>();
+            //// Identity
+            //app.MapGrpcService<ResourceServiceImplement>();
+            //app.MapGrpcService<AccountServiceImplement>();
+            //app.MapGrpcService<UserServiceImplement>();
+            //app.MapGrpcService<RoleServiceImplement>();
 
-            // Resource
-            app.MapGrpcService<DictionaryServiceImplement>();
-            app.MapGrpcService<OrganizationServiceImplement>();
-            app.MapGrpcService<DivisionServiceImplement>();
-            app.MapGrpcService<StandardServiceImplement>();
-            app.MapGrpcService<SystemModuleServiceImplement>();
+            //// Resource
+            //app.MapGrpcService<DictionaryServiceImplement>();
+            //app.MapGrpcService<OrganizationServiceImplement>();
+            //app.MapGrpcService<DivisionServiceImplement>();
+            //app.MapGrpcService<StandardServiceImplement>();
+            //app.MapGrpcService<SystemModuleServiceImplement>();
 
-            // School
-            app.MapGrpcService<SchoolServiceImplement>();
-            app.MapGrpcService<StudentServiceImplement>();
-            app.MapGrpcService<TeacherServiceImplement>();
-            app.MapGrpcService<ChangeServiceImplement>();
+            //// School
+            //app.MapGrpcService<SchoolServiceImplement>();
+            //app.MapGrpcService<StudentServiceImplement>();
+            //app.MapGrpcService<TeacherServiceImplement>();
+            //app.MapGrpcService<ChangeServiceImplement>();
 
-            // Task
-            app.MapGrpcService<TaskServiceImplement>();
+            //// Task
+            //app.MapGrpcService<TaskServiceImplement>();
 
             // Business
             app.MapGrpcService<WxParentTerminalServiceImplement>();

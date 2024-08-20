@@ -187,6 +187,14 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 查询仪表盘数据
+	rpc DashboardData (DashboardDataRequerst) returns (DashboardDataResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/DashboardData"
+			body: "*"
+		};
+	}
+
 	// 请求批量PDF导出示例
     rpc MultiplePdfExportExample (ExportRequest) returns (stream ExportResponse){
 		option (google.api.http) = {
@@ -1283,4 +1291,125 @@ message SearchRecordInfoResponse {
     // 分页视力档案信息数据包
     // @required
     PagedRecordInfoPacket Data = 7;
+}
+
+// 仪表盘数据请求
+message DashboardDataRequerst{
+	// 任务标识
+	// @required
+	// @guid
+	string TaskId = 1;
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 2;
+	// 年级名称
+	google.protobuf.StringValue GradeName = 3;
+	// 标准标识
+	google.protobuf.StringValue StandardId = 4;
+}
+
+// 仪表盘人数分布
+message DashboardPopulationDistributionPacket{
+	// 总人数
+	int32 Total = 1;
+	// 已筛查人数
+	int32 Checked = 2;
+	// 仅验光仪
+	int32 OnlyOptoimeterChecked = 3;
+	// 仅视力表
+	int32 OnlyChartChecked = 4;
+	// 未筛查人数
+	int32 NotChecked = 5;
+}
+
+// 仪表盘新增统计
+message DashboardIncreasedStatisticsPacket{
+	// 新增数量
+	int32 IncreasedCount = 1;
+	// 同比增长率
+	double YearOnYearIncreased = 2;
+	// 环比增长率
+	double TimeOnTimeIncreased = 3;
+}
+
+// 仪表盘标准分布项目数据包
+message DashboardStandardDistributionItemPacket{
+	// 项目名称
+	string ItemName = 1;
+	// 项目数量
+	int32 ItemCount = 2;
+	// 项目占比
+	double ItemRate = 3;
+}
+
+// 仪表盘标准分布数据包
+message DashboardStandardDistributionPacket{
+	// 标准分布数据项目列表
+	repeated DashboardStandardDistributionItemPacket Items = 1;
+}
+
+// 未筛查原因分布项目数据包
+message DashBoardExceptionReasonItemPacket{
+	// 项目名称
+	string ItemName = 1;
+	// 项目数量
+	int32 ItemCount = 2;
+}
+
+// 未筛查原因分布数据包
+message DashBoardExceptionReasonDistributionPacket{
+	// 标准分布数据项目列表
+	repeated DashBoardExceptionReasonItemPacket Items = 1;
+}
+
+// 年级班级分布项目数据包
+message DashboardGradeOrClassDistributionItemPacket{
+	// 项目名称
+	string ItemName = 1;
+	// 项目总数
+	int32 ItemTotal = 2;
+	// 项目数量
+	int32 ItemCount = 3;
+}
+
+// 年级班级分布数据包
+message DashboardGradeOrClassDistributionPacket{
+	// 年级班级分布列表
+	repeated DashboardGradeOrClassDistributionItemPacket Items = 1;
+}
+
+// 仪表盘数据包
+message DashboardDataPacket{
+	// 仪表盘人数分布
+	DashboardPopulationDistributionPacket PopulationDistribution = 1;
+	// 仪表盘新增统计
+	DashboardIncreasedStatisticsPacket IncreasedStatistic = 2;
+	// 仪表盘标准分布
+	DashboardStandardDistributionPacket StandardDistribution = 3;
+	// 仪表盘未筛查原因分布
+	DashBoardExceptionReasonDistributionPacket ExceptionReasonDistribution = 4;
+	// 年级班级数据分布
+	DashboardGradeOrClassDistributionPacket GradeOrClassDistribution = 5;
+}
+
+// 查询仪表盘人数分布响应
+message DashboardDataResponse {
+    // 状态码
+    int32 Code = 1;
+    // 是否成功
+    bool Succeeded = 2;
+    // 响应消息
+    string Message = 3;
+    // 错误
+    // @exception
+    google.protobuf.StringValue Error = 4;
+    // 响应时间
+    // @datetime
+    string DateTime = 5;
+    // 响应时间戳
+    // @timestamp
+    int64 Timestamp = 6;
+    // 仪表盘数据包
+    // @required
+    DashboardDataPacket Data = 7;
 }

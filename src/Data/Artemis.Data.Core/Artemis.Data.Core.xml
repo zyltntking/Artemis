@@ -1380,6 +1380,24 @@
             <returns>枚举成员</returns>
             <exception cref="T:System.InvalidOperationException">无效操作异常</exception>
         </member>
+        <member name="F:Artemis.Data.Core.Fundamental.Enumeration._descriptionDictionary">
+            <summary>
+            描述字典缓存
+            </summary>
+        </member>
+        <member name="P:Artemis.Data.Core.Fundamental.Enumeration.DescriptionDictionary">
+            <summary>
+            描述字典访问器
+            </summary>
+        </member>
+        <member name="M:Artemis.Data.Core.Fundamental.Enumeration.TryGetDescription``1(System.String)">
+            <summary>
+            尝试获取描述
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
         <member name="M:Artemis.Data.Core.Fundamental.Enumeration.ToRecordDictionary``1(System.Boolean)">
             <summary>
                 转为记录字典

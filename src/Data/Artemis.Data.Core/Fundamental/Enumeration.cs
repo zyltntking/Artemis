@@ -199,6 +199,45 @@ public abstract class Enumeration : IEnumeration<Enumeration>
     }
 
     /// <summary>
+    /// 描述字典缓存
+    /// </summary>
+    private static Dictionary<string, Dictionary<string, string>>? _descriptionDictionary;
+
+    /// <summary>
+    /// 描述字典访问器
+    /// </summary>
+    private static Dictionary<string, Dictionary<string, string>> DescriptionDictionary => _descriptionDictionary ??= new Dictionary<string, Dictionary<string, string>>();
+
+    /// <summary>
+    /// 尝试获取描述
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static string TryGetDescription<T>(string name) where T : Enumeration
+    {
+        var key = typeof(T).Name;
+
+        if (!DescriptionDictionary.ContainsKey(key))
+        {
+            var fieldDictionary = typeof(T)
+                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
+                .Select(info =>
+                {
+                    var enumeration = info.GetValue(null) as T;
+                    var description = info.GetCustomAttribute<DescriptionAttribute>()?.Description;
+
+                    return new KeyValuePair<string, string>(enumeration!, description!);
+                }).ToDictionary();
+
+            DescriptionDictionary.Add(key, fieldDictionary);
+        }
+
+        return DescriptionDictionary[key][name];
+
+    }
+
+    /// <summary>
     ///     转为记录字典
     /// </summary>
     /// <typeparam name="T"></typeparam>

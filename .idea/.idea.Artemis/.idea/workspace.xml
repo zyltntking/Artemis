@@ -18,9 +18,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9bfc34f-3e61-4a6d-a221-14382329899b" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App/Business/Artemis.App.Business.VisionScreen/Controllers/FileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Business/Artemis.App.Business.VisionScreen/Controllers/FileController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App/Business/Artemis.App.Business.VisionScreen/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Business/Artemis.App.Business.VisionScreen/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/Artemis.Service.Protos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/task/task.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/task/task.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/business/visionscreening/businesscore.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Artemis.Service.Protos/business/visionscreening/businesscore.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Business/Artemis.Service.Business.VisionScreen/Artemis.Service.Business.VisionScreen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Business/Artemis.Service.Business.VisionScreen/Artemis.Service.Business.VisionScreen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Business/Artemis.Service.Business.VisionScreen/Services/VisionScreeningCoreServiceImplement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Business/Artemis.Service.Business.VisionScreen/Services/VisionScreeningCoreServiceImplement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,6 +244,7 @@
       <workItem from="1721826183046" duration="1498000" />
       <workItem from="1721832596213" duration="1954000" />
       <workItem from="1722196039038" duration="21000" />
+      <workItem from="1724114608919" duration="9000" />
     </task>
     <servers />
   </component>
