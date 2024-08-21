@@ -195,6 +195,8 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 视力筛查记录查询
+
 	// 请求批量PDF导出示例
     rpc MultiplePdfExportExample (ExportRequest) returns (stream ExportResponse){
 		option (google.api.http) = {
@@ -1130,21 +1132,61 @@ message SearchRecordInfoRequest{
 	// 任务标识
     // @guid
     google.protobuf.StringValue TaskId = 1;
-    // 学生名称搜索值
-    // @maxLength(128)
-    google.protobuf.StringValue StudentName = 2;
 	// 学校标识
     // @guid
-    google.protobuf.StringValue SchoolId = 3;
+    google.protobuf.StringValue SchoolId = 2;
 	// 班级标识
     // @guid
-    google.protobuf.StringValue classId = 4;
+    google.protobuf.StringValue classId = 3;
+    // 学生名称搜索值
+    // @maxLength(128)
+    google.protobuf.StringValue StudentName = 4;
+	// 学生性别
+    google.protobuf.StringValue Gender = 5;
+	// 是否佩戴角膜塑形镜
+	google.protobuf.BoolValue IsWareOkLenses = 6;
+	// 裸眼视力阈值上限
+	google.protobuf.DoubleValue NakedEyeVisionUpperLimit = 7;
+	// 裸眼视力阈值下限
+	google.protobuf.DoubleValue NakedEyeVisionLowerLimit = 8;
+	// 矫正视力阈值上限
+	google.protobuf.DoubleValue CorrectedVisionUpperLimit = 9;
+	// 矫正视力阈值下限
+	google.protobuf.DoubleValue CorrectedVisionLowerLimit = 10;
+	// 球镜阈值上限
+	google.protobuf.DoubleValue SphereUpperLimit = 11;
+	// 球镜阈值下限
+	google.protobuf.DoubleValue SphereLowerLimit = 12;
+	// 柱镜阈值上限
+	google.protobuf.DoubleValue CylinderUpperLimit = 13;
+	// 柱镜阈值下限
+	google.protobuf.DoubleValue CylinderLowerLimit = 14;
+	// 轴位阈值上限
+	google.protobuf.DoubleValue AxisUpperLimit = 15;
+	// 轴位阈值下限
+	google.protobuf.DoubleValue AxisLowerLimit = 16;
+	// 瞳距阈值上限
+	google.protobuf.DoubleValue PupilDistanceUpperLimit = 17;
+	// 瞳距阈值下限
+	google.protobuf.DoubleValue PupilDistanceLowerLimit = 18;
+	// 出生日期范围起始时间
+	// @datetime
+	google.protobuf.StringValue BirthdayStartTime = 19;
+	// 出生日期范围结束时间
+	// @datetime
+	google.protobuf.StringValue BirthdayEndTime = 20;
+	// 筛查日期范围起始时间
+	// @datetime
+	google.protobuf.StringValue CheckDateStartTime = 21;
+	// 筛查日期范围结束时间
+	// @datetime
+	google.protobuf.StringValue CheckDateEndTime = 22;
     // 页码
     // @min(0)
-    google.protobuf.Int32Value Page = 5;
+    google.protobuf.Int32Value Page = 23;
     // 条目数
     // @min(0)
-    google.protobuf.Int32Value Size = 6;
+    google.protobuf.Int32Value Size = 24;
 }
 
 // 视力档案信息数据包

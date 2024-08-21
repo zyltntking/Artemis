@@ -2697,15 +2697,6 @@
             @guid
             </summary>
         </member>
-        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.StudentNameFieldNumber">
-            <summary>Field number for the "StudentName" field.</summary>
-        </member>
-        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.StudentName">
-            <summary>
-            学生名称搜索值
-            @maxLength(128)
-            </summary>
-        </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.SchoolIdFieldNumber">
             <summary>Field number for the "SchoolId" field.</summary>
         </member>
@@ -2722,6 +2713,159 @@
             <summary>
             班级标识
             @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.StudentNameFieldNumber">
+            <summary>Field number for the "StudentName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.StudentName">
+            <summary>
+            学生名称搜索值
+            @maxLength(128)
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.GenderFieldNumber">
+            <summary>Field number for the "Gender" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.Gender">
+            <summary>
+            学生性别
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsWareOkLensesFieldNumber">
+            <summary>Field number for the "IsWareOkLenses" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsWareOkLenses">
+            <summary>
+            是否佩戴角膜塑形镜
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.NakedEyeVisionUpperLimitFieldNumber">
+            <summary>Field number for the "NakedEyeVisionUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.NakedEyeVisionUpperLimit">
+            <summary>
+            裸眼视力阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.NakedEyeVisionLowerLimitFieldNumber">
+            <summary>Field number for the "NakedEyeVisionLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.NakedEyeVisionLowerLimit">
+            <summary>
+            裸眼视力阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CorrectedVisionUpperLimitFieldNumber">
+            <summary>Field number for the "CorrectedVisionUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CorrectedVisionUpperLimit">
+            <summary>
+            矫正视力阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CorrectedVisionLowerLimitFieldNumber">
+            <summary>Field number for the "CorrectedVisionLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CorrectedVisionLowerLimit">
+            <summary>
+            矫正视力阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.SphereUpperLimitFieldNumber">
+            <summary>Field number for the "SphereUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.SphereUpperLimit">
+            <summary>
+            球镜阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.SphereLowerLimitFieldNumber">
+            <summary>Field number for the "SphereLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.SphereLowerLimit">
+            <summary>
+            球镜阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CylinderUpperLimitFieldNumber">
+            <summary>Field number for the "CylinderUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CylinderUpperLimit">
+            <summary>
+            柱镜阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CylinderLowerLimitFieldNumber">
+            <summary>Field number for the "CylinderLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CylinderLowerLimit">
+            <summary>
+            柱镜阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.AxisUpperLimitFieldNumber">
+            <summary>Field number for the "AxisUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.AxisUpperLimit">
+            <summary>
+            轴位阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.AxisLowerLimitFieldNumber">
+            <summary>Field number for the "AxisLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.AxisLowerLimit">
+            <summary>
+            轴位阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PupilDistanceUpperLimitFieldNumber">
+            <summary>Field number for the "PupilDistanceUpperLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PupilDistanceUpperLimit">
+            <summary>
+            瞳距阈值上限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PupilDistanceLowerLimitFieldNumber">
+            <summary>Field number for the "PupilDistanceLowerLimit" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PupilDistanceLowerLimit">
+            <summary>
+            瞳距阈值下限
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayStartTimeFieldNumber">
+            <summary>Field number for the "BirthdayStartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayStartTime">
+            <summary>
+            出生日期范围起始时间
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayEndTimeFieldNumber">
+            <summary>Field number for the "BirthdayEndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayEndTime">
+            <summary>
+            出生日期范围结束时间
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateStartTimeFieldNumber">
+            <summary>Field number for the "CheckDateStartTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateStartTime">
+            <summary>
+            筛查日期范围起始时间
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateEndTimeFieldNumber">
+            <summary>Field number for the "CheckDateEndTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateEndTime">
+            <summary>
+            筛查日期范围结束时间
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PageFieldNumber">

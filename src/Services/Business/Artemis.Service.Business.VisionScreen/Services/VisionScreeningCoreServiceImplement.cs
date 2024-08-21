@@ -1349,7 +1349,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
-    [Description("获取系统模块树")]
+    [Description("搜索视力档案")]
     [Authorize(AuthorizePolicy.Token)]
     public override async Task<SearchRecordInfoResponse> SearchRecordInfo(SearchRecordInfoRequest request, ServerCallContext context)
     {
@@ -1359,11 +1359,47 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         Guid? classId = string.IsNullOrWhiteSpace(request.ClassId) ? null : Guid.Parse(request.ClassId);
 
+        var studentName = request.StudentName ?? string.Empty;
+
+        var gender = request.Gender ?? string.Empty;
+
+        var isWareOkLenses = request.IsWareOkLenses;
+
+        var nakedEyeVisionUpperLimit = request.NakedEyeVisionUpperLimit;
+
+        var nakedEyeVisionLowerLimit = request.NakedEyeVisionLowerLimit;
+
+        var correctedVisionUpperLimit = request.CorrectedVisionUpperLimit;
+
+        var correctedVisionLowerLimit = request.CorrectedVisionLowerLimit;
+
+        var sphereUpperLimit = request.SphereUpperLimit;
+
+        var sphereLowerLimit = request.SphereLowerLimit;
+
+        var cylinderUpperLimit = request.CylinderUpperLimit;
+
+        var cylinderLowerLimit = request.CylinderLowerLimit;
+
+        var axisUpperLimit = request.AxisUpperLimit;
+
+        var axisLowerLimit = request.AxisLowerLimit;
+
+        var pupilDistanceUpperLimit = request.PupilDistanceUpperLimit;
+
+        var pupilDistanceLowerLimit = request.PupilDistanceLowerLimit;
+
+        DateTime? birthdayStartTime = string.IsNullOrWhiteSpace(request.BirthdayStartTime) ? null : DateTime.Parse(request.BirthdayStartTime);
+
+        DateTime? birthdayEndTime = string.IsNullOrWhiteSpace(request.BirthdayEndTime) ? null : DateTime.Parse(request.BirthdayEndTime);
+
+        DateTime? checkDateStartTime = string.IsNullOrWhiteSpace(request.CheckDateStartTime) ? null : DateTime.Parse(request.CheckDateStartTime);
+
+        DateTime? checkDateEndTime = string.IsNullOrWhiteSpace(request.CheckDateEndTime) ? null : DateTime.Parse(request.CheckDateEndTime);
+
         var page = request.Page ?? 0;
 
         var size = request.Size ?? 0;
-
-        var studentName = request.StudentName ?? string.Empty;
 
         var query = VisionScreenRecordStore.EntityQuery;
 
@@ -1377,6 +1413,53 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         query = query.WhereIf(!string.IsNullOrEmpty(studentName),
             record => EF.Functions.Like(record.StudentName, $"%{studentName}%"));
+
+        query = query.WhereIf(!string.IsNullOrEmpty(gender), record => record.Gender == gender);
+
+        query = query.WhereIf(isWareOkLenses != null,
+            record => record.IsWareLeftOkLenses == isWareOkLenses || record.IsWareRightOkLenses == isWareOkLenses);
+
+        query = query.WhereIf(nakedEyeVisionUpperLimit != null && nakedEyeVisionLowerLimit != null,
+            record => (record.LeftNakedEyeVision < nakedEyeVisionUpperLimit && 
+                      record.LeftNakedEyeVision >= nakedEyeVisionLowerLimit) || 
+                      (record.RightNakedEyeVision < nakedEyeVisionUpperLimit &&
+                       record.RightNakedEyeVision >= nakedEyeVisionLowerLimit));
+
+        query = query.WhereIf(correctedVisionUpperLimit != null && correctedVisionLowerLimit != null,
+            record => (record.LeftCorrectedVision < correctedVisionUpperLimit &&
+                       record.LeftCorrectedVision >= correctedVisionLowerLimit) ||
+                      (record.RightCorrectedVision < correctedVisionUpperLimit &&
+                       record.RightCorrectedVision >= correctedVisionLowerLimit));
+
+        query = query.WhereIf(sphereUpperLimit != null && sphereLowerLimit != null,
+            record => (record.LeftSphere < sphereUpperLimit &&
+                       record.LeftSphere >= sphereLowerLimit) ||
+                      (record.RightSphere < sphereUpperLimit &&
+                       record.RightSphere >= sphereLowerLimit));
+
+        query = query.WhereIf(cylinderUpperLimit != null && cylinderLowerLimit != null,
+            record => (record.LeftCylinder < cylinderUpperLimit &&
+                       record.LeftCylinder >= cylinderLowerLimit) ||
+                      (record.RightCylinder < cylinderUpperLimit &&
+                       record.RightCylinder >= cylinderLowerLimit));
+
+        query = query.WhereIf(axisUpperLimit != null && axisLowerLimit != null,
+            record => (record.LeftAxis < axisUpperLimit &&
+                       record.LeftAxis >= axisLowerLimit) ||
+                      (record.RightAxis < axisUpperLimit &&
+                       record.RightAxis >= axisLowerLimit));
+
+        query = query.WhereIf(pupilDistanceUpperLimit != null, record => record.PupilDistance < pupilDistanceUpperLimit);
+
+        query = query.WhereIf(pupilDistanceLowerLimit != null, record => record.PupilDistance >= pupilDistanceLowerLimit);
+
+        query = query.WhereIf(birthdayStartTime != null, record => record.Birthday >= birthdayStartTime);
+
+        query = query.WhereIf(birthdayEndTime != null, record => record.Birthday <= birthdayEndTime);
+
+        query = query.WhereIf(checkDateStartTime != null, record => record.CheckTime >= checkDateStartTime);
+
+        query = query.WhereIf(checkDateEndTime != null, record => record.CheckTime <= checkDateEndTime);
 
         var count = await query.LongCountAsync(context.CancellationToken);
 
