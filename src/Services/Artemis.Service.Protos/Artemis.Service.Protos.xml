@@ -2707,7 +2707,7 @@
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.ClassIdFieldNumber">
-            <summary>Field number for the "classId" field.</summary>
+            <summary>Field number for the "ClassId" field.</summary>
         </member>
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.ClassId">
             <summary>
@@ -2842,6 +2842,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayStartTime">
             <summary>
             出生日期范围起始时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayEndTimeFieldNumber">
@@ -2850,6 +2851,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.BirthdayEndTime">
             <summary>
             出生日期范围结束时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateStartTimeFieldNumber">
@@ -2858,6 +2860,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateStartTime">
             <summary>
             筛查日期范围起始时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateEndTimeFieldNumber">
@@ -2866,6 +2869,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.CheckDateEndTime">
             <summary>
             筛查日期范围结束时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PageFieldNumber">

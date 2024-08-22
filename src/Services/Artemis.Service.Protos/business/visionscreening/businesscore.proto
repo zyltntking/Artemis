@@ -1137,7 +1137,7 @@ message SearchRecordInfoRequest{
     google.protobuf.StringValue SchoolId = 2;
 	// 班级标识
     // @guid
-    google.protobuf.StringValue classId = 3;
+    google.protobuf.StringValue ClassId = 3;
     // 学生名称搜索值
     // @maxLength(128)
     google.protobuf.StringValue StudentName = 4;

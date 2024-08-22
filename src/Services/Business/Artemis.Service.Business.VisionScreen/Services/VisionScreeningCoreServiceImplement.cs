@@ -1213,7 +1213,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
     [Description("获取通知消息(多端通用)")]
-    [Authorize(AuthorizePolicy.Token)]
+    [Authorize(AuthorizePolicy.Anonymous)]
     public override async Task<FetchUserMessageResponse> FetchUserMessage(EmptyRequest request, ServerCallContext context)
     {
         var (valid, userId) = context.GetHttpContext().GetUserId();
