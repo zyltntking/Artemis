@@ -1608,7 +1608,7 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         // 未筛查原因分布
         var exceptionReasonQuery = baseQuery
-            .Where(record => record.IsOptometerChecked || record.IsChartChecked)
+            .Where(record => !record.IsOptometerChecked && !record.IsChartChecked)
             .Select(record => string.IsNullOrWhiteSpace(record.ExceptionReason) ? "原因不明" : record.ExceptionReason);
 
         var exceptionReasonItems = await exceptionReasonQuery

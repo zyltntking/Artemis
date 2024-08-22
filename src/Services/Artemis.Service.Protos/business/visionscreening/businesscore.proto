@@ -1213,11 +1213,12 @@ message RecordInfoPacket{
 	// 班级名称
 	google.protobuf.StringValue ClassName = 10;
 	// 建档时间
+	// @datetime
 	google.protobuf.StringValue CreatedAt = 11;
 	// 筛查时间
 	google.protobuf.StringValue CheckTime = 12;
 	// 瞳距
-	google.protobuf.StringValue PupilDistance = 13;
+	google.protobuf.DoubleValue PupilDistance = 13;
 	// 左眼球镜
 	google.protobuf.DoubleValue LeftSphere = 14;
 	// 右眼球镜
