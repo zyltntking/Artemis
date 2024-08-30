@@ -59,6 +59,46 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 查询记录任务字段
+	rpc QueryRecordTaskField(QueryRecordFieldRequest) returns (QueryRecordTaskFieldResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/QueryRecordTaskField"
+			body: "*"
+		};
+	}
+
+	// 查询记录区域字段
+	rpc QueryRecordDivisionField(QueryRecordFieldRequest) returns (QueryRecordDivisionFieldResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/QueryRecordDivisionField"
+			body: "*"
+		};
+	}
+
+	// 查询记录学校字段
+	rpc QueryRecordSchoolField(QueryRecordFieldRequest) returns (QueryRecordSchoolFieldResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/QueryRecordSchoolField"
+			body: "*"
+		};
+	}
+
+	// 查询记录年级字段
+	rpc QueryRecordGradeField(QueryRecordFieldRequest) returns (QueryRecordGradeFieldResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/QueryRecordGradeField"
+			body: "*"
+		};
+	}
+
+	// 查询记录班级字段
+	rpc QueryRecordClassField(QueryRecordFieldRequest) returns (QueryRecordClassFieldResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/QueryRecordClassField"
+			body: "*"
+		};
+	}
+
 	// 获取当前任务的学校列表
 	rpc FetchTaskSchool(FetchTaskSchoolRequest) returns (FetchTaskSchoolResponse){
 		option (google.api.http) = {
@@ -325,6 +365,188 @@ message FetchSchoolNotGraduatedClassResponse{
 	// 当前未毕业班级信息
 	// @required
 	repeated SchoolNotGraduatedClassPacket Data = 7;
+}
+
+// 查询记录字段信息请求
+message QueryRecordFieldRequest{
+	// 任务标识
+	// @guid
+	google.protobuf.StringValue TaskId = 1;
+	// 区划标识
+	// @guid
+	google.protobuf.StringValue DivisionId = 2;
+	// 学校标识
+	// @guid
+	google.protobuf.StringValue SchoolId = 3;
+	// 年级名称
+	google.protobuf.StringValue GradeName = 4;
+	// 班级标识
+	// @guid
+	google.protobuf.StringValue ClassId = 5;
+}
+
+// 记录任务字段数据包
+message RecordTaskFieldPacket{
+	// 任务标识
+	// @guid
+	// @required
+	string TaskId = 1;
+	// 任务名称
+	google.protobuf.StringValue TaskName = 2;
+	// 任务编号
+	google.protobuf.StringValue TaskCode = 3;
+}
+
+// 查询记录任务字段响应
+message QueryRecordTaskFieldResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 记录任务字段数据
+	// @required
+	repeated RecordTaskFieldPacket Data = 7;
+}
+
+// 记录区划字段数据包
+message RecordDivisionFieldPacket{
+	// 区划标识
+	// @guid
+	// @required
+	string DivisionId = 1;
+	// 区划名称
+	google.protobuf.StringValue DivisionName = 2;
+	// 区划编码
+	google.protobuf.StringValue DivisionCode = 3;
+}
+
+// 查询记录区域字段响应
+message QueryRecordDivisionFieldResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 记录区划字段数据
+	// @required
+	repeated RecordDivisionFieldPacket Data = 7;
+}
+
+// 记录学校字段数据包
+message RecordSchoolFieldPacket{
+	// 学校标识
+	// @guid
+	// @required
+	string SchoolId = 1;
+	// 学校名称
+	google.protobuf.StringValue SchoolName = 2;
+	// 学校编码
+	google.protobuf.StringValue SchoolCode = 3;
+}
+
+// 查询记录学校字段响应
+message QueryRecordSchoolFieldResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 记录学校字段数据
+	// @required
+	repeated RecordSchoolFieldPacket Data = 7;
+}
+
+// 记录年级字段数据包
+message RecordGradeFieldPacket{
+	// 年级名称
+	google.protobuf.StringValue GradeName = 1;
+}
+
+// 查询记录年级字段响应
+message QueryRecordGradeFieldResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 记录年级字段数据
+	// @required
+	repeated RecordGradeFieldPacket Data = 7;
+}
+
+// 记录班级字段数据包
+message RecordClassFieldPacket{
+	// 班级标识
+	// @guid
+	// @required
+	string ClassId = 1;
+	// 班级名称
+	google.protobuf.StringValue ClassName = 2;
+	// 班级编码
+	google.protobuf.StringValue ClassCode = 3;
+}
+
+// 查询记录年级字段响应
+message QueryRecordClassFieldResponse{
+	// 状态码
+	int32 Code = 1;
+	// 是否成功
+	bool Succeeded = 2;
+	// 消息
+	string Message = 3;
+	// 错误
+	// @exception
+	google.protobuf.StringValue Error = 4;
+	// 响应时间
+	// @datetime
+	string DateTime = 5;
+	// 响应时间戳
+	// @timestamp
+	int64 Timestamp = 6;
+	// 记录班级字段数据
+	// @required
+	repeated RecordClassFieldPacket Data = 7;
 }
 
 // 获取当前任务的学校列表请求

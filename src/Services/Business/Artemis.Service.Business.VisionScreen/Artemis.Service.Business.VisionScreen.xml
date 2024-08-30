@@ -1430,6 +1430,46 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.QueryRecordTaskField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.QueryRecordDivisionField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.QueryRecordSchoolField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.QueryRecordGradeField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.QueryRecordClassField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录班级字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.FetchTaskSchool(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取当前任务的学校列表
@@ -1573,6 +1613,13 @@
             </summary>
             <param name="key">根标识</param>
             <param name="nodeList">节点列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Artemis.Service.Business.VisionScreen.Services.VisionScreeningCoreServiceImplement.RecordFieldQuery(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest)">
+            <summary>
+            记录字段查询
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:Artemis.Service.Business.VisionScreen.Services.WxParentTerminalServiceImplement">

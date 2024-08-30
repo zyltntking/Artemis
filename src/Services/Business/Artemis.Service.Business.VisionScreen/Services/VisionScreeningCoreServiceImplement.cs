@@ -565,6 +565,96 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     }
 
     /// <summary>
+    /// 查询记录任务字段
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询记录任务字段")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<QueryRecordTaskFieldResponse> QueryRecordTaskField(QueryRecordFieldRequest request, ServerCallContext context)
+    {
+        var filedList = await RecordFieldQuery(request)
+            .ProjectToType<RecordTaskFieldPacket>()
+            .Distinct()
+            .ToListAsync(context.CancellationToken);
+
+        return filedList.ReadInfoResponse<QueryRecordTaskFieldResponse, IEnumerable<RecordTaskFieldPacket>>();
+    }
+
+    /// <summary>
+    /// 查询记录区域字段
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询记录区域字段")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<QueryRecordDivisionFieldResponse> QueryRecordDivisionField(QueryRecordFieldRequest request, ServerCallContext context)
+    {
+        var filedList = await RecordFieldQuery(request)
+            .ProjectToType<RecordDivisionFieldPacket>()
+            .Distinct()
+            .ToListAsync(context.CancellationToken);
+
+        return filedList.ReadInfoResponse<QueryRecordDivisionFieldResponse, IEnumerable<RecordDivisionFieldPacket>>();
+    }
+
+    /// <summary>
+    /// 查询记录学校字段
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询记录学校字段")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<QueryRecordSchoolFieldResponse> QueryRecordSchoolField(QueryRecordFieldRequest request, ServerCallContext context)
+    {
+        var filedList = await RecordFieldQuery(request)
+            .ProjectToType<RecordSchoolFieldPacket>()
+            .Distinct()
+            .ToListAsync(context.CancellationToken);
+
+        return filedList.ReadInfoResponse<QueryRecordSchoolFieldResponse, IEnumerable<RecordSchoolFieldPacket>>();
+    }
+
+    /// <summary>
+    /// 查询记录年级字段
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询记录年级字段")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<QueryRecordGradeFieldResponse> QueryRecordGradeField(QueryRecordFieldRequest request, ServerCallContext context)
+    {
+        var filedList = await RecordFieldQuery(request)
+            .ProjectToType<RecordGradeFieldPacket>()
+            .Distinct()
+            .ToListAsync(context.CancellationToken);
+
+        return filedList.ReadInfoResponse<QueryRecordGradeFieldResponse, IEnumerable<RecordGradeFieldPacket>>();
+    }
+
+    /// <summary>
+    /// 查询记录班级字段
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("查询记录班级字段")]
+    [Authorize(AuthorizePolicy.Token)]
+    public override async Task<QueryRecordClassFieldResponse> QueryRecordClassField(QueryRecordFieldRequest request, ServerCallContext context)
+    {
+        var filedList = await RecordFieldQuery(request)
+            .ProjectToType<RecordClassFieldPacket>()
+            .Distinct()
+            .ToListAsync(context.CancellationToken);
+
+        return filedList.ReadInfoResponse<QueryRecordClassFieldResponse, IEnumerable<RecordClassFieldPacket>>();
+    }
+
+    /// <summary>
     /// 获取当前任务的学校列表
     /// </summary>
     /// <param name="request">The request received from the client.</param>
@@ -1783,6 +1873,29 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         tree.Children.Add(children);
 
         return tree;
+    }
+
+    /// <summary>
+    /// 记录字段查询
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    private IQueryable<ArtemisVisionScreenRecord> RecordFieldQuery(QueryRecordFieldRequest request)
+    {
+        Guid? taskId = string.IsNullOrWhiteSpace(request.TaskId) ? null : Guid.Parse(request.TaskId);
+        Guid? divisionId = string.IsNullOrWhiteSpace(request.DivisionId) ? null : Guid.Parse(request.DivisionId);
+        Guid? schoolId = string.IsNullOrWhiteSpace(request.SchoolId) ? null : Guid.Parse(request.SchoolId);
+        Guid? classId = string.IsNullOrWhiteSpace(request.ClassId) ? null : Guid.Parse(request.ClassId);
+        var gradeName = request.GradeName ?? string.Empty;
+
+        var query = VisionScreenRecordStore.EntityQuery
+            .WhereIf(taskId != null, record => record.TaskId == taskId)
+            .WhereIf(divisionId != null, record => record.DivisionId == divisionId)
+            .WhereIf(schoolId != null, record => record.SchoolId == schoolId)
+            .WhereIf(classId != null, record => record.ClassId == classId)
+            .WhereIf(gradeName != string.Empty, record => record.GradeName == gradeName);
+
+        return query;
     }
 
     #endregion

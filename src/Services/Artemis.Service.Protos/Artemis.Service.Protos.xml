@@ -335,6 +335,517 @@
             @required
             </summary>
         </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest">
+            <summary>
+            查询记录字段信息请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.TaskId">
+            <summary>
+            任务标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.DivisionIdFieldNumber">
+            <summary>Field number for the "DivisionId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.DivisionId">
+            <summary>
+            区划标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.SchoolId">
+            <summary>
+            学校标识
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.GradeNameFieldNumber">
+            <summary>Field number for the "GradeName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest.ClassId">
+            <summary>
+            班级标识
+            @guid
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket">
+            <summary>
+            记录任务字段数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskIdFieldNumber">
+            <summary>Field number for the "TaskId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskId">
+            <summary>
+            任务标识
+            @guid
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskNameFieldNumber">
+            <summary>Field number for the "TaskName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskName">
+            <summary>
+            任务名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskCodeFieldNumber">
+            <summary>Field number for the "TaskCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordTaskFieldPacket.TaskCode">
+            <summary>
+            任务编号
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse">
+            <summary>
+            查询记录任务字段响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordTaskFieldResponse.Data">
+            <summary>
+            记录任务字段数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket">
+            <summary>
+            记录区划字段数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionIdFieldNumber">
+            <summary>Field number for the "DivisionId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionId">
+            <summary>
+            区划标识
+            @guid
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionNameFieldNumber">
+            <summary>Field number for the "DivisionName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionName">
+            <summary>
+            区划名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionCodeFieldNumber">
+            <summary>Field number for the "DivisionCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordDivisionFieldPacket.DivisionCode">
+            <summary>
+            区划编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse">
+            <summary>
+            查询记录区域字段响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordDivisionFieldResponse.Data">
+            <summary>
+            记录区划字段数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket">
+            <summary>
+            记录学校字段数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolIdFieldNumber">
+            <summary>Field number for the "SchoolId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolId">
+            <summary>
+            学校标识
+            @guid
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolNameFieldNumber">
+            <summary>Field number for the "SchoolName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolName">
+            <summary>
+            学校名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolCodeFieldNumber">
+            <summary>Field number for the "SchoolCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordSchoolFieldPacket.SchoolCode">
+            <summary>
+            学校编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse">
+            <summary>
+            查询记录学校字段响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordSchoolFieldResponse.Data">
+            <summary>
+            记录学校字段数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RecordGradeFieldPacket">
+            <summary>
+            记录年级字段数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordGradeFieldPacket.GradeNameFieldNumber">
+            <summary>Field number for the "GradeName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordGradeFieldPacket.GradeName">
+            <summary>
+            年级名称
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse">
+            <summary>
+            查询记录年级字段响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordGradeFieldResponse.Data">
+            <summary>
+            记录年级字段数据
+            @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket">
+            <summary>
+            记录班级字段数据包
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassIdFieldNumber">
+            <summary>Field number for the "ClassId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassId">
+            <summary>
+            班级标识
+            @guid
+            @required
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassNameFieldNumber">
+            <summary>Field number for the "ClassName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassCodeFieldNumber">
+            <summary>Field number for the "ClassCode" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordClassFieldPacket.ClassCode">
+            <summary>
+            班级编码
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse">
+            <summary>
+            查询记录年级字段响应
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.CodeFieldNumber">
+            <summary>Field number for the "Code" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.SucceededFieldNumber">
+            <summary>Field number for the "Succeeded" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Succeeded">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.MessageFieldNumber">
+            <summary>Field number for the "Message" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.ErrorFieldNumber">
+            <summary>Field number for the "Error" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Error">
+            <summary>
+            错误
+            @exception
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.DateTimeFieldNumber">
+            <summary>Field number for the "DateTime" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.DateTime">
+            <summary>
+            响应时间
+            @datetime
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.TimestampFieldNumber">
+            <summary>Field number for the "Timestamp" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Timestamp">
+            <summary>
+            响应时间戳
+            @timestamp
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.DataFieldNumber">
+            <summary>Field number for the "Data" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.QueryRecordClassFieldResponse.Data">
+            <summary>
+            记录班级字段数据
+            @required
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest">
             <summary>
             获取当前任务的学校列表请求
@@ -2982,6 +3493,7 @@
         <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.CreatedAt">
             <summary>
             建档时间
+            @datetime
             </summary>
         </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.CheckTimeFieldNumber">
@@ -3812,6 +4324,46 @@
             <param name="context">The context of the server-side call handler being invoked.</param>
             <returns>The response to send back to the client (wrapped by a task).</returns>
         </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.QueryRecordTaskField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.QueryRecordDivisionField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.QueryRecordSchoolField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.QueryRecordGradeField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.QueryRecordClassField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            查询记录班级字段
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.FetchTaskSchool(Artemis.Service.Protos.Business.VisionScreen.FetchTaskSchoolRequest,Grpc.Core.ServerCallContext)">
             <summary>
             获取当前任务的学校列表
@@ -4186,6 +4738,186 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.FetchSchoolNotGraduatedClassAsync(Artemis.Service.Protos.Business.VisionScreen.FetchSchoolNotGraduatedClassRequest,Grpc.Core.CallOptions)">
             <summary>
             获取当前未毕业班级的列表
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordTaskField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordTaskField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordTaskFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordTaskFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录任务字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordDivisionField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordDivisionField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordDivisionFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordDivisionFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录区域字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordSchoolField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordSchoolField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordSchoolFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordSchoolFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录学校字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordGradeField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordGradeField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordGradeFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordGradeFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录年级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordClassField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录班级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordClassField(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录班级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordClassFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            查询记录班级字段
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.QueryRecordClassFieldAsync(Artemis.Service.Protos.Business.VisionScreen.QueryRecordFieldRequest,Grpc.Core.CallOptions)">
+            <summary>
+            查询记录班级字段
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>
