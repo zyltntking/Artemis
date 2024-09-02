@@ -63,19 +63,19 @@ public class Program
                 }, Log.Debug)
                 .AddBusinessServices();
 
-            //builder.AddPostgreSqlComponent<TaskContext>("ArtemisDb")
-            //    .AddTaskServices();
+            builder.AddPostgreSqlComponent<TaskContext>("ArtemisDb")
+                .AddTaskServices();
 
-            //builder.AddPostgreSqlComponent<SchoolContext>("ArtemisDb")
-            //    .AddSchoolServices();
+            builder.AddPostgreSqlComponent<SchoolContext>("ArtemisDb")
+                .AddSchoolServices();
 
-            //builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb")
-            //    .AddResourceServices();
-            //builder.ConfigureResourceService();
+            builder.AddPostgreSqlComponent<ResourceContext>("ArtemisDb")
+                .AddResourceServices();
+            builder.ConfigureResourceService();
 
-            //builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb")
-            //    .AddIdentityServices()
-            //    .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
+            builder.AddPostgreSqlComponent<IdentityContext>("ArtemisDb")
+                .AddIdentityServices()
+                .Configure<IdentityOptions>(builder.Configuration.GetSection("IdentityOption"));
 
             //≈‰÷√»œ÷§
             builder.Services.AddAuthentication()
