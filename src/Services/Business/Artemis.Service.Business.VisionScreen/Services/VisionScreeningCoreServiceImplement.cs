@@ -1594,6 +1594,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("提交取消筛查原因(不筛查)")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> SubmitRecordCancelResaon(SubmitRecordResaonRequest request, ServerCallContext context)
     {
         var recordId = Guid.Parse(request.RecordId);
@@ -1621,6 +1623,8 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
     /// <param name="request">The request received from the client.</param>
     /// <param name="context">The context of the server-side call handler being invoked.</param>
     /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    [Description("提交筛查异常原因(未筛查)")]
+    [Authorize(AuthorizePolicy.Token)]
     public override async Task<AffectedResponse> SubmitRecordExceptionResaon(SubmitRecordResaonRequest request, ServerCallContext context)
     {
         var recordId = Guid.Parse(request.RecordId);

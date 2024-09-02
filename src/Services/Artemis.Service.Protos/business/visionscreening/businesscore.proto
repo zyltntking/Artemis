@@ -238,7 +238,7 @@ service VisionScreeningCoreService{
 	// 提交筛查异常原因(未筛查)
 	rpc SubmitRecordExceptionResaon (SubmitRecordResaonRequest) returns (AffectedResponse){
 		option (google.api.http) = {
-			post: "/api/BusinessService/VisionScreeningCore/SubmitRecordCancelResaon"
+			post: "/api/BusinessService/VisionScreeningCore/SubmitRecordExceptionResaon"
 			body: "*"
 		};
 	}
