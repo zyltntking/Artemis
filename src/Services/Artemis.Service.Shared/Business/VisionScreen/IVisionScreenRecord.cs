@@ -317,6 +317,11 @@ public interface IVisionScreenRecordPackage : IVisualChartPackage, IOptometerPac
     DateTime? UserSignTime { get; set; }
 
     /// <summary>
+    /// 是否取消筛查
+    /// </summary>
+    bool IsCanceled { get; set; }
+
+    /// <summary>
     /// 取消筛查标识
     /// </summary>
     string? CancelFlag { get; set; }

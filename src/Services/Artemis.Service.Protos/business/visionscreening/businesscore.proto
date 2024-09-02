@@ -227,6 +227,22 @@ service VisionScreeningCoreService{
 		};
 	}
 
+	// 提交取消筛查原因(不筛查)
+	rpc SubmitRecordCancelResaon (SubmitRecordResaonRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/SubmitRecordCancelResaon"
+			body: "*"
+		};
+	}
+
+	// 提交筛查异常原因(未筛查)
+	rpc SubmitRecordExceptionResaon (SubmitRecordResaonRequest) returns (AffectedResponse){
+		option (google.api.http) = {
+			post: "/api/BusinessService/VisionScreeningCore/SubmitRecordCancelResaon"
+			body: "*"
+		};
+	}
+
 	// 查询仪表盘数据
 	rpc DashboardData (DashboardDataRequerst) returns (DashboardDataResponse){
 		option (google.api.http) = {
@@ -1403,12 +1419,18 @@ message SearchRecordInfoRequest{
 	// 筛查日期范围结束时间
 	// @datetime
 	google.protobuf.StringValue CheckDateEndTime = 22;
+	// 是否已筛查
+	google.protobuf.BoolValue IsChecked = 23;
+	// 是否不筛查
+	google.protobuf.BoolValue IsOutChecked = 24;
+	// 是否数据不全
+	google.protobuf.BoolValue IsNotFullChecked = 25;
     // 页码
     // @min(0)
-    google.protobuf.Int32Value Page = 23;
+    google.protobuf.Int32Value Page = 26;
     // 条目数
     // @min(0)
-    google.protobuf.Int32Value Size = 24;
+    google.protobuf.Int32Value Size = 27;
 }
 
 // 视力档案信息数据包
@@ -1515,6 +1537,14 @@ message RecordInfoPacket{
 	google.protobuf.StringValue RightEyePhoto = 49;
 	// 双眼图片
 	google.protobuf.StringValue BothEyePhoto = 50;
+	// 行政区划名称
+	google.protobuf.StringValue DivisionName = 51;
+	// 学生姓名
+	google.protobuf.StringValue StudentName = 52;
+	// 未筛查原因
+	google.protobuf.StringValue ExceptionReason = 53;
+	// 不筛查原因
+	google.protobuf.StringValue CancelFlag = 54;
 }
 
 // 分页视力档案信息数据包
@@ -1556,6 +1586,16 @@ message SearchRecordInfoResponse {
     // 分页视力档案信息数据包
     // @required
     PagedRecordInfoPacket Data = 7;
+}
+
+// 添加原因请求
+message SubmitRecordResaonRequest{
+	// 记录标识
+	// @required
+	// @guid
+	string RecordId = 1;
+	// 原因
+	string Reason = 2;
 }
 
 // 仪表盘数据请求

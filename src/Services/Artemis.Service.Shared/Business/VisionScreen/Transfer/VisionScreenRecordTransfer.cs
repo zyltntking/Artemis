@@ -586,6 +586,11 @@ public record VisionScreenRecordPackage : IVisionScreenRecordPackage
     public DateTime? UserSignTime { get; set; }
 
     /// <summary>
+    /// 是否取消筛查
+    /// </summary>
+    public bool IsCanceled { get; set; }
+
+    /// <summary>
     /// 取消筛查标识
     /// </summary>
     public string? CancelFlag { get; set; }

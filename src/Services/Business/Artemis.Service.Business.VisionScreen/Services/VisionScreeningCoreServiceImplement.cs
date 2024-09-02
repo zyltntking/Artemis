@@ -1487,6 +1487,12 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         DateTime? checkDateEndTime = string.IsNullOrWhiteSpace(request.CheckDateEndTime) ? null : DateTime.Parse(request.CheckDateEndTime);
 
+        var isChecked = request.IsChecked ??= false;
+
+        var isOutChecked = request.IsOutChecked ?? false;
+
+        var isNotFullChecked = request.IsNotFullChecked ?? false;
+
         var page = request.Page ?? 0;
 
         var size = request.Size ?? 0;
@@ -1551,6 +1557,16 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
 
         query = query.WhereIf(checkDateEndTime != null, record => record.CheckTime <= checkDateEndTime);
 
+        query = query.WhereIf(isChecked, record => record.IsOptometerChecked || record.IsChartChecked);
+
+        query = query.WhereIf(!isChecked, record => !record.IsOptometerChecked && !record.IsChartChecked);
+
+        query = query.Where(record => record.IsCanceled == isOutChecked);
+
+        query = query.WhereIf(isNotFullChecked, record =>
+            (!record.IsOptometerChecked && record.IsChartChecked) ||
+            (record.IsOptometerChecked && !record.IsChartChecked));
+
         var count = await query.LongCountAsync(context.CancellationToken);
 
         query = query.OrderBy(task => task.TaskUnitTargetCode);
@@ -1570,6 +1586,62 @@ public class VisionScreeningCoreServiceImplement : VisionScreeningCoreService.Vi
         };
 
         return result.PagedResponse<SearchRecordInfoResponse, RecordInfoPacket>();
+    }
+
+    /// <summary>
+    /// 提交取消筛查原因(不筛查)
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override async Task<AffectedResponse> SubmitRecordCancelResaon(SubmitRecordResaonRequest request, ServerCallContext context)
+    {
+        var recordId = Guid.Parse(request.RecordId);
+
+        var reason = request.Reason ??= string.Empty;
+
+        var record = await VisionScreenRecordStore.FindEntityAsync(recordId, context.CancellationToken);
+
+        if (record != null)
+        {
+            record.CancelFlag = reason;
+            record.IsCanceled = true;
+
+            var result = await VisionScreenRecordStore.UpdateAsync(record, context.CancellationToken);
+
+            return result.AffectedResponse();
+        }
+
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("记录不存在");
+    }
+
+    /// <summary>
+    /// 提交筛查异常原因(未筛查)
+    /// </summary>
+    /// <param name="request">The request received from the client.</param>
+    /// <param name="context">The context of the server-side call handler being invoked.</param>
+    /// <returns>The response to send back to the client (wrapped by a task).</returns>
+    public override async Task<AffectedResponse> SubmitRecordExceptionResaon(SubmitRecordResaonRequest request, ServerCallContext context)
+    {
+        var recordId = Guid.Parse(request.RecordId);
+
+        var reason = request.Reason ??= string.Empty;
+
+        var record = await VisionScreenRecordStore.KeyMatchQuery(recordId)
+            .FirstOrDefaultAsync(record => !record.IsChartChecked && !record.IsOptometerChecked,
+                context.CancellationToken);
+
+        if (record != null)
+        {
+            record.CancelFlag = reason;
+            record.IsCanceled = true;
+
+            var result = await VisionScreenRecordStore.UpdateAsync(record, context.CancellationToken);
+
+            return result.AffectedResponse();
+        }
+
+        return ResultAdapter.AdaptEmptyFail<AffectedResponse>("记录不存在, 或所需更新的记录不是为筛查记录");
     }
 
     /// <summary>

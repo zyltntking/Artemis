@@ -710,8 +710,16 @@ public class VisionScreenRecord : ConcurrencyPartition, IVisionScreenRecord
     public DateTime? UserSignTime { get; set; }
 
     /// <summary>
+    /// 是否取消筛查
+    /// </summary>
+    [Comment("是否取消筛查")]
+    public bool IsCanceled { get; set; }
+
+
+    /// <summary>
     /// 取消筛查标识
     /// </summary>
     [Comment("取消筛查标识")]
+    [MaxLength(64)]
     public string? CancelFlag { get; set; }
 }

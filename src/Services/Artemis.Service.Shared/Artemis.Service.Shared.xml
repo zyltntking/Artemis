@@ -744,6 +744,11 @@
             用户签名时间
             </summary>
         </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.IsCanceled">
+            <summary>
+            是否取消筛查
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.IVisionScreenRecordPackage.CancelFlag">
             <summary>
             取消筛查标识
@@ -1567,6 +1572,11 @@
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.UserSignTime">
             <summary>
             用户签名时间
+            </summary>
+        </member>
+        <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.IsCanceled">
+            <summary>
+            是否取消筛查
             </summary>
         </member>
         <member name="P:Artemis.Service.Shared.Business.VisionScreen.Transfer.VisionScreenRecordPackage.CancelFlag">

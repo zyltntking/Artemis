@@ -3383,6 +3383,30 @@
             @datetime
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsCheckedFieldNumber">
+            <summary>Field number for the "IsChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsChecked">
+            <summary>
+            是否已筛查
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsOutCheckedFieldNumber">
+            <summary>Field number for the "IsOutChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsOutChecked">
+            <summary>
+            是否不筛查
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsNotFullCheckedFieldNumber">
+            <summary>Field number for the "IsNotFullChecked" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.IsNotFullChecked">
+            <summary>
+            是否数据不全
+            </summary>
+        </member>
         <member name="F:Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest.PageFieldNumber">
             <summary>Field number for the "Page" field.</summary>
         </member>
@@ -3808,6 +3832,38 @@
             双眼图片
             </summary>
         </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.DivisionNameFieldNumber">
+            <summary>Field number for the "DivisionName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.DivisionName">
+            <summary>
+            行政区划名称
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.StudentNameFieldNumber">
+            <summary>Field number for the "StudentName" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.StudentName">
+            <summary>
+            学生姓名
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.ExceptionReasonFieldNumber">
+            <summary>Field number for the "ExceptionReason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.ExceptionReason">
+            <summary>
+            未筛查原因
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.CancelFlagFieldNumber">
+            <summary>Field number for the "CancelFlag" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.RecordInfoPacket.CancelFlag">
+            <summary>
+            不筛查原因
+            </summary>
+        </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.PagedRecordInfoPacket">
             <summary>
             分页视力档案信息数据包
@@ -3921,6 +3977,29 @@
             <summary>
             分页视力档案信息数据包
             @required
+            </summary>
+        </member>
+        <member name="T:Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest">
+            <summary>
+            添加原因请求
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest.RecordIdFieldNumber">
+            <summary>Field number for the "RecordId" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest.RecordId">
+            <summary>
+            记录标识
+            @required
+            @guid
+            </summary>
+        </member>
+        <member name="F:Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest.ReasonFieldNumber">
+            <summary>Field number for the "Reason" field.</summary>
+        </member>
+        <member name="P:Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest.Reason">
+            <summary>
+            原因
             </summary>
         </member>
         <member name="T:Artemis.Service.Protos.Business.VisionScreen.DashboardDataRequerst">
@@ -4487,6 +4566,22 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.SearchRecordInfo(Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest,Grpc.Core.ServerCallContext)">
             <summary>
             搜索视力档案
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.SubmitRecordCancelResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            提交取消筛查原因(不筛查)
+            </summary>
+            <param name="request">The request received from the client.</param>
+            <param name="context">The context of the server-side call handler being invoked.</param>
+            <returns>The response to send back to the client (wrapped by a task).</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceBase.SubmitRecordExceptionResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            提交筛查异常原因(未筛查)
             </summary>
             <param name="request">The request received from the client.</param>
             <param name="context">The context of the server-side call handler being invoked.</param>
@@ -5494,6 +5589,78 @@
         <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SearchRecordInfoAsync(Artemis.Service.Protos.Business.VisionScreen.SearchRecordInfoRequest,Grpc.Core.CallOptions)">
             <summary>
             搜索视力档案
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordCancelResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            提交取消筛查原因(不筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordCancelResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.CallOptions)">
+            <summary>
+            提交取消筛查原因(不筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordCancelResaonAsync(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            提交取消筛查原因(不筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordCancelResaonAsync(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.CallOptions)">
+            <summary>
+            提交取消筛查原因(不筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordExceptionResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            提交筛查异常原因(未筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordExceptionResaon(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.CallOptions)">
+            <summary>
+            提交筛查异常原因(未筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordExceptionResaonAsync(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            提交筛查异常原因(未筛查)
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:Artemis.Service.Protos.Business.VisionScreen.VisionScreeningCoreService.VisionScreeningCoreServiceClient.SubmitRecordExceptionResaonAsync(Artemis.Service.Protos.Business.VisionScreen.SubmitRecordResaonRequest,Grpc.Core.CallOptions)">
+            <summary>
+            提交筛查异常原因(未筛查)
             </summary>
             <param name="request">The request to send to the server.</param>
             <param name="options">The options for the call.</param>

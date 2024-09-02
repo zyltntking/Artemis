@@ -191,6 +191,18 @@
         <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddOrgnizationBind.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Artemis.App.Business.VisionScreen.Migrations.AddCancelFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddCancelFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddCancelFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Artemis.App.Business.VisionScreen.Migrations.AddCancelFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Artemis.App.Business.VisionScreen.Program">
             <summary>
                 应用程序入口

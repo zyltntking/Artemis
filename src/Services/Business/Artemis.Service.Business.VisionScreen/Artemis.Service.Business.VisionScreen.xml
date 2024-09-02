@@ -1244,6 +1244,11 @@
             用户签名时间
             </summary>
         </member>
+        <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.IsCanceled">
+            <summary>
+            是否取消筛查
+            </summary>
+        </member>
         <member name="P:Artemis.Service.Business.VisionScreen.Models.VisionScreenRecord.CancelFlag">
             <summary>
             取消筛查标识
